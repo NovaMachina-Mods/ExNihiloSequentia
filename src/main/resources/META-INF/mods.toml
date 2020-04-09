@@ -18,7 +18,7 @@ version="${file.jarVersion}" #mandatory
  # A display name for the mod
 displayName="Ex Nihilo: Sequentia" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="http://myurl.me/" #optional
+updateJSONURL="https://raw.githubusercontent.com/NovaMachina/ExNihiloSequentia/master/update.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://github.com/NovaMachina/ExNihiloSequentia/wiki" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
