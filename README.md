@@ -10,13 +10,13 @@ The Crushed Sky Stone texture is derived from the Sky Stone texture in Applied E
 The following will be included in this mod.
 - Add basic sifting blocks
   - Crushed:
-    - Andesite
-    - Diorite
-    - End Stone
-    - Granite
-    - Netherrack
+    - ~~Andesite~~
+    - ~~Diorite~~
+    - ~~End Stone~~
+    - ~~Granite~~
+    - ~~Netherrack~~
     - Skystone
-  - Dust
+  - ~~Dust~~
 - Add Sieve
 - Add Meshes
   - String
