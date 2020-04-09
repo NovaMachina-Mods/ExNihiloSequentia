@@ -1,0 +1,9 @@
+{
+  "homepage": "https://github.com/NovaMachina/ExNihiloSequentia/wiki",
+  "promos": {
+    "1.15.2-latest": "Unreleased"
+  },
+  "1.15.2": {
+    "Unreleased": "Not yet released."
+  }
+}
