@@ -1,10 +1,17 @@
 package com.novamachina.ens.common.setup;
 
+import com.novamachina.ens.common.block.BaseBlock;
+import com.novamachina.ens.common.builder.BlockBuilder;
 import com.novamachina.ens.common.utility.Constants;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -12,14 +19,78 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class Registration {
 
     // Registries
-    private static final DeferredRegister<Block> BLOCKS =
+    private static final DeferredRegister<Block>             BLOCKS     =
         new DeferredRegister<>(ForgeRegistries.BLOCKS, Constants.ModInfo.MOD_ID);
-    private static final DeferredRegister<Item> ITEMS =
+    private static final DeferredRegister<Item>              ITEMS      =
         new DeferredRegister<>(ForgeRegistries.ITEMS, Constants.ModInfo.MOD_ID);
-    private static final DeferredRegister<ContainerType<?>> CONTAINERS =
+    private static final DeferredRegister<ContainerType<?>>  CONTAINERS =
         new DeferredRegister<>(ForgeRegistries.CONTAINERS, Constants.ModInfo.MOD_ID);
-    private static final DeferredRegister<TileEntityType<?>> TILES =
+    private static final DeferredRegister<TileEntityType<?>> TILES      =
         new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Constants.ModInfo.MOD_ID);
+
+    // Blocks
+    public static final RegistryObject<BaseBlock> BLOCK_DUST               = BLOCKS
+        .register(Constants.Blocks.DUST,
+            () -> new BaseBlock(new BlockBuilder().properties(
+                Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+                    .sound(SoundType.CLOTH))
+                .harvestLevel(ToolType.SHOVEL, 0)));
+    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_NETHERRACK =
+        BLOCKS.register(Constants.Blocks.CRUSHED_NETHERRACK,
+            () -> new BaseBlock(new BlockBuilder().properties(
+                Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+                    .sound(SoundType.GROUND))
+                .harvestLevel(ToolType.SHOVEL, 0)));
+    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_END_STONE  =
+        BLOCKS.register(Constants.Blocks.CRUSHED_END_STONE,
+            () -> new BaseBlock(new BlockBuilder().properties(
+                Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+                    .sound(SoundType.GROUND))
+                .harvestLevel(ToolType.SHOVEL, 0)));
+    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_ANDESITE   =
+        BLOCKS.register(Constants.Blocks.CRUSHED_ANDESITE,
+            () -> new BaseBlock(new BlockBuilder().properties(
+                Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+                    .sound(SoundType.GROUND))
+                .harvestLevel(ToolType.SHOVEL, 0)));
+    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_DIORITE    =
+        BLOCKS.register(Constants.Blocks.CRUSHED_DIORITE,
+            () -> new BaseBlock(new BlockBuilder().properties(
+                Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+                    .sound(SoundType.GROUND))
+                .harvestLevel(ToolType.SHOVEL, 0)));
+    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_GRANITE    =
+        BLOCKS.register(Constants.Blocks.CRUSHED_GRANITE,
+            () -> new BaseBlock(new BlockBuilder().properties(
+                Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+                    .sound(SoundType.GROUND))
+                .harvestLevel(ToolType.SHOVEL, 0)));
+
+    // Items
+    public static final RegistryObject<Item> ITEM_DUST               = ITEMS
+        .register(Constants.Blocks.DUST,
+            () -> new BlockItem(BLOCK_DUST.get(),
+                new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_CRUSHED_NETHERRACK =
+        ITEMS.register(Constants.Blocks.CRUSHED_NETHERRACK,
+            () -> new BlockItem(BLOCK_CRUSHED_NETHERRACK.get(),
+                new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_CRUSHED_END_STONE  =
+        ITEMS.register(Constants.Blocks.CRUSHED_END_STONE,
+            () -> new BlockItem(BLOCK_CRUSHED_END_STONE.get(),
+                new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_CRUSHED_ANDESITE   = ITEMS
+        .register(Constants.Blocks.CRUSHED_ANDESITE,
+            () -> new BlockItem(BLOCK_CRUSHED_ANDESITE.get(),
+                new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_CRUSHED_DIORITE    = ITEMS
+        .register(Constants.Blocks.CRUSHED_DIORITE,
+            () -> new BlockItem(BLOCK_CRUSHED_DIORITE.get(),
+                new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_CRUSEHD_GRANITE    = ITEMS
+        .register(Constants.Blocks.CRUSHED_GRANITE,
+            () -> new BlockItem(BLOCK_CRUSHED_GRANITE.get(),
+                new Item.Properties().group(ModSetup.ITEM_GROUP)));
 
     public static void init() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
