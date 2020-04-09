@@ -14,6 +14,7 @@ The following will be included in this mod.
     - Diorite
     - End Stone
     - Granite
+    - Netherrack
     - Skystone
   - Dust
 - Add Sieve

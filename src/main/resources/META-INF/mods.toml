@@ -34,7 +34,7 @@ Ex Nihilo: Sequentia is a port to 1.15 of Ex Nihilo: Creatio for 1.12, which in 
 This mod allows you to create resources from absolutely nothing. Well...I guess you need some trees to start.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
+[[dependencies.ens]] #optional
     # the modid of the dependency
     modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -46,7 +46,7 @@ This mod allows you to create resources from absolutely nothing. Well...I guess 
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.examplemod]]
+[[dependencies.ens]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.15.2]"
