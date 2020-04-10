@@ -2,8 +2,10 @@ package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseBlock;
 import com.novamachina.ens.common.block.BaseFallingBlock;
+import com.novamachina.ens.common.block.BlockSieve;
 import com.novamachina.ens.common.builder.BlockBuilder;
 import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.Constants.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -66,31 +68,36 @@ public class Registration {
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-
+    public static final RegistryObject<BaseBlock>        BLOCK_SIEVE              = BLOCKS
+        .register(Constants.Blocks.SIEVE, BlockSieve::new);
     // Items
-    public static final RegistryObject<Item> ITEM_DUST               = ITEMS
+    public static final RegistryObject<Item>             ITEM_DUST                = ITEMS
         .register(Constants.Blocks.DUST,
             () -> new BlockItem(BLOCK_DUST.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_NETHERRACK =
+    public static final RegistryObject<Item>             ITEM_CRUSHED_NETHERRACK  =
         ITEMS.register(Constants.Blocks.CRUSHED_NETHERRACK,
             () -> new BlockItem(BLOCK_CRUSHED_NETHERRACK.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_END_STONE  =
+    public static final RegistryObject<Item>             ITEM_CRUSHED_END_STONE   =
         ITEMS.register(Constants.Blocks.CRUSHED_END_STONE,
             () -> new BlockItem(BLOCK_CRUSHED_END_STONE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_ANDESITE   = ITEMS
+    public static final RegistryObject<Item>             ITEM_CRUSHED_ANDESITE    = ITEMS
         .register(Constants.Blocks.CRUSHED_ANDESITE,
             () -> new BlockItem(BLOCK_CRUSHED_ANDESITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_DIORITE    = ITEMS
+    public static final RegistryObject<Item>             ITEM_CRUSHED_DIORITE     = ITEMS
         .register(Constants.Blocks.CRUSHED_DIORITE,
             () -> new BlockItem(BLOCK_CRUSHED_DIORITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSEHD_GRANITE    = ITEMS
+    public static final RegistryObject<Item>             ITEM_CRUSEHD_GRANITE     = ITEMS
         .register(Constants.Blocks.CRUSHED_GRANITE,
             () -> new BlockItem(BLOCK_CRUSHED_GRANITE.get(),
+                new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item>             ITEM_SIEVE               = ITEMS
+        .register(Blocks.SIEVE,
+            () -> new BlockItem(BLOCK_SIEVE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
 
     public static void init() {
