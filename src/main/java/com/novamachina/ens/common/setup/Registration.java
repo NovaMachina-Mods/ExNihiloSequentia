@@ -1,6 +1,7 @@
 package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseBlock;
+import com.novamachina.ens.common.block.BaseFallingBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
 import com.novamachina.ens.common.utility.Constants;
 import net.minecraft.block.Block;
@@ -29,39 +30,39 @@ public class Registration {
         new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Constants.ModInfo.MOD_ID);
 
     // Blocks
-    public static final RegistryObject<BaseBlock> BLOCK_DUST               = BLOCKS
+    public static final RegistryObject<BaseFallingBlock> BLOCK_DUST               = BLOCKS
         .register(Constants.Blocks.DUST,
-            () -> new BaseBlock(new BlockBuilder().properties(
+            () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.CLOTH))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_NETHERRACK =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_NETHERRACK =
         BLOCKS.register(Constants.Blocks.CRUSHED_NETHERRACK,
-            () -> new BaseBlock(new BlockBuilder().properties(
+            () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_END_STONE  =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_END_STONE  =
         BLOCKS.register(Constants.Blocks.CRUSHED_END_STONE,
-            () -> new BaseBlock(new BlockBuilder().properties(
+            () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_ANDESITE   =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_ANDESITE   =
         BLOCKS.register(Constants.Blocks.CRUSHED_ANDESITE,
-            () -> new BaseBlock(new BlockBuilder().properties(
+            () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_DIORITE    =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_DIORITE    =
         BLOCKS.register(Constants.Blocks.CRUSHED_DIORITE,
-            () -> new BaseBlock(new BlockBuilder().properties(
+            () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseBlock> BLOCK_CRUSHED_GRANITE    =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_GRANITE    =
         BLOCKS.register(Constants.Blocks.CRUSHED_GRANITE,
-            () -> new BaseBlock(new BlockBuilder().properties(
+            () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
