@@ -2,10 +2,10 @@ package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseFallingBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
+import com.novamachina.ens.common.item.SilkWormItem;
 import com.novamachina.ens.common.item.tools.crook.CrookBaseItem;
 import com.novamachina.ens.common.item.tools.crook.EnumCrook;
 import com.novamachina.ens.common.utility.Constants;
-import java.util.EnumSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -101,6 +101,9 @@ public class Registration {
                 .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability));
         }
     }
+
+    public static final RegistryObject<Item> ITEM_SILKWORM = ITEMS
+        .register(Constants.Items.SILKWORM, SilkWormItem::new);
 
     public static void init() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());

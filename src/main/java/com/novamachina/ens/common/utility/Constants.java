@@ -38,6 +38,7 @@ public class Constants {
         public static final String CROOK_NETHERRACK    = createCrookName("netherrack");
         public static final String CROOK_PURPUR        = createCrookName("purpur");
         public static final String CROOK_BLAZE         = createCrookName("blaze");
+        public static final String SILKWORM            = createItemName("silkworm");
 
 
         private static String createCrookName(String name) {
