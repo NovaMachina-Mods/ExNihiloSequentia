@@ -38,4 +38,7 @@ The following will be included in this mod.
   - Infested trees
 - Add Crook
   - Wooden
+  - Iron
+  - Gold
+  - Diamond
   - Bone
