@@ -2,9 +2,15 @@ package com.novamachina.ens.common.registry.registryitem;
 
 import net.minecraft.item.Item;
 
-public interface IRegistryItem {
+public abstract class IRegistryItem<T> {
 
-    Item registryItem = null;
+    private final T registryItem;
 
-    Item getItem();
+    public IRegistryItem(T registryItem) {
+        this.registryItem = registryItem;
+    }
+
+    public T getItem() {
+        return registryItem;
+    }
 }
