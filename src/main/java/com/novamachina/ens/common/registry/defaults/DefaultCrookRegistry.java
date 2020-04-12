@@ -10,9 +10,11 @@ public class DefaultCrookRegistry {
 
     public DefaultCrookRegistry(CrookRegistry crookRegistry) {
         this.crookRegistry = crookRegistry;
+        this.crookRegistry.setNumberOfTimesToTestVanillaDrops(3);
+        this.crookRegistry.setVanillaDropChance(0.3);
     }
 
     public void init() {
-        crookRegistry.register(new CrookRegistryItem(Registration.ITEM_SILKWORM.get()));
+        crookRegistry.register(new CrookRegistryItem(Registration.ITEM_SILKWORM.get(), 0.3));
     }
 }

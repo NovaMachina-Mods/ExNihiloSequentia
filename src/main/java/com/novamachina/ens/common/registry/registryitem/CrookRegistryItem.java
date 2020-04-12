@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 
 public class CrookRegistryItem extends IRegistryItem<Item> {
 
-    public CrookRegistryItem(Item registryItem) {
-        super(registryItem);
+    public CrookRegistryItem(Item registryItem, double rarity) {
+        super(registryItem, rarity);
     }
 }

@@ -6,8 +6,15 @@ public abstract class IRegistryItem<T> {
 
     private final T registryItem;
 
-    public IRegistryItem(T registryItem) {
+    private final double rarity;
+
+    public double getRarity() {
+        return rarity;
+    }
+
+    public IRegistryItem(T registryItem, double rarity) {
         this.registryItem = registryItem;
+        this.rarity       = rarity;
     }
 
     public T getItem() {
