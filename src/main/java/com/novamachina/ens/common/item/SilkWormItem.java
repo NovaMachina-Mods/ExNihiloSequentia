@@ -2,7 +2,6 @@ package com.novamachina.ens.common.item;
 
 import com.novamachina.ens.common.setup.ModSetup;
 import com.novamachina.ens.common.utility.LogUtil;
-import com.novamachina.ens.common.utility.ServerUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.item.Item;
@@ -17,7 +16,7 @@ public class SilkWormItem extends Item {
 
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
-        if (ServerUtil.isServer()) {
+        if (!context.getWorld().isRemote()) {
             BlockState state = context.getWorld().getBlockState(context.getPos());
             if (state.getBlock() instanceof LeavesBlock) {
                 LogUtil.info("INFEST LEAVES");
