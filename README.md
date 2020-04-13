@@ -34,7 +34,7 @@ The following will be included in this mod.
   - Stone
   - Iron
   - Diamond
-- ~~Add Slik Worms~~
+- ~~Add Silk Worms~~
   - Infested trees
 - ~~Add Crook~~
   - ~~Wooden~~
@@ -42,3 +42,4 @@ The following will be included in this mod.
   - ~~Gold~~
   - ~~Diamond~~
   - ~~Bone~~
+- Add Recipes
