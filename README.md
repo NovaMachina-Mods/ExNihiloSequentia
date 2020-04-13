@@ -34,11 +34,11 @@ The following will be included in this mod.
   - Stone
   - Iron
   - Diamond
-- Add Slik Worms
+- ~~Add Slik Worms~~
   - Infested trees
-- Add Crook
-  - Wooden
-  - Iron
-  - Gold
-  - Diamond
-  - Bone
+- ~~Add Crook~~
+  - ~~Wooden~~
+  - ~~Iron~~
+  - ~~Gold~~
+  - ~~Diamond~~
+  - ~~Bone~~
