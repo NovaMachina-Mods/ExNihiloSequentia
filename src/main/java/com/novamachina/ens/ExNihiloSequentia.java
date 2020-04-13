@@ -4,7 +4,6 @@ import com.novamachina.ens.client.proxy.ClientProxy;
 import com.novamachina.ens.client.setup.ClientSetup;
 import com.novamachina.ens.common.proxy.IProxy;
 import com.novamachina.ens.common.proxy.ServerProxy;
-import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.setup.ModSetup;
 import com.novamachina.ens.common.setup.Registration;
 import com.novamachina.ens.common.utility.Config;
@@ -17,16 +16,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(Constants.ModInfo.MOD_ID)
 public class ExNihiloSequentia {
-  public static final IProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
-  public ExNihiloSequentia() {
-    ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+    public static final IProxy PROXY = DistExecutor
+        .runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
-    Registration.init();
+    public ExNihiloSequentia() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
 
-    FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
-    FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+        Registration.init();
 
-    MasterRegistry.initRegistries();
-  }
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+    }
 }

@@ -1,9 +1,12 @@
 package com.novamachina.ens.common.setup;
 
-import com.novamachina.ens.common.block.BaseBlock;
 import com.novamachina.ens.common.block.BaseFallingBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
+import com.novamachina.ens.common.item.SilkWormItem;
+import com.novamachina.ens.common.item.tools.crook.CrookBaseItem;
+import com.novamachina.ens.common.item.tools.crook.EnumCrook;
 import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.LogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -93,7 +96,18 @@ public class Registration {
             () -> new BlockItem(BLOCK_CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
 
+    static {
+        for (EnumCrook crook : EnumCrook.values()) {
+            ITEMS
+                .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability));
+        }
+    }
+
+    public static final RegistryObject<Item> ITEM_SILKWORM = ITEMS
+        .register(Constants.Items.SILKWORM, SilkWormItem::new);
+
     public static void init() {
+        LogUtil.info("Registration init");
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
