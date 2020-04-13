@@ -36,18 +36,14 @@ public class CrookBaseItem extends ToolItem {
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos,
         LivingEntity entityLiving) {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
-        LogUtil.info("Crook used");
         if (state.getBlock() instanceof LeavesBlock) {
-            LogUtil.info("Used on leaves");
-            List<Item> itemDrops = MasterRegistry.getCrookRegistry()
+            List<ItemStack> itemDrops = MasterRegistry.CROOK_REGISTRY
                 .getLeavesDrops(worldIn, state, pos);
-            for (Item item : itemDrops) {
+            for (ItemStack item : itemDrops) {
                 worldIn.addEntity(
                     new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
-                        new ItemStack(item)));
+                        item));
             }
-        } else {
-            LogUtil.info("Used on something else");
         }
         return false;
     }
