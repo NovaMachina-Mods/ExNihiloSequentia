@@ -39,6 +39,15 @@ public class Constants {
         public static final String CROOK_PURPUR        = createCrookName("purpur");
         public static final String CROOK_BLAZE         = createCrookName("blaze");
         public static final String SILKWORM            = createItemName("silkworm");
+        public static final String HAMMER_WOOD         = createHammername("wood");
+        public static final String HAMMER_STONE        = createHammername("stone");
+        public static final String HAMMER_IRON         = createHammername("iron");
+        public static final String HAMMER_DIAMOND      = createHammername("diamond");
+        public static final String HAMMER_GOLD         = createHammername("gold");
+
+        private static String createHammername(String name) {
+            return createItemName(name) + "_hammer";
+        }
 
 
         private static String createCrookName(String name) {

@@ -2,21 +2,21 @@ package com.novamachina.ens.common.registry;
 
 import com.novamachina.ens.common.registry.defaults.DefaultCrookRegistry;
 import com.novamachina.ens.common.registry.registryitem.CrookRegistryItem;
-import com.novamachina.ens.common.utility.LogUtil;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class CrookRegistry extends IRegistry<CrookRegistryItem> {
 
-    private double vanillaDropChance               = 0.0;
-    private int    numberOfTimesToTestVanillaDrops = 0;
+    private       int                    numberOfTimesToTestVanillaDrops = 0;
+    private final Set<CrookRegistryItem> registrySet                     = new HashSet<>();
 
     @Override
     public void register(CrookRegistryItem value) {
@@ -45,10 +45,6 @@ public class CrookRegistry extends IRegistry<CrookRegistryItem> {
         }
 
         return drops;
-    }
-
-    public void setVanillaDropChance(double vanillaDropChance) {
-        this.vanillaDropChance = vanillaDropChance;
     }
 
     public void setNumberOfTimesToTestVanillaDrops(int numberOfTimesToTestVanillaDrops) {

@@ -1,29 +1,32 @@
-package com.novamachina.ens.common.item.tools.crook;
+package com.novamachina.ens.common.item.tools.hammer;
 
 import com.google.common.collect.Sets;
 import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.setup.ModSetup;
-import java.util.List;
+import com.novamachina.ens.common.setup.Registration;
 import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class CrookBaseItem extends ToolItem {
+public class HammerBaseItem extends ToolItem {
 
     private static final Set<Block> effectiveBlocksOn = Sets
-        .newHashSet(BlockTags.LEAVES.getAllElements());
+        .newHashSet(Blocks.STONE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.GRANITE,
+            Blocks.NETHERRACK, Blocks.END_STONE, Blocks.COBBLESTONE,
+            Registration.BLOCK_CRUSHED_DIORITE.get(), Registration.BLOCK_CRUSHED_ANDESITE.get(),
+            Registration.BLOCK_CRUSHED_GRANITE.get(), Registration.BLOCK_CRUSHED_NETHERRACK.get(),
+            Registration.BLOCK_CRUSHED_END_STONE.get(), Blocks.GRAVEL, Blocks.SAND,
+            Registration.BLOCK_DUST.get());
 
-    public CrookBaseItem(IItemTier tier, int maxDamage) {
+    public HammerBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
             new Item.Properties().defaultMaxDamage(maxDamage).group(ModSetup.ITEM_GROUP));
     }
@@ -32,15 +35,9 @@ public class CrookBaseItem extends ToolItem {
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos,
         LivingEntity entityLiving) {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
-        if (state.getBlock() instanceof LeavesBlock) {
-            List<ItemStack> itemDrops = MasterRegistry.CROOK_REGISTRY
-                .getLeavesDrops(worldIn, state, pos);
-            for (ItemStack item : itemDrops) {
-                worldIn.addEntity(
-                    new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
-                        item));
-            }
-        }
+        Block result = MasterRegistry.HAMMER_REGISTRY.getResult(state.getBlock());
+        Block.spawnAsEntity(worldIn, pos, new ItemStack(result));
+
         return false;
     }
 }
