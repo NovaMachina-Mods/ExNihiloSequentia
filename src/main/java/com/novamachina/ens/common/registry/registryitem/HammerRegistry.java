@@ -2,6 +2,7 @@ package com.novamachina.ens.common.registry.registryitem;
 
 import com.novamachina.ens.common.registry.IRegistry;
 import com.novamachina.ens.common.registry.defaults.DefaultHammerRegistry;
+import com.novamachina.ens.common.utility.LogUtil;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.block.Block;

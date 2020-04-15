@@ -39,5 +39,7 @@ public class DefaultHammerRegistry implements IDefaultRegistry {
         hammerRegistry.registerNonSilkTouch(new HammerRegistryItem(Blocks.GLASS, Blocks.AIR, 1.0));
         hammerRegistry
             .registerNonSilkTouch(new HammerRegistryItem(Blocks.MYCELIUM, Blocks.DIRT, 1.0));
+        hammerRegistry
+            .registerNonSilkTouch(new HammerRegistryItem(Blocks.STONE, Blocks.COBBLESTONE, 1.0));
     }
 }
