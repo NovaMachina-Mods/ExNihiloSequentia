@@ -30,10 +30,11 @@ The following will be included in this mod.
     - Diamond
     - Lapis
     - Redstone
-- Add Hammer
-  - Stone
-  - Iron
-  - Diamond
+- ~~Add Hammer~~
+  - ~~Wood~~
+  - ~~Stone~~
+  - ~~Iron~~
+  - ~~Diamond~~
 - ~~Add Silk Worms~~
   - Infested trees
 - ~~Add Crook~~
@@ -43,3 +44,4 @@ The following will be included in this mod.
   - ~~Diamond~~
   - ~~Bone~~
 - Add Recipes
+- Add JSON Registries
