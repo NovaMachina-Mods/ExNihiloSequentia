@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "ens:items/tools/hammer/hammer_diamond"
+  }
+}

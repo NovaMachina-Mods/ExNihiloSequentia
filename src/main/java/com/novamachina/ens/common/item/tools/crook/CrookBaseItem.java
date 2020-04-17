@@ -1,12 +1,8 @@
 package com.novamachina.ens.common.item.tools.crook;
 
 import com.google.common.collect.Sets;
-import com.novamachina.ens.common.item.SilkWormItem;
-import com.novamachina.ens.common.registry.CrookRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.setup.ModSetup;
-import com.novamachina.ens.common.setup.Registration;
-import com.novamachina.ens.common.utility.LogUtil;
 import java.util.List;
 import java.util.Set;
 import net.minecraft.block.Block;
@@ -24,11 +20,11 @@ import net.minecraft.world.World;
 
 public class CrookBaseItem extends ToolItem {
 
-    private static final Set<Block> effectiveBlocksIn = Sets
+    private static final Set<Block> effectiveBlocksOn = Sets
         .newHashSet(BlockTags.LEAVES.getAllElements());
 
     public CrookBaseItem(IItemTier tier, int maxDamage) {
-        super(0.5F, 0.5F, tier, effectiveBlocksIn,
+        super(0.5F, 0.5F, tier, effectiveBlocksOn,
             new Item.Properties().defaultMaxDamage(maxDamage).group(ModSetup.ITEM_GROUP));
     }
 

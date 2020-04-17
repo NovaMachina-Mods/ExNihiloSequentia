@@ -2,13 +2,10 @@ package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.registry.CrookRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
+import com.novamachina.ens.common.registry.registryitem.HammerRegistry;
 import com.novamachina.ens.common.utility.Constants;
-import com.novamachina.ens.common.utility.Constants.ModInfo;
-import com.novamachina.ens.common.utility.LogUtil;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class ModSetup {
@@ -26,9 +23,11 @@ public class ModSetup {
     }
 
     private static void addRegistries() {
-        MasterRegistry.CROOK_REGISTRY = new CrookRegistry();
+        MasterRegistry.CROOK_REGISTRY  = new CrookRegistry();
+        MasterRegistry.HAMMER_REGISTRY = new HammerRegistry();
 
         MasterRegistry.addRegistry(MasterRegistry.CROOK_REGISTRY);
+        MasterRegistry.addRegistry(MasterRegistry.HAMMER_REGISTRY);
 
         MasterRegistry.initRegistries();
     }

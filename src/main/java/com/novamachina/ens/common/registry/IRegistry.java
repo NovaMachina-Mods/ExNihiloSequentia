@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class IRegistry<T extends IRegistryItem> {
-    protected       Set<T>  registrySet = new HashSet<>();
     protected final boolean useJSON     = Config.USE_JSON_REGISTRIES.get();
 
     public void initRegistry() {
