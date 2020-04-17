@@ -28,8 +28,8 @@ public class ModSetup {
 
     public static void init(final FMLCommonSetupEvent event) {
         addRegistries();
-        LootFunctionManager.registerFunction(new UseHammerFunction.Serializer());
-        LootConditionManager.registerCondition(new UseHammerCondition.Serializer());
+//        LootFunctionManager.registerFunction(new UseHammerFunction.Serializer());
+//        LootConditionManager.registerCondition(new UseHammerCondition.Serializer());
         //        Networking.registerMessages();
     }
 
