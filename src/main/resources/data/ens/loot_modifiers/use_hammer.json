@@ -15,6 +15,26 @@
         {
           "condition": "minecraft:block_state_property",
           "block": "minecraft:sand"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:andesite"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:diorite"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:granite"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:netherrack"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:end_stone"
         }
       ]
     }

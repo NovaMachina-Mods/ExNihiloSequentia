@@ -2,6 +2,7 @@ package com.novamachina.ens;
 
 import com.novamachina.ens.client.proxy.ClientProxy;
 import com.novamachina.ens.client.setup.ClientSetup;
+import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
 import com.novamachina.ens.common.loot.modifier.UseHammerModifier;
 import com.novamachina.ens.common.proxy.IProxy;
 import com.novamachina.ens.common.proxy.ServerProxy;
@@ -13,6 +14,7 @@ import com.novamachina.ens.common.utility.Constants.ModInfo;
 import com.novamachina.ens.common.utility.LogUtil;
 import javax.annotation.Nonnull;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,6 +39,8 @@ public class ExNihiloSequentia {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+//        FMLJavaModLoadingContext.get().getModEventBus().addListener(HammerBaseItem::harvestCheck);
+        MinecraftForge.EVENT_BUS.register(HammerBaseItem.class);
     }
 
     @EventBusSubscriber(modid = ModInfo.MOD_ID, bus = Bus.MOD)
