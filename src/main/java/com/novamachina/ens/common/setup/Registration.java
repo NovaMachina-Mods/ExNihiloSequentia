@@ -7,6 +7,7 @@ import com.novamachina.ens.common.item.tools.crook.CrookBaseItem;
 import com.novamachina.ens.common.item.tools.crook.EnumCrook;
 import com.novamachina.ens.common.item.tools.hammer.EnumHammer;
 import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
+import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.LogUtil;
 import net.minecraft.block.Block;

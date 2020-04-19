@@ -2,6 +2,7 @@ package com.novamachina.ens.common.loot.modifier;
 
 import com.google.gson.JsonObject;
 import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
+import com.novamachina.ens.common.registry.HammerRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.utility.LogUtil;
 import java.util.ArrayList;
@@ -31,9 +32,10 @@ public class UseHammerModifier extends LootModifier {
         BlockState blockState = context.get(LootParameters.BLOCK_STATE);
         if (tool != null && blockState != null) {
             if (tool.getItem() instanceof HammerBaseItem) {
-                List<ItemStack> newLoot     = new ArrayList<>();
-                Block           returnBlock = MasterRegistry.HAMMER_REGISTRY
-                    .getResult(blockState.getBlock());
+                List<ItemStack> newLoot = new ArrayList<>();
+                Block returnBlock = ((HammerRegistry) MasterRegistry.getInstance()
+                    .getRegistry("HAMMER_REGISTRY")
+                ).getResult(blockState.getBlock().getRegistryName().toString());
                 newLoot.add(new ItemStack(returnBlock));
                 return newLoot;
             }

@@ -1,6 +1,7 @@
 package com.novamachina.ens.common.item.tools.crook;
 
 import com.google.common.collect.Sets;
+import com.novamachina.ens.common.registry.CrookRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.setup.ModSetup;
 import java.util.List;
@@ -33,7 +34,8 @@ public class CrookBaseItem extends ToolItem {
         LivingEntity entityLiving) {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
         if (state.getBlock() instanceof LeavesBlock) {
-            List<ItemStack> itemDrops = MasterRegistry.CROOK_REGISTRY
+            List<ItemStack> itemDrops = ((CrookRegistry) MasterRegistry.getInstance()
+                .getRegistry("CROOK_REGISTRY"))
                 .getLeavesDrops(worldIn, state, pos);
             for (ItemStack item : itemDrops) {
                 worldIn.addEntity(

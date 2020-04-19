@@ -1,23 +1,45 @@
 package com.novamachina.ens.common.registry;
 
-import com.novamachina.ens.common.registry.registryitem.CrookRegistryItem;
-import com.novamachina.ens.common.registry.registryitem.HammerRegistry;
-import java.util.ArrayList;
-import java.util.List;
+public class MasterRegistry extends IRegistry<IRegistry<?>> {
 
-public class MasterRegistry {
-
-    public static CrookRegistry  CROOK_REGISTRY;
-    public static HammerRegistry HAMMER_REGISTRY;
-
-    private static final List<IRegistry> registries = new ArrayList<>();
-
-    public static void addRegistry(IRegistry registry) {
-        registries.add(registry);
+    public MasterRegistry() {
+        initRegistry();
     }
 
-    public static void initRegistries() {
-        for (IRegistry registry : registries) {
+    private static MasterRegistry INSTANCE;
+
+    public static MasterRegistry getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new MasterRegistry();
+        }
+        return INSTANCE;
+    }
+
+    @Override
+    protected void useJsonRegistry() {
+        useDefaultRegistry();
+    }
+
+    @Override
+    public void register(String key, IRegistry<?> value) {
+        registry.put(key, value);
+    }
+
+    @Override
+    protected void useDefaultRegistry() {
+        register("CROOK_REGISTRY", new CrookRegistry());
+        register("HAMMER_REGISTRY", new HammerRegistry());
+    }
+
+    public IRegistry<?> getRegistry(String registryName) {
+        return registry.get(registryName);
+    }
+
+    @Override
+    public void initRegistry() {
+        super.initRegistry();
+
+        for (IRegistry<?> registry : registry.values()) {
             registry.initRegistry();
         }
     }

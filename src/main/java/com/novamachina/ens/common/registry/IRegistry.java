@@ -1,25 +1,25 @@
 package com.novamachina.ens.common.registry;
 
-import com.novamachina.ens.common.registry.registryitem.IRegistryItem;
 import com.novamachina.ens.common.utility.Config;
-import com.novamachina.ens.common.utility.LogUtil;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class IRegistry<T extends IRegistryItem> {
-    protected final boolean useJSON     = Config.USE_JSON_REGISTRIES.get();
+public abstract class IRegistry<T> {
+
+    protected final boolean        useJSON  = Config.USE_JSON_REGISTRIES.get();
+    protected       Map<String, T> registry = new HashMap<>();
 
     public void initRegistry() {
         if (useJSON) {
-            // TODO: Add JSON Handling
-            //read from json files
+            useJsonRegistry();
         } else {
             useDefaultRegistry();
         }
     }
 
-    public abstract void register(T value);
+    protected abstract void useJsonRegistry();
+
+    public abstract void register(String key, T value);
 
     protected abstract void useDefaultRegistry();
 }

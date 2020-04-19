@@ -1,12 +1,11 @@
 package com.novamachina.ens.common.registry;
 
-import com.novamachina.ens.common.registry.defaults.DefaultCrookRegistry;
 import com.novamachina.ens.common.registry.registryitem.CrookRegistryItem;
+import com.novamachina.ens.common.setup.Registration;
+import com.novamachina.ens.common.utility.Config;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -15,17 +14,22 @@ import net.minecraft.world.World;
 
 public class CrookRegistry extends IRegistry<CrookRegistryItem> {
 
-    private       int                    numberOfTimesToTestVanillaDrops = 0;
-    private final Set<CrookRegistryItem> registrySet                     = new HashSet<>();
+    private final int numberOfTimesToTestVanillaDrops = Config.NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS
+        .get();
 
     @Override
-    public void register(CrookRegistryItem value) {
-        registrySet.add(value);
+    protected void useJsonRegistry() {
+
+    }
+
+    @Override
+    public void register(String key, CrookRegistryItem value) {
+        registry.put(key, value);
     }
 
     @Override
     protected void useDefaultRegistry() {
-        new DefaultCrookRegistry(this).init();
+        register("silkworm", new CrookRegistryItem(Registration.ITEM_SILKWORM.get(), 0.3));
     }
 
     public List<ItemStack> getLeavesDrops(World worldIn, BlockState state, BlockPos pos) {
@@ -37,7 +41,7 @@ public class CrookRegistry extends IRegistry<CrookRegistryItem> {
             drops.addAll(items);
         }
 
-        for (CrookRegistryItem item : this.registrySet) {
+        for (CrookRegistryItem item : this.registry.values()) {
             Random random = new Random();
             if (random.nextDouble() <= item.getRarity()) {
                 drops.add(new ItemStack(item.getItem()));
@@ -45,9 +49,5 @@ public class CrookRegistry extends IRegistry<CrookRegistryItem> {
         }
 
         return drops;
-    }
-
-    public void setNumberOfTimesToTestVanillaDrops(int numberOfTimesToTestVanillaDrops) {
-        this.numberOfTimesToTestVanillaDrops = numberOfTimesToTestVanillaDrops;
     }
 }

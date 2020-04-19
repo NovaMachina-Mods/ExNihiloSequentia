@@ -1,8 +1,6 @@
 package com.novamachina.ens.common.setup;
 
-import com.novamachina.ens.common.registry.CrookRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
-import com.novamachina.ens.common.registry.registryitem.HammerRegistry;
 import com.novamachina.ens.common.utility.Constants;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -18,17 +16,7 @@ public class ModSetup {
     };
 
     public static void init(final FMLCommonSetupEvent event) {
-        addRegistries();
+        MasterRegistry.getInstance();
         //        Networking.registerMessages();
-    }
-
-    private static void addRegistries() {
-        MasterRegistry.CROOK_REGISTRY  = new CrookRegistry();
-        MasterRegistry.HAMMER_REGISTRY = new HammerRegistry();
-
-        MasterRegistry.addRegistry(MasterRegistry.CROOK_REGISTRY);
-        MasterRegistry.addRegistry(MasterRegistry.HAMMER_REGISTRY);
-
-        MasterRegistry.initRegistries();
     }
 }

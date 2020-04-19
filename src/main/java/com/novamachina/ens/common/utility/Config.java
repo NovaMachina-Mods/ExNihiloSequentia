@@ -20,6 +20,7 @@ public class Config {
     public static ForgeConfigSpec COMMON_CONFIG;
 
     public static ForgeConfigSpec.BooleanValue USE_JSON_REGISTRIES;
+    public static ForgeConfigSpec.IntValue     NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS;
 
     static {
         COMMON_BUILDER.comment("Main Settings").push(CATEGORY_MAIN);
@@ -32,8 +33,12 @@ public class Config {
 
     private static void setUpMainConfig() {
         COMMON_BUILDER.comment("Registry Options").push(SUBCATEGORY_REGISTRY_OPTIONS);
-        USE_JSON_REGISTRIES = COMMON_BUILDER.comment("Decides which registry to use.")
+        USE_JSON_REGISTRIES                   = COMMON_BUILDER
+            .comment("Decides which registry to use.")
             .define("useJSON", false);
+        NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS = COMMON_BUILDER
+            .comment("Decides which registry to use.")
+            .defineInRange("numberOfTimesToTestVanillaDrops", 3, 1, 10);
         COMMON_BUILDER.pop();
     }
 

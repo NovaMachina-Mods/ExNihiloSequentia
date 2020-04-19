@@ -6,6 +6,7 @@ import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
 import com.novamachina.ens.common.loot.modifier.UseHammerModifier;
 import com.novamachina.ens.common.proxy.IProxy;
 import com.novamachina.ens.common.proxy.ServerProxy;
+import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.setup.ModSetup;
 import com.novamachina.ens.common.setup.Registration;
 import com.novamachina.ens.common.utility.Config;
