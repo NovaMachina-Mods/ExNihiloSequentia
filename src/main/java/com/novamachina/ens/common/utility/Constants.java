@@ -44,6 +44,8 @@ public class Constants {
         public static final String HAMMER_IRON         = createHammername("iron");
         public static final String HAMMER_DIAMOND      = createHammername("diamond");
         public static final String HAMMER_GOLD         = createHammername("gold");
+        public static final String ORE_CHUNK           = "item_ore_chunk";
+        public static final String ORE_PIECE           = "item_ore_piece";
 
         private static String createHammername(String name) {
             return createItemName(name) + "_hammer";
@@ -59,5 +61,18 @@ public class Constants {
         }
 
 
+    }
+
+    public class Ore {
+
+        public static final String GOLD = "gold";
+        public static final String IRON = "iron";
+    }
+
+    public class Registry {
+
+        public static final String CROOK_REGISTRY  = "CROOK_REGISTRY";
+        public static final String HAMMER_REGISTRY = "HAMMER_REGISTRY";
+        public static final String ORE_REGISTRY    = "ORE_REGISTRY";
     }
 }

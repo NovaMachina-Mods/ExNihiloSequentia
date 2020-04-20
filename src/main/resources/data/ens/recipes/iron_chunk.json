@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "ens:item_iron_piece"
+    }
+  },
+  "result": {
+    "item": "ens:item_iron_chunk"
+  }
+}

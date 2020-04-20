@@ -4,6 +4,8 @@ import com.google.common.collect.Sets;
 import com.novamachina.ens.common.registry.CrookRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.setup.ModSetup;
+import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.Constants.Registry;
 import java.util.List;
 import java.util.Set;
 import net.minecraft.block.Block;
@@ -35,7 +37,7 @@ public class CrookBaseItem extends ToolItem {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
         if (state.getBlock() instanceof LeavesBlock) {
             List<ItemStack> itemDrops = ((CrookRegistry) MasterRegistry.getInstance()
-                .getRegistry("CROOK_REGISTRY"))
+                .getRegistry(Registry.CROOK_REGISTRY))
                 .getLeavesDrops(worldIn, state, pos);
             for (ItemStack item : itemDrops) {
                 worldIn.addEntity(

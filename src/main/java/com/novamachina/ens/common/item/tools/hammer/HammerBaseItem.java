@@ -32,18 +32,4 @@ public class HammerBaseItem extends ToolItem {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
             new Item.Properties().defaultMaxDamage(maxDamage).group(ModSetup.ITEM_GROUP));
     }
-
-    @SubscribeEvent
-    public static void harvestCheck(PlayerEvent.HarvestCheck event) {
-        if (!(HammerBaseItem.effectiveBlocksOn.contains(event.getTargetBlock().getBlock())) && (
-            event.getPlayer() == null ||
-                !(event.getPlayer().getItemStackFromSlot(EquipmentSlotType.MAINHAND)
-                    .getItem() instanceof HammerBaseItem))) {
-            return;
-        }
-        event.setCanHarvest(
-            HammerBaseItem.effectiveBlocksOn.contains(event.getTargetBlock().getBlock()) && event
-                .getPlayer().getItemStackFromSlot(EquipmentSlotType.MAINHAND)
-                .getItem() instanceof HammerBaseItem);
-    }
 }

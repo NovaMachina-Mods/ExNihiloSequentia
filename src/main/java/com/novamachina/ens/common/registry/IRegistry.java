@@ -19,7 +19,13 @@ public abstract class IRegistry<T> {
 
     protected abstract void useJsonRegistry();
 
-    public abstract void register(String key, T value);
+    public void register(String key, T value) {
+        registry.put(key, value);
+    }
+
+    public T getValue(String key) {
+        return registry.get(key);
+    }
 
     protected abstract void useDefaultRegistry();
 }
