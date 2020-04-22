@@ -8,19 +8,19 @@ The Crushed Sky Stone texture is derived from the Sky Stone texture in Applied E
 
 # ToDo
 The following will be included in this mod.
-- Add basic sifting blocks
-  - Crushed:
+- ~~Add basic sifting blocks~~
+  - ~~Crushed:~~
     - ~~Andesite~~
     - ~~Diorite~~
     - ~~End Stone~~
     - ~~Granite~~
     - ~~Netherrack~~
   - ~~Dust~~
-- Add Pebbles
-    - Stone
-    - Andesite
-    - Diorite
-    - Granite
+- ~~Add Pebbles~~
+    - ~~Stone~~
+    - ~~Andesite~~
+    - ~~Diorite~~
+    - ~~Granite~~
 - Add Sieve
 - Add Meshes
   - String
@@ -35,7 +35,7 @@ The following will be included in this mod.
     - Diamond
     - Lapis
     - Redstone
-  - Porcelain Clay
+  - ~~Porcelain Clay~~
 - Add Barrel
 - Add Crucible
 - Add End Cake
