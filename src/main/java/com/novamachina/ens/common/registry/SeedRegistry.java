@@ -13,7 +13,6 @@ public class SeedRegistry extends IRegistry<SeedRegistryItem> {
 
     @Override
     protected void useDefaultRegistry() {
-        // TODO: Add berry seeds
         register("oak",
             new SeedRegistryItem(Blocks.OAK_SAPLING.getDefaultState(), PlantType.Plains));
         register("spruce",
@@ -31,5 +30,7 @@ public class SeedRegistry extends IRegistry<SeedRegistryItem> {
             new SeedRegistryItem(Blocks.SUGAR_CANE.getDefaultState(), PlantType.Beach));
         register("carrot", new SeedRegistryItem(Blocks.CARROTS.getDefaultState(), PlantType.Crop));
         register("potato", new SeedRegistryItem(Blocks.POTATOES.getDefaultState(), PlantType.Crop));
+        register("berry",
+            new SeedRegistryItem(Blocks.SWEET_BERRY_BUSH.getDefaultState(), PlantType.Plains));
     }
 }
