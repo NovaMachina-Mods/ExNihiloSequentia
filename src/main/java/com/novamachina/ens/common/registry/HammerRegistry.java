@@ -1,5 +1,6 @@
 package com.novamachina.ens.common.registry;
 
+import com.novamachina.ens.ExNihiloSequentia;
 import com.novamachina.ens.common.setup.Registration;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -12,12 +13,11 @@ public class HammerRegistry extends IRegistry<Block> {
     }
 
     @Override
-    public void register(String key, Block value) {
-        registry.put(key, value);
-    }
-
-    @Override
     protected void useDefaultRegistry() {
+        if (!ExNihiloSequentia.itemRegistrationFinished) {
+            return;
+        }
+
         register(Blocks.STONE.getRegistryName().toString(), Blocks.COBBLESTONE);
         register(Blocks.COBBLESTONE.getRegistryName().toString(), Blocks.GRAVEL);
         register(Blocks.GRAVEL.getRegistryName().toString(), Blocks.SAND);

@@ -2,14 +2,25 @@ package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseFallingBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
-import com.novamachina.ens.common.item.SilkWormItem;
+import com.novamachina.ens.common.item.CookedSilkwormItem;
+import com.novamachina.ens.common.item.EnumPebbleType;
+import com.novamachina.ens.common.item.PebbleItem;
+import com.novamachina.ens.common.item.ResourceItem;
+import com.novamachina.ens.common.item.SeedBaseItem;
+import com.novamachina.ens.common.item.ore.Ore;
+import com.novamachina.ens.common.item.ore.OreItem;
 import com.novamachina.ens.common.item.tools.crook.CrookBaseItem;
 import com.novamachina.ens.common.item.tools.crook.EnumCrook;
 import com.novamachina.ens.common.item.tools.hammer.EnumHammer;
 import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
 import com.novamachina.ens.common.registry.MasterRegistry;
+import com.novamachina.ens.common.registry.OreRegistry;
+import com.novamachina.ens.common.registry.registryitem.SeedRegistryItem;
 import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.Constants.Registry;
 import com.novamachina.ens.common.utility.LogUtil;
+import java.util.HashMap;
+import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -100,6 +111,14 @@ public class Registration {
         .register(Constants.Blocks.CRUSHED_GRANITE,
             () -> new BlockItem(BLOCK_CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_COOKED_SILKWORM    = ITEMS
+        .register(Constants.Items.COOKED_SILKWORM,
+            () -> new CookedSilkwormItem());
+
+    public static Map<String, RegistryObject<OreItem>> chunkMap    = new HashMap<>();
+    public static Map<String, RegistryObject<OreItem>> pieceMap    = new HashMap<>();
+    public static Map<String, RegistryObject<Item>>    resourceMap = new HashMap<>();
+    public static Map<String, RegistryObject<Item>>    pebbleMap   = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -111,10 +130,33 @@ public class Registration {
             ITEMS.register(hammer.name,
                 () -> new HammerBaseItem(hammer.teir, hammer.defaultDurability));
         }
-    }
 
-    public static final RegistryObject<Item> ITEM_SILKWORM = ITEMS
-        .register(Constants.Items.SILKWORM, SilkWormItem::new);
+        for (Ore ore : ((OreRegistry) MasterRegistry.getInstance()
+            .getRegistry(Registry.ORE_REGISTRY)).getValues()) {
+            chunkMap.put(ore.getName(), ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
+            pieceMap.put(ore.getName(), ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
+        }
+
+        for (String key : MasterRegistry.getInstance().getRegistry(Registry.SEED_REGISTRY)
+            .getKeys()) {
+            SeedRegistryItem registryItem = (SeedRegistryItem) MasterRegistry.getInstance()
+                .getRegistry(Registry.SEED_REGISTRY).getValue(key);
+            ITEMS.register("item_" + key + "_seed",
+                () -> new SeedBaseItem(registryItem.getBlockState())
+                    .setPlantType(registryItem.getPlantType()));
+        }
+
+        for (String key : MasterRegistry.getInstance().getRegistry(Registry.RESOURCE_REGISTRY)
+            .getKeys()) {
+            RegistryObject<Item> item = ITEMS.register(key, () -> new ResourceItem(key));
+            resourceMap.put(key, item);
+        }
+
+        for (EnumPebbleType type : EnumPebbleType.values()) {
+            pebbleMap
+                .put(type.getType(), ITEMS.register(type.getType(), () -> new PebbleItem(type)));
+        }
+    }
 
     public static void init() {
         LogUtil.info("Registration init");

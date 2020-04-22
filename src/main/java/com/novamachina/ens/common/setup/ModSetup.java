@@ -16,7 +16,7 @@ public class ModSetup {
     };
 
     public static void init(final FMLCommonSetupEvent event) {
-        MasterRegistry.getInstance();
+        MasterRegistry.getInstance().initRegistry();
         //        Networking.registerMessages();
     }
 }

@@ -1,5 +1,8 @@
 package com.novamachina.ens.common.registry;
 
+import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.Constants.Registry;
+
 public class MasterRegistry extends IRegistry<IRegistry<?>> {
 
     public MasterRegistry() {
@@ -21,14 +24,12 @@ public class MasterRegistry extends IRegistry<IRegistry<?>> {
     }
 
     @Override
-    public void register(String key, IRegistry<?> value) {
-        registry.put(key, value);
-    }
-
-    @Override
     protected void useDefaultRegistry() {
-        register("CROOK_REGISTRY", new CrookRegistry());
-        register("HAMMER_REGISTRY", new HammerRegistry());
+        register(Constants.Registry.CROOK_REGISTRY, new CrookRegistry());
+        register(Constants.Registry.HAMMER_REGISTRY, new HammerRegistry());
+        register(Constants.Registry.ORE_REGISTRY, new OreRegistry());
+        register(Constants.Registry.SEED_REGISTRY, new SeedRegistry());
+        register(Registry.RESOURCE_REGISTRY, new ResourceRegistry());
     }
 
     public IRegistry<?> getRegistry(String registryName) {
