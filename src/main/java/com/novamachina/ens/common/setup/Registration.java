@@ -3,6 +3,8 @@ package com.novamachina.ens.common.setup;
 import com.novamachina.ens.common.block.BaseFallingBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
 import com.novamachina.ens.common.item.CookedSilkwormItem;
+import com.novamachina.ens.common.item.EnumPebbleType;
+import com.novamachina.ens.common.item.PebbleItem;
 import com.novamachina.ens.common.item.ResourceItem;
 import com.novamachina.ens.common.item.SeedBaseItem;
 import com.novamachina.ens.common.item.ore.Ore;
@@ -116,6 +118,7 @@ public class Registration {
     public static Map<String, RegistryObject<OreItem>> chunkMap    = new HashMap<>();
     public static Map<String, RegistryObject<OreItem>> pieceMap    = new HashMap<>();
     public static Map<String, RegistryObject<Item>>    resourceMap = new HashMap<>();
+    public static Map<String, RegistryObject<Item>>    pebbleMap   = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -148,8 +151,12 @@ public class Registration {
             RegistryObject<Item> item = ITEMS.register(key, () -> new ResourceItem(key));
             resourceMap.put(key, item);
         }
-    }
 
+        for (EnumPebbleType type : EnumPebbleType.values()) {
+            pebbleMap
+                .put(type.getType(), ITEMS.register(type.getType(), () -> new PebbleItem(type)));
+        }
+    }
 
     public static void init() {
         LogUtil.info("Registration init");
