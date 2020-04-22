@@ -2,6 +2,7 @@ package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseFallingBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
+import com.novamachina.ens.common.item.CookedSilkwormItem;
 import com.novamachina.ens.common.item.ResourceItem;
 import com.novamachina.ens.common.item.SeedBaseItem;
 import com.novamachina.ens.common.item.ore.Ore;
@@ -108,10 +109,13 @@ public class Registration {
         .register(Constants.Blocks.CRUSHED_GRANITE,
             () -> new BlockItem(BLOCK_CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_COOKED_SILKWORM    = ITEMS
+        .register(Constants.Items.COOKED_SILKWORM,
+            () -> new CookedSilkwormItem());
 
-
-    public static Map<String, RegistryObject<OreItem>> chunkMap = new HashMap<>();
-    public static Map<String, RegistryObject<OreItem>> pieceMap = new HashMap<>();
+    public static Map<String, RegistryObject<OreItem>> chunkMap    = new HashMap<>();
+    public static Map<String, RegistryObject<OreItem>> pieceMap    = new HashMap<>();
+    public static Map<String, RegistryObject<Item>>    resourceMap = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -141,7 +145,8 @@ public class Registration {
 
         for (String key : MasterRegistry.getInstance().getRegistry(Registry.RESOURCE_REGISTRY)
             .getKeys()) {
-            ITEMS.register("item_" + key, () -> new ResourceItem(key));
+            RegistryObject<Item> item = ITEMS.register(key, () -> new ResourceItem(key));
+            resourceMap.put(key, item);
         }
     }
 

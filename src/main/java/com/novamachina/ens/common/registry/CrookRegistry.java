@@ -4,6 +4,8 @@ import com.novamachina.ens.ExNihiloSequentia;
 import com.novamachina.ens.common.registry.registryitem.CrookRegistryItem;
 import com.novamachina.ens.common.setup.Registration;
 import com.novamachina.ens.common.utility.Config;
+import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.Constants.Items;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,7 +30,8 @@ public class CrookRegistry extends IRegistry<CrookRegistryItem> {
         if (!ExNihiloSequentia.itemRegistrationFinished) {
             return;
         }
-        register("silkworm", new CrookRegistryItem(Registration.ITEM_SILKWORM.get(), 0.3));
+        register(Items.SILKWORM,
+            new CrookRegistryItem(Registration.resourceMap.get(Items.SILKWORM).get(), 0.3));
     }
 
     public List<ItemStack> getLeavesDrops(World worldIn, BlockState state, BlockPos pos) {
