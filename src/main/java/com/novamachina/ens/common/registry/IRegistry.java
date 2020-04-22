@@ -1,6 +1,7 @@
 package com.novamachina.ens.common.registry;
 
 import com.novamachina.ens.common.utility.Config;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,4 +29,12 @@ public abstract class IRegistry<T> {
     }
 
     protected abstract void useDefaultRegistry();
+
+    public Collection<T> getValues() {
+        return registry.values();
+    }
+
+    public Collection<String> getKeys() {
+        return registry.keySet();
+    }
 }

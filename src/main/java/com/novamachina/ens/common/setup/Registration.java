@@ -2,6 +2,7 @@ package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseFallingBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
+import com.novamachina.ens.common.item.SeedBaseItem;
 import com.novamachina.ens.common.item.SilkWormItem;
 import com.novamachina.ens.common.item.ore.Ore;
 import com.novamachina.ens.common.item.ore.OreItem;
@@ -11,6 +12,7 @@ import com.novamachina.ens.common.item.tools.hammer.EnumHammer;
 import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
 import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.registry.OreRegistry;
+import com.novamachina.ens.common.registry.registryitem.SeedRegistryItem;
 import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.Constants.Registry;
 import com.novamachina.ens.common.utility.LogUtil;
@@ -128,9 +130,18 @@ public class Registration {
         }
 
         for (Ore ore : ((OreRegistry) MasterRegistry.getInstance()
-            .getRegistry(Registry.ORE_REGISTRY)).getOres()) {
+            .getRegistry(Registry.ORE_REGISTRY)).getValues()) {
             chunkMap.put(ore.getName(), ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
             pieceMap.put(ore.getName(), ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
+        }
+
+        for (String key : MasterRegistry.getInstance().getRegistry(Registry.SEED_REGISTRY)
+            .getKeys()) {
+            SeedRegistryItem registryItem = (SeedRegistryItem) MasterRegistry.getInstance()
+                .getRegistry(Registry.SEED_REGISTRY).getValue(key);
+            ITEMS.register("item_" + key + "_seed",
+                () -> new SeedBaseItem(registryItem.getBlockState())
+                    .setPlantType(registryItem.getPlantType()));
         }
     }
 

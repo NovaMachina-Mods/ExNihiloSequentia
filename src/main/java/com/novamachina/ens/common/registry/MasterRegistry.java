@@ -27,6 +27,7 @@ public class MasterRegistry extends IRegistry<IRegistry<?>> {
         register(Constants.Registry.CROOK_REGISTRY, new CrookRegistry());
         register(Constants.Registry.HAMMER_REGISTRY, new HammerRegistry());
         register(Constants.Registry.ORE_REGISTRY, new OreRegistry());
+        register(Constants.Registry.SEED_REGISTRY, new SeedRegistry());
     }
 
     public IRegistry<?> getRegistry(String registryName) {

@@ -74,5 +74,6 @@ public class Constants {
         public static final String CROOK_REGISTRY  = "CROOK_REGISTRY";
         public static final String HAMMER_REGISTRY = "HAMMER_REGISTRY";
         public static final String ORE_REGISTRY    = "ORE_REGISTRY";
+        public static final String SEED_REGISTRY   = "SEED_REGISTRY";
     }
 }

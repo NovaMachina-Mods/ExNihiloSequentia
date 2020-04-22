@@ -23,10 +23,4 @@ public class OreRegistry extends IRegistry<Ore> {
         register(Constants.Ore.IRON,
             new Ore(Constants.Ore.IRON, new Color("BF8040"), Items.IRON_INGOT));
     }
-
-    public Collection<Ore> getOres() {
-        return registry.values();
-    }
-
-
 }
