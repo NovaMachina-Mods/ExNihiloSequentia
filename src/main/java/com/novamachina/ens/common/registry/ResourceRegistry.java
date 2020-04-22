@@ -16,6 +16,7 @@ public class ResourceRegistry extends IRegistry<Void> {
         register(Constants.Items.ANCIENT_SPORE, null);
         register(Items.GRASS_SEED, null);
         register(Items.SILKWORM, null);
+        register(Items.PORCELAIN_CLAY, null);
     }
 
     @Override
