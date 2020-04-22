@@ -2,8 +2,8 @@ package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseFallingBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
+import com.novamachina.ens.common.item.ResourceItem;
 import com.novamachina.ens.common.item.SeedBaseItem;
-import com.novamachina.ens.common.item.SilkWormItem;
 import com.novamachina.ens.common.item.ore.Ore;
 import com.novamachina.ens.common.item.ore.OreItem;
 import com.novamachina.ens.common.item.tools.crook.CrookBaseItem;
@@ -21,16 +21,13 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -112,8 +109,6 @@ public class Registration {
             () -> new BlockItem(BLOCK_CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
 
-    public static final RegistryObject<Item> ITEM_SILKWORM = ITEMS
-        .register(Constants.Items.SILKWORM, SilkWormItem::new);
 
     public static Map<String, RegistryObject<OreItem>> chunkMap = new HashMap<>();
     public static Map<String, RegistryObject<OreItem>> pieceMap = new HashMap<>();
@@ -142,6 +137,11 @@ public class Registration {
             ITEMS.register("item_" + key + "_seed",
                 () -> new SeedBaseItem(registryItem.getBlockState())
                     .setPlantType(registryItem.getPlantType()));
+        }
+
+        for (String key : MasterRegistry.getInstance().getRegistry(Registry.RESOURCE_REGISTRY)
+            .getKeys()) {
+            ITEMS.register("item_" + key, () -> new ResourceItem(key));
         }
     }
 

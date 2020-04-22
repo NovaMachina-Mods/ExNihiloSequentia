@@ -1,6 +1,7 @@
 package com.novamachina.ens.common.registry;
 
 import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.Constants.Registry;
 
 public class MasterRegistry extends IRegistry<IRegistry<?>> {
 
@@ -28,6 +29,7 @@ public class MasterRegistry extends IRegistry<IRegistry<?>> {
         register(Constants.Registry.HAMMER_REGISTRY, new HammerRegistry());
         register(Constants.Registry.ORE_REGISTRY, new OreRegistry());
         register(Constants.Registry.SEED_REGISTRY, new SeedRegistry());
+        register(Registry.RESOURCE_REGISTRY, new ResourceRegistry());
     }
 
     public IRegistry<?> getRegistry(String registryName) {

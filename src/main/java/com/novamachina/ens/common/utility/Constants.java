@@ -35,26 +35,28 @@ public class Constants {
         public static final String CROOK_CLAY_UNCOOKED = createCrookName("clay_uncooked");
         public static final String CROOK_CLAY          = createCrookName("clay");
         public static final String CROOK_PRISMARINE    = createCrookName("prismarine");
-        public static final String CROOK_NETHERRACK    = createCrookName("netherrack");
-        public static final String CROOK_PURPUR        = createCrookName("purpur");
-        public static final String CROOK_BLAZE         = createCrookName("blaze");
-        public static final String SILKWORM            = createItemName("silkworm");
-        public static final String HAMMER_WOOD         = createHammername("wood");
-        public static final String HAMMER_STONE        = createHammername("stone");
-        public static final String HAMMER_IRON         = createHammername("iron");
-        public static final String HAMMER_DIAMOND      = createHammername("diamond");
-        public static final String HAMMER_GOLD         = createHammername("gold");
-        public static final String OAK_SEED            = "oak";
-        public static final String SPRUCE_SEED         = "spruce";
-        public static final String BIRCH_SEED          = "birch";
-        public static final String JUNGLE_SEED         = "jungle";
-        public static final String ACACIA_SEED         = "acacia";
-        public static final String DARK_OAK_SEED       = "darkoak";
-        public static final String CACTUS_SEED         = "cactus";
-        public static final String SUGARCANE_SEED      = "sugarcane";
-        public static final String CARROT_SEED         = "carrot";
-        public static final String POTATO_SEED         = "potato";
-        public static final String SWEET_BERRY_SEED    = "berry";
+        public static final String CROOK_NETHERRACK = createCrookName("netherrack");
+        public static final String CROOK_PURPUR     = createCrookName("purpur");
+        public static final String CROOK_BLAZE      = createCrookName("blaze");
+        public static final String SILKWORM         = createItemName("silkworm");
+        public static final String HAMMER_WOOD      = createHammername("wood");
+        public static final String HAMMER_STONE     = createHammername("stone");
+        public static final String HAMMER_IRON      = createHammername("iron");
+        public static final String HAMMER_DIAMOND   = createHammername("diamond");
+        public static final String HAMMER_GOLD      = createHammername("gold");
+        public static final String OAK_SEED         = "oak";
+        public static final String SPRUCE_SEED      = "spruce";
+        public static final String BIRCH_SEED       = "birch";
+        public static final String JUNGLE_SEED      = "jungle";
+        public static final String ACACIA_SEED      = "acacia";
+        public static final String DARK_OAK_SEED    = "darkoak";
+        public static final String CACTUS_SEED      = "cactus";
+        public static final String SUGARCANE_SEED   = "sugarcane";
+        public static final String CARROT_SEED      = "carrot";
+        public static final String POTATO_SEED      = "potato";
+        public static final String SWEET_BERRY_SEED = "berry";
+        public static final String ANCIENT_SPORE    = "ancientspores";
+        public static final String GRASS_SEED       = "grassseeds";
 
         private static String createHammername(String name) {
             return createItemName(name) + "_hammer";
@@ -80,9 +82,10 @@ public class Constants {
 
     public class Registry {
 
-        public static final String CROOK_REGISTRY  = "CROOK_REGISTRY";
-        public static final String HAMMER_REGISTRY = "HAMMER_REGISTRY";
-        public static final String ORE_REGISTRY    = "ORE_REGISTRY";
-        public static final String SEED_REGISTRY   = "SEED_REGISTRY";
+        public static final String CROOK_REGISTRY    = "CROOK_REGISTRY";
+        public static final String HAMMER_REGISTRY   = "HAMMER_REGISTRY";
+        public static final String ORE_REGISTRY      = "ORE_REGISTRY";
+        public static final String SEED_REGISTRY     = "SEED_REGISTRY";
+        public static final String RESOURCE_REGISTRY = "RESOURCE_REGISTRY";
     }
 }
