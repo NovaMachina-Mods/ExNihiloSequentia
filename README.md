@@ -15,8 +15,12 @@ The following will be included in this mod.
     - ~~End Stone~~
     - ~~Granite~~
     - ~~Netherrack~~
-    - Skystone
   - ~~Dust~~
+- Add Pebbles
+    - Stone
+    - Andesite
+    - Diorite
+    - Granite
 - Add Sieve
 - Add Meshes
   - String
@@ -25,11 +29,22 @@ The following will be included in this mod.
   - Diamond
 - Add Resource Items
   - Vanilla
-    - Iron
+    - ~~Iron~~
+    - ~~Gold~~
     - Coal
     - Diamond
     - Lapis
     - Redstone
+  - Porcelain Clay
+- Add Barrel
+- Add Crucible
+- Add End Cake
+- Add Witch Water
+- Add Dolls
+    - Blaze
+    - Enderman
+    - Guardian
+    - Shulker
 - ~~Add Hammer~~
   - ~~Wood~~
   - ~~Stone~~
@@ -44,4 +59,5 @@ The following will be included in this mod.
   - ~~Diamond~~
   - ~~Bone~~
 - Add Recipes
+- Add Smelting
 - Add JSON Registries
