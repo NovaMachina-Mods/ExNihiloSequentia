@@ -44,8 +44,17 @@ public class Constants {
         public static final String HAMMER_IRON         = createHammername("iron");
         public static final String HAMMER_DIAMOND      = createHammername("diamond");
         public static final String HAMMER_GOLD         = createHammername("gold");
-        public static final String ORE_CHUNK           = "item_ore_chunk";
-        public static final String ORE_PIECE           = "item_ore_piece";
+        public static final String OAK_SEED            = "oak";
+        public static final String SPRUCE_SEED         = "spruce";
+        public static final String BIRCH_SEED          = "birch";
+        public static final String JUNGLE_SEED         = "jungle";
+        public static final String ACACIA_SEED         = "acacia";
+        public static final String DARK_OAK_SEED       = "darkoak";
+        public static final String CACTUS_SEED         = "cactus";
+        public static final String SUGARCANE_SEED      = "sugarcane";
+        public static final String CARROT_SEED         = "carrot";
+        public static final String POTATO_SEED         = "potato";
+        public static final String SWEET_BERRY_SEED    = "berry";
 
         private static String createHammername(String name) {
             return createItemName(name) + "_hammer";
