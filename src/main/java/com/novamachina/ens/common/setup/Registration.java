@@ -1,6 +1,7 @@
 package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseFallingBlock;
+import com.novamachina.ens.common.block.EndCakeBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
 import com.novamachina.ens.common.item.CookedSilkwormItem;
 import com.novamachina.ens.common.item.EnumPebbleType;
@@ -61,30 +62,32 @@ public class Registration {
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_END_STONE  =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_END_STONE =
         BLOCKS.register(Constants.Blocks.CRUSHED_END_STONE,
             () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_ANDESITE   =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_ANDESITE  =
         BLOCKS.register(Constants.Blocks.CRUSHED_ANDESITE,
             () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_DIORITE    =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_DIORITE   =
         BLOCKS.register(Constants.Blocks.CRUSHED_DIORITE,
             () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_GRANITE    =
+    public static final RegistryObject<BaseFallingBlock> BLOCK_CRUSHED_GRANITE   =
         BLOCKS.register(Constants.Blocks.CRUSHED_GRANITE,
             () -> new BaseFallingBlock(new BlockBuilder().properties(
                 Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                     .sound(SoundType.GROUND))
                 .harvestLevel(ToolType.SHOVEL, 0)));
+    public static final RegistryObject<EndCakeBlock>     BLOCK_END_CAKE          = BLOCKS
+        .register(Constants.Blocks.END_CAKE, EndCakeBlock::new);
 
     // Items
     public static final RegistryObject<Item> ITEM_DUST               = ITEMS
@@ -112,8 +115,10 @@ public class Registration {
             () -> new BlockItem(BLOCK_CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
     public static final RegistryObject<Item> ITEM_COOKED_SILKWORM    = ITEMS
-        .register(Constants.Items.COOKED_SILKWORM,
-            () -> new CookedSilkwormItem());
+        .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
+    public static final RegistryObject<Item> ITEM_END_CAKE           = ITEMS
+        .register(Constants.Blocks.END_CAKE, () -> new BlockItem(BLOCK_END_CAKE.get(),
+            new Item.Properties().group(ModSetup.ITEM_GROUP)));
 
     public static Map<String, RegistryObject<OreItem>> chunkMap    = new HashMap<>();
     public static Map<String, RegistryObject<OreItem>> pieceMap    = new HashMap<>();

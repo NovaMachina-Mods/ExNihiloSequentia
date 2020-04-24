@@ -15,6 +15,7 @@ public class Constants {
         public static final String CRUSHED_GRANITE    = createBlockName("crushed_granite");
         public static final String CRUSHED_NETHERRACK = createBlockName("crushed_netherrack");
         public static final String DUST               = createBlockName("dust");
+        public static final String END_CAKE           = createBlockName("end_cake");
 
         private static String createBlockName(String name) {
             return "block_" + name;
