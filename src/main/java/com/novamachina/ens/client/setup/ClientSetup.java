@@ -5,6 +5,9 @@ import com.novamachina.ens.common.utility.Constants;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -14,5 +17,15 @@ public class ClientSetup
     public static void init(final FMLClientSetupEvent event) {
         RenderTypeLookup
             .setRenderLayer(Registration.BLOCK_SIEVE.get(), RenderType.getCutoutMipped());
+    }
+
+    @SubscribeEvent
+    public static void onColorHandlerEvent(ColorHandlerEvent.Item event) {
+        for (RegistryObject<OreItem> item : Registration.chunkMap.values()) {
+            event.getItemColors().register(new OreColor(), item.get());
+        }
+        for (RegistryObject<OreItem> item : Registration.pieceMap.values()) {
+            event.getItemColors().register(new OreColor(), item.get());
+        }
     }
 }

@@ -2,7 +2,6 @@ package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseBlock;
 import com.novamachina.ens.common.block.BaseFallingBlock;
-import com.novamachina.ens.common.block.BlockSieve;
 import com.novamachina.ens.common.builder.BlockBuilder;
 import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.Constants.Blocks;
@@ -70,40 +69,95 @@ public class Registration {
                 .harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<BaseBlock>        BLOCK_SIEVE              = BLOCKS
         .register(Constants.Blocks.SIEVE, BlockSieve::new);
+    public static final RegistryObject<EndCakeBlock>     BLOCK_END_CAKE           = BLOCKS
+        .register(Constants.Blocks.END_CAKE, EndCakeBlock::new);
+
     // Items
-    public static final RegistryObject<Item>             ITEM_DUST                = ITEMS
+    public static final RegistryObject<Item> ITEM_DUST               = ITEMS
         .register(Constants.Blocks.DUST,
             () -> new BlockItem(BLOCK_DUST.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item>             ITEM_CRUSHED_NETHERRACK  =
+    public static final RegistryObject<Item> ITEM_CRUSHED_NETHERRACK =
         ITEMS.register(Constants.Blocks.CRUSHED_NETHERRACK,
             () -> new BlockItem(BLOCK_CRUSHED_NETHERRACK.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item>             ITEM_CRUSHED_END_STONE   =
+    public static final RegistryObject<Item> ITEM_CRUSHED_END_STONE  =
         ITEMS.register(Constants.Blocks.CRUSHED_END_STONE,
             () -> new BlockItem(BLOCK_CRUSHED_END_STONE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item>             ITEM_CRUSHED_ANDESITE    = ITEMS
+    public static final RegistryObject<Item> ITEM_CRUSHED_ANDESITE   = ITEMS
         .register(Constants.Blocks.CRUSHED_ANDESITE,
             () -> new BlockItem(BLOCK_CRUSHED_ANDESITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item>             ITEM_CRUSHED_DIORITE     = ITEMS
+    public static final RegistryObject<Item> ITEM_CRUSHED_DIORITE    = ITEMS
         .register(Constants.Blocks.CRUSHED_DIORITE,
             () -> new BlockItem(BLOCK_CRUSHED_DIORITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item>             ITEM_CRUSEHD_GRANITE     = ITEMS
+    public static final RegistryObject<Item> ITEM_CRUSEHD_GRANITE    = ITEMS
         .register(Constants.Blocks.CRUSHED_GRANITE,
             () -> new BlockItem(BLOCK_CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
-    public static final RegistryObject<Item>             ITEM_SIEVE               = ITEMS
+    public static final RegistryObject<Item> ITEM_COOKED_SILKWORM    = ITEMS
+        .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
+    public static final RegistryObject<Item> ITEM_END_CAKE           = ITEMS
+        .register(Constants.Blocks.END_CAKE, () -> new BlockItem(BLOCK_END_CAKE.get(),
+            new Item.Properties().group(ModSetup.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_SIEVE              = ITEMS
         .register(Blocks.SIEVE,
             () -> new BlockItem(BLOCK_SIEVE.get(),
                 new Item.Properties().group(ModSetup.ITEM_GROUP)));
 
+    public static Map<String, RegistryObject<OreItem>> chunkMap    = new HashMap<>();
+    public static Map<String, RegistryObject<OreItem>> pieceMap    = new HashMap<>();
+    public static Map<String, RegistryObject<Item>>    resourceMap = new HashMap<>();
+    public static Map<String, RegistryObject<Item>>    pebbleMap   = new HashMap<>();
+
+    static {
+        for (EnumCrook crook : EnumCrook.values()) {
+            ITEMS
+                .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability));
+        }
+
+        for (EnumHammer hammer : EnumHammer.values()) {
+            ITEMS.register(hammer.name,
+                () -> new HammerBaseItem(hammer.teir, hammer.defaultDurability));
+        }
+
+        for (Ore ore : ((OreRegistry) MasterRegistry.getInstance()
+            .getRegistry(Registry.ORE_REGISTRY)).getValues()) {
+            chunkMap.put(ore.getName(), ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
+            pieceMap.put(ore.getName(), ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
+        }
+
+        for (String key : MasterRegistry.getInstance().getRegistry(Registry.SEED_REGISTRY)
+            .getKeys()) {
+            SeedRegistryItem registryItem = (SeedRegistryItem) MasterRegistry.getInstance()
+                .getRegistry(Registry.SEED_REGISTRY).getValue(key);
+            ITEMS.register("item_" + key + "_seed",
+                () -> new SeedBaseItem(registryItem.getBlockState())
+                    .setPlantType(registryItem.getPlantType()));
+        }
+
+        for (String key : MasterRegistry.getInstance().getRegistry(Registry.RESOURCE_REGISTRY)
+            .getKeys()) {
+            RegistryObject<Item> item = ITEMS.register(key, () -> new ResourceItem(key));
+            resourceMap.put(key, item);
+        }
+
+        for (EnumPebbleType type : EnumPebbleType.values()) {
+            pebbleMap
+                .put(type.getType(), ITEMS.register(type.getType(), () -> new PebbleItem(type)));
+        }
+    }
+
     public static void init() {
+        LogUtil.info("Registration init");
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
+
+    @ObjectHolder("ens:use_hammer")
+    public static GlobalLootModifierSerializer<?> HAMMER_MODIFIER = null;
 }
