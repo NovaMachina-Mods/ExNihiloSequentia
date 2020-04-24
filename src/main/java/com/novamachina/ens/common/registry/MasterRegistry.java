@@ -5,11 +5,11 @@ import com.novamachina.ens.common.utility.Constants.Registry;
 
 public class MasterRegistry extends IRegistry<IRegistry<?>> {
 
+    private static MasterRegistry INSTANCE;
+
     public MasterRegistry() {
         initRegistry();
     }
-
-    private static MasterRegistry INSTANCE;
 
     public static MasterRegistry getInstance() {
         if (INSTANCE == null) {

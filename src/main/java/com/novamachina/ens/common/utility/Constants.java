@@ -2,12 +2,12 @@ package com.novamachina.ens.common.utility;
 
 public class Constants {
 
-  public static class ModInfo {
+    public static class ModInfo {
 
-    public static final String MOD_ID = "ens";
-  }
+        public static final String MOD_ID = "ens";
+    }
 
-  public static class Blocks {
+    public static class Blocks {
 
         public static final String CRUSHED_ANDESITE   = createBlockName("crushed_andesite");
         public static final String CRUSHED_DIORITE    = createBlockName("crushed_diorite");
@@ -16,7 +16,7 @@ public class Constants {
         public static final String CRUSHED_NETHERRACK = createBlockName("crushed_netherrack");
         public static final String DUST               = createBlockName("dust");
         public static final String END_CAKE           = createBlockName("end_cake");
-        public static final String SIEVE = createBlockName("sieve");
+        public static final String SIEVE              = createBlockName("sieve");
 
         private static String createBlockName(String name) {
             return "block_" + name;

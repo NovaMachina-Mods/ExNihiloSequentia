@@ -3,21 +3,12 @@ package com.novamachina.ens.common.item.tools.hammer;
 import com.google.common.collect.Sets;
 import com.novamachina.ens.common.setup.ModSetup;
 import com.novamachina.ens.common.setup.Registration;
-import com.novamachina.ens.common.utility.LogUtil;
 import java.util.Set;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class HammerBaseItem extends ToolItem {
 

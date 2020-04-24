@@ -4,7 +4,6 @@ import com.novamachina.ens.ExNihiloSequentia;
 import com.novamachina.ens.common.registry.registryitem.CrookRegistryItem;
 import com.novamachina.ens.common.setup.Registration;
 import com.novamachina.ens.common.utility.Config;
-import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.Constants.Items;
 import java.util.ArrayList;
 import java.util.List;

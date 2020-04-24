@@ -1,11 +1,7 @@
 package com.novamachina.ens.common.item.ore;
 
-import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.utility.Color;
-import com.novamachina.ens.common.utility.Constants.Registry;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
 
 public class Ore {
 

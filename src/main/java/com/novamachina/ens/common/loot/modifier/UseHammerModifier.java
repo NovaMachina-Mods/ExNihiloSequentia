@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
 import com.novamachina.ens.common.registry.HammerRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
-import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.Constants.Registry;
 import com.novamachina.ens.common.utility.LogUtil;
 import java.util.ArrayList;

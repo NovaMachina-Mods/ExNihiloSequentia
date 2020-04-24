@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import com.novamachina.ens.common.registry.CrookRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.setup.ModSetup;
-import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.Constants.Registry;
 import java.util.List;
 import java.util.Set;

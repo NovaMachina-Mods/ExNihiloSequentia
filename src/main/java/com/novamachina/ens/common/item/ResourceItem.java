@@ -1,7 +1,6 @@
 package com.novamachina.ens.common.item;
 
 import com.novamachina.ens.common.setup.ModSetup;
-import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.Constants.Items;
 import com.novamachina.ens.common.utility.LogUtil;
 import net.minecraft.block.Block;

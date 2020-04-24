@@ -3,10 +3,6 @@ package com.novamachina.ens.common.registry;
 import com.novamachina.ens.common.item.ore.Ore;
 import com.novamachina.ens.common.utility.Color;
 import com.novamachina.ens.common.utility.Constants;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 public class OreRegistry extends IRegistry<Ore> {
