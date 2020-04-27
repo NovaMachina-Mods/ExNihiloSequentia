@@ -1,7 +1,41 @@
 {
-  "variants": {
-    "": {
-      "model": "ens:block/block_sieve"
+  "multipart": [
+    {
+      "apply": {
+        "model": "ens:block/block_sieve"
+      }
+    },
+    {
+      "when": {
+        "mesh": "string"
+      },
+      "apply": {
+        "model": "ens:block/mesh_string"
+      }
+    },
+    {
+      "when": {
+        "mesh": "flint"
+      },
+      "apply": {
+        "model": "ens:block/mesh_flint"
+      }
+    },
+    {
+      "when": {
+        "mesh": "iron"
+      },
+      "apply": {
+        "model": "ens:block/mesh_iron"
+      }
+    },
+    {
+      "when": {
+        "mesh": "diamond"
+      },
+      "apply": {
+        "model": "ens:block/mesh_diamond"
+      }
     }
-  }
+  ]
 }
