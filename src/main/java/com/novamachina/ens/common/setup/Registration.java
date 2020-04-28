@@ -10,6 +10,8 @@ import com.novamachina.ens.common.item.EnumPebbleType;
 import com.novamachina.ens.common.item.PebbleItem;
 import com.novamachina.ens.common.item.ResourceItem;
 import com.novamachina.ens.common.item.SeedBaseItem;
+import com.novamachina.ens.common.item.mesh.EnumMesh;
+import com.novamachina.ens.common.item.mesh.MeshItem;
 import com.novamachina.ens.common.item.ore.Ore;
 import com.novamachina.ens.common.item.ore.OreItem;
 import com.novamachina.ens.common.item.tools.crook.CrookBaseItem;
@@ -168,6 +170,13 @@ public class Registration {
         for (EnumPebbleType type : EnumPebbleType.values()) {
             pebbleMap
                 .put(type.getType(), ITEMS.register(type.getType(), () -> new PebbleItem(type)));
+        }
+
+        for (EnumMesh mesh : EnumMesh.values()) {
+            if (mesh.getName().equals("none")) {
+                continue;
+            }
+            ITEMS.register("item_" + mesh.getName() + "_mesh", () -> new MeshItem(mesh));
         }
     }
 
