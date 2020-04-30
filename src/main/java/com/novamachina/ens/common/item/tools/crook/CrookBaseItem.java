@@ -3,8 +3,7 @@ package com.novamachina.ens.common.item.tools.crook;
 import com.google.common.collect.Sets;
 import com.novamachina.ens.common.registry.CrookRegistry;
 import com.novamachina.ens.common.registry.MasterRegistry;
-import com.novamachina.ens.common.setup.ModSetup;
-import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.setup.ModInitialization;
 import com.novamachina.ens.common.utility.Constants.Registry;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +27,7 @@ public class CrookBaseItem extends ToolItem {
 
     public CrookBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
-            new Item.Properties().defaultMaxDamage(maxDamage).group(ModSetup.ITEM_GROUP));
+            new Item.Properties().defaultMaxDamage(maxDamage).group(ModInitialization.ITEM_GROUP));
     }
 
     @Override

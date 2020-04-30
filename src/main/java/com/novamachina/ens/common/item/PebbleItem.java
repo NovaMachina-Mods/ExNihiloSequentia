@@ -1,6 +1,6 @@
 package com.novamachina.ens.common.item;
 
-import com.novamachina.ens.common.setup.ModSetup;
+import com.novamachina.ens.common.setup.ModInitialization;
 import net.minecraft.item.Item;
 
 public class PebbleItem extends Item {
@@ -8,7 +8,7 @@ public class PebbleItem extends Item {
     private final EnumPebbleType type;
 
     public PebbleItem(EnumPebbleType type) {
-        super(new Item.Properties().group(ModSetup.ITEM_GROUP));
+        super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
         this.type = type;
     }
 

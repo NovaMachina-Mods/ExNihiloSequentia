@@ -2,9 +2,9 @@ package com.novamachina.ens.common.registry;
 
 import com.novamachina.ens.ExNihiloSequentia;
 import com.novamachina.ens.common.registry.registryitem.CrookRegistryItem;
-import com.novamachina.ens.common.setup.Registration;
+import com.novamachina.ens.common.setup.ModInitialization;
+import com.novamachina.ens.common.setup.ModItems;
 import com.novamachina.ens.common.utility.Config;
-import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.Constants.Items;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class CrookRegistry extends IRegistry<CrookRegistryItem> {
             return;
         }
         register(Items.SILKWORM,
-            new CrookRegistryItem(Registration.resourceMap.get(Items.SILKWORM).get(), 0.3));
+            new CrookRegistryItem(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.3));
     }
 
     public List<ItemStack> getLeavesDrops(World worldIn, BlockState state, BlockPos pos) {

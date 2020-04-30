@@ -2,7 +2,7 @@ package com.novamachina.ens.client.setup;
 
 import com.novamachina.ens.common.item.ore.OreColor;
 import com.novamachina.ens.common.item.ore.OreItem;
-import com.novamachina.ens.common.setup.Registration;
+import com.novamachina.ens.common.setup.ModItems;
 import com.novamachina.ens.common.utility.Constants;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -19,10 +19,10 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void onColorHandlerEvent(ColorHandlerEvent.Item event) {
-        for (RegistryObject<OreItem> item : Registration.chunkMap.values()) {
+        for (RegistryObject<OreItem> item : ModItems.chunkMap.values()) {
             event.getItemColors().register(new OreColor(), item.get());
         }
-        for (RegistryObject<OreItem> item : Registration.pieceMap.values()) {
+        for (RegistryObject<OreItem> item : ModItems.pieceMap.values()) {
             event.getItemColors().register(new OreColor(), item.get());
         }
     }
