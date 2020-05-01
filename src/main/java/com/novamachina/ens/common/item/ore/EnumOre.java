@@ -1,19 +1,19 @@
 package com.novamachina.ens.common.item.ore;
 
-import com.novamachina.ens.common.registry.MasterRegistry;
 import com.novamachina.ens.common.utility.Color;
-import com.novamachina.ens.common.utility.Constants.Registry;
+import com.novamachina.ens.common.utility.Constants;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
 
-public class Ore {
+public enum EnumOre {
+    IRON(Constants.Ore.IRON, new Color("BF8040"), Items.IRON_INGOT),
+    GOLD(Constants.Ore.GOLD, new Color("FFFF00"), Items.GOLD_INGOT);
 
     private final String name;
     private final Color  color;
     private final Item   result;
 
-    public Ore(String name, Color color, Item result) {
+    EnumOre(String name, Color color, Item result) {
         this.name   = name;
         this.color  = color;
         this.result = result;

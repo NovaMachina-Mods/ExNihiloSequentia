@@ -5,6 +5,7 @@ import com.novamachina.ens.common.utility.LogUtil;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ObjectHolder;
 
 public class ModInitialization {
@@ -19,9 +20,9 @@ public class ModInitialization {
     @ObjectHolder("ens:use_hammer")
     public static GlobalLootModifierSerializer<?> HAMMER_MODIFIER = null;
 
-    public static void init() {
+    public static void init(IEventBus modEventBus) {
         LogUtil.info("Registration init");
-        ModBlocks.init();
-        ModItems.init();
+        ModBlocks.init(modEventBus);
+        ModItems.init(modEventBus);
     }
 }

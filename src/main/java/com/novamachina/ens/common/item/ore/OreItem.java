@@ -5,14 +5,14 @@ import net.minecraft.item.Item;
 
 public class OreItem extends Item {
 
-    private final Ore ore;
+    private final EnumOre ore;
 
-    public OreItem(Ore ore) {
+    public OreItem(EnumOre ore) {
         super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
         this.ore = ore;
     }
 
-    public Ore getOre() {
+    public EnumOre getOre() {
         return ore;
     }
 }

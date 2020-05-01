@@ -1,4 +1,4 @@
-package com.novamachina.ens.common.item;
+package com.novamachina.ens.common.item.seeds;
 
 import com.novamachina.ens.common.setup.ModInitialization;
 import net.minecraft.block.BlockState;

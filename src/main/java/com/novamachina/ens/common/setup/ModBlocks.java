@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -45,7 +46,7 @@ public class ModBlocks {
     public static final RegistryObject<EndCakeBlock>     BLOCK_END_CAKE           = BLOCKS
         .register(Constants.Blocks.END_CAKE, EndCakeBlock::new);
 
-    public static void init() {
-        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+    public static void init(IEventBus modEventBus) {
+        BLOCKS.register(modEventBus);
     }
 }

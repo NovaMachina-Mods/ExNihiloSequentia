@@ -28,24 +28,14 @@ public class ExNihiloSequentia {
     public ExNihiloSequentia() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
 
-        ModInitialization.init();
+        ModInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::init);
+//        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         MinecraftForge.EVENT_BUS.register(HammerBaseItem.class);
     }
 
-    @EventBusSubscriber(modid = ModInfo.MOD_ID, bus = Bus.MOD)
-    public static class EventHandlers {
 
-        @SubscribeEvent
-        public static void registerModifierSerializers(
-            @Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-            LogUtil.info("Register Modifiers");
-            event.getRegistry()
-                .register(new UseHammerModifier.Serializer().setRegistryName("ens", "use_hammer"));
-        }
-    }
 
 //    public void onModLoading(FMLLoadCompleteEvent event) {
 //        RegistryManager.ACTIVE.getRegistry(GameData.BLOCKS).getRaw(new ResourceLocation("minecraft","cobblestone"));

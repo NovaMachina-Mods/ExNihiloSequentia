@@ -1,4 +1,4 @@
-package com.novamachina.ens.common.item;
+package com.novamachina.ens.common.item.resources;
 
 import com.novamachina.ens.common.setup.ModInitialization;
 import com.novamachina.ens.common.utility.Constants.Items;
