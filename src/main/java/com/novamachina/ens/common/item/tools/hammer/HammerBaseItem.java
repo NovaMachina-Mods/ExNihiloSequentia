@@ -9,6 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolItem;
+import net.minecraftforge.common.ToolType;
 
 public class HammerBaseItem extends ToolItem {
 
@@ -21,6 +22,8 @@ public class HammerBaseItem extends ToolItem {
 
     public HammerBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
-            new Item.Properties().defaultMaxDamage(maxDamage).group(ModInitialization.ITEM_GROUP));
+            new Item.Properties().defaultMaxDamage(maxDamage).group(ModInitialization.ITEM_GROUP)
+                .addToolType(
+                    ToolType.PICKAXE, tier.getHarvestLevel()));
     }
 }
