@@ -14,9 +14,10 @@ public class CrookDrops {
     public static final int numberOfTimesToTestVanillaDrops = Config.NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS
         .get();
 
-    private static final List<CrookDropEntry> crookDrops = new ArrayList<>();
+    private static final List<CrookDropEntry> crookDrops  = new ArrayList<>();
+    private static       boolean              initialized = false;
 
-    public static void useDefaultRegistry() {
+    public static void useDefaults() {
         if (!ExNihiloSequentia.itemRegistrationFinished) {
             return;
         }
@@ -24,6 +25,11 @@ public class CrookDrops {
     }
 
     public static List<ItemStack> getDrops() {
+        if (!initialized) {
+            useDefaults();
+            initialized = true;
+        }
+
         List<ItemStack> drops = new ArrayList<>();
 
         for (CrookDropEntry item : crookDrops) {
