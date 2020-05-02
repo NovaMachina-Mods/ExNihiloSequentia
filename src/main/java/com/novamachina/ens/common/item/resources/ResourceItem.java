@@ -1,6 +1,6 @@
-package com.novamachina.ens.common.item;
+package com.novamachina.ens.common.item.resources;
 
-import com.novamachina.ens.common.setup.ModSetup;
+import com.novamachina.ens.common.setup.ModInitialization;
 import com.novamachina.ens.common.utility.Constants.Items;
 import com.novamachina.ens.common.utility.LogUtil;
 import net.minecraft.block.Block;
@@ -20,7 +20,7 @@ public class ResourceItem extends Item {
     private final String resourceName;
 
     public ResourceItem(String name) {
-        super(new Item.Properties().group(ModSetup.ITEM_GROUP));
+        super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
         this.resourceName = name;
     }
 

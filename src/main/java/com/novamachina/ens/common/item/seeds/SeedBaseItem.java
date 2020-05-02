@@ -1,6 +1,6 @@
-package com.novamachina.ens.common.item;
+package com.novamachina.ens.common.item.seeds;
 
-import com.novamachina.ens.common.setup.ModSetup;
+import com.novamachina.ens.common.setup.ModInitialization;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -20,7 +20,7 @@ public class SeedBaseItem extends Item implements IPlantable {
     private       PlantType  type;
 
     public SeedBaseItem(BlockState plant) {
-        super(new Item.Properties().group(ModSetup.ITEM_GROUP));
+        super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
         this.plant = plant;
     }
 
