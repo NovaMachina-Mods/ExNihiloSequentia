@@ -1,16 +1,13 @@
 package com.novamachina.ens;
 
 import com.novamachina.ens.client.setup.ClientSetup;
-import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
 import com.novamachina.ens.common.loot.modifier.UseHammerModifier;
-import com.novamachina.ens.common.setup.ModSetup;
-import com.novamachina.ens.common.setup.Registration;
+import com.novamachina.ens.common.setup.ModInitialization;
 import com.novamachina.ens.common.utility.Config;
 import com.novamachina.ens.common.utility.Constants;
 import com.novamachina.ens.common.utility.Constants.ModInfo;
 import com.novamachina.ens.common.utility.LogUtil;
 import javax.annotation.Nonnull;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,11 +26,11 @@ public class ExNihiloSequentia {
     public ExNihiloSequentia() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
 
-        Registration.init();
+        ModInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
+//        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
-        MinecraftForge.EVENT_BUS.register(HammerBaseItem.class);
+//        FMLJavaModLoadingContext.get().getModEventBus().addListener(LootModifierHandler::registerModifierSerializers);
     }
 
     @EventBusSubscriber(modid = ModInfo.MOD_ID, bus = Bus.MOD)
