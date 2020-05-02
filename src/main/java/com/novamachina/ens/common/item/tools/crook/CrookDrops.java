@@ -14,19 +14,19 @@ public class CrookDrops {
     public static final int numberOfTimesToTestVanillaDrops = Config.NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS
         .get();
 
-    private static final List<CrookDropsEntry> crookDrops = new ArrayList<>();
+    private static final List<CrookDropEntry> crookDrops = new ArrayList<>();
 
     public static void useDefaultRegistry() {
         if (!ExNihiloSequentia.itemRegistrationFinished) {
             return;
         }
-        crookDrops.add(new CrookDropsEntry(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.3));
+        crookDrops.add(new CrookDropEntry(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.3));
     }
 
     public static List<ItemStack> getDrops() {
         List<ItemStack> drops = new ArrayList<>();
 
-        for (CrookDropsEntry item : crookDrops) {
+        for (CrookDropEntry item : crookDrops) {
             Random random = new Random();
             if (random.nextDouble() <= item.getRarity()) {
                 drops.add(new ItemStack(item.getItem()));

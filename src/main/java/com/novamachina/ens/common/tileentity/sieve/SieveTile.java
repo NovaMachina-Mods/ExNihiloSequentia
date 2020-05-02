@@ -1,9 +1,9 @@
-package com.novamachina.ens.common.tileentity;
+package com.novamachina.ens.common.tileentity.sieve;
 
 import com.novamachina.ens.common.block.BlockSieve;
 import com.novamachina.ens.common.item.mesh.EnumMesh;
 import com.novamachina.ens.common.item.mesh.MeshItem;
-import com.novamachina.ens.common.setup.Registration;
+import com.novamachina.ens.common.setup.ModTiles;
 import com.novamachina.ens.common.utility.LogUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
@@ -20,7 +20,7 @@ public class SieveTile extends TileEntity {
     private float     progress   = 0;
 
     public SieveTile() {
-        super(Registration.SIEVE_TILE.get());
+        super(ModTiles.SIEVE_TILE.get());
     }
 
     public void insertMesh(ItemStack stack) {
