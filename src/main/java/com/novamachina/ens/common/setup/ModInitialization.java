@@ -24,5 +24,6 @@ public class ModInitialization {
         LogUtil.info("Registration init");
         ModBlocks.init(modEventBus);
         ModItems.init(modEventBus);
+        ModTiles.init(modEventBus);
     }
 }
