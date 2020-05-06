@@ -36,6 +36,7 @@ public class ModItems {
     public static Map<String, RegistryObject<OreItem>> pieceMap    = new HashMap<>();
     public static Map<String, RegistryObject<Item>>    resourceMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>>    pebbleMap   = new HashMap<>();
+    public static Map<String, RegistryObject<Item>>    seedMap     = new HashMap<>();
 
     public static final RegistryObject<Item> ITEM_DUST               = ITEMS
         .register(Constants.Blocks.DUST, () -> new BlockItem(ModBlocks.BLOCK_DUST.get(),
@@ -86,8 +87,8 @@ public class ModItems {
         }
 
         for (EnumSeed seed : EnumSeed.values()) {
-            ITEMS.register(seed.getSeedName(),
-                () -> new SeedBaseItem(seed.getDefaultState()).setPlantType(seed.getPlantType()));
+            seedMap.put(seed.getSeedName(), ITEMS.register(seed.getSeedName(),
+                () -> new SeedBaseItem(seed.getDefaultState()).setPlantType(seed.getPlantType())));
         }
 
         for (EnumResource resource : EnumResource.values()) {

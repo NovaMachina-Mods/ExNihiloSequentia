@@ -3,6 +3,7 @@ package com.novamachina.ens.common.tileentity.sieve;
 import com.novamachina.ens.common.item.mesh.EnumMesh;
 import com.novamachina.ens.common.item.ore.EnumOre;
 import com.novamachina.ens.common.item.resources.EnumResource;
+import com.novamachina.ens.common.item.seeds.EnumSeed;
 import com.novamachina.ens.common.setup.ModBlocks;
 import com.novamachina.ens.common.setup.ModItems;
 import com.novamachina.ens.common.utility.Constants;
@@ -16,6 +17,7 @@ import java.util.Objects;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
@@ -202,13 +204,14 @@ public class SieveDrops {
         addDrop(ModBlocks.BLOCK_DUST.get().getRegistryName().toString(), Items.BLAZE_POWDER,
             0.05F, EnumMesh.IRON);
 
+        // Ores
         for (EnumOre ore : EnumOre.values()) {
             switch (ore) {
                 case IRON: {
                     addMultiMeshDrop(Blocks.GRAVEL.getRegistryName().toString(),
                         ModItems.pieceMap.get(ore.getName()).get(), null, 0.1F, 0.15F, 0.25F);
-                    addDrop(ModBlocks.BLOCK_DUST.get().getRegistryName().toString(),
-                        ModItems.pieceMap.get(ore.getName()).get(), 0.5F, EnumMesh.DIAMOND);
+                    addDrop(Blocks.SAND.toString(), ModItems.pieceMap.get(ore.getName()).get(),
+                        0.5F, EnumMesh.DIAMOND);
                     break;
                 }
                 case GOLD: {
@@ -221,6 +224,52 @@ public class SieveDrops {
                 }
             }
         }
+
+        // Seeds
+        for (EnumSeed seed : EnumSeed.values()) {
+            addDrop(Blocks.DIRT.getRegistryName().toString(),
+                ModItems.seedMap.get(seed.getSeedName()).get(), 0.05F, EnumMesh.STRING);
+        }
+
+        getLeavesSaplings().forEach((input, drop) -> {
+            LeavesBlock leavesBlock = (LeavesBlock) input;
+            if (leavesBlock.getRegistryName().toString().contains("jungle")) {
+                addDrop(leavesBlock.getRegistryName().toString(), drop, 0.025F, EnumMesh.STRING);
+                addDrop(leavesBlock.getRegistryName().toString(), drop, 0.05F, EnumMesh.FLINT);
+                addDrop(leavesBlock.getRegistryName().toString(), drop, 0.075F, EnumMesh.IRON);
+                addDrop(leavesBlock.getRegistryName().toString(), drop, 0.1F, EnumMesh.DIAMOND);
+            } else {
+                addDrop(leavesBlock.getRegistryName().toString(), drop, 0.05F, EnumMesh.STRING);
+                addDrop(leavesBlock.getRegistryName().toString(), drop, 0.10F, EnumMesh.FLINT);
+                addDrop(leavesBlock.getRegistryName().toString(), drop, 0.15F, EnumMesh.IRON);
+                addDrop(leavesBlock.getRegistryName().toString(), drop, 0.2F, EnumMesh.DIAMOND);
+            }
+
+            // Apple
+            addMultiMeshDrop(leavesBlock.getRegistryName().toString(), Items.APPLE, 0.05F, 0.10F,
+                0.15F, 0.20F);
+
+            // Golden Apple
+            addMultiMeshDrop(leavesBlock.getRegistryName().toString(), Items.GOLDEN_APPLE, 0.001F,
+                0.003F, 0.005F, 0.01F);
+
+            // Silk Worm
+            addMultiMeshDrop(leavesBlock.getRegistryName().toString(),
+                ModItems.resourceMap.get(Constants.Items.SILKWORM).get(), 0.025F, 0.05F, 0.1F,
+                0.2F);
+        });
+    }
+
+    private static Map<Block, Item> getLeavesSaplings() {
+        Map<Block, Item> saplingMap = new HashMap<>();
+        saplingMap.put(Blocks.ACACIA_LEAVES, Items.ACACIA_SAPLING);
+        saplingMap.put(Blocks.BIRCH_LEAVES, Items.BIRCH_SAPLING);
+        saplingMap.put(Blocks.DARK_OAK_LEAVES, Items.DARK_OAK_SAPLING);
+        saplingMap.put(Blocks.JUNGLE_LEAVES, Items.JUNGLE_SAPLING);
+        saplingMap.put(Blocks.OAK_LEAVES, Items.OAK_SAPLING);
+        saplingMap.put(Blocks.SPRUCE_LEAVES, Items.SPRUCE_SAPLING);
+
+        return saplingMap;
     }
 
     private static void addMultiMeshDrop(String input, Item result, Float stringRarity,
