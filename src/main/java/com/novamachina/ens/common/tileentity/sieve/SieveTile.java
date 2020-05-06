@@ -5,8 +5,11 @@ import com.novamachina.ens.common.item.mesh.EnumMesh;
 import com.novamachina.ens.common.item.mesh.MeshItem;
 import com.novamachina.ens.common.setup.ModTiles;
 import com.novamachina.ens.common.utility.LogUtil;
+import java.util.List;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -17,7 +20,7 @@ public class SieveTile extends TileEntity {
     private ItemStack meshStack  = ItemStack.EMPTY;
     private ItemStack blockStack = ItemStack.EMPTY;
     private EnumMesh  meshType   = EnumMesh.NONE;
-    private float     progress   = 0;
+    private int       progress   = 0;
 
     public SieveTile() {
         super(ModTiles.SIEVE_TILE.get());
@@ -77,7 +80,7 @@ public class SieveTile extends TileEntity {
             blockStack = ItemStack.EMPTY;
         }
 
-        progress = compound.getFloat("progress");
+        progress = compound.getInt("progress");
 
         super.read(compound);
 //        setSieveState();
@@ -96,7 +99,7 @@ public class SieveTile extends TileEntity {
             compound.put("block", blockNBT);
         }
 
-        compound.putFloat("progress", progress);
+        compound.putInt("progress", progress);
 
         return super.write(compound);
     }
@@ -117,5 +120,32 @@ public class SieveTile extends TileEntity {
             LogUtil.info("Inserted " + blockStack.getItem().toString());
         }
         LogUtil.info(meshStack.isEmpty() ? "No Mesh" : "Block already in sieve");
+    }
+
+    public void activateSieve() {
+        if (isReadyToSieve()) {
+            if (progress >= 4) {
+                LogUtil.info("Getting Drops");
+                List<Item> drops = SieveDrops
+                    .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType);
+                drops.forEach((item -> {
+                    world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
+                        pos.getZ() + 0.5F, new ItemStack(item)));
+                }));
+                resetSieve();
+            } else {
+                progress++;
+                LogUtil.info("Progress: " + progress);
+            }
+        }
+    }
+
+    private void resetSieve() {
+        blockStack = ItemStack.EMPTY;
+        progress   = 0;
+    }
+
+    public boolean isReadyToSieve() {
+        return !meshStack.isEmpty() && !blockStack.isEmpty();
     }
 }

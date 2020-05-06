@@ -14,7 +14,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -42,35 +41,19 @@ public class BlockSieve extends BaseBlock {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
         PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote()) {
-            ItemStack stack = player.getHeldItem(handIn);
+            ItemStack stack     = player.getHeldItem(handIn);
+            SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
 
-            if (stack.isEmpty() && player.isSneaking()) {
-                TileEntity tileEntity = worldIn.getTileEntity(pos);
-                if (tileEntity instanceof SieveTile) {
-                    SieveTile sieveTile = (SieveTile) tileEntity;
-                    sieveTile.removeMesh(true);
-                    return ActionResultType.SUCCESS;
-                }
-            }
-
-            if (stack.getItem() instanceof MeshItem) {
-                TileEntity tileEntity = worldIn.getTileEntity(pos);
-                if (tileEntity instanceof SieveTile) {
-                    SieveTile sieveTile = (SieveTile) tileEntity;
-                    sieveTile.insertMesh(stack);
-                    return ActionResultType.SUCCESS;
-                }
-            }
-
-            if (stack.getItem() instanceof BlockItem) {
+            if (sieveTile.isReadyToSieve()) {
+                sieveTile.activateSieve();
+            } else if (stack.isEmpty() && player.isSneaking()) {
+                sieveTile.removeMesh(true);
+            } else if (stack.getItem() instanceof MeshItem) {
+                sieveTile.insertMesh(stack);
+            } else if (stack.getItem() instanceof BlockItem) {
                 BlockItem blockItem = (BlockItem) stack.getItem();
                 if (SieveDrops.isBlockSiftable(blockItem.getBlock())) {
-                    TileEntity tileEntity = worldIn.getTileEntity(pos);
-                    if (tileEntity instanceof SieveTile) {
-                        SieveTile sieveTile = (SieveTile) tileEntity;
-                        sieveTile.insertSiftableBlock(stack);
-                        return ActionResultType.SUCCESS;
-                    }
+                    sieveTile.insertSiftableBlock(stack);
                 }
             }
         }

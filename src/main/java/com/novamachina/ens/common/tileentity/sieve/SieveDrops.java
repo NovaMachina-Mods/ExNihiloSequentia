@@ -58,25 +58,27 @@ public class SieveDrops {
         }
     }
 
-    public static List<Item> getDrop(String input, EnumMesh meshType) {
+    public static List<Item> getDrops(Block input, EnumMesh meshType) {
         if (!initialized) {
             addDefaultDrops();
             initialized = true;
         }
 
+        String inputString = input.getRegistryName().toString();
+
         List<Item> returnList = new ArrayList<>();
         switch (meshType) {
             case STRING:
-                returnList.addAll(retrieveFromMap(stringMeshMap, input, meshType));
+                returnList.addAll(retrieveFromMap(stringMeshMap, inputString, meshType));
                 break;
             case FLINT:
-                returnList.addAll(retrieveFromMap(flintMeshMap, input, meshType));
+                returnList.addAll(retrieveFromMap(flintMeshMap, inputString, meshType));
                 break;
             case IRON:
-                returnList.addAll(retrieveFromMap(ironMeshMap, input, meshType));
+                returnList.addAll(retrieveFromMap(ironMeshMap, inputString, meshType));
                 break;
             case DIAMOND:
-                returnList.addAll(retrieveFromMap(diamondMeshMap, input, meshType));
+                returnList.addAll(retrieveFromMap(diamondMeshMap, inputString, meshType));
                 break;
             default:
                 LogUtil.warn(String.format("Mesh type \"%s\" does not exist.", meshType.getName()));
@@ -241,6 +243,9 @@ public class SieveDrops {
         Map<String, List<SieveDropEntry>> dropsMap, String input, EnumMesh meshType) {
         List<Item> returnList = new ArrayList<>();
         Random     random     = new Random();
+        if (!dropsMap.containsKey(input)) {
+            return returnList;
+        }
         for (SieveDropEntry entry : dropsMap.get(input)) {
             if (random.nextFloat() <= entry.getRarity()) {
                 returnList.add(entry.getResult());
