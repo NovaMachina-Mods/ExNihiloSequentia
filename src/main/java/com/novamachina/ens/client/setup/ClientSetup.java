@@ -2,6 +2,7 @@ package com.novamachina.ens.client.setup;
 
 import com.novamachina.ens.common.item.ore.OreColor;
 import com.novamachina.ens.common.item.ore.OreItem;
+import com.novamachina.ens.common.setup.ModBlocks;
 import com.novamachina.ens.common.setup.ModItems;
 import com.novamachina.ens.common.utility.Constants;
 import net.minecraft.client.renderer.RenderType;
@@ -18,7 +19,7 @@ public class ClientSetup {
 
     public static void init(final FMLClientSetupEvent event) {
         RenderTypeLookup
-            .setRenderLayer(Registration.BLOCK_SIEVE.get(), RenderType.getCutoutMipped());
+            .setRenderLayer(ModBlocks.BLOCK_SIEVE.get(), RenderType.getCutoutMipped());
     }
 
     @SubscribeEvent

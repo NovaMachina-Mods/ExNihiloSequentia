@@ -3,12 +3,14 @@ package com.novamachina.ens.common.block;
 import com.novamachina.ens.common.builder.BlockBuilder;
 import com.novamachina.ens.common.item.mesh.EnumMesh;
 import com.novamachina.ens.common.item.mesh.MeshItem;
+import com.novamachina.ens.common.tileentity.sieve.SieveDrops;
 import com.novamachina.ens.common.tileentity.sieve.SieveTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -59,7 +61,19 @@ public class BlockSieve extends BaseBlock {
                     return ActionResultType.SUCCESS;
                 }
             }
+
+            if (stack.getItem() instanceof BlockItem) {
+                BlockItem blockItem = (BlockItem) stack.getItem();
+                if (SieveDrops.isBlockSiftable(blockItem.getBlock())) {
+                    TileEntity tileEntity = worldIn.getTileEntity(pos);
+                    if (tileEntity instanceof SieveTile) {
+                        SieveTile sieveTile = (SieveTile) tileEntity;
+                        sieveTile.insertSiftableBlock(stack);
+                        return ActionResultType.SUCCESS;
+                    }
+                }
+            }
         }
-        return ActionResultType.PASS;
+        return ActionResultType.SUCCESS;
     }
 }

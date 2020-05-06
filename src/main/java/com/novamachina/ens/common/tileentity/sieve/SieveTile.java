@@ -103,7 +103,19 @@ public class SieveTile extends TileEntity {
 
     @Override
     public void remove() {
-        removeMesh(false);
+        if (!world.isRemote()) {
+            removeMesh(false);
+        }
         super.remove();
+    }
+
+    public void insertSiftableBlock(ItemStack stack) {
+        if (!meshStack.isEmpty() && blockStack.isEmpty()) {
+            blockStack = stack.copy();
+            blockStack.setCount(1);
+            stack.shrink(1);
+            LogUtil.info("Inserted " + blockStack.getItem().toString());
+        }
+        LogUtil.info(meshStack.isEmpty() ? "No Mesh" : "Block already in sieve");
     }
 }

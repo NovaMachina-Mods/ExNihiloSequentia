@@ -1,23 +1,27 @@
 package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.item.CookedSilkwormItem;
-import com.novamachina.ens.common.item.pebbles.EnumPebbleType;
-import com.novamachina.ens.common.item.pebbles.PebbleItem;
-import com.novamachina.ens.common.item.resources.ResourceItem;
-import com.novamachina.ens.common.item.seeds.SeedBaseItem;
+import com.novamachina.ens.common.item.mesh.EnumMesh;
+import com.novamachina.ens.common.item.mesh.MeshItem;
 import com.novamachina.ens.common.item.ore.EnumOre;
 import com.novamachina.ens.common.item.ore.OreItem;
+import com.novamachina.ens.common.item.pebbles.EnumPebbleType;
+import com.novamachina.ens.common.item.pebbles.PebbleItem;
+import com.novamachina.ens.common.item.resources.EnumResource;
+import com.novamachina.ens.common.item.resources.ResourceItem;
+import com.novamachina.ens.common.item.seeds.EnumSeed;
+import com.novamachina.ens.common.item.seeds.SeedBaseItem;
 import com.novamachina.ens.common.item.tools.crook.CrookBaseItem;
 import com.novamachina.ens.common.item.tools.crook.EnumCrook;
 import com.novamachina.ens.common.item.tools.hammer.EnumHammer;
 import com.novamachina.ens.common.item.tools.hammer.HammerBaseItem;
-import com.novamachina.ens.common.item.resources.EnumResource;
-import com.novamachina.ens.common.item.seeds.EnumSeed;
 import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.Constants.Blocks;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.Properties;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -59,6 +63,9 @@ public class ModItems {
     public static final RegistryObject<Item> ITEM_END_CAKE           = ITEMS
         .register(Constants.Blocks.END_CAKE, () -> new BlockItem(ModBlocks.BLOCK_END_CAKE.get(),
             new Item.Properties().group(ModInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> ITEM_SIEVE              = ITEMS.register(Blocks.SIEVE,
+        () -> new BlockItem(ModBlocks.BLOCK_SIEVE.get(),
+            new Properties().group(ModInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> ITEM_COOKED_SILKWORM    = ITEMS
         .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
 
@@ -92,6 +99,10 @@ public class ModItems {
         for (EnumPebbleType type : EnumPebbleType.values()) {
             pebbleMap
                 .put(type.getType(), ITEMS.register(type.getType(), () -> new PebbleItem(type)));
+        }
+
+        for (EnumMesh mesh : EnumMesh.values()) {
+            ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh));
         }
     }
 

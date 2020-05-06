@@ -12,7 +12,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -245,5 +247,17 @@ public class SieveDrops {
             }
         }
         return returnList;
+    }
+
+    public static boolean isBlockSiftable(Block block) {
+        Objects.requireNonNull(block.getRegistryName());
+        if (!initialized) {
+            addDefaultDrops();
+            initialized = true;
+        }
+        return stringMeshMap.containsKey(block.getRegistryName().toString()) || flintMeshMap
+            .containsKey(block.getRegistryName().toString()) || ironMeshMap
+            .containsKey(block.getRegistryName().toString()) || diamondMeshMap
+            .containsKey(block.getRegistryName().toString());
     }
 }
