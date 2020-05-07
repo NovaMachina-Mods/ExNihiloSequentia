@@ -20,7 +20,7 @@ public class SieveTile extends TileEntity {
     private ItemStack meshStack  = ItemStack.EMPTY;
     private ItemStack blockStack = ItemStack.EMPTY;
     private EnumMesh  meshType   = EnumMesh.NONE;
-    private int       progress   = 0;
+    private float     progress   = 0;
 
     public SieveTile() {
         super(ModTiles.SIEVE_TILE.get());
@@ -80,7 +80,7 @@ public class SieveTile extends TileEntity {
             blockStack = ItemStack.EMPTY;
         }
 
-        progress = compound.getInt("progress");
+        progress = compound.getFloat("progress");
 
         super.read(compound);
 //        setSieveState();
@@ -99,7 +99,7 @@ public class SieveTile extends TileEntity {
             compound.put("block", blockNBT);
         }
 
-        compound.putInt("progress", progress);
+        compound.putFloat("progress", progress);
 
         return super.write(compound);
     }
@@ -124,7 +124,7 @@ public class SieveTile extends TileEntity {
 
     public void activateSieve() {
         if (isReadyToSieve()) {
-            if (progress >= 4) {
+            if (progress >= 1.0F) {
                 LogUtil.info("Getting Drops");
                 List<Item> drops = SieveDrops
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType);
@@ -134,7 +134,7 @@ public class SieveTile extends TileEntity {
                 }));
                 resetSieve();
             } else {
-                progress++;
+                progress += 0.3F;
                 LogUtil.info("Progress: " + progress);
             }
         }
@@ -142,7 +142,7 @@ public class SieveTile extends TileEntity {
 
     private void resetSieve() {
         blockStack = ItemStack.EMPTY;
-        progress   = 0;
+        progress   = 0.0F;
     }
 
     public boolean isReadyToSieve() {
