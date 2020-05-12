@@ -303,15 +303,29 @@ public class SieveDrops {
         return returnList;
     }
 
-    public static boolean isBlockSiftable(Block block) {
+    public static boolean isBlockSiftable(Block block, EnumMesh mesh) {
         Objects.requireNonNull(block.getRegistryName());
         if (!initialized) {
             addDefaultDrops();
             initialized = true;
         }
-        return stringMeshMap.containsKey(block.getRegistryName().toString()) || flintMeshMap
-            .containsKey(block.getRegistryName().toString()) || ironMeshMap
-            .containsKey(block.getRegistryName().toString()) || diamondMeshMap
-            .containsKey(block.getRegistryName().toString());
+
+        switch (mesh) {
+            case STRING: {
+                return stringMeshMap.containsKey(block.getRegistryName().toString());
+            }
+            case FLINT: {
+                return flintMeshMap.containsKey(block.getRegistryName().toString());
+            }
+            case IRON: {
+                return ironMeshMap.containsKey(block.getRegistryName().toString());
+            }
+            case DIAMOND: {
+                return diamondMeshMap.containsKey(block.getRegistryName().toString());
+            }
+            default: {
+                return false;
+            }
+        }
     }
 }

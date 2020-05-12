@@ -52,11 +52,12 @@ public class BlockSieve extends BaseBlock {
                 sieveTile.insertMesh(stack);
             } else if (stack.getItem() instanceof BlockItem) {
                 BlockItem blockItem = (BlockItem) stack.getItem();
-                if (SieveDrops.isBlockSiftable(blockItem.getBlock())) {
+                if (SieveDrops.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh())) {
                     sieveTile.insertSiftableBlock(stack);
                 }
             }
         }
+        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
         return ActionResultType.SUCCESS;
     }
 }

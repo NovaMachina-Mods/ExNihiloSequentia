@@ -5,15 +5,21 @@ import com.novamachina.ens.common.item.mesh.EnumMesh;
 import com.novamachina.ens.common.item.mesh.MeshItem;
 import com.novamachina.ens.common.setup.ModTiles;
 import com.novamachina.ens.common.utility.LogUtil;
+import java.util.Collection;
 import java.util.List;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 public class SieveTile extends TileEntity {
 
@@ -94,7 +100,7 @@ public class SieveTile extends TileEntity {
             compound.put("mesh", meshNBT);
         }
 
-        if (blockStack.getItem() != Items.AIR) {
+        if (!blockStack.isEmpty()) {
             CompoundNBT blockNBT = blockStack.write(new CompoundNBT());
             compound.put("block", blockNBT);
         }
@@ -124,6 +130,9 @@ public class SieveTile extends TileEntity {
 
     public void activateSieve() {
         if (isReadyToSieve()) {
+            progress += 0.1F;
+            LogUtil.info("Progress: " + progress);
+
             if (progress >= 1.0F) {
                 LogUtil.info("Getting Drops");
                 List<Item> drops = SieveDrops
@@ -133,9 +142,6 @@ public class SieveTile extends TileEntity {
                         pos.getZ() + 0.5F, new ItemStack(item)));
                 }));
                 resetSieve();
-            } else {
-                progress += 0.3F;
-                LogUtil.info("Progress: " + progress);
             }
         }
     }
@@ -147,5 +153,49 @@ public class SieveTile extends TileEntity {
 
     public boolean isReadyToSieve() {
         return !meshStack.isEmpty() && !blockStack.isEmpty();
+    }
+
+    public ResourceLocation getTexture() {
+        if (!blockStack.isEmpty()) {
+            return blockStack.getItem().getRegistryName();
+        }
+        return null;
+    }
+
+    public ItemStack getBlockStack() {
+        return blockStack;
+    }
+
+    public float getProgress() {
+        return progress;
+    }
+
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        LogUtil.info("Send Packet");
+        CompoundNBT nbt = new CompoundNBT();
+        if (!blockStack.isEmpty()) {
+            CompoundNBT blockNbt = blockStack.write(new CompoundNBT());
+            nbt.put("block", blockNbt);
+        }
+        nbt.putFloat("progress", progress);
+
+        return new SUpdateTileEntityPacket(getPos(), -1, nbt);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+        LogUtil.info("Receive packet");
+        CompoundNBT nbt = packet.getNbtCompound();
+        if (nbt.contains("block")) {
+            blockStack = ItemStack.read((CompoundNBT) nbt.get("block"));
+        } else {
+            blockStack = ItemStack.EMPTY;
+        }
+        progress = nbt.getFloat("progress");
+    }
+
+    public EnumMesh getMesh() {
+        return meshType;
     }
 }
