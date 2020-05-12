@@ -103,7 +103,9 @@ public class ModItems {
         }
 
         for (EnumMesh mesh : EnumMesh.values()) {
-            ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh));
+            if (mesh != EnumMesh.NONE) {
+                ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh));
+            }
         }
     }
 
