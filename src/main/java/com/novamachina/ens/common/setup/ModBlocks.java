@@ -1,16 +1,17 @@
 package com.novamachina.ens.common.setup;
 
 import com.novamachina.ens.common.block.BaseFallingBlock;
+import com.novamachina.ens.common.block.BlockSieve;
 import com.novamachina.ens.common.block.EndCakeBlock;
 import com.novamachina.ens.common.builder.BlockBuilder;
 import com.novamachina.ens.common.utility.Constants;
+import com.novamachina.ens.common.utility.Constants.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -45,6 +46,8 @@ public class ModBlocks {
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<EndCakeBlock>     BLOCK_END_CAKE           = BLOCKS
         .register(Constants.Blocks.END_CAKE, EndCakeBlock::new);
+    public static final RegistryObject<BlockSieve>       BLOCK_SIEVE              = BLOCKS
+        .register(Blocks.SIEVE, BlockSieve::new);
 
     public static void init(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);

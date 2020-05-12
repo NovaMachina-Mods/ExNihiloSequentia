@@ -7,6 +7,7 @@ import com.novamachina.ens.common.utility.Constants.Items;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class CrookDrops {
@@ -14,19 +15,25 @@ public class CrookDrops {
     public static final int numberOfTimesToTestVanillaDrops = Config.NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS
         .get();
 
-    private static final List<CrookDropsEntry> crookDrops = new ArrayList<>();
+    private static final List<CrookDropEntry> crookDrops  = new ArrayList<>();
+    private static       boolean              initialized = false;
 
-    public static void useDefaultRegistry() {
+    public static void addDefaultDrops() {
         if (!ExNihiloSequentia.itemRegistrationFinished) {
             return;
         }
-        crookDrops.add(new CrookDropsEntry(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.3));
+        addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.3F);
     }
 
     public static List<ItemStack> getDrops() {
+        if (!initialized) {
+            addDefaultDrops();
+            initialized = true;
+        }
+
         List<ItemStack> drops = new ArrayList<>();
 
-        for (CrookDropsEntry item : crookDrops) {
+        for (CrookDropEntry item : crookDrops) {
             Random random = new Random();
             if (random.nextDouble() <= item.getRarity()) {
                 drops.add(new ItemStack(item.getItem()));
@@ -34,5 +41,9 @@ public class CrookDrops {
         }
 
         return drops;
+    }
+
+    public static void addDrop(Item item, float rarity) {
+        crookDrops.add(new CrookDropEntry(item, rarity));
     }
 }

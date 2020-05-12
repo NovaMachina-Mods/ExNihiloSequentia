@@ -1,7 +1,6 @@
 package com.novamachina.ens.common.utility;
 
 import java.util.Objects;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 
 public class Color {

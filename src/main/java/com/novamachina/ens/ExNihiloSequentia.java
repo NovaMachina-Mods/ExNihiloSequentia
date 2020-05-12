@@ -28,9 +28,7 @@ public class ExNihiloSequentia {
 
         ModInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
 
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(LootModifierHandler::registerModifierSerializers);
     }
 
     @EventBusSubscriber(modid = ModInfo.MOD_ID, bus = Bus.MOD)

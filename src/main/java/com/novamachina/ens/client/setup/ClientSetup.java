@@ -1,9 +1,13 @@
 package com.novamachina.ens.client.setup;
 
+import com.novamachina.ens.client.render.SieveRender;
 import com.novamachina.ens.common.item.ore.OreColor;
 import com.novamachina.ens.common.item.ore.OreItem;
+import com.novamachina.ens.common.setup.ModBlocks;
 import com.novamachina.ens.common.setup.ModItems;
 import com.novamachina.ens.common.utility.Constants;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +19,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientSetup {
 
     public static void init(final FMLClientSetupEvent event) {
+        RenderTypeLookup
+            .setRenderLayer(ModBlocks.BLOCK_SIEVE.get(), RenderType.getCutoutMipped());
+        SieveRender.register();
     }
 
     @SubscribeEvent
