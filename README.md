@@ -21,24 +21,24 @@ The following will be included in this mod.
     - ~~Andesite~~
     - ~~Diorite~~
     - ~~Granite~~
-- Add Sieve
-- Add Meshes
-  - String
-  - Flint
-  - Iron
-  - Diamond
-- Add Resource Items
-  - Vanilla
+- ~~Add Sieve~~
+- ~~Add Meshes~~
+  - ~~String~~
+  - ~~Flint~~
+  - ~~Iron~~
+  - ~~Diamond~~
+- ~~Add Resource Items~~
+  - ~~Vanilla~~
     - ~~Iron~~
     - ~~Gold~~
-    - Coal
-    - Diamond
+    - ~~Coal~~
+    - ~~Diamond~~
     - Lapis
-    - Redstone
+    - ~~Redstone~~
   - ~~Porcelain Clay~~
 - Add Barrel
 - Add Crucible
-- Add End Cake
+- ~~Add End Cake
 - Add Witch Water
 - Add Dolls
     - Blaze

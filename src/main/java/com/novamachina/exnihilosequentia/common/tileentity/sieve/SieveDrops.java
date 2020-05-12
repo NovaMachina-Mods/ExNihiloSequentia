@@ -89,6 +89,7 @@ public class SieveDrops {
         return returnList;
     }
 
+    //TODO: Add lapis, cocoa, bonemeal (these are the dyes that are missing)
     private static void addDefaultDrops() {
         // Stone Pebble
         addDrop(Blocks.DIRT.getRegistryName().toString(),
