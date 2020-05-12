@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "particle": "ens:block/block_crushed_diorite",
-    "all": "ens:block/block_crushed_diorite"
-  }
-}

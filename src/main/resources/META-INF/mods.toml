@@ -12,7 +12,7 @@ issueTrackerURL="https://github.com/NovaMachina/ExNihiloSequentia/issues" #optio
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
-modId="ens" #mandatory
+modId="exnihilosequentia" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="${file.jarVersion}" #mandatory
  # A display name for the mod
@@ -34,7 +34,7 @@ Ex Nihilo: Sequentia is a port to 1.15 of Ex Nihilo: Creatio for 1.12, which in 
 This mod allows you to create resources from absolutely nothing. Well...I guess you need some trees to start.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.ens]] #optional
+[[dependencies.exnihilosequentia]] #optional
     # the modid of the dependency
     modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -46,7 +46,7 @@ This mod allows you to create resources from absolutely nothing. Well...I guess 
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.ens]]
+[[dependencies.exnihilosequentia]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.15.2]"

@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "ens:items/item_pebble_diorite"
-  }
-}

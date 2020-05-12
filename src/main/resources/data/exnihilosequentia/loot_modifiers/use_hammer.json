@@ -1,0 +1,42 @@
+{
+  "type": "exnihilosequentia:use_hammer",
+  "conditions": [
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:cobblestone"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:gravel"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:sand"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:andesite"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:diorite"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:granite"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:netherrack"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:end_stone"
+        }
+      ]
+    }
+  ]
+}

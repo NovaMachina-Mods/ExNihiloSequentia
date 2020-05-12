@@ -1,6 +1,0 @@
-{
-  "parent": "ens:block/mesh_base",
-  "textures": {
-    "texture": "minecraft:block/light_gray_wool"
-  }
-}
