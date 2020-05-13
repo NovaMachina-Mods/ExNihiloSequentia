@@ -25,7 +25,7 @@ public class SieveTile extends TileEntity {
     private float     progress   = 0;
 
     public SieveTile() {
-        super(ModTiles.SIEVE_TILE.get());
+        super(ModTiles.SIEVE.get());
     }
 
     public void insertMesh(ItemStack stack) {

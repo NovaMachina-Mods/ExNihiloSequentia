@@ -32,10 +32,10 @@ public enum EnumOre {
     }
 
     public String getChunkName() {
-        return "item_" + name + "_chunk";
+        return "chunk_" + name;
     }
 
     public String getPieceName() {
-        return "item_" + name + "_piece";
+        return "piece_" + name;
     }
 }

@@ -9,18 +9,14 @@ public class Constants {
 
     public static class Blocks {
 
-        public static final String CRUSHED_ANDESITE   = createBlockName("crushed_andesite");
-        public static final String CRUSHED_DIORITE    = createBlockName("crushed_diorite");
-        public static final String CRUSHED_END_STONE  = createBlockName("crushed_end_stone");
-        public static final String CRUSHED_GRANITE    = createBlockName("crushed_granite");
-        public static final String CRUSHED_NETHERRACK = createBlockName("crushed_netherrack");
-        public static final String DUST               = createBlockName("dust");
-        public static final String END_CAKE           = createBlockName("end_cake");
-        public static final String SIEVE              = createBlockName("sieve");
-
-        private static String createBlockName(String name) {
-            return "block_" + name;
-        }
+        public static final String CRUSHED_ANDESITE   = "crushed_andesite";
+        public static final String CRUSHED_DIORITE    = "crushed_diorite";
+        public static final String CRUSHED_END_STONE  = "crushed_end_stone";
+        public static final String CRUSHED_GRANITE    = "crushed_granite";
+        public static final String CRUSHED_NETHERRACK = "crushed_netherrack";
+        public static final String DUST               = "dust";
+        public static final String END_CAKE           = "end_cake";
+        public static final String SIEVE              = "sieve";
     }
 
     public static class Items {
@@ -40,60 +36,48 @@ public class Constants {
         public static final String CROOK_NETHERRACK    = createCrookName("netherrack");
         public static final String CROOK_PURPUR        = createCrookName("purpur");
         public static final String CROOK_BLAZE         = createCrookName("blaze");
-        public static final String SILKWORM            = createItemName("silkworm");
+        public static final String SILKWORM            = "silkworm";
         public static final String HAMMER_WOOD         = createHammername("wood");
         public static final String HAMMER_STONE        = createHammername("stone");
         public static final String HAMMER_IRON         = createHammername("iron");
         public static final String HAMMER_DIAMOND      = createHammername("diamond");
         public static final String HAMMER_GOLD         = createHammername("gold");
-        public static final String OAK_SEED            = "oak";
-        public static final String SPRUCE_SEED         = "spruce";
-        public static final String BIRCH_SEED          = "birch";
-        public static final String JUNGLE_SEED         = "jungle";
-        public static final String ACACIA_SEED         = "acacia";
-        public static final String DARK_OAK_SEED       = "darkoak";
-        public static final String CACTUS_SEED         = "cactus";
-        public static final String SUGARCANE_SEED      = "sugarcane";
-        public static final String CARROT_SEED         = "carrot";
-        public static final String POTATO_SEED         = "potato";
-        public static final String SWEET_BERRY_SEED    = "berry";
-        public static final String ANCIENT_SPORE       = createItemName("ancientspores");
-        public static final String GRASS_SEED          = createItemName("grassseeds");
-        public static final String COOKED_SILKWORM     = createItemName("cooked_silkworm");
-        public static final String PORCELAIN_CLAY      = createItemName("porcelain_clay");
-        public static final String STONE_PEBBLE        = createItemName("stone_pebble");
-        public static final String GRANITE_PEBBLE      = createItemName("granite_pebble");
-        public static final String DIORITE_PEBBLE      = createItemName("diorite_pebble");
-        public static final String ANDESITE_PEBBLE     = createItemName("andesite_pebble");
+        public static final String SEED_OAK            = "oak";
+        public static final String SEED_SPRUCE         = "spruce";
+        public static final String SEED_BIRCH          = "birch";
+        public static final String SEED_JUNGLE         = "jungle";
+        public static final String SEED_ACACIA         = "acacia";
+        public static final String SEED_DARK_OAK       = "darkoak";
+        public static final String SEED_CACTUS         = "cactus";
+        public static final String SEEDSUGARCANE       = "sugarcane";
+        public static final String SEED_CARROT         = "carrot";
+        public static final String SEED_POTATO         = "potato";
+        public static final String SEED_SWEET_BERRY    = "berry";
+        public static final String ANCIENT_SPORE       = "ancient_spores";
+        public static final String GRASS_SEED          = "grass_seeds";
+        public static final String COOKED_SILKWORM     = "cooked_silkworm";
+        public static final String PORCELAIN_CLAY      = "porcelain_clay";
+        public static final String PEBBLE_STONE        = createPebbleName("stone");
+        public static final String PEBBLE_GRANITE      = createPebbleName("granite");
+        public static final String PEBBLE_DIORITE      = createPebbleName("diorite");
+        public static final String PEBBLE_ANDESITE     = createPebbleName("andesite");
 
         private static String createHammername(String name) {
-            return createItemName(name) + "_hammer";
+            return "hammer_" + name;
         }
-
 
         private static String createCrookName(String name) {
-            return createItemName(name) + "_crook";
+            return "crook_" + name;
         }
 
-        private static String createItemName(String name) {
-            return "item_" + name;
+        private static String createPebbleName(String name) {
+            return "pebble_" + name;
         }
-
-
     }
 
     public class Ore {
 
         public static final String GOLD = "gold";
         public static final String IRON = "iron";
-    }
-
-    public class Registry {
-
-        public static final String CROOK_REGISTRY    = "CROOK_REGISTRY";
-        public static final String HAMMER_REGISTRY   = "HAMMER_REGISTRY";
-        public static final String ORE_REGISTRY      = "ORE_REGISTRY";
-        public static final String SEED_REGISTRY     = "SEED_REGISTRY";
-        public static final String RESOURCE_REGISTRY = "RESOURCE_REGISTRY";
     }
 }

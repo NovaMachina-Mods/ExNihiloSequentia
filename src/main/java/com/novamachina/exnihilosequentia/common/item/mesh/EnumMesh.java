@@ -22,6 +22,6 @@ public enum EnumMesh implements IStringSerializable {
     }
 
     public String getMeshName() {
-        return "item_" + name + "_mesh";
+        return "mesh_" + name;
     }
 }

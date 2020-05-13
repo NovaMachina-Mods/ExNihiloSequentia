@@ -16,9 +16,9 @@ public class HammerBaseItem extends ToolItem {
     private static final Set<Block> effectiveBlocksOn = Sets
         .newHashSet(Blocks.STONE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.GRANITE,
             Blocks.NETHERRACK, Blocks.END_STONE, Blocks.COBBLESTONE,
-            ModBlocks.BLOCK_CRUSHED_DIORITE.get(), ModBlocks.BLOCK_CRUSHED_ANDESITE.get(),
-            ModBlocks.BLOCK_CRUSHED_GRANITE.get(), ModBlocks.BLOCK_CRUSHED_NETHERRACK.get(),
-            ModBlocks.BLOCK_CRUSHED_END_STONE.get(), Blocks.GRAVEL, Blocks.SAND);
+            ModBlocks.CRUSHED_DIORITE.get(), ModBlocks.CRUSHED_ANDESITE.get(),
+            ModBlocks.CRUSHED_GRANITE.get(), ModBlocks.CRUSHED_NETHERRACK.get(),
+            ModBlocks.CRUSHED_END_STONE.get(), Blocks.GRAVEL, Blocks.SAND);
 
     public HammerBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,

@@ -38,36 +38,36 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>>    pebbleMap   = new HashMap<>();
     public static Map<String, RegistryObject<Item>>    seedMap     = new HashMap<>();
 
-    public static final RegistryObject<Item> ITEM_DUST               = ITEMS
-        .register(Constants.Blocks.DUST, () -> new BlockItem(ModBlocks.BLOCK_DUST.get(),
+    public static final RegistryObject<Item> DUST               = ITEMS
+        .register(Constants.Blocks.DUST, () -> new BlockItem(ModBlocks.DUST.get(),
             new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_NETHERRACK = ITEMS
+    public static final RegistryObject<Item> CRUSHED_NETHERRACK = ITEMS
         .register(Constants.Blocks.CRUSHED_NETHERRACK,
-            () -> new BlockItem(ModBlocks.BLOCK_CRUSHED_NETHERRACK.get(),
+            () -> new BlockItem(ModBlocks.CRUSHED_NETHERRACK.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_END_STONE  = ITEMS
+    public static final RegistryObject<Item> CRUSHED_END_STONE  = ITEMS
         .register(Constants.Blocks.CRUSHED_END_STONE,
-            () -> new BlockItem(ModBlocks.BLOCK_CRUSHED_END_STONE.get(),
+            () -> new BlockItem(ModBlocks.CRUSHED_END_STONE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_ANDESITE   = ITEMS
+    public static final RegistryObject<Item> CRUSHED_ANDESITE   = ITEMS
         .register(Constants.Blocks.CRUSHED_ANDESITE,
-            () -> new BlockItem(ModBlocks.BLOCK_CRUSHED_ANDESITE.get(),
+            () -> new BlockItem(ModBlocks.CRUSHED_ANDESITE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_DIORITE    = ITEMS
+    public static final RegistryObject<Item> CRUSHED_DIORITE    = ITEMS
         .register(Constants.Blocks.CRUSHED_DIORITE,
-            () -> new BlockItem(ModBlocks.BLOCK_CRUSHED_DIORITE.get(),
+            () -> new BlockItem(ModBlocks.CRUSHED_DIORITE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_CRUSHED_GRANITE    = ITEMS
+    public static final RegistryObject<Item> CRUSHED_GRANITE    = ITEMS
         .register(Constants.Blocks.CRUSHED_GRANITE,
-            () -> new BlockItem(ModBlocks.BLOCK_CRUSHED_GRANITE.get(),
+            () -> new BlockItem(ModBlocks.CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_END_CAKE           = ITEMS
-        .register(Constants.Blocks.END_CAKE, () -> new BlockItem(ModBlocks.BLOCK_END_CAKE.get(),
+    public static final RegistryObject<Item> END_CAKE           = ITEMS
+        .register(Constants.Blocks.END_CAKE, () -> new BlockItem(ModBlocks.END_CAKE.get(),
             new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_SIEVE              = ITEMS.register(Blocks.SIEVE,
-        () -> new BlockItem(ModBlocks.BLOCK_SIEVE.get(),
+    public static final RegistryObject<Item> SIEVE              = ITEMS.register(Blocks.SIEVE,
+        () -> new BlockItem(ModBlocks.SIEVE.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> ITEM_COOKED_SILKWORM    = ITEMS
+    public static final RegistryObject<Item> COOKED_SILKWORM    = ITEMS
         .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
 
     static {

@@ -3,10 +3,10 @@ package com.novamachina.exnihilosequentia.common.item.pebbles;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 
 public enum EnumPebbleType {
-    STONE(Constants.Items.STONE_PEBBLE),
-    GRANITE(Constants.Items.GRANITE_PEBBLE),
-    DIORITE(Constants.Items.DIORITE_PEBBLE),
-    ANDESITE(Constants.Items.ANDESITE_PEBBLE);
+    STONE(Constants.Items.PEBBLE_STONE),
+    GRANITE(Constants.Items.PEBBLE_GRANITE),
+    DIORITE(Constants.Items.PEBBLE_DIORITE),
+    ANDESITE(Constants.Items.PEBBLE_ANDESITE);
 
     final String type;
 

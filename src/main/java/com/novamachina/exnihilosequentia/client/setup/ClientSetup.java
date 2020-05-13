@@ -20,7 +20,7 @@ public class ClientSetup {
 
     public static void init(final FMLClientSetupEvent event) {
         RenderTypeLookup
-            .setRenderLayer(ModBlocks.BLOCK_SIEVE.get(), RenderType.getCutoutMipped());
+            .setRenderLayer(ModBlocks.SIEVE.get(), RenderType.getCutoutMipped());
         SieveRender.register();
     }
 

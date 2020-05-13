@@ -14,9 +14,9 @@ public class ModTiles {
     private static final DeferredRegister<TileEntityType<?>> TILES =
         new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Constants.ModInfo.MOD_ID);
 
-    public static final RegistryObject<TileEntityType<SieveTile>> SIEVE_TILE = TILES
+    public static final RegistryObject<TileEntityType<SieveTile>> SIEVE = TILES
         .register(Blocks.SIEVE,
-            () -> TileEntityType.Builder.create(SieveTile::new, ModBlocks.BLOCK_SIEVE.get())
+            () -> TileEntityType.Builder.create(SieveTile::new, ModBlocks.SIEVE.get())
                 .build(null));
 
     public static void init(IEventBus eventBus) {

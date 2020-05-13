@@ -23,7 +23,7 @@ public class SieveRender extends TileEntityRenderer<SieveTile> {
     }
 
     public static void register() {
-        ClientRegistry.bindTileEntityRenderer(ModTiles.SIEVE_TILE.get(), SieveRender::new);
+        ClientRegistry.bindTileEntityRenderer(ModTiles.SIEVE.get(), SieveRender::new);
     }
 
     private void add(IVertexBuilder renderer, MatrixStack stack, float x, float y, float z, float u,

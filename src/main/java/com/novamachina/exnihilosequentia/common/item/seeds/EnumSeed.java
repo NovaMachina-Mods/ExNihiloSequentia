@@ -7,23 +7,23 @@ import net.minecraftforge.common.PlantType;
 
 public enum EnumSeed {
 
-    OAK_SEED(Constants.Items.OAK_SEED, Blocks.OAK_SAPLING.getDefaultState(), PlantType.Plains),
-    SPRUCE_SEED(Constants.Items.SPRUCE_SEED, Blocks.SPRUCE_SAPLING.getDefaultState(),
+    SEED_OAK(Constants.Items.SEED_OAK, Blocks.OAK_SAPLING.getDefaultState(), PlantType.Plains),
+    SEED_SPRUCE(Constants.Items.SEED_SPRUCE, Blocks.SPRUCE_SAPLING.getDefaultState(),
         PlantType.Plains),
-    BIRCH_SEED(Constants.Items.BIRCH_SEED, Blocks.BIRCH_SAPLING.getDefaultState(),
+    SEED_BIRCH(Constants.Items.SEED_BIRCH, Blocks.BIRCH_SAPLING.getDefaultState(),
         PlantType.Plains),
-    JUNGLE_SEED(Constants.Items.JUNGLE_SEED, Blocks.JUNGLE_SAPLING.getDefaultState(),
+    SEED_JUNGLE(Constants.Items.SEED_JUNGLE, Blocks.JUNGLE_SAPLING.getDefaultState(),
         PlantType.Plains),
-    ACACIA_SEED(Constants.Items.ACACIA_SEED, Blocks.ACACIA_SAPLING.getDefaultState(),
+    SEED_ACACIA(Constants.Items.SEED_ACACIA, Blocks.ACACIA_SAPLING.getDefaultState(),
         PlantType.Plains),
-    DARK_OAK_SEED(Constants.Items.DARK_OAK_SEED, Blocks.DARK_OAK_SAPLING.getDefaultState(),
+    SEED_DARK_OAK(Constants.Items.SEED_DARK_OAK, Blocks.DARK_OAK_SAPLING.getDefaultState(),
         PlantType.Plains),
-    CACTUS_SEED(Constants.Items.CACTUS_SEED, Blocks.CACTUS.getDefaultState(), PlantType.Desert),
-    SUGARCANE_SEED(Constants.Items.SUGARCANE_SEED, Blocks.SUGAR_CANE.getDefaultState(),
+    SEED_CACTUS(Constants.Items.SEED_CACTUS, Blocks.CACTUS.getDefaultState(), PlantType.Desert),
+    SEED_SUGARCANE(Constants.Items.SEEDSUGARCANE, Blocks.SUGAR_CANE.getDefaultState(),
         PlantType.Beach),
-    CARROT_SEED(Constants.Items.CARROT_SEED, Blocks.CARROTS.getDefaultState(), PlantType.Crop),
-    POTATO_SEED(Constants.Items.POTATO_SEED, Blocks.POTATOES.getDefaultState(), PlantType.Crop),
-    SWEET_BERRY_SEED(Constants.Items.SWEET_BERRY_SEED, Blocks.SWEET_BERRY_BUSH.getDefaultState(),
+    SEED_CARROT(Constants.Items.SEED_CARROT, Blocks.CARROTS.getDefaultState(), PlantType.Crop),
+    SEED_POTATO(Constants.Items.SEED_POTATO, Blocks.POTATOES.getDefaultState(), PlantType.Crop),
+    SEED_SWEET_BERRY(Constants.Items.SEED_SWEET_BERRY, Blocks.SWEET_BERRY_BUSH.getDefaultState(),
         PlantType.Plains);
 
     private final String     seedName;
@@ -45,6 +45,6 @@ public enum EnumSeed {
     }
 
     public String getSeedName() {
-        return "item_" + seedName + "_seed";
+        return "seed_" + seedName;
     }
 }
