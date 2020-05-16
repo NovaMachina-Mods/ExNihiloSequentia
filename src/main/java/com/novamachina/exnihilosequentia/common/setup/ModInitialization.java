@@ -26,5 +26,6 @@ public class ModInitialization {
         ModBlocks.init(modEventBus);
         ModItems.init(modEventBus);
         ModTiles.init(modEventBus);
+        ModFluids.init(modEventBus);
     }
 }
