@@ -20,6 +20,7 @@ import com.novamachina.exnihilosequentia.common.utility.Constants.Blocks;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -38,37 +39,41 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>>    pebbleMap   = new HashMap<>();
     public static Map<String, RegistryObject<Item>>    seedMap     = new HashMap<>();
 
-    public static final RegistryObject<Item> DUST               = ITEMS
+    public static final RegistryObject<Item>       DUST               = ITEMS
         .register(Constants.Blocks.DUST, () -> new BlockItem(ModBlocks.DUST.get(),
             new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_NETHERRACK = ITEMS
+    public static final RegistryObject<Item>       CRUSHED_NETHERRACK = ITEMS
         .register(Constants.Blocks.CRUSHED_NETHERRACK,
             () -> new BlockItem(ModBlocks.CRUSHED_NETHERRACK.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_END_STONE  = ITEMS
+    public static final RegistryObject<Item>       CRUSHED_END_STONE  = ITEMS
         .register(Constants.Blocks.CRUSHED_END_STONE,
             () -> new BlockItem(ModBlocks.CRUSHED_END_STONE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_ANDESITE   = ITEMS
+    public static final RegistryObject<Item>       CRUSHED_ANDESITE   = ITEMS
         .register(Constants.Blocks.CRUSHED_ANDESITE,
             () -> new BlockItem(ModBlocks.CRUSHED_ANDESITE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_DIORITE    = ITEMS
+    public static final RegistryObject<Item>       CRUSHED_DIORITE    = ITEMS
         .register(Constants.Blocks.CRUSHED_DIORITE,
             () -> new BlockItem(ModBlocks.CRUSHED_DIORITE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_GRANITE    = ITEMS
+    public static final RegistryObject<Item>       CRUSHED_GRANITE    = ITEMS
         .register(Constants.Blocks.CRUSHED_GRANITE,
             () -> new BlockItem(ModBlocks.CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> END_CAKE           = ITEMS
+    public static final RegistryObject<Item>       END_CAKE           = ITEMS
         .register(Constants.Blocks.END_CAKE, () -> new BlockItem(ModBlocks.END_CAKE.get(),
             new Item.Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> SIEVE              = ITEMS.register(Blocks.SIEVE,
+    public static final RegistryObject<Item>       SIEVE              = ITEMS.register(Blocks.SIEVE,
         () -> new BlockItem(ModBlocks.SIEVE.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> COOKED_SILKWORM    = ITEMS
+    public static final RegistryObject<Item>       COOKED_SILKWORM    = ITEMS
         .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
+    public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = ITEMS
+        .register(Constants.Items.WITCH_WATER_BUCKET,
+            () -> new BucketItem(ModFluids.WITCH_WATER_STILL,
+                new Properties().group(ModInitialization.ITEM_GROUP).maxStackSize(1)));
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
