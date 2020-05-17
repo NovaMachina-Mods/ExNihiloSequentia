@@ -15,18 +15,22 @@ import net.minecraft.entity.monster.CaveSpiderEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.EvokerEntity;
 import net.minecraft.entity.monster.GhastEntity;
-import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
-import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.entity.monster.WitchEntity;
 import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.passive.SquidEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import sun.security.provider.ConfigFile.Spi;
 
 public class WitchWaterBlock extends FlowingFluidBlock {
 
@@ -56,6 +60,8 @@ public class WitchWaterBlock extends FlowingFluidBlock {
             }
         }
 
+        // TODO Slime
+
         if (entityIn instanceof SpiderEntity) {
             if (!(entityIn instanceof CaveSpiderEntity)) {
                 replaceMob(worldIn, (SpiderEntity) entityIn,
@@ -84,6 +90,34 @@ public class WitchWaterBlock extends FlowingFluidBlock {
                 zombieVillagerEntity.func_213792_a(villagerEntity.getVillagerData());
                 replaceMob(worldIn, villagerEntity, zombieVillagerEntity);
             }
+        }
+
+//        if (entityIn instanceof CowEntity) {
+//            if (!(entityIn instanceof MooshroomEntity)) {
+//                replaceMob(worldIn, (CowEntity) entityIn,
+//                    new MooshroomEntity(EntityType.MOOSHROOM, worldIn));
+//            }
+//        }
+
+        if (entityIn instanceof AnimalEntity) {
+            entityIn.onStruckByLightning(
+                new LightningBoltEntity(worldIn, entityIn.getPosX(), entityIn.getPosY(),
+                    entityIn.getPosZ(), true));
+        }
+
+        if (entityIn instanceof PlayerEntity) {
+            applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.BLINDNESS, 210, 0));
+            applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.WEAKNESS, 210, 2));
+            applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.WITHER, 210, 0));
+            applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.SLOWNESS, 210, 0));
+        }
+    }
+
+    private void applyPotion(PlayerEntity entityIn, EffectInstance potionEffect) {
+        EffectInstance currentEffect = entityIn.getActivePotionEffect(potionEffect.getPotion());
+        if (currentEffect != null
+            && currentEffect.getDuration() <= potionEffect.getDuration() - 20) {
+            entityIn.addPotionEffect(potionEffect);
         }
     }
 
