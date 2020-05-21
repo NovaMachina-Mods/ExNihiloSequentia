@@ -22,7 +22,7 @@ public class CrookDrops {
         if (!ExNihiloSequentia.itemRegistrationFinished) {
             return;
         }
-        addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.3F);
+        addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.1F);
     }
 
     public static List<ItemStack> getDrops() {
