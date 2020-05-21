@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.item.resources;
 
+import com.novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
 import com.novamachina.exnihilosequentia.common.utility.Constants.Items;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -37,8 +38,10 @@ public class ResourceItem extends Item {
                         LogUtil.info("INFEST LEAVES");
                         context.getItem().shrink(1);
                         // TODO: Replace dirt with infested leaves
-                        Block.replaceBlock(state,
-                            Blocks.DIRT.getDefaultState(), context.getWorld(), context.getPos(), 1);
+//                        Block.replaceBlock(state,
+//                            Blocks.DIRT.getDefaultState(), context.getWorld(), context.getPos(), 1);
+                        InfestingLeavesBlock.normalToInfesting(context.getWorld(),
+                            context.getWorld().getBlockState(context.getPos()), context.getPos());
                         return ActionResultType.SUCCESS;
                     }
                     LogUtil.info("NOT LEAVES");
