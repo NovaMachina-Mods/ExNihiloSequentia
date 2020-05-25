@@ -38,7 +38,7 @@ The following will be included in this mod.
   - ~~Porcelain Clay~~
 - Add Barrel
 - Add Crucible
-- ~~Add End Cake
+- ~~Add End Cake~~
 - Add Witch Water
 - Add Dolls
     - Blaze
