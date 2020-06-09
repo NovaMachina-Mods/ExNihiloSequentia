@@ -20,6 +20,7 @@ public class Constants {
         public static final String WITCH_WATER        = "witchwater";
         public static final String INFESTING_LEAVES   = "infesting_leaves";
         public static final String INFESTED_LEAVES    = "infested_leaves";
+        public static final String CRUCIBLE_UNFIRED   = "crucible_unfired";
     }
 
     public static class Items {

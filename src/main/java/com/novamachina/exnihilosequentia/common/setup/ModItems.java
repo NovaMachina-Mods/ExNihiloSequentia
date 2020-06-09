@@ -74,6 +74,9 @@ public class ModItems {
         .register(Constants.Items.WITCH_WATER_BUCKET,
             () -> new BucketItem(ModFluids.WITCH_WATER_STILL,
                 new Properties().group(ModInitialization.ITEM_GROUP).maxStackSize(1)));
+    public static final RegistryObject<Item>       CRUCIBLE_UNFIRED   = ITEMS
+        .register(Blocks.CRUCIBLE_UNFIRED, () -> new BlockItem(ModBlocks.CRUCIBLE_UNFIRED.get(),
+            new Properties().group(ModInitialization.ITEM_GROUP)));
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
