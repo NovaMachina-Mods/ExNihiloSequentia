@@ -26,4 +26,8 @@ public class LogUtil {
     private static String addPrefix(String msg) {
         return "[Ex Nihilo: Sequentia]: " + msg;
     }
+
+    public static void info(int num) {
+        info(String.format("%d", num));
+    }
 }

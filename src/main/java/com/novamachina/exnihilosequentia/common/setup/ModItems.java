@@ -77,6 +77,9 @@ public class ModItems {
     public static final RegistryObject<Item>       CRUCIBLE_UNFIRED   = ITEMS
         .register(Blocks.CRUCIBLE_UNFIRED, () -> new BlockItem(ModBlocks.CRUCIBLE_UNFIRED.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item>       CRUCIBLE_FIRED     = ITEMS
+        .register(Blocks.CRUCIBLE_FIRED, () -> new BlockItem(ModBlocks.CRUCIBLE_FIRED.get(),
+            new Properties().group(ModInitialization.ITEM_GROUP)));
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
