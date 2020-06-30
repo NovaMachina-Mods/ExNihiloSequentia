@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.client.setup;
 
+import com.novamachina.exnihilosequentia.client.render.FiredCrucibleRender;
 import com.novamachina.exnihilosequentia.client.render.SieveRender;
 import com.novamachina.exnihilosequentia.common.item.ore.OreColor;
 import com.novamachina.exnihilosequentia.common.item.ore.OreItem;
@@ -28,6 +29,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ModBlocks.INFESTING_LEAVES.get(), RenderType.getCutout());
 
         SieveRender.register();
+        FiredCrucibleRender.register();
     }
 
     @SubscribeEvent

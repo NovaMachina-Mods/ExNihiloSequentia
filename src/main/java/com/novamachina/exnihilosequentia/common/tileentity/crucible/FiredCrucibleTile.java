@@ -5,13 +5,17 @@ import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -74,13 +78,14 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
         return super.getCapability(cap, side);
     }
 
+    // This is the same for the wooden one.
     @Override
     public void tick() {
         if (world.isRemote()) {
             return;
         }
 
-        inventory.setCrucibleHasRoom(tank.getFluidAmount() < 3000);
+        inventory.setCrucibleHasRoom(tank.getFluidAmount() < 4000);
         ticksSinceLast++;
 
         if (ticksSinceLast >= 10) {
@@ -132,10 +137,14 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
             if (heat > 0 && MeltableItems.isMeltable(currentItem.getItem())) {
                 FluidStack fluidStack = new FluidStack(
                     MeltableItems.getMeltable(currentItem.getItem()).getFluid(), heat);
-                int        filled     = tank.fill(fluidStack, FluidAction.EXECUTE);
+                int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
                 solidAmount -= filled;
             }
+            if (solidAmount <= 0 && inventory.getStackInSlot(0).isEmpty()) {
+                currentItem = ItemStack.EMPTY;
+            }
         }
+        world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
     }
 
     public ActionResultType onBlockActivated(PlayerEntity player, Hand handIn,
@@ -151,6 +160,7 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
+            world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
             markDirty();
             return ActionResultType.SUCCESS;
         }
@@ -168,5 +178,64 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
             return ActionResultType.SUCCESS;
         }
         return ActionResultType.SUCCESS;
+    }
+
+    public ResourceLocation getSolidTexture() {
+        if (!inventory.getStackInSlot(0).isEmpty()) {
+            return inventory.getStackInSlot(0).getItem().getRegistryName();
+        }
+        return null;
+    }
+
+    public Fluid getFluid() {
+        if (!tank.isEmpty()) {
+            return tank.getFluid().getFluid();
+        }
+        return null;
+    }
+
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        CompoundNBT nbt = new CompoundNBT();
+        if (!inventory.getStackInSlot(0).isEmpty()) {
+            CompoundNBT blockNbt = inventory.getStackInSlot(0).write(new CompoundNBT());
+            nbt.put("block", blockNbt);
+        }
+        if (!tank.isEmpty()) {
+            CompoundNBT fluidNbt = tank.writeToNBT(new CompoundNBT());
+            nbt.put("fluid", fluidNbt);
+        }
+        nbt.putInt("solidAmount", solidAmount);
+
+        return new SUpdateTileEntityPacket(getPos(), -1, nbt);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+        CompoundNBT nbt = packet.getNbtCompound();
+        if (nbt.contains("block")) {
+            inventory.setStackInSlot(0, ItemStack.read((CompoundNBT) nbt.get("block")));
+        } else {
+            inventory.setStackInSlot(0, ItemStack.EMPTY);
+        }
+
+        if (nbt.contains("fluid")) {
+            tank.readFromNBT(nbt.getCompound("fluid"));
+        } else {
+            tank.setFluid(FluidStack.EMPTY);
+        }
+        solidAmount = nbt.getInt("solidAmount");
+    }
+
+    public float getFluidProportion() {
+        return ((float) tank.getFluidAmount()) / tank.getCapacity();
+    }
+
+    public float getSolidProportion() {
+        int itemCount =
+            inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
+        float solidProportion = ((float) itemCount) / 4;
+
+        return solidProportion;
     }
 }
