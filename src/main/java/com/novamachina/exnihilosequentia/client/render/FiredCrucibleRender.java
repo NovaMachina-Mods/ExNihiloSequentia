@@ -44,9 +44,9 @@ public class FiredCrucibleRender extends TileEntityRenderer<FiredCrucibleTile> {
         Fluid            fluid        = tileEntity.getFluid();
         ResourceLocation fluidTexture =
             fluid != null ? fluid.getAttributes().getStillTexture() : null;
-        Color            color        =
+        Color fluidColor =
             fluid != null ? new Color(fluid.getAttributes().getColor()) : Color.INVALID_COLOR;
-
+        Color blockColor = getBlockColor(solidTexture, tileEntity);
         if (fluidTexture != null) {
             IVertexBuilder builder = buffer.getBuffer(RenderType.getTranslucent());
 
@@ -62,20 +62,52 @@ public class FiredCrucibleRender extends TileEntityRenderer<FiredCrucibleTile> {
             matrixStack.translate(-.5, -.5, -.5);
 
             add(builder, matrixStack, 0, 0.25f + fillAmount, 1, sprite.getMinU(), sprite.getMaxV(),
-                color);
+                fluidColor);
             add(builder, matrixStack, 1, 0.25f + fillAmount, 1, sprite.getMaxU(), sprite.getMaxV(),
-                color);
+                fluidColor);
             add(builder, matrixStack, 1, 0.25f + fillAmount, 0, sprite.getMaxU(), sprite.getMinV(),
-                color);
+                fluidColor);
             add(builder, matrixStack, 0, 0.25f + fillAmount, 0, sprite.getMinU(), sprite.getMinV(),
-                color);
+                fluidColor);
 
             matrixStack.pop();
         }
         if (solidTexture != null) {
+            IVertexBuilder builder = buffer.getBuffer(RenderType.getSolid());
+
             TextureAtlasSprite sprite = Minecraft.getInstance()
                 .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
-                    solidTexture);
+                    new ResourceLocation(solidTexture.getNamespace(),
+                        "block/" + solidTexture.getPath()));
+
+            // Subtract 0.005 to prevent texture fighting
+            float fillAmount = (0.75f * tileEntity.getSolidProportion()) - 0.005f;
+
+            matrixStack.push();
+            matrixStack.translate(.5, .5, .5);
+            matrixStack.translate(-.5, -.5, -.5);
+
+            add(builder, matrixStack, 0, 0.25f + fillAmount, 1, sprite.getMinU(), sprite.getMaxV(),
+                blockColor);
+            add(builder, matrixStack, 1, 0.25f + fillAmount, 1, sprite.getMaxU(), sprite.getMaxV(),
+                blockColor);
+            add(builder, matrixStack, 1, 0.25f + fillAmount, 0, sprite.getMaxU(), sprite.getMinV(),
+                blockColor);
+            add(builder, matrixStack, 0, 0.25f + fillAmount, 0, sprite.getMinU(), sprite.getMinV(),
+                blockColor);
+
+            matrixStack.pop();
         }
+    }
+
+    private Color getBlockColor(ResourceLocation solidTexture,
+        FiredCrucibleTile tileEntity) {
+        if (solidTexture != null) {
+            if (solidTexture.toString().contains("leaves")) {
+                return new Color(
+                    tileEntity.getWorld().getBiome(tileEntity.getPos()).getFoliageColor());
+            }
+        }
+        return Color.WHITE;
     }
 }

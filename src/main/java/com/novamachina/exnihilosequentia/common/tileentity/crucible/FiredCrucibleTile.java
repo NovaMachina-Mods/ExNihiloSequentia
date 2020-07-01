@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -90,14 +91,6 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
 
         if (ticksSinceLast >= 10) {
             ticksSinceLast = 0;
-
-            LogUtil.info(String
-                .format("Fluid: %s Amount: %d", tank.getFluid().getFluid().toString(),
-                    tank.getFluid().getAmount()));
-            LogUtil.info(String.format("Current Item: %s", currentItem.toString()));
-            LogUtil
-                .info(String.format("Inventory Item: %s", inventory.getStackInSlot(0).toString()));
-            LogUtil.info(String.format("Solid Amount: %d", solidAmount));
 
             int heat = HeatRegistry.getHeatAmount(world.getBlockState(pos.down()).getBlock());
             if (heat <= 0) {
@@ -184,6 +177,9 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
         if (!inventory.getStackInSlot(0).isEmpty()) {
             return inventory.getStackInSlot(0).getItem().getRegistryName();
         }
+        if (!currentItem.isEmpty()) {
+            return currentItem.getItem().getRegistryName();
+        }
         return null;
     }
 
@@ -201,6 +197,10 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
             CompoundNBT blockNbt = inventory.getStackInSlot(0).write(new CompoundNBT());
             nbt.put("block", blockNbt);
         }
+        if (!currentItem.isEmpty()) {
+            CompoundNBT currentItemTag = currentItem.write(new CompoundNBT());
+            nbt.put("currentItem", currentItemTag);
+        }
         if (!tank.isEmpty()) {
             CompoundNBT fluidNbt = tank.writeToNBT(new CompoundNBT());
             nbt.put("fluid", fluidNbt);
@@ -213,6 +213,12 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         CompoundNBT nbt = packet.getNbtCompound();
+        if (nbt.contains("currentItem")) {
+            currentItem = ItemStack.read((CompoundNBT) nbt.get("currentItem"));
+        } else {
+            currentItem = ItemStack.EMPTY;
+        }
+
         if (nbt.contains("block")) {
             inventory.setStackInSlot(0, ItemStack.read((CompoundNBT) nbt.get("block")));
         } else {
@@ -232,10 +238,19 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
     }
 
     public float getSolidProportion() {
+        LogUtil.info(String.format("Inventory: %s", inventory.getStackInSlot(0).toString()));
+        LogUtil.info(String.format("Current Item: %s", currentItem.toString()));
+
         int itemCount =
             inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
         float solidProportion = ((float) itemCount) / 4;
 
+        if (solidAmount > 0) {
+            Meltable meltable = MeltableItems.getMeltable(currentItem.getItem());
+            solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
+        }
+
+        LogUtil.info(String.format("Solid Amount: %f", solidProportion));
         return solidProportion;
     }
 }

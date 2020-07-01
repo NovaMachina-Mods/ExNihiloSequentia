@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundNBT;
 public class Color {
 
     public static final Color INVALID_COLOR = new Color(-1, -1, -1, -1);
+    public static final Color WHITE         = new Color(1, 1, 1, 1);
 
     public final float r;
     public final float g;
