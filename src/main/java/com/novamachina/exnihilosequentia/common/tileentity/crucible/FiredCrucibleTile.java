@@ -133,9 +133,6 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
                 int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
                 solidAmount -= filled;
             }
-            if (solidAmount <= 0 && inventory.getStackInSlot(0).isEmpty()) {
-                currentItem = ItemStack.EMPTY;
-            }
         }
         world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
     }
@@ -156,6 +153,13 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
             world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
             markDirty();
             return ActionResultType.SUCCESS;
+        }
+
+        if (!tank.isEmpty()) {
+            if (!tank.getFluid().getFluid()
+                .isEquivalentTo(MeltableItems.getMeltable(stack.getItem()).getFluid())) {
+                return ActionResultType.SUCCESS;
+            }
         }
 
         ItemStack addStack = stack.copy();
@@ -238,8 +242,6 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
     }
 
     public float getSolidProportion() {
-        LogUtil.info(String.format("Inventory: %s", inventory.getStackInSlot(0).toString()));
-        LogUtil.info(String.format("Current Item: %s", currentItem.toString()));
 
         int itemCount =
             inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
@@ -249,8 +251,6 @@ public class FiredCrucibleTile extends TileEntity implements ITickableTileEntity
             Meltable meltable = MeltableItems.getMeltable(currentItem.getItem());
             solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
         }
-
-        LogUtil.info(String.format("Solid Amount: %f", solidProportion));
         return solidProportion;
     }
 }
