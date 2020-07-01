@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.client.setup;
 
+import com.novamachina.exnihilosequentia.client.render.FiredCrucibleRender;
 import com.novamachina.exnihilosequentia.client.render.SieveRender;
 import com.novamachina.exnihilosequentia.common.item.ore.OreColor;
 import com.novamachina.exnihilosequentia.common.item.ore.OreItem;
@@ -20,10 +21,15 @@ public class ClientSetup {
 
     public static void init(final FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(ModBlocks.SIEVE.get(), RenderType.getCutoutMipped());
+        RenderTypeLookup
+            .setRenderLayer(ModBlocks.CRUCIBLE_UNFIRED.get(), RenderType.getCutoutMipped());
+        RenderTypeLookup
+            .setRenderLayer(ModBlocks.CRUCIBLE_FIRED.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModBlocks.INFESTED_LEAVES.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.INFESTING_LEAVES.get(), RenderType.getCutout());
 
         SieveRender.register();
+        FiredCrucibleRender.register();
     }
 
     @SubscribeEvent

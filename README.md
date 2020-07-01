@@ -37,9 +37,10 @@ The following will be included in this mod.
     - ~~Redstone~~
   - ~~Porcelain Clay~~
 - Add Barrel
-- Add Crucible
-- ~~Add End Cake
-- Add Witch Water
+- ~~Add Fired Crucible~~
+- Add Wooden Crucible? (Does anyone actually use this?)
+- ~~Add End Cake~~
+- ~~Add Witch Water~~
 - Add Dolls
     - Blaze
     - Enderman
@@ -51,7 +52,7 @@ The following will be included in this mod.
   - ~~Iron~~
   - ~~Diamond~~
 - ~~Add Silk Worms~~
-  - Infested trees
+  - ~~Infested trees~~
 - ~~Add Crook~~
   - ~~Wooden~~
   - ~~Iron~~

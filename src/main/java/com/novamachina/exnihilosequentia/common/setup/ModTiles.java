@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.setup;
 
+import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestedLeavesTile;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
@@ -16,11 +17,12 @@ public class ModTiles {
     private static final DeferredRegister<TileEntityType<?>> TILES =
         new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Constants.ModInfo.MOD_ID);
 
-    public static final RegistryObject<TileEntityType<SieveTile>> SIEVE = TILES
-        .register(Blocks.SIEVE,
-            () -> TileEntityType.Builder.create(SieveTile::new, ModBlocks.SIEVE.get())
-                .build(null));
-
+    public static final RegistryObject<TileEntityType<FiredCrucibleTile>>   CRUCIBLE_FIRED   = TILES
+        .register(Blocks.CRUCIBLE_UNFIRED, () -> TileEntityType.Builder
+            .create(FiredCrucibleTile::new, ModBlocks.CRUCIBLE_FIRED.get()).build(null));
+    public static final RegistryObject<TileEntityType<SieveTile>>           SIEVE            = TILES
+        .register(Blocks.SIEVE, () -> TileEntityType.Builder
+            .create(SieveTile::new, ModBlocks.SIEVE.get()).build(null));
     public static final RegistryObject<TileEntityType<InfestingLeavesTile>> INFESTING_LEAVES = TILES
         .register(Blocks.INFESTING_LEAVES, () -> TileEntityType.Builder
             .create(InfestingLeavesTile::new, ModBlocks.INFESTING_LEAVES.get()).build(null));

@@ -4,8 +4,10 @@ import com.novamachina.exnihilosequentia.common.block.BaseBlock;
 import com.novamachina.exnihilosequentia.common.block.BaseFallingBlock;
 import com.novamachina.exnihilosequentia.common.block.BlockSieve;
 import com.novamachina.exnihilosequentia.common.block.EndCakeBlock;
+import com.novamachina.exnihilosequentia.common.block.FiredCrucibleBlock;
 import com.novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import com.novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
+import com.novamachina.exnihilosequentia.common.block.UnfiredCrucibleBlock;
 import com.novamachina.exnihilosequentia.common.block.WitchWaterBlock;
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -59,6 +61,10 @@ public class ModBlocks {
         .register(Blocks.INFESTING_LEAVES, InfestingLeavesBlock::new);
     public static final RegistryObject<BaseBlock>         INFESTED_LEAVES    = BLOCKS
         .register(Blocks.INFESTED_LEAVES, InfestedLeavesBlock::new);
+    public static final RegistryObject<BaseBlock>         CRUCIBLE_UNFIRED   = BLOCKS
+        .register(Blocks.CRUCIBLE_UNFIRED, UnfiredCrucibleBlock::new);
+    public static final RegistryObject<BaseBlock>         CRUCIBLE_FIRED     = BLOCKS
+        .register(Blocks.CRUCIBLE_FIRED, FiredCrucibleBlock::new);
 
     public static void init(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
