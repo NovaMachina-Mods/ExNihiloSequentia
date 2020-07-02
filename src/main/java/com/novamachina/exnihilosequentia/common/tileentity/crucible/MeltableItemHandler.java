@@ -7,10 +7,13 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class MeltableItemHandler extends ItemStackHandler {
 
-    private boolean crucibleHasRoom = true;
+    private boolean          crucibleHasRoom = true;
+    private CrucilbeTypeEnum type;
 
-    public MeltableItemHandler() {
+    public MeltableItemHandler(
+        CrucilbeTypeEnum crucibleType) {
         super(1);
+        type = crucibleType;
     }
 
     @Nonnull
@@ -28,7 +31,8 @@ public class MeltableItemHandler extends ItemStackHandler {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return MeltableItems.isMeltable(stack.getItem());
+        return type == CrucilbeTypeEnum.FIRED ? FiredCrucibleMeltableItems
+            .isMeltable(stack.getItem()) : WoodCrucibleMeltableItems.isMeltable(stack.getItem());
     }
 
     @Override
@@ -40,6 +44,7 @@ public class MeltableItemHandler extends ItemStackHandler {
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = super.serializeNBT();
         nbt.putBoolean("hasRoom", crucibleHasRoom);
+        nbt.putString("type", type.getName());
         return nbt;
     }
 
@@ -47,6 +52,7 @@ public class MeltableItemHandler extends ItemStackHandler {
     public void deserializeNBT(CompoundNBT nbt) {
         super.deserializeNBT(nbt);
         this.crucibleHasRoom = nbt.getBoolean("hasRoom");
+        this.type            = CrucilbeTypeEnum.getTypeByName(nbt.getString("type"));
     }
 
     @Nonnull

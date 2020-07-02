@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.client.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
+import com.novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 import com.novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.client.Minecraft;
@@ -13,18 +14,20 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-public class FiredCrucibleRender extends TileEntityRenderer<FiredCrucibleTile> {
+public class CrucibleRender extends TileEntityRenderer<BaseCrucibleTile> {
 
-    public FiredCrucibleRender(TileEntityRendererDispatcher rendererDispatcher) {
+    public CrucibleRender(TileEntityRendererDispatcher rendererDispatcher) {
         super(rendererDispatcher);
     }
 
-    public static void register() {
+    public static void register(
+        TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         ClientRegistry
-            .bindTileEntityRenderer(ModTiles.CRUCIBLE_FIRED.get(), FiredCrucibleRender::new);
+            .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
     }
 
     private void add(IVertexBuilder renderer, MatrixStack stack, float x, float y, float z, float u,
@@ -38,7 +41,7 @@ public class FiredCrucibleRender extends TileEntityRenderer<FiredCrucibleTile> {
     }
 
     @Override
-    public void render(FiredCrucibleTile tileEntity, float partialTicks, MatrixStack matrixStack,
+    public void render(BaseCrucibleTile tileEntity, float partialTicks, MatrixStack matrixStack,
         IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation solidTexture = tileEntity.getSolidTexture();
         Fluid            fluid        = tileEntity.getFluid();
@@ -81,7 +84,7 @@ public class FiredCrucibleRender extends TileEntityRenderer<FiredCrucibleTile> {
                         "block/" + solidTexture.getPath()));
 
             // Subtract 0.005 to prevent texture fighting
-            float fillAmount = (0.75f * tileEntity.getSolidProportion()) - 0.005f;
+            float fillAmount = (0.75f * Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.005f;
 
             matrixStack.push();
             matrixStack.translate(.5, .5, .5);
@@ -101,7 +104,7 @@ public class FiredCrucibleRender extends TileEntityRenderer<FiredCrucibleTile> {
     }
 
     private Color getBlockColor(ResourceLocation solidTexture,
-        FiredCrucibleTile tileEntity) {
+        BaseCrucibleTile tileEntity) {
         if (solidTexture != null) {
             if (solidTexture.toString().contains("leaves")) {
                 return new Color(

@@ -22,6 +22,7 @@ public class Constants {
         public static final String INFESTED_LEAVES    = "infested_leaves";
         public static final String CRUCIBLE_UNFIRED   = "crucible_unfired";
         public static final String CRUCIBLE_FIRED     = "crucible_fired";
+        public static final String CRUCIBLE_WOOD      = "crucible_wood";
     }
 
     public static class Items {

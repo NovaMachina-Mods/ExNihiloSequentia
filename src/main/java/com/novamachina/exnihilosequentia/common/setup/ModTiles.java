@@ -1,8 +1,9 @@
 package com.novamachina.exnihilosequentia.common.setup;
 
-import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestedLeavesTile;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
+import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
+import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleTile;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.Constants.Blocks;
@@ -20,6 +21,9 @@ public class ModTiles {
     public static final RegistryObject<TileEntityType<FiredCrucibleTile>>   CRUCIBLE_FIRED   = TILES
         .register(Blocks.CRUCIBLE_UNFIRED, () -> TileEntityType.Builder
             .create(FiredCrucibleTile::new, ModBlocks.CRUCIBLE_FIRED.get()).build(null));
+    public static final RegistryObject<TileEntityType<WoodCrucibleTile>>    CRUCIBLE_WOOD    = TILES
+        .register(Blocks.CRUCIBLE_WOOD, () -> TileEntityType.Builder
+            .create(WoodCrucibleTile::new, ModBlocks.CRUCIBLE_WOOD.get()).build(null));
     public static final RegistryObject<TileEntityType<SieveTile>>           SIEVE            = TILES
         .register(Blocks.SIEVE, () -> TileEntityType.Builder
             .create(SieveTile::new, ModBlocks.SIEVE.get()).build(null));

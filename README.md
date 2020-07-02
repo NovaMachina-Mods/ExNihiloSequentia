@@ -38,7 +38,7 @@ The following will be included in this mod.
   - ~~Porcelain Clay~~
 - Add Barrel
 - ~~Add Fired Crucible~~
-- Add Wooden Crucible? (Does anyone actually use this?)
+- ~~Add Wooden Crucible~~
 - ~~Add End Cake~~
 - ~~Add Witch Water~~
 - Add Dolls

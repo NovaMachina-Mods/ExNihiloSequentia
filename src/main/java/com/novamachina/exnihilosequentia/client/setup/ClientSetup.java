@@ -1,11 +1,12 @@
 package com.novamachina.exnihilosequentia.client.setup;
 
-import com.novamachina.exnihilosequentia.client.render.FiredCrucibleRender;
+import com.novamachina.exnihilosequentia.client.render.CrucibleRender;
 import com.novamachina.exnihilosequentia.client.render.SieveRender;
 import com.novamachina.exnihilosequentia.common.item.ore.OreColor;
 import com.novamachina.exnihilosequentia.common.item.ore.OreItem;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
+import com.novamachina.exnihilosequentia.common.setup.ModTiles;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -29,7 +30,8 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ModBlocks.INFESTING_LEAVES.get(), RenderType.getCutout());
 
         SieveRender.register();
-        FiredCrucibleRender.register();
+        CrucibleRender.register(ModTiles.CRUCIBLE_FIRED.get());
+        CrucibleRender.register(ModTiles.CRUCIBLE_WOOD.get());
     }
 
     @SubscribeEvent

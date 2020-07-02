@@ -80,6 +80,9 @@ public class ModItems {
     public static final RegistryObject<Item>       CRUCIBLE_FIRED     = ITEMS
         .register(Blocks.CRUCIBLE_FIRED, () -> new BlockItem(ModBlocks.CRUCIBLE_FIRED.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item>       CRUCIBLE_WOOD      = ITEMS
+        .register(Blocks.CRUCIBLE_WOOD, () -> new BlockItem(ModBlocks.CRUCIBLE_WOOD.get(),
+            new Properties().group(ModInitialization.ITEM_GROUP)));
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {

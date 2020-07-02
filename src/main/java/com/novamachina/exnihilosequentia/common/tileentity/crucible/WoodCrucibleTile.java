@@ -5,20 +5,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
-public class FiredCrucibleTile extends BaseCrucibleTile {
+public class WoodCrucibleTile extends BaseCrucibleTile {
 
-    public FiredCrucibleTile() {
-        super(ModTiles.CRUCIBLE_FIRED.get());
-    }
-
-    @Override
-    protected int getHeat() {
-        return HeatRegistry.getHeatAmount(world.getBlockState(pos.down()).getBlock());
-    }
-
-    @Override
-    public CrucilbeTypeEnum getCrucibleType() {
-        return CrucilbeTypeEnum.FIRED;
+    public WoodCrucibleTile() {
+        super(ModTiles.CRUCIBLE_WOOD.get());
     }
 
     @Override
@@ -46,7 +36,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
 
-                    solidAmount = FiredCrucibleMeltableItems.getMeltable(currentItem.getItem())
+                    solidAmount = WoodCrucibleMeltableItems.getMeltable(currentItem.getItem())
                         .getAmount();
                 } else {
                     return;
@@ -56,7 +46,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
                 .isItemEqual(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
-                    solidAmount += FiredCrucibleMeltableItems.getMeltable(currentItem.getItem())
+                    solidAmount += WoodCrucibleMeltableItems.getMeltable(currentItem.getItem())
                         .getAmount();
                     inventory.getStackInSlot(0).shrink(1);
 
@@ -70,13 +60,24 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                 heat = solidAmount;
             }
 
-            if (heat > 0 && FiredCrucibleMeltableItems.isMeltable(currentItem.getItem())) {
+            if (heat > 0 && WoodCrucibleMeltableItems.isMeltable(currentItem.getItem())) {
                 FluidStack fluidStack = new FluidStack(
-                    FiredCrucibleMeltableItems.getMeltable(currentItem.getItem()).getFluid(), heat);
+                    WoodCrucibleMeltableItems.getMeltable(currentItem.getItem()).getFluid(), heat);
                 int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
                 solidAmount -= filled;
             }
         }
         world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
     }
+
+    @Override
+    protected int getHeat() {
+        return HeatRegistry.getHeatAmount(world.getBlockState(pos.down()).getBlock());
+    }
+
+    @Override
+    public CrucilbeTypeEnum getCrucibleType() {
+        return CrucilbeTypeEnum.WOOD;
+    }
+
 }
