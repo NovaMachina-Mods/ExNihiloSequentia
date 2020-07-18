@@ -1,5 +1,7 @@
 package com.novamachina.exnihilosequentia.common.utility;
 
+import net.minecraftforge.eventbus.api.IEventBus;
+
 public class Constants {
 
     public static class ModInfo {
@@ -23,6 +25,7 @@ public class Constants {
         public static final String CRUCIBLE_UNFIRED   = "crucible_unfired";
         public static final String CRUCIBLE_FIRED     = "crucible_fired";
         public static final String CRUCIBLE_WOOD      = "crucible_wood";
+        public static final String BARREL_WOOD = "barrel_wood";
     }
 
     public static class Items {
