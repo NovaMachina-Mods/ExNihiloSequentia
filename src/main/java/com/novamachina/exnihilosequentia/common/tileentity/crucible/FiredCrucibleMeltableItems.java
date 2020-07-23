@@ -13,7 +13,6 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 public class FiredCrucibleMeltableItems {
 
     private static final Map<String, Meltable> meltableList = new HashMap<>();
-    private static       boolean               initialized  = false;
 
     public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount,
         Fluid fluid) {
@@ -26,24 +25,15 @@ public class FiredCrucibleMeltableItems {
 
     public static boolean isMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
         String blockName = entry.getRegistryName().toString();
-        if (!initialized) {
-            useDefaults();
-            initialized = true;
-        }
         return meltableList.containsKey(blockName);
     }
 
     public static Meltable getMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        if (!initialized) {
-            useDefaults();
-            initialized = true;
-        }
-
         String blockName = entry.getRegistryName().toString();
         return meltableList.getOrDefault(blockName, Meltable.DEFAULT);
     }
 
-    private static void useDefaults() {
+    public static void initialize() {
         // Lava Meltables
         addMeltable(Blocks.COBBLESTONE, 250, Fluids.LAVA);
         addMeltable(Blocks.DIORITE, 250, Fluids.LAVA);

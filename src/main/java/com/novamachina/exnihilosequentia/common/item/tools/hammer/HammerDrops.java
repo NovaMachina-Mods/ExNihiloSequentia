@@ -9,9 +9,8 @@ import net.minecraft.block.Blocks;
 public class HammerDrops {
 
     private static final Map<String, Block> hammerDrops = new HashMap<>();
-    private static       boolean            initialized = false;
 
-    public static void useDefaults() {
+    public static void initialize() {
 
         hammerDrops.put(Blocks.STONE.getRegistryName().toString(), Blocks.COBBLESTONE);
         hammerDrops.put(Blocks.COBBLESTONE.getRegistryName().toString(), Blocks.GRAVEL);
@@ -30,10 +29,6 @@ public class HammerDrops {
     }
 
     public static Block getResult(String input) {
-        if (!initialized) {
-            useDefaults();
-            initialized = true;
-        }
         return hammerDrops.get(input);
     }
 }

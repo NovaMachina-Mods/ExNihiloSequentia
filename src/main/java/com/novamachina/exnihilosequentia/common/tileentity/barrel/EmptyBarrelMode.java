@@ -10,8 +10,19 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void tick(BarrelItemHandler inventory, FluidTank tank) {
+    public void tick(BarrelTile barrelTile) {
+        String nextState = checkConditions(barrelTile.getInventory(), barrelTile.getTank());
+        barrelTile.setMode(nextState);
+    }
 
+    private String checkConditions(BarrelItemHandler inventory, FluidTank tank) {
+        if(!inventory.getStackInSlot(0).isEmpty()) {
+            return "solids";
+        }
+        if(!tank.isEmpty()) {
+            return "fluids";
+        }
+        return "empty";
     }
 
     @Override
@@ -25,7 +36,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BarrelItemHandler inventory, FluidTank tank) {
+    public ActionResultType onBlockActivated(BarrelTile barrelTile) {
         return ActionResultType.SUCCESS;
     }
 }

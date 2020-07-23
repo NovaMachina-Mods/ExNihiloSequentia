@@ -15,11 +15,11 @@ public abstract class AbstractBarrelMode {
         return modeName;
     }
 
-    public abstract void tick(BarrelItemHandler inventory, FluidTank tank);
+    public abstract void tick(BarrelTile barrelTile);
 
     public abstract CompoundNBT write(CompoundNBT compound);
 
     public abstract void read(CompoundNBT compound);
 
-    public abstract ActionResultType onBlockActivated(BarrelItemHandler inventory, FluidTank tank);
+    public abstract ActionResultType onBlockActivated(BarrelTile barrelTile);
 }

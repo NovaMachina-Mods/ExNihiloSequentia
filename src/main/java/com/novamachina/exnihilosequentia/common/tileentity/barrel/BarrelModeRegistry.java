@@ -6,17 +6,12 @@ import java.util.function.Supplier;
 
 public class BarrelModeRegistry {
     private static Map<String, Supplier<AbstractBarrelMode>> modeMap = new HashMap<>();
-    private static boolean initialized = false;
 
     public static AbstractBarrelMode getModeFromName(String barrelMode) {
-        if(!initialized) {
-            useDefaults();
-            initialized = true;
-        }
         return modeMap.getOrDefault(barrelMode, null).get();
     }
 
-    private static void useDefaults() {
+    public static void initialize() {
         addMode(() -> new EmptyBarrelMode("empty"));
     }
 

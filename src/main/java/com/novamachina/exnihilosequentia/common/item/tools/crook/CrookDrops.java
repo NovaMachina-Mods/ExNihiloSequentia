@@ -16,21 +16,12 @@ public class CrookDrops {
         .get();
 
     private static final List<CrookDropEntry> crookDrops  = new ArrayList<>();
-    private static       boolean              initialized = false;
 
-    public static void addDefaultDrops() {
-        if (!ExNihiloSequentia.itemRegistrationFinished) {
-            return;
-        }
+    public static void initialize() {
         addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.1F);
     }
 
     public static List<ItemStack> getDrops() {
-        if (!initialized) {
-            addDefaultDrops();
-            initialized = true;
-        }
-
         List<ItemStack> drops = new ArrayList<>();
 
         for (CrookDropEntry item : crookDrops) {

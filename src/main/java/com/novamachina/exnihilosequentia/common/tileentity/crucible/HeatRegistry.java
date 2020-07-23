@@ -9,7 +9,6 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 public class HeatRegistry {
 
     private static final Map<String, Integer> heatMap     = new HashMap<>();
-    private static       boolean              initialized = false;
 
     public static void addHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry,
         int amount) {
@@ -26,16 +25,11 @@ public class HeatRegistry {
     }
 
     public static int getHeatAmount(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        if (!initialized) {
-            useDefaults();
-            initialized = true;
-        }
-
         String blockName = entry.getRegistryName().toString();
         return heatMap.getOrDefault(blockName, 0);
     }
 
-    private static void useDefaults() {
+    public static void initialized() {
         addHeatSource(Blocks.LAVA, 3);
         addHeatSource(Blocks.FIRE, 4);
         addHeatSource(Blocks.TORCH, 1);

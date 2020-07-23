@@ -23,12 +23,23 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     private FluidTank tank;
     private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
     private AbstractBarrelMode mode;
+    private int solidAmount;
+    private int MAX_SOLID_AMOUNT = 1000;
 
     public BarrelTile() {
         super(ModTiles.BARREL.get());
         this.mode = BarrelModeRegistry.getModeFromName("empty");
-        inventory      = new BarrelItemHandler();
-        tank           = new FluidTank(1000);
+        inventory = new BarrelItemHandler();
+        tank = new FluidTank(1000);
+        solidAmount = 0;
+    }
+
+    public BarrelItemHandler getInventory() {
+        return inventory;
+    }
+
+    public FluidTank getTank() {
+        return tank;
     }
 
     @Override
@@ -38,7 +49,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
         }
 
         if (mode != null) {
-            mode.tick(inventory, tank);
+            mode.tick(this);
         }
     }
 
@@ -48,6 +59,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
         compound.put("tank", tank.writeToNBT(new CompoundNBT()));
         compound.putString("barrelMode", mode.getModeName());
         compound.put("modeInfo", mode.write(new CompoundNBT()));
+        compound.putInt("solidAmount", solidAmount);
         return super.write(compound);
     }
 
@@ -59,11 +71,12 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
         if (mode != null) {
             mode.read(compound.getCompound("modeInfo"));
         }
+        this.solidAmount = compound.getInt("solidAmount");
         super.read(compound);
     }
 
     public ActionResultType onBlockActivated() {
-        return mode.onBlockActivated(inventory, tank);
+        return mode.onBlockActivated(this);
     }
 
     @Nonnull
@@ -76,5 +89,32 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
             return tankHolder.cast();
         }
         return super.getCapability(cap, side);
+    }
+
+    public void setMode(String nextState) {
+        mode = BarrelModeRegistry.getModeFromName(nextState);
+    }
+
+    public int getSolidAmount() {
+        return this.solidAmount;
+    }
+
+    public int getFluidAmount() {
+        return tank.getFluidAmount();
+    }
+
+    public boolean addSolid(int amount) {
+        if(solidAmount + amount < MAX_SOLID_AMOUNT) {
+            solidAmount += amount;
+            return true;
+        }
+        return false;
+    }
+
+    public void removeSolid(int amount) {
+        solidAmount -= amount;
+        if(solidAmount < 0) {
+            solidAmount = 0;
+        }
     }
 }
