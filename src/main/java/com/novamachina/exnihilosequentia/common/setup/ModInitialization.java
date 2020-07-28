@@ -18,9 +18,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLModIdMappingEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.registries.ObjectHolder;
 
-@Mod.EventBusSubscriber(modid = Constants.ModInfo.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Constants.ModInfo.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModInitialization {
 
     public static final ItemGroup ITEM_GROUP = new ItemGroup(Constants.ModInfo.MOD_ID) {
@@ -42,7 +44,7 @@ public class ModInitialization {
     }
 
     @SubscribeEvent
-    public static void onModSetup(FMLCommonSetupEvent event) {
+    public static void onModSetup(FMLServerStartingEvent event) {
         LogUtil.info("Initialize Mod Registries");
         CrookDrops.initialize();
         HammerDrops.initialize();
