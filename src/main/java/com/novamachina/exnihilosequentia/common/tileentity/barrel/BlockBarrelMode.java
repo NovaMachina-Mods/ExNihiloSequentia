@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -8,37 +9,28 @@ import net.minecraft.util.Hand;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import java.util.List;
-import java.util.function.Supplier;
-
-public class EmptyBarrelMode extends AbstractBarrelMode {
-    public EmptyBarrelMode(String name) {
+public class BlockBarrelMode extends AbstractBarrelMode {
+    public BlockBarrelMode(String name) {
         super(name);
     }
 
     @Override
     public void tick(BarrelTile barrelTile) {
+
     }
 
     @Override
     public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        if(!player.getHeldItem(handIn).isEmpty()) {
-            ItemStack stack = player.getHeldItem(handIn);
-            List<Supplier<AbstractBarrelMode>> modes = BarrelModeRegistry.getModes(BarrelModeRegistry.TriggerType.ITEM);
-            for(Supplier<AbstractBarrelMode> mode : modes) {
-                if(mode.get().isTriggerItem(stack)) {
-                    barrelTile.setMode(mode.get());
-                    barrelTile.getMode().onBlockActivated(barrelTile, player, handIn, fluidHandler, itemHandler);
-                    return ActionResultType.SUCCESS;
-                }
-            }
-        }
+        barrelTile.getWorld().addEntity(new ItemEntity(barrelTile.getWorld(), barrelTile.getPos().getX() + 0.5F, barrelTile.getPos().getY() + 0.5F,
+            barrelTile.getPos().getZ() + 0.5F, new ItemStack(barrelTile.getInventory().getStackInSlot(0).getItem())));
+        barrelTile.getInventory().setStackInSlot(0, ItemStack.EMPTY);
+        barrelTile.setMode("empty");
         return ActionResultType.SUCCESS;
     }
 
     @Override
     public boolean checkConditionsToSwitchToState(BarrelTile barrelTile) {
-        return barrelTile.getTank().isEmpty() && barrelTile.getInventory().getStackInSlot(0).isEmpty() && barrelTile.getSolidAmount() == 0;
+        return false;
     }
 
     @Override
@@ -48,7 +40,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
     @Override
     public boolean isEmptyMode() {
-        return true;
+        return false;
     }
 
     @Override

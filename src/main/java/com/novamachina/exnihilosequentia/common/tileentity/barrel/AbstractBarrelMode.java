@@ -1,8 +1,12 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraft.util.Hand;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public abstract class AbstractBarrelMode {
     private String modeName;
@@ -17,9 +21,17 @@ public abstract class AbstractBarrelMode {
 
     public abstract void tick(BarrelTile barrelTile);
 
-    public abstract CompoundNBT write(CompoundNBT compound);
+    public abstract ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
 
-    public abstract void read(CompoundNBT compound);
+    public abstract boolean checkConditionsToSwitchToState(BarrelTile barrelTile);
 
-    public abstract ActionResultType onBlockActivated(BarrelTile barrelTile);
+    public abstract boolean canFillWithFluid(BarrelTile barrel);
+
+    public abstract boolean isEmptyMode();
+
+    protected abstract boolean isTriggerItem(ItemStack stack);
+
+    public abstract void read(CompoundNBT nbt);
+
+    public abstract CompoundNBT write();
 }
