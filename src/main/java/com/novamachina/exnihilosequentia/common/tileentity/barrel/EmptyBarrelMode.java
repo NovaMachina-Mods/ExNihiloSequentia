@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -23,6 +24,17 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     @Override
     public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         if(!player.getHeldItem(handIn).isEmpty()) {
+            boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
+
+            if (result) {
+                if (!player.isCreative()) {
+                    player.getHeldItem(handIn).shrink(1);
+                }
+                barrelTile.getWorld().notifyBlockUpdate(barrelTile.getPos(), barrelTile.getBlockState(), barrelTile.getBlockState(), 2);
+                barrelTile.markDirty();
+                return ActionResultType.SUCCESS;
+            }
+
             ItemStack stack = player.getHeldItem(handIn);
             List<Supplier<AbstractBarrelMode>> modes = BarrelModeRegistry.getModes(BarrelModeRegistry.TriggerType.ITEM);
             for(Supplier<AbstractBarrelMode> mode : modes) {
@@ -37,13 +49,8 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public boolean checkConditionsToSwitchToState(BarrelTile barrelTile) {
-        return barrelTile.getTank().isEmpty() && barrelTile.getInventory().getStackInSlot(0).isEmpty() && barrelTile.getSolidAmount() == 0;
-    }
-
-    @Override
     public boolean canFillWithFluid(BarrelTile barrel) {
-        return false;
+        return true;
     }
 
     @Override

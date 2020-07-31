@@ -23,8 +23,6 @@ public abstract class AbstractBarrelMode {
 
     public abstract ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
 
-    public abstract boolean checkConditionsToSwitchToState(BarrelTile barrelTile);
-
     public abstract boolean canFillWithFluid(BarrelTile barrel);
 
     public abstract boolean isEmptyMode();

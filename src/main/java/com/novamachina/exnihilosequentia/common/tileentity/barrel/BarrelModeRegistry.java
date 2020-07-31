@@ -21,7 +21,7 @@ public class BarrelModeRegistry {
     public static void initialize() {
         addMode(() -> new EmptyBarrelMode("empty"), TriggerType.NONE);
         addMode(() -> new CompostBarrelMode("solids"), TriggerType.ITEM);
-//        addMode(() -> new FluidsBarrelMode("fluids"), TriggerType.FLUID);
+        addMode(() -> new FluidsBarrelMode("fluids"), TriggerType.FLUID);
         addMode(() -> new BlockBarrelMode("block"), TriggerType.NONE);
 //        addMode(() -> new MobSpawnBarrelMode("mob"), TriggerType.NONE);
 //        addMode(() -> new FluidTransformBarrelMode("transform"), TriggerType.NONE);

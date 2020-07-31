@@ -29,11 +29,6 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public boolean checkConditionsToSwitchToState(BarrelTile barrelTile) {
-        return false;
-    }
-
-    @Override
     public boolean canFillWithFluid(BarrelTile barrel) {
         return false;
     }

@@ -4,6 +4,7 @@ import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDrops;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelModeRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.CompostRegistry;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.FluidOnTopRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleMeltableItems;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.HeatRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleMeltableItems;
@@ -44,12 +45,20 @@ public class ModInitialization {
     }
 
     @SubscribeEvent
-    public static void onModSetup(FMLServerStartingEvent event) {
-        LogUtil.info("Initialize Mod Registries");
+    public static void setupNonTagBasedRegistries(FMLCommonSetupEvent event) {
+        LogUtil.info("Initialize Non-Tag Based Mod Registries");
+
+        BarrelModeRegistry.initialize();
+    }
+
+    @SubscribeEvent
+    public static void setupTagBasedRegistries(FMLServerStartingEvent event) {
+        LogUtil.info("Initialize Tag Based Mod Registries");
+
         CrookDrops.initialize();
         HammerDrops.initialize();
         CompostRegistry.initialize();
-        BarrelModeRegistry.initialize();
+        FluidOnTopRegistry.initialize();
         FiredCrucibleMeltableItems.initialize();
         HeatRegistry.initialized();
         WoodCrucibleMeltableItems.initialize();

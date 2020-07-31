@@ -55,7 +55,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
             return;
         }
 
-        if (mode.isEmptyMode() || mode.getModeName().equals("fluid")) {
+        if (mode.isEmptyMode() || mode.getModeName().equals("fluids")) {
             BlockPos abovePos = pos.add(0, 1, 0);
             if(getWorld().isRainingAt(abovePos)) {
                 FluidStack stack = new FluidStack(Fluids.WATER, 2);

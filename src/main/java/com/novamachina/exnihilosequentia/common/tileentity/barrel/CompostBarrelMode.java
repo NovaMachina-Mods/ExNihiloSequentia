@@ -44,11 +44,6 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public boolean checkConditionsToSwitchToState(BarrelTile barrelTile) {
-        return !barrelTile.getInventory().getStackInSlot(0).isEmpty();
-    }
-
-    @Override
     public boolean canFillWithFluid(BarrelTile barrel) {
         return false;
     }
