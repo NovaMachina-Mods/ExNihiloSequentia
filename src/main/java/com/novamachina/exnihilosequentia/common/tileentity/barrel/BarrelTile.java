@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundNBT;
@@ -35,7 +36,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
 
     public BarrelTile() {
         super(ModTiles.BARREL.get());
-        this.mode = BarrelModeRegistry.getModeFromName("empty");
+        this.mode = BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY);
         inventory = new BarrelItemHandler();
         tank = new BarrelFluidHandler(this);
         solidAmount = 0;
@@ -55,7 +56,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
             return;
         }
 
-        if (mode.isEmptyMode() || mode.getModeName().equals("fluids")) {
+        if (mode.isEmptyMode() || mode.getModeName().equals(Constants.BarrelModes.FLUID)) {
             BlockPos abovePos = pos.add(0, 1, 0);
             if(getWorld().isRainingAt(abovePos)) {
                 FluidStack stack = new FluidStack(Fluids.WATER, 2);

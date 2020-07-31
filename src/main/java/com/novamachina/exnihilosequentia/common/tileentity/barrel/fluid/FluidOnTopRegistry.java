@@ -1,4 +1,4 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel;
+package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

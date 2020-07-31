@@ -1,4 +1,4 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel;
+package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
 public class FluidOnTopRecipe {
     private String fluidInBarrel;

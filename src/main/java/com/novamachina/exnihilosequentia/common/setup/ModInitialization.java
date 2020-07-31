@@ -3,8 +3,8 @@ package com.novamachina.exnihilosequentia.common.setup;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDrops;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelModeRegistry;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.CompostRegistry;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.FluidOnTopRegistry;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.compost.CompostRegistry;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnTopRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleMeltableItems;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.HeatRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleMeltableItems;
@@ -19,7 +19,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLModIdMappingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -29,7 +28,7 @@ public class ModInitialization {
     public static final ItemGroup ITEM_GROUP = new ItemGroup(Constants.ModInfo.MOD_ID) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModBlocks.DUST.get());
+            return new ItemStack(ModBlocks.SIEVE.get());
         }
     };
 

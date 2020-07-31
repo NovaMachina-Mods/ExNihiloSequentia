@@ -1,5 +1,10 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel;
+package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.transform.FluidTransformRegistry;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
@@ -22,7 +27,21 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             if(fluidOnTop(barrelTile)) {
                 return;
             }
+            if(fluidTransform(barrelTile)) {
+                return;
+            }
         }
+    }
+
+    private boolean fluidTransform(BarrelTile barrelTile) {
+        Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
+        Block blockBelow = barrelTile.getWorld().getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock();
+
+        if(FluidTransformRegistry.isValidRecipe(fluidInTank, blockBelow)) {
+            barrelTile.setMode(Constants.BarrelModes.TRANSFORM);
+            return true;
+        }
+        return false;
     }
 
     private boolean fluidOnTop(BarrelTile barrelTile) {
@@ -32,7 +51,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         if(FluidOnTopRegistry.isValidRecipe(fluidInTank, fluidOnTop)) {
             barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
             barrelTile.getInventory().setStackInSlot(0, new ItemStack(FluidOnTopRegistry.getResult(fluidInTank, fluidOnTop)));
-            barrelTile.setMode("block");
+            barrelTile.setMode(Constants.BarrelModes.BLOCK);
             return true;
         }
         return false;

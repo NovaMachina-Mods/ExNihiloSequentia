@@ -96,4 +96,13 @@ public class Constants {
         public static final String WITCH_WATER_STILL = "witchwater_still";
         public static final String WITCH_WATER_FLOW  = "witchwater_flow";
     }
+
+    public class BarrelModes {
+        public static final String EMPTY = "empty";
+        public static final String COMPOST = "compost";
+        public static final String FLUID = "fluid";
+        public static final String BLOCK = "block";
+        public static final String MOB = "mob";
+        public static final String TRANSFORM = "transform";
+    }
 }

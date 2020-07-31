@@ -1,10 +1,8 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel;
+package com.novamachina.exnihilosequentia.common.tileentity.barrel.compost;
 
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;

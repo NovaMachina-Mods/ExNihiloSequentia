@@ -1,5 +1,8 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel;
+package com.novamachina.exnihilosequentia.common.tileentity.barrel.compost;
 
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -26,7 +29,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
                 currentProgress = 0;
                 barrelTile.getInventory().setStackInSlot(0, new ItemStack(ForgeRegistries.BLOCKS.getValue(Blocks.DIRT.getRegistryName())));
                 barrelTile.removeSolid(barrelTile.getSolidAmount());
-                barrelTile.setMode("block");
+                barrelTile.setMode(Constants.BarrelModes.BLOCK);
             }
         }
     }
