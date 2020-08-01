@@ -24,12 +24,13 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BarrelTile extends TileEntity implements ITickableTileEntity {
-    private BarrelItemHandler inventory;
+    private ItemStackHandler inventory;
     private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
     private BarrelFluidHandler tank;
     private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
@@ -40,12 +41,12 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     public BarrelTile() {
         super(ModTiles.BARREL.get());
         this.mode = BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY);
-        inventory = new BarrelItemHandler();
+        inventory = new ItemStackHandler();
         tank = new BarrelFluidHandler(this);
         solidAmount = 0;
     }
 
-    public BarrelItemHandler getInventory() {
+    public ItemStackHandler getInventory() {
         return inventory;
     }
 
