@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-public class CrucibleRender extends TileEntityRenderer<BaseCrucibleTile> {
+public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
 
     public CrucibleRender(TileEntityRendererDispatcher rendererDispatcher) {
         super(rendererDispatcher);
@@ -28,16 +28,6 @@ public class CrucibleRender extends TileEntityRenderer<BaseCrucibleTile> {
         TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         ClientRegistry
             .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
-    }
-
-    private void add(IVertexBuilder renderer, MatrixStack stack, float x, float y, float z, float u,
-        float v, Color color) {
-        renderer.pos(stack.getLast().getMatrix(), x, y, z)
-            .color(color.r, color.g, color.b, color.a)
-            .tex(u, v)
-            .lightmap(0, 240)
-            .normal(1, 0, 0)
-            .endVertex();
     }
 
     @Override

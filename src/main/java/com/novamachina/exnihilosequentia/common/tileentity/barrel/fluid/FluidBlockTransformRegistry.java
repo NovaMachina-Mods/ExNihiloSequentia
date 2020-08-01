@@ -20,13 +20,17 @@ import java.util.List;
 import java.util.Map;
 
 public class FluidBlockTransformRegistry {
-    private static Map<String, ArrayList<FluidBlockTransformRecipe>> recipeMap = new HashMap<>();
+    private static Map<String, List<FluidBlockTransformRecipe>> recipeMap = new HashMap<>();
 
     public static boolean isValidRecipe(Fluid fluid, Item input) {
         String fluidString = fluid.getRegistryName().toString();
         String itemString = input.getRegistryName().toString();
 
-        ArrayList<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluidString);
+        List<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluidString);
+
+        if(possibleRecipes == null) {
+            return false;
+        }
 
         for(FluidBlockTransformRecipe recipe : possibleRecipes) {
             if(recipe.getInput().equals(itemString)) {
@@ -40,7 +44,7 @@ public class FluidBlockTransformRegistry {
         String fluidString = fluid.getRegistryName().toString();
         String itemString = input.getRegistryName().toString();
 
-        ArrayList<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluidString);
+        List<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluidString);
 
         for(FluidBlockTransformRecipe recipe : possibleRecipes) {
             if(recipe.getInput().equals(itemString)) {
@@ -66,6 +70,7 @@ public class FluidBlockTransformRegistry {
 
         if(recipeList == null) {
             recipeList = new ArrayList<>();
+            recipeMap.put(fluidString, recipeList);
         }
         recipeList.add(new FluidBlockTransformRecipe(fluidString, itemString, resultString));
     }

@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -12,9 +13,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -64,6 +67,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
             }
         }
         mode.tick(this);
+        getWorld().notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
     }
 
     @Override
@@ -116,16 +120,10 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbt = new CompoundNBT();
-        if(!inventory.getStackInSlot(0).isEmpty()) {
-            nbt.put("inventory", inventory.serializeNBT());
-        }
-        if(!tank.isEmpty()) {
-            nbt.put("tank", tank.writeToNBT(new CompoundNBT()));
-        }
+        nbt.put("inventory", inventory.serializeNBT());
+        nbt.put("tank", tank.writeToNBT(new CompoundNBT()));
         nbt.putString("mode", mode.getModeName());
-        if(!mode.getModeName().equals("empty")) {
-            nbt.put("modeInfo", mode.write());
-        }
+        nbt.put("modeInfo", mode.write());
         nbt.putInt("solidAmount", solidAmount);
 
         return new SUpdateTileEntityPacket(getPos(), -1, nbt);
@@ -163,6 +161,9 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     }
 
     public boolean addSolid(int amount) {
+        if(amount <= 0) {
+            return false;
+        }
         if(solidAmount == MAX_SOLID_AMOUNT) {
             return false;
         }
@@ -186,5 +187,27 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
 
     public void setMode(AbstractBarrelMode mode) {
         this.mode = mode;
+    }
+
+    public ResourceLocation getSolidTexture() {
+        if (!inventory.getStackInSlot(0).isEmpty()) {
+            return inventory.getStackInSlot(0).getItem().getRegistryName();
+        }
+        return null;
+    }
+
+    public Fluid getFluid() {
+        if (!tank.isEmpty()) {
+            return tank.getFluid().getFluid();
+        }
+        return null;
+    }
+
+    public float getSolidProportion() {
+        return (float)solidAmount / MAX_SOLID_AMOUNT;
+    }
+
+    public float getFluidProportion() {
+        return (float)tank.getFluidAmount() / FluidAttributes.BUCKET_VOLUME;
     }
 }

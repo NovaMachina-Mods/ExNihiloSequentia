@@ -15,13 +15,25 @@ import java.util.Map;
 public class CompostRegistry {
     public static Map<String, Integer> solidsMap = new HashMap<>();
 
-    public static boolean containsSolid(String registryName) {
-
-        return solidsMap.containsKey(registryName);
+    public static boolean containsSolid(IItemProvider item) {
+        Collection<ResourceLocation> tags = getTags(item);
+        for(ResourceLocation tag : tags) {
+            if(solidsMap.containsKey(tag.toString())) {
+                return true;
+            }
+        }
+        return solidsMap.containsKey(item.asItem().getRegistryName().toString());
     }
 
-    public static int getSolidAmount(String registryName) {
-        return solidsMap.getOrDefault(registryName, 0);
+    public static int getSolidAmount(IItemProvider item) {
+        Collection<ResourceLocation> tags = getTags(item);
+        for(ResourceLocation tag : tags) {
+            if(solidsMap.containsKey(tag.toString())) {
+                return solidsMap.get(tag.toString());
+            }
+        }
+
+        return solidsMap.getOrDefault(item.asItem().getRegistryName().toString(), 0);
     }
 
     public static void initialize() {

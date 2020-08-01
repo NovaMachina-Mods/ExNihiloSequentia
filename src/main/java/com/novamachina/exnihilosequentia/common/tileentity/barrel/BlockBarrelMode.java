@@ -17,7 +17,6 @@ public class BlockBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(BarrelTile barrelTile) {
-
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.client.setup;
 
+import com.novamachina.exnihilosequentia.client.render.BarrelRender;
 import com.novamachina.exnihilosequentia.client.render.CrucibleRender;
 import com.novamachina.exnihilosequentia.client.render.SieveRender;
 import com.novamachina.exnihilosequentia.common.item.ore.OreColor;
@@ -30,6 +31,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ModBlocks.INFESTING_LEAVES.get(), RenderType.getCutout());
 
         SieveRender.register();
+        BarrelRender.register();
         CrucibleRender.register(ModTiles.CRUCIBLE_FIRED.get());
         CrucibleRender.register(ModTiles.CRUCIBLE_WOOD.get());
     }

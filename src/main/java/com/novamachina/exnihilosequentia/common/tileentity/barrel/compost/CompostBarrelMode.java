@@ -36,9 +36,9 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        if (CompostRegistry.containsSolid(player.getHeldItem(handIn).getItem().getRegistryName().toString())) {
+        if (CompostRegistry.containsSolid(player.getHeldItem(handIn).getItem())) {
             if(barrelTile.addSolid(CompostRegistry
-                .getSolidAmount(player.getHeldItem(handIn).getItem().getRegistryName().toString()))) {
+                .getSolidAmount(player.getHeldItem(handIn).getItem()))) {
                 player.getHeldItem(handIn).shrink(1);
             }
         }
@@ -58,7 +58,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected boolean isTriggerItem(ItemStack stack) {
-        return CompostRegistry.containsSolid(stack.getItem().getRegistryName().toString());
+        return CompostRegistry.containsSolid(stack.getItem());
     }
 
     @Override

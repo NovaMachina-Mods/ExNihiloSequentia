@@ -13,6 +13,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -50,7 +51,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
         if (FluidOnTopRegistry.isValidRecipe(fluidInTank, fluidOnTop)) {
-            barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+            barrelTile.getTank().setFluid(FluidStack.EMPTY);
             barrelTile.getInventory()
                 .setStackInSlot(0, new ItemStack(FluidOnTopRegistry.getResult(fluidInTank, fluidOnTop)));
             barrelTile.setMode(Constants.BarrelModes.BLOCK);
@@ -90,6 +91,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
             barrelTile.getInventory()
                 .setStackInSlot(0, new ItemStack(FluidBlockTransformRegistry.getResult(fluid, input)));
+            player.getHeldItem(handIn).shrink(1);
             barrelTile.setMode(Constants.BarrelModes.BLOCK);
             return true;
         }
