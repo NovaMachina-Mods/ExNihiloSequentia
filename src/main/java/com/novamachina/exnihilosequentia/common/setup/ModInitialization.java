@@ -4,7 +4,9 @@ import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDrops;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelModeRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.compost.CompostRegistry;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidBlockTransformRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnTopRegistry;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.transform.FluidTransformRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleMeltableItems;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.HeatRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleMeltableItems;
@@ -56,11 +58,13 @@ public class ModInitialization {
 
         CrookDrops.initialize();
         HammerDrops.initialize();
+        SieveDrops.initialize();
+        HeatRegistry.initialized();
+        FiredCrucibleMeltableItems.initialize();
+        WoodCrucibleMeltableItems.initialize();
         CompostRegistry.initialize();
         FluidOnTopRegistry.initialize();
-        FiredCrucibleMeltableItems.initialize();
-        HeatRegistry.initialized();
-        WoodCrucibleMeltableItems.initialize();
-        SieveDrops.initialize();
+        FluidTransformRegistry.initialize();
+        FluidBlockTransformRegistry.initialize();
     }
 }
