@@ -10,47 +10,47 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CompostRegistry {
-    public static Map<String, Integer> solidsMap = new HashMap<>();
+    public static Map<ResourceLocation, Integer> solidsMap = new HashMap<>();
 
     public static boolean containsSolid(IItemProvider item) {
         Collection<ResourceLocation> tags = TagUtils.getTags(item);
         for(ResourceLocation tag : tags) {
-            if(solidsMap.containsKey(tag.toString())) {
+            if(solidsMap.containsKey(tag)) {
                 return true;
             }
         }
-        return solidsMap.containsKey(item.asItem().getRegistryName().toString());
+        return solidsMap.containsKey(item.asItem().getRegistryName());
     }
 
     public static int getSolidAmount(IItemProvider item) {
         Collection<ResourceLocation> tags = TagUtils.getTags(item);
         for(ResourceLocation tag : tags) {
-            if(solidsMap.containsKey(tag.toString())) {
-                return solidsMap.get(tag.toString());
+            if(solidsMap.containsKey(tag)) {
+                return solidsMap.get(tag);
             }
         }
 
-        return solidsMap.getOrDefault(item.asItem().getRegistryName().toString(), 0);
+        return solidsMap.getOrDefault(item.asItem().getRegistryName(), 0);
     }
 
     // TODO: add remaining compost values
     public static void initialize() {
-        addSolid("minecraft:leaves", 250);
+        addSolid(new ResourceLocation("minecraft:leaves"), 250);
     }
 
     private static void addSolid(IItemProvider item, int solidAmount) {
         Collection<ResourceLocation> tags = TagUtils.getTags(item);
 
         for(ResourceLocation tag : tags) {
-            if(solidsMap.containsKey(tag.toString())) {
+            if(solidsMap.containsKey(tag)) {
                 LogUtil.info(String.format("Tag: %s already registered. Skipping...", tag.toString()));
                 return;
             }
         }
-        solidsMap.put(item.asItem().getRegistryName().toString(), solidAmount);
+        solidsMap.put(item.asItem().getRegistryName(), solidAmount);
     }
 
-    private static void addSolid(String tag, int solidAmount) {
+    private static void addSolid(ResourceLocation tag, int solidAmount) {
         if(solidsMap.containsKey(tag)) {
             LogUtil.info(String.format("Tag: %s already registered. Skipping...", tag));
             return;
