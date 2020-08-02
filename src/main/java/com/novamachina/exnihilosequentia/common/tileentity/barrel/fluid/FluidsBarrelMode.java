@@ -1,7 +1,9 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
+import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.MobSpawnBarrelMode;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.transform.FluidTransformRegistry;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.Block;
@@ -12,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -33,6 +36,22 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
                 return;
             }
         }
+    }
+
+    private boolean doMobSpawn(BarrelTile barrelTile, PlayerEntity player, Hand handIn) {
+        Item item = player.getHeldItem(handIn).getItem();
+
+        if(item instanceof DollItem) {
+            DollItem doll = (DollItem) item;
+            if(barrelTile.getFluid().isEquivalentTo(doll.getSpawnFluid())) {
+                barrelTile.setMode(Constants.BarrelModes.MOB);
+                ((MobSpawnBarrelMode)barrelTile.getMode()).setDoll(doll);
+                player.getHeldItem(handIn).shrink(1);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private boolean fluidTransform(BarrelTile barrelTile) {
@@ -79,7 +98,11 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             return ActionResultType.SUCCESS;
         }
 
-        fluidBlockTransform(barrelTile, player, handIn);
+        if(fluidBlockTransform(barrelTile, player, handIn)) {
+            return ActionResultType.SUCCESS;
+        }
+
+        doMobSpawn(barrelTile, player, handIn);
 
         return ActionResultType.SUCCESS;
     }

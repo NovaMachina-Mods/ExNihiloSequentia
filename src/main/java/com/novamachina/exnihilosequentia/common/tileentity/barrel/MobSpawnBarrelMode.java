@@ -1,44 +1,47 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel.transform;
+package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
-import com.novamachina.exnihilosequentia.common.setup.ModFluids;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
+import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class FluidTransformBarrelMode extends AbstractBarrelMode {
+public class MobSpawnBarrelMode extends AbstractBarrelMode {
     private int currentProgress;
+    private DollItem doll;
 
-    public FluidTransformBarrelMode(String name) {
+    public MobSpawnBarrelMode(String name) {
         super(name);
         currentProgress = 0;
+        doll = null;
+    }
+
+    public void setDoll(DollItem doll) {
+        this.doll = doll;
     }
 
     @Override
     public void tick(BarrelTile barrelTile) {
-        if (FluidTransformRegistry.isValidRecipe(barrelTile.getTank().getFluid().getFluid(), barrelTile.getWorld()
-            .getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock())) {
+        if(doll != null) {
             currentProgress++;
-
             if(currentProgress >= 200) {
-                currentProgress = 0;
-                barrelTile.getTank().setFluid(new FluidStack(ModFluids.WITCH_WATER_STILL.get(), FluidAttributes.BUCKET_VOLUME));
-                barrelTile.setMode(Constants.BarrelModes.FLUID);
+                if(doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
+                    barrelTile.getTank().setFluid(FluidStack.EMPTY);
+                    barrelTile.setMode(Constants.BarrelModes.EMPTY);
+                }
             }
         }
     }
 
     @Override
     public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        return null;
+        return ActionResultType.SUCCESS;
     }
 
     @Override
@@ -58,13 +61,23 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void read(CompoundNBT nbt) {
-        currentProgress = nbt.getInt("currentProgress");
+        if(nbt.contains("currentProgress")) {
+            this.currentProgress = nbt.getInt("currentProgress");
+        } else {
+            this.currentProgress = 0;
+        }
+        if(nbt.contains("dollType")) {
+            setDoll((DollItem)ModItems.dollMap.get(nbt.getString("dollType")).get());
+        } else {
+            this.setDoll(null);
+        }
     }
 
     @Override
     public CompoundNBT write() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("currentProgress", currentProgress);
+        nbt.putString("dollType", doll.getDollType());
         return nbt;
     }
 }
