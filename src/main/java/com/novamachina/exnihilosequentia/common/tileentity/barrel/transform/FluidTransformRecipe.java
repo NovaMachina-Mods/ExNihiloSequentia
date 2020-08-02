@@ -1,25 +1,27 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.transform;
 
-public class FluidTransformRecipe {
-    private String fluidInBarrel;
-    private String blockBelow;
-    private String result;
+import net.minecraft.util.ResourceLocation;
 
-    public FluidTransformRecipe(String fluidInBarrel, String blockBelow, String result) {
+public class FluidTransformRecipe {
+    private ResourceLocation fluidInBarrel;
+    private ResourceLocation blockBelow;
+    private ResourceLocation result;
+
+    public FluidTransformRecipe(ResourceLocation fluidInBarrel, ResourceLocation blockBelow, ResourceLocation result) {
         this.fluidInBarrel = fluidInBarrel;
         this.blockBelow = blockBelow;
         this.result = result;
     }
 
-    public String getFluidInBarrel() {
+    public ResourceLocation getFluidInBarrel() {
         return fluidInBarrel;
     }
 
-    public String getBlockBelow() {
+    public ResourceLocation getBlockBelow() {
         return blockBelow;
     }
 
-    public String getResult() {
+    public ResourceLocation getResult() {
         return result;
     }
 }

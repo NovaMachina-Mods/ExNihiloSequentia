@@ -12,32 +12,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FluidTransformRegistry {
-    private static Map<String, FluidTransformRecipe> recipeMap = new HashMap<>();
+    private static Map<ResourceLocation, FluidTransformRecipe> recipeMap = new HashMap<>();
 
     public static boolean isValidRecipe(Fluid fluidInTank, Block blockBelow) {
         boolean isValid = false;
-        String fluidInTankString = fluidInTank.getRegistryName().toString();
-        if(recipeMap.containsKey(fluidInTankString)) {
-            if(recipeMap.get(fluidInTankString).getBlockBelow().equals(blockBelow.getRegistryName().toString())) {
+        ResourceLocation fluidInTankID = fluidInTank.getRegistryName();
+        if(recipeMap.containsKey(fluidInTankID)) {
+            if(recipeMap.get(fluidInTankID).getBlockBelow().equals(blockBelow.getRegistryName())) {
                 isValid = true;
             }
         }
         return isValid;
     }
 
-    public static Block getResult(Fluid fluidInTank, Fluid fluidOnTop) {
-        String resultString = recipeMap.get(fluidInTank.getRegistryName().toString()).getResult();
-        return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(resultString));
+    public static Block getResult(Fluid fluidInTank) {
+        return ForgeRegistries.BLOCKS.getValue(recipeMap.get(fluidInTank.getRegistryName()).getResult());
     }
 
     public static void addRecipe(Fluid fluidInTank, Block blockBelow, Fluid result) {
-        String fluidInTankString = fluidInTank.getRegistryName().toString();
-        String blockBelowString = blockBelow.getRegistryName().toString();
-        String resultString = result.getRegistryName().toString();
-
-        recipeMap.put(fluidInTankString, new FluidTransformRecipe(fluidInTankString, blockBelowString, resultString));
+        addRecipe(fluidInTank.getRegistryName(), blockBelow.getRegistryName(), result.getRegistryName());
     }
 
+    public static void addRecipe(ResourceLocation fluidInTank, ResourceLocation blockBelow, ResourceLocation result) {
+
+        recipeMap.put(fluidInTank, new FluidTransformRecipe(fluidInTank, blockBelow, result));
+    }
 
     public static void initialize() {
         addRecipe(Fluids.WATER, Blocks.MYCELIUM, ModFluids.WITCH_WATER_STILL.get());
