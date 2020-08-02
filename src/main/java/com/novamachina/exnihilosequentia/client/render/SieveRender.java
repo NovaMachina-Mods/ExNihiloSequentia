@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
+import com.novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -14,7 +15,7 @@ import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-public class SieveRender extends TileEntityRenderer<SieveTile> {
+public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
 
 
     public SieveRender(
@@ -24,16 +25,6 @@ public class SieveRender extends TileEntityRenderer<SieveTile> {
 
     public static void register() {
         ClientRegistry.bindTileEntityRenderer(ModTiles.SIEVE.get(), SieveRender::new);
-    }
-
-    private void add(IVertexBuilder renderer, MatrixStack stack, float x, float y, float z, float u,
-        float v) {
-        renderer.pos(stack.getLast().getMatrix(), x, y, z)
-            .color(1.0f, 1.0f, 1.0f, 1.0f)
-            .tex(u, v)
-            .lightmap(0, 240)
-            .normal(1, 0, 0)
-            .endVertex();
     }
 
     @Override
@@ -55,15 +46,15 @@ public class SieveRender extends TileEntityRenderer<SieveTile> {
             double height     = 0.99f - tileEntity.getProgress();
             float  fillAmount = (float) (0.15625 * height + 0.84375);
 
-            add(builder, matrixStack, 0, fillAmount, 0, sprite.getMinU(), sprite.getMinV());
-            add(builder, matrixStack, 1, fillAmount, 0, sprite.getMaxU(), sprite.getMinV());
-            add(builder, matrixStack, 1, fillAmount, 1, sprite.getMaxU(), sprite.getMaxV());
-            add(builder, matrixStack, 0, fillAmount, 1, sprite.getMinU(), sprite.getMaxV());
+            add(builder, matrixStack, 0, fillAmount, 0, sprite.getMinU(), sprite.getMinV(), Color.WHITE);
+            add(builder, matrixStack, 1, fillAmount, 0, sprite.getMaxU(), sprite.getMinV(), Color.WHITE);
+            add(builder, matrixStack, 1, fillAmount, 1, sprite.getMaxU(), sprite.getMaxV(), Color.WHITE);
+            add(builder, matrixStack, 0, fillAmount, 1, sprite.getMinU(), sprite.getMaxV(), Color.WHITE);
 
-            add(builder, matrixStack, 0, fillAmount, 1, sprite.getMinU(), sprite.getMaxV());
-            add(builder, matrixStack, 1, fillAmount, 1, sprite.getMaxU(), sprite.getMaxV());
-            add(builder, matrixStack, 1, fillAmount, 0, sprite.getMaxU(), sprite.getMinV());
-            add(builder, matrixStack, 0, fillAmount, 0, sprite.getMinU(), sprite.getMinV());
+            add(builder, matrixStack, 0, fillAmount, 1, sprite.getMinU(), sprite.getMaxV(), Color.WHITE);
+            add(builder, matrixStack, 1, fillAmount, 1, sprite.getMaxU(), sprite.getMaxV(), Color.WHITE);
+            add(builder, matrixStack, 1, fillAmount, 0, sprite.getMaxU(), sprite.getMinV(), Color.WHITE);
+            add(builder, matrixStack, 0, fillAmount, 0, sprite.getMinU(), sprite.getMinV(), Color.WHITE);
 
             matrixStack.pop();
         }

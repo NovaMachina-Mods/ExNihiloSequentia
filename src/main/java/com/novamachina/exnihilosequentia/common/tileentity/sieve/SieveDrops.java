@@ -27,7 +27,6 @@ public class SieveDrops {
     private static final Map<String, List<SieveDropEntry>> flintMeshMap   = new HashMap<>();
     private static final Map<String, List<SieveDropEntry>> ironMeshMap    = new HashMap<>();
     private static final Map<String, List<SieveDropEntry>> diamondMeshMap = new HashMap<>();
-    private static       boolean                           initialized    = false;
 
     public static void addDrop(String input, Item result, float rarity, EnumMesh meshType) {
         switch (meshType) {
@@ -61,11 +60,6 @@ public class SieveDrops {
     }
 
     public static List<Item> getDrops(Block input, EnumMesh meshType) {
-        if (!initialized) {
-            addDefaultDrops();
-            initialized = true;
-        }
-
         String inputString = input.getRegistryName().toString();
 
         List<Item> returnList = new ArrayList<>();
@@ -90,7 +84,7 @@ public class SieveDrops {
     }
 
     //TODO: Add lapis, cocoa, bonemeal (these are the dyes that are missing)
-    private static void addDefaultDrops() {
+    public static void initialize() {
         // Stone Pebble
         addDrop(Blocks.DIRT.getRegistryName().toString(),
             ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 1.0F, EnumMesh.STRING);
@@ -306,10 +300,6 @@ public class SieveDrops {
 
     public static boolean isBlockSiftable(Block block, EnumMesh mesh) {
         Objects.requireNonNull(block.getRegistryName());
-        if (!initialized) {
-            addDefaultDrops();
-            initialized = true;
-        }
 
         switch (mesh) {
             case STRING: {

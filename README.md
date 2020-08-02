@@ -36,16 +36,16 @@ The following will be included in this mod.
     - Lapis
     - ~~Redstone~~
   - ~~Porcelain Clay~~
-- Add Barrel
+- ~~Add Barrel~~
 - ~~Add Fired Crucible~~
 - ~~Add Wooden Crucible~~
 - ~~Add End Cake~~
 - ~~Add Witch Water~~
-- Add Dolls
-    - Blaze
-    - Enderman
-    - Guardian
-    - Shulker
+- ~~Add Dolls~~
+    - ~~Blaze~~
+    - ~~Enderman~~
+    - ~~Guardian~~
+    - ~~Shulker~~
 - ~~Add Hammer~~
   - ~~Wood~~
   - ~~Stone~~

@@ -1,5 +1,7 @@
 package com.novamachina.exnihilosequentia.common.utility;
 
+import net.minecraftforge.eventbus.api.IEventBus;
+
 public class Constants {
 
     public static class ModInfo {
@@ -23,6 +25,7 @@ public class Constants {
         public static final String CRUCIBLE_UNFIRED   = "crucible_unfired";
         public static final String CRUCIBLE_FIRED     = "crucible_fired";
         public static final String CRUCIBLE_WOOD      = "crucible_wood";
+        public static final String BARREL_WOOD = "barrel_wood";
     }
 
     public static class Items {
@@ -68,6 +71,7 @@ public class Constants {
         public static final String PEBBLE_DIORITE      = createPebbleName("diorite");
         public static final String PEBBLE_ANDESITE     = createPebbleName("andesite");
         public static final String WITCH_WATER_BUCKET  = "bucket_witchwater";
+        public static final String CRAFTING_DOLL = "doll";
 
         private static String createHammername(String name) {
             return "hammer_" + name;
@@ -92,5 +96,14 @@ public class Constants {
 
         public static final String WITCH_WATER_STILL = "witchwater_still";
         public static final String WITCH_WATER_FLOW  = "witchwater_flow";
+    }
+
+    public class BarrelModes {
+        public static final String EMPTY = "empty";
+        public static final String COMPOST = "compost";
+        public static final String FLUID = "fluid";
+        public static final String BLOCK = "block";
+        public static final String MOB = "mob";
+        public static final String TRANSFORM = "transform";
     }
 }
