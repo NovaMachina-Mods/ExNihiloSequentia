@@ -6,9 +6,12 @@ import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
@@ -20,6 +23,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolItem;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -38,7 +43,9 @@ public class CrookBaseItem extends ToolItem {
         LivingEntity entityLiving) {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
         List<ItemStack> itemDrops = new ArrayList<>();
-        if (state.getBlock() instanceof LeavesBlock) {
+        Collection<ResourceLocation> tags = TagUtils.getTags(state.getBlock());
+
+        if (tags.contains(new ResourceLocation("minecraft:leaves"))) {
             for (int i = 0; i < CrookDrops.numberOfTimesToTestVanillaDrops + 1; i++) {
                 List<ItemStack> items = Block
                     .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimension().getType()),
