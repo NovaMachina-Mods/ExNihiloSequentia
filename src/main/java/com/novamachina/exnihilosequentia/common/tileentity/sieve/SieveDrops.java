@@ -136,7 +136,7 @@ public class SieveDrops {
             EnumMesh.STRING);
 
         // Misc Vanilla Drops
-        // Some Dye from sand
+        addDrop(Blocks.SAND.getRegistryName().toString(), Items.COCOA_BEANS, 0.03F, EnumMesh.STRING);
         addDrop(Blocks.SAND.getRegistryName().toString(), Items.PRISMARINE_SHARD, 0.02F,
             EnumMesh.DIAMOND);
 
@@ -147,7 +147,7 @@ public class SieveDrops {
         // Coal
         addDrop(Blocks.GRAVEL.getRegistryName().toString(), Items.COAL, 0.125F, EnumMesh.FLINT);
 
-        // Some dye from gravel
+        addDrop(Blocks.GRAVEL.getRegistryName().toString(), Items.LAPIS_LAZULI, 0.05F, EnumMesh.FLINT);
 
         // Diamond
         addDrop(Blocks.GRAVEL.getRegistryName().toString(), Items.DIAMOND, 0.008F,
@@ -179,7 +179,7 @@ public class SieveDrops {
         addDrop(Blocks.SOUL_SAND.getRegistryName().toString(), Items.GHAST_TEAR, 0.02F,
             EnumMesh.DIAMOND);
 
-        // Some Dye from dust
+        addDrop(ModBlocks.DUST.get().getRegistryName().toString(), Items.BONE_MEAL, 0.2F, EnumMesh.STRING);
 
         // Gunpowder
         addDrop(ModBlocks.DUST.get().getRegistryName().toString(), Items.GUNPOWDER, 0.07F,
