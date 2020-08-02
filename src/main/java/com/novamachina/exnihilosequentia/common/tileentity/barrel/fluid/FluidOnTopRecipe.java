@@ -1,25 +1,27 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
-public class FluidOnTopRecipe {
-    private String fluidInBarrel;
-    private String fluidOnTop;
-    private String result;
+import net.minecraft.util.ResourceLocation;
 
-    public FluidOnTopRecipe(String fluidInBarrel, String fluidOnTop, String result) {
+public class FluidOnTopRecipe {
+    private ResourceLocation fluidInBarrel;
+    private ResourceLocation fluidOnTop;
+    private ResourceLocation result;
+
+    public FluidOnTopRecipe(ResourceLocation fluidInBarrel, ResourceLocation fluidOnTop, ResourceLocation result) {
         this.fluidInBarrel = fluidInBarrel;
         this.fluidOnTop = fluidOnTop;
         this.result = result;
     }
 
-    public String getFluidInBarrel() {
+    public ResourceLocation getFluidInBarrel() {
         return fluidInBarrel;
     }
 
-    public String getFluidOnTop() {
+    public ResourceLocation getFluidOnTop() {
         return fluidOnTop;
     }
 
-    public String getResult() {
+    public ResourceLocation getResult() {
         return result;
     }
 }

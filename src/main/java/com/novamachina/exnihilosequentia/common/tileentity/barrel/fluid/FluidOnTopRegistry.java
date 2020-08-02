@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FluidOnTopRegistry {
-    private static Map<String, FluidOnTopRecipe> recipeMap = new HashMap<>();
+    private static Map<ResourceLocation, FluidOnTopRecipe> recipeMap = new HashMap<>();
 
     public static boolean isValidRecipe(Fluid fluidInTank, Fluid fluidOnTop) {
         boolean isValid = false;
-        String fluidInTankString = fluidInTank.getRegistryName().toString();
-        if(recipeMap.containsKey(fluidInTankString)) {
-            if(recipeMap.get(fluidInTankString).getFluidOnTop().equals(fluidOnTop.getRegistryName().toString())) {
+        ResourceLocation fluidInTankID = fluidInTank.getRegistryName();
+        if(recipeMap.containsKey(fluidInTankID)) {
+            if(recipeMap.get(fluidInTankID).getFluidOnTop().equals(fluidOnTop.getRegistryName())) {
                 isValid = true;
             }
         }
@@ -25,18 +25,16 @@ public class FluidOnTopRegistry {
     }
 
     public static Block getResult(Fluid fluidInTank, Fluid fluidOnTop) {
-        String resultString = recipeMap.get(fluidInTank.getRegistryName().toString()).getResult();
-        return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(resultString));
+        return ForgeRegistries.BLOCKS.getValue(recipeMap.get(fluidInTank.getRegistryName()).getResult());
     }
 
     public static void addRecipe(Fluid fluidInTank, Fluid fluidOnTop, Block result) {
-        String fluidInTankString = fluidInTank.getRegistryName().toString();
-        String fluidOnTopString = fluidOnTop.getRegistryName().toString();
-        String resultString = result.getRegistryName().toString();
-
-        recipeMap.put(fluidInTankString, new FluidOnTopRecipe(fluidInTankString, fluidOnTopString, resultString));
+        addRecipe(fluidInTank.getRegistryName(), fluidOnTop.getRegistryName(), result.getRegistryName());
     }
 
+    public static void addRecipe(ResourceLocation fluidInTank, ResourceLocation fluidOnTop, ResourceLocation result) {
+        recipeMap.put(fluidInTank, new FluidOnTopRecipe(fluidInTank, fluidOnTop, result));
+    }
 
     public static void initialize() {
         addRecipe(Fluids.LAVA, Fluids.WATER, Blocks.OBSIDIAN);
