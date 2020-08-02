@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    " sx",
+    "s  "
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:gems/diamond"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:hammer_diamond"
+  }
+}

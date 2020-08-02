@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xx",
+    " x",
+    " x"
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:crook_wood"
+  }
+}

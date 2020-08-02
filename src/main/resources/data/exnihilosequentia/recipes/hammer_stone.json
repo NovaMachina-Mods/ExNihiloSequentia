@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    " sx",
+    "s  "
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:cobblestone"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:hammer_stone"
+  }
+}

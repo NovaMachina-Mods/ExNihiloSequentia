@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "brb",
+    "gdg",
+    "bwb"
+  ],
+  "key": {
+    "b": {
+      "tag": "forge:gems/prismarine"
+    },
+    "r": {
+      "tag": "forge:dusts/redstone"
+    },
+    "g": {
+      "tag": "forge:dusts/glowstone"
+    },
+    "d": {
+      "item": "exnihilosequentia:doll_crafting"
+    },
+    "w": {
+      "tag": "minecraft:fishes"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:doll_guardian"
+  }
+}

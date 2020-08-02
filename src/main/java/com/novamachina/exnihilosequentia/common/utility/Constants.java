@@ -71,7 +71,7 @@ public class Constants {
         public static final String PEBBLE_DIORITE      = createPebbleName("diorite");
         public static final String PEBBLE_ANDESITE     = createPebbleName("andesite");
         public static final String WITCH_WATER_BUCKET  = "bucket_witchwater";
-        public static final String CRAFTING_DOLL = "doll";
+        public static final String CRAFTING_DOLL = "doll_crafting";
 
         private static String createHammername(String name) {
             return "hammer_" + name;

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "plp",
+    "s s"
+  ],
+  "key": {
+    "p": {
+      "tag": "minecraft:logs"
+    },
+    "l": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:sieve"
+  }
+}

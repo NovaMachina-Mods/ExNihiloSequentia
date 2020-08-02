@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "brb",
+    "gdg",
+    "bwb"
+  ],
+  "key": {
+    "b": {
+      "tag": "forge:dyes/black"
+    },
+    "r": {
+      "tag": "forge:dusts/redstone"
+    },
+    "g": {
+      "tag": "forge:dusts/glowstone"
+    },
+    "d": {
+      "item": "exnihilosequentia:doll_crafting"
+    },
+    "w": {
+      "tag": "forge:crops/nether_wart"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:doll_enderman"
+  }
+}

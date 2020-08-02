@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:mesh_string"
+  }
+}

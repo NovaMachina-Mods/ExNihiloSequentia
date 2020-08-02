@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "x x",
+    "xmx",
+    "x x"
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:gems/diamond"
+    },
+    "m": {
+      "item": "exnihilosequentia:mesh_iron"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:mesh_diamond"
+  }
+}
