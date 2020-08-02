@@ -1,36 +1,38 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
-import java.util.HashMap;
-import java.util.Map;
-import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class WoodCrucibleMeltableItems {
+import java.util.HashMap;
+import java.util.Map;
 
-    private static final Map<String, Meltable> meltableList = new HashMap<>();
+public class WoodCrucibleMeltableItems{
+
+    private static final Map<ResourceLocation, Meltable> meltableList = new HashMap<>();
 
     public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount,
-        Fluid fluid) {
-        insertIntoMap(entry.getRegistryName().toString(), new Meltable(amount, fluid));
+                                   Fluid fluid) {
+        addMeltable(entry.getRegistryName(), amount, fluid.getRegistryName());
     }
 
-    private static void insertIntoMap(String name, Meltable meltable) {
+    public static void addMeltable(ResourceLocation entry, int amount, ResourceLocation fluid) {
+        insertIntoMap(entry, new Meltable(amount, fluid));
+    }
+
+    private static void insertIntoMap(ResourceLocation name, Meltable meltable) {
         meltableList.put(name, meltable);
     }
 
     public static boolean isMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        String blockName = entry.getRegistryName().toString();
-        return meltableList.containsKey(blockName);
+        return meltableList.containsKey(entry.getRegistryName());
     }
 
     public static Meltable getMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        String blockName = entry.getRegistryName().toString();
-        return meltableList.getOrDefault(blockName, Meltable.DEFAULT);
+        return meltableList.getOrDefault(entry.getRegistryName(), Meltable.DEFAULT);
     }
 
     public static void initialize() {
