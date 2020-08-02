@@ -6,8 +6,10 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -28,10 +30,20 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(BarrelTile barrelTile) {
-        if(doll != null) {
+        if (doll != null) {
             currentProgress++;
-            if(currentProgress >= 200) {
-                if(doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
+            ((ServerWorld) barrelTile.getWorld())
+                .spawnParticle(ParticleTypes.LARGE_SMOKE,
+                    barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
+                    barrelTile.getPos().getY() + barrelTile.getWorld().rand.nextDouble(),
+                    barrelTile.getPos().getZ() + barrelTile.getWorld().rand.nextDouble(),
+                    5,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.05);
+            if (currentProgress >= 200) {
+                if (doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
                     barrelTile.getTank().setFluid(FluidStack.EMPTY);
                     barrelTile.setMode(Constants.BarrelModes.EMPTY);
                 }
@@ -61,13 +73,13 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void read(CompoundNBT nbt) {
-        if(nbt.contains("currentProgress")) {
+        if (nbt.contains("currentProgress")) {
             this.currentProgress = nbt.getInt("currentProgress");
         } else {
             this.currentProgress = 0;
         }
-        if(nbt.contains("dollType")) {
-            setDoll((DollItem)ModItems.dollMap.get(nbt.getString("dollType")).get());
+        if (nbt.contains("dollType")) {
+            setDoll((DollItem) ModItems.dollMap.get(nbt.getString("dollType")).get());
         } else {
             this.setDoll(null);
         }
