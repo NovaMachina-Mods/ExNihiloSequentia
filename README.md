@@ -59,6 +59,6 @@ The following will be included in this mod.
   - ~~Gold~~
   - ~~Diamond~~
   - ~~Bone~~
-- Add Recipes
-- Add Smelting
+- ~~Add Recipes~~
+- ~~Add Smelting~~
 - Add JSON Registries
