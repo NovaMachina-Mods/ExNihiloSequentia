@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "x x",
+    "x x",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:porcelain_clay"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:crucible_unfired"
+  }
+}
