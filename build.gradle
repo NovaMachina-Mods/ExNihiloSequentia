@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = 'Unreleased'
+version = new Date().format("yyyy-MM-dd-HH-mm-ss")
 group = 'com.novamachina.exnihilosequentia' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'exnihilosequentia'
 
