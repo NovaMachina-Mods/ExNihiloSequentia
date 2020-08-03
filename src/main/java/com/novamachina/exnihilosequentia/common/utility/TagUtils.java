@@ -7,6 +7,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,6 +45,24 @@ public class TagUtils {
         return tags;
     }
 
+    public static Collection<ResourceLocation> getTags(ResourceLocation id) {
+        Collection<ResourceLocation> tags = null;
+        if(ForgeRegistries.BLOCKS.containsKey(id)) {
+            Block block = ForgeRegistries.BLOCKS.getValue(id);
+            tags = getTags(block);
+        }
+
+        if(ForgeRegistries.ITEMS.containsKey(id)) {
+            Item item = ForgeRegistries.ITEMS.getValue(id);
+            if (tags != null) {
+                tags.addAll(getTags(item));
+            } else {
+                tags = getTags(item);
+            }
+        }
+        return tags;
+    }
+
     public static List<ResourceLocation> getTagsOwnedBy(ResourceLocation owningTag) {
         Tag<Block> blockTag = BlockTags.getCollection().get(owningTag);
         Tag<Item> itemTag = ItemTags.getCollection().get(owningTag);
@@ -67,7 +86,9 @@ public class TagUtils {
         }
         if(itemCollection != null) {
             for(Item item : itemCollection) {
-                idList.add(item.getRegistryName());
+                if(!idList.contains(item.getRegistryName())) {
+                    idList.add(item.getRegistryName());
+                }
             }
         }
         return idList;

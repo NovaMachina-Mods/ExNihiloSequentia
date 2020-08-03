@@ -1,6 +1,8 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
+import com.novamachina.exnihilosequentia.common.utility.LogUtil;
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -8,15 +10,16 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FiredCrucibleMeltableItems {
 
-    private static final Map<ResourceLocation, Meltable> meltableList = new HashMap<>();
+    private static final Map<ResourceLocation, Meltable> meltableMap = new HashMap<>();
 
-    public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount,
-        Fluid fluid) {
+    public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount, Fluid fluid) {
         addMeltable(entry.getRegistryName(), amount, fluid.getRegistryName());
     }
 
@@ -25,15 +28,15 @@ public class FiredCrucibleMeltableItems {
     }
 
     private static void insertIntoMap(ResourceLocation name, Meltable meltable) {
-        meltableList.put(name, meltable);
+        meltableMap.put(name, meltable);
     }
 
     public static boolean isMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        return meltableList.containsKey(entry.getRegistryName());
+        return meltableMap.containsKey(entry.getRegistryName());
     }
 
     public static Meltable getMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        return meltableList.getOrDefault(entry.getRegistryName(), Meltable.DEFAULT);
+        return meltableMap.getOrDefault(entry.getRegistryName(), Meltable.DEFAULT);
     }
 
     public static void initialize() {

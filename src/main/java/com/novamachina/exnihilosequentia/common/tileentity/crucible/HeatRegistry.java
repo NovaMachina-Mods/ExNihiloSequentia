@@ -19,15 +19,6 @@ public class HeatRegistry {
     private static final Map<ResourceLocation, Integer> heatMap     = new HashMap<>();
 
     public static void addHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry, int amount) {
-        // Does a tag who owns me already exist in map?
-        Collection<ResourceLocation> tags = TagUtils.getTags((Block) entry);
-        for(ResourceLocation tag : tags) {
-            if(heatMap.containsKey(tag)) {
-                LogUtil.info(String.format("Tag: %s already registered. Skipping item %s ...", tag.toString(), entry.getRegistryName()));
-                return;
-            }
-        }
-
         addHeatSource(entry.getRegistryName(), amount);
     }
 
@@ -42,12 +33,14 @@ public class HeatRegistry {
         }
 
         // Does a tag who owns me already exist in the map?
-        Block block = ForgeRegistries.BLOCKS.getValue(entry);
-        Collection<ResourceLocation> tags = TagUtils.getTags(block);
-        for(ResourceLocation tag : tags) {
-            if(heatMap.containsKey(tag)) {
-                LogUtil.info(String.format("Tag: %s already registered. Skipping item %s ...", tag.toString(), entry));
-                return;
+        Collection<ResourceLocation> tags = TagUtils.getTags(entry);
+        if(tags != null) {
+            for (ResourceLocation tag : tags) {
+                if (heatMap.containsKey(tag)) {
+                    LogUtil
+                        .info(String.format("Tag: %s already registered. Skipping item %s ...", tag.toString(), entry));
+                    return;
+                }
             }
         }
 

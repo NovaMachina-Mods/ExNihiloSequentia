@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
+import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
@@ -54,13 +55,19 @@ public class FluidBlockTransformRegistry {
     }
 
     public static void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {
-        List<FluidBlockTransformRecipe> recipeList = recipeMap.get(fluid);
+        List<FluidBlockTransformRecipe> list = recipeMap.get(fluid);
 
-        if(recipeList == null) {
-            recipeList = new ArrayList<>();
-            recipeMap.put(fluid, recipeList);
+        if(list == null) {
+            list = new ArrayList<>();
+            recipeMap.put(fluid, list);
         }
-        recipeList.add(new FluidBlockTransformRecipe(fluid, input, result));
+        for(FluidBlockTransformRecipe recipe : list) {
+            if(recipe.getInput().equals(input)) {
+                LogUtil.warn(String.format("Duplicate recipe: %s(Fluid) + %s(Input). Replacing result with most recent: %s", fluid, input, result));
+                list.remove(recipe);
+            }
+        }
+        list.add(new FluidBlockTransformRecipe(fluid, input, result));
     }
 
     public static void addRecipe(Fluid fluid, IItemProvider input, Block result) {

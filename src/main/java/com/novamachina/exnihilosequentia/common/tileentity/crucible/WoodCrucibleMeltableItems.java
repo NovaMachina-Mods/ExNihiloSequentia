@@ -14,8 +14,7 @@ public class WoodCrucibleMeltableItems{
 
     private static final Map<ResourceLocation, Meltable> meltableList = new HashMap<>();
 
-    public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount,
-                                   Fluid fluid) {
+    public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount, Fluid fluid) {
         addMeltable(entry.getRegistryName(), amount, fluid.getRegistryName());
     }
 

@@ -34,8 +34,11 @@ public class FluidTransformRegistry {
     }
 
     public static void addRecipe(ResourceLocation fluidInTank, ResourceLocation blockBelow, ResourceLocation result) {
+        insertIntoMap(fluidInTank, new FluidTransformRecipe(fluidInTank, blockBelow, result));
+    }
 
-        recipeMap.put(fluidInTank, new FluidTransformRecipe(fluidInTank, blockBelow, result));
+    private static void insertIntoMap(ResourceLocation fluidInTank, FluidTransformRecipe recipe) {
+        recipeMap.put(fluidInTank, recipe);
     }
 
     public static void initialize() {

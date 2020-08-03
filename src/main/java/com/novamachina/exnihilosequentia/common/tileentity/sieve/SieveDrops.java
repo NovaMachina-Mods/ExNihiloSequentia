@@ -233,7 +233,7 @@ public class SieveDrops {
 
         getLeavesSaplings().forEach((input, drop) -> {
             LeavesBlock leavesBlock = (LeavesBlock) input;
-            if (leavesBlock.getRegistryName().getPath().equals("jungle_leaves")) {
+            if (leavesBlock.getRegistryName().equals(new ResourceLocation("jungle_leaves"))) {
                 addMultiMeshDrop(leavesBlock, drop, 0.025F, 0.05F, 0.075F, 0.1F);
             } else {
                 addMultiMeshDrop(leavesBlock, drop, 0.05F, 0.10F, 0.15F, 0.2F);
