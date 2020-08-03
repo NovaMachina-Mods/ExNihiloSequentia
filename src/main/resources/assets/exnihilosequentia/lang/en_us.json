@@ -72,5 +72,9 @@
   "item.exnihilosequentia.mesh_string": "String Mesh",
   "item.exnihilosequentia.mesh_flint": "Flint Mesh",
   "item.exnihilosequentia.mesh_iron": "Iron Mesh",
-  "item.exnihilosequentia.mesh_diamond": "Diamond Mesh"
+  "item.exnihilosequentia.mesh_diamond": "Diamond Mesh",
+
+  "message.new_mod": "Thanks for using Ex Nihilo: Sequentia! This mod is newly released and is probably missing a lot of stuff and broken somewhere.",
+  "message.issues": "To report any issues or make a suggestion, go to:",
+  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues"
 }
