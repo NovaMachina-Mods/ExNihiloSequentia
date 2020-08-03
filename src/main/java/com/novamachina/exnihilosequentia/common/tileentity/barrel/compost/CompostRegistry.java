@@ -37,9 +37,11 @@ public class CompostRegistry {
 
     // TODO: add remaining compost values
     public static void initialize() {
-        addSolid(new ResourceLocation("minecraft:acacia_leaves"), 250);
-        addSolid(Blocks.ACACIA_LEAVES, 250);
-        addSolid(new ResourceLocation("minecraft:leaves"), 250);
+        addSolid(new ResourceLocation("minecraft:saplings"), 125);
+        addSolid(new ResourceLocation("minecraft:leaves"), 125);
+        addSolid(new ResourceLocation("minecraft:flowers"), 100);
+        addSolid(new ResourceLocation("minecraft:fishes"), 150);
+        addSolid(new ResourceLocation("forge:allMeatCooked"), 200);
     }
 
     public static void addSolid(IItemProvider item, int solidAmount) {
