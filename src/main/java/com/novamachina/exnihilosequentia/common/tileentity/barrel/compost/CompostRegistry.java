@@ -44,7 +44,7 @@ public class CompostRegistry {
         addSolid(new ResourceLocation("minecraft:leaves"), 125);
         addSolid(new ResourceLocation("minecraft:flowers"), 100);
         addSolid(new ResourceLocation("minecraft:fishes"), 150);
-        addSolid(new ResourceLocation("forge:allMeatCooked"), 200);
+        addSolid(new ResourceLocation("forge:meat_cooked"), 200);
         addSolid(Items.ROTTEN_FLESH, 100);
         addSolid(Items.SPIDER_EYE, 80);
         addSolid(new ResourceLocation("forge:seeds"), 80);
@@ -53,7 +53,7 @@ public class CompostRegistry {
         addSolid(Blocks.BROWN_MUSHROOM_BLOCK, 100);
         addSolid(Blocks.RED_MUSHROOM_BLOCK, 100);
         addSolid(Items.PUMPKIN_PIE, 160);
-        addSolid(new ResourceLocation("forge:allMeatUncooked"), 200);
+        addSolid(new ResourceLocation("forge:meat_uncooked"), 200);
         addSolid(ModItems.resourceMap.get(EnumResource.SILKWORM.getResourceName()).get(), 40);
         addSolid(ModItems.COOKED_SILKWORM.get(), 40);
         addSolid(Items.APPLE, 100);
