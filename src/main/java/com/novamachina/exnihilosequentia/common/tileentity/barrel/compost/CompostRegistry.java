@@ -1,94 +1,80 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.compost;
 
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CompostRegistry {
-    public static Map<String, Integer> solidsMap = new HashMap<>();
+    public static Map<ResourceLocation, Integer> solidsMap = new HashMap<>();
 
     public static boolean containsSolid(IItemProvider item) {
-        Collection<ResourceLocation> tags = getTags(item);
+        Collection<ResourceLocation> tags = TagUtils.getTags(item);
         for(ResourceLocation tag : tags) {
-            if(solidsMap.containsKey(tag.toString())) {
+            if(solidsMap.containsKey(tag)) {
                 return true;
             }
         }
-        return solidsMap.containsKey(item.asItem().getRegistryName().toString());
+        return solidsMap.containsKey(item.asItem().getRegistryName());
     }
 
     public static int getSolidAmount(IItemProvider item) {
-        Collection<ResourceLocation> tags = getTags(item);
+        Collection<ResourceLocation> tags = TagUtils.getTags(item);
         for(ResourceLocation tag : tags) {
-            if(solidsMap.containsKey(tag.toString())) {
-                return solidsMap.get(tag.toString());
+            if(solidsMap.containsKey(tag)) {
+                return solidsMap.get(tag);
             }
         }
 
-        return solidsMap.getOrDefault(item.asItem().getRegistryName().toString(), 0);
+        return solidsMap.getOrDefault(item.asItem().getRegistryName(), 0);
     }
 
+    // TODO: add remaining compost values
     public static void initialize() {
-        addSolid("minecraft:leaves", 250);
+        addSolid(new ResourceLocation("minecraft:acacia_leaves"), 250);
+        addSolid(Blocks.ACACIA_LEAVES, 250);
+        addSolid(new ResourceLocation("minecraft:leaves"), 250);
     }
 
-    private static Collection<ResourceLocation> getTags(Item item) {
-        Collection<ResourceLocation> c = ItemTags.getCollection().getOwningTags(item);
-        return c;
+    public static void addSolid(IItemProvider item, int solidAmount) {
+        addSolid(item.asItem().getRegistryName(), solidAmount);
     }
 
-    private static Collection<ResourceLocation> getTags(Block block) {
-        Collection<ResourceLocation> c = BlockTags.getCollection().getOwningTags(block);
-        return c;
-    }
+    public static void addSolid(ResourceLocation tag, int solidAmount) {
+        List<ResourceLocation> idList = TagUtils.getTagsOwnedBy(tag);
 
-    private static Collection<ResourceLocation> getTags(IItemProvider item) {
-        Collection<ResourceLocation> c = null;
-
-        try{
-            c = getTags((Item)item);
-        } catch (ClassCastException ignored) {
-            LogUtil.warn("Not an Item");
-        }
-
-        try {
-            if(c != null) {
-                c.addAll(getTags((Block)item));
-            } else {
-                c = getTags((Block) item);
-            }
-        }catch (ClassCastException ignored) {
-            LogUtil.warn("Not a Block");
-        }
-
-        return c;
-    }
-
-    private static void addSolid(IItemProvider item, int solidAmount) {
-        Collection<ResourceLocation> c = getTags(item);
-
-        for(ResourceLocation r : c) {
-            if(solidsMap.containsKey(r.toString())) {
-                LogUtil.info(String.format("Tag: %s already registered. Skipping...", r.toString()));
-                return;
+        for(ResourceLocation id : idList) {
+            if(solidsMap.containsKey(id)) {
+                LogUtil.info(String.format("ID: %s falls under Tag: %s. Removing %s ...", id.toString(), tag.toString(), id.toString()));
+                solidsMap.remove(id);
             }
         }
-        solidsMap.put(item.asItem().getRegistryName().toString(), solidAmount);
-    }
 
-    private static void addSolid(String tag, int solidAmount) {
+        // Does a tag who owns me already exist in the map?
+        Collection<ResourceLocation> tags = TagUtils.getTags(tag);
+        if(tags != null) {
+            for(ResourceLocation id : tags) {
+                if(solidsMap.containsKey(id)) {
+                    LogUtil.info(String.format("Tag: %s already registered. Skipping item %s ...", id.toString(), tag));
+                    return;
+                }
+            }
+        }
+
         if(solidsMap.containsKey(tag)) {
             LogUtil.info(String.format("Tag: %s already registered. Skipping...", tag));
             return;
         }
-        solidsMap.put(tag, solidAmount);
+        insertIntoMap(tag, solidAmount);
+    }
+
+    private static void insertIntoMap(ResourceLocation id, int amount) {
+        solidsMap.put(id, amount);
     }
 }

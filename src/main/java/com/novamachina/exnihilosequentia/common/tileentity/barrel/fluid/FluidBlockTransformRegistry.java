@@ -1,11 +1,10 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
-import com.novamachina.exnihilosequentia.common.block.BaseFallingBlock;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
+import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -20,20 +19,17 @@ import java.util.List;
 import java.util.Map;
 
 public class FluidBlockTransformRegistry {
-    private static Map<String, List<FluidBlockTransformRecipe>> recipeMap = new HashMap<>();
+    private static final Map<ResourceLocation, List<FluidBlockTransformRecipe>> recipeMap = new HashMap<>();
 
     public static boolean isValidRecipe(Fluid fluid, Item input) {
-        String fluidString = fluid.getRegistryName().toString();
-        String itemString = input.getRegistryName().toString();
-
-        List<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluidString);
+        List<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluid.getRegistryName());
 
         if(possibleRecipes == null) {
             return false;
         }
 
         for(FluidBlockTransformRecipe recipe : possibleRecipes) {
-            if(recipe.getInput().equals(itemString)) {
+            if(recipe.getInput().equals(input.getRegistryName())) {
                 return true;
             }
         }
@@ -41,14 +37,11 @@ public class FluidBlockTransformRegistry {
     }
 
     public static IItemProvider getResult(Fluid fluid, Item input) {
-        String fluidString = fluid.getRegistryName().toString();
-        String itemString = input.getRegistryName().toString();
-
-        List<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluidString);
+        List<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluid.getRegistryName());
 
         for(FluidBlockTransformRecipe recipe : possibleRecipes) {
-            if(recipe.getInput().equals(itemString)) {
-                return ForgeRegistries.ITEMS.getValue(new ResourceLocation(recipe.getResult()));
+            if(recipe.getInput().equals(input.getRegistryName())) {
+                return ForgeRegistries.ITEMS.getValue(recipe.getResult());
             }
         }
         return null;
@@ -61,17 +54,23 @@ public class FluidBlockTransformRegistry {
         addRecipe(ModFluids.WITCH_WATER_STILL.get(), Blocks.SAND, Blocks.SOUL_SAND);
     }
 
-    private static void addRecipe(Fluid fluid, IItemProvider input, Block result) {
-        String fluidString = fluid.getRegistryName().toString();
-        String itemString = input.asItem().getRegistryName().toString();
-        String resultString = result.getRegistryName().toString();
+    public static void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {
+        List<FluidBlockTransformRecipe> list = recipeMap.get(fluid);
 
-        List<FluidBlockTransformRecipe> recipeList = recipeMap.get(fluidString);
-
-        if(recipeList == null) {
-            recipeList = new ArrayList<>();
-            recipeMap.put(fluidString, recipeList);
+        if(list == null) {
+            list = new ArrayList<>();
+            recipeMap.put(fluid, list);
         }
-        recipeList.add(new FluidBlockTransformRecipe(fluidString, itemString, resultString));
+        for(FluidBlockTransformRecipe recipe : list) {
+            if(recipe.getInput().equals(input)) {
+                LogUtil.warn(String.format("Duplicate recipe: %s(Fluid) + %s(Input). Replacing result with most recent: %s", fluid, input, result));
+                list.remove(recipe);
+            }
+        }
+        list.add(new FluidBlockTransformRecipe(fluid, input, result));
+    }
+
+    public static void addRecipe(Fluid fluid, IItemProvider input, Block result) {
+        addRecipe(fluid.getRegistryName(), input.asItem().getRegistryName(), result.getRegistryName());
     }
 }

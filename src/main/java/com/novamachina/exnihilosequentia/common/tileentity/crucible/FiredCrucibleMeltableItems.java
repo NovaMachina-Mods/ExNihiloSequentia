@@ -1,36 +1,42 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
-import java.util.HashMap;
-import java.util.Map;
+import com.novamachina.exnihilosequentia.common.utility.LogUtil;
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FiredCrucibleMeltableItems {
 
-    private static final Map<String, Meltable> meltableList = new HashMap<>();
+    private static final Map<ResourceLocation, Meltable> meltableMap = new HashMap<>();
 
-    public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount,
-        Fluid fluid) {
-        insertIntoMap(entry.getRegistryName().toString(), new Meltable(amount, fluid));
+    public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount, Fluid fluid) {
+        addMeltable(entry.getRegistryName(), amount, fluid.getRegistryName());
     }
 
-    private static void insertIntoMap(String name, Meltable meltable) {
-        meltableList.put(name, meltable);
+    public static void addMeltable(ResourceLocation entry, int amount, ResourceLocation fluid) {
+        insertIntoMap(entry, new Meltable(amount, fluid));
+    }
+
+    private static void insertIntoMap(ResourceLocation name, Meltable meltable) {
+        meltableMap.put(name, meltable);
     }
 
     public static boolean isMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        String blockName = entry.getRegistryName().toString();
-        return meltableList.containsKey(blockName);
+        return meltableMap.containsKey(entry.getRegistryName());
     }
 
     public static Meltable getMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        String blockName = entry.getRegistryName().toString();
-        return meltableList.getOrDefault(blockName, Meltable.DEFAULT);
+        return meltableMap.getOrDefault(entry.getRegistryName(), Meltable.DEFAULT);
     }
 
     public static void initialize() {

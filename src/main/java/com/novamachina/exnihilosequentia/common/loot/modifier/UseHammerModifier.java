@@ -33,7 +33,7 @@ public class UseHammerModifier extends LootModifier {
             if (tool.getItem() instanceof HammerBaseItem) {
                 List<ItemStack> newLoot     = new ArrayList<>();
                 Block           returnBlock = HammerDrops
-                    .getResult(blockState.getBlock().getRegistryName().toString());
+                    .getResult(blockState.getBlock().getRegistryName());
                 newLoot.add(new ItemStack(returnBlock));
                 return newLoot;
             }

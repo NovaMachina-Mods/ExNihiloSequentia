@@ -1,32 +1,64 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.novamachina.exnihilosequentia.common.utility.LogUtil;
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HeatRegistry {
 
-    private static final Map<String, Integer> heatMap     = new HashMap<>();
+    private static final Map<ResourceLocation, Integer> heatMap     = new HashMap<>();
 
-    public static void addHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry,
-        int amount) {
-        insertIntoMap(entry.getRegistryName().toString(), amount);
+    public static void addHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry, int amount) {
+        addHeatSource(entry.getRegistryName(), amount);
     }
 
-    private static void insertIntoMap(String name, int amount) {
+    public static void addHeatSource(ResourceLocation entry, int amount) {
+        // Who do I own?
+        List<ResourceLocation> idList = TagUtils.getTagsOwnedBy(entry);
+        for(ResourceLocation id : idList) {
+            if(heatMap.containsKey(id)) {
+                LogUtil.info(String.format("ID: %s falls under Tag: %s. Removing %s ...", id.toString(), entry.toString(), id.toString()));
+                heatMap.remove(id);
+            }
+        }
+
+        // Does a tag who owns me already exist in the map?
+        Collection<ResourceLocation> tags = TagUtils.getTags(entry);
+        if(tags != null) {
+            for (ResourceLocation tag : tags) {
+                if (heatMap.containsKey(tag)) {
+                    LogUtil
+                        .info(String.format("Tag: %s already registered. Skipping item %s ...", tag.toString(), entry));
+                    return;
+                }
+            }
+        }
+
+        // Am I in map?
+        if(heatMap.containsKey(entry)) {
+            LogUtil.info(String.format("Tag: %s already registered. Skipping...", entry));
+            return;
+        }
+
+        insertIntoMap(entry, amount);
+    }
+
+    private static void insertIntoMap(ResourceLocation name, int amount) {
         heatMap.put(name, amount);
     }
 
-    public static boolean isHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        String blockName = entry.getRegistryName().toString();
-        return heatMap.containsKey(blockName);
-    }
-
     public static int getHeatAmount(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        String blockName = entry.getRegistryName().toString();
-        return heatMap.getOrDefault(blockName, 0);
+        return heatMap.getOrDefault(entry.getRegistryName(), 0);
     }
 
     public static void initialized() {
