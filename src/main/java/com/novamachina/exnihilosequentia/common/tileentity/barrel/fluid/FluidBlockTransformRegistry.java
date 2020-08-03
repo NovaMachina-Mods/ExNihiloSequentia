@@ -52,6 +52,8 @@ public class FluidBlockTransformRegistry {
         addRecipe(Fluids.LAVA, Items.REDSTONE, Blocks.NETHERRACK);
         addRecipe(Fluids.LAVA, Items.GLOWSTONE_DUST, Blocks.END_STONE);
         addRecipe(ModFluids.WITCH_WATER_STILL.get(), Blocks.SAND, Blocks.SOUL_SAND);
+        addRecipe(ModFluids.WITCH_WATER_STILL.get(), Blocks.RED_MUSHROOM, Blocks.SLIME_BLOCK);
+        addRecipe(ModFluids.WITCH_WATER_STILL.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
     }
 
     public static void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {
