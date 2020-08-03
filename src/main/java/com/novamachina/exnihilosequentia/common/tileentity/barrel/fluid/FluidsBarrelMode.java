@@ -144,4 +144,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     public CompoundNBT write() {
         return new CompoundNBT();
     }
+
+    @Override
+    protected void spawnParticle(BarrelTile barrelTile) {
+
+    }
 }

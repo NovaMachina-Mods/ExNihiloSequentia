@@ -32,16 +32,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     public void tick(BarrelTile barrelTile) {
         if (doll != null) {
             currentProgress++;
-            ((ServerWorld) barrelTile.getWorld())
-                .spawnParticle(ParticleTypes.LARGE_SMOKE,
-                    barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
-                    barrelTile.getPos().getY() + barrelTile.getWorld().rand.nextDouble(),
-                    barrelTile.getPos().getZ() + barrelTile.getWorld().rand.nextDouble(),
-                    5,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.05);
+            spawnParticle(barrelTile);
             if (currentProgress >= 200) {
                 if (doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
                     barrelTile.getTank().setFluid(FluidStack.EMPTY);
@@ -91,5 +82,19 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
         nbt.putInt("currentProgress", currentProgress);
         nbt.putString("dollType", doll.getDollType());
         return nbt;
+    }
+
+    @Override
+    protected void spawnParticle(BarrelTile barrelTile) {
+        ((ServerWorld) barrelTile.getWorld())
+            .spawnParticle(ParticleTypes.LARGE_SMOKE,
+                barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
+                barrelTile.getPos().getY() + barrelTile.getWorld().rand.nextDouble(),
+                barrelTile.getPos().getZ() + barrelTile.getWorld().rand.nextDouble(),
+                5,
+                0.0,
+                0.0,
+                0.0,
+                0.05);
     }
 }

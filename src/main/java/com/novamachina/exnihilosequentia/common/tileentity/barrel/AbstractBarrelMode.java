@@ -32,4 +32,6 @@ public abstract class AbstractBarrelMode {
     public abstract void read(CompoundNBT nbt);
 
     public abstract CompoundNBT write();
+
+    protected abstract void spawnParticle(BarrelTile barrelTile);
 }

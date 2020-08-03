@@ -7,8 +7,10 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -27,7 +29,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
         if (FluidTransformRegistry.isValidRecipe(barrelTile.getTank().getFluid().getFluid(), barrelTile.getWorld()
             .getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock())) {
             currentProgress++;
-
+            spawnParticle(barrelTile);
             if(currentProgress >= 200) {
                 currentProgress = 0;
                 barrelTile.getTank().setFluid(new FluidStack(ModFluids.WITCH_WATER_STILL.get(), FluidAttributes.BUCKET_VOLUME));
@@ -66,5 +68,19 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("currentProgress", currentProgress);
         return nbt;
+    }
+
+    @Override
+    protected void spawnParticle(BarrelTile barrelTile) {
+        ((ServerWorld) barrelTile.getWorld())
+            .spawnParticle(ParticleTypes.EFFECT,
+                barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
+                barrelTile.getPos().getY() + barrelTile.getWorld().rand.nextDouble(),
+                barrelTile.getPos().getZ() + barrelTile.getWorld().rand.nextDouble(),
+                1,
+                0.0,
+                0.0,
+                0.0,
+                0.05);
     }
 }

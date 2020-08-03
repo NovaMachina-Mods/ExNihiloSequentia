@@ -52,4 +52,9 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     public CompoundNBT write() {
         return new CompoundNBT();
     }
+
+    @Override
+    protected void spawnParticle(BarrelTile barrelTile) {
+
+    }
 }

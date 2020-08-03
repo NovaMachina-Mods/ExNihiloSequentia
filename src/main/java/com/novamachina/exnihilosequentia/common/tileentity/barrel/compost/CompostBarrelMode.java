@@ -7,8 +7,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,6 +27,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     public void tick(BarrelTile barrelTile) {
         if (barrelTile.getSolidAmount() >= BarrelTile.MAX_SOLID_AMOUNT && barrelTile.getInventory().getStackInSlot(0).isEmpty()) {
             currentProgress++;
+            spawnParticle(barrelTile);
             if (currentProgress >= 200) {
                 currentProgress = 0;
                 barrelTile.getInventory().setStackInSlot(0, new ItemStack(ForgeRegistries.BLOCKS.getValue(Blocks.DIRT.getRegistryName())));
@@ -71,5 +74,19 @@ public class CompostBarrelMode extends AbstractBarrelMode {
         CompoundNBT modeInfo = new CompoundNBT();
         modeInfo.putInt("currentProgress", currentProgress);
         return modeInfo;
+    }
+
+    @Override
+    protected void spawnParticle(BarrelTile barrelTile) {
+        ((ServerWorld) barrelTile.getWorld())
+            .spawnParticle(ParticleTypes.EFFECT,
+                barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
+                barrelTile.getPos().getY() + barrelTile.getWorld().rand.nextDouble(),
+                barrelTile.getPos().getZ() + barrelTile.getWorld().rand.nextDouble(),
+                1,
+                0.0,
+                0.0,
+                0.0,
+                0.05);
     }
 }
