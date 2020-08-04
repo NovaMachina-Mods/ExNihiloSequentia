@@ -32,7 +32,6 @@ public class ExNihiloSequentia {
 
     public ExNihiloSequentia() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
-//        Path p = FMLPaths.getOrCreateGameRelativePath(FMLPaths.CONFIGDIR.get().resolve("Ex Nihilo: Sequentia Json folder"), "exnihilosequentia");
 
         ModInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
 

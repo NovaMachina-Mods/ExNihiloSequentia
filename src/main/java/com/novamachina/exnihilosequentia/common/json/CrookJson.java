@@ -4,9 +4,9 @@ import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDropEntry;
 
 public class CrookJson {
     private final String result;
-    private final double rarity;
+    private final float rarity;
 
-    public CrookJson(String result, double rarity) {
+    public CrookJson(String result, float rarity) {
         this.result = result;
         this.rarity = rarity;
     }
@@ -20,7 +20,7 @@ public class CrookJson {
         return result;
     }
 
-    public double getRarity() {
+    public float getRarity() {
         return rarity;
     }
 }

@@ -15,6 +15,7 @@ import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibl
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.HeatRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleMeltableItems;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveDrops;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.Constants.ModInfo;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -26,7 +27,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ObjectHolder;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Mod.EventBusSubscriber(modid = Constants.ModInfo.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModInitialization {
@@ -60,6 +70,10 @@ public class ModInitialization {
     public static void setupTagBasedRegistries(FMLServerStartingEvent event) {
         LogUtil.info("Initialize Tag Based Mod Registries");
 
+        if(Config.USE_JSON_REGISTRIES.get()) {
+            generateJsonFiles();
+        }
+
         CrookDrops.initialize();
         HammerDrops.initialize();
         SieveDrops.initialize();
@@ -70,20 +84,55 @@ public class ModInitialization {
         FluidOnTopRegistry.initialize();
         FluidTransformRegistry.initialize();
         FluidBlockTransformRegistry.initialize();
+    }
 
+    private static void generateJsonFiles() {
         GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+        Gson gson = builder.setPrettyPrinting().create();
 
-        BarrelRegistriesJson barrelRegistriesJson = new BarrelRegistriesJson(FluidOnTopRegistry
-            .toJSONReady(), FluidTransformRegistry.toJSONReady(), FluidBlockTransformRegistry
-            .toJSONReady(), CompostRegistry.toJSONReady());
+        File file = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE).toFile();
+        if(!Files.exists(file.toPath())) {
+            try (Writer writer = new FileWriter(file)){
+                BarrelRegistriesJson barrelRegistriesJson = new BarrelRegistriesJson(FluidOnTopRegistry
+                    .toJSONReady(), FluidTransformRegistry.toJSONReady(), FluidBlockTransformRegistry
+                    .toJSONReady(), CompostRegistry.toJSONReady());
+                writer.write(gson.toJson(barrelRegistriesJson));
+                LogUtil.info("Created Barrel Registries JSON");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-        CrucibleRegistriesJson crucibleRegistriesJson = new CrucibleRegistriesJson(FiredCrucibleMeltableItems
-            .toJSONReady(), WoodCrucibleMeltableItems.toJSONReady(), HeatRegistry.toJSONReady());
+        file = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE).toFile();
+        if(!Files.exists(file.toPath())) {
+            try (Writer writer = new FileWriter(file)){
+                CrucibleRegistriesJson crucibleRegistriesJson = new CrucibleRegistriesJson(FiredCrucibleMeltableItems
+                    .toJSONReady(), WoodCrucibleMeltableItems.toJSONReady(), HeatRegistry.toJSONReady());
+                writer.write(gson.toJson(crucibleRegistriesJson));
+                LogUtil.info("Created Barrel Registries JSON");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-        LogUtil.info(gson.toJson(barrelRegistriesJson));
-        LogUtil.info(gson.toJson(crucibleRegistriesJson));
+        file = Constants.Json.baseJsonPath.resolve(Constants.Json.SIEVE_FILE).toFile();
+        if(!Files.exists(file.toPath())) {
+            try (Writer writer = new FileWriter(file)){
+                writer.write(gson.toJson(SieveDrops.toJSONReady()));
+                LogUtil.info("Created Sieve Registry JSON");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-        LogUtil.info(gson.toJson(SieveDrops.toJSONReady()));
+        file = Constants.Json.baseJsonPath.resolve(Constants.Json.CROOK_FILE).toFile();
+        if(!Files.exists(file.toPath())) {
+            try (Writer writer = new FileWriter(file)){
+                writer.write(gson.toJson(CrookDrops.toJSONReady()));
+                LogUtil.info("Created Crook Registry JSON");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
