@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Items;

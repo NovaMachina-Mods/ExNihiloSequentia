@@ -1,13 +1,11 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import com.google.gson.Gson;
+import com.novamachina.exnihilosequentia.common.json.HeatJson;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.util.ArrayList;

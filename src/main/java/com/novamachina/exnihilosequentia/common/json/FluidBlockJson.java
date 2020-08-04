@@ -1,18 +1,20 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
+package com.novamachina.exnihilosequentia.common.json;
 
-public class FluidBlockJSON {
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidBlockTransformRecipe;
+
+public class FluidBlockJson {
     private final String fluid;
     private final String input;
     private final String result;
 
 
-    public FluidBlockJSON(String fluid, String input, String result) {
+    public FluidBlockJson(String fluid, String input, String result) {
         this.fluid = fluid;
         this.input = input;
         this.result = result;
     }
 
-    public FluidBlockJSON(FluidBlockTransformRecipe recipe) {
+    public FluidBlockJson(FluidBlockTransformRecipe recipe) {
         this.fluid = recipe.getFluid().toString();
         this.input = recipe.getInput().toString();
         this.result = recipe.getResult().toString();

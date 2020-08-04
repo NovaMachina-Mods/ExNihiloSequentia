@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
+import com.novamachina.exnihilosequentia.common.json.FluidOnTopJson;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -69,12 +70,12 @@ public class FluidOnTopRegistry {
         addRecipe(Fluids.WATER, Fluids.LAVA, Blocks.COBBLESTONE);
     }
 
-    public static List<FluidOnTopJSON> toJSONReady() {
-        List<FluidOnTopJSON> gsonList = new ArrayList<>();
+    public static List<FluidOnTopJson> toJSONReady() {
+        List<FluidOnTopJson> gsonList = new ArrayList<>();
 
         for (List<FluidOnTopRecipe> recipeList : recipeMap.values()) {
             for (FluidOnTopRecipe recipe : recipeList) {
-                gsonList.add(new FluidOnTopJSON(recipe));
+                gsonList.add(new FluidOnTopJson(recipe));
             }
         }
 

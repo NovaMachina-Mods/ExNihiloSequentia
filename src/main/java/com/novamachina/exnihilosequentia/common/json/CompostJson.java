@@ -1,10 +1,10 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel.compost;
+package com.novamachina.exnihilosequentia.common.json;
 
-public class CompostJSON {
+public class CompostJson {
     private final String entry;
     private final int amount;
 
-    public CompostJSON(String entry, int amount) {
+    public CompostJson(String entry, int amount) {
         this.entry = entry;
         this.amount = amount;
     }

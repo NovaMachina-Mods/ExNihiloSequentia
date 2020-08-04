@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDrops;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
+import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelModeRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.compost.CompostRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidBlockTransformRegistry;
@@ -72,11 +74,11 @@ public class ModInitialization {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
 
-        BarrelRegistriesJSON barrelRegistriesJson = new BarrelRegistriesJSON(FluidOnTopRegistry
+        BarrelRegistriesJson barrelRegistriesJson = new BarrelRegistriesJson(FluidOnTopRegistry
             .toJSONReady(), FluidTransformRegistry.toJSONReady(), FluidBlockTransformRegistry
             .toJSONReady(), CompostRegistry.toJSONReady());
 
-        CrucibleRegistriesJSON crucibleRegistriesJson = new CrucibleRegistriesJSON(FiredCrucibleMeltableItems
+        CrucibleRegistriesJson crucibleRegistriesJson = new CrucibleRegistriesJson(FiredCrucibleMeltableItems
             .toJSONReady(), WoodCrucibleMeltableItems.toJSONReady(), HeatRegistry.toJSONReady());
 
         LogUtil.info(gson.toJson(barrelRegistriesJson));

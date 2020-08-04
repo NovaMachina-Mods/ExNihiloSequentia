@@ -1,19 +1,20 @@
-package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
+package com.novamachina.exnihilosequentia.common.json;
 
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnTopRecipe;
 import net.minecraft.util.ResourceLocation;
 
-public class FluidOnTopJSON {
+public class FluidOnTopJson {
     private final String fluidInBarrel;
     private final String fluidOnTop;
     private final String result;
 
-    public FluidOnTopJSON(String fluidInBarrel, String fluidOnTop, String result) {
+    public FluidOnTopJson(String fluidInBarrel, String fluidOnTop, String result) {
         this.fluidInBarrel = fluidInBarrel;
         this.fluidOnTop = fluidOnTop;
         this.result = result;
     }
 
-    public FluidOnTopJSON(FluidOnTopRecipe recipe) {
+    public FluidOnTopJson(FluidOnTopRecipe recipe) {
         this.fluidInBarrel = recipe.getFluidInBarrel().toString();
         this.fluidOnTop = recipe.getFluidOnTop().toString();
         this.result = recipe.getResult().toString();

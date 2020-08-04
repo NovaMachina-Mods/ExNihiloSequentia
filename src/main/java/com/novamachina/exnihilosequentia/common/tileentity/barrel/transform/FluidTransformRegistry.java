@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.transform;
 
+import com.novamachina.exnihilosequentia.common.json.FluidTransformJson;
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -47,11 +48,11 @@ public class FluidTransformRegistry {
         addRecipe(Fluids.WATER, Blocks.MYCELIUM, ModFluids.WITCH_WATER_STILL.get());
     }
 
-    public static List<FluidTransformJSON> toJSONReady() {
-        List<FluidTransformJSON> gsonList = new ArrayList<>();
+    public static List<FluidTransformJson> toJSONReady() {
+        List<FluidTransformJson> gsonList = new ArrayList<>();
 
         for (FluidTransformRecipe recipe : recipeMap.values()) {
-            gsonList.add(new FluidTransformJSON(recipe));
+            gsonList.add(new FluidTransformJson(recipe));
         }
 
         return gsonList;

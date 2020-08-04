@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.compost;
 
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
+import com.novamachina.exnihilosequentia.common.json.CompostJson;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
@@ -114,11 +115,11 @@ public class CompostRegistry {
         solidsMap.put(id, amount);
     }
 
-    public static List<CompostJSON> toJSONReady() {
-        List<CompostJSON> gsonList = new ArrayList<>();
+    public static List<CompostJson> toJSONReady() {
+        List<CompostJson> gsonList = new ArrayList<>();
 
         for(Map.Entry<ResourceLocation, Integer> entry : solidsMap.entrySet()) {
-            gsonList.add(new CompostJSON(entry.getKey().toString(), entry.getValue()));
+            gsonList.add(new CompostJson(entry.getKey().toString(), entry.getValue()));
         }
 
         return gsonList;

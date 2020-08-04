@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.item.tools.crook;
 
+import com.novamachina.exnihilosequentia.common.json.CrookJson;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants.Items;
@@ -8,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -42,5 +44,13 @@ public class CrookDrops {
 
     public static void addDrop(ResourceLocation item, float rarity) {
         crookDrops.add(new CrookDropEntry(item, rarity));
+    }
+
+    public List<CrookJson> toJSONReady() {
+        List<CrookJson> jsonList = new ArrayList<>();
+        for(CrookDropEntry entry : crookDrops) {
+            jsonList.add(new CrookJson(entry));
+        }
+        return jsonList;
     }
 }

@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
+import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -76,12 +77,12 @@ public class FluidBlockTransformRegistry {
         addRecipe(fluid.getRegistryName(), input.asItem().getRegistryName(), result.getRegistryName());
     }
 
-    public static List<FluidBlockJSON> toJSONReady() {
-        List<FluidBlockJSON> gsonList = new ArrayList<>();
+    public static List<FluidBlockJson> toJSONReady() {
+        List<FluidBlockJson> gsonList = new ArrayList<>();
 
         for (List<FluidBlockTransformRecipe> recipeList : recipeMap.values()) {
             for (FluidBlockTransformRecipe recipe : recipeList) {
-                gsonList.add(new FluidBlockJSON(recipe));
+                gsonList.add(new FluidBlockJson(recipe));
             }
         }
 

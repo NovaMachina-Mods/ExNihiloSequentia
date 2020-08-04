@@ -1,4 +1,6 @@
-package com.novamachina.exnihilosequentia.common.tileentity.crucible;
+package com.novamachina.exnihilosequentia.common.json;
+
+import com.novamachina.exnihilosequentia.common.tileentity.crucible.Meltable;
 
 public class CrucibleJson {
     private final String entry;

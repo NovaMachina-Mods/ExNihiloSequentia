@@ -1,8 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
-import com.novamachina.exnihilosequentia.common.utility.LogUtil;
-import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -11,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
