@@ -58,7 +58,7 @@ public class FiredCrucibleMeltableItems {
     }
 
     private static void addEntries(CrucibleRegistriesJson registriesJson) {
-        for(CrucibleJson entry : registriesJson.getWoodCrucibleRegistry()) {
+        for(CrucibleJson entry : registriesJson.getFiredCrucibleRegistry()) {
             if(itemExists(entry.getEntry())) {
                 ResourceLocation entryID = new ResourceLocation(entry.getEntry());
                 if(itemExists(entry.getFluid())) {
