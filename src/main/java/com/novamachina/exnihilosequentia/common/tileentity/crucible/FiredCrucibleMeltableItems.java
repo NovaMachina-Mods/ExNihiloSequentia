@@ -10,6 +10,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -51,5 +52,13 @@ public class FiredCrucibleMeltableItems {
         addMeltable(ModBlocks.DUST.get(), 50, Fluids.LAVA);
         addMeltable(Blocks.NETHERRACK, 1000, Fluids.LAVA);
         addMeltable(Blocks.OBSIDIAN, 1000, Fluids.LAVA);
+    }
+
+    public static List<CrucibleJson> toJSONReady() {
+        List<CrucibleJson> jsonList = new ArrayList<>();
+        for(Map.Entry<ResourceLocation, Meltable> entry : meltableMap.entrySet()) {
+            jsonList.add(new CrucibleJson(entry.getKey().toString(), entry.getValue()));
+        }
+        return jsonList;
     }
 }

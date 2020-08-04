@@ -7,7 +7,9 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 // TODO: Add Tag support
@@ -49,5 +51,13 @@ public class WoodCrucibleMeltableItems{
         addMeltable(Items.JUNGLE_LEAVES, 250, Fluids.WATER);
         addMeltable(Items.SPRUCE_LEAVES, 250, Fluids.WATER);
         addMeltable(Items.OAK_LEAVES, 250, Fluids.WATER);
+    }
+
+    public static List<CrucibleJson> toJSONReady() {
+        List<CrucibleJson> jsonList = new ArrayList<>();
+        for(Map.Entry<ResourceLocation, Meltable> entry : meltableList.entrySet()) {
+            jsonList.add(new CrucibleJson(entry.getKey().toString(), entry.getValue()));
+        }
+        return jsonList;
     }
 }

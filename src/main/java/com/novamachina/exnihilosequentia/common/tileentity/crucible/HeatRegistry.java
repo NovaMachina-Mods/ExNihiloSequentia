@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +72,12 @@ public class HeatRegistry {
         addHeatSource(Blocks.GLOWSTONE, 2);
     }
 
-    public static String toJSON(Gson gson) {
-        return gson.toJson(heatMap);
+    public static List<HeatJson> toJSONReady() {
+        List<HeatJson> jsonList = new ArrayList<>();
+        for(Map.Entry<ResourceLocation, Integer> entry: heatMap.entrySet())
+        {
+            jsonList.add(new HeatJson(entry.getKey().toString(), entry.getValue()));
+        }
+        return jsonList;
     }
 }

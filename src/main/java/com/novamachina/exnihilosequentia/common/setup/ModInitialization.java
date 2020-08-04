@@ -72,10 +72,14 @@ public class ModInitialization {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
 
-        BarrelRegistriesJSON barrelRegistriesGSON = new BarrelRegistriesJSON(FluidOnTopRegistry
+        BarrelRegistriesJSON barrelRegistriesJson = new BarrelRegistriesJSON(FluidOnTopRegistry
             .toJSONReady(), FluidTransformRegistry.toJSONReady(), FluidBlockTransformRegistry
             .toJSONReady(), CompostRegistry.toJSONReady());
 
-        LogUtil.info(gson.toJson(barrelRegistriesGSON));
+        CrucibleRegistriesJSON crucibleRegistriesJson = new CrucibleRegistriesJSON(FiredCrucibleMeltableItems
+            .toJSONReady(), WoodCrucibleMeltableItems.toJSONReady(), HeatRegistry.toJSONReady());
+
+        LogUtil.info(gson.toJson(barrelRegistriesJson));
+        LogUtil.info(gson.toJson(crucibleRegistriesJson));
     }
 }
