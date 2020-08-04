@@ -5,7 +5,9 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -16,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
@@ -214,5 +217,14 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
 
     public float getFluidProportion() {
         return (float)tank.getFluidAmount() / FluidAttributes.BUCKET_VOLUME;
+    }
+
+
+    @Override
+    public void remove() {
+        super.remove();
+        NonNullList<ItemStack> list = NonNullList.create();
+        list.add(inventory.getStackInSlot(0));
+        InventoryHelper.dropItems(getWorld(), getPos(), list);
     }
 }

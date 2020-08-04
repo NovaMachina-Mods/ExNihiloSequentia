@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: Add Tag support
 public class WoodCrucibleMeltableItems{
 
     private static final Map<ResourceLocation, Meltable> meltableList = new HashMap<>();
