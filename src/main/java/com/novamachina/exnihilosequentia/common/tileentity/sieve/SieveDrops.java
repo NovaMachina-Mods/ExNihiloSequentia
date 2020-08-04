@@ -1,15 +1,25 @@
 package com.novamachina.exnihilosequentia.common.tileentity.sieve;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
+import com.novamachina.exnihilosequentia.common.json.CrookJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.SieveJson;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,11 +28,15 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -89,8 +103,54 @@ public class SieveDrops {
         return returnList;
     }
 
-    //TODO: Add lapis, cocoa, bonemeal (these are the dyes that are missing)
     public static void initialize() {
+        if(Config.USE_JSON_REGISTRIES.get()) {
+            addEntries(readJson());
+        } else {
+            useDefaults();
+        }
+    }
+
+    private static void addEntries(Map<String, List<SieveJson>> registriesJson) {
+        for(String input : registriesJson.keySet()) {
+            if(itemExists(input)) {
+                ResourceLocation inputID = new ResourceLocation(input);
+                for(SieveJson entry : registriesJson.get(input)) {
+                    if(itemExists(entry.getResult())) {
+                        ResourceLocation outputID = new ResourceLocation(entry.getResult());
+                        addDrop(inputID, outputID, entry.getRarity(), entry.getMesh());
+                    } else {
+                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                    }
+                }
+            } else {
+                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", input));
+            }
+        }
+    }
+
+    private static boolean itemExists(String entry) {
+        ResourceLocation itemID = new ResourceLocation(entry);
+        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
+    }
+
+    private static Map<String, List<SieveJson>> readJson() {
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.SIEVE_FILE);
+        Map<String, List<SieveJson>> sieveRegistryJson = null;
+        try {
+            StringBuilder builder = new StringBuilder();
+            Files.readAllLines(path).forEach(builder::append);
+            Type listType = new TypeToken<HashMap<String, List<SieveJson>>>(){}.getType();
+            sieveRegistryJson = new Gson().fromJson(builder.toString(), listType);
+            LogUtil.info(builder.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sieveRegistryJson;
+    }
+
+    //TODO: Add lapis, cocoa, bonemeal (these are the dyes that are missing)
+    public static void useDefaults() {
         // Stone Pebble
         addDrop(Blocks.DIRT,
             ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 1.0F, EnumMesh.STRING);
