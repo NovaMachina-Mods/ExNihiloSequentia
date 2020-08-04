@@ -40,7 +40,10 @@ public class CrookDrops {
     private static void addEntries(List<CrookJson> list) {
         for(CrookJson entry : list) {
             if(itemExists(entry.getResult())) {
-                crookDrops.add(new CrookDropEntry(new ResourceLocation(entry.getResult()), entry.getRarity()));
+                ResourceLocation entryID = new ResourceLocation(entry.getResult());
+                addDrop(entryID, entry.getRarity());
+            } else {
+                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
             }
         }
     }
@@ -64,8 +67,6 @@ public class CrookDrops {
         }
         return list;
     }
-
-
 
     private static void useDefaults() {
         addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.1F);
