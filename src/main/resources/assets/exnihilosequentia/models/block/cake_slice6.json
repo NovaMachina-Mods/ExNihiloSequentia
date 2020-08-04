@@ -1,0 +1,44 @@
+{
+  "textures": {
+    "particle": "exnihilosequentia:block/end_cake_side",
+    "bottom": "exnihilosequentia:block/end_cake_bottom",
+    "top": "exnihilosequentia:block/end_cake_top",
+    "side": "exnihilosequentia:block/end_cake_side",
+    "inside": "exnihilosequentia:block/end_cake_inner"
+  },
+  "elements": [
+    {
+      "from": [
+        13,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        8,
+        15
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#inside"
+        },
+        "east": {
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

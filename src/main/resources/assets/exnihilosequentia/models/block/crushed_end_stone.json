@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "exnihilosequentia:block/crushed_end_stone",
+    "all": "exnihilosequentia:block/crushed_end_stone"
+  }
+}

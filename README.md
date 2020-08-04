@@ -8,34 +8,57 @@ The Crushed Sky Stone texture is derived from the Sky Stone texture in Applied E
 
 # ToDo
 The following will be included in this mod.
-- Add basic sifting blocks
-  - Crushed:
-    - Andesite
-    - Diorite
-    - End Stone
-    - Granite
-    - Netherrack
-    - Skystone
-  - Dust
-- Add Sieve
-- Add Meshes
-  - String
-  - Flint
-  - Iron
-  - Diamond
-- Add Resource Items
-  - Vanilla
-    - Iron
-    - Coal
-    - Diamond
+- ~~Add basic sifting blocks~~
+  - ~~Crushed:~~
+    - ~~Andesite~~
+    - ~~Diorite~~
+    - ~~End Stone~~
+    - ~~Granite~~
+    - ~~Netherrack~~
+  - ~~Dust~~
+- ~~Add Pebbles~~
+    - ~~Stone~~
+    - ~~Andesite~~
+    - ~~Diorite~~
+    - ~~Granite~~
+- ~~Add Sieve~~
+- ~~Add Meshes~~
+  - ~~String~~
+  - ~~Flint~~
+  - ~~Iron~~
+  - ~~Diamond~~
+- ~~Add Resource Items~~
+  - ~~Vanilla~~
+    - ~~Iron~~
+    - ~~Gold~~
+    - ~~Coal~~
+    - ~~Diamond~~
     - Lapis
-    - Redstone
-- Add Hammer
-  - Stone
-  - Iron
-  - Diamond
-- Add Slik Worms
-  - Infested trees
-- Add Crook
-  - Wooden
-  - Bone
+    - ~~Redstone~~
+  - ~~Porcelain Clay~~
+- ~~Add Barrel~~
+- ~~Add Fired Crucible~~
+- ~~Add Wooden Crucible~~
+- ~~Add End Cake~~
+- ~~Add Witch Water~~
+- ~~Add Dolls~~
+    - ~~Blaze~~
+    - ~~Enderman~~
+    - ~~Guardian~~
+    - ~~Shulker~~
+- ~~Add Hammer~~
+  - ~~Wood~~
+  - ~~Stone~~
+  - ~~Iron~~
+  - ~~Diamond~~
+- ~~Add Silk Worms~~
+  - ~~Infested trees~~
+- ~~Add Crook~~
+  - ~~Wooden~~
+  - ~~Iron~~
+  - ~~Gold~~
+  - ~~Diamond~~
+  - ~~Bone~~
+- ~~Add Recipes~~
+- ~~Add Smelting~~
+- Add JSON Registries
