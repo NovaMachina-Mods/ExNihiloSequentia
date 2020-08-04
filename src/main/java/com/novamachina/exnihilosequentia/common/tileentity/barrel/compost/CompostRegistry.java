@@ -9,6 +9,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -111,5 +112,15 @@ public class CompostRegistry {
 
     private static void insertIntoMap(ResourceLocation id, int amount) {
         solidsMap.put(id, amount);
+    }
+
+    public static List<CompostJSON> toJSONReady() {
+        List<CompostJSON> gsonList = new ArrayList<>();
+
+        for(Map.Entry<ResourceLocation, Integer> entry : solidsMap.entrySet()) {
+            gsonList.add(new CompostJSON(entry.getKey().toString(), entry.getValue()));
+        }
+
+        return gsonList;
     }
 }

@@ -75,4 +75,16 @@ public class FluidBlockTransformRegistry {
     public static void addRecipe(Fluid fluid, IItemProvider input, Block result) {
         addRecipe(fluid.getRegistryName(), input.asItem().getRegistryName(), result.getRegistryName());
     }
+
+    public static List<FluidBlockJSON> toJSONReady() {
+        List<FluidBlockJSON> gsonList = new ArrayList<>();
+
+        for (List<FluidBlockTransformRecipe> recipeList : recipeMap.values()) {
+            for (FluidBlockTransformRecipe recipe : recipeList) {
+                gsonList.add(new FluidBlockJSON(recipe));
+            }
+        }
+
+        return gsonList;
+    }
 }

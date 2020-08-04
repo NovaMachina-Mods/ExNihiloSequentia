@@ -19,10 +19,10 @@ public class FluidOnTopRegistry {
     public static boolean isValidRecipe(Fluid fluidInTank, Fluid fluidOnTop) {
         boolean isValid = false;
         ResourceLocation fluidInTankID = fluidInTank.getRegistryName();
-        if(recipeMap.containsKey(fluidInTankID)) {
+        if (recipeMap.containsKey(fluidInTankID)) {
             List<FluidOnTopRecipe> recipeList = recipeMap.get(fluidInTankID);
-            for(FluidOnTopRecipe recipe : recipeList) {
-                if(recipe.getFluidOnTop().equals(fluidOnTop.getRegistryName())) {
+            for (FluidOnTopRecipe recipe : recipeList) {
+                if (recipe.getFluidOnTop().equals(fluidOnTop.getRegistryName())) {
                     isValid = true;
                 }
             }
@@ -32,7 +32,7 @@ public class FluidOnTopRegistry {
 
     public static Block getResult(Fluid fluidInTank, Fluid fluidOnTop) {
         ResourceLocation fluidInTankID = fluidInTank.getRegistryName();
-        if(recipeMap.containsKey(fluidInTankID)) {
+        if (recipeMap.containsKey(fluidInTankID)) {
             List<FluidOnTopRecipe> recipeList = recipeMap.get(fluidInTankID);
             for (FluidOnTopRecipe recipe : recipeList) {
                 if (recipe.getFluidOnTop().equals(fluidOnTop.getRegistryName())) {
@@ -50,13 +50,14 @@ public class FluidOnTopRegistry {
     public static void addRecipe(ResourceLocation fluidInTank, ResourceLocation fluidOnTop, ResourceLocation result) {
         List<FluidOnTopRecipe> list = recipeMap.get(fluidInTank);
 
-        if(list == null) {
+        if (list == null) {
             list = new ArrayList<>();
             recipeMap.put(fluidInTank, list);
         }
-        for(FluidOnTopRecipe recipe : list) {
-            if(recipe.getFluidOnTop().equals(fluidOnTop)) {
-                LogUtil.warn(String.format("Duplicate recipe: %s(In Barrel) + %s(On Top). Replacing result with most recent: %s", fluidInTank, fluidOnTop, result));
+        for (FluidOnTopRecipe recipe : list) {
+            if (recipe.getFluidOnTop().equals(fluidOnTop)) {
+                LogUtil.warn(String
+                    .format("Duplicate recipe: %s(In Barrel) + %s(On Top). Replacing result with most recent: %s", fluidInTank, fluidOnTop, result));
                 list.remove(recipe);
             }
         }
@@ -66,5 +67,17 @@ public class FluidOnTopRegistry {
     public static void initialize() {
         addRecipe(Fluids.LAVA, Fluids.WATER, Blocks.OBSIDIAN);
         addRecipe(Fluids.WATER, Fluids.LAVA, Blocks.COBBLESTONE);
+    }
+
+    public static List<FluidOnTopJSON> toJSONReady() {
+        List<FluidOnTopJSON> gsonList = new ArrayList<>();
+
+        for (List<FluidOnTopRecipe> recipeList : recipeMap.values()) {
+            for (FluidOnTopRecipe recipe : recipeList) {
+                gsonList.add(new FluidOnTopJSON(recipe));
+            }
+        }
+
+        return gsonList;
     }
 }

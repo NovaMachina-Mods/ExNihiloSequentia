@@ -1,5 +1,7 @@
 package com.novamachina.exnihilosequentia.common.setup;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDrops;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelModeRegistry;
@@ -66,5 +68,14 @@ public class ModInitialization {
         FluidOnTopRegistry.initialize();
         FluidTransformRegistry.initialize();
         FluidBlockTransformRegistry.initialize();
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+
+        BarrelRegistriesJSON barrelRegistriesGSON = new BarrelRegistriesJSON(FluidOnTopRegistry
+            .toJSONReady(), FluidTransformRegistry.toJSONReady(), FluidBlockTransformRegistry
+            .toJSONReady(), CompostRegistry.toJSONReady());
+
+        LogUtil.info(gson.toJson(barrelRegistriesGSON));
     }
 }

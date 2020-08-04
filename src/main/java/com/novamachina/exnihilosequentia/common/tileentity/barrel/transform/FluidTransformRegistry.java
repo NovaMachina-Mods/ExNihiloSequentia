@@ -8,7 +8,9 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FluidTransformRegistry {
@@ -43,5 +45,15 @@ public class FluidTransformRegistry {
 
     public static void initialize() {
         addRecipe(Fluids.WATER, Blocks.MYCELIUM, ModFluids.WITCH_WATER_STILL.get());
+    }
+
+    public static List<FluidTransformJSON> toJSONReady() {
+        List<FluidTransformJSON> gsonList = new ArrayList<>();
+
+        for (FluidTransformRecipe recipe : recipeMap.values()) {
+            gsonList.add(new FluidTransformJSON(recipe));
+        }
+
+        return gsonList;
     }
 }

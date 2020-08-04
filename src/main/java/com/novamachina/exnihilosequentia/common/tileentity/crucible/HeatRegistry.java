@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.google.gson.Gson;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
@@ -68,5 +69,9 @@ public class HeatRegistry {
         addHeatSource(Blocks.WALL_TORCH, 1);
         addHeatSource(Blocks.MAGMA_BLOCK, 2);
         addHeatSource(Blocks.GLOWSTONE, 2);
+    }
+
+    public static String toJSON(Gson gson) {
+        return gson.toJson(heatMap);
     }
 }
