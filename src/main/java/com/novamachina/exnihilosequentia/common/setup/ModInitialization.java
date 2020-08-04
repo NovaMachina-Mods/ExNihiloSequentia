@@ -81,5 +81,7 @@ public class ModInitialization {
 
         LogUtil.info(gson.toJson(barrelRegistriesJson));
         LogUtil.info(gson.toJson(crucibleRegistriesJson));
+
+        LogUtil.info(gson.toJson(SieveDrops.toJSONReady()));
     }
 }

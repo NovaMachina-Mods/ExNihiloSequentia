@@ -323,4 +323,58 @@ public class SieveDrops {
             }
         }
     }
+
+    public static Map<String, List<SieveJson>> toJSONReady() {
+        Map<String, List<SieveJson>> jsonMap = new HashMap<>();
+        for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : stringMeshMap.entrySet()) {
+            List<SieveJson> list = new ArrayList<>();
+            for(SieveDropEntry dropEntry : entry.getValue()) {
+                list.add(new SieveJson(dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.STRING));
+            }
+            jsonMap.put(entry.getKey().toString(), list);
+        }
+
+        for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : flintMeshMap.entrySet()) {
+            List<SieveJson> list = jsonMap.get(entry.getKey().toString());
+
+            if(list == null) {
+                list = new ArrayList<>();
+            }
+
+            for(SieveDropEntry dropEntry : entry.getValue()) {
+                list.add(new SieveJson(dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.FLINT));
+            }
+
+            jsonMap.put(entry.getKey().toString(), list);
+        }
+
+        for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : ironMeshMap.entrySet()) {
+            List<SieveJson> list = jsonMap.get(entry.getKey().toString());
+
+            if(list == null) {
+                list = new ArrayList<>();
+            }
+
+            for(SieveDropEntry dropEntry : entry.getValue()) {
+                list.add(new SieveJson(dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.IRON));
+            }
+
+            jsonMap.put(entry.getKey().toString(), list);
+        }
+
+        for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : diamondMeshMap.entrySet()) {
+            List<SieveJson> list = jsonMap.get(entry.getKey().toString());
+
+            if(list == null) {
+                list = new ArrayList<>();
+            }
+
+            for(SieveDropEntry dropEntry : entry.getValue()) {
+                list.add(new SieveJson(dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.DIAMOND));
+            }
+
+            jsonMap.put(entry.getKey().toString(), list);
+        }
+        return jsonMap;
+    }
 }
