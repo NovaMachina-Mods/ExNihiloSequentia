@@ -131,7 +131,7 @@ public class SieveDrops {
 
     private static boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
-        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
+        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }
 
     private static Map<String, List<SieveJson>> readJson() {
@@ -142,7 +142,6 @@ public class SieveDrops {
             Files.readAllLines(path).forEach(builder::append);
             Type listType = new TypeToken<HashMap<String, List<SieveJson>>>(){}.getType();
             sieveRegistryJson = new Gson().fromJson(builder.toString(), listType);
-            LogUtil.info(builder.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

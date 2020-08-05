@@ -9,6 +9,7 @@ import com.novamachina.exnihilosequentia.common.setup.ModFluids;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
@@ -87,7 +88,7 @@ public class FluidBlockTransformRegistry {
 
     private static boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
-        return ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
+        return TagUtils.isTag(itemID) ||  ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
     private static BarrelRegistriesJson readJson() {
@@ -97,7 +98,6 @@ public class FluidBlockTransformRegistry {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
             barrelRegistriesJson = new Gson().fromJson(builder.toString(), BarrelRegistriesJson.class);
-            LogUtil.info(builder.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

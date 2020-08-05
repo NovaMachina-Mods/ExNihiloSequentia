@@ -6,6 +6,7 @@ import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Items;
@@ -73,7 +74,7 @@ public class WoodCrucibleMeltableItems{
 
     private static boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
-        return ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
+        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
     private static CrucibleRegistriesJson readJson() {
@@ -83,7 +84,6 @@ public class WoodCrucibleMeltableItems{
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
             crucibleRegistriesJson = new Gson().fromJson(builder.toString(), CrucibleRegistriesJson.class);
-            LogUtil.info(builder.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

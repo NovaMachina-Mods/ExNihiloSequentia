@@ -61,7 +61,6 @@ public class CrookDrops {
             Files.readAllLines(path).forEach(builder::append);
             Type listType = new TypeToken<ArrayList<CrookJson>>(){}.getType();
             list = new Gson().fromJson(builder.toString(), listType);
-            LogUtil.info(builder.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

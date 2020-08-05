@@ -1,13 +1,22 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.google.gson.Gson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.HeatJson;
+import com.novamachina.exnihilosequentia.common.utility.Config;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -61,7 +70,44 @@ public class HeatRegistry {
         return heatMap.getOrDefault(entry.getRegistryName(), 0);
     }
 
-    public static void initialized() {
+    public static void initialize() {
+        if(Config.USE_JSON_REGISTRIES.get()) {
+            addEntries(readJson());
+        } else {
+            useDefaults();
+        }
+    }
+
+    private static void addEntries(CrucibleRegistriesJson registriesJson) {
+        for(HeatJson entry : registriesJson.getHeatRegistry()) {
+            if(itemExists(entry.getEntry())) {
+                ResourceLocation entryID = new ResourceLocation(entry.getEntry());
+                addHeatSource(entryID, entry.getRate());
+            } else {
+                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
+            }
+        }
+    }
+
+    private static boolean itemExists(String entry) {
+        ResourceLocation itemID = new ResourceLocation(entry);
+        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
+    }
+
+    private static CrucibleRegistriesJson readJson() {
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE);
+        CrucibleRegistriesJson crucibleRegistriesJson = null;
+        try {
+            StringBuilder builder = new StringBuilder();
+            Files.readAllLines(path).forEach(builder::append);
+            crucibleRegistriesJson = new Gson().fromJson(builder.toString(), CrucibleRegistriesJson.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return crucibleRegistriesJson;
+    }
+
+    public static void useDefaults() {
         addHeatSource(Blocks.LAVA, 3);
         addHeatSource(Blocks.FIRE, 4);
         addHeatSource(Blocks.TORCH, 1);

@@ -77,7 +77,7 @@ public class ModInitialization {
         CrookDrops.initialize();
         HammerDrops.initialize();
         SieveDrops.initialize();
-        HeatRegistry.initialized();
+        HeatRegistry.initialize();
         FiredCrucibleMeltableItems.initialize();
         WoodCrucibleMeltableItems.initialize();
         CompostRegistry.initialize();

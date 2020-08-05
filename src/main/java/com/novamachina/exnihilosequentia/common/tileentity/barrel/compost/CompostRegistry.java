@@ -72,7 +72,7 @@ public class CompostRegistry {
 
     private static boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
-        return ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
+        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }
 
     private static BarrelRegistriesJson readJson() {
@@ -82,7 +82,6 @@ public class CompostRegistry {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
            barrelRegistriesJson = new Gson().fromJson(builder.toString(), BarrelRegistriesJson.class);
-            LogUtil.info(builder.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
