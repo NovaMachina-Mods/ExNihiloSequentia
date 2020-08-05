@@ -2,6 +2,8 @@ package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
@@ -202,8 +204,8 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public abstract CrucilbeTypeEnum getCrucibleType();
 
     private Meltable getMeltable() {
-        return getCrucibleType() == CrucilbeTypeEnum.FIRED ? FiredCrucibleMeltableItems
+        return getCrucibleType() == CrucilbeTypeEnum.FIRED ? ModRegistries.FIRED_CRUCIBLE
             .getMeltable(currentItem.getItem())
-            : WoodCrucibleMeltableItems.getMeltable(currentItem.getItem());
+            : ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem());
     }
 }

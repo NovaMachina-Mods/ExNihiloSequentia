@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
 import com.novamachina.exnihilosequentia.common.json.FluidOnTopJson;
+import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -23,10 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FluidOnTopRegistry {
-    private static Map<ResourceLocation, List<FluidOnTopRecipe>> recipeMap = new HashMap<>();
+public class FluidOnTopRegistry extends AbstractModRegistry {
+    private Map<ResourceLocation, List<FluidOnTopRecipe>> recipeMap = new HashMap<>();
 
-    public static boolean isValidRecipe(Fluid fluidInTank, Fluid fluidOnTop) {
+    public FluidOnTopRegistry(ModRegistries.ModBus bus) {
+        bus.register(this);
+    }
+
+    public boolean isValidRecipe(Fluid fluidInTank, Fluid fluidOnTop) {
         boolean isValid = false;
         ResourceLocation fluidInTankID = fluidInTank.getRegistryName();
         if (recipeMap.containsKey(fluidInTankID)) {
@@ -40,7 +46,7 @@ public class FluidOnTopRegistry {
         return isValid;
     }
 
-    public static Block getResult(Fluid fluidInTank, Fluid fluidOnTop) {
+    public Block getResult(Fluid fluidInTank, Fluid fluidOnTop) {
         ResourceLocation fluidInTankID = fluidInTank.getRegistryName();
         if (recipeMap.containsKey(fluidInTankID)) {
             List<FluidOnTopRecipe> recipeList = recipeMap.get(fluidInTankID);
@@ -53,11 +59,11 @@ public class FluidOnTopRegistry {
         return ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:air"));
     }
 
-    public static void addRecipe(Fluid fluidInTank, Fluid fluidOnTop, Block result) {
+    public void addRecipe(Fluid fluidInTank, Fluid fluidOnTop, Block result) {
         addRecipe(fluidInTank.getRegistryName(), fluidOnTop.getRegistryName(), result.getRegistryName());
     }
 
-    public static void addRecipe(ResourceLocation fluidInTank, ResourceLocation fluidOnTop, ResourceLocation result) {
+    public void addRecipe(ResourceLocation fluidInTank, ResourceLocation fluidOnTop, ResourceLocation result) {
         List<FluidOnTopRecipe> list = recipeMap.get(fluidInTank);
 
         if (list == null) {
@@ -74,15 +80,9 @@ public class FluidOnTopRegistry {
         list.add(new FluidOnTopRecipe(fluidInTank, fluidOnTop, result));
     }
 
-    public static void initialize() {
-        if(Config.USE_JSON_REGISTRIES.get()) {
-            addEntries(readJson());
-        } else {
-            useDefaults();
-        }
-    }
-
-    private static void addEntries(BarrelRegistriesJson registriesJson) {
+    @Override
+    protected void useJson() {
+        BarrelRegistriesJson registriesJson = readJson();
         for(FluidOnTopJson entry : registriesJson.getFluidOnTopRegistry()) {
             if(itemExists(entry.getFluidInBarrel())) {
                 ResourceLocation fluidInBarrel = new ResourceLocation(entry.getFluidInBarrel());
@@ -103,12 +103,12 @@ public class FluidOnTopRegistry {
         }
     }
 
-    private static boolean itemExists(String entry) {
+    private boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) ||  ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
-    private static BarrelRegistriesJson readJson() {
+    private BarrelRegistriesJson readJson() {
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
         BarrelRegistriesJson barrelRegistriesJson = null;
         try {
@@ -121,12 +121,19 @@ public class FluidOnTopRegistry {
         return barrelRegistriesJson;
     }
 
-    public static void useDefaults() {
+    @Override
+    protected void useDefaults() {
         addRecipe(Fluids.LAVA, Fluids.WATER, Blocks.OBSIDIAN);
         addRecipe(Fluids.WATER, Fluids.LAVA, Blocks.COBBLESTONE);
     }
 
-    public static List<FluidOnTopJson> toJSONReady() {
+    @Override
+    public void clear() {
+        recipeMap.clear();
+    }
+
+    @Override
+    public List<FluidOnTopJson> toJSONReady() {
         List<FluidOnTopJson> gsonList = new ArrayList<>();
 
         for (List<FluidOnTopRecipe> recipeList : recipeMap.values()) {

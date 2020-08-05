@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.HeatJson;
+import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -23,15 +25,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HeatRegistry {
+public class HeatRegistry extends AbstractModRegistry {
 
-    private static final Map<ResourceLocation, Integer> heatMap     = new HashMap<>();
+    private final Map<ResourceLocation, Integer> heatMap     = new HashMap<>();
 
-    public static void addHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry, int amount) {
+    public HeatRegistry(ModRegistries.ModBus bus) {
+        bus.register(this);
+    }
+
+    public void addHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry, int amount) {
         addHeatSource(entry.getRegistryName(), amount);
     }
 
-    public static void addHeatSource(ResourceLocation entry, int amount) {
+    public void addHeatSource(ResourceLocation entry, int amount) {
         // Who do I own?
         List<ResourceLocation> idList = TagUtils.getTagsOwnedBy(entry);
         for(ResourceLocation id : idList) {
@@ -62,23 +68,17 @@ public class HeatRegistry {
         insertIntoMap(entry, amount);
     }
 
-    private static void insertIntoMap(ResourceLocation name, int amount) {
+    private void insertIntoMap(ResourceLocation name, int amount) {
         heatMap.put(name, amount);
     }
 
-    public static int getHeatAmount(ForgeRegistryEntry<? extends IItemProvider> entry) {
+    public int getHeatAmount(ForgeRegistryEntry<? extends IItemProvider> entry) {
         return heatMap.getOrDefault(entry.getRegistryName(), 0);
     }
 
-    public static void initialize() {
-        if(Config.USE_JSON_REGISTRIES.get()) {
-            addEntries(readJson());
-        } else {
-            useDefaults();
-        }
-    }
-
-    private static void addEntries(CrucibleRegistriesJson registriesJson) {
+    @Override
+    protected void useJson() {
+        CrucibleRegistriesJson registriesJson = readJson();
         for(HeatJson entry : registriesJson.getHeatRegistry()) {
             if(itemExists(entry.getEntry())) {
                 ResourceLocation entryID = new ResourceLocation(entry.getEntry());
@@ -89,12 +89,12 @@ public class HeatRegistry {
         }
     }
 
-    private static boolean itemExists(String entry) {
+    private boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
-    private static CrucibleRegistriesJson readJson() {
+    private CrucibleRegistriesJson readJson() {
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE);
         CrucibleRegistriesJson crucibleRegistriesJson = null;
         try {
@@ -107,7 +107,8 @@ public class HeatRegistry {
         return crucibleRegistriesJson;
     }
 
-    public static void useDefaults() {
+    @Override
+    protected void useDefaults() {
         addHeatSource(Blocks.LAVA, 3);
         addHeatSource(Blocks.FIRE, 4);
         addHeatSource(Blocks.TORCH, 1);
@@ -116,7 +117,13 @@ public class HeatRegistry {
         addHeatSource(Blocks.GLOWSTONE, 2);
     }
 
-    public static List<HeatJson> toJSONReady() {
+    @Override
+    public void clear() {
+        heatMap.clear();
+    }
+
+    @Override
+    public List<HeatJson> toJSONReady() {
         List<HeatJson> jsonList = new ArrayList<>();
         for(Map.Entry<ResourceLocation, Integer> entry: heatMap.entrySet())
         {

@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,7 +54,7 @@ public class CrookBaseItem extends ToolItem {
                 itemDrops.addAll(items);
             }
 
-            itemDrops.addAll(CrookDrops.getDrops());
+            itemDrops.addAll(ModRegistries.CROOK.getDrops());
         }
         if (state.getBlock() instanceof InfestedLeavesBlock) {
             Random random = new Random();

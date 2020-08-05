@@ -7,7 +7,9 @@ import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDropEntry;
 import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.CompostJson;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
+import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -28,10 +30,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CompostRegistry {
-    public static Map<ResourceLocation, Integer> solidsMap = new HashMap<>();
+public class CompostRegistry extends AbstractModRegistry {
+    private final Map<ResourceLocation, Integer> solidsMap = new HashMap<>();
 
-    public static boolean containsSolid(IItemProvider item) {
+    public CompostRegistry(ModRegistries.ModBus bus) {
+        bus.register(this);
+    }
+
+    public boolean containsSolid(IItemProvider item) {
         Collection<ResourceLocation> tags = TagUtils.getTags(item);
         for(ResourceLocation tag : tags) {
             if(solidsMap.containsKey(tag)) {
@@ -41,7 +47,7 @@ public class CompostRegistry {
         return solidsMap.containsKey(item.asItem().getRegistryName());
     }
 
-    public static int getSolidAmount(IItemProvider item) {
+    public int getSolidAmount(IItemProvider item) {
         Collection<ResourceLocation> tags = TagUtils.getTags(item);
         for(ResourceLocation tag : tags) {
             if(solidsMap.containsKey(tag)) {
@@ -52,15 +58,9 @@ public class CompostRegistry {
         return solidsMap.getOrDefault(item.asItem().getRegistryName(), 0);
     }
 
-    public static void initialize() {
-        if(Config.USE_JSON_REGISTRIES.get()) {
-            addEntries(readJson());
-        } else {
-            useDefaults();
-        }
-    }
-
-    private static void addEntries(BarrelRegistriesJson registriesJson) {
+    @Override
+    protected void useJson() {
+        BarrelRegistriesJson registriesJson = readJson();
         for(CompostJson entry : registriesJson.getCompostRegistry()) {
             if(itemExists(entry.getEntry())) {
                 solidsMap.put(new ResourceLocation(entry.getEntry()), entry.getAmount());
@@ -70,12 +70,12 @@ public class CompostRegistry {
         }
     }
 
-    private static boolean itemExists(String entry) {
+    private boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }
 
-    private static BarrelRegistriesJson readJson() {
+    private BarrelRegistriesJson readJson() {
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
         BarrelRegistriesJson barrelRegistriesJson = null;
         try {
@@ -88,7 +88,7 @@ public class CompostRegistry {
         return barrelRegistriesJson;
     }
 
-    private static void useDefaults() {
+    protected void useDefaults() {
         addSolid(new ResourceLocation("minecraft:saplings"), 125);
         addSolid(new ResourceLocation("minecraft:leaves"), 125);
         addSolid(new ResourceLocation("minecraft:flowers"), 100);
@@ -126,11 +126,11 @@ public class CompostRegistry {
         addSolid(Blocks.SUGAR_CANE, 80);
     }
 
-    public static void addSolid(IItemProvider item, int solidAmount) {
+    public void addSolid(IItemProvider item, int solidAmount) {
         addSolid(item.asItem().getRegistryName(), solidAmount);
     }
 
-    public static void addSolid(ResourceLocation tag, int solidAmount) {
+    public void addSolid(ResourceLocation tag, int solidAmount) {
         List<ResourceLocation> idList = TagUtils.getTagsOwnedBy(tag);
 
         for(ResourceLocation id : idList) {
@@ -158,11 +158,16 @@ public class CompostRegistry {
         insertIntoMap(tag, solidAmount);
     }
 
-    private static void insertIntoMap(ResourceLocation id, int amount) {
+    private void insertIntoMap(ResourceLocation id, int amount) {
         solidsMap.put(id, amount);
     }
 
-    public static List<CompostJson> toJSONReady() {
+    @Override
+    public void clear() {
+        solidsMap.clear();
+    }
+
+    public List<CompostJson> toJSONReady() {
         List<CompostJson> gsonList = new ArrayList<>();
 
         for(Map.Entry<ResourceLocation, Integer> entry : solidsMap.entrySet()) {

@@ -3,14 +3,15 @@ package com.novamachina.exnihilosequentia.common.item.tools.crook;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
+import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.Constants.Items;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -22,22 +23,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CrookDrops {
+public class CrookDrops extends AbstractModRegistry {
 
-    public static final int numberOfTimesToTestVanillaDrops = Config.NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS
-        .get();
+    public static final int numberOfTimesToTestVanillaDrops = Config.NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS.get();
 
-    private static final List<CrookDropEntry> crookDrops  = new ArrayList<>();
+    private final List<CrookDropEntry> crookDrops  = new ArrayList<>();
 
-    public static void initialize() {
-        if(Config.USE_JSON_REGISTRIES.get()) {
-            addEntries(readJson());
-        } else {
-            useDefaults();
-        }
+    public CrookDrops(ModRegistries.ModBus bus) {
+        bus.register(this);
     }
 
-    private static void addEntries(List<CrookJson> list) {
+    @Override
+    public void useJson() {
+        List<CrookJson> list = readJson();
         for(CrookJson entry : list) {
             if(itemExists(entry.getResult())) {
                 ResourceLocation entryID = new ResourceLocation(entry.getResult());
@@ -48,12 +46,12 @@ public class CrookDrops {
         }
     }
 
-    private static boolean itemExists(String entry) {
+    private boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
         return ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }
 
-    private static List<CrookJson> readJson() {
+    private List<CrookJson> readJson() {
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CROOK_FILE);
         List<CrookJson> list = null;
         try {
@@ -67,11 +65,11 @@ public class CrookDrops {
         return list;
     }
 
-    private static void useDefaults() {
+    public void useDefaults() {
         addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.1F);
     }
 
-    public static List<ItemStack> getDrops() {
+    public List<ItemStack> getDrops() {
         List<ItemStack> drops = new ArrayList<>();
 
         for (CrookDropEntry item : crookDrops) {
@@ -84,19 +82,25 @@ public class CrookDrops {
         return drops;
     }
 
-    public static void addDrop(Item item, float rarity) {
+    public void addDrop(Item item, float rarity) {
         addDrop(item.getRegistryName(), rarity);
     }
 
-    public static void addDrop(ResourceLocation item, float rarity) {
+    public void addDrop(ResourceLocation item, float rarity) {
         crookDrops.add(new CrookDropEntry(item, rarity));
     }
 
-    public static List<CrookJson> toJSONReady() {
+    @Override
+    public List<CrookJson> toJSONReady() {
         List<CrookJson> jsonList = new ArrayList<>();
         for(CrookDropEntry entry : crookDrops) {
             jsonList.add(new CrookJson(entry));
         }
         return jsonList;
+    }
+
+    @Override
+    public void clear() {
+        crookDrops.clear();
     }
 }

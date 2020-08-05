@@ -3,8 +3,11 @@ package com.novamachina.exnihilosequentia.common.json;
 import java.util.List;
 
 public class CrucibleRegistriesJson {
+    @JsonRequired
     private final List<CrucibleJson> firedCrucibleRegistry;
+    @JsonRequired
     private final List<CrucibleJson> woodCrucibleRegistry;
+    @JsonRequired
     private final List<HeatJson> heatRegistry;
 
     public CrucibleRegistriesJson(List<CrucibleJson> firedCrucibleRegistry, List<CrucibleJson> woodCrucibleRegistry, List<HeatJson> heatRegistry) {

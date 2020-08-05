@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.CompostJson;
 import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
+import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -28,10 +30,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FluidBlockTransformRegistry {
-    private static final Map<ResourceLocation, List<FluidBlockTransformRecipe>> recipeMap = new HashMap<>();
+public class FluidBlockTransformRegistry extends AbstractModRegistry {
+    private final Map<ResourceLocation, List<FluidBlockTransformRecipe>> recipeMap = new HashMap<>();
 
-    public static boolean isValidRecipe(Fluid fluid, Item input) {
+    public FluidBlockTransformRegistry(ModRegistries.ModBus bus) {
+        bus.register(this);
+    }
+
+    public boolean isValidRecipe(Fluid fluid, Item input) {
         List<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluid.getRegistryName());
 
         if(possibleRecipes == null) {
@@ -46,7 +52,7 @@ public class FluidBlockTransformRegistry {
         return false;
     }
 
-    public static IItemProvider getResult(Fluid fluid, Item input) {
+    public IItemProvider getResult(Fluid fluid, Item input) {
         List<FluidBlockTransformRecipe> possibleRecipes = recipeMap.get(fluid.getRegistryName());
 
         for(FluidBlockTransformRecipe recipe : possibleRecipes) {
@@ -57,15 +63,9 @@ public class FluidBlockTransformRegistry {
         return null;
     }
 
-    public static void initialize() {
-        if(Config.USE_JSON_REGISTRIES.get()) {
-            addEntries(readJson());
-        } else {
-            useDefaults();
-        }
-    }
-
-    private static void addEntries(BarrelRegistriesJson registriesJson) {
+    @Override
+    protected void useJson() {
+        BarrelRegistriesJson registriesJson = readJson();
         for(FluidBlockJson entry : registriesJson.getFluidBlockRegistry()) {
             if(itemExists(entry.getFluid())) {
                 ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
@@ -86,12 +86,12 @@ public class FluidBlockTransformRegistry {
         }
     }
 
-    private static boolean itemExists(String entry) {
+    private boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) ||  ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
-    private static BarrelRegistriesJson readJson() {
+    private BarrelRegistriesJson readJson() {
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
         BarrelRegistriesJson barrelRegistriesJson = null;
         try {
@@ -104,7 +104,7 @@ public class FluidBlockTransformRegistry {
         return barrelRegistriesJson;
     }
 
-    private static void useDefaults() {
+    protected void useDefaults() {
         addRecipe(Fluids.WATER, ModBlocks.DUST.get(), Blocks.CLAY);
         addRecipe(Fluids.LAVA, Items.REDSTONE, Blocks.NETHERRACK);
         addRecipe(Fluids.LAVA, Items.GLOWSTONE_DUST, Blocks.END_STONE);
@@ -113,7 +113,7 @@ public class FluidBlockTransformRegistry {
         addRecipe(ModFluids.WITCH_WATER_STILL.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
     }
 
-    public static void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {
+    public void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {
         List<FluidBlockTransformRecipe> list = recipeMap.get(fluid);
 
         if(list == null) {
@@ -129,11 +129,17 @@ public class FluidBlockTransformRegistry {
         list.add(new FluidBlockTransformRecipe(fluid, input, result));
     }
 
-    public static void addRecipe(Fluid fluid, IItemProvider input, Block result) {
+    public void addRecipe(Fluid fluid, IItemProvider input, Block result) {
         addRecipe(fluid.getRegistryName(), input.asItem().getRegistryName(), result.getRegistryName());
     }
 
-    public static List<FluidBlockJson> toJSONReady() {
+    @Override
+    public void clear() {
+        recipeMap.clear();
+    }
+
+    @Override
+    public List<FluidBlockJson> toJSONReady() {
         List<FluidBlockJson> gsonList = new ArrayList<>();
 
         for (List<FluidBlockTransformRecipe> recipeList : recipeMap.values()) {
