@@ -30,4 +30,4 @@ Mod Version: 2020-08-09-11-59-99
 
 **Additional context**
 Add any other context about the problem here.
-Stack traces are nice to have
+Stack traces and log files are nice to have. Submit all files through [Gist](https://gist.github.com/) or [Pastebin](https://pastebin.com/) and place the links here.
