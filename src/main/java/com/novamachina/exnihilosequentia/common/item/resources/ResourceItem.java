@@ -37,9 +37,6 @@ public class ResourceItem extends Item {
                     if (state.getBlock() instanceof LeavesBlock) {
                         LogUtil.info("INFEST LEAVES");
                         context.getItem().shrink(1);
-                        // TODO: Replace dirt with infested leaves
-//                        Block.replaceBlock(state,
-//                            Blocks.DIRT.getDefaultState(), context.getWorld(), context.getPos(), 1);
                         InfestingLeavesBlock.normalToInfesting(context.getWorld(),
                             context.getWorld().getBlockState(context.getPos()), context.getPos());
                         return ActionResultType.SUCCESS;

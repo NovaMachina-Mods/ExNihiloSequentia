@@ -76,8 +76,6 @@ public class ModInitialization {
 
         ModRegistries.BUS.initialize(Config.USE_JSON_REGISTRIES.get());
     }
-
-    // TODO: If files do not exist, they are created without any contents
     private static void generateJsonFiles() {
         ModRegistries.BUS.initialize(false);
 
