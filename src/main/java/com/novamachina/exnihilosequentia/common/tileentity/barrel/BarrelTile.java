@@ -218,7 +218,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     }
 
     public float getFluidProportion() {
-        return (float)tank.getFluidAmount() / FluidAttributes.BUCKET_VOLUME;
+        return (float)tank.getFluidAmount() / MAX_FLUID_AMOUNT;
     }
 
 
