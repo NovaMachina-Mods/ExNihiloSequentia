@@ -74,7 +74,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     @Override
     protected int getHeat() {
-        return Config.WOOD_HEAT_RATE.get();
+        return ModRegistries.HEAT.getHeatAmount(world.getBlockState(pos.down()).getBlock()) > 0 ? Config.WOOD_HEAT_RATE.get() : 0;
     }
 
     @Override
