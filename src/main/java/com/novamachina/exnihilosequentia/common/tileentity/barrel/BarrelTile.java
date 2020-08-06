@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -43,7 +44,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
     private AbstractBarrelMode mode;
     private int solidAmount;
-    public static int MAX_SOLID_AMOUNT = 1000;
+    public static int MAX_SOLID_AMOUNT = Config.BARREL_MAX_SOLID_AMOUNT.get();
 
     public BarrelTile() {
         super(ModTiles.BARREL.get());
@@ -70,7 +71,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
         if (mode.isEmptyMode() || mode.getModeName().equals(Constants.BarrelModes.FLUID)) {
             BlockPos abovePos = pos.add(0, 1, 0);
             if(getWorld().isRainingAt(abovePos)) {
-                FluidStack stack = new FluidStack(Fluids.WATER, 2);
+                FluidStack stack = new FluidStack(Fluids.WATER, Config.RAIN_FILL_AMOUNT.get());
                 tank.fill(stack, IFluidHandler.FluidAction.EXECUTE);
             }
         }

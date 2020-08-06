@@ -81,7 +81,7 @@ public class Config {
     }
 
     private static void sieveConfigs() {
-        USE_JSON_REGISTRIES = COMMON_BUILDER.comment("Sieve will get results for all mesh tiers below the one in the sieve (Default: false)").define("flattenSieveRecipes", false);
+        FLATTEN_SIEVE_RECIPES = COMMON_BUILDER.comment("Sieve will get results for all mesh tiers below the one in the sieve (Default: false)").define("flattenSieveRecipes", false);
     }
 
     private static void registryConfigs() {
