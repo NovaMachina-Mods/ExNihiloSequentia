@@ -3,8 +3,11 @@ package com.novamachina.exnihilosequentia.common.json;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidBlockTransformRecipe;
 
 public class FluidBlockJson {
+    @JsonRequired
     private final String fluid;
+    @JsonRequired
     private final String input;
+    @JsonRequired
     private final String result;
 
 

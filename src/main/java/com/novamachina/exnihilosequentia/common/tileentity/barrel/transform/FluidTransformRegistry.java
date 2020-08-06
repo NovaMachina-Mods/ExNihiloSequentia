@@ -1,7 +1,11 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.transform;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
 import com.novamachina.exnihilosequentia.common.json.FluidTransformJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
@@ -62,24 +66,32 @@ public class FluidTransformRegistry extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
-        BarrelRegistriesJson registriesJson = readJson();
-        for(FluidTransformJson entry : registriesJson.getFluidTransformRegistry()) {
-            if(itemExists(entry.getFluidInBarrel())) {
-                ResourceLocation fluidID = new ResourceLocation(entry.getFluidInBarrel());
-                if(itemExists(entry.getBlockBelow())) {
-                    ResourceLocation inputID = new ResourceLocation(entry.getBlockBelow());
-                    if(itemExists(entry.getResult())) {
-                        ResourceLocation resultID = new ResourceLocation(entry.getResult());
-                        addRecipe(fluidID, inputID, resultID);
-                    }else {
-                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+        try {
+            BarrelRegistriesJson registriesJson = readJson();
+            for (FluidTransformJson entry : registriesJson.getFluidTransformRegistry()) {
+                if (itemExists(entry.getFluidInBarrel())) {
+                    ResourceLocation fluidID = new ResourceLocation(entry.getFluidInBarrel());
+                    if (itemExists(entry.getBlockBelow())) {
+                        ResourceLocation inputID = new ResourceLocation(entry.getBlockBelow());
+                        if (itemExists(entry.getResult())) {
+                            ResourceLocation resultID = new ResourceLocation(entry.getResult());
+                            addRecipe(fluidID, inputID, resultID);
+                        } else {
+                            LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                        }
+                    } else {
+                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getBlockBelow()));
                     }
-                }else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getBlockBelow()));
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluidInBarrel()));
                 }
-            } else {
-                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluidInBarrel()));
             }
+        } catch (JsonParseException e) {
+            LogUtil.error("Malformed BarrelRegistries.json");
+            LogUtil.error(e.getMessage());
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
         }
     }
 
@@ -88,13 +100,14 @@ public class FluidTransformRegistry extends AbstractModRegistry {
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
-    private BarrelRegistriesJson readJson() {
+    private BarrelRegistriesJson readJson() throws JsonParseException {
+        Gson gson = new GsonBuilder().registerTypeAdapter(BarrelRegistriesJson.class, new AnnotatedDeserializer<BarrelRegistriesJson>()).create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
         BarrelRegistriesJson barrelRegistriesJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            barrelRegistriesJson = new Gson().fromJson(builder.toString(), BarrelRegistriesJson.class);
+            barrelRegistriesJson = gson.fromJson(builder.toString(), BarrelRegistriesJson.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

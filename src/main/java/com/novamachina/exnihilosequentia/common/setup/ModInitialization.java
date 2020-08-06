@@ -27,6 +27,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -76,6 +77,12 @@ public class ModInitialization {
 
         ModRegistries.BUS.initialize(Config.USE_JSON_REGISTRIES.get());
     }
+
+    @SubscribeEvent
+    public static void clearRegistriesOnServerExit(FMLServerStoppedEvent event) {
+        ModRegistries.BUS.clearRegistries();
+    }
+
     private static void generateJsonFiles() {
         ModRegistries.BUS.initialize(false);
 

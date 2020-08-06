@@ -1,11 +1,14 @@
 package com.novamachina.exnihilosequentia.common.tileentity.sieve;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
 import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
@@ -111,21 +114,27 @@ public class SieveDrops extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
-        Map<String, List<SieveJson>> registriesJson = readJson();
-        for(String input : registriesJson.keySet()) {
-            if(itemExists(input)) {
-                ResourceLocation inputID = new ResourceLocation(input);
-                for(SieveJson entry : registriesJson.get(input)) {
+        try {
+            List<SieveJson> registryJson = readJson();
+            for(SieveJson entry : registryJson) {
+                if(itemExists(entry.getInput())) {
+                    ResourceLocation inputID = new ResourceLocation(entry.getInput());
                     if(itemExists(entry.getResult())) {
                         ResourceLocation outputID = new ResourceLocation(entry.getResult());
                         addDrop(inputID, outputID, entry.getRarity(), entry.getMesh());
                     } else {
                         LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
                     }
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getInput()));
                 }
-            } else {
-                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", input));
             }
+        } catch (JsonParseException e) {
+            LogUtil.error("Malformed SieveRegistry.json");
+            LogUtil.error(e.getMessage());
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
         }
     }
 
@@ -134,14 +143,15 @@ public class SieveDrops extends AbstractModRegistry {
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }
 
-    protected Map<String, List<SieveJson>> readJson() {
+    protected List<SieveJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<SieveJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<SieveJson>>()).create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.SIEVE_FILE);
-        Map<String, List<SieveJson>> sieveRegistryJson = null;
+        List<SieveJson> sieveRegistryJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            Type listType = new TypeToken<HashMap<String, List<SieveJson>>>(){}.getType();
-            sieveRegistryJson = new Gson().fromJson(builder.toString(), listType);
+            sieveRegistryJson = gson.fromJson(builder.toString(), listType);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -393,57 +403,39 @@ public class SieveDrops extends AbstractModRegistry {
     }
 
     @Override
-    public Map<String, List<SieveJson>> toJSONReady() {
-        Map<String, List<SieveJson>> jsonMap = new HashMap<>();
+    public List<SieveJson> toJSONReady() {
+        List<SieveJson> jsonList = new ArrayList<>();
         for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : stringMeshMap.entrySet()) {
-            List<SieveJson> list = new ArrayList<>();
-            for(SieveDropEntry dropEntry : entry.getValue()) {
-                list.add(new SieveJson(dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.STRING));
+            ResourceLocation input = entry.getKey();
+            List<SieveDropEntry> dropList = entry.getValue();
+            for(SieveDropEntry dropEntry : dropList) {
+                jsonList.add(new SieveJson(input.toString(), dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.STRING));
             }
-            jsonMap.put(entry.getKey().toString(), list);
         }
 
         for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : flintMeshMap.entrySet()) {
-            List<SieveJson> list = jsonMap.get(entry.getKey().toString());
-
-            if(list == null) {
-                list = new ArrayList<>();
+            ResourceLocation input = entry.getKey();
+            List<SieveDropEntry> dropList = entry.getValue();
+            for(SieveDropEntry dropEntry : dropList) {
+                jsonList.add(new SieveJson(input.toString(), dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.FLINT));
             }
-
-            for(SieveDropEntry dropEntry : entry.getValue()) {
-                list.add(new SieveJson(dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.FLINT));
-            }
-
-            jsonMap.put(entry.getKey().toString(), list);
         }
 
         for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : ironMeshMap.entrySet()) {
-            List<SieveJson> list = jsonMap.get(entry.getKey().toString());
-
-            if(list == null) {
-                list = new ArrayList<>();
+            ResourceLocation input = entry.getKey();
+            List<SieveDropEntry> dropList = entry.getValue();
+            for(SieveDropEntry dropEntry : dropList) {
+                jsonList.add(new SieveJson(input.toString(), dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.IRON));
             }
-
-            for(SieveDropEntry dropEntry : entry.getValue()) {
-                list.add(new SieveJson(dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.IRON));
-            }
-
-            jsonMap.put(entry.getKey().toString(), list);
         }
 
         for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : diamondMeshMap.entrySet()) {
-            List<SieveJson> list = jsonMap.get(entry.getKey().toString());
-
-            if(list == null) {
-                list = new ArrayList<>();
+            ResourceLocation input = entry.getKey();
+            List<SieveDropEntry> dropList = entry.getValue();
+            for(SieveDropEntry dropEntry : dropList) {
+                jsonList.add(new SieveJson(input.toString(), dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.DIAMOND));
             }
-
-            for(SieveDropEntry dropEntry : entry.getValue()) {
-                list.add(new SieveJson(dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.DIAMOND));
-            }
-
-            jsonMap.put(entry.getKey().toString(), list);
         }
-        return jsonMap;
+        return jsonList;
     }
 }

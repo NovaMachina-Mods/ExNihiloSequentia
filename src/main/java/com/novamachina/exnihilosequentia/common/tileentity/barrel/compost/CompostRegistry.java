@@ -1,12 +1,16 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.compost;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDropEntry;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.CompostJson;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
@@ -60,13 +64,21 @@ public class CompostRegistry extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
-        BarrelRegistriesJson registriesJson = readJson();
-        for(CompostJson entry : registriesJson.getCompostRegistry()) {
-            if(itemExists(entry.getEntry())) {
-                solidsMap.put(new ResourceLocation(entry.getEntry()), entry.getAmount());
-            } else {
-                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
+        try {
+            BarrelRegistriesJson registriesJson = readJson();
+            for (CompostJson entry : registriesJson.getCompostRegistry()) {
+                if (itemExists(entry.getEntry())) {
+                    solidsMap.put(new ResourceLocation(entry.getEntry()), entry.getAmount());
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
+                }
             }
+        } catch (JsonParseException e) {
+            LogUtil.error("Malformed BarrelRegistries.json");
+            LogUtil.error(e.getMessage());
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
         }
     }
 
@@ -75,13 +87,14 @@ public class CompostRegistry extends AbstractModRegistry {
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }
 
-    private BarrelRegistriesJson readJson() {
+    private BarrelRegistriesJson readJson() throws JsonParseException {
+        Gson gson = new GsonBuilder().registerTypeAdapter(BarrelRegistriesJson.class, new AnnotatedDeserializer<BarrelRegistriesJson>()).create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
         BarrelRegistriesJson barrelRegistriesJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-           barrelRegistriesJson = new Gson().fromJson(builder.toString(), BarrelRegistriesJson.class);
+           barrelRegistriesJson = gson.fromJson(builder.toString(), BarrelRegistriesJson.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

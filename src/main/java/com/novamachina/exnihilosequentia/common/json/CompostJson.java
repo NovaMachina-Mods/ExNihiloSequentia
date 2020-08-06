@@ -1,10 +1,12 @@
 package com.novamachina.exnihilosequentia.common.json;
 
 public class CompostJson {
+    @JsonRequired
     private final String entry;
-    private final int amount;
+    @JsonRequired
+    private final Integer amount;
 
-    public CompostJson(String entry, int amount) {
+    public CompostJson(String entry, Integer amount) {
         this.entry = entry;
         this.amount = amount;
     }
@@ -13,7 +15,7 @@ public class CompostJson {
         return entry;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 }

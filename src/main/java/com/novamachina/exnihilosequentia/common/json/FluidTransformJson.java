@@ -3,8 +3,11 @@ package com.novamachina.exnihilosequentia.common.json;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.transform.FluidTransformRecipe;
 
 public class FluidTransformJson {
+    @JsonRequired
     private final String fluidInBarrel;
+    @JsonRequired
     private final String blockBelow;
+    @JsonRequired
     private final String result;
 
     public FluidTransformJson(String fluidInBarrel, String blockBelow, String result) {

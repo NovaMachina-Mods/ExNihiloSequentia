@@ -4,8 +4,11 @@ import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnT
 import net.minecraft.util.ResourceLocation;
 
 public class FluidOnTopJson {
+    @JsonRequired
     private final String fluidInBarrel;
+    @JsonRequired
     private final String fluidOnTop;
+    @JsonRequired
     private final String result;
 
     public FluidOnTopJson(String fluidInBarrel, String fluidOnTop, String result) {

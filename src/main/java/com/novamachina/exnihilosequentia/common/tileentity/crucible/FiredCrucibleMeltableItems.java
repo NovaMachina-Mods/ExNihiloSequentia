@@ -1,6 +1,9 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
@@ -22,29 +25,38 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
 
     @Override
     protected void useJson() {
-        CrucibleRegistriesJson registriesJson = readJson();
-        for(CrucibleJson entry : registriesJson.getFiredCrucibleRegistry()) {
-            if(itemExists(entry.getEntry())) {
-                ResourceLocation entryID = new ResourceLocation(entry.getEntry());
-                if(itemExists(entry.getFluid())) {
-                    ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
-                    addMeltable(entryID, entry.getAmount(), fluidID);
-                }else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluid()));
+        try {
+            CrucibleRegistriesJson registriesJson = readJson();
+            for (CrucibleJson entry : registriesJson.getFiredCrucibleRegistry()) {
+                if (itemExists(entry.getEntry())) {
+                    ResourceLocation entryID = new ResourceLocation(entry.getEntry());
+                    if (itemExists(entry.getFluid())) {
+                        ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
+                        addMeltable(entryID, entry.getAmount(), fluidID);
+                    } else {
+                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluid()));
+                    }
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
                 }
-            } else {
-                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
             }
+        } catch (JsonParseException e) {
+            LogUtil.error("Malformed CrucibleRegistries.json");
+            LogUtil.error(e.getMessage());
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
         }
     }
 
-    private CrucibleRegistriesJson readJson() {
+    private CrucibleRegistriesJson readJson() throws JsonParseException {
+        Gson gson = new GsonBuilder().registerTypeAdapter(CrucibleRegistriesJson.class, new AnnotatedDeserializer<CrucibleRegistriesJson>()).create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE);
         CrucibleRegistriesJson crucibleRegistriesJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            crucibleRegistriesJson = new Gson().fromJson(builder.toString(), CrucibleRegistriesJson.class);
+            crucibleRegistriesJson = gson.fromJson(builder.toString(), CrucibleRegistriesJson.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,14 +4,14 @@ public class HeatJson {
     @JsonRequired
     private final String entry;
     @JsonRequired
-    private final int rate;
+    private final Integer rate;
 
-    public HeatJson(String entry, int rate) {
+    public HeatJson(String entry, Integer rate) {
         this.entry = entry;
         this.rate = rate;
     }
 
-    public int getRate() {
+    public Integer getRate() {
         return rate;
     }
 

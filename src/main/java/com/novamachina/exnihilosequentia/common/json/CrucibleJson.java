@@ -8,7 +8,7 @@ public class CrucibleJson {
     @JsonRequired
     private final String fluid;
     @JsonRequired
-    private final int amount;
+    private final Integer amount;
 
     public CrucibleJson(String entry, Meltable value) {
         this.entry = entry;
@@ -16,7 +16,7 @@ public class CrucibleJson {
         this.amount = value.getAmount();
     }
 
-    public CrucibleJson(String entry, String fluid, int value) {
+    public CrucibleJson(String entry, String fluid, Integer value) {
         this.entry = entry;
         this.fluid = fluid;
         this.amount = value;
@@ -30,7 +30,7 @@ public class CrucibleJson {
         return fluid;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 }

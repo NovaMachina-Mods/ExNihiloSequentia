@@ -1,8 +1,12 @@
 package com.novamachina.exnihilosequentia.common.item.tools.crook;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
@@ -35,14 +39,22 @@ public class CrookDrops extends AbstractModRegistry {
 
     @Override
     public void useJson() {
-        List<CrookJson> list = readJson();
-        for(CrookJson entry : list) {
-            if(itemExists(entry.getResult())) {
-                ResourceLocation entryID = new ResourceLocation(entry.getResult());
-                addDrop(entryID, entry.getRarity());
-            } else {
-                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+        try {
+            List<CrookJson> list = readJson();
+            for(CrookJson entry : list) {
+                if(itemExists(entry.getResult())) {
+                    ResourceLocation entryID = new ResourceLocation(entry.getResult());
+                    addDrop(entryID, entry.getRarity());
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                }
             }
+        } catch (JsonParseException e) {
+            LogUtil.error("Malformed CrookRegistry.json");
+            LogUtil.error(e.getMessage());
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
         }
     }
 
@@ -51,14 +63,15 @@ public class CrookDrops extends AbstractModRegistry {
         return ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }
 
-    private List<CrookJson> readJson() {
+    private List<CrookJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<CrookJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<CrookJson>>()).create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CROOK_FILE);
         List<CrookJson> list = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            Type listType = new TypeToken<ArrayList<CrookJson>>(){}.getType();
-            list = new Gson().fromJson(builder.toString(), listType);
+            list = gson.fromJson(builder.toString(), listType);
         } catch (IOException e) {
             e.printStackTrace();
         }

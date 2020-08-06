@@ -3,10 +3,12 @@ package com.novamachina.exnihilosequentia.common.json;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDropEntry;
 
 public class CrookJson {
+    @JsonRequired
     private final String result;
-    private final float rarity;
+    @JsonRequired
+    private final Float rarity;
 
-    public CrookJson(String result, float rarity) {
+    public CrookJson(String result, Float rarity) {
         this.result = result;
         this.rarity = rarity;
     }
@@ -20,7 +22,7 @@ public class CrookJson {
         return result;
     }
 
-    public float getRarity() {
+    public Float getRarity() {
         return rarity;
     }
 }

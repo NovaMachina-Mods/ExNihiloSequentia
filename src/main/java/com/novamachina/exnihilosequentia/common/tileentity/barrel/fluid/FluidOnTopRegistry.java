@@ -1,7 +1,11 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
 import com.novamachina.exnihilosequentia.common.json.FluidOnTopJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
@@ -73,8 +77,7 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
         for (FluidOnTopRecipe recipe : list) {
             if (recipe.getFluidOnTop().equals(fluidOnTop)) {
                 LogUtil.warn(String
-                    .format("Duplicate recipe: %s(In Barrel) + %s(On Top). Replacing result with most recent: %s", fluidInTank, fluidOnTop, result));
-                list.remove(recipe);
+                    .format("Duplicate recipe: %s(In Barrel) + %s(On Top). Keeping first result: %s", fluidInTank, fluidOnTop, recipe.getResult()));
             }
         }
         list.add(new FluidOnTopRecipe(fluidInTank, fluidOnTop, result));
@@ -82,24 +85,32 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
-        BarrelRegistriesJson registriesJson = readJson();
-        for(FluidOnTopJson entry : registriesJson.getFluidOnTopRegistry()) {
-            if(itemExists(entry.getFluidInBarrel())) {
-                ResourceLocation fluidInBarrel = new ResourceLocation(entry.getFluidInBarrel());
-                if(itemExists(entry.getFluidOnTop())) {
-                    ResourceLocation fluidOnTop = new ResourceLocation(entry.getFluidOnTop());
-                    if(itemExists(entry.getResult())) {
-                        ResourceLocation resultID = new ResourceLocation(entry.getResult());
-                        addRecipe(fluidInBarrel, fluidOnTop, resultID);
+        try {
+            BarrelRegistriesJson registriesJson = readJson();
+            for(FluidOnTopJson entry : registriesJson.getFluidOnTopRegistry()) {
+                if(itemExists(entry.getFluidInBarrel())) {
+                    ResourceLocation fluidInBarrel = new ResourceLocation(entry.getFluidInBarrel());
+                    if(itemExists(entry.getFluidOnTop())) {
+                        ResourceLocation fluidOnTop = new ResourceLocation(entry.getFluidOnTop());
+                        if(itemExists(entry.getResult())) {
+                            ResourceLocation resultID = new ResourceLocation(entry.getResult());
+                            addRecipe(fluidInBarrel, fluidOnTop, resultID);
+                        }else {
+                            LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                        }
                     }else {
-                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluidOnTop()));
                     }
-                }else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluidOnTop()));
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluidInBarrel()));
                 }
-            } else {
-                LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluidInBarrel()));
             }
+        } catch (JsonParseException e) {
+            LogUtil.error("Malformed CrucibleRegistries.json");
+            LogUtil.error(e.getMessage());
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
         }
     }
 
@@ -108,13 +119,14 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
         return TagUtils.isTag(itemID) ||  ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
-    private BarrelRegistriesJson readJson() {
+    private BarrelRegistriesJson readJson() throws JsonParseException {
+        Gson gson = new GsonBuilder().registerTypeAdapter(BarrelRegistriesJson.class, new AnnotatedDeserializer<BarrelRegistriesJson>()).create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
         BarrelRegistriesJson barrelRegistriesJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            barrelRegistriesJson = new Gson().fromJson(builder.toString(), BarrelRegistriesJson.class);
+            barrelRegistriesJson = gson.fromJson(builder.toString(), BarrelRegistriesJson.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
