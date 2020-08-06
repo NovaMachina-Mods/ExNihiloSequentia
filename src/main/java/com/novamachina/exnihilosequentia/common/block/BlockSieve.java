@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.block;
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveDrops;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
 import net.minecraft.block.Block;
@@ -52,7 +53,7 @@ public class BlockSieve extends BaseBlock {
                 sieveTile.insertMesh(stack);
             } else if (stack.getItem() instanceof BlockItem) {
                 BlockItem blockItem = (BlockItem) stack.getItem();
-                if (SieveDrops.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh())) {
+                if (ModRegistries.SIEVE.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh())) {
                     sieveTile.insertSiftableBlock(stack);
                 }
             }

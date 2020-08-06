@@ -2,6 +2,9 @@ package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
@@ -17,6 +20,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -34,12 +38,13 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     protected     int                         ticksSinceLast;
     protected     int                         solidAmount;
     protected     ItemStack                   currentItem;
+    protected static int MAX_FLUID_AMOUNT =  Config.CRUCIBLE_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
 
     public BaseCrucibleTile(
         TileEntityType<? extends BaseCrucibleTile> tileEntityType) {
         super(tileEntityType);
         inventory      = new MeltableItemHandler(getCrucibleType());
-        tank           = new FluidTank(4000);
+        tank           = new FluidTank(MAX_FLUID_AMOUNT);
         ticksSinceLast = 0;
         solidAmount    = 0;
         currentItem    = ItemStack.EMPTY;
@@ -202,8 +207,8 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public abstract CrucilbeTypeEnum getCrucibleType();
 
     private Meltable getMeltable() {
-        return getCrucibleType() == CrucilbeTypeEnum.FIRED ? FiredCrucibleMeltableItems
+        return getCrucibleType() == CrucilbeTypeEnum.FIRED ? ModRegistries.FIRED_CRUCIBLE
             .getMeltable(currentItem.getItem())
-            : WoodCrucibleMeltableItems.getMeltable(currentItem.getItem());
+            : ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem());
     }
 }

@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.sieve;
 import com.novamachina.exnihilosequentia.common.block.BlockSieve;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import java.util.List;
@@ -131,7 +132,7 @@ public class SieveTile extends TileEntity {
 
             if (progress >= 1.0F) {
                 LogUtil.info("Getting Drops");
-                List<Item> drops = SieveDrops
+                List<Item> drops = ModRegistries.SIEVE
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType);
                 drops.forEach((item -> {
                     world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,

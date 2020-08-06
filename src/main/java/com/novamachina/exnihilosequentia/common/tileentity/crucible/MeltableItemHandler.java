@@ -1,6 +1,8 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import javax.annotation.Nonnull;
+
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.items.ItemStackHandler;
@@ -31,8 +33,8 @@ public class MeltableItemHandler extends ItemStackHandler {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return type == CrucilbeTypeEnum.FIRED ? FiredCrucibleMeltableItems
-            .isMeltable(stack.getItem()) : WoodCrucibleMeltableItems.isMeltable(stack.getItem());
+        return type == CrucilbeTypeEnum.FIRED ? ModRegistries.FIRED_CRUCIBLE
+            .isMeltable(stack.getItem()) : ModRegistries.WOODEN_CRUCIBLE.isMeltable(stack.getItem());
     }
 
     @Override

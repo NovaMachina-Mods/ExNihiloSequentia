@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.MobSpawnBarrelMode;
@@ -28,7 +29,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(BarrelTile barrelTile) {
-        if (barrelTile.getFluidAmount() >= FluidAttributes.BUCKET_VOLUME) {
+        if (barrelTile.getFluidAmount() >= BarrelTile.MAX_FLUID_AMOUNT) {
             if (fluidOnTop(barrelTile)) {
                 return;
             }
@@ -58,7 +59,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
         Block blockBelow = barrelTile.getWorld().getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock();
 
-        if (FluidTransformRegistry.isValidRecipe(fluidInTank, blockBelow)) {
+        if (ModRegistries.FLUID_TRANSFORM.isValidRecipe(fluidInTank, blockBelow)) {
             barrelTile.setMode(Constants.BarrelModes.TRANSFORM);
             return true;
         }
@@ -69,9 +70,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         Fluid fluidOnTop = barrelTile.getWorld().getFluidState(barrelTile.getPos().add(0, 1, 0)).getFluid();
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
-        if (FluidOnTopRegistry.isValidRecipe(fluidInTank, fluidOnTop)) {
+        if (ModRegistries.FLUID_ON_TOP.isValidRecipe(fluidInTank, fluidOnTop)) {
             barrelTile.getTank().setFluid(FluidStack.EMPTY);
-            barrelTile.getInventory().setStackInSlot(0, new ItemStack(FluidOnTopRegistry.getResult(fluidInTank, fluidOnTop)));
+            barrelTile.getInventory().setStackInSlot(0, new ItemStack(ModRegistries.FLUID_ON_TOP.getResult(fluidInTank, fluidOnTop)));
             barrelTile.setMode(Constants.BarrelModes.BLOCK);
             return true;
         }
@@ -109,10 +110,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     private boolean fluidBlockTransform(BarrelTile barrelTile, PlayerEntity player, Hand handIn) {
         Fluid fluid = barrelTile.getTank().getFluid().getFluid();
         Item input = player.getHeldItem(handIn).getItem();
-        if (FluidBlockTransformRegistry.isValidRecipe(fluid, input)) {
+        if (ModRegistries.FLUID_BLOCK.isValidRecipe(fluid, input)) {
             barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
             barrelTile.getInventory()
-                .setStackInSlot(0, new ItemStack(FluidBlockTransformRegistry.getResult(fluid, input)));
+                .setStackInSlot(0, new ItemStack(ModRegistries.FLUID_BLOCK.getResult(fluid, input)));
             player.getHeldItem(handIn).shrink(1);
             barrelTile.setMode(Constants.BarrelModes.BLOCK);
             return true;

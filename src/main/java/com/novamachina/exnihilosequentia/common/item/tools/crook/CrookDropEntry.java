@@ -6,9 +6,9 @@ import net.minecraft.util.ResourceLocation;
 public class CrookDropEntry {
 
     private final ResourceLocation item;
-    private final double rarity;
+    private final float rarity;
 
-    public CrookDropEntry(ResourceLocation item, double rarity) {
+    public CrookDropEntry(ResourceLocation item, float rarity) {
         this.item   = item;
         this.rarity = rarity;
     }
@@ -17,7 +17,7 @@ public class CrookDropEntry {
         return item;
     }
 
-    public double getRarity() {
+    public float getRarity() {
         return rarity;
     }
 }

@@ -93,4 +93,8 @@ public class TagUtils {
         }
         return idList;
     }
+
+    public static boolean isTag(ResourceLocation tag) {
+        return ItemTags.getCollection().get(tag) != null || BlockTags.getCollection().get(tag) != null;
+    }
 }

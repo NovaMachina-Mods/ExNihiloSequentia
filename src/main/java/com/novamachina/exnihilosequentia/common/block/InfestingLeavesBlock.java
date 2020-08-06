@@ -40,7 +40,7 @@ public class InfestingLeavesBlock extends BaseBlock {
             Random random = new Random();
             nearbyLeaves.forEach(leafPos -> {
                 LogUtil.info(leafPos.toString());
-                if (random.nextDouble() <= Config.SPREAD_CHANCE_PERCENT.get()) {
+                if (random.nextDouble() <= Config.SPREAD_CHANCE.get()) {
                     normalToInfesting(world, world.getBlockState(leafPos), leafPos);
                 }
             });

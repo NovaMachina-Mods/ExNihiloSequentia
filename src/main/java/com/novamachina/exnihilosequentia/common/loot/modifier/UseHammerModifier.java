@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.loot.modifier;
 import com.google.gson.JsonObject;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class UseHammerModifier extends LootModifier {
         if (tool != null && blockState != null) {
             if (tool.getItem() instanceof HammerBaseItem) {
                 List<ItemStack> newLoot     = new ArrayList<>();
-                Block           returnBlock = HammerDrops
+                Block           returnBlock = ModRegistries.HAMMER
                     .getResult(blockState.getBlock().getRegistryName());
                 newLoot.add(new ItemStack(returnBlock));
                 return newLoot;

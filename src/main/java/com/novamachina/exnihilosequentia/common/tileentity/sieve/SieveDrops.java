@@ -1,14 +1,30 @@
 package com.novamachina.exnihilosequentia.common.tileentity.sieve;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
+import com.novamachina.exnihilosequentia.common.json.CrookJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
+import com.novamachina.exnihilosequentia.common.json.SieveJson;
+import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,26 +33,36 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class SieveDrops {
+public class SieveDrops extends AbstractModRegistry {
 
-    private static final Map<ResourceLocation, List<SieveDropEntry>> stringMeshMap = new HashMap<>();
-    private static final Map<ResourceLocation, List<SieveDropEntry>> flintMeshMap = new HashMap<>();
-    private static final Map<ResourceLocation, List<SieveDropEntry>> ironMeshMap = new HashMap<>();
-    private static final Map<ResourceLocation, List<SieveDropEntry>> diamondMeshMap = new HashMap<>();
+    private final Map<ResourceLocation, List<SieveDropEntry>> stringMeshMap = new HashMap<>();
+    private final Map<ResourceLocation, List<SieveDropEntry>> flintMeshMap = new HashMap<>();
+    private final Map<ResourceLocation, List<SieveDropEntry>> ironMeshMap = new HashMap<>();
+    private final Map<ResourceLocation, List<SieveDropEntry>> diamondMeshMap = new HashMap<>();
 
-    public static void addDrop(Block input, Item result, float rarity, EnumMesh meshType) {
+    private boolean flattenRecipes = Config.FLATTEN_SIEVE_RECIPES.get();
+
+    public SieveDrops(ModRegistries.ModBus bus) {
+        bus.register(this);
+    }
+
+    public void addDrop(Block input, Item result, float rarity, EnumMesh meshType) {
         addDrop(input.getRegistryName(), result.getRegistryName(), rarity, meshType);
     }
 
-    public static void addDrop(ResourceLocation input, ResourceLocation result, float rarity, EnumMesh meshType) {
+    public void addDrop(ResourceLocation input, ResourceLocation result, float rarity, EnumMesh meshType) {
         switch (meshType) {
             case STRING:
                 insertIntoMap(stringMeshMap, input, result, rarity);
@@ -56,7 +82,7 @@ public class SieveDrops {
         }
     }
 
-    private static void insertIntoMap(Map<ResourceLocation, List<SieveDropEntry>> map, ResourceLocation input, ResourceLocation result, float rarity) {
+    private void insertIntoMap(Map<ResourceLocation, List<SieveDropEntry>> map, ResourceLocation input, ResourceLocation result, float rarity) {
         if (map.containsKey(input)) {
             map.get(input).add(new SieveDropEntry(result, rarity));
         } else {
@@ -66,20 +92,26 @@ public class SieveDrops {
         }
     }
 
-    public static List<Item> getDrops(Block input, EnumMesh meshType) {
+    public List<Item> getDrops(Block input, EnumMesh meshType) {
         List<Item> returnList = new ArrayList<>();
         switch (meshType) {
-            case STRING:
-                returnList.addAll(retrieveFromMap(stringMeshMap, input.getRegistryName()));
-                break;
-            case FLINT:
-                returnList.addAll(retrieveFromMap(flintMeshMap, input.getRegistryName()));
-                break;
-            case IRON:
-                returnList.addAll(retrieveFromMap(ironMeshMap, input.getRegistryName()));
-                break;
             case DIAMOND:
                 returnList.addAll(retrieveFromMap(diamondMeshMap, input.getRegistryName()));
+                if(!flattenRecipes) {
+                    break;
+                }
+            case IRON:
+                returnList.addAll(retrieveFromMap(ironMeshMap, input.getRegistryName()));
+                if(!flattenRecipes) {
+                    break;
+                }
+            case FLINT:
+                returnList.addAll(retrieveFromMap(flintMeshMap, input.getRegistryName()));
+                if(!flattenRecipes) {
+                    break;
+                }
+            case STRING:
+                returnList.addAll(retrieveFromMap(stringMeshMap, input.getRegistryName()));
                 break;
             default:
                 LogUtil.warn(String.format("Mesh type \"%s\" does not exist.", meshType.getName()));
@@ -88,8 +120,57 @@ public class SieveDrops {
         return returnList;
     }
 
-    //TODO: Add lapis, cocoa, bonemeal (these are the dyes that are missing)
-    public static void initialize() {
+    @Override
+    protected void useJson() {
+        try {
+            List<SieveJson> registryJson = readJson();
+            for(SieveJson entry : registryJson) {
+                if(itemExists(entry.getInput())) {
+                    ResourceLocation inputID = new ResourceLocation(entry.getInput());
+                    if(itemExists(entry.getResult())) {
+                        ResourceLocation outputID = new ResourceLocation(entry.getResult());
+                        addDrop(inputID, outputID, entry.getRarity(), entry.getMesh());
+                    } else {
+                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                    }
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getInput()));
+                }
+            }
+        } catch (JsonParseException e) {
+            LogUtil.error(String.format("Malformed %s", Constants.Json.SIEVE_FILE));
+            LogUtil.error(e.getMessage());
+            if(e.getMessage().contains("IllegalStateException")) {
+                LogUtil.error("Please consider deleting the file and regenerating it.");
+            }
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
+        }
+    }
+
+    private boolean itemExists(String entry) {
+        ResourceLocation itemID = new ResourceLocation(entry);
+        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
+    }
+
+    protected List<SieveJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<SieveJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<SieveJson>>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.SIEVE_FILE);
+        List<SieveJson> registryJson = null;
+        try {
+            StringBuilder builder = new StringBuilder();
+            Files.readAllLines(path).forEach(builder::append);
+            registryJson = gson.fromJson(builder.toString(), listType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return registryJson;
+    }
+
+    @Override
+    protected void useDefaults() {
         // Stone Pebble
         addDrop(Blocks.DIRT,
             ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 1.0F, EnumMesh.STRING);
@@ -254,7 +335,7 @@ public class SieveDrops {
         });
     }
 
-    private static Map<Block, Item> getLeavesSaplings() {
+    private Map<Block, Item> getLeavesSaplings() {
         Map<Block, Item> saplingMap = new HashMap<>();
         saplingMap.put(Blocks.ACACIA_LEAVES, Items.ACACIA_SAPLING);
         saplingMap.put(Blocks.BIRCH_LEAVES, Items.BIRCH_SAPLING);
@@ -266,12 +347,12 @@ public class SieveDrops {
         return saplingMap;
     }
 
-    private static void addMultiMeshDrop(Block input, Item result, Float stringRarity,
+    private void addMultiMeshDrop(Block input, Item result, Float stringRarity,
                                          Float flintRarity, Float ironRarity, Float diamondRarity) {
         addMultiMeshDrop(input.getRegistryName(), result.getRegistryName(), stringRarity, flintRarity,ironRarity, diamondRarity);
     }
 
-    private static void addMultiMeshDrop(ResourceLocation input, ResourceLocation result, Float stringRarity,
+    private void addMultiMeshDrop(ResourceLocation input, ResourceLocation result, Float stringRarity,
                                          Float flintRarity, Float ironRarity, Float diamondRarity) {
         if (stringRarity != null) {
             addDrop(input, result, stringRarity, EnumMesh.STRING);
@@ -287,7 +368,7 @@ public class SieveDrops {
         }
     }
 
-    private static Collection<? extends Item> retrieveFromMap(
+    private Collection<? extends Item> retrieveFromMap(
         Map<ResourceLocation, List<SieveDropEntry>> dropsMap, ResourceLocation input) {
         List<Item> returnList = new ArrayList<>();
         Random random = new Random();
@@ -302,7 +383,7 @@ public class SieveDrops {
         return returnList;
     }
 
-    public static boolean isBlockSiftable(Block block, EnumMesh mesh) {
+    public boolean isBlockSiftable(Block block, EnumMesh mesh) {
         Objects.requireNonNull(block.getRegistryName());
 
         switch (mesh) {
@@ -322,5 +403,50 @@ public class SieveDrops {
                 return false;
             }
         }
+    }
+
+    @Override
+    public void clear() {
+        stringMeshMap.clear();
+        flintMeshMap.clear();
+        ironMeshMap.clear();
+        diamondMeshMap.clear();
+    }
+
+    @Override
+    public List<SieveJson> toJSONReady() {
+        List<SieveJson> jsonList = new ArrayList<>();
+        for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : stringMeshMap.entrySet()) {
+            ResourceLocation input = entry.getKey();
+            List<SieveDropEntry> dropList = entry.getValue();
+            for(SieveDropEntry dropEntry : dropList) {
+                jsonList.add(new SieveJson(input.toString(), dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.STRING));
+            }
+        }
+
+        for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : flintMeshMap.entrySet()) {
+            ResourceLocation input = entry.getKey();
+            List<SieveDropEntry> dropList = entry.getValue();
+            for(SieveDropEntry dropEntry : dropList) {
+                jsonList.add(new SieveJson(input.toString(), dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.FLINT));
+            }
+        }
+
+        for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : ironMeshMap.entrySet()) {
+            ResourceLocation input = entry.getKey();
+            List<SieveDropEntry> dropList = entry.getValue();
+            for(SieveDropEntry dropEntry : dropList) {
+                jsonList.add(new SieveJson(input.toString(), dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.IRON));
+            }
+        }
+
+        for(Map.Entry<ResourceLocation, List<SieveDropEntry>> entry : diamondMeshMap.entrySet()) {
+            ResourceLocation input = entry.getKey();
+            List<SieveDropEntry> dropList = entry.getValue();
+            for(SieveDropEntry dropEntry : dropList) {
+                jsonList.add(new SieveJson(input.toString(), dropEntry.getResult().toString(), dropEntry.getRarity(), EnumMesh.DIAMOND));
+            }
+        }
+        return jsonList;
     }
 }

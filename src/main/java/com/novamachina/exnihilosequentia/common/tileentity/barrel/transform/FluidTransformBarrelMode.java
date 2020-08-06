@@ -1,10 +1,13 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.transform;
 
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
@@ -26,13 +29,14 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(BarrelTile barrelTile) {
-        if (FluidTransformRegistry.isValidRecipe(barrelTile.getTank().getFluid().getFluid(), barrelTile.getWorld()
+        if (ModRegistries.FLUID_TRANSFORM.isValidRecipe(barrelTile.getTank().getFluid().getFluid(), barrelTile.getWorld()
             .getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock())) {
             currentProgress++;
             spawnParticle(barrelTile);
-            if(currentProgress >= 200) {
+            if(currentProgress >= Config.SECONDS_TO_FLUID_TRANSFORM.get() * 20) {
                 currentProgress = 0;
-                barrelTile.getTank().setFluid(new FluidStack(ModFluids.WITCH_WATER_STILL.get(), FluidAttributes.BUCKET_VOLUME));
+                Fluid newFluid = ModRegistries.FLUID_TRANSFORM.getResult(barrelTile.getFluid());
+                barrelTile.getTank().setFluid(new FluidStack(newFluid, BarrelTile.MAX_FLUID_AMOUNT));
                 barrelTile.setMode(Constants.BarrelModes.FLUID);
             }
         }
