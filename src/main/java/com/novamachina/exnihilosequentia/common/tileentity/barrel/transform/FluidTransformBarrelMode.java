@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.transform;
 
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -26,7 +27,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(BarrelTile barrelTile) {
-        if (FluidTransformRegistry.isValidRecipe(barrelTile.getTank().getFluid().getFluid(), barrelTile.getWorld()
+        if (ModRegistries.FLUID_TRANSFORM.isValidRecipe(barrelTile.getTank().getFluid().getFluid(), barrelTile.getWorld()
             .getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock())) {
             currentProgress++;
             spawnParticle(barrelTile);

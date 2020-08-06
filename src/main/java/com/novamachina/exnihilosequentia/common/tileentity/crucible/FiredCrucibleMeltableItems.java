@@ -1,45 +1,70 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
+import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
-import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-public class FiredCrucibleMeltableItems {
-
-    private static final Map<ResourceLocation, Meltable> meltableMap = new HashMap<>();
-
-    public static void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount, Fluid fluid) {
-        addMeltable(entry.getRegistryName(), amount, fluid.getRegistryName());
+public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
+    public FiredCrucibleMeltableItems(ModRegistries.ModBus bus) {
+        bus.register(this);
     }
 
-    public static void addMeltable(ResourceLocation entry, int amount, ResourceLocation fluid) {
-        insertIntoMap(entry, new Meltable(amount, fluid));
+    @Override
+    protected void useJson() {
+        try {
+            CrucibleRegistriesJson registriesJson = readJson();
+            for (CrucibleJson entry : registriesJson.getFiredCrucibleRegistry()) {
+                if (itemExists(entry.getEntry())) {
+                    ResourceLocation entryID = new ResourceLocation(entry.getEntry());
+                    if (itemExists(entry.getFluid())) {
+                        ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
+                        addMeltable(entryID, entry.getAmount(), fluidID);
+                    } else {
+                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluid()));
+                    }
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
+                }
+            }
+        } catch (JsonParseException e) {
+            LogUtil.error("Malformed CrucibleRegistries.json");
+            LogUtil.error(e.getMessage());
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
+        }
     }
 
-    private static void insertIntoMap(ResourceLocation name, Meltable meltable) {
-        meltableMap.put(name, meltable);
+    private CrucibleRegistriesJson readJson() throws JsonParseException {
+        Gson gson = new GsonBuilder().registerTypeAdapter(CrucibleRegistriesJson.class, new AnnotatedDeserializer<CrucibleRegistriesJson>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE);
+        CrucibleRegistriesJson crucibleRegistriesJson = null;
+        try {
+            StringBuilder builder = new StringBuilder();
+            Files.readAllLines(path).forEach(builder::append);
+            crucibleRegistriesJson = gson.fromJson(builder.toString(), CrucibleRegistriesJson.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return crucibleRegistriesJson;
     }
 
-    public static boolean isMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        return meltableMap.containsKey(entry.getRegistryName());
-    }
-
-    public static Meltable getMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
-        return meltableMap.getOrDefault(entry.getRegistryName(), Meltable.DEFAULT);
-    }
-
-    public static void initialize() {
+    @Override
+    protected void useDefaults() {
         // Lava Meltables
         addMeltable(Blocks.COBBLESTONE, 250, Fluids.LAVA);
         addMeltable(Blocks.DIORITE, 250, Fluids.LAVA);

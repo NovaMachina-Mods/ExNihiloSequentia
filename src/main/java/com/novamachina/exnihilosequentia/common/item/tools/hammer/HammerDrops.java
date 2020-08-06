@@ -1,29 +1,56 @@
 package com.novamachina.exnihilosequentia.common.item.tools.hammer;
 
+import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class HammerDrops {
+public class HammerDrops extends AbstractModRegistry {
 
-    private static final Map<ResourceLocation, ResourceLocation> hammerDrops = new HashMap<>();
+    private final Map<ResourceLocation, ResourceLocation> hammerDrops = new HashMap<>();
 
-    public static void addRecipe(Block input, Block output) {
+    public HammerDrops(ModRegistries.ModBus bus) {
+        bus.register(this);
+    }
+
+    public void addRecipe(Block input, Block output) {
         addRecipe(input.getRegistryName(), output.getRegistryName());
     }
 
-    private static void addRecipe(ResourceLocation input, ResourceLocation output) {
+    private void addRecipe(ResourceLocation input, ResourceLocation output) {
         hammerDrops.put(input, output);
     }
 
-    public static void initialize() {
+    public Block getResult(ResourceLocation input) {
+        if(hammerDrops.containsKey(input)) {
+            ResourceLocation output = hammerDrops.get(input);
+            if(ForgeRegistries.BLOCKS.containsKey(output)) {
+                return ForgeRegistries.BLOCKS.getValue(output);
+            }
+        }
+        return ForgeRegistries.BLOCKS.getValue(input);
+    }
 
+    @Override
+    public void clear() {
+        hammerDrops.clear();
+    }
+
+    @Override
+    public Object toJSONReady() {
+        return null;
+    }
+
+    @Override
+    protected void useDefaults() {
         addRecipe(Blocks.STONE, Blocks.COBBLESTONE);
         addRecipe(Blocks.COBBLESTONE, Blocks.GRAVEL);
         addRecipe(Blocks.GRAVEL, Blocks.SAND);
@@ -35,13 +62,8 @@ public class HammerDrops {
         addRecipe(Blocks.NETHERRACK, ModBlocks.CRUSHED_NETHERRACK.get());
     }
 
-    public static Block getResult(ResourceLocation input) {
-        if(hammerDrops.containsKey(input)) {
-            ResourceLocation output = hammerDrops.get(input);
-            if(ForgeRegistries.BLOCKS.containsKey(output)) {
-                return ForgeRegistries.BLOCKS.getValue(output);
-            }
-        }
-        return ForgeRegistries.BLOCKS.getValue(input);
+    @Override
+    protected void useJson() {
+        useDefaults();
     }
 }

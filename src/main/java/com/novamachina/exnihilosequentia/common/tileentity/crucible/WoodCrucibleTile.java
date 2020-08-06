@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -36,7 +37,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
 
-                    solidAmount = WoodCrucibleMeltableItems.getMeltable(currentItem.getItem())
+                    solidAmount = ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem())
                         .getAmount();
                 } else {
                     return;
@@ -46,7 +47,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
                 .isItemEqual(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
-                    solidAmount += WoodCrucibleMeltableItems.getMeltable(currentItem.getItem())
+                    solidAmount += ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem())
                         .getAmount();
                     inventory.getStackInSlot(0).shrink(1);
 
@@ -60,9 +61,9 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                 heat = solidAmount;
             }
 
-            if (heat > 0 && WoodCrucibleMeltableItems.isMeltable(currentItem.getItem())) {
+            if (heat > 0 && ModRegistries.WOODEN_CRUCIBLE.isMeltable(currentItem.getItem())) {
                 FluidStack fluidStack = new FluidStack(
-                    WoodCrucibleMeltableItems.getMeltable(currentItem.getItem()).getFluid(), heat);
+                    ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem()).getFluid(), heat);
                 int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
                 solidAmount -= filled;
             }
@@ -72,7 +73,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     @Override
     protected int getHeat() {
-        return HeatRegistry.getHeatAmount(world.getBlockState(pos.down()).getBlock());
+        return ModRegistries.HEAT.getHeatAmount(world.getBlockState(pos.down()).getBlock());
     }
 
     @Override

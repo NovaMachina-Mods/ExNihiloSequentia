@@ -1,28 +1,46 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
+import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
+import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
+import com.novamachina.exnihilosequentia.common.json.HeatJson;
+import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.utility.Config;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HeatRegistry {
+public class HeatRegistry extends AbstractModRegistry {
 
-    private static final Map<ResourceLocation, Integer> heatMap     = new HashMap<>();
+    private final Map<ResourceLocation, Integer> heatMap     = new HashMap<>();
 
-    public static void addHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry, int amount) {
+    public HeatRegistry(ModRegistries.ModBus bus) {
+        bus.register(this);
+    }
+
+    public void addHeatSource(ForgeRegistryEntry<? extends IItemProvider> entry, int amount) {
         addHeatSource(entry.getRegistryName(), amount);
     }
 
-    public static void addHeatSource(ResourceLocation entry, int amount) {
+    public void addHeatSource(ResourceLocation entry, int amount) {
         // Who do I own?
         List<ResourceLocation> idList = TagUtils.getTagsOwnedBy(entry);
         for(ResourceLocation id : idList) {
@@ -53,20 +71,76 @@ public class HeatRegistry {
         insertIntoMap(entry, amount);
     }
 
-    private static void insertIntoMap(ResourceLocation name, int amount) {
+    private void insertIntoMap(ResourceLocation name, int amount) {
         heatMap.put(name, amount);
     }
 
-    public static int getHeatAmount(ForgeRegistryEntry<? extends IItemProvider> entry) {
+    public int getHeatAmount(ForgeRegistryEntry<? extends IItemProvider> entry) {
         return heatMap.getOrDefault(entry.getRegistryName(), 0);
     }
 
-    public static void initialized() {
+    @Override
+    protected void useJson() {
+        try {
+            CrucibleRegistriesJson registriesJson = readJson();
+            for(HeatJson entry : registriesJson.getHeatRegistry()) {
+                if(itemExists(entry.getEntry())) {
+                    ResourceLocation entryID = new ResourceLocation(entry.getEntry());
+                    addHeatSource(entryID, entry.getRate());
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
+                }
+            }
+        } catch (JsonParseException e) {
+            LogUtil.error("Malformed CrucibleRegistries.json");
+            LogUtil.error(e.getMessage());
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
+        }
+    }
+
+    private boolean itemExists(String entry) {
+        ResourceLocation itemID = new ResourceLocation(entry);
+        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
+    }
+
+    private CrucibleRegistriesJson readJson() throws JsonParseException {
+        Gson gson = new GsonBuilder().registerTypeAdapter(CrucibleRegistriesJson.class, new AnnotatedDeserializer<CrucibleRegistriesJson>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE);
+        CrucibleRegistriesJson crucibleRegistriesJson = null;
+        try {
+            StringBuilder builder = new StringBuilder();
+            Files.readAllLines(path).forEach(builder::append);
+            crucibleRegistriesJson = gson.fromJson(builder.toString(), CrucibleRegistriesJson.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return crucibleRegistriesJson;
+    }
+
+    @Override
+    protected void useDefaults() {
         addHeatSource(Blocks.LAVA, 3);
         addHeatSource(Blocks.FIRE, 4);
         addHeatSource(Blocks.TORCH, 1);
         addHeatSource(Blocks.WALL_TORCH, 1);
         addHeatSource(Blocks.MAGMA_BLOCK, 2);
         addHeatSource(Blocks.GLOWSTONE, 2);
+    }
+
+    @Override
+    public void clear() {
+        heatMap.clear();
+    }
+
+    @Override
+    public List<HeatJson> toJSONReady() {
+        List<HeatJson> jsonList = new ArrayList<>();
+        for(Map.Entry<ResourceLocation, Integer> entry: heatMap.entrySet())
+        {
+            jsonList.add(new HeatJson(entry.getKey().toString(), entry.getValue()));
+        }
+        return jsonList;
     }
 }

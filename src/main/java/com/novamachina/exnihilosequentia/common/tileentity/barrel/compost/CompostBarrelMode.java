@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.compost;
 
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -39,8 +40,8 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        if (CompostRegistry.containsSolid(player.getHeldItem(handIn).getItem())) {
-            if(barrelTile.addSolid(CompostRegistry
+        if (ModRegistries.COMPOST.containsSolid(player.getHeldItem(handIn).getItem())) {
+            if(barrelTile.addSolid(ModRegistries.COMPOST
                 .getSolidAmount(player.getHeldItem(handIn).getItem()))) {
                 player.getHeldItem(handIn).shrink(1);
             }
@@ -61,7 +62,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected boolean isTriggerItem(ItemStack stack) {
-        return CompostRegistry.containsSolid(stack.getItem());
+        return ModRegistries.COMPOST.containsSolid(stack.getItem());
     }
 
     @Override

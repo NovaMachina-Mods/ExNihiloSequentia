@@ -87,7 +87,7 @@ public class WitchWaterBlock extends FlowingFluidBlock {
             } else {
                 ZombieVillagerEntity zombieVillagerEntity = new ZombieVillagerEntity(
                     EntityType.ZOMBIE_VILLAGER, worldIn);
-                zombieVillagerEntity.func_213792_a(villagerEntity.getVillagerData());
+                zombieVillagerEntity.setVillagerData(villagerEntity.getVillagerData());
                 replaceMob(worldIn, villagerEntity, zombieVillagerEntity);
             }
         }
