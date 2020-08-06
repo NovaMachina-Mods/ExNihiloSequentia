@@ -43,6 +43,9 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
         } catch (JsonParseException e) {
             LogUtil.error("Malformed CrucibleRegistries.json");
             LogUtil.error(e.getMessage());
+            if(e.getMessage().contains("IllegalStateException")) {
+                LogUtil.error("Please consider deleting the file and regenerating it.");
+            }
             LogUtil.error("Falling back to defaults");
             clear();
             useDefaults();
