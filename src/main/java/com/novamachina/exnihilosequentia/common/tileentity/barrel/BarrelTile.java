@@ -45,6 +45,7 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     private AbstractBarrelMode mode;
     private int solidAmount;
     public static int MAX_SOLID_AMOUNT = Config.BARREL_MAX_SOLID_AMOUNT.get();
+    public static int MAX_FLUID_AMOUNT = Config.BARREL_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
 
     public BarrelTile() {
         super(ModTiles.BARREL.get());

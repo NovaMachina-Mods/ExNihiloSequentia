@@ -7,6 +7,7 @@ import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
@@ -34,8 +35,8 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
             spawnParticle(barrelTile);
             if(currentProgress >= Config.SECONDS_TO_FLUID_TRANSFORM.get() * 20) {
                 currentProgress = 0;
-                // TODO: This is wrong...
-                barrelTile.getTank().setFluid(new FluidStack(ModFluids.WITCH_WATER_STILL.get(), FluidAttributes.BUCKET_VOLUME));
+                Fluid newFluid = ModRegistries.FLUID_TRANSFORM.getResult(barrelTile.getFluid());
+                barrelTile.getTank().setFluid(new FluidStack(newFluid, BarrelTile.MAX_FLUID_AMOUNT));
                 barrelTile.setMode(Constants.BarrelModes.FLUID);
             }
         }

@@ -29,7 +29,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(BarrelTile barrelTile) {
-        if (barrelTile.getFluidAmount() >= FluidAttributes.BUCKET_VOLUME) {
+        if (barrelTile.getFluidAmount() >= BarrelTile.MAX_FLUID_AMOUNT) {
             if (fluidOnTop(barrelTile)) {
                 return;
             }

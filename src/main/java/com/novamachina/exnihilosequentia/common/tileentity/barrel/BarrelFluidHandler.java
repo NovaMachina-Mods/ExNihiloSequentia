@@ -10,7 +10,7 @@ public class BarrelFluidHandler extends FluidTank {
     private BarrelTile barrel;
 
     public BarrelFluidHandler(BarrelTile barrelTile) {
-        this(Config.BARREL_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME);
+        this(BarrelTile.MAX_FLUID_AMOUNT);
         this.barrel = barrelTile;
     }
 

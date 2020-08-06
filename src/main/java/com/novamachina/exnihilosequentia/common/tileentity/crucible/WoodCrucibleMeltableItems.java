@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// TODO: Add Tag support
 public class WoodCrucibleMeltableItems extends BaseCrucibleMeltableItems{
 
     public WoodCrucibleMeltableItems(ModRegistries.ModBus bus) {
