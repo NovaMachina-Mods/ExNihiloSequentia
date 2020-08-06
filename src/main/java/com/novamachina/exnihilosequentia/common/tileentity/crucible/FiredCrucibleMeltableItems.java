@@ -3,9 +3,11 @@ package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
+import com.novamachina.exnihilosequentia.common.json.FluidOnTopJson;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -15,8 +17,11 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
     public FiredCrucibleMeltableItems(ModRegistries.ModBus bus) {
@@ -26,8 +31,8 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
     @Override
     protected void useJson() {
         try {
-            CrucibleRegistriesJson registriesJson = readJson();
-            for (CrucibleJson entry : registriesJson.getFiredCrucibleRegistry()) {
+            List<CrucibleJson> registriesJson = readJson();
+            for (CrucibleJson entry : registriesJson) {
                 if (itemExists(entry.getEntry())) {
                     ResourceLocation entryID = new ResourceLocation(entry.getEntry());
                     if (itemExists(entry.getFluid())) {
@@ -41,7 +46,7 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
                 }
             }
         } catch (JsonParseException e) {
-            LogUtil.error("Malformed CrucibleRegistries.json");
+            LogUtil.error(String.format("Malformed %s", Constants.Json.FIRED_CRUCIBLE_FILE));
             LogUtil.error(e.getMessage());
             if(e.getMessage().contains("IllegalStateException")) {
                 LogUtil.error("Please consider deleting the file and regenerating it.");
@@ -52,18 +57,19 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
         }
     }
 
-    private CrucibleRegistriesJson readJson() throws JsonParseException {
-        Gson gson = new GsonBuilder().registerTypeAdapter(CrucibleRegistriesJson.class, new AnnotatedDeserializer<CrucibleRegistriesJson>()).create();
-        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE);
-        CrucibleRegistriesJson crucibleRegistriesJson = null;
+    private List<CrucibleJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<CrucibleJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<CrucibleJson>>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.FIRED_CRUCIBLE_FILE);
+        List<CrucibleJson> registryJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            crucibleRegistriesJson = gson.fromJson(builder.toString(), CrucibleRegistriesJson.class);
+            registryJson = gson.fromJson(builder.toString(), listType);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return crucibleRegistriesJson;
+        return registryJson;
     }
 
     @Override

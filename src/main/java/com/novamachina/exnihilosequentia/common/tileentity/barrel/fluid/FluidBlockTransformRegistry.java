@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.CompostJson;
@@ -27,6 +28,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -70,8 +72,8 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
     @Override
     protected void useJson() {
         try {
-            BarrelRegistriesJson registriesJson = readJson();
-            for (FluidBlockJson entry : registriesJson.getFluidBlockRegistry()) {
+            List<FluidBlockJson> registriesJson = readJson();
+            for (FluidBlockJson entry : registriesJson) {
                 if (itemExists(entry.getFluid())) {
                     ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
                     if (itemExists(entry.getInput())) {
@@ -90,7 +92,7 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
                 }
             }
         } catch (JsonParseException e) {
-            LogUtil.error("Malformed BarrelRegistries.json");
+            LogUtil.error(String.format("Malformed %s", Constants.Json.FLUID_BLOCK_FILE));
             LogUtil.error(e.getMessage());
             if(e.getMessage().contains("IllegalStateException")) {
                 LogUtil.error("Please consider deleting the file and regenerating it.");
@@ -106,18 +108,19 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
         return TagUtils.isTag(itemID) ||  ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
-    private BarrelRegistriesJson readJson() throws JsonParseException {
-        Gson gson = new GsonBuilder().registerTypeAdapter(BarrelRegistriesJson.class, new AnnotatedDeserializer<BarrelRegistriesJson>()).create();
-        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
-        BarrelRegistriesJson barrelRegistriesJson = null;
+    private List<FluidBlockJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<FluidBlockJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<FluidBlockJson>>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.FLUID_BLOCK_FILE);
+        List<FluidBlockJson> registryJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            barrelRegistriesJson = gson.fromJson(builder.toString(), BarrelRegistriesJson.class);
+            registryJson = gson.fromJson(builder.toString(), listType);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return barrelRegistriesJson;
+        return registryJson;
     }
 
     protected void useDefaults() {

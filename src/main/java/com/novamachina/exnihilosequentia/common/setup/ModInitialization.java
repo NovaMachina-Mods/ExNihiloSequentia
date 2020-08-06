@@ -38,6 +38,7 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Constants.ModInfo.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModInitialization {
@@ -89,51 +90,28 @@ public class ModInitialization {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
 
-        File file = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE).toFile();
-        if(!Files.exists(file.toPath())) {
-            try (Writer writer = new FileWriter(file)){
-                BarrelRegistriesJson barrelRegistriesJson = new BarrelRegistriesJson(ModRegistries.FLUID_ON_TOP
-                    .toJSONReady(), ModRegistries.FLUID_TRANSFORM.toJSONReady(), ModRegistries.FLUID_BLOCK
-                    .toJSONReady(), ModRegistries.COMPOST.toJSONReady());
-                writer.write(gson.toJson(barrelRegistriesJson));
-                LogUtil.info("Created Barrel Registries JSON");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        file = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE).toFile();
-        if(!Files.exists(file.toPath())) {
-            try (Writer writer = new FileWriter(file)){
-                CrucibleRegistriesJson crucibleRegistriesJson = new CrucibleRegistriesJson(ModRegistries.FIRED_CRUCIBLE
-                    .toJSONReady(), ModRegistries.WOODEN_CRUCIBLE.toJSONReady(), ModRegistries.HEAT.toJSONReady());
-                writer.write(gson.toJson(crucibleRegistriesJson));
-                LogUtil.info("Created Barrel Registries JSON");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        file = Constants.Json.baseJsonPath.resolve(Constants.Json.SIEVE_FILE).toFile();
-        if(!Files.exists(file.toPath())) {
-            try (Writer writer = new FileWriter(file)){
-                writer.write(gson.toJson(ModRegistries.SIEVE.toJSONReady()));
-                LogUtil.info("Created Sieve Registry JSON");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        file = Constants.Json.baseJsonPath.resolve(Constants.Json.CROOK_FILE).toFile();
-        if(!Files.exists(file.toPath())) {
-            try (Writer writer = new FileWriter(file)){
-                writer.write(gson.toJson(ModRegistries.CROOK.toJSONReady()));
-                LogUtil.info("Created Crook Registry JSON");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        generateJson(gson, Constants.Json.COMPOST_FILE, ModRegistries.COMPOST.toJSONReady());
+        generateJson(gson, Constants.Json.FLUID_BLOCK_FILE, ModRegistries.FLUID_BLOCK.toJSONReady());
+        generateJson(gson, Constants.Json.FLUID_TRANSFORM_FILE, ModRegistries.FLUID_TRANSFORM.toJSONReady());
+        generateJson(gson, Constants.Json.FLUID_ON_TOP_FILE, ModRegistries.FLUID_ON_TOP.toJSONReady());
+        generateJson(gson, Constants.Json.HEAT_FILE, ModRegistries.HEAT.toJSONReady());
+        generateJson(gson, Constants.Json.WOOD_CRUCIBLE_FILE, ModRegistries.WOODEN_CRUCIBLE.toJSONReady());
+        generateJson(gson, Constants.Json.FIRED_CRUCIBLE_FILE, ModRegistries.FIRED_CRUCIBLE.toJSONReady());
+        generateJson(gson, Constants.Json.SIEVE_FILE, ModRegistries.SIEVE.toJSONReady());
+        generateJson(gson, Constants.Json.CROOK_FILE, ModRegistries.CROOK.toJSONReady());
 
         ModRegistries.BUS.clearRegistries();
+    }
+
+    private static void generateJson(Gson gson, String fileName, List<?> list) {
+        File file = Constants.Json.baseJsonPath.resolve(fileName).toFile();
+        if(!Files.exists(file.toPath())) {
+            try (Writer writer = new FileWriter(file)){
+                writer.write(gson.toJson(list));
+                LogUtil.info("Created " + fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

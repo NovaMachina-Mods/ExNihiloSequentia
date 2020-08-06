@@ -48,7 +48,7 @@ public class CrookDrops extends AbstractModRegistry {
                 }
             }
         } catch (JsonParseException e) {
-            LogUtil.error("Malformed CrookRegistry.json");
+            LogUtil.error(String.format("Malformed %s", Constants.Json.CROOK_FILE));
             LogUtil.error(e.getMessage());
             if(e.getMessage().contains("IllegalStateException")) {
                 LogUtil.error("Please consider deleting the file and regenerating it.");
