@@ -3,13 +3,13 @@ package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
-import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
+import com.novamachina.exnihilosequentia.common.json.FluidOnTopJson;
 import com.novamachina.exnihilosequentia.common.json.HeatJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
@@ -20,6 +20,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -82,8 +83,8 @@ public class HeatRegistry extends AbstractModRegistry {
     @Override
     protected void useJson() {
         try {
-            CrucibleRegistriesJson registriesJson = readJson();
-            for(HeatJson entry : registriesJson.getHeatRegistry()) {
+            List<HeatJson> registriesJson = readJson();
+            for(HeatJson entry : registriesJson) {
                 if(itemExists(entry.getEntry())) {
                     ResourceLocation entryID = new ResourceLocation(entry.getEntry());
                     addHeatSource(entryID, entry.getRate());
@@ -92,8 +93,11 @@ public class HeatRegistry extends AbstractModRegistry {
                 }
             }
         } catch (JsonParseException e) {
-            LogUtil.error("Malformed CrucibleRegistries.json");
+            LogUtil.error(String.format("Malformed %s", Constants.Json.HEAT_FILE));
             LogUtil.error(e.getMessage());
+            if(e.getMessage().contains("IllegalStateException")) {
+                LogUtil.error("Please consider deleting the file and regenerating it.");
+            }
             LogUtil.error("Falling back to defaults");
             clear();
             useDefaults();
@@ -105,18 +109,19 @@ public class HeatRegistry extends AbstractModRegistry {
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
-    private CrucibleRegistriesJson readJson() throws JsonParseException {
-        Gson gson = new GsonBuilder().registerTypeAdapter(CrucibleRegistriesJson.class, new AnnotatedDeserializer<CrucibleRegistriesJson>()).create();
-        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE);
-        CrucibleRegistriesJson crucibleRegistriesJson = null;
+    private List<HeatJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<HeatJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<HeatJson>>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.HEAT_FILE);
+        List<HeatJson> registryJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            crucibleRegistriesJson = gson.fromJson(builder.toString(), CrucibleRegistriesJson.class);
+            registryJson = gson.fromJson(builder.toString(), listType);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return crucibleRegistriesJson;
+        return registryJson;
     }
 
     @Override

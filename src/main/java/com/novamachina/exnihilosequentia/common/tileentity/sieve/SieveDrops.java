@@ -138,8 +138,11 @@ public class SieveDrops extends AbstractModRegistry {
                 }
             }
         } catch (JsonParseException e) {
-            LogUtil.error("Malformed SieveRegistry.json");
+            LogUtil.error(String.format("Malformed %s", Constants.Json.SIEVE_FILE));
             LogUtil.error(e.getMessage());
+            if(e.getMessage().contains("IllegalStateException")) {
+                LogUtil.error("Please consider deleting the file and regenerating it.");
+            }
             LogUtil.error("Falling back to defaults");
             clear();
             useDefaults();
@@ -155,15 +158,15 @@ public class SieveDrops extends AbstractModRegistry {
         Type listType = new TypeToken<ArrayList<SieveJson>>(){}.getType();
         Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<SieveJson>>()).create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.SIEVE_FILE);
-        List<SieveJson> sieveRegistryJson = null;
+        List<SieveJson> registryJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            sieveRegistryJson = gson.fromJson(builder.toString(), listType);
+            registryJson = gson.fromJson(builder.toString(), listType);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return sieveRegistryJson;
+        return registryJson;
     }
 
     @Override

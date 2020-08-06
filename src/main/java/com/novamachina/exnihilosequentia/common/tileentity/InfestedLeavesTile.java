@@ -13,7 +13,6 @@ public class InfestedLeavesTile extends TileEntity implements ITickableTileEntit
         super(ModTiles.INFESTED_LEAVES.get());
     }
 
-    //TODO: Switch to config
     private int progressWaitInterval = 0;
 
     @Override

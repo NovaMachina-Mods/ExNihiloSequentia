@@ -11,6 +11,7 @@ import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.CompostJson;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
 import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
+import com.novamachina.exnihilosequentia.common.json.SieveJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
@@ -65,8 +66,8 @@ public class CompostRegistry extends AbstractModRegistry {
     @Override
     protected void useJson() {
         try {
-            BarrelRegistriesJson registriesJson = readJson();
-            for (CompostJson entry : registriesJson.getCompostRegistry()) {
+            List<CompostJson> registryJson = readJson();
+            for (CompostJson entry : registryJson) {
                 if (itemExists(entry.getEntry())) {
                     solidsMap.put(new ResourceLocation(entry.getEntry()), entry.getAmount());
                 } else {
@@ -74,8 +75,11 @@ public class CompostRegistry extends AbstractModRegistry {
                 }
             }
         } catch (JsonParseException e) {
-            LogUtil.error("Malformed BarrelRegistries.json");
+            LogUtil.error(String.format("Malformed %s", Constants.Json.COMPOST_FILE));
             LogUtil.error(e.getMessage());
+            if(e.getMessage().contains("IllegalStateException")) {
+                LogUtil.error("Please consider deleting the file and regenerating it.");
+            }
             LogUtil.error("Falling back to defaults");
             clear();
             useDefaults();
@@ -87,18 +91,19 @@ public class CompostRegistry extends AbstractModRegistry {
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }
 
-    private BarrelRegistriesJson readJson() throws JsonParseException {
-        Gson gson = new GsonBuilder().registerTypeAdapter(BarrelRegistriesJson.class, new AnnotatedDeserializer<BarrelRegistriesJson>()).create();
-        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
-        BarrelRegistriesJson barrelRegistriesJson = null;
+    private List<CompostJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<CompostJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<CompostJson>>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.COMPOST_FILE);
+        List<CompostJson> registryJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-           barrelRegistriesJson = gson.fromJson(builder.toString(), BarrelRegistriesJson.class);
+            registryJson = gson.fromJson(builder.toString(), listType);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return barrelRegistriesJson;
+        return registryJson;
     }
 
     protected void useDefaults() {

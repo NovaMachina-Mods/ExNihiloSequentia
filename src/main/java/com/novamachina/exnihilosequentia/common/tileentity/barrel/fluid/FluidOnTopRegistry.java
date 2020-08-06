@@ -3,14 +3,11 @@ package com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
-import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
-import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
-import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
 import com.novamachina.exnihilosequentia.common.json.FluidOnTopJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
@@ -22,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -86,8 +84,8 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
     @Override
     protected void useJson() {
         try {
-            BarrelRegistriesJson registriesJson = readJson();
-            for(FluidOnTopJson entry : registriesJson.getFluidOnTopRegistry()) {
+            List<FluidOnTopJson> registriesJson = readJson();
+            for(FluidOnTopJson entry : registriesJson) {
                 if(itemExists(entry.getFluidInBarrel())) {
                     ResourceLocation fluidInBarrel = new ResourceLocation(entry.getFluidInBarrel());
                     if(itemExists(entry.getFluidOnTop())) {
@@ -106,8 +104,11 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
                 }
             }
         } catch (JsonParseException e) {
-            LogUtil.error("Malformed CrucibleRegistries.json");
+            LogUtil.error(String.format("Malformed %s", Constants.Json.FLUID_ON_TOP_FILE));
             LogUtil.error(e.getMessage());
+            if(e.getMessage().contains("IllegalStateException")) {
+                LogUtil.error("Please consider deleting the file and regenerating it.");
+            }
             LogUtil.error("Falling back to defaults");
             clear();
             useDefaults();
@@ -119,18 +120,19 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
         return TagUtils.isTag(itemID) ||  ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
-    private BarrelRegistriesJson readJson() throws JsonParseException {
-        Gson gson = new GsonBuilder().registerTypeAdapter(BarrelRegistriesJson.class, new AnnotatedDeserializer<BarrelRegistriesJson>()).create();
-        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.BARREL_FILE);
-        BarrelRegistriesJson barrelRegistriesJson = null;
+    private List<FluidOnTopJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<FluidOnTopJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<FluidOnTopJson>>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.FLUID_ON_TOP_FILE);
+        List<FluidOnTopJson> registryJson = null;
         try {
             StringBuilder builder = new StringBuilder();
             Files.readAllLines(path).forEach(builder::append);
-            barrelRegistriesJson = gson.fromJson(builder.toString(), BarrelRegistriesJson.class);
+            registryJson = gson.fromJson(builder.toString(), listType);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return barrelRegistriesJson;
+        return registryJson;
     }
 
     @Override

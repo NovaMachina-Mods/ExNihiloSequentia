@@ -114,8 +114,16 @@ public class Constants {
             .resolve("exnihilosequentia"), "Ex Nihilo: Sequentia Json folder");
 
         public static String BARREL_FILE = "BarrelRegistries.json";
-        public static String CROOK_FILE = "CrookRegistry.json";
         public static String CRUCIBLE_FILE = "CrucibleRegistries.json";
+
+        public static String COMPOST_FILE = "CompostRegistry.json";
+        public static String FLUID_BLOCK_FILE = "FluidBlockTransformRegistry.json";
+        public static String FLUID_TRANSFORM_FILE = "FluidTransformRegistry.json";
+        public static String FLUID_ON_TOP_FILE = "FluidOnTopRegistry.json";
+        public static String HEAT_FILE = "HeatRegistry.json";
+        public static String WOOD_CRUCIBLE_FILE = "WoodCrucibleRegistry.json";
+        public static String FIRED_CRUCIBLE_FILE = "FiredCrucibleRegistry.json";
         public static String SIEVE_FILE = "SieveRegistry.json";
+        public static String CROOK_FILE = "CrookRegistry.json";
     }
 }
