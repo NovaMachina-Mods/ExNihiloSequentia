@@ -5,6 +5,7 @@ import com.novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,7 +48,7 @@ public class CrookBaseItem extends ToolItem {
         Collection<ResourceLocation> tags = TagUtils.getTags(state.getBlock());
 
         if (tags.contains(new ResourceLocation("minecraft:leaves"))) {
-            for (int i = 0; i < CrookDrops.numberOfTimesToTestVanillaDrops + 1; i++) {
+            for (int i = 0; i < Config.VANILLA_SIMULATE_DROP_COUNT.get(); i++) {
                 List<ItemStack> items = Block
                     .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimension().getType()),
                         pos, null);
@@ -59,7 +60,7 @@ public class CrookBaseItem extends ToolItem {
         if (state.getBlock() instanceof InfestedLeavesBlock) {
             Random random = new Random();
 
-            itemDrops.add(new ItemStack(Items.STRING, random.nextInt(3) + 2));
+            itemDrops.add(new ItemStack(Items.STRING, random.nextInt(Config.MAX_BONUS_STRING_COUNT.get()) + Config.MIN_STRING_COUNT.get()));
             if (random.nextDouble() <= 0.8) {
                 itemDrops
                     .add(new ItemStack(ModItems.resourceMap.get(Constants.Items.SILKWORM).get()));

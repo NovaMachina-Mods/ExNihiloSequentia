@@ -14,13 +14,14 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
     }
 
     private int progress             = 0;
-    private int progressWaitInterval = Config.TICKS_TO_TRANSFORM_LEAVES.get() / 100;
+    private int progressWaitInterval = (Config.SECONDS_TO_TRANSFORM_LEAVES.get() * 20) / 100;
     private int spreadCounter        = 0;
 
     @Override
     public void tick() {
         if (!world.isRemote()) {
-            if (progressWaitInterval <= 0) {
+            progressWaitInterval--;
+            if (progressWaitInterval <= 0){
                 progress++;
                 spreadCounter++;
 
@@ -29,14 +30,12 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
                     InfestingLeavesBlock.finishInfestingBlock(world, pos);
                 }
 
-                if (spreadCounter >= Config.SPREAD_UPDATE_FREQUENCEY.get()) {
+                if (spreadCounter >= Config.TICKS_BETWEEN_SPREAD_ATTEMPT.get()) {
                     LogUtil.info("Spreading");
                     InfestingLeavesBlock.spread(world, pos);
                     spreadCounter = 0;
                 }
-                progressWaitInterval = Config.TICKS_TO_TRANSFORM_LEAVES.get() / 100;
-            } else {
-                progressWaitInterval--;
+                progressWaitInterval = (Config.SECONDS_TO_TRANSFORM_LEAVES.get() * 20) / 100;
             }
         }
     }

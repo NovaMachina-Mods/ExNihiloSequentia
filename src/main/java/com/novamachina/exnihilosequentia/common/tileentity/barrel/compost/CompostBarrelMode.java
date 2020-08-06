@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.barrel.compost;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelMode;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,7 +30,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
         if (barrelTile.getSolidAmount() >= BarrelTile.MAX_SOLID_AMOUNT && barrelTile.getInventory().getStackInSlot(0).isEmpty()) {
             currentProgress++;
             spawnParticle(barrelTile);
-            if (currentProgress >= 200) {
+            if (currentProgress >= Config.SECONDS_TO_COMPOST.get() * 20) {
                 currentProgress = 0;
                 barrelTile.getInventory().setStackInSlot(0, new ItemStack(ForgeRegistries.BLOCKS.getValue(Blocks.DIRT.getRegistryName())));
                 barrelTile.removeSolid(barrelTile.getSolidAmount());

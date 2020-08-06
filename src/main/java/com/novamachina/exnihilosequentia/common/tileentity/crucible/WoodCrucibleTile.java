@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
@@ -18,10 +19,10 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
             return;
         }
 
-        inventory.setCrucibleHasRoom(tank.getFluidAmount() < 4000);
+        inventory.setCrucibleHasRoom(tank.getFluidAmount() < MAX_FLUID_AMOUNT);
         ticksSinceLast++;
 
-        if (ticksSinceLast >= 10) {
+        if (ticksSinceLast >= Config.TICKS_BETWEEN_MELTS.get()) {
             ticksSinceLast = 0;
 
             int heat = getHeat();
@@ -73,7 +74,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     @Override
     protected int getHeat() {
-        return ModRegistries.HEAT.getHeatAmount(world.getBlockState(pos.down()).getBlock());
+        return Config.WOOD_HEAT_RATE.get();
     }
 
     @Override

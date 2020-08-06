@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
@@ -9,7 +10,7 @@ public class BarrelFluidHandler extends FluidTank {
     private BarrelTile barrel;
 
     public BarrelFluidHandler(BarrelTile barrelTile) {
-        this(FluidAttributes.BUCKET_VOLUME);
+        this(Config.BARREL_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME);
         this.barrel = barrelTile;
     }
 

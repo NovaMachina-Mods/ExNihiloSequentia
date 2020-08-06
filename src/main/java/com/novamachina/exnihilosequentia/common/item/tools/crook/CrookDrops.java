@@ -29,8 +29,6 @@ import java.util.Random;
 
 public class CrookDrops extends AbstractModRegistry {
 
-    public static final int numberOfTimesToTestVanillaDrops = Config.NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS.get();
-
     private final List<CrookDropEntry> crookDrops  = new ArrayList<>();
 
     public CrookDrops(ModRegistries.ModBus bus) {

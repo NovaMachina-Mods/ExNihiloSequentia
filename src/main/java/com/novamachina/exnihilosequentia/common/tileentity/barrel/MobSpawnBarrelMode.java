@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -33,7 +34,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
         if (doll != null) {
             currentProgress++;
             spawnParticle(barrelTile);
-            if (currentProgress >= 200) {
+            if (currentProgress >= Config.SECONDS_TO_SPAWN.get() * 20) {
                 if (doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
                     barrelTile.getTank().setFluid(FluidStack.EMPTY);
                     barrelTile.setMode(Constants.BarrelModes.EMPTY);

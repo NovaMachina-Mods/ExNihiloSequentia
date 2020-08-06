@@ -52,6 +52,8 @@ public class SieveDrops extends AbstractModRegistry {
     private final Map<ResourceLocation, List<SieveDropEntry>> ironMeshMap = new HashMap<>();
     private final Map<ResourceLocation, List<SieveDropEntry>> diamondMeshMap = new HashMap<>();
 
+    private boolean flattenRecipes = Config.FLATTEN_SIEVE_RECIPES.get();
+
     public SieveDrops(ModRegistries.ModBus bus) {
         bus.register(this);
     }
@@ -93,17 +95,23 @@ public class SieveDrops extends AbstractModRegistry {
     public List<Item> getDrops(Block input, EnumMesh meshType) {
         List<Item> returnList = new ArrayList<>();
         switch (meshType) {
-            case STRING:
-                returnList.addAll(retrieveFromMap(stringMeshMap, input.getRegistryName()));
-                break;
-            case FLINT:
-                returnList.addAll(retrieveFromMap(flintMeshMap, input.getRegistryName()));
-                break;
-            case IRON:
-                returnList.addAll(retrieveFromMap(ironMeshMap, input.getRegistryName()));
-                break;
             case DIAMOND:
                 returnList.addAll(retrieveFromMap(diamondMeshMap, input.getRegistryName()));
+                if(!flattenRecipes) {
+                    break;
+                }
+            case IRON:
+                returnList.addAll(retrieveFromMap(ironMeshMap, input.getRegistryName()));
+                if(!flattenRecipes) {
+                    break;
+                }
+            case FLINT:
+                returnList.addAll(retrieveFromMap(flintMeshMap, input.getRegistryName()));
+                if(!flattenRecipes) {
+                    break;
+                }
+            case STRING:
+                returnList.addAll(retrieveFromMap(stringMeshMap, input.getRegistryName()));
                 break;
             default:
                 LogUtil.warn(String.format("Mesh type \"%s\" does not exist.", meshType.getName()));
