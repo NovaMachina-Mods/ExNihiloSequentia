@@ -12,53 +12,99 @@ import net.minecraftforge.fml.config.ModConfig;
 @Mod.EventBusSubscriber
 public class Config {
 
-    private static final String CATEGORY_MAIN                       = "main";
-    private static final String SUBCATEGORY_REGISTRY_OPTIONS        = "registry";
-    private static final String SUBCATEGORY_CROOK_OPTIONS           = "crook";
-    private static final String SUBCATEGORY_INFESTED_LEAVES_OPTIONS = "infested_leaves";
+    private static final String CATEGORY_BARREL = "barrel";
+    private static final String CATEGORY_CROOK = "crook";
+    private static final String CATEGORY_CRUCIBLE = "crucible";
+    private static final String CATEGORY_INFESTED_LEAVES = "infested_leaves";
+    private static final String CATEGORY_REGISTRY = "registry";
+    private static final String CATEGORY_SIEVE = "sieve";
+    private static final String SUBCATEGORY_BARREL_MOB = "mob_spawn";
+    private static final String SUBCATEGORY_BARREL_COMPOST = "compost";
+    private static final String SUBCATEGORY_BARREL_FLUID = "fluid_transform";
+    private static final String SUBCATEGORY_BARREL_MISC = "misc";
+    private static final String SUBCATEGORY_CRUCIBLE_WOOD = "wood";
 
     private static final ForgeConfigSpec.Builder COMMON_BUILDER = new Builder();
 
     public static ForgeConfigSpec COMMON_CONFIG;
 
+    // Barrel
+    public static ForgeConfigSpec.IntValue SECONDS_TO_SPAWN;
+    public static ForgeConfigSpec.IntValue BARREL_MAX_SOLID_AMOUNT;
+    public static ForgeConfigSpec.IntValue SECONDS_TO_COMPOST;
+    public static ForgeConfigSpec.IntValue SECONDS_TO_FLUID_TRANSFORM;
+    public static ForgeConfigSpec.IntValue BARREL_NUMBER_OF_BUCKETS;
+    public static ForgeConfigSpec.IntValue RAIN_FILL_AMOUNT;
+
+    // Crook
+    public static ForgeConfigSpec.IntValue MAX_BONUS_STRING_COUNT;
+    public static ForgeConfigSpec.IntValue MIN_STRING_COUNT;
+    public static ForgeConfigSpec.IntValue VANILLA_SIMULATE_DROP_COUNT;
+
+    // Crucible
+    public static ForgeConfigSpec.IntValue TICKS_BETWEEN_MELTS;
+    public static ForgeConfigSpec.IntValue CRUCIBLE_NUMBER_OF_BUCKETS;
+    public static ForgeConfigSpec.IntValue WOOD_HEAT_RATE;
+
+    // Infested Leaves
+    public static ForgeConfigSpec.IntValue SECONDS_TO_TRANSFORM_LEAVES;
+    public static ForgeConfigSpec.DoubleValue SPREAD_CHANCE;
+    public static ForgeConfigSpec.IntValue TICKS_BETWEEN_SPREAD_ATTEMPT;
+
+    // Registry
     public static ForgeConfigSpec.BooleanValue USE_JSON_REGISTRIES;
-    public static ForgeConfigSpec.IntValue     NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS;
-    public static ForgeConfigSpec.IntValue     TICKS_TO_TRANSFORM_LEAVES;
-    public static ForgeConfigSpec.IntValue     SPREAD_UPDATE_FREQUENCEY;
-    public static ForgeConfigSpec.DoubleValue  SPREAD_CHANCE_PERCENT;
+
+    // Sieve
+    public static ForgeConfigSpec.BooleanValue FLATTEN_SIEVE_RECIPES;
 
     static {
-        COMMON_BUILDER.comment("Main Settings").push(CATEGORY_MAIN);
-        setUpMainConfig();
-
+        COMMON_BUILDER.comment("Barrel Configs").push(CATEGORY_BARREL);
+        barrelConfigs();
+        COMMON_BUILDER.pop();
+        COMMON_BUILDER.comment("Crook Configs").push(CATEGORY_CROOK);
+        crookConfigs();
+        COMMON_BUILDER.pop();
+        COMMON_BUILDER.comment("Crucible Configs").push(CATEGORY_CRUCIBLE);
+//        crucibleConfigs();
+        COMMON_BUILDER.pop();
+        COMMON_BUILDER.comment("Infested Leaves Configs").push(CATEGORY_INFESTED_LEAVES);
+//        infestedLeavesConfigs();
+        COMMON_BUILDER.pop();
+        COMMON_BUILDER.comment("Registry Configs").push(CATEGORY_REGISTRY);
+//        registryConfigs();
+        COMMON_BUILDER.pop();
+        COMMON_BUILDER.comment("Sieve Configs").push(CATEGORY_SIEVE);
+//        sieveConfigs();
         COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
     }
 
-    private static void setUpMainConfig() {
-        COMMON_BUILDER.comment("Registry Options").push(SUBCATEGORY_REGISTRY_OPTIONS);
-        USE_JSON_REGISTRIES = COMMON_BUILDER
-            .comment("Decides which registry to use.")
-            .define("useJSON", false);
-
-        COMMON_BUILDER.comment("Crook Options").push(SUBCATEGORY_CROOK_OPTIONS);
-        NUMBER_OF_TIMES_TO_TEST_VANILLA_DROPS = COMMON_BUILDER
-            .comment("Decides which registry to use.")
-            .defineInRange("numberOfTimesToTestVanillaDrops", 3, 1, 10);
-
+    private static void crookConfigs() {
+        COMMON_BUILDER.comment("Crook Configs").push(SUBCATEGORY_BARREL_MOB);
+        MAX_BONUS_STRING_COUNT = COMMON_BUILDER.comment("Maximum additional string that a crook will drop from infested leaves in addition to the minimum string count (Default: 3)").defineInRange("maxBonusStringCount", 3, 1, Integer.MAX_VALUE);
+        MIN_STRING_COUNT = COMMON_BUILDER.comment("Minimum string that a crook will drop from infested leaves (Default: 2)").defineInRange("minStringCount", 2, 1, Integer.MAX_VALUE);
+        VANILLA_SIMULATE_DROP_COUNT = COMMON_BUILDER.comment("Number of times the crook will \"break\" a leaf block to get drops (Default: 3)").defineInRange("vanillaDropSimulateCount", 3, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
+    }
+
+    private static void barrelConfigs() {
+        COMMON_BUILDER.comment("Mob Spawn Configs").push(SUBCATEGORY_BARREL_MOB);
+        SECONDS_TO_SPAWN = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)").defineInRange("secondsToSpawnMobs", 10, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
 
-        COMMON_BUILDER.comment("Infested Leaves Options").push(SUBCATEGORY_INFESTED_LEAVES_OPTIONS);
-        TICKS_TO_TRANSFORM_LEAVES = COMMON_BUILDER.comment(
-            "The number of ticks that it takes to transform a leaf block to an infested leaf block")
-            .defineInRange("ticksToTransformLeaves", 600, 1, Integer.MAX_VALUE);
-        SPREAD_UPDATE_FREQUENCEY  = COMMON_BUILDER.comment("Minimum percentage to spread")
-            .defineInRange("spreadUpdateFrequency", 5, 0, 100);
-        SPREAD_CHANCE_PERCENT     = COMMON_BUILDER.comment("Chance to spread if it got ticked")
-            .defineInRange("spreadChancePercent", 0.5, 0, 1.0);
+        COMMON_BUILDER.comment("Compost Configs").push(SUBCATEGORY_BARREL_COMPOST);
+        BARREL_MAX_SOLID_AMOUNT = COMMON_BUILDER.comment("How much solids need to be in barrel before composting starts (Default: 1000)").defineInRange("maxSolidAmount", 1000, 1, Integer.MAX_VALUE);
+        SECONDS_TO_COMPOST = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)").defineInRange("secondsToCompost", 10, 1, Integer.MAX_VALUE);
+        COMMON_BUILDER.pop();
 
+        COMMON_BUILDER.comment("Fluid Transform Configs").push(SUBCATEGORY_BARREL_FLUID);
+        SECONDS_TO_FLUID_TRANSFORM = COMMON_BUILDER.comment("Number of seconds to transform fluids (Default: 10)").defineInRange("secondsToTransformFluid", 10, 1, Integer.MAX_VALUE);
+        COMMON_BUILDER.pop();
+
+        COMMON_BUILDER.comment("Misc Configs").push(SUBCATEGORY_BARREL_MISC);
+        BARREL_NUMBER_OF_BUCKETS = COMMON_BUILDER.comment("Number of buckets the barrel will hold (Default: 1)").defineInRange("barrelNumberOfBuckets", 1, 1, Integer.MAX_VALUE);
+        RAIN_FILL_AMOUNT = COMMON_BUILDER.comment("How much fluid rain will fill per iteration (Default: 2)").defineInRange("rainFillAmount", 2, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
     }
 
