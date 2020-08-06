@@ -65,30 +65,54 @@ public class Config {
         crookConfigs();
         COMMON_BUILDER.pop();
         COMMON_BUILDER.comment("Crucible Configs").push(CATEGORY_CRUCIBLE);
-//        crucibleConfigs();
+        crucibleConfigs();
         COMMON_BUILDER.pop();
         COMMON_BUILDER.comment("Infested Leaves Configs").push(CATEGORY_INFESTED_LEAVES);
-//        infestedLeavesConfigs();
+        infestedLeavesConfigs();
         COMMON_BUILDER.pop();
         COMMON_BUILDER.comment("Registry Configs").push(CATEGORY_REGISTRY);
-//        registryConfigs();
+        registryConfigs();
         COMMON_BUILDER.pop();
         COMMON_BUILDER.comment("Sieve Configs").push(CATEGORY_SIEVE);
-//        sieveConfigs();
+        sieveConfigs();
         COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
     }
 
-    private static void crookConfigs() {
-        COMMON_BUILDER.comment("Crook Configs").push(SUBCATEGORY_BARREL_MOB);
-        MAX_BONUS_STRING_COUNT = COMMON_BUILDER.comment("Maximum additional string that a crook will drop from infested leaves in addition to the minimum string count (Default: 3)").defineInRange("maxBonusStringCount", 3, 1, Integer.MAX_VALUE);
-        MIN_STRING_COUNT = COMMON_BUILDER.comment("Minimum string that a crook will drop from infested leaves (Default: 2)").defineInRange("minStringCount", 2, 1, Integer.MAX_VALUE);
-        VANILLA_SIMULATE_DROP_COUNT = COMMON_BUILDER.comment("Number of times the crook will \"break\" a leaf block to get drops (Default: 3)").defineInRange("vanillaDropSimulateCount", 3, 1, Integer.MAX_VALUE);
+    private static void sieveConfigs() {
+        USE_JSON_REGISTRIES = COMMON_BUILDER.comment("Sieve will get results for all mesh tiers below the one in the sieve (Default: false)").define("flattenSieveRecipes", false);
+    }
+
+    private static void registryConfigs() {
+        USE_JSON_REGISTRIES = COMMON_BUILDER.comment("Should use JSON registries. Will generate JSON files if they do not exist. (Default: false)").define("useJson", false);
+    }
+
+    private static void infestedLeavesConfigs() {
+        SECONDS_TO_TRANSFORM_LEAVES = COMMON_BUILDER.comment("Number of seconds to for leaves to become completely infested (Default: 10)").defineInRange("secondsToTransformLeaves", 10, 1, Integer.MAX_VALUE);
+        SPREAD_CHANCE = COMMON_BUILDER.comment("Percentage of the time that infested leaves will spread (Default: 0.3)").defineInRange("minStringCount", 0.3, 0.001, 1.0);
+        TICKS_BETWEEN_SPREAD_ATTEMPT = COMMON_BUILDER.comment("Number of ticks between infested leave spread attempts (Default: 1000)").defineInRange("ticksBetweenSpreadAttempt", 1000, 1, Integer.MAX_VALUE);
+    }
+
+    private static void crucibleConfigs() {
+        TICKS_BETWEEN_MELTS = COMMON_BUILDER.comment("Ticks between melting operations (Default: 20)").defineInRange("ticksBetweenMelts", 20, 1, Integer.MAX_VALUE);
+        CRUCIBLE_NUMBER_OF_BUCKETS = COMMON_BUILDER.comment("Number of buckets the crucible will hold (Default: 4)").defineInRange("crucibleNumberOfBuckets", 4, 1, Integer.MAX_VALUE);
+
+        COMMON_BUILDER.comment("Wooden Crucible Configs").push(SUBCATEGORY_CRUCIBLE_WOOD);
+        WOOD_HEAT_RATE = COMMON_BUILDER.comment("Heat rate the Wood Crucible will use regardless of heat source below (Default: 2)").defineInRange("woodHeatRate", 2, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
     }
 
+    private static void crookConfigs() {
+        MAX_BONUS_STRING_COUNT = COMMON_BUILDER.comment("Maximum additional string that a crook will drop from infested leaves in addition to the minimum string count (Default: 3)").defineInRange("maxBonusStringCount", 3, 1, Integer.MAX_VALUE);
+        MIN_STRING_COUNT = COMMON_BUILDER.comment("Minimum string that a crook will drop from infested leaves (Default: 2)").defineInRange("minStringCount", 2, 1, Integer.MAX_VALUE);
+        VANILLA_SIMULATE_DROP_COUNT = COMMON_BUILDER.comment("Number of times the crook will \"break\" a leaf block to get drops (Default: 3)").defineInRange("vanillaDropSimulateCount", 3, 1, Integer.MAX_VALUE);
+    }
+
     private static void barrelConfigs() {
+        BARREL_NUMBER_OF_BUCKETS = COMMON_BUILDER.comment("Number of buckets the barrel will hold (Default: 1)").defineInRange("barrelNumberOfBuckets", 1, 1, Integer.MAX_VALUE);
+        RAIN_FILL_AMOUNT = COMMON_BUILDER.comment("How much fluid rain will fill per iteration (Default: 2)").defineInRange("rainFillAmount", 2, 1, Integer.MAX_VALUE);
+
         COMMON_BUILDER.comment("Mob Spawn Configs").push(SUBCATEGORY_BARREL_MOB);
         SECONDS_TO_SPAWN = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)").defineInRange("secondsToSpawnMobs", 10, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
@@ -100,11 +124,6 @@ public class Config {
 
         COMMON_BUILDER.comment("Fluid Transform Configs").push(SUBCATEGORY_BARREL_FLUID);
         SECONDS_TO_FLUID_TRANSFORM = COMMON_BUILDER.comment("Number of seconds to transform fluids (Default: 10)").defineInRange("secondsToTransformFluid", 10, 1, Integer.MAX_VALUE);
-        COMMON_BUILDER.pop();
-
-        COMMON_BUILDER.comment("Misc Configs").push(SUBCATEGORY_BARREL_MISC);
-        BARREL_NUMBER_OF_BUCKETS = COMMON_BUILDER.comment("Number of buckets the barrel will hold (Default: 1)").defineInRange("barrelNumberOfBuckets", 1, 1, Integer.MAX_VALUE);
-        RAIN_FILL_AMOUNT = COMMON_BUILDER.comment("How much fluid rain will fill per iteration (Default: 2)").defineInRange("rainFillAmount", 2, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
     }
 
