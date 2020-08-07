@@ -27,9 +27,6 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
             boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
 
             if (result) {
-                if (!player.isCreative()) {
-                    player.getHeldItem(handIn).shrink(1);
-                }
                 barrelTile.getWorld().notifyBlockUpdate(barrelTile.getPos(), barrelTile.getBlockState(), barrelTile.getBlockState(), 2);
                 barrelTile.markDirty();
                 return ActionResultType.SUCCESS;

@@ -45,7 +45,6 @@ public class ExNihiloSequentia {
         @SubscribeEvent
         public static void registerModifierSerializers(
             @Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-            LogUtil.info("Register Modifiers");
             event.getRegistry()
                 .register(new UseHammerModifier.Serializer()
                     .setRegistryName(ModInfo.MOD_ID, "use_hammer"));

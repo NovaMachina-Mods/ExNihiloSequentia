@@ -141,7 +141,7 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
         }
         for(FluidBlockTransformRecipe recipe : list) {
             if(recipe.getInput().equals(input)) {
-                LogUtil.warn(String.format("Duplicate recipe: %s(Fluid) + %s(Input). Keeping first result: %s", fluid, input, recipe.getResult().toString()));
+                LogUtil.info(String.format("Duplicate recipe: %s(Fluid) + %s(Input). Keeping first result: %s", fluid, input, recipe.getResult().toString()));
             }
         }
         list.add(new FluidBlockTransformRecipe(fluid, input, result));
