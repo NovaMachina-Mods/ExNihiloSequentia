@@ -1,0 +1,28 @@
+# If you add a page, you must add it to the index here
+nav:
+  - Home: 'index.md'
+  - Barrel: 'barrel/barrel.md'
+  - Crooks: 'crook/crook.md'
+  - Crucible: 'crucible/crucible.md'
+  - Dolls: 'doll/doll.md'
+  - Hammers: 'hammer/hammer.md'
+  - Sieve: 'sieve/sieve.md'
+  - Misc: 'misc/misc.md'
+  - Configuration File: 'config/config.md'
+
+# Do not edit in PRs below here
+site_name: "Ex Nihilo: Sequentia Documentation"
+
+markdown_extensions:
+  - admonition
+  - smarty
+  - sane_lists
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      use_pygments: false
+  - toc:
+      permalink: ' '
+
+theme:
+  name: readthedocs
+#  custom_dir: forge_theme

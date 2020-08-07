@@ -43,8 +43,8 @@ public class FluidTransformRegistry extends AbstractModRegistry {
     public boolean isValidRecipe(Fluid fluidInTank, Block blockBelow) {
         boolean isValid = false;
         ResourceLocation fluidInTankID = fluidInTank.getRegistryName();
-        if(recipeMap.containsKey(fluidInTankID)) {
-            if(recipeMap.get(fluidInTankID).getBlockBelow().equals(blockBelow.getRegistryName())) {
+        if (recipeMap.containsKey(fluidInTankID)) {
+            if (recipeMap.get(fluidInTankID).getBlockBelow().equals(blockBelow.getRegistryName())) {
                 isValid = true;
             }
         }
@@ -60,6 +60,14 @@ public class FluidTransformRegistry extends AbstractModRegistry {
     }
 
     public void addRecipe(ResourceLocation fluidInTank, ResourceLocation blockBelow, ResourceLocation result) {
+        if (recipeMap.containsKey(fluidInTank)) {
+            if (recipeMap.get(fluidInTank).getBlockBelow().equals(blockBelow)) {
+                LogUtil.warn(String
+                    .format("Duplicate recipe: %s(Fluid) + %s(Block Below). Keeping first result: %s", fluidInTank
+                        .toString(), blockBelow.toString(), recipeMap.get(fluidInTank).getResult().toString()));
+                return;
+            }
+        }
         insertIntoMap(fluidInTank, new FluidTransformRecipe(fluidInTank, blockBelow, result));
     }
 
@@ -92,7 +100,7 @@ public class FluidTransformRegistry extends AbstractModRegistry {
         } catch (JsonParseException e) {
             LogUtil.error(String.format("Malformed %s", Constants.Json.FLUID_TRANSFORM_FILE));
             LogUtil.error(e.getMessage());
-            if(e.getMessage().contains("IllegalStateException")) {
+            if (e.getMessage().contains("IllegalStateException")) {
                 LogUtil.error("Please consider deleting the file and regenerating it.");
             }
             LogUtil.error("Falling back to defaults");
@@ -103,12 +111,15 @@ public class FluidTransformRegistry extends AbstractModRegistry {
 
     private boolean itemExists(String entry) {
         ResourceLocation itemID = new ResourceLocation(entry);
-        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
+        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS
+            .containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
 
     private List<FluidTransformJson> readJson() throws JsonParseException {
-        Type listType = new TypeToken<ArrayList<FluidTransformJson>>(){}.getType();
-        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<FluidTransformJson>>()).create();
+        Type listType = new TypeToken<ArrayList<FluidTransformJson>>() {
+        }.getType();
+        Gson gson = new GsonBuilder()
+            .registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<FluidTransformJson>>()).create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.FLUID_TRANSFORM_FILE);
         List<FluidTransformJson> registryJson = null;
         try {

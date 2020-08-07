@@ -90,7 +90,7 @@ public class Config {
 
     private static void infestedLeavesConfigs() {
         SECONDS_TO_TRANSFORM_LEAVES = COMMON_BUILDER.comment("Number of seconds to for leaves to become completely infested (Default: 10)").defineInRange("secondsToTransformLeaves", 10, 1, Integer.MAX_VALUE);
-        SPREAD_CHANCE = COMMON_BUILDER.comment("Percentage of the time that infested leaves will spread (Default: 0.3)").defineInRange("minStringCount", 0.3, 0.001, 1.0);
+        SPREAD_CHANCE = COMMON_BUILDER.comment("Percentage of the time that infested leaves will spread (Default: 0.3)").defineInRange("spreadChance", 0.3, 0.001, 1.0);
         TICKS_BETWEEN_SPREAD_ATTEMPT = COMMON_BUILDER.comment("Number of ticks between infested leave spread attempts (Default: 1000)").defineInRange("ticksBetweenSpreadAttempt", 1000, 1, Integer.MAX_VALUE);
     }
 
@@ -104,7 +104,7 @@ public class Config {
     }
 
     private static void crookConfigs() {
-        MAX_BONUS_STRING_COUNT = COMMON_BUILDER.comment("Maximum additional string that a crook will drop from infested leaves in addition to the minimum string count (Default: 3)").defineInRange("maxBonusStringCount", 3, 1, Integer.MAX_VALUE);
+        MAX_BONUS_STRING_COUNT = COMMON_BUILDER.comment("Maximum additional string that a crook will drop from infested leaves in addition to the minimum string count (Default: 3)").defineInRange("maxBonusStringCount", 3, 0, Integer.MAX_VALUE);
         MIN_STRING_COUNT = COMMON_BUILDER.comment("Minimum string that a crook will drop from infested leaves (Default: 2)").defineInRange("minStringCount", 2, 1, Integer.MAX_VALUE);
         VANILLA_SIMULATE_DROP_COUNT = COMMON_BUILDER.comment("Number of times the crook will \"break\" a leaf block to get drops (Default: 3)").defineInRange("vanillaDropSimulateCount", 3, 1, Integer.MAX_VALUE);
     }

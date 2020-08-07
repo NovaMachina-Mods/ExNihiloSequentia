@@ -386,23 +386,33 @@ public class SieveDrops extends AbstractModRegistry {
     public boolean isBlockSiftable(Block block, EnumMesh mesh) {
         Objects.requireNonNull(block.getRegistryName());
 
+        boolean isSiftable = false;
+
         switch (mesh) {
-            case STRING: {
-                return stringMeshMap.containsKey(block.getRegistryName());
-            }
-            case FLINT: {
-                return flintMeshMap.containsKey(block.getRegistryName());
+            case DIAMOND: {
+                isSiftable = diamondMeshMap.containsKey(block.getRegistryName());
+                if(!flattenRecipes || isSiftable) {
+                    break;
+                }
             }
             case IRON: {
-                return ironMeshMap.containsKey(block.getRegistryName());
+                isSiftable = ironMeshMap.containsKey(block.getRegistryName());
+                if(!flattenRecipes || isSiftable) {
+                    break;
+                }
             }
-            case DIAMOND: {
-                return diamondMeshMap.containsKey(block.getRegistryName());
+            case FLINT: {
+                isSiftable = flintMeshMap.containsKey(block.getRegistryName());
+                if(!flattenRecipes || isSiftable) {
+                    break;
+                }
             }
-            default: {
-                return false;
+            case STRING: {
+                isSiftable = stringMeshMap.containsKey(block.getRegistryName());
+                break;
             }
         }
+        return isSiftable;
     }
 
     @Override
