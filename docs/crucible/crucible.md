@@ -66,3 +66,72 @@ The following blocks and fluids can be placed below a crucible to begin the melt
 | Torch       | 1         |
 | Magma Block | 2         |
 | Glowstone   | 2         |
+
+Configuration
+-------------
+### Fired and Wooden Crucible Meltable Item Configuration
+Configuration for Fired Crucible Meltable Items are found in `~/config/exnihilosequentia/FiredCrucibleRegistry.json`.
+Configuration for Wooden Crucible Meltable Items are found in `~/config/exnihilosequentia/WoodCrucibleRegistry.json`.
+
+!!! Note
+    These two files will eventually be merged into one file.
+
+The format of the file is: 
+```
+[
+  {
+    "entry: "modid:name",
+    "fluid: "modid:name",
+    "amount: 0 < number
+  },
+  ...
+]
+```
+- `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
+- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+
+- `entry`: The input item/block (Must be an item, block or a tag). Required field.
+- `fluid`: The fluid the entry will melt into (Must be a fluid). Required field.
+- `amount`: The amount of fluid produced (Must be an integer greater than 0). Required field.
+
+You may chain together as many:
+```
+{
+  "entry: "modid:name",
+  "fluid: "modid:name",
+  "amount: 0 < number
+}
+```
+blocks as you'd like as long as they are separated by commas and all of them remain inside `[ ]`.
+!!! Important
+    Duplicate entries are not allowed. The first recipe in the list will be the one used.
+    
+### Heat Source Configuration
+Configuration for Heat Sources are found in `~/config/exnihilosequentia/HeatRegistry.json`.
+
+The format of the file is: 
+```
+[
+  {
+    "entry: "modid:name",
+    "amount: 0 < number
+  },
+  ...
+]
+```
+- `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
+- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+
+- `entry`: The block or fluid is a heat source (Must be a block, fluid or a tag). Required field.
+- `amount`: The amount of heat the source produces (Must be an integer greater than 0). Required field.
+
+You may chain together as many:
+```
+{
+    "entry: "modid:name",
+    "amount: integer
+  }
+```
+blocks as you'd like as long as they are separated by commas and all of them remain inside `[ ]`.
+!!! Important
+    Duplicate entries are not allowed. The first recipe in the list will be the one used.

@@ -62,6 +62,7 @@ public class SieveDrops extends AbstractModRegistry {
         addDrop(input.getRegistryName(), result.getRegistryName(), rarity, meshType);
     }
 
+    // TODO: Add flattening config
     public void addDrop(ResourceLocation input, ResourceLocation result, float rarity, EnumMesh meshType) {
         switch (meshType) {
             case STRING:

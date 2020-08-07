@@ -8,6 +8,7 @@ nav:
   - Hammers: 'hammer/hammer.md'
   - Sieve: 'sieve/sieve.md'
   - Misc: 'misc/misc.md'
+  - Configuration File: 'config/config.md'
 
 # Do not edit in PRs below here
 site_name: "Ex Nihilo: Sequentia Documentation"

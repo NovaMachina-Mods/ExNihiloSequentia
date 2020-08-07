@@ -60,6 +60,7 @@ public class FluidTransformRegistry extends AbstractModRegistry {
     }
 
     public void addRecipe(ResourceLocation fluidInTank, ResourceLocation blockBelow, ResourceLocation result) {
+        // TODO check for duplicates
         insertIntoMap(fluidInTank, new FluidTransformRecipe(fluidInTank, blockBelow, result));
     }
 

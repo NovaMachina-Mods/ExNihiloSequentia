@@ -193,3 +193,41 @@ Following are the blocks that can be sifted and the drops obtainable with their 
 |                    |                   | 5 %          | Flint         |
 |                    |                   | 10 %         | Iron          |
 |                    |                   | 20 %         | Diamond       |
+
+Configuration
+-------------
+### Sieve Drop Configuration
+Configuration for Sieve Drops are found in `~/config/exnihilosequentia/SieveRegistry.json`.
+
+The format of the file is: 
+```
+[
+  {
+    "input: "modid:name",
+    "result: "modid:name",
+    "rarity: 0.0 < number <= 1.0,
+    "mesh": MeshType
+  },
+  ...
+]
+```
+- `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
+- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+
+- `input`: The block to be sieved (Must be a block or a tag). Required field.
+- `result`: The item to be dropped (Must be an item). Required field.
+- `rarity`: The percent chance the result will be dropped from the input (Must be a number greater than 0.0 and less than 1.0). Required field.
+- `mesh`: The minimum mesh required to drop the result (Must be STRING, FLINT, IRON, or DIAMOND). Required field.
+
+You may chain together as many:
+```
+{
+  "input: "modid:name",
+  "result: "modid:name",
+  "rarity: 0.0 < number <= 1.0,
+  "mesh": MeshType
+}
+```
+blocks as you'd like as long as they are separated by commas and all of them remain inside `[ ]`.
+!!! Important
+    Duplicate entries are allowed. All entries will be considered when selecting drops.
