@@ -1,7 +1,13 @@
 # If you add a page, you must add it to the index here
 nav:
   - Home: 'index.md'
-  - Barrel: 'barrel/description.md'
+  - Barrel: 'barrel/barrel.md'
+  - Crooks: 'crook/crook.md'
+  - Crucible: 'crucible/crucible.md'
+  - Dolls: 'doll/doll.md'
+  - Hammers: 'hammer/hammer.md'
+  - Sieve: 'sieve/sieve.md'
+  - Misc: 'misc/misc.md'
 
 # Do not edit in PRs below here
 site_name: "Ex Nihilo: Sequentia Documentation"
