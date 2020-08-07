@@ -30,7 +30,6 @@ public class SieveTile extends TileEntity {
     }
 
     public void insertMesh(ItemStack stack) {
-        LogUtil.info("Insert Mesh");
         EnumMesh mesh = ((MeshItem) stack.getItem()).getMesh();
         if (meshStack.isEmpty()) {
             meshStack = stack.copy();
@@ -45,7 +44,6 @@ public class SieveTile extends TileEntity {
     }
 
     public void removeMesh(boolean rerenderSieve) {
-        LogUtil.info("Remove Mesh");
         if (!meshStack.isEmpty()) {
             world.addEntity(
                 new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
@@ -67,7 +65,6 @@ public class SieveTile extends TileEntity {
 
     @Override
     public void read(CompoundNBT compound) {
-        LogUtil.info("Read Sieve State");
         if (compound.contains("mesh")) {
             meshStack = ItemStack.read((CompoundNBT) compound.get("mesh"));
             if (meshStack.getItem() instanceof MeshItem) {
@@ -91,7 +88,6 @@ public class SieveTile extends TileEntity {
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        LogUtil.info("Write Sieve State");
         if (!meshStack.isEmpty()) {
             CompoundNBT meshNBT = meshStack.write(new CompoundNBT());
             compound.put("mesh", meshNBT);
@@ -120,18 +116,14 @@ public class SieveTile extends TileEntity {
             blockStack = stack.copy();
             blockStack.setCount(1);
             stack.shrink(1);
-            LogUtil.info("Inserted " + blockStack.getItem().toString());
         }
-        LogUtil.info(meshStack.isEmpty() ? "No Mesh" : "Block already in sieve");
     }
 
     public void activateSieve() {
         if (isReadyToSieve()) {
             progress += 0.1F;
-            LogUtil.info("Progress: " + progress);
 
             if (progress >= 1.0F) {
-                LogUtil.info("Getting Drops");
                 List<Item> drops = ModRegistries.SIEVE
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType);
                 drops.forEach((item -> {
@@ -169,7 +161,6 @@ public class SieveTile extends TileEntity {
 
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        LogUtil.info("Send Packet");
         CompoundNBT nbt = new CompoundNBT();
         if (!blockStack.isEmpty()) {
             CompoundNBT blockNbt = blockStack.write(new CompoundNBT());
@@ -182,7 +173,6 @@ public class SieveTile extends TileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
-        LogUtil.info("Receive packet");
         CompoundNBT nbt = packet.getNbtCompound();
         if (nbt.contains("block")) {
             blockStack = ItemStack.read((CompoundNBT) nbt.get("block"));

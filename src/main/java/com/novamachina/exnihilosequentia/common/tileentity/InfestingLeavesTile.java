@@ -26,12 +26,10 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
                 spreadCounter++;
 
                 if (progress >= 100) {
-                    LogUtil.info("Finished Transform");
                     InfestingLeavesBlock.finishInfestingBlock(world, pos);
                 }
 
                 if (spreadCounter >= Config.TICKS_BETWEEN_SPREAD_ATTEMPT.get()) {
-                    LogUtil.info("Spreading");
                     InfestingLeavesBlock.spread(world, pos);
                     spreadCounter = 0;
                 }

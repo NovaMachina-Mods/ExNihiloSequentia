@@ -35,13 +35,11 @@ public class ResourceItem extends Item {
                 BlockState state = context.getWorld().getBlockState(context.getPos());
                 if (resourceItem.getResourceName().equals(Items.SILKWORM)) {
                     if (state.getBlock() instanceof LeavesBlock) {
-                        LogUtil.info("INFEST LEAVES");
                         context.getItem().shrink(1);
                         InfestingLeavesBlock.normalToInfesting(context.getWorld(),
                             context.getWorld().getBlockState(context.getPos()), context.getPos());
                         return ActionResultType.SUCCESS;
                     }
-                    LogUtil.info("NOT LEAVES");
                 }
                 if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) || resourceItem
                     .getResourceName().equals(Items.GRASS_SEED)) {

@@ -9,10 +9,8 @@ public abstract class AbstractModRegistry {
 
     public void initialize(boolean useJson) {
         if (useJson) {
-            LogUtil.info("Using JSON");
             useJson();
         } else {
-            LogUtil.info("Using Defaults");
             useDefaults();
         }
     }

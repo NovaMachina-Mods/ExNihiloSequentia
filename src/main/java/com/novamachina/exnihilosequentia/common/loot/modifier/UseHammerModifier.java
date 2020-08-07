@@ -27,7 +27,6 @@ public class UseHammerModifier extends LootModifier {
     @Nonnull
     @Override
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-        LogUtil.info("Fired Modifier");
         ItemStack  tool       = context.get(LootParameters.TOOL);
         BlockState blockState = context.get(LootParameters.BLOCK_STATE);
         if (tool != null && blockState != null) {
@@ -48,7 +47,6 @@ public class UseHammerModifier extends LootModifier {
         @Override
         public UseHammerModifier read(ResourceLocation location, JsonObject object,
             ILootCondition[] ailootcondition) {
-            LogUtil.info("UseHammerModifier.Serializer.read");
             return new UseHammerModifier(ailootcondition);
         }
     }

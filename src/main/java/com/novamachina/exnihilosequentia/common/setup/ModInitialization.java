@@ -54,7 +54,6 @@ public class ModInitialization {
     public static GlobalLootModifierSerializer<?> HAMMER_MODIFIER = null;
 
     public static void init(IEventBus modEventBus) {
-        LogUtil.info("Registration init");
         ModBlocks.init(modEventBus);
         ModItems.init(modEventBus);
         ModTiles.init(modEventBus);
@@ -63,15 +62,11 @@ public class ModInitialization {
 
     @SubscribeEvent
     public static void setupNonTagBasedRegistries(FMLCommonSetupEvent event) {
-        LogUtil.info("Initialize Non-Tag Based Mod Registries");
-
         BarrelModeRegistry.initialize();
     }
 
     @SubscribeEvent
     public static void setupTagBasedRegistries(FMLServerStartingEvent event) {
-        LogUtil.info("Initialize Tag Based Mod Registries");
-
         if(Config.USE_JSON_REGISTRIES.get()) {
             generateJsonFiles();
         }
