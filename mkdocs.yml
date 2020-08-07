@@ -2,7 +2,6 @@
 nav:
   - Home: 'index.md'
   - Barrel: 'barrel/description.md'
-    - Recipe: 'barrel/recipe.md'
 
 # Do not edit in PRs below here
 site_name: "Ex Nihilo: Sequentia Documentation"
