@@ -60,7 +60,7 @@ public class Constants {
         public static final String SEED_ACACIA = "acacia";
         public static final String SEED_DARK_OAK = "darkoak";
         public static final String SEED_CACTUS = "cactus";
-        public static final String SEEDSUGARCANE = "sugarcane";
+        public static final String SEED_SUGARCANE = "sugarcane";
         public static final String SEED_CARROT = "carrot";
         public static final String SEED_POTATO = "potato";
         public static final String SEED_SWEET_BERRY = "berry";
