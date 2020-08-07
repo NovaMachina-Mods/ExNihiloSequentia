@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.item.seeds;
 
 import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -52,10 +53,17 @@ public class SeedBaseItem extends Item implements IPlantable {
         World        world     = context.getWorld();
         if (player.canPlayerEdit(pos, direction, item) && player
             .canPlayerEdit(pos.add(0, 1, 0), direction, item)) {
-            BlockState soil = world.getBlockState(context.getPos());
 
-            if (soil.getBlock().canSustainPlant(soil, world, pos, Direction.UP, this) && world
-                .isAirBlock(pos.add(0, 1, 0)) && this.getPlant(world, pos) != null) {
+            BlockState soil;
+            if(type == PlantType.Water) {
+                soil = world.getBlockState(context.getPos().add(0, 1, 0));
+            } else {
+                soil = world.getBlockState(context.getPos());
+            }
+
+            boolean canSustain = soil.getBlock().canSustainPlant(soil, world, pos, Direction.UP, this);
+            boolean blockEmpty = isBlockSpaceEmpty(world, pos, type);
+            if (canSustain && blockEmpty && this.getPlant(world, pos) != null) {
                 world.setBlockState(pos.add(0, 1, 0),
                     this.getPlant(world, pos));
                 if (!player.isCreative()) {
@@ -65,5 +73,13 @@ public class SeedBaseItem extends Item implements IPlantable {
             }
         }
         return ActionResultType.PASS;
+    }
+
+    private boolean isBlockSpaceEmpty(World world, BlockPos pos, PlantType type) {
+        if(type == PlantType.Water) {
+            return world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.WATER;
+        }
+
+        return world.isAirBlock(pos.add(0, 1, 0));
     }
 }
