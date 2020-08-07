@@ -1,6 +1,8 @@
 # If you add a page, you must add it to the index here
 nav:
   - Home: 'index.md'
+  - Barrel:
+      - Description: 'barrel/description.md'
 
 # Do not edit in PRs below here
 site_name: "Ex Nihilo: Sequentia Documentation"
