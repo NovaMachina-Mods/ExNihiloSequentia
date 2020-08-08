@@ -49,11 +49,11 @@ public class Constants {
         public static final String CROOK_PURPUR = createCrookName("purpur");
         public static final String CROOK_BLAZE = createCrookName("blaze");
         public static final String SILKWORM = "silkworm";
-        public static final String HAMMER_WOOD = createHammername("wood");
-        public static final String HAMMER_STONE = createHammername("stone");
-        public static final String HAMMER_IRON = createHammername("iron");
-        public static final String HAMMER_DIAMOND = createHammername("diamond");
-        public static final String HAMMER_GOLD = createHammername("gold");
+        public static final String HAMMER_WOOD = createHammerName("wood");
+        public static final String HAMMER_STONE = createHammerName("stone");
+        public static final String HAMMER_IRON = createHammerName("iron");
+        public static final String HAMMER_DIAMOND = createHammerName("diamond");
+        public static final String HAMMER_GOLD = createHammerName("gold");
         public static final String SEED_OAK = "oak";
         public static final String SEED_SPRUCE = "spruce";
         public static final String SEED_BIRCH = "birch";
@@ -78,8 +78,13 @@ public class Constants {
         public static final String SEED_KELP = "kelp";
         public static final String SEED_PICKLE = "pickle";
         public static final String SEA_WATER_BUCKET = "bucket_sea_water";
+        public static final String BLUE_CORAL_SEED = "seed_blue_coral";
+        public static final String PINK_CORAL_SEED = "seed_pink_coral";
+        public static final String PURPLE_CORAL_SEED = "seed_purple_coral";
+        public static final String RED_CORAL_SEED = "seed_red_coral";
+        public static final String YELLOW_CORAL_SEED = "seed_yellow_coral";
 
-        private static String createHammername(String name) {
+        private static String createHammerName(String name) {
             return "hammer_" + name;
         }
 
@@ -118,9 +123,6 @@ public class Constants {
     public static class Json {
         public static final Path baseJsonPath = FMLPaths.getOrCreateGameRelativePath(FMLPaths.CONFIGDIR.get()
             .resolve("exnihilosequentia"), "Ex Nihilo: Sequentia Json folder");
-
-        public static String BARREL_FILE = "BarrelRegistries.json";
-        public static String CRUCIBLE_FILE = "CrucibleRegistries.json";
 
         public static String COMPOST_FILE = "CompostRegistry.json";
         public static String FLUID_BLOCK_FILE = "FluidBlockTransformRegistry.json";
