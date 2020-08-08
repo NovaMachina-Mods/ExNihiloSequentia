@@ -55,14 +55,14 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable {
             SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
 
             if (sieveTile.isReadyToSieve()) {
-                sieveTile.activateSieve();
+                sieveTile.activateSieve(state.get(WATERLOGGED));
             } else if (stack.isEmpty() && player.isSneaking()) {
                 sieveTile.removeMesh(true);
             } else if (stack.getItem() instanceof MeshItem) {
                 sieveTile.insertMesh(stack);
             } else if (stack.getItem() instanceof BlockItem) {
                 BlockItem blockItem = (BlockItem) stack.getItem();
-                if (ModRegistries.SIEVE.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh())) {
+                if (ModRegistries.SIEVE.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
                     sieveTile.insertSiftableBlock(stack);
                 }
             }

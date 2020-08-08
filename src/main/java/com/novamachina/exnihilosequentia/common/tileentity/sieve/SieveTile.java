@@ -125,7 +125,7 @@ public class SieveTile extends TileEntity {
         LogUtil.info(meshStack.isEmpty() ? "No Mesh" : "Block already in sieve");
     }
 
-    public void activateSieve() {
+    public void activateSieve(boolean isWaterlogged) {
         if (isReadyToSieve()) {
             progress += 0.1F;
             LogUtil.info("Progress: " + progress);
@@ -133,7 +133,7 @@ public class SieveTile extends TileEntity {
             if (progress >= 1.0F) {
                 LogUtil.info("Getting Drops");
                 List<Item> drops = ModRegistries.SIEVE
-                    .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType);
+                    .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 drops.forEach((item -> {
                     world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
                         pos.getZ() + 0.5F, new ItemStack(item)));

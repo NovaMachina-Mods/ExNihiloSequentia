@@ -18,9 +18,7 @@ public enum EnumSeed {
     SEED_CARROT(Constants.Items.SEED_CARROT, Blocks.CARROTS.getDefaultState(), PlantType.Crop),
     SEED_POTATO(Constants.Items.SEED_POTATO, Blocks.POTATOES.getDefaultState(), PlantType.Crop),
     SEED_SWEET_BERRY(Constants.Items.SEED_SWEET_BERRY, Blocks.SWEET_BERRY_BUSH.getDefaultState(), PlantType.Plains),
-    // TODO: sieve drops
     SEED_KELP(Constants.Items.SEED_KELP, Blocks.KELP_PLANT.getDefaultState(), PlantType.Water),
-    // TODO: sieve drops
     SEED_PICKLE(Constants.Items.SEED_PICKLE, Blocks.SEA_PICKLE.getDefaultState(), PlantType.Water);
 
     private final String     seedName;
