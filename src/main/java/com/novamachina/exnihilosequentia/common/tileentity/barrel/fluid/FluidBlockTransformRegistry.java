@@ -9,6 +9,7 @@ import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
+import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -126,6 +127,11 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
         addRecipe(ModFluids.WITCH_WATER.get(), Blocks.SAND, Blocks.SOUL_SAND);
         addRecipe(ModFluids.WITCH_WATER.get(), Blocks.RED_MUSHROOM, Blocks.SLIME_BLOCK);
         addRecipe(ModFluids.WITCH_WATER.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
+        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.BLUE_CORAL_SEED).get(), Blocks.TUBE_CORAL_BLOCK);
+        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.RED_CORAL_SEED).get(), Blocks.FIRE_CORAL_BLOCK);
+        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.PINK_CORAL_SEED).get(), Blocks.BRAIN_CORAL_BLOCK);
+        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.PURPLE_CORAL_SEED).get(), Blocks.BUBBLE_CORAL_BLOCK);
+        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.YELLOW_CORAL_SEED).get(), Blocks.HORN_CORAL_BLOCK);
     }
 
     public void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {
