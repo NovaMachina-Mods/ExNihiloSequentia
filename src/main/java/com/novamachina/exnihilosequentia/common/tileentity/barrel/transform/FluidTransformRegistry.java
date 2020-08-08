@@ -130,6 +130,7 @@ public class FluidTransformRegistry extends AbstractModRegistry {
     @Override
     protected void useDefaults() {
         addRecipe(Fluids.WATER, Blocks.MYCELIUM, ModFluids.WITCH_WATER.get());
+        addRecipe(Fluids.WATER, Blocks.SAND, ModFluids.SEA_WATER.get());
     }
 
     @Override
