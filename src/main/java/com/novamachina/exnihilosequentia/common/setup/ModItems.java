@@ -78,7 +78,11 @@ public class ModItems {
         .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
     public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = ITEMS
         .register(Constants.Items.WITCH_WATER_BUCKET,
-            () -> new BucketItem(ModFluids.WITCH_WATER_STILL,
+            () -> new BucketItem(ModFluids.WITCH_WATER,
+                new Properties().group(ModInitialization.ITEM_GROUP).maxStackSize(1)));
+    public static final RegistryObject<BucketItem> SEA_WATER_BUCKET = ITEMS
+        .register(Constants.Items.SEA_WATER_BUCKET,
+            () -> new BucketItem(ModFluids.SEA_WATER,
                 new Properties().group(ModInitialization.ITEM_GROUP).maxStackSize(1)));
     public static final RegistryObject<Item> CRUCIBLE_UNFIRED = ITEMS
         .register(Blocks.CRUCIBLE_UNFIRED, () -> new BlockItem(ModBlocks.CRUCIBLE_UNFIRED.get(),

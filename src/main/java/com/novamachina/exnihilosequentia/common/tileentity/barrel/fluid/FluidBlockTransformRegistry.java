@@ -5,15 +5,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
-import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
-import com.novamachina.exnihilosequentia.common.json.CompostJson;
-import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
@@ -127,9 +123,9 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
         addRecipe(Fluids.WATER, ModBlocks.DUST.get(), Blocks.CLAY);
         addRecipe(Fluids.LAVA, Items.REDSTONE, Blocks.NETHERRACK);
         addRecipe(Fluids.LAVA, Items.GLOWSTONE_DUST, Blocks.END_STONE);
-        addRecipe(ModFluids.WITCH_WATER_STILL.get(), Blocks.SAND, Blocks.SOUL_SAND);
-        addRecipe(ModFluids.WITCH_WATER_STILL.get(), Blocks.RED_MUSHROOM, Blocks.SLIME_BLOCK);
-        addRecipe(ModFluids.WITCH_WATER_STILL.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
+        addRecipe(ModFluids.WITCH_WATER.get(), Blocks.SAND, Blocks.SOUL_SAND);
+        addRecipe(ModFluids.WITCH_WATER.get(), Blocks.RED_MUSHROOM, Blocks.SLIME_BLOCK);
+        addRecipe(ModFluids.WITCH_WATER.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
     }
 
     public void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {

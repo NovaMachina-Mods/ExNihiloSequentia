@@ -28,6 +28,7 @@ public class Constants {
         public static final String CRUCIBLE_FIRED = "crucible_fired";
         public static final String CRUCIBLE_WOOD = "crucible_wood";
         public static final String BARREL_WOOD = "barrel_wood";
+        public static final String SEA_WATER = "sea_water";
     }
 
     public static class Items {
@@ -76,6 +77,7 @@ public class Constants {
         public static final String CRAFTING_DOLL = "doll_crafting";
         public static final String SEED_KELP = "kelp";
         public static final String SEED_PICKLE = "pickle";
+        public static final String SEA_WATER_BUCKET = "bucket_sea_water";
 
         private static String createHammername(String name) {
             return "hammer_" + name;
@@ -98,8 +100,10 @@ public class Constants {
 
     public static class Fluids {
 
-        public static final String WITCH_WATER_STILL = "witchwater_still";
+        public static final String WITCH_WATER = "witchwater";
         public static final String WITCH_WATER_FLOW = "witchwater_flow";
+        public static final String SEA_WATER = "sea_water";
+        public static final String SEA_WATER_FLOW = "sea_water_flow";
     }
 
     public static class BarrelModes {
