@@ -7,7 +7,7 @@ The barrel has a wide range of uses. You can use it to compost organics into dir
     
 Recipe
 ------
-![](../images/recipes/barrel_wood.png)
+![](images/recipes/barrel_wood.png)
 ---
 - 6x Wood Plank (Any)
 - 1x Wood Slab (Any)

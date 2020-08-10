@@ -5,31 +5,31 @@ Crooks are used to obtain resources from leaves. Silkworms can only be obtained 
 Recipes
 -------
 ### Wooden Crook
-![](../images/recipes/crook_wood.png)
+![](images/recipes/crook_wood.png)
 
 ### Stone Crook
-![](../images/recipes/crook_stone.png)
+![](images/recipes/crook_stone.png)
 
 ### Andesite Crook
-![](../images/recipes/crook_andesite.png)
+![](images/recipes/crook_andesite.png)
 
 ### Diorite Crook
-![](../images/recipes/crook_diorite.png)
+![](images/recipes/crook_diorite.png)
 
 ### Granite Crook
-![](../images/recipes/crook_granite.png)
+![](images/recipes/crook_granite.png)
 
 ### Iron Crook
-![](../images/recipes/crook_iron.png)
+![](images/recipes/crook_iron.png)
 
 ### Gold Crook
-![](../images/recipes/crook_gold.png)
+![](images/recipes/crook_gold.png)
 
 ### Diamond Crook
-![](../images/recipes/crook_diamond.png)
+![](images/recipes/crook_diamond.png)
 
 ### Bone Crook
-![](../images/recipes/crook_bone.png)
+![](images/recipes/crook_bone.png)
 
 Configuration
 -------------
