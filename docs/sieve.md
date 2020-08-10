@@ -7,7 +7,7 @@ The sieve is how you get most of your resources. Pretty much everything can be o
 
 Recipe
 -----
-![](../images/recipes/sieve.png)
+![](images/recipes/sieve.png)
 ---
 - 4x Wood Plank (Any)
 - 1x Wood Slab (Any)
@@ -18,16 +18,16 @@ Meshes
 Meshes are used to obtain resources from the sieve. Different meshes have different drop chances. General rule of thumb is the more it costs to make a mesh, the better chances to drop resources.
 
 ## String Mesh
-![](../images/recipes/mesh_string.png)
+![](images/recipes/mesh_string.png)
 
 ## Flint Mesh
-![](../images/recipes/mesh_flint.png)
+![](images/recipes/mesh_flint.png)
 
 ## Iron Mesh
-![](../images/recipes/mesh_iron.png)
+![](images/recipes/mesh_iron.png)
 
 ## Diamond Mesh
-![](../images/recipes/mesh_diamond.png)
+![](images/recipes/mesh_diamond.png)
 
 Results
 -------

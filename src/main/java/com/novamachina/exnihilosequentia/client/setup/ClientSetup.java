@@ -12,6 +12,7 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
@@ -36,6 +37,7 @@ public class ClientSetup {
         CrucibleRender.register(ModTiles.CRUCIBLE_WOOD.get());
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onColorHandlerEvent(ColorHandlerEvent.Item event) {
         for (RegistryObject<OreItem> item : ModItems.chunkMap.values()) {

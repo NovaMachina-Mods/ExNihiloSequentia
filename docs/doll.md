@@ -5,12 +5,12 @@ Dolls are used to spawn mobs in a barrel. To spawn a mob craft the doll for the 
 Recipes
 -------
 ### Porcelain Doll
-![](../images/recipes/doll_x4.png)
+![](images/recipes/doll_x4.png)
 ---
 - 5x Porcelain Clay
 - 1x Diamond
 
-![](../images/recipes/doll_x6.png)
+![](images/recipes/doll_x6.png)
 ---
 - 5x Porcelain Clay
 - 1x Emerald
@@ -18,7 +18,7 @@ Recipes
 ### Blazing Doll
 Will spawn a Blaze
 
-![](../images/recipes/doll_blaze.png)
+![](images/recipes/doll_blaze.png)
 ---
 - 4x Blaze Powder
 - 1x Redstone
@@ -29,7 +29,7 @@ Will spawn a Blaze
 ### Creeping Doll
 Will spawn an Enderman
 
-![](../images/recipes/doll_enderman.png)
+![](images/recipes/doll_enderman.png)
 ---
 - 4x Black Dye
 - 1x Redstone
@@ -40,7 +40,7 @@ Will spawn an Enderman
 ### Floating Doll
 Will spawn a Shulker
 
-![](../images/recipes/doll_shulker.png)
+![](images/recipes/doll_shulker.png)
 ---
 - 4x Purple Dye
 - 1x End Stone
@@ -51,7 +51,7 @@ Will spawn a Shulker
 ### Protecting Doll
 Will spawn a Guardian
 
-![](../images/recipes/doll_guardian.png)
+![](images/recipes/doll_guardian.png)
 --
 - 4x Prismarine Crystal
 - 1x Redstone
@@ -59,4 +59,4 @@ Will spawn a Guardian
 - 1x Fish
 - 2x Glowstone Dust
 
-[Barrel Mob Spawning]: ../barrel/barrel/#mob-spawning
+[Barrel Mob Spawning]: barrel.md/#mob-spawning

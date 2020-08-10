@@ -11,20 +11,20 @@ The crucible is used to melt various blocks and items into fluids. Right click t
 Recipe
 ------
 ### Wooden Crucible
-![](../images/recipes/crucible_wooden.png)
+![](images/recipes/crucible_wooden.png)
 ---
 - 4x Wood Log (Any)
 - 1x Wood Slab (Any)
 - 2x Stick
 
 ### Unfired Crucible
-![](../images/recipes/crucible_unfired.png)
+![](images/recipes/crucible_unfired.png)
 ---
 - 7x Porcelain Clay (Any)
 - Smelt an Unfired Crucible to obtain a Fired Crucible.
 
 ### Porcelain Clay
-![](../images/recipes/porcelain_clay.png)
+![](images/recipes/porcelain_clay.png)
 ---
 - 1x Bone Meal
 - 1x Clay

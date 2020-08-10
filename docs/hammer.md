@@ -5,19 +5,19 @@ Hammers are used to break blocks down into other blocks. The only difference bet
 Recipes
 -------
 ### Wooden Hammer
-![](../images/recipes/hammer_wood.png)
+![](images/recipes/hammer_wood.png)
 
 ### Stone Hammer
-![](../images/recipes/hammer_stone.png)
+![](images/recipes/hammer_stone.png)
 
 ### Iron Hammer
-![](../images/recipes/hammer_iron.png)
+![](images/recipes/hammer_iron.png)
 
 ### Gold Hammer
-![](../images/recipes/hammer_gold.png)
+![](images/recipes/hammer_gold.png)
 
 ### Diamond Hammer
-![](../images/recipes/hammer_diamond.png)
+![](images/recipes/hammer_diamond.png)
 
 Block Breakdown
 ---------------
