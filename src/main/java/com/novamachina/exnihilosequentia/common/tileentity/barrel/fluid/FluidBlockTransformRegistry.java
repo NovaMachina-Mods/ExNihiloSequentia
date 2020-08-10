@@ -132,6 +132,11 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
         addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.PINK_CORAL_SEED).get(), Blocks.BRAIN_CORAL_BLOCK);
         addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.PURPLE_CORAL_SEED).get(), Blocks.BUBBLE_CORAL_BLOCK);
         addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.YELLOW_CORAL_SEED).get(), Blocks.HORN_CORAL_BLOCK);
+        addRecipe(ModFluids.SEA_WATER.get(), Blocks.TUBE_CORAL_FAN, Blocks.TUBE_CORAL_WALL_FAN);
+        addRecipe(ModFluids.SEA_WATER.get(), Blocks.BRAIN_CORAL_FAN, Blocks.BRAIN_CORAL_WALL_FAN);
+        addRecipe(ModFluids.SEA_WATER.get(), Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN);
+        addRecipe(ModFluids.SEA_WATER.get(), Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN);
+        addRecipe(ModFluids.SEA_WATER.get(), Blocks.FIRE_CORAL_FAN, Blocks.FIRE_CORAL_WALL_FAN);
     }
 
     public void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {

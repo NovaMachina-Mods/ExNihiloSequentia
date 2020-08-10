@@ -60,6 +60,16 @@ public class HammerDrops extends AbstractModRegistry {
         addRecipe(Blocks.GRANITE, ModBlocks.CRUSHED_GRANITE.get());
         addRecipe(Blocks.END_STONE, ModBlocks.CRUSHED_END_STONE.get());
         addRecipe(Blocks.NETHERRACK, ModBlocks.CRUSHED_NETHERRACK.get());
+        addRecipe(Blocks.TUBE_CORAL_BLOCK, Blocks.TUBE_CORAL);
+        addRecipe(Blocks.BRAIN_CORAL_BLOCK, Blocks.BRAIN_CORAL);
+        addRecipe(Blocks.BUBBLE_CORAL_BLOCK, Blocks.BUBBLE_CORAL);
+        addRecipe(Blocks.FIRE_CORAL_BLOCK, Blocks.FIRE_CORAL);
+        addRecipe(Blocks.HORN_CORAL_BLOCK, Blocks.HORN_CORAL);
+        addRecipe(Blocks.TUBE_CORAL, Blocks.TUBE_CORAL_FAN);
+        addRecipe(Blocks.BRAIN_CORAL, Blocks.BRAIN_CORAL_FAN);
+        addRecipe(Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN);
+        addRecipe(Blocks.FIRE_CORAL, Blocks.FIRE_CORAL_FAN);
+        addRecipe(Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN);
     }
 
     @Override
