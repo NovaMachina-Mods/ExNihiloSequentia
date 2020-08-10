@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "exnihilosequentia:items/seed_purple_coral"
+  }
+}

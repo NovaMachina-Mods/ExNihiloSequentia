@@ -52,6 +52,8 @@ public class ModBlocks {
         .register(Blocks.SIEVE, BlockSieve::new);
     public static final RegistryObject<FlowingFluidBlock> WITCH_WATER = BLOCKS
         .register(Constants.Blocks.WITCH_WATER, WitchWaterBlock::new);
+    public static final RegistryObject<FlowingFluidBlock> SEA_WATER = BLOCKS
+        .register(Constants.Blocks.SEA_WATER, SeaWaterBlock::new);
     public static final RegistryObject<BaseBlock> INFESTING_LEAVES = BLOCKS
         .register(Blocks.INFESTING_LEAVES, InfestingLeavesBlock::new);
     public static final RegistryObject<BaseBlock> INFESTED_LEAVES = BLOCKS

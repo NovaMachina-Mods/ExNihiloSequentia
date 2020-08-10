@@ -22,11 +22,8 @@ import net.minecraft.entity.monster.WitchEntity;
 import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +32,7 @@ import net.minecraft.world.World;
 public class WitchWaterBlock extends FlowingFluidBlock {
 
     public WitchWaterBlock() {
-        super(ModFluids.WITCH_WATER_STILL,
+        super(ModFluids.WITCH_WATER,
             Block.Properties.create(Material.WATER).doesNotBlockMovement()
                 .hardnessAndResistance(100.0F).noDrops());
     }

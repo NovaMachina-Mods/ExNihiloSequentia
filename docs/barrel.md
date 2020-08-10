@@ -195,7 +195,7 @@ blocks as you'd like as long as they are separated by commas and all of them rem
 !!! Important
     Duplicate recipes are not allowed. The first recipe in the list will be the one used.
 
-# Compost Amount Configuration
+### Compost Amount Configuration
 Configuration for Compost Amounts are found in `~/config/exnihilosequentia/CompostRegistry.json`.
 
 The format of the file is: 

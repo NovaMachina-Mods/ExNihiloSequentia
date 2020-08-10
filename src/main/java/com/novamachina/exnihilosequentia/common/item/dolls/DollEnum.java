@@ -4,8 +4,8 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 
 public enum DollEnum {
     BLAZE("minecraft","blaze", "minecraft", "lava", 1),
-    ENDERMAN("minecraft","enderman", Constants.ModInfo.MOD_ID, Constants.Fluids.WITCH_WATER_STILL, 2),
-    SHULKER("minecraft","shulker", Constants.ModInfo.MOD_ID, Constants.Fluids.WITCH_WATER_STILL, 1.5),
+    ENDERMAN("minecraft","enderman", Constants.ModInfo.MOD_ID, Constants.Fluids.WITCH_WATER, 2),
+    SHULKER("minecraft","shulker", Constants.ModInfo.MOD_ID, Constants.Fluids.WITCH_WATER, 1.5),
     GUARDIAN("minecraft","guardian", "minecraft", "water", 1);
 
     private final String entityModId;

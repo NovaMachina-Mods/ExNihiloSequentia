@@ -35,6 +35,7 @@
   "item.exnihilosequentia.cooked_silkworm": "Cooked Silkworm",
 
   "item.exnihilosequentia.bucket_witchwater": "Witchwater Bucket",
+  "item.exnihilosequentia.bucket_sea_water": "Sea Water Bucket",
 
   "item.exnihilosequentia.doll_crafting": "Porcelain Doll",
   "item.exnihilosequentia.doll_blaze": "Blazing Doll",
@@ -61,6 +62,14 @@
   "item.exnihilosequentia.seed_berry": "Sweet Berry Seeds",
   "item.exnihilosequentia.ancient_spores": "Ancient Spores",
   "item.exnihilosequentia.grass_seeds": "Grass Seeds",
+  "item.exnihilosequentia.seed_kelp": "Kelp Seeds",
+  "item.exnihilosequentia.seed_pickle": "Sea Pickle Egg",
+
+  "item.exnihilosequentia.seed_red_coral": "Fire Coral Seed",
+  "item.exnihilosequentia.seed_blue_coral": "Tube Coral Seed",
+  "item.exnihilosequentia.seed_pink_coral": "Brain Coral Seed",
+  "item.exnihilosequentia.seed_purple_coral": "Bubble Coral Seed",
+  "item.exnihilosequentia.seed_yellow_coral": "Horn Coral Seed",
 
   "item.exnihilosequentia.porcelain_clay": "Porcelain Clay",
 

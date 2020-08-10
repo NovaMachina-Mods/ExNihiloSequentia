@@ -6,7 +6,12 @@ public enum EnumResource {
     ANCIENT_SPORE(Items.ANCIENT_SPORE),
     GRASS_SEED(Items.GRASS_SEED),
     SILKWORM(Items.SILKWORM),
-    PORCELAIN_CLAY(Items.PORCELAIN_CLAY);
+    PORCELAIN_CLAY(Items.PORCELAIN_CLAY),
+    BLUE_CORAL_SEED(Items.BLUE_CORAL_SEED),
+    PINK_CORAL_SEED(Items.PINK_CORAL_SEED),
+    PURPLE_CORAL_SEED(Items.PURPLE_CORAL_SEED),
+    RED_CORAL_SEED(Items.RED_CORAL_SEED),
+    YELLOW_CORAL_SEED(Items.YELLOW_CORAL_SEED);
 
     public String getResourceName() {
         return resourceName;

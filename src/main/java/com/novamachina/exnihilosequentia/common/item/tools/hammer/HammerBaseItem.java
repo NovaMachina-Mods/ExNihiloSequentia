@@ -3,7 +3,9 @@ package com.novamachina.exnihilosequentia.common.item.tools.hammer;
 import com.google.common.collect.Sets;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
+
 import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.IItemTier;
@@ -18,7 +20,11 @@ public class HammerBaseItem extends ToolItem {
             Blocks.NETHERRACK, Blocks.END_STONE, Blocks.COBBLESTONE,
             ModBlocks.CRUSHED_DIORITE.get(), ModBlocks.CRUSHED_ANDESITE.get(),
             ModBlocks.CRUSHED_GRANITE.get(), ModBlocks.CRUSHED_NETHERRACK.get(),
-            ModBlocks.CRUSHED_END_STONE.get(), Blocks.GRAVEL, Blocks.SAND);
+            ModBlocks.CRUSHED_END_STONE.get(), Blocks.GRAVEL, Blocks.SAND,
+            Blocks.TUBE_CORAL_BLOCK, Blocks.BRAIN_CORAL_BLOCK, Blocks.BUBBLE_CORAL_BLOCK,
+            Blocks.FIRE_CORAL_BLOCK, Blocks.HORN_CORAL_BLOCK,
+            Blocks.TUBE_CORAL, Blocks.BRAIN_CORAL, Blocks.BUBBLE_CORAL,
+            Blocks.FIRE_CORAL, Blocks.HORN_CORAL);
 
     public HammerBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
