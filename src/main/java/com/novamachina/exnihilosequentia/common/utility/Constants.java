@@ -83,6 +83,7 @@ public class Constants {
         public static final String PURPLE_CORAL_SEED = "seed_purple_coral";
         public static final String RED_CORAL_SEED = "seed_red_coral";
         public static final String YELLOW_CORAL_SEED = "seed_yellow_coral";
+        public static final String SEED_BAMBOO = "bamboo";
 
         private static String createHammerName(String name) {
             return "hammer_" + name;
