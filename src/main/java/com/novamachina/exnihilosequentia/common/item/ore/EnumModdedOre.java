@@ -4,7 +4,11 @@ import com.novamachina.exnihilosequentia.common.utility.Color;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 
 public enum EnumModdedOre implements IOre {
-    COPPER(Constants.Ore.COPPER, new Color("FF9933"),true);
+    COPPER(Constants.Ore.COPPER, new Color("FF9933"),true),
+    LEAD(Constants.Ore.LEAD, new Color("330066"), true),
+    NICKEL(Constants.Ore.NICKEL, new Color("FFFFCC"), true),
+    SILVER(Constants.Ore.SILVER, new Color("C2FAFF"), true),
+    TIN(Constants.Ore.TIN, new Color("F5FEFF"), true),;
 
     private final String name;
     private final Color color;
