@@ -1,9 +1,10 @@
 {
   "homepage": "https://github.com/NovaMachina/ExNihiloSequentia/wiki",
   "promos": {
-    "1.15.2-latest": "1.1.0.2"
+    "1.15.2-latest": "1.1.0.3"
   },
   "1.15.2": {
+    "1.1.0.3": "Fix issue with crashing on server start",
     "1.1.0.2": "Fix barrel eating buckets when inserting a fluid",
     "1.1.0.1": "Fix Fluid Transform duplicate check, Fix Sieve Drops flattening, Fix config file errors",
     "1.1.0.0": "The Configuration Update",
