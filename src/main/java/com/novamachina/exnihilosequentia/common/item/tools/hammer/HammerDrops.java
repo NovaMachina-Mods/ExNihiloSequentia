@@ -1,13 +1,28 @@
 package com.novamachina.exnihilosequentia.common.item.tools.hammer;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
+import com.novamachina.exnihilosequentia.common.json.CrookJson;
+import com.novamachina.exnihilosequentia.common.json.HammerJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
+import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -26,6 +41,10 @@ public class HammerDrops extends AbstractModRegistry {
     }
 
     private void addRecipe(ResourceLocation input, ResourceLocation output) {
+        if(hammerDrops.containsKey(input)) {
+            LogUtil.warn(String.format("Input %s already has a drop assigned. Skipping...", input.toString()));
+            return;
+        }
         hammerDrops.put(input, output);
     }
 
@@ -45,8 +64,13 @@ public class HammerDrops extends AbstractModRegistry {
     }
 
     @Override
-    public Object toJSONReady() {
-        return null;
+    public List<HammerJson> toJSONReady() {
+        List<HammerJson> jsonList = new ArrayList<>();
+
+        for(Map.Entry<ResourceLocation, ResourceLocation> entry : hammerDrops.entrySet()) {
+            jsonList.add(new HammerJson(entry.getKey().toString(), entry.getValue().toString()));
+        }
+        return jsonList;
     }
 
     @Override
@@ -74,6 +98,54 @@ public class HammerDrops extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
-        useDefaults();
+        try {
+            List<HammerJson> list = readJson();
+            for(HammerJson entry : list) {
+                if(itemExists(entry.getInput())) {
+                    ResourceLocation inputID = new ResourceLocation(entry.getInput());
+                    if(itemExists(entry.getOutput())) {
+                        ResourceLocation outputID = new ResourceLocation(entry.getOutput());
+                        addRecipe(inputID, outputID);
+                    } else {
+                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getOutput()));
+                    }
+                } else {
+                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getInput()));
+                }
+            }
+        } catch (JsonParseException e) {
+            LogUtil.error(String.format("Malformed %s", Constants.Json.HAMMER_FILE));
+            LogUtil.error(e.getMessage());
+            if(e.getMessage().contains("IllegalStateException")) {
+                LogUtil.error("Please consider deleting the file and regenerating it.");
+            }
+            LogUtil.error("Falling back to defaults");
+            clear();
+            useDefaults();
+        }
+    }
+
+    private boolean itemExists(String entry) {
+        ResourceLocation itemID = new ResourceLocation(entry);
+        return ForgeRegistries.BLOCKS.containsKey(itemID);
+    }
+
+    private List<HammerJson> readJson() {
+        Type listType = new TypeToken<ArrayList<HammerJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<HammerJson>>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.HAMMER_FILE);
+        List<HammerJson> list = null;
+        try {
+            StringBuilder builder = new StringBuilder();
+            Files.readAllLines(path).forEach(builder::append);
+            list = gson.fromJson(builder.toString(), listType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public boolean isHammerable(ResourceLocation blockID) {
+        return hammerDrops.containsKey(blockID);
     }
 }

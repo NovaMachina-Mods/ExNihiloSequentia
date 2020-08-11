@@ -19,19 +19,30 @@ The following are the fluids that will transform. A full barrel and the correct 
 | Fluid | Block    | Result     |
 |-------|----------|------------|
 | Water | Mycelium | Witchwater |
+| Water | Sand     | Sea Water  |
 
 Fluid Block Transformation
 --------------------------
 The following are the recipes that a barrel will perform when a block, or an item is right clicked on a full barrel with the correct fluid.
 
-| Fluid      | Block or Item    | Result     |
-|------------|------------------|------------|
-| Water      | Dust             | Clay       |
-| Lava       | Redstone Dust    | Netherrack |
-| Lava       | Glowstone Dust   | End Stone  |
-| Witchwater | Sand             | Soul Sand  |
-| Witchwater | Red Mushroom     | Slime      |
-| Witchwater | Brown Mushroom   | Slime      |
+| Fluid      | Block or Item      | Result           |
+|------------|--------------------|------------------|
+| Water      | Dust               | Clay             |
+| Lava       | Redstone Dust      | Netherrack       |
+| Lava       | Glowstone Dust     | End Stone        |
+| Witchwater | Sand               | Soul Sand        |
+| Witchwater | Red Mushroom       | Slime            |
+| Witchwater | Brown Mushroom     | Slime            |
+| Sea Water  | Tube Coral Seed    | Tube Coral Block |
+| Sea Water  | Brain Coral Seed   | Brain Coral Block |
+| Sea Water  | Bubble Coral Seed  | Bubble Coral Block |
+| Sea Water  | Horn Coral Seed    | Horn Coral Block |
+| Sea Water  | Fire Coral Seed    | Fire Coral Block |
+| Sea Water  | Tube Coral Fan     | Tube Coral Wall Fan |
+| Sea Water  | Brain Coral Fan    | Brain Coral Wall Fan |
+| Sea Water  | Bubble Coral Fan   | Bubble Coral Wall Fan |
+| Sea Water  | Horn Coral Fan     | Horn Coral Wall Fan |
+| Sea Water  | Fire Coral Fan     | Fire Coral Wall Fan |
 
 Fluid On Top
 ------------
@@ -51,7 +62,8 @@ In order to spawn a mob, create the doll of the mob you want to spawn and right 
 | Blaze    | Blazing Doll    | Lava       |
 | Enderman | Creeping Doll   | Witchwater |
 | Shulker  | Floating Doll   | Witchwater |
-| Guardian | Protecting Doll | Witch      |
+| Guardian | Protecting Doll | Water      |
+| Bee      | Buzzing Doll    | Witchwater |
 
 Compostable Blocks and Items
 ----------------------------

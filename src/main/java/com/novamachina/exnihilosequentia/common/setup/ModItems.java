@@ -1,7 +1,6 @@
 package com.novamachina.exnihilosequentia.common.setup;
 
 import com.novamachina.exnihilosequentia.common.item.CookedSilkwormItem;
-import com.novamachina.exnihilosequentia.common.item.dolls.CraftingDollItem;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
@@ -96,8 +95,6 @@ public class ModItems {
     public static final RegistryObject<Item> BARREL_WOOD = ITEMS
         .register(Blocks.BARREL_WOOD, () -> new BlockItem(ModBlocks.BARREL_WOOD.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRAFTING_DOLL = ITEMS
-        .register(Constants.Items.CRAFTING_DOLL, CraftingDollItem::new);
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
