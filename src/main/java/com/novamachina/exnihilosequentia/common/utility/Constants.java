@@ -107,6 +107,8 @@ public class Constants {
         public static final String NICKEL = "nickel";
         public static final String SILVER = "silver";
         public static final String TIN = "tin";
+        public static final String ALUMINUM = "aluminum";
+        public static final String PLATINUM = "platinum";
     }
 
     public static class Fluids {

@@ -51,6 +51,8 @@
   "item.exnihilosequentia.chunk_silver": "Silver Ore Chunk",
   "item.exnihilosequentia.chunk_nickel": "Nickel Ore Chunk",
   "item.exnihilosequentia.chunk_lead": "Lead Ore Chunk",
+  "item.exnihilosequentia.chunk_aluminum": "Aluminum Ore Chunk",
+  "item.exnihilosequentia.chunk_platinum": "Platinum Ore Chunk",
 
   "item.exnihilosequentia.piece_iron": "Iron Ore Piece",
   "item.exnihilosequentia.piece_gold": "Gold Ore Piece",
@@ -59,12 +61,16 @@
   "item.exnihilosequentia.piece_silver": "Silver Ore Piece",
   "item.exnihilosequentia.piece_nickel": "Nickel Ore Piece",
   "item.exnihilosequentia.piece_lead": "Lead Ore Piece",
+  "item.exnihilosequentia.piece_aluminum": "Aluminum Ore Piece",
+  "item.exnihilosequentia.piece_platinum": "Platinum Ore Piece",
 
   "item.exnihilosequentia.ingot_copper": "Copper Ingot",
   "item.exnihilosequentia.ingot_tin": "Tin Ingot",
   "item.exnihilosequentia.ingot_silver": "Silver Ingot",
   "item.exnihilosequentia.ingot_nickel": "Nickel Ingot",
   "item.exnihilosequentia.ingot_lead": "Lead Ingot",
+  "item.exnihilosequentia.ingot_aluminum": "Aluminum Ingot",
+  "item.exnihilosequentia.ingot_platinum": "Platinum Ingot",
 
   "item.exnihilosequentia.seed_oak": "Oak Seed",
   "item.exnihilosequentia.seed_spruce": "Spruce Seed",
