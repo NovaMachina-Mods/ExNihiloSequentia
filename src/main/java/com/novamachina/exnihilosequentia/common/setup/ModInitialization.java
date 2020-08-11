@@ -94,6 +94,7 @@ public class ModInitialization {
         generateJson(gson, Constants.Json.FIRED_CRUCIBLE_FILE, ModRegistries.FIRED_CRUCIBLE.toJSONReady());
         generateJson(gson, Constants.Json.SIEVE_FILE, ModRegistries.SIEVE.toJSONReady());
         generateJson(gson, Constants.Json.CROOK_FILE, ModRegistries.CROOK.toJSONReady());
+        generateJson(gson, Constants.Json.HAMMER_FILE, ModRegistries.HAMMER.toJSONReady());
 
         ModRegistries.BUS.clearRegistries();
     }

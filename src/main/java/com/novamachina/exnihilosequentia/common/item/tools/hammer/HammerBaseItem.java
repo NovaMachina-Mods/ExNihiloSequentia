@@ -6,11 +6,14 @@ import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
 
 import java.util.Set;
 
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolItem;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
 
 public class HammerBaseItem extends ToolItem {
@@ -31,5 +34,14 @@ public class HammerBaseItem extends ToolItem {
             new Item.Properties().defaultMaxDamage(maxDamage).group(ModInitialization.ITEM_GROUP)
                 .addToolType(
                     ToolType.PICKAXE, tier.getHarvestLevel()));
+    }
+
+    @Override
+    public boolean canHarvestBlock(BlockState blockIn) {
+        ResourceLocation blockID = blockIn.getBlock().getRegistryName();
+        if(ModRegistries.HAMMER.isHammerable(blockID)) {
+            return true;
+        }
+        return super.canHarvestBlock(blockIn);
     }
 }
