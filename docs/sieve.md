@@ -65,11 +65,17 @@ The following is a list of the possible drops from the sieve. Listed is the bloc
 |                    | Carrot Seeds      | 5 %          | String        | false       |
 |                    | Potato Seeds      | 5 %          | String        | false       |
 |                    | Sweet Berry Seeds | 5 %          | String        | false       |
+|                    | Bamboo Seeds      | 5 %          | String        | false       |
 | Sand               | Cocoa Beans       | 3 %          | String        | false       |
 |                    | Prismarine Shards | 2 %          | Diamond       | false       |
 |                    | Iron Ore Piece    | 50 %         | Diamond       | false       |
-|                    | Kelp Seeds        | 5 %          | String        | true       |
-|                    | Sea Pickle Egg    | 5 %          | String        | true       |
+|                    | Kelp Seeds        | 5 %          | String        | true        |
+|                    | Sea Pickle Egg    | 5 %          | String        | true        |
+|                    | Tube Coral Seed   | 5 %          | Iron          | true        |
+|                    | Horn Coral Seed   | 5 %          | Iron          | true        |
+|                    | Bubble Coral Seed | 5 %          | Iron          | true        |
+|                    | Brain Coral Seed  | 5 %          | Iron          | true        |
+|                    | Fire Coral Seed   | 5 %          | Iron          | true        |
 | Gravel             | Flint             | 25 %         | String        | false       |
 |                    |                   | 25 %         | Flint         | false       |
 |                    | Coal              | 12.5 %       | Flint         | false       |
@@ -208,7 +214,8 @@ The format of the file is:
     "input: "modid:name",
     "result: "modid:name",
     "rarity: 0.0 < number <= 1.0,
-    "mesh": MeshType
+    "mesh": MeshType,
+    "isWaterlogged": true or false
   },
   ...
 ]
@@ -220,6 +227,7 @@ The format of the file is:
 - `result`: The item to be dropped (Must be an item). Required field.
 - `rarity`: The percent chance the result will be dropped from the input (Must be a number greater than 0.0 and less than 1.0). Required field.
 - `mesh`: The minimum mesh required to drop the result (Must be STRING, FLINT, IRON, or DIAMOND). Required field.
+- `isWaterlogged`: The sieve must be placed in water in to obtain the result (Must be `true` or `false`). Required field.
 
 You may chain together as many:
 ```
@@ -227,7 +235,8 @@ You may chain together as many:
   "input: "modid:name",
   "result: "modid:name",
   "rarity: 0.0 < number <= 1.0,
-  "mesh": MeshType
+  "mesh": MeshType,
+  "isWaterlogged": true or false
 }
 ```
 blocks as you'd like as long as they are separated by commas and all of them remain inside `[ ]`.

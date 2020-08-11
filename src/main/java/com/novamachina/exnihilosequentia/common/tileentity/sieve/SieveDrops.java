@@ -339,6 +339,13 @@ public class SieveDrops extends AbstractModRegistry {
             addMultiMeshDrop(leavesBlock,
                 ModItems.resourceMap.get(Constants.Items.SILKWORM).get(), 0.025F, 0.05F, 0.1F, 0.2F, false);
         });
+
+        // Coral Seeds
+        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.BLUE_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
+        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.PURPLE_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
+        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.PINK_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
+        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.YELLOW_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
+        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.RED_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
     }
 
     private Map<Block, Item> getLeavesSaplings() {

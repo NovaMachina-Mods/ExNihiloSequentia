@@ -22,3 +22,9 @@ Various recipes that don't really fall under a category.
 
 ## End Cake
 ![](images/recipes/end_cake.png)
+
+## Beehive Frame
+![](images/recipes/beehive_frame.png)
+
+## Beehive
+![](images/recipes/beehive.png)

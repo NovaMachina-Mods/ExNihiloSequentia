@@ -41,6 +41,10 @@ public class HammerDrops extends AbstractModRegistry {
     }
 
     private void addRecipe(ResourceLocation input, ResourceLocation output) {
+        if(hammerDrops.containsKey(input)) {
+            LogUtil.warn(String.format("Input %s already has a drop assigned. Skipping...", input.toString()));
+            return;
+        }
         hammerDrops.put(input, output);
     }
 
