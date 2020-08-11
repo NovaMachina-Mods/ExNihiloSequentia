@@ -3,16 +3,15 @@ package com.novamachina.exnihilosequentia.common.item.ore;
 import com.novamachina.exnihilosequentia.common.utility.Color;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 
-public enum EnumOre implements IOre {
-    IRON(Constants.Ore.IRON, new Color("BF8040"),true),
-    GOLD(Constants.Ore.GOLD, new Color("FFFF00"),true);
+public enum EnumModdedOre implements IOre {
+    COPPER(Constants.Ore.COPPER, new Color("FF9933"),true);
 
     private final String name;
     private final Color color;
     private final boolean isEnabled;
 
 
-    EnumOre(String name, Color color, boolean isEnabled) {
+    EnumModdedOre(String name, Color color, boolean isEnabled) {
         this.name = name;
         this.color = color;
         this.isEnabled = isEnabled;
@@ -33,12 +32,10 @@ public enum EnumOre implements IOre {
         return color;
     }
 
-    @Override
     public String getChunkName() {
         return "chunk_" + name;
     }
 
-    @Override
     public String getPieceName() {
         return "piece_" + name;
     }

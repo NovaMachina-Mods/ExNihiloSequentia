@@ -103,6 +103,7 @@ public class Constants {
 
         public static final String GOLD = "gold";
         public static final String IRON = "iron";
+        public static final String COPPER = "copper";
     }
 
     public static class Fluids {

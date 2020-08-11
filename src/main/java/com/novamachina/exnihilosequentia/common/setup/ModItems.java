@@ -5,7 +5,9 @@ import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
+import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import com.novamachina.exnihilosequentia.common.item.ore.IOre;
 import com.novamachina.exnihilosequentia.common.item.ore.OreItem;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import com.novamachina.exnihilosequentia.common.item.pebbles.PebbleItem;
@@ -39,6 +41,7 @@ public class ModItems {
 
     public static Map<String, RegistryObject<OreItem>> chunkMap = new HashMap<>();
     public static Map<String, RegistryObject<OreItem>> pieceMap = new HashMap<>();
+    public static Map<String, RegistryObject<OreItem>> ingotMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> resourceMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> pebbleMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
@@ -110,6 +113,12 @@ public class ModItems {
         for (EnumOre ore : EnumOre.values()) {
             chunkMap.put(ore.getName(), ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
             pieceMap.put(ore.getName(), ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
+        }
+
+        for (IOre ore : EnumModdedOre.values()) {
+            chunkMap.put(ore.getName(), ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
+            pieceMap.put(ore.getName(), ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
+            ingotMap.put(ore.getName(), ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
         }
 
         for (EnumSeed seed : EnumSeed.values()) {
