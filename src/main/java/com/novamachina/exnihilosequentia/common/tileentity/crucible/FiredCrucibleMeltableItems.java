@@ -15,6 +15,7 @@ import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -33,16 +34,20 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
         try {
             List<CrucibleJson> registriesJson = readJson();
             for (CrucibleJson entry : registriesJson) {
-                if (itemExists(entry.getEntry())) {
-                    ResourceLocation entryID = new ResourceLocation(entry.getEntry());
-                    if (itemExists(entry.getFluid())) {
-                        ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
-                        addMeltable(entryID, entry.getAmount(), fluidID);
+                try {
+                    if (itemExists(entry.getEntry())) {
+                        ResourceLocation entryID = new ResourceLocation(entry.getEntry());
+                        if (itemExists(entry.getFluid())) {
+                            ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
+                            addMeltable(entryID, entry.getAmount(), fluidID);
+                        } else {
+                            LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.FIRED_CRUCIBLE_FILE, entry.getFluid()));
+                        }
                     } else {
-                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluid()));
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.FIRED_CRUCIBLE_FILE, entry.getEntry()));
                     }
-                } else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.FIRED_CRUCIBLE_FILE, e.getMessage()));
                 }
             }
         } catch (JsonParseException e) {

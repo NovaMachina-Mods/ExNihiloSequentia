@@ -6,6 +6,7 @@ import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -51,7 +52,7 @@ public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
         return jsonList;
     }
 
-    protected boolean itemExists(String entry) {
+    protected boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }

@@ -22,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
@@ -71,21 +72,25 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
         try {
             List<FluidBlockJson> registriesJson = readJson();
             for (FluidBlockJson entry : registriesJson) {
-                if (itemExists(entry.getFluid())) {
-                    ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
-                    if (itemExists(entry.getInput())) {
-                        ResourceLocation inputID = new ResourceLocation(entry.getInput());
-                        if (itemExists(entry.getResult())) {
-                            ResourceLocation resultID = new ResourceLocation(entry.getResult());
-                            addRecipe(fluidID, inputID, resultID);
+                try {
+                    if (itemExists(entry.getFluid())) {
+                        ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
+                        if (itemExists(entry.getInput())) {
+                            ResourceLocation inputID = new ResourceLocation(entry.getInput());
+                            if (itemExists(entry.getResult())) {
+                                ResourceLocation resultID = new ResourceLocation(entry.getResult());
+                                addRecipe(fluidID, inputID, resultID);
+                            } else {
+                                LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.FLUID_BLOCK_FILE, entry.getResult()));
+                            }
                         } else {
-                            LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                            LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.FLUID_BLOCK_FILE, entry.getInput()));
                         }
                     } else {
-                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getInput()));
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.FLUID_BLOCK_FILE, entry.getFluid()));
                     }
-                } else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluid()));
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.FLUID_BLOCK_FILE, e.getMessage()));
                 }
             }
         } catch (JsonParseException e) {
@@ -100,7 +105,7 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
         }
     }
 
-    private boolean itemExists(String entry) {
+    private boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) ||  ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }

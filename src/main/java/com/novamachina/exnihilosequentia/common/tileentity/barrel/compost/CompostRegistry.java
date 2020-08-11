@@ -23,6 +23,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
@@ -68,10 +69,14 @@ public class CompostRegistry extends AbstractModRegistry {
         try {
             List<CompostJson> registryJson = readJson();
             for (CompostJson entry : registryJson) {
-                if (itemExists(entry.getEntry())) {
-                    solidsMap.put(new ResourceLocation(entry.getEntry()), entry.getAmount());
-                } else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
+                try {
+                    if (itemExists(entry.getEntry())) {
+                        solidsMap.put(new ResourceLocation(entry.getEntry()), entry.getAmount());
+                    } else {
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.COMPOST_FILE, entry.getEntry()));
+                    }
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.COMPOST_FILE, e.getMessage()));
                 }
             }
         } catch (JsonParseException e) {
@@ -86,7 +91,7 @@ public class CompostRegistry extends AbstractModRegistry {
         }
     }
 
-    private boolean itemExists(String entry) {
+    private boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }

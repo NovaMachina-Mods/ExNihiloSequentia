@@ -16,6 +16,7 @@ import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -85,11 +86,15 @@ public class HeatRegistry extends AbstractModRegistry {
         try {
             List<HeatJson> registriesJson = readJson();
             for(HeatJson entry : registriesJson) {
-                if(itemExists(entry.getEntry())) {
-                    ResourceLocation entryID = new ResourceLocation(entry.getEntry());
-                    addHeatSource(entryID, entry.getRate());
-                } else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getEntry()));
+                try {
+                    if(itemExists(entry.getEntry())) {
+                        ResourceLocation entryID = new ResourceLocation(entry.getEntry());
+                        addHeatSource(entryID, entry.getRate());
+                    } else {
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.HEAT_FILE, entry.getEntry()));
+                    }
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.HEAT_FILE, e.getMessage()));
                 }
             }
         } catch (JsonParseException e) {
@@ -104,7 +109,7 @@ public class HeatRegistry extends AbstractModRegistry {
         }
     }
 
-    private boolean itemExists(String entry) {
+    private boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }

@@ -26,6 +26,7 @@ import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class HammerDrops extends AbstractModRegistry {
@@ -42,7 +43,7 @@ public class HammerDrops extends AbstractModRegistry {
 
     private void addRecipe(ResourceLocation input, ResourceLocation output) {
         if(hammerDrops.containsKey(input)) {
-            LogUtil.warn(String.format("Input %s already has a drop assigned. Skipping...", input.toString()));
+            LogUtil.warn(String.format("%s: Input %s already has a drop assigned. Skipping...", Constants.Json.HAMMER_FILE, input.toString()));
             return;
         }
         hammerDrops.put(input, output);
@@ -101,16 +102,20 @@ public class HammerDrops extends AbstractModRegistry {
         try {
             List<HammerJson> list = readJson();
             for(HammerJson entry : list) {
-                if(itemExists(entry.getInput())) {
-                    ResourceLocation inputID = new ResourceLocation(entry.getInput());
-                    if(itemExists(entry.getOutput())) {
-                        ResourceLocation outputID = new ResourceLocation(entry.getOutput());
-                        addRecipe(inputID, outputID);
+                try {
+                    if(itemExists(entry.getInput())) {
+                        ResourceLocation inputID = new ResourceLocation(entry.getInput());
+                        if(itemExists(entry.getOutput())) {
+                            ResourceLocation outputID = new ResourceLocation(entry.getOutput());
+                            addRecipe(inputID, outputID);
+                        } else {
+                            LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.HAMMER_FILE, entry.getOutput()));
+                        }
                     } else {
-                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getOutput()));
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.HAMMER_FILE, entry.getInput()));
                     }
-                } else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getInput()));
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.HAMMER_FILE, e.getMessage()));
                 }
             }
         } catch (JsonParseException e) {
@@ -125,7 +130,7 @@ public class HammerDrops extends AbstractModRegistry {
         }
     }
 
-    private boolean itemExists(String entry) {
+    private boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return ForgeRegistries.BLOCKS.containsKey(itemID);
     }

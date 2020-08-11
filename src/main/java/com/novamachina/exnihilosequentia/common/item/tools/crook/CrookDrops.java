@@ -17,6 +17,7 @@ import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
@@ -40,11 +41,15 @@ public class CrookDrops extends AbstractModRegistry {
         try {
             List<CrookJson> list = readJson();
             for(CrookJson entry : list) {
-                if(itemExists(entry.getResult())) {
-                    ResourceLocation entryID = new ResourceLocation(entry.getResult());
-                    addDrop(entryID, entry.getRarity());
-                } else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                try {
+                    if(itemExists(entry.getResult())) {
+                        ResourceLocation entryID = new ResourceLocation(entry.getResult());
+                        addDrop(entryID, entry.getRarity());
+                    } else {
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.CROOK_FILE, entry.getResult()));
+                    }
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.CROOK_FILE, e.getMessage()));
                 }
             }
         } catch (JsonParseException e) {
@@ -59,7 +64,7 @@ public class CrookDrops extends AbstractModRegistry {
         }
     }
 
-    private boolean itemExists(String entry) {
+    private boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }

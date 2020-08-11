@@ -37,6 +37,7 @@ import net.minecraft.block.LeavesBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class SieveDrops extends AbstractModRegistry {
@@ -153,16 +154,20 @@ public class SieveDrops extends AbstractModRegistry {
         try {
             List<SieveJson> registryJson = readJson();
             for(SieveJson entry : registryJson) {
-                if(itemExists(entry.getInput())) {
-                    ResourceLocation inputID = new ResourceLocation(entry.getInput());
-                    if(itemExists(entry.getResult())) {
-                        ResourceLocation outputID = new ResourceLocation(entry.getResult());
-                        addDrop(inputID, outputID, entry.getRarity(), entry.getMesh(), entry.isWaterlogged());
+                try {
+                    if(itemExists(entry.getInput())) {
+                        ResourceLocation inputID = new ResourceLocation(entry.getInput());
+                        if(itemExists(entry.getResult())) {
+                            ResourceLocation outputID = new ResourceLocation(entry.getResult());
+                            addDrop(inputID, outputID, entry.getRarity(), entry.getMesh(), entry.isWaterlogged());
+                        } else {
+                            LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.SIEVE_FILE, entry.getResult()));
+                        }
                     } else {
-                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.SIEVE_FILE, entry.getInput()));
                     }
-                } else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getInput()));
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.SIEVE_FILE, e.getMessage()));
                 }
             }
         } catch (JsonParseException e) {
@@ -177,7 +182,7 @@ public class SieveDrops extends AbstractModRegistry {
         }
     }
 
-    private boolean itemExists(String entry) {
+    private boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID);
     }

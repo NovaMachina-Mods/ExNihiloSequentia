@@ -16,6 +16,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
@@ -86,21 +87,25 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
         try {
             List<FluidOnTopJson> registriesJson = readJson();
             for(FluidOnTopJson entry : registriesJson) {
-                if(itemExists(entry.getFluidInBarrel())) {
-                    ResourceLocation fluidInBarrel = new ResourceLocation(entry.getFluidInBarrel());
-                    if(itemExists(entry.getFluidOnTop())) {
-                        ResourceLocation fluidOnTop = new ResourceLocation(entry.getFluidOnTop());
-                        if(itemExists(entry.getResult())) {
-                            ResourceLocation resultID = new ResourceLocation(entry.getResult());
-                            addRecipe(fluidInBarrel, fluidOnTop, resultID);
+                try {
+                    if(itemExists(entry.getFluidInBarrel())) {
+                        ResourceLocation fluidInBarrel = new ResourceLocation(entry.getFluidInBarrel());
+                        if(itemExists(entry.getFluidOnTop())) {
+                            ResourceLocation fluidOnTop = new ResourceLocation(entry.getFluidOnTop());
+                            if(itemExists(entry.getResult())) {
+                                ResourceLocation resultID = new ResourceLocation(entry.getResult());
+                                addRecipe(fluidInBarrel, fluidOnTop, resultID);
+                            }else {
+                                LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.FLUID_ON_TOP_FILE, entry.getResult()));
+                            }
                         }else {
-                            LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getResult()));
+                            LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.FLUID_ON_TOP_FILE, entry.getFluidOnTop()));
                         }
-                    }else {
-                        LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluidOnTop()));
+                    } else {
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.FLUID_ON_TOP_FILE, entry.getFluidInBarrel()));
                     }
-                } else {
-                    LogUtil.warn(String.format("Entry \"%s\" does not exist...Skipping...", entry.getFluidInBarrel()));
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.FLUID_ON_TOP_FILE, e.getMessage()));
                 }
             }
         } catch (JsonParseException e) {
@@ -115,7 +120,7 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
         }
     }
 
-    private boolean itemExists(String entry) {
+    private boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) ||  ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
     }
