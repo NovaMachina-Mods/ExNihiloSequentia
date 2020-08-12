@@ -39,6 +39,10 @@ public class WoodCrucibleMeltableItems extends BaseCrucibleMeltableItems{
 
     @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.WOOD_CRUCIBLE_FILE, this)) {
+            return;
+        }
+
         try {
             List<CrucibleJson> registriesJson = readJson();
             for (CrucibleJson entry : registriesJson) {
@@ -66,7 +70,7 @@ public class WoodCrucibleMeltableItems extends BaseCrucibleMeltableItems{
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerWoodCrucible(this));
         }
     }
 
@@ -83,22 +87,5 @@ public class WoodCrucibleMeltableItems extends BaseCrucibleMeltableItems{
             e.printStackTrace();
         }
         return registryJson;
-    }
-
-    @Override
-    protected void useDefaults() {
-        addMeltable(Items.ACACIA_SAPLING, 250, Fluids.WATER);
-        addMeltable(Items.BIRCH_SAPLING, 250, Fluids.WATER);
-        addMeltable(Items.DARK_OAK_SAPLING, 250, Fluids.WATER);
-        addMeltable(Items.JUNGLE_SAPLING, 250, Fluids.WATER);
-        addMeltable(Items.SPRUCE_SAPLING, 250, Fluids.WATER);
-        addMeltable(Items.OAK_SAPLING, 250, Fluids.WATER);
-
-        addMeltable(Items.ACACIA_LEAVES, 250, Fluids.WATER);
-        addMeltable(Items.BIRCH_LEAVES, 250, Fluids.WATER);
-        addMeltable(Items.DARK_OAK_LEAVES, 250, Fluids.WATER);
-        addMeltable(Items.JUNGLE_LEAVES, 250, Fluids.WATER);
-        addMeltable(Items.SPRUCE_LEAVES, 250, Fluids.WATER);
-        addMeltable(Items.OAK_LEAVES, 250, Fluids.WATER);
     }
 }

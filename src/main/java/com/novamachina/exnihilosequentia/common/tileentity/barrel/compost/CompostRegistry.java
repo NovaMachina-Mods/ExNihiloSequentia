@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.novamachina.exnihilosequentia.common.compat.IDefaultRegistry;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDropEntry;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
@@ -66,6 +67,10 @@ public class CompostRegistry extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.COMPOST_FILE, this)) {
+            return;
+        }
+
         try {
             List<CompostJson> registryJson = readJson();
             for (CompostJson entry : registryJson) {
@@ -87,7 +92,7 @@ public class CompostRegistry extends AbstractModRegistry {
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerCompost(this));
         }
     }
 
@@ -97,8 +102,10 @@ public class CompostRegistry extends AbstractModRegistry {
     }
 
     private List<CompostJson> readJson() throws JsonParseException {
-        Type listType = new TypeToken<ArrayList<CompostJson>>(){}.getType();
-        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<CompostJson>>()).create();
+        Type listType = new TypeToken<ArrayList<CompostJson>>() {
+        }.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<CompostJson>>())
+            .create();
         Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.COMPOST_FILE);
         List<CompostJson> registryJson = null;
         try {
@@ -109,44 +116,6 @@ public class CompostRegistry extends AbstractModRegistry {
             e.printStackTrace();
         }
         return registryJson;
-    }
-
-    protected void useDefaults() {
-        addSolid(new ResourceLocation("minecraft:saplings"), 125);
-        addSolid(new ResourceLocation("minecraft:leaves"), 125);
-        addSolid(new ResourceLocation("minecraft:flowers"), 100);
-        addSolid(new ResourceLocation("minecraft:fishes"), 150);
-        addSolid(new ResourceLocation("forge:meat_cooked"), 200);
-        addSolid(new ResourceLocation("forge:meat_uncooked"), 200);
-        addSolid(new ResourceLocation("forge:seeds"), 80);
-        addSolid(new ResourceLocation("forge:crops/wheat"), 80);
-        addSolid(new ResourceLocation("forge:crops/carrot"), 100);
-        addSolid(new ResourceLocation("forge:crops/beetroot"), 100);
-        addSolid(new ResourceLocation("forge:crops/potato"), 100);
-        addSolid(new ResourceLocation("forge:crops/nether_wart"), 100);
-        addSolid(new ResourceLocation("forge:eggs"), 80);
-        addSolid(new ResourceLocation("forge:string"), 40);
-        addSolid(Items.ROTTEN_FLESH, 100);
-        addSolid(Items.SPIDER_EYE, 80);
-        addSolid(Items.BREAD, 160);
-        addSolid(Blocks.BROWN_MUSHROOM, 100);
-        addSolid(Blocks.RED_MUSHROOM, 100);
-        addSolid(Items.PUMPKIN_PIE, 160);
-        addSolid(ModItems.resourceMap.get(EnumResource.SILKWORM.getResourceName()).get(), 40);
-        addSolid(ModItems.COOKED_SILKWORM.get(), 40);
-        addSolid(Items.APPLE, 100);
-        addSolid(Items.MELON_SLICE, 40);
-        addSolid(Blocks.MELON, 1000/6);
-        addSolid(Blocks.PUMPKIN, 1000/6);
-        addSolid(Blocks.CARVED_PUMPKIN, 1000/6);
-        addSolid(Blocks.JACK_O_LANTERN, 1000/6);
-        addSolid(Blocks.CACTUS, 100);
-        addSolid(Items.BAKED_POTATO, 150);
-        addSolid(Items.POISONOUS_POTATO, 200);
-        addSolid(Blocks.LILY_PAD, 100);
-        addSolid(Blocks.VINE, 100);
-        addSolid(Blocks.TALL_GRASS, 100);
-        addSolid(Blocks.SUGAR_CANE, 80);
     }
 
     public void addSolid(IItemProvider item, int solidAmount) {

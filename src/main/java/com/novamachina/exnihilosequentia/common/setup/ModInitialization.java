@@ -68,46 +68,14 @@ public class ModInitialization {
     @SubscribeEvent
     public static void setupTagBasedRegistries(FMLServerStartingEvent event) {
         if(Config.USE_JSON_REGISTRIES.get()) {
-            generateJsonFiles();
+            ModRegistries.BUS.useJson();
+        } else {
+            ModRegistries.BUS.useDefault();
         }
-
-        ModRegistries.BUS.initialize(Config.USE_JSON_REGISTRIES.get());
     }
 
     @SubscribeEvent
     public static void clearRegistriesOnServerExit(FMLServerStoppedEvent event) {
         ModRegistries.BUS.clearRegistries();
-    }
-
-    private static void generateJsonFiles() {
-        ModRegistries.BUS.initialize(false);
-
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.setPrettyPrinting().create();
-
-        generateJson(gson, Constants.Json.COMPOST_FILE, ModRegistries.COMPOST.toJSONReady());
-        generateJson(gson, Constants.Json.FLUID_BLOCK_FILE, ModRegistries.FLUID_BLOCK.toJSONReady());
-        generateJson(gson, Constants.Json.FLUID_TRANSFORM_FILE, ModRegistries.FLUID_TRANSFORM.toJSONReady());
-        generateJson(gson, Constants.Json.FLUID_ON_TOP_FILE, ModRegistries.FLUID_ON_TOP.toJSONReady());
-        generateJson(gson, Constants.Json.HEAT_FILE, ModRegistries.HEAT.toJSONReady());
-        generateJson(gson, Constants.Json.WOOD_CRUCIBLE_FILE, ModRegistries.WOODEN_CRUCIBLE.toJSONReady());
-        generateJson(gson, Constants.Json.FIRED_CRUCIBLE_FILE, ModRegistries.FIRED_CRUCIBLE.toJSONReady());
-        generateJson(gson, Constants.Json.SIEVE_FILE, ModRegistries.SIEVE.toJSONReady());
-        generateJson(gson, Constants.Json.CROOK_FILE, ModRegistries.CROOK.toJSONReady());
-        generateJson(gson, Constants.Json.HAMMER_FILE, ModRegistries.HAMMER.toJSONReady());
-
-        ModRegistries.BUS.clearRegistries();
-    }
-
-    private static void generateJson(Gson gson, String fileName, List<?> list) {
-        File file = Constants.Json.baseJsonPath.resolve(fileName).toFile();
-        if(!Files.exists(file.toPath())) {
-            try (Writer writer = new FileWriter(file)){
-                writer.write(gson.toJson(list));
-                LogUtil.info("Created " + fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

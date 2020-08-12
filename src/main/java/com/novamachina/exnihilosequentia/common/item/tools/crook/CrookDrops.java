@@ -38,6 +38,10 @@ public class CrookDrops extends AbstractModRegistry {
 
     @Override
     public void useJson() {
+        if(generateJson(Constants.Json.CROOK_FILE, this)) {
+            return;
+        }
+
         try {
             List<CrookJson> list = readJson();
             for(CrookJson entry : list) {

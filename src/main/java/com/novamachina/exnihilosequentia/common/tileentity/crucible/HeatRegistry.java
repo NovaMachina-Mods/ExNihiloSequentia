@@ -83,6 +83,10 @@ public class HeatRegistry extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.HEAT_FILE, this)) {
+            return;
+        }
+
         try {
             List<HeatJson> registriesJson = readJson();
             for(HeatJson entry : registriesJson) {
@@ -105,7 +109,7 @@ public class HeatRegistry extends AbstractModRegistry {
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerHeat(this));
         }
     }
 
@@ -127,16 +131,6 @@ public class HeatRegistry extends AbstractModRegistry {
             e.printStackTrace();
         }
         return registryJson;
-    }
-
-    @Override
-    protected void useDefaults() {
-        addHeatSource(Blocks.LAVA, 3);
-        addHeatSource(Blocks.FIRE, 4);
-        addHeatSource(Blocks.TORCH, 1);
-        addHeatSource(Blocks.WALL_TORCH, 1);
-        addHeatSource(Blocks.MAGMA_BLOCK, 2);
-        addHeatSource(Blocks.GLOWSTONE, 2);
     }
 
     @Override

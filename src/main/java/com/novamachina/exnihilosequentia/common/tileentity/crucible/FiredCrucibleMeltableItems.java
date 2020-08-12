@@ -31,6 +31,10 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
 
     @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.FIRED_CRUCIBLE_FILE, this)) {
+            return;
+        }
+
         try {
             List<CrucibleJson> registriesJson = readJson();
             for (CrucibleJson entry : registriesJson) {
@@ -58,7 +62,7 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerFiredCrucible(this));
         }
     }
 
@@ -75,20 +79,5 @@ public class FiredCrucibleMeltableItems extends BaseCrucibleMeltableItems {
             e.printStackTrace();
         }
         return registryJson;
-    }
-
-    @Override
-    protected void useDefaults() {
-        // Lava Meltables
-        addMeltable(Blocks.COBBLESTONE, 250, Fluids.LAVA);
-        addMeltable(Blocks.DIORITE, 250, Fluids.LAVA);
-        addMeltable(Blocks.ANDESITE, 250, Fluids.LAVA);
-        addMeltable(Blocks.GRANITE, 250, Fluids.LAVA);
-        addMeltable(Blocks.STONE, 250, Fluids.LAVA);
-        addMeltable(Blocks.GRAVEL, 200, Fluids.LAVA);
-        addMeltable(Blocks.SAND, 100, Fluids.LAVA);
-        addMeltable(ModBlocks.DUST.get(), 50, Fluids.LAVA);
-        addMeltable(Blocks.NETHERRACK, 1000, Fluids.LAVA);
-        addMeltable(Blocks.OBSIDIAN, 1000, Fluids.LAVA);
     }
 }
