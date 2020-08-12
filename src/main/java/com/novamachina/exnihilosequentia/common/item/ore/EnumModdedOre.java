@@ -4,18 +4,17 @@ import com.novamachina.exnihilosequentia.common.utility.Color;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 
 public enum EnumModdedOre implements IOre {
-    COPPER(Constants.Ore.COPPER, new Color("FF9933"),true),
-    LEAD(Constants.Ore.LEAD, new Color("330066"), true),
-    NICKEL(Constants.Ore.NICKEL, new Color("FFFFCC"), true),
-    SILVER(Constants.Ore.SILVER, new Color("C2FAFF"), true),
-    TIN(Constants.Ore.TIN, new Color("F5FEFF"), true),
-    ALUMINUM(Constants.Ore.ALUMINUM, new Color("BFBFBF"), true),
-    PLATINUM(Constants.Ore.PLATINUM, new Color("00FFF7"), true);
+    COPPER(Constants.Ore.COPPER, new Color("FF9933"),false),
+    LEAD(Constants.Ore.LEAD, new Color("330066"), false),
+    NICKEL(Constants.Ore.NICKEL, new Color("FFFFCC"), false),
+    SILVER(Constants.Ore.SILVER, new Color("C2FAFF"), false),
+    TIN(Constants.Ore.TIN, new Color("F5FEFF"), false),
+    ALUMINUM(Constants.Ore.ALUMINUM, new Color("BFBFBF"), false),
+    PLATINUM(Constants.Ore.PLATINUM, new Color("00FFF7"), false);
 
     private final String name;
     private final Color color;
-    private final boolean isEnabled;
-
+    private boolean isEnabled;
 
     EnumModdedOre(String name, Color color, boolean isEnabled) {
         this.name = name;
@@ -26,6 +25,10 @@ public enum EnumModdedOre implements IOre {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    public void setEnabled() {
+        isEnabled = true;
     }
 
     @Override

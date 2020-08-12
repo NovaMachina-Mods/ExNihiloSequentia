@@ -14,6 +14,9 @@ import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibl
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.HeatRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleMeltableItems;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveDrops;
+import com.novamachina.exnihilosequentia.common.utility.Config;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
+import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +51,9 @@ public class ModRegistries {
 
         private void registerDefaults() {
             this.defaults.add(new ExNihilo());
-            this.defaults.add(new ThermalExpansion());
+            if(ModList.get().isLoaded(Constants.Compat.THERMAL_EXPANSION) || Config.ENABLE_THERMAL.get()) {
+                this.defaults.add(new ThermalExpansion());
+            }
         }
 
         public void register(AbstractModRegistry registry) {

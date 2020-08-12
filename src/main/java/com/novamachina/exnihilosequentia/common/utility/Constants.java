@@ -142,4 +142,8 @@ public class Constants {
         public static String CROOK_FILE = "CrookRegistry.json";
         public static String HAMMER_FILE = "HammerRegistry.json";
     }
+
+    public static class Compat {
+        public static final String THERMAL_EXPANSION = "thermalexpansion";
+    }
 }
