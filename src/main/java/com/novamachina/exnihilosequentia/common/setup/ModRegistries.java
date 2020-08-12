@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.setup;
 
 import com.novamachina.exnihilosequentia.common.compat.ExNihilo;
 import com.novamachina.exnihilosequentia.common.compat.IDefaultRegistry;
+import com.novamachina.exnihilosequentia.common.compat.ThermalExpansion;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDrops;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.compost.CompostRegistry;
@@ -47,6 +48,7 @@ public class ModRegistries {
 
         private void registerDefaults() {
             this.defaults.add(new ExNihilo());
+            this.defaults.add(new ThermalExpansion());
         }
 
         public void register(AbstractModRegistry registry) {
