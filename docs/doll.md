@@ -69,3 +69,4 @@ Will spawn a Bee
 - 1x Porcelain Doll
 - 1x Beehive Frame
 - 2x Glowstone
+[Barrel Mob Spawning]: ../barrel.md/#mob-spawning
