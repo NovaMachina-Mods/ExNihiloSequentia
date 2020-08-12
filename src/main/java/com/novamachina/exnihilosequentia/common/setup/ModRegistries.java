@@ -1,5 +1,8 @@
 package com.novamachina.exnihilosequentia.common.setup;
 
+import com.novamachina.exnihilosequentia.common.compat.ExNihilo;
+import com.novamachina.exnihilosequentia.common.compat.IDefaultRegistry;
+import com.novamachina.exnihilosequentia.common.compat.ThermalExpansion;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDrops;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.compost.CompostRegistry;
@@ -11,6 +14,9 @@ import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibl
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.HeatRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleMeltableItems;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveDrops;
+import com.novamachina.exnihilosequentia.common.utility.Config;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
+import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +37,26 @@ public class ModRegistries {
 
     public static class ModBus {
         private final List<AbstractModRegistry> registries;
+        private final List<IDefaultRegistry> defaults;
+
+        public List<IDefaultRegistry> getDefaults() {
+            return defaults;
+        }
 
         public ModBus() {
             this.registries = new ArrayList<>();
+            this.defaults = new ArrayList<>();
+            registerDefaults();
+        }
+
+        private void registerDefaults() {
+            this.defaults.add(new ExNihilo());
+            if(ModList.get().isLoaded(Constants.Compat.THERMAL_EXPANSION) || Config.ENABLE_THERMAL.get()) {
+                this.defaults.add(new ThermalExpansion());
+            }
+            if(ModList.get().isLoaded(Constants.Compat.IMMERSIVE_ENGINEERING) || Config.ENABLE_IMMERSIVE.get()) {
+                this.defaults.add(new ThermalExpansion());
+            }
         }
 
         public void register(AbstractModRegistry registry) {
@@ -44,9 +67,23 @@ public class ModRegistries {
             registries.forEach(AbstractModRegistry::clear);
         }
 
-        public void initialize(boolean useJson) {
-            registries.forEach(registry -> {
-                registry.initialize(useJson);
+        public void useJson() {
+            useDefault();
+            registries.forEach(AbstractModRegistry::useJson);
+        }
+
+        public void useDefault() {
+            defaults.forEach(registry -> {
+                registry.registerCrook(CROOK);
+                registry.registerCompost(COMPOST);
+                registry.registerHammer(HAMMER);
+                registry.registerSieve(SIEVE);
+                registry.registerHeat(HEAT);
+                registry.registerFiredCrucible(FIRED_CRUCIBLE);
+                registry.registerWoodCrucible(WOODEN_CRUCIBLE);
+                registry.registerFluidOnTop(FLUID_ON_TOP);
+                registry.registerFluidTransform(FLUID_TRANSFORM);
+                registry.registerFluidBlock(FLUID_BLOCK);
             });
         }
     }

@@ -84,6 +84,10 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.FLUID_ON_TOP_FILE, this)) {
+            return;
+        }
+
         try {
             List<FluidOnTopJson> registriesJson = readJson();
             for(FluidOnTopJson entry : registriesJson) {
@@ -116,7 +120,7 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerFluidOnTop(this));
         }
     }
 
@@ -138,12 +142,6 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
             e.printStackTrace();
         }
         return registryJson;
-    }
-
-    @Override
-    protected void useDefaults() {
-        addRecipe(Fluids.LAVA, Fluids.WATER, Blocks.OBSIDIAN);
-        addRecipe(Fluids.WATER, Fluids.LAVA, Blocks.COBBLESTONE);
     }
 
     @Override

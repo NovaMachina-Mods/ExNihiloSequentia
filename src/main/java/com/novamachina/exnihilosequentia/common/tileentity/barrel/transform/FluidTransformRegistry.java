@@ -73,6 +73,10 @@ public class FluidTransformRegistry extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.FLUID_TRANSFORM_FILE, this)) {
+            return;
+        }
+
         try {
             List<FluidTransformJson> registriesJson = readJson();
             for (FluidTransformJson entry : registriesJson) {
@@ -105,7 +109,7 @@ public class FluidTransformRegistry extends AbstractModRegistry {
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerFluidTransform(this));
         }
     }
 
@@ -130,12 +134,6 @@ public class FluidTransformRegistry extends AbstractModRegistry {
             e.printStackTrace();
         }
         return registryJson;
-    }
-
-    @Override
-    protected void useDefaults() {
-        addRecipe(Fluids.WATER, Blocks.MYCELIUM, ModFluids.WITCH_WATER.get());
-        addRecipe(Fluids.WATER, Blocks.SAND, ModFluids.SEA_WATER.get());
     }
 
     @Override

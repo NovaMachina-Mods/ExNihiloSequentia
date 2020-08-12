@@ -151,6 +151,10 @@ public class SieveDrops extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.SIEVE_FILE, this)) {
+            return;
+        }
+
         try {
             List<SieveJson> registryJson = readJson();
             for(SieveJson entry : registryJson) {
@@ -178,7 +182,7 @@ public class SieveDrops extends AbstractModRegistry {
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerSieve(this));
         }
     }
 
@@ -202,170 +206,9 @@ public class SieveDrops extends AbstractModRegistry {
         return registryJson;
     }
 
-    @Override
-    protected void useDefaults() {
-        // Stone Pebble
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 1.0F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 1.0F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 0.5F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 0.5F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 0.1F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 0.1F, EnumMesh.STRING, false);
 
-        // Andesite Pebble
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_ANDESITE).get(), 0.5F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_ANDESITE).get(), 0.1F, EnumMesh.STRING, false);
 
-        // Diorite Pebble
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_DIORITE).get(), 0.5F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_DIORITE).get(), 0.1F, EnumMesh.STRING, false);
-
-        // Granite Pebble
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_GRANITE).get(), 0.5F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_GRANITE).get(), 0.1F, EnumMesh.STRING, false);
-
-        // Vanilla Seeds
-        addDrop(Blocks.DIRT, Items.WHEAT_SEEDS, 0.7F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT, Items.MELON_SEEDS, 0.35F, EnumMesh.STRING, false);
-        addDrop(Blocks.DIRT, Items.PUMPKIN_SEEDS, 0.35F, EnumMesh.STRING, false);
-
-        // Ancient Spores
-        addDrop(Blocks.DIRT,
-            ModItems.resourceMap.get(EnumResource.ANCIENT_SPORE.getResourceName()).get(), 0.05F, EnumMesh.STRING, false);
-
-        // Grass Seeds
-        addDrop(Blocks.DIRT,
-            ModItems.resourceMap.get(EnumResource.GRASS_SEED.getResourceName()).get(), 0.05F, EnumMesh.STRING, false);
-
-        // Misc Vanilla Drops
-        addDrop(Blocks.SAND, Items.COCOA_BEANS, 0.03F, EnumMesh.STRING, false);
-        addDrop(Blocks.SAND, Items.PRISMARINE_SHARD, 0.02F, EnumMesh.DIAMOND, false);
-
-        // Flint
-        addDrop(Blocks.GRAVEL, Items.FLINT, 0.25F, EnumMesh.STRING, false);
-        addDrop(Blocks.GRAVEL, Items.FLINT, 0.25F, EnumMesh.FLINT, false);
-
-        // Coal
-        addDrop(Blocks.GRAVEL, Items.COAL, 0.125F, EnumMesh.FLINT, false);
-
-        addDrop(Blocks.GRAVEL, Items.LAPIS_LAZULI, 0.05F, EnumMesh.FLINT, false);
-
-        // Diamond
-        addDrop(Blocks.GRAVEL, Items.DIAMOND, 0.008F, EnumMesh.IRON, false);
-        addDrop(Blocks.GRAVEL, Items.DIAMOND, 0.016F, EnumMesh.DIAMOND, false);
-
-        // Emerald
-        addDrop(Blocks.GRAVEL, Items.EMERALD, 0.008F, EnumMesh.IRON, false);
-        addDrop(Blocks.GRAVEL, Items.EMERALD, 0.016F, EnumMesh.DIAMOND, false);
-
-        // Quartz
-        addDrop(Blocks.SOUL_SAND, Items.QUARTZ, 1.0F, EnumMesh.FLINT, false);
-        addDrop(Blocks.SOUL_SAND, Items.QUARTZ, 0.33F, EnumMesh.FLINT, false);
-        addDrop(Blocks.SOUL_SAND, Items.QUARTZ, 1.0F, EnumMesh.DIAMOND, false);
-        addDrop(Blocks.SOUL_SAND, Items.QUARTZ, 0.8F, EnumMesh.DIAMOND, false);
-
-        // Nether Wart
-        addDrop(Blocks.SOUL_SAND, Items.NETHER_WART, 0.1F, EnumMesh.STRING, false);
-
-        // Ghast Tear
-        addDrop(Blocks.SOUL_SAND, Items.GHAST_TEAR, 0.02F, EnumMesh.DIAMOND, false);
-
-        addDrop(ModBlocks.DUST.get(), Items.BONE_MEAL, 0.2F, EnumMesh.STRING, false);
-
-        // Gunpowder
-        addDrop(ModBlocks.DUST.get(), Items.GUNPOWDER, 0.07F, EnumMesh.STRING, false);
-
-        // Redstone
-        addDrop(ModBlocks.DUST.get(), Items.REDSTONE, 0.125F, EnumMesh.IRON, false);
-        addDrop(ModBlocks.DUST.get(), Items.REDSTONE, 0.25F, EnumMesh.DIAMOND, false);
-
-        // Glowstone
-        addDrop(ModBlocks.DUST.get(), Items.GLOWSTONE_DUST, 0.0625F, EnumMesh.IRON, false);
-
-        // Blaze Powder
-        addDrop(ModBlocks.DUST.get(), Items.BLAZE_POWDER, 0.05F, EnumMesh.IRON, false);
-
-        // Ores
-        for (EnumOre ore : EnumOre.values()) {
-            switch (ore) {
-                case IRON: {
-                    addMultiMeshDrop(Blocks.GRAVEL,
-                        ModItems.pieceMap.get(ore.getName()).get(), null, 0.1F, 0.15F, 0.25F, false);
-                    addDrop(Blocks.SAND, ModItems.pieceMap.get(ore.getName()).get(), 0.5F, EnumMesh.DIAMOND, false);
-                    break;
-                }
-                case GOLD: {
-                    addMultiMeshDrop(
-                        ModBlocks.CRUSHED_NETHERRACK.get(),
-                        ModItems.pieceMap.get(ore.getName()).get(), null, 0.25F, 0.25F, 0.4F, false);
-                    addMultiMeshDrop(Blocks.GRAVEL,
-                        ModItems.pieceMap.get(ore.getName()).get(), null, 0.05F, 0.075F, 0.15F, false);
-                    break;
-                }
-            }
-        }
-
-        // Seeds
-        for (EnumSeed seed : EnumSeed.values()) {
-            if(seed != EnumSeed.SEED_PICKLE && seed != EnumSeed.SEED_KELP) {
-                addDrop(Blocks.DIRT, ModItems.seedMap.get(seed.getSeedName()).get(), 0.05F, EnumMesh.STRING, false);
-            } else {
-                addDrop(Blocks.SAND, ModItems.seedMap.get(seed.getSeedName()).get(), 0.05F, EnumMesh.STRING, true);
-            }
-        }
-
-        getLeavesSaplings().forEach((input, drop) -> {
-            LeavesBlock leavesBlock = (LeavesBlock) input;
-            if (leavesBlock.getRegistryName().equals(new ResourceLocation("jungle_leaves"))) {
-                addMultiMeshDrop(leavesBlock, drop, 0.025F, 0.05F, 0.075F, 0.1F, false);
-            } else {
-                addMultiMeshDrop(leavesBlock, drop, 0.05F, 0.10F, 0.15F, 0.2F, false);
-            }
-
-            // Apple
-            addMultiMeshDrop(leavesBlock, Items.APPLE, 0.05F, 0.10F, 0.15F, 0.20F, false);
-
-            // Golden Apple
-            addMultiMeshDrop(leavesBlock, Items.GOLDEN_APPLE, 0.001F, 0.003F, 0.005F, 0.01F, false);
-
-            // Silk Worm
-            addMultiMeshDrop(leavesBlock,
-                ModItems.resourceMap.get(Constants.Items.SILKWORM).get(), 0.025F, 0.05F, 0.1F, 0.2F, false);
-        });
-
-        // Coral Seeds
-        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.BLUE_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
-        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.PURPLE_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
-        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.PINK_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
-        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.YELLOW_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
-        addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.RED_CORAL_SEED.getResourceName()).get(), 0.05F, EnumMesh.IRON, true);
-    }
-
-    private Map<Block, Item> getLeavesSaplings() {
-        Map<Block, Item> saplingMap = new HashMap<>();
-        saplingMap.put(Blocks.ACACIA_LEAVES, Items.ACACIA_SAPLING);
-        saplingMap.put(Blocks.BIRCH_LEAVES, Items.BIRCH_SAPLING);
-        saplingMap.put(Blocks.DARK_OAK_LEAVES, Items.DARK_OAK_SAPLING);
-        saplingMap.put(Blocks.JUNGLE_LEAVES, Items.JUNGLE_SAPLING);
-        saplingMap.put(Blocks.OAK_LEAVES, Items.OAK_SAPLING);
-        saplingMap.put(Blocks.SPRUCE_LEAVES, Items.SPRUCE_SAPLING);
-
-        return saplingMap;
-    }
-
-    private void addMultiMeshDrop(Block input, Item result, Float stringRarity,
+    public void addMultiMeshDrop(Block input, Item result, Float stringRarity,
                                          Float flintRarity, Float ironRarity, Float diamondRarity, boolean isWaterlogged) {
         addMultiMeshDrop(input.getRegistryName(), result.getRegistryName(), stringRarity, flintRarity,ironRarity, diamondRarity, isWaterlogged);
     }

@@ -109,6 +109,7 @@ public class Constants {
         public static final String TIN = "tin";
         public static final String ALUMINUM = "aluminum";
         public static final String PLATINUM = "platinum";
+        public static final String OSMIUM = "osmium";
     }
 
     public static class Fluids {
@@ -141,5 +142,10 @@ public class Constants {
         public static String SIEVE_FILE = "SieveRegistry.json";
         public static String CROOK_FILE = "CrookRegistry.json";
         public static String HAMMER_FILE = "HammerRegistry.json";
+    }
+
+    public static class Compat {
+        public static final String THERMAL_EXPANSION = "thermalexpansion";
+        public static final String IMMERSIVE_ENGINEERING = "immersiveengineering";
     }
 }

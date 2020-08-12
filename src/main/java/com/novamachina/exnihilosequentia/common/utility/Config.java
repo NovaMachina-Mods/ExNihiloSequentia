@@ -18,10 +18,10 @@ public class Config {
     private static final String CATEGORY_INFESTED_LEAVES = "infested_leaves";
     private static final String CATEGORY_REGISTRY = "registry";
     private static final String CATEGORY_SIEVE = "sieve";
+    private static final String CATEGORY_COMPAT = "compatibility";
     private static final String SUBCATEGORY_BARREL_MOB = "mob_spawn";
     private static final String SUBCATEGORY_BARREL_COMPOST = "compost";
     private static final String SUBCATEGORY_BARREL_FLUID = "fluid_transform";
-    private static final String SUBCATEGORY_BARREL_MISC = "misc";
     private static final String SUBCATEGORY_CRUCIBLE_WOOD = "wood";
 
     private static final ForgeConfigSpec.Builder COMMON_BUILDER = new Builder();
@@ -57,6 +57,10 @@ public class Config {
     // Sieve
     public static ForgeConfigSpec.BooleanValue FLATTEN_SIEVE_RECIPES;
 
+    // Compat
+    public static ForgeConfigSpec.BooleanValue ENABLE_THERMAL;
+    public static ForgeConfigSpec.BooleanValue ENABLE_IMMERSIVE;
+
     static {
         COMMON_BUILDER.comment("Barrel Configs").push(CATEGORY_BARREL);
         barrelConfigs();
@@ -76,8 +80,16 @@ public class Config {
         COMMON_BUILDER.comment("Sieve Configs").push(CATEGORY_SIEVE);
         sieveConfigs();
         COMMON_BUILDER.pop();
+        COMMON_BUILDER.comment("Compatibility Configs").push(CATEGORY_COMPAT);
+        compatConfigs();
+        COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
+    }
+
+    private static void compatConfigs() {
+        ENABLE_THERMAL = COMMON_BUILDER.comment("Should Thermal Expansion ores be enabled? (Default: false)").define("enableThermalExpansion", false);
+        ENABLE_IMMERSIVE = COMMON_BUILDER.comment("Should Immersive Engineering ores be enabled? (Default: false)").define("enableImmersiveEngineering", false);
     }
 
     private static void sieveConfigs() {

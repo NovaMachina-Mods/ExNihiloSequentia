@@ -7,19 +7,13 @@ import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.FluidBlockJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
-import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
-import com.novamachina.exnihilosequentia.common.setup.ModFluids;
-import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
@@ -69,6 +63,10 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
 
     @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.FLUID_BLOCK_FILE, this)) {
+            return;
+        }
+
         try {
             List<FluidBlockJson> registriesJson = readJson();
             for (FluidBlockJson entry : registriesJson) {
@@ -101,7 +99,7 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerFluidBlock(this));
         }
     }
 
@@ -123,25 +121,6 @@ public class FluidBlockTransformRegistry extends AbstractModRegistry {
             e.printStackTrace();
         }
         return registryJson;
-    }
-
-    protected void useDefaults() {
-        addRecipe(Fluids.WATER, ModBlocks.DUST.get(), Blocks.CLAY);
-        addRecipe(Fluids.LAVA, Items.REDSTONE, Blocks.NETHERRACK);
-        addRecipe(Fluids.LAVA, Items.GLOWSTONE_DUST, Blocks.END_STONE);
-        addRecipe(ModFluids.WITCH_WATER.get(), Blocks.SAND, Blocks.SOUL_SAND);
-        addRecipe(ModFluids.WITCH_WATER.get(), Blocks.RED_MUSHROOM, Blocks.SLIME_BLOCK);
-        addRecipe(ModFluids.WITCH_WATER.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
-        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.BLUE_CORAL_SEED).get(), Blocks.TUBE_CORAL_BLOCK);
-        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.RED_CORAL_SEED).get(), Blocks.FIRE_CORAL_BLOCK);
-        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.PINK_CORAL_SEED).get(), Blocks.BRAIN_CORAL_BLOCK);
-        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.PURPLE_CORAL_SEED).get(), Blocks.BUBBLE_CORAL_BLOCK);
-        addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.YELLOW_CORAL_SEED).get(), Blocks.HORN_CORAL_BLOCK);
-        addRecipe(ModFluids.SEA_WATER.get(), Blocks.TUBE_CORAL_FAN, Blocks.TUBE_CORAL_WALL_FAN);
-        addRecipe(ModFluids.SEA_WATER.get(), Blocks.BRAIN_CORAL_FAN, Blocks.BRAIN_CORAL_WALL_FAN);
-        addRecipe(ModFluids.SEA_WATER.get(), Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN);
-        addRecipe(ModFluids.SEA_WATER.get(), Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN);
-        addRecipe(ModFluids.SEA_WATER.get(), Blocks.FIRE_CORAL_FAN, Blocks.FIRE_CORAL_WALL_FAN);
     }
 
     public void addRecipe(ResourceLocation fluid, ResourceLocation input, ResourceLocation result) {

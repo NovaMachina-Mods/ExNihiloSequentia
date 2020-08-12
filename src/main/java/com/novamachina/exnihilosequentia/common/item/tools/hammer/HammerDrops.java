@@ -75,30 +75,11 @@ public class HammerDrops extends AbstractModRegistry {
     }
 
     @Override
-    protected void useDefaults() {
-        addRecipe(Blocks.STONE, Blocks.COBBLESTONE);
-        addRecipe(Blocks.COBBLESTONE, Blocks.GRAVEL);
-        addRecipe(Blocks.GRAVEL, Blocks.SAND);
-        addRecipe(Blocks.SAND, ModBlocks.DUST.get());
-        addRecipe(Blocks.ANDESITE, ModBlocks.CRUSHED_ANDESITE.get());
-        addRecipe(Blocks.DIORITE, ModBlocks.CRUSHED_DIORITE.get());
-        addRecipe(Blocks.GRANITE, ModBlocks.CRUSHED_GRANITE.get());
-        addRecipe(Blocks.END_STONE, ModBlocks.CRUSHED_END_STONE.get());
-        addRecipe(Blocks.NETHERRACK, ModBlocks.CRUSHED_NETHERRACK.get());
-        addRecipe(Blocks.TUBE_CORAL_BLOCK, Blocks.TUBE_CORAL);
-        addRecipe(Blocks.BRAIN_CORAL_BLOCK, Blocks.BRAIN_CORAL);
-        addRecipe(Blocks.BUBBLE_CORAL_BLOCK, Blocks.BUBBLE_CORAL);
-        addRecipe(Blocks.FIRE_CORAL_BLOCK, Blocks.FIRE_CORAL);
-        addRecipe(Blocks.HORN_CORAL_BLOCK, Blocks.HORN_CORAL);
-        addRecipe(Blocks.TUBE_CORAL, Blocks.TUBE_CORAL_FAN);
-        addRecipe(Blocks.BRAIN_CORAL, Blocks.BRAIN_CORAL_FAN);
-        addRecipe(Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN);
-        addRecipe(Blocks.FIRE_CORAL, Blocks.FIRE_CORAL_FAN);
-        addRecipe(Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN);
-    }
-
-    @Override
     protected void useJson() {
+        if(generateJson(Constants.Json.HAMMER_FILE, this)) {
+            return;
+        }
+
         try {
             List<HammerJson> list = readJson();
             for(HammerJson entry : list) {
@@ -126,7 +107,7 @@ public class HammerDrops extends AbstractModRegistry {
             }
             LogUtil.error("Falling back to defaults");
             clear();
-            useDefaults();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerHammer(this));
         }
     }
 
