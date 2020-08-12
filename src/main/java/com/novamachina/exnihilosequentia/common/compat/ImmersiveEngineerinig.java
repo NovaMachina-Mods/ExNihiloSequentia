@@ -8,8 +8,7 @@ import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveDrops;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.Blocks;
 
-public class ThermalExpansion implements IDefaultRegistry {
-
+public class ImmersiveEngineerinig implements IDefaultRegistry{
     @Override
     public void registerSieve(SieveDrops registry) {
         if(!EnumModdedOre.ALUMINUM.isEnabled()) {
@@ -30,11 +29,6 @@ public class ThermalExpansion implements IDefaultRegistry {
             registry.addMultiMeshDrop(ModBlocks.CRUSHED_END_STONE.get(), ModItems.pieceMap.get(Constants.Ore.SILVER).get(), null, null, 0.15F, 0.25F, false);
         }
 
-        if(!EnumModdedOre.TIN.isEnabled()) {
-            registry.addMultiMeshDrop(Blocks.SAND, ModItems.pieceMap.get(Constants.Ore.TIN).get(), null, 0.05F, 0.075F, null, false);
-            EnumModdedOre.TIN.setEnabled();
-        }
-
         if(!EnumModdedOre.NICKEL.isEnabled()) {
             registry.addMultiMeshDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.NICKEL).get(), null, 0.05F, 0.075F, 0.15F, false);
             EnumModdedOre.NICKEL.setEnabled();
@@ -43,13 +37,6 @@ public class ThermalExpansion implements IDefaultRegistry {
         if(!EnumModdedOre.LEAD.isEnabled()) {
             registry.addMultiMeshDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.LEAD).get(), null, 0.05F, 0.075F, 0.15F, false);
             EnumModdedOre.LEAD.setEnabled();
-        }
-
-        if(!EnumModdedOre.PLATINUM.isEnabled()) {
-            registry.addDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.PLATINUM).get(), 0.02F, EnumMesh.FLINT, false);
-            registry.addDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.PLATINUM).get(), 0.04F, EnumMesh.IRON, false);
-            registry.addDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.PLATINUM).get(), 0.12F, EnumMesh.DIAMOND, false);
-            EnumModdedOre.PLATINUM.setEnabled();
         }
     }
 }

@@ -54,6 +54,9 @@ public class ModRegistries {
             if(ModList.get().isLoaded(Constants.Compat.THERMAL_EXPANSION) || Config.ENABLE_THERMAL.get()) {
                 this.defaults.add(new ThermalExpansion());
             }
+            if(ModList.get().isLoaded(Constants.Compat.IMMERSIVE_ENGINEERING) || Config.ENABLE_IMMERSIVE.get()) {
+                this.defaults.add(new ThermalExpansion());
+            }
         }
 
         public void register(AbstractModRegistry registry) {
