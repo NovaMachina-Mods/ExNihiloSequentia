@@ -1,6 +1,6 @@
 Dolls
 =====
-Dolls are used to spawn mobs in a barrel. To spawn a mob craft the doll for the entity you want to spawn and then right click on a barrel with the right fluid in it to spawn (See [Barrel Mob Spawning])
+Dolls are used to spawn mobs in a barrel. To spawn a mob craft the doll for the entity you want to spawn and then right click on a barrel with the right fluid in it to spawn (See [Barrel Mob Spawning](../barrel/#mob-spawning))
 
 Recipes
 -------
@@ -69,4 +69,3 @@ Will spawn a Bee
 - 1x Porcelain Doll
 - 1x Beehive Frame
 - 2x Glowstone
-[Barrel Mob Spawning]: ../barrel.md/#mob-spawning
