@@ -46,5 +46,8 @@ public class ClientSetup {
         for (RegistryObject<OreItem> item : ModItems.pieceMap.values()) {
             event.getItemColors().register(new OreColor(), item.get());
         }
+        for (RegistryObject<OreItem> item : ModItems.ingotMap.values()) {
+            event.getItemColors().register(new OreColor(), item.get());
+        }
     }
 }
