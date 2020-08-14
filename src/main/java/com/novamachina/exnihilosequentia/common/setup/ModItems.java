@@ -37,7 +37,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
 
     private static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(
-        ForgeRegistries.ITEMS, Constants.ModInfo.MOD_ID);
+        ForgeRegistries.ITEMS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
 
     public static Map<String, RegistryObject<OreItem>> chunkMap = new HashMap<>();
     public static Map<String, RegistryObject<OreItem>> pieceMap = new HashMap<>();

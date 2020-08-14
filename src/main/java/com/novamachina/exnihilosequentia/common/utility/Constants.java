@@ -6,11 +6,6 @@ import java.nio.file.Path;
 
 public class Constants {
 
-    public static class ModInfo {
-
-        public static final String MOD_ID = "exnihilosequentia";
-    }
-
     public static class Blocks {
 
         public static final String CRUSHED_ANDESITE = "crushed_andesite";
@@ -144,8 +139,10 @@ public class Constants {
         public static String HAMMER_FILE = "HammerRegistry.json";
     }
 
-    public static class Compat {
+    public static class ModIds {
         public static final String THERMAL_EXPANSION = "thermalexpansion";
         public static final String IMMERSIVE_ENGINEERING = "immersiveengineering";
+        public static final String JEI = "jei";
+        public static final String EX_NIHILO_SEQUENTIA = "exnihilosequentia";
     }
 }

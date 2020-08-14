@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.item.dolls;
 
 import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
+import mezz.jei.api.registration.IModIngredientRegistration;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;

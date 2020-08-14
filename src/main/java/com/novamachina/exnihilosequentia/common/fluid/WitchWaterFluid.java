@@ -3,7 +3,7 @@ package com.novamachina.exnihilosequentia.common.fluid;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModFluids;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
-import com.novamachina.exnihilosequentia.common.utility.Constants.ModInfo;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.state.StateContainer.Builder;
@@ -16,8 +16,8 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
     public static final ForgeFlowingFluid.Properties WITCH_WATER_PROPS =
         new ForgeFlowingFluid.Properties(
             ModFluids.WITCH_WATER, ModFluids.WITCH_WATER_FLOW, FluidAttributes
-            .builder(new ResourceLocation(ModInfo.MOD_ID, "block/witchwater"),
-                new ResourceLocation(ModInfo.MOD_ID, "block/witchwater_flow"))
+            .builder(new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "block/witchwater"),
+                new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "block/witchwater_flow"))
             .color(0x3F1080FF))
             .bucket(ModItems.WITCH_WATER_BUCKET)
             .block(ModBlocks.WITCH_WATER);
