@@ -1,9 +1,8 @@
-package com.novamachina.exnihilosequentia.common.jei;
+package com.novamachina.exnihilosequentia.common.jei.sieve;
 
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
-import java.util.Objects;
 
 public class SieveRecipe {
     private List<List<ItemStack>> inputs;

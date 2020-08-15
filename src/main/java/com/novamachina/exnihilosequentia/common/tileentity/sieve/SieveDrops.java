@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import com.novamachina.exnihilosequentia.common.jei.SieveRecipe;
+import com.novamachina.exnihilosequentia.common.jei.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.SieveJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
@@ -456,5 +456,16 @@ public class SieveDrops extends AbstractModRegistry {
             list = new ArrayList<>();
         }
         return returnList;
+    }
+
+    public List<SieveRecipe> getWetRecipeList() {
+        List<SieveRecipe> recipes = new ArrayList<>();
+
+        recipes.addAll(collectRecipes(EnumMesh.STRING, waterloggedStringMeshMap, true));
+        recipes.addAll(collectRecipes(EnumMesh.FLINT, waterloggedFlintMeshMap, true));
+        recipes.addAll(collectRecipes(EnumMesh.IRON, waterloggedIronMeshMap, true));
+        recipes.addAll(collectRecipes(EnumMesh.DIAMOND, waterloggedDiamondMeshMap, true));
+
+        return recipes;
     }
 }

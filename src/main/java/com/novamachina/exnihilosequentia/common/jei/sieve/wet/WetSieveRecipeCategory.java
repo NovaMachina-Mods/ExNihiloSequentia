@@ -1,5 +1,6 @@
-package com.novamachina.exnihilosequentia.common.jei;
+package com.novamachina.exnihilosequentia.common.jei.sieve.wet;
 
+import com.novamachina.exnihilosequentia.common.jei.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -12,14 +13,14 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class SieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "sieve");
+public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
+    public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "wet_sieve");
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
     private final IDrawableStatic background;
     private final IDrawableStatic slotHighlight;
 
-    public SieveRecipeCategory(IGuiHelper guiHelper) {
+    public WetSieveRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(texture, 0, 0, 166, 58);
         this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
     }
@@ -36,7 +37,7 @@ public class SieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
 
     @Override
     public String getTitle() {
-        return "Sieve";
+        return "Waterlogged Sieve";
     }
 
     @Override

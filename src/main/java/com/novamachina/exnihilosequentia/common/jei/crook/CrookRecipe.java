@@ -1,4 +1,4 @@
-package com.novamachina.exnihilosequentia.common.jei;
+package com.novamachina.exnihilosequentia.common.jei.crook;
 
 import net.minecraft.item.ItemStack;
 

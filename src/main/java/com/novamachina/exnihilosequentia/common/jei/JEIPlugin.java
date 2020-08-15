@@ -1,6 +1,11 @@
 package com.novamachina.exnihilosequentia.common.jei;
 
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
+import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipe;
+import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipeCategory;
+import com.novamachina.exnihilosequentia.common.jei.sieve.SieveRecipe;
+import com.novamachina.exnihilosequentia.common.jei.sieve.dry.DrySieveRecipeCategory;
+import com.novamachina.exnihilosequentia.common.jei.sieve.wet.WetSieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
@@ -12,7 +17,6 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -30,7 +34,8 @@ public class JEIPlugin implements IModPlugin {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
 
         registration.addRecipeCategories(new CrookRecipeCategory(guiHelper));
-        registration.addRecipeCategories(new SieveRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new DrySieveRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new WetSieveRecipeCategory(guiHelper));
     }
 
     @Override
@@ -40,9 +45,11 @@ public class JEIPlugin implements IModPlugin {
     }
 
     private void registerSieve(IRecipeRegistration registration) {
-        List<SieveRecipe> sieveRecipes = ModRegistries.SIEVE.getDryRecipeList();
-        registration.addRecipes(sieveRecipes, SieveRecipeCategory.UID);
-        LogUtil.info("JEI: Sieve Recipes Loaded: " + sieveRecipes.size());
+        List<SieveRecipe> drySieveRecipes = ModRegistries.SIEVE.getDryRecipeList();
+        List<SieveRecipe> wetSieveRecipes = ModRegistries.SIEVE.getWetRecipeList();
+        registration.addRecipes(drySieveRecipes, DrySieveRecipeCategory.UID);
+        registration.addRecipes(wetSieveRecipes, WetSieveRecipeCategory.UID);
+        LogUtil.info("JEI: Sieve Recipes Loaded: " + (drySieveRecipes.size() + wetSieveRecipes.size()));
     }
 
     @Override
@@ -50,7 +57,8 @@ public class JEIPlugin implements IModPlugin {
         for(EnumCrook crook : EnumCrook.values()) {
             registration.addRecipeCatalyst(new ItemStack(ModItems.crookMap.get(crook.name).get()), CrookRecipeCategory.UID);
         }
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), SieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), DrySieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), WetSieveRecipeCategory.UID);
     }
 
     private void registerCrook(IRecipeRegistration registration) {
