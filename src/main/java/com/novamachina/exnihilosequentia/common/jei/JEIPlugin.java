@@ -4,6 +4,8 @@ import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipeCategory;
+import com.novamachina.exnihilosequentia.common.jei.fluidontop.FluidOnTopJEIRecipe;
+import com.novamachina.exnihilosequentia.common.jei.fluidontop.FluidOnTopRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.jei.hammer.HammerRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.sieve.SieveRecipe;
@@ -41,6 +43,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new DrySieveRecipeCategory(guiHelper));
         registration.addRecipeCategories(new WetSieveRecipeCategory(guiHelper));
         registration.addRecipeCategories(new HammerRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new FluidOnTopRecipeCategory(guiHelper));
     }
 
     @Override
@@ -48,6 +51,13 @@ public class JEIPlugin implements IModPlugin {
         registerCrook(registration);
         registerSieve(registration);
         registerHammer(registration);
+        registerFluidOnTop(registration);
+    }
+
+    private void registerFluidOnTop(IRecipeRegistration registration) {
+        List<FluidOnTopJEIRecipe> recipes = ModRegistries.FLUID_ON_TOP.getRecipeList();
+        registration.addRecipes(recipes, FluidOnTopRecipeCategory.UID);
+        LogUtil.info("JEI: Fluid On Top Recipes Loaded: " + recipes.size());
     }
 
     private void registerHammer(IRecipeRegistration registration) {

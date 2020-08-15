@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.novamachina.exnihilosequentia.common.jei.fluidontop.FluidOnTopJEIRecipe;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.FluidOnTopJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
@@ -15,9 +16,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -160,5 +165,18 @@ public class FluidOnTopRegistry extends AbstractModRegistry {
         }
 
         return gsonList;
+    }
+
+    public List<FluidOnTopJEIRecipe> getRecipeList() {
+        List<FluidOnTopJEIRecipe> recipes = new ArrayList<>();
+        for(List<FluidOnTopRecipe> list : recipeMap.values()) {
+            for(FluidOnTopRecipe recipe : list) {
+                FluidStack fluidOnTop = new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getFluidOnTop()), FluidAttributes.BUCKET_VOLUME);
+                FluidStack fluidInBarrel = new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getFluidInBarrel()), FluidAttributes.BUCKET_VOLUME);
+                ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(recipe.getResult()));
+                recipes.add(new FluidOnTopJEIRecipe(fluidInBarrel, fluidOnTop, result));
+            }
+        }
+        return recipes;
     }
 }
