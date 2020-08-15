@@ -46,6 +46,7 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>> pebbleMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> dollMap = new HashMap<>();
+    public static Map<String, RegistryObject<Item>> crookMap = new HashMap<>();
 
     public static final RegistryObject<Item> DUST = ITEMS
         .register(Constants.Blocks.DUST, () -> new BlockItem(ModBlocks.DUST.get(),
@@ -101,8 +102,8 @@ public class ModItems {
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
-            ITEMS
-                .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability));
+            crookMap.put(crook.name, ITEMS
+                .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability)));
         }
 
         for (EnumHammer hammer : EnumHammer.values()) {

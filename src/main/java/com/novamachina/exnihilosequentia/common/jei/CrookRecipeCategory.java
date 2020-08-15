@@ -1,9 +1,11 @@
 package com.novamachina.exnihilosequentia.common.jei;
 
 import com.novamachina.exnihilosequentia.common.utility.Constants;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
@@ -30,7 +32,7 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
 
     @Override
     public Class<? extends CrookRecipe> getRecipeClass() {
-        return null;
+        return CrookRecipe.class;
     }
 
     @Override
@@ -50,11 +52,34 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
 
     @Override
     public void setIngredients(CrookRecipe crookRecipe, IIngredients iIngredients) {
-
+        iIngredients.setInputs(VanillaTypes.ITEM, crookRecipe.getInputs());
+        iIngredients.setOutputs(VanillaTypes.ITEM, crookRecipe.getOutputs());
     }
 
     @Override
     public void setRecipe(IRecipeLayout iRecipeLayout, CrookRecipe crookRecipe, IIngredients iIngredients) {
+        iRecipeLayout.getItemStacks().init(0, true, 10, 38);
+        iRecipeLayout.getItemStacks().set(0, crookRecipe.getInputs());
 
+        IFocus<?> focus = iRecipeLayout.getFocus();
+
+        int slotIndex = 1;
+        for(int i = 0; i < crookRecipe.getOutputs().size(); i++) {
+            final int slotX = 38 + (i % 7 * 18);
+            final int slotY = 2 + i/7 * 18;
+
+            ItemStack outputStack = crookRecipe.getOutputs().get(i);
+
+            iRecipeLayout.getItemStacks().init(slotIndex + i, false, slotX, slotY);
+            iRecipeLayout.getItemStacks().set(slotIndex + i, outputStack);
+
+            if(focus != null) {
+                ItemStack focusStack = (ItemStack) focus.getValue();
+                if (focus.getMode() == IFocus.Mode.OUTPUT && !focusStack.isEmpty() && focusStack.getItem() == outputStack.getItem() && focusStack.getDamage() == outputStack.getDamage()) {
+                    iRecipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
+                }
+            }
+        }
+//        iRecipeLayout.getItemStacks().addTooltipCallback(new CrookTooltipCallback(crookRecipe));
     }
 }
