@@ -4,6 +4,8 @@ import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipeCategory;
+import com.novamachina.exnihilosequentia.common.jei.fluiditem.FluidBlockJEIRecipe;
+import com.novamachina.exnihilosequentia.common.jei.fluiditem.FluidBlockRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.fluidontop.FluidOnTopJEIRecipe;
 import com.novamachina.exnihilosequentia.common.jei.fluidontop.FluidOnTopRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.fluidtransform.FluidTransformCategory;
@@ -47,6 +49,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new HammerRecipeCategory(guiHelper));
         registration.addRecipeCategories(new FluidOnTopRecipeCategory(guiHelper));
         registration.addRecipeCategories(new FluidTransformCategory(guiHelper));
+        registration.addRecipeCategories(new FluidBlockRecipeCategory(guiHelper));
     }
 
     @Override
@@ -56,6 +59,13 @@ public class JEIPlugin implements IModPlugin {
         registerHammer(registration);
         registerFluidOnTop(registration);
         registerFluidTransform(registration);
+        registerFluidBlock(registration);
+    }
+
+    private void registerFluidBlock(IRecipeRegistration registration) {
+        List<FluidBlockJEIRecipe> recipes = ModRegistries.FLUID_BLOCK.getRecipeList();
+        registration.addRecipes(recipes, FluidBlockRecipeCategory.UID);
+        LogUtil.info("JEI: Fluid Item Recipes Loaded: " + recipes.size());
     }
 
     private void registerFluidTransform(IRecipeRegistration registration) {
@@ -96,6 +106,8 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), DrySieveRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), WetSieveRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidOnTopRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidTransformCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidBlockRecipeCategory.UID);
     }
 
     private void registerCrook(IRecipeRegistration registration) {
