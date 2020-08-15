@@ -111,6 +111,9 @@
   "item.exnihilosequentia.mesh_iron": "Iron Mesh",
   "item.exnihilosequentia.mesh_diamond": "Diamond Mesh",
 
+  "fluid.exnihilosequentia.witchwater": "Witchwater",
+  "fluid.exnihilosequentia.sea_water": "Sea Water",
+
   "message.new_mod": "Thanks for using Ex Nihilo: Sequentia! This mod is newly released and is probably missing a lot of stuff and broken somewhere.",
   "message.issues": "To report any issues or make a suggestion, go to:",
   "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues"

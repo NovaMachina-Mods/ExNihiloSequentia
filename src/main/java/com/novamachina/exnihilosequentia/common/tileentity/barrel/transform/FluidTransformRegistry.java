@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.novamachina.exnihilosequentia.common.jei.fluidtransform.FluidTransformJEIRecipe;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.FluidTransformJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
@@ -16,8 +17,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
@@ -30,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FluidTransformRegistry extends AbstractModRegistry {
-    private Map<ResourceLocation, FluidTransformRecipe> recipeMap = new HashMap<>();
+    private Map<ResourceLocation, List<FluidTransformRecipe>> recipeMap = new HashMap<>();
 
     public FluidTransformRegistry(ModRegistries.ModBus bus) {
         bus.register(this);
@@ -40,15 +44,24 @@ public class FluidTransformRegistry extends AbstractModRegistry {
         boolean isValid = false;
         ResourceLocation fluidInTankID = fluidInTank.getRegistryName();
         if (recipeMap.containsKey(fluidInTankID)) {
-            if (recipeMap.get(fluidInTankID).getBlockBelow().equals(blockBelow.getRegistryName())) {
-                isValid = true;
+            List<FluidTransformRecipe> recipes = recipeMap.get(fluidInTankID);
+            for(FluidTransformRecipe recipe : recipes) {
+                if (recipe.getBlockBelow().equals(blockBelow.getRegistryName())) {
+                    isValid = true;
+                }
             }
         }
         return isValid;
     }
 
-    public Fluid getResult(Fluid fluidInTank) {
-        return ForgeRegistries.FLUIDS.getValue(recipeMap.get(fluidInTank.getRegistryName()).getResult());
+    public Fluid getResult(Fluid fluidInTank, Block blockBelow) {
+        List<FluidTransformRecipe> possibleRecipes = recipeMap.get(fluidInTank);
+        for(FluidTransformRecipe recipe : possibleRecipes) {
+            if(recipe.getBlockBelow().equals(blockBelow)) {
+                return ForgeRegistries.FLUIDS.getValue(recipe.getResult());
+            }
+        }
+        return null;
     }
 
     public void addRecipe(Fluid fluidInTank, Block blockBelow, Fluid result) {
@@ -57,18 +70,26 @@ public class FluidTransformRegistry extends AbstractModRegistry {
 
     public void addRecipe(ResourceLocation fluidInTank, ResourceLocation blockBelow, ResourceLocation result) {
         if (recipeMap.containsKey(fluidInTank)) {
-            if (recipeMap.get(fluidInTank).getBlockBelow().equals(blockBelow)) {
-                LogUtil.warn(String
-                    .format("Duplicate recipe: %s(Fluid) + %s(Block Below). Keeping first result: %s", fluidInTank
-                        .toString(), blockBelow.toString(), recipeMap.get(fluidInTank).getResult().toString()));
-                return;
+            List<FluidTransformRecipe> recipes = recipeMap.get(fluidInTank);
+            for(FluidTransformRecipe recipe : recipes) {
+                if (recipe.getBlockBelow().equals(blockBelow)) {
+                    LogUtil.warn(String
+                        .format("Duplicate recipe: %s(Fluid) + %s(Block Below). Keeping first result: %s", fluidInTank
+                            .toString(), blockBelow.toString(), recipe.getResult().toString()));
+                    return;
+                }
             }
         }
         insertIntoMap(fluidInTank, new FluidTransformRecipe(fluidInTank, blockBelow, result));
     }
 
     private void insertIntoMap(ResourceLocation fluidInTank, FluidTransformRecipe recipe) {
-        recipeMap.put(fluidInTank, recipe);
+        List<FluidTransformRecipe> recipes = recipeMap.get(fluidInTank);
+        if(recipes == null) {
+            recipes = new ArrayList<>();
+            recipeMap.put(fluidInTank, recipes);
+        }
+        recipes.add(recipe);
     }
 
     @Override
@@ -145,10 +166,26 @@ public class FluidTransformRegistry extends AbstractModRegistry {
     public List<FluidTransformJson> toJSONReady() {
         List<FluidTransformJson> gsonList = new ArrayList<>();
 
-        for (FluidTransformRecipe recipe : recipeMap.values()) {
-            gsonList.add(new FluidTransformJson(recipe));
+        for (List<FluidTransformRecipe> recipeList : recipeMap.values()) {
+            for(FluidTransformRecipe recipe : recipeList) {
+                gsonList.add(new FluidTransformJson(recipe));
+            }
+        }
+        return gsonList;
+    }
+
+    public List<FluidTransformJEIRecipe> getRecipeList() {
+        List<FluidTransformJEIRecipe> recipes = new ArrayList<>();
+
+        for(List<FluidTransformRecipe> recipeList : recipeMap.values()) {
+            for(FluidTransformRecipe recipe : recipeList ){
+                FluidStack fluid = new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getFluidInBarrel()), FluidAttributes.BUCKET_VOLUME);
+                ItemStack block = new ItemStack(ForgeRegistries.BLOCKS.getValue(recipe.getBlockBelow()));
+                FluidStack result = new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getResult()), FluidAttributes.BUCKET_VOLUME);
+                recipes.add(new FluidTransformJEIRecipe(fluid, block, result));
+            }
         }
 
-        return gsonList;
+        return recipes;
     }
 }

@@ -6,6 +6,8 @@ import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.fluidontop.FluidOnTopJEIRecipe;
 import com.novamachina.exnihilosequentia.common.jei.fluidontop.FluidOnTopRecipeCategory;
+import com.novamachina.exnihilosequentia.common.jei.fluidtransform.FluidTransformCategory;
+import com.novamachina.exnihilosequentia.common.jei.fluidtransform.FluidTransformJEIRecipe;
 import com.novamachina.exnihilosequentia.common.jei.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.jei.hammer.HammerRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.sieve.SieveRecipe;
@@ -14,6 +16,7 @@ import com.novamachina.exnihilosequentia.common.jei.sieve.wet.WetSieveRecipeCate
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnTopRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import mezz.jei.api.IModPlugin;
@@ -24,7 +27,6 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -44,6 +46,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new WetSieveRecipeCategory(guiHelper));
         registration.addRecipeCategories(new HammerRecipeCategory(guiHelper));
         registration.addRecipeCategories(new FluidOnTopRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new FluidTransformCategory(guiHelper));
     }
 
     @Override
@@ -52,6 +55,13 @@ public class JEIPlugin implements IModPlugin {
         registerSieve(registration);
         registerHammer(registration);
         registerFluidOnTop(registration);
+        registerFluidTransform(registration);
+    }
+
+    private void registerFluidTransform(IRecipeRegistration registration) {
+        List<FluidTransformJEIRecipe> recipes = ModRegistries.FLUID_TRANSFORM.getRecipeList();
+        registration.addRecipes(recipes, FluidTransformCategory.UID);
+        LogUtil.info("JEI: Fluid Transform Recipes Loaded: " + recipes.size());
     }
 
     private void registerFluidOnTop(IRecipeRegistration registration) {
@@ -85,6 +95,7 @@ public class JEIPlugin implements IModPlugin {
 
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), DrySieveRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidOnTopRecipeCategory.UID);
     }
 
     private void registerCrook(IRecipeRegistration registration) {
