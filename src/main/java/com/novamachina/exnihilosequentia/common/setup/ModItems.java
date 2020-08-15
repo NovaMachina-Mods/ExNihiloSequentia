@@ -47,6 +47,7 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> dollMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> crookMap = new HashMap<>();
+    public static Map<String, RegistryObject<Item>> meshMap = new HashMap<>();
 
     public static final RegistryObject<Item> DUST = ITEMS
         .register(Constants.Blocks.DUST, () -> new BlockItem(ModBlocks.DUST.get(),
@@ -140,7 +141,7 @@ public class ModItems {
 
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
-                ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh));
+                meshMap.put(mesh.getMeshName(), ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh)));
             }
         }
 

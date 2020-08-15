@@ -5,18 +5,24 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
-import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
+import com.novamachina.exnihilosequentia.common.jei.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.SieveJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
-import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
+import com.novamachina.exnihilosequentia.common.utility.TagUtils;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -24,21 +30,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
-
-import com.novamachina.exnihilosequentia.common.utility.TagUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.ResourceLocationException;
-import net.minecraftforge.registries.ForgeRegistries;
+import java.util.stream.Collectors;
 
 public class SieveDrops extends AbstractModRegistry {
 
@@ -353,5 +351,110 @@ public class SieveDrops extends AbstractModRegistry {
             }
         }
         return jsonList;
+    }
+
+    public List<SieveRecipe> getDryRecipeList() {
+        List<SieveRecipe> recipes = new ArrayList<>();
+
+        recipes.addAll(collectRecipes(EnumMesh.STRING, stringMeshMap, false));
+        recipes.addAll(collectRecipes(EnumMesh.FLINT, flintMeshMap, false));
+        recipes.addAll(collectRecipes(EnumMesh.IRON, ironMeshMap, false));
+        recipes.addAll(collectRecipes(EnumMesh.DIAMOND, diamondMeshMap, false));
+
+        return recipes;
+    }
+
+    private List<SieveRecipe> collectRecipes(EnumMesh mesh, Map<ResourceLocation, List<SieveDropEntry>> dropMap, boolean isWaterlogged) {
+        List<SieveRecipe> recipes = new ArrayList<>();
+        for(ResourceLocation inputID : dropMap.keySet()) {
+            SieveRecipe recipe = createRecipe(mesh, inputID, isWaterlogged);
+            if(!recipes.contains(recipe)) {
+                recipes.add(createRecipe(mesh, inputID, isWaterlogged));
+            }
+        }
+        return recipes;
+    }
+
+    private SieveRecipe createRecipe(EnumMesh mesh, ResourceLocation inputID, boolean isWaterlogged) {
+        List<List<ItemStack>> inputs = new ArrayList<>();
+        inputs.add(Collections.singletonList(new ItemStack(ModItems.meshMap.get(mesh.getMeshName()).get())));
+        Tag<Block> blockTag = BlockTags.getCollection().get(inputID);
+        List<ItemStack> inputBlocks = new ArrayList<>();
+        if(blockTag != null) {
+            inputBlocks.addAll(blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList()));
+        } else {
+            inputBlocks.add(new ItemStack(ForgeRegistries.BLOCKS.getValue(inputID)));
+        }
+        List<SieveDropEntry> dropEntries = getAllDrops(ForgeRegistries.BLOCKS.getValue(inputID), mesh, isWaterlogged);
+        List<ItemStack> drops = new ArrayList<>();
+        for(SieveDropEntry entry : dropEntries) {
+            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getResult()));
+            if(! drops.contains(stack)) {
+                drops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getResult())));
+            }
+        }
+        inputs.add(inputBlocks);
+        return new SieveRecipe(inputs, drops);
+    }
+
+    private List<SieveDropEntry> getAllDrops(Block input, EnumMesh meshType, boolean isWaterlogged) {
+        List<SieveDropEntry> returnList = new ArrayList<>();
+        List<SieveDropEntry> list = null;
+        ResourceLocation blockID = input.getRegistryName();
+        switch (meshType) {
+            case DIAMOND:
+                list = isWaterlogged ? waterloggedDiamondMeshMap.get(blockID) : diamondMeshMap.get(blockID);
+                if(list != null) {
+                    for(SieveDropEntry element : list) {
+                        if(!returnList.contains(element)) {
+                            returnList.add(element);
+                        }
+                    }
+                }
+                if(!flattenRecipes) {
+                    break;
+                }
+            case IRON:
+                list = isWaterlogged ? waterloggedIronMeshMap.get(blockID) : ironMeshMap.get(blockID);
+                if(list != null) {
+                    for(SieveDropEntry element : list) {
+                        if(!returnList.contains(element)) {
+                            returnList.add(element);
+                        }
+                    }
+                }
+                if(!flattenRecipes) {
+                    break;
+                }
+            case FLINT:
+                list = isWaterlogged ? waterloggedFlintMeshMap.get(blockID) : flintMeshMap.get(blockID);
+                if(list != null) {
+                    for(SieveDropEntry element : list) {
+                        if(!returnList.contains(element)) {
+                            returnList.add(element);
+                        }
+                    }
+                }
+                if(!flattenRecipes) {
+                    break;
+                }
+            case STRING:
+                list = isWaterlogged ? waterloggedStringMeshMap.get(blockID) : stringMeshMap.get(blockID);
+                if(list != null) {
+                    for(SieveDropEntry element : list) {
+                        if(!returnList.contains(element)) {
+                            returnList.add(element);
+                        }
+                    }
+                }
+                break;
+            default:
+                LogUtil.warn(String.format("Mesh type \"%s\" does not exist.", meshType.getName()));
+                break;
+        }
+        if(list == null) {
+            list = new ArrayList<>();
+        }
+        return returnList;
     }
 }
