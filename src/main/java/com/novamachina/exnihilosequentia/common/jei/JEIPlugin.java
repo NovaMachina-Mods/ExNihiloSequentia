@@ -16,6 +16,8 @@ import com.novamachina.exnihilosequentia.common.jei.fluidtransform.FluidTransfor
 import com.novamachina.exnihilosequentia.common.jei.fluidtransform.FluidTransformJEIRecipe;
 import com.novamachina.exnihilosequentia.common.jei.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.jei.hammer.HammerRecipeCategory;
+import com.novamachina.exnihilosequentia.common.jei.heat.HeatRecipe;
+import com.novamachina.exnihilosequentia.common.jei.heat.HeatRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.jei.sieve.dry.DrySieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.sieve.wet.WetSieveRecipeCategory;
@@ -56,6 +58,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new CompostRecipeCategory(guiHelper));
         registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, "crucible_wood"));
         registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, "crucible_fired"));
+        registration.addRecipeCategories(new HeatRecipeCategory(guiHelper));
     }
 
     @Override
@@ -69,6 +72,13 @@ public class JEIPlugin implements IModPlugin {
         registerCompost(registration);
         registerFiredCrucible(registration);
         registerWoodCrucible(registration);
+        registerHeat(registration);
+    }
+
+    private void registerHeat(IRecipeRegistration registration) {
+        List<HeatRecipe> recipes = ModRegistries.HEAT.getRecipeList();
+        registration.addRecipes(recipes, HeatRecipeCategory.UID);
+        LogUtil.info("JEI: Heat Recipes Loaded: " + recipes.size());
     }
 
     private void registerWoodCrucible(IRecipeRegistration registration) {
@@ -138,6 +148,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_FIRED.get()), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"));
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_WOOD.get()), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_wood"));
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_FIRED.get()), HeatRecipeCategory.UID);
     }
 
     private void registerCrook(IRecipeRegistration registration) {
