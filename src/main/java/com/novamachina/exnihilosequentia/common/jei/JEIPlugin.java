@@ -2,6 +2,8 @@ package com.novamachina.exnihilosequentia.common.jei;
 
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
+import com.novamachina.exnihilosequentia.common.jei.compost.CompostRecipe;
+import com.novamachina.exnihilosequentia.common.jei.compost.CompostRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.fluiditem.FluidBlockJEIRecipe;
@@ -18,7 +20,6 @@ import com.novamachina.exnihilosequentia.common.jei.sieve.wet.WetSieveRecipeCate
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnTopRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import mezz.jei.api.IModPlugin;
@@ -50,6 +51,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new FluidOnTopRecipeCategory(guiHelper));
         registration.addRecipeCategories(new FluidTransformCategory(guiHelper));
         registration.addRecipeCategories(new FluidBlockRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new CompostRecipeCategory(guiHelper));
     }
 
     @Override
@@ -60,6 +62,13 @@ public class JEIPlugin implements IModPlugin {
         registerFluidOnTop(registration);
         registerFluidTransform(registration);
         registerFluidBlock(registration);
+        registerCompost(registration);
+    }
+
+    private void registerCompost(IRecipeRegistration registration) {
+        List<CompostRecipe> recipes = ModRegistries.COMPOST.getRecipeList();
+        registration.addRecipes(recipes, CompostRecipeCategory.UID);
+        LogUtil.info("JEI: Compost Recipes Loaded: " + recipes.size());
     }
 
     private void registerFluidBlock(IRecipeRegistration registration) {
@@ -108,6 +117,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidOnTopRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidTransformCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidBlockRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), CompostRecipeCategory.UID);
     }
 
     private void registerCrook(IRecipeRegistration registration) {

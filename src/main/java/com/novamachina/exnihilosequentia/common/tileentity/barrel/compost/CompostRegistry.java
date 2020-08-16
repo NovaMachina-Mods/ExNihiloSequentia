@@ -4,24 +4,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import com.novamachina.exnihilosequentia.common.compat.IDefaultRegistry;
-import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
-import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDropEntry;
+import com.novamachina.exnihilosequentia.common.jei.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
-import com.novamachina.exnihilosequentia.common.json.BarrelRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.CompostJson;
-import com.novamachina.exnihilosequentia.common.json.CrookJson;
-import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
-import com.novamachina.exnihilosequentia.common.json.SieveJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
-import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
@@ -36,6 +31,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CompostRegistry extends AbstractModRegistry {
     private final Map<ResourceLocation, Integer> solidsMap = new HashMap<>();
@@ -167,5 +163,23 @@ public class CompostRegistry extends AbstractModRegistry {
         }
 
         return gsonList;
+    }
+
+    public List<CompostRecipe> getRecipeList() {
+        List<CompostRecipe> recipes = new ArrayList<>();
+
+        for(ResourceLocation entry : solidsMap.keySet()) {
+            List<ItemStack> blocks;
+            Tag<Item> itemTag = ItemTags.getCollection().get(entry);
+            if(itemTag != null) {
+                blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+            } else {
+                blocks = new ArrayList<>();
+                blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
+            }
+            recipes.add(new CompostRecipe(blocks, new ItemStack(Blocks.DIRT)));
+        }
+
+        return recipes;
     }
 }
