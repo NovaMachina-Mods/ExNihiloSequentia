@@ -6,6 +6,8 @@ import com.novamachina.exnihilosequentia.common.jei.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.jei.compost.CompostRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipeCategory;
+import com.novamachina.exnihilosequentia.common.jei.crucible.CrucibleRecipe;
+import com.novamachina.exnihilosequentia.common.jei.crucible.CrucibleRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.fluiditem.FluidBlockJEIRecipe;
 import com.novamachina.exnihilosequentia.common.jei.fluiditem.FluidBlockRecipeCategory;
 import com.novamachina.exnihilosequentia.common.jei.fluidontop.FluidOnTopJEIRecipe;
@@ -52,6 +54,8 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new FluidTransformCategory(guiHelper));
         registration.addRecipeCategories(new FluidBlockRecipeCategory(guiHelper));
         registration.addRecipeCategories(new CompostRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, "crucible_wood"));
+        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, "crucible_fired"));
     }
 
     @Override
@@ -63,6 +67,20 @@ public class JEIPlugin implements IModPlugin {
         registerFluidTransform(registration);
         registerFluidBlock(registration);
         registerCompost(registration);
+        registerFiredCrucible(registration);
+        registerWoodCrucible(registration);
+    }
+
+    private void registerWoodCrucible(IRecipeRegistration registration) {
+        List<CrucibleRecipe> recipes = ModRegistries.WOODEN_CRUCIBLE.getRecipeList();
+        registration.addRecipes(recipes, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_wood"));
+        LogUtil.info("JEI: Wooden Crucible Recipes Loaded: " + recipes.size());
+    }
+
+    private void registerFiredCrucible(IRecipeRegistration registration) {
+        List<CrucibleRecipe> recipes = ModRegistries.FIRED_CRUCIBLE.getRecipeList();
+        registration.addRecipes(recipes, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"));
+        LogUtil.info("JEI: Fired Crucible Recipes Loaded: " + recipes.size());
     }
 
     private void registerCompost(IRecipeRegistration registration) {
@@ -118,6 +136,8 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidTransformCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), FluidBlockRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BARREL_WOOD.get()), CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_FIRED.get()), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"));
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_WOOD.get()), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_wood"));
     }
 
     private void registerCrook(IRecipeRegistration registration) {

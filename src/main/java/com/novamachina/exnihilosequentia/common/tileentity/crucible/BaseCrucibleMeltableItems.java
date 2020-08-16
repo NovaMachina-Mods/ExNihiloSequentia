@@ -1,12 +1,21 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.novamachina.exnihilosequentia.common.jei.compost.CompostRecipe;
+import com.novamachina.exnihilosequentia.common.jei.crucible.CrucibleRecipe;
 import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
+import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -14,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
     private final Map<ResourceLocation, Meltable> meltableMap = new HashMap<>();
@@ -56,5 +66,28 @@ public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
     protected boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
         return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS.containsKey(itemID) || ForgeRegistries.FLUIDS.containsKey(itemID);
+    }
+
+    public List<CrucibleRecipe> getRecipeList() {
+        List<CrucibleRecipe> recipes = new ArrayList<>();
+
+        for(ResourceLocation entry : meltableMap.keySet()) {
+            Meltable meltable = getMeltable(entry);
+            List<ItemStack> blocks;
+            Tag<Item> itemTag = ItemTags.getCollection().get(entry);
+            if(itemTag != null) {
+                blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+            } else {
+                blocks = new ArrayList<>();
+                blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
+            }
+            recipes.add(new CrucibleRecipe(blocks, new FluidStack(meltable.getFluid(), FluidAttributes.BUCKET_VOLUME)));
+        }
+
+        return recipes;
+    }
+
+    private Meltable getMeltable(ResourceLocation entry) {
+        return meltableMap.get(entry);
     }
 }
