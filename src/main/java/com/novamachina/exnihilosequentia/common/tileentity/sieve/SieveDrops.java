@@ -119,7 +119,7 @@ public class SieveDrops extends AbstractModRegistry {
     }
 
     public List<SieveDropEntry> getDrops(Block input, EnumMesh meshType, boolean isWaterlogged) {
-        return getAllDrops(input.getRegistryName(), meshType, isWaterlogged);
+        return getDrops(input.getRegistryName(), meshType, isWaterlogged);
     }
 
     public List<SieveDropEntry> getDrops(ResourceLocation input, EnumMesh meshType, boolean isWaterlogged) {
@@ -391,11 +391,19 @@ public class SieveDrops extends AbstractModRegistry {
         } else {
             inputBlocks.add(new ItemStack(ForgeRegistries.BLOCKS.getValue(inputID)));
         }
-        List<SieveDropEntry> dropEntries = getAllDrops(ForgeRegistries.BLOCKS.getValue(inputID), mesh, isWaterlogged);
+        List<SieveDropEntry> dropEntries = getDrops(ForgeRegistries.BLOCKS.getValue(inputID), mesh, isWaterlogged);
         List<ItemStack> drops = new ArrayList<>();
         for(SieveDropEntry entry : dropEntries) {
+            boolean alreadyExists = false;
             ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getResult()));
-            if(! drops.contains(stack)) {
+            for(ItemStack itemStack : drops) {
+                if(itemStack.getItem() == stack.getItem()) {
+                    itemStack.grow(1);
+                    alreadyExists = true;
+                }
+            }
+
+            if(!alreadyExists) {
                 drops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getResult())));
             }
         }
@@ -409,6 +417,7 @@ public class SieveDrops extends AbstractModRegistry {
         return getAllDrops(block, mesh, isWaterlogged);
     }
 
+    @Deprecated
     private List<SieveDropEntry> getAllDrops(Block input, EnumMesh meshType, boolean isWaterlogged) {
         List<SieveDropEntry> returnList = new ArrayList<>();
         List<SieveDropEntry> list = null;

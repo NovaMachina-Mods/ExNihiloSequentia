@@ -105,7 +105,7 @@ public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
                 if(!input) {
                     ItemStack mesh = recipe.getMesh();
                     Multiset<String> condensedTooltips = HashMultiset.create();
-                    List<SieveDropEntry> drops = ModRegistries.SIEVE.getDrops(recipe.getInputs().get(1).get(0).getItem().getRegistryName(), ((MeshItem)recipe.getInputs().get(0).get(0).getItem()).getMesh(), false);
+                    List<SieveDropEntry> drops = ModRegistries.SIEVE.getDrops(recipe.getInputs().get(1).get(0).getItem().getRegistryName(), ((MeshItem)recipe.getInputs().get(0).get(0).getItem()).getMesh(), true);
                     for(SieveDropEntry entry : drops) {
                         ItemStack drop = new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getResult()));
                         if(!drop.isItemEqual(ingredient)) {
