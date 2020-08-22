@@ -161,14 +161,14 @@ public class HeatRegistry extends AbstractModRegistry {
     public List<HeatRecipe> getRecipeList() {
         List<HeatRecipe> recipes = new ArrayList<>();
 
-        for(ResourceLocation heatID : heatMap.keySet()) {
-            Block block = ForgeRegistries.BLOCKS.getValue(heatID);
-            Fluid fluid = ForgeRegistries.FLUIDS.getValue(heatID);
+        for(Map.Entry<ResourceLocation, Integer> entry : heatMap.entrySet()) {
+            Block block = ForgeRegistries.BLOCKS.getValue(entry.getKey());
+            Fluid fluid = ForgeRegistries.FLUIDS.getValue(entry.getKey());
             List<ItemStack> blockList = new ArrayList<>();
             List<FluidStack> fluidList = new ArrayList<>();
 
             if(block != Blocks.AIR && fluid == Fluids.EMPTY) {
-                Tag<Block> blockTag = BlockTags.getCollection().get(heatID);
+                Tag<Block> blockTag = BlockTags.getCollection().get(entry.getKey());
                 if(blockTag != null) {
                     blockList = blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
                 } else {
@@ -179,7 +179,7 @@ public class HeatRegistry extends AbstractModRegistry {
                 fluidList.add(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
             }
 
-            recipes.add(new HeatRecipe(blockList, fluidList));
+            recipes.add(new HeatRecipe(blockList, fluidList, entry.getValue()));
         }
         return recipes;
     }

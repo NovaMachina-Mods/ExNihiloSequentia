@@ -20,6 +20,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,12 @@ public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
     }
 
     public Meltable getMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
+        Collection<ResourceLocation> tags = TagUtils.getTags(entry.getRegistryName());
+        for(ResourceLocation tag : tags) {
+            if(meltableMap.containsKey(tag)) {
+                return meltableMap.get(tag);
+            }
+        }
         return meltableMap.getOrDefault(entry.getRegistryName(), Meltable.DEFAULT);
     }
 

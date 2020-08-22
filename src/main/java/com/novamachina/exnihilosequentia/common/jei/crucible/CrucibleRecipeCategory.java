@@ -79,7 +79,12 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
                     }
                 }
             }
+        }
 
+        if(UID.equals(new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"))) {
+            recipeLayout.getItemStacks().addTooltipCallback(new FiredCrucibleTooltipCallback());
+        } else {
+            recipeLayout.getItemStacks().addTooltipCallback(new WoodCrucibleTooltipCallback());
         }
     }
 }

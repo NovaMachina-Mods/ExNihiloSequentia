@@ -8,7 +8,10 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+
+import java.awt.*;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
@@ -66,5 +69,10 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getFluidStacks().init(0, true, 1, 17);
             recipeLayout.getFluidStacks().set(0, recipe.getFluidInputs());
         }
+    }
+
+    @Override
+    public void draw(HeatRecipe recipe, double mouseX, double mouseY) {
+        Minecraft.getInstance().fontRenderer.drawString(recipe.getHeatAmountString(), 24, 12, Color.gray.getRGB());
     }
 }
