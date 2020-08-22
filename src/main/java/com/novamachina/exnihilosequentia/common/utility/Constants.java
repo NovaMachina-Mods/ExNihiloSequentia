@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.utility;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
@@ -144,5 +145,13 @@ public class Constants {
         public static final String IMMERSIVE_ENGINEERING = "immersiveengineering";
         public static final String JEI = "jei";
         public static final String EX_NIHILO_SEQUENTIA = "exnihilosequentia";
+    }
+
+    public static class Tooltips {
+        public static final String ENDERMAN = "tooltip.doll.enderman";
+        public static final String BLAZE = "tooltip.doll.blaze";
+        public static final String SHULKER = "tooltip.doll.shulker";
+        public static final String GUARDIAN = "tooltip.doll.guardian";
+        public static final String BEE = "tooltip.doll.bee";
     }
 }
