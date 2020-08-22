@@ -118,27 +118,30 @@ public class SieveDrops extends AbstractModRegistry {
         }
     }
 
-    public List<Item> getDrops(Block input, EnumMesh meshType, boolean isWaterlogged) {
-        List<Item> returnList = new ArrayList<>();
-        ResourceLocation blockID = input.getRegistryName();
+    public List<SieveDropEntry> getDrops(Block input, EnumMesh meshType, boolean isWaterlogged) {
+        return getAllDrops(input.getRegistryName(), meshType, isWaterlogged);
+    }
+
+    public List<SieveDropEntry> getDrops(ResourceLocation input, EnumMesh meshType, boolean isWaterlogged) {
+        List<SieveDropEntry> returnList = new ArrayList<>();
         switch (meshType) {
             case DIAMOND:
-                returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedDiamondMeshMap : diamondMeshMap, blockID));
+                returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedDiamondMeshMap : diamondMeshMap, input));
                 if(!flattenRecipes) {
                     break;
                 }
             case IRON:
-                returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedIronMeshMap : ironMeshMap, blockID));
+                returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedIronMeshMap : ironMeshMap, input));
                 if(!flattenRecipes) {
                     break;
                 }
             case FLINT:
-                returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedFlintMeshMap : flintMeshMap, blockID));
+                returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedFlintMeshMap : flintMeshMap, input));
                 if(!flattenRecipes) {
                     break;
                 }
             case STRING:
-                returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedStringMeshMap : stringMeshMap, blockID));
+                returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedStringMeshMap : stringMeshMap, input));
                 break;
             default:
                 LogUtil.warn(String.format("Mesh type \"%s\" does not exist.", meshType.getName()));
@@ -227,18 +230,21 @@ public class SieveDrops extends AbstractModRegistry {
         }
     }
 
-    private Collection<? extends Item> retrieveFromMap(
+    private Collection<SieveDropEntry> retrieveFromMap(
         Map<ResourceLocation, List<SieveDropEntry>> dropsMap, ResourceLocation input) {
-        List<Item> returnList = new ArrayList<>();
-        Random random = new Random();
+        List<SieveDropEntry> returnList = new ArrayList<>();
+        Collection<ResourceLocation> tags = TagUtils.getTags(input);
+        for(ResourceLocation tag : tags) {
+            if(dropsMap.containsKey(tag)) {
+                returnList.addAll(dropsMap.get(tag));
+                return returnList;
+            }
+        }
+
         if (!dropsMap.containsKey(input)) {
             return returnList;
         }
-        for (SieveDropEntry entry : dropsMap.get(input)) {
-            if (random.nextFloat() <= entry.getRarity()) {
-                returnList.add(ForgeRegistries.ITEMS.getValue(entry.getResult()));
-            }
-        }
+        returnList.addAll(dropsMap.get(input));
         return returnList;
     }
 
@@ -395,6 +401,12 @@ public class SieveDrops extends AbstractModRegistry {
         }
         inputs.add(inputBlocks);
         return new SieveRecipe(inputs, drops);
+    }
+
+    @Deprecated
+    public List<SieveDropEntry> getAllDrops(ResourceLocation input, EnumMesh mesh, boolean isWaterlogged) {
+        Block block = ForgeRegistries.BLOCKS.getValue(input);
+        return getAllDrops(block, mesh, isWaterlogged);
     }
 
     private List<SieveDropEntry> getAllDrops(Block input, EnumMesh meshType, boolean isWaterlogged) {

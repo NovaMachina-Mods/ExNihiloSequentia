@@ -7,6 +7,8 @@ import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.setup.ModTiles;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.BlockItem;
@@ -17,6 +19,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class SieveTile extends TileEntity {
 
@@ -124,11 +127,15 @@ public class SieveTile extends TileEntity {
             progress += 0.1F;
 
             if (progress >= 1.0F) {
-                List<Item> drops = ModRegistries.SIEVE
+                List<SieveDropEntry> drops = ModRegistries.SIEVE
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
-                drops.forEach((item -> {
-                    world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
-                        pos.getZ() + 0.5F, new ItemStack(item)));
+                Random random = new Random();
+                drops.forEach((entry -> {
+                    if(random.nextFloat() <= entry.getRarity()) {
+                        Item item = ForgeRegistries.ITEMS.getValue(entry.getResult());
+                        world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
+                            pos.getZ() + 0.5F, new ItemStack(item)));
+                    }
                 }));
                 resetSieve();
             }

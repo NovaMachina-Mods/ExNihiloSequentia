@@ -116,5 +116,7 @@
 
   "message.new_mod": "Thanks for using Ex Nihilo: Sequentia! This mod is newly released and is probably missing a lot of stuff and broken somewhere.",
   "message.issues": "To report any issues or make a suggestion, go to:",
-  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues"
+  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues",
+
+  "jei.sieve.dropChance": "Drop Chance"
 }
