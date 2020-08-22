@@ -56,11 +56,11 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
     }
 
     @Override
-    public void setRecipe(IRecipeLayout iRecipeLayout, CrookRecipe crookRecipe, IIngredients iIngredients) {
-        iRecipeLayout.getItemStacks().init(0, true, 10, 38);
-        iRecipeLayout.getItemStacks().set(0, crookRecipe.getInputs());
+    public void setRecipe(IRecipeLayout recipeLayout, CrookRecipe crookRecipe, IIngredients iIngredients) {
+        recipeLayout.getItemStacks().init(0, true, 10, 38);
+        recipeLayout.getItemStacks().set(0, crookRecipe.getInputs());
 
-        IFocus<?> focus = iRecipeLayout.getFocus();
+        IFocus<?> focus = recipeLayout.getFocus();
 
         int slotIndex = 1;
         for(int i = 0; i < crookRecipe.getOutputs().size(); i++) {
@@ -69,16 +69,16 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
 
             ItemStack outputStack = crookRecipe.getOutputs().get(i);
 
-            iRecipeLayout.getItemStacks().init(slotIndex + i, false, slotX, slotY);
-            iRecipeLayout.getItemStacks().set(slotIndex + i, outputStack);
+            recipeLayout.getItemStacks().init(slotIndex + i, false, slotX, slotY);
+            recipeLayout.getItemStacks().set(slotIndex + i, outputStack);
 
             if(focus != null) {
                 ItemStack focusStack = (ItemStack) focus.getValue();
                 if (focus.getMode() == IFocus.Mode.OUTPUT && !focusStack.isEmpty() && focusStack.getItem() == outputStack.getItem() && focusStack.getDamage() == outputStack.getDamage()) {
-                    iRecipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
+                    recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
                 }
             }
         }
-//        iRecipeLayout.getItemStacks().addTooltipCallback(new CrookTooltipCallback(crookRecipe));
+        recipeLayout.getItemStacks().addTooltipCallback(new CrookTooltipCallback(crookRecipe));
     }
 }

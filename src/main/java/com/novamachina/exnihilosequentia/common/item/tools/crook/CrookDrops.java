@@ -93,17 +93,9 @@ public class CrookDrops extends AbstractModRegistry {
         addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.1F);
     }
 
-    public List<ItemStack> getDrops() {
-        List<ItemStack> drops = new ArrayList<>();
+    public List<CrookDropEntry> getDrops() {
 
-        for (CrookDropEntry item : crookDrops) {
-            Random random = new Random();
-            if (random.nextFloat() <= item.getRarity()) {
-                drops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(item.getItem())));
-            }
-        }
-
-        return drops;
+        return crookDrops;
     }
 
     public void addDrop(Item item, float rarity) {

@@ -29,6 +29,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class CrookBaseItem extends ToolItem {
 
@@ -54,8 +55,12 @@ public class CrookBaseItem extends ToolItem {
                         pos, null);
                 itemDrops.addAll(items);
             }
-
-            itemDrops.addAll(ModRegistries.CROOK.getDrops());
+            Random random = new Random();
+            for(CrookDropEntry entry : ModRegistries.CROOK.getDrops()) {
+                if(random.nextFloat() <= entry.getRarity()) {
+                    itemDrops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getItem())));
+                }
+            }
         }
         if (state.getBlock() instanceof InfestedLeavesBlock) {
             Random random = new Random();
