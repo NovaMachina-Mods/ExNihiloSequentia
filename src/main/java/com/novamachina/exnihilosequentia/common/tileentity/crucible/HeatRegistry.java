@@ -19,6 +19,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
@@ -167,16 +168,21 @@ public class HeatRegistry extends AbstractModRegistry {
             List<ItemStack> blockList = new ArrayList<>();
             List<FluidStack> fluidList = new ArrayList<>();
 
-            if(block != Blocks.AIR && fluid == Fluids.EMPTY) {
-                Tag<Block> blockTag = BlockTags.getCollection().get(entry.getKey());
-                if(blockTag != null) {
-                    blockList = blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
-                } else {
-                    blockList.add(new ItemStack(block));
+            if(block == Blocks.FIRE) {
+                blockList.add(new ItemStack(Items.FLINT_AND_STEEL));
+
+            } else {
+                if(block != Blocks.AIR && fluid == Fluids.EMPTY) {
+                    Tag<Block> blockTag = BlockTags.getCollection().get(entry.getKey());
+                    if(blockTag != null) {
+                        blockList = blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+                    } else {
+                        blockList.add(new ItemStack(block));
+                    }
                 }
-            }
-            if(fluid != Fluids.EMPTY) {
-                fluidList.add(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
+                if(fluid != Fluids.EMPTY) {
+                    fluidList.add(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
+                }
             }
 
             recipes.add(new HeatRecipe(blockList, fluidList, entry.getValue()));

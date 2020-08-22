@@ -149,6 +149,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_FIRED.get()), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"));
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_WOOD.get()), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_wood"));
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_FIRED.get()), HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUCIBLE_WOOD.get()), HeatRecipeCategory.UID);
     }
 
     private void registerCrook(IRecipeRegistration registration) {
