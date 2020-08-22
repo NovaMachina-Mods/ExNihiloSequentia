@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.novamachina.exnihilosequentia.common.jei.heat.HeatRecipe;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.json.FluidOnTopJson;
@@ -13,10 +14,19 @@ import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -29,6 +39,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HeatRegistry extends AbstractModRegistry {
 
@@ -146,5 +157,36 @@ public class HeatRegistry extends AbstractModRegistry {
             jsonList.add(new HeatJson(entry.getKey().toString(), entry.getValue()));
         }
         return jsonList;
+    }
+
+    public List<HeatRecipe> getRecipeList() {
+        List<HeatRecipe> recipes = new ArrayList<>();
+
+        for(Map.Entry<ResourceLocation, Integer> entry : heatMap.entrySet()) {
+            Block block = ForgeRegistries.BLOCKS.getValue(entry.getKey());
+            Fluid fluid = ForgeRegistries.FLUIDS.getValue(entry.getKey());
+            List<ItemStack> blockList = new ArrayList<>();
+            List<FluidStack> fluidList = new ArrayList<>();
+
+            if(block == Blocks.FIRE) {
+                blockList.add(new ItemStack(Items.FLINT_AND_STEEL));
+
+            } else {
+                if(block != Blocks.AIR && fluid == Fluids.EMPTY) {
+                    Tag<Block> blockTag = BlockTags.getCollection().get(entry.getKey());
+                    if(blockTag != null) {
+                        blockList = blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+                    } else {
+                        blockList.add(new ItemStack(block));
+                    }
+                }
+                if(fluid != Fluids.EMPTY) {
+                    fluidList.add(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
+                }
+            }
+
+            recipes.add(new HeatRecipe(blockList, fluidList, entry.getValue()));
+        }
+        return recipes;
     }
 }

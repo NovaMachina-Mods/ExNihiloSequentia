@@ -51,10 +51,10 @@ public class ModRegistries {
 
         private void registerDefaults() {
             this.defaults.add(new ExNihilo());
-            if(ModList.get().isLoaded(Constants.Compat.THERMAL_EXPANSION) || Config.ENABLE_THERMAL.get()) {
+            if(ModList.get().isLoaded(Constants.ModIds.THERMAL_EXPANSION) || Config.ENABLE_THERMAL.get()) {
                 this.defaults.add(new ThermalExpansion());
             }
-            if(ModList.get().isLoaded(Constants.Compat.IMMERSIVE_ENGINEERING) || Config.ENABLE_IMMERSIVE.get()) {
+            if(ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING) || Config.ENABLE_IMMERSIVE.get()) {
                 this.defaults.add(new ThermalExpansion());
             }
         }

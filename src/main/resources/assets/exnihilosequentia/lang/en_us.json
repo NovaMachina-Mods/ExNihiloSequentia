@@ -111,7 +111,18 @@
   "item.exnihilosequentia.mesh_iron": "Iron Mesh",
   "item.exnihilosequentia.mesh_diamond": "Diamond Mesh",
 
+  "fluid.exnihilosequentia.witchwater": "Witchwater",
+  "fluid.exnihilosequentia.sea_water": "Sea Water",
+
   "message.new_mod": "Thanks for using Ex Nihilo: Sequentia! This mod is newly released and is probably missing a lot of stuff and broken somewhere.",
   "message.issues": "To report any issues or make a suggestion, go to:",
-  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues"
+  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues",
+
+  "tooltip.doll.blaze": "Add to a barrel of lava to spawn a Blaze",
+  "tooltip.doll.enderman": "Add to a barrel of witchwater to spawn an Enderman",
+  "tooltip.doll.shulker": "Add to a barrel of witchwater to spawn a Shulker",
+  "tooltip.doll.guardian": "Add to a barrel of sea water to spawn a Guardian",
+  "tooltip.doll.bee": "Add to a barrel of witchwater to spawn a Bee",
+
+  "jei.sieve.dropChance": "Drop Chance"
 }

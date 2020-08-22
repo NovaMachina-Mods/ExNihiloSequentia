@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModTiles {
 
     private static final DeferredRegister<TileEntityType<?>> TILES =
-        new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Constants.ModInfo.MOD_ID);
+        new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Constants.ModIds.EX_NIHILO_SEQUENTIA);
 
     public static final RegistryObject<TileEntityType<FiredCrucibleTile>>   CRUCIBLE_FIRED   = TILES
         .register(Blocks.CRUCIBLE_UNFIRED, () -> TileEntityType.Builder

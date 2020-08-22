@@ -4,18 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.novamachina.exnihilosequentia.common.jei.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
-import com.novamachina.exnihilosequentia.common.json.CrucibleRegistriesJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.Constants.Items;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,6 +27,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class CrookDrops extends AbstractModRegistry {
 
@@ -92,17 +93,9 @@ public class CrookDrops extends AbstractModRegistry {
         addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.1F);
     }
 
-    public List<ItemStack> getDrops() {
-        List<ItemStack> drops = new ArrayList<>();
+    public List<CrookDropEntry> getDrops() {
 
-        for (CrookDropEntry item : crookDrops) {
-            Random random = new Random();
-            if (random.nextFloat() <= item.getRarity()) {
-                drops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(item.getItem())));
-            }
-        }
-
-        return drops;
+        return crookDrops;
     }
 
     public void addDrop(Item item, float rarity) {
@@ -125,5 +118,16 @@ public class CrookDrops extends AbstractModRegistry {
     @Override
     public void clear() {
         crookDrops.clear();
+    }
+
+    public List<CrookRecipe> getRecipeList() {
+        List<CrookRecipe> recipes = new ArrayList<>();
+        List<ItemStack> inputs = BlockTags.getCollection().get(new ResourceLocation("minecraft", "leaves")).getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+        for(CrookDropEntry entry : crookDrops) {
+            List<ItemStack> outputs = new ArrayList<>();
+            outputs.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getItem())));
+            recipes.add(new CrookRecipe(inputs, outputs));
+        }
+        return recipes;
     }
 }

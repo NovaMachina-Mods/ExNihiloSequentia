@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.novamachina.exnihilosequentia.common.jei.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
 import com.novamachina.exnihilosequentia.common.json.HammerJson;
@@ -25,6 +26,7 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -133,5 +135,16 @@ public class HammerDrops extends AbstractModRegistry {
 
     public boolean isHammerable(ResourceLocation blockID) {
         return hammerDrops.containsKey(blockID);
+    }
+
+    public List<HammerRecipe> getRecipeList() {
+        List<HammerRecipe> recipes = new ArrayList<>();
+        for(ResourceLocation inputID : hammerDrops.keySet()) {
+            Block input = ForgeRegistries.BLOCKS.getValue(inputID);
+            Block output = getResult(inputID);
+
+            recipes.add(new HammerRecipe(new ItemStack(input), new ItemStack(output)));
+        }
+        return recipes;
     }
 }

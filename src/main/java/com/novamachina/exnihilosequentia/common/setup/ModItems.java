@@ -37,7 +37,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
 
     private static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(
-        ForgeRegistries.ITEMS, Constants.ModInfo.MOD_ID);
+        ForgeRegistries.ITEMS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
 
     public static Map<String, RegistryObject<OreItem>> chunkMap = new HashMap<>();
     public static Map<String, RegistryObject<OreItem>> pieceMap = new HashMap<>();
@@ -46,6 +46,9 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>> pebbleMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> dollMap = new HashMap<>();
+    public static Map<String, RegistryObject<Item>> crookMap = new HashMap<>();
+    public static Map<String, RegistryObject<Item>> meshMap = new HashMap<>();
+    public static Map<String, RegistryObject<Item>> hammerMap = new HashMap<>();
 
     public static final RegistryObject<Item> DUST = ITEMS
         .register(Constants.Blocks.DUST, () -> new BlockItem(ModBlocks.DUST.get(),
@@ -101,13 +104,13 @@ public class ModItems {
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
-            ITEMS
-                .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability));
+            crookMap.put(crook.name, ITEMS
+                .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability)));
         }
 
         for (EnumHammer hammer : EnumHammer.values()) {
-            ITEMS.register(hammer.name,
-                () -> new HammerBaseItem(hammer.teir, hammer.defaultDurability));
+            hammerMap.put(hammer.name, ITEMS.register(hammer.name,
+                () -> new HammerBaseItem(hammer.teir, hammer.defaultDurability)));
         }
 
         for (EnumOre ore : EnumOre.values()) {
@@ -139,7 +142,7 @@ public class ModItems {
 
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
-                ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh));
+                meshMap.put(mesh.getMeshName(), ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh)));
             }
         }
 

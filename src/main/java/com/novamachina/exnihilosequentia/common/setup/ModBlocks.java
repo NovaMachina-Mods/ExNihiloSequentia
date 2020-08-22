@@ -5,12 +5,10 @@ import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.Constants.Blocks;
-import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.BarrelTileEntity;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -20,7 +18,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModBlocks {
 
     private static final DeferredRegister<Block> BLOCKS =
-        new DeferredRegister<>(ForgeRegistries.BLOCKS, Constants.ModInfo.MOD_ID);
+        new DeferredRegister<>(ForgeRegistries.BLOCKS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
 
     public static final RegistryObject<BaseFallingBlock> DUST = BLOCKS
         .register(Constants.Blocks.DUST, () -> new BaseFallingBlock(new BlockBuilder().properties(
