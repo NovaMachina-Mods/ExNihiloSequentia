@@ -59,7 +59,7 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformJEI
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, FluidTransformJEIRecipe recipe, IIngredients ingredients) {
         recipeLayout.getFluidStacks().init(0, true, 48, 10);
-        recipeLayout.getItemStacks().init(0, true, 75, 37);
+        recipeLayout.getItemStacks().init(0, true, 74, 36);
         recipeLayout.getFluidStacks().init(1, false, 102, 10);
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInBarrel());

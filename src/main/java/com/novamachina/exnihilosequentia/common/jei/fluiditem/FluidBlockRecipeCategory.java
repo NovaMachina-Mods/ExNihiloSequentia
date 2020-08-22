@@ -57,8 +57,8 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidBlockJEIRe
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, FluidBlockJEIRecipe recipe, IIngredients ingredients) {
         recipeLayout.getFluidStacks().init(0, true, 48, 37);
-        recipeLayout.getItemStacks().init(0, true, 75, 10);
-        recipeLayout.getItemStacks().init(1, false, 102, 37);
+        recipeLayout.getItemStacks().init(0, true, 74, 9);
+        recipeLayout.getItemStacks().init(1, false, 101, 36);
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInBarrel());
         recipeLayout.getItemStacks().set(0, recipe.getInput());

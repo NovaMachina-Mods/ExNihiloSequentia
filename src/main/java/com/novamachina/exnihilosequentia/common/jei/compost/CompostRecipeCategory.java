@@ -59,7 +59,7 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, CompostRecipe recipe, IIngredients ingredients) {
-        recipeLayout.getItemStacks().init(0, true, 2, 20);
+        recipeLayout.getItemStacks().init(0, true, 10, 38);
         recipeLayout.getItemStacks().set(0, recipe.getOutput());
 
         IFocus<?> focus = recipeLayout.getFocus();
@@ -80,5 +80,6 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
                 }
             }
         }
+        recipeLayout.getItemStacks().addTooltipCallback(new CompostTooltipCallback());
     }
 }
