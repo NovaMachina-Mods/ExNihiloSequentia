@@ -6,6 +6,7 @@ import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrel
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
+import com.novamachina.exnihilosequentia.common.utility.StringUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -14,11 +15,16 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FluidTransformBarrelMode extends AbstractBarrelMode {
     private int currentProgress;
@@ -88,5 +94,14 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
                 0.0,
                 0.0,
                 0.05);
+    }
+
+    @Override
+    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+        List<ITextComponent> info = new ArrayList<>();
+
+        info.add(new TranslationTextComponent("waila.barrel.progress", StringUtils.formatPercent((float)currentProgress / (Config.SECONDS_TO_FLUID_TRANSFORM.get() * 20))));
+
+        return info;
     }
 }

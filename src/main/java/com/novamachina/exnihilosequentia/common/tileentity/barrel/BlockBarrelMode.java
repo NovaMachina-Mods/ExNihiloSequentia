@@ -1,14 +1,20 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
 import com.novamachina.exnihilosequentia.common.utility.Constants;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockBarrelMode extends AbstractBarrelMode {
     public BlockBarrelMode(String name) {
@@ -56,5 +62,16 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     @Override
     protected void spawnParticle(BarrelTile barrelTile) {
 
+    }
+
+    @Override
+    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+        List<ITextComponent> info = new ArrayList<>();
+
+        String block = I18n.format(barrelTile.getInventory().getStackInSlot(0).getTranslationKey());
+
+        info.add(new TranslationTextComponent("waila.barrel.block", block));
+
+        return info;
     }
 }
