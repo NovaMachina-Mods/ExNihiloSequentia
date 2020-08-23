@@ -104,7 +104,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
         if(currentProgress <= 0) {
             info.add(new TranslationTextComponent("waila.barrel.solidAmount", barrelTile.getSolidAmount(), BarrelTile.MAX_SOLID_AMOUNT));
         } else {
-            info.add(new TranslationTextComponent("waila.barrel.progress", StringUtils.formatPercent((float)currentProgress / (Config.SECONDS_TO_COMPOST.get() * 20))));
+            info.add(new TranslationTextComponent("waila.progress", StringUtils.formatPercent((float)currentProgress / (Config.SECONDS_TO_COMPOST.get() * 20))));
         }
         return info;
     }

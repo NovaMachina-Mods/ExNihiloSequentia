@@ -100,7 +100,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
     public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
-        info.add(new TranslationTextComponent("waila.barrel.progress", StringUtils.formatPercent((float)currentProgress / (Config.SECONDS_TO_FLUID_TRANSFORM.get() * 20))));
+        info.add(new TranslationTextComponent("waila.progress", StringUtils.formatPercent((float)currentProgress / (Config.SECONDS_TO_FLUID_TRANSFORM.get() * 20))));
 
         return info;
     }

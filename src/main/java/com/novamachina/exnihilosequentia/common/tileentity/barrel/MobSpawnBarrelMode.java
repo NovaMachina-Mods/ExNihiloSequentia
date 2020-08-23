@@ -109,7 +109,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
-        info.add(new TranslationTextComponent("waila.barrel.progress", StringUtils.formatPercent((float)currentProgress / (Config.SECONDS_TO_SPAWN.get() * 20))));
+        info.add(new TranslationTextComponent("waila.progress", StringUtils.formatPercent((float)currentProgress / (Config.SECONDS_TO_SPAWN.get() * 20))));
 
         return info;
     }
