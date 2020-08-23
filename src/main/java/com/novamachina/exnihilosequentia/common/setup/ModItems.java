@@ -76,6 +76,12 @@ public class ModItems {
     public static final RegistryObject<Item> END_CAKE = ITEMS
         .register(Constants.Blocks.END_CAKE, () -> new BlockItem(ModBlocks.END_CAKE.get(),
             new Item.Properties().group(ModInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> INFESTING_LEAVES = ITEMS
+        .register(Blocks.INFESTING_LEAVES, () -> new BlockItem(ModBlocks.INFESTING_LEAVES.get(),
+            new Item.Properties().group(ModInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> INFESTED_LEAVES = ITEMS
+        .register(Blocks.INFESTED_LEAVES, () -> new BlockItem(ModBlocks.INFESTED_LEAVES.get(),
+            new Item.Properties().group(ModInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> SIEVE = ITEMS.register(Blocks.SIEVE,
         () -> new BlockItem(ModBlocks.SIEVE.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
