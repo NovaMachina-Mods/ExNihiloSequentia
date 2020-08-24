@@ -2,9 +2,8 @@ package com.novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.novamachina.exnihilosequentia.common.setup.ModTiles;
+import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
-import com.novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 import com.novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -30,7 +29,7 @@ public class BarrelRender extends AbstractModBlockRenderer<BarrelTile> {
     public void render(BarrelTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation inventoryTexture = tileEntity.getSolidTexture();
         ResourceLocation solidTexture = Blocks.OAK_LEAVES.getRegistryName();
-        Fluid fluid        = tileEntity.getFluid();
+        Fluid fluid = tileEntity.getFluid();
         ResourceLocation fluidTexture =
             fluid != null ? fluid.getAttributes().getStillTexture() : null;
         Color fluidColor =

@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.item;
 
-import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
+import com.novamachina.exnihilosequentia.common.init.ModInitialization;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 

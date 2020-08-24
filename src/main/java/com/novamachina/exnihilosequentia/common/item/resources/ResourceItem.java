@@ -1,9 +1,8 @@
 package com.novamachina.exnihilosequentia.common.item.resources;
 
 import com.novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
+import com.novamachina.exnihilosequentia.common.init.ModInitialization;
 import com.novamachina.exnihilosequentia.common.utility.Constants.Items;
-import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -64,7 +63,7 @@ public class ResourceItem extends Item {
 
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn,
-        LivingEntity target, Hand hand) {
+                                            LivingEntity target, Hand hand) {
         return super.itemInteractionForEntity(stack, playerIn, target, hand);
     }
 

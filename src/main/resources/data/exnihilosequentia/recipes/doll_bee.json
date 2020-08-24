@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "brb",
+    "gdg",
+    "bwb"
+  ],
+  "key": {
+    "b": {
+      "tag": "forge:dyes/yellow"
+    },
+    "r": {
+      "tag": "minecraft:flowers"
+    },
+    "g": {
+      "tag": "forge:dusts/glowstone"
+    },
+    "d": {
+      "item": "exnihilosequentia:doll_crafting"
+    },
+    "w": {
+      "item": "exnihilosequentia:beehive_frame"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:doll_bee"
+  }
+}

@@ -19,19 +19,30 @@ The following are the fluids that will transform. A full barrel and the correct 
 | Fluid | Block    | Result     |
 |-------|----------|------------|
 | Water | Mycelium | Witchwater |
+| Water | Sand     | Sea Water  |
 
 Fluid Block Transformation
 --------------------------
 The following are the recipes that a barrel will perform when a block, or an item is right clicked on a full barrel with the correct fluid.
 
-| Fluid      | Block or Item    | Result     |
-|------------|------------------|------------|
-| Water      | Dust             | Clay       |
-| Lava       | Redstone Dust    | Netherrack |
-| Lava       | Glowstone Dust   | End Stone  |
-| Witchwater | Sand             | Soul Sand  |
-| Witchwater | Red Mushroom     | Slime      |
-| Witchwater | Brown Mushroom   | Slime      |
+| Fluid      | Block or Item      | Result           |
+|------------|--------------------|------------------|
+| Water      | Dust               | Clay             |
+| Lava       | Redstone Dust      | Netherrack       |
+| Lava       | Glowstone Dust     | End Stone        |
+| Witchwater | Sand               | Soul Sand        |
+| Witchwater | Red Mushroom       | Slime            |
+| Witchwater | Brown Mushroom     | Slime            |
+| Sea Water  | Tube Coral Seed    | Tube Coral Block |
+| Sea Water  | Brain Coral Seed   | Brain Coral Block |
+| Sea Water  | Bubble Coral Seed  | Bubble Coral Block |
+| Sea Water  | Horn Coral Seed    | Horn Coral Block |
+| Sea Water  | Fire Coral Seed    | Fire Coral Block |
+| Sea Water  | Tube Coral Fan     | Tube Coral Wall Fan |
+| Sea Water  | Brain Coral Fan    | Brain Coral Wall Fan |
+| Sea Water  | Bubble Coral Fan   | Bubble Coral Wall Fan |
+| Sea Water  | Horn Coral Fan     | Horn Coral Wall Fan |
+| Sea Water  | Fire Coral Fan     | Fire Coral Wall Fan |
 
 Fluid On Top
 ------------
@@ -51,7 +62,8 @@ In order to spawn a mob, create the doll of the mob you want to spawn and right 
 | Blaze    | Blazing Doll    | Lava       |
 | Enderman | Creeping Doll   | Witchwater |
 | Shulker  | Floating Doll   | Witchwater |
-| Guardian | Protecting Doll | Witch      |
+| Guardian | Protecting Doll | Water      |
+| Bee      | Buzzing Doll    | Witchwater |
 
 Compostable Blocks and Items
 ----------------------------
@@ -111,7 +123,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `fluidInBarrel`: The fluid in the barrel to start the transformation (Must be a fluid or a tag). Required field.
 - `blockBelow`: The block below the barrel to start the transformation (Must be a block or a tag). Required field.
@@ -144,7 +156,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `fluid`: The fluid in the barrel (Must be a fluid or a tag). Required field.
 - `input`: The input item/block (Must be an item, block or a tag). Required field.
@@ -177,7 +189,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `fluidInBarrel`: The fluid in the barrel (Must be a fluid or a tag). Required field.
 - `fluidOnTop`: The fluid placed on top of the barrel (Must be a fluid or a tag). Required field.
@@ -195,7 +207,7 @@ blocks as you'd like as long as they are separated by commas and all of them rem
 !!! Important
     Duplicate recipes are not allowed. The first recipe in the list will be the one used.
 
-# Compost Amount Configuration
+### Compost Amount Configuration
 Configuration for Compost Amounts are found in `~/config/exnihilosequentia/CompostRegistry.json`.
 
 The format of the file is: 
@@ -209,7 +221,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `entry`: The item or block that can be placed in a barrel (Must be an item, fluid or a tag). Required field.
 - `amount`: The solid amount the entry will add to a barrel (Must be an integer greater than 0). Required field.

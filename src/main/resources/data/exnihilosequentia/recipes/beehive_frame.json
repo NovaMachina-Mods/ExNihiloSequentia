@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xsx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:rods/wooden"
+    },
+    "s":{
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:beehive_frame"
+  }
+}

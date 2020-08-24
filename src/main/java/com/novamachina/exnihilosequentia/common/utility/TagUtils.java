@@ -28,18 +28,18 @@ public class TagUtils {
     public static Collection<ResourceLocation> getTags(IItemProvider item) {
         Collection<ResourceLocation> tags = null;
 
-        try{
-            tags = getTags((Item)item);
+        try {
+            tags = getTags((Item) item);
         } catch (ClassCastException ignored) {
         }
 
         try {
-            if(tags != null) {
-                tags.addAll(getTags((Block)item));
+            if (tags != null) {
+                tags.addAll(getTags((Block) item));
             } else {
                 tags = getTags((Block) item);
             }
-        }catch (ClassCastException ignored) {
+        } catch (ClassCastException ignored) {
         }
 
         return tags;
@@ -47,12 +47,12 @@ public class TagUtils {
 
     public static Collection<ResourceLocation> getTags(ResourceLocation id) {
         Collection<ResourceLocation> tags = null;
-        if(ForgeRegistries.BLOCKS.containsKey(id)) {
+        if (ForgeRegistries.BLOCKS.containsKey(id)) {
             Block block = ForgeRegistries.BLOCKS.getValue(id);
             tags = getTags(block);
         }
 
-        if(ForgeRegistries.ITEMS.containsKey(id)) {
+        if (ForgeRegistries.ITEMS.containsKey(id)) {
             Item item = ForgeRegistries.ITEMS.getValue(id);
             if (tags != null) {
                 tags.addAll(getTags(item));
@@ -70,23 +70,23 @@ public class TagUtils {
         Collection<Block> blockCollection = null;
         Collection<Item> itemCollection = null;
 
-        if(blockTag != null) {
+        if (blockTag != null) {
             blockCollection = blockTag.getAllElements();
         }
-        if(itemTag != null) {
+        if (itemTag != null) {
             itemCollection = itemTag.getAllElements();
         }
 
         List<ResourceLocation> idList = new ArrayList<>();
 
-        if(blockCollection != null) {
-            for(Block block : blockCollection) {
+        if (blockCollection != null) {
+            for (Block block : blockCollection) {
                 idList.add(block.getRegistryName());
             }
         }
-        if(itemCollection != null) {
-            for(Item item : itemCollection) {
-                if(!idList.contains(item.getRegistryName())) {
+        if (itemCollection != null) {
+            for (Item item : itemCollection) {
+                if (!idList.contains(item.getRegistryName())) {
                     idList.add(item.getRegistryName());
                 }
             }

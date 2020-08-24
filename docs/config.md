@@ -72,4 +72,13 @@ Sets whether Ex Nihilo: Sequentia will use the JSON registries. If the JSON regi
 
 ## flattenSieveRecipes
 Sets whether sieves will get the results for all the meshes below the one currently in the sieve. For example, if an iron mesh is in the sieve, it will get results for the iron, flint and string meshes.
-*Must be `true` or `false`*
+*Must be `true` or `false`*.
+
+## sieveRadius
+The number of blocks away that the sieve will try to find other sieves to activate. For example, if set to 2, the sieve will look in a 5 x 5 block area (with the sieve that was activated in the center) for other sieves. *Must be a value between 0 and 5*.
+
+## enableThermalExpansion
+Enables ore drops for Thermal Expansion ores
+
+## enableImmersiveEngineering
+Enables ore drops for Immersive Engineering ores

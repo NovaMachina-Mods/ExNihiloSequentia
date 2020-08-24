@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.item.mesh;
 
-import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
+import com.novamachina.exnihilosequentia.common.init.ModInitialization;
 import net.minecraft.item.Item;
 
 public class MeshItem extends Item {

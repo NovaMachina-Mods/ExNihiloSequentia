@@ -6,14 +6,12 @@ modId="exnihilosequentia" #mandatory
 version="${file.jarVersion}" #mandatory
 displayName="Ex Nihilo: Sequentia" #mandatory
 updateJSONURL="https://raw.githubusercontent.com/NovaMachina/ExNihiloSequentia/master/update.json" #optional
-displayURL="https://ex-nihilo-sequentia.readthedocs.io/" #optional
-logoFile="examplemod.png" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia" #optional
+logoFile="" #optional
 credits="Thanks to McJty for tutorials and those that created the Ex Nihilo series" #optional
 authors="NovaMachina" #optional
 description="""
-Ex Nihilo: Sequentia is a port to 1.15 of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.12, which was a continuation of Ex Nihilo for 1.7.10.
-
-This mod allows you to create resources from absolutely nothing. Well...I guess you need some trees to start.
+Ex Nihilo: Sequentia is a port to 1.15 of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.12, which was a continuation of Ex Nihilo for 1.7.10. This mod allows you to create resources from absolutely nothing. Well...I guess you need some trees to start.
 """
 [[dependencies.exnihilosequentia]] #optional
     modId="forge" #mandatory

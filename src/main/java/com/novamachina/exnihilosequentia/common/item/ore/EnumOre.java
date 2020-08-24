@@ -2,40 +2,49 @@ package com.novamachina.exnihilosequentia.common.item.ore;
 
 import com.novamachina.exnihilosequentia.common.utility.Color;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 
-public enum EnumOre {
-    IRON(Constants.Ore.IRON, new Color("BF8040"), Items.IRON_INGOT),
-    GOLD(Constants.Ore.GOLD, new Color("FFFF00"), Items.GOLD_INGOT);
+public enum EnumOre implements IOre {
+    IRON(Constants.Ore.IRON, new Color("BF8040"), true),
+    GOLD(Constants.Ore.GOLD, new Color("FFFF00"), true);
 
     private final String name;
-    private final Color  color;
-    private final Item   result;
+    private final Color color;
+    private final boolean isEnabled;
 
-    EnumOre(String name, Color color, Item result) {
-        this.name   = name;
-        this.color  = color;
-        this.result = result;
+
+    EnumOre(String name, Color color, boolean isEnabled) {
+        this.name = name;
+        this.color = color;
+        this.isEnabled = isEnabled;
     }
 
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public Color getColor() {
         return color;
     }
 
-    public Item getResult() {
-        return result;
-    }
-
+    @Override
     public String getChunkName() {
         return "chunk_" + name;
     }
 
+    @Override
     public String getPieceName() {
         return "piece_" + name;
+    }
+
+    @Override
+    public String getIngotName() {
+        return "ingot_" + name;
     }
 }

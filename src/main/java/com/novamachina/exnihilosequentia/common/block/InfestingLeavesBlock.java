@@ -1,23 +1,31 @@
 package com.novamachina.exnihilosequentia.common.block;
 
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
+import com.novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import com.novamachina.exnihilosequentia.common.utility.Config;
-import com.novamachina.exnihilosequentia.common.utility.LogUtil;
-import java.util.Random;
+import com.novamachina.exnihilosequentia.common.utility.StringUtils;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 // TODO: Add progressive render
-public class InfestingLeavesBlock extends BaseBlock {
+public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider {
 
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
@@ -57,5 +65,18 @@ public class InfestingLeavesBlock extends BaseBlock {
         });
 
         return nearbyLeaves;
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
+        InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getTileEntity(iProbeHitData.getPos());
+
+        iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
+            .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
     }
 }

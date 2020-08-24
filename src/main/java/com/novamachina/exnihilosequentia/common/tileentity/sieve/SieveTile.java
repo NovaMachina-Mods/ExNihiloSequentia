@@ -1,12 +1,11 @@
 package com.novamachina.exnihilosequentia.common.tileentity.sieve;
 
+import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.block.BlockSieve;
+import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.setup.ModTiles;
-import com.novamachina.exnihilosequentia.common.utility.LogUtil;
-import java.util.List;
+import com.novamachina.exnihilosequentia.common.registries.sieve.SieveDropEntry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.BlockItem;
@@ -17,13 +16,17 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
+import java.util.Random;
 
 public class SieveTile extends TileEntity {
 
-    private ItemStack meshStack  = ItemStack.EMPTY;
+    private ItemStack meshStack = ItemStack.EMPTY;
     private ItemStack blockStack = ItemStack.EMPTY;
-    private EnumMesh  meshType   = EnumMesh.NONE;
-    private float     progress   = 0;
+    private EnumMesh meshType = EnumMesh.NONE;
+    private float progress = 0;
 
     public SieveTile() {
         super(ModTiles.SIEVE.get());
@@ -49,7 +52,7 @@ public class SieveTile extends TileEntity {
                 new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
                     meshStack.copy()));
             meshStack = ItemStack.EMPTY;
-            meshType  = EnumMesh.NONE;
+            meshType = EnumMesh.NONE;
             if (rerenderSieve) {
                 setSieveState();
             }
@@ -119,16 +122,20 @@ public class SieveTile extends TileEntity {
         }
     }
 
-    public void activateSieve() {
+    public void activateSieve(boolean isWaterlogged) {
         if (isReadyToSieve()) {
             progress += 0.1F;
 
             if (progress >= 1.0F) {
-                List<Item> drops = ModRegistries.SIEVE
-                    .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType);
-                drops.forEach((item -> {
-                    world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
-                        pos.getZ() + 0.5F, new ItemStack(item)));
+                List<SieveDropEntry> drops = ExNihiloRegistries.SIEVE_REGISTRY
+                    .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
+                Random random = new Random();
+                drops.forEach((entry -> {
+                    if (random.nextFloat() <= entry.getRarity()) {
+                        Item item = ForgeRegistries.ITEMS.getValue(entry.getResult());
+                        world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
+                            pos.getZ() + 0.5F, new ItemStack(item)));
+                    }
                 }));
                 resetSieve();
             }
@@ -137,7 +144,7 @@ public class SieveTile extends TileEntity {
 
     private void resetSieve() {
         blockStack = ItemStack.EMPTY;
-        progress   = 0.0F;
+        progress = 0.0F;
     }
 
     public boolean isReadyToSieve() {
@@ -162,6 +169,11 @@ public class SieveTile extends TileEntity {
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbt = new CompoundNBT();
+        if (!meshStack.isEmpty()) {
+            CompoundNBT meshNBT = meshStack.write(new CompoundNBT());
+            nbt.put("mesh", meshNBT);
+        }
+
         if (!blockStack.isEmpty()) {
             CompoundNBT blockNbt = blockStack.write(new CompoundNBT());
             nbt.put("block", blockNbt);
@@ -174,6 +186,15 @@ public class SieveTile extends TileEntity {
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         CompoundNBT nbt = packet.getNbtCompound();
+        if (nbt.contains("mesh")) {
+            meshStack = ItemStack.read((CompoundNBT) nbt.get("mesh"));
+            if (meshStack.getItem() instanceof MeshItem) {
+                meshType = ((MeshItem) meshStack.getItem()).getMesh();
+            }
+        } else {
+            meshStack = ItemStack.EMPTY;
+        }
+
         if (nbt.contains("block")) {
             blockStack = ItemStack.read((CompoundNBT) nbt.get("block"));
         } else {

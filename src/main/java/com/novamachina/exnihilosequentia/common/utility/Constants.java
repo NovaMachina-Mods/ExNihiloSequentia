@@ -6,11 +6,6 @@ import java.nio.file.Path;
 
 public class Constants {
 
-    public static class ModInfo {
-
-        public static final String MOD_ID = "exnihilosequentia";
-    }
-
     public static class Blocks {
 
         public static final String CRUSHED_ANDESITE = "crushed_andesite";
@@ -28,6 +23,7 @@ public class Constants {
         public static final String CRUCIBLE_FIRED = "crucible_fired";
         public static final String CRUCIBLE_WOOD = "crucible_wood";
         public static final String BARREL_WOOD = "barrel_wood";
+        public static final String SEA_WATER = "sea_water";
     }
 
     public static class Items {
@@ -48,11 +44,11 @@ public class Constants {
         public static final String CROOK_PURPUR = createCrookName("purpur");
         public static final String CROOK_BLAZE = createCrookName("blaze");
         public static final String SILKWORM = "silkworm";
-        public static final String HAMMER_WOOD = createHammername("wood");
-        public static final String HAMMER_STONE = createHammername("stone");
-        public static final String HAMMER_IRON = createHammername("iron");
-        public static final String HAMMER_DIAMOND = createHammername("diamond");
-        public static final String HAMMER_GOLD = createHammername("gold");
+        public static final String HAMMER_WOOD = createHammerName("wood");
+        public static final String HAMMER_STONE = createHammerName("stone");
+        public static final String HAMMER_IRON = createHammerName("iron");
+        public static final String HAMMER_DIAMOND = createHammerName("diamond");
+        public static final String HAMMER_GOLD = createHammerName("gold");
         public static final String SEED_OAK = "oak";
         public static final String SEED_SPRUCE = "spruce";
         public static final String SEED_BIRCH = "birch";
@@ -60,7 +56,7 @@ public class Constants {
         public static final String SEED_ACACIA = "acacia";
         public static final String SEED_DARK_OAK = "darkoak";
         public static final String SEED_CACTUS = "cactus";
-        public static final String SEEDSUGARCANE = "sugarcane";
+        public static final String SEED_SUGARCANE = "sugarcane";
         public static final String SEED_CARROT = "carrot";
         public static final String SEED_POTATO = "potato";
         public static final String SEED_SWEET_BERRY = "berry";
@@ -74,8 +70,18 @@ public class Constants {
         public static final String PEBBLE_ANDESITE = createPebbleName("andesite");
         public static final String WITCH_WATER_BUCKET = "bucket_witchwater";
         public static final String CRAFTING_DOLL = "doll_crafting";
+        public static final String SEED_KELP = "kelp";
+        public static final String SEED_PICKLE = "pickle";
+        public static final String SEA_WATER_BUCKET = "bucket_sea_water";
+        public static final String BLUE_CORAL_SEED = "seed_blue_coral";
+        public static final String PINK_CORAL_SEED = "seed_pink_coral";
+        public static final String PURPLE_CORAL_SEED = "seed_purple_coral";
+        public static final String RED_CORAL_SEED = "seed_red_coral";
+        public static final String YELLOW_CORAL_SEED = "seed_yellow_coral";
+        public static final String SEED_BAMBOO = "bamboo";
+        public static final String BEEHIVE_FRAME = "beehive_frame";
 
-        private static String createHammername(String name) {
+        private static String createHammerName(String name) {
             return "hammer_" + name;
         }
 
@@ -89,15 +95,24 @@ public class Constants {
     }
 
     public static class Ore {
-
         public static final String GOLD = "gold";
         public static final String IRON = "iron";
+        public static final String COPPER = "copper";
+        public static final String LEAD = "lead";
+        public static final String NICKEL = "nickel";
+        public static final String SILVER = "silver";
+        public static final String TIN = "tin";
+        public static final String ALUMINUM = "aluminum";
+        public static final String PLATINUM = "platinum";
+        public static final String OSMIUM = "osmium";
     }
 
     public static class Fluids {
 
-        public static final String WITCH_WATER_STILL = "witchwater_still";
+        public static final String WITCH_WATER = "witchwater";
         public static final String WITCH_WATER_FLOW = "witchwater_flow";
+        public static final String SEA_WATER = "sea_water";
+        public static final String SEA_WATER_FLOW = "sea_water_flow";
     }
 
     public static class BarrelModes {
@@ -112,10 +127,7 @@ public class Constants {
     public static class Json {
         public static final Path baseJsonPath = FMLPaths.getOrCreateGameRelativePath(FMLPaths.CONFIGDIR.get()
             .resolve("exnihilosequentia"), "Ex Nihilo: Sequentia Json folder");
-
-        public static String BARREL_FILE = "BarrelRegistries.json";
-        public static String CRUCIBLE_FILE = "CrucibleRegistries.json";
-
+        public static final String CRUCIBLE_FILE = "CrucibleRegistry.json";
         public static String COMPOST_FILE = "CompostRegistry.json";
         public static String FLUID_BLOCK_FILE = "FluidBlockTransformRegistry.json";
         public static String FLUID_TRANSFORM_FILE = "FluidTransformRegistry.json";
@@ -125,5 +137,22 @@ public class Constants {
         public static String FIRED_CRUCIBLE_FILE = "FiredCrucibleRegistry.json";
         public static String SIEVE_FILE = "SieveRegistry.json";
         public static String CROOK_FILE = "CrookRegistry.json";
+        public static String HAMMER_FILE = "HammerRegistry.json";
+    }
+
+    public static class ModIds {
+        public static final String THERMAL_EXPANSION = "thermalexpansion";
+        public static final String IMMERSIVE_ENGINEERING = "immersiveengineering";
+        public static final String JEI = "jei";
+        public static final String EX_NIHILO_SEQUENTIA = "exnihilosequentia";
+        public static final String TOP = "theoneprobe";
+    }
+
+    public static class Tooltips {
+        public static final String ENDERMAN = "tooltip.doll.enderman";
+        public static final String BLAZE = "tooltip.doll.blaze";
+        public static final String SHULKER = "tooltip.doll.shulker";
+        public static final String GUARDIAN = "tooltip.doll.guardian";
+        public static final String BEE = "tooltip.doll.bee";
     }
 }

@@ -1,6 +1,6 @@
 Dolls
 =====
-Dolls are used to spawn mobs in a barrel. To spawn a mob craft the doll for the entity you want to spawn and then right click on a barrel with the right fluid in it to spawn (See [Barrel Mob Spawning])
+Dolls are used to spawn mobs in a barrel. To spawn a mob craft the doll for the entity you want to spawn and then right click on a barrel with the right fluid in it to spawn (See [Barrel Mob Spawning](../barrel/#mob-spawning))
 
 Recipes
 -------
@@ -52,11 +52,21 @@ Will spawn a Shulker
 Will spawn a Guardian
 
 ![](images/recipes/doll_guardian.png)
---
+---
 - 4x Prismarine Crystal
 - 1x Redstone
 - 1x Porcelain Doll
 - 1x Fish
 - 2x Glowstone Dust
 
-[Barrel Mob Spawning]: barrel.md/#mob-spawning
+### Buzzing Doll
+Will spawn a Bee
+
+![](images/recipes/doll_bee.png)
+---
+- 4x Yellow Dye
+- 1x Flower (Any)
+- 1x Porcelain Doll
+- 1x Beehive Frame
+- 2x Glowstone
+[Barrel Mob Spawning]: ../barrel.md/#mob-spawning

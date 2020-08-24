@@ -1,7 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.setup.ModTiles;
+import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -15,12 +15,19 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
 
     @Override
     protected int getHeat() {
-        return ModRegistries.HEAT.getHeatAmount(world.getBlockState(pos.down()).getBlock());
+        return ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(world.getBlockState(pos.down()).getBlock());
     }
 
     @Override
     public CrucilbeTypeEnum getCrucibleType() {
         return CrucilbeTypeEnum.FIRED;
+    }
+
+    @Override
+    public int getSolidAmount() {
+        int itemCount = inventory.getStackInSlot(0).getCount();
+        return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem())
+            .getAmount());
     }
 
     @Override
@@ -48,7 +55,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
 
-                    solidAmount = ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem())
+                    solidAmount = ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem())
                         .getAmount();
                 } else {
                     return;
@@ -58,7 +65,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
                 .isItemEqual(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
-                    solidAmount += ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem())
+                    solidAmount += ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem())
                         .getAmount();
                     inventory.getStackInSlot(0).shrink(1);
 
@@ -72,9 +79,10 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                 heat = solidAmount;
             }
 
-            if (heat > 0 && ModRegistries.FIRED_CRUCIBLE.isMeltable(currentItem.getItem())) {
+            if (heat > 0 && ExNihiloRegistries.CRUCIBLE_REGISTRY
+                .isMeltable(currentItem.getItem(), getCrucibleType().getLevel())) {
                 FluidStack fluidStack = new FluidStack(
-                    ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem()).getFluid(), heat);
+                    ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem()).getFluid(), heat);
                 int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
                 solidAmount -= filled;
             }

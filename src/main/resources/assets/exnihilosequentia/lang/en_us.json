@@ -7,6 +7,9 @@
   "block.exnihilosequentia.crushed_diorite": "Crushed Diorite",
   "block.exnihilosequentia.crushed_granite": "Crushed Granite",
 
+  "block.exnihilosequentia.infesting_leaves": "Infesting Leaves",
+  "block.exnihilosequentia.infested_leaves": "Infested Leaves",
+
   "block.exnihilosequentia.sieve": "Sieve",
   "block.exnihilosequentia.barrel_wood": "Wooden Barrel",
   "block.exnihilosequentia.crucible_unfired": "Unfired Crucible",
@@ -14,6 +17,9 @@
   "block.exnihilosequentia.crucible_wood": "Wooden Crucible",
 
   "block.exnihilosequentia.end_cake": "End Cake",
+
+  "block.exnihilosequentia.witchwater": "Witchwater",
+  "block.exnihilosequentia.sea_water": "Sea Water",
 
   "item.exnihilosequentia.crook_andesite": "Andesite Crook",
   "item.exnihilosequentia.crook_bone": "Bone Crook",
@@ -35,18 +41,45 @@
   "item.exnihilosequentia.cooked_silkworm": "Cooked Silkworm",
 
   "item.exnihilosequentia.bucket_witchwater": "Witchwater Bucket",
+  "item.exnihilosequentia.bucket_sea_water": "Sea Water Bucket",
 
   "item.exnihilosequentia.doll_crafting": "Porcelain Doll",
   "item.exnihilosequentia.doll_blaze": "Blazing Doll",
   "item.exnihilosequentia.doll_enderman": "Creeping Doll",
   "item.exnihilosequentia.doll_shulker": "Floating Doll",
   "item.exnihilosequentia.doll_guardian": "Protecting Doll",
+  "item.exnihilosequentia.doll_bee": "Buzzing Doll",
 
   "item.exnihilosequentia.chunk_iron": "Iron Ore Chunk",
   "item.exnihilosequentia.chunk_gold": "Gold Ore Chunk",
+  "item.exnihilosequentia.chunk_copper": "Copper Ore Chunk",
+  "item.exnihilosequentia.chunk_tin": "Tin Ore Chunk",
+  "item.exnihilosequentia.chunk_silver": "Silver Ore Chunk",
+  "item.exnihilosequentia.chunk_nickel": "Nickel Ore Chunk",
+  "item.exnihilosequentia.chunk_lead": "Lead Ore Chunk",
+  "item.exnihilosequentia.chunk_aluminum": "Aluminum Ore Chunk",
+  "item.exnihilosequentia.chunk_platinum": "Platinum Ore Chunk",
+  "item.exnihilosequentia.chunk_osmium": "Osmium Ore Chunk",
 
   "item.exnihilosequentia.piece_iron": "Iron Ore Piece",
   "item.exnihilosequentia.piece_gold": "Gold Ore Piece",
+  "item.exnihilosequentia.piece_copper": "Copper Ore Piece",
+  "item.exnihilosequentia.piece_tin": "Tin Ore Piece",
+  "item.exnihilosequentia.piece_silver": "Silver Ore Piece",
+  "item.exnihilosequentia.piece_nickel": "Nickel Ore Piece",
+  "item.exnihilosequentia.piece_lead": "Lead Ore Piece",
+  "item.exnihilosequentia.piece_aluminum": "Aluminum Ore Piece",
+  "item.exnihilosequentia.piece_platinum": "Platinum Ore Piece",
+  "item.exnihilosequentia.piece_osmium": "Osmium Ore Piece",
+
+  "item.exnihilosequentia.ingot_copper": "Copper Ingot",
+  "item.exnihilosequentia.ingot_tin": "Tin Ingot",
+  "item.exnihilosequentia.ingot_silver": "Silver Ingot",
+  "item.exnihilosequentia.ingot_nickel": "Nickel Ingot",
+  "item.exnihilosequentia.ingot_lead": "Lead Ingot",
+  "item.exnihilosequentia.ingot_aluminum": "Aluminum Ingot",
+  "item.exnihilosequentia.ingot_platinum": "Platinum Ingot",
+  "item.exnihilosequentia.ingot_osmium": "Osmium Ingot",
 
   "item.exnihilosequentia.seed_oak": "Oak Seed",
   "item.exnihilosequentia.seed_spruce": "Spruce Seed",
@@ -61,8 +94,18 @@
   "item.exnihilosequentia.seed_berry": "Sweet Berry Seeds",
   "item.exnihilosequentia.ancient_spores": "Ancient Spores",
   "item.exnihilosequentia.grass_seeds": "Grass Seeds",
+  "item.exnihilosequentia.seed_kelp": "Kelp Seeds",
+  "item.exnihilosequentia.seed_pickle": "Sea Pickle Egg",
+  "item.exnihilosequentia.seed_bamboo": "Bamboo Seed",
+
+  "item.exnihilosequentia.seed_red_coral": "Fire Coral Seed",
+  "item.exnihilosequentia.seed_blue_coral": "Tube Coral Seed",
+  "item.exnihilosequentia.seed_pink_coral": "Brain Coral Seed",
+  "item.exnihilosequentia.seed_purple_coral": "Bubble Coral Seed",
+  "item.exnihilosequentia.seed_yellow_coral": "Horn Coral Seed",
 
   "item.exnihilosequentia.porcelain_clay": "Porcelain Clay",
+  "item.exnihilosequentia.beehive_frame": "Beehive Frame",
 
   "item.exnihilosequentia.pebble_stone": "Stone Pebble",
   "item.exnihilosequentia.pebble_granite": "Granite Pebble",
@@ -74,7 +117,29 @@
   "item.exnihilosequentia.mesh_iron": "Iron Mesh",
   "item.exnihilosequentia.mesh_diamond": "Diamond Mesh",
 
+  "fluid.exnihilosequentia.witchwater": "Witchwater",
+  "fluid.exnihilosequentia.sea_water": "Sea Water",
+
   "message.new_mod": "Thanks for using Ex Nihilo: Sequentia! This mod is newly released and is probably missing a lot of stuff and broken somewhere.",
   "message.issues": "To report any issues or make a suggestion, go to:",
-  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues"
+  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues",
+
+  "tooltip.doll.blaze": "Add to a barrel of lava to spawn a Blaze",
+  "tooltip.doll.enderman": "Add to a barrel of witchwater to spawn an Enderman",
+  "tooltip.doll.shulker": "Add to a barrel of witchwater to spawn a Shulker",
+  "tooltip.doll.guardian": "Add to a barrel of sea water to spawn a Guardian",
+  "tooltip.doll.bee": "Add to a barrel of witchwater to spawn a Bee",
+
+  "jei.sieve.dropChance": "Drop Chance",
+
+  "waila.progress": "Progress: %s",
+  "waila.barrel.fluidAmount": "Fluid: %s %s mb",
+  "waila.barrel.solidAmount": "Solid Amount: %s / %s",
+  "waila.barrel.block": "Block: %s",
+  "waila.sieve.block": "Sifting: %s",
+  "waila.sieve.mesh": "Mesh: %s",
+  "waila.crucible.fluid": "Fluid: %s %s mb",
+  "waila.crucible.solid": "Solid Amount: %s",
+
+  "top.barrel.mode": "Mode: %s"
 }

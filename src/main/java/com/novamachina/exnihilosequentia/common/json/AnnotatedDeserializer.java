@@ -9,8 +9,6 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class AnnotatedDeserializer<T> implements JsonDeserializer<T> {
     @Override

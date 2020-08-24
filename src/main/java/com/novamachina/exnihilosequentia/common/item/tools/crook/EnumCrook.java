@@ -26,13 +26,13 @@ public enum EnumCrook {
 
 //    BLAZE(Constants.Items.CROOK_BLAZE, 1024, 3, ItemTier.DIAMOND);
 
-    public final String    name;
-    public final int       defaultDurability;
+    public final String name;
+    public final int defaultDurability;
     public final IItemTier teir;
 
     EnumCrook(String name, int durability, IItemTier teir) {
-        this.name              = name;
+        this.name = name;
         this.defaultDurability = durability;
-        this.teir              = teir;
+        this.teir = teir;
     }
 }
