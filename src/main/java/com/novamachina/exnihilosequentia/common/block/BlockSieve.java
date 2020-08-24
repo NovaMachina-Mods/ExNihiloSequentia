@@ -14,6 +14,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
@@ -31,12 +32,16 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+
+import java.util.List;
 
 public class BlockSieve extends BaseBlock implements IWaterLoggable, IProbeInfoProvider {
 
@@ -58,25 +63,39 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, IProbeInfoP
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
         PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote()) {
-            ItemStack stack     = player.getHeldItem(handIn);
+        if(!worldIn.isRemote()) {
             SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
+            ItemStack stack     = player.getHeldItem(handIn);
 
-            if (sieveTile.isReadyToSieve()) {
-                sieveTile.activateSieve(state.get(WATERLOGGED));
-            } else if (stack.isEmpty() && player.isSneaking()) {
+            for(BlockPos sievePos : getNearbySieves(worldIn, pos)) {
+                BlockState currentState = worldIn.getBlockState(sievePos);
+                activateBlock(currentState, worldIn, player, sievePos, handIn);
+            }
+
+            if (stack.isEmpty() && player.isSneaking()) {
                 sieveTile.removeMesh(true);
             } else if (stack.getItem() instanceof MeshItem) {
                 sieveTile.insertMesh(stack);
-            } else if (stack.getItem() instanceof BlockItem) {
-                BlockItem blockItem = (BlockItem) stack.getItem();
-                if (ModRegistries.SIEVE.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
-                    sieveTile.insertSiftableBlock(stack);
-                }
             }
         }
         worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
         return ActionResultType.SUCCESS;
+    }
+
+    public void activateBlock(BlockState state, World worldIn, PlayerEntity player, BlockPos pos, Hand handIn) {
+        ItemStack stack     = player.getHeldItem(handIn);
+        SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
+
+        if (sieveTile.isReadyToSieve()) {
+            sieveTile.activateSieve(state.get(WATERLOGGED));
+        }
+        if (!sieveTile.isReadyToSieve() && stack.getItem() instanceof BlockItem) {
+            BlockItem blockItem = (BlockItem) stack.getItem();
+            if (ModRegistries.SIEVE.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
+                sieveTile.insertSiftableBlock(stack);
+            }
+        }
+        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
     }
 
     @Override
@@ -115,5 +134,18 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, IProbeInfoP
         if(sieveTile.getMesh() != EnumMesh.NONE) {
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", sieveTile.getMesh().getName()));
         }
+    }
+
+    private List<BlockPos> getNearbySieves(World world, BlockPos pos) {
+        NonNullList<BlockPos> nearbySieves = NonNullList.create();
+
+        BlockPos.getAllInBox(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1),
+            new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1)).forEach(item -> {
+            if (world.getBlockState(item).getBlock() instanceof BlockSieve) {
+                nearbySieves.add(new BlockPos(item));
+            }
+        });
+
+        return nearbySieves;
     }
 }
