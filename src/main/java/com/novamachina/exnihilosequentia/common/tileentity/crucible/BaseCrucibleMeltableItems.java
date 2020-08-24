@@ -34,7 +34,6 @@ public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
         addMeltable(entry.getRegistryName(), amount, fluid.getRegistryName());
     }
 
-    //ToDo: Add Tag checking
     public void addMeltable(ResourceLocation entry, int amount, ResourceLocation fluid) {
         List<ResourceLocation> idList = TagUtils.getTagsOwnedBy(entry);
 

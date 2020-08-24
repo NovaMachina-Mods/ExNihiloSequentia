@@ -5,11 +5,18 @@ import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
+import com.novamachina.exnihilosequentia.common.utility.StringUtils;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -26,11 +33,12 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class BlockSieve extends BaseBlock implements IWaterLoggable {
+public class BlockSieve extends BaseBlock implements IWaterLoggable, IProbeInfoProvider {
 
     public static final EnumProperty<EnumMesh> MESH = EnumProperty.create("mesh", EnumMesh.class);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -88,5 +96,24 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable {
     @Override
     public IFluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public String getID() {
+        return Constants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve";
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
+        SieveTile sieveTile = (SieveTile) world.getTileEntity(iProbeHitData.getPos());
+        String block = I18n.format(sieveTile.getBlockStack().getTranslationKey());
+
+        if(!sieveTile.getBlockStack().isEmpty()) {
+            iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils.formatPercent(sieveTile.getProgress()/ 1.0F)));
+            iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", block));
+        }
+        if(sieveTile.getMesh() != EnumMesh.NONE) {
+            iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", sieveTile.getMesh().getName()));
+        }
     }
 }

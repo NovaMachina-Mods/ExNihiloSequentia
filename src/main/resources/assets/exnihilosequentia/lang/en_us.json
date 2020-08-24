@@ -139,5 +139,7 @@
   "waila.sieve.block": "Sifting: %s",
   "waila.sieve.mesh": "Mesh: %s",
   "waila.crucible.fluid": "Fluid: %s %s mb",
-  "waila.crucible.solid": "Solid Amount: %s"
+  "waila.crucible.solid": "Solid Amount: %s",
+
+  "top.barrel.mode": "Mode: %s"
 }
