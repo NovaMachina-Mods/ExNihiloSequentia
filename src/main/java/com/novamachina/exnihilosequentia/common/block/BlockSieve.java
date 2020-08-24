@@ -5,6 +5,7 @@ import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
+import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -139,8 +140,8 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, IProbeInfoP
     private List<BlockPos> getNearbySieves(World world, BlockPos pos) {
         NonNullList<BlockPos> nearbySieves = NonNullList.create();
 
-        BlockPos.getAllInBox(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1),
-            new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1)).forEach(item -> {
+        BlockPos.getAllInBox(new BlockPos(pos.getX() - Config.SIEVE_RANGE.get(), pos.getY(), pos.getZ() - Config.SIEVE_RANGE.get()),
+            new BlockPos(pos.getX() + Config.SIEVE_RANGE.get(), pos.getY(), pos.getZ() + Config.SIEVE_RANGE.get())).forEach(item -> {
             if (world.getBlockState(item).getBlock() instanceof BlockSieve) {
                 nearbySieves.add(new BlockPos(item));
             }
