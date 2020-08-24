@@ -1,22 +1,16 @@
 package com.novamachina.exnihilosequentia.common.item.tools.crook;
 
 import com.google.common.collect.Sets;
+import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
-import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
-import com.novamachina.exnihilosequentia.common.setup.ModItems;
-import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.init.ModInitialization;
+import com.novamachina.exnihilosequentia.common.init.ModItems;
+import com.novamachina.exnihilosequentia.common.registries.crook.CrookDropEntry;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.IItemTier;
@@ -25,11 +19,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolItem;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class CrookBaseItem extends ToolItem {
 
@@ -43,7 +42,7 @@ public class CrookBaseItem extends ToolItem {
 
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos,
-        LivingEntity entityLiving) {
+                                    LivingEntity entityLiving) {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
         List<ItemStack> itemDrops = new ArrayList<>();
         Collection<ResourceLocation> tags = TagUtils.getTags(state.getBlock());
@@ -56,8 +55,8 @@ public class CrookBaseItem extends ToolItem {
                 itemDrops.addAll(items);
             }
             Random random = new Random();
-            for(CrookDropEntry entry : ModRegistries.CROOK.getDrops()) {
-                if(random.nextFloat() <= entry.getRarity()) {
+            for (CrookDropEntry entry : ExNihiloRegistries.CROOK_REGISTRY.getDrops()) {
+                if (random.nextFloat() <= entry.getRarity()) {
                     itemDrops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getItem())));
                 }
             }
@@ -65,7 +64,8 @@ public class CrookBaseItem extends ToolItem {
         if (state.getBlock() instanceof InfestedLeavesBlock) {
             Random random = new Random();
 
-            itemDrops.add(new ItemStack(Items.STRING, random.nextInt(Config.MAX_BONUS_STRING_COUNT.get()) + Config.MIN_STRING_COUNT.get()));
+            itemDrops.add(new ItemStack(Items.STRING, random
+                .nextInt(Config.MAX_BONUS_STRING_COUNT.get()) + Config.MIN_STRING_COUNT.get()));
             if (random.nextDouble() <= 0.8) {
                 itemDrops
                     .add(new ItemStack(ModItems.resourceMap.get(Constants.Items.SILKWORM).get()));

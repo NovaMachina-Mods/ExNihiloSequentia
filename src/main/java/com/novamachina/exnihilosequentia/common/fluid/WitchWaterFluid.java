@@ -1,8 +1,8 @@
 package com.novamachina.exnihilosequentia.common.fluid;
 
-import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
-import com.novamachina.exnihilosequentia.common.setup.ModFluids;
-import com.novamachina.exnihilosequentia.common.setup.ModItems;
+import com.novamachina.exnihilosequentia.common.init.ModBlocks;
+import com.novamachina.exnihilosequentia.common.init.ModFluids;
+import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;

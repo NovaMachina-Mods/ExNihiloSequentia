@@ -13,7 +13,7 @@ public abstract class AbstractModBlockRenderer<T extends TileEntity> extends Til
     }
 
     protected void add(IVertexBuilder renderer, MatrixStack stack, float x, float y, float z, float u,
-                     float v, Color color) {
+                       float v, Color color) {
         renderer.pos(stack.getLast().getMatrix(), x, y, z)
             .color(color.r, color.g, color.b, color.a)
             .tex(u, v)

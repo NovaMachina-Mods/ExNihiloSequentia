@@ -1,7 +1,6 @@
 package com.novamachina.exnihilosequentia.common.json;
 
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnTopRecipe;
-import net.minecraft.util.ResourceLocation;
+import com.novamachina.exnihilosequentia.common.registries.barrel.fluid.FluidOnTopRecipe;
 
 public class FluidOnTopJson {
     @JsonRequired

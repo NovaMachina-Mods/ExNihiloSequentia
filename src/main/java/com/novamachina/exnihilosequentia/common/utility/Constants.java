@@ -1,6 +1,5 @@
 package com.novamachina.exnihilosequentia.common.utility;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;

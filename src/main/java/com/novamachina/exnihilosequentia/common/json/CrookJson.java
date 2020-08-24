@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.json;
 
-import com.novamachina.exnihilosequentia.common.item.tools.crook.CrookDropEntry;
+import com.novamachina.exnihilosequentia.common.registries.crook.CrookDropEntry;
 
 public class CrookJson {
     @JsonRequired

@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.block;
 
-import com.novamachina.exnihilosequentia.common.setup.ModFluids;
+import com.novamachina.exnihilosequentia.common.init.ModFluids;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
@@ -71,8 +71,8 @@ public class WitchWaterBlock extends FlowingFluidBlock {
         }
 
         if (entityIn instanceof VillagerEntity) {
-            VillagerEntity     villagerEntity = (VillagerEntity) entityIn;
-            VillagerProfession profession     = villagerEntity.getVillagerData().getProfession();
+            VillagerEntity villagerEntity = (VillagerEntity) entityIn;
+            VillagerProfession profession = villagerEntity.getVillagerData().getProfession();
 
             if (profession == VillagerProfession.CLERIC) {
                 replaceMob(worldIn, villagerEntity, new WitchEntity(EntityType.WITCH, worldIn));

@@ -1,13 +1,12 @@
 package com.novamachina.exnihilosequentia.common.item.dolls;
 
 import com.novamachina.exnihilosequentia.common.utility.Constants;
-import net.minecraft.client.resources.I18n;
 
 public enum DollEnum {
-    BLAZE("minecraft","blaze", "minecraft", "lava", 1, Constants.Tooltips.BLAZE),
-    ENDERMAN("minecraft","enderman", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 2, Constants.Tooltips.ENDERMAN),
-    SHULKER("minecraft","shulker", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1.5, Constants.Tooltips.SHULKER),
-    GUARDIAN("minecraft","guardian", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.SEA_WATER, 1, Constants.Tooltips.GUARDIAN),
+    BLAZE("minecraft", "blaze", "minecraft", "lava", 1, Constants.Tooltips.BLAZE),
+    ENDERMAN("minecraft", "enderman", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 2, Constants.Tooltips.ENDERMAN),
+    SHULKER("minecraft", "shulker", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1.5, Constants.Tooltips.SHULKER),
+    GUARDIAN("minecraft", "guardian", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.SEA_WATER, 1, Constants.Tooltips.GUARDIAN),
     BEE("minecraft", "bee", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1, Constants.Tooltips.BEE);
 
 

@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.item.seeds;
 
-import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
+import com.novamachina.exnihilosequentia.common.init.ModInitialization;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +18,7 @@ import net.minecraftforge.common.PlantType;
 public class SeedBaseItem extends Item implements IPlantable {
 
     private final BlockState plant;
-    private       PlantType  type;
+    private PlantType type;
 
     public SeedBaseItem(BlockState plant) {
         super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
@@ -46,16 +46,16 @@ public class SeedBaseItem extends Item implements IPlantable {
             return ActionResultType.PASS;
         }
 
-        ItemStack    item      = context.getItem();
-        PlayerEntity player    = context.getPlayer();
-        BlockPos     pos       = context.getPos();
-        Direction    direction = context.getFace();
-        World        world     = context.getWorld();
+        ItemStack item = context.getItem();
+        PlayerEntity player = context.getPlayer();
+        BlockPos pos = context.getPos();
+        Direction direction = context.getFace();
+        World world = context.getWorld();
         if (player.canPlayerEdit(pos, direction, item) && player
             .canPlayerEdit(pos.add(0, 1, 0), direction, item)) {
 
             BlockState soil;
-            if(type == PlantType.Water) {
+            if (type == PlantType.Water) {
                 soil = world.getBlockState(context.getPos().add(0, 1, 0));
             } else {
                 soil = world.getBlockState(context.getPos());
@@ -76,7 +76,7 @@ public class SeedBaseItem extends Item implements IPlantable {
     }
 
     private boolean isBlockSpaceEmpty(World world, BlockPos pos, PlantType type) {
-        if(type == PlantType.Water) {
+        if (type == PlantType.Water) {
             return world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.WATER;
         }
 

@@ -1,13 +1,8 @@
 package com.novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
+import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
-import com.novamachina.exnihilosequentia.common.item.tools.hammer.HammerDrops;
-import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.utility.LogUtil;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -18,6 +13,10 @@ import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+
 public class UseHammerModifier extends LootModifier {
 
     public UseHammerModifier(ILootCondition[] conditionsIn) {
@@ -27,12 +26,12 @@ public class UseHammerModifier extends LootModifier {
     @Nonnull
     @Override
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-        ItemStack  tool       = context.get(LootParameters.TOOL);
+        ItemStack tool = context.get(LootParameters.TOOL);
         BlockState blockState = context.get(LootParameters.BLOCK_STATE);
         if (tool != null && blockState != null) {
             if (tool.getItem() instanceof HammerBaseItem) {
-                List<ItemStack> newLoot     = new ArrayList<>();
-                Block           returnBlock = ModRegistries.HAMMER
+                List<ItemStack> newLoot = new ArrayList<>();
+                Block returnBlock = ExNihiloRegistries.HAMMER_REGISTRY
                     .getResult(blockState.getBlock().getRegistryName());
                 newLoot.add(new ItemStack(returnBlock));
                 return newLoot;
@@ -46,7 +45,7 @@ public class UseHammerModifier extends LootModifier {
 
         @Override
         public UseHammerModifier read(ResourceLocation location, JsonObject object,
-            ILootCondition[] ailootcondition) {
+                                      ILootCondition[] ailootcondition) {
             return new UseHammerModifier(ailootcondition);
         }
     }

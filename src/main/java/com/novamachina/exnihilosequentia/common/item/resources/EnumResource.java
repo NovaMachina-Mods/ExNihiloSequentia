@@ -15,13 +15,13 @@ public enum EnumResource {
     YELLOW_CORAL_SEED(Items.YELLOW_CORAL_SEED),
     BEEHIVE_FRAME(Items.BEEHIVE_FRAME);
 
-    public String getResourceName() {
-        return resourceName;
-    }
-
     private final String resourceName;
 
     EnumResource(String resourceName) {
         this.resourceName = resourceName;
+    }
+
+    public String getResourceName() {
+        return resourceName;
     }
 }

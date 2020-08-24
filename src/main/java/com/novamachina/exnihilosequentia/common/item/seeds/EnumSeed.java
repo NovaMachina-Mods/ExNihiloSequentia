@@ -22,14 +22,14 @@ public enum EnumSeed {
     SEED_PICKLE(Constants.Items.SEED_PICKLE, Blocks.SEA_PICKLE.getDefaultState(), PlantType.Water),
     SEED_BAMBOO(Constants.Items.SEED_BAMBOO, Blocks.BAMBOO_SAPLING.getDefaultState(), PlantType.Plains);
 
-    private final String     seedName;
+    private final String seedName;
     private final BlockState defaultState;
-    private final PlantType  plantType;
+    private final PlantType plantType;
 
     EnumSeed(String seedName, BlockState defaultState, PlantType plantType) {
-        this.seedName     = seedName;
+        this.seedName = seedName;
         this.defaultState = defaultState;
-        this.plantType    = plantType;
+        this.plantType = plantType;
     }
 
     public BlockState getDefaultState() {

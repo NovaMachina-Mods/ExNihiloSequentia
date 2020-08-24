@@ -1,8 +1,9 @@
 package com.novamachina.exnihilosequentia.common.item.ore;
 
-import java.awt.Color;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
+
+import java.awt.*;
 
 public class OreColor implements IItemColor {
 
@@ -14,7 +15,7 @@ public class OreColor implements IItemColor {
                     return Color.WHITE.getRGB();
                 case 1: {
                     OreItem oreItem = (OreItem) stack.getItem();
-                    IOre ore     = oreItem.getOre();
+                    IOre ore = oreItem.getOre();
                     return ore.getColor().toInt();
                 }
                 default: {

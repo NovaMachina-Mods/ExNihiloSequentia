@@ -1,8 +1,8 @@
 package com.novamachina.exnihilosequentia;
 
 import com.novamachina.exnihilosequentia.client.setup.ClientSetup;
+import com.novamachina.exnihilosequentia.common.init.ModInitialization;
 import com.novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
-import com.novamachina.exnihilosequentia.common.setup.ModInitialization;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.util.text.Style;

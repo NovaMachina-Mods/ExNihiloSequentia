@@ -1,9 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.registries.crucible.Meltable;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -29,25 +27,28 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public abstract class BaseCrucibleTile extends TileEntity implements ITickableTileEntity {
 
-    protected     MeltableItemHandler         inventory;
-    private final LazyOptional<IItemHandler>  inventoryHolder = LazyOptional.of(() -> inventory);
-    protected     FluidTank                   tank;
-    private final LazyOptional<IFluidHandler> tankHolder      = LazyOptional.of(() -> tank);
-    protected     int                         ticksSinceLast;
-    protected     int                         solidAmount;
-    protected     ItemStack                   currentItem;
-    protected static int MAX_FLUID_AMOUNT =  Config.CRUCIBLE_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
+    protected static int MAX_FLUID_AMOUNT = Config.CRUCIBLE_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
+    protected MeltableItemHandler inventory;
+    private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
+    protected FluidTank tank;
+    private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
+    protected int ticksSinceLast;
+    protected int solidAmount;
+    protected ItemStack currentItem;
 
     public BaseCrucibleTile(
         TileEntityType<? extends BaseCrucibleTile> tileEntityType) {
         super(tileEntityType);
-        inventory      = new MeltableItemHandler(getCrucibleType());
-        tank           = new FluidTank(MAX_FLUID_AMOUNT);
+        inventory = new MeltableItemHandler(getCrucibleType());
+        tank = new FluidTank(MAX_FLUID_AMOUNT);
         ticksSinceLast = 0;
-        solidAmount    = 0;
-        currentItem    = ItemStack.EMPTY;
+        solidAmount = 0;
+        currentItem = ItemStack.EMPTY;
     }
 
     @Override
@@ -55,8 +56,8 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         inventory.deserializeNBT(compound.getCompound("inventory"));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
-        this.solidAmount    = compound.getInt("solidAmount");
-        this.currentItem    = ItemStack.read(compound.getCompound("currentItem"));
+        this.solidAmount = compound.getInt("solidAmount");
+        this.currentItem = ItemStack.read(compound.getCompound("currentItem"));
         super.read(compound);
     }
 
@@ -88,7 +89,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     protected abstract int getHeat();
 
     public ActionResultType onBlockActivated(PlayerEntity player, Hand handIn,
-        IFluidHandler handler) {
+                                             IFluidHandler handler) {
         ItemStack stack = player.getHeldItem(handIn);
         if (stack.isEmpty()) {
             return ActionResultType.SUCCESS;
@@ -207,7 +208,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public abstract CrucilbeTypeEnum getCrucibleType();
 
     private Meltable getMeltable() {
-        return ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem());
+        return ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem());
     }
 
     public int getFluidAmount() {

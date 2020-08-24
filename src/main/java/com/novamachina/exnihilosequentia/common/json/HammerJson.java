@@ -2,9 +2,9 @@ package com.novamachina.exnihilosequentia.common.json;
 
 public class HammerJson {
     @JsonRequired
-    private String input;
+    private final String input;
     @JsonRequired
-    private String output;
+    private final String output;
 
     public HammerJson(String input, String output) {
         this.input = input;

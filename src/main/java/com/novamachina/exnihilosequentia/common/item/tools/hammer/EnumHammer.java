@@ -11,13 +11,13 @@ public enum EnumHammer {
     DIAMOND(Constants.Items.HAMMER_DIAMOND, 4096, ItemTier.DIAMOND),
     GOLD(Constants.Items.HAMMER_GOLD, 64, ItemTier.GOLD);
 
-    public final String    name;
-    public final int       defaultDurability;
+    public final String name;
+    public final int defaultDurability;
     public final IItemTier teir;
 
     EnumHammer(String name, int durability, IItemTier teir) {
-        this.name              = name;
+        this.name = name;
         this.defaultDurability = durability;
-        this.teir              = teir;
+        this.teir = teir;
     }
 }

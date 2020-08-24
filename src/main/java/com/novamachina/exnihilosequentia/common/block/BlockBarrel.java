@@ -1,14 +1,10 @@
 package com.novamachina.exnihilosequentia.common.block;
 
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import com.novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
-import com.novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
-import com.novamachina.exnihilosequentia.common.top.ITOPInfoProvider;
-import com.novamachina.exnihilosequentia.common.utility.Constants;
-import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -30,7 +26,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.swing.text.AttributeSet;
 import java.util.List;
 
 public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
@@ -68,15 +63,17 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
         BarrelTile barrelTile = (BarrelTile) world.getTileEntity(data.getPos());
-        if(barrelTile == null) {
+        if (barrelTile == null) {
             return;
         }
-        if(probeMode == ProbeMode.EXTENDED) {
-            probeInfo.text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+        if (probeMode == ProbeMode.EXTENDED) {
+            probeInfo
+                .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase())
+                    .setStyle(new Style().setColor(TextFormatting.GREEN)));
         }
 
         List<ITextComponent> info = barrelTile.getWailaInfo();
-        for(ITextComponent tooltip : info) {
+        for (ITextComponent tooltip : info) {
             probeInfo.text(tooltip);
         }
     }

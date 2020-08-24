@@ -4,8 +4,8 @@ import com.novamachina.exnihilosequentia.common.utility.Color;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 
 public enum EnumOre implements IOre {
-    IRON(Constants.Ore.IRON, new Color("BF8040"),true),
-    GOLD(Constants.Ore.GOLD, new Color("FFFF00"),true);
+    IRON(Constants.Ore.IRON, new Color("BF8040"), true),
+    GOLD(Constants.Ore.GOLD, new Color("FFFF00"), true);
 
     private final String name;
     private final Color color;

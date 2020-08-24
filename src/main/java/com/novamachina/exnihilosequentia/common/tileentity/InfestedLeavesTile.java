@@ -1,19 +1,18 @@
 package com.novamachina.exnihilosequentia.common.tileentity;
 
 import com.novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import com.novamachina.exnihilosequentia.common.setup.ModTiles;
+import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.utility.Config;
-import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class InfestedLeavesTile extends TileEntity implements ITickableTileEntity {
 
+    private int progressWaitInterval = 0;
+
     public InfestedLeavesTile() {
         super(ModTiles.INFESTED_LEAVES.get());
     }
-
-    private int progressWaitInterval = 0;
 
     @Override
     public void tick() {

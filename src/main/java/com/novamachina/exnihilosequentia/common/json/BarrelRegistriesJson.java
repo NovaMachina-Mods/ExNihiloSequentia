@@ -4,13 +4,13 @@ import java.util.List;
 
 public class BarrelRegistriesJson {
     @JsonRequired
-    private List<FluidOnTopJson> fluidOnTopRegistry;
+    private final List<FluidOnTopJson> fluidOnTopRegistry;
     @JsonRequired
-    private List<FluidTransformJson> fluidTransformRegistry;
+    private final List<FluidTransformJson> fluidTransformRegistry;
     @JsonRequired
-    private List<FluidBlockJson> fluidBlockRegistry;
+    private final List<FluidBlockJson> fluidBlockRegistry;
     @JsonRequired
-    private List<CompostJson> compostRegistry;
+    private final List<CompostJson> compostRegistry;
 
     public BarrelRegistriesJson(List<FluidOnTopJson> fluidOnTopRegistry, List<FluidTransformJson> fluidTransformRegistry,
                                 List<FluidBlockJson> fluidBlockRegistry, List<CompostJson> compostRegistry) {

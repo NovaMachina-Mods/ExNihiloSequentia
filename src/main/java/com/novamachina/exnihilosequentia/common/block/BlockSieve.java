@@ -1,27 +1,23 @@
 package com.novamachina.exnihilosequentia.common.block;
 
+import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import com.novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
-import com.novamachina.exnihilosequentia.common.top.ITOPInfoProvider;
 import com.novamachina.exnihilosequentia.common.utility.Config;
-import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItem;
@@ -41,7 +37,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 
 import java.util.List;
 
@@ -64,12 +59,12 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-        PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote()) {
+                                             PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isRemote()) {
             SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
-            ItemStack stack     = player.getHeldItem(handIn);
+            ItemStack stack = player.getHeldItem(handIn);
 
-            for(BlockPos sievePos : getNearbySieves(worldIn, pos)) {
+            for (BlockPos sievePos : getNearbySieves(worldIn, pos)) {
                 BlockState currentState = worldIn.getBlockState(sievePos);
                 activateBlock(currentState, worldIn, player, sievePos, handIn);
             }
@@ -85,7 +80,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     }
 
     public void activateBlock(BlockState state, World worldIn, PlayerEntity player, BlockPos pos, Hand handIn) {
-        ItemStack stack     = player.getHeldItem(handIn);
+        ItemStack stack = player.getHeldItem(handIn);
         SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
 
         if (sieveTile.isReadyToSieve()) {
@@ -93,7 +88,8 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         }
         if (!sieveTile.isReadyToSieve() && stack.getItem() instanceof BlockItem) {
             BlockItem blockItem = (BlockItem) stack.getItem();
-            if (ModRegistries.SIEVE.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
+            if (ExNihiloRegistries.SIEVE_REGISTRY
+                .isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
                 sieveTile.insertSiftableBlock(stack);
             }
         }
@@ -108,7 +104,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
 
     @Override
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if(stateIn.get(WATERLOGGED)) {
+        if (stateIn.get(WATERLOGGED)) {
             worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }
         return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
@@ -124,11 +120,12 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         SieveTile sieveTile = (SieveTile) world.getTileEntity(iProbeHitData.getPos());
         String block = I18n.format(sieveTile.getBlockStack().getTranslationKey());
 
-        if(!sieveTile.getBlockStack().isEmpty()) {
-            iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils.formatPercent(sieveTile.getProgress()/ 1.0F)));
+        if (!sieveTile.getBlockStack().isEmpty()) {
+            iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
+                .formatPercent(sieveTile.getProgress() / 1.0F)));
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", block));
         }
-        if(sieveTile.getMesh() != EnumMesh.NONE) {
+        if (sieveTile.getMesh() != EnumMesh.NONE) {
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", sieveTile.getMesh().getName()));
         }
     }
@@ -136,12 +133,15 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     private List<BlockPos> getNearbySieves(World world, BlockPos pos) {
         NonNullList<BlockPos> nearbySieves = NonNullList.create();
 
-        BlockPos.getAllInBox(new BlockPos(pos.getX() - Config.SIEVE_RANGE.get(), pos.getY(), pos.getZ() - Config.SIEVE_RANGE.get()),
-            new BlockPos(pos.getX() + Config.SIEVE_RANGE.get(), pos.getY(), pos.getZ() + Config.SIEVE_RANGE.get())).forEach(item -> {
-            if (world.getBlockState(item).getBlock() instanceof BlockSieve) {
-                nearbySieves.add(new BlockPos(item));
-            }
-        });
+        BlockPos
+            .getAllInBox(new BlockPos(pos.getX() - Config.SIEVE_RANGE.get(), pos.getY(), pos.getZ() - Config.SIEVE_RANGE
+                    .get()),
+                new BlockPos(pos.getX() + Config.SIEVE_RANGE.get(), pos.getY(), pos.getZ() + Config.SIEVE_RANGE.get()))
+            .forEach(item -> {
+                if (world.getBlockState(item).getBlock() instanceof BlockSieve) {
+                    nearbySieves.add(new BlockPos(item));
+                }
+            });
 
         return nearbySieves;
     }

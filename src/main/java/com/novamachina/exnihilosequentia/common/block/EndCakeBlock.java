@@ -22,7 +22,7 @@ public class EndCakeBlock extends CakeBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-        PlayerEntity player, Hand handIn, BlockRayTraceResult p_225533_6_) {
+                                             PlayerEntity player, Hand handIn, BlockRayTraceResult p_225533_6_) {
         ItemStack itemStack = player.getHeldItem(handIn);
 
         if (itemStack.isEmpty()) {
@@ -42,7 +42,7 @@ public class EndCakeBlock extends CakeBlock {
     }
 
     private ActionResultType eatCake(World worldIn, BlockPos pos, BlockState state,
-        PlayerEntity player) {
+                                     PlayerEntity player) {
         if (!worldIn.isRemote() && player.getRidingEntity() == null && player.isCreative()) {
             player.changeDimension(DimensionType.THE_END);
         }

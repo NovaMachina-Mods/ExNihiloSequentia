@@ -1,12 +1,13 @@
 package com.novamachina.exnihilosequentia.common.utility;
 
-import java.util.Objects;
 import net.minecraft.nbt.CompoundNBT;
+
+import java.util.Objects;
 
 public class Color {
 
     public static final Color INVALID_COLOR = new Color(-1, -1, -1, -1);
-    public static final Color WHITE         = new Color(1, 1, 1, 1);
+    public static final Color WHITE = new Color(1, 1, 1, 1);
 
     public final float r;
     public final float g;
@@ -60,10 +61,10 @@ public class Color {
     public static Color fromNBT(CompoundNBT compoundNBT) {
         if (compoundNBT.contains("color")) {
             CompoundNBT colorTag = compoundNBT.getCompound("color");
-            float       a        = colorTag.getFloat("colorA");
-            float       r        = colorTag.getFloat("colorR");
-            float       b        = colorTag.getFloat("colorB");
-            float       g        = colorTag.getFloat("colorG");
+            float a = colorTag.getFloat("colorA");
+            float r = colorTag.getFloat("colorR");
+            float b = colorTag.getFloat("colorB");
+            float g = colorTag.getFloat("colorG");
 
             return new Color(a, r, b, g);
         }

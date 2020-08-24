@@ -12,7 +12,7 @@ public class SieveJson {
     @JsonRequired
     private final EnumMesh mesh;
     @JsonRequired
-    private boolean isWaterlogged;
+    private final boolean isWaterlogged;
 
     public SieveJson(String input, String result, Float rarity, EnumMesh mesh, boolean isWaterlogged) {
         this.input = input;

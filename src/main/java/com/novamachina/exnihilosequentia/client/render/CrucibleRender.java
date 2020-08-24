@@ -2,15 +2,12 @@ package com.novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.novamachina.exnihilosequentia.common.setup.ModTiles;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
-import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 import com.novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.PlayerContainer;
@@ -32,9 +29,9 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
 
     @Override
     public void render(BaseCrucibleTile tileEntity, float partialTicks, MatrixStack matrixStack,
-        IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
+                       IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation solidTexture = tileEntity.getSolidTexture();
-        Fluid            fluid        = tileEntity.getFluid();
+        Fluid fluid = tileEntity.getFluid();
         ResourceLocation fluidTexture =
             fluid != null ? fluid.getAttributes().getStillTexture() : null;
         Color fluidColor =
@@ -94,7 +91,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     }
 
     private Color getBlockColor(ResourceLocation solidTexture,
-        BaseCrucibleTile tileEntity) {
+                                BaseCrucibleTile tileEntity) {
         if (solidTexture != null) {
             if (solidTexture.toString().contains("leaves")) {
                 return new Color(

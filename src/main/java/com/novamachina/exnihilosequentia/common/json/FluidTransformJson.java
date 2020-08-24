@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.json;
 
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.transform.FluidTransformRecipe;
+import com.novamachina.exnihilosequentia.common.registries.barrel.transform.FluidTransformRecipe;
 
 public class FluidTransformJson {
     @JsonRequired

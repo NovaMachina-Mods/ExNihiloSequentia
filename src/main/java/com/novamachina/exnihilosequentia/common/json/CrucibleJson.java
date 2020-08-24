@@ -1,7 +1,7 @@
 package com.novamachina.exnihilosequentia.common.json;
 
+import com.novamachina.exnihilosequentia.common.registries.crucible.Meltable;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
-import com.novamachina.exnihilosequentia.common.tileentity.crucible.Meltable;
 
 public class CrucibleJson {
     @JsonRequired

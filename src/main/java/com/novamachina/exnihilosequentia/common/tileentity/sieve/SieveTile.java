@@ -1,14 +1,11 @@
 package com.novamachina.exnihilosequentia.common.tileentity.sieve;
 
+import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.block.BlockSieve;
+import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
-import com.novamachina.exnihilosequentia.common.setup.ModTiles;
-import com.novamachina.exnihilosequentia.common.utility.LogUtil;
-import java.util.List;
-import java.util.Random;
-
+import com.novamachina.exnihilosequentia.common.registries.sieve.SieveDropEntry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.BlockItem;
@@ -21,12 +18,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
+import java.util.Random;
+
 public class SieveTile extends TileEntity {
 
-    private ItemStack meshStack  = ItemStack.EMPTY;
+    private ItemStack meshStack = ItemStack.EMPTY;
     private ItemStack blockStack = ItemStack.EMPTY;
-    private EnumMesh  meshType   = EnumMesh.NONE;
-    private float     progress   = 0;
+    private EnumMesh meshType = EnumMesh.NONE;
+    private float progress = 0;
 
     public SieveTile() {
         super(ModTiles.SIEVE.get());
@@ -52,7 +52,7 @@ public class SieveTile extends TileEntity {
                 new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
                     meshStack.copy()));
             meshStack = ItemStack.EMPTY;
-            meshType  = EnumMesh.NONE;
+            meshType = EnumMesh.NONE;
             if (rerenderSieve) {
                 setSieveState();
             }
@@ -127,11 +127,11 @@ public class SieveTile extends TileEntity {
             progress += 0.1F;
 
             if (progress >= 1.0F) {
-                List<SieveDropEntry> drops = ModRegistries.SIEVE
+                List<SieveDropEntry> drops = ExNihiloRegistries.SIEVE_REGISTRY
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 Random random = new Random();
                 drops.forEach((entry -> {
-                    if(random.nextFloat() <= entry.getRarity()) {
+                    if (random.nextFloat() <= entry.getRarity()) {
                         Item item = ForgeRegistries.ITEMS.getValue(entry.getResult());
                         world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
                             pos.getZ() + 0.5F, new ItemStack(item)));
@@ -144,7 +144,7 @@ public class SieveTile extends TileEntity {
 
     private void resetSieve() {
         blockStack = ItemStack.EMPTY;
-        progress   = 0.0F;
+        progress = 0.0F;
     }
 
     public boolean isReadyToSieve() {
