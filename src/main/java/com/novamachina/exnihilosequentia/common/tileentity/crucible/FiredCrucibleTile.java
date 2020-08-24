@@ -26,7 +26,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     @Override
     public int getSolidAmount() {
         int itemCount = inventory.getStackInSlot(0).getCount();
-        return solidAmount + (itemCount * ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem()).getAmount());
+        return solidAmount + (itemCount * ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem()).getAmount());
     }
 
     @Override
@@ -54,7 +54,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
 
-                    solidAmount = ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem())
+                    solidAmount = ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem())
                         .getAmount();
                 } else {
                     return;
@@ -64,7 +64,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
                 .isItemEqual(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
-                    solidAmount += ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem())
+                    solidAmount += ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem())
                         .getAmount();
                     inventory.getStackInSlot(0).shrink(1);
 
@@ -78,9 +78,9 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                 heat = solidAmount;
             }
 
-            if (heat > 0 && ModRegistries.FIRED_CRUCIBLE.isMeltable(currentItem.getItem())) {
+            if (heat > 0 && ModRegistries.CRUCIBLE.isMeltable(currentItem.getItem(), getCrucibleType().getLevel())) {
                 FluidStack fluidStack = new FluidStack(
-                    ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem()).getFluid(), heat);
+                    ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem()).getFluid(), heat);
                 int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
                 solidAmount -= filled;
             }

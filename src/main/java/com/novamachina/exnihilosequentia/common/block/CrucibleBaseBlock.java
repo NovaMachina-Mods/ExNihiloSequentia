@@ -8,6 +8,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -54,7 +55,8 @@ public class CrucibleBaseBlock extends BaseBlock implements IProbeInfoProvider {
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
         BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getTileEntity(data.getPos());
         if(crucibleTile.getFluidAmount() > 0) {
-            probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", crucibleTile.getFluidAmount()));
+            String fluidName = I18n.format(crucibleTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey());
+            probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", fluidName, crucibleTile.getFluidAmount()));
         }
         if(crucibleTile.getSolidAmount() > 0) {
             probeInfo.text(new TranslationTextComponent("waila.crucible.solid", crucibleTile.getSolidAmount()));

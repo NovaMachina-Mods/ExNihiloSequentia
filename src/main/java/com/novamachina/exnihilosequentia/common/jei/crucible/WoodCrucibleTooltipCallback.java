@@ -11,7 +11,7 @@ public class WoodCrucibleTooltipCallback implements ITooltipCallback<ItemStack> 
     @Override
     public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<String> tooltip) {
         if (input) {
-            Meltable meltable = ModRegistries.WOODEN_CRUCIBLE.getMeltable(ingredient.getItem());
+            Meltable meltable = ModRegistries.CRUCIBLE.getMeltable(ingredient.getItem());
             tooltip.add(String.format("Fluid Amount: %d mb", meltable.getAmount()));
         }
     }

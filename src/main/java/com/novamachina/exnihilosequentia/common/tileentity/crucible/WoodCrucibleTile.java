@@ -38,7 +38,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
 
-                    solidAmount = ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem())
+                    solidAmount = ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem())
                         .getAmount();
                 } else {
                     return;
@@ -48,7 +48,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
                 .isItemEqual(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
-                    solidAmount += ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem())
+                    solidAmount += ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem())
                         .getAmount();
                     inventory.getStackInSlot(0).shrink(1);
 
@@ -62,9 +62,9 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                 heat = solidAmount;
             }
 
-            if (heat > 0 && ModRegistries.WOODEN_CRUCIBLE.isMeltable(currentItem.getItem())) {
+            if (heat > 0 && ModRegistries.CRUCIBLE.isMeltable(currentItem.getItem(), getCrucibleType().getLevel())) {
                 FluidStack fluidStack = new FluidStack(
-                    ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem()).getFluid(), heat);
+                    ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem()).getFluid(), heat);
                 int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
                 solidAmount -= filled;
             }
@@ -85,7 +85,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     @Override
     public int getSolidAmount() {
         int itemCount = inventory.getStackInSlot(0).getCount();
-        return solidAmount + (itemCount * ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem()).getAmount());
+        return solidAmount + (itemCount * ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem()).getAmount());
     }
 
 }

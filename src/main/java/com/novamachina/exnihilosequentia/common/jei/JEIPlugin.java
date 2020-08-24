@@ -82,13 +82,13 @@ public class JEIPlugin implements IModPlugin {
     }
 
     private void registerWoodCrucible(IRecipeRegistration registration) {
-        List<CrucibleRecipe> recipes = ModRegistries.WOODEN_CRUCIBLE.getRecipeList();
+        List<CrucibleRecipe> recipes = ModRegistries.CRUCIBLE.getWoodRecipeList();
         registration.addRecipes(recipes, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_wood"));
         LogUtil.info("JEI: Wooden Crucible Recipes Loaded: " + recipes.size());
     }
 
     private void registerFiredCrucible(IRecipeRegistration registration) {
-        List<CrucibleRecipe> recipes = ModRegistries.FIRED_CRUCIBLE.getRecipeList();
+        List<CrucibleRecipe> recipes = ModRegistries.CRUCIBLE.getFiredRecipeList();
         registration.addRecipes(recipes, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"));
         LogUtil.info("JEI: Fired Crucible Recipes Loaded: " + recipes.size());
     }

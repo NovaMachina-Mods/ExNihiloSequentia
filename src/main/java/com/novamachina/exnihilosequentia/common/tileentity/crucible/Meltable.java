@@ -6,14 +6,16 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class Meltable {
 
-    public static Meltable DEFAULT = new Meltable(0, null);
+    public static Meltable DEFAULT = new Meltable(0, null, CrucilbeTypeEnum.WOOD);
 
     private final int   amount;
     private final ResourceLocation fluid;
+    private final CrucilbeTypeEnum crucibleType;
 
-    public Meltable(int amount, ResourceLocation fluid) {
+    public Meltable(int amount, ResourceLocation fluid, CrucilbeTypeEnum crucibleType) {
         this.amount = amount;
         this.fluid  = fluid;
+        this.crucibleType = crucibleType;
     }
 
     public int getAmount() {
@@ -22,5 +24,9 @@ public class Meltable {
 
     public Fluid getFluid() {
         return ForgeRegistries.FLUIDS.getValue(fluid);
+    }
+
+    public CrucilbeTypeEnum getCrucibleType() {
+        return crucibleType;
     }
 }

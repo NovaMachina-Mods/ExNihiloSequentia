@@ -207,9 +207,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public abstract CrucilbeTypeEnum getCrucibleType();
 
     private Meltable getMeltable() {
-        return getCrucibleType() == CrucilbeTypeEnum.FIRED ? ModRegistries.FIRED_CRUCIBLE
-            .getMeltable(currentItem.getItem())
-            : ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem());
+        return ModRegistries.CRUCIBLE.getMeltable(currentItem.getItem());
     }
 
     public int getFluidAmount() {

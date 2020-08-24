@@ -14,6 +14,7 @@ import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidBlo
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnTopRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.transform.FluidTransformRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleMeltableItems;
+import com.novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.HeatRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveDrops;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -125,22 +126,22 @@ public class ExNihilo implements IDefaultRegistry {
 
     @Override
     public void registerFiredCrucible(BaseCrucibleMeltableItems registry) {
-        registry.addMeltable(Blocks.COBBLESTONE, 250, Fluids.LAVA);
-        registry.addMeltable(Blocks.DIORITE, 250, Fluids.LAVA);
-        registry.addMeltable(Blocks.ANDESITE, 250, Fluids.LAVA);
-        registry.addMeltable(Blocks.GRANITE, 250, Fluids.LAVA);
-        registry.addMeltable(Blocks.STONE, 250, Fluids.LAVA);
-        registry.addMeltable(Blocks.GRAVEL, 200, Fluids.LAVA);
-        registry.addMeltable(Blocks.SAND, 100, Fluids.LAVA);
-        registry.addMeltable(ModBlocks.DUST.get(), 50, Fluids.LAVA);
-        registry.addMeltable(Blocks.NETHERRACK, 1000, Fluids.LAVA);
-        registry.addMeltable(Blocks.OBSIDIAN, 1000, Fluids.LAVA);
+        registry.addMeltable(Blocks.COBBLESTONE, 250, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(Blocks.DIORITE, 250, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(Blocks.ANDESITE, 250, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(Blocks.GRANITE, 250, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(Blocks.STONE, 250, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(Blocks.GRAVEL, 200, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(Blocks.SAND, 100, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(ModBlocks.DUST.get(), 50, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(Blocks.NETHERRACK, 1000, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
+        registry.addMeltable(Blocks.OBSIDIAN, 1000, Fluids.LAVA, CrucilbeTypeEnum.FIRED);
     }
 
     @Override
     public void registerWoodCrucible(BaseCrucibleMeltableItems registry) {
-        registry.addMeltable(new ResourceLocation("minecraft:saplings"), 250, new ResourceLocation("minecraft:water"));
-        registry.addMeltable(new ResourceLocation("minecraft:leaves"), 250, new ResourceLocation("minecraft:water"));
+        registry.addMeltable(new ResourceLocation("minecraft:saplings"), 250, new ResourceLocation("minecraft:water"), CrucilbeTypeEnum.WOOD);
+        registry.addMeltable(new ResourceLocation("minecraft:leaves"), 250, new ResourceLocation("minecraft:water"), CrucilbeTypeEnum.WOOD);
     }
 
     @Override

@@ -10,9 +10,7 @@ import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidBlo
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.fluid.FluidOnTopRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.transform.FluidTransformRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleMeltableItems;
-import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleMeltableItems;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.HeatRegistry;
-import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleMeltableItems;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveDrops;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -29,8 +27,9 @@ public class ModRegistries {
     public static HammerDrops HAMMER = new HammerDrops(BUS);
     public static SieveDrops SIEVE = new SieveDrops(BUS);
     public static HeatRegistry HEAT = new HeatRegistry(BUS);
-    public static BaseCrucibleMeltableItems FIRED_CRUCIBLE = new FiredCrucibleMeltableItems(BUS);
-    public static BaseCrucibleMeltableItems WOODEN_CRUCIBLE = new WoodCrucibleMeltableItems(BUS);
+//    public static BaseCrucibleMeltableItems FIRED_CRUCIBLE = new FiredCrucibleMeltableItems(BUS);
+//    public static BaseCrucibleMeltableItems WOODEN_CRUCIBLE = new WoodCrucibleMeltableItems(BUS);
+    public static BaseCrucibleMeltableItems CRUCIBLE = new BaseCrucibleMeltableItems(BUS);
     public static FluidOnTopRegistry FLUID_ON_TOP = new FluidOnTopRegistry(BUS);
     public static FluidTransformRegistry FLUID_TRANSFORM = new FluidTransformRegistry(BUS);
     public static FluidBlockTransformRegistry FLUID_BLOCK = new FluidBlockTransformRegistry(BUS);
@@ -79,8 +78,8 @@ public class ModRegistries {
                 registry.registerHammer(HAMMER);
                 registry.registerSieve(SIEVE);
                 registry.registerHeat(HEAT);
-                registry.registerFiredCrucible(FIRED_CRUCIBLE);
-                registry.registerWoodCrucible(WOODEN_CRUCIBLE);
+                registry.registerFiredCrucible(CRUCIBLE);
+                registry.registerWoodCrucible(CRUCIBLE);
                 registry.registerFluidOnTop(FLUID_ON_TOP);
                 registry.registerFluidTransform(FLUID_TRANSFORM);
                 registry.registerFluidBlock(FLUID_BLOCK);

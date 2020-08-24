@@ -33,8 +33,7 @@ public class MeltableItemHandler extends ItemStackHandler {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return type == CrucilbeTypeEnum.FIRED ? ModRegistries.FIRED_CRUCIBLE
-            .isMeltable(stack.getItem()) : ModRegistries.WOODEN_CRUCIBLE.isMeltable(stack.getItem());
+        return ModRegistries.CRUCIBLE.isMeltable(stack.getItem(), type.getLevel());
     }
 
     @Override

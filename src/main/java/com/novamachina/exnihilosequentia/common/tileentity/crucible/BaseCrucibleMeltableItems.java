@@ -1,9 +1,16 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.jei.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.jei.crucible.CrucibleRecipe;
+import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
+import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
@@ -20,6 +27,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,14 +38,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
-    private final Map<ResourceLocation, Meltable> meltableMap = new HashMap<>();
-
-    public void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount, Fluid fluid) {
-        addMeltable(entry.getRegistryName(), amount, fluid.getRegistryName());
+public class BaseCrucibleMeltableItems extends AbstractModRegistry {
+    public BaseCrucibleMeltableItems(ModRegistries.ModBus bus) {
+        bus.register(this);
     }
 
-    public void addMeltable(ResourceLocation entry, int amount, ResourceLocation fluid) {
+    private final Map<ResourceLocation, Meltable> meltableMap = new HashMap<>();
+
+    public void addMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int amount, Fluid fluid, CrucilbeTypeEnum crucibleType) {
+        addMeltable(entry.getRegistryName(), amount, fluid.getRegistryName(), crucibleType);
+    }
+
+    public void addMeltable(ResourceLocation entry, int amount, ResourceLocation fluid, CrucilbeTypeEnum crucibleType) {
         List<ResourceLocation> idList = TagUtils.getTagsOwnedBy(entry);
 
         for(ResourceLocation id : idList) {
@@ -60,21 +75,23 @@ public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
             return;
         }
 
-        insertIntoMap(entry, new Meltable(amount, fluid));
+        insertIntoMap(entry, new Meltable(amount, fluid, crucibleType));
     }
 
     private void insertIntoMap(ResourceLocation name, Meltable meltable) {
         meltableMap.put(name, meltable);
     }
 
-    public boolean isMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
+    public boolean isMeltable(ForgeRegistryEntry<? extends IItemProvider> entry, int level) {
         Collection<ResourceLocation> tags = TagUtils.getTags(entry.getRegistryName());
         for(ResourceLocation tag : tags) {
             if(meltableMap.containsKey(tag)) {
-                return true;
+                if(meltableMap.get(tag).getCrucibleType().getLevel() <= level) {
+                    return true;
+                }
             }
         }
-        return meltableMap.containsKey(entry.getRegistryName());
+        return meltableMap.containsKey(entry.getRegistryName()) && meltableMap.get(entry.getRegistryName()).getCrucibleType().getLevel() <= level;
     }
 
     public Meltable getMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
@@ -127,5 +144,97 @@ public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
 
     private Meltable getMeltable(ResourceLocation entry) {
         return meltableMap.get(entry);
+    }
+
+    @Override
+    protected void useJson() {
+        if(generateJson(Constants.Json.CRUCIBLE_FILE, this)) {
+            return;
+        }
+
+        try {
+            List<CrucibleJson> registriesJson = readJson();
+            for (CrucibleJson entry : registriesJson) {
+                try {
+                    if (itemExists(entry.getEntry())) {
+                        ResourceLocation entryID = new ResourceLocation(entry.getEntry());
+                        if (itemExists(entry.getFluid())) {
+                            ResourceLocation fluidID = new ResourceLocation(entry.getFluid());
+                            addMeltable(entryID, entry.getAmount(), fluidID, entry.getCrucibleType());
+                        } else {
+                            LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.CRUCIBLE_FILE, entry.getFluid()));
+                        }
+                    } else {
+                        LogUtil.warn(String.format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.CRUCIBLE_FILE, entry.getEntry()));
+                    }
+                } catch (ResourceLocationException e) {
+                    LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.CRUCIBLE_FILE, e.getMessage()));
+                }
+            }
+        } catch (JsonParseException e) {
+            LogUtil.error(String.format("Malformed %s", Constants.Json.CRUCIBLE_FILE));
+            LogUtil.error(e.getMessage());
+            if(e.getMessage().contains("IllegalStateException")) {
+                LogUtil.error("Please consider deleting the file and regenerating it.");
+            }
+            LogUtil.error("Falling back to defaults");
+            clear();
+            ModRegistries.BUS.getDefaults().forEach(registry -> registry.registerFiredCrucible(this));
+        }
+    }
+
+    private List<CrucibleJson> readJson() throws JsonParseException {
+        Type listType = new TypeToken<ArrayList<CrucibleJson>>(){}.getType();
+        Gson gson = new GsonBuilder().registerTypeAdapter(listType, new AnnotatedDeserializer<ArrayList<CrucibleJson>>()).create();
+        Path path = Constants.Json.baseJsonPath.resolve(Constants.Json.CRUCIBLE_FILE);
+        List<CrucibleJson> registryJson = null;
+        try {
+            StringBuilder builder = new StringBuilder();
+            Files.readAllLines(path).forEach(builder::append);
+            registryJson = gson.fromJson(builder.toString(), listType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return registryJson;
+    }
+
+    public List<CrucibleRecipe> getFiredRecipeList() {
+        List<CrucibleRecipe> recipes = new ArrayList<>();
+
+        for(ResourceLocation entry : meltableMap.keySet()) {
+            Meltable meltable = getMeltable(entry);
+            List<ItemStack> blocks;
+            Tag<Item> itemTag = ItemTags.getCollection().get(entry);
+            if(itemTag != null) {
+                blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+            } else {
+                blocks = new ArrayList<>();
+                blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
+            }
+            recipes.add(new CrucibleRecipe(blocks, new FluidStack(meltable.getFluid(), FluidAttributes.BUCKET_VOLUME)));
+        }
+
+        return recipes;
+    }
+
+    public List<CrucibleRecipe> getWoodRecipeList() {
+        List<CrucibleRecipe> recipes = new ArrayList<>();
+
+        for(ResourceLocation entry : meltableMap.keySet()) {
+            Meltable meltable = getMeltable(entry);
+            if(meltable.getCrucibleType() == CrucilbeTypeEnum.WOOD) {
+                List<ItemStack> blocks;
+                Tag<Item> itemTag = ItemTags.getCollection().get(entry);
+                if(itemTag != null) {
+                    blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+                } else {
+                    blocks = new ArrayList<>();
+                    blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
+                }
+                recipes.add(new CrucibleRecipe(blocks, new FluidStack(meltable.getFluid(), FluidAttributes.BUCKET_VOLUME)));
+            }
+        }
+
+        return recipes;
     }
 }

@@ -128,6 +128,7 @@ public class Constants {
     public static class Json {
         public static final Path baseJsonPath = FMLPaths.getOrCreateGameRelativePath(FMLPaths.CONFIGDIR.get()
             .resolve("exnihilosequentia"), "Ex Nihilo: Sequentia Json folder");
+        public static final String CRUCIBLE_FILE = "CrucibleRegistry.json";
         public static String COMPOST_FILE = "CompostRegistry.json";
         public static String FLUID_BLOCK_FILE = "FluidBlockTransformRegistry.json";
         public static String FLUID_TRANSFORM_FILE = "FluidTransformRegistry.json";
