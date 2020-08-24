@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.setup;
 
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelModeRegistry;
+import com.novamachina.exnihilosequentia.common.top.CompatTOP;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.ItemGroup;
@@ -8,8 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import net.minecraftforge.registries.ObjectHolder;
@@ -51,5 +54,12 @@ public class ModInitialization {
     @SubscribeEvent
     public static void clearRegistriesOnServerExit(FMLServerStoppedEvent event) {
         ModRegistries.BUS.clearRegistries();
+    }
+
+    @SubscribeEvent
+    public static void registerTOP(InterModEnqueueEvent event) {
+        if(ModList.get().isLoaded(Constants.ModIds.TOP)) {
+            CompatTOP.register();
+        }
     }
 }

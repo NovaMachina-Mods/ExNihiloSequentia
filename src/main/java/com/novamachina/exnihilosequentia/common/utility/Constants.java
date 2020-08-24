@@ -145,6 +145,7 @@ public class Constants {
         public static final String IMMERSIVE_ENGINEERING = "immersiveengineering";
         public static final String JEI = "jei";
         public static final String EX_NIHILO_SEQUENTIA = "exnihilosequentia";
+        public static final String TOP = "theoneprobe";
     }
 
     public static class Tooltips {

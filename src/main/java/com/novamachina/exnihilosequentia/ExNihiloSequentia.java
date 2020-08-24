@@ -31,6 +31,7 @@ public class ExNihiloSequentia {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::setupNonTagBasedRegistries);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::registerTOP);
     }
 
     @EventBusSubscriber(modid = Constants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)

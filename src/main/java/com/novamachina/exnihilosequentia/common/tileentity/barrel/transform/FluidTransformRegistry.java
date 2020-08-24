@@ -55,10 +55,12 @@ public class FluidTransformRegistry extends AbstractModRegistry {
     }
 
     public Fluid getResult(Fluid fluidInTank, Block blockBelow) {
-        List<FluidTransformRecipe> possibleRecipes = recipeMap.get(fluidInTank);
-        for(FluidTransformRecipe recipe : possibleRecipes) {
-            if(recipe.getBlockBelow().equals(blockBelow)) {
-                return ForgeRegistries.FLUIDS.getValue(recipe.getResult());
+        List<FluidTransformRecipe> possibleRecipes = recipeMap.get(fluidInTank.getRegistryName());
+        if(possibleRecipes != null) {
+            for(FluidTransformRecipe recipe : possibleRecipes) {
+                if(recipe.getBlockBelow().equals(blockBelow.getRegistryName())) {
+                    return ForgeRegistries.FLUIDS.getValue(recipe.getResult());
+                }
             }
         }
         return null;

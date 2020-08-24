@@ -116,6 +116,9 @@ dependencies {
 
     compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_version}:api")
     runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_version}")
+
+    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}:api")
+    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -140,16 +143,21 @@ jar.finalizedBy('reobfJar')
 //publish.dependsOn('reobfJar')
 
 repositories {
-    maven { // JEI & Tinkers
-        name 'DVS1 Maven FS'
-        url 'https://dvs1.progwml6.com/files/maven'
+    maven { // JEI
+        name = "DVS1 Maven FS"
+        url = "https://dvs1.progwml6.com/files/maven"
     }
     maven {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
     }
     maven {
-        url "https://maven.tehnut.info"
+        name = "TTerrag Repo"
+        url = "https://maven.tterrag.com/"
+    }
+    maven { // WAILA
+        name = "Mobius Repo"
+        url = "https://maven.tehnut.info"
     }
 }
 
