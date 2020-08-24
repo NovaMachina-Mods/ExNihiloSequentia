@@ -82,4 +82,10 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
         return CrucilbeTypeEnum.WOOD;
     }
 
+    @Override
+    public int getSolidAmount() {
+        int itemCount = inventory.getStackInSlot(0).getCount();
+        return solidAmount + (itemCount * ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem()).getAmount());
+    }
+
 }

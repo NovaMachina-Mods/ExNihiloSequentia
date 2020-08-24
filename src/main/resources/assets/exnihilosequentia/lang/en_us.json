@@ -137,5 +137,7 @@
   "waila.barrel.solidAmount": "Solid Amount: %s / %s",
   "waila.barrel.block": "Block: %s",
   "waila.sieve.block": "Sifting: %s",
-  "waila.sieve.mesh": "Mesh: %s"
+  "waila.sieve.mesh": "Mesh: %s",
+  "waila.crucible.fluid": "Fluid: %s %s mb",
+  "waila.crucible.solid": "Solid Amount: %s"
 }

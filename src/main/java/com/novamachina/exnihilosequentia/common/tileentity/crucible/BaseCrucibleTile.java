@@ -211,4 +211,10 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             .getMeltable(currentItem.getItem())
             : ModRegistries.WOODEN_CRUCIBLE.getMeltable(currentItem.getItem());
     }
+
+    public int getFluidAmount() {
+        return tank.getFluidAmount();
+    }
+
+    public abstract int getSolidAmount();
 }

@@ -24,6 +24,12 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
+    public int getSolidAmount() {
+        int itemCount = inventory.getStackInSlot(0).getCount();
+        return solidAmount + (itemCount * ModRegistries.FIRED_CRUCIBLE.getMeltable(currentItem.getItem()).getAmount());
+    }
+
+    @Override
     public void tick() {
         if (world.isRemote()) {
             return;
