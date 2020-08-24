@@ -10,7 +10,7 @@
       "tag": "forge:dyes/yellow"
     },
     "r": {
-      "item": "minecraft:sunflower"
+      "tag": "minecraft:flowers"
     },
     "g": {
       "tag": "forge:dusts/glowstone"

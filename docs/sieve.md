@@ -2,6 +2,8 @@ Sieve
 =====
 The sieve is how you get most of your resources. Pretty much everything can be obtained by sifting a block in the sieve. You will need to place a mesh in the sieve before you can use it. To place a block in the sieve, simply right click the sieve with the block that you want to sift. Continue right clicking until the block is gone to obtain your resources.
 
+Multi-sieve sifting can be accomplished by placing other sieves nearby on the same Y level. A sieve that is activated will attempt to use other sieves in a configurable radius.
+
 !!! Warning
     Once a block is partially sieved it is stuck in the sieve until you finish sifting.
 
@@ -221,7 +223,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `input`: The block to be sieved (Must be a block or a tag). Required field.
 - `result`: The item to be dropped (Must be an item). Required field.

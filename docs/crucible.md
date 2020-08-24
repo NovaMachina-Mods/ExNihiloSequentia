@@ -2,6 +2,8 @@ Crucible
 ========
 The crucible is used to melt various blocks and items into fluids. Right click the barrel to place an item or block into the crucible. Place a heat source under the barrel to begin the melting process. Once a crucible is full, right click with a bucket to add or remove a fluid.
 
+The Fired Crucible can be used to melt down everything that the Wooden Crucible can, however, not everything that the Fired Crucible melts down can be melted by the wooden crucible.
+
 !!! Note
     An Unfired Crucible *MUST* be smelted to be used.
 
@@ -40,7 +42,7 @@ Items in the following list will melt down into water in the wooden crucible.
 
 Fired Crucible Meltable Items
 -----------------------------
-Items in the following list will melt down into lava in the fired crucible.
+Items in the following list will melt down into lava in the fired crucible. In addition, the Fired Crucible can melt down all the items of the Wooden Crucible seciton above into water.
 
 | Item         | Amount |
 |--------------|:------:|
@@ -69,12 +71,8 @@ The following blocks and fluids can be placed below a crucible to begin the melt
 
 Configuration
 -------------
-### Fired and Wooden Crucible Meltable Item Configuration
-Configuration for Fired Crucible Meltable Items are found in `~/config/exnihilosequentia/FiredCrucibleRegistry.json`.
-Configuration for Wooden Crucible Meltable Items are found in `~/config/exnihilosequentia/WoodCrucibleRegistry.json`.
-
-!!! Note
-    These two files will eventually be merged into one file.
+### Crucible Meltable Item Configuration
+Configuration for Crucible Meltable Items are found in `~/config/exnihilosequentia/CrucibleRegistry.json`.
 
 The format of the file is: 
 ```
@@ -82,24 +80,27 @@ The format of the file is:
   {
     "entry: "modid:name",
     "fluid: "modid:name",
-    "amount: 0 < number
+    "amount: 0 < number,
+    "crucibleType": WOOD or FIRED
   },
   ...
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `entry`: The input item/block (Must be an item, block or a tag). Required field.
 - `fluid`: The fluid the entry will melt into (Must be a fluid). Required field.
 - `amount`: The amount of fluid produced (Must be an integer greater than 0). Required field.
+- `crucibleType`: The minimum crucible requred to start the melting process. (Must be WOOD or FIRED). Required field.
 
 You may chain together as many:
 ```
 {
   "entry: "modid:name",
   "fluid: "modid:name",
-  "amount: 0 < number
+  "amount: 0 < number,
+  "crucibleType": WOOD or FIRED
 }
 ```
 blocks as you'd like as long as they are separated by commas and all of them remain inside `[ ]`.
@@ -120,7 +121,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `entry`: The block or fluid is a heat source (Must be a block, fluid or a tag). Required field.
 - `amount`: The amount of heat the source produces (Must be an integer greater than 0). Required field.

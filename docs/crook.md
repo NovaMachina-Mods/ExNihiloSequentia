@@ -1,6 +1,6 @@
 Crooks
 ======
-Crooks are used to obtain resources from leaves. Silkworms can only be obtained by breaking leaves with crooks. The only difference between crooks is their durability.
+Crooks are used to obtain resources from leaves. Silkworms can be obtained by breaking leaves with crooks. The only difference between crooks is their durability.
 
 Recipes
 -------
@@ -46,7 +46,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `entry`: The item dropped (Must be an item). Required field.
 - `rarity`: Percentage of the time the item will be dropped (Must number greater than 0 and less than or equal to 1). Required field.

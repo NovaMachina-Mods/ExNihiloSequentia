@@ -65,7 +65,7 @@ Will spawn a Bee
 ![](images/recipes/doll_bee.png)
 ---
 - 4x Yellow Dye
-- 1x Sunflower
+- 1x Flower (Any)
 - 1x Porcelain Doll
 - 1x Beehive Frame
 - 2x Glowstone

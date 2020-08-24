@@ -1,9 +1,19 @@
 Welcome to the Ex Nihilo: Sequentia Wiki!
 =========================================
 
-This mod is pretty new and is still under active development. I'm sure there are things that are broken. If you would like to report an issue or make a suggestion, go [here].
+Ex Nihilo is a Latin phrase meaning "out of nothing". Ex Nihilo: Sequentia is the next installment of the long lasting Ex Nihilo mod series. With it you can create resources and mobs out of nothing! Well, sort of...you need a tree to start.
+ 
 
-Currently, this mod contains pretty much all the features that the 1.12 [Ex Nihilo: Creatio]. I am aware a lot of stuff has been added since 1.12 and am currently working on implementing those things.
+Using barrels, sieves, and a few other tools, you can produce all the resources you need. This mod is particularly useful for those skyblock experiences that we all know and love.
 
-[here]: https://github.com/NovaMachina/ExNihiloSequentia/issues
-[Ex Nihilo: Creatio]: https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-creatio
+Ex Nihilo: Sequentia has support for:
+* [JEI]
+* [The One Probe]
+* [WAILA/HWYLA]
+
+To report any issues or make a suggestion, go to the [GitHub Issues] page.
+
+[JEI]: "https://www.curseforge.com/minecraft/mc-mods/jei"
+[The One Probe]: "https://www.curseforge.com/minecraft/mc-mods/the-one-probe"
+[WAILA/HWYLA]: "https://www.curseforge.com/minecraft/mc-mods/hwyla/
+[GitHub Issues]: "https://github.com/NovaMachina/ExNihiloSequentia/issues"

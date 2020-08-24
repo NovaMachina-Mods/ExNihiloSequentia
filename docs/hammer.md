@@ -59,7 +59,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `input`: The block broken by the hammer (Must be a block). Required field.
 - `output`: The block the input turns into (Must be a block). Required field.

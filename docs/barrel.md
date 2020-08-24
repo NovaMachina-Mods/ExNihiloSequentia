@@ -123,7 +123,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `fluidInBarrel`: The fluid in the barrel to start the transformation (Must be a fluid or a tag). Required field.
 - `blockBelow`: The block below the barrel to start the transformation (Must be a block or a tag). Required field.
@@ -156,7 +156,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `fluid`: The fluid in the barrel (Must be a fluid or a tag). Required field.
 - `input`: The input item/block (Must be an item, block or a tag). Required field.
@@ -189,7 +189,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `fluidInBarrel`: The fluid in the barrel (Must be a fluid or a tag). Required field.
 - `fluidOnTop`: The fluid placed on top of the barrel (Must be a fluid or a tag). Required field.
@@ -221,7 +221,7 @@ The format of the file is:
 ]
 ```
 - `modid`: The mod id the block/item/fluid comes from (i.e. `exnihilosequentia`)
-- `name`: The name of block/item/fluid (i.e. `witchwater_still`)
+- `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `entry`: The item or block that can be placed in a barrel (Must be an item, fluid or a tag). Required field.
 - `amount`: The solid amount the entry will add to a barrel (Must be an integer greater than 0). Required field.
