@@ -94,7 +94,7 @@ public class Config {
     }
 
     private static void sieveConfigs() {
-        FLATTEN_SIEVE_RECIPES = COMMON_BUILDER.comment("Sieve will get results for all mesh tiers below the one in the sieve (Default: false)").define("flattenSieveRecipes", true);
+        FLATTEN_SIEVE_RECIPES = COMMON_BUILDER.comment("Sieve will get results for all mesh tiers below the one in the sieve (Default: true)").define("flattenSieveRecipes", true);
         SIEVE_RANGE = COMMON_BUILDER.comment("Defines the radius that a sieve will attempt to activate other sieves (Default: 2)").defineInRange("sieveRange", 2, 0, 5);
     }
 

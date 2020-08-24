@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.block;
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
+import com.novamachina.exnihilosequentia.common.top.ITOPInfoProvider;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -32,7 +33,7 @@ import net.minecraftforge.items.IItemHandler;
 import javax.swing.text.AttributeSet;
 import java.util.List;
 
-public class BlockBarrel extends BaseBlock implements IProbeInfoProvider {
+public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
     public BlockBarrel(BlockBuilder builder) {
@@ -62,11 +63,6 @@ public class BlockBarrel extends BaseBlock implements IProbeInfoProvider {
         }
 
         return ActionResultType.SUCCESS;
-    }
-
-    @Override
-    public String getID() {
-        return Constants.ModIds.EX_NIHILO_SEQUENTIA + ":barrel";
     }
 
     @Override

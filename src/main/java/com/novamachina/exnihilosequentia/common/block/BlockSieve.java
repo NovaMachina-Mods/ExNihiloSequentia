@@ -5,6 +5,7 @@ import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import com.novamachina.exnihilosequentia.common.setup.ModRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
+import com.novamachina.exnihilosequentia.common.top.ITOPInfoProvider;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
@@ -44,7 +45,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 
 import java.util.List;
 
-public class BlockSieve extends BaseBlock implements IWaterLoggable, IProbeInfoProvider {
+public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoProvider {
 
     public static final EnumProperty<EnumMesh> MESH = EnumProperty.create("mesh", EnumMesh.class);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -116,11 +117,6 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, IProbeInfoP
     @Override
     public IFluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
-    }
-
-    @Override
-    public String getID() {
-        return Constants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve";
     }
 
     @Override

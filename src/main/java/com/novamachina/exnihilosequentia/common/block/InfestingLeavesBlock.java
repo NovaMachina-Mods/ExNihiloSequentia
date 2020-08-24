@@ -4,6 +4,7 @@ import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
+import com.novamachina.exnihilosequentia.common.top.ITOPInfoProvider;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -31,7 +32,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 // TODO: Add progressive render
-public class InfestingLeavesBlock extends BaseBlock implements IProbeInfoProvider {
+public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider {
 
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
@@ -76,11 +77,6 @@ public class InfestingLeavesBlock extends BaseBlock implements IProbeInfoProvide
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
 
-    }
-
-    @Override
-    public String getID() {
-        return Constants.ModIds.EX_NIHILO_SEQUENTIA + "infesting_leaves";
     }
 
     @Override

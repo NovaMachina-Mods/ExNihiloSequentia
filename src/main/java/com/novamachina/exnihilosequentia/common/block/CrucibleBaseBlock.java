@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.block;
 
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
+import com.novamachina.exnihilosequentia.common.top.ITOPInfoProvider;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -22,7 +23,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.List;
 
-public class CrucibleBaseBlock extends BaseBlock implements IProbeInfoProvider {
+public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
 
     public CrucibleBaseBlock(BlockBuilder builder) {
         super(builder);
@@ -44,11 +45,6 @@ public class CrucibleBaseBlock extends BaseBlock implements IProbeInfoProvider {
             return tile.onBlockActivated(player, handIn, fluidHandler);
         }
         return ActionResultType.SUCCESS;
-    }
-
-    @Override
-    public String getID() {
-        return Constants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible";
     }
 
     @Override

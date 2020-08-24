@@ -7,7 +7,6 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -42,8 +41,8 @@ public class CompatTOP {
 
                 @Override
                 public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
-                    if (blockState.getBlock() instanceof IProbeInfoProvider) {
-                        IProbeInfoProvider provider = (IProbeInfoProvider) blockState.getBlock();
+                    if (blockState.getBlock() instanceof ITOPInfoProvider) {
+                        ITOPInfoProvider provider = (ITOPInfoProvider) blockState.getBlock();
                         provider.addProbeInfo(probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData);
                     }
                 }
