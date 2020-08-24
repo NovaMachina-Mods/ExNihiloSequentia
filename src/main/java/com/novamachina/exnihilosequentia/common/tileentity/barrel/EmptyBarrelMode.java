@@ -5,10 +5,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -73,5 +75,10 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     @Override
     protected void spawnParticle(BarrelTile barrelTile) {
 
+    }
+
+    @Override
+    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+        return new ArrayList<>();
     }
 }

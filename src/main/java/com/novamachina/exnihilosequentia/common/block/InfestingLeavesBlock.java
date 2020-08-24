@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.block;
 
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import com.novamachina.exnihilosequentia.common.setup.ModBlocks;
+import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
@@ -11,8 +12,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -57,5 +63,10 @@ public class InfestingLeavesBlock extends BaseBlock {
         });
 
         return nearbyLeaves;
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+
     }
 }

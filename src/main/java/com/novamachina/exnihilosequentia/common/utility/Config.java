@@ -93,7 +93,7 @@ public class Config {
     }
 
     private static void sieveConfigs() {
-        FLATTEN_SIEVE_RECIPES = COMMON_BUILDER.comment("Sieve will get results for all mesh tiers below the one in the sieve (Default: false)").define("flattenSieveRecipes", false);
+        FLATTEN_SIEVE_RECIPES = COMMON_BUILDER.comment("Sieve will get results for all mesh tiers below the one in the sieve (Default: false)").define("flattenSieveRecipes", true);
     }
 
     private static void registryConfigs() {
@@ -103,7 +103,7 @@ public class Config {
     private static void infestedLeavesConfigs() {
         SECONDS_TO_TRANSFORM_LEAVES = COMMON_BUILDER.comment("Number of seconds to for leaves to become completely infested (Default: 10)").defineInRange("secondsToTransformLeaves", 10, 1, Integer.MAX_VALUE);
         SPREAD_CHANCE = COMMON_BUILDER.comment("Percentage of the time that infested leaves will spread (Default: 0.3)").defineInRange("spreadChance", 0.3, 0.001, 1.0);
-        TICKS_BETWEEN_SPREAD_ATTEMPT = COMMON_BUILDER.comment("Number of ticks between infested leave spread attempts (Default: 1000)").defineInRange("ticksBetweenSpreadAttempt", 1000, 1, Integer.MAX_VALUE);
+        TICKS_BETWEEN_SPREAD_ATTEMPT = COMMON_BUILDER.comment("Number of ticks between infested leave spread attempts (Default: 100)").defineInRange("ticksBetweenSpreadAttempt", 100, 1, Integer.MAX_VALUE);
     }
 
     private static void crucibleConfigs() {

@@ -4,16 +4,22 @@ import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import com.novamachina.exnihilosequentia.common.setup.ModItems;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
+import com.novamachina.exnihilosequentia.common.utility.StringUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MobSpawnBarrelMode extends AbstractBarrelMode {
     private int currentProgress;
@@ -97,5 +103,14 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
                 0.0,
                 0.0,
                 0.05);
+    }
+
+    @Override
+    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+        List<ITextComponent> info = new ArrayList<>();
+
+        info.add(new TranslationTextComponent("waila.progress", StringUtils.formatPercent((float)currentProgress / (Config.SECONDS_TO_SPAWN.get() * 20))));
+
+        return info;
     }
 }

@@ -4,6 +4,7 @@ import com.novamachina.exnihilosequentia.common.jei.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.jei.crucible.CrucibleRecipe;
 import com.novamachina.exnihilosequentia.common.json.CrucibleJson;
 import com.novamachina.exnihilosequentia.common.setup.AbstractModRegistry;
+import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
@@ -35,6 +36,31 @@ public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
 
     //ToDo: Add Tag checking
     public void addMeltable(ResourceLocation entry, int amount, ResourceLocation fluid) {
+        List<ResourceLocation> idList = TagUtils.getTagsOwnedBy(entry);
+
+        for(ResourceLocation id : idList) {
+            if(meltableMap.containsKey(id)) {
+                LogUtil.info(String.format("ID: %s falls under Tag: %s. Removing %s ...", id.toString(), meltableMap.toString(), id.toString()));
+                meltableMap.remove(id);
+            }
+        }
+
+        // Does a tag who owns me already exist in the map?
+        Collection<ResourceLocation> tags = TagUtils.getTags(entry);
+        if(tags != null) {
+            for(ResourceLocation id : tags) {
+                if(meltableMap.containsKey(id)) {
+                    LogUtil.info(String.format("Tag: %s already registered. Skipping item %s ...", id.toString(), entry));
+                    return;
+                }
+            }
+        }
+
+        if(meltableMap.containsKey(entry)) {
+            LogUtil.info(String.format("Tag: %s already registered. Skipping...", entry));
+            return;
+        }
+
         insertIntoMap(entry, new Meltable(amount, fluid));
     }
 
@@ -43,6 +69,12 @@ public abstract class BaseCrucibleMeltableItems extends AbstractModRegistry {
     }
 
     public boolean isMeltable(ForgeRegistryEntry<? extends IItemProvider> entry) {
+        Collection<ResourceLocation> tags = TagUtils.getTags(entry.getRegistryName());
+        for(ResourceLocation tag : tags) {
+            if(meltableMap.containsKey(tag)) {
+                return true;
+            }
+        }
         return meltableMap.containsKey(entry.getRegistryName());
     }
 

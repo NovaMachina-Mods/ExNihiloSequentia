@@ -8,6 +8,7 @@ import com.novamachina.exnihilosequentia.common.tileentity.barrel.MobSpawnBarrel
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.transform.FluidTransformRegistry;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -16,11 +17,16 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FluidsBarrelMode extends AbstractBarrelMode {
     public FluidsBarrelMode(String name) {
@@ -149,5 +155,16 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     @Override
     protected void spawnParticle(BarrelTile barrelTile) {
 
+    }
+
+    @Override
+    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+        List<ITextComponent> info = new ArrayList<>();
+
+        String fluidName = I18n.format(barrelTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey());
+
+        info.add(new TranslationTextComponent("waila.barrel.fluidAmount", fluidName, barrelTile.getFluidAmount()));
+
+        return info;
     }
 }

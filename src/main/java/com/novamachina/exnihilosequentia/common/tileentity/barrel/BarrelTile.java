@@ -22,6 +22,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -36,6 +37,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.List;
 
 public class BarrelTile extends TileEntity implements ITickableTileEntity {
     private ItemStackHandler inventory;
@@ -228,5 +230,9 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
         NonNullList<ItemStack> list = NonNullList.create();
         list.add(inventory.getStackInSlot(0));
         InventoryHelper.dropItems(getWorld(), getPos(), list);
+    }
+
+    public List<ITextComponent> getWailaInfo() {
+        return mode.getWailaInfo(this);
     }
 }

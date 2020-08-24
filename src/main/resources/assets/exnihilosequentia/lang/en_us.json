@@ -7,6 +7,9 @@
   "block.exnihilosequentia.crushed_diorite": "Crushed Diorite",
   "block.exnihilosequentia.crushed_granite": "Crushed Granite",
 
+  "block.exnihilosequentia.infesting_leaves": "Infesting Leaves",
+  "block.exnihilosequentia.infested_leaves": "Infested Leaves",
+
   "block.exnihilosequentia.sieve": "Sieve",
   "block.exnihilosequentia.barrel_wood": "Wooden Barrel",
   "block.exnihilosequentia.crucible_unfired": "Unfired Crucible",
@@ -14,6 +17,9 @@
   "block.exnihilosequentia.crucible_wood": "Wooden Crucible",
 
   "block.exnihilosequentia.end_cake": "End Cake",
+
+  "block.exnihilosequentia.witchwater": "Witchwater",
+  "block.exnihilosequentia.sea_water": "Sea Water",
 
   "item.exnihilosequentia.crook_andesite": "Andesite Crook",
   "item.exnihilosequentia.crook_bone": "Bone Crook",
@@ -124,5 +130,14 @@
   "tooltip.doll.guardian": "Add to a barrel of sea water to spawn a Guardian",
   "tooltip.doll.bee": "Add to a barrel of witchwater to spawn a Bee",
 
-  "jei.sieve.dropChance": "Drop Chance"
+  "jei.sieve.dropChance": "Drop Chance",
+
+  "waila.progress": "Progress: %s",
+  "waila.barrel.fluidAmount": "Fluid: %s %s mb",
+  "waila.barrel.solidAmount": "Solid Amount: %s / %s",
+  "waila.barrel.block": "Block: %s",
+  "waila.sieve.block": "Sifting: %s",
+  "waila.sieve.mesh": "Mesh: %s",
+  "waila.crucible.fluid": "Fluid: %s %s mb",
+  "waila.crucible.solid": "Solid Amount: %s"
 }

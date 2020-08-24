@@ -5,8 +5,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+
+import java.util.List;
 
 public abstract class AbstractBarrelMode {
     private String modeName;
@@ -34,4 +37,6 @@ public abstract class AbstractBarrelMode {
     public abstract CompoundNBT write();
 
     protected abstract void spawnParticle(BarrelTile barrelTile);
+
+    public abstract List<ITextComponent> getWailaInfo(BarrelTile barrelTile);
 }

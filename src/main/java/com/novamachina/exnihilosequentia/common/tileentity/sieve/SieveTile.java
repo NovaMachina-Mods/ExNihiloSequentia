@@ -169,6 +169,11 @@ public class SieveTile extends TileEntity {
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbt = new CompoundNBT();
+        if (!meshStack.isEmpty()) {
+            CompoundNBT meshNBT = meshStack.write(new CompoundNBT());
+            nbt.put("mesh", meshNBT);
+        }
+
         if (!blockStack.isEmpty()) {
             CompoundNBT blockNbt = blockStack.write(new CompoundNBT());
             nbt.put("block", blockNbt);
@@ -181,6 +186,15 @@ public class SieveTile extends TileEntity {
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         CompoundNBT nbt = packet.getNbtCompound();
+        if (nbt.contains("mesh")) {
+            meshStack = ItemStack.read((CompoundNBT) nbt.get("mesh"));
+            if (meshStack.getItem() instanceof MeshItem) {
+                meshType = ((MeshItem) meshStack.getItem()).getMesh();
+            }
+        } else {
+            meshStack = ItemStack.EMPTY;
+        }
+
         if (nbt.contains("block")) {
             blockStack = ItemStack.read((CompoundNBT) nbt.get("block"));
         } else {
