@@ -28,8 +28,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlocks {
 
-    private static final DeferredRegister<Block> BLOCKS =
-        new DeferredRegister<>(ForgeRegistries.BLOCKS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
+    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
 
     public static final RegistryObject<BaseFallingBlock> DUST = BLOCKS
         .register(Constants.Blocks.DUST, () -> new BaseFallingBlock(new BlockBuilder().properties(

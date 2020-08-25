@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.utility;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
@@ -64,17 +65,17 @@ public class TagUtils {
     }
 
     public static List<ResourceLocation> getTagsOwnedBy(ResourceLocation owningTag) {
-        Tag<Block> blockTag = BlockTags.getCollection().get(owningTag);
-        Tag<Item> itemTag = ItemTags.getCollection().get(owningTag);
+        ITag<Block> blockTag = BlockTags.getCollection().get(owningTag);
+        ITag<Item> itemTag = ItemTags.getCollection().get(owningTag);
 
         Collection<Block> blockCollection = null;
         Collection<Item> itemCollection = null;
 
         if (blockTag != null) {
-            blockCollection = blockTag.getAllElements();
+            blockCollection = blockTag.func_230236_b_();
         }
         if (itemTag != null) {
-            itemCollection = itemTag.getAllElements();
+            itemCollection = itemTag.func_230236_b_();
         }
 
         List<ResourceLocation> idList = new ArrayList<>();

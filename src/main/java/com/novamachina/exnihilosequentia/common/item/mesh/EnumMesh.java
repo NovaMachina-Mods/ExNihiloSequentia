@@ -24,4 +24,9 @@ public enum EnumMesh implements IStringSerializable {
     public String getMeshName() {
         return "mesh_" + name;
     }
+
+    @Override
+    public String func_176610_l() {
+        return this.name;
+    }
 }

@@ -15,6 +15,7 @@ import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
@@ -175,9 +176,9 @@ public class CompostRegistry extends AbstractModRegistry {
 
         for (ResourceLocation entry : solidsMap.keySet()) {
             List<ItemStack> blocks;
-            Tag<Item> itemTag = ItemTags.getCollection().get(entry);
+            ITag<Item> itemTag = ItemTags.getCollection().get(entry);
             if (itemTag != null) {
-                blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+                blocks = itemTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
             } else {
                 blocks = new ArrayList<>();
                 blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));

@@ -11,6 +11,7 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.IItemTier;
@@ -26,18 +27,24 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 public class CrookBaseItem extends ToolItem {
 
-    private static final Set<Block> effectiveBlocksOn = Sets
-        .newHashSet(BlockTags.LEAVES.getAllElements());
+    private static final Set<Material> effectiveMaterialsOn = Sets
+        .newHashSet(Material.LEAVES);
 
     public CrookBaseItem(IItemTier tier, int maxDamage) {
-        super(0.5F, 0.5F, tier, effectiveBlocksOn,
+        super(0.5F, 0.5F, tier, Sets.newHashSet(),
             new Item.Properties().defaultMaxDamage(maxDamage).group(ModInitialization.ITEM_GROUP));
+    }
+
+    public float getDestroySpeed(ItemStack stack, BlockState state) {
+        Material material = state.getMaterial();
+        return effectiveMaterialsOn.contains(material) ? this.efficiency : super.getDestroySpeed(stack, state);
     }
 
     @Override
@@ -50,7 +57,7 @@ public class CrookBaseItem extends ToolItem {
         if (tags.contains(new ResourceLocation("minecraft:leaves"))) {
             for (int i = 0; i < Config.VANILLA_SIMULATE_DROP_COUNT.get(); i++) {
                 List<ItemStack> items = Block
-                    .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimension().getType()),
+                    .getDrops(state, worldIn.getServer().getWorld(worldIn.func_234923_W_()),
                         pos, null);
                 itemDrops.addAll(items);
             }

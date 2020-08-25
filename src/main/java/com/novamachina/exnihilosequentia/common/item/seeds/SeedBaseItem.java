@@ -55,7 +55,7 @@ public class SeedBaseItem extends Item implements IPlantable {
             .canPlayerEdit(pos.add(0, 1, 0), direction, item)) {
 
             BlockState soil;
-            if (type == PlantType.Water) {
+            if (type == PlantType.WATER) {
                 soil = world.getBlockState(context.getPos().add(0, 1, 0));
             } else {
                 soil = world.getBlockState(context.getPos());
@@ -76,7 +76,7 @@ public class SeedBaseItem extends Item implements IPlantable {
     }
 
     private boolean isBlockSpaceEmpty(World world, BlockPos pos, PlantType type) {
-        if (type == PlantType.Water) {
+        if (type == PlantType.WATER) {
             return world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.WATER;
         }
 

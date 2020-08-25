@@ -16,6 +16,7 @@ import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
@@ -133,9 +134,9 @@ public class CrucibleRegistry extends AbstractModRegistry {
         for (ResourceLocation entry : meltableMap.keySet()) {
             Meltable meltable = getMeltable(entry);
             List<ItemStack> blocks;
-            Tag<Item> itemTag = ItemTags.getCollection().get(entry);
+            ITag<Item> itemTag = ItemTags.getCollection().get(entry);
             if (itemTag != null) {
-                blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+                blocks = itemTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
             } else {
                 blocks = new ArrayList<>();
                 blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
@@ -214,9 +215,9 @@ public class CrucibleRegistry extends AbstractModRegistry {
         for (ResourceLocation entry : meltableMap.keySet()) {
             Meltable meltable = getMeltable(entry);
             List<ItemStack> blocks;
-            Tag<Item> itemTag = ItemTags.getCollection().get(entry);
+            ITag<Item> itemTag = ItemTags.getCollection().get(entry);
             if (itemTag != null) {
-                blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+                blocks = itemTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
             } else {
                 blocks = new ArrayList<>();
                 blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
@@ -234,9 +235,9 @@ public class CrucibleRegistry extends AbstractModRegistry {
             Meltable meltable = getMeltable(entry);
             if (meltable.getCrucibleType() == CrucilbeTypeEnum.WOOD) {
                 List<ItemStack> blocks;
-                Tag<Item> itemTag = ItemTags.getCollection().get(entry);
+                ITag<Item> itemTag = ItemTags.getCollection().get(entry);
                 if (itemTag != null) {
-                    blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+                    blocks = itemTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
                 } else {
                     blocks = new ArrayList<>();
                     blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));

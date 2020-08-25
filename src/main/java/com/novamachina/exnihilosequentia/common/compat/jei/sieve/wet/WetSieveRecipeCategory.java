@@ -20,6 +20,9 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -101,7 +104,7 @@ public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
         recipeLayout.getItemStacks().addTooltipCallback(new ITooltipCallback<ItemStack>() {
             @OnlyIn(Dist.CLIENT)
             @Override
-            public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<String> tooltip) {
+            public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
                 if (!input) {
                     ItemStack mesh = recipe.getMesh();
                     Multiset<String> condensedTooltips = HashMultiset.create();
@@ -115,9 +118,9 @@ public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
                         }
                         condensedTooltips.add(StringUtils.formatPercent(entry.getRarity()));
                     }
-                    tooltip.add(I18n.format("jei.sieve.dropChance"));
+                    tooltip.add(new TranslationTextComponent("jei.sieve.dropChance"));
                     for (String line : condensedTooltips.elementSet()) {
-                        tooltip.add(" * " + condensedTooltips.count(line) + "x " + line);
+                        tooltip.add(new StringTextComponent(" * " + condensedTooltips.count(line) + "x " + line));
                     }
                 }
             }

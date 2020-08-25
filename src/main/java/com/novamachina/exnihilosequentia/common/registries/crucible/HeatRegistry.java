@@ -19,6 +19,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -177,9 +178,9 @@ public class HeatRegistry extends AbstractModRegistry {
 
             } else {
                 if (block != Blocks.AIR && fluid == Fluids.EMPTY) {
-                    Tag<Block> blockTag = BlockTags.getCollection().get(entry.getKey());
+                    ITag<Block> blockTag = BlockTags.getCollection().get(entry.getKey());
                     if (blockTag != null) {
-                        blockList = blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+                        blockList = blockTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
                     } else {
                         blockList.add(new ItemStack(block));
                     }

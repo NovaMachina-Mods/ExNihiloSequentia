@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.registries.crucible.Meltable;
 import com.novamachina.exnihilosequentia.common.utility.Config;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
@@ -52,13 +53,13 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void read(CompoundNBT compound) {
+    public void func_230337_a_(BlockState state, CompoundNBT compound) {
         inventory.deserializeNBT(compound.getCompound("inventory"));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
         this.solidAmount = compound.getInt("solidAmount");
         this.currentItem = ItemStack.read(compound.getCompound("currentItem"));
-        super.read(compound);
+        super.func_230337_a_(state, compound);
     }
 
     @Override

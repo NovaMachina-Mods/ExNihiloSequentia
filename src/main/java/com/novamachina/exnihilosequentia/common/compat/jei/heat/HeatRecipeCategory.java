@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.compat.jei.heat;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -73,7 +74,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     }
 
     @Override
-    public void draw(HeatRecipe recipe, double mouseX, double mouseY) {
-        Minecraft.getInstance().fontRenderer.drawString(recipe.getHeatAmountString(), 24, 12, Color.gray.getRGB());
+    public void draw(HeatRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+        Minecraft.getInstance().fontRenderer.func_238421_b_(matrixStack, recipe.getHeatAmountString(), 24, 12, Color.gray.getRGB());
     }
 }

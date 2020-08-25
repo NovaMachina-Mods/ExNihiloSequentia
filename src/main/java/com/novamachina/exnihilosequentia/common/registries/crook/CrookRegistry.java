@@ -126,7 +126,7 @@ public class CrookRegistry extends AbstractModRegistry {
     public List<CrookRecipe> getRecipeList() {
         List<CrookRecipe> recipes = new ArrayList<>();
         List<ItemStack> inputs = BlockTags.getCollection().get(new ResourceLocation("minecraft", "leaves"))
-            .getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
+            .func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
         for (CrookDropEntry entry : crookDrops) {
             List<ItemStack> outputs = new ArrayList<>();
             outputs.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getItem())));

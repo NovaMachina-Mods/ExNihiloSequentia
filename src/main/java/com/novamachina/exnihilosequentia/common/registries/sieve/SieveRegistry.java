@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
@@ -402,10 +403,10 @@ public class SieveRegistry extends AbstractModRegistry {
     private SieveRecipe createRecipe(EnumMesh mesh, ResourceLocation inputID, boolean isWaterlogged) {
         List<List<ItemStack>> inputs = new ArrayList<>();
         inputs.add(Collections.singletonList(new ItemStack(ModItems.meshMap.get(mesh.getMeshName()).get())));
-        Tag<Block> blockTag = BlockTags.getCollection().get(inputID);
+        ITag<Block> blockTag = BlockTags.getCollection().get(inputID);
         List<ItemStack> inputBlocks = new ArrayList<>();
         if (blockTag != null) {
-            inputBlocks.addAll(blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList()));
+            inputBlocks.addAll(blockTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList()));
         } else {
             inputBlocks.add(new ItemStack(ForgeRegistries.BLOCKS.getValue(inputID)));
         }

@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class ModItems {
 
-    private static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(
+    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
         ForgeRegistries.ITEMS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
     public static final RegistryObject<Item> DUST = ITEMS
         .register(Constants.Blocks.DUST, () -> new BlockItem(ModBlocks.DUST.get(),

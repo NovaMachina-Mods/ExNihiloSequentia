@@ -5,8 +5,8 @@ import com.novamachina.exnihilosequentia.common.init.ModFluids;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.IFluidState;
-import net.minecraft.state.StateContainer.Builder;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
@@ -33,12 +33,12 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        public boolean isSource(IFluidState state) {
+        public boolean isSource(FluidState state) {
             return true;
         }
 
         @Override
-        public int getLevel(IFluidState fluidState) {
+        public int getLevel(FluidState fluidState) {
             return 8;
         }
     }
@@ -51,17 +51,17 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        public boolean isSource(IFluidState state) {
+        public boolean isSource(FluidState state) {
             return false;
         }
 
         @Override
-        public int getLevel(IFluidState fluidState) {
+        public int getLevel(FluidState fluidState) {
             return fluidState.get(LEVEL_1_8);
         }
 
         @Override
-        protected void fillStateContainer(Builder<Fluid, IFluidState> builder) {
+        protected void fillStateContainer(StateContainer.Builder<Fluid, FluidState> builder) {
             super.fillStateContainer(builder);
             builder.add(LEVEL_1_8);
         }

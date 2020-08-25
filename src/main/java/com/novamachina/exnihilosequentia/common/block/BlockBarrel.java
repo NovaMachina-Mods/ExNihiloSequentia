@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.text.Color;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
@@ -69,7 +70,7 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
         if (probeMode == ProbeMode.EXTENDED) {
             probeInfo
                 .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase())
-                    .setStyle(new Style().setColor(TextFormatting.GREEN)));
+                    .func_230530_a_(Style.field_240709_b_.func_240718_a_(Color.func_240744_a_(TextFormatting.GREEN))));
         }
 
         List<ITextComponent> info = barrelTile.getWailaInfo();

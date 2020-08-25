@@ -28,6 +28,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class WitchWaterBlock extends FlowingFluidBlock {
 
@@ -50,9 +51,7 @@ public class WitchWaterBlock extends FlowingFluidBlock {
 
         if (entityIn instanceof CreeperEntity) {
             if (!((CreeperEntity) entityIn).isCharged()) {
-                entityIn.onStruckByLightning(
-                    new LightningBoltEntity(worldIn, entityIn.getPosX(), entityIn.getPosY(),
-                        entityIn.getPosZ(), true));
+                entityIn.func_241841_a((ServerWorld)worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
                 ((CreeperEntity) entityIn).setHealth(((CreeperEntity) entityIn).getMaxHealth());
             }
         }
@@ -97,9 +96,7 @@ public class WitchWaterBlock extends FlowingFluidBlock {
 //        }
 
         if (entityIn instanceof AnimalEntity) {
-            entityIn.onStruckByLightning(
-                new LightningBoltEntity(worldIn, entityIn.getPosX(), entityIn.getPosY(),
-                    entityIn.getPosZ(), true));
+            entityIn.func_241841_a((ServerWorld)worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
         }
 
         if (entityIn instanceof PlayerEntity) {
