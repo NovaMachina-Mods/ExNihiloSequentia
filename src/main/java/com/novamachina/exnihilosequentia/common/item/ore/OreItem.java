@@ -19,6 +19,9 @@ public class OreItem extends Item {
 
     @Override
     protected boolean isInGroup(ItemGroup group) {
-        return ore.isEnabled();
+        if(group == ModInitialization.ITEM_GROUP) {
+            return ore.isEnabled();
+        }
+        return false;
     }
 }
