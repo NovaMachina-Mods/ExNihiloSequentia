@@ -1,9 +1,16 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
   "promos": {
-    "1.15.2-latest": "1.2.0.0"
+    "1.16.2-latest": "1.2.0.1",
+    "1.16.2-recommended": "1.2.0.1",
+    "1.15.2-latest": "1.2.0.1",
+    "1.15.2-recommended": "1.2.0.1"
+  },
+  "1.16.2": {
+    "1.2.0.1": "Initial port to 116.2"
   },
   "1.15.2": {
+    "1.2.0.1": "Fix ores showing up in all tabs",
     "1.2.0.0": "Add 1.13 - 1.15 features, Add support for JEI, WAILA, and TOP, Add some modded metal support",
     "1.1.0.3": "Fix issue with crashing on server start",
     "1.1.0.2": "Fix barrel eating buckets when inserting a fluid",
