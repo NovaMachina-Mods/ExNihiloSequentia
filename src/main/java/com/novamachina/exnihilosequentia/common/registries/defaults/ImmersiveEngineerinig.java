@@ -43,5 +43,11 @@ public class ImmersiveEngineerinig implements IDefaultRegistry {
                 .get(), null, 0.05F, 0.075F, 0.15F, false);
             EnumModdedOre.LEAD.setEnabled();
         }
+
+        if (!EnumModdedOre.URANIUM.isEnabled()) {
+            registry.addMultiMeshDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.URANIUM)
+                .get(), null, 0.05F, 0.075F, 0.15F, false);
+            EnumModdedOre.URANIUM.setEnabled();
+        }
     }
 }

@@ -60,6 +60,7 @@
   "item.exnihilosequentia.chunk_aluminum": "Aluminum Ore Chunk",
   "item.exnihilosequentia.chunk_platinum": "Platinum Ore Chunk",
   "item.exnihilosequentia.chunk_osmium": "Osmium Ore Chunk",
+  "item.exnihilosequentia.chunk_uranium": "Uranium Ore Chunk",
 
   "item.exnihilosequentia.piece_iron": "Iron Ore Piece",
   "item.exnihilosequentia.piece_gold": "Gold Ore Piece",
@@ -71,6 +72,7 @@
   "item.exnihilosequentia.piece_aluminum": "Aluminum Ore Piece",
   "item.exnihilosequentia.piece_platinum": "Platinum Ore Piece",
   "item.exnihilosequentia.piece_osmium": "Osmium Ore Piece",
+  "item.exnihilosequentia.piece_uranium": "Uranium Ore Piece",
 
   "item.exnihilosequentia.ingot_copper": "Copper Ingot",
   "item.exnihilosequentia.ingot_tin": "Tin Ingot",
@@ -80,6 +82,7 @@
   "item.exnihilosequentia.ingot_aluminum": "Aluminum Ingot",
   "item.exnihilosequentia.ingot_platinum": "Platinum Ingot",
   "item.exnihilosequentia.ingot_osmium": "Osmium Ingot",
+  "item.exnihilosequentia.ingot_uranium": "Uranium Ingot",
 
   "item.exnihilosequentia.seed_oak": "Oak Seed",
   "item.exnihilosequentia.seed_spruce": "Spruce Seed",

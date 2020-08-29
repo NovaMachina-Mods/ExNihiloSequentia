@@ -11,7 +11,8 @@ public enum EnumModdedOre implements IOre {
     TIN(Constants.Ore.TIN, new Color("F5FEFF"), false),
     ALUMINUM(Constants.Ore.ALUMINUM, new Color("BFBFBF"), false),
     PLATINUM(Constants.Ore.PLATINUM, new Color("00FFF7"), false),
-    OSMIUM(Constants.Ore.OSMIUM, new Color("BBDDFF"), false);
+    OSMIUM(Constants.Ore.OSMIUM, new Color("BBDDFF"), false),
+    URANIUM(Constants.Ore.URANIUM, new Color("4E5B43"), false);
 
     private final String name;
     private final Color color;

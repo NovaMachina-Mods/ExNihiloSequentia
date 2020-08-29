@@ -27,6 +27,7 @@ public class Mekanism implements IDefaultRegistry {
                 .addDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.OSMIUM).get(), 0.05F, EnumMesh.IRON, false);
             registry.addDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.OSMIUM)
                 .get(), 0.1F, EnumMesh.DIAMOND, false);
+            EnumModdedOre.OSMIUM.setEnabled();
         }
     }
 }

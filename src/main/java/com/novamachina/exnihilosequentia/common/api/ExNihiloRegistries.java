@@ -10,6 +10,7 @@ import com.novamachina.exnihilosequentia.common.registries.crucible.CrucibleRegi
 import com.novamachina.exnihilosequentia.common.registries.crucible.HeatRegistry;
 import com.novamachina.exnihilosequentia.common.registries.defaults.ExNihilo;
 import com.novamachina.exnihilosequentia.common.registries.defaults.IDefaultRegistry;
+import com.novamachina.exnihilosequentia.common.registries.defaults.Mekanism;
 import com.novamachina.exnihilosequentia.common.registries.defaults.ThermalExpansion;
 import com.novamachina.exnihilosequentia.common.registries.hammer.HammerRegistry;
 import com.novamachina.exnihilosequentia.common.registries.sieve.SieveRegistry;
@@ -54,6 +55,9 @@ public class ExNihiloRegistries {
             }
             if (ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING) || Config.ENABLE_IMMERSIVE.get()) {
                 this.defaults.add(new ThermalExpansion());
+            }
+            if (ModList.get().isLoaded(Constants.ModIds.MEKANISM) || Config.ENABLE_MEKANISM.get()) {
+                this.defaults.add(new Mekanism());
             }
         }
 
