@@ -22,11 +22,24 @@ public class Mekanism implements IDefaultRegistry {
             EnumModdedOre.COPPER.setEnabled();
         }
 
+        if (!EnumModdedOre.LEAD.isEnabled()) {
+            registry.addMultiMeshDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.LEAD)
+                .get(), null, 0.05F, 0.075F, null, false);
+            EnumModdedOre.LEAD.setEnabled();
+        }
+
+        if (!EnumModdedOre.URANIUM.isEnabled()) {
+            registry.addMultiMeshDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.URANIUM)
+                .get(), null, 0.05F, 0.075F, null, false);
+            EnumModdedOre.URANIUM.setEnabled();
+        }
+
         if (!EnumModdedOre.OSMIUM.isEnabled()) {
             registry
                 .addDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.OSMIUM).get(), 0.05F, EnumMesh.IRON, false);
             registry.addDrop(Blocks.GRAVEL, ModItems.pieceMap.get(Constants.Ore.OSMIUM)
                 .get(), 0.1F, EnumMesh.DIAMOND, false);
+            EnumModdedOre.OSMIUM.setEnabled();
         }
     }
 }

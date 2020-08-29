@@ -62,6 +62,7 @@ public class Config {
     // Compat
     public static ForgeConfigSpec.BooleanValue ENABLE_THERMAL;
     public static ForgeConfigSpec.BooleanValue ENABLE_IMMERSIVE;
+    public static ForgeConfigSpec.BooleanValue ENABLE_MEKANISM;
 
     static {
         COMMON_BUILDER.comment("Barrel Configs").push(CATEGORY_BARREL);
@@ -94,6 +95,8 @@ public class Config {
             .define("enableThermalExpansion", false);
         ENABLE_IMMERSIVE = COMMON_BUILDER.comment("Should Immersive Engineering ores be enabled? (Default: false)")
             .define("enableImmersiveEngineering", false);
+        ENABLE_MEKANISM = COMMON_BUILDER.comment("Should Mekanism ores be enabled? (Default: false)")
+            .define("enableMekanism", false);
     }
 
     private static void sieveConfigs() {
