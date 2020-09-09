@@ -33,7 +33,7 @@ import java.util.Map;
 public class ExNihilo implements IDefaultRegistry {
     @Override
     public void registerCrook(CrookRegistry registry) {
-        registry.addDrop(ModItems.resourceMap.get(Constants.Items.SILKWORM).get(), 0.1F);
+        registry.addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class ExNihilo implements IDefaultRegistry {
         registry.addSolid(Blocks.BROWN_MUSHROOM, 100);
         registry.addSolid(Blocks.RED_MUSHROOM, 100);
         registry.addSolid(Items.PUMPKIN_PIE, 160);
-        registry.addSolid(ModItems.resourceMap.get(EnumResource.SILKWORM.getResourceName()).get(), 40);
+        registry.addSolid(EnumResource.SILKWORM.getRegistryObject().get(), 40);
         registry.addSolid(ModItems.COOKED_SILKWORM.get(), 40);
         registry.addSolid(Items.APPLE, 100);
         registry.addSolid(Items.MELON_SLICE, 40);
@@ -106,15 +106,15 @@ public class ExNihilo implements IDefaultRegistry {
         registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.SAND, Blocks.SOUL_SAND);
         registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.RED_MUSHROOM, Blocks.SLIME_BLOCK);
         registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.BLUE_CORAL_SEED)
+        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.BLUE_CORAL_SEED.getRegistryObject()
             .get(), Blocks.TUBE_CORAL_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.RED_CORAL_SEED)
+        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.RED_CORAL_SEED.getRegistryObject()
             .get(), Blocks.FIRE_CORAL_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.PINK_CORAL_SEED)
+        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.PINK_CORAL_SEED.getRegistryObject()
             .get(), Blocks.BRAIN_CORAL_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.PURPLE_CORAL_SEED)
+        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.PURPLE_CORAL_SEED.getRegistryObject()
             .get(), Blocks.BUBBLE_CORAL_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), ModItems.resourceMap.get(Constants.Items.YELLOW_CORAL_SEED)
+        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.YELLOW_CORAL_SEED.getRegistryObject()
             .get(), Blocks.HORN_CORAL_BLOCK);
     }
 
@@ -203,12 +203,10 @@ public class ExNihilo implements IDefaultRegistry {
 
         // Ancient Spores
         registry.addDrop(Blocks.DIRT,
-            ModItems.resourceMap.get(EnumResource.ANCIENT_SPORE.getResourceName())
-                .get(), 0.05F, EnumMesh.STRING, false);
+            EnumResource.ANCIENT_SPORE.getRegistryObject().get(), 0.05F, EnumMesh.STRING, false);
 
         // Grass Seeds
-        registry.addDrop(Blocks.DIRT,
-            ModItems.resourceMap.get(EnumResource.GRASS_SEED.getResourceName()).get(), 0.05F, EnumMesh.STRING, false);
+        registry.addDrop(Blocks.DIRT, EnumResource.GRASS_SEED.getRegistryObject().get(), 0.05F, EnumMesh.STRING, false);
 
         // Misc Vanilla Drops
         registry.addDrop(Blocks.SAND, Items.COCOA_BEANS, 0.03F, EnumMesh.STRING, false);
@@ -306,19 +304,19 @@ public class ExNihilo implements IDefaultRegistry {
 
             // Silk Worm
             registry.addMultiMeshDrop(leavesBlock,
-                ModItems.resourceMap.get(Constants.Items.SILKWORM).get(), 0.025F, 0.05F, 0.1F, 0.2F, false);
+                EnumResource.SILKWORM.getRegistryObject().get(), 0.025F, 0.05F, 0.1F, 0.2F, false);
         });
 
         // Coral Seeds
-        registry.addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.BLUE_CORAL_SEED.getResourceName())
+        registry.addDrop(Blocks.SAND, EnumResource.BLUE_CORAL_SEED.getRegistryObject()
             .get(), 0.05F, EnumMesh.IRON, true);
-        registry.addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.PURPLE_CORAL_SEED.getResourceName())
+        registry.addDrop(Blocks.SAND, EnumResource.PURPLE_CORAL_SEED.getRegistryObject()
             .get(), 0.05F, EnumMesh.IRON, true);
-        registry.addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.PINK_CORAL_SEED.getResourceName())
+        registry.addDrop(Blocks.SAND, EnumResource.PINK_CORAL_SEED.getRegistryObject()
             .get(), 0.05F, EnumMesh.IRON, true);
-        registry.addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.YELLOW_CORAL_SEED.getResourceName())
+        registry.addDrop(Blocks.SAND, EnumResource.YELLOW_CORAL_SEED.getRegistryObject()
             .get(), 0.05F, EnumMesh.IRON, true);
-        registry.addDrop(Blocks.SAND, ModItems.resourceMap.get(EnumResource.RED_CORAL_SEED.getResourceName())
+        registry.addDrop(Blocks.SAND, EnumResource.RED_CORAL_SEED.getRegistryObject()
             .get(), 0.05F, EnumMesh.IRON, true);
     }
 

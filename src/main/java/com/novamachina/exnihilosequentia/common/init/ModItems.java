@@ -97,7 +97,6 @@ public class ModItems {
     public static Map<String, RegistryObject<OreItem>> chunkMap = new HashMap<>();
     public static Map<String, RegistryObject<OreItem>> pieceMap = new HashMap<>();
     public static Map<String, RegistryObject<OreItem>> ingotMap = new HashMap<>();
-    public static Map<String, RegistryObject<Item>> resourceMap = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -126,9 +125,8 @@ public class ModItems {
         }
 
         for (EnumResource resource : EnumResource.values()) {
-            RegistryObject<Item> item = ITEMS.register(resource.getResourceName(),
-                () -> new ResourceItem(resource.getResourceName()));
-            resourceMap.put(resource.getResourceName(), item);
+            resource.setRegistryObject(ITEMS.register(resource.getResourceName(),
+                () -> new ResourceItem(resource.getResourceName())));
         }
 
         for (EnumPebbleType type : EnumPebbleType.values()) {
