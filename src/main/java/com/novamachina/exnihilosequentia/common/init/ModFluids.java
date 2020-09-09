@@ -12,7 +12,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModFluids {
 
-    private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
+    private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister
+        .create(ForgeRegistries.FLUIDS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
 
     public static final RegistryObject<FlowingFluid> WITCH_WATER = FLUIDS
         .register(Constants.Fluids.WITCH_WATER,

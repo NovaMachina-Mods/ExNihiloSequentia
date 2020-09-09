@@ -23,7 +23,8 @@ public class CrookTooltipCallback implements ITooltipCallback<ItemStack> {
             ExNihiloRegistries.CROOK_REGISTRY.getDrops().stream()
                 .filter(reward -> ItemStack.areItemsEqual(new ItemStack(ForgeRegistries.ITEMS
                     .getValue(reward.getItem())), ingredient))
-                .forEach(reward -> tooltip.add(new StringTextComponent(String.format("%s", StringUtils.formatPercent(reward.getRarity())))));
+                .forEach(reward -> tooltip
+                    .add(new StringTextComponent(String.format("%s", StringUtils.formatPercent(reward.getRarity())))));
         }
     }
 }

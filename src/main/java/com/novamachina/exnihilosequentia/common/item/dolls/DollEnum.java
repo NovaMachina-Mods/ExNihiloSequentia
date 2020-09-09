@@ -4,8 +4,6 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
-import java.util.Map;
-
 public enum DollEnum {
     BLAZE("minecraft", "blaze", "minecraft", "lava", 1, Constants.Tooltips.BLAZE),
     ENDERMAN("minecraft", "enderman", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 2, Constants.Tooltips.ENDERMAN),
@@ -32,8 +30,8 @@ public enum DollEnum {
     }
 
     public static DollEnum getDollFromString(String dollType) {
-        for(DollEnum doll : values()) {
-            if(doll.name().toLowerCase().equals(dollType)) {
+        for (DollEnum doll : values()) {
+            if (doll.name().toLowerCase().equals(dollType)) {
                 return doll;
             }
         }

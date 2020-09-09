@@ -63,7 +63,7 @@ public class ResourceItem extends Item {
 
     @Override
     public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn,
-                                            LivingEntity target, Hand hand) {
+                                                     LivingEntity target, Hand hand) {
         return super.itemInteractionForEntity(stack, playerIn, target, hand);
     }
 

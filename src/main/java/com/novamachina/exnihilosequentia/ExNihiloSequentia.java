@@ -55,7 +55,8 @@ public class ExNihiloSequentia {
             event.getPlayer().sendMessage(new TranslationTextComponent("message.issues"), UUID.randomUUID());
             event.getPlayer().sendMessage(new TranslationTextComponent("message.issues_link")
                 .func_230530_a_(Style.field_240709_b_.setUnderlined(true)
-                    .func_240715_a_(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/NovaMachina/ExNihiloSequentia/issues"))), UUID.randomUUID());
+                    .func_240715_a_(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/NovaMachina/ExNihiloSequentia/issues"))), UUID
+                .randomUUID());
         }
     }
 }

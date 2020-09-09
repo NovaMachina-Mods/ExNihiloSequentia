@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.item.ore;
 
 import com.novamachina.exnihilosequentia.common.utility.Color;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
+import net.minecraftforge.fml.RegistryObject;
 
 public enum EnumModdedOre implements IOre {
     COPPER(Constants.Ore.COPPER, new Color("FF9933"), false),
@@ -18,6 +19,9 @@ public enum EnumModdedOre implements IOre {
     private final String name;
     private final Color color;
     private boolean isEnabled;
+    private RegistryObject<OreItem> pieceItem;
+    private RegistryObject<OreItem> chunkItem;
+    private RegistryObject<OreItem> ingotItem;
 
     EnumModdedOre(String name, Color color, boolean isEnabled) {
         this.name = name;
@@ -55,5 +59,33 @@ public enum EnumModdedOre implements IOre {
     @Override
     public String getIngotName() {
         return "ingot_" + name;
+    }
+
+    @Override
+    public RegistryObject<OreItem> getPieceItem() {
+        return pieceItem;
+    }
+
+    @Override
+    public void setPieceItem(RegistryObject<OreItem> pieceItem) {
+        this.pieceItem = pieceItem;
+    }
+
+    @Override
+    public RegistryObject<OreItem> getChunkItem() {
+        return chunkItem;
+    }
+
+    @Override
+    public void setChunkItem(RegistryObject<OreItem> chunkItem) {
+        this.chunkItem = chunkItem;
+    }
+
+    public RegistryObject<OreItem> getIngotItem() {
+        return ingotItem;
+    }
+
+    public void setIngotItem(RegistryObject<OreItem> ingotItem) {
+        this.ingotItem = ingotItem;
     }
 }

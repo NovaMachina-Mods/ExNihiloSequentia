@@ -18,7 +18,6 @@ import com.novamachina.exnihilosequentia.common.registries.crucible.HeatRegistry
 import com.novamachina.exnihilosequentia.common.registries.hammer.HammerRegistry;
 import com.novamachina.exnihilosequentia.common.registries.sieve.SieveRegistry;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
-import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
@@ -261,17 +260,17 @@ public class ExNihilo implements IDefaultRegistry {
             switch (ore) {
                 case IRON: {
                     registry.addMultiMeshDrop(Blocks.GRAVEL,
-                        ModItems.pieceMap.get(ore.getName()).get(), null, 0.1F, 0.15F, 0.25F, false);
-                    registry.addDrop(Blocks.SAND, ModItems.pieceMap.get(ore.getName())
+                        ore.getPieceItem().get(), null, 0.1F, 0.15F, 0.25F, false);
+                    registry.addDrop(Blocks.SAND, ore.getPieceItem()
                         .get(), 0.5F, EnumMesh.DIAMOND, false);
                     break;
                 }
                 case GOLD: {
                     registry.addMultiMeshDrop(
                         ModBlocks.CRUSHED_NETHERRACK.get(),
-                        ModItems.pieceMap.get(ore.getName()).get(), null, 0.25F, 0.25F, 0.4F, false);
+                        ore.getPieceItem().get(), null, 0.25F, 0.25F, 0.4F, false);
                     registry.addMultiMeshDrop(Blocks.GRAVEL,
-                        ModItems.pieceMap.get(ore.getName()).get(), null, 0.05F, 0.075F, 0.15F, false);
+                        ore.getPieceItem().get(), null, 0.05F, 0.075F, 0.15F, false);
                     break;
                 }
             }
