@@ -101,12 +101,10 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>> pebbleMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> dollMap = new HashMap<>();
-    public static Map<String, RegistryObject<Item>> crookMap = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
-            crookMap.put(crook.name, ITEMS
-                .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability)));
+            crook.setRegistryObject(ITEMS.register(crook.name, () -> new CrookBaseItem(crook.tier, crook.defaultDurability)));
         }
 
         for (EnumHammer hammer : EnumHammer.values()) {
