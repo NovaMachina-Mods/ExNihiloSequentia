@@ -99,7 +99,6 @@ public class ModItems {
     public static Map<String, RegistryObject<OreItem>> ingotMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> resourceMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> pebbleMap = new HashMap<>();
-    public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -122,7 +121,7 @@ public class ModItems {
         }
 
         for (EnumSeed seed : EnumSeed.values()) {
-            seedMap.put(seed.getSeedName(), ITEMS.register(seed.getSeedName(),
+            seed.setRegistryObject(ITEMS.register(seed.getSeedName(),
                 () -> new SeedBaseItem(seed.getDefaultState()).setPlantType(seed.getPlantType())));
         }
 

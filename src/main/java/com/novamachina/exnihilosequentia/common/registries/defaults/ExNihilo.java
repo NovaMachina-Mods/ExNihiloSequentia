@@ -281,11 +281,10 @@ public class ExNihilo implements IDefaultRegistry {
         // Seeds
         for (EnumSeed seed : EnumSeed.values()) {
             if (seed != EnumSeed.SEED_PICKLE && seed != EnumSeed.SEED_KELP) {
-                registry.addDrop(Blocks.DIRT, ModItems.seedMap.get(seed.getSeedName())
-                    .get(), 0.05F, EnumMesh.STRING, false);
+                registry.addDrop(Blocks.DIRT, seed.getRegistryObject().get(), 0.05F, EnumMesh.STRING, false);
             } else {
                 registry
-                    .addDrop(Blocks.SAND, ModItems.seedMap.get(seed.getSeedName()).get(), 0.05F, EnumMesh.STRING, true);
+                    .addDrop(Blocks.SAND, seed.getRegistryObject().get(), 0.05F, EnumMesh.STRING, true);
             }
         }
 
