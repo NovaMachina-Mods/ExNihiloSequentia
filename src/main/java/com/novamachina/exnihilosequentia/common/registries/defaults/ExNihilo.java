@@ -5,6 +5,7 @@ import com.novamachina.exnihilosequentia.common.init.ModFluids;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import com.novamachina.exnihilosequentia.common.registries.barrel.compost.CompostRegistry;
@@ -165,35 +166,35 @@ public class ExNihilo implements IDefaultRegistry {
     public void registerSieve(SieveRegistry registry) {
         // Stone Pebble
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 1.0F, EnumMesh.STRING, false);
+            EnumPebbleType.STONE.getRegistryObject().get(), 1.0F, EnumMesh.STRING, false);
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 1.0F, EnumMesh.STRING, false);
+            EnumPebbleType.STONE.getRegistryObject().get(), 1.0F, EnumMesh.STRING, false);
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 0.5F, EnumMesh.STRING, false);
+            EnumPebbleType.STONE.getRegistryObject().get(), 0.5F, EnumMesh.STRING, false);
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 0.5F, EnumMesh.STRING, false);
+            EnumPebbleType.STONE.getRegistryObject().get(), 0.5F, EnumMesh.STRING, false);
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 0.1F, EnumMesh.STRING, false);
+            EnumPebbleType.STONE.getRegistryObject().get(), 0.1F, EnumMesh.STRING, false);
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_STONE).get(), 0.1F, EnumMesh.STRING, false);
+            EnumPebbleType.STONE.getRegistryObject().get(), 0.1F, EnumMesh.STRING, false);
 
         // Andesite Pebble
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_ANDESITE).get(), 0.5F, EnumMesh.STRING, false);
+            EnumPebbleType.ANDESITE.getRegistryObject().get(), 0.5F, EnumMesh.STRING, false);
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_ANDESITE).get(), 0.1F, EnumMesh.STRING, false);
+            EnumPebbleType.ANDESITE.getRegistryObject().get(), 0.1F, EnumMesh.STRING, false);
 
         // Diorite Pebble
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_DIORITE).get(), 0.5F, EnumMesh.STRING, false);
+            EnumPebbleType.DIORITE.getRegistryObject().get(), 0.5F, EnumMesh.STRING, false);
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_DIORITE).get(), 0.1F, EnumMesh.STRING, false);
+            EnumPebbleType.DIORITE.getRegistryObject().get(), 0.1F, EnumMesh.STRING, false);
 
         // Granite Pebble
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_GRANITE).get(), 0.5F, EnumMesh.STRING, false);
+            EnumPebbleType.GRANITE.getRegistryObject().get(), 0.5F, EnumMesh.STRING, false);
         registry.addDrop(Blocks.DIRT,
-            ModItems.pebbleMap.get(Constants.Items.PEBBLE_GRANITE).get(), 0.1F, EnumMesh.STRING, false);
+            EnumPebbleType.GRANITE.getRegistryObject().get(), 0.1F, EnumMesh.STRING, false);
 
         // Vanilla Seeds
         registry.addDrop(Blocks.DIRT, Items.WHEAT_SEEDS, 0.7F, EnumMesh.STRING, false);
