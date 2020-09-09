@@ -1,6 +1,5 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;

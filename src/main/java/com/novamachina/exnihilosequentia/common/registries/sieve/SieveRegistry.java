@@ -6,7 +6,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.SieveRecipe;
-import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.SieveJson;

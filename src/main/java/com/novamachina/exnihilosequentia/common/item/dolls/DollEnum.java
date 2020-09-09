@@ -29,6 +29,15 @@ public enum DollEnum {
         this.tooltip = tooltip;
     }
 
+    public static DollEnum getDollFromString(String dollName) {
+        for (DollEnum doll : values()) {
+            if (doll.name().toLowerCase().equals(dollName)) {
+                return doll;
+            }
+        }
+        return null;
+    }
+
     public String getFluidModId() {
         return fluidModId;
     }
@@ -63,14 +72,5 @@ public enum DollEnum {
 
     public void setRegistryObject(RegistryObject<Item> registryObject) {
         this.registryObject = registryObject;
-    }
-
-    public static DollEnum getDollFromString(String dollName) {
-        for(DollEnum doll : values()) {
-            if(doll.name().toLowerCase().equals(dollName)) {
-                return doll;
-            }
-        }
-        return null;
     }
 }

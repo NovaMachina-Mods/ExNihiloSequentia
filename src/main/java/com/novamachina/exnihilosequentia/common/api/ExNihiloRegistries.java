@@ -58,10 +58,10 @@ public class ExNihiloRegistries {
             if (ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING) || Config.ENABLE_IMMERSIVE.get()) {
                 this.defaults.add(new ImmersiveEngineerinig());
             }
-            if(ModList.get().isLoaded(Constants.ModIds.MEKANSIM) || Config.ENABLE_MEKANISM.get()) {
+            if (ModList.get().isLoaded(Constants.ModIds.MEKANSIM) || Config.ENABLE_MEKANISM.get()) {
                 this.defaults.add(new Mekanism());
             }
-            if(ModList.get().isLoaded(Constants.ModIds.CREATE) || Config.ENABLE_CREATE.get()) {
+            if (ModList.get().isLoaded(Constants.ModIds.CREATE) || Config.ENABLE_CREATE.get()) {
                 this.defaults.add(new Create());
             }
         }

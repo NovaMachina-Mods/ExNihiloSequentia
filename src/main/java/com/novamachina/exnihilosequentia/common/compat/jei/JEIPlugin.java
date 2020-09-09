@@ -21,7 +21,6 @@ import com.novamachina.exnihilosequentia.common.compat.jei.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.dry.DrySieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.wet.WetSieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
-import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import com.novamachina.exnihilosequentia.common.utility.Constants;

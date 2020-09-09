@@ -7,7 +7,6 @@ import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import com.novamachina.exnihilosequentia.common.item.ore.IOre;
 import com.novamachina.exnihilosequentia.common.item.ore.OreItem;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import com.novamachina.exnihilosequentia.common.item.pebbles.PebbleItem;
@@ -29,9 +28,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ModItems {
 
@@ -94,28 +90,27 @@ public class ModItems {
     public static final RegistryObject<Item> BARREL_WOOD = ITEMS
         .register(Blocks.BARREL_WOOD, () -> new BlockItem(ModBlocks.BARREL_WOOD.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
-    public static Map<String, RegistryObject<OreItem>> chunkMap = new HashMap<>();
-    public static Map<String, RegistryObject<OreItem>> pieceMap = new HashMap<>();
-    public static Map<String, RegistryObject<OreItem>> ingotMap = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
-            crook.setRegistryObject(ITEMS.register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability)));
+            crook.setRegistryObject(ITEMS
+                .register(crook.name, () -> new CrookBaseItem(crook.teir, crook.defaultDurability)));
         }
 
         for (EnumHammer hammer : EnumHammer.values()) {
-            hammer.setRegistryObject(ITEMS.register(hammer.name, () -> new HammerBaseItem(hammer.teir, hammer.defaultDurability)));
+            hammer.setRegistryObject(ITEMS
+                .register(hammer.name, () -> new HammerBaseItem(hammer.teir, hammer.defaultDurability)));
         }
 
         for (EnumOre ore : EnumOre.values()) {
-            chunkMap.put(ore.getName(), ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
-            pieceMap.put(ore.getName(), ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
+            ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
+            ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
         }
 
-        for (IOre ore : EnumModdedOre.values()) {
-            chunkMap.put(ore.getName(), ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
-            pieceMap.put(ore.getName(), ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
-            ingotMap.put(ore.getName(), ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
+        for (EnumModdedOre ore : EnumModdedOre.values()) {
+            ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
+            ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
+            ore.setIngotItem(ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
         }
 
         for (EnumSeed seed : EnumSeed.values()) {
@@ -124,7 +119,8 @@ public class ModItems {
         }
 
         for (EnumResource resource : EnumResource.values()) {
-            resource.setRegistryObject(ITEMS.register(resource.getResourceName(), () -> new ResourceItem(resource.getResourceName())));
+            resource.setRegistryObject(ITEMS
+                .register(resource.getResourceName(), () -> new ResourceItem(resource.getResourceName())));
         }
 
         for (EnumPebbleType type : EnumPebbleType.values()) {
