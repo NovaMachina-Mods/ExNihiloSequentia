@@ -9,6 +9,7 @@
     "#forge:ores/aluminum",
     "#forge:ores/platinum",
     "#forge:ores/osmium",
-    "#forge:ores/uranium"
+    "#forge:ores/uranium",
+    "#forge:ores/zinc"
   ]
 }
