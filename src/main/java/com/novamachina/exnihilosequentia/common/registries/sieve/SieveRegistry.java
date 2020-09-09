@@ -401,7 +401,7 @@ public class SieveRegistry extends AbstractModRegistry {
 
     private SieveRecipe createRecipe(EnumMesh mesh, ResourceLocation inputID, boolean isWaterlogged) {
         List<List<ItemStack>> inputs = new ArrayList<>();
-        inputs.add(Collections.singletonList(new ItemStack(ModItems.meshMap.get(mesh.getMeshName()).get())));
+        inputs.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
         Tag<Block> blockTag = BlockTags.getCollection().get(inputID);
         List<ItemStack> inputBlocks = new ArrayList<>();
         if (blockTag != null) {
