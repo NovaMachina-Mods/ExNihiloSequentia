@@ -100,7 +100,6 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>> resourceMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> pebbleMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
-    public static Map<String, RegistryObject<Item>> dollMap = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -146,7 +145,7 @@ public class ModItems {
         }
 
         for (DollEnum doll : DollEnum.values()) {
-            dollMap.put(doll.getEntityName(), ITEMS.register(doll.getDollName(), () -> new DollItem(doll)));
+            doll.setRegistryObject(ITEMS.register(doll.getDollName(), () -> new DollItem(doll)));
         }
     }
 

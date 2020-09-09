@@ -135,7 +135,7 @@ public class JEIPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         for (EnumCrook crook : EnumCrook.values()) {
             registration
-                .addRecipeCatalyst(new ItemStack(ModItems.crookMap.get(crook.name).get()), CrookRecipeCategory.UID);
+                .addRecipeCatalyst(new ItemStack(crook.getRegistryObject().get()), CrookRecipeCategory.UID);
         }
         for (EnumHammer hammer : EnumHammer.values()) {
             registration
