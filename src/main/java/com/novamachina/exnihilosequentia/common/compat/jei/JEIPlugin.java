@@ -139,7 +139,7 @@ public class JEIPlugin implements IModPlugin {
         }
         for (EnumHammer hammer : EnumHammer.values()) {
             registration
-                .addRecipeCatalyst(new ItemStack(ModItems.hammerMap.get(hammer.name).get()), HammerRecipeCategory.UID);
+                .addRecipeCatalyst(new ItemStack(hammer.getRegistryObject().get()), HammerRecipeCategory.UID);
         }
 
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), DrySieveRecipeCategory.UID);

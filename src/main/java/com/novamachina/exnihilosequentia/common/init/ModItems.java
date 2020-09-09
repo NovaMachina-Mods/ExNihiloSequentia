@@ -102,7 +102,6 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> dollMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> meshMap = new HashMap<>();
-    public static Map<String, RegistryObject<Item>> hammerMap = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -110,8 +109,7 @@ public class ModItems {
         }
 
         for (EnumHammer hammer : EnumHammer.values()) {
-            hammerMap.put(hammer.name, ITEMS.register(hammer.name,
-                () -> new HammerBaseItem(hammer.teir, hammer.defaultDurability)));
+            hammer.setRegistryObject(ITEMS.register(hammer.name, () -> new HammerBaseItem(hammer.teir, hammer.defaultDurability)));
         }
 
         for (EnumOre ore : EnumOre.values()) {
