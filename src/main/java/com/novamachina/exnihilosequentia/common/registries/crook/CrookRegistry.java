@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
+import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.CrookJson;
 import com.novamachina.exnihilosequentia.common.registries.AbstractModRegistry;
@@ -93,7 +94,7 @@ public class CrookRegistry extends AbstractModRegistry {
     }
 
     public void useDefaults() {
-        addDrop(ModItems.resourceMap.get(Items.SILKWORM).get(), 0.1F);
+        addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F);
     }
 
     public List<CrookDropEntry> getDrops() {
