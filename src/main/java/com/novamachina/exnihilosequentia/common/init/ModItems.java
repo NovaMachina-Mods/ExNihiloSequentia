@@ -102,7 +102,6 @@ public class ModItems {
     public static Map<String, RegistryObject<Item>> seedMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> dollMap = new HashMap<>();
     public static Map<String, RegistryObject<Item>> crookMap = new HashMap<>();
-    public static Map<String, RegistryObject<Item>> meshMap = new HashMap<>();
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -144,7 +143,7 @@ public class ModItems {
 
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
-                meshMap.put(mesh.getMeshName(), ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh)));
+                mesh.setRegistryObject(ITEMS.register(mesh.getMeshName(), () -> new MeshItem(mesh)));
             }
         }
 
