@@ -90,6 +90,9 @@ public class ModItems {
     public static final RegistryObject<Item> BARREL_WOOD = ITEMS
         .register(Blocks.BARREL_WOOD, () -> new BlockItem(ModBlocks.BARREL_WOOD.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_STONE = ITEMS
+        .register(Blocks.BARREL_STONE, () -> new BlockItem(ModBlocks.BARREL_STONE.get(),
+            new Properties().group(ModInitialization.ITEM_GROUP)));
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {

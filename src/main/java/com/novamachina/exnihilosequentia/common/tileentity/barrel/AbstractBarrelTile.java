@@ -15,6 +15,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -37,7 +38,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BarrelTile extends TileEntity implements ITickableTileEntity {
+public abstract class AbstractBarrelTile extends TileEntity implements ITickableTileEntity {
     public static int MAX_SOLID_AMOUNT = Config.BARREL_MAX_SOLID_AMOUNT.get();
     public static int MAX_FLUID_AMOUNT = Config.BARREL_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
     private ItemStackHandler inventory;
@@ -47,8 +48,8 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     private AbstractBarrelMode mode;
     private int solidAmount;
 
-    public BarrelTile() {
-        super(ModTiles.BARREL.get());
+    public AbstractBarrelTile(TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
+        super(tileEntityType);
         this.mode = BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY);
         inventory = new ItemStackHandler();
         tank = new BarrelFluidHandler(this);
@@ -233,4 +234,6 @@ public class BarrelTile extends TileEntity implements ITickableTileEntity {
     public List<ITextComponent> getWailaInfo() {
         return mode.getWailaInfo(this);
     }
+
+    public abstract boolean canAcceptFluidTemperature(FluidStack resource);
 }

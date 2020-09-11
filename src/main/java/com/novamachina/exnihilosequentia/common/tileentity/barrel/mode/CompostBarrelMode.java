@@ -1,7 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
@@ -31,8 +31,8 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void tick(BarrelTile barrelTile) {
-        if (barrelTile.getSolidAmount() >= BarrelTile.MAX_SOLID_AMOUNT && barrelTile.getInventory().getStackInSlot(0)
+    public void tick(AbstractBarrelTile barrelTile) {
+        if (barrelTile.getSolidAmount() >= AbstractBarrelTile.MAX_SOLID_AMOUNT && barrelTile.getInventory().getStackInSlot(0)
             .isEmpty()) {
             currentProgress++;
             spawnParticle(barrelTile);
@@ -47,7 +47,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         if (ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(player.getHeldItem(handIn).getItem())) {
             if (barrelTile.addSolid(ExNihiloRegistries.COMPOST_REGISTRY
                 .getSolidAmount(player.getHeldItem(handIn).getItem()))) {
@@ -59,7 +59,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public boolean canFillWithFluid(BarrelTile barrel) {
+    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
         return false;
     }
 
@@ -86,7 +86,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected void spawnParticle(BarrelTile barrelTile) {
+    protected void spawnParticle(AbstractBarrelTile barrelTile) {
         ((ServerWorld) barrelTile.getWorld())
             .spawnParticle(ParticleTypes.EFFECT,
                 barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
@@ -100,11 +100,11 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
         if (currentProgress <= 0) {
             info.add(new TranslationTextComponent("waila.barrel.solidAmount", barrelTile
-                .getSolidAmount(), BarrelTile.MAX_SOLID_AMOUNT));
+                .getSolidAmount(), AbstractBarrelTile.MAX_SOLID_AMOUNT));
         } else {
             info.add(new TranslationTextComponent("waila.progress", StringUtils
                 .formatPercent((float) currentProgress / (Config.SECONDS_TO_COMPOST.get() * 20))));
