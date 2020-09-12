@@ -9,6 +9,7 @@ nav:
   - Sieve: 'sieve.md'
   - Misc: 'misc.md'
   - Configuration File: 'config.md'
+  - Commands: 'commands.md'
 
 # Do not edit in PRs below here
 site_name: "Ex Nihilo: Sequentia Documentation"

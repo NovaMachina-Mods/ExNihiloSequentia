@@ -5,10 +5,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public class BarrelFluidHandler extends FluidTank {
-    private BarrelTile barrel;
+    private AbstractBarrelTile barrel;
 
-    public BarrelFluidHandler(BarrelTile barrelTile) {
-        this(BarrelTile.MAX_FLUID_AMOUNT);
+    public BarrelFluidHandler(AbstractBarrelTile barrelTile) {
+        this(AbstractBarrelTile.MAX_FLUID_AMOUNT);
         this.barrel = barrelTile;
     }
 
@@ -18,6 +18,10 @@ public class BarrelFluidHandler extends FluidTank {
 
     @Override
     public int fill(FluidStack resource, FluidAction action) {
+        if(!barrel.canAcceptFluidTemperature(resource)) {
+            return 0;
+        }
+
         if (barrel.getMode() != null && !barrel.getMode().canFillWithFluid(barrel)) {
             return 0;
         }

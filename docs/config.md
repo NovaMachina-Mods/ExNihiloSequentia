@@ -14,6 +14,11 @@ The number of buckets of fluid a barrel will hold.
 The number of millibuckets per tick that a barrel will fill with water per tick.
 *Must be an integer greater than 0.*
 
+## woodBarrelMaxTemp
+The maximum temperature of a fluid the wooden can accept. Water is 300 and lava is 1300. Anything above 433 is considered hot.
+*Must be an integer greater than or equal to 0.*
+
+
 ## secondsToSpawnMobs
 The number of seconds that it takes to spawn mobs in a barrel.
 *Must be an integer greater than 0.*
@@ -82,3 +87,9 @@ Enables ore drops for Thermal Expansion ores
 
 ## enableImmersiveEngineering
 Enables ore drops for Immersive Engineering ores
+
+## enableMekanism
+Enables ore drops for Mekanism ores
+
+## enableCreate
+Enables ore drops for Create ores

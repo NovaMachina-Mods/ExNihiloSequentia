@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.CaveSpiderEntity;
@@ -51,7 +50,7 @@ public class WitchWaterBlock extends FlowingFluidBlock {
 
         if (entityIn instanceof CreeperEntity) {
             if (!((CreeperEntity) entityIn).isCharged()) {
-                entityIn.func_241841_a((ServerWorld)worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+                entityIn.func_241841_a((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
                 ((CreeperEntity) entityIn).setHealth(((CreeperEntity) entityIn).getMaxHealth());
             }
         }
@@ -96,7 +95,7 @@ public class WitchWaterBlock extends FlowingFluidBlock {
 //        }
 
         if (entityIn instanceof AnimalEntity) {
-            entityIn.func_241841_a((ServerWorld)worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+            entityIn.func_241841_a((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
         }
 
         if (entityIn instanceof PlayerEntity) {

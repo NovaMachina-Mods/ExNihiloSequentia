@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -23,11 +23,11 @@ public abstract class AbstractBarrelMode {
         return modeName;
     }
 
-    public abstract void tick(BarrelTile barrelTile);
+    public abstract void tick(AbstractBarrelTile barrelTile);
 
-    public abstract ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
+    public abstract ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
 
-    public abstract boolean canFillWithFluid(BarrelTile barrel);
+    public abstract boolean canFillWithFluid(AbstractBarrelTile barrel);
 
     public abstract boolean isEmptyMode();
 
@@ -37,7 +37,7 @@ public abstract class AbstractBarrelMode {
 
     public abstract CompoundNBT write();
 
-    protected abstract void spawnParticle(BarrelTile barrelTile);
+    protected abstract void spawnParticle(AbstractBarrelTile barrelTile);
 
-    public abstract List<ITextComponent> getWailaInfo(BarrelTile barrelTile);
+    public abstract List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile);
 }

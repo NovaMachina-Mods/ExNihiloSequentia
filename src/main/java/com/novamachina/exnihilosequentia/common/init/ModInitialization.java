@@ -44,7 +44,9 @@ public class ModInitialization {
     }
 
     @SubscribeEvent
-    public static void setupTagBasedRegistries(FMLServerStartingEvent event) {
+    public static void onServerStart(FMLServerStartingEvent event) {
+        ModCommands.register(event.getServer().getCommandManager().getDispatcher());
+
         if (Config.USE_JSON_REGISTRIES.get()) {
             ExNihiloRegistries.BUS.useJson();
         } else {

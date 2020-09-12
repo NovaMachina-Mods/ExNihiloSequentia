@@ -13,7 +13,9 @@ import com.novamachina.exnihilosequentia.common.block.UnfiredCrucibleBlock;
 import com.novamachina.exnihilosequentia.common.block.WitchWaterBlock;
 import com.novamachina.exnihilosequentia.common.block.WoodCrucibleBlock;
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.Constants.Blocks;
 import net.minecraft.block.Block;
@@ -28,7 +30,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlocks {
 
-    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
+    private static final DeferredRegister<Block> BLOCKS = DeferredRegister
+        .create(ForgeRegistries.BLOCKS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
 
     public static final RegistryObject<BaseFallingBlock> DUST = BLOCKS
         .register(Constants.Blocks.DUST, () -> new BaseFallingBlock(new BlockBuilder().properties(
@@ -75,7 +78,11 @@ public class ModBlocks {
     public static final RegistryObject<BaseBlock> BARREL_WOOD = BLOCKS
         .register(Blocks.BARREL_WOOD, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
             .properties(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
-            .tileEntitySupplier(BarrelTile::new)));
+            .tileEntitySupplier(WoodBarrelTile::new)));
+    public static final RegistryObject<BaseBlock> BARREL_STONE = BLOCKS
+        .register(Blocks.BARREL_STONE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
+            .properties(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.75F).sound(SoundType.STONE))
+            .tileEntitySupplier(StoneBarrelTile::new)));
 
     public static void init(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);

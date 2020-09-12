@@ -48,5 +48,10 @@ public class UseHammerModifier extends LootModifier {
                                       ILootCondition[] ailootcondition) {
             return new UseHammerModifier(ailootcondition);
         }
+
+        @Override
+        public JsonObject write(UseHammerModifier instance) {
+            return makeConditions(instance.conditions);
+        }
     }
 }

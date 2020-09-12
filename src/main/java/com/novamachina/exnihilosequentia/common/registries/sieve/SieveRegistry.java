@@ -6,7 +6,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.SieveRecipe;
-import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.json.AnnotatedDeserializer;
 import com.novamachina.exnihilosequentia.common.json.SieveJson;
@@ -20,7 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -402,7 +400,7 @@ public class SieveRegistry extends AbstractModRegistry {
 
     private SieveRecipe createRecipe(EnumMesh mesh, ResourceLocation inputID, boolean isWaterlogged) {
         List<List<ItemStack>> inputs = new ArrayList<>();
-        inputs.add(Collections.singletonList(new ItemStack(ModItems.meshMap.get(mesh.getMeshName()).get())));
+        inputs.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
         ITag<Block> blockTag = BlockTags.getCollection().get(inputID);
         List<ItemStack> inputBlocks = new ArrayList<>();
         if (blockTag != null) {
