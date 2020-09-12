@@ -4,6 +4,7 @@ Below is a detailed description of in game commands. All commands are prefixed w
 
 ## reload
 This command is used to reload specific registries in game. The following are subcommands:
+
 - `sieve`
 - `crook`
 - `compost`
@@ -13,3 +14,4 @@ This command is used to reload specific registries in game. The following are su
 - `fluidOnTop`
 - `fluidTransform`
 - `fluidBlock`
+- `all` - reloads all registries

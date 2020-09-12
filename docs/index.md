@@ -7,6 +7,7 @@ Ex Nihilo is a Latin phrase meaning "out of nothing". Ex Nihilo: Sequentia is th
 Using barrels, sieves, and a few other tools, you can produce all the resources you need. This mod is particularly useful for those skyblock experiences that we all know and love.
 
 Ex Nihilo: Sequentia has support for:
+
 - [JEI]
 - [The One Probe]
 - [WAILA/HWYLA]
