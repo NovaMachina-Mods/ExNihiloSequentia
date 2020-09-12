@@ -4,10 +4,9 @@ import com.google.common.collect.Sets;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import com.novamachina.exnihilosequentia.common.init.ModInitialization;
-import com.novamachina.exnihilosequentia.common.init.ModItems;
+import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.registries.crook.CrookDropEntry;
 import com.novamachina.exnihilosequentia.common.utility.Config;
-import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -68,7 +67,7 @@ public class CrookBaseItem extends ToolItem {
                 .nextInt(Config.MAX_BONUS_STRING_COUNT.get()) + Config.MIN_STRING_COUNT.get()));
             if (random.nextDouble() <= 0.8) {
                 itemDrops
-                    .add(new ItemStack(ModItems.resourceMap.get(Constants.Items.SILKWORM).get()));
+                    .add(new ItemStack(EnumResource.SILKWORM.getRegistryObject().get()));
             }
         }
 

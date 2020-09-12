@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,11 +21,11 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void tick(BarrelTile barrelTile) {
+    public void tick(AbstractBarrelTile barrelTile) {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         if (!player.getHeldItem(handIn).isEmpty()) {
             boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
 
@@ -50,7 +50,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public boolean canFillWithFluid(BarrelTile barrel) {
+    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
         return true;
     }
 
@@ -75,12 +75,12 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected void spawnParticle(BarrelTile barrelTile) {
+    protected void spawnParticle(AbstractBarrelTile barrelTile) {
 
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         return new ArrayList<>();
     }
 }

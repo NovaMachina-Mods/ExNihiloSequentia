@@ -1,7 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
@@ -32,7 +32,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void tick(BarrelTile barrelTile) {
+    public void tick(AbstractBarrelTile barrelTile) {
         Block blockBelow = barrelTile.getWorld().getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock();
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
         if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, blockBelow)) {
@@ -41,19 +41,19 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
             if (currentProgress >= Config.SECONDS_TO_FLUID_TRANSFORM.get() * 20) {
                 currentProgress = 0;
                 Fluid newFluid = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getResult(fluidInTank, blockBelow);
-                barrelTile.getTank().setFluid(new FluidStack(newFluid, BarrelTile.MAX_FLUID_AMOUNT));
+                barrelTile.getTank().setFluid(new FluidStack(newFluid, AbstractBarrelTile.MAX_FLUID_AMOUNT));
                 barrelTile.setMode(Constants.BarrelModes.FLUID);
             }
         }
     }
 
     @Override
-    public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         return null;
     }
 
     @Override
-    public boolean canFillWithFluid(BarrelTile barrel) {
+    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
         return false;
     }
 
@@ -80,7 +80,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected void spawnParticle(BarrelTile barrelTile) {
+    protected void spawnParticle(AbstractBarrelTile barrelTile) {
         ((ServerWorld) barrelTile.getWorld())
             .spawnParticle(ParticleTypes.EFFECT,
                 barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
@@ -94,7 +94,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils

@@ -2,7 +2,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
@@ -30,8 +30,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void tick(BarrelTile barrelTile) {
-        if (barrelTile.getFluidAmount() >= BarrelTile.MAX_FLUID_AMOUNT) {
+    public void tick(AbstractBarrelTile barrelTile) {
+        if (barrelTile.getFluidAmount() >= AbstractBarrelTile.MAX_FLUID_AMOUNT) {
             if (fluidOnTop(barrelTile)) {
                 return;
             }
@@ -41,7 +41,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         }
     }
 
-    private boolean doMobSpawn(BarrelTile barrelTile, PlayerEntity player, Hand handIn) {
+    private boolean doMobSpawn(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn) {
         Item item = player.getHeldItem(handIn).getItem();
 
         if (item instanceof DollItem) {
@@ -57,7 +57,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         return false;
     }
 
-    private boolean fluidTransform(BarrelTile barrelTile) {
+    private boolean fluidTransform(AbstractBarrelTile barrelTile) {
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
         Block blockBelow = barrelTile.getWorld().getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock();
 
@@ -68,7 +68,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         return false;
     }
 
-    private boolean fluidOnTop(BarrelTile barrelTile) {
+    private boolean fluidOnTop(AbstractBarrelTile barrelTile) {
         Fluid fluidOnTop = barrelTile.getWorld().getFluidState(barrelTile.getPos().add(0, 1, 0)).getFluid();
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
@@ -83,7 +83,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         ItemStack stack = player.getHeldItem(handIn);
         if (stack.isEmpty()) {
             return ActionResultType.SUCCESS;
@@ -110,7 +110,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         return ActionResultType.SUCCESS;
     }
 
-    private boolean fluidBlockTransform(BarrelTile barrelTile, PlayerEntity player, Hand handIn) {
+    private boolean fluidBlockTransform(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn) {
         Fluid fluid = barrelTile.getTank().getFluid().getFluid();
         Item input = player.getHeldItem(handIn).getItem();
         if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
@@ -125,7 +125,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public boolean canFillWithFluid(BarrelTile barrel) {
+    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
+
         return true;
     }
 
@@ -150,12 +151,12 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected void spawnParticle(BarrelTile barrelTile) {
+    protected void spawnParticle(AbstractBarrelTile barrelTile) {
 
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
         String fluidName = I18n

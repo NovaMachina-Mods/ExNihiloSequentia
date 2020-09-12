@@ -24,6 +24,7 @@ public class Constants {
         public static final String CRUCIBLE_WOOD = "crucible_wood";
         public static final String BARREL_WOOD = "barrel_wood";
         public static final String SEA_WATER = "sea_water";
+        public static final String BARREL_STONE = "barrel_stone";
     }
 
     public static class Items {
@@ -106,6 +107,7 @@ public class Constants {
         public static final String PLATINUM = "platinum";
         public static final String OSMIUM = "osmium";
         public static final String URANIUM = "uranium";
+        public static final String ZINC = "zinc";
     }
 
     public static class Fluids {
@@ -148,6 +150,7 @@ public class Constants {
         public static final String EX_NIHILO_SEQUENTIA = "exnihilosequentia";
         public static final String TOP = "theoneprobe";
         public static final String MEKANSIM = "mekanism";
+        public static final String CREATE = "create";
     }
 
     public static class Tooltips {

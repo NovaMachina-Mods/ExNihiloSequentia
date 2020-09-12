@@ -8,6 +8,7 @@ import com.novamachina.exnihilosequentia.common.registries.barrel.transform.Flui
 import com.novamachina.exnihilosequentia.common.registries.crook.CrookRegistry;
 import com.novamachina.exnihilosequentia.common.registries.crucible.CrucibleRegistry;
 import com.novamachina.exnihilosequentia.common.registries.crucible.HeatRegistry;
+import com.novamachina.exnihilosequentia.common.registries.defaults.Create;
 import com.novamachina.exnihilosequentia.common.registries.defaults.ExNihilo;
 import com.novamachina.exnihilosequentia.common.registries.defaults.IDefaultRegistry;
 import com.novamachina.exnihilosequentia.common.registries.defaults.ImmersiveEngineerinig;
@@ -57,8 +58,11 @@ public class ExNihiloRegistries {
             if (ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING) || Config.ENABLE_IMMERSIVE.get()) {
                 this.defaults.add(new ImmersiveEngineerinig());
             }
-            if(ModList.get().isLoaded(Constants.ModIds.MEKANSIM) || Config.ENABLE_MEKANISM.get()) {
+            if (ModList.get().isLoaded(Constants.ModIds.MEKANSIM) || Config.ENABLE_MEKANISM.get()) {
                 this.defaults.add(new Mekanism());
+            }
+            if (ModList.get().isLoaded(Constants.ModIds.CREATE) || Config.ENABLE_CREATE.get()) {
+                this.defaults.add(new Create());
             }
         }
 

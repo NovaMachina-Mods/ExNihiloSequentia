@@ -3,7 +3,7 @@ package com.novamachina.exnihilosequentia.client.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.novamachina.exnihilosequentia.common.init.ModTiles;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -16,17 +16,18 @@ import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-public class BarrelRender extends AbstractModBlockRenderer<BarrelTile> {
+public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
     public BarrelRender(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     public static void register() {
-        ClientRegistry.bindTileEntityRenderer(ModTiles.BARREL.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ModTiles.WOOD_BARREL.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ModTiles.STONE_BARREL.get(), BarrelRender::new);
     }
 
     @Override
-    public void render(BarrelTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
+    public void render(AbstractBarrelTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation inventoryTexture = tileEntity.getSolidTexture();
         ResourceLocation solidTexture = Blocks.OAK_LEAVES.getRegistryName();
         Fluid fluid = tileEntity.getFluid();
@@ -117,7 +118,7 @@ public class BarrelRender extends AbstractModBlockRenderer<BarrelTile> {
     }
 
     private Color getBlockColor(ResourceLocation solidTexture,
-                                BarrelTile tileEntity) {
+                                AbstractBarrelTile tileEntity) {
         if (solidTexture != null) {
             if (solidTexture.toString().contains("leaves")) {
                 return new Color(

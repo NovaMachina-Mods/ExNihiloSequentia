@@ -2,7 +2,9 @@ package com.novamachina.exnihilosequentia.common.item.tools.hammer;
 
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
+import net.minecraftforge.fml.RegistryObject;
 
 public enum EnumHammer {
     WOOD(Constants.Items.HAMMER_WOOD, 64, ItemTier.WOOD),
@@ -14,10 +16,19 @@ public enum EnumHammer {
     public final String name;
     public final int defaultDurability;
     public final IItemTier teir;
+    private RegistryObject<Item> registryObject;
 
     EnumHammer(String name, int durability, IItemTier teir) {
         this.name = name;
         this.defaultDurability = durability;
         this.teir = teir;
+    }
+
+    public RegistryObject<Item> getRegistryObject() {
+        return registryObject;
+    }
+
+    public void setRegistryObject(RegistryObject<Item> registryObject) {
+        this.registryObject = registryObject;
     }
 }

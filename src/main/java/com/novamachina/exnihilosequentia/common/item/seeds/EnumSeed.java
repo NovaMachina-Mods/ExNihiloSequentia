@@ -3,7 +3,9 @@ package com.novamachina.exnihilosequentia.common.item.seeds;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.PlantType;
+import net.minecraftforge.fml.RegistryObject;
 
 public enum EnumSeed {
 
@@ -25,6 +27,7 @@ public enum EnumSeed {
     private final String seedName;
     private final BlockState defaultState;
     private final PlantType plantType;
+    private RegistryObject<Item> registryObject;
 
     EnumSeed(String seedName, BlockState defaultState, PlantType plantType) {
         this.seedName = seedName;
@@ -42,5 +45,13 @@ public enum EnumSeed {
 
     public String getSeedName() {
         return "seed_" + seedName;
+    }
+
+    public RegistryObject<Item> getRegistryObject() {
+        return registryObject;
+    }
+
+    public void setRegistryObject(RegistryObject<Item> registryObject) {
+        this.registryObject = registryObject;
     }
 }

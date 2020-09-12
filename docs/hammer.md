@@ -22,6 +22,7 @@ Recipes
 Block Breakdown
 ---------------
 The following is what a block will break down into.
+
 | Original    | Output             |
 |-------------|--------------------|
 | Stone       | Cobblestone        |

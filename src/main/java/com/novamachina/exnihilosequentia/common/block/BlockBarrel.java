@@ -2,7 +2,7 @@ package com.novamachina.exnihilosequentia.common.block;
 
 import com.novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import com.novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -46,7 +46,7 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
             return ActionResultType.SUCCESS;
         }
 
-        BarrelTile tile = (BarrelTile) worldIn.getTileEntity(pos);
+        AbstractBarrelTile tile = (AbstractBarrelTile) worldIn.getTileEntity(pos);
 
         if (tile != null) {
             IFluidHandler fluidHandler = tile
@@ -62,7 +62,7 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
-        BarrelTile barrelTile = (BarrelTile) world.getTileEntity(data.getPos());
+        AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getTileEntity(data.getPos());
         if (barrelTile == null) {
             return;
         }

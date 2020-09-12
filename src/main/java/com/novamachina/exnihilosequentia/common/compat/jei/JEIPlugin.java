@@ -21,7 +21,6 @@ import com.novamachina.exnihilosequentia.common.compat.jei.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.dry.DrySieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.wet.WetSieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
-import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -135,11 +134,11 @@ public class JEIPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         for (EnumCrook crook : EnumCrook.values()) {
             registration
-                .addRecipeCatalyst(new ItemStack(ModItems.crookMap.get(crook.name).get()), CrookRecipeCategory.UID);
+                .addRecipeCatalyst(new ItemStack(crook.getRegistryObject().get()), CrookRecipeCategory.UID);
         }
         for (EnumHammer hammer : EnumHammer.values()) {
             registration
-                .addRecipeCatalyst(new ItemStack(ModItems.hammerMap.get(hammer.name).get()), HammerRecipeCategory.UID);
+                .addRecipeCatalyst(new ItemStack(hammer.getRegistryObject().get()), HammerRecipeCategory.UID);
         }
 
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.SIEVE.get()), DrySieveRecipeCategory.UID);

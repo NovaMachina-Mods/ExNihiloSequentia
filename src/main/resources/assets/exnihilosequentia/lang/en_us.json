@@ -12,6 +12,7 @@
 
   "block.exnihilosequentia.sieve": "Sieve",
   "block.exnihilosequentia.barrel_wood": "Wooden Barrel",
+  "block.exnihilosequentia.barrel_stone": "Stone Barrel",
   "block.exnihilosequentia.crucible_unfired": "Unfired Crucible",
   "block.exnihilosequentia.crucible_fired": "Fired Crucible",
   "block.exnihilosequentia.crucible_wood": "Wooden Crucible",
@@ -61,6 +62,7 @@
   "item.exnihilosequentia.chunk_platinum": "Platinum Ore Chunk",
   "item.exnihilosequentia.chunk_osmium": "Osmium Ore Chunk",
   "item.exnihilosequentia.chunk_uranium": "Uranium Ore Chunk",
+  "item.exnihilosequentia.chunk_zinc": "Zinc Ore Chunk",
 
   "item.exnihilosequentia.piece_iron": "Iron Ore Piece",
   "item.exnihilosequentia.piece_gold": "Gold Ore Piece",
@@ -73,6 +75,7 @@
   "item.exnihilosequentia.piece_platinum": "Platinum Ore Piece",
   "item.exnihilosequentia.piece_osmium": "Osmium Ore Piece",
   "item.exnihilosequentia.piece_uranium": "Uranium Ore Piece",
+  "item.exnihilosequentia.piece_zinc": "Zinc Ore Piece",
 
   "item.exnihilosequentia.ingot_copper": "Copper Ingot",
   "item.exnihilosequentia.ingot_tin": "Tin Ingot",
@@ -83,6 +86,7 @@
   "item.exnihilosequentia.ingot_platinum": "Platinum Ingot",
   "item.exnihilosequentia.ingot_osmium": "Osmium Ingot",
   "item.exnihilosequentia.ingot_uranium": "Uranium Ingot",
+  "item.exnihilosequentia.ingot_zinc": "Zinc Ingot",
 
   "item.exnihilosequentia.seed_oak": "Oak Seed",
   "item.exnihilosequentia.seed_spruce": "Spruce Seed",
@@ -144,5 +148,8 @@
   "waila.crucible.fluid": "Fluid: %s %s mb",
   "waila.crucible.solid": "Solid Amount: %s",
 
-  "top.barrel.mode": "Mode: %s"
+  "top.barrel.mode": "Mode: %s",
+
+  "command.reload.warning": "WARNING: JSON registries are disabled in the configuration file. Reload will not occur.",
+  "command.reload.success": "Reload successful."
 }
