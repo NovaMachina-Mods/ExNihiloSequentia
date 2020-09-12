@@ -1,8 +1,11 @@
 package com.novamachina.exnihilosequentia.common.init;
 
+import com.electronwill.nightconfig.core.ConfigSpec;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestedLeavesTile;
 import com.novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleTile;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
@@ -34,9 +37,12 @@ public class ModTiles {
     public static final RegistryObject<TileEntityType<InfestedLeavesTile>> INFESTED_LEAVES = TILES
         .register(Blocks.INFESTED_LEAVES, () -> TileEntityType.Builder
             .create(InfestedLeavesTile::new, ModBlocks.INFESTED_LEAVES.get()).build(null));
-    public static final RegistryObject<TileEntityType<BarrelTile>> BARREL = TILES
+    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_WOOD = TILES
         .register(Blocks.BARREL_WOOD, () -> TileEntityType.Builder
-            .create(BarrelTile::new, ModBlocks.BARREL_WOOD.get()).build(null));
+            .create(WoodBarrelTile::new, ModBlocks.BARREL_WOOD.get()).build(null));
+    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_STONE = TILES
+        .register(Blocks.BARREL_STONE, () -> TileEntityType.Builder
+            .create(StoneBarrelTile::new, ModBlocks.BARREL_STONE.get()).build(null));
 
     public static void init(IEventBus eventBus) {
         TILES.register(eventBus);

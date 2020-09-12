@@ -36,6 +36,7 @@ public class Config {
     public static ForgeConfigSpec.IntValue SECONDS_TO_FLUID_TRANSFORM;
     public static ForgeConfigSpec.IntValue BARREL_NUMBER_OF_BUCKETS;
     public static ForgeConfigSpec.IntValue RAIN_FILL_AMOUNT;
+    public static ForgeConfigSpec.IntValue WOOD_BARREL_MAX_TEMP;
 
     // Crook
     public static ForgeConfigSpec.IntValue MAX_BONUS_STRING_COUNT;
@@ -158,6 +159,8 @@ public class Config {
             .defineInRange("barrelNumberOfBuckets", 1, 1, Integer.MAX_VALUE);
         RAIN_FILL_AMOUNT = COMMON_BUILDER.comment("How much fluid rain will fill per iteration (Default: 2)")
             .defineInRange("rainFillAmount", 2, 1, Integer.MAX_VALUE);
+        WOOD_BARREL_MAX_TEMP = COMMON_BUILDER.comment("The max temperature a barrel can accept; water is 300 (Default: 300)")
+            .defineInRange("woodBarrelMaxTemp", 300, 0, Integer.MAX_VALUE);
 
         COMMON_BUILDER.comment("Mob Spawn Configs").push(SUBCATEGORY_BARREL_MOB);
         SECONDS_TO_SPAWN = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)")

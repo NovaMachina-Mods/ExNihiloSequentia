@@ -21,10 +21,12 @@ import com.novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeType
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -159,6 +161,15 @@ public class ExNihilo implements IDefaultRegistry {
         registry.addHeatSource(Blocks.WALL_TORCH, 1);
         registry.addHeatSource(Blocks.MAGMA_BLOCK, 2);
         registry.addHeatSource(Blocks.GLOWSTONE, 2);
+
+        for(Fluid fluid : ForgeRegistries.FLUIDS) {
+            if(fluid != Fluids.LAVA && fluid != Fluids.FLOWING_LAVA) {
+                int temp = fluid.getAttributes().getTemperature() / 433;
+                if(temp > 0 && ForgeRegistries.BLOCKS.containsKey(fluid.getRegistryName())) {
+                    registry.addHeatSource(fluid.getRegistryName(), temp);
+                }
+            }
+        }
     }
 
     @Override

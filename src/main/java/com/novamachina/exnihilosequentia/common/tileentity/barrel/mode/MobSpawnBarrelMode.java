@@ -2,7 +2,7 @@ package com.novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
-import com.novamachina.exnihilosequentia.common.tileentity.barrel.BarrelTile;
+import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
@@ -37,7 +37,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void tick(BarrelTile barrelTile) {
+    public void tick(AbstractBarrelTile barrelTile) {
         if (doll != null) {
             currentProgress++;
             spawnParticle(barrelTile);
@@ -51,12 +51,12 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         return ActionResultType.SUCCESS;
     }
 
     @Override
-    public boolean canFillWithFluid(BarrelTile barrel) {
+    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
         return false;
     }
 
@@ -93,7 +93,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected void spawnParticle(BarrelTile barrelTile) {
+    protected void spawnParticle(AbstractBarrelTile barrelTile) {
         ((ServerWorld) barrelTile.getWorld())
             .spawnParticle(ParticleTypes.LARGE_SMOKE,
                 barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
@@ -107,7 +107,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(BarrelTile barrelTile) {
+    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils

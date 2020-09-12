@@ -24,6 +24,7 @@ public class Constants {
         public static final String CRUCIBLE_WOOD = "crucible_wood";
         public static final String BARREL_WOOD = "barrel_wood";
         public static final String SEA_WATER = "sea_water";
+        public static final String BARREL_STONE = "barrel_stone";
     }
 
     public static class Items {
