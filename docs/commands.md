@@ -13,3 +13,4 @@ This command is used to reload specific registries in game. The following are su
 - `fluidOnTop`
 - `fluidTransform`
 - `fluidBlock`
+- `all` - reloads all registries

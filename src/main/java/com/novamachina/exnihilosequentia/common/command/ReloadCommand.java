@@ -23,7 +23,19 @@ public class ReloadCommand implements Command<CommandSource> {
             .then(Commands.literal("crucible").executes((c) -> reloadRegistry(c, ExNihiloRegistries.CRUCIBLE_REGISTRY)))
             .then(Commands.literal("fluidOnTop").executes((c) -> reloadRegistry(c, ExNihiloRegistries.FLUID_ON_TOP_REGISTRY)))
             .then(Commands.literal("fluidTransform").executes((c) -> reloadRegistry(c, ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY)))
-            .then(Commands.literal("fluidBlock").executes((c) -> reloadRegistry(c, ExNihiloRegistries.FLUID_BLOCK_REGISTRY)));
+            .then(Commands.literal("fluidBlock").executes((c) -> reloadRegistry(c, ExNihiloRegistries.FLUID_BLOCK_REGISTRY)))
+            .then(Commands.literal("allRegistries").executes((c -> reloadAll(c))));
+    }
+
+    private static int reloadAll(CommandContext<CommandSource> c) {
+        if(Config.USE_JSON_REGISTRIES.get()) {
+            ExNihiloRegistries.BUS.clearRegistries();
+            ExNihiloRegistries.BUS.useJson();
+            c.getSource().getEntity().sendMessage(new TranslationTextComponent("command.reload.success"));
+        } else {
+            c.getSource().getEntity().sendMessage(new TranslationTextComponent("command.reload.warning"));
+        }
+        return 1;
     }
 
     private static int reloadRegistry(CommandContext<CommandSource> c, AbstractModRegistry registry) {
