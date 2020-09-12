@@ -148,5 +148,8 @@
   "waila.crucible.fluid": "Fluid: %s %s mb",
   "waila.crucible.solid": "Solid Amount: %s",
 
-  "top.barrel.mode": "Mode: %s"
+  "top.barrel.mode": "Mode: %s",
+
+  "command.reload.warning": "WARNING: JSON registries are disabled in the configuration file. Reload will not occur.",
+  "command.reload.success": "Reload successful."
 }
