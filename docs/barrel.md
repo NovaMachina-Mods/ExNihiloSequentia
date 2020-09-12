@@ -2,6 +2,8 @@ Barrel
 ======
 The barrel has a wide range of uses. You can use it to compost organics into dirt, transform one fluid into another, transform a fluid into a block with an item, and spawn mobs. When in the rain, the barrel will collect water. Right click the barrel to get a block out of the barrel. Right click the barrel with a bucket to add or remove a fluid.
 
+Wood barrels cannot accept hot fluids. Stone barrels can accept hot fluids. Water has a temperature of 300. Anything over 433 will not go into a wood barrel.
+
 !!! Warning
     Once a compost item is in the barrel, it cannot be removed. A barrel will void any fluid in it when it is broken.
     
@@ -11,6 +13,12 @@ Recipe
 ---
 - 6x Wood Plank (Any)
 - 1x Wood Slab (Any)
+---
+![](images/recipes/barrel_stone.png)
+---
+- 6x Stone
+- 1x Stone Stab
+---
 
 Fluid Transformation
 --------------------
