@@ -151,4 +151,5 @@
   "top.barrel.mode": "模式: %s",
 
   "command.reload.warning": "警告：配置文件中禁用了JSON注册表。 重新加载不会发生。",
-  "command.reload.success": "重新加载成功。",
+  "command.reload.success": "重新加载成功。"
+}
