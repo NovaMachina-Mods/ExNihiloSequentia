@@ -13,7 +13,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "${mc_version}-${exnihilosequentia_version}"
+def mc_version = "${mc_major}.3"
+version = "${mc_major}-${exnihilosequentia_version}"
 group = 'com.novamachina.exnihilosequentia' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'exnihilosequentia'
 
@@ -111,11 +112,11 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    compileOnly fg.deobf("mezz.jei:jei-${mod_support_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mod_support_version}:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}")
 
-    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mod_support_version}:api")
-    runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mod_support_version}")
+    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2:api")
+    runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2")
 
     compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}:api")
     runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}")
