@@ -31,6 +31,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(AbstractBarrelTile barrelTile) {
+        if(barrelTile.getFluidAmount() <= 0) {
+            barrelTile.setMode(BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY));
+        }
         if (barrelTile.getFluidAmount() >= AbstractBarrelTile.MAX_FLUID_AMOUNT) {
             if (fluidOnTop(barrelTile)) {
                 return;
@@ -158,8 +161,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
-        String fluidName = I18n
-            .format(barrelTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey());
+        String fluidName = barrelTile.getFluid() != null ? I18n
+            .format(barrelTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey()) : "None";
 
         info.add(new TranslationTextComponent("waila.barrel.fluidAmount", fluidName, barrelTile.getFluidAmount()));
 

@@ -23,6 +23,6 @@ Ex Nihilo: Sequentia is a port to 1.15 of Ex Nihilo: Creatio for 1.12, which in 
 [[dependencies.exnihilosequentia]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.2]"
+    versionRange="[1.16.2, )"
     ordering="NONE"
     side="BOTH"
