@@ -6,7 +6,7 @@ import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.registries.sieve.SieveRegistry;
 import net.minecraft.block.Blocks;
 
-public class ImmersiveEngineerinig implements IDefaultRegistry {
+public class ImmersiveEngineering implements IDefaultRegistry {
     @Override
     public void registerSieve(SieveRegistry registry) {
         if (!EnumModdedOre.ALUMINUM.isEnabled()) {
