@@ -31,9 +31,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SieveRegistry extends AbstractModRegistry {
@@ -47,6 +49,8 @@ public class SieveRegistry extends AbstractModRegistry {
     private final Map<ResourceLocation, List<SieveDropEntry>> waterloggedFlintMeshMap = new HashMap<>();
     private final Map<ResourceLocation, List<SieveDropEntry>> waterloggedIronMeshMap = new HashMap<>();
     private final Map<ResourceLocation, List<SieveDropEntry>> waterloggedDiamondMeshMap = new HashMap<>();
+    
+    private final Map<ResourceLocation, List<UniqueSieveDropEntry>> uniqueDropsMap = new HashMap<>();
 
     private final boolean flattenRecipes = Config.FLATTEN_SIEVE_RECIPES.get();
 
@@ -124,21 +128,25 @@ public class SieveRegistry extends AbstractModRegistry {
         List<SieveDropEntry> returnList = new ArrayList<>();
         switch (meshType) {
             case DIAMOND:
+                returnList.addAll(retrieveFromUnique(input, isWaterlogged, EnumMesh.DIAMOND));
                 returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedDiamondMeshMap : diamondMeshMap, input));
                 if (!flattenRecipes) {
                     break;
                 }
             case IRON:
+                returnList.addAll(retrieveFromUnique(input, isWaterlogged, EnumMesh.IRON));
                 returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedIronMeshMap : ironMeshMap, input));
                 if (!flattenRecipes) {
                     break;
                 }
             case FLINT:
+                returnList.addAll(retrieveFromUnique(input, isWaterlogged, EnumMesh.FLINT));
                 returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedFlintMeshMap : flintMeshMap, input));
                 if (!flattenRecipes) {
                     break;
                 }
             case STRING:
+                returnList.addAll(retrieveFromUnique(input, isWaterlogged, EnumMesh.STRING));
                 returnList.addAll(retrieveFromMap(isWaterlogged ? waterloggedStringMeshMap : stringMeshMap, input));
                 break;
             default:
@@ -146,6 +154,19 @@ public class SieveRegistry extends AbstractModRegistry {
                 break;
         }
         return returnList;
+    }
+
+    private Collection<? extends SieveDropEntry> retrieveFromUnique(ResourceLocation input, boolean isWaterlogged, EnumMesh mesh) {
+        List<UniqueSieveDropEntry> uniqueDropsList = uniqueDropsMap.get(input);
+        List<SieveDropEntry> drops = new ArrayList<>();
+        for(UniqueSieveDropEntry entry : uniqueDropsList) {
+            if(mesh.getId() == entry.getMesh().getId()) {
+                if(isWaterlogged == entry.isWaterlogged()) {
+                    drops.add(new SieveDropEntry(entry.getResult(), entry.getRarity()));
+                }
+            }
+        }
+        return drops;
     }
 
     @Override
@@ -157,21 +178,11 @@ public class SieveRegistry extends AbstractModRegistry {
         try {
             List<SieveJson> registryJson = readJson();
             for (SieveJson entry : registryJson) {
-                try {
-                    if (itemExists(entry.getInput())) {
-                        ResourceLocation inputID = new ResourceLocation(entry.getInput());
-                        if (itemExists(entry.getResult())) {
-                            ResourceLocation outputID = new ResourceLocation(entry.getResult());
-                            addDrop(inputID, outputID, entry.getRarity(), entry.getMesh(), entry.isWaterlogged());
-                        } else {
-                            LogUtil.warn(String
-                                .format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.SIEVE_FILE, entry
-                                    .getResult()));
-                        }
+                try {     
+                    if(entry.getInput().charAt(0) == '*') {
+                        handleUniqueDrop(entry);
                     } else {
-                        LogUtil.warn(String
-                            .format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.SIEVE_FILE, entry
-                                .getInput()));
+                        handleRegularDrop(entry);
                     }
                 } catch (ResourceLocationException e) {
                     LogUtil.warn(String.format("%s: %s. Skipping...", Constants.Json.SIEVE_FILE, e.getMessage()));
@@ -189,9 +200,56 @@ public class SieveRegistry extends AbstractModRegistry {
         }
     }
 
+    private void handleUniqueDrop(SieveJson entry) {
+        String input = entry.getInput().substring(1);
+        if (itemExists(input)) {
+            ResourceLocation inputID = new ResourceLocation(input);
+            if (itemExistsOrTag(entry.getResult())) {
+                ResourceLocation outputID = new ResourceLocation(entry.getResult());
+                addUniqueDrop(inputID, outputID, entry.getRarity(), entry.getMesh(), entry.isWaterlogged());
+            } else {
+                LogUtil.warn(String
+                    .format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.SIEVE_FILE, entry
+                        .getResult()));
+            }
+        } else {
+            LogUtil.warn(String
+                .format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.SIEVE_FILE, entry
+                    .getInput()));
+        }
+    }
+
+    private void addUniqueDrop(ResourceLocation inputID, ResourceLocation outputID, Float rarity, EnumMesh mesh, boolean waterlogged) {
+        List<UniqueSieveDropEntry> drops = uniqueDropsMap.computeIfAbsent(inputID, k -> new ArrayList<>());
+        drops.add(new UniqueSieveDropEntry(outputID, rarity, mesh, waterlogged));        
+    }
+
+    private void handleRegularDrop(SieveJson entry) {
+        if (itemExistsOrTag(entry.getInput())) {
+            ResourceLocation inputID = new ResourceLocation(entry.getInput());
+            if (itemExistsOrTag(entry.getResult())) {
+                ResourceLocation outputID = new ResourceLocation(entry.getResult());
+                addDrop(inputID, outputID, entry.getRarity(), entry.getMesh(), entry.isWaterlogged());
+            } else {
+                LogUtil.warn(String
+                    .format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.SIEVE_FILE, entry
+                        .getResult()));
+            }
+        } else {
+            LogUtil.warn(String
+                .format("%s: Entry \"%s\" does not exist...Skipping...", Constants.Json.SIEVE_FILE, entry
+                    .getInput()));
+        }
+    }
+
+    private boolean itemExistsOrTag(String entry) throws ResourceLocationException {
+        ResourceLocation itemID = new ResourceLocation(entry);
+        return TagUtils.isTag(itemID) || itemExists(entry);
+    }
+
     private boolean itemExists(String entry) throws ResourceLocationException {
         ResourceLocation itemID = new ResourceLocation(entry);
-        return TagUtils.isTag(itemID) || ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS
+        return ForgeRegistries.BLOCKS.containsKey(itemID) || ForgeRegistries.ITEMS
             .containsKey(itemID);
     }
 
@@ -239,10 +297,11 @@ public class SieveRegistry extends AbstractModRegistry {
         Map<ResourceLocation, List<SieveDropEntry>> dropsMap, ResourceLocation input) {
         List<SieveDropEntry> returnList = new ArrayList<>();
         Collection<ResourceLocation> tags = TagUtils.getTags(input);
-        for (ResourceLocation tag : tags) {
+        Set<ResourceLocation> tagSet = new HashSet<>(tags);
+        for (ResourceLocation tag : tagSet) {
             if (dropsMap.containsKey(tag)) {
                 returnList.addAll(dropsMap.get(tag));
-                return returnList;
+//                return returnList;
             }
         }
 
