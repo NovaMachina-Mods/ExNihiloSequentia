@@ -226,6 +226,7 @@ The format of the file is:
 - `name`: The name of block/item/fluid (i.e. `witchwater`)
 
 - `input`: The block to be sieved (Must be a block or a tag). Required field.
+    - In order to force a block registration rather than a tag, add a `*` to the beginning of the input. For example, `*minecraft:sand` will register a drop for the sand block rather than the tag sand, which includes red sand. The drops will first come from the forced drops you specify and then any tag registries as well. This only applies to sieve inputs. 
 - `result`: The item to be dropped (Must be an item). Required field.
 - `rarity`: The percent chance the result will be dropped from the input (Must be a number greater than 0.0 and less than 1.0). Required field.
 - `mesh`: The minimum mesh required to drop the result (Must be STRING, FLINT, IRON, or DIAMOND). Required field.
