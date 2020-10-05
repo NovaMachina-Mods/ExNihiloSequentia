@@ -28,6 +28,7 @@ public class ImmersiveEngineering implements IDefaultRegistry {
                 .get(), 0.15F, EnumMesh.DIAMOND, false);
             registry.addMultiMeshDrop(ModBlocks.CRUSHED_END_STONE.get(), EnumModdedOre.SILVER.getPieceItem()
                 .get(), null, null, 0.15F, 0.25F, false);
+            EnumModdedOre.SILVER.setEnabled();
         }
 
         if (!EnumModdedOre.NICKEL.isEnabled()) {
