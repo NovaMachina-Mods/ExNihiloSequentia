@@ -14,5 +14,12 @@ public class BlockStates extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         simpleBlock(ModBlocks.CRUSHED_ANDESITE.get());
+        simpleBlock(ModBlocks.CRUSHED_DIORITE.get());
+        simpleBlock(ModBlocks.CRUSHED_GRANITE.get());
+        simpleBlock(ModBlocks.CRUSHED_NETHERRACK.get());
+        simpleBlock(ModBlocks.CRUSHED_END_STONE.get());
+        simpleBlock(ModBlocks.DUST.get());
+        simpleBlock(ModBlocks.INFESTED_LEAVES.get());
+        simpleBlock(ModBlocks.INFESTING_LEAVES.get());
     }
 }
