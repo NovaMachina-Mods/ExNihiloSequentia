@@ -1,11 +1,16 @@
 package com.novamachina.exnihilosequentia.common.datagen;
 
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
+import com.novamachina.exnihilosequentia.common.init.ModItems;
+import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
+import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.ore.IOre;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
+import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
+import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Block;
@@ -20,6 +25,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
+import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -34,6 +40,205 @@ public class Recipes extends RecipeProvider {
         registerPebbleBlocks(consumer);
         registerBarrels(consumer);
         registerOres(consumer);
+        registerHammers(consumer);
+        registerDolls(consumer);
+        registerMeshes(consumer);
+        registerMisc(consumer);
+    }
+
+    private void registerMisc(Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(Blocks.BEEHIVE)
+            .patternLine("xxx")
+            .patternLine("fff")
+            .patternLine("xxx")
+            .key('x', ItemTags.PLANKS)
+            .key('f', EnumResource.BEEHIVE_FRAME.getRegistryObject().get())
+            .addCriterion("has_frame", InventoryChangeTrigger.Instance
+                .forItems(EnumResource.BEEHIVE_FRAME.getRegistryObject().get()))
+            .build(consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(Blocks.BEEHIVE)
+            .patternLine("xxx")
+            .patternLine("xfx")
+            .patternLine("xxx")
+            .key('x', Items.STICK)
+            .key('f', Items.STRING)
+            .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
+            .addCriterion("has_string", InventoryChangeTrigger.Instance.forItems(Items.STRING))
+            .build(consumer);
+
+        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.COOKED_SILKWORM.get()), EnumResource.SILKWORM
+            .getRegistryObject().get(), 0.1F, 200)
+            .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
+                .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
+            .build(consumer);
+
+        CookingRecipeBuilder
+            .smeltingRecipe(Ingredient.fromItems(ModBlocks.CRUCIBLE_FIRED.get()), ModBlocks.CRUCIBLE_UNFIRED
+                .get(), 0.7F, 200)
+            .addCriterion("has_uncooked_crucible", InventoryChangeTrigger.Instance
+                .forItems(ModBlocks.CRUCIBLE_UNFIRED.get()))
+            .build(consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.CRUCIBLE_UNFIRED.get())
+            .patternLine("c c")
+            .patternLine("c c")
+            .patternLine("ccc")
+            .key('c', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
+            .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
+                .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
+            .build(consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.CRUCIBLE_WOOD.get())
+            .patternLine("c c")
+            .patternLine("clc")
+            .patternLine("s s")
+            .key('c', ItemTags.LOGS)
+            .key('l', ItemTags.WOODEN_SLABS)
+            .key('s', Items.STICK)
+            .addCriterion("has_logs", hasItem(ItemTags.LOGS))
+            .build(consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 4)
+            .patternLine("xex")
+            .patternLine(" x ")
+            .patternLine("x x")
+            .key('x', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
+            .key('e', Items.DIAMOND)
+            .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
+                .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
+            .addCriterion("has_diamond", InventoryChangeTrigger.Instance.forItems(Items.DIAMOND))
+            .build(consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 6)
+            .patternLine("xex")
+            .patternLine(" x ")
+            .patternLine("x x")
+            .key('x', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
+            .key('e', Items.EMERALD)
+            .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
+                .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
+            .addCriterion("has_emerald", InventoryChangeTrigger.Instance.forItems(Items.EMERALD))
+            .build(consumer);
+    }
+
+    private void registerMeshes(Consumer<IFinishedRecipe> consumer) {
+        registerMesh(EnumMesh.FLINT.getRegistryObject().get(), EnumMesh.STRING.getRegistryObject()
+            .get(), Items.FLINT, consumer);
+        registerMesh(EnumMesh.IRON.getRegistryObject().get(), EnumMesh.FLINT.getRegistryObject()
+            .get(), Items.IRON_INGOT, consumer);
+        registerMesh(EnumMesh.DIAMOND.getRegistryObject().get(), EnumMesh.IRON.getRegistryObject()
+            .get(), Items.DIAMOND, consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(EnumMesh.STRING.getRegistryObject().get())
+            .patternLine("iii")
+            .patternLine("iii")
+            .patternLine("iii")
+            .key('i', Items.STRING)
+            .addCriterion("has_sieve", InventoryChangeTrigger.Instance.forItems(ModBlocks.SIEVE.get()))
+            .build(consumer);
+    }
+
+    private void registerMesh(Item output, Item inputMesh, Item inputItem, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(output)
+            .patternLine("i i")
+            .patternLine("imi")
+            .patternLine("i i")
+            .key('i', inputItem)
+            .key('m', inputMesh)
+            .addCriterion("has_mesh", InventoryChangeTrigger.Instance.forItems(inputMesh))
+            .build(consumer);
+    }
+
+    private void registerDolls(Consumer<IFinishedRecipe> consumer) {
+        registerDoll(DollEnum.BEE.getRegistryObject()
+            .get(), Items.YELLOW_DYE, Items.GLOWSTONE_DUST, ItemTags.FLOWERS, EnumResource.BEEHIVE_FRAME
+            .getRegistryObject().get(), consumer);
+        registerDoll(DollEnum.BLAZE.getRegistryObject()
+            .get(), Items.BLAZE_POWDER, Items.GLOWSTONE_DUST, Items.REDSTONE, Items.NETHER_WART, consumer);
+        registerDoll(DollEnum.ENDERMAN.getRegistryObject()
+            .get(), Items.BLACK_DYE, Items.GLOWSTONE_DUST, Items.REDSTONE, Items.NETHER_WART, consumer);
+        registerDoll(DollEnum.GUARDIAN.getRegistryObject()
+            .get(), Items.PRISMARINE, Items.GLOWSTONE_DUST, Items.REDSTONE, ItemTags.FISHES, consumer);
+        registerDoll(DollEnum.SHULKER.getRegistryObject()
+            .get(), Items.PURPLE_DYE, Items.GLOWSTONE_DUST, Items.END_STONE, Items.ENDER_PEARL, consumer);
+    }
+
+    private void registerDoll(Item output, Item corners, Item sides, Item top, ITag.INamedTag<Item> bottom, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(output)
+            .patternLine("ctc")
+            .patternLine("sms")
+            .patternLine("cbc")
+            .key('c', corners)
+            .key('t', top)
+            .key('s', sides)
+            .key('b', bottom)
+            .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
+            .addCriterion("has_doll", InventoryChangeTrigger.Instance
+                .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .build(consumer);
+    }
+
+    private void registerDoll(Item output, Item corners, Item sides, Item top, Item bottom, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(output)
+            .patternLine("ctc")
+            .patternLine("sms")
+            .patternLine("cbc")
+            .key('c', corners)
+            .key('t', top)
+            .key('s', sides)
+            .key('b', bottom)
+            .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
+            .addCriterion("has_doll", InventoryChangeTrigger.Instance
+                .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .build(consumer);
+    }
+
+    private void registerDoll(Item output, Item corners, Item sides, ITag.INamedTag<Item> top, Item bottom, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(output)
+            .patternLine("ctc")
+            .patternLine("sms")
+            .patternLine("cbc")
+            .key('c', corners)
+            .key('t', top)
+            .key('s', sides)
+            .key('b', bottom)
+            .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
+            .addCriterion("has_doll", InventoryChangeTrigger.Instance
+                .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .build(consumer);
+    }
+
+    private void registerHammers(Consumer<IFinishedRecipe> consumer) {
+        registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Items.DIAMOND, consumer);
+        registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Items.GOLD_INGOT, consumer);
+        registerHammer(EnumHammer.IRON.getRegistryObject().get(), Items.IRON_INGOT, consumer);
+        registerHammer(EnumHammer.STONE.getRegistryObject().get(), Tags.Items.COBBLESTONE, consumer);
+        registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), ItemTags.PLANKS, consumer);
+    }
+
+    private void registerHammer(Item output, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(output)
+            .patternLine(" x ")
+            .patternLine(" -X")
+            .patternLine("-  ")
+            .key('x', input)
+            .key('-', Items.STICK)
+            .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
+            .addCriterion("has_material", hasItem(input))
+            .build(consumer);
+    }
+
+    private void registerHammer(Item output, Item input, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(output)
+            .patternLine(" x ")
+            .patternLine(" -X")
+            .patternLine("-  ")
+            .key('x', input)
+            .key('-', Items.STICK)
+            .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
+            .addCriterion("has_material", InventoryChangeTrigger.Instance.forItems(input))
+            .build(consumer);
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
