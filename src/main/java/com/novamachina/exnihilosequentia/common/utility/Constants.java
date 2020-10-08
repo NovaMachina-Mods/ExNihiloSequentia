@@ -151,6 +151,7 @@ public class Constants {
         public static final String TOP = "theoneprobe";
         public static final String MEKANISM = "mekanism";
         public static final String CREATE = "create";
+        public static final String MINECRAFT = "minecraft";
     }
 
     public static class Tooltips {
