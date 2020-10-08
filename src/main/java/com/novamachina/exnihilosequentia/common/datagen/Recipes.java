@@ -20,6 +20,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -119,6 +120,22 @@ public class Recipes extends RecipeProvider {
             .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
                 .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
             .addCriterion("has_emerald", InventoryChangeTrigger.Instance.forItems(Items.EMERALD))
+            .build(consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.END_CAKE.get())
+            .patternLine("ece")
+            .patternLine("eke")
+            .patternLine("ece")
+            .key('e', Items.ENDER_EYE)
+            .key('c', Items.END_CRYSTAL)
+            .key('c', Items.CAKE)
+            .addCriterion("has_ender_pearl", InventoryChangeTrigger.Instance.forItems(Items.ENDER_PEARL))
+            .build(consumer);
+
+        ShapelessRecipeBuilder.shapelessRecipe(EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
+            .addIngredient(Items.CLAY_BALL)
+            .addIngredient(Items.BONE_MEAL)
+            .addCriterion("has_clay", InventoryChangeTrigger.Instance.forItems(Items.CLAY_BALL))
             .build(consumer);
     }
 
