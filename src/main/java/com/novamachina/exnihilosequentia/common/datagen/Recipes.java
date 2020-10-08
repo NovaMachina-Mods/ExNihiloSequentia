@@ -1,23 +1,25 @@
 package com.novamachina.exnihilosequentia.common.datagen;
 
-import com.novamachina.exnihilosequentia.common.block.BaseBlock;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
+import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
+import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import com.novamachina.exnihilosequentia.common.item.ore.IOre;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -31,6 +33,35 @@ public class Recipes extends RecipeProvider {
         registerCrooks(consumer);
         registerPebbleBlocks(consumer);
         registerBarrels(consumer);
+        registerOres(consumer);
+    }
+
+    private void registerOres(Consumer<IFinishedRecipe> consumer) {
+        for (EnumOre ore : EnumOre.values()) {
+            registerOre(ore, consumer);
+        }
+
+        for (EnumModdedOre ore : EnumModdedOre.values()) {
+            registerOre(ore, consumer);
+            registerSmelting(ore, consumer);
+        }
+    }
+
+    private void registerSmelting(EnumModdedOre ore, Consumer<IFinishedRecipe> consumer) {
+        CookingRecipeBuilder
+            .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem().get(), 0.7F, 200)
+            .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
+            .build(consumer);
+    }
+
+    private void registerOre(IOre ore, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(ore.getChunkItem().get())
+            .patternLine("xx")
+            .patternLine("xx")
+            .key('x', ore.getPieceItem().get())
+            .setGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA)
+            .addCriterion("has_piece", InventoryChangeTrigger.Instance.forItems(ore.getPieceItem().get()))
+            .build(consumer);
     }
 
     private void registerBarrels(Consumer<IFinishedRecipe> consumer) {
@@ -82,14 +113,18 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerCrooks(Consumer<IFinishedRecipe> consumer) {
-        registerCrook(EnumCrook.ANDESITE.getRegistryObject().get(), EnumPebbleType.ANDESITE.getRegistryObject().get(), consumer);
+        registerCrook(EnumCrook.ANDESITE.getRegistryObject().get(), EnumPebbleType.ANDESITE.getRegistryObject()
+            .get(), consumer);
         registerCrook(EnumCrook.BONE.getRegistryObject().get(), Items.BONE, consumer);
         registerCrook(EnumCrook.DIAMOND.getRegistryObject().get(), Items.DIAMOND, consumer);
-        registerCrook(EnumCrook.DIORITE.getRegistryObject().get(), EnumPebbleType.DIORITE.getRegistryObject().get(), consumer);
+        registerCrook(EnumCrook.DIORITE.getRegistryObject().get(), EnumPebbleType.DIORITE.getRegistryObject()
+            .get(), consumer);
         registerCrook(EnumCrook.GOLD.getRegistryObject().get(), Items.GOLD_NUGGET, consumer);
-        registerCrook(EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject().get(), consumer);
+        registerCrook(EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject()
+            .get(), consumer);
         registerCrook(EnumCrook.IRON.getRegistryObject().get(), Items.IRON_NUGGET, consumer);
-        registerCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject().get(), consumer);
+        registerCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject()
+            .get(), consumer);
         registerCrook(EnumCrook.WOOD.getRegistryObject().get(), Items.STICK, consumer);
     }
 
