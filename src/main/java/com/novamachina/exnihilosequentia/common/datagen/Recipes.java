@@ -26,6 +26,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
@@ -58,7 +59,7 @@ public class Recipes extends RecipeProvider {
                 .forItems(EnumResource.BEEHIVE_FRAME.getRegistryObject().get()))
             .build(consumer);
 
-        ShapedRecipeBuilder.shapedRecipe(Blocks.BEEHIVE)
+        ShapedRecipeBuilder.shapedRecipe(EnumResource.BEEHIVE_FRAME.getRegistryObject().get())
             .patternLine("xxx")
             .patternLine("xfx")
             .patternLine("xxx")
@@ -68,14 +69,14 @@ public class Recipes extends RecipeProvider {
             .addCriterion("has_string", InventoryChangeTrigger.Instance.forItems(Items.STRING))
             .build(consumer);
 
-        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModItems.COOKED_SILKWORM.get()), EnumResource.SILKWORM
-            .getRegistryObject().get(), 0.1F, 200)
+        CookingRecipeBuilder.smeltingRecipe(Ingredient
+            .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ModItems.COOKED_SILKWORM.get(), 0.1F, 200)
             .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
                 .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
             .build(consumer);
 
         CookingRecipeBuilder
-            .smeltingRecipe(Ingredient.fromItems(ModBlocks.CRUCIBLE_FIRED.get()), ModBlocks.CRUCIBLE_UNFIRED
+            .smeltingRecipe(Ingredient.fromItems(ModBlocks.CRUCIBLE_UNFIRED.get()), ModBlocks.CRUCIBLE_FIRED
                 .get(), 0.7F, 200)
             .addCriterion("has_uncooked_crucible", InventoryChangeTrigger.Instance
                 .forItems(ModBlocks.CRUCIBLE_UNFIRED.get()))
@@ -109,7 +110,7 @@ public class Recipes extends RecipeProvider {
             .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
                 .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
             .addCriterion("has_diamond", InventoryChangeTrigger.Instance.forItems(Items.DIAMOND))
-            .build(consumer);
+            .build(consumer, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x4"));
 
         ShapedRecipeBuilder.shapedRecipe(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 6)
             .patternLine("xex")
@@ -120,7 +121,7 @@ public class Recipes extends RecipeProvider {
             .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
                 .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
             .addCriterion("has_emerald", InventoryChangeTrigger.Instance.forItems(Items.EMERALD))
-            .build(consumer);
+            .build(consumer, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x6"));
 
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.END_CAKE.get())
             .patternLine("ece")
@@ -128,7 +129,7 @@ public class Recipes extends RecipeProvider {
             .patternLine("ece")
             .key('e', Items.ENDER_EYE)
             .key('c', Items.END_CRYSTAL)
-            .key('c', Items.CAKE)
+            .key('k', Items.CAKE)
             .addCriterion("has_ender_pearl", InventoryChangeTrigger.Instance.forItems(Items.ENDER_PEARL))
             .build(consumer);
 
@@ -231,13 +232,13 @@ public class Recipes extends RecipeProvider {
         registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Items.GOLD_INGOT, consumer);
         registerHammer(EnumHammer.IRON.getRegistryObject().get(), Items.IRON_INGOT, consumer);
         registerHammer(EnumHammer.STONE.getRegistryObject().get(), Tags.Items.COBBLESTONE, consumer);
-        registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), ItemTags.PLANKS, consumer);
+        registerHammer(EnumHammer.WOOD.getRegistryObject().get(), ItemTags.PLANKS, consumer);
     }
 
     private void registerHammer(Item output, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shapedRecipe(output)
             .patternLine(" x ")
-            .patternLine(" -X")
+            .patternLine(" -x")
             .patternLine("-  ")
             .key('x', input)
             .key('-', Items.STICK)
@@ -249,7 +250,7 @@ public class Recipes extends RecipeProvider {
     private void registerHammer(Item output, Item input, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shapedRecipe(output)
             .patternLine(" x ")
-            .patternLine(" -X")
+            .patternLine(" -x")
             .patternLine("-  ")
             .key('x', input)
             .key('-', Items.STICK)
