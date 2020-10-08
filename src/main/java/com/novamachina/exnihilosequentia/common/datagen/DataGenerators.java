@@ -13,13 +13,16 @@ public class DataGenerators {
 
         if(event.includeServer()) {
             // Recipes
+            generator.addProvider(new Recipes(generator));
             // LootTable
+            // Tags
         }
         if(event.includeClient()) {
             // BlockStates
             generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
             // Items
             generator.addProvider(new Items(generator, event.getExistingFileHelper()));
+            // Language
         }
     }
 }
