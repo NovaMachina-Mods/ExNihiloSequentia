@@ -3,9 +3,7 @@ package com.novamachina.exnihilosequentia.common.datagen;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import com.novamachina.exnihilosequentia.common.item.ore.IOre;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
@@ -84,26 +82,23 @@ public class Items extends ItemModelProvider {
         for (EnumOre ore : EnumOre.values()) {
             registerChunk(ore);
             registerPiece(ore);
-        }
-
-        for (EnumModdedOre ore : EnumModdedOre.values()) {
-            registerChunk(ore);
-            registerPiece(ore);
-            registerIngot(ore);
+            if(!ore.isVanilla()) {
+                registerIngot(ore);
+            }
         }
     }
 
-    private void registerIngot(EnumModdedOre ore) {
+    private void registerIngot(EnumOre ore) {
         withExistingParent(ore.getIngotItem().get().getRegistryName()
             .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "item/ingot_ore"));
     }
 
-    private void registerPiece(IOre ore) {
+    private void registerPiece(EnumOre ore) {
         withExistingParent(ore.getPieceItem().get().getRegistryName()
             .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "item/piece_ore"));
     }
 
-    private void registerChunk(IOre ore) {
+    private void registerChunk(EnumOre ore) {
         withExistingParent(ore.getChunkItem().get().getRegistryName()
             .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "item/chunk_ore"));
     }

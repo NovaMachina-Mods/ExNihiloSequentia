@@ -1,5 +1,7 @@
 package com.novamachina.exnihilosequentia.common.datagen;
 
+import com.novamachina.exnihilosequentia.common.utility.Constants;
+import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,6 +19,8 @@ public class DataGenerators {
             // LootTable
             generator.addProvider(new LootTables(generator));
             // Tags
+            generator.addProvider(new ItemTags(generator, new BlockTagsProvider(generator, Constants.ModIds.EX_NIHILO_SEQUENTIA, event
+                .getExistingFileHelper()), event.getExistingFileHelper()));
         }
         if(event.includeClient()) {
             // BlockStates

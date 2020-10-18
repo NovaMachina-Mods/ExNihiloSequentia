@@ -4,9 +4,7 @@ import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import com.novamachina.exnihilosequentia.common.item.ore.IOre;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
@@ -259,25 +257,38 @@ public class Recipes extends RecipeProvider {
             .build(consumer);
     }
 
+    // TODO: Vanilla Metals don't generate recipes
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
         for (EnumOre ore : EnumOre.values()) {
             registerOre(ore, consumer);
-        }
-
-        for (EnumModdedOre ore : EnumModdedOre.values()) {
-            registerOre(ore, consumer);
-            registerSmelting(ore, consumer);
+            if(!ore.isVanilla()) {
+                registerSmelting(ore, consumer);
+            }
+            if(ore.isVanilla()) {
+                if(ore == EnumOre.IRON) {
+                    CookingRecipeBuilder
+                        .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 200)
+                        .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
+                        .build(consumer);
+                }
+                if(ore == EnumOre.GOLD) {
+                    CookingRecipeBuilder
+                        .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
+                        .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
+                        .build(consumer);
+                }
+            }
         }
     }
 
-    private void registerSmelting(EnumModdedOre ore, Consumer<IFinishedRecipe> consumer) {
+    private void registerSmelting(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
         CookingRecipeBuilder
             .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem().get(), 0.7F, 200)
             .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
             .build(consumer);
     }
 
-    private void registerOre(IOre ore, Consumer<IFinishedRecipe> consumer) {
+    private void registerOre(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shapedRecipe(ore.getChunkItem().get())
             .patternLine("xx")
             .patternLine("xx")

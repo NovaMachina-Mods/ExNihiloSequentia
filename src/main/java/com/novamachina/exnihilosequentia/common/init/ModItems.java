@@ -5,7 +5,6 @@ import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.ore.OreItem;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
@@ -111,12 +110,9 @@ public class ModItems {
         for (EnumOre ore : EnumOre.values()) {
             ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
             ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
-        }
-
-        for (EnumModdedOre ore : EnumModdedOre.values()) {
-            ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
-            ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
-            ore.setIngotItem(ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
+            if(!ore.isVanilla()) {
+                ore.setIngotItem(ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
+            }
         }
 
         for (EnumSeed seed : EnumSeed.values()) {

@@ -5,7 +5,6 @@ import com.novamachina.exnihilosequentia.client.render.CrucibleRender;
 import com.novamachina.exnihilosequentia.client.render.SieveRender;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.init.ModTiles;
-import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.ore.OreColor;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -42,12 +41,9 @@ public class ClientSetup {
         for (EnumOre ore : EnumOre.values()) {
             event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
             event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
-        }
-
-        for (EnumModdedOre ore : EnumModdedOre.values()) {
-            event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
-            event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
-            event.getItemColors().register(new OreColor(), ore.getIngotItem().get());
+            if(!ore.isVanilla()) {
+                event.getItemColors().register(new OreColor(), ore.getIngotItem().get());
+            }
         }
     }
 }
