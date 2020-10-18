@@ -27,7 +27,6 @@ public class DataGenerators {
             generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
             // Items
             generator.addProvider(new Items(generator, event.getExistingFileHelper()));
-            // Language
         }
     }
 }
