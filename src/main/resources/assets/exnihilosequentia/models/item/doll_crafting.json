@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "exnihilosequentia:items/doll"
+    "layer0": "exnihilosequentia:items/doll_crafting"
   }
 }

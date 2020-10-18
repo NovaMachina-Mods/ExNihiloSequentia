@@ -5,7 +5,6 @@ import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import com.novamachina.exnihilosequentia.common.item.ore.EnumModdedOre;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.ore.OreItem;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
@@ -31,6 +30,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems {
 
+    // Begin Block Items
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
         ForgeRegistries.ITEMS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
     public static final RegistryObject<Item> DUST = ITEMS
@@ -68,16 +68,6 @@ public class ModItems {
     public static final RegistryObject<Item> SIEVE = ITEMS.register(Blocks.SIEVE,
         () -> new BlockItem(ModBlocks.SIEVE.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
-        .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
-    public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = ITEMS
-        .register(Constants.Items.WITCH_WATER_BUCKET,
-            () -> new BucketItem(ModFluids.WITCH_WATER,
-                new Properties().group(ModInitialization.ITEM_GROUP).maxStackSize(1)));
-    public static final RegistryObject<BucketItem> SEA_WATER_BUCKET = ITEMS
-        .register(Constants.Items.SEA_WATER_BUCKET,
-            () -> new BucketItem(ModFluids.SEA_WATER,
-                new Properties().group(ModInitialization.ITEM_GROUP).maxStackSize(1)));
     public static final RegistryObject<Item> CRUCIBLE_UNFIRED = ITEMS
         .register(Blocks.CRUCIBLE_UNFIRED, () -> new BlockItem(ModBlocks.CRUCIBLE_UNFIRED.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
@@ -94,6 +84,18 @@ public class ModItems {
         .register(Blocks.BARREL_STONE, () -> new BlockItem(ModBlocks.BARREL_STONE.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
 
+    // Begin Items Only
+    public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
+        .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
+    public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = ITEMS
+        .register(Constants.Items.WITCH_WATER_BUCKET,
+            () -> new BucketItem(ModFluids.WITCH_WATER,
+                new Properties().group(ModInitialization.ITEM_GROUP).maxStackSize(1)));
+    public static final RegistryObject<BucketItem> SEA_WATER_BUCKET = ITEMS
+        .register(Constants.Items.SEA_WATER_BUCKET,
+            () -> new BucketItem(ModFluids.SEA_WATER,
+                new Properties().group(ModInitialization.ITEM_GROUP).maxStackSize(1)));
+
     static {
         for (EnumCrook crook : EnumCrook.values()) {
             crook.setRegistryObject(ITEMS
@@ -108,12 +110,9 @@ public class ModItems {
         for (EnumOre ore : EnumOre.values()) {
             ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
             ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
-        }
-
-        for (EnumModdedOre ore : EnumModdedOre.values()) {
-            ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
-            ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
-            ore.setIngotItem(ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
+            if(!ore.isVanilla()) {
+                ore.setIngotItem(ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
+            }
         }
 
         for (EnumSeed seed : EnumSeed.values()) {

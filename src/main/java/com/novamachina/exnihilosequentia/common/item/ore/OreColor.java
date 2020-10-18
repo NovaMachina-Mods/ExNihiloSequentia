@@ -15,7 +15,7 @@ public class OreColor implements IItemColor {
                     return Color.WHITE.getRGB();
                 case 1: {
                     OreItem oreItem = (OreItem) stack.getItem();
-                    IOre ore = oreItem.getOre();
+                    EnumOre ore = oreItem.getOre();
                     return ore.getColor().toInt();
                 }
                 default: {
