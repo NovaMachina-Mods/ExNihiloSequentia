@@ -37,28 +37,29 @@ public class ExNihilo implements IDefaultRegistry {
         registry.addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F);
     }
 
-    @Override
-    public void registerHammer(HammerRegistry registry) {
-        registry.addRecipe(Blocks.STONE, Blocks.COBBLESTONE);
-        registry.addRecipe(Blocks.COBBLESTONE, Blocks.GRAVEL);
-        registry.addRecipe(Blocks.GRAVEL, Blocks.SAND);
-        registry.addRecipe(Blocks.SAND, ModBlocks.DUST.get());
-        registry.addRecipe(Blocks.ANDESITE, ModBlocks.CRUSHED_ANDESITE.get());
-        registry.addRecipe(Blocks.DIORITE, ModBlocks.CRUSHED_DIORITE.get());
-        registry.addRecipe(Blocks.GRANITE, ModBlocks.CRUSHED_GRANITE.get());
-        registry.addRecipe(Blocks.END_STONE, ModBlocks.CRUSHED_END_STONE.get());
-        registry.addRecipe(Blocks.NETHERRACK, ModBlocks.CRUSHED_NETHERRACK.get());
-        registry.addRecipe(Blocks.TUBE_CORAL_BLOCK, Blocks.TUBE_CORAL);
-        registry.addRecipe(Blocks.BRAIN_CORAL_BLOCK, Blocks.BRAIN_CORAL);
-        registry.addRecipe(Blocks.BUBBLE_CORAL_BLOCK, Blocks.BUBBLE_CORAL);
-        registry.addRecipe(Blocks.FIRE_CORAL_BLOCK, Blocks.FIRE_CORAL);
-        registry.addRecipe(Blocks.HORN_CORAL_BLOCK, Blocks.HORN_CORAL);
-        registry.addRecipe(Blocks.TUBE_CORAL, Blocks.TUBE_CORAL_FAN);
-        registry.addRecipe(Blocks.BRAIN_CORAL, Blocks.BRAIN_CORAL_FAN);
-        registry.addRecipe(Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN);
-        registry.addRecipe(Blocks.FIRE_CORAL, Blocks.FIRE_CORAL_FAN);
-        registry.addRecipe(Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN);
-    }
+//    @Override
+//    public void registerHammer(HammerRegistry registry) {
+//        registry.addRecipe(Blocks.STONE, Blocks.COBBLESTONE);
+//        registry.addRecipe(Blocks.COBBLESTONE, Blocks.GRAVEL);
+//        registry.addRecipe(Blocks.GRAVEL, Blocks.SAND);
+//        registry.addRecipe(Blocks.SAND, ModBlocks.DUST.get());
+//        registry.addRecipe(Blocks.ANDESITE, ModBlocks.CRUSHED_ANDESITE.get());
+//        registry.addRecipe(Blocks.DIORITE, ModBlocks.CRUSHED_DIORITE.get());
+//        registry.addRecipe(Blocks.GRANITE, ModBlocks.CRUSHED_GRANITE.get());
+//        registry.addRecipe(Blocks.END_STONE, ModBlocks.CRUSHED_END_STONE.get());
+//        registry.addRecipe(Blocks.NETHERRACK, ModBlocks.CRUSHED_NETHERRACK.get());
+//
+//        registry.addRecipe(Blocks.TUBE_CORAL_BLOCK, Blocks.TUBE_CORAL);
+//        registry.addRecipe(Blocks.BRAIN_CORAL_BLOCK, Blocks.BRAIN_CORAL);
+//        registry.addRecipe(Blocks.BUBBLE_CORAL_BLOCK, Blocks.BUBBLE_CORAL);
+//        registry.addRecipe(Blocks.FIRE_CORAL_BLOCK, Blocks.FIRE_CORAL);
+//        registry.addRecipe(Blocks.HORN_CORAL_BLOCK, Blocks.HORN_CORAL);
+//        registry.addRecipe(Blocks.TUBE_CORAL, Blocks.TUBE_CORAL_FAN);
+//        registry.addRecipe(Blocks.BRAIN_CORAL, Blocks.BRAIN_CORAL_FAN);
+//        registry.addRecipe(Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN);
+//        registry.addRecipe(Blocks.FIRE_CORAL, Blocks.FIRE_CORAL_FAN);
+//        registry.addRecipe(Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN);
+//    }
 
     @Override
     public void registerCompost(CompostRegistry registry) {

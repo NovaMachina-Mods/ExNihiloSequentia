@@ -3,6 +3,7 @@ package com.novamachina.exnihilosequentia.common.datagen;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloTags;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
+import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -22,6 +23,13 @@ public class ItemTags extends ItemTagsProvider {
         registerOres();
         registerSeeds();
         registerMeats();
+        registerHammers();
+    }
+
+    private void registerHammers() {
+        for(EnumHammer hammer : EnumHammer.values()) {
+            func_240522_a_(ExNihiloTags.HAMMER).func_240532_a_(hammer.getRegistryObject().get());
+        }
     }
 
     private void registerMeats() {

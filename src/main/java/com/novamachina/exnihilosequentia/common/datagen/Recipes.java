@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.datagen;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.HammerRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
@@ -44,6 +45,39 @@ public class Recipes extends RecipeProvider {
         registerDolls(consumer);
         registerMeshes(consumer);
         registerMisc(consumer);
+        
+        registerCustomRecipes(consumer);
+    }
+
+    private void registerCustomRecipes(Consumer<IFinishedRecipe> consumer) {
+        registerHammerRecipes(consumer);
+    }
+
+    private void registerHammerRecipes(Consumer<IFinishedRecipe> consumer) {
+        HammerRecipeBuilder.builder().input(Blocks.STONE).result(Blocks.COBBLESTONE).build(consumer, hammerLoc("cobblestone"));
+        HammerRecipeBuilder.builder().input(Blocks.COBBLESTONE).result(Blocks.GRAVEL).build(consumer, hammerLoc("gravel"));
+        HammerRecipeBuilder.builder().input(Blocks.GRAVEL).result(Blocks.SAND).build(consumer, hammerLoc("sand"));
+        HammerRecipeBuilder.builder().input(Blocks.SAND).result(ModBlocks.DUST.get()).build(consumer, hammerLoc("dust"));
+        HammerRecipeBuilder.builder().input(Blocks.NETHERRACK).result(ModBlocks.CRUSHED_NETHERRACK.get()).build(consumer, hammerLoc("netherrack"));
+        HammerRecipeBuilder.builder().input(Blocks.ANDESITE).result(ModBlocks.CRUSHED_ANDESITE.get()).build(consumer, hammerLoc("andesite"));
+        HammerRecipeBuilder.builder().input(Blocks.DIORITE).result(ModBlocks.CRUSHED_DIORITE.get()).build(consumer, hammerLoc("diorite"));
+        HammerRecipeBuilder.builder().input(Blocks.GRANITE).result(ModBlocks.CRUSHED_GRANITE.get()).build(consumer, hammerLoc("granite"));
+        HammerRecipeBuilder.builder().input(Blocks.END_STONE).result(ModBlocks.CRUSHED_END_STONE.get()).build(consumer, hammerLoc("end_stone"));
+
+        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL_BLOCK).result(Blocks.TUBE_CORAL).build(consumer, hammerLoc("tube_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL_BLOCK).result(Blocks.BRAIN_CORAL).build(consumer, hammerLoc("brain_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL_BLOCK).result(Blocks.BUBBLE_CORAL).build(consumer, hammerLoc("bubble_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL_BLOCK).result(Blocks.FIRE_CORAL).build(consumer, hammerLoc("fire_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL_BLOCK).result(Blocks.HORN_CORAL).build(consumer, hammerLoc("horn_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL).result(Blocks.TUBE_CORAL_FAN).build(consumer, hammerLoc("tube_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL).result(Blocks.BRAIN_CORAL_FAN).build(consumer, hammerLoc("brain_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL).result(Blocks.BUBBLE_CORAL_FAN).build(consumer, hammerLoc("bubble_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL).result(Blocks.FIRE_CORAL_FAN).build(consumer, hammerLoc("fire_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL).result(Blocks.HORN_CORAL_FAN).build(consumer, hammerLoc("horn_coral_fan"));
+    }
+
+    private ResourceLocation hammerLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "hammer/" + id);
     }
 
     private void registerMisc(Consumer<IFinishedRecipe> consumer) {

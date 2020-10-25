@@ -1,0 +1,9 @@
+{
+  "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:horn_coral_block"
+  },
+  "result": {
+    "item": "minecraft:horn_coral"
+  }
+}

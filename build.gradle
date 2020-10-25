@@ -113,7 +113,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     compileOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}:api")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}")
 
     compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2:api")
 //    runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2")

@@ -1,0 +1,136 @@
+package com.novamachina.exnihilosequentia.common.api.crafting;
+
+import com.google.common.base.Preconditions;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
+public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements IFinishedRecipe {
+    private List<Consumer<JsonObject>> writerFunctions;
+    private ResourceLocation id;
+    private RecipeSerializer<?> serializer;
+
+    protected JsonArray inputArray = null;
+    protected int inputCount = 0;
+    protected int maxInputCount = 1;
+
+    protected JsonArray outputArray = null;
+    protected int outputCount = 0;
+    protected int maxOutputCount = 1;
+
+    protected JsonArray conditions = null;
+
+    public ExNihiloFinishedRecipe(RecipeSerializer<?> serializer) {
+        this.serializer = serializer;
+        this.writerFunctions = new ArrayList<>();
+    }
+
+    @Override
+    public void serialize(JsonObject json) {
+        for(Consumer<JsonObject> writer : this.writerFunctions) {
+            writer.accept(json);
+        }
+    }
+
+    @Override
+    public ResourceLocation getID() {
+        return id;
+    }
+
+    @Override
+    public IRecipeSerializer<?> getSerializer() {
+        return serializer;
+    }
+
+    @Override
+    public JsonObject getAdvancementJson() {
+        return null;
+    }
+
+    @Override
+    public ResourceLocation getAdvancementID() {
+        return null;
+    }
+
+    public void build(Consumer<IFinishedRecipe> out, ResourceLocation id) {
+        Preconditions.checkArgument(isComplete(), "This recipe is incomplete.");
+        this.id = id;
+        out.accept(this);
+    }
+
+    protected boolean isComplete() {
+        return true;
+    }
+
+    public R addResult(ItemStack itemStack) {
+        if (outputArray != null) {
+            return addMultiResult(serializeItemStack(itemStack));
+        } else {
+            return addItem("result", itemStack);
+        }
+    }
+
+    private R addItem(String key, ItemStack itemStack) {
+        Preconditions.checkArgument(!itemStack.isEmpty(), "ItemStack cannot be empty.");
+        return addWriter(jsonObj -> jsonObj.add(key, serializeItemStack(itemStack)));
+    }
+
+    public R addWriter(Consumer<JsonObject> writer) {
+        Preconditions.checkArgument(id == null, "This recipe has already been finalized.");
+        this.writerFunctions.add(writer);
+        return (R) this;
+    }
+
+    private R addMultiResult(JsonElement obj) {
+        Preconditions.checkArgument(maxOutputCount > 1, "This recipe does not support multiple results.");
+        Preconditions.checkArgument(outputCount < maxOutputCount, "This recipe can only have " + maxOutputCount + "results.");
+        outputArray.add(obj);
+        outputCount++;
+        return (R) this;
+    }
+
+    private R addMultiInput(JsonObject obj) {
+        Preconditions.checkArgument(maxInputCount > 1, "This recipe does not support multiple inputs.");
+        Preconditions.checkArgument(inputCount < maxInputCount, "This recipe can only have " + maxInputCount + "inputs.");
+        inputArray.add(obj);
+        inputCount++;
+        return (R) this;
+    }
+
+    private JsonObject serializeItemStack(ItemStack itemStack) {
+        JsonObject obj = new JsonObject();
+        obj.addProperty("item", itemStack.getItem().getRegistryName().toString());
+        if(itemStack.getCount() > 1) {
+            obj.addProperty("count", itemStack.getCount());
+        }
+        if(itemStack.hasTag()) {
+            obj.addProperty("nbt", itemStack.getTag().toString());
+        }
+        return obj;
+    }
+
+    protected R addInput(ItemStack input) {
+        if (outputArray != null) {
+            return addMultiInput(serializeItemStack(input));
+        } else {
+            return addItem("input", input);
+        }
+    }
+
+    protected R addResult(IItemProvider result) {
+        return addResult(new ItemStack(result));
+    }
+
+    protected R addInput(IItemProvider input) {
+        return addInput(new ItemStack(input));
+    }
+}

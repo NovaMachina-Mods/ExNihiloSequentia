@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.api;
 
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
@@ -17,6 +18,7 @@ public class ExNihiloTags {
 
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
+    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
 
     static {
         for(EnumOre ore : EnumOre.values()) {

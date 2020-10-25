@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.compat.jei;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.api.crafting.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipe;
@@ -13,7 +14,6 @@ import com.novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTop
 import com.novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformJEIRecipe;
-import com.novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipeCategory;
