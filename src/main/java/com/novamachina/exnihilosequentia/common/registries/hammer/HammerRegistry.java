@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.registries.hammer;
 
-import com.novamachina.exnihilosequentia.common.api.crafting.HammerRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 

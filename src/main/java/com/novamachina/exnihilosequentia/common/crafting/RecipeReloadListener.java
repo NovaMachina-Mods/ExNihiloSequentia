@@ -1,7 +1,7 @@
 package com.novamachina.exnihilosequentia.common.crafting;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import com.novamachina.exnihilosequentia.common.api.crafting.HammerRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;

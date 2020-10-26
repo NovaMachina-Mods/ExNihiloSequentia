@@ -1,7 +1,7 @@
 package com.novamachina.exnihilosequentia.common.compat.jei;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import com.novamachina.exnihilosequentia.common.api.crafting.HammerRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipe;

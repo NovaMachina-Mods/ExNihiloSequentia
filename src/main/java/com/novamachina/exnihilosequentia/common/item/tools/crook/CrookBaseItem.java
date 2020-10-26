@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.item.tools.crook;
 
 import com.google.common.collect.Sets;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import com.novamachina.exnihilosequentia.common.init.ModInitialization;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
@@ -59,8 +60,8 @@ public class CrookBaseItem extends ToolItem {
                 itemDrops.addAll(items);
             }
             Random random = new Random();
-            for (CrookDropEntry entry : ExNihiloRegistries.CROOK_REGISTRY.getDrops()) {
-                if (random.nextFloat() <= entry.getRarity()) {
+            for (CrookRecipe entry : ExNihiloRegistries.CROOK_REGISTRY.getDrops()) {
+                if (random.nextFloat() <= entry.getChance()) {
                     itemDrops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getItem())));
                 }
             }

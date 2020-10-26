@@ -8,6 +8,8 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import java.util.Collection;
+
 public abstract class SerializableRecipe implements IRecipe<IInventory> {
     protected final ItemStack outputDummy;
     protected final IRecipeType<?> type;

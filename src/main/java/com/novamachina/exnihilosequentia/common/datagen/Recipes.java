@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.datagen;
 
-import com.novamachina.exnihilosequentia.common.api.crafting.HammerRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;

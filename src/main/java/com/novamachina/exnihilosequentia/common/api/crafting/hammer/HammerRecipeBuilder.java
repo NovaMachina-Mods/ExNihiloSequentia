@@ -1,5 +1,6 @@
-package com.novamachina.exnihilosequentia.common.api.crafting;
+package com.novamachina.exnihilosequentia.common.api.crafting.hammer;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.ExNihiloFinishedRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.util.IItemProvider;
 

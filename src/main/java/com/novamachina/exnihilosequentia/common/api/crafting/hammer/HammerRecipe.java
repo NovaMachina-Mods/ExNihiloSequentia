@@ -1,13 +1,12 @@
-package com.novamachina.exnihilosequentia.common.api.crafting;
+package com.novamachina.exnihilosequentia.common.api.crafting.hammer;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.RecipeSerializer;
+import com.novamachina.exnihilosequentia.common.api.crafting.SerializableRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
-
-import java.util.Collections;
-import java.util.Map;
 
 public class HammerRecipe extends SerializableRecipe {
     public static HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), ItemStack.EMPTY, ItemStack.EMPTY);

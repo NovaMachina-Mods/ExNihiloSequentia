@@ -90,6 +90,12 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         return (R) this;
     }
 
+    public R setMultipleResults(int maxResultCount) {
+        this.outputArray = new JsonArray();
+        this.maxOutputCount = maxResultCount;
+        return addWriter(jsonObject -> jsonObject.add("results", outputArray));
+    }
+
     private R addMultiResult(JsonElement obj) {
         Preconditions.checkArgument(maxOutputCount > 1, "This recipe does not support multiple results.");
         Preconditions.checkArgument(outputCount < maxOutputCount, "This recipe can only have " + maxOutputCount + "results.");
