@@ -28,7 +28,7 @@ public class ItemTags extends ItemTagsProvider {
 
     private void registerHammers() {
         for(EnumHammer hammer : EnumHammer.values()) {
-            func_240522_a_(ExNihiloTags.HAMMER).func_240532_a_(hammer.getRegistryObject().get());
+            getOrCreateBuilder(ExNihiloTags.HAMMER).addItemEntry(hammer.getRegistryObject().get());
         }
     }
 
@@ -38,28 +38,28 @@ public class ItemTags extends ItemTagsProvider {
     }
 
     private void registerCooked() {
-        func_240522_a_(ExNihiloTags.MEAT_COOKED).func_240532_a_(Items.COOKED_CHICKEN);
-        func_240522_a_(ExNihiloTags.MEAT_COOKED).func_240532_a_(Items.COOKED_COD);
-        func_240522_a_(ExNihiloTags.MEAT_COOKED).func_240532_a_(Items.COOKED_MUTTON);
-        func_240522_a_(ExNihiloTags.MEAT_COOKED).func_240532_a_(Items.COOKED_PORKCHOP);
-        func_240522_a_(ExNihiloTags.MEAT_COOKED).func_240532_a_(Items.COOKED_RABBIT);
-        func_240522_a_(ExNihiloTags.MEAT_COOKED).func_240532_a_(Items.COOKED_SALMON);
-        func_240522_a_(ExNihiloTags.MEAT_COOKED).func_240532_a_(Items.COOKED_BEEF);
+        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_CHICKEN);
+        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_COD);
+        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_MUTTON);
+        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_PORKCHOP);
+        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_RABBIT);
+        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_SALMON);
+        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_BEEF);
     }
 
     private void registerUncooked() {
-        func_240522_a_(ExNihiloTags.MEAT_UNCOOKED).func_240532_a_(Items.CHICKEN);
-        func_240522_a_(ExNihiloTags.MEAT_UNCOOKED).func_240532_a_(Items.COD);
-        func_240522_a_(ExNihiloTags.MEAT_UNCOOKED).func_240532_a_(Items.MUTTON);
-        func_240522_a_(ExNihiloTags.MEAT_UNCOOKED).func_240532_a_(Items.PORKCHOP);
-        func_240522_a_(ExNihiloTags.MEAT_UNCOOKED).func_240532_a_(Items.RABBIT);
-        func_240522_a_(ExNihiloTags.MEAT_UNCOOKED).func_240532_a_(Items.SALMON);
-        func_240522_a_(ExNihiloTags.MEAT_UNCOOKED).func_240532_a_(Items.BEEF);
+        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.CHICKEN);
+        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.COD);
+        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.MUTTON);
+        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.PORKCHOP);
+        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.RABBIT);
+        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.SALMON);
+        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.BEEF);
     }
 
     private void registerSeeds() {
         for(EnumSeed seed : EnumSeed.values()) {
-            func_240522_a_(Tags.Items.SEEDS).func_240532_a_(seed.getRegistryObject().get());
+            getOrCreateBuilder(Tags.Items.SEEDS).addItemEntry(seed.getRegistryObject().get());
         }
     }
 
@@ -70,14 +70,14 @@ public class ItemTags extends ItemTagsProvider {
                 Item ingot = ore.getIngotItem().get();
                 Item chunk = ore.getChunkItem().get();
 
-                func_240522_a_(tags.getIngotTag()).func_240532_a_(ingot);
-                func_240522_a_(Tags.Items.INGOTS).func_240531_a_(tags.getIngotTag());
-                func_240522_a_(tags.getOreTag()).func_240532_a_(chunk);
-                func_240522_a_(Tags.Items.ORES).func_240531_a_(tags.getOreTag());
+                getOrCreateBuilder(tags.getIngotTag()).addItemEntry(ingot);
+                getOrCreateBuilder(Tags.Items.INGOTS).addTag(tags.getIngotTag());
+                getOrCreateBuilder(tags.getOreTag()).addItemEntry(chunk);
+                getOrCreateBuilder(Tags.Items.ORES).addTag(tags.getOreTag());
             } else {
                 Item chunk = ore.getChunkItem().get();
-                func_240522_a_(tags.getOreTag()).func_240532_a_(chunk);
-                func_240522_a_(Tags.Items.ORES).func_240531_a_(tags.getOreTag());
+                getOrCreateBuilder(tags.getOreTag()).addItemEntry(chunk);
+                getOrCreateBuilder(Tags.Items.ORES).addTag(tags.getOreTag());
             }
         }
     }

@@ -76,6 +76,6 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     @Override
     public void draw(HeatRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         Minecraft.getInstance().fontRenderer
-            .func_238421_b_(matrixStack, recipe.getHeatAmountString(), 24, 12, Color.gray.getRGB());
+            .drawString(matrixStack, recipe.getHeatAmountString(), 24, 12, Color.gray.getRGB());
     }
 }

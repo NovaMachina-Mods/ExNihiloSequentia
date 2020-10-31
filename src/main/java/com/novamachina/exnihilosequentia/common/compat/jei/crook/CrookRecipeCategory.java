@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.compat.jei.crook;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -11,6 +12,8 @@ import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.Arrays;
 
 public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crook");
@@ -52,7 +55,7 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
     @Override
     public void setIngredients(CrookRecipe crookRecipe, IIngredients iIngredients) {
         iIngredients.setInputs(VanillaTypes.ITEM, crookRecipe.getInputs());
-        iIngredients.setOutputs(VanillaTypes.ITEM, crookRecipe.getOutputs());
+        iIngredients.setOutputs(VanillaTypes.ITEM, crookRecipe.getOutputsWithoutChance());
     }
 
     @Override
@@ -63,11 +66,11 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
         IFocus<?> focus = recipeLayout.getFocus();
 
         int slotIndex = 1;
-        for (int i = 0; i < crookRecipe.getOutputs().size(); i++) {
+        for (int i = 0; i < crookRecipe.getOutputsWithoutChance().size(); i++) {
             final int slotX = 38 + (i % 7 * 18);
             final int slotY = 2 + i / 7 * 18;
 
-            ItemStack outputStack = crookRecipe.getOutputs().get(i);
+            ItemStack outputStack = crookRecipe.getOutputsWithoutChance().get(i);
 
             recipeLayout.getItemStacks().init(slotIndex + i, false, slotX, slotY);
             recipeLayout.getItemStacks().set(slotIndex + i, outputStack);

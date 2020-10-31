@@ -32,10 +32,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExNihilo implements IDefaultRegistry {
-    @Override
-    public void registerCrook(CrookRegistry registry) {
-        registry.addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F);
-    }
+//    @Override
+//    public void registerCrook(CrookRegistry registry) {
+//        registry.addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F);
+//    }
 
 //    @Override
 //    public void registerHammer(HammerRegistry registry) {

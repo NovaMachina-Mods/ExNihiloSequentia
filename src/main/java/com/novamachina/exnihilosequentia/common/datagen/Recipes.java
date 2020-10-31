@@ -1,5 +1,7 @@
 package com.novamachina.exnihilosequentia.common.datagen;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
@@ -21,12 +23,15 @@ import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Consumer;
 
@@ -51,6 +56,15 @@ public class Recipes extends RecipeProvider {
 
     private void registerCustomRecipes(Consumer<IFinishedRecipe> consumer) {
         registerHammerRecipes(consumer);
+        registerCrookRecipes(consumer);
+    }
+
+    private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
+        CrookRecipeBuilder.builder().input(ItemTags.LEAVES).addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F).build(consumer, crookLoc("leaves"));
+    }
+
+    private ResourceLocation crookLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crook/" + id);
     }
 
     private void registerHammerRecipes(Consumer<IFinishedRecipe> consumer) {

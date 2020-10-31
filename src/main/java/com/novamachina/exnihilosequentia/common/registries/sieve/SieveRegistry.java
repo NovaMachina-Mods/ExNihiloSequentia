@@ -463,7 +463,7 @@ public class SieveRegistry extends AbstractModRegistry {
         ITag<Block> blockTag = BlockTags.getCollection().get(inputID);
         List<ItemStack> inputBlocks = new ArrayList<>();
         if (blockTag != null) {
-            inputBlocks.addAll(blockTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList()));
+            inputBlocks.addAll(blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList()));
         } else {
             inputBlocks.add(new ItemStack(ForgeRegistries.BLOCKS.getValue(inputID)));
         }

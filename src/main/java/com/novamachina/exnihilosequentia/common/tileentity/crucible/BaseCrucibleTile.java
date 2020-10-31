@@ -53,13 +53,13 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+    public void read(BlockState state, CompoundNBT compound) {
         inventory.deserializeNBT(compound.getCompound("inventory"));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
         this.solidAmount = compound.getInt("solidAmount");
         this.currentItem = ItemStack.read(compound.getCompound("currentItem"));
-        super.func_230337_a_(state, compound);
+        super.read(state, compound);
     }
 
     @Override

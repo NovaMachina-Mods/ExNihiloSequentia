@@ -4,9 +4,15 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.crafting.serializer.ItemStackWithChanceSerializer;
+import net.minecraft.block.Block;
 import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
@@ -15,19 +21,16 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements IFinishedRecipe {
-    private List<Consumer<JsonObject>> writerFunctions;
-    private ResourceLocation id;
-    private RecipeSerializer<?> serializer;
-
     protected JsonArray inputArray = null;
     protected int inputCount = 0;
     protected int maxInputCount = 1;
-
     protected JsonArray outputArray = null;
     protected int outputCount = 0;
     protected int maxOutputCount = 1;
-
     protected JsonArray conditions = null;
+    private List<Consumer<JsonObject>> writerFunctions;
+    private ResourceLocation id;
+    private RecipeSerializer<?> serializer;
 
     public ExNihiloFinishedRecipe(RecipeSerializer<?> serializer) {
         this.serializer = serializer;
@@ -36,7 +39,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
     @Override
     public void serialize(JsonObject json) {
-        for(Consumer<JsonObject> writer : this.writerFunctions) {
+        for (Consumer<JsonObject> writer : this.writerFunctions) {
             writer.accept(json);
         }
     }
@@ -84,6 +87,10 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         return addWriter(jsonObj -> jsonObj.add(key, serializeItemStack(itemStack)));
     }
 
+    private R addItem(String key, Ingredient ingredient) {
+        return addWriter(jsonObj -> jsonObj.add(key, ingredient.serialize()));
+    }
+
     public R addWriter(Consumer<JsonObject> writer) {
         Preconditions.checkArgument(id == null, "This recipe has already been finalized.");
         this.writerFunctions.add(writer);
@@ -98,15 +105,17 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
     private R addMultiResult(JsonElement obj) {
         Preconditions.checkArgument(maxOutputCount > 1, "This recipe does not support multiple results.");
-        Preconditions.checkArgument(outputCount < maxOutputCount, "This recipe can only have " + maxOutputCount + "results.");
+        Preconditions
+            .checkArgument(outputCount < maxOutputCount, "This recipe can only have " + maxOutputCount + "results.");
         outputArray.add(obj);
         outputCount++;
         return (R) this;
     }
 
-    private R addMultiInput(JsonObject obj) {
+    private R addMultiInput(JsonElement obj) {
         Preconditions.checkArgument(maxInputCount > 1, "This recipe does not support multiple inputs.");
-        Preconditions.checkArgument(inputCount < maxInputCount, "This recipe can only have " + maxInputCount + "inputs.");
+        Preconditions
+            .checkArgument(inputCount < maxInputCount, "This recipe can only have " + maxInputCount + "inputs.");
         inputArray.add(obj);
         inputCount++;
         return (R) this;
@@ -115,18 +124,26 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     private JsonObject serializeItemStack(ItemStack itemStack) {
         JsonObject obj = new JsonObject();
         obj.addProperty("item", itemStack.getItem().getRegistryName().toString());
-        if(itemStack.getCount() > 1) {
+        if (itemStack.getCount() > 1) {
             obj.addProperty("count", itemStack.getCount());
         }
-        if(itemStack.hasTag()) {
+        if (itemStack.hasTag()) {
             obj.addProperty("nbt", itemStack.getTag().toString());
         }
         return obj;
     }
 
     protected R addInput(ItemStack input) {
-        if (outputArray != null) {
+        if (inputArray != null) {
             return addMultiInput(serializeItemStack(input));
+        } else {
+            return addItem("input", input);
+        }
+    }
+
+    protected R addInput(Ingredient input) {
+        if (inputArray != null) {
+            return addMultiInput(input.serialize());
         } else {
             return addItem("input", input);
         }
@@ -138,5 +155,21 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
     protected R addInput(IItemProvider input) {
         return addInput(new ItemStack(input));
+    }
+
+    protected R addInput(ITag.INamedTag<Item> tag) {
+        return addInput(Ingredient.fromTag(tag));
+    }
+
+    protected R addResult(ItemStackWithChance itemStack) {
+        if (outputArray != null) {
+            return addMultiResult(ItemStackWithChanceSerializer.INSTANCE.write(itemStack));
+        } else {
+            return addItem("result", ItemStackWithChanceSerializer.INSTANCE.write(itemStack));
+        }
+    }
+
+    private R addItem(String key, JsonElement obj) {
+        return addWriter(jsonObj -> jsonObj.add(key, obj));
     }
 }

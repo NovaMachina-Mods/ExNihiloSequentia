@@ -160,6 +160,10 @@ repositories {
         name = "Mobius Repo"
         url = "https://maven.tehnut.info"
     }
+    maven {
+        name = "Minecraft Forge"
+        url = "https://files.minecraftforge.net/maven"
+    }
 }
 
 publishing {

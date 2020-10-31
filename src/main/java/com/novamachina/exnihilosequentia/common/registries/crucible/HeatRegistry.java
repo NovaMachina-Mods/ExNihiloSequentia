@@ -179,7 +179,7 @@ public class HeatRegistry extends AbstractModRegistry {
                 if (block != Blocks.AIR && fluid == Fluids.EMPTY) {
                     ITag<Block> blockTag = BlockTags.getCollection().get(entry.getKey());
                     if (blockTag != null) {
-                        blockList = blockTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
+                        blockList = blockTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
                     } else {
                         blockList.add(new ItemStack(block));
                     }

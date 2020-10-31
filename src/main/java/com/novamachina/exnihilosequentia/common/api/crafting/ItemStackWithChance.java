@@ -22,6 +22,6 @@ public class ItemStackWithChance {
     }
 
     public float getChance() {
-        return chance
+        return chance;
     }
 }

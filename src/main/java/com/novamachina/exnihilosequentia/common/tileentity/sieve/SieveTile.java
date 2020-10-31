@@ -67,7 +67,7 @@ public class SieveTile extends TileEntity {
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+    public void read(BlockState state, CompoundNBT compound) {
         if (compound.contains("mesh")) {
             meshStack = ItemStack.read((CompoundNBT) compound.get("mesh"));
             if (meshStack.getItem() instanceof MeshItem) {
@@ -85,7 +85,7 @@ public class SieveTile extends TileEntity {
 
         progress = compound.getFloat("progress");
 
-        super.func_230337_a_(state, compound);
+        super.read(state, compound);
 //        setSieveState();
     }
 

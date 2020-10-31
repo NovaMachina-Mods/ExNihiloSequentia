@@ -1,0 +1,16 @@
+{
+  "type": "exnihilosequentia:crook",
+  "results": [
+    {
+      "chance": 0.1,
+      "item": "exnihilosequentia:silkworm"
+    },
+    {
+      "chance": 0.7,
+      "item": "minecraft:emerald"
+    }
+  ],
+  "input": {
+    "tag": "minecraft:leaves"
+  }
+}

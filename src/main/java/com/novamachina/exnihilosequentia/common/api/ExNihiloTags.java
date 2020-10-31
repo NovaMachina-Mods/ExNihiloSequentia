@@ -62,7 +62,7 @@ public class ExNihiloTags {
 
     public static ITag.INamedTag<Item> createItemWrapper(ResourceLocation name)
     {
-        return createWrapperTag(ItemTags.func_242177_b(), name, ItemTags::makeWrapperTag);
+        return createWrapperTag(ItemTags.getAllTags(), name, ItemTags::makeWrapperTag);
     }
 
     private static <T> ITag.INamedTag<T> createWrapperTag(List<? extends ITag.INamedTag<T>> allExisting, ResourceLocation name,
@@ -70,7 +70,7 @@ public class ExNihiloTags {
     {
         Optional<? extends ITag.INamedTag<T>> existing = allExisting
             .stream()
-            .filter(tag -> tag.func_230234_a_().equals(name))
+            .filter(tag -> tag.getName().equals(name))
             .findAny();
         if(existing.isPresent())
             return existing.get();

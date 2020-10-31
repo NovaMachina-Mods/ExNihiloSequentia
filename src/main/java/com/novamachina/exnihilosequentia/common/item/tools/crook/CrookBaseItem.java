@@ -2,6 +2,7 @@ package com.novamachina.exnihilosequentia.common.item.tools.crook;
 
 import com.google.common.collect.Sets;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.api.crafting.ItemStackWithChance;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import com.novamachina.exnihilosequentia.common.init.ModInitialization;
@@ -50,25 +51,24 @@ public class CrookBaseItem extends ToolItem {
                                     LivingEntity entityLiving) {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
         List<ItemStack> itemDrops = new ArrayList<>();
-        Collection<ResourceLocation> tags = TagUtils.getTags(state.getBlock());
 
-        if (tags.contains(new ResourceLocation("minecraft:leaves"))) {
-            for (int i = 0; i < Config.VANILLA_SIMULATE_DROP_COUNT.get(); i++) {
-                List<ItemStack> items = Block
-                    .getDrops(state, worldIn.getServer().getWorld(worldIn.func_234923_W_()),
-                        pos, null);
-                itemDrops.addAll(items);
-            }
-            Random random = new Random();
-            for (CrookRecipe entry : ExNihiloRegistries.CROOK_REGISTRY.getDrops()) {
-                if (random.nextFloat() <= entry.getChance()) {
-                    itemDrops.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getItem())));
+        for (int i = 0; i < Config.VANILLA_SIMULATE_DROP_COUNT.get(); i++) {
+            List<ItemStack> items = Block
+                .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimensionKey()),
+                    pos, null);
+            itemDrops.addAll(items);
+        }
+
+        Random random = new Random();
+        for(CrookRecipe recipe : ExNihiloRegistries.CROOK_REGISTRY.getDrops(state.getBlock())) {
+            for(ItemStackWithChance result : recipe.getOutput()) {
+                if(random.nextFloat() <= result.getChance()) {
+                    itemDrops.add(result.getStack());
                 }
             }
         }
-        if (state.getBlock() instanceof InfestedLeavesBlock) {
-            Random random = new Random();
 
+        if (state.getBlock() instanceof InfestedLeavesBlock) {
             itemDrops.add(new ItemStack(Items.STRING, random
                 .nextInt(Config.MAX_BONUS_STRING_COUNT.get()) + Config.MIN_STRING_COUNT.get()));
             if (random.nextDouble() <= 0.8) {

@@ -48,18 +48,18 @@ public class EndCakeBlock extends CakeBlock {
         if (!worldIn.isRemote() && player.getRidingEntity() == null && player.isCreative()) {
             if (worldIn instanceof ServerWorld && !player.isPassenger()) {
                 RegistryKey<World> registrykey = worldIn
-                    .func_234923_W_() == World.field_234920_i_ ? World.field_234918_g_ : World.field_234920_i_;
+                    .getDimensionKey() == World.OVERWORLD ? World.THE_END : World.OVERWORLD;
                 ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registrykey);
                 if (serverworld == null) {
                     return ActionResultType.FAIL;
                 }
 
-                player.func_241206_a_(serverworld);
+                player.changeDimension(serverworld);
             }
         }
 
-        if (!player.canEat(false) || player.getEntityWorld().func_230315_m_()
-            .func_242725_p() == DimensionType.field_242712_c) {
+        if (!player.canEat(false) || player.getEntityWorld().getDimensionType()
+            .getEffects() == DimensionType.THE_END_ID) {
             return ActionResultType.FAIL;
         } else {
             player.addStat(Stats.EAT_CAKE_SLICE);
@@ -75,13 +75,13 @@ public class EndCakeBlock extends CakeBlock {
             if (!worldIn.isRemote() && player.getRidingEntity() == null) {
                 if (worldIn instanceof ServerWorld && !player.isPassenger()) {
                     RegistryKey<World> registrykey = worldIn
-                        .func_234923_W_() == World.field_234920_i_ ? World.field_234918_g_ : World.field_234920_i_;
+                        .getDimensionKey() == World.THE_END ? World.OVERWORLD : World.THE_END;
                     ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registrykey);
                     if (serverworld == null) {
                         return ActionResultType.FAIL;
                     }
 
-                    player.func_241206_a_(serverworld);
+                    player.changeDimension(serverworld);
                 }
             }
         }

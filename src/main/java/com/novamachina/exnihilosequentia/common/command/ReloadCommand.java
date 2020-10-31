@@ -18,7 +18,7 @@ public class ReloadCommand implements Command<CommandSource> {
     public static LiteralArgumentBuilder<CommandSource> register(CommandDispatcher<CommandSource> dispatcher) {
         return Commands.literal("reload").requires(commandSource -> commandSource.hasPermissionLevel(1))
             .then(Commands.literal("sieve").executes((c) -> reloadRegistry(c, ExNihiloRegistries.SIEVE_REGISTRY)))
-            .then(Commands.literal("crook").executes((c) -> reloadRegistry(c, ExNihiloRegistries.CROOK_REGISTRY)))
+//            .then(Commands.literal("crook").executes((c) -> reloadRegistry(c, ExNihiloRegistries.CROOK_REGISTRY)))
             .then(Commands.literal("compost").executes((c) -> reloadRegistry(c, ExNihiloRegistries.COMPOST_REGISTRY)))
 //            .then(Commands.literal("hammer").executes((c) -> reloadRegistry(c, ExNihiloRegistries.HAMMER_REGISTRY)))
             .then(Commands.literal("heat").executes((c) -> reloadRegistry(c, ExNihiloRegistries.HEAT_REGISTRY)))

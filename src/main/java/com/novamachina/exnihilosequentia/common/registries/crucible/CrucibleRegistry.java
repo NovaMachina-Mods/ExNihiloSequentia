@@ -135,7 +135,7 @@ public class CrucibleRegistry extends AbstractModRegistry {
             List<ItemStack> blocks;
             ITag<Item> itemTag = ItemTags.getCollection().get(entry);
             if (itemTag != null) {
-                blocks = itemTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
+                blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
             } else {
                 blocks = new ArrayList<>();
                 blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
@@ -216,7 +216,7 @@ public class CrucibleRegistry extends AbstractModRegistry {
             List<ItemStack> blocks;
             ITag<Item> itemTag = ItemTags.getCollection().get(entry);
             if (itemTag != null) {
-                blocks = itemTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
+                blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
             } else {
                 blocks = new ArrayList<>();
                 blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
@@ -236,7 +236,7 @@ public class CrucibleRegistry extends AbstractModRegistry {
                 List<ItemStack> blocks;
                 ITag<Item> itemTag = ItemTags.getCollection().get(entry);
                 if (itemTag != null) {
-                    blocks = itemTag.func_230236_b_().stream().map(ItemStack::new).collect(Collectors.toList());
+                    blocks = itemTag.getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
                 } else {
                     blocks = new ArrayList<>();
                     blocks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(entry)));
