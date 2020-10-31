@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.crafting;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import net.minecraft.item.crafting.IRecipe;
@@ -39,6 +40,7 @@ public class RecipeReloadListener implements IResourceManagerReloadListener {
 
         ExNihiloRegistries.HAMMER_REGISTRY.setRecipes(filterRecipes(recipes, HammerRecipe.class, HammerRecipe.TYPE));
         ExNihiloRegistries.CROOK_REGISTRY.setRecipes(filterRecipes(recipes, CrookRecipe.class, CrookRecipe.TYPE));
+        ExNihiloRegistries.COMPOST_REGISTRY.setRecipes(filterRecipes(recipes, CompostRecipe.class, CompostRecipe.TYPE));
     }
 
     private static <R extends IRecipe<?>> Map<ResourceLocation, R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)

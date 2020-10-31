@@ -1,7 +1,6 @@
 package com.novamachina.exnihilosequentia.common.registries.crook;
 
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
-import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -25,9 +24,7 @@ public class CrookRegistry {
     }
 
     public void setRecipes(Map<ResourceLocation, CrookRecipe> recipes) {
-        for(CrookRecipe recipe : recipes.values()) {
-            recipeList.add(recipe);
-        }
+        recipeList.addAll(recipes.values());
     }
 
     public List<CrookRecipe> getRecipeList() {

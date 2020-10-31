@@ -1,7 +1,9 @@
 package com.novamachina.exnihilosequentia.common.init;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
+import com.novamachina.exnihilosequentia.common.crafting.serializer.CompostRecipeSerializer;
 import com.novamachina.exnihilosequentia.common.crafting.serializer.CrookRecipeSerializer;
 import com.novamachina.exnihilosequentia.common.crafting.serializer.HammerRecipeSerializer;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
@@ -16,6 +18,7 @@ public class ModSerializers {
     static {
         HammerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new);
         CrookRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("crook", CrookRecipeSerializer::new);
+        CompostRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new);
     }
 
     public static void init(IEventBus modEventBus) {

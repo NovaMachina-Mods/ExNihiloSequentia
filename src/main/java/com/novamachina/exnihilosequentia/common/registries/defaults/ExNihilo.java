@@ -61,44 +61,44 @@ public class ExNihilo implements IDefaultRegistry {
 //        registry.addRecipe(Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN);
 //    }
 
-    @Override
-    public void registerCompost(CompostRegistry registry) {
-        registry.addSolid(new ResourceLocation("minecraft:saplings"), 125);
-        registry.addSolid(new ResourceLocation("minecraft:leaves"), 125);
-        registry.addSolid(new ResourceLocation("minecraft:flowers"), 100);
-        registry.addSolid(new ResourceLocation("minecraft:fishes"), 150);
-        registry.addSolid(new ResourceLocation("forge:meat_cooked"), 200);
-        registry.addSolid(new ResourceLocation("forge:meat_uncooked"), 200);
-        registry.addSolid(new ResourceLocation("forge:seeds"), 80);
-        registry.addSolid(new ResourceLocation("forge:crops/wheat"), 80);
-        registry.addSolid(new ResourceLocation("forge:crops/carrot"), 100);
-        registry.addSolid(new ResourceLocation("forge:crops/beetroot"), 100);
-        registry.addSolid(new ResourceLocation("forge:crops/potato"), 100);
-        registry.addSolid(new ResourceLocation("forge:crops/nether_wart"), 100);
-        registry.addSolid(new ResourceLocation("forge:eggs"), 80);
-        registry.addSolid(new ResourceLocation("forge:string"), 40);
-        registry.addSolid(Items.ROTTEN_FLESH, 100);
-        registry.addSolid(Items.SPIDER_EYE, 80);
-        registry.addSolid(Items.BREAD, 160);
-        registry.addSolid(Blocks.BROWN_MUSHROOM, 100);
-        registry.addSolid(Blocks.RED_MUSHROOM, 100);
-        registry.addSolid(Items.PUMPKIN_PIE, 160);
-        registry.addSolid(EnumResource.SILKWORM.getRegistryObject().get(), 40);
-        registry.addSolid(ModItems.COOKED_SILKWORM.get(), 40);
-        registry.addSolid(Items.APPLE, 100);
-        registry.addSolid(Items.MELON_SLICE, 40);
-        registry.addSolid(Blocks.MELON, 1000 / 6);
-        registry.addSolid(Blocks.PUMPKIN, 1000 / 6);
-        registry.addSolid(Blocks.CARVED_PUMPKIN, 1000 / 6);
-        registry.addSolid(Blocks.JACK_O_LANTERN, 1000 / 6);
-        registry.addSolid(Blocks.CACTUS, 100);
-        registry.addSolid(Items.BAKED_POTATO, 150);
-        registry.addSolid(Items.POISONOUS_POTATO, 200);
-        registry.addSolid(Blocks.LILY_PAD, 100);
-        registry.addSolid(Blocks.VINE, 100);
-        registry.addSolid(Blocks.TALL_GRASS, 100);
-        registry.addSolid(Blocks.SUGAR_CANE, 80);
-    }
+//    @Override
+//    public void registerCompost(CompostRegistry registry) {
+//        registry.addSolid(new ResourceLocation("minecraft:saplings"), 125);
+//        registry.addSolid(new ResourceLocation("minecraft:leaves"), 125);
+//        registry.addSolid(new ResourceLocation("minecraft:flowers"), 100);
+//        registry.addSolid(new ResourceLocation("minecraft:fishes"), 150);
+//        registry.addSolid(new ResourceLocation("forge:meat_cooked"), 200);
+//        registry.addSolid(new ResourceLocation("forge:meat_uncooked"), 200);
+//        registry.addSolid(new ResourceLocation("forge:seeds"), 80);
+//        registry.addSolid(new ResourceLocation("forge:crops/wheat"), 80);
+//        registry.addSolid(new ResourceLocation("forge:crops/carrot"), 100);
+//        registry.addSolid(new ResourceLocation("forge:crops/beetroot"), 100);
+//        registry.addSolid(new ResourceLocation("forge:crops/potato"), 100);
+//        registry.addSolid(new ResourceLocation("forge:crops/nether_wart"), 100);
+//        registry.addSolid(new ResourceLocation("forge:eggs"), 80);
+//        registry.addSolid(new ResourceLocation("forge:string"), 40);
+//        registry.addSolid(Items.ROTTEN_FLESH, 100);
+//        registry.addSolid(Items.SPIDER_EYE, 80);
+//        registry.addSolid(Items.BREAD, 160);
+//        registry.addSolid(Blocks.BROWN_MUSHROOM, 100);
+//        registry.addSolid(Blocks.RED_MUSHROOM, 100);
+//        registry.addSolid(Items.PUMPKIN_PIE, 160);
+//        registry.addSolid(EnumResource.SILKWORM.getRegistryObject().get(), 40);
+//        registry.addSolid(ModItems.COOKED_SILKWORM.get(), 40);
+//        registry.addSolid(Items.APPLE, 100);
+//        registry.addSolid(Items.MELON_SLICE, 40);
+//        registry.addSolid(Blocks.MELON, 1000 / 6);
+//        registry.addSolid(Blocks.PUMPKIN, 1000 / 6);
+//        registry.addSolid(Blocks.CARVED_PUMPKIN, 1000 / 6);
+//        registry.addSolid(Blocks.JACK_O_LANTERN, 1000 / 6);
+//        registry.addSolid(Blocks.CACTUS, 100);
+//        registry.addSolid(Items.BAKED_POTATO, 150);
+//        registry.addSolid(Items.POISONOUS_POTATO, 200);
+//        registry.addSolid(Blocks.LILY_PAD, 100);
+//        registry.addSolid(Blocks.VINE, 100);
+//        registry.addSolid(Blocks.TALL_GRASS, 100);
+//        registry.addSolid(Blocks.SUGAR_CANE, 80);
+//    }
 
     @Override
     public void registerFluidBlock(FluidBlockTransformRegistry registry) {

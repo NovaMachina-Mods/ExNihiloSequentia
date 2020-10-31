@@ -31,9 +31,7 @@ public class HammerRegistry {
     }
 
     public void setRecipes(Map<ResourceLocation, HammerRecipe> recipes) {
-        for(HammerRecipe recipe : recipes.values()) {
-            recipeList.add(recipe);
-        }
+        recipeList.addAll(recipes.values());
     }
 
     public List<HammerRecipe> getRecipeList() {

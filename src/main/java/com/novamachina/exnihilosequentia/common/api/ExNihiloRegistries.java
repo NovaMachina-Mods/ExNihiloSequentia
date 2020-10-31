@@ -27,7 +27,7 @@ public class ExNihiloRegistries {
     public static final ModBus BUS = new ModBus();
 
     public static CrookRegistry CROOK_REGISTRY = new CrookRegistry();
-    public static CompostRegistry COMPOST_REGISTRY = new CompostRegistry(BUS);
+    public static CompostRegistry COMPOST_REGISTRY = new CompostRegistry();
     public static HammerRegistry HAMMER_REGISTRY = new HammerRegistry();
     public static SieveRegistry SIEVE_REGISTRY = new SieveRegistry(BUS);
     public static HeatRegistry HEAT_REGISTRY = new HeatRegistry(BUS);

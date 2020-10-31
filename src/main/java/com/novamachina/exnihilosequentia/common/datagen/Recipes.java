@@ -1,5 +1,8 @@
 package com.novamachina.exnihilosequentia.common.datagen;
 
+import com.novamachina.exnihilosequentia.common.api.ExNihiloTags;
+import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipeBuilder;
@@ -57,6 +60,49 @@ public class Recipes extends RecipeProvider {
     private void registerCustomRecipes(Consumer<IFinishedRecipe> consumer) {
         registerHammerRecipes(consumer);
         registerCrookRecipes(consumer);
+        registerCompostRecipes(consumer);
+    }
+
+    private void registerCompostRecipes(Consumer<IFinishedRecipe> consumer) {
+        CompostRecipeBuilder.builder().input(ItemTags.SAPLINGS).amount(125).build(consumer, compostLoc("saplings"));
+        CompostRecipeBuilder.builder().input(ItemTags.LEAVES).amount(125).build(consumer, compostLoc("leaves"));
+        CompostRecipeBuilder.builder().input(ItemTags.FLOWERS).amount(100).build(consumer, compostLoc("flowers"));
+        CompostRecipeBuilder.builder().input(ItemTags.FISHES).amount(150).build(consumer, compostLoc("fishes"));
+        CompostRecipeBuilder.builder().input(ExNihiloTags.MEAT_COOKED).amount(200).build(consumer, compostLoc("meat_cooked"));
+        CompostRecipeBuilder.builder().input(ExNihiloTags.MEAT_UNCOOKED).amount(200).build(consumer, compostLoc("meat_uncooked"));
+        CompostRecipeBuilder.builder().input(Tags.Items.SEEDS).amount(80).build(consumer, compostLoc("seeds"));
+        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_WHEAT).amount(80).build(consumer, compostLoc("wheat"));
+        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_CARROT).amount(100).build(consumer, compostLoc("carrot"));
+        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_BEETROOT).amount(100).build(consumer, compostLoc("beetroot"));
+        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_POTATO).amount(100).build(consumer, compostLoc("potato"));
+        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_NETHER_WART).amount(100).build(consumer, compostLoc("nether_wart"));
+        CompostRecipeBuilder.builder().input(Tags.Items.EGGS).amount(80).build(consumer, compostLoc("eggs"));
+        CompostRecipeBuilder.builder().input(Tags.Items.STRING).amount(40).build(consumer, compostLoc("string"));
+        CompostRecipeBuilder.builder().input(Items.ROTTEN_FLESH).amount(100).build(consumer, compostLoc("rotten_flesh"));
+        CompostRecipeBuilder.builder().input(Items.SPIDER_EYE).amount(80).build(consumer, compostLoc("spider_eye"));
+        CompostRecipeBuilder.builder().input(Items.BREAD).amount(160).build(consumer, compostLoc("bread"));
+        CompostRecipeBuilder.builder().input(Blocks.BROWN_MUSHROOM).amount(100).build(consumer, compostLoc("brown_mushroom"));
+        CompostRecipeBuilder.builder().input(Blocks.RED_MUSHROOM).amount(100).build(consumer, compostLoc("red_mushroom"));
+        CompostRecipeBuilder.builder().input(Items.PUMPKIN_PIE).amount(160).build(consumer, compostLoc("pumpkin_pie"));
+        CompostRecipeBuilder.builder().input(EnumResource.SILKWORM.getRegistryObject().get()).amount(40).build(consumer, compostLoc("silkworm"));
+        CompostRecipeBuilder.builder().input(ModItems.COOKED_SILKWORM.get()).amount(40).build(consumer, compostLoc("cooked_silkworm"));
+        CompostRecipeBuilder.builder().input(Items.APPLE).amount(100).build(consumer, compostLoc("apple"));
+        CompostRecipeBuilder.builder().input(Items.MELON_SLICE).amount(40).build(consumer, compostLoc("melon_slice"));
+        CompostRecipeBuilder.builder().input(Items.MELON).amount(1000 / 6).build(consumer, compostLoc("melon"));
+        CompostRecipeBuilder.builder().input(Items.PUMPKIN).amount(1000 / 6).build(consumer, compostLoc("pumpkin"));
+        CompostRecipeBuilder.builder().input(Items.CARVED_PUMPKIN).amount(1000 / 6).build(consumer, compostLoc("carved_pumpkin"));
+        CompostRecipeBuilder.builder().input(Items.JACK_O_LANTERN).amount(1000 / 6).build(consumer, compostLoc("jack_o_lantern"));
+        CompostRecipeBuilder.builder().input(Items.CACTUS).amount(100).build(consumer, compostLoc("cactus"));
+        CompostRecipeBuilder.builder().input(Items.BAKED_POTATO).amount(150).build(consumer, compostLoc("baked_potato"));
+        CompostRecipeBuilder.builder().input(Items.POISONOUS_POTATO).amount(200).build(consumer, compostLoc("poisonous_potato"));
+        CompostRecipeBuilder.builder().input(Items.LILY_PAD).amount(100).build(consumer, compostLoc("lily_pad"));
+        CompostRecipeBuilder.builder().input(Items.VINE).amount(100).build(consumer, compostLoc("vine"));
+        CompostRecipeBuilder.builder().input(Items.TALL_GRASS).amount(100).build(consumer, compostLoc("tall_grass"));
+        CompostRecipeBuilder.builder().input(Items.SUGAR_CANE).amount(80).build(consumer, compostLoc("sugar_cane"));
+    }
+
+    private ResourceLocation compostLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "compost/" + id);
     }
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
