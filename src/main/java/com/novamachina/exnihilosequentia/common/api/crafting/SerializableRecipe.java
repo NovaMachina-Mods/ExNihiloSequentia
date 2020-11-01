@@ -8,8 +8,6 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import java.util.Collection;
-
 public abstract class SerializableRecipe implements IRecipe<IInventory> {
     protected final ItemStack outputDummy;
     protected final IRecipeType<?> type;
@@ -30,7 +28,7 @@ public abstract class SerializableRecipe implements IRecipe<IInventory> {
 
     @Override
     public ItemStack getIcon(){
-        return getIESerializer().getIcon();
+        return getENSerializer().getIcon();
     }
 
     @Override
@@ -60,10 +58,10 @@ public abstract class SerializableRecipe implements IRecipe<IInventory> {
     @Override
     public IRecipeSerializer<?> getSerializer()
     {
-        return getIESerializer();
+        return getENSerializer();
     }
 
-    protected abstract RecipeSerializer getIESerializer();
+    protected abstract RecipeSerializer getENSerializer();
 
     @Override
     public IRecipeType<?> getType()

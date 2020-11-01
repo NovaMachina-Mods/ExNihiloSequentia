@@ -23,7 +23,7 @@ public class ReloadCommand implements Command<CommandSource> {
 //            .then(Commands.literal("hammer").executes((c) -> reloadRegistry(c, ExNihiloRegistries.HAMMER_REGISTRY)))
             .then(Commands.literal("heat").executes((c) -> reloadRegistry(c, ExNihiloRegistries.HEAT_REGISTRY)))
             .then(Commands.literal("crucible").executes((c) -> reloadRegistry(c, ExNihiloRegistries.CRUCIBLE_REGISTRY)))
-            .then(Commands.literal("fluidOnTop").executes((c) -> reloadRegistry(c, ExNihiloRegistries.FLUID_ON_TOP_REGISTRY)))
+//            .then(Commands.literal("fluidOnTop").executes((c) -> reloadRegistry(c, ExNihiloRegistries.FLUID_ON_TOP_REGISTRY)))
             .then(Commands.literal("fluidTransform").executes((c) -> reloadRegistry(c, ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY)))
 //            .then(Commands.literal("fluidBlock").executes((c) -> reloadRegistry(c, ExNihiloRegistries.FLUID_BLOCK_REGISTRY)))
             .then(Commands.literal("all").executes((c) -> reloadAll(c)));

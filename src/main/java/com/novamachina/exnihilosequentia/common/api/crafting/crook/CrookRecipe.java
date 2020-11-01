@@ -34,7 +34,7 @@ public class CrookRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getIESerializer() {
+    protected RecipeSerializer getENSerializer() {
         return SERIALIZER.get();
     }
 

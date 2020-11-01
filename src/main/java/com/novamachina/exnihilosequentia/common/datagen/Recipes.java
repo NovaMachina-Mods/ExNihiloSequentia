@@ -1,11 +1,10 @@
 package com.novamachina.exnihilosequentia.common.datagen;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloTags;
-import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipeBuilder;
-import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.init.ModFluids;
@@ -29,15 +28,12 @@ import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Consumer;
 
@@ -65,6 +61,16 @@ public class Recipes extends RecipeProvider {
         registerCrookRecipes(consumer);
         registerCompostRecipes(consumer);
         registerFluidItemRecipes(consumer);
+        registerFluidOnTopRecipes(consumer);
+    }
+
+    private void registerFluidOnTopRecipes(Consumer<IFinishedRecipe> consumer) {
+        FluidOnTopRecipeBuilder.builder().fluidInTank(Fluids.LAVA).fluidOnTop(Fluids.WATER).result(Blocks.OBSIDIAN).build(consumer, fluidOnTopLoc("obsidian"));
+        FluidOnTopRecipeBuilder.builder().fluidInTank(Fluids.WATER).fluidOnTop(Fluids.LAVA).result(Blocks.COBBLESTONE).build(consumer, fluidOnTopLoc("cobblestone"));
+    }
+
+    private ResourceLocation fluidOnTopLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluid_on_top/" + id);
     }
 
     private void registerFluidItemRecipes(Consumer<IFinishedRecipe> consumer) {

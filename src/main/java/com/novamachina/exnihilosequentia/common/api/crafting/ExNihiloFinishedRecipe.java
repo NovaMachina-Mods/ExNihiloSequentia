@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.novamachina.exnihilosequentia.common.api.FluidStackUtils;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.crafting.serializer.ItemStackWithChanceSerializer;
 import net.minecraft.block.Block;
 import net.minecraft.data.IFinishedRecipe;
@@ -87,8 +88,8 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    public R addFluid(FluidStack fluidStack) {
-        return addWriter(jsonObject -> jsonObject.add("fluid", FluidStackUtils.jsonSerializeFluidStack(fluidStack)));
+    public R addFluid(String id, FluidStack fluidStack) {
+        return addWriter(jsonObject -> jsonObject.add(id, FluidStackUtils.jsonSerializeFluidStack(fluidStack)));
     }
 
     private R addItem(String key, ItemStack itemStack) {
@@ -183,6 +184,10 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     protected R addFluid(Fluid fluid) {
-        return this.addFluid(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
+        return this.addFluid("fluid", new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
+    }
+
+    protected R addFluid(String id, Fluid fluid) {
+        return this.addFluid(id, new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
     }
 }

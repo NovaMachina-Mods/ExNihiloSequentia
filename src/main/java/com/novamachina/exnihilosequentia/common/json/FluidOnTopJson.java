@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.json;
 
-import com.novamachina.exnihilosequentia.common.registries.barrel.fluid.FluidOnTopRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
 
 public class FluidOnTopJson {
     @JsonRequired
@@ -17,7 +17,7 @@ public class FluidOnTopJson {
     }
 
     public FluidOnTopJson(FluidOnTopRecipe recipe) {
-        this.fluidInBarrel = recipe.getFluidInBarrel().toString();
+        this.fluidInBarrel = recipe.getFluidInTank().toString();
         this.fluidOnTop = recipe.getFluidOnTop().toString();
         this.result = recipe.getResult().toString();
     }

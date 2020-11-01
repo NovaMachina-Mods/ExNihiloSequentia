@@ -120,11 +120,11 @@ public class ExNihilo implements IDefaultRegistry {
 //            .get(), Blocks.HORN_CORAL_BLOCK);
 //    }
 
-    @Override
-    public void registerFluidOnTop(FluidOnTopRegistry registry) {
-        registry.addRecipe(Fluids.LAVA, Fluids.WATER, Blocks.OBSIDIAN);
-        registry.addRecipe(Fluids.WATER, Fluids.LAVA, Blocks.COBBLESTONE);
-    }
+//    @Override
+//    public void registerFluidOnTop(FluidOnTopRegistry registry) {
+//        registry.addRecipe(Fluids.LAVA, Fluids.WATER, Blocks.OBSIDIAN);
+//        registry.addRecipe(Fluids.WATER, Fluids.LAVA, Blocks.COBBLESTONE);
+//    }
 
     @Override
     public void registerFluidTransform(FluidTransformRegistry registry) {
