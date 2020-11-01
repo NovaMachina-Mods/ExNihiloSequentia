@@ -3,12 +3,12 @@ package com.novamachina.exnihilosequentia.common.compat.jei;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipeCategory;
-import com.novamachina.exnihilosequentia.common.compat.jei.fluiditem.FluidBlockJEIRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.fluiditem.FluidBlockRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopJEIRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopRecipeCategory;
@@ -99,7 +99,7 @@ public class JEIPlugin implements IModPlugin {
     }
 
     private void registerFluidBlock(IRecipeRegistration registration) {
-        List<FluidBlockJEIRecipe> recipes = ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getRecipeList();
+        List<FluidItemRecipe> recipes = ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getRecipeList();
         registration.addRecipes(recipes, FluidBlockRecipeCategory.UID);
         LogUtil.info("JEI: Fluid Item Recipes Loaded: " + recipes.size());
     }

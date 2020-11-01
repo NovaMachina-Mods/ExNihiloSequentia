@@ -34,7 +34,7 @@ public class ExNihiloRegistries {
     public static CrucibleRegistry CRUCIBLE_REGISTRY = new CrucibleRegistry(BUS);
     public static FluidOnTopRegistry FLUID_ON_TOP_REGISTRY = new FluidOnTopRegistry(BUS);
     public static FluidTransformRegistry FLUID_TRANSFORM_REGISTRY = new FluidTransformRegistry(BUS);
-    public static FluidBlockTransformRegistry FLUID_BLOCK_REGISTRY = new FluidBlockTransformRegistry(BUS);
+    public static FluidBlockTransformRegistry FLUID_BLOCK_REGISTRY = new FluidBlockTransformRegistry();
 
     public static class ModBus {
         private final List<AbstractModRegistry> registries;

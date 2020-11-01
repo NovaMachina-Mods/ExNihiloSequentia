@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_item",
+  "fluid": {
+    "fluid": "minecraft:lava"
+  },
+  "input": {
+    "item": "minecraft:glowstone_dust"
+  },
+  "result": {
+    "item": "minecraft:end_stone"
+  }
+}

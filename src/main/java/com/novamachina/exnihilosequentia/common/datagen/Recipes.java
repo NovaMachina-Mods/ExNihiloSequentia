@@ -5,8 +5,10 @@ import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostReci
 import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
+import com.novamachina.exnihilosequentia.common.init.ModFluids;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
 import com.novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
@@ -25,6 +27,7 @@ import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -53,7 +56,7 @@ public class Recipes extends RecipeProvider {
         registerDolls(consumer);
         registerMeshes(consumer);
         registerMisc(consumer);
-        
+
         registerCustomRecipes(consumer);
     }
 
@@ -61,6 +64,29 @@ public class Recipes extends RecipeProvider {
         registerHammerRecipes(consumer);
         registerCrookRecipes(consumer);
         registerCompostRecipes(consumer);
+        registerFluidItemRecipes(consumer);
+    }
+
+    private void registerFluidItemRecipes(Consumer<IFinishedRecipe> consumer) {
+        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.WATER).input(ModBlocks.DUST.get()).result(Blocks.CLAY).build(consumer, fluidItemLoc("clay"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Items.REDSTONE).result(Blocks.NETHERRACK).build(consumer, fluidItemLoc("netherrack"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Items.GLOWSTONE_DUST).result(Blocks.END_STONE).build(consumer, fluidItemLoc("end_stone"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get()).input(Tags.Items.SAND).result(Blocks.SOUL_SAND).build(consumer, fluidItemLoc("soul_sand"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get()).input(Tags.Items.MUSHROOMS).result(Blocks.SLIME_BLOCK).build(consumer, fluidItemLoc("slime"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.BLUE_CORAL_SEED.getRegistryObject()
+            .get()).result(Blocks.TUBE_CORAL_BLOCK).build(consumer, fluidItemLoc("tube_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.RED_CORAL_SEED.getRegistryObject()
+            .get()).result(Blocks.FIRE_CORAL_BLOCK).build(consumer, fluidItemLoc("fire_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.PINK_CORAL_SEED.getRegistryObject()
+            .get()).result(Blocks.BRAIN_CORAL_BLOCK).build(consumer, fluidItemLoc("brain_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.PURPLE_CORAL_SEED.getRegistryObject()
+            .get()).result(Blocks.BUBBLE_CORAL_BLOCK).build(consumer, fluidItemLoc("bubble_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.YELLOW_CORAL_SEED.getRegistryObject()
+            .get()).result(Blocks.HORN_CORAL_BLOCK).build(consumer, fluidItemLoc("horn_coral"));
+    }
+
+    private ResourceLocation fluidItemLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluid_item/" + id);
     }
 
     private void registerCompostRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -68,33 +94,46 @@ public class Recipes extends RecipeProvider {
         CompostRecipeBuilder.builder().input(ItemTags.LEAVES).amount(125).build(consumer, compostLoc("leaves"));
         CompostRecipeBuilder.builder().input(ItemTags.FLOWERS).amount(100).build(consumer, compostLoc("flowers"));
         CompostRecipeBuilder.builder().input(ItemTags.FISHES).amount(150).build(consumer, compostLoc("fishes"));
-        CompostRecipeBuilder.builder().input(ExNihiloTags.MEAT_COOKED).amount(200).build(consumer, compostLoc("meat_cooked"));
-        CompostRecipeBuilder.builder().input(ExNihiloTags.MEAT_UNCOOKED).amount(200).build(consumer, compostLoc("meat_uncooked"));
+        CompostRecipeBuilder.builder().input(ExNihiloTags.MEAT_COOKED).amount(200)
+            .build(consumer, compostLoc("meat_cooked"));
+        CompostRecipeBuilder.builder().input(ExNihiloTags.MEAT_UNCOOKED).amount(200)
+            .build(consumer, compostLoc("meat_uncooked"));
         CompostRecipeBuilder.builder().input(Tags.Items.SEEDS).amount(80).build(consumer, compostLoc("seeds"));
         CompostRecipeBuilder.builder().input(Tags.Items.CROPS_WHEAT).amount(80).build(consumer, compostLoc("wheat"));
         CompostRecipeBuilder.builder().input(Tags.Items.CROPS_CARROT).amount(100).build(consumer, compostLoc("carrot"));
-        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_BEETROOT).amount(100).build(consumer, compostLoc("beetroot"));
+        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_BEETROOT).amount(100)
+            .build(consumer, compostLoc("beetroot"));
         CompostRecipeBuilder.builder().input(Tags.Items.CROPS_POTATO).amount(100).build(consumer, compostLoc("potato"));
-        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_NETHER_WART).amount(100).build(consumer, compostLoc("nether_wart"));
+        CompostRecipeBuilder.builder().input(Tags.Items.CROPS_NETHER_WART).amount(100)
+            .build(consumer, compostLoc("nether_wart"));
         CompostRecipeBuilder.builder().input(Tags.Items.EGGS).amount(80).build(consumer, compostLoc("eggs"));
         CompostRecipeBuilder.builder().input(Tags.Items.STRING).amount(40).build(consumer, compostLoc("string"));
-        CompostRecipeBuilder.builder().input(Items.ROTTEN_FLESH).amount(100).build(consumer, compostLoc("rotten_flesh"));
+        CompostRecipeBuilder.builder().input(Items.ROTTEN_FLESH).amount(100)
+            .build(consumer, compostLoc("rotten_flesh"));
         CompostRecipeBuilder.builder().input(Items.SPIDER_EYE).amount(80).build(consumer, compostLoc("spider_eye"));
         CompostRecipeBuilder.builder().input(Items.BREAD).amount(160).build(consumer, compostLoc("bread"));
-        CompostRecipeBuilder.builder().input(Blocks.BROWN_MUSHROOM).amount(100).build(consumer, compostLoc("brown_mushroom"));
-        CompostRecipeBuilder.builder().input(Blocks.RED_MUSHROOM).amount(100).build(consumer, compostLoc("red_mushroom"));
+        CompostRecipeBuilder.builder().input(Blocks.BROWN_MUSHROOM).amount(100)
+            .build(consumer, compostLoc("brown_mushroom"));
+        CompostRecipeBuilder.builder().input(Blocks.RED_MUSHROOM).amount(100)
+            .build(consumer, compostLoc("red_mushroom"));
         CompostRecipeBuilder.builder().input(Items.PUMPKIN_PIE).amount(160).build(consumer, compostLoc("pumpkin_pie"));
-        CompostRecipeBuilder.builder().input(EnumResource.SILKWORM.getRegistryObject().get()).amount(40).build(consumer, compostLoc("silkworm"));
-        CompostRecipeBuilder.builder().input(ModItems.COOKED_SILKWORM.get()).amount(40).build(consumer, compostLoc("cooked_silkworm"));
+        CompostRecipeBuilder.builder().input(EnumResource.SILKWORM.getRegistryObject().get()).amount(40)
+            .build(consumer, compostLoc("silkworm"));
+        CompostRecipeBuilder.builder().input(ModItems.COOKED_SILKWORM.get()).amount(40)
+            .build(consumer, compostLoc("cooked_silkworm"));
         CompostRecipeBuilder.builder().input(Items.APPLE).amount(100).build(consumer, compostLoc("apple"));
         CompostRecipeBuilder.builder().input(Items.MELON_SLICE).amount(40).build(consumer, compostLoc("melon_slice"));
         CompostRecipeBuilder.builder().input(Items.MELON).amount(1000 / 6).build(consumer, compostLoc("melon"));
         CompostRecipeBuilder.builder().input(Items.PUMPKIN).amount(1000 / 6).build(consumer, compostLoc("pumpkin"));
-        CompostRecipeBuilder.builder().input(Items.CARVED_PUMPKIN).amount(1000 / 6).build(consumer, compostLoc("carved_pumpkin"));
-        CompostRecipeBuilder.builder().input(Items.JACK_O_LANTERN).amount(1000 / 6).build(consumer, compostLoc("jack_o_lantern"));
+        CompostRecipeBuilder.builder().input(Items.CARVED_PUMPKIN).amount(1000 / 6)
+            .build(consumer, compostLoc("carved_pumpkin"));
+        CompostRecipeBuilder.builder().input(Items.JACK_O_LANTERN).amount(1000 / 6)
+            .build(consumer, compostLoc("jack_o_lantern"));
         CompostRecipeBuilder.builder().input(Items.CACTUS).amount(100).build(consumer, compostLoc("cactus"));
-        CompostRecipeBuilder.builder().input(Items.BAKED_POTATO).amount(150).build(consumer, compostLoc("baked_potato"));
-        CompostRecipeBuilder.builder().input(Items.POISONOUS_POTATO).amount(200).build(consumer, compostLoc("poisonous_potato"));
+        CompostRecipeBuilder.builder().input(Items.BAKED_POTATO).amount(150)
+            .build(consumer, compostLoc("baked_potato"));
+        CompostRecipeBuilder.builder().input(Items.POISONOUS_POTATO).amount(200)
+            .build(consumer, compostLoc("poisonous_potato"));
         CompostRecipeBuilder.builder().input(Items.LILY_PAD).amount(100).build(consumer, compostLoc("lily_pad"));
         CompostRecipeBuilder.builder().input(Items.VINE).amount(100).build(consumer, compostLoc("vine"));
         CompostRecipeBuilder.builder().input(Items.TALL_GRASS).amount(100).build(consumer, compostLoc("tall_grass"));
@@ -106,7 +145,8 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
-        CrookRecipeBuilder.builder().input(ItemTags.LEAVES).addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F).build(consumer, crookLoc("leaves"));
+        CrookRecipeBuilder.builder().input(ItemTags.LEAVES)
+            .addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F).build(consumer, crookLoc("leaves"));
     }
 
     private ResourceLocation crookLoc(String id) {
@@ -114,26 +154,44 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerHammerRecipes(Consumer<IFinishedRecipe> consumer) {
-        HammerRecipeBuilder.builder().input(Blocks.STONE).result(Blocks.COBBLESTONE).build(consumer, hammerLoc("cobblestone"));
-        HammerRecipeBuilder.builder().input(Blocks.COBBLESTONE).result(Blocks.GRAVEL).build(consumer, hammerLoc("gravel"));
+        HammerRecipeBuilder.builder().input(Blocks.STONE).result(Blocks.COBBLESTONE)
+            .build(consumer, hammerLoc("cobblestone"));
+        HammerRecipeBuilder.builder().input(Blocks.COBBLESTONE).result(Blocks.GRAVEL)
+            .build(consumer, hammerLoc("gravel"));
         HammerRecipeBuilder.builder().input(Blocks.GRAVEL).result(Blocks.SAND).build(consumer, hammerLoc("sand"));
-        HammerRecipeBuilder.builder().input(Blocks.SAND).result(ModBlocks.DUST.get()).build(consumer, hammerLoc("dust"));
-        HammerRecipeBuilder.builder().input(Blocks.NETHERRACK).result(ModBlocks.CRUSHED_NETHERRACK.get()).build(consumer, hammerLoc("netherrack"));
-        HammerRecipeBuilder.builder().input(Blocks.ANDESITE).result(ModBlocks.CRUSHED_ANDESITE.get()).build(consumer, hammerLoc("andesite"));
-        HammerRecipeBuilder.builder().input(Blocks.DIORITE).result(ModBlocks.CRUSHED_DIORITE.get()).build(consumer, hammerLoc("diorite"));
-        HammerRecipeBuilder.builder().input(Blocks.GRANITE).result(ModBlocks.CRUSHED_GRANITE.get()).build(consumer, hammerLoc("granite"));
-        HammerRecipeBuilder.builder().input(Blocks.END_STONE).result(ModBlocks.CRUSHED_END_STONE.get()).build(consumer, hammerLoc("end_stone"));
+        HammerRecipeBuilder.builder().input(Blocks.SAND).result(ModBlocks.DUST.get())
+            .build(consumer, hammerLoc("dust"));
+        HammerRecipeBuilder.builder().input(Blocks.NETHERRACK).result(ModBlocks.CRUSHED_NETHERRACK.get())
+            .build(consumer, hammerLoc("netherrack"));
+        HammerRecipeBuilder.builder().input(Blocks.ANDESITE).result(ModBlocks.CRUSHED_ANDESITE.get())
+            .build(consumer, hammerLoc("andesite"));
+        HammerRecipeBuilder.builder().input(Blocks.DIORITE).result(ModBlocks.CRUSHED_DIORITE.get())
+            .build(consumer, hammerLoc("diorite"));
+        HammerRecipeBuilder.builder().input(Blocks.GRANITE).result(ModBlocks.CRUSHED_GRANITE.get())
+            .build(consumer, hammerLoc("granite"));
+        HammerRecipeBuilder.builder().input(Blocks.END_STONE).result(ModBlocks.CRUSHED_END_STONE.get())
+            .build(consumer, hammerLoc("end_stone"));
 
-        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL_BLOCK).result(Blocks.TUBE_CORAL).build(consumer, hammerLoc("tube_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL_BLOCK).result(Blocks.BRAIN_CORAL).build(consumer, hammerLoc("brain_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL_BLOCK).result(Blocks.BUBBLE_CORAL).build(consumer, hammerLoc("bubble_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL_BLOCK).result(Blocks.FIRE_CORAL).build(consumer, hammerLoc("fire_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL_BLOCK).result(Blocks.HORN_CORAL).build(consumer, hammerLoc("horn_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL).result(Blocks.TUBE_CORAL_FAN).build(consumer, hammerLoc("tube_coral_fan"));
-        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL).result(Blocks.BRAIN_CORAL_FAN).build(consumer, hammerLoc("brain_coral_fan"));
-        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL).result(Blocks.BUBBLE_CORAL_FAN).build(consumer, hammerLoc("bubble_coral_fan"));
-        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL).result(Blocks.FIRE_CORAL_FAN).build(consumer, hammerLoc("fire_coral_fan"));
-        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL).result(Blocks.HORN_CORAL_FAN).build(consumer, hammerLoc("horn_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL_BLOCK).result(Blocks.TUBE_CORAL)
+            .build(consumer, hammerLoc("tube_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL_BLOCK).result(Blocks.BRAIN_CORAL)
+            .build(consumer, hammerLoc("brain_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL_BLOCK).result(Blocks.BUBBLE_CORAL)
+            .build(consumer, hammerLoc("bubble_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL_BLOCK).result(Blocks.FIRE_CORAL)
+            .build(consumer, hammerLoc("fire_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL_BLOCK).result(Blocks.HORN_CORAL)
+            .build(consumer, hammerLoc("horn_coral"));
+        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL).result(Blocks.TUBE_CORAL_FAN)
+            .build(consumer, hammerLoc("tube_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL).result(Blocks.BRAIN_CORAL_FAN)
+            .build(consumer, hammerLoc("brain_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL).result(Blocks.BUBBLE_CORAL_FAN)
+            .build(consumer, hammerLoc("bubble_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL).result(Blocks.FIRE_CORAL_FAN)
+            .build(consumer, hammerLoc("fire_coral_fan"));
+        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL).result(Blocks.HORN_CORAL_FAN)
+            .build(consumer, hammerLoc("horn_coral_fan"));
     }
 
     private ResourceLocation hammerLoc(String id) {
@@ -355,17 +413,17 @@ public class Recipes extends RecipeProvider {
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
         for (EnumOre ore : EnumOre.values()) {
             registerOre(ore, consumer);
-            if(!ore.isVanilla()) {
+            if (!ore.isVanilla()) {
                 registerSmelting(ore, consumer);
             }
-            if(ore.isVanilla()) {
-                if(ore == EnumOre.IRON) {
+            if (ore.isVanilla()) {
+                if (ore == EnumOre.IRON) {
                     CookingRecipeBuilder
                         .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 200)
                         .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
                         .build(consumer);
                 }
-                if(ore == EnumOre.GOLD) {
+                if (ore == EnumOre.GOLD) {
                     CookingRecipeBuilder
                         .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
                         .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))

@@ -1,6 +1,6 @@
 package com.novamachina.exnihilosequentia.common.json;
 
-import com.novamachina.exnihilosequentia.common.registries.barrel.fluid.FluidBlockTransformRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
 
 public class FluidBlockJson {
     @JsonRequired
@@ -17,8 +17,8 @@ public class FluidBlockJson {
         this.result = result;
     }
 
-    public FluidBlockJson(FluidBlockTransformRecipe recipe) {
-        this.fluid = recipe.getFluid().toString();
+    public FluidBlockJson(FluidItemRecipe recipe) {
+        this.fluid = recipe.getFluidInBarrel().toString();
         this.input = recipe.getInput().toString();
         this.result = recipe.getResult().toString();
     }

@@ -100,25 +100,25 @@ public class ExNihilo implements IDefaultRegistry {
 //        registry.addSolid(Blocks.SUGAR_CANE, 80);
 //    }
 
-    @Override
-    public void registerFluidBlock(FluidBlockTransformRegistry registry) {
-        registry.addRecipe(Fluids.WATER, ModBlocks.DUST.get(), Blocks.CLAY);
-        registry.addRecipe(Fluids.LAVA, Items.REDSTONE, Blocks.NETHERRACK);
-        registry.addRecipe(Fluids.LAVA, Items.GLOWSTONE_DUST, Blocks.END_STONE);
-        registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.SAND, Blocks.SOUL_SAND);
-        registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.RED_MUSHROOM, Blocks.SLIME_BLOCK);
-        registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.BLUE_CORAL_SEED.getRegistryObject()
-            .get(), Blocks.TUBE_CORAL_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.RED_CORAL_SEED.getRegistryObject()
-            .get(), Blocks.FIRE_CORAL_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.PINK_CORAL_SEED.getRegistryObject()
-            .get(), Blocks.BRAIN_CORAL_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.PURPLE_CORAL_SEED.getRegistryObject()
-            .get(), Blocks.BUBBLE_CORAL_BLOCK);
-        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.YELLOW_CORAL_SEED.getRegistryObject()
-            .get(), Blocks.HORN_CORAL_BLOCK);
-    }
+//    @Override
+//    public void registerFluidBlock(FluidBlockTransformRegistry registry) {
+//        registry.addRecipe(Fluids.WATER, ModBlocks.DUST.get(), Blocks.CLAY);
+//        registry.addRecipe(Fluids.LAVA, Items.REDSTONE, Blocks.NETHERRACK);
+//        registry.addRecipe(Fluids.LAVA, Items.GLOWSTONE_DUST, Blocks.END_STONE);
+//        registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.SAND, Blocks.SOUL_SAND);
+//        registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.RED_MUSHROOM, Blocks.SLIME_BLOCK);
+//        registry.addRecipe(ModFluids.WITCH_WATER.get(), Blocks.BROWN_MUSHROOM, Blocks.SLIME_BLOCK);
+//        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.BLUE_CORAL_SEED.getRegistryObject()
+//            .get(), Blocks.TUBE_CORAL_BLOCK);
+//        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.RED_CORAL_SEED.getRegistryObject()
+//            .get(), Blocks.FIRE_CORAL_BLOCK);
+//        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.PINK_CORAL_SEED.getRegistryObject()
+//            .get(), Blocks.BRAIN_CORAL_BLOCK);
+//        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.PURPLE_CORAL_SEED.getRegistryObject()
+//            .get(), Blocks.BUBBLE_CORAL_BLOCK);
+//        registry.addRecipe(ModFluids.SEA_WATER.get(), EnumResource.YELLOW_CORAL_SEED.getRegistryObject()
+//            .get(), Blocks.HORN_CORAL_BLOCK);
+//    }
 
     @Override
     public void registerFluidOnTop(FluidOnTopRegistry registry) {
@@ -163,10 +163,10 @@ public class ExNihilo implements IDefaultRegistry {
         registry.addHeatSource(Blocks.MAGMA_BLOCK, 2);
         registry.addHeatSource(Blocks.GLOWSTONE, 2);
 
-        for(Fluid fluid : ForgeRegistries.FLUIDS) {
-            if(fluid != Fluids.LAVA && fluid != Fluids.FLOWING_LAVA) {
+        for (Fluid fluid : ForgeRegistries.FLUIDS) {
+            if (fluid != Fluids.LAVA && fluid != Fluids.FLOWING_LAVA) {
                 int temp = fluid.getAttributes().getTemperature() / 433;
-                if(temp > 0 && ForgeRegistries.BLOCKS.containsKey(fluid.getRegistryName())) {
+                if (temp > 0 && ForgeRegistries.BLOCKS.containsKey(fluid.getRegistryName())) {
                     registry.addHeatSource(fluid.getRegistryName(), temp);
                 }
             }
