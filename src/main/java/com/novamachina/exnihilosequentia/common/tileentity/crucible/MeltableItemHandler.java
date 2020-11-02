@@ -11,17 +11,20 @@ public class MeltableItemHandler extends ItemStackHandler {
 
     private boolean crucibleHasRoom = true;
     private CrucilbeTypeEnum type;
+    private BaseCrucibleTile crucibleTile;
 
     public MeltableItemHandler(
-        CrucilbeTypeEnum crucibleType) {
+        CrucilbeTypeEnum crucibleType, BaseCrucibleTile crucibleTile) {
         super(1);
         type = crucibleType;
+        this.crucibleTile = crucibleTile;
     }
 
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        if (crucibleHasRoom) {
+        int amount = ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(stack.getItem()).getAmount();
+        if (crucibleHasRoom && crucibleTile.getSolidAmount() <= 1000 - amount * stack.getCount()) {
             return super.insertItem(slot, stack, simulate);
         }
         return stack;

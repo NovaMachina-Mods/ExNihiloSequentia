@@ -45,7 +45,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public BaseCrucibleTile(
         TileEntityType<? extends BaseCrucibleTile> tileEntityType) {
         super(tileEntityType);
-        inventory = new MeltableItemHandler(getCrucibleType());
+        inventory = new MeltableItemHandler(getCrucibleType(), this);
         tank = new FluidTank(MAX_FLUID_AMOUNT);
         ticksSinceLast = 0;
         solidAmount = 0;
@@ -87,7 +87,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     @Override
     public abstract void tick();
 
-    protected abstract int getHeat();
+    public abstract int getHeat();
 
     public ActionResultType onBlockActivated(PlayerEntity player, Hand handIn,
                                              IFluidHandler handler) {
@@ -214,6 +214,10 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     public int getFluidAmount() {
         return tank.getFluidAmount();
+    }
+
+    public ItemStack getCurrentItem(){
+        return currentItem;
     }
 
     public abstract int getSolidAmount();

@@ -14,7 +14,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
-    protected int getHeat() {
+    public int getHeat() {
         return ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(world.getBlockState(pos.down()).getBlock());
     }
 
