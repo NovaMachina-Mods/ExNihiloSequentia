@@ -7,6 +7,7 @@ import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import com.novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
 import com.novamachina.exnihilosequentia.common.utility.Config;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -126,7 +127,10 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", block));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
-            iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", sieveTile.getMesh().getName()));
+            String meshName = I18n.format("item." + Constants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName());
+            if(meshName.equals(sieveTile.getMesh().getMeshName()))
+                meshName = sieveTile.getMesh().getName();
+            iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", meshName));
         }
     }
 
