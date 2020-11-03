@@ -226,6 +226,7 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerHammers(Consumer<IFinishedRecipe> consumer) {
+        registerHammer(EnumHammer.NETHERITE.getRegistryObject().get(), Items.field_234759_km_, consumer);
         registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Items.DIAMOND, consumer);
         registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Items.GOLD_INGOT, consumer);
         registerHammer(EnumHammer.IRON.getRegistryObject().get(), Items.IRON_INGOT, consumer);

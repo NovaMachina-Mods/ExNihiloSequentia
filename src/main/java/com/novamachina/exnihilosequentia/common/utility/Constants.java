@@ -49,6 +49,7 @@ public class Constants {
         public static final String HAMMER_STONE = createHammerName("stone");
         public static final String HAMMER_IRON = createHammerName("iron");
         public static final String HAMMER_DIAMOND = createHammerName("diamond");
+        public static final String HAMMER_NETHERITE = createHammerName("netherite");
         public static final String HAMMER_GOLD = createHammerName("gold");
         public static final String SEED_OAK = "oak";
         public static final String SEED_SPRUCE = "spruce";
