@@ -12,10 +12,7 @@ import com.novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,7 +46,9 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     public BlockSieve() {
         super(new BlockBuilder().properties(
             Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7F)
-                .sound(SoundType.WOOD).notSolid()).harvestLevel(ToolType.AXE, 0).tileEntitySupplier(
+                .sound(SoundType.WOOD).notSolid().func_235828_a_((state, reader, pos) -> false)
+                    .func_235842_b_((state, reader, pos) -> false).func_235847_c_((state, reader, pos) -> false))
+                .harvestLevel(ToolType.AXE, 0).tileEntitySupplier(
             SieveTile::new));
         this.setDefaultState(this.stateContainer.getBaseState().with(MESH, EnumMesh.NONE).with(WATERLOGGED, false));
     }
