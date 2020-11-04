@@ -4,11 +4,13 @@ import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostReci
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.crafting.serializer.CompostRecipeSerializer;
 import com.novamachina.exnihilosequentia.common.crafting.serializer.CrookRecipeSerializer;
 import com.novamachina.exnihilosequentia.common.crafting.serializer.FluidItemRecipeSerializer;
 import com.novamachina.exnihilosequentia.common.crafting.serializer.FluidOnTopRecipeSerializer;
+import com.novamachina.exnihilosequentia.common.crafting.serializer.FluidTransformRecipeSerializer;
 import com.novamachina.exnihilosequentia.common.crafting.serializer.HammerRecipeSerializer;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -25,6 +27,7 @@ public class ModSerializers {
         CompostRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new);
         FluidItemRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new);
         FluidOnTopRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new);
+        FluidTransformRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new);
     }
 
     public static void init(IEventBus modEventBus) {

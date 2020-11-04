@@ -5,6 +5,7 @@ import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostReci
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
@@ -45,6 +46,7 @@ public class RecipeReloadListener implements IResourceManagerReloadListener {
         ExNihiloRegistries.COMPOST_REGISTRY.setRecipes(filterRecipes(recipes, CompostRecipe.class, CompostRecipe.TYPE));
         ExNihiloRegistries.FLUID_BLOCK_REGISTRY.setRecipes(filterRecipes(recipes, FluidItemRecipe.class, FluidItemRecipe.TYPE));
         ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.setRecipes(filterRecipes(recipes, FluidOnTopRecipe.class, FluidOnTopRecipe.TYPE));
+        ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.setRecipes(filterRecipes(recipes, FluidTransformRecipe.class, FluidTransformRecipe.TYPE));
     }
 
     private static <R extends IRecipe<?>> Map<ResourceLocation, R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)
