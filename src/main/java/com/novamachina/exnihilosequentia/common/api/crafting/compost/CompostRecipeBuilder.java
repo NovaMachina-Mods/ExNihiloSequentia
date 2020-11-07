@@ -6,7 +6,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 
 public class CompostRecipeBuilder extends ExNihiloFinishedRecipe<CompostRecipeBuilder> {
-    public CompostRecipeBuilder() {
+    private CompostRecipeBuilder() {
         super(CompostRecipe.SERIALIZER.get());
     }
 

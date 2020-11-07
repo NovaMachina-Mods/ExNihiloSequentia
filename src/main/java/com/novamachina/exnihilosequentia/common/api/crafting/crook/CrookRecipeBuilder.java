@@ -9,7 +9,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 
 public class CrookRecipeBuilder extends ExNihiloFinishedRecipe<CrookRecipeBuilder> {
-    public CrookRecipeBuilder() {
+    private CrookRecipeBuilder() {
         super(CrookRecipe.SERIALIZER.get());
         setMultipleResults(Integer.MAX_VALUE);
     }

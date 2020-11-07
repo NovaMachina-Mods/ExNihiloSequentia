@@ -8,7 +8,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.Tags;
 
 public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemRecipeBuilder> {
-    public FluidItemRecipeBuilder() {
+    private FluidItemRecipeBuilder() {
         super(FluidItemRecipe.SERIALIZER.get());
     }
 

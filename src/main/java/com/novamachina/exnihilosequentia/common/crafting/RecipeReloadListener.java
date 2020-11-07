@@ -3,10 +3,14 @@ package com.novamachina.exnihilosequentia.common.crafting;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
+import com.novamachina.exnihilosequentia.common.registries.defaults.ExNihilo;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
@@ -47,6 +51,9 @@ public class RecipeReloadListener implements IResourceManagerReloadListener {
         ExNihiloRegistries.FLUID_BLOCK_REGISTRY.setRecipes(filterRecipes(recipes, FluidItemRecipe.class, FluidItemRecipe.TYPE));
         ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.setRecipes(filterRecipes(recipes, FluidOnTopRecipe.class, FluidOnTopRecipe.TYPE));
         ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.setRecipes(filterRecipes(recipes, FluidTransformRecipe.class, FluidTransformRecipe.TYPE));
+        ExNihiloRegistries.CRUCIBLE_REGISTRY.setRecipes(filterRecipes(recipes, CrucibleRecipe.class, CrucibleRecipe.TYPE));
+        ExNihiloRegistries.HEAT_REGISTRY.setRecipes(filterRecipes(recipes, HeatRecipe.class, HeatRecipe.TYPE));
+        ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(filterRecipes(recipes, SieveRecipe.class, SieveRecipe.TYPE));
     }
 
     private static <R extends IRecipe<?>> Map<ResourceLocation, R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)

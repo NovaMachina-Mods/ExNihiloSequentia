@@ -3,7 +3,6 @@ package com.novamachina.exnihilosequentia.common.compat.jei.sieve.wet;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import com.novamachina.exnihilosequentia.common.compat.jei.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import com.novamachina.exnihilosequentia.common.registries.sieve.SieveDropEntry;
 import com.novamachina.exnihilosequentia.common.utility.Constants;

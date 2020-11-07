@@ -5,10 +5,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.novamachina.exnihilosequentia.common.api.FluidStackUtils;
-import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
-import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipeBuilder;
-import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipeBuilder;
-import com.novamachina.exnihilosequentia.common.crafting.serializer.ItemStackWithChanceSerializer;
+import com.novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.fluid.Fluid;
@@ -159,7 +157,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    protected R addResult(IItemProvider result) {
+    public R addResult(IItemProvider result) {
         return addResult(new ItemStack(result));
     }
 
@@ -173,9 +171,9 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
     protected R addResult(ItemStackWithChance itemStack) {
         if (outputArray != null) {
-            return addMultiResult(ItemStackWithChanceSerializer.INSTANCE.write(itemStack));
+            return addMultiResult(itemStack.serialize());
         } else {
-            return addItem("result", ItemStackWithChanceSerializer.INSTANCE.write(itemStack));
+            return addItem("result", itemStack.serialize());
         }
     }
 
@@ -189,5 +187,17 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
     protected R addFluid(String id, Fluid fluid) {
         return this.addFluid(id, new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
+    }
+
+    protected R addInput(String id, IItemProvider block) {
+        return this.addItem(id, new ItemStack(block));
+    }
+
+    protected R addBoolean(String key, boolean value) {
+        return addWriter(jsonObject -> jsonObject.addProperty(key, value));
+    }
+
+    protected R addBlock(Block block) {
+        return addWriter(jsonObject -> jsonObject.addProperty("block", block.getRegistryName().toString()));
     }
 }

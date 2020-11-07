@@ -3,9 +3,14 @@ package com.novamachina.exnihilosequentia.common.datagen;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloTags;
 import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipeBuilder;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.MeshWithChance;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipeBuilder;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.init.ModFluids;
 import com.novamachina.exnihilosequentia.common.init.ModItems;
@@ -14,8 +19,10 @@ import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import com.novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
+import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
+import com.novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Block;
@@ -30,11 +37,14 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class Recipes extends RecipeProvider {
@@ -62,11 +72,324 @@ public class Recipes extends RecipeProvider {
         registerCompostRecipes(consumer);
         registerFluidItemRecipes(consumer);
         registerFluidOnTopRecipes(consumer);
+        registerFluidTransformRecipes(consumer);
+        registerCrucibleRecipes(consumer);
+        registerHeatRecipes(consumer);
+        registerSieveRecipes(consumer);
+    }
+
+    private void registerSieveRecipes(Consumer<IFinishedRecipe> consumer) {
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(EnumPebbleType.STONE.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 1.0F))
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 1.0F))
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
+            .build(consumer, sieveLoc("pebble_stone"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(EnumPebbleType.ANDESITE.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
+            .build(consumer, sieveLoc("pebble_andesite"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(EnumPebbleType.DIORITE.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
+            .build(consumer, sieveLoc("pebble_diorite"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(EnumPebbleType.GRANITE.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
+            .build(consumer, sieveLoc("pebble_granite"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(Items.WHEAT_SEEDS)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.7F))
+            .build(consumer, sieveLoc("seed_wheat"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(Items.MELON_SEEDS)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.35F))
+            .build(consumer, sieveLoc("seed_melon"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(Items.PUMPKIN_SEEDS)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.35F))
+            .build(consumer, sieveLoc("seed_pumpkin"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(EnumResource.ANCIENT_SPORE.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+            .build(consumer, sieveLoc("ancient_spore"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+            .addResult(EnumResource.GRASS_SEED.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+            .build(consumer, sieveLoc("seed_grass"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
+            .addResult(Items.COCOA_BEANS)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.03F))
+            .build(consumer, sieveLoc("cocoa_beans"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
+            .addResult(Items.PRISMARINE_SHARD)
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.02F))
+            .build(consumer, sieveLoc("prismarine_shard"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+            .addResult(Items.FLINT)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.25F))
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.25F))
+            .build(consumer, sieveLoc("flint"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+            .addResult(Items.COAL)
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.125F))
+            .build(consumer, sieveLoc("coal"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+            .addResult(Items.LAPIS_LAZULI)
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
+            .build(consumer, sieveLoc("lapis_lazuli"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+            .addResult(Items.DIAMOND)
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.008F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.016F))
+            .build(consumer, sieveLoc("diamond"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+            .addResult(Items.EMERALD)
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.008F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.016F))
+            .build(consumer, sieveLoc("emerald"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SOUL_SAND))
+            .addResult(Items.QUARTZ)
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 1.0F))
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.33F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 1.0F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.8F))
+            .build(consumer, sieveLoc("quartz"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SOUL_SAND))
+            .addResult(Items.NETHER_WART)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
+            .build(consumer, sieveLoc("nether_wart"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SOUL_SAND))
+            .addResult(Items.GHAST_TEAR)
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.02F))
+            .build(consumer, sieveLoc("ghast_tear"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.DUST.get()))
+            .addResult(Items.BONE_MEAL)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.2F))
+            .build(consumer, sieveLoc("bone_meal"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.DUST.get()))
+            .addResult(Items.GUNPOWDER)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.07F))
+            .build(consumer, sieveLoc("gunpowder"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.DUST.get()))
+            .addResult(Items.REDSTONE)
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.125F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.25F))
+            .build(consumer, sieveLoc("redstone"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.DUST.get()))
+            .addResult(Items.GLOWSTONE_DUST)
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.0625F))
+            .build(consumer, sieveLoc("glowstone"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.DUST.get()))
+            .addResult(Items.BLAZE_POWDER)
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
+            .build(consumer, sieveLoc("blaze_powder"));
+
+        for(EnumOre ore : EnumOre.values()) {
+            switch (ore) {
+                case IRON: {
+                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+                        .addResult(ore.getPieceItem().get())
+                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.1F))
+                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.15F))
+                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.25F))
+                        .build(consumer, sieveLoc(ore.getPieceName() + "_gravel"));
+                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
+                        .addResult(ore.getPieceItem().get())
+                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.5F))
+                        .build(consumer, sieveLoc(ore.getPieceName() + "_sand"));
+                    break;
+                }
+                case GOLD: {
+                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_NETHERRACK.get()))
+                        .addResult(ore.getPieceItem().get())
+                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.25F))
+                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.25F))
+                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.4F))
+                        .build(consumer, sieveLoc(ore.getPieceName() + "_crushed_netherrack"));
+                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+                        .addResult(ore.getPieceItem().get())
+                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
+                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
+                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.15F))
+                        .build(consumer, sieveLoc(ore.getPieceName() + "_gravel"));
+                    break;
+                }
+                default: {
+                    //TODO: Add default ore values
+                }
+            }
+        }
+
+        for(EnumSeed seed : EnumSeed.values()) {
+            if(seed != EnumSeed.SEED_PICKLE && seed != EnumSeed.SEED_KELP) {
+                SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+                    .addResult(seed.getRegistryObject().get())
+                    .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+                    .build(consumer, sieveLoc(seed.getSeedName()));
+            } else {
+                SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
+                    .addResult(seed.getRegistryObject().get())
+                    .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+                    .isWaterlogged()
+                    .build(consumer, sieveLoc(seed.getSeedName()));
+            }
+        }
+
+        getLeavesSaplings().forEach((input, drop) -> {
+            if(input.getRegistryName().equals(new ResourceLocation("jungle_leaves"))) {
+                SieveRecipeBuilder.builder().input(Ingredient.fromItems(input))
+                    .addResult(drop)
+                    .addRoll(new MeshWithChance(EnumMesh.STRING, 0.025F))
+                    .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
+                    .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
+                    .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.1F))
+                    .build(consumer, sieveLoc(input.getRegistryName().getPath()));
+            } else {
+                SieveRecipeBuilder.builder().input(Ingredient.fromItems(input))
+                    .addResult(drop)
+                    .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+                    .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.1F))
+                    .addRoll(new MeshWithChance(EnumMesh.IRON, 0.15F))
+                    .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.2F))
+                    .build(consumer, sieveLoc(input.getRegistryName().getPath()));
+            }
+        });
+        SieveRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.LEAVES))
+            .addResult(Items.APPLE)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.1F))
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.15F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.2F))
+            .build(consumer, sieveLoc("apple"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.LEAVES))
+            .addResult(Items.GOLDEN_APPLE)
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.001F))
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.003F))
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.005F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
+            .build(consumer, sieveLoc("golden_apple"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.LEAVES))
+            .addResult(EnumResource.SILKWORM.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.025F))
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.1F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.2F))
+            .build(consumer, sieveLoc("silkworm"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.SAND))
+            .addResult(EnumResource.BLUE_CORAL_SEED.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
+            .isWaterlogged()
+            .build(consumer, sieveLoc("seed_blue_coral"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.SAND))
+            .addResult(EnumResource.PURPLE_CORAL_SEED.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
+            .isWaterlogged()
+            .build(consumer, sieveLoc("seed_purple_coral"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.SAND))
+            .addResult(EnumResource.PINK_CORAL_SEED.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
+            .isWaterlogged()
+            .build(consumer, sieveLoc("seed_pink_coral"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.SAND))
+            .addResult(EnumResource.YELLOW_CORAL_SEED.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
+            .isWaterlogged()
+            .build(consumer, sieveLoc("seed_yellow_coral"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.SAND))
+            .addResult(EnumResource.RED_CORAL_SEED.getRegistryObject().get())
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
+            .isWaterlogged()
+            .build(consumer, sieveLoc("seed_red_coral"));
+    }
+
+    private ResourceLocation sieveLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "sieve/" + id);
+    }
+
+    private Map<Block, Item> getLeavesSaplings() {
+        Map<Block, Item> saplingMap = new HashMap<>();
+        saplingMap.put(Blocks.ACACIA_LEAVES, Items.ACACIA_SAPLING);
+        saplingMap.put(Blocks.BIRCH_LEAVES, Items.BIRCH_SAPLING);
+        saplingMap.put(Blocks.DARK_OAK_LEAVES, Items.DARK_OAK_SAPLING);
+        saplingMap.put(Blocks.JUNGLE_LEAVES, Items.JUNGLE_SAPLING);
+        saplingMap.put(Blocks.OAK_LEAVES, Items.OAK_SAPLING);
+        saplingMap.put(Blocks.SPRUCE_LEAVES, Items.SPRUCE_SAPLING);
+
+        return saplingMap;
+    }
+
+    private void registerHeatRecipes(Consumer<IFinishedRecipe> consumer) {
+        HeatRecipeBuilder.builder().input(Blocks.LAVA).amount(3).build(consumer, heatLoc("lava"));
+        HeatRecipeBuilder.builder().input(Blocks.FIRE).amount(4).build(consumer, heatLoc("fire"));
+        HeatRecipeBuilder.builder().input(Blocks.TORCH).amount(1)
+            .build(consumer, heatLoc("torch"));
+        HeatRecipeBuilder.builder().input(Blocks.WALL_TORCH).amount(1)
+            .build(consumer, heatLoc("wall_torch"));
+        HeatRecipeBuilder.builder().input(Blocks.MAGMA_BLOCK).amount(2)
+            .build(consumer, heatLoc("magma_block"));
+        HeatRecipeBuilder.builder().input(Blocks.GLOWSTONE).amount(2)
+            .build(consumer, heatLoc("glowstone"));
+    }
+
+    private ResourceLocation heatLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "heat/" + id);
+    }
+
+    private void registerCrucibleRecipes(Consumer<IFinishedRecipe> consumer) {
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.COBBLESTONE)).amount(250)
+            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("cobblestone"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIORITE)).amount(250).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("diorite"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.ANDESITE)).amount(250)
+            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("andesite"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRANITE)).amount(250).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("granite"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.STONE)).amount(250).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("stone"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL)).amount(200).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("gravel"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND)).amount(100).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("sand"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.DUST.get())).amount(50)
+            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("dust"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.NETHERRACK)).amount(1000)
+            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("netherrack"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.OBSIDIAN)).amount(1000)
+            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("obsidian"));
+
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.SAPLINGS)).amount(250)
+            .fluidResult(Fluids.WATER).crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc("saplings"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.LEAVES)).amount(250).fluidResult(Fluids.WATER)
+            .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc("leaves"));
+    }
+
+    private ResourceLocation crucibleLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible/" + id);
+    }
+
+    private void registerFluidTransformRecipes(Consumer<IFinishedRecipe> consumer) {
+        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).blockBelow(Blocks.MYCELIUM)
+            .result(ModFluids.WITCH_WATER.get()).build(consumer, fluidTransformLoc("witch_water"));
+        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).blockBelow(Blocks.SAND)
+            .result(ModFluids.SEA_WATER.get()).build(consumer, fluidTransformLoc("sea_water"));
+    }
+
+    private ResourceLocation fluidTransformLoc(String id) {
+        return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluid_transform/" + id);
     }
 
     private void registerFluidOnTopRecipes(Consumer<IFinishedRecipe> consumer) {
-        FluidOnTopRecipeBuilder.builder().fluidInTank(Fluids.LAVA).fluidOnTop(Fluids.WATER).result(Blocks.OBSIDIAN).build(consumer, fluidOnTopLoc("obsidian"));
-        FluidOnTopRecipeBuilder.builder().fluidInTank(Fluids.WATER).fluidOnTop(Fluids.LAVA).result(Blocks.COBBLESTONE).build(consumer, fluidOnTopLoc("cobblestone"));
+        FluidOnTopRecipeBuilder.builder().fluidInTank(Fluids.LAVA).fluidOnTop(Fluids.WATER).result(Blocks.OBSIDIAN)
+            .build(consumer, fluidOnTopLoc("obsidian"));
+        FluidOnTopRecipeBuilder.builder().fluidInTank(Fluids.WATER).fluidOnTop(Fluids.LAVA).result(Blocks.COBBLESTONE)
+            .build(consumer, fluidOnTopLoc("cobblestone"));
     }
 
     private ResourceLocation fluidOnTopLoc(String id) {
@@ -74,21 +397,31 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerFluidItemRecipes(Consumer<IFinishedRecipe> consumer) {
-        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.WATER).input(ModBlocks.DUST.get()).result(Blocks.CLAY).build(consumer, fluidItemLoc("clay"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Items.REDSTONE).result(Blocks.NETHERRACK).build(consumer, fluidItemLoc("netherrack"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Items.GLOWSTONE_DUST).result(Blocks.END_STONE).build(consumer, fluidItemLoc("end_stone"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get()).input(Tags.Items.SAND).result(Blocks.SOUL_SAND).build(consumer, fluidItemLoc("soul_sand"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get()).input(Tags.Items.MUSHROOMS).result(Blocks.SLIME_BLOCK).build(consumer, fluidItemLoc("slime"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.BLUE_CORAL_SEED.getRegistryObject()
-            .get()).result(Blocks.TUBE_CORAL_BLOCK).build(consumer, fluidItemLoc("tube_coral"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.RED_CORAL_SEED.getRegistryObject()
-            .get()).result(Blocks.FIRE_CORAL_BLOCK).build(consumer, fluidItemLoc("fire_coral"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.PINK_CORAL_SEED.getRegistryObject()
-            .get()).result(Blocks.BRAIN_CORAL_BLOCK).build(consumer, fluidItemLoc("brain_coral"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.PURPLE_CORAL_SEED.getRegistryObject()
-            .get()).result(Blocks.BUBBLE_CORAL_BLOCK).build(consumer, fluidItemLoc("bubble_coral"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get()).input(EnumResource.YELLOW_CORAL_SEED.getRegistryObject()
-            .get()).result(Blocks.HORN_CORAL_BLOCK).build(consumer, fluidItemLoc("horn_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.WATER).input(ModBlocks.DUST.get()).result(Blocks.CLAY)
+            .build(consumer, fluidItemLoc("clay"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Items.REDSTONE).result(Blocks.NETHERRACK)
+            .build(consumer, fluidItemLoc("netherrack"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Items.GLOWSTONE_DUST).result(Blocks.END_STONE)
+            .build(consumer, fluidItemLoc("end_stone"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get()).input(Tags.Items.SAND)
+            .result(Blocks.SOUL_SAND).build(consumer, fluidItemLoc("soul_sand"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get()).input(Tags.Items.MUSHROOMS)
+            .result(Blocks.SLIME_BLOCK).build(consumer, fluidItemLoc("slime"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get())
+            .input(EnumResource.BLUE_CORAL_SEED.getRegistryObject()
+                .get()).result(Blocks.TUBE_CORAL_BLOCK).build(consumer, fluidItemLoc("tube_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get())
+            .input(EnumResource.RED_CORAL_SEED.getRegistryObject()
+                .get()).result(Blocks.FIRE_CORAL_BLOCK).build(consumer, fluidItemLoc("fire_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get())
+            .input(EnumResource.PINK_CORAL_SEED.getRegistryObject()
+                .get()).result(Blocks.BRAIN_CORAL_BLOCK).build(consumer, fluidItemLoc("brain_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get())
+            .input(EnumResource.PURPLE_CORAL_SEED.getRegistryObject()
+                .get()).result(Blocks.BUBBLE_CORAL_BLOCK).build(consumer, fluidItemLoc("bubble_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get())
+            .input(EnumResource.YELLOW_CORAL_SEED.getRegistryObject()
+                .get()).result(Blocks.HORN_CORAL_BLOCK).build(consumer, fluidItemLoc("horn_coral"));
     }
 
     private ResourceLocation fluidItemLoc(String id) {

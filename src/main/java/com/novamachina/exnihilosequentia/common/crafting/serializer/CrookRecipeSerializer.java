@@ -39,7 +39,7 @@ public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
         int outputCount = buffer.readInt();
         List<ItemStackWithChance> output = new ArrayList<>(outputCount);
         for(int i = 0; i < outputCount; i++) {
-            output.set(i, ItemStackWithChanceSerializer.INSTANCE.parse(buffer));
+            output.set(i,ItemStackWithChance.read(buffer));
         }
         Ingredient input = Ingredient.read(buffer);
         return new CrookRecipe(recipeId, input, output);
@@ -49,7 +49,7 @@ public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
     public void write(PacketBuffer buffer, CrookRecipe recipe) {
         buffer.writeInt(recipe.getOutput().size());
         for(ItemStackWithChance stack : recipe.getOutput()) {
-            ItemStackWithChanceSerializer.INSTANCE.write(buffer, stack);
+            stack.write(buffer);
         }
         recipe.getInput().write(buffer);
     }

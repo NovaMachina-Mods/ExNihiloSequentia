@@ -11,18 +11,30 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
 
 public class FluidTransformRecipe extends SerializableRecipe {
-    public static IRecipeType<FluidTransformRecipe> TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
+    public static IRecipeType<FluidTransformRecipe> TYPE = IRecipeType
+        .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
     public static RegistryObject<RecipeSerializer<FluidTransformRecipe>> SERIALIZER;
-
     private final FluidStack fluidInTank;
-    private final Block blockBelow;
+    private final ItemStack blockBelow;
     private final FluidStack result;
 
-    protected FluidTransformRecipe(ResourceLocation id, FluidStack fluidInTank, Block blockBelow, FluidStack result) {
+    public FluidTransformRecipe(ResourceLocation id, FluidStack fluidInTank, ItemStack blockBelow, FluidStack result) {
         super(null, TYPE, id);
         this.fluidInTank = fluidInTank;
         this.blockBelow = blockBelow;
         this.result = result;
+    }
+
+    public FluidStack getFluidInTank() {
+        return fluidInTank;
+    }
+
+    public ItemStack getBlockBelow() {
+        return blockBelow;
+    }
+
+    public FluidStack getResult() {
+        return result;
     }
 
     @Override

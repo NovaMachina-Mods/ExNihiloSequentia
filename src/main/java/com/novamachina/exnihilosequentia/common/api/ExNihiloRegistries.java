@@ -29,11 +29,11 @@ public class ExNihiloRegistries {
     public static CrookRegistry CROOK_REGISTRY = new CrookRegistry();
     public static CompostRegistry COMPOST_REGISTRY = new CompostRegistry();
     public static HammerRegistry HAMMER_REGISTRY = new HammerRegistry();
-    public static SieveRegistry SIEVE_REGISTRY = new SieveRegistry(BUS);
-    public static HeatRegistry HEAT_REGISTRY = new HeatRegistry(BUS);
-    public static CrucibleRegistry CRUCIBLE_REGISTRY = new CrucibleRegistry(BUS);
+    public static SieveRegistry SIEVE_REGISTRY = new SieveRegistry();
+    public static HeatRegistry HEAT_REGISTRY = new HeatRegistry();
+    public static CrucibleRegistry CRUCIBLE_REGISTRY = new CrucibleRegistry();
     public static FluidOnTopRegistry FLUID_ON_TOP_REGISTRY = new FluidOnTopRegistry();
-    public static FluidTransformRegistry FLUID_TRANSFORM_REGISTRY = new FluidTransformRegistry(BUS);
+    public static FluidTransformRegistry FLUID_TRANSFORM_REGISTRY = new FluidTransformRegistry();
     public static FluidBlockTransformRegistry FLUID_BLOCK_REGISTRY = new FluidBlockTransformRegistry();
 
     public static class ModBus {
