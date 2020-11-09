@@ -18,7 +18,7 @@ public enum EnumMesh implements IStringSerializable {
 
     public static EnumMesh getMeshFromName(String name) {
         for(EnumMesh mesh : EnumMesh.values()) {
-            if(mesh.getMeshName().equals(name)) {
+            if(mesh.getName().equals(name)) {
                 return mesh;
             }
         }

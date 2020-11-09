@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "meshes": [
+    {
+      "chance": 0.07,
+      "mesh": "string"
+    }
+  ],
+  "input": {
+    "item": "exnihilosequentia:dust"
+  },
+  "result": {
+    "item": "minecraft:gunpowder"
+  }
+}

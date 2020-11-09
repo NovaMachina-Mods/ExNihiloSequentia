@@ -1,0 +1,11 @@
+{
+  "type": "exnihilosequentia:crucible",
+  "input": {
+    "item": "minecraft:cobblestone"
+  },
+  "amount": 250,
+  "fluidResult": {
+    "fluid": "minecraft:lava"
+  },
+  "crucibleType": "fired"
+}

@@ -8,6 +8,8 @@ import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItem
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
 import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipeCategory;
@@ -16,6 +18,7 @@ import com.novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTop
 import com.novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipeCategory;
+import com.novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.dry.DrySieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.wet.WetSieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
@@ -123,8 +126,8 @@ public class JEIPlugin implements IModPlugin {
     }
 
     private void registerSieve(IRecipeRegistration registration) {
-        List<SieveRecipe> drySieveRecipes = ExNihiloRegistries.SIEVE_REGISTRY.getDryRecipeList();
-        List<SieveRecipe> wetSieveRecipes = ExNihiloRegistries.SIEVE_REGISTRY.getWetRecipeList();
+        List<JEISieveRecipe> drySieveRecipes = ExNihiloRegistries.SIEVE_REGISTRY.getDryRecipeList();
+        List<JEISieveRecipe> wetSieveRecipes = ExNihiloRegistries.SIEVE_REGISTRY.getWetRecipeList();
         registration.addRecipes(drySieveRecipes, DrySieveRecipeCategory.UID);
         registration.addRecipes(wetSieveRecipes, WetSieveRecipeCategory.UID);
         LogUtil.info("JEI: Sieve Recipes Loaded: " + (drySieveRecipes.size() + wetSieveRecipes.size()));

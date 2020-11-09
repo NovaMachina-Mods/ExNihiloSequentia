@@ -2,15 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "xxx",
-    "xsx",
+    "xfx",
     "xxx"
   ],
   "key": {
     "x": {
-      "tag": "forge:rods/wooden"
+      "item": "minecraft:stick"
     },
-    "s":{
-      "tag": "forge:string"
+    "f": {
+      "item": "minecraft:string"
     }
   },
   "result": {

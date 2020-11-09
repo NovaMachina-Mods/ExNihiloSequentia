@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "meshes": [
+    {
+      "chance": 0.05,
+      "mesh": "string"
+    }
+  ],
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "item": "exnihilosequentia:seed_birch"
+  }
+}

@@ -11,6 +11,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CrucibleRecipe extends SerializableRecipe {
     public static IRecipeType<CrucibleRecipe> TYPE = IRecipeType
         .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
@@ -52,5 +55,9 @@ public class CrucibleRecipe extends SerializableRecipe {
     @Override
     public ItemStack getRecipeOutput() {
         return null;
+    }
+
+    public List<ItemStack> getInputs() {
+        return Arrays.asList(input.getMatchingStacks());
     }
 }

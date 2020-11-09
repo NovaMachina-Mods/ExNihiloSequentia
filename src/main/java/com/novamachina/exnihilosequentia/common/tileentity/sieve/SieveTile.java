@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.sieve;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.block.BlockSieve;
 import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
@@ -127,15 +128,15 @@ public class SieveTile extends TileEntity {
             progress += 0.1F;
 
             if (progress >= 1.0F) {
-                List<SieveDropEntry> drops = ExNihiloRegistries.SIEVE_REGISTRY
+                List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 Random random = new Random();
                 drops.forEach((entry -> {
-                    if (random.nextFloat() <= entry.getRarity()) {
-                        Item item = ForgeRegistries.ITEMS.getValue(entry.getResult());
-                        world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
-                            pos.getZ() + 0.5F, new ItemStack(item)));
-                    }
+                    entry.getMeshWithChances().stream().forEach(meshWithChance -> {
+                        if(random.nextFloat() <= meshWithChance.getChance()) {
+                            world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, entry.getDrop()));
+                        }
+                    });
                 }));
                 resetSieve();
             }

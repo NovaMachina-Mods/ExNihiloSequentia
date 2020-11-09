@@ -3,8 +3,10 @@ package com.novamachina.exnihilosequentia.common.compat.jei.sieve.wet;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.MeshWithChance;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
+import com.novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import com.novamachina.exnihilosequentia.common.registries.sieve.SieveDropEntry;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
 import mezz.jei.api.constants.VanillaTypes;
@@ -23,11 +25,10 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
-public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
+public class WetSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "wet_sieve");
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
@@ -45,8 +46,8 @@ public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
     }
 
     @Override
-    public Class<? extends SieveRecipe> getRecipeClass() {
-        return SieveRecipe.class;
+    public Class<? extends JEISieveRecipe> getRecipeClass() {
+        return JEISieveRecipe.class;
     }
 
     @Override
@@ -65,13 +66,14 @@ public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
     }
 
     @Override
-    public void setIngredients(SieveRecipe recipe, IIngredients ingredients) {
+    public void setIngredients(JEISieveRecipe recipe, IIngredients ingredients) {
         ingredients.setInputLists(VanillaTypes.ITEM, recipe.getInputs());
-        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getOutputs());
+        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getResults());
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, SieveRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, JEISieveRecipe recipe, IIngredients ingredients) {
+        // TODO
         recipeLayout.getItemStacks().init(0, true, 10, 38);
         recipeLayout.getItemStacks().set(0, recipe.getMesh());
 
@@ -81,11 +83,11 @@ public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
         IFocus<?> focus = recipeLayout.getFocus();
 
         int slotIndex = 2;
-        for (int i = 0; i < recipe.getOutputs().size(); i++) {
+        for (int i = 0; i < recipe.getResults().size(); i++) {
             final int slotX = 38 + (i % 7 * 18);
             final int slotY = 2 + i / 7 * 18;
 
-            ItemStack outputStack = recipe.getOutputs().get(i);
+            ItemStack outputStack = recipe.getResults().get(i);
             recipeLayout.getItemStacks().init(slotIndex + i, false, slotX, slotY);
             recipeLayout.getItemStacks().set(slotIndex + i, outputStack);
 
@@ -106,15 +108,17 @@ public class WetSieveRecipeCategory implements IRecipeCategory<SieveRecipe> {
                 if (!input) {
                     ItemStack mesh = recipe.getMesh();
                     Multiset<String> condensedTooltips = HashMultiset.create();
-                    List<SieveDropEntry> drops = ExNihiloRegistries.SIEVE_REGISTRY
-                        .getDrops(recipe.getInputs().get(1).get(0).getItem().getRegistryName(), ((MeshItem) recipe
+                    List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
+                        .getDrops(recipe.getInputs().get(1).get(0).getItem(), ((MeshItem) recipe
                             .getInputs().get(0).get(0).getItem()).getMesh(), true);
-                    for (SieveDropEntry entry : drops) {
-                        ItemStack drop = new ItemStack(ForgeRegistries.ITEMS.getValue(entry.getResult()));
+                    for (SieveRecipe entry : drops) {
+                        ItemStack drop = entry.getDrop();
                         if (!drop.isItemEqual(ingredient)) {
                             continue;
                         }
-                        condensedTooltips.add(StringUtils.formatPercent(entry.getRarity()));
+                        for(MeshWithChance meshWithChance : entry.getMeshWithChances()) {
+                            condensedTooltips.add(StringUtils.formatPercent(meshWithChance.getChance()));
+                        }
                     }
                     tooltip.add(new TranslationTextComponent("jei.sieve.dropChance"));
                     for (String line : condensedTooltips.elementSet()) {

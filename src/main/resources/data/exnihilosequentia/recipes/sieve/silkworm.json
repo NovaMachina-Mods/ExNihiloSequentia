@@ -1,0 +1,27 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "meshes": [
+    {
+      "chance": 0.025,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.05,
+      "mesh": "flint"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.2,
+      "mesh": "diamond"
+    }
+  ],
+  "input": {
+    "tag": "minecraft:leaves"
+  },
+  "result": {
+    "item": "exnihilosequentia:silkworm"
+  }
+}

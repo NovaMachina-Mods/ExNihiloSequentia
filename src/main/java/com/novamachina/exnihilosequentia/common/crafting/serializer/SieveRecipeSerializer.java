@@ -25,8 +25,7 @@ public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     @Override
     protected SieveRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
         Ingredient input = Ingredient.deserialize(json.get("input"));
-        ItemStack drop = new ItemStack(ForgeRegistries.ITEMS
-            .getValue(new ResourceLocation(JSONUtils.getString(json, "result"))));
+        ItemStack drop = readOutput(json.get("result"));
         List<MeshWithChance> meshWithChanceList = new ArrayList<>();
         for(JsonElement element : json.get("meshes").getAsJsonArray()) {
             meshWithChanceList.add(MeshWithChance.deserialize(element));

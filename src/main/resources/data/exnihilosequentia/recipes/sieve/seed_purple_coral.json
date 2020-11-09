@@ -1,0 +1,16 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "meshes": [
+    {
+      "chance": 0.05,
+      "mesh": "iron"
+    }
+  ],
+  "input": {
+    "tag": "minecraft:sand"
+  },
+  "result": {
+    "item": "exnihilosequentia:seed_purple_coral"
+  },
+  "waterlogged": true
+}

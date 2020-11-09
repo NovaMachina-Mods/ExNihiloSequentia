@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:doll_blaze"
+    ]
+  },
+  "criteria": {
+    "has_doll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "exnihilosequentia:doll_crafting"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:doll_blaze"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_doll",
+      "has_the_recipe"
+    ]
+  ]
+}

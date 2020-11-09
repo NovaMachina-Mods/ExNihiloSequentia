@@ -60,19 +60,18 @@ public class SieveRecipe extends SerializableRecipe {
     }
 
     public SieveRecipe filterByMesh(EnumMesh meshType, boolean flattenRecipes) {
-        List<MeshWithChance> possibleMeshes = meshWithChances.parallelStream()
-            .filter(meshWithChance -> {
-                if(flattenRecipes) {
-                    if(meshWithChance.getMesh().getId() <= meshType.getId()) {
-                        return true;
-                    }
-                } else {
-                    if(meshWithChance.getMesh().getId() == meshType.getId()) {
-                        return true;
-                    }
+        List<MeshWithChance> possibleMeshes = new ArrayList<>();
+        for(MeshWithChance mesh : meshWithChances) {
+            if(flattenRecipes) {
+                if(mesh.getMesh().getId() <= meshType.getId()) {
+                    possibleMeshes.add(mesh);
                 }
-                return false;
-            }).collect(Collectors.toList());
+            } else {
+                if(mesh.getMesh().getId() == meshType.getId()) {
+                    possibleMeshes.add(mesh);
+                }
+            }
+        }
         return new SieveRecipe(recipeId, input, drop, possibleMeshes, isWaterlogged);
     }
 }

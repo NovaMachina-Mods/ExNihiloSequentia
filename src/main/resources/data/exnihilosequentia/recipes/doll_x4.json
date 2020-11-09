@@ -6,11 +6,11 @@
     "x x"
   ],
   "key": {
-    "e": {
-      "tag": "forge:gems/diamond"
-    },
     "x": {
       "item": "exnihilosequentia:porcelain_clay"
+    },
+    "e": {
+      "item": "minecraft:diamond"
     }
   },
   "result": {
