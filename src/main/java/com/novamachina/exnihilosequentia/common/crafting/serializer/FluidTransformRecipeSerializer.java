@@ -7,6 +7,7 @@ import com.novamachina.exnihilosequentia.common.api.crafting.fluidtransform.Flui
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
@@ -20,7 +21,7 @@ public class FluidTransformRecipeSerializer extends RecipeSerializer<FluidTransf
     @Override
     protected FluidTransformRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
         FluidStack fluid = FluidStackUtils.jsonDeserializeFluidStack(json.get("fluidInTank").getAsJsonObject());
-        ItemStack block = readOutput(json.get("blockBelow"));
+        Ingredient block = Ingredient.deserialize(json.get("blockBelow"));
         FluidStack result = FluidStackUtils.jsonDeserializeFluidStack(json.get("result").getAsJsonObject());
         return new FluidTransformRecipe(recipeId, fluid, block, result);
     }
@@ -28,7 +29,7 @@ public class FluidTransformRecipeSerializer extends RecipeSerializer<FluidTransf
     @Override
     public FluidTransformRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
         FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
-        ItemStack blockBelow = buffer.readItemStack();
+        Ingredient blockBelow = Ingredient.read(buffer);
         FluidStack result = FluidStack.readFromPacket(buffer);
         return new FluidTransformRecipe(recipeId, fluidInTank, blockBelow, result);
     }
@@ -36,7 +37,7 @@ public class FluidTransformRecipeSerializer extends RecipeSerializer<FluidTransf
     @Override
     public void write(PacketBuffer buffer, FluidTransformRecipe recipe) {
         recipe.getFluidInTank().writeToPacket(buffer);
-        buffer.writeItemStack(recipe.getBlockBelow());
+        recipe.getBlockBelow().write(buffer);
         recipe.getResult().writeToPacket(buffer);
     }
 }

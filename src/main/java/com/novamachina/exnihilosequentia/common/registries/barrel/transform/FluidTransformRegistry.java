@@ -18,7 +18,7 @@ public class FluidTransformRegistry {
 
     public boolean isValidRecipe(Fluid fluidInTank, Block blockBelow) {
         for(FluidTransformRecipe recipe : recipeList) {
-            if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getBlockBelow().isItemEqual(new ItemStack(blockBelow))) {
+            if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getBlockBelow().test(new ItemStack(blockBelow))) {
                 return true;
             }
         }
@@ -27,7 +27,7 @@ public class FluidTransformRegistry {
 
     public Fluid getResult(Fluid fluidInTank, Block blockBelow) {
         for(FluidTransformRecipe recipe : recipeList) {
-            if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getBlockBelow().isItemEqual(new ItemStack(blockBelow))) {
+            if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getBlockBelow().test(new ItemStack(blockBelow))) {
                 return recipe.getResult().getFluid();
             }
         }

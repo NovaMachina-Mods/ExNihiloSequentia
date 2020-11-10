@@ -9,7 +9,11 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_transform.png");
@@ -50,7 +54,7 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
     @Override
     public void setIngredients(FluidTransformRecipe recipe, IIngredients ingredients) {
         ingredients.setInput(VanillaTypes.FLUID, recipe.getFluidInTank());
-        ingredients.setInput(VanillaTypes.ITEM, recipe.getBlockBelow());
+        ingredients.setInputs(VanillaTypes.ITEM, new ArrayList<>(Arrays.asList(recipe.getBlockBelow().getMatchingStacks())));
         ingredients.setOutput(VanillaTypes.FLUID, recipe.getResult());
     }
 
@@ -61,7 +65,7 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
         recipeLayout.getFluidStacks().init(1, false, 102, 10);
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInTank());
-        recipeLayout.getItemStacks().set(0, recipe.getBlockBelow());
+        recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getBlockBelow().getMatchingStacks())));
         recipeLayout.getFluidStacks().set(1, recipe.getResult());
     }
 }
