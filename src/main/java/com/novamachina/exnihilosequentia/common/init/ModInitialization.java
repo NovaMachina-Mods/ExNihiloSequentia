@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.resources.DataPackRegistries;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -51,17 +50,7 @@ public class ModInitialization {
     @SubscribeEvent
     public static void onServerStart(FMLServerStartingEvent event) {
         ModCommands.register(event.getServer().getCommandManager().getDispatcher());
-
-        if (Config.USE_JSON_REGISTRIES.get()) {
-            ExNihiloRegistries.BUS.useJson();
-        } else {
-            ExNihiloRegistries.BUS.useDefault();
-        }
-    }
-
-    @SubscribeEvent
-    public static void clearRegistriesOnServerExit(FMLServerStoppedEvent event) {
-        ExNihiloRegistries.BUS.clearRegistries();
+        ExNihiloRegistries.BUS.activateOreCompat();
     }
 
     @SubscribeEvent

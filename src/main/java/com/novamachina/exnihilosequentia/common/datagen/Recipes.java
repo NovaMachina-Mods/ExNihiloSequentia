@@ -222,7 +222,12 @@ public class Recipes extends RecipeProvider {
                     break;
                 }
                 default: {
-                    //TODO: Add default ore values
+                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+                        .addResult(ore.getPieceItem().get())
+                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
+                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
+                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.1F))
+                        .build(consumer, sieveLoc(ore.getPieceName() + "_gravel"));
                 }
             }
         }

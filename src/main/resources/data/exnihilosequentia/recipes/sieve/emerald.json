@@ -1,6 +1,6 @@
 {
   "type": "exnihilosequentia:sieve",
-  "meshes": [
+  "rolls": [
     {
       "chance": 0.008,
       "mesh": "iron"

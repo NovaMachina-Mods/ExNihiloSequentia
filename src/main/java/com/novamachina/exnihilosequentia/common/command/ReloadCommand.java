@@ -31,8 +31,8 @@ public class ReloadCommand implements Command<CommandSource> {
 
     private static int reloadAll(CommandContext<CommandSource> c) {
         if(Config.USE_JSON_REGISTRIES.get()) {
-            ExNihiloRegistries.BUS.clearRegistries();
-            ExNihiloRegistries.BUS.useJson();
+//            ExNihiloRegistries.BUS.clearRegistries();
+//            ExNihiloRegistries.BUS.useJson();
             c.getSource().getEntity().sendMessage(new TranslationTextComponent("command.reload.success"), UUID.randomUUID());
         } else {
             c.getSource().getEntity().sendMessage(new TranslationTextComponent("command.reload.warning"), UUID.randomUUID());

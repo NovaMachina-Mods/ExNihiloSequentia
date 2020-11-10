@@ -4,6 +4,7 @@ import com.novamachina.exnihilosequentia.common.api.crafting.sieve.MeshWithChanc
 import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
+import com.novamachina.exnihilosequentia.common.item.ore.OreItem;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.IngredientUtils;
 import net.minecraft.block.Block;
@@ -31,6 +32,15 @@ public class SieveRegistry {
             .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
             .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), input))
             .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
+            .filter(recipe -> {
+                if(recipe.getDrop().getItem() instanceof OreItem) {
+                    OreItem ore = (OreItem)recipe.getDrop().getItem();
+                    if(!ore.getOre().isEnabled()) {
+                        return false;
+                    }
+                }
+                return true;
+            })
             .filter(recipe -> recipe.getRolls().size() > 0)
             .collect(Collectors.toList());
     }
@@ -40,6 +50,15 @@ public class SieveRegistry {
             .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
             .filter(sieveRecipe -> sieveRecipe.getInput().test(new ItemStack(input)))
             .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
+            .filter(recipe -> {
+                if(recipe.getDrop().getItem() instanceof OreItem) {
+                    OreItem ore = (OreItem)recipe.getDrop().getItem();
+                    if(!ore.getOre().isEnabled()) {
+                        return false;
+                    }
+                }
+                return true;
+            })
             .filter(recipe -> recipe.getRolls().size() > 0)
             .collect(Collectors.toList());
     }
