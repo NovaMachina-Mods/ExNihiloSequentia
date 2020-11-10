@@ -16,6 +16,15 @@ public enum EnumMesh implements IStringSerializable {
         this.name = name;
     }
 
+    public static EnumMesh getMeshFromName(String name) {
+        for(EnumMesh mesh : EnumMesh.values()) {
+            if(mesh.getName().equals(name)) {
+                return mesh;
+            }
+        }
+        return NONE;
+    }
+
     public int getId() {
         return id;
     }
@@ -29,7 +38,7 @@ public enum EnumMesh implements IStringSerializable {
     }
 
     @Override
-    public String func_176610_l() {
+    public String getString() {
         return this.name;
     }
 

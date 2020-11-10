@@ -1,6 +1,7 @@
 package com.novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
 import com.novamachina.exnihilosequentia.common.registries.crucible.Meltable;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.block.BlockState;
@@ -53,13 +54,13 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+    public void read(BlockState state, CompoundNBT compound) {
         inventory.deserializeNBT(compound.getCompound("inventory"));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
         this.solidAmount = compound.getInt("solidAmount");
         this.currentItem = ItemStack.read(compound.getCompound("currentItem"));
-        super.func_230337_a_(state, compound);
+        super.read(state, compound);
     }
 
     @Override
@@ -109,7 +110,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
         if (!tank.isEmpty()) {
             if (!tank.getFluid().getFluid()
-                .isEquivalentTo(getMeltable().getFluid())) {
+                .isEquivalentTo(getMeltable().getResultFluid().getFluid())) {
                 return ActionResultType.SUCCESS;
             }
         }
@@ -200,7 +201,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         float solidProportion = ((float) itemCount) / 4;
 
         if (solidAmount > 0) {
-            Meltable meltable = getMeltable();
+            CrucibleRecipe meltable = getMeltable();
             solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
         }
         return solidProportion;
@@ -208,8 +209,8 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     public abstract CrucilbeTypeEnum getCrucibleType();
 
-    private Meltable getMeltable() {
-        return ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem());
+    private CrucibleRecipe getMeltable() {
+        return ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());
     }
 
     public int getFluidAmount() {

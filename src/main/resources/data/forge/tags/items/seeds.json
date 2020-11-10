@@ -6,11 +6,14 @@
     "exnihilosequentia:seed_birch",
     "exnihilosequentia:seed_jungle",
     "exnihilosequentia:seed_acacia",
+    "exnihilosequentia:seed_darkoak",
     "exnihilosequentia:seed_cactus",
     "exnihilosequentia:seed_sugarcane",
     "exnihilosequentia:seed_carrot",
     "exnihilosequentia:seed_potato",
     "exnihilosequentia:seed_berry",
-    "exnihilosequentia:grass_seeds"
+    "exnihilosequentia:seed_kelp",
+    "exnihilosequentia:seed_pickle",
+    "exnihilosequentia:seed_bamboo"
   ]
 }

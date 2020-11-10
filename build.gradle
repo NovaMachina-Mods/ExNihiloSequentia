@@ -113,13 +113,13 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     compileOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}:api")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}")
 
     compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2:api")
-//    runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2")
+    runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2")
 
     compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}:api")
-//    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}")
+    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -159,6 +159,10 @@ repositories {
     maven { // WAILA
         name = "Mobius Repo"
         url = "https://maven.tehnut.info"
+    }
+    maven {
+        name = "Minecraft Forge"
+        url = "https://files.minecraftforge.net/maven"
     }
 }
 

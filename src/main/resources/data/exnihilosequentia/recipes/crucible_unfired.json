@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "x x",
-    "x x",
-    "xxx"
+    "c c",
+    "c c",
+    "ccc"
   ],
   "key": {
-    "x": {
+    "c": {
       "item": "exnihilosequentia:porcelain_clay"
     }
   },

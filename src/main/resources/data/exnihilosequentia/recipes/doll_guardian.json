@@ -1,25 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "brb",
-    "gdg",
-    "bwb"
+    "ctc",
+    "sms",
+    "cbc"
   ],
   "key": {
+    "c": {
+      "item": "minecraft:prismarine"
+    },
+    "t": {
+      "item": "minecraft:redstone"
+    },
+    "s": {
+      "item": "minecraft:glowstone_dust"
+    },
     "b": {
-      "tag": "forge:gems/prismarine"
-    },
-    "r": {
-      "tag": "forge:dusts/redstone"
-    },
-    "g": {
-      "tag": "forge:dusts/glowstone"
-    },
-    "d": {
-      "item": "exnihilosequentia:doll_crafting"
-    },
-    "w": {
       "tag": "minecraft:fishes"
+    },
+    "m": {
+      "item": "exnihilosequentia:doll_crafting"
     }
   },
   "result": {

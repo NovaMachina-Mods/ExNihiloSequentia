@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.compat.jei.compost;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -9,6 +10,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -51,13 +53,13 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
     @Override
     public void setIngredients(CompostRecipe recipe, IIngredients ingredients) {
         ingredients.setInputs(VanillaTypes.ITEM, recipe.getInputs());
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
+        ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(Blocks.DIRT));
     }
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, CompostRecipe recipe, IIngredients ingredients) {
         recipeLayout.getItemStacks().init(0, true, 10, 38);
-        recipeLayout.getItemStacks().set(0, recipe.getOutput());
+        recipeLayout.getItemStacks().set(0, new ItemStack(Blocks.DIRT));
 
         IFocus<?> focus = recipeLayout.getFocus();
 

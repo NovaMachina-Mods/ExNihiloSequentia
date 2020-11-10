@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "x x",
-    "xmx",
-    "x x"
+    "i i",
+    "imi",
+    "i i"
   ],
   "key": {
-    "x": {
+    "i": {
       "item": "minecraft:flint"
     },
     "m": {

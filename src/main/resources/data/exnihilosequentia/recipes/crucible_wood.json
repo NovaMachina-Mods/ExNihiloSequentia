@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "p p",
-    "plp",
+    "c c",
+    "clc",
     "s s"
   ],
   "key": {
-    "p": {
+    "c": {
       "tag": "minecraft:logs"
     },
     "l": {
       "tag": "minecraft:wooden_slabs"
     },
     "s": {
-      "tag": "forge:rods/wooden"
+      "item": "minecraft:stick"
     }
   },
   "result": {

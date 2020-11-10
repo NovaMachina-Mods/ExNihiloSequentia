@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.compat.jei.crucible;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -52,13 +53,13 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
     @Override
     public void setIngredients(CrucibleRecipe recipe, IIngredients ingredients) {
         ingredients.setInputs(VanillaTypes.ITEM, recipe.getInputs());
-        ingredients.setOutput(VanillaTypes.FLUID, recipe.getOutput());
+        ingredients.setOutput(VanillaTypes.FLUID, recipe.getResultFluid());
     }
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, CrucibleRecipe recipe, IIngredients ingredients) {
         recipeLayout.getFluidStacks().init(0, true, 3, 21);
-        recipeLayout.getFluidStacks().set(0, recipe.getOutput());
+        recipeLayout.getFluidStacks().set(0, recipe.getResultFluid());
 
         IFocus<?> focus = recipeLayout.getFocus();
 

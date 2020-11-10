@@ -1,22 +1,20 @@
 package com.novamachina.exnihilosequentia.common.tileentity.sieve;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.block.BlockSieve;
 import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import com.novamachina.exnihilosequentia.common.registries.sieve.SieveDropEntry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 import java.util.Random;
@@ -67,7 +65,7 @@ public class SieveTile extends TileEntity {
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+    public void read(BlockState state, CompoundNBT compound) {
         if (compound.contains("mesh")) {
             meshStack = ItemStack.read((CompoundNBT) compound.get("mesh"));
             if (meshStack.getItem() instanceof MeshItem) {
@@ -85,7 +83,7 @@ public class SieveTile extends TileEntity {
 
         progress = compound.getFloat("progress");
 
-        super.func_230337_a_(state, compound);
+        super.read(state, compound);
 //        setSieveState();
     }
 
@@ -127,15 +125,15 @@ public class SieveTile extends TileEntity {
             progress += 0.1F;
 
             if (progress >= 1.0F) {
-                List<SieveDropEntry> drops = ExNihiloRegistries.SIEVE_REGISTRY
+                List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 Random random = new Random();
                 drops.forEach((entry -> {
-                    if (random.nextFloat() <= entry.getRarity()) {
-                        Item item = ForgeRegistries.ITEMS.getValue(entry.getResult());
-                        world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F,
-                            pos.getZ() + 0.5F, new ItemStack(item)));
-                    }
+                    entry.getRolls().stream().forEach(meshWithChance -> {
+                        if(random.nextFloat() <= meshWithChance.getChance()) {
+                            world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, entry.getDrop()));
+                        }
+                    });
                 }));
                 resetSieve();
             }

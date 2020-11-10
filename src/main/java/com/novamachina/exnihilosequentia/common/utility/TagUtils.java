@@ -71,10 +71,10 @@ public class TagUtils {
         Collection<Item> itemCollection = null;
 
         if (blockTag != null) {
-            blockCollection = blockTag.func_230236_b_();
+            blockCollection = blockTag.getAllElements();
         }
         if (itemTag != null) {
-            itemCollection = itemTag.func_230236_b_();
+            itemCollection = itemTag.getAllElements();
         }
 
         List<ResourceLocation> idList = new ArrayList<>();

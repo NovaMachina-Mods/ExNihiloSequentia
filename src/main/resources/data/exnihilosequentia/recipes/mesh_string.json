@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "xxx",
-    "xxx",
-    "xxx"
+    "iii",
+    "iii",
+    "iii"
   ],
   "key": {
-    "x": {
-      "tag": "forge:string"
+    "i": {
+      "item": "minecraft:string"
     }
   },
   "result": {

@@ -1,25 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "brb",
-    "gdg",
-    "bwb"
+    "ctc",
+    "sms",
+    "cbc"
   ],
   "key": {
+    "c": {
+      "item": "minecraft:black_dye"
+    },
+    "t": {
+      "item": "minecraft:redstone"
+    },
+    "s": {
+      "item": "minecraft:glowstone_dust"
+    },
     "b": {
-      "tag": "forge:dyes/black"
+      "item": "minecraft:nether_wart"
     },
-    "r": {
-      "tag": "forge:dusts/redstone"
-    },
-    "g": {
-      "tag": "forge:dusts/glowstone"
-    },
-    "d": {
+    "m": {
       "item": "exnihilosequentia:doll_crafting"
-    },
-    "w": {
-      "tag": "forge:crops/nether_wart"
     }
   },
   "result": {

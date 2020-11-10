@@ -1,28 +1,30 @@
 package com.novamachina.exnihilosequentia.common.compat.jei;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import com.novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipe;
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
-import com.novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
-import com.novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipeCategory;
-import com.novamachina.exnihilosequentia.common.compat.jei.fluiditem.FluidBlockJEIRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.fluiditem.FluidBlockRecipeCategory;
-import com.novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopJEIRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
-import com.novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformJEIRecipe;
-import com.novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipeCategory;
-import com.novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipeCategory;
-import com.novamachina.exnihilosequentia.common.compat.jei.sieve.SieveRecipe;
+import com.novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.dry.DrySieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.wet.WetSieveRecipeCategory;
 import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
+import com.novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.LogUtil;
 import mezz.jei.api.IModPlugin;
@@ -35,6 +37,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
@@ -81,13 +84,13 @@ public class JEIPlugin implements IModPlugin {
     }
 
     private void registerWoodCrucible(IRecipeRegistration registration) {
-        List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getWoodRecipeList();
+        List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList().stream().filter(recipe -> recipe.getCrucibleType() == CrucilbeTypeEnum.WOOD).collect(Collectors.toList());
         registration.addRecipes(recipes, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_wood"));
         LogUtil.info("JEI: Wooden Crucible Recipes Loaded: " + recipes.size());
     }
 
     private void registerFiredCrucible(IRecipeRegistration registration) {
-        List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getFiredRecipeList();
+        List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList();
         registration.addRecipes(recipes, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"));
         LogUtil.info("JEI: Fired Crucible Recipes Loaded: " + recipes.size());
     }
@@ -99,19 +102,19 @@ public class JEIPlugin implements IModPlugin {
     }
 
     private void registerFluidBlock(IRecipeRegistration registration) {
-        List<FluidBlockJEIRecipe> recipes = ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getRecipeList();
+        List<FluidItemRecipe> recipes = ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getRecipeList();
         registration.addRecipes(recipes, FluidBlockRecipeCategory.UID);
         LogUtil.info("JEI: Fluid Item Recipes Loaded: " + recipes.size());
     }
 
     private void registerFluidTransform(IRecipeRegistration registration) {
-        List<FluidTransformJEIRecipe> recipes = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getRecipeList();
+        List<FluidTransformRecipe> recipes = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getRecipeList();
         registration.addRecipes(recipes, FluidTransformCategory.UID);
         LogUtil.info("JEI: Fluid Transform Recipes Loaded: " + recipes.size());
     }
 
     private void registerFluidOnTop(IRecipeRegistration registration) {
-        List<FluidOnTopJEIRecipe> recipes = ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.getRecipeList();
+        List<FluidOnTopRecipe> recipes = ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.getRecipeList();
         registration.addRecipes(recipes, FluidOnTopRecipeCategory.UID);
         LogUtil.info("JEI: Fluid On Top Recipes Loaded: " + recipes.size());
     }
@@ -123,8 +126,8 @@ public class JEIPlugin implements IModPlugin {
     }
 
     private void registerSieve(IRecipeRegistration registration) {
-        List<SieveRecipe> drySieveRecipes = ExNihiloRegistries.SIEVE_REGISTRY.getDryRecipeList();
-        List<SieveRecipe> wetSieveRecipes = ExNihiloRegistries.SIEVE_REGISTRY.getWetRecipeList();
+        List<JEISieveRecipe> drySieveRecipes = ExNihiloRegistries.SIEVE_REGISTRY.getDryRecipeList();
+        List<JEISieveRecipe> wetSieveRecipes = ExNihiloRegistries.SIEVE_REGISTRY.getWetRecipeList();
         registration.addRecipes(drySieveRecipes, DrySieveRecipeCategory.UID);
         registration.addRecipes(wetSieveRecipes, WetSieveRecipeCategory.UID);
         LogUtil.info("JEI: Sieve Recipes Loaded: " + (drySieveRecipes.size() + wetSieveRecipes.size()));

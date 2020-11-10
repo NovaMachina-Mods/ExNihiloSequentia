@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.compat.jei.hammer;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;

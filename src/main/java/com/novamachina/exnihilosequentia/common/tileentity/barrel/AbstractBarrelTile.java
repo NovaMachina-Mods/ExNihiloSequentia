@@ -93,7 +93,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+    public void read(BlockState state, CompoundNBT compound) {
         if (compound.contains("inventory")) {
             inventory.deserializeNBT(compound.getCompound("inventory"));
         }
@@ -109,7 +109,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         if (compound.contains("solidAmount")) {
             this.solidAmount = compound.getInt("solidAmount");
         }
-        super.func_230337_a_(state, compound);
+        super.read(state, compound);
     }
 
     @Override
