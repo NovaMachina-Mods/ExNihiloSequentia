@@ -9,9 +9,7 @@ import com.novamachina.exnihilosequentia.common.init.ModBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,35 +24,35 @@ public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     protected SieveRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
         Ingredient input = Ingredient.deserialize(json.get("input"));
         ItemStack drop = readOutput(json.get("result"));
-        List<MeshWithChance> meshWithChanceList = new ArrayList<>();
-        for(JsonElement element : json.get("meshes").getAsJsonArray()) {
-            meshWithChanceList.add(MeshWithChance.deserialize(element));
+        List<MeshWithChance> rolls = new ArrayList<>();
+        for(JsonElement element : json.get("rolls").getAsJsonArray()) {
+            rolls.add(MeshWithChance.deserialize(element));
         }
         if(json.has("waterlogged")) {
-            return new SieveRecipe(recipeId, input, drop, meshWithChanceList, true);
+            return new SieveRecipe(recipeId, input, drop, rolls, true);
         }
-        return new SieveRecipe(recipeId, input, drop, meshWithChanceList, false);
+        return new SieveRecipe(recipeId, input, drop, rolls, false);
     }
 
     @Override
     public SieveRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
         Ingredient input = Ingredient.read(buffer);
         ItemStack drop = buffer.readItemStack();
-        List<MeshWithChance> meshWithChances = new ArrayList<>();
+        List<MeshWithChance> rolls = new ArrayList<>();
         int count = buffer.readInt();
         for(int i = 0; i < count; i++) {
-            meshWithChances.add(MeshWithChance.read(buffer));
+            rolls.add(MeshWithChance.read(buffer));
         }
         boolean isWaterlogged = buffer.readBoolean();
-        return new SieveRecipe(recipeId, input, drop, meshWithChances, isWaterlogged);
+        return new SieveRecipe(recipeId, input, drop, rolls, isWaterlogged);
     }
 
     @Override
     public void write(PacketBuffer buffer, SieveRecipe recipe) {
         recipe.getInput().write(buffer);
         buffer.writeItemStack(recipe.getDrop());
-        buffer.writeInt(recipe.getMeshWithChances().size());
-        for(MeshWithChance meshWithChance : recipe.getMeshWithChances()) {
+        buffer.writeInt(recipe.getRolls().size());
+        for(MeshWithChance meshWithChance : recipe.getRolls()) {
             meshWithChance.write(buffer);
         }
         buffer.writeBoolean(recipe.isWaterlogged());

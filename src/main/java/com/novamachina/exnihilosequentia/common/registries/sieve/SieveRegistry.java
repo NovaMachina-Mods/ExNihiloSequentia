@@ -31,7 +31,7 @@ public class SieveRegistry {
             .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
             .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), input))
             .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
-            .filter(recipe -> recipe.getMeshWithChances().size() > 0)
+            .filter(recipe -> recipe.getRolls().size() > 0)
             .collect(Collectors.toList());
     }
 
@@ -40,7 +40,7 @@ public class SieveRegistry {
             .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
             .filter(sieveRecipe -> sieveRecipe.getInput().test(new ItemStack(input)))
             .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
-            .filter(recipe -> recipe.getMeshWithChances().size() > 0)
+            .filter(recipe -> recipe.getRolls().size() > 0)
             .collect(Collectors.toList());
     }
 
@@ -48,7 +48,7 @@ public class SieveRegistry {
         return recipeList.parallelStream().anyMatch(sieveRecipe ->{
             if(sieveRecipe.getInput().test(new ItemStack(block))) {
                 if(sieveRecipe.isWaterlogged() == isWaterlogged) {
-                    for(MeshWithChance meshWithChance : sieveRecipe.getMeshWithChances()) {
+                    for(MeshWithChance meshWithChance : sieveRecipe.getRolls()) {
                         if(flattenRecipes) {
                             if(meshWithChance.getMesh().getId() <= mesh.getId()) {
                                 return true;

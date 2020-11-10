@@ -11,7 +11,7 @@ public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilde
     private SieveRecipeBuilder() {
         super(SieveRecipe.SERIALIZER.get());
 
-        addWriter(jsonObject -> jsonObject.add("meshes", meshArray));
+        addWriter(jsonObject -> jsonObject.add("rolls", meshArray));
     }
 
     public static SieveRecipeBuilder builder() {

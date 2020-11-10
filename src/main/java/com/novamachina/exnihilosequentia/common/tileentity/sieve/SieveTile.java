@@ -6,18 +6,15 @@ import com.novamachina.exnihilosequentia.common.block.BlockSieve;
 import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import com.novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import com.novamachina.exnihilosequentia.common.registries.sieve.SieveDropEntry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 import java.util.Random;
@@ -132,7 +129,7 @@ public class SieveTile extends TileEntity {
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 Random random = new Random();
                 drops.forEach((entry -> {
-                    entry.getMeshWithChances().stream().forEach(meshWithChance -> {
+                    entry.getRolls().stream().forEach(meshWithChance -> {
                         if(random.nextFloat() <= meshWithChance.getChance()) {
                             world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, entry.getDrop()));
                         }

@@ -115,7 +115,7 @@ public class WetSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
                         if (!drop.isItemEqual(ingredient)) {
                             continue;
                         }
-                        for(MeshWithChance meshWithChance : entry.getMeshWithChances()) {
+                        for(MeshWithChance meshWithChance : entry.getRolls()) {
                             condensedTooltips.add(StringUtils.formatPercent(meshWithChance.getChance()));
                         }
                     }

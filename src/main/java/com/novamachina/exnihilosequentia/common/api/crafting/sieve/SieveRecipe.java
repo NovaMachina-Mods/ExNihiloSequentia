@@ -12,7 +12,6 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SieveRecipe extends SerializableRecipe {
     public static IRecipeType<SieveRecipe> TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
@@ -20,16 +19,16 @@ public class SieveRecipe extends SerializableRecipe {
 
     private final Ingredient input;
     private final ItemStack drop;
-    private final List<MeshWithChance> meshWithChances;
+    private final List<MeshWithChance> rolls;
     private final boolean isWaterlogged;
     private final ResourceLocation recipeId;
 
-    public SieveRecipe(ResourceLocation id, Ingredient input, ItemStack drop, List<MeshWithChance> meshWithChances, boolean isWaterlogged) {
+    public SieveRecipe(ResourceLocation id, Ingredient input, ItemStack drop, List<MeshWithChance> rolls, boolean isWaterlogged) {
         super(drop, TYPE, id);
         this.recipeId = id;
         this.input = input;
         this.drop = drop;
-        this.meshWithChances = meshWithChances;
+        this.rolls = rolls;
         this.isWaterlogged = isWaterlogged;
     }
 
@@ -41,8 +40,8 @@ public class SieveRecipe extends SerializableRecipe {
         return drop;
     }
 
-    public List<MeshWithChance> getMeshWithChances() {
-        return meshWithChances;
+    public List<MeshWithChance> getRolls() {
+        return rolls;
     }
 
     @Override
@@ -61,7 +60,7 @@ public class SieveRecipe extends SerializableRecipe {
 
     public SieveRecipe filterByMesh(EnumMesh meshType, boolean flattenRecipes) {
         List<MeshWithChance> possibleMeshes = new ArrayList<>();
-        for(MeshWithChance mesh : meshWithChances) {
+        for(MeshWithChance mesh : rolls) {
             if(flattenRecipes) {
                 if(mesh.getMesh().getId() <= meshType.getId()) {
                     possibleMeshes.add(mesh);
