@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.registries.sieve;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.sieve.MeshWithChance;
 import com.novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
 import com.novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
 import com.novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
@@ -44,7 +45,24 @@ public class SieveRegistry {
     }
 
     public boolean isBlockSiftable(Block block, EnumMesh mesh, boolean isWaterlogged) {
-        return recipeList.parallelStream().anyMatch(sieveRecipe -> sieveRecipe.getInput().test(new ItemStack(block)));
+        return recipeList.parallelStream().anyMatch(sieveRecipe ->{
+            if(sieveRecipe.getInput().test(new ItemStack(block))) {
+                if(sieveRecipe.isWaterlogged() == isWaterlogged) {
+                    for(MeshWithChance meshWithChance : sieveRecipe.getMeshWithChances()) {
+                        if(flattenRecipes) {
+                            if(meshWithChance.getMesh().getId() <= mesh.getId()) {
+                                return true;
+                            }
+                        } else {
+                            if(meshWithChance.getMesh().getId() == mesh.getId()) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        });
     }
 
     public List<JEISieveRecipe> getDryRecipeList() {

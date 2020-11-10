@@ -73,7 +73,6 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, JEISieveRecipe recipe, IIngredients ingredients) {
-        // TODO
         recipeLayout.getItemStacks().init(0, true, 10, 38);
         recipeLayout.getItemStacks().set(0, recipe.getMesh());
 

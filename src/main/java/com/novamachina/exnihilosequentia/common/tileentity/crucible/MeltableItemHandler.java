@@ -38,7 +38,7 @@ public class MeltableItemHandler extends ItemStackHandler {
 
     @Override
     protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
-        return 4;
+        return 3;
     }
 
     @Override
