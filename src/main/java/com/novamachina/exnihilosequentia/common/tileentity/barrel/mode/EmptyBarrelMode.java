@@ -1,6 +1,8 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -82,5 +84,14 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     @Override
     public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         return new ArrayList<>();
+    }
+
+    @Override
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+        if(ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(stack.getItem())) {
+            barrelTile.setMode(Constants.BarrelModes.COMPOST);
+            return barrelTile.getMode().handleInsert(barrelTile, stack);
+        }
+        return stack;
     }
 }

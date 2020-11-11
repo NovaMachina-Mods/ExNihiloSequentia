@@ -1,6 +1,5 @@
 package com.novamachina.exnihilosequentia.common.tileentity.barrel;
 
-import com.novamachina.exnihilosequentia.common.init.ModTiles;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.mode.AbstractBarrelMode;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
 import com.novamachina.exnihilosequentia.common.utility.Config;
@@ -42,7 +41,7 @@ import java.util.List;
 public abstract class AbstractBarrelTile extends TileEntity implements ITickableTileEntity {
     public static int MAX_SOLID_AMOUNT = Config.BARREL_MAX_SOLID_AMOUNT.get();
     public static int MAX_FLUID_AMOUNT = Config.BARREL_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
-    private ItemStackHandler inventory;
+    private BarrelInventoryHandler inventory;
     private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
     private BarrelFluidHandler tank;
     private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
@@ -52,7 +51,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     public AbstractBarrelTile(TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
         super(tileEntityType);
         this.mode = BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY);
-        inventory = new ItemStackHandler();
+        inventory = new BarrelInventoryHandler(this);
         tank = new BarrelFluidHandler(this);
         solidAmount = 0;
     }

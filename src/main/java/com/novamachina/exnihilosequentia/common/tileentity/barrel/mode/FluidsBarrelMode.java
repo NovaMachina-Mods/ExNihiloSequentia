@@ -170,4 +170,29 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
         return info;
     }
+
+    @Override
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+        ItemStack returnStack = stack.copy();
+        Fluid fluid = barrelTile.getTank().getFluid().getFluid();
+        Item input = stack.getItem();
+        if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
+            barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+            barrelTile.getInventory()
+                .setStackInSlot(0, new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
+            barrelTile.setMode(Constants.BarrelModes.BLOCK);
+            returnStack.shrink(1);
+            return returnStack;
+        }
+
+        if (input instanceof DollItem) {
+            DollItem doll = (DollItem) input;
+            if (barrelTile.getFluid().isEquivalentTo(doll.getSpawnFluid())) {
+                barrelTile.setMode(Constants.BarrelModes.MOB);
+                ((MobSpawnBarrelMode) barrelTile.getMode()).setDoll(doll);
+                returnStack.shrink(1);
+            }
+        }
+        return returnStack;
+    }
 }
