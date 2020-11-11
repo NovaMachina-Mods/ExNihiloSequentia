@@ -14,7 +14,7 @@ Ex Nihilo: Sequentia has support for:
 
 To report any issues or make a suggestion, go to the [GitHub Issues] page.
 
-[JEI]: "https://www.curseforge.com/minecraft/mc-mods/jei"
-[The One Probe]: "https://www.curseforge.com/minecraft/mc-mods/the-one-probe"
-[WAILA/HWYLA]: "https://www.curseforge.com/minecraft/mc-mods/hwyla/
-[GitHub Issues]: "https://github.com/NovaMachina/ExNihiloSequentia/issues"
+[JEI]: https://www.curseforge.com/minecraft/mc-mods/jei
+[The One Probe]: https://www.curseforge.com/minecraft/mc-mods/the-one-probe
+[WAILA/HWYLA]: https://www.curseforge.com/minecraft/mc-mods/hwyla/
+[GitHub Issues]: https://github.com/NovaMachina/ExNihiloSequentia/issues

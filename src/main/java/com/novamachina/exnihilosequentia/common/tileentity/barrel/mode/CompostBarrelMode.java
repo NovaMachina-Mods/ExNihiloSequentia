@@ -6,6 +6,7 @@ import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import com.novamachina.exnihilosequentia.common.utility.StringUtils;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -103,7 +104,8 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
         if (currentProgress <= 0) {
-            info.add(new TranslationTextComponent("waila.barrel.solidAmount", barrelTile
+            String itemName = I18n.format(barrelTile.getInventory().getStackInSlot(0).getItem().getTranslationKey());
+            info.add(new TranslationTextComponent("waila.barrel.solidAmount", itemName, barrelTile
                 .getSolidAmount(), AbstractBarrelTile.MAX_SOLID_AMOUNT));
         } else {
             info.add(new TranslationTextComponent("waila.progress", StringUtils

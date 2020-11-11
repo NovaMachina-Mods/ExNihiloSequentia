@@ -74,7 +74,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
-    protected int getHeat() {
+    public int getHeat() {
         return ExNihiloRegistries.HEAT_REGISTRY
             .getHeatAmount(world.getBlockState(pos.down()).getBlock()) > 0 ? Config.WOOD_HEAT_RATE.get() : 0;
     }

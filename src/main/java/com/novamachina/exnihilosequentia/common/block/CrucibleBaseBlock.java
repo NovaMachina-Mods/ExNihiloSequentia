@@ -45,14 +45,14 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
         BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getTileEntity(data.getPos());
-        if (crucibleTile.getFluidAmount() > 0) {
-            String fluidName = I18n
-                .format(crucibleTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey());
-            probeInfo
-                .text(new TranslationTextComponent("waila.crucible.fluid", fluidName, crucibleTile.getFluidAmount()));
-        }
         if (crucibleTile.getSolidAmount() > 0) {
-            probeInfo.text(new TranslationTextComponent("waila.crucible.solid", crucibleTile.getSolidAmount()));
+            String itemName = I18n.format(crucibleTile.getCurrentItem().getItem().getTranslationKey());
+            probeInfo.text(new TranslationTextComponent("waila.crucible.solid", itemName, crucibleTile.getSolidAmount()));
         }
+        if (crucibleTile.getFluidAmount() > 0) {
+            String fluidName = I18n.format(crucibleTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey());
+            probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", fluidName, crucibleTile.getFluidAmount()));
+        }
+            probeInfo.text(new TranslationTextComponent("waila.crucible.heat", crucibleTile.getHeat()));
     }
 }
