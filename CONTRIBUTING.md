@@ -4,7 +4,7 @@
 - If you do not find an issue related to the one you have discovered, feel free to create a new issue. When you do so:
   - Give your issue a good title.
   - Give a clear description of what the bug/issue is. If it is too vague we cannot guarantee that your issue will be resolved.
-  - Give clear and concise steps to reproduce the issue. Again, if it is too vague we cannot garantee that your issue will be resolved.
+  - Give clear and concise steps to reproduce the issue. Again, if it is too vague we cannot guarantee that your issue will be resolved.
   - Explain what you expect to happen.
   - Provide the version of Minecraft, Minecraft Forge, and Ex Nihilo: Sequentia that you are using. This helps us to reproduce your issue.
   - Provide, if applicable (which is most of the time) logs and crash reports. The more information the better! Submit all files through [Gist] or [Pastebin].
@@ -21,6 +21,7 @@ Awesome! We really appreciate your help and desire to see Ex Nihilo: Sequentia t
 ### Want to add a feature?
 - Start hacking away and add your feature to the code! Or pick one of the suggestions on the issue board and get to work!
 - Once your feature is in a good place to be incorporated into the rest of the mod, create a suggestion on the issue board (unless you are implementing a suggestion already on the board), make a pull request, and link your pull request to the suggestion on the issue board.
+- Be sure to describe your suggested feature clearly and why it should be added to Ex Nihilo: Sequentia.
 - Request a review from one of the project maintainers. (Currently there is only one maintainer, [NovaMachina].)
 - If changes are requested, or your pull request is rejected, don't get discouraged! We want to make sure that Ex Nihilo: Sequentia is a great experience for everyone, yourself and all those that use the mod. As such, we want to make sure that good code/features are added.
 
@@ -30,7 +31,7 @@ Be aware that any features that don't fit with the spirit of Ex Nihilo: Sequenti
 Unfortunately, pull requests of this nature will most likely be rejected. They generally do not add anything to Ex Nihilo: Sequentia and tend to be a waste of time to review.
 
 ---
-Currently there is only one developer on the project, so please be understanding and patient as they work through your issues, review your pull requests, and implement new features.
+Currently, there is only one developer on the project, so please be understanding and patient as they work through your issues, review your pull requests, and implement new features.
   
 [Gist]: https://gist.github.com/
 [Pastebin]: https://pastebin.com/
