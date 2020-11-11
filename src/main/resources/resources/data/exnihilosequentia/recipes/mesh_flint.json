@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "i i",
+    "imi",
+    "i i"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:flint"
+    },
+    "m": {
+      "item": "exnihilosequentia:mesh_string"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:mesh_flint"
+  }
+}

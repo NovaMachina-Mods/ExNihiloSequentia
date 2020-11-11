@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "i i",
+    "imi",
+    "i i"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "m": {
+      "item": "exnihilosequentia:mesh_flint"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:mesh_iron"
+  }
+}

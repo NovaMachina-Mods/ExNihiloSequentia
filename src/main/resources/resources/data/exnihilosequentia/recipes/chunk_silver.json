@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:piece_silver"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:chunk_silver"
+  }
+}

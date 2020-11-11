@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_on_top",
+  "fluidInTank": {
+    "fluid": "minecraft:water"
+  },
+  "fluidOnTop": {
+    "fluid": "minecraft:lava"
+  },
+  "result": {
+    "item": "minecraft:cobblestone"
+  }
+}

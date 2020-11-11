@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "clc",
+    "s s"
+  ],
+  "key": {
+    "c": {
+      "tag": "minecraft:logs"
+    },
+    "l": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:crucible_wood"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_transform",
+  "fluidInTank": {
+    "fluid": "minecraft:water"
+  },
+  "blockBelow": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "fluid": "exnihilosequentia:sea_water"
+  }
+}
