@@ -30,6 +30,14 @@ Be aware that any features that don't fit with the spirit of Ex Nihilo: Sequenti
 ### Did you fix whitespace, format code, or make a purely cosmetic patch?
 Unfortunately, pull requests of this nature will most likely be rejected. They generally do not add anything to Ex Nihilo: Sequentia and tend to be a waste of time to review.
 
+# Code Style
+We have a few specific code style requirements that we would like contributors to adhear to.
+- Do not use tabs, use four spaces instead.
+- If at all possible, line separators should be Unix based (`\n`).
+- Curly braces should be used as frequently as possible. This includes simple `if` statements.
+- Leading curly braces should be on the same line, not a new line.
+- No bulk imports. These are considered bad practice and should not be done. Instead, list out all the individual imports for the class.
+
 ---
 Currently, there is only one developer on the project, so please be understanding and patient as they work through your issues, review your pull requests, and implement new features.
   
