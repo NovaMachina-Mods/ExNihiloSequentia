@@ -37,7 +37,7 @@ public abstract class LootTableGenerator implements IDataProvider {
 
         ValidationTracker validator = new ValidationTracker(LootParameterSets.GENERIC, (function) -> null, lootTables::get);
         lootTables.forEach((name, table) -> {
-            LootTableManager.func_227508_a_(validator, name, table);
+            LootTableManager.validateLootTable(validator, name, table);
         });
         Multimap<String, String> problems = validator.getProblems();
         if(!problems.isEmpty()) {

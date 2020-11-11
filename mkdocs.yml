@@ -8,6 +8,7 @@ nav:
   - Hammers: 'hammer.md'
   - Sieve: 'sieve.md'
   - Misc: 'misc.md'
+  - Data Pack: 'data_pack.md'
   - Configuration File: 'config.md'
   - Commands: 'commands.md'
 

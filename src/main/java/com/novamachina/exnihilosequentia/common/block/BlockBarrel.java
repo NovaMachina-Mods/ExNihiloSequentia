@@ -69,8 +69,10 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
         }
         if (probeMode == ProbeMode.EXTENDED) {
             probeInfo
-                .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase())
-                    .func_230530_a_(Style.field_240709_b_.func_240718_a_(Color.func_240744_a_(TextFormatting.GREEN))));
+                .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).modifyStyle(style -> {
+                    style.setColor(Color.fromTextFormatting(TextFormatting.GREEN));
+                    return style;
+                }));
         }
 
         List<ITextComponent> info = barrelTile.getWailaInfo();

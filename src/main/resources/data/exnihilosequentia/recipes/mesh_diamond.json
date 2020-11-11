@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "x x",
-    "xmx",
-    "x x"
+    "i i",
+    "imi",
+    "i i"
   ],
   "key": {
-    "x": {
-      "tag": "forge:gems/diamond"
+    "i": {
+      "item": "minecraft:diamond"
     },
     "m": {
       "item": "exnihilosequentia:mesh_iron"

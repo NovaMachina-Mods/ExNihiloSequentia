@@ -38,7 +38,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
 
-                    solidAmount = ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem())
+                    solidAmount = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
                         .getAmount();
                 } else {
                     return;
@@ -48,7 +48,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
                 .isItemEqual(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
-                    solidAmount += ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem())
+                    solidAmount += ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
                         .getAmount();
                     inventory.getStackInSlot(0).shrink(1);
 
@@ -65,7 +65,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
             if (heat > 0 && ExNihiloRegistries.CRUCIBLE_REGISTRY
                 .isMeltable(currentItem.getItem(), getCrucibleType().getLevel())) {
                 FluidStack fluidStack = new FluidStack(
-                    ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem()).getFluid(), heat);
+                    ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem()).getResultFluid(), heat);
                 int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
                 solidAmount -= filled;
             }
@@ -87,7 +87,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     @Override
     public int getSolidAmount() {
         int itemCount = inventory.getStackInSlot(0).getCount();
-        return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(currentItem.getItem())
+        return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
             .getAmount());
     }
 

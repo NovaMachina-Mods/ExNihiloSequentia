@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "x x",
-    "xmx",
-    "x x"
+    "i i",
+    "imi",
+    "i i"
   ],
   "key": {
-    "x": {
-      "tag": "forge:ingots/iron"
+    "i": {
+      "item": "minecraft:iron_ingot"
     },
     "m": {
       "item": "exnihilosequentia:mesh_flint"

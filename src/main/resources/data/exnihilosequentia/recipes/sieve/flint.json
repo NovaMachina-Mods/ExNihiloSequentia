@@ -1,0 +1,19 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.25,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.25,
+      "mesh": "flint"
+    }
+  ],
+  "input": {
+    "item": "minecraft:gravel"
+  },
+  "result": {
+    "item": "minecraft:flint"
+  }
+}

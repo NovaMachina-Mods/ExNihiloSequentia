@@ -1,25 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "brb",
-    "gdg",
-    "bwb"
+    "ctc",
+    "sms",
+    "cbc"
   ],
   "key": {
+    "c": {
+      "item": "minecraft:purple_dye"
+    },
+    "t": {
+      "item": "minecraft:end_stone"
+    },
+    "s": {
+      "item": "minecraft:glowstone_dust"
+    },
     "b": {
-      "tag": "forge:dyes/purple"
+      "item": "minecraft:ender_pearl"
     },
-    "r": {
-      "tag": "forge:end_stones"
-    },
-    "g": {
-      "tag": "forge:dusts/glowstone"
-    },
-    "d": {
+    "m": {
       "item": "exnihilosequentia:doll_crafting"
-    },
-    "w": {
-      "tag": "forge:ender_pearls"
     }
   },
   "result": {

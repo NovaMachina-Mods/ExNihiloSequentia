@@ -2,12 +2,15 @@ package com.novamachina.exnihilosequentia.common.init;
 
 import com.novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
 import com.novamachina.exnihilosequentia.common.compat.top.CompatTOP;
+import com.novamachina.exnihilosequentia.common.crafting.RecipeReloadListener;
 import com.novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
 import com.novamachina.exnihilosequentia.common.utility.Config;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.resources.DataPackRegistries;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -36,6 +39,7 @@ public class ModInitialization {
         ModItems.init(modEventBus);
         ModTiles.init(modEventBus);
         ModFluids.init(modEventBus);
+        ModSerializers.init(modEventBus);
     }
 
     @SubscribeEvent
@@ -46,17 +50,7 @@ public class ModInitialization {
     @SubscribeEvent
     public static void onServerStart(FMLServerStartingEvent event) {
         ModCommands.register(event.getServer().getCommandManager().getDispatcher());
-
-        if (Config.USE_JSON_REGISTRIES.get()) {
-            ExNihiloRegistries.BUS.useJson();
-        } else {
-            ExNihiloRegistries.BUS.useDefault();
-        }
-    }
-
-    @SubscribeEvent
-    public static void clearRegistriesOnServerExit(FMLServerStoppedEvent event) {
-        ExNihiloRegistries.BUS.clearRegistries();
+        ExNihiloRegistries.BUS.activateOreCompat();
     }
 
     @SubscribeEvent
@@ -64,5 +58,11 @@ public class ModInitialization {
         if (ModList.get().isLoaded(Constants.ModIds.TOP)) {
             CompatTOP.register();
         }
+    }
+
+
+    public  static void addReloadListeners(AddReloadListenerEvent event) {
+        DataPackRegistries dataPackRegistries = event.getDataPackRegistries();
+        event.addListener(new RecipeReloadListener(dataPackRegistries));
     }
 }

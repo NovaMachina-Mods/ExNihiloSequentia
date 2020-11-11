@@ -1,5 +1,6 @@
 package com.novamachina.exnihilosequentia.common.compat.jei.fluiditem;
 
+import com.novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -10,7 +11,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
 
-public class FluidBlockRecipeCategory implements IRecipeCategory<FluidBlockJEIRecipe> {
+public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_block_transform.png");
     public static ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluiditem");
     private final IDrawableStatic background;
@@ -27,8 +28,8 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidBlockJEIRe
     }
 
     @Override
-    public Class<? extends FluidBlockJEIRecipe> getRecipeClass() {
-        return FluidBlockJEIRecipe.class;
+    public Class<? extends FluidItemRecipe> getRecipeClass() {
+        return FluidItemRecipe.class;
     }
 
     @Override
@@ -47,20 +48,20 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidBlockJEIRe
     }
 
     @Override
-    public void setIngredients(FluidBlockJEIRecipe recipe, IIngredients ingredients) {
-        ingredients.setInput(VanillaTypes.ITEM, recipe.getInput());
+    public void setIngredients(FluidItemRecipe recipe, IIngredients ingredients) {
+        ingredients.setInputs(VanillaTypes.ITEM, recipe.getInputs());
         ingredients.setInput(VanillaTypes.FLUID, recipe.getFluidInBarrel());
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, FluidBlockJEIRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, FluidItemRecipe recipe, IIngredients ingredients) {
         recipeLayout.getFluidStacks().init(0, true, 48, 37);
         recipeLayout.getItemStacks().init(0, true, 74, 9);
         recipeLayout.getItemStacks().init(1, false, 101, 36);
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInBarrel());
-        recipeLayout.getItemStacks().set(0, recipe.getInput());
+        recipeLayout.getItemStacks().set(0, recipe.getInputs());
         recipeLayout.getItemStacks().set(1, recipe.getResult());
     }
 }

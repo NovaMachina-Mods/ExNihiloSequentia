@@ -1,0 +1,9 @@
+{
+  "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "item": "exnihilosequentia:dust"
+  }
+}

@@ -8,6 +8,7 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.event.ClickEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -22,6 +23,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
+//TODO verify that all registries still work
 @Mod(Constants.ModIds.EX_NIHILO_SEQUENTIA)
 public class ExNihiloSequentia {
 
@@ -33,6 +35,7 @@ public class ExNihiloSequentia {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::setupNonTagBasedRegistries);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::registerTOP);
+        MinecraftForge.EVENT_BUS.addListener(ModInitialization::addReloadListeners);
     }
 
     @EventBusSubscriber(modid = Constants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)

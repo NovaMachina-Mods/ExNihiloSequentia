@@ -2,15 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     " x ",
-    " sx",
-    "s  "
+    " -x",
+    "-  "
   ],
   "key": {
     "x": {
       "tag": "forge:cobblestone"
     },
-    "s": {
-      "tag": "forge:rods/wooden"
+    "-": {
+      "item": "minecraft:stick"
     }
   },
   "result": {

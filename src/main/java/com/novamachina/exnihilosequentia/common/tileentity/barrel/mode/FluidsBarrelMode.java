@@ -77,8 +77,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
         if (ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.isValidRecipe(fluidInTank, fluidOnTop)) {
             barrelTile.getTank().setFluid(FluidStack.EMPTY);
-            barrelTile.getInventory().setStackInSlot(0, new ItemStack(ExNihiloRegistries.FLUID_ON_TOP_REGISTRY
-                .getResult(fluidInTank, fluidOnTop)));
+            barrelTile.getInventory().setStackInSlot(0, ExNihiloRegistries.FLUID_ON_TOP_REGISTRY
+                .getResult(fluidInTank, fluidOnTop));
             barrelTile.setMode(Constants.BarrelModes.BLOCK);
             return true;
         }

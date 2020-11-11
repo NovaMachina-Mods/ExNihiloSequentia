@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
   "pattern": [
     "x x",
     "x x",
