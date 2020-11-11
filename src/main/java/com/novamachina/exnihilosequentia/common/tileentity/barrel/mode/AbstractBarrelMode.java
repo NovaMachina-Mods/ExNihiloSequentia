@@ -40,4 +40,6 @@ public abstract class AbstractBarrelMode {
     protected abstract void spawnParticle(AbstractBarrelTile barrelTile);
 
     public abstract List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile);
+
+    public abstract ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack);
 }

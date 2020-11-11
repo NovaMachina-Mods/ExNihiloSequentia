@@ -23,7 +23,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-//TODO verify that all registries still work
 @Mod(Constants.ModIds.EX_NIHILO_SEQUENTIA)
 public class ExNihiloSequentia {
 

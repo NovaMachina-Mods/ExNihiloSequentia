@@ -102,4 +102,9 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
 
         return info;
     }
+
+    @Override
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+        return stack;
+    }
 }

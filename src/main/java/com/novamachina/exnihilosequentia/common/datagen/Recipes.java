@@ -754,7 +754,6 @@ public class Recipes extends RecipeProvider {
             .build(consumer);
     }
 
-    // TODO: Vanilla Metals don't generate recipes
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
         for (EnumOre ore : EnumOre.values()) {
             registerOre(ore, consumer);
