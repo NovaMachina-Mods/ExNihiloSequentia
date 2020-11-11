@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.common.api.FluidStackUtils;
-import novamachina.exnihilosequentia.common.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.init.ModBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

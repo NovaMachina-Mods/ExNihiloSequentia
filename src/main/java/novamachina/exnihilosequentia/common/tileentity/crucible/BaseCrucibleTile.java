@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

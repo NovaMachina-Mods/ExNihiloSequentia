@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloTags;
+import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;

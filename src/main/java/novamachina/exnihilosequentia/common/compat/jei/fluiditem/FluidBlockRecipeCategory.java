@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluiditem;
 
-import novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;

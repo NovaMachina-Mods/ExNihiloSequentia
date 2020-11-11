@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.item.tools.hammer;
 
 import com.google.common.collect.Sets;
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ModBlocks;
 import novamachina.exnihilosequentia.common.init.ModInitialization;
 import net.minecraft.block.Block;

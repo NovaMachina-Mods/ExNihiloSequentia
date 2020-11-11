@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.item.tools.crook;
 
 import com.google.common.collect.Sets;
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ModInitialization;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;

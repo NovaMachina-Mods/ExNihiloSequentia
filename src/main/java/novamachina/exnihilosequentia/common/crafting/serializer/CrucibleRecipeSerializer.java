@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.common.api.FluidStackUtils;
-import novamachina.exnihilosequentia.common.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.init.ModBlocks;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import net.minecraft.item.ItemStack;

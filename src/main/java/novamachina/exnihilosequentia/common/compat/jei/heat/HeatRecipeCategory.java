@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipe;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;

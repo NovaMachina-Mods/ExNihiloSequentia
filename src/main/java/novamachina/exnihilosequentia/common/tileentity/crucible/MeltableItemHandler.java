@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.items.ItemStackHandler;

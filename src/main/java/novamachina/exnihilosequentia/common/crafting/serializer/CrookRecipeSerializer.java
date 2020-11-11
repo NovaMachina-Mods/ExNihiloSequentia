@@ -2,9 +2,9 @@ package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.common.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.common.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

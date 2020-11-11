@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.crucible;
 
-import novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;

@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;

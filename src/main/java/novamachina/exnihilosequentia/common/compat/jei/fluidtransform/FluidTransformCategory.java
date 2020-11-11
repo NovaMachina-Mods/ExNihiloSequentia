@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidtransform;
 
-import novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;

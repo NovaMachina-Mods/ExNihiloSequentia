@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.Constants;

@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
-import novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
+import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;

@@ -1,14 +1,14 @@
 package novamachina.exnihilosequentia.common.init;
 
-import novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
+import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
+import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
+import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.crafting.serializer.CompostRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.serializer.CrookRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.serializer.CrucibleRecipeSerializer;

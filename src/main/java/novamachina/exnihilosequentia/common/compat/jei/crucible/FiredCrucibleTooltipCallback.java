@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.crucible;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;

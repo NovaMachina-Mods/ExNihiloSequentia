@@ -1,15 +1,15 @@
 package novamachina.exnihilosequentia.common.crafting;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
+import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
+import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
@@ -19,6 +19,7 @@ import net.minecraft.resources.IResourceManagerReloadListener;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,12 +56,12 @@ public class RecipeReloadListener implements IResourceManagerReloadListener {
         ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(filterRecipes(recipes, SieveRecipe.class, SieveRecipe.TYPE));
     }
 
-    private static <R extends IRecipe<?>> Map<ResourceLocation, R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)
+    private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)
     {
         return recipes.stream()
             .filter(iRecipe -> iRecipe.getType() == recipeType)
             .flatMap(Stream::of)
             .map(recipeClass::cast)
-            .collect(Collectors.toMap(recipe -> recipe.getId(), recipe -> recipe));
+            .collect(Collectors.toList());
     }
 }

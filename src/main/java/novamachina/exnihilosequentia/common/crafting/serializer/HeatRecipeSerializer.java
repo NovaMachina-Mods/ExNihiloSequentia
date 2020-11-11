@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.common.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipe;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

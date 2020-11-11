@@ -2,10 +2,10 @@ package novamachina.exnihilosequentia.common.compat.jei.sieve.dry;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.api.crafting.sieve.MeshWithChance;
-import novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
+import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
+import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;

@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.item.ItemStack;

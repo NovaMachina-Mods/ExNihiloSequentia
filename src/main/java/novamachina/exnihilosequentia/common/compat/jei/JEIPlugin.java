@@ -1,14 +1,14 @@
 package novamachina.exnihilosequentia.common.compat.jei;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipe;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
+import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipeCategory;
@@ -17,7 +17,7 @@ import novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopReci
 import novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
 import novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipeCategory;
-import novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
+import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.common.compat.jei.sieve.dry.DrySieveRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.sieve.wet.WetSieveRecipeCategory;
 import novamachina.exnihilosequentia.common.init.ModBlocks;

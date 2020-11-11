@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.crook;
 
-import novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.item.ItemStack;

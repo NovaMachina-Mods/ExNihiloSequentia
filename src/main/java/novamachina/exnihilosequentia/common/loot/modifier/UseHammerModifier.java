@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;

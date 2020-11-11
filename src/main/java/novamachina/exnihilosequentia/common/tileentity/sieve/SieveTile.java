@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.tileentity.sieve;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipe;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.init.ModTiles;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;

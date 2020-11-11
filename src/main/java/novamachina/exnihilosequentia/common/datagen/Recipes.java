@@ -1,16 +1,16 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import novamachina.exnihilosequentia.common.api.ExNihiloTags;
-import novamachina.exnihilosequentia.common.api.crafting.compost.CompostRecipeBuilder;
-import novamachina.exnihilosequentia.common.api.crafting.crook.CrookRecipeBuilder;
-import novamachina.exnihilosequentia.common.api.crafting.crucible.CrucibleRecipeBuilder;
-import novamachina.exnihilosequentia.common.api.crafting.fluidItem.FluidItemRecipeBuilder;
-import novamachina.exnihilosequentia.common.api.crafting.fluidontop.FluidOnTopRecipeBuilder;
-import novamachina.exnihilosequentia.common.api.crafting.fluidtransform.FluidTransformRecipeBuilder;
-import novamachina.exnihilosequentia.common.api.crafting.hammer.HammerRecipeBuilder;
-import novamachina.exnihilosequentia.common.api.crafting.heat.HeatRecipeBuilder;
-import novamachina.exnihilosequentia.common.api.crafting.sieve.MeshWithChance;
-import novamachina.exnihilosequentia.common.api.crafting.sieve.SieveRecipeBuilder;
+import novamachina.exnihilosequentia.api.ExNihiloTags;
+import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
+import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.common.init.ModBlocks;
 import novamachina.exnihilosequentia.common.init.ModFluids;
 import novamachina.exnihilosequentia.common.init.ModItems;
