@@ -11,11 +11,13 @@ public class MeltableItemHandler extends ItemStackHandler {
 
     private boolean crucibleHasRoom = true;
     private CrucilbeTypeEnum type;
+    private BaseCrucibleTile crucibleTile;
 
     public MeltableItemHandler(
-        CrucilbeTypeEnum crucibleType) {
+        CrucilbeTypeEnum crucibleType, BaseCrucibleTile crucibleTile) {
         super(1);
         type = crucibleType;
+        this.crucibleTile = crucibleTile;
     }
 
     @Nonnull

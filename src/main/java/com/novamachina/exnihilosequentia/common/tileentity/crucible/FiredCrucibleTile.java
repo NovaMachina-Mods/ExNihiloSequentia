@@ -14,7 +14,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
-    protected int getHeat() {
+    public int getHeat() {
         return ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(world.getBlockState(pos.down()).getBlock());
     }
 
@@ -26,8 +26,11 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     @Override
     public int getSolidAmount() {
         int itemCount = inventory.getStackInSlot(0).getCount();
-        return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
-            .getAmount());
+        if(!currentItem.isEmpty()) {
+            return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
+                    .getAmount());
+        }
+        return solidAmount;
     }
 
     @Override

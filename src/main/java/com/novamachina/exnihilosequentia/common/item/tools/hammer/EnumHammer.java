@@ -11,6 +11,7 @@ public enum EnumHammer {
     STONE(Constants.Items.HAMMER_STONE, 125, ItemTier.STONE),
     IRON(Constants.Items.HAMMER_IRON, 512, ItemTier.IRON),
     DIAMOND(Constants.Items.HAMMER_DIAMOND, 4096, ItemTier.DIAMOND),
+    NETHERITE(Constants.Items.HAMMER_NETHERITE, 8192, ItemTier.NETHERITE),
     GOLD(Constants.Items.HAMMER_GOLD, 64, ItemTier.GOLD);
 
     public final String name;
