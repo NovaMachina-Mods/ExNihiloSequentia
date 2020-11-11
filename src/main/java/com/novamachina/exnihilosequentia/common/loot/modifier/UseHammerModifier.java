@@ -23,7 +23,6 @@ public class UseHammerModifier extends LootModifier {
         super(conditionsIn);
     }
 
-    // TODO: Figure out how to allow generatedLoot to pass through when nothing is in registry
     @Nonnull
     @Override
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {

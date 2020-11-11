@@ -88,7 +88,6 @@ public class BlockStates extends BlockStateProvider {
         registerSieve(ModBlocks.SIEVE.get(), new ResourceLocation(Constants.ModIds.MINECRAFT, "block/oak_planks"));
     }
 
-    //TODO: Rename base sieve model and sieve for multiple sieve textures
     private void registerSieve(Block block, ResourceLocation texture) {
         ConfiguredModel model = new ConfiguredModel(models().withExistingParent(name(block), modLoc("block/sieve"))
             .texture("texture", texture)
