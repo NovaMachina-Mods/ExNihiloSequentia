@@ -1,0 +1,66 @@
+package novamachina.exnihilosequentia.common.init;
+
+import novamachina.exnihilosequentia.common.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
+import novamachina.exnihilosequentia.common.crafting.RecipeReloadListener;
+import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
+import novamachina.exnihilosequentia.common.utility.Constants;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.resources.DataPackRegistries;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.registries.ObjectHolder;
+
+@Mod.EventBusSubscriber(modid = Constants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class ModInitialization {
+
+    public static final ItemGroup ITEM_GROUP = new ItemGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA) {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModBlocks.SIEVE.get());
+        }
+    };
+
+    @ObjectHolder(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
+    public static GlobalLootModifierSerializer<?> HAMMER_MODIFIER = null;
+
+    public static void init(IEventBus modEventBus) {
+        ModBlocks.init(modEventBus);
+        ModItems.init(modEventBus);
+        ModTiles.init(modEventBus);
+        ModFluids.init(modEventBus);
+        ModSerializers.init(modEventBus);
+    }
+
+    @SubscribeEvent
+    public static void setupNonTagBasedRegistries(FMLCommonSetupEvent event) {
+        BarrelModeRegistry.initialize();
+    }
+
+    @SubscribeEvent
+    public static void onServerStart(FMLServerStartingEvent event) {
+        ModCommands.register(event.getServer().getCommandManager().getDispatcher());
+        ExNihiloRegistries.BUS.activateOreCompat();
+    }
+
+    @SubscribeEvent
+    public static void registerTOP(InterModEnqueueEvent event) {
+        if (ModList.get().isLoaded(Constants.ModIds.TOP)) {
+            CompatTOP.register();
+        }
+    }
+
+
+    public  static void addReloadListeners(AddReloadListenerEvent event) {
+        DataPackRegistries dataPackRegistries = event.getDataPackRegistries();
+        event.addListener(new RecipeReloadListener(dataPackRegistries));
+    }
+}
