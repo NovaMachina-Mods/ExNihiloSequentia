@@ -120,7 +120,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
             barrelTile.getInventory()
                 .setStackInSlot(0, new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
-            player.getHeldItem(handIn).shrink(1);
+            if(!player.isCreative()) {
+                player.getHeldItem(handIn).shrink(1);
+            }
             barrelTile.setMode(Constants.BarrelModes.BLOCK);
             return true;
         }
