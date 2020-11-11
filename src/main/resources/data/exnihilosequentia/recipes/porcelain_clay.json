@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:clay_ball"
+      "tag": "forge:clay"
     },
     {
       "item": "minecraft:bone_meal"
