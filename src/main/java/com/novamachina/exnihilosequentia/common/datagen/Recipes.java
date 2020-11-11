@@ -22,6 +22,7 @@ import com.novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import com.novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import com.novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import com.novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
+import com.novamachina.exnihilosequentia.common.registries.defaults.ExNihilo;
 import com.novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
@@ -628,7 +629,7 @@ public class Recipes extends RecipeProvider {
             .build(consumer);
 
         ShapelessRecipeBuilder.shapelessRecipe(EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
-            .addIngredient(Items.CLAY_BALL)
+            .addIngredient(ExNihiloTags.CLAY)
             .addIngredient(Items.BONE_MEAL)
             .addCriterion("has_clay", InventoryChangeTrigger.Instance.forItems(Items.CLAY_BALL))
             .build(consumer);

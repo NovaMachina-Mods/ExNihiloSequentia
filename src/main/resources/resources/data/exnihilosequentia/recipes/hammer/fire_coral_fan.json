@@ -1,9 +1,0 @@
-{
-  "type": "exnihilosequentia:hammer",
-  "input": {
-    "item": "minecraft:fire_coral"
-  },
-  "result": {
-    "item": "minecraft:fire_coral_fan"
-  }
-}

@@ -1,7 +1,6 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "particle": "exnihilosequentia:block/crushed_diorite",
     "all": "exnihilosequentia:block/crushed_diorite"
   }
 }

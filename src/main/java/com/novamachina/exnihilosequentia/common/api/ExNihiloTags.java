@@ -19,6 +19,7 @@ public class ExNihiloTags {
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
     public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
+    public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
 
     static {
         for(EnumOre ore : EnumOre.values()) {

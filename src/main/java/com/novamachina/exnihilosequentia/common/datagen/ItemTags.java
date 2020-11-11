@@ -24,6 +24,11 @@ public class ItemTags extends ItemTagsProvider {
         registerSeeds();
         registerMeats();
         registerHammers();
+        registerMisc();
+    }
+
+    private void registerMisc() {
+        getOrCreateBuilder(ExNihiloTags.CLAY).addItemEntry(Items.CLAY_BALL);
     }
 
     private void registerHammers() {
