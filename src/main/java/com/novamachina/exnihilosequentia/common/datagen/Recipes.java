@@ -27,12 +27,17 @@ import com.novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.*;
+import net.minecraft.data.CookingRecipeBuilder;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.data.RecipeProvider;
+import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.data.SmithingRecipeBuilder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
@@ -718,10 +723,10 @@ public class Recipes extends RecipeProvider {
 
     private void registerHammers(Consumer<IFinishedRecipe> consumer) {
         SmithingRecipeBuilder
-                .func_240502_a_(Ingredient.fromItems(EnumHammer.DIAMOND.getRegistryObject().get()), Ingredient.fromTag(Tags.Items.INGOTS_NETHERITE), EnumHammer.NETHERITE.getRegistryObject().get())
-                .func_240503_a_("has_diamond_hammer", InventoryChangeTrigger.Instance.forItems(EnumHammer.DIAMOND.getRegistryObject().get()))
-                .func_240503_a_("has_material", hasItem(Tags.Items.INGOTS_NETHERITE))
-                .func_240505_a_(consumer,  new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.name));
+                .smithingRecipe(Ingredient.fromItems(EnumHammer.DIAMOND.getRegistryObject().get()), Ingredient.fromTag(Tags.Items.INGOTS_NETHERITE), EnumHammer.NETHERITE.getRegistryObject().get())
+                .addCriterion("has_diamond_hammer", InventoryChangeTrigger.Instance.forItems(EnumHammer.DIAMOND.getRegistryObject().get()))
+                .addCriterion("has_material", hasItem(Tags.Items.INGOTS_NETHERITE))
+                .build(consumer,  new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.name));
         registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Items.DIAMOND, consumer);
         registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Items.GOLD_INGOT, consumer);
         registerHammer(EnumHammer.IRON.getRegistryObject().get(), Items.IRON_INGOT, consumer);

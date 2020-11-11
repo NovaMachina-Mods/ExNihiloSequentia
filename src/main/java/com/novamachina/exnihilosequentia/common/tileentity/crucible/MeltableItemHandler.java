@@ -23,8 +23,7 @@ public class MeltableItemHandler extends ItemStackHandler {
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        int amount = ExNihiloRegistries.CRUCIBLE_REGISTRY.getMeltable(stack.getItem()).getAmount();
-        if (crucibleHasRoom && crucibleTile.getSolidAmount() <= 1000 - amount * stack.getCount()) {
+        if (crucibleHasRoom) {
             return super.insertItem(slot, stack, simulate);
         }
         return stack;
