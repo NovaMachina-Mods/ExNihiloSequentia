@@ -89,7 +89,7 @@ public class BlockStates extends BlockStateProvider {
     }
 
     private void registerSieve(Block block, ResourceLocation texture) {
-        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(name(block), modLoc("block/sieve"))
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(name(block), modLoc("block/sieve_base"))
             .texture("texture", texture)
             .texture("particle", texture));
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
@@ -104,6 +104,7 @@ public class BlockStates extends BlockStateProvider {
                 partBuilder.end();
             }
         }
+        simpleBlockItem(block, model.model);
     }
 
     private void registerCake() {

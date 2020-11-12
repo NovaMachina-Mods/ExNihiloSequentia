@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.datagen;
 
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.item.crafting.ShapedRecipe;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipeBuilder;
@@ -625,6 +627,15 @@ public class Recipes extends RecipeProvider {
             .key('c', Items.END_CRYSTAL)
             .key('k', Items.CAKE)
             .addCriterion("has_ender_pearl", InventoryChangeTrigger.Instance.forItems(Items.ENDER_PEARL))
+            .build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.SIEVE.get())
+            .patternLine("p p")
+            .patternLine("plp")
+            .patternLine("s s")
+            .key('p', ItemTags.PLANKS)
+            .key('l', ItemTags.WOODEN_SLABS)
+            .key('s', Tags.Items.RODS_WOODEN)
+            .addCriterion("has_plank", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(ItemTags.PLANKS).build()))
             .build(consumer);
 
         ShapelessRecipeBuilder.shapelessRecipe(EnumResource.PORCELAIN_CLAY.getRegistryObject().get())

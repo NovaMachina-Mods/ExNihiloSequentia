@@ -1,0 +1,16 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "string"
+    }
+  ],
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "item": "exnihilosequentia:seed_pickle"
+  },
+  "waterlogged": true
+}
