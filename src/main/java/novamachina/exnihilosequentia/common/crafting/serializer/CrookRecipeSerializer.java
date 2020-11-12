@@ -36,7 +36,7 @@ public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
         int outputCount = buffer.readInt();
         List<ItemStackWithChance> output = new ArrayList<>(outputCount);
         for(int i = 0; i < outputCount; i++) {
-            output.set(i,ItemStackWithChance.read(buffer));
+            output.add(ItemStackWithChance.read(buffer));
         }
         Ingredient input = Ingredient.read(buffer);
         return new CrookRecipe(recipeId, input, output);
