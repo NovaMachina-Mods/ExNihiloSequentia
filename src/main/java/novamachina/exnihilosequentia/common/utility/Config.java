@@ -17,7 +17,6 @@ public class Config {
     private static final String CATEGORY_CROOK = "crook";
     private static final String CATEGORY_CRUCIBLE = "crucible";
     private static final String CATEGORY_INFESTED_LEAVES = "infested_leaves";
-    private static final String CATEGORY_REGISTRY = "registry";
     private static final String CATEGORY_SIEVE = "sieve";
     private static final String CATEGORY_COMPAT = "compatibility";
     private static final String SUBCATEGORY_BARREL_MOB = "mob_spawn";
@@ -53,9 +52,6 @@ public class Config {
     public static ForgeConfigSpec.DoubleValue SPREAD_CHANCE;
     public static ForgeConfigSpec.IntValue TICKS_BETWEEN_SPREAD_ATTEMPT;
 
-    // Registry
-    public static ForgeConfigSpec.BooleanValue USE_JSON_REGISTRIES;
-
     // Sieve
     public static ForgeConfigSpec.BooleanValue FLATTEN_SIEVE_RECIPES;
     public static ForgeConfigSpec.IntValue SIEVE_RANGE;
@@ -78,9 +74,6 @@ public class Config {
         COMMON_BUILDER.pop();
         COMMON_BUILDER.comment("Infested Leaves Configs").push(CATEGORY_INFESTED_LEAVES);
         infestedLeavesConfigs();
-        COMMON_BUILDER.pop();
-        COMMON_BUILDER.comment("Registry Configs").push(CATEGORY_REGISTRY);
-        registryConfigs();
         COMMON_BUILDER.pop();
         COMMON_BUILDER.comment("Sieve Configs").push(CATEGORY_SIEVE);
         sieveConfigs();
@@ -110,12 +103,6 @@ public class Config {
         SIEVE_RANGE = COMMON_BUILDER
             .comment("Defines the radius that a sieve will attempt to activate other sieves (Default: 2)")
             .defineInRange("sieveRange", 2, 0, 5);
-    }
-
-    private static void registryConfigs() {
-        USE_JSON_REGISTRIES = COMMON_BUILDER
-            .comment("Should use JSON registries. Will generate JSON files if they do not exist. (Default: false)")
-            .define("useJson", false);
     }
 
     private static void infestedLeavesConfigs() {
