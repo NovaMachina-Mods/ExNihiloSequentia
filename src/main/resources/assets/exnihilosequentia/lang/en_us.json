@@ -124,13 +124,11 @@
   "item.exnihilosequentia.mesh_flint": "Flint Mesh",
   "item.exnihilosequentia.mesh_iron": "Iron Mesh",
   "item.exnihilosequentia.mesh_diamond": "Diamond Mesh",
+  "item.exnihilosequentia.mesh_emerald": "Emerald Mesh",
+  "item.exnihilosequentia.mesh_netherite": "Netherite Mesh",
 
   "fluid.exnihilosequentia.witchwater": "Witchwater",
   "fluid.exnihilosequentia.sea_water": "Sea Water",
-
-  "message.new_mod": "Thanks for using Ex Nihilo: Sequentia! This mod is newly released and is probably missing a lot of stuff and broken somewhere.",
-  "message.issues": "To report any issues or make a suggestion, go to:",
-  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues",
 
   "tooltip.doll.blaze": "Add to a barrel of lava to spawn a Blaze",
   "tooltip.doll.enderman": "Add to a barrel of witchwater to spawn an Enderman",
@@ -150,8 +148,5 @@
   "waila.crucible.solid": "Solid(%s): %s",
   "waila.crucible.heat": "Heat: %s",
 
-  "top.barrel.mode": "Mode: %s",
-
-  "command.reload.warning": "WARNING: JSON registries are disabled in the configuration file. Reload will not occur.",
-  "command.reload.success": "Reload successful."
+  "top.barrel.mode": "Mode: %s"
 }
