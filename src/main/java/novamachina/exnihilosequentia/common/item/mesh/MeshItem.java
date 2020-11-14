@@ -8,7 +8,8 @@ public class MeshItem extends Item {
     private final EnumMesh mesh;
 
     public MeshItem(EnumMesh mesh) {
-        super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
+        // TODO Mesh damage can be disabled
+        super(new Item.Properties().group(ModInitialization.ITEM_GROUP).maxDamage(mesh.getMaxDamage()));
         this.mesh = mesh;
     }
 

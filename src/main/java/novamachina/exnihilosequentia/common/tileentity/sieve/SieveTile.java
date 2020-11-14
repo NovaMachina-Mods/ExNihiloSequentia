@@ -1,5 +1,8 @@
 package novamachina.exnihilosequentia.common.tileentity.sieve;
 
+import com.mojang.authlib.GameProfile;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
@@ -18,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class SieveTile extends TileEntity {
 
@@ -141,8 +145,13 @@ public class SieveTile extends TileEntity {
     }
 
     private void resetSieve() {
+        meshStack.damageItem(1, new FakePlayer((ServerWorld) world, new GameProfile(UUID.randomUUID(), "Fake Player")), player -> System.out.println("Broken"));
         blockStack = ItemStack.EMPTY;
         progress = 0.0F;
+        if(meshStack.isEmpty()) {
+            meshType = EnumMesh.NONE;
+            setSieveState();
+        }
     }
 
     public boolean isReadyToSieve() {
