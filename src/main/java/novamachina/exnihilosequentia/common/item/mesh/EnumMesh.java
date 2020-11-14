@@ -5,7 +5,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.RegistryObject;
 
 public enum EnumMesh implements IStringSerializable {
-    NONE(0, "none"), STRING(1, "string"), FLINT(2, "flint"), IRON(3, "iron"), DIAMOND(4, "diamond");
+    NONE(0, "none"), STRING(1, "string"), FLINT(2, "flint"), IRON(3, "iron"), DIAMOND(4, "diamond"), EMERALD(5, "emerald"), NETHERITE(6, "netherite");
 
     private final int id;
     private final String name;
