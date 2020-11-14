@@ -19,7 +19,7 @@ public class DataGenerators {
             // LootTable
             generator.addProvider(new LootTables(generator));
             // Tags
-            generator.addProvider(new ItemTags(generator, new BlockTagsProvider(generator, Constants.ModIds.EX_NIHILO_SEQUENTIA, event
+            generator.addProvider(new ItemTagsGenerator(generator, new BlockTagsProvider(generator, Constants.ModIds.EX_NIHILO_SEQUENTIA, event
                 .getExistingFileHelper()), event.getExistingFileHelper()));
         }
         if(event.includeClient()) {
