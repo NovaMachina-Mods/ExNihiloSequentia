@@ -5,6 +5,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
+import novamachina.exnihilosequentia.common.utility.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class HeatRegistry implements IHeatRegistry {
 
     @Override
     public void setRecipes(List<HeatRecipe> recipes) {
+        LogUtil.debug("Heat Registry recipes: " + recipes.size());
         this.recipeList.addAll(recipes);
     }
 }

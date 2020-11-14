@@ -5,6 +5,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.registry.IFluidOnTopRegistry;
+import novamachina.exnihilosequentia.common.utility.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class FluidOnTopRegistry implements IFluidOnTopRegistry {
 
     @Override
     public void setRecipes(List<FluidOnTopRecipe> recipes) {
+        LogUtil.debug("Fluid On Top Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 }

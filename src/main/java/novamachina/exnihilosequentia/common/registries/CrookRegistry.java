@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.registry.ICrookRegistry;
+import novamachina.exnihilosequentia.common.utility.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class CrookRegistry implements ICrookRegistry {
 
     @Override
     public void setRecipes(List<CrookRecipe> recipes) {
+        LogUtil.debug("Crook Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 

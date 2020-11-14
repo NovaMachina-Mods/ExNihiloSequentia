@@ -16,6 +16,7 @@ public class LogUtil {
     }
 
     public static void debug(String msg) {
+        if(Config.ENABLE_DEBUG_LOGGING.get())
         LOGGER.debug(addPrefix(msg));
     }
 

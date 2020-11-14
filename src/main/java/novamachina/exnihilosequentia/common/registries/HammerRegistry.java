@@ -4,6 +4,7 @@ import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.registry.IHammerRegistry;
+import novamachina.exnihilosequentia.common.utility.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class HammerRegistry implements IHammerRegistry {
 
     @Override
     public void setRecipes(List<HammerRecipe> recipes) {
+        LogUtil.debug("Hammer Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 

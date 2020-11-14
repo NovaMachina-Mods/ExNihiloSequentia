@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
+import novamachina.exnihilosequentia.common.utility.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -157,6 +158,7 @@ public class SieveRegistry implements ISieveRegistry {
 
     @Override
     public void setRecipes(List<SieveRecipe> recipes) {
+        LogUtil.debug("Sieve Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 }

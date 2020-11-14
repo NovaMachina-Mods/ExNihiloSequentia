@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.registry.IFluidTransformRegistry;
+import novamachina.exnihilosequentia.common.utility.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
 
     @Override
     public void setRecipes(List<FluidTransformRecipe> recipes) {
+        LogUtil.debug("Fluid Transform Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 }

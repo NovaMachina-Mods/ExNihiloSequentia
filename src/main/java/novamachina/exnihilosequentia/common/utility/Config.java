@@ -19,6 +19,7 @@ public class Config {
     private static final String CATEGORY_INFESTED_LEAVES = "infested_leaves";
     private static final String CATEGORY_SIEVE = "sieve";
     private static final String CATEGORY_COMPAT = "compatibility";
+    private static final String CATEGORY_DEBUG = "debug";
     private static final String SUBCATEGORY_BARREL_MOB = "mob_spawn";
     private static final String SUBCATEGORY_BARREL_COMPOST = "compost";
     private static final String SUBCATEGORY_BARREL_FLUID = "fluid_transform";
@@ -62,6 +63,9 @@ public class Config {
     public static ForgeConfigSpec.BooleanValue ENABLE_MEKANISM;
     public static ForgeConfigSpec.BooleanValue ENABLE_CREATE;
 
+    // Debugging
+    public static ForgeConfigSpec.BooleanValue ENABLE_DEBUG_LOGGING;
+
     static {
         COMMON_BUILDER.comment("Barrel Configs").push(CATEGORY_BARREL);
         barrelConfigs();
@@ -81,8 +85,16 @@ public class Config {
         COMMON_BUILDER.comment("Compatibility Configs").push(CATEGORY_COMPAT);
         compatConfigs();
         COMMON_BUILDER.pop();
+        COMMON_BUILDER.comment("Debug Configs").push(CATEGORY_DEBUG);
+        debugConfigs();
+        COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
+    }
+
+    private static void debugConfigs() {
+        ENABLE_DEBUG_LOGGING = COMMON_BUILDER.comment("Enable extra logging? (Default: false)")
+            .define("enableDebugLogging", false);
     }
 
     private static void compatConfigs() {

@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.registry.ICrucibleRegistry;
+import novamachina.exnihilosequentia.common.utility.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class CrucibleRegistry implements ICrucibleRegistry {
 
     @Override
     public void setRecipes(List<CrucibleRecipe> recipes) {
+        LogUtil.debug("Crucible Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 
