@@ -13,8 +13,8 @@ import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ItemTags extends ItemTagsProvider {
-    public ItemTags(DataGenerator generator, BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper) {
+public class ItemTagsGenerator extends ItemTagsProvider {
+    public ItemTagsGenerator(DataGenerator generator, BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper) {
         super(generator, blockTagsProvider, Constants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
 

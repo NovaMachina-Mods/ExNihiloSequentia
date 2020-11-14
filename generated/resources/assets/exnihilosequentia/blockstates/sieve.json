@@ -36,6 +36,22 @@
       "apply": {
         "model": "exnihilosequentia:block/mesh_diamond"
       }
+    },
+    {
+      "when": {
+        "mesh": "emerald"
+      },
+      "apply": {
+        "model": "exnihilosequentia:block/mesh_emerald"
+      }
+    },
+    {
+      "when": {
+        "mesh": "netherite"
+      },
+      "apply": {
+        "model": "exnihilosequentia:block/mesh_netherite"
+      }
     }
   ]
 }

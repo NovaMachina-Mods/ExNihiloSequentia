@@ -1,7 +1,24 @@
 package novamachina.exnihilosequentia.common.datagen;
 
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.item.crafting.ShapedRecipe;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.data.CookingRecipeBuilder;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.data.RecipeProvider;
+import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.data.SmithingRecipeBuilder;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipeBuilder;
@@ -26,24 +43,6 @@ import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import novamachina.exnihilosequentia.common.utility.Constants;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.CookingRecipeBuilder;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.data.ShapelessRecipeBuilder;
-import net.minecraft.data.SmithingRecipeBuilder;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Tags;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -406,9 +405,9 @@ public class Recipes extends RecipeProvider {
     private void registerFluidItemRecipes(Consumer<IFinishedRecipe> consumer) {
         FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.WATER).input(ModBlocks.DUST.get()).result(Blocks.CLAY)
             .build(consumer, fluidItemLoc("clay"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Items.REDSTONE).result(Blocks.NETHERRACK)
+        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Tags.Items.DUSTS_REDSTONE).result(Blocks.NETHERRACK)
             .build(consumer, fluidItemLoc("netherrack"));
-        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Items.GLOWSTONE_DUST).result(Blocks.END_STONE)
+        FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Tags.Items.DUSTS_GLOWSTONE).result(Blocks.END_STONE)
             .build(consumer, fluidItemLoc("end_stone"));
         FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get()).input(Tags.Items.SAND)
             .result(Blocks.SOUL_SAND).build(consumer, fluidItemLoc("soul_sand"));
@@ -559,10 +558,10 @@ public class Recipes extends RecipeProvider {
             .patternLine("xxx")
             .patternLine("xfx")
             .patternLine("xxx")
-            .key('x', Items.STICK)
-            .key('f', Items.STRING)
-            .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
-            .addCriterion("has_string", InventoryChangeTrigger.Instance.forItems(Items.STRING))
+            .key('x', Tags.Items.RODS_WOODEN)
+            .key('f', Tags.Items.STRING)
+            .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(Tags.Items.RODS_WOODEN).build()))
+            .addCriterion("has_string", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(Tags.Items.STRING).build()))
             .build(consumer);
 
         CookingRecipeBuilder.smeltingRecipe(Ingredient
@@ -593,7 +592,7 @@ public class Recipes extends RecipeProvider {
             .patternLine("s s")
             .key('c', ItemTags.LOGS)
             .key('l', ItemTags.WOODEN_SLABS)
-            .key('s', Items.STICK)
+            .key('s', Tags.Items.RODS_WOODEN)
             .addCriterion("has_logs", hasItem(ItemTags.LOGS))
             .build(consumer);
 
@@ -602,10 +601,10 @@ public class Recipes extends RecipeProvider {
             .patternLine(" x ")
             .patternLine("x x")
             .key('x', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
-            .key('e', Items.DIAMOND)
+            .key('e', Tags.Items.GEMS_DIAMOND)
             .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
                 .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
-            .addCriterion("has_diamond", InventoryChangeTrigger.Instance.forItems(Items.DIAMOND))
+            .addCriterion("has_diamond", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(Tags.Items.GEMS_DIAMOND).build()))
             .build(consumer, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x4"));
 
         ShapedRecipeBuilder.shapedRecipe(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 6)
@@ -613,10 +612,10 @@ public class Recipes extends RecipeProvider {
             .patternLine(" x ")
             .patternLine("x x")
             .key('x', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
-            .key('e', Items.EMERALD)
+            .key('e', Tags.Items.GEMS_EMERALD)
             .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
                 .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
-            .addCriterion("has_emerald", InventoryChangeTrigger.Instance.forItems(Items.EMERALD))
+            .addCriterion("has_emerald", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(Tags.Items.GEMS_EMERALD).build()))
             .build(consumer, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x6"));
 
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.END_CAKE.get())
@@ -641,7 +640,7 @@ public class Recipes extends RecipeProvider {
         ShapelessRecipeBuilder.shapelessRecipe(EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
             .addIngredient(ExNihiloTags.CLAY)
             .addIngredient(Items.BONE_MEAL)
-            .addCriterion("has_clay", InventoryChangeTrigger.Instance.forItems(Items.CLAY_BALL))
+            .addCriterion("has_clay", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(ExNihiloTags.CLAY).build()))
             .build(consumer);
     }
 
@@ -649,16 +648,31 @@ public class Recipes extends RecipeProvider {
         registerMesh(EnumMesh.FLINT.getRegistryObject().get(), EnumMesh.STRING.getRegistryObject()
             .get(), Items.FLINT, consumer);
         registerMesh(EnumMesh.IRON.getRegistryObject().get(), EnumMesh.FLINT.getRegistryObject()
-            .get(), Items.IRON_INGOT, consumer);
+            .get(), Tags.Items.INGOTS_IRON, consumer);
         registerMesh(EnumMesh.DIAMOND.getRegistryObject().get(), EnumMesh.IRON.getRegistryObject()
-            .get(), Items.DIAMOND, consumer);
+            .get(), Tags.Items.GEMS_DIAMOND, consumer);
+        registerMesh(EnumMesh.EMERALD.getRegistryObject().get(), EnumMesh.DIAMOND.getRegistryObject()
+            .get(), Tags.Items.GEMS_EMERALD, consumer);
+        registerMesh(EnumMesh.NETHERITE.getRegistryObject().get(), EnumMesh.EMERALD.getRegistryObject()
+            .get(), Tags.Items.INGOTS_NETHERITE, consumer);
 
         ShapedRecipeBuilder.shapedRecipe(EnumMesh.STRING.getRegistryObject().get())
             .patternLine("iii")
             .patternLine("iii")
             .patternLine("iii")
-            .key('i', Items.STRING)
+            .key('i', Tags.Items.STRING)
             .addCriterion("has_sieve", InventoryChangeTrigger.Instance.forItems(ModBlocks.SIEVE.get()))
+            .build(consumer);
+    }
+
+    private void registerMesh(Item output, Item inputMesh, ITag.INamedTag<Item> inputItem, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(output)
+            .patternLine("i i")
+            .patternLine("imi")
+            .patternLine("i i")
+            .key('i', inputItem)
+            .key('m', inputMesh)
+            .addCriterion("has_mesh", InventoryChangeTrigger.Instance.forItems(inputMesh))
             .build(consumer);
     }
 
@@ -674,61 +688,60 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerDolls(Consumer<IFinishedRecipe> consumer) {
-        registerDoll(DollEnum.BEE.getRegistryObject()
-            .get(), Items.YELLOW_DYE, Items.GLOWSTONE_DUST, ItemTags.FLOWERS, EnumResource.BEEHIVE_FRAME
-            .getRegistryObject().get(), consumer);
-        registerDoll(DollEnum.BLAZE.getRegistryObject()
-            .get(), Items.BLAZE_POWDER, Items.GLOWSTONE_DUST, Items.REDSTONE, Items.NETHER_WART, consumer);
-        registerDoll(DollEnum.ENDERMAN.getRegistryObject()
-            .get(), Items.BLACK_DYE, Items.GLOWSTONE_DUST, Items.REDSTONE, Items.NETHER_WART, consumer);
-        registerDoll(DollEnum.GUARDIAN.getRegistryObject()
-            .get(), Items.PRISMARINE, Items.GLOWSTONE_DUST, Items.REDSTONE, ItemTags.FISHES, consumer);
-        registerDoll(DollEnum.SHULKER.getRegistryObject()
-            .get(), Items.PURPLE_DYE, Items.GLOWSTONE_DUST, Items.END_STONE, Items.ENDER_PEARL, consumer);
-    }
-
-    private void registerDoll(Item output, Item corners, Item sides, Item top, ITag.INamedTag<Item> bottom, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(output)
+        ShapedRecipeBuilder.shapedRecipe(DollEnum.SHULKER.getRegistryObject().get())
             .patternLine("ctc")
             .patternLine("sms")
             .patternLine("cbc")
-            .key('c', corners)
-            .key('t', top)
-            .key('s', sides)
-            .key('b', bottom)
+            .key('c', Tags.Items.DYES_PURPLE)
+            .key('s', Tags.Items.DUSTS_GLOWSTONE)
+            .key('t', Tags.Items.END_STONES)
+            .key('b', Tags.Items.ENDER_PEARLS)
             .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-            .addCriterion("has_doll", InventoryChangeTrigger.Instance
-                .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
             .build(consumer);
-    }
-
-    private void registerDoll(Item output, Item corners, Item sides, Item top, Item bottom, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(output)
+        ShapedRecipeBuilder.shapedRecipe(DollEnum.GUARDIAN.getRegistryObject().get())
             .patternLine("ctc")
             .patternLine("sms")
             .patternLine("cbc")
-            .key('c', corners)
-            .key('t', top)
-            .key('s', sides)
-            .key('b', bottom)
+            .key('c', Tags.Items.GEMS_PRISMARINE)
+            .key('s', Tags.Items.DUSTS_GLOWSTONE)
+            .key('t', Tags.Items.DUSTS_REDSTONE)
+            .key('b', ItemTags.FISHES)
             .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-            .addCriterion("has_doll", InventoryChangeTrigger.Instance
-                .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
             .build(consumer);
-    }
-
-    private void registerDoll(Item output, Item corners, Item sides, ITag.INamedTag<Item> top, Item bottom, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(output)
+        ShapedRecipeBuilder.shapedRecipe(DollEnum.BEE.getRegistryObject().get())
             .patternLine("ctc")
             .patternLine("sms")
             .patternLine("cbc")
-            .key('c', corners)
-            .key('t', top)
-            .key('s', sides)
-            .key('b', bottom)
+            .key('c', Tags.Items.DYES_YELLOW)
+            .key('s', Tags.Items.DUSTS_GLOWSTONE)
+            .key('t', ItemTags.FLOWERS)
+            .key('b', EnumResource.BEEHIVE_FRAME.getRegistryObject().get())
             .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-            .addCriterion("has_doll", InventoryChangeTrigger.Instance
-                .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(DollEnum.BLAZE.getRegistryObject().get())
+            .patternLine("ctc")
+            .patternLine("sms")
+            .patternLine("cbc")
+            .key('c', Items.BLAZE_POWDER)
+            .key('s', Tags.Items.DUSTS_GLOWSTONE)
+            .key('t', Tags.Items.DUSTS_REDSTONE)
+            .key('b', Tags.Items.CROPS_NETHER_WART)
+            .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
+            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(DollEnum.ENDERMAN.getRegistryObject().get())
+            .patternLine("ctc")
+            .patternLine("sms")
+            .patternLine("cbc")
+            .key('c', Tags.Items.DYES_BLACK)
+            .key('s', Tags.Items.DUSTS_GLOWSTONE)
+            .key('t', Tags.Items.DUSTS_REDSTONE)
+            .key('b', Tags.Items.CROPS_NETHER_WART)
+            .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
+            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
             .build(consumer);
     }
 
@@ -738,9 +751,9 @@ public class Recipes extends RecipeProvider {
                 .addCriterion("has_diamond_hammer", InventoryChangeTrigger.Instance.forItems(EnumHammer.DIAMOND.getRegistryObject().get()))
                 .addCriterion("has_material", hasItem(Tags.Items.INGOTS_NETHERITE))
                 .build(consumer,  new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.name));
-        registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Items.DIAMOND, consumer);
-        registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Items.GOLD_INGOT, consumer);
-        registerHammer(EnumHammer.IRON.getRegistryObject().get(), Items.IRON_INGOT, consumer);
+        registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND, consumer);
+        registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Tags.Items.INGOTS_GOLD, consumer);
+        registerHammer(EnumHammer.IRON.getRegistryObject().get(), Tags.Items.INGOTS_IRON, consumer);
         registerHammer(EnumHammer.STONE.getRegistryObject().get(), Tags.Items.COBBLESTONE, consumer);
         registerHammer(EnumHammer.WOOD.getRegistryObject().get(), ItemTags.PLANKS, consumer);
     }
@@ -751,21 +764,9 @@ public class Recipes extends RecipeProvider {
             .patternLine(" -x")
             .patternLine("-  ")
             .key('x', input)
-            .key('-', Items.STICK)
-            .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
+            .key('-', Tags.Items.RODS)
+            .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(Tags.Items.RODS).build()))
             .addCriterion("has_material", hasItem(input))
-            .build(consumer);
-    }
-
-    private void registerHammer(Item output, Item input, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(output)
-            .patternLine(" x ")
-            .patternLine(" -x")
-            .patternLine("-  ")
-            .key('x', input)
-            .key('-', Items.STICK)
-            .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(Items.STICK))
-            .addCriterion("has_material", InventoryChangeTrigger.Instance.forItems(input))
             .build(consumer);
     }
 
@@ -810,33 +811,25 @@ public class Recipes extends RecipeProvider {
     }
 
     private void registerBarrels(Consumer<IFinishedRecipe> consumer) {
-        registerBarrel(ModBlocks.BARREL_STONE.get(), Blocks.STONE, Blocks.STONE_SLAB, consumer);
-        registerBarrel(ModBlocks.BARREL_WOOD.get(), ItemTags.PLANKS, ItemTags.WOODEN_SLABS, consumer);
-    }
-
-    private void registerBarrel(Block result, ITag.INamedTag<Item> walls, ITag.INamedTag<Item> base, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(result)
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BARREL_STONE.get())
             .patternLine("x x")
             .patternLine("x x")
             .patternLine("x-x")
-            .key('x', walls)
-            .key('-', base)
+            .key('x', Tags.Items.STONE)
+            .key('-', Blocks.STONE_SLAB)
             .setGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA)
-            .addCriterion("has_walls", hasItem(walls))
-            .addCriterion("has_base", hasItem(base))
+            .addCriterion("has_walls", hasItem(Tags.Items.STONE))
+            .addCriterion("has_base", hasItem(Blocks.STONE_SLAB))
             .build(consumer);
-    }
-
-    private void registerBarrel(Block result, Block walls, Block base, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(result)
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BARREL_WOOD.get())
             .patternLine("x x")
             .patternLine("x x")
             .patternLine("x-x")
-            .key('x', walls)
-            .key('-', base)
+            .key('x', ItemTags.PLANKS)
+            .key('-', ItemTags.WOODEN_SLABS)
             .setGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA)
-            .addCriterion("has_walls", InventoryChangeTrigger.Instance.forItems(walls))
-            .addCriterion("has_base", InventoryChangeTrigger.Instance.forItems(base))
+            .addCriterion("has_walls", hasItem(ItemTags.PLANKS))
+            .addCriterion("has_base", hasItem(ItemTags.WOODEN_SLABS))
             .build(consumer);
     }
 
@@ -860,17 +853,17 @@ public class Recipes extends RecipeProvider {
     private void registerCrooks(Consumer<IFinishedRecipe> consumer) {
         registerCrook(EnumCrook.ANDESITE.getRegistryObject().get(), EnumPebbleType.ANDESITE.getRegistryObject()
             .get(), consumer);
-        registerCrook(EnumCrook.BONE.getRegistryObject().get(), Items.BONE, consumer);
-        registerCrook(EnumCrook.DIAMOND.getRegistryObject().get(), Items.DIAMOND, consumer);
+        registerCrook(EnumCrook.BONE.getRegistryObject().get(), Tags.Items.BONES, consumer);
+        registerCrook(EnumCrook.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND, consumer);
         registerCrook(EnumCrook.DIORITE.getRegistryObject().get(), EnumPebbleType.DIORITE.getRegistryObject()
             .get(), consumer);
-        registerCrook(EnumCrook.GOLD.getRegistryObject().get(), Items.GOLD_NUGGET, consumer);
+        registerCrook(EnumCrook.GOLD.getRegistryObject().get(), Tags.Items.NUGGETS_GOLD, consumer);
         registerCrook(EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject()
             .get(), consumer);
-        registerCrook(EnumCrook.IRON.getRegistryObject().get(), Items.IRON_NUGGET, consumer);
+        registerCrook(EnumCrook.IRON.getRegistryObject().get(), Tags.Items.NUGGETS_IRON, consumer);
         registerCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject()
             .get(), consumer);
-        registerCrook(EnumCrook.WOOD.getRegistryObject().get(), Items.STICK, consumer);
+        registerCrook(EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN, consumer);
     }
 
     private void registerCrook(Item result, Item input, Consumer<IFinishedRecipe> consumer) {
@@ -881,6 +874,16 @@ public class Recipes extends RecipeProvider {
             .key('x', input)
             .setGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA)
             .addCriterion("has_pebble", InventoryChangeTrigger.Instance.forItems(input))
+            .build(consumer);
+    }
+    private void registerCrook(Item result, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(result)
+            .patternLine("xx")
+            .patternLine(" x")
+            .patternLine(" x")
+            .key('x', input)
+            .setGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA)
+            .addCriterion("has_pebble", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(input).build()))
             .build(consumer);
     }
 }
