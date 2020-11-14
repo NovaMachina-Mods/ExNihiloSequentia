@@ -18,6 +18,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 import java.util.List;
 import java.util.Random;
@@ -133,7 +134,7 @@ public class SieveTile extends TileEntity {
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 Random random = new Random();
                 drops.forEach((entry -> {
-                    entry.getRolls().stream().forEach(meshWithChance -> {
+                    entry.getRolls().forEach(meshWithChance -> {
                         if(random.nextFloat() <= meshWithChance.getChance()) {
                             world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, entry.getDrop()));
                         }
@@ -145,7 +146,9 @@ public class SieveTile extends TileEntity {
     }
 
     private void resetSieve() {
-        meshStack.damageItem(1, new FakePlayer((ServerWorld) world, new GameProfile(UUID.randomUUID(), "Fake Player")), player -> System.out.println("Broken"));
+        if(Config.ENABLE_MESH_DURABILITY.get()) {
+            meshStack.damageItem(1, new FakePlayer((ServerWorld) world, new GameProfile(UUID.randomUUID(), "Fake Player")), player -> System.out.println("Broken"));
+        }
         blockStack = ItemStack.EMPTY;
         progress = 0.0F;
         if(meshStack.isEmpty()) {

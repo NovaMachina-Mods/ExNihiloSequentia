@@ -56,6 +56,7 @@ public class Config {
     // Sieve
     public static ForgeConfigSpec.BooleanValue FLATTEN_SIEVE_RECIPES;
     public static ForgeConfigSpec.IntValue SIEVE_RANGE;
+    public static ForgeConfigSpec.BooleanValue ENABLE_MESH_DURABILITY;
 
     // Compat
     public static ForgeConfigSpec.BooleanValue ENABLE_THERMAL;
@@ -115,6 +116,9 @@ public class Config {
         SIEVE_RANGE = COMMON_BUILDER
             .comment("Defines the radius that a sieve will attempt to activate other sieves (Default: 2)")
             .defineInRange("sieveRange", 2, 0, 5);
+        ENABLE_MESH_DURABILITY = COMMON_BUILDER
+            .comment("Meshes will have durability and can break. (Default: false)")
+            .define("enableMeshDurability", false);
     }
 
     private static void infestedLeavesConfigs() {
