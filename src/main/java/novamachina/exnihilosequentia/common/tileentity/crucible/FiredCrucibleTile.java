@@ -25,8 +25,8 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public int getSolidAmount() {
-        int itemCount = inventory.getStackInSlot(0).getCount();
         if(!currentItem.isEmpty()) {
+            int itemCount = inventory.getStackInSlot(0).getCount();
             return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
                     .getAmount());
         }

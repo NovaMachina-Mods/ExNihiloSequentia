@@ -86,9 +86,13 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public int getSolidAmount() {
-        int itemCount = inventory.getStackInSlot(0).getCount();
-        return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
-            .getAmount());
+        if(!currentItem.isEmpty()) {
+            int itemCount = inventory.getStackInSlot(0).getCount();
+            return solidAmount +
+                    (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
+                            .getAmount());
+        }
+        return solidAmount;
     }
 
 }

@@ -124,13 +124,11 @@
   "item.exnihilosequentia.mesh_flint": "燧石硬化网",
   "item.exnihilosequentia.mesh_iron": "铁质硬化网",
   "item.exnihilosequentia.mesh_diamond": "钻石硬化网",
+  "item.exnihilosequentia.mesh_emerald": "绿宝石硬化网",
+  "item.exnihilosequentia.mesh_netherite": "下界合金硬化网",
 
   "fluid.exnihilosequentia.witchwater": "巫水",
   "fluid.exnihilosequentia.sea_water": "海水",
-
-  "message.new_mod": "感谢您使用无中生有：传承(Ex Nihilo:Sequentia)！这个mod是新发布的(还是个宝宝)，可能会有许多不足之处。",
-  "message.issues": "如果发现任何问题或者要提出任何建议，请访问：",
-  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues",
 
   "tooltip.doll.blaze": "将烈焰人偶添加到一桶熔岩中以生成烈焰人",
   "tooltip.doll.enderman": "将惊悚人偶添加到一桶巫水里生成末影人",
@@ -150,8 +148,5 @@
   "waila.crucible.solid": "固体(%s): %s",
   "waila.crucible.heat": "热量: %s",
 
-  "top.barrel.mode": "模式: %s",
-
-  "command.reload.warning": "警告：配置文件中禁用了JSON注册表。 重新加载不会发生。",
-  "command.reload.success": "重新加载成功。"
+  "top.barrel.mode": "模式: %s"
 }
