@@ -15,13 +15,18 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
     public BarrelRender(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     public static void register() {
+        logger.debug("Register barrel renderer");
         ClientRegistry.bindTileEntityRenderer(ModTiles.BARREL_WOOD.get(), BarrelRender::new);
         ClientRegistry.bindTileEntityRenderer(ModTiles.BARREL_STONE.get(), BarrelRender::new);
     }

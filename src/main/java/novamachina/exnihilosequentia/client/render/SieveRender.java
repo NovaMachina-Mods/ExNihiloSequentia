@@ -13,9 +13,11 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
-
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public SieveRender(
         TileEntityRendererDispatcher rendererDispatcherIn) {
@@ -23,6 +25,7 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
     }
 
     public static void register() {
+        logger.debug("Registering sieve renderer");
         ClientRegistry.bindTileEntityRenderer(ModTiles.SIEVE.get(), SieveRender::new);
     }
 

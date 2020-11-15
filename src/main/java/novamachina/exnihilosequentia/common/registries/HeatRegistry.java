@@ -2,16 +2,16 @@ package novamachina.exnihilosequentia.common.registries;
 
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
-import novamachina.exnihilosequentia.common.utility.LogUtil;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HeatRegistry implements IHeatRegistry {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private List<HeatRecipe> recipeList = new ArrayList<>();
 
@@ -27,7 +27,7 @@ public class HeatRegistry implements IHeatRegistry {
 
     @Override
     public void setRecipes(List<HeatRecipe> recipes) {
-        LogUtil.debug("Heat Registry recipes: " + recipes.size());
+        logger.debug("Heat Registry recipes: " + recipes.size());
         this.recipeList.addAll(recipes);
     }
 }

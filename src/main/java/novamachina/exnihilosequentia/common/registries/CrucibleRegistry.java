@@ -3,15 +3,16 @@ package novamachina.exnihilosequentia.common.registries;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.registry.ICrucibleRegistry;
-import novamachina.exnihilosequentia.common.utility.LogUtil;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CrucibleRegistry implements ICrucibleRegistry {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
     private final List<CrucibleRecipe> recipeList = new ArrayList<>();
 
     @Override
@@ -21,7 +22,7 @@ public class CrucibleRegistry implements ICrucibleRegistry {
 
     @Override
     public void setRecipes(List<CrucibleRecipe> recipes) {
-        LogUtil.debug("Crucible Registry recipes: " + recipes.size());
+        logger.debug("Crucible Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 

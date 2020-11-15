@@ -14,15 +14,18 @@ import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public CrucibleRender(TileEntityRendererDispatcher rendererDispatcher) {
         super(rendererDispatcher);
     }
 
-    public static void register(
-        TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
+    public static void register(TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
+        logger.debug("Register crucible renderer, Type" + tileTileEntityType);
         ClientRegistry
             .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
     }

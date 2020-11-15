@@ -15,8 +15,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class ModTiles {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private static final DeferredRegister<TileEntityType<?>> TILES =
         DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Constants.ModIds.EX_NIHILO_SEQUENTIA);
@@ -44,6 +47,7 @@ public class ModTiles {
             .create(StoneBarrelTile::new, ModBlocks.BARREL_STONE.get()).build(null));
 
     public static void init(IEventBus eventBus) {
+        logger.debug("Register Tile Entities");
         TILES.register(eventBus);
     }
 }

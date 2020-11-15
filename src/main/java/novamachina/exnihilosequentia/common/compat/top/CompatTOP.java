@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.top;
 
 import novamachina.exnihilosequentia.common.utility.Constants;
-import novamachina.exnihilosequentia.common.utility.LogUtil;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
@@ -11,13 +11,17 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.InterModComms;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.function.Function;
 
 public class CompatTOP {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
     private static boolean registered;
 
     public static void register() {
+        logger.debug("Registering The One Probe");
         if (registered) {
             return;
         }
@@ -26,13 +30,14 @@ public class CompatTOP {
     }
 
     public static class GetTheOneProbe implements Function<ITheOneProbe, Void> {
+        private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
         public static ITheOneProbe probe;
 
         @Override
         public Void apply(ITheOneProbe iTheOneProbe) {
             probe = iTheOneProbe;
-            LogUtil.info("Enabled support for The One Probe");
+            logger.info("Enabled support for The One Probe");
             probe.registerProvider(new IProbeInfoProvider() {
                 @Override
                 public String getID() {

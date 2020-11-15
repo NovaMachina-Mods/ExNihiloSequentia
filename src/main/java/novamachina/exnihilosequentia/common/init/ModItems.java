@@ -27,8 +27,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class ModItems {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     // Begin Block Items
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
@@ -141,6 +144,7 @@ public class ModItems {
     }
 
     public static void init(IEventBus modEventBus) {
+        logger.debug("Register items");
         ITEMS.register(modEventBus);
     }
 }

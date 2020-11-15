@@ -9,8 +9,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class ModFluids {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister
         .create(ForgeRegistries.FLUIDS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
@@ -30,6 +33,7 @@ public class ModFluids {
             () -> new SeaWaterFluid.Flowing(SeaWaterFluid.SEA_WATER_PROPS));
 
     public static void init(IEventBus modEventBus) {
+        logger.debug("Register fluids");
         FLUIDS.register(modEventBus);
     }
 }

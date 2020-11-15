@@ -7,12 +7,13 @@ import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.ore.OreItem;
 import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.IngredientUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
-import novamachina.exnihilosequentia.common.utility.LogUtil;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SieveRegistry implements ISieveRegistry {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
     private final boolean flattenRecipes = Config.FLATTEN_SIEVE_RECIPES.get();
 
     private List<SieveRecipe> recipeList = new ArrayList<>();
@@ -158,7 +161,7 @@ public class SieveRegistry implements ISieveRegistry {
 
     @Override
     public void setRecipes(List<SieveRecipe> recipes) {
-        LogUtil.debug("Sieve Registry recipes: " + recipes.size());
+        logger.debug("Sieve Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 }

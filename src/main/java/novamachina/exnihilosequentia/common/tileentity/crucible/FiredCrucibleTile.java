@@ -6,6 +6,7 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class FiredCrucibleTile extends BaseCrucibleTile {
 

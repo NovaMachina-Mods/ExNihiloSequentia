@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.datagen;
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import novamachina.exnihilosequentia.common.utility.LogUtil;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
@@ -12,6 +12,7 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTableManager;
 import net.minecraft.loot.ValidationTracker;
 import net.minecraft.util.ResourceLocation;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class LootTableGenerator implements IDataProvider {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private final DataGenerator generator;
     private static final Gson GSON =(new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
     protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
@@ -42,7 +44,7 @@ public abstract class LootTableGenerator implements IDataProvider {
         Multimap<String, String> problems = validator.getProblems();
         if(!problems.isEmpty()) {
             problems.forEach((name, table) -> {
-                LogUtil.warn("Found validation problem in "+ name + ": " + table);
+                logger.warn("Found validation problem in "+ name + ": " + table);
             });
             throw new IllegalStateException("Failed to validate loot tables, see logs");
         } else {
@@ -52,8 +54,8 @@ public abstract class LootTableGenerator implements IDataProvider {
                 try {
                     IDataProvider.save(GSON, cache, LootTableManager.toJson(table), out);
                 } catch (IOException e) {
-                    LogUtil.error("Couldn't save loot table " + out);
-                    LogUtil.error(Arrays.toString(e.getStackTrace()));
+                    logger.error("Couldn't save loot table " + out);
+                    logger.error(Arrays.toString(e.getStackTrace()));
                 }
             });
         }

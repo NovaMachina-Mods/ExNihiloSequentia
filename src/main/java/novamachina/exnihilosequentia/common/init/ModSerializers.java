@@ -23,8 +23,12 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class ModSerializers {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
 
     static {
@@ -40,6 +44,7 @@ public class ModSerializers {
     }
 
     public static void init(IEventBus modEventBus) {
+        logger.debug("Register recipe serializers");
         RECIPE_SERIALIZERS.register(modEventBus);
     }
 }

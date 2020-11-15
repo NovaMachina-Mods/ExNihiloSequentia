@@ -5,17 +5,18 @@ import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.registry.IFluidTransformRegistry;
-import novamachina.exnihilosequentia.common.utility.LogUtil;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FluidTransformRegistry implements IFluidTransformRegistry {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
     private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
 
     @Override
@@ -45,7 +46,7 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
 
     @Override
     public void setRecipes(List<FluidTransformRecipe> recipes) {
-        LogUtil.debug("Fluid Transform Registry recipes: " + recipes.size());
+        logger.debug("Fluid Transform Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
 }

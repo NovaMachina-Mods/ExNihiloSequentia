@@ -33,12 +33,16 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
 public abstract class AbstractBarrelTile extends TileEntity implements ITickableTileEntity {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
     public static int MAX_SOLID_AMOUNT = Config.BARREL_MAX_SOLID_AMOUNT.get();
     public static int MAX_FLUID_AMOUNT = Config.BARREL_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
     private BarrelInventoryHandler inventory;

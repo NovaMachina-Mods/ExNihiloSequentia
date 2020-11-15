@@ -16,11 +16,16 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 @Mod.EventBusSubscriber(modid = Constants.ModIds.EX_NIHILO_SEQUENTIA, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public static void init(final FMLClientSetupEvent event) {
+        logger.debug("Initializing client renderers");
+
         RenderTypeLookup.setRenderLayer(ModBlocks.SIEVE.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModBlocks.CRUCIBLE_UNFIRED.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModBlocks.CRUCIBLE_FIRED.get(), RenderType.getCutoutMipped());
@@ -38,6 +43,8 @@ public class ClientSetup {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onColorHandlerEvent(ColorHandlerEvent.Item event) {
+        logger.debug("Fired ColorHandlerEvent.Item event");
+
         for (EnumOre ore : EnumOre.values()) {
             event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
             event.getItemColors().register(new OreColor(), ore.getPieceItem().get());

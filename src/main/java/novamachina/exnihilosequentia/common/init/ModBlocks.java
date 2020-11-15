@@ -26,8 +26,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class ModBlocks {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister
         .create(ForgeRegistries.BLOCKS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
@@ -84,6 +87,7 @@ public class ModBlocks {
             .tileEntitySupplier(StoneBarrelTile::new)));
 
     public static void init(IEventBus modEventBus) {
+        logger.debug("Register blocks");
         BLOCKS.register(modEventBus);
     }
 }
