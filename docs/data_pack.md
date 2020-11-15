@@ -177,6 +177,6 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
 
 - `rolls`: A list of rolls for this recipe.
     - `chance`: A value from `0.0` to `1.0`.
-    - `mesh`: The mesh required to cause this roll to be considered. Must be `string`, `flint`, `iron`, or `diamond`.
+    - `mesh`: The mesh required to cause this roll to be considered. Must be `string`, `flint`, `iron`, `diamond`, `emerald`, or `netherite`.
 - `input`: The block/type of block that will be consumed by the sieve.
 - `result`: The resulting item.
