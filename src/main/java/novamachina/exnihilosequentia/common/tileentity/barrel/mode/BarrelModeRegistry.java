@@ -17,7 +17,6 @@ public class BarrelModeRegistry {
     private static final Map<TriggerType, ArrayList<Supplier<AbstractBarrelMode>>> modeMap = new EnumMap<>(TriggerType.class);
 
     public static AbstractBarrelMode getModeFromName(String barrelMode) {
-        logger.debug("Getting barrel mode, String: " + barrelMode);
         return modeNameMap.getOrDefault(barrelMode, null).get();
     }
 

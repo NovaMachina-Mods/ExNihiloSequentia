@@ -440,6 +440,12 @@ public class Recipes extends RecipeProvider {
         FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.SEA_WATER.get())
             .input(EnumResource.YELLOW_CORAL_SEED.getRegistryObject()
                 .get()).result(Blocks.HORN_CORAL_BLOCK).build(consumer, fluidItemLoc("horn_coral"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get())
+            .input(EnumResource.ANCIENT_SPORE.getRegistryObject().get())
+            .result(Blocks.BROWN_MUSHROOM_BLOCK).build(consumer, fluidItemLoc("brown_mushroom"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get())
+            .input(Blocks.BROWN_MUSHROOM_BLOCK)
+            .result(Blocks.RED_MUSHROOM_BLOCK).build(consumer, fluidItemLoc("red_mushroom"));
     }
 
     private ResourceLocation fluidItemLoc(String id) {
