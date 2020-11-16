@@ -6,6 +6,7 @@
   "block.exnihilosequentia.crushed_andesite": "Crushed Andesite",
   "block.exnihilosequentia.crushed_diorite": "Crushed Diorite",
   "block.exnihilosequentia.crushed_granite": "Crushed Granite",
+  "block.exnihilosequentia.crushed_skystone": "Crushed Skystone",
 
   "block.exnihilosequentia.infesting_leaves": "Infesting Leaves",
   "block.exnihilosequentia.infested_leaves": "Infested Leaves",
@@ -37,6 +38,7 @@
   "item.exnihilosequentia.hammer_iron": "Iron Hammer",
   "item.exnihilosequentia.hammer_gold": "Gold Hammer",
   "item.exnihilosequentia.hammer_diamond": "Diamond Hammer",
+  "item.exnihilosequentia.hammer_netherite": "Netherite Hammer",
 
   "item.exnihilosequentia.silkworm": "Silkworm",
   "item.exnihilosequentia.cooked_silkworm": "Cooked Silkworm",
@@ -63,6 +65,7 @@
   "item.exnihilosequentia.chunk_osmium": "Osmium Ore Chunk",
   "item.exnihilosequentia.chunk_uranium": "Uranium Ore Chunk",
   "item.exnihilosequentia.chunk_zinc": "Zinc Ore Chunk",
+  "item.exnihilosequentia.chunk_bismuth": "Bismuth Ore Chunk",
 
   "item.exnihilosequentia.piece_iron": "Iron Ore Piece",
   "item.exnihilosequentia.piece_gold": "Gold Ore Piece",
@@ -76,6 +79,7 @@
   "item.exnihilosequentia.piece_osmium": "Osmium Ore Piece",
   "item.exnihilosequentia.piece_uranium": "Uranium Ore Piece",
   "item.exnihilosequentia.piece_zinc": "Zinc Ore Piece",
+  "item.exnihilosequentia.piece_bismuth": "Bismuth Ore Piece",
 
   "item.exnihilosequentia.ingot_copper": "Copper Ingot",
   "item.exnihilosequentia.ingot_tin": "Tin Ingot",
@@ -87,6 +91,7 @@
   "item.exnihilosequentia.ingot_osmium": "Osmium Ingot",
   "item.exnihilosequentia.ingot_uranium": "Uranium Ingot",
   "item.exnihilosequentia.ingot_zinc": "Zinc Ingot",
+  "item.exnihilosequentia.ingot_bismuth": "Bismuth Ingot",
 
   "item.exnihilosequentia.seed_oak": "Oak Seed",
   "item.exnihilosequentia.seed_spruce": "Spruce Seed",
@@ -123,13 +128,11 @@
   "item.exnihilosequentia.mesh_flint": "Flint Mesh",
   "item.exnihilosequentia.mesh_iron": "Iron Mesh",
   "item.exnihilosequentia.mesh_diamond": "Diamond Mesh",
+  "item.exnihilosequentia.mesh_emerald": "Emerald Mesh",
+  "item.exnihilosequentia.mesh_netherite": "Netherite Mesh",
 
   "fluid.exnihilosequentia.witchwater": "Witchwater",
   "fluid.exnihilosequentia.sea_water": "Sea Water",
-
-  "message.new_mod": "Thanks for using Ex Nihilo: Sequentia! This mod is newly released and is probably missing a lot of stuff and broken somewhere.",
-  "message.issues": "To report any issues or make a suggestion, go to:",
-  "message.issues_link": "https://github.com/NovaMachina/ExNihiloSequentia/issues",
 
   "tooltip.doll.blaze": "Add to a barrel of lava to spawn a Blaze",
   "tooltip.doll.enderman": "Add to a barrel of witchwater to spawn an Enderman",
@@ -140,16 +143,14 @@
   "jei.sieve.dropChance": "Drop Chance",
 
   "waila.progress": "Progress: %s",
-  "waila.barrel.fluidAmount": "Fluid: %s %s mb",
-  "waila.barrel.solidAmount": "Solid Amount: %s / %s",
+  "waila.barrel.fluidAmount": "Fluid(%s): %s mB",
+  "waila.barrel.solidAmount": "Solid(%s): %s",
   "waila.barrel.block": "Block: %s",
   "waila.sieve.block": "Sifting: %s",
   "waila.sieve.mesh": "Mesh: %s",
-  "waila.crucible.fluid": "Fluid: %s %s mb",
-  "waila.crucible.solid": "Solid Amount: %s",
+  "waila.crucible.fluid": "Fluid(%s): %s mB",
+  "waila.crucible.solid": "Solid(%s): %s",
+  "waila.crucible.heat": "Heat: %s",
 
-  "top.barrel.mode": "Mode: %s",
-
-  "command.reload.warning": "WARNING: JSON registries are disabled in the configuration file. Reload will not occur.",
-  "command.reload.success": "Reload successful."
+  "top.barrel.mode": "Mode: %s"
 }

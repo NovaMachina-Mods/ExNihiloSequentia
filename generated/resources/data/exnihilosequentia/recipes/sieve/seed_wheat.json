@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.7,
+      "mesh": "string"
+    }
+  ],
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "item": "minecraft:wheat_seeds"
+  }
+}

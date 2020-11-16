@@ -1,0 +1,6 @@
+{
+  "parent": "exnihilosequentia:block/mesh_base",
+  "textures": {
+    "texture": "minecraft:block/black_wool"
+  }
+}

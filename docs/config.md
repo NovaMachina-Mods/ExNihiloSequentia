@@ -71,16 +71,15 @@ The percent chance that an infested leaf block will spread to a non-infested lea
 Infested leaves do not attempt to spread every tick. This config allows the user to define how many ticks take place in between operations. If it is set to 1, infested leaves will attempt to spread every tick.
 *Must be a value greater than 0.*
 
-## useJson
-Sets whether Ex Nihilo: Sequentia will use the JSON registries. If the JSON registries do not exist, setting this to true will generate them. Keep in mind that the default option is `false` which means the JSON registries will not exist when first installed. In addition, due to the way that Minecraft initializes tags, these registries will not be generated until a world is started. This means that you can change the registries without restarting the game. Simply quit the world, modify the registries, and renter the world.
-*Must be `true` or `false`*  
-
 ## flattenSieveRecipes
 Sets whether sieves will get the results for all the meshes below the one currently in the sieve. For example, if an iron mesh is in the sieve, it will get results for the iron, flint and string meshes.
 *Must be `true` or `false`*.
 
 ## sieveRadius
 The number of blocks away that the sieve will try to find other sieves to activate. For example, if set to 2, the sieve will look in a 5 x 5 block area (with the sieve that was activated in the center) for other sieves. *Must be a value between 0 and 5*.
+
+## enableMeshDurability
+This enables meshes to be breakable. *Must be `true` or `false`*.
 
 ## enableThermalExpansion
 Enables ore drops for Thermal Expansion ores
@@ -93,3 +92,9 @@ Enables ore drops for Mekanism ores
 
 ## enableCreate
 Enables ore drops for Create ores
+
+## enableSilentMechanism
+Enables ore drops for Silent Mechanism ores
+
+## enableDebugLogging
+Enables extra logging.

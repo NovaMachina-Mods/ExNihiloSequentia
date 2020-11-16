@@ -1,0 +1,27 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 1.0,
+      "mesh": "flint"
+    },
+    {
+      "chance": 0.33,
+      "mesh": "flint"
+    },
+    {
+      "chance": 1.0,
+      "mesh": "diamond"
+    },
+    {
+      "chance": 0.8,
+      "mesh": "diamond"
+    }
+  ],
+  "input": {
+    "item": "minecraft:soul_sand"
+  },
+  "result": {
+    "item": "minecraft:quartz"
+  }
+}

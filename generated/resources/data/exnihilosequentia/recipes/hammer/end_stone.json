@@ -1,0 +1,9 @@
+{
+  "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:end_stone"
+  },
+  "result": {
+    "item": "exnihilosequentia:crushed_end_stone"
+  }
+}

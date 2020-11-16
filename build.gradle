@@ -13,9 +13,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-def mc_version = "${mc_major}.3"
+def mc_version = "${mc_major}.4"
 version = "${mc_major}-${exnihilosequentia_version}"
-group = 'com.novamachina.exnihilosequentia' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'novamachina.exnihilosequentia' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'exnihilosequentia'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
@@ -77,7 +77,7 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'exnihilosequentia', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'exnihilosequentia', '--all', '--output', file('generated/resources/'), '--existing', file('src/main/resources')
 
             mods {
                 exnihilosequentia {
@@ -159,6 +159,10 @@ repositories {
     maven { // WAILA
         name = "Mobius Repo"
         url = "https://maven.tehnut.info"
+    }
+    maven {
+        name = "Minecraft Forge"
+        url = "https://files.minecraftforge.net/maven"
     }
 }
 

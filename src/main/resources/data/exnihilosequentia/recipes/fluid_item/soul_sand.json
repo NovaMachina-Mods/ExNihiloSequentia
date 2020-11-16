@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_item",
+  "fluid": {
+    "fluid": "exnihilosequentia:witchwater"
+  },
+  "input": {
+    "tag": "forge:sand"
+  },
+  "result": {
+    "item": "minecraft:soul_sand"
+  }
+}

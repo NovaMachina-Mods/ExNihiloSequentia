@@ -8,8 +8,8 @@ nav:
   - Hammers: 'hammer.md'
   - Sieve: 'sieve.md'
   - Misc: 'misc.md'
+  - Data Pack: 'data_pack.md'
   - Configuration File: 'config.md'
-  - Commands: 'commands.md'
 
 # Do not edit in PRs below here
 site_name: "Ex Nihilo: Sequentia Documentation"
