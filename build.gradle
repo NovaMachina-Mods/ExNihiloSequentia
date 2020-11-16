@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-def mc_version = "${mc_major}.3"
+def mc_version = "${mc_major}.4"
 version = "${mc_major}-${exnihilosequentia_version}"
 group = 'novamachina.exnihilosequentia' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'exnihilosequentia'
