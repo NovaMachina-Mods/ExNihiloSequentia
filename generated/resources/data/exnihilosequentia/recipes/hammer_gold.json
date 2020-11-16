@@ -7,10 +7,10 @@
   ],
   "key": {
     "x": {
-      "item": "minecraft:gold_ingot"
+      "tag": "forge:ingots/gold"
     },
     "-": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods"
     }
   },
   "result": {

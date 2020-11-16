@@ -7,10 +7,10 @@
   ],
   "key": {
     "x": {
-      "item": "minecraft:diamond"
+      "tag": "forge:gems/diamond"
     },
     "-": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods"
     }
   },
   "result": {

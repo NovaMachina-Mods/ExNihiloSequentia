@@ -55,6 +55,7 @@ public class LootTables extends LootTableGenerator {
         registerSelfDrop(ModBlocks.CRUSHED_END_STONE.get());
         registerSelfDrop(ModBlocks.CRUSHED_GRANITE.get());
         registerSelfDrop(ModBlocks.CRUSHED_NETHERRACK.get());
+        registerSelfDrop(ModBlocks.CRUSHED_SKYSTONE.get());
         registerSelfDrop(ModBlocks.DUST.get());
         registerSelfDrop(ModBlocks.SIEVE.get());
     }

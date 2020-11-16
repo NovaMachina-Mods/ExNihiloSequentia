@@ -16,7 +16,8 @@ public enum EnumOre {
     URANIUM(Type.MODDED, Constants.Ore.URANIUM, new Color("4E5B43"), false),
     ZINC(Type.MODDED, Constants.Ore.ZINC, new Color("A59C74"), false),
     IRON(Type.VANILLA, Constants.Ore.IRON, new Color("BF8040"), true),
-    GOLD(Type.VANILLA, Constants.Ore.GOLD, new Color("FFFF00"), true);
+    GOLD(Type.VANILLA, Constants.Ore.GOLD, new Color("FFFF00"), true),
+    BISMUTH(Type.MODDED, Constants.Ore.BISMUTH, new Color("908194"), false);
 
     private final String name;
     private final Color color;

@@ -59,6 +59,10 @@ public class ModBlocks {
         .register(Constants.Blocks.CRUSHED_GRANITE, () -> new BaseFallingBlock(new BlockBuilder()
             .properties(Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
+    public static final RegistryObject<BaseFallingBlock> CRUSHED_SKYSTONE = BLOCKS
+        .register(Constants.Blocks.CRUSHED_SKYSTONE, () -> new BaseFallingBlock(new BlockBuilder()
+            .properties(Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+                .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<EndCakeBlock> END_CAKE = BLOCKS
         .register(Constants.Blocks.END_CAKE, EndCakeBlock::new);
     public static final RegistryObject<BlockSieve> SIEVE = BLOCKS

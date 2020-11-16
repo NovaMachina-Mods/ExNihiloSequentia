@@ -25,6 +25,7 @@ public class Constants {
         public static final String BARREL_WOOD = "barrel_wood";
         public static final String SEA_WATER = "sea_water";
         public static final String BARREL_STONE = "barrel_stone";
+        public static final String CRUSHED_SKYSTONE = "crushed_skystone";
     }
 
     public static class Items {
@@ -109,6 +110,7 @@ public class Constants {
         public static final String OSMIUM = "osmium";
         public static final String URANIUM = "uranium";
         public static final String ZINC = "zinc";
+        public static final String BISMUTH = "bismuth";
     }
 
     public static class Fluids {
@@ -153,6 +155,7 @@ public class Constants {
         public static final String MEKANISM = "mekanism";
         public static final String CREATE = "create";
         public static final String MINECRAFT = "minecraft";
+        public static final String SILENT_MECHANISM = "silent_mechanism";
     }
 
     public static class Tooltips {

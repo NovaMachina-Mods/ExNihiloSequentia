@@ -12,6 +12,7 @@
     "#forge:ores/uranium",
     "#forge:ores/zinc",
     "#forge:ores/iron",
-    "#forge:ores/gold"
+    "#forge:ores/gold",
+    "#forge:ores/bismuth"
   ]
 }

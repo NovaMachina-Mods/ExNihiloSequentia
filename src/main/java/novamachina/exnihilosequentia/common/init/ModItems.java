@@ -59,6 +59,10 @@ public class ModItems {
         .register(Constants.Blocks.CRUSHED_GRANITE,
             () -> new BlockItem(ModBlocks.CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ModInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUSHED_SKYSTONE = ITEMS
+        .register(Constants.Blocks.CRUSHED_SKYSTONE,
+            () -> new BlockItem(ModBlocks.CRUSHED_SKYSTONE.get(),
+                new Item.Properties().group(ModInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> END_CAKE = ITEMS
         .register(Constants.Blocks.END_CAKE, () -> new BlockItem(ModBlocks.END_CAKE.get(),
             new Item.Properties().group(ModInitialization.ITEM_GROUP)));

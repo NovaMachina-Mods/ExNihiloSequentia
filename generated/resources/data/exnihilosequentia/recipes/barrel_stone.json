@@ -8,7 +8,7 @@
   ],
   "key": {
     "x": {
-      "item": "minecraft:stone"
+      "tag": "forge:stone"
     },
     "-": {
       "item": "minecraft:stone_slab"

@@ -7,16 +7,16 @@
   ],
   "key": {
     "c": {
-      "item": "minecraft:black_dye"
-    },
-    "t": {
-      "item": "minecraft:redstone"
+      "tag": "forge:dyes/black"
     },
     "s": {
-      "item": "minecraft:glowstone_dust"
+      "tag": "forge:dusts/glowstone"
+    },
+    "t": {
+      "tag": "forge:dusts/redstone"
     },
     "b": {
-      "item": "minecraft:nether_wart"
+      "tag": "forge:crops/nether_wart"
     },
     "m": {
       "item": "exnihilosequentia:doll_crafting"

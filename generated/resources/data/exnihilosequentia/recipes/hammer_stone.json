@@ -10,7 +10,7 @@
       "tag": "forge:cobblestone"
     },
     "-": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods"
     }
   },
   "result": {

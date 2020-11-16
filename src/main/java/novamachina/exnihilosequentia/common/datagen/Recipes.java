@@ -361,6 +361,18 @@ public class Recipes extends RecipeProvider {
             .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("stone"));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL)).amount(200).fluidResult(Fluids.LAVA)
             .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("gravel"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_ANDESITE.get())).amount(200).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_andesite"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_SKYSTONE.get())).amount(200).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_skystone"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_DIORITE.get())).amount(200).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_diorite"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_END_STONE.get())).amount(200).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_end_stone"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_GRANITE.get())).amount(200).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_granite"));
+        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_NETHERRACK.get())).amount(200).fluidResult(Fluids.LAVA)
+            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_netherrack"));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND)).amount(100).fluidResult(Fluids.LAVA)
             .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("sand"));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.DUST.get())).amount(50)

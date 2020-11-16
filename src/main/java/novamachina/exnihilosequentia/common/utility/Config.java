@@ -63,6 +63,7 @@ public class Config {
     public static ForgeConfigSpec.BooleanValue ENABLE_IMMERSIVE;
     public static ForgeConfigSpec.BooleanValue ENABLE_MEKANISM;
     public static ForgeConfigSpec.BooleanValue ENABLE_CREATE;
+    public static ForgeConfigSpec.BooleanValue ENABLE_SILENT;
 
     // Debugging
     public static ForgeConfigSpec.BooleanValue ENABLE_DEBUG_LOGGING;
@@ -107,6 +108,8 @@ public class Config {
             .define("enableMekanism", false);
         ENABLE_CREATE = COMMON_BUILDER.comment("Should Create ores be enabled? (Default: false)")
             .define("enableCreate", false);
+        ENABLE_SILENT = COMMON_BUILDER.comment("Should Silent Mechanism ores be enabled? (Default: false)")
+            .define("enableSilentMechanism", false);
     }
 
     private static void sieveConfigs() {

@@ -7,13 +7,13 @@
   ],
   "key": {
     "c": {
-      "item": "minecraft:yellow_dye"
+      "tag": "forge:dyes/yellow"
+    },
+    "s": {
+      "tag": "forge:dusts/glowstone"
     },
     "t": {
       "tag": "minecraft:flowers"
-    },
-    "s": {
-      "item": "minecraft:glowstone_dust"
     },
     "b": {
       "item": "exnihilosequentia:beehive_frame"
