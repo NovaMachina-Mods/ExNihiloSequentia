@@ -7,7 +7,7 @@ import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 import novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 import novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleTile;
-import novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
+import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import novamachina.exnihilosequentia.common.utility.Constants.Blocks;
 import net.minecraft.tileentity.TileEntityType;

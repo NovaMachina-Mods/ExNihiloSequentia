@@ -8,8 +8,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class InfestingLeavesTile extends TileEntity implements ITickableTileEntity {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private int progress = 0;
     private int progressWaitInterval = (Config.SECONDS_TO_TRANSFORM_LEAVES.get() * 20) / 100;
@@ -32,10 +35,12 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
                 spreadCounter++;
 
                 if (progress >= 100) {
+                    logger.debug("Finish insfesting leaves");
                     InfestingLeavesBlock.finishInfestingBlock(world, pos);
                 }
 
                 if (spreadCounter >= Config.TICKS_BETWEEN_SPREAD_ATTEMPT.get()) {
+                    logger.debug("Spreading infested leaves");
                     InfestingLeavesBlock.spread(world, pos);
                     spreadCounter = 0;
                 }

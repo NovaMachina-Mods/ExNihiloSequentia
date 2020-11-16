@@ -27,11 +27,14 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public abstract class BaseCrucibleTile extends TileEntity implements ITickableTileEntity {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     protected static int MAX_FLUID_AMOUNT = Config.CRUCIBLE_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
     protected MeltableItemHandler inventory;
@@ -91,6 +94,8 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     public ActionResultType onBlockActivated(PlayerEntity player, Hand handIn,
                                              IFluidHandler handler) {
+        logger.debug("Crucible activated");
+
         ItemStack stack = player.getHeldItem(handIn);
         if (stack.isEmpty()) {
             return ActionResultType.SUCCESS;
@@ -99,6 +104,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         boolean result = FluidUtil.interactWithFluidHandler(player, handIn, handler);
 
         if (result) {
+            logger.debug("Fluid handler interaction successful");
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
@@ -114,6 +120,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             }
         }
 
+        logger.debug("Inserting item");
         ItemStack addStack = stack.copy();
         addStack.setCount(1);
         ItemStack insertStack = inventory.insertItem(0, addStack, true);

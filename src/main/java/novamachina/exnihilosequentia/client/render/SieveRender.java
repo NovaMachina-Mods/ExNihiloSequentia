@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.client.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import novamachina.exnihilosequentia.common.init.ModTiles;
-import novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
+import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

@@ -5,7 +5,7 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
+import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;

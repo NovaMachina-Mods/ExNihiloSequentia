@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.waila;
 
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import novamachina.exnihilosequentia.common.tileentity.sieve.SieveTile;
+import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcp.mobius.waila.api.IComponentProvider;

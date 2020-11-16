@@ -11,12 +11,15 @@ import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UseHammerModifier extends LootModifier {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public UseHammerModifier(ILootCondition[] conditionsIn) {
         super(conditionsIn);
@@ -25,6 +28,7 @@ public class UseHammerModifier extends LootModifier {
     @Nonnull
     @Override
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+        logger.debug("Fired Hammer Modifier");
         ItemStack tool = context.get(LootParameters.TOOL);
         BlockState blockState = context.get(LootParameters.BLOCK_STATE);
         List<ItemStack> newLoot = new ArrayList<>();
@@ -37,6 +41,7 @@ public class UseHammerModifier extends LootModifier {
             }
         }
         if(newLoot.size() > 0) {
+            logger.debug("Adding new loot");
             generatedLoot = newLoot;
         }
         return generatedLoot;

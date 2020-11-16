@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.common.tileentity.sieve;
+package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.world.server.ServerWorld;
@@ -19,12 +19,15 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 public class SieveTile extends TileEntity {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ItemStack meshStack = ItemStack.EMPTY;
     private ItemStack blockStack = ItemStack.EMPTY;
@@ -36,6 +39,7 @@ public class SieveTile extends TileEntity {
     }
 
     public void insertMesh(ItemStack stack) {
+        logger.debug("Insert Mesh: " + stack);
         EnumMesh mesh = ((MeshItem) stack.getItem()).getMesh();
         if (meshStack.isEmpty()) {
             meshStack = stack.copy();
@@ -50,6 +54,7 @@ public class SieveTile extends TileEntity {
     }
 
     public void removeMesh(boolean rerenderSieve) {
+        logger.debug("Remove mesh: Rerender Sieve: " + rerenderSieve);
         if (!meshStack.isEmpty()) {
             world.addEntity(
                 new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
@@ -63,6 +68,7 @@ public class SieveTile extends TileEntity {
     }
 
     private void setSieveState() {
+        logger.debug("Set Sieve State, Mesh: " + meshType);
         BlockState state = getBlockState();
         if (state.getBlock() instanceof BlockSieve) {
             world.setBlockState(getPos(), state.with(BlockSieve.MESH, meshType));
@@ -118,6 +124,7 @@ public class SieveTile extends TileEntity {
     }
 
     public void insertSiftableBlock(ItemStack stack) {
+        logger.debug("Insert Siftable Block: " + stack);
         if (!meshStack.isEmpty() && blockStack.isEmpty()) {
             blockStack = stack.copy();
             blockStack.setCount(1);
@@ -126,10 +133,12 @@ public class SieveTile extends TileEntity {
     }
 
     public void activateSieve(boolean isWaterlogged) {
+        logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
         if (isReadyToSieve()) {
             progress += 0.1F;
 
             if (progress >= 1.0F) {
+                logger.debug("Sieve progress complete");
                 List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 Random random = new Random();
@@ -146,12 +155,15 @@ public class SieveTile extends TileEntity {
     }
 
     private void resetSieve() {
+        logger.debug("Resetting sieve");
         if(Config.ENABLE_MESH_DURABILITY.get()) {
+            logger.debug("Damaging mesh");
             meshStack.damageItem(1, new FakePlayer((ServerWorld) world, new GameProfile(UUID.randomUUID(), "Fake Player")), player -> System.out.println("Broken"));
         }
         blockStack = ItemStack.EMPTY;
         progress = 0.0F;
         if(meshStack.isEmpty()) {
+            logger.debug("Setting mesh to none, potential broken mesh");
             meshType = EnumMesh.NONE;
             setSieveState();
         }
