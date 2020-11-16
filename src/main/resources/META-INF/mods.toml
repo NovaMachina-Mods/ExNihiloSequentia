@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[33,)" #mandatory
+loaderVersion="[32,)" #mandatory
 license="All rights reserved"
 issueTrackerURL="https://github.com/NovaMachina/ExNihiloSequentia/issues" #optional
 [[mods]] #mandatory
@@ -17,12 +17,12 @@ Ex Nihilo: Sequentia is a port to 1.15 of Ex Nihilo: Creatio for 1.12, which in 
 [[dependencies.exnihilosequentia]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[33,)" #mandatory
+    versionRange="[32,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.exnihilosequentia]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.2, )"
+    versionRange="[1.16, )"
     ordering="NONE"
     side="BOTH"
