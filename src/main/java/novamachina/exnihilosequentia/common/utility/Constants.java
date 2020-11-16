@@ -155,6 +155,7 @@ public class Constants {
         public static final String MEKANISM = "mekanism";
         public static final String CREATE = "create";
         public static final String MINECRAFT = "minecraft";
+        public static final String SILENT_MECHANISM = "silent_mechanism";
     }
 
     public static class Tooltips {

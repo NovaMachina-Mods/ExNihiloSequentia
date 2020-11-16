@@ -18,6 +18,7 @@ import novamachina.exnihilosequentia.common.compat.Create;
 import novamachina.exnihilosequentia.common.compat.ExNihilo;
 import novamachina.exnihilosequentia.common.compat.ImmersiveEngineering;
 import novamachina.exnihilosequentia.common.compat.Mekanism;
+import novamachina.exnihilosequentia.common.compat.SilentMechanism;
 import novamachina.exnihilosequentia.common.compat.ThermalExpansion;
 import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
@@ -149,6 +150,12 @@ public class ModInitialization {
         if (ModList.get().isLoaded(Constants.ModIds.CREATE) || Config.ENABLE_CREATE.get()) {
             logger.debug("Added Create");
             oreCompats.add(new Create());
+        }
+        logger.debug("Silent Mechanism detected: " + ModList.get().isLoaded(Constants.ModIds.SILENT_MECHANISM));
+        logger.debug("Silent Mechanism enabled: " + Config.ENABLE_SILENT.get());
+        if (ModList.get().isLoaded(Constants.ModIds.SILENT_MECHANISM) || Config.ENABLE_SILENT.get()) {
+            logger.debug("Added Silent Mechanism");
+            oreCompats.add(new SilentMechanism());
         }
     }
 }
