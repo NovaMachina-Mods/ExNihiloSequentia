@@ -1,12 +1,13 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
   "promos": {
-    "1.16-latest": "1.3.0.0",
-    "1.16-recommended": "1.3.0.0",
+    "1.16-latest": "1.3.0.1",
+    "1.16-recommended": "1.3.0.1",
     "1.15.2-latest": "1.2.1.0",
     "1.15.2-recommended": "1.2.1.0"
   },
   "1.16": {
+    "1.3.0.1": "Fix bug with mods that require non-null output from recipe",
     "1.3.0.0": "Removed JSON registry files, Added datapack support, New API package, Validated support for 1.16.X, Added Silent Mechanism support, Added Crushed Skystone, Added emerald mesh, Added Netherite mesh and hammer, Fix issues with recipes not being synced from server to client",
     "1.2.1.2": "Fix issue where Immersive Engineering ores were not being added",
     "1.2.1.1": "Fix some barrel bugs, Check compatibility with 1.16.3",
