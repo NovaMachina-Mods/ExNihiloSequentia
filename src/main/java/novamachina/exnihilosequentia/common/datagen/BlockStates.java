@@ -126,6 +126,7 @@ public class BlockStates extends BlockStateProvider {
         basicBlock(ModBlocks.CRUSHED_GRANITE.get());
         basicBlock(ModBlocks.CRUSHED_NETHERRACK.get());
         basicBlock(ModBlocks.CRUSHED_END_STONE.get());
+        basicBlock(ModBlocks.CRUSHED_SKYSTONE.get());
         basicBlock(ModBlocks.DUST.get());
         basicBlock(ModBlocks.INFESTED_LEAVES.get());
         basicBlock(ModBlocks.INFESTING_LEAVES.get());

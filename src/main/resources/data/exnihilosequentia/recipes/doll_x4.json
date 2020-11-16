@@ -10,7 +10,7 @@
       "item": "exnihilosequentia:porcelain_clay"
     },
     "e": {
-      "item": "minecraft:diamond"
+      "tag": "forge:gems/diamond"
     }
   },
   "result": {

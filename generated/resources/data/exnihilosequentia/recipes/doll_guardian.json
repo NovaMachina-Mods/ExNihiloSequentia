@@ -7,13 +7,13 @@
   ],
   "key": {
     "c": {
-      "item": "minecraft:prismarine"
-    },
-    "t": {
-      "item": "minecraft:redstone"
+      "tag": "forge:gems/prismarine"
     },
     "s": {
-      "item": "minecraft:glowstone_dust"
+      "tag": "forge:dusts/glowstone"
+    },
+    "t": {
+      "tag": "forge:dusts/redstone"
     },
     "b": {
       "tag": "minecraft:fishes"

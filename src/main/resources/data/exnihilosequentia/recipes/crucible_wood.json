@@ -13,7 +13,7 @@
       "tag": "minecraft:wooden_slabs"
     },
     "s": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

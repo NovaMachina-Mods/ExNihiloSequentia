@@ -8,7 +8,7 @@
   ],
   "key": {
     "x": {
-      "item": "minecraft:iron_nugget"
+      "tag": "forge:nuggets/iron"
     }
   },
   "result": {
