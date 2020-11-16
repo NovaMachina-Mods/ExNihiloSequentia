@@ -93,5 +93,8 @@ Enables ore drops for Mekanism ores
 ## enableCreate
 Enables ore drops for Create ores
 
+## enableSilentMechanism
+Enables ore drops for Silent Mechanism ores
+
 ## enableDebugLogging
 Enables extra logging.
