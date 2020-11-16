@@ -19,8 +19,9 @@ public class ExNihiloLogger {
     }
 
     public void debug(String msg) {
-        if(Config.ENABLE_DEBUG_LOGGING.get())
-        LOGGER.debug(addPrefix(msg));
+        if(Config.ENABLE_DEBUG_LOGGING.get()) {
+            LOGGER.info(addPrefix(msg));
+        }
     }
 
     public void error(String msg) {
