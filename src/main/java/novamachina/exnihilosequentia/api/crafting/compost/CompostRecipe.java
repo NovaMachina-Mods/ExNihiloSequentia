@@ -39,7 +39,7 @@ public class CompostRecipe extends SerializableRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return null;
+        return ItemStack.EMPTY;
     }
 
     public List<ItemStack> getInputs() {

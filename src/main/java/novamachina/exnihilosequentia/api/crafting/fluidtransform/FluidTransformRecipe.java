@@ -44,6 +44,6 @@ public class FluidTransformRecipe extends SerializableRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return null;
+        return ItemStack.EMPTY;
     }
 }
