@@ -8,6 +8,7 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -38,10 +39,12 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.List;
 
 public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoProvider {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public static final EnumProperty<EnumMesh> MESH = EnumProperty.create("mesh", EnumMesh.class);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -61,9 +64,9 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-                                             PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote()) {
+            logger.debug("Sieve Activated");
             SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
             ItemStack stack = player.getHeldItem(handIn);
 
@@ -86,13 +89,14 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         ItemStack stack = player.getHeldItem(handIn);
         SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
 
+        logger.debug("isReadyToSieve: " + sieveTile.isReadyToSieve());
         if (sieveTile.isReadyToSieve()) {
             sieveTile.activateSieve(state.get(WATERLOGGED));
         }
         if (!sieveTile.isReadyToSieve() && stack.getItem() instanceof BlockItem) {
             BlockItem blockItem = (BlockItem) stack.getItem();
-            if (ExNihiloRegistries.SIEVE_REGISTRY
-                .isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
+            logger.debug("Is Block Siftable: " + ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED)));
+            if (ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
                 sieveTile.insertSiftableBlock(stack);
             }
         }
