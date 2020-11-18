@@ -148,7 +148,7 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
 {
     "type": "exnihilosequentia:heat",
     "block": "minecraft:fire",
-    "amount" 4
+    "amount": 4
 }
 ```
 
@@ -171,7 +171,8 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
     },
     "result": {
         "item": "exnihilosequentia:pebble_stone"
-    }
+    },
+    "waterlogged": true
 }
 ```
 
@@ -180,3 +181,4 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
     - `mesh`: The mesh required to cause this roll to be considered. Must be `string`, `flint`, `iron`, `diamond`, `emerald`, or `netherite`.
 - `input`: The block/type of block that will be consumed by the sieve.
 - `result`: The resulting item.
+- `waterlogged`: The sieve must be placed in water to produce result. Either `true` or `false`. Optional and enitire tag may be omitted. Will default to false. 
