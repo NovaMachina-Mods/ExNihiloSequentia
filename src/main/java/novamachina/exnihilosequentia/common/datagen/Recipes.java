@@ -799,13 +799,13 @@ public class Recipes extends RecipeProvider {
                     CookingRecipeBuilder
                         .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 200)
                         .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
-                        .build(consumer);
+                        .build(consumer, new ResourceLocation(Constants.ModIds.MINECRAFT, "ingot_iron"));
                 }
                 if (ore == EnumOre.GOLD) {
                     CookingRecipeBuilder
                         .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
                         .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
-                        .build(consumer);
+                        .build(consumer, new ResourceLocation(Constants.ModIds.MINECRAFT, "ingot_gold"));
                 }
             }
         }
