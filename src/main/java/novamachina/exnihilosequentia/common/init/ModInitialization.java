@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.init;
 
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeManager;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.compat.ore.IOreCompat;
@@ -79,6 +80,7 @@ public class ModInitialization {
         logger.debug("Fired FMLServerStartingEvent");
         registerOreCompat();
         activateOreCompat();
+        loadRecipes(event.getServer().getRecipeManager());
     }
 
     @SubscribeEvent
@@ -89,9 +91,9 @@ public class ModInitialization {
         }
     }
 
-    public static void loadRecipes(RecipesUpdatedEvent event){
+    private static void loadRecipes(RecipeManager manager) {
         logger.debug("Loading Recipes");
-        Collection<IRecipe<?>> recipes = event.getRecipeManager().getRecipes();
+        Collection<IRecipe<?>> recipes = manager.getRecipes();
         if(recipes.size() == 0) {
             return;
         }
@@ -105,6 +107,10 @@ public class ModInitialization {
         ExNihiloRegistries.CRUCIBLE_REGISTRY.setRecipes(filterRecipes(recipes, CrucibleRecipe.class, CrucibleRecipe.TYPE));
         ExNihiloRegistries.HEAT_REGISTRY.setRecipes(filterRecipes(recipes, HeatRecipe.class, HeatRecipe.TYPE));
         ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(filterRecipes(recipes, SieveRecipe.class, SieveRecipe.TYPE));
+    }
+
+    public static void loadClientRecipes(RecipesUpdatedEvent event){
+        loadRecipes(event.getRecipeManager());
     }
 
     private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)
