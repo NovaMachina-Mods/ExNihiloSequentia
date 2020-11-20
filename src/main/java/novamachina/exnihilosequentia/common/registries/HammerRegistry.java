@@ -17,7 +17,10 @@ public class HammerRegistry implements IHammerRegistry {
 
     @Override
     public ItemStack getResult(ResourceLocation input) {
-        return findRecipe(input).getRecipeOutput();
+        ItemStack returnStack = findRecipe(input).getRecipeOutput();
+        returnStack.setCount(1);
+        logger.debug("Hammer Drop Stack: " + returnStack);
+        return returnStack;
     }
 
     @Override

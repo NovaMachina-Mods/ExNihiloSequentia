@@ -40,7 +40,7 @@ public class CrookRecipe extends SerializableRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return output.get(0).getStack();
+        return output.get(0).getStack().copy();
     }
 
     public List<ItemStack> getInputs() {

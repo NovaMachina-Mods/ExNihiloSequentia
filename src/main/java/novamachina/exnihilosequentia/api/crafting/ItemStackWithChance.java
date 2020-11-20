@@ -39,7 +39,7 @@ public class ItemStackWithChance {
     }
 
     public ItemStack getStack() {
-        return itemStack;
+        return itemStack.copy();
     }
 
     public float getChance() {

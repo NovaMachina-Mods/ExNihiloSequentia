@@ -44,6 +44,7 @@ public class UseHammerModifier extends LootModifier {
             logger.debug("Adding new loot");
             generatedLoot = newLoot;
         }
+        logger.debug("Hammer Generated Loot: " + generatedLoot);
         return generatedLoot;
     }
 

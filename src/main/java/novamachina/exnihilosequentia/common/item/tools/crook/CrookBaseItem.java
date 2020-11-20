@@ -77,6 +77,6 @@ public class CrookBaseItem extends ToolItem {
                 new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
                     item));
         }
-        return false;
+        return true;
     }
 }

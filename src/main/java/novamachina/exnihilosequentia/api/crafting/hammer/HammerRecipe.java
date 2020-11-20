@@ -38,6 +38,6 @@ public class HammerRecipe extends SerializableRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return this.output;
+        return this.output.copy();
     }
 }
