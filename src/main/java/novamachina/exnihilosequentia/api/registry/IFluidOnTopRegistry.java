@@ -14,4 +14,6 @@ public interface IFluidOnTopRegistry {
     List<FluidOnTopRecipe> getRecipeList();
 
     void setRecipes(List<FluidOnTopRecipe> recipes);
+
+    void clearRecipes();
 }

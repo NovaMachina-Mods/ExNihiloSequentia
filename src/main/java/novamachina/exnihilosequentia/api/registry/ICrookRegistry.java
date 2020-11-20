@@ -9,4 +9,5 @@ public interface ICrookRegistry {
     List<CrookRecipe> getDrops(IItemProvider block);
     List<CrookRecipe> getRecipeList();
     void setRecipes(List<CrookRecipe> recipes);
+    void clearRecipes();
 }

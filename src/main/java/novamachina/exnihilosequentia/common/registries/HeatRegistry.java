@@ -30,4 +30,9 @@ public class HeatRegistry implements IHeatRegistry {
         logger.debug("Heat Registry recipes: " + recipes.size());
         this.recipeList.addAll(recipes);
     }
+
+    @Override
+    public void clearRecipes() {
+        recipeList.clear();
+    }
 }

@@ -16,4 +16,6 @@ public interface IHammerRegistry {
     void setRecipes(List<HammerRecipe> recipes);
 
     List<HammerRecipe> getRecipeList();
+
+    void clearRecipes();
 }

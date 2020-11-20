@@ -13,4 +13,6 @@ public interface ICrucibleRegistry {
     CrucibleRecipe findRecipe(IItemProvider item);
 
     boolean isMeltable(IItemProvider item, int level);
+
+    void clearRecipes();
 }

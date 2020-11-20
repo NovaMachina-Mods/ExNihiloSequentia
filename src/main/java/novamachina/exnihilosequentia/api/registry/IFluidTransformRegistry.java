@@ -14,4 +14,6 @@ public interface IFluidTransformRegistry {
     List<FluidTransformRecipe> getRecipeList();
 
     void setRecipes(List<FluidTransformRecipe> recipes);
+
+    void clearRecipes();
 }

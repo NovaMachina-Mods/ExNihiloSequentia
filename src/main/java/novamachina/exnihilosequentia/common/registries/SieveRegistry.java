@@ -164,4 +164,9 @@ public class SieveRegistry implements ISieveRegistry {
         logger.debug("Sieve Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
+
+    @Override
+    public void clearRecipes() {
+        recipeList.clear();
+    }
 }

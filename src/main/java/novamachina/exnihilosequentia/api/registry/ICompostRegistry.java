@@ -13,4 +13,6 @@ public interface ICompostRegistry {
     void setRecipes(List<CompostRecipe> recipes);
 
     List<CompostRecipe> getRecipeList();
+
+    void clearRecipes();
 }

@@ -15,4 +15,6 @@ public interface IFluidItemTransformRegistry {
     List<FluidItemRecipe> getRecipeList();
 
     void setRecipes(List<FluidItemRecipe> recipes);
+
+    void clearRecipes();
 }

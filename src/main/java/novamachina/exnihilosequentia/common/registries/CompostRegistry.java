@@ -44,4 +44,9 @@ public class CompostRegistry implements ICompostRegistry {
     public List<CompostRecipe> getRecipeList() {
         return recipeList;
     }
+
+    @Override
+    public void clearRecipes() {
+        recipeList.clear();
+    }
 }

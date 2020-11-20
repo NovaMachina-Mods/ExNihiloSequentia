@@ -3,7 +3,11 @@ package novamachina.exnihilosequentia.common.init;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
+import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.compat.ore.IOreCompat;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
@@ -80,7 +84,28 @@ public class ModInitialization {
         logger.debug("Fired FMLServerStartingEvent");
         registerOreCompat();
         activateOreCompat();
-        loadRecipes(event.getServer().getRecipeManager());
+        if(event.getServer().isDedicatedServer()) {
+            loadRecipes(event.getServer().getRecipeManager());
+        }
+    }
+
+    public static void loadClientRecipes(RecipesUpdatedEvent event){
+        loadRecipes(event.getRecipeManager());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void clearRegistries(ClientPlayerNetworkEvent.LoggedOutEvent event) {
+        logger.debug("Fired LoggedOutEvent");
+        ExNihiloRegistries.HAMMER_REGISTRY.clearRecipes();
+        ExNihiloRegistries.CROOK_REGISTRY.clearRecipes();
+        ExNihiloRegistries.COMPOST_REGISTRY.clearRecipes();
+        ExNihiloRegistries.FLUID_BLOCK_REGISTRY.clearRecipes();
+        ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.clearRecipes();
+        ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.clearRecipes();
+        ExNihiloRegistries.CRUCIBLE_REGISTRY.clearRecipes();
+        ExNihiloRegistries.HEAT_REGISTRY.clearRecipes();
+        ExNihiloRegistries.SIEVE_REGISTRY.clearRecipes();
     }
 
     @SubscribeEvent
@@ -107,10 +132,6 @@ public class ModInitialization {
         ExNihiloRegistries.CRUCIBLE_REGISTRY.setRecipes(filterRecipes(recipes, CrucibleRecipe.class, CrucibleRecipe.TYPE));
         ExNihiloRegistries.HEAT_REGISTRY.setRecipes(filterRecipes(recipes, HeatRecipe.class, HeatRecipe.TYPE));
         ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(filterRecipes(recipes, SieveRecipe.class, SieveRecipe.TYPE));
-    }
-
-    public static void loadClientRecipes(RecipesUpdatedEvent event){
-        loadRecipes(event.getRecipeManager());
     }
 
     private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)

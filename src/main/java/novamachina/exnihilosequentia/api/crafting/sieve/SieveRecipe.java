@@ -73,4 +73,15 @@ public class SieveRecipe extends SerializableRecipe {
         }
         return new SieveRecipe(recipeId, input, drop, possibleMeshes, isWaterlogged);
     }
+
+    @Override
+    public String toString() {
+        return "SieveRecipe{" +
+            "input=" + input +
+            ", drop=" + drop +
+            ", rolls=" + rolls +
+            ", isWaterlogged=" + isWaterlogged +
+            ", recipeId=" + recipeId +
+            '}';
+    }
 }

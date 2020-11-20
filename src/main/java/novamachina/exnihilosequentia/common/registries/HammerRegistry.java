@@ -46,4 +46,9 @@ public class HammerRegistry implements IHammerRegistry {
     public List<HammerRecipe> getRecipeList() {
         return recipeList;
     }
+
+    @Override
+    public void clearRecipes() {
+        recipeList.clear();
+    }
 }

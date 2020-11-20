@@ -47,4 +47,9 @@ public class FluidItemTransformRegistry implements IFluidItemTransformRegistry {
         logger.debug("Fluid Item Transform Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
+
+    @Override
+    public void clearRecipes() {
+        recipeList.clear();
+    }
 }

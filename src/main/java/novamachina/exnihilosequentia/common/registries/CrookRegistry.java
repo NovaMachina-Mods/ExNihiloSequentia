@@ -36,4 +36,9 @@ public class CrookRegistry implements ICrookRegistry {
     public List<CrookRecipe> getRecipeList() {
         return recipeList;
     }
+
+    @Override
+    public void clearRecipes() {
+        recipeList.clear();
+    }
 }

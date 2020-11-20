@@ -45,4 +45,9 @@ public class FluidOnTopRegistry implements IFluidOnTopRegistry {
         logger.debug("Fluid On Top Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
     }
+
+    @Override
+    public void clearRecipes() {
+        recipeList.clear();
+    }
 }

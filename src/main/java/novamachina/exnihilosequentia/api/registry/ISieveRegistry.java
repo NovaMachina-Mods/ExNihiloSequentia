@@ -18,4 +18,6 @@ public interface ISieveRegistry {
     List<JEISieveRecipe> getWetRecipeList();
 
     void setRecipes(List<SieveRecipe> recipes);
+
+    void clearRecipes();
 }

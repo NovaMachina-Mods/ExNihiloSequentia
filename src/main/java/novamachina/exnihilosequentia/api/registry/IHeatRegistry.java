@@ -12,4 +12,6 @@ public interface IHeatRegistry {
     List<HeatRecipe> getRecipeList();
 
     void setRecipes(List<HeatRecipe> recipes);
+
+    void clearRecipes();
 }
