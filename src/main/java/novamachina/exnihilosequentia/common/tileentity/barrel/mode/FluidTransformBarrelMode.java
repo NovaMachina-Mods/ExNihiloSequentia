@@ -49,7 +49,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        return null;
+        return ActionResultType.PASS;
     }
 
     @Override
