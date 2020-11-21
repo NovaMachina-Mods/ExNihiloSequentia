@@ -145,7 +145,8 @@ public class SieveTile extends TileEntity {
                 drops.forEach((entry -> {
                     entry.getRolls().forEach(meshWithChance -> {
                         if(random.nextFloat() <= meshWithChance.getChance()) {
-                            world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, entry.getDrop()));
+                            logger.debug("Spawning Item: " + entry.getDrop());
+                            world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.1F, pos.getZ() + 0.5F, entry.getDrop()));
                         }
                     });
                 }));

@@ -37,7 +37,7 @@ public class SieveRecipe extends SerializableRecipe {
     }
 
     public ItemStack getDrop() {
-        return drop;
+        return drop.copy();
     }
 
     public List<MeshWithChance> getRolls() {
@@ -51,7 +51,7 @@ public class SieveRecipe extends SerializableRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return drop;
+        return drop.copy();
     }
 
     public boolean isWaterlogged() {
