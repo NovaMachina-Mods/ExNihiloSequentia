@@ -8,19 +8,14 @@ pipeline {
                 sh './gradlew clean'
             }
         }
-        stage('Build') {
+        stage('Build, Test, Package') {
             steps {
                 sh './gradlew build'
             }
         }
-        stage('Test') {
-            steps {
-                sh './gradlew test'
-            }
-        }
-        stage('Upload') {
+        stage('Deploy') {
             when {
-                branch '1.16'
+                branch '1.16-dev'
             }
             steps {
                 sh './create-release.sh'
