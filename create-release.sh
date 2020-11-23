@@ -1,9 +1,9 @@
 getVersion() {
   version=$(grep mc_major gradle.properties)
-  mc_major=$( echo -n $version | tail -c 5)
+  mc_major=$( echo -n $version | tail -c 4)
   echo $mc_major
-  version=${mc_major//[$'\t\r\n']}
   mod_version="-$(head -n 1 changelog.md)"
+  echo $mod_version
   full_version=$version$mod_version
 }
 
