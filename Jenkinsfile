@@ -5,6 +5,7 @@ pipeline {
         stage('Clean') {
             steps{
                 sh 'chmod +x gradlew'
+                sh 'chmod +x create-release.sh'
                 sh './gradlew clean'
             }
         }
