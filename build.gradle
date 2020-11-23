@@ -1,169 +1,18 @@
-buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-    }
+name = "CurseForge"
+url = "https://minecraft.curseforge.com/api/maven/"
 }
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-
-def mc_version = "${mc_major}.4"
-version = "${mc_major}-${exnihilosequentia_version}"
-group = 'novamachina.exnihilosequentia' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'exnihilosequentia'
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-//Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-
-minecraft {
-    // The mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   Snapshot are built nightly.
-    // stable_#            Stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'snapshot', version: "${mcp_version}"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                exnihilosequentia {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                exnihilosequentia {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'exnihilosequentia', '--all', '--output', file('generated/resources/'), '--existing', file('src/main/resources')
-
-            mods {
-                exnihilosequentia {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+maven {
+    name = "TTerrag Repo"
+    url = "https://maven.tterrag.com/"
 }
-
-dependencies {
-    // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
-    // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
-    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-
-    // You may put jars on which you depend on in ./libs or you may define them like so..
-    // compile "some.group:artifact:version:classifier"
-    // compile "some.group:artifact:version"
-
-    // Real examples
-    // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // These dependencies get remapped to your current MCP mappings
-    // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-    compileOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_major}.2:${jei_version}")
-
-    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2:api")
-    runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${mc_major}.2")
-
-    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}:api")
-    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_major}:${mc_major}-${top_version}")
+maven { // WAILA
+    name = "Mobius Repo"
+    url = "https://maven.tehnut.info"
 }
-
-// Example for how to get properties into the manifest for reading by the runtime..
-jar {
-    manifest {
-        attributes([
-                "Specification-Title": "Ex Nihilo: Sequentia",
-                "Specification-Vendor": "NovaMachina",
-                "Specification-Version": "1", // We are version 1 of ourselves
-                "Implementation-Title": project.name,
-                "Implementation-Version": "${version}",
-                "Implementation-Vendor" :"NovaMachina",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
+maven {
+    name = "Minecraft Forge"
+    url = "https://files.minecraftforge.net/maven"
 }
-
-// Example configuration to allow publishing using the maven-publish task
-// This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar')
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
-
-repositories {
-    maven { // JEI
-        name = "DVS1 Maven FS"
-        url = "https://dvs1.progwml6.com/files/maven"
-    }
-    maven {
-        name = "CurseForge"
-        url = "https://minecraft.curseforge.com/api/maven/"
-    }
-    maven {
-        name = "TTerrag Repo"
-        url = "https://maven.tterrag.com/"
-    }
-    maven { // WAILA
-        name = "Mobius Repo"
-        url = "https://maven.tehnut.info"
-    }
-    maven {
-        name = "Minecraft Forge"
-        url = "https://files.minecraftforge.net/maven"
-    }
 }
 
 publishing {
@@ -175,6 +24,26 @@ publishing {
     repositories {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+if(ENV.CURSEFORGE_KEY) {
+    curseforge {
+        apiKey = ENV.CURSEFORGE_KEY
+
+        project {
+            id = '400012'
+            releaseType = 'release'
+            mainArtifact jar
+            addGameVersion '1.16'
+            addGameVersion '1.16.1'
+            addGameVersion '1.16.2'
+            addGameVersion '1.16.3'
+            addGameVersion '1.16.4'
+            debug = true
+            changelog = file('changelog.md')
+            changelogType = 'markdown'
         }
     }
 }
