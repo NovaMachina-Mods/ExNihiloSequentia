@@ -20,7 +20,9 @@ pipeline {
         }
         stage('Deploy') {
             when{
-                branch '1.16'
+                expression {
+                    return env.GIT_BRANCH == 'origin/1.16';
+                }
             }
             steps {
                 sh './create-release.sh'
