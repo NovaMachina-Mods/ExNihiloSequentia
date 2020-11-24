@@ -19,6 +19,9 @@ pipeline {
             }
         }
         stage('Deploy') {
+            when{
+                branch '1.16'
+            }
             steps {
                 sh './create-release.sh'
                 sh './gradlew curseforge400012'
