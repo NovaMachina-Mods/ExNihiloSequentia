@@ -196,7 +196,6 @@ if(ENV.CURSEFORGE_KEY) {
             addGameVersion '1.16.2'
             addGameVersion '1.16.3'
             addGameVersion '1.16.4'
-            debug = true
             changelog = file('changelog.md')
             changelogType = 'markdown'
         }
