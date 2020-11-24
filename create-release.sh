@@ -8,5 +8,11 @@ getVersion() {
   echo $full_version
 }
 
+getDescription() {
+  description=$(cat changelog.md)
+}
+
 getVersion
-github-release upload --user NovaMachina --repo ExNihiloSequentia --tag $full_version --name $full_version
+getDescription
+github-release release --user NovaMachina --repo ExNihiloSequentia --tag $full_version --name $full_version --description $description
+github-release upload --user NovaMachina --repo ExNihiloSequentia --tag $full_version --name "$full_version.jar" --file build/libs/*.jar
