@@ -5,6 +5,7 @@ getVersion() {
   mod_version="-$(head -n 1 changelog.md)"
   echo $mod_version
   full_version=$version$mod_version
+  echo $full_version
 }
 
 getVersion

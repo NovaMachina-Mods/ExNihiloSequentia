@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        PATH = "/usr/local/go/bin:/home/pi/go/bin:$PATH"
+    }
 
     stages {
         stage('Clean') {
@@ -9,6 +12,7 @@ pipeline {
                 sh './gradlew clean'
             }
         }
+
         stage('Build, Test, Package') {
             steps {
                 sh './gradlew build'
@@ -21,7 +25,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             archiveArtifacts artifacts: 'build/libs/*.jar'
