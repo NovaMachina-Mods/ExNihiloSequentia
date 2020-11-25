@@ -1,4 +1,4 @@
-1.3.1.0
-- Fix issue with hammer and crook dropping absurd amounts of resources.
-- Fix crash when using auto-clickers on a barrel
-- Fix duplicate JEI recipes
+1.3.1.1
+- Fix server crash when eating end cake
+- Removed hunger requirement for end cake
+- Change netherite mesh recipe to be more vanilla like

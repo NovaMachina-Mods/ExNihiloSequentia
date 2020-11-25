@@ -58,8 +58,7 @@ public class EndCakeBlock extends CakeBlock {
             }
         }
 
-        if (!player.canEat(false) || player.getEntityWorld().getDimensionType()
-            .getEffects() == DimensionType.THE_END_ID) {
+        if (!player.canEat(true) || player.getEntityWorld().getDimensionKey() == World.THE_END) {
             return ActionResultType.FAIL;
         } else {
             player.addStat(Stats.EAT_CAKE_SLICE);

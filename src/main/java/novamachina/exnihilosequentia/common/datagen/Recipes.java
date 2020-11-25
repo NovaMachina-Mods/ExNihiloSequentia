@@ -671,8 +671,11 @@ public class Recipes extends RecipeProvider {
             .get(), Tags.Items.GEMS_DIAMOND, consumer);
         registerMesh(EnumMesh.EMERALD.getRegistryObject().get(), EnumMesh.DIAMOND.getRegistryObject()
             .get(), Tags.Items.GEMS_EMERALD, consumer);
-        registerMesh(EnumMesh.NETHERITE.getRegistryObject().get(), EnumMesh.EMERALD.getRegistryObject()
-            .get(), Tags.Items.INGOTS_NETHERITE, consumer);
+        SmithingRecipeBuilder
+            .smithingRecipe(Ingredient.fromItems(EnumMesh.DIAMOND.getRegistryObject().get()), Ingredient.fromTag(Tags.Items.INGOTS_NETHERITE), EnumMesh.NETHERITE.getRegistryObject().get())
+            .addCriterion("has_diamond_mesh", InventoryChangeTrigger.Instance.forItems(EnumMesh.DIAMOND.getRegistryObject().get()))
+            .addCriterion("has_material", hasItem(Tags.Items.INGOTS_NETHERITE))
+            .build(consumer,  new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE.getMeshName()));
 
         ShapedRecipeBuilder.shapedRecipe(EnumMesh.STRING.getRegistryObject().get())
             .patternLine("iii")
