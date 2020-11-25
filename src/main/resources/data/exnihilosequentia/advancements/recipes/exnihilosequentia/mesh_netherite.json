@@ -6,12 +6,22 @@
     ]
   },
   "criteria": {
-    "has_mesh": {
+    "has_diamond_mesh": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "exnihilosequentia:mesh_emerald"
+            "item": "exnihilosequentia:mesh_diamond"
+          }
+        ]
+      }
+    },
+    "has_material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/netherite"
           }
         ]
       }
@@ -25,7 +35,8 @@
   },
   "requirements": [
     [
-      "has_mesh",
+      "has_diamond_mesh",
+      "has_material",
       "has_the_recipe"
     ]
   ]
