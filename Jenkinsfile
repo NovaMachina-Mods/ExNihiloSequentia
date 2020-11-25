@@ -33,6 +33,14 @@ pipeline {
     post {
         success {
             archiveArtifacts artifacts: 'build/libs/*.jar'
+            mail to: env.BUILD_RESULT_EMAIL,
+            subject: "Build Success: ${currentBuild.fullDisplayName}",
+            body: "Build ${env.BUILD_URL} was successful."
+        }
+        failure {
+            mail to: env.BUILD_RESULT_EMAIL,
+            subject: "Build Failed: ${currentBuild.fullDisplayName}",
+            body: "Build ${env.BUILD_URL} failed."
         }
     }
 }
