@@ -7,7 +7,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
-import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.compat.ore.IOreCompat;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
@@ -26,6 +26,7 @@ import novamachina.exnihilosequentia.common.compat.Mekanism;
 import novamachina.exnihilosequentia.common.compat.SilentMechanism;
 import novamachina.exnihilosequentia.common.compat.ThermalExpansion;
 import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
+import novamachina.exnihilosequentia.common.network.PacketHandler;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.Constants;
@@ -77,6 +78,7 @@ public class ModInitialization {
     public static void setupNonTagBasedRegistries(FMLCommonSetupEvent event) {
         logger.debug("Fired FMLCommonSetupEvent");
         BarrelModeRegistry.initialize();
+        PacketHandler.registerMessages();
     }
 
     @SubscribeEvent
@@ -91,6 +93,10 @@ public class ModInitialization {
 
     public static void loadClientRecipes(RecipesUpdatedEvent event){
         loadRecipes(event.getRecipeManager());
+    }
+
+    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        logger.debug("Fired PlayerLoggedInEvent");
     }
 
     @OnlyIn(Dist.CLIENT)
