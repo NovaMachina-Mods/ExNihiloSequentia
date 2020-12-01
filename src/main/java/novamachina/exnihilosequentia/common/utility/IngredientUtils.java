@@ -8,12 +8,17 @@ public class IngredientUtils {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public static boolean areIngredientsEqual(Ingredient i1, Ingredient i2) {
-//        logger.debug("ingredient1: " + i1);
-        JsonElement item1 = i1.serialize();
-//        logger.debug("item1: " + item1);
-//        logger.debug("ingredient2: " + i2);
-        JsonElement item2 = i2.serialize();
-//        logger.debug("item2: " + item2);
+        JsonElement item1;
+        JsonElement item2;
+        try {
+            item1 = i1.serialize();
+            item2 = i2.serialize();
+        } catch (Exception e) {
+            logger.debug("Cannot compare ingredients");
+            logger.debug("Ingredient 1: " + i1.toString());
+            logger.debug("Ingredient 2: " + i2.toString());
+            throw e;
+        }
 
         return item1.equals(item2);
     }

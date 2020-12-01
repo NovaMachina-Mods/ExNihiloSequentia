@@ -1,8 +1,14 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import novamachina.exnihilosequentia.common.network.HandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraftforge.fml.RegistryObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 public enum EnumOre {
     COPPER(Type.MODDED, Constants.Ore.COPPER, new Color("FF9933"), false),
@@ -32,6 +38,19 @@ public enum EnumOre {
         this.name = name;
         this.color = color;
         this.isEnabled = isEnabled;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static boolean updateEnabledOres(HandshakeMessages.S2COreList message) {
+        List<EnumOre> oreList = message.getOreList();
+        Arrays.stream(EnumOre.values()).forEach(EnumOre::disable);
+        if (oreList != null) {
+            for (EnumOre ore : oreList) {
+                EnumOre.valueOf(ore.name()).setEnabled();
+            }
+            return true;
+        }
+        return false;
     }
 
     public boolean isEnabled() {
@@ -88,6 +107,20 @@ public enum EnumOre {
 
     public boolean isVanilla() {
         return this.type == Type.VANILLA;
+    }
+
+    @Override
+    public String toString() {
+        return "EnumOre{" +
+            "name='" + name + '\'' +
+            ", color=" + color +
+            ", isEnabled=" + isEnabled +
+            ", type=" + type +
+            '}';
+    }
+
+    private void disable() {
+        isEnabled = false;
     }
 
     private enum Type {
