@@ -191,7 +191,7 @@ public class Recipes extends RecipeProvider {
             .addResult(Items.BLAZE_POWDER)
             .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
             .build(consumer, sieveLoc("blaze_powder"));
-        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SOUL_SAND))
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_END_STONE.get()))
                 .addResult(Items.ENDER_PEARL)
                 .addRoll(new MeshWithChance(EnumMesh.IRON, 0.005F))
                 .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
