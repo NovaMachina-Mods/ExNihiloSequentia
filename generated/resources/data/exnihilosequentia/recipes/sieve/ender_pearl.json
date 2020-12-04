@@ -19,7 +19,7 @@
     }
   ],
   "input": {
-    "item": "minecraft:soul_sand"
+    "item": "exnihilosequentia:crushed_end_stone"
   },
   "result": {
     "item": "minecraft:ender_pearl"
