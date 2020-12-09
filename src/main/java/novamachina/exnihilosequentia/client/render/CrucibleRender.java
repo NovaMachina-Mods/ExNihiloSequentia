@@ -54,13 +54,17 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             matrixStack.translate(.5, .5, .5);
             matrixStack.translate(-.5, -.5, -.5);
 
-            add(builder, matrixStack, 0, 0.25f + fillAmount, 1, sprite.getMinU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 1), new UVLocation(sprite
+                    .getMinU(), sprite.getMaxV()),
                 fluidColor);
-            add(builder, matrixStack, 1, 0.25f + fillAmount, 1, sprite.getMaxU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 1), new UVLocation(sprite
+                    .getMaxU(), sprite.getMaxV()),
                 fluidColor);
-            add(builder, matrixStack, 1, 0.25f + fillAmount, 0, sprite.getMaxU(), sprite.getMinV(),
+            add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 0), new UVLocation(sprite
+                    .getMaxU(), sprite.getMinV()),
                 fluidColor);
-            add(builder, matrixStack, 0, 0.25f + fillAmount, 0, sprite.getMinU(), sprite.getMinV(),
+            add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 0), new UVLocation(sprite
+                    .getMinU(), sprite.getMinV()),
                 fluidColor);
 
             matrixStack.pop();
@@ -80,13 +84,17 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             matrixStack.translate(.5, .5, .5);
             matrixStack.translate(-.5, -.5, -.5);
 
-            add(builder, matrixStack, 0, 0.25f + fillAmount, 1, sprite.getMinU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 1), new UVLocation(sprite
+                    .getMinU(), sprite.getMaxV()),
                 blockColor);
-            add(builder, matrixStack, 1, 0.25f + fillAmount, 1, sprite.getMaxU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 1), new UVLocation(sprite
+                    .getMaxU(), sprite.getMaxV()),
                 blockColor);
-            add(builder, matrixStack, 1, 0.25f + fillAmount, 0, sprite.getMaxU(), sprite.getMinV(),
+            add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 0), new UVLocation(sprite
+                    .getMaxU(), sprite.getMinV()),
                 blockColor);
-            add(builder, matrixStack, 0, 0.25f + fillAmount, 0, sprite.getMinU(), sprite.getMinV(),
+            add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 0), new UVLocation(sprite
+                    .getMinU(), sprite.getMinV()),
                 blockColor);
 
             matrixStack.pop();
@@ -95,11 +103,8 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
 
     private Color getBlockColor(ResourceLocation solidTexture,
                                 BaseCrucibleTile tileEntity) {
-        if (solidTexture != null) {
-            if (solidTexture.toString().contains("leaves")) {
-                return new Color(
-                    tileEntity.getWorld().getBiome(tileEntity.getPos()).getFoliageColor());
-            }
+        if (solidTexture != null && solidTexture.toString().contains("leaves")) {
+            return new Color(tileEntity.getWorld().getBiome(tileEntity.getPos()).getFoliageColor());
         }
         return Color.WHITE;
     }

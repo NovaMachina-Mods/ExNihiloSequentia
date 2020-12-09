@@ -1,39 +1,42 @@
 package novamachina.exnihilosequentia.api.crafting.hammer;
 
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.utility.Constants;
 
 public class HammerRecipe extends SerializableRecipe {
-    public static HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), ItemStack.EMPTY, ItemStack.EMPTY);
-
-    public static IRecipeType<HammerRecipe> TYPE = IRecipeType
+    public static final IRecipeType<HammerRecipe> RECIPE_TYPE = IRecipeType
         .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":hammer");
-    public static RegistryObject<RecipeSerializer<HammerRecipe>> SERIALIZER;
+    public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), ItemStack.EMPTY, ItemStack.EMPTY);
+    private static RegistryObject<RecipeSerializer<HammerRecipe>> serializer;
     private final ItemStack input;
     private final ItemStack output;
 
     public HammerRecipe(ResourceLocation id, ItemStack input, ItemStack output) {
-        super(output, TYPE, id);
+        super(output, RECIPE_TYPE, id);
         this.input = input;
         this.output = output;
     }
 
-    public ItemStack getInput() {
-        return input;
+    public static RegistryObject<RecipeSerializer<HammerRecipe>> getStaticSerializer() {
+        return serializer;
     }
 
-    public ItemStack getOutput() {
-        return output;
+    public static void setSerializer(RegistryObject<RecipeSerializer<HammerRecipe>> serializer) {
+        HammerRecipe.serializer = serializer;
+    }
+
+    public ItemStack getInput() {
+        return input.copy();
     }
 
     @Override
     protected RecipeSerializer getENSerializer() {
-        return SERIALIZER.get();
+        return serializer.get();
     }
 
     @Override

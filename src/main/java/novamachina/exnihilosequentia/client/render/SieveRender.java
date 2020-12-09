@@ -48,15 +48,15 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
             double height = 0.99f - tileEntity.getProgress();
             float fillAmount = (float) (0.15625 * height + 0.84375);
 
-            add(builder, matrixStack, 0, fillAmount, 0, sprite.getMinU(), sprite.getMinV(), Color.WHITE);
-            add(builder, matrixStack, 1, fillAmount, 0, sprite.getMaxU(), sprite.getMinV(), Color.WHITE);
-            add(builder, matrixStack, 1, fillAmount, 1, sprite.getMaxU(), sprite.getMaxV(), Color.WHITE);
-            add(builder, matrixStack, 0, fillAmount, 1, sprite.getMinU(), sprite.getMaxV(), Color.WHITE);
+            add(builder, matrixStack, new VertexLocation(0, fillAmount, 0), new UVLocation(sprite.getMinU(), sprite.getMinV()), Color.WHITE);
+            add(builder, matrixStack, new VertexLocation(1, fillAmount, 0), new UVLocation(sprite.getMaxU(), sprite.getMinV()), Color.WHITE);
+            add(builder, matrixStack, new VertexLocation(1, fillAmount, 1), new UVLocation(sprite.getMaxU(), sprite.getMaxV()), Color.WHITE);
+            add(builder, matrixStack, new VertexLocation(0, fillAmount, 1), new UVLocation(sprite.getMinU(), sprite.getMaxV()), Color.WHITE);
 
-            add(builder, matrixStack, 0, fillAmount, 1, sprite.getMinU(), sprite.getMaxV(), Color.WHITE);
-            add(builder, matrixStack, 1, fillAmount, 1, sprite.getMaxU(), sprite.getMaxV(), Color.WHITE);
-            add(builder, matrixStack, 1, fillAmount, 0, sprite.getMaxU(), sprite.getMinV(), Color.WHITE);
-            add(builder, matrixStack, 0, fillAmount, 0, sprite.getMinU(), sprite.getMinV(), Color.WHITE);
+            add(builder, matrixStack, new VertexLocation(0, fillAmount, 1), new UVLocation(sprite.getMinU(), sprite.getMaxV()), Color.WHITE);
+            add(builder, matrixStack, new VertexLocation(1, fillAmount, 1), new UVLocation(sprite.getMaxU(), sprite.getMaxV()), Color.WHITE);
+            add(builder, matrixStack, new VertexLocation(1, fillAmount, 0), new UVLocation(sprite.getMaxU(), sprite.getMinV()), Color.WHITE);
+            add(builder, matrixStack, new VertexLocation(0, fillAmount, 0), new UVLocation(sprite.getMinU(), sprite.getMinV()), Color.WHITE);
 
             matrixStack.pop();
         }

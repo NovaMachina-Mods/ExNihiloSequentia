@@ -6,7 +6,7 @@ import net.minecraft.fluid.Fluid;
 
 public class FluidTransformRecipeBuilder extends ExNihiloFinishedRecipe<FluidTransformRecipeBuilder> {
     public FluidTransformRecipeBuilder() {
-        super(FluidTransformRecipe.SERIALIZER.get());
+        super(FluidTransformRecipe.getStaticSerializer().get());
     }
 
     public static FluidTransformRecipeBuilder builder() {

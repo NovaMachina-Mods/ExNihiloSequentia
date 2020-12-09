@@ -16,13 +16,11 @@ import java.util.Arrays;
 
 public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_transform.png");
-    public static ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluidtransform");
+    public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluidtransform");
     private final IDrawableStatic background;
-    private final IDrawableStatic slotHighlight;
 
     public FluidTransformCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(texture, 0, 0, 166, 63);
-        this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
     }
 
     @Override

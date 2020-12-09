@@ -8,6 +8,7 @@ public class Color {
 
     public static final Color INVALID_COLOR = new Color(-1, -1, -1, -1);
     public static final Color WHITE = new Color(1, 1, 1, 1);
+    private static final String COLOR_TAG = "color";
 
     public final float r;
     public final float g;
@@ -59,8 +60,8 @@ public class Color {
     }
 
     public static Color fromNBT(CompoundNBT compoundNBT) {
-        if (compoundNBT.contains("color")) {
-            CompoundNBT colorTag = compoundNBT.getCompound("color");
+        if (compoundNBT.contains(COLOR_TAG)) {
+            CompoundNBT colorTag = compoundNBT.getCompound(COLOR_TAG);
             float a = colorTag.getFloat("colorA");
             float r = colorTag.getFloat("colorR");
             float b = colorTag.getFloat("colorB");
@@ -129,6 +130,6 @@ public class Color {
         colorTag.putFloat("colorR", r);
         colorTag.putFloat("colorB", b);
         colorTag.putFloat("colorG", g);
-        compoundNBT.put("color", colorTag);
+        compoundNBT.put(COLOR_TAG, colorTag);
     }
 }

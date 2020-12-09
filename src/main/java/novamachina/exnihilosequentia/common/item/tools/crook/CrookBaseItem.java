@@ -31,11 +31,14 @@ public class CrookBaseItem extends ToolItem {
     private static final Set<Material> effectiveMaterialsOn = Sets
         .newHashSet(Material.LEAVES);
 
+    private final Random random = new Random();
+
     public CrookBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, Sets.newHashSet(),
             new Item.Properties().defaultMaxDamage(maxDamage).group(ModInitialization.ITEM_GROUP));
     }
 
+    @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
         return effectiveMaterialsOn.contains(material) ? this.efficiency : super.getDestroySpeed(stack, state);
@@ -47,14 +50,13 @@ public class CrookBaseItem extends ToolItem {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
         List<ItemStack> itemDrops = new ArrayList<>();
 
-        for (int i = 0; i < Config.VANILLA_SIMULATE_DROP_COUNT.get(); i++) {
+        for (int i = 0; i < Config.getVanillaSimulateDropCount(); i++) {
             List<ItemStack> items = Block
                 .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimensionKey()),
                     pos, null);
             itemDrops.addAll(items);
         }
 
-        Random random = new Random();
         for(CrookRecipe recipe : ExNihiloRegistries.CROOK_REGISTRY.getDrops(state.getBlock())) {
             for(ItemStackWithChance result : recipe.getOutput()) {
                 if(random.nextFloat() <= result.getChance()) {
@@ -65,7 +67,7 @@ public class CrookBaseItem extends ToolItem {
 
         if (state.getBlock() instanceof InfestedLeavesBlock) {
             itemDrops.add(new ItemStack(Items.STRING, random
-                .nextInt(Config.MAX_BONUS_STRING_COUNT.get()) + Config.MIN_STRING_COUNT.get()));
+                .nextInt(Config.getMaxBonusStringCount()) + Config.getMinStringCount()));
             if (random.nextDouble() <= 0.8) {
                 itemDrops
                     .add(new ItemStack(EnumResource.SILKWORM.getRegistryObject().get()));

@@ -7,7 +7,7 @@ import net.minecraft.util.IItemProvider;
 
 public class CompostRecipeBuilder extends ExNihiloFinishedRecipe<CompostRecipeBuilder> {
     private CompostRecipeBuilder() {
-        super(CompostRecipe.SERIALIZER.get());
+        super(CompostRecipe.getStaticSerializer().get());
     }
 
     public static CompostRecipeBuilder builder() {

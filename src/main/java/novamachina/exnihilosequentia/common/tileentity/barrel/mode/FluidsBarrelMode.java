@@ -38,9 +38,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             if (fluidOnTop(barrelTile)) {
                 return;
             }
-            if (fluidTransform(barrelTile)) {
-                return;
-            }
+            fluidTransform(barrelTile);
         }
     }
 
@@ -146,7 +144,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void read(CompoundNBT nbt) {
-
+        // NOOP
     }
 
     @Override
@@ -156,7 +154,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-
+        // NOOP
     }
 
     @Override

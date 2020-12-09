@@ -38,7 +38,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
         if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, blockBelow)) {
             currentProgress++;
             spawnParticle(barrelTile);
-            if (currentProgress >= Config.SECONDS_TO_FLUID_TRANSFORM.get() * 20) {
+            if (currentProgress >= Config.getSecondsToFluidTransform() * 20) {
                 currentProgress = 0;
                 Fluid newFluid = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getResult(fluidInTank, blockBelow);
                 barrelTile.getTank().setFluid(new FluidStack(newFluid, AbstractBarrelTile.MAX_FLUID_AMOUNT));
@@ -98,7 +98,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
         List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils
-            .formatPercent((float) currentProgress / (Config.SECONDS_TO_FLUID_TRANSFORM.get() * 20))));
+            .formatPercent((float) currentProgress / (Config.getSecondsToFluidTransform() * 20))));
 
         return info;
     }

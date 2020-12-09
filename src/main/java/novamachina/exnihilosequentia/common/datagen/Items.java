@@ -16,20 +16,25 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class Items extends ItemModelProvider {
+    private static final String ITEM_HANDHELD_TAG = "item/handheld";
+    private static final String LAYER_0_TAG = "layer0";
+    private static final String ITEMS_TAG = "items/";
+
     public Items(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, Constants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
 
     @Override
     protected void registerModels() {
-        singleTexture(ModItems.COOKED_SILKWORM.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
-            "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/cooked_silkworm"));
+        singleTexture(ModItems.COOKED_SILKWORM.get().getRegistryName()
+                .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+            LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/cooked_silkworm"));
         singleTexture(ModItems.WITCH_WATER_BUCKET.get().getRegistryName()
-                .getPath(), new ResourceLocation("item/handheld"),
-            "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/bucket_witchwater"));
+                .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+            LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/bucket_witchwater"));
         singleTexture(ModItems.SEA_WATER_BUCKET.get().getRegistryName()
-                .getPath(), new ResourceLocation("item/handheld"),
-            "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/bucket_sea_water"));
+                .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+            LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/bucket_sea_water"));
 
         registerCrooks();
         registerHammers();
@@ -42,39 +47,47 @@ public class Items extends ItemModelProvider {
     }
 
     private void registerDolls() {
-        for(DollEnum doll : DollEnum.values()) {
-            singleTexture(doll.getRegistryObject().get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
-                "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/" + doll.getDollName()));
+        for (DollEnum doll : DollEnum.values()) {
+            singleTexture(doll.getRegistryObject().get().getRegistryName()
+                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, ITEMS_TAG + doll
+                    .getDollName()));
         }
     }
 
     private void registerMeshes() {
-        for(EnumMesh mesh : EnumMesh.values()) {
-            if(mesh != EnumMesh.NONE) {
+        for (EnumMesh mesh : EnumMesh.values()) {
+            if (mesh != EnumMesh.NONE) {
                 withExistingParent(mesh.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "block/" + mesh.getMeshName()));
+                    .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "block/" + mesh
+                    .getMeshName()));
             }
         }
     }
 
     private void registerPebbles() {
-        for(EnumPebbleType pebble : EnumPebbleType.values()) {
-            singleTexture(pebble.getRegistryObject().get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
-                "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/" + pebble.getType()));
+        for (EnumPebbleType pebble : EnumPebbleType.values()) {
+            singleTexture(pebble.getRegistryObject().get().getRegistryName()
+                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, ITEMS_TAG + pebble.getType()));
         }
     }
 
     private void registerResources() {
-        for(EnumResource resource : EnumResource.values()) {
-            singleTexture(resource.getRegistryObject().get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
-                "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/" + resource.getResourceName()));
+        for (EnumResource resource : EnumResource.values()) {
+            singleTexture(resource.getRegistryObject().get().getRegistryName()
+                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, ITEMS_TAG + resource
+                    .getResourceName()));
         }
     }
 
     private void registerSeeds() {
-        for(EnumSeed seed : EnumSeed.values()) {
-            singleTexture(seed.getRegistryObject().get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
-                "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/" + seed.getSeedName()));
+        for (EnumSeed seed : EnumSeed.values()) {
+            singleTexture(seed.getRegistryObject().get().getRegistryName()
+                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, ITEMS_TAG + seed
+                    .getSeedName()));
         }
     }
 
@@ -82,7 +95,7 @@ public class Items extends ItemModelProvider {
         for (EnumOre ore : EnumOre.values()) {
             registerChunk(ore);
             registerPiece(ore);
-            if(!ore.isVanilla()) {
+            if (!ore.isVanilla()) {
                 registerIngot(ore);
             }
         }
@@ -106,16 +119,16 @@ public class Items extends ItemModelProvider {
     private void registerHammers() {
         for (EnumHammer hammer : EnumHammer.values()) {
             singleTexture(hammer.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation("item/handheld"),
-                "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/tools/hammer/" + hammer.name));
+                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/tools/hammer/" + hammer.hammerName));
         }
     }
 
     private void registerCrooks() {
         for (EnumCrook crook : EnumCrook.values()) {
             singleTexture(crook.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation("item/handheld"),
-                "layer0", new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/tools/crook/" + crook.name));
+                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/tools/crook/" + crook.crookName));
         }
     }
 }

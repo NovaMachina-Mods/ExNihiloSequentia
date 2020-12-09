@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
-    public static ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "compost");
+    public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "compost");
     private final IDrawableStatic background;
     private final IDrawableStatic slotHighlight;
 
@@ -73,10 +73,8 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
             recipeLayout.getItemStacks().init(i + slotIndex, true, slotX, slotY);
             recipeLayout.getItemStacks().set(i + slotIndex, stack);
 
-            if (focus != null) {
-                if (stack.isItemEqual((ItemStack) focus.getValue())) {
-                    recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
-                }
+            if (focus != null && stack.isItemEqual((ItemStack) focus.getValue())) {
+                recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
             }
         }
         recipeLayout.getItemStacks().addTooltipCallback(new CompostTooltipCallback());

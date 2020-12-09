@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluiditem;
 
-import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.utility.Constants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -13,13 +13,11 @@ import net.minecraft.util.ResourceLocation;
 
 public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_block_transform.png");
-    public static ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluiditem");
+    public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluiditem");
     private final IDrawableStatic background;
-    private final IDrawableStatic slotHighlight;
 
     public FluidBlockRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(texture, 0, 0, 166, 63);
-        this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
     }
 
     @Override
@@ -51,7 +49,7 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe
     public void setIngredients(FluidItemRecipe recipe, IIngredients ingredients) {
         ingredients.setInputs(VanillaTypes.ITEM, recipe.getInputs());
         ingredients.setInput(VanillaTypes.FLUID, recipe.getFluidInBarrel());
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
     }
 
     @Override
@@ -62,6 +60,6 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInBarrel());
         recipeLayout.getItemStacks().set(0, recipe.getInputs());
-        recipeLayout.getItemStacks().set(1, recipe.getResult());
+        recipeLayout.getItemStacks().set(1, recipe.getRecipeOutput());
     }
 }

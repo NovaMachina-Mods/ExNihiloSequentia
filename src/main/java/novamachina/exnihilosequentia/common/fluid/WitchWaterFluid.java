@@ -22,7 +22,7 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
             .bucket(ModItems.WITCH_WATER_BUCKET)
             .block(ModBlocks.WITCH_WATER);
 
-    public WitchWaterFluid(Properties properties) {
+    protected WitchWaterFluid(Properties properties) {
         super(properties);
     }
 

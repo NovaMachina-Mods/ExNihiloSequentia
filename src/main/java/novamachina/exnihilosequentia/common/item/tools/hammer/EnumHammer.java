@@ -14,13 +14,13 @@ public enum EnumHammer {
     NETHERITE(Constants.Items.HAMMER_NETHERITE, 8192, ItemTier.NETHERITE),
     GOLD(Constants.Items.HAMMER_GOLD, 64, ItemTier.GOLD);
 
-    public final String name;
+    public final String hammerName;
     public final int defaultDurability;
     public final IItemTier tier;
     private RegistryObject<Item> registryObject;
 
-    EnumHammer(String name, int durability, IItemTier tier) {
-        this.name = name;
+    EnumHammer(String hammerName, int durability, IItemTier tier) {
+        this.hammerName = hammerName;
         this.defaultDurability = durability;
         this.tier = tier;
     }

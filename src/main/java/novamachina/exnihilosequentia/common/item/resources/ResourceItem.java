@@ -1,19 +1,16 @@
 package novamachina.exnihilosequentia.common.item.resources;
 
-import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ModInitialization;
-import novamachina.exnihilosequentia.common.utility.Constants.Items;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
+import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
+import novamachina.exnihilosequentia.common.init.ModInitialization;
+import novamachina.exnihilosequentia.common.utility.Constants.Items;
 
 public class ResourceItem extends Item {
 
@@ -27,44 +24,32 @@ public class ResourceItem extends Item {
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
         ItemStack item = context.getItem();
-        if (!context.getWorld().isRemote()) {
-            if (item.getItem() instanceof ResourceItem) {
-                ResourceItem resourceItem = (ResourceItem) item.getItem();
+        if (!context.getWorld().isRemote() && item.getItem() instanceof ResourceItem) {
+            ResourceItem resourceItem = (ResourceItem) item.getItem();
 
-                BlockState state = context.getWorld().getBlockState(context.getPos());
-                if (resourceItem.getResourceName().equals(Items.SILKWORM)) {
-                    if (state.getBlock() instanceof LeavesBlock) {
-                        context.getItem().shrink(1);
-                        InfestingLeavesBlock.normalToInfesting(context.getWorld(),
-                            context.getWorld().getBlockState(context.getPos()), context.getPos());
-                        return ActionResultType.SUCCESS;
-                    }
+            BlockState state = context.getWorld().getBlockState(context.getPos());
+            if (resourceItem.getResourceName().equals(Items.SILKWORM) && state.getBlock() instanceof LeavesBlock) {
+                context.getItem().shrink(1);
+                InfestingLeavesBlock.normalToInfesting(context.getWorld(),
+                    context.getPos());
+                return ActionResultType.SUCCESS;
+            }
+            if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) || resourceItem.getResourceName()
+                .equals(Items.GRASS_SEED) && state.getBlock().equals(Blocks.DIRT)) {
+                context.getItem().shrink(1);
+                if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE)) {
+                    Block.replaceBlock(state,
+                        Blocks.MYCELIUM.getDefaultState(), context.getWorld(),
+                        context.getPos(), 1);
+                } else {
+                    Block.replaceBlock(state,
+                        Blocks.GRASS_BLOCK.getDefaultState(), context.getWorld(),
+                        context.getPos(), 1);
                 }
-                if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) || resourceItem
-                    .getResourceName().equals(Items.GRASS_SEED)) {
-                    if (state.getBlock().equals(Blocks.DIRT)) {
-                        context.getItem().shrink(1);
-                        if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE)) {
-                            Block.replaceBlock(state,
-                                Blocks.MYCELIUM.getDefaultState(), context.getWorld(),
-                                context.getPos(), 1);
-                        } else {
-                            Block.replaceBlock(state,
-                                Blocks.GRASS_BLOCK.getDefaultState(), context.getWorld(),
-                                context.getPos(), 1);
-                        }
-                        return ActionResultType.SUCCESS;
-                    }
-                }
+                return ActionResultType.SUCCESS;
             }
         }
         return ActionResultType.PASS;
-    }
-
-    @Override
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn,
-                                                     LivingEntity target, Hand hand) {
-        return super.itemInteractionForEntity(stack, playerIn, target, hand);
     }
 
     public String getResourceName() {

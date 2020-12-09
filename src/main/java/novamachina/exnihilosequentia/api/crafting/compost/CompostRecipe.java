@@ -13,15 +13,23 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CompostRecipe extends SerializableRecipe {
-    public static IRecipeType<CompostRecipe> TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
-    public static RegistryObject<RecipeSerializer<CompostRecipe>> SERIALIZER;
+    public static final IRecipeType<CompostRecipe> RECIPE_TYPE = IRecipeType
+        .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
+    private static RegistryObject<RecipeSerializer<CompostRecipe>> serializer;
     private final Ingredient input;
     private final int amount;
-
     public CompostRecipe(ResourceLocation id, Ingredient input, int amount) {
-        super(null, TYPE, id);
+        super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
+    }
+
+    public static RegistryObject<RecipeSerializer<CompostRecipe>> getStaticSerializer() {
+        return serializer;
+    }
+
+    public static void setSerializer(RegistryObject<RecipeSerializer<CompostRecipe>> serializer) {
+        CompostRecipe.serializer = serializer;
     }
 
     public Ingredient getInput() {
@@ -34,7 +42,7 @@ public class CompostRecipe extends SerializableRecipe {
 
     @Override
     protected RecipeSerializer getENSerializer() {
-        return SERIALIZER.get();
+        return serializer.get();
     }
 
     @Override

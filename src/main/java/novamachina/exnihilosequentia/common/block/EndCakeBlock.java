@@ -1,6 +1,5 @@
 package novamachina.exnihilosequentia.common.block;
 
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CakeBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,9 +11,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
 public class EndCakeBlock extends CakeBlock {
 
@@ -22,9 +21,14 @@ public class EndCakeBlock extends CakeBlock {
         super(new BlockBuilder().getProperties().hardnessAndResistance(0.5F));
     }
 
+
+    /**
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-                                             PlayerEntity player, Hand handIn, BlockRayTraceResult p_225533_6_) {
+                                             PlayerEntity player, Hand handIn, BlockRayTraceResult blockRayTraceResult) {
         ItemStack itemStack = player.getHeldItem(handIn);
 
         if (itemStack.isEmpty()) {
@@ -45,17 +49,16 @@ public class EndCakeBlock extends CakeBlock {
 
     private ActionResultType eatCake(World worldIn, BlockPos pos, BlockState state,
                                      PlayerEntity player) {
-        if (!worldIn.isRemote() && player.getRidingEntity() == null && player.isCreative()) {
-            if (worldIn instanceof ServerWorld && !player.isPassenger()) {
-                RegistryKey<World> registrykey = worldIn
-                    .getDimensionKey() == World.OVERWORLD ? World.THE_END : World.OVERWORLD;
-                ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registrykey);
-                if (serverworld == null) {
-                    return ActionResultType.FAIL;
-                }
-
-                player.changeDimension(serverworld);
+        if (!worldIn.isRemote() && player.getRidingEntity() == null && player
+            .isCreative() && worldIn instanceof ServerWorld && !player.isPassenger()) {
+            RegistryKey<World> registrykey = worldIn
+                .getDimensionKey() == World.OVERWORLD ? World.THE_END : World.OVERWORLD;
+            ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registrykey);
+            if (serverworld == null) {
+                return ActionResultType.FAIL;
             }
+
+            player.changeDimension(serverworld);
         }
 
         if (!player.canEat(true) || player.getEntityWorld().getDimensionKey() == World.THE_END) {
@@ -71,17 +74,16 @@ public class EndCakeBlock extends CakeBlock {
                 worldIn.removeBlock(pos, false);
             }
 
-            if (!worldIn.isRemote() && player.getRidingEntity() == null) {
-                if (worldIn instanceof ServerWorld && !player.isPassenger()) {
-                    RegistryKey<World> registrykey = worldIn
-                        .getDimensionKey() == World.THE_END ? World.OVERWORLD : World.THE_END;
-                    ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registrykey);
-                    if (serverworld == null) {
-                        return ActionResultType.FAIL;
-                    }
-
-                    player.changeDimension(serverworld);
+            if (!worldIn.isRemote() && player.getRidingEntity() == null && worldIn instanceof ServerWorld && !player
+                .isPassenger()) {
+                RegistryKey<World> registrykey = worldIn
+                    .getDimensionKey() == World.THE_END ? World.OVERWORLD : World.THE_END;
+                ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registrykey);
+                if (serverworld == null) {
+                    return ActionResultType.FAIL;
                 }
+
+                player.changeDimension(serverworld);
             }
         }
         return ActionResultType.SUCCESS;

@@ -7,7 +7,7 @@ import net.minecraft.util.IItemProvider;
 public class HammerRecipeBuilder extends ExNihiloFinishedRecipe<HammerRecipeBuilder> {
 
     private HammerRecipeBuilder() {
-        super(HammerRecipe.SERIALIZER.get());
+        super(HammerRecipe.getStaticSerializer().get());
     }
 
     public HammerRecipeBuilder result(IItemProvider result) {

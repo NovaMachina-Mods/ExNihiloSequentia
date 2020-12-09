@@ -16,11 +16,9 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
     private final IDrawableStatic background;
-    private final IDrawableStatic slotHighlight;
 
     public HammerRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(texture, 0, 56, 166, 58);
-        this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
     }
 
     @Override
@@ -51,7 +49,7 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
     @Override
     public void setIngredients(HammerRecipe recipe, IIngredients ingredients) {
         ingredients.setInput(VanillaTypes.ITEM, recipe.getInput());
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
     }
 
     @Override
@@ -60,6 +58,6 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
         recipeLayout.getItemStacks().set(0, recipe.getInput());
 
         recipeLayout.getItemStacks().init(1, false, 38, 2);
-        recipeLayout.getItemStacks().set(1, recipe.getOutput());
+        recipeLayout.getItemStacks().set(1, recipe.getRecipeOutput());
     }
 }

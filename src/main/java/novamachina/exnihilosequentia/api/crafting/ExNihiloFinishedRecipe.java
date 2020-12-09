@@ -34,7 +34,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     private ResourceLocation id;
     private RecipeSerializer<?> serializer;
 
-    public ExNihiloFinishedRecipe(RecipeSerializer<?> serializer) {
+    protected ExNihiloFinishedRecipe(RecipeSerializer<?> serializer) {
         this.serializer = serializer;
         this.writerFunctions = new ArrayList<>();
     }

@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class SieveRegistry implements ISieveRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private final boolean flattenRecipes = Config.FLATTEN_SIEVE_RECIPES.get();
+    private final boolean flattenRecipes = Config.getFlattenSieveRecipes();
 
     private List<SieveRecipe> recipeList = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class SieveRegistry implements ISieveRegistry {
                 }
                 return true;
             })
-            .filter(recipe -> recipe.getRolls().size() > 0)
+            .filter(recipe -> !recipe.getRolls().isEmpty())
             .collect(Collectors.toList());
     }
 
@@ -63,24 +63,22 @@ public class SieveRegistry implements ISieveRegistry {
                 }
                 return true;
             })
-            .filter(recipe -> recipe.getRolls().size() > 0)
+            .filter(recipe -> !recipe.getRolls().isEmpty())
             .collect(Collectors.toList());
     }
 
     @Override
     public boolean isBlockSiftable(Block block, EnumMesh mesh, boolean isWaterlogged) {
         return recipeList.parallelStream().anyMatch(sieveRecipe ->{
-            if(sieveRecipe.getInput().test(new ItemStack(block))) {
-                if(sieveRecipe.isWaterlogged() == isWaterlogged) {
-                    for(MeshWithChance meshWithChance : sieveRecipe.getRolls()) {
-                        if(flattenRecipes) {
-                            if(meshWithChance.getMesh().getId() <= mesh.getId()) {
-                                return true;
-                            }
-                        } else {
-                            if(meshWithChance.getMesh().getId() == mesh.getId()) {
-                                return true;
-                            }
+            if(sieveRecipe.getInput().test(new ItemStack(block)) && sieveRecipe.isWaterlogged() == isWaterlogged) {
+                for(MeshWithChance meshWithChance : sieveRecipe.getRolls()) {
+                    if(flattenRecipes) {
+                        if(meshWithChance.getMesh().getId() <= mesh.getId()) {
+                            return true;
+                        }
+                    } else {
+                        if(meshWithChance.getMesh().getId() == mesh.getId()) {
+                            return true;
                         }
                     }
                 }
@@ -111,7 +109,7 @@ public class SieveRegistry implements ISieveRegistry {
             if(mesh != EnumMesh.NONE) {
                 for(Ingredient ingredient : inputs) {
                     List<SieveRecipe> drops = getDrops(ingredient, mesh, false);
-                    if(drops.size() > 0) {
+                    if(!drops.isEmpty()) {
                         List<List<ItemStack>> inputList = new ArrayList<>();
                         inputList.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
                         inputList.add(Arrays.asList(ingredient.getMatchingStacks()));
@@ -146,7 +144,7 @@ public class SieveRegistry implements ISieveRegistry {
             if(mesh != EnumMesh.NONE) {
                 for(Ingredient ingredient : inputs) {
                     List<SieveRecipe> drops = getDrops(ingredient, mesh, true);
-                    if(drops.size() > 0) {
+                    if(!drops.isEmpty()) {
                         List<List<ItemStack>> inputList = new ArrayList<>();
                         inputList.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
                         inputList.add(Arrays.asList(ingredient.getMatchingStacks()));
