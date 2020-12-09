@@ -37,6 +37,9 @@ public class ExNihiloSequentia {
 
     @EventBusSubscriber(modid = Constants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)
     public static class EventHandlers {
+        private EventHandlers() {
+        }
+
         @SubscribeEvent
         public static void registerModifierSerializers(
             @Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {

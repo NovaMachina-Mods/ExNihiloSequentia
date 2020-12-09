@@ -7,7 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 
 public class CrucibleRecipeBuilder extends ExNihiloFinishedRecipe<CrucibleRecipeBuilder> {
     private CrucibleRecipeBuilder() {
-        super(CrucibleRecipe.SERIALIZER.get());
+        super(CrucibleRecipe.getStaticSerializer().get());
     }
 
     public static CrucibleRecipeBuilder builder() {

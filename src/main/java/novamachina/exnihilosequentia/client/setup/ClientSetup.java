@@ -23,6 +23,9 @@ import org.apache.logging.log4j.LogManager;
 public class ClientSetup {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
+    private ClientSetup() {
+    }
+
     public static void init(final FMLClientSetupEvent event) {
         logger.debug("Initializing client renderers");
 
@@ -48,7 +51,7 @@ public class ClientSetup {
         for (EnumOre ore : EnumOre.values()) {
             event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
             event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
-            if(!ore.isVanilla()) {
+            if (!ore.isVanilla()) {
                 event.getItemColors().register(new OreColor(), ore.getIngotItem().get());
             }
         }

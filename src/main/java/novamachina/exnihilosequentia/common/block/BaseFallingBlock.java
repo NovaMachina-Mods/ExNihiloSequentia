@@ -12,7 +12,6 @@ import java.util.function.Supplier;
 
 public class BaseFallingBlock extends FallingBlock {
 
-    private final int harvestLevel;
     private final Supplier<TileEntity> tileEntitySupplier;
     private final ToolType toolType;
 
@@ -20,7 +19,6 @@ public class BaseFallingBlock extends FallingBlock {
         super(builder.getProperties());
         this.tileEntitySupplier = builder.getTileEntitySupplier();
         this.toolType = builder.getToolType();
-        this.harvestLevel = builder.getHarvestLevel();
     }
 
     @Nullable

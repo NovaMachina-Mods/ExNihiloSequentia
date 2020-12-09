@@ -5,11 +5,11 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
 public enum DollEnum {
-    BLAZE("minecraft", "blaze", "minecraft", "lava", 1, Constants.Tooltips.BLAZE),
-    ENDERMAN("minecraft", "enderman", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 2, Constants.Tooltips.ENDERMAN),
-    SHULKER("minecraft", "shulker", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1.5, Constants.Tooltips.SHULKER),
-    GUARDIAN("minecraft", "guardian", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.SEA_WATER, 1, Constants.Tooltips.GUARDIAN),
-    BEE("minecraft", "bee", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1, Constants.Tooltips.BEE);
+    BLAZE(Constants.ModIds.MINECRAFT, "blaze", "minecraft", "lava", 1, Constants.Tooltips.BLAZE),
+    ENDERMAN(Constants.ModIds.MINECRAFT, "enderman", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 2, Constants.Tooltips.ENDERMAN),
+    SHULKER(Constants.ModIds.MINECRAFT, "shulker", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1.5, Constants.Tooltips.SHULKER),
+    GUARDIAN(Constants.ModIds.MINECRAFT, "guardian", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.SEA_WATER, 1, Constants.Tooltips.GUARDIAN),
+    BEE(Constants.ModIds.MINECRAFT, "bee", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1, Constants.Tooltips.BEE);
 
 
     private final String entityModId;
@@ -31,7 +31,7 @@ public enum DollEnum {
 
     public static DollEnum getDollFromString(String dollType) {
         for (DollEnum doll : values()) {
-            if (doll.name().toLowerCase().equals(dollType)) {
+            if (doll.name().equalsIgnoreCase(dollType)) {
                 return doll;
             }
         }

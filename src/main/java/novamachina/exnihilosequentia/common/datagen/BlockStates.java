@@ -1,11 +1,5 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import novamachina.exnihilosequentia.common.block.BlockSieve;
-import novamachina.exnihilosequentia.common.block.EndCakeBlock;
-import novamachina.exnihilosequentia.common.init.ModBlocks;
-import novamachina.exnihilosequentia.common.init.ModFluids;
-import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.fluid.Fluid;
@@ -16,18 +10,22 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import novamachina.exnihilosequentia.common.block.BlockSieve;
+import novamachina.exnihilosequentia.common.init.ModBlocks;
+import novamachina.exnihilosequentia.common.init.ModFluids;
+import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
+import novamachina.exnihilosequentia.common.utility.Constants;
 
-import java.util.HashMap;
-import java.util.Map;
+import static net.minecraft.block.CakeBlock.BITES;
 
 public class BlockStates extends BlockStateProvider {
-    private Map<Block, ModelFile> itemModels = new HashMap<>();
+    private static final String PARTICLE_TAG = "particle";
 
     public BlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
         super(gen, Constants.ModIds.EX_NIHILO_SEQUENTIA, exFileHelper);
     }
 
-    private String name(Block b) {
+    private String getRegistryName(Block b) {
         return b.getRegistryName().toString();
     }
 
@@ -49,7 +47,7 @@ public class BlockStates extends BlockStateProvider {
     private void registerFluid(Fluid fluid) {
         ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
         ModelFile model = models().getBuilder("block/" + fluid.getRegistryName().getPath())
-            .texture("particle", stillTexture);
+            .texture(PARTICLE_TAG, stillTexture);
         getVariantBuilder(fluid.getDefaultState().getBlockState().getBlock()).partialState().setModels(new ConfiguredModel(model));
     }
 
@@ -61,8 +59,8 @@ public class BlockStates extends BlockStateProvider {
     }
 
     private void registerCrucible(Block block, ResourceLocation texture) {
-        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(name(block), modLoc("block/crucible"))
-            .texture("particle", texture)
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/crucible"))
+            .texture(PARTICLE_TAG, texture)
             .texture("top", texture)
             .texture("bottom", texture)
             .texture("side", texture)
@@ -77,9 +75,9 @@ public class BlockStates extends BlockStateProvider {
     }
 
     private void registerBarrel(Block block, ResourceLocation texture) {
-        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(name(block), modLoc("block/barrel"))
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/barrel"))
             .texture("texture", texture)
-            .texture("particle", texture));
+            .texture(PARTICLE_TAG, texture));
 
         simpleItemBlock(block, model.model);
     }
@@ -89,9 +87,9 @@ public class BlockStates extends BlockStateProvider {
     }
 
     private void registerSieve(Block block, ResourceLocation texture) {
-        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(name(block), modLoc("block/sieve_base"))
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/sieve_base"))
             .texture("texture", texture)
-            .texture("particle", texture));
+            .texture(PARTICLE_TAG, texture));
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
         MultiPartBlockStateBuilder.PartBuilder partBuilder = builder.part().modelFile(model.model).addModel();
         partBuilder.end();
@@ -113,11 +111,11 @@ public class BlockStates extends BlockStateProvider {
         for(int i = 1; i < 7; i++) {
             VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
             ConfiguredModel model = new ConfiguredModel(models().getExistingFile(new ResourceLocation("exnihilosequentia:block/cake_slice" + i)));
-            partialBlockstate.with(EndCakeBlock.BITES, i).addModels(model);
+            partialBlockstate.with(BITES, i).addModels(model);
         }
         VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
         ConfiguredModel model = new ConfiguredModel(models().getExistingFile(new ResourceLocation("exnihilosequentia:block/cake_uneaten")));
-        partialBlockstate.with(EndCakeBlock.BITES, 0).addModels(model);
+        partialBlockstate.with(BITES, 0).addModels(model);
     }
 
     private void registerSimpleBlocks() {

@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.block;
 
-import novamachina.exnihilosequentia.common.init.ModFluids;
-import net.minecraft.block.Block;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
@@ -28,15 +27,20 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import novamachina.exnihilosequentia.common.init.ModFluids;
 
 public class WitchWaterBlock extends FlowingFluidBlock {
 
     public WitchWaterBlock() {
         super(ModFluids.WITCH_WATER,
-            Block.Properties.create(Material.WATER).doesNotBlockMovement()
+            AbstractBlock.Properties.create(Material.WATER).doesNotBlockMovement()
                 .hardnessAndResistance(100.0F).noDrops());
     }
 
+    /**
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
         if (worldIn.isRemote() || !entityIn.isAlive()) {
@@ -48,20 +52,16 @@ public class WitchWaterBlock extends FlowingFluidBlock {
                 new WitherSkeletonEntity(EntityType.WITHER_SKELETON, worldIn));
         }
 
-        if (entityIn instanceof CreeperEntity) {
-            if (!((CreeperEntity) entityIn).isCharged()) {
-                entityIn.func_241841_a((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
-                ((CreeperEntity) entityIn).setHealth(((CreeperEntity) entityIn).getMaxHealth());
-            }
+        if (entityIn instanceof CreeperEntity && !((CreeperEntity) entityIn).isCharged()) {
+            entityIn.func_241841_a((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+            ((CreeperEntity) entityIn).setHealth(((CreeperEntity) entityIn).getMaxHealth());
         }
 
         // TODO Slime
 
-        if (entityIn instanceof SpiderEntity) {
-            if (!(entityIn instanceof CaveSpiderEntity)) {
-                replaceMob(worldIn, (SpiderEntity) entityIn,
-                    new CaveSpiderEntity(EntityType.CAVE_SPIDER, worldIn));
-            }
+        if (entityIn instanceof SpiderEntity && !(entityIn instanceof CaveSpiderEntity)) {
+            replaceMob(worldIn, (SpiderEntity) entityIn,
+                new CaveSpiderEntity(EntityType.CAVE_SPIDER, worldIn));
         }
 
         if (entityIn instanceof SquidEntity) {
@@ -87,12 +87,7 @@ public class WitchWaterBlock extends FlowingFluidBlock {
             }
         }
 
-//        if (entityIn instanceof CowEntity) {
-//            if (!(entityIn instanceof MooshroomEntity)) {
-//                replaceMob(worldIn, (CowEntity) entityIn,
-//                    new MooshroomEntity(EntityType.MOOSHROOM, worldIn));
-//            }
-//        }
+        // TODO Cows
 
         if (entityIn instanceof AnimalEntity) {
             entityIn.func_241841_a((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
@@ -120,7 +115,6 @@ public class WitchWaterBlock extends FlowingFluidBlock {
         toSpawn.renderYawOffset = toKill.renderYawOffset;
         toSpawn.setHealth(toSpawn.getMaxHealth() * toKill.getHealth() / toKill.getMaxHealth());
 
-//        toKill.onKillCommand();
         toKill.remove();
         world.addEntity(toSpawn);
     }

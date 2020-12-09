@@ -6,7 +6,7 @@ import net.minecraft.item.crafting.Ingredient;
 
 public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder> {
     private HeatRecipeBuilder() {
-        super(HeatRecipe.SERIALIZER.get());
+        super(HeatRecipe.getStaticSerializer().get());
     }
 
     public static HeatRecipeBuilder builder() {

@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import java.util.Arrays;
 
 public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecipe> {
+    public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluidontop");
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_on_top.png");
-    public static ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluidontop");
     private final IDrawableStatic background;
 
     public FluidOnTopRecipeCategory(IGuiHelper guiHelper) {
@@ -50,7 +50,7 @@ public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecip
     @Override
     public void setIngredients(FluidOnTopRecipe recipe, IIngredients ingredients) {
         ingredients.setInputs(VanillaTypes.FLUID, Arrays.asList(recipe.getFluidInTank(), recipe.getFluidOnTop()));
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
     }
 
     @Override
@@ -61,6 +61,6 @@ public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecip
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInTank());
         recipeLayout.getFluidStacks().set(1, recipe.getFluidOnTop());
-        recipeLayout.getItemStacks().set(0, recipe.getResult());
+        recipeLayout.getItemStacks().set(0, recipe.getRecipeOutput());
     }
 }

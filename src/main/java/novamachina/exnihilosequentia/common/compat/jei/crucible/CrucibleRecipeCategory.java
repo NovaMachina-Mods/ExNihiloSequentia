@@ -15,19 +15,19 @@ import net.minecraft.util.ResourceLocation;
 
 public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
-    public final ResourceLocation UID;
+    private final ResourceLocation uid;
     private final IDrawableStatic background;
     private final IDrawableStatic slotHighlight;
 
     public CrucibleRecipeCategory(IGuiHelper guiHelper, String uid) {
         this.background = guiHelper.createDrawable(texture, 0, 168, 166, 58);
         this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
-        this.UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, uid);
+        this.uid = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, uid);
     }
 
     @Override
     public ResourceLocation getUid() {
-        return UID;
+        return uid;
     }
 
     @Override
@@ -73,16 +73,13 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
             recipeLayout.getItemStacks().init(i + slotIndex, true, slotX, slotY);
             recipeLayout.getItemStacks().set(i + slotIndex, stack);
 
-            if (focus != null) {
-                if (focus.getValue() instanceof ItemStack) {
-                    if (stack.isItemEqual((ItemStack) focus.getValue())) {
-                        recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
-                    }
-                }
+            if (focus != null && focus.getValue() instanceof ItemStack && stack
+                .isItemEqual((ItemStack) focus.getValue())) {
+                recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
             }
         }
 
-        if (UID.equals(new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"))) {
+        if (uid.equals(new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"))) {
             recipeLayout.getItemStacks().addTooltipCallback(new FiredCrucibleTooltipCallback());
         } else {
             recipeLayout.getItemStacks().addTooltipCallback(new WoodCrucibleTooltipCallback());

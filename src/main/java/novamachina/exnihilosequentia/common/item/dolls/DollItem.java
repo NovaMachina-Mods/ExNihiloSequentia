@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
+import net.minecraft.fluid.Fluids;
 import novamachina.exnihilosequentia.common.init.ModInitialization;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -38,10 +39,10 @@ public class DollItem extends Item {
         ResourceLocation fluidLocation = new ResourceLocation(type.getFluidModId(), type.getFluidName());
 
         if (ForgeRegistries.FLUIDS.containsKey(fluidLocation)) {
-            Fluid fluid = ForgeRegistries.FLUIDS.getValue(fluidLocation);
-            return fluid;
+
+            return ForgeRegistries.FLUIDS.getValue(fluidLocation);
         }
-        return null;
+        return Fluids.EMPTY;
     }
 
     public String getDollType() {

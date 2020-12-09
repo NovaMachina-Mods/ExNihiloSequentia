@@ -29,7 +29,7 @@ public class FluidOnTopRegistry implements IFluidOnTopRegistry {
     public ItemStack getResult(Fluid fluidInTank, Fluid fluidOnTop) {
         for(FluidOnTopRecipe recipe : recipeList) {
             if(recipe.validInputs(fluidInTank, fluidOnTop)) {
-                return recipe.getResult();
+                return recipe.getRecipeOutput();
             }
         }
         return ItemStack.EMPTY;

@@ -105,7 +105,6 @@ public class WetSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
             @Override
             public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
                 if (!input) {
-                    ItemStack mesh = recipe.getMesh();
                     Multiset<String> condensedTooltips = HashMultiset.create();
                     List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
                         .getDrops(recipe.getInputs().get(1).get(0).getItem(), ((MeshItem) recipe

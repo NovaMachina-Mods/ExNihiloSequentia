@@ -13,9 +13,10 @@ import org.apache.logging.log4j.LogManager;
 
 public class InfestingLeavesTile extends TileEntity implements ITickableTileEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final String PROGRESS_TAG = "progress";
 
     private int progress = 0;
-    private int progressWaitInterval = (Config.SECONDS_TO_TRANSFORM_LEAVES.get() * 20) / 100;
+    private int progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
     private int spreadCounter = 0;
 
     public InfestingLeavesTile() {
@@ -39,12 +40,12 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
                     InfestingLeavesBlock.finishInfestingBlock(world, pos);
                 }
 
-                if (spreadCounter >= Config.TICKS_BETWEEN_SPREAD_ATTEMPT.get()) {
+                if (spreadCounter >= Config.getTicksBetweenSpreadAttempt()) {
                     logger.debug("Spreading infested leaves");
                     InfestingLeavesBlock.spread(world, pos);
                     spreadCounter = 0;
                 }
-                progressWaitInterval = (Config.SECONDS_TO_TRANSFORM_LEAVES.get() * 20) / 100;
+                progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
                 world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
             }
         }
@@ -53,15 +54,15 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbt = new CompoundNBT();
-        nbt.putInt("progress", progress);
+        nbt.putInt(PROGRESS_TAG, progress);
         return new SUpdateTileEntityPacket(getPos(), -1, nbt);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         CompoundNBT nbt = pkt.getNbtCompound();
-        if (nbt.contains("progress")) {
-            progress = nbt.getInt("progress");
+        if (nbt.contains(PROGRESS_TAG)) {
+            progress = nbt.getInt(PROGRESS_TAG);
         }
     }
 }

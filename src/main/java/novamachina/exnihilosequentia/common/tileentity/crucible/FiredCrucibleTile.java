@@ -1,12 +1,11 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.init.ModTiles;
-import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.common.init.ModTiles;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 public class FiredCrucibleTile extends BaseCrucibleTile {
 
@@ -26,10 +25,10 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public int getSolidAmount() {
-        if(!currentItem.isEmpty()) {
+        if (!currentItem.isEmpty()) {
             int itemCount = inventory.getStackInSlot(0).getCount();
             return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
-                    .getAmount());
+                .getAmount());
         }
         return solidAmount;
     }
@@ -43,7 +42,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
         inventory.setCrucibleHasRoom(tank.getFluidAmount() < MAX_FLUID_AMOUNT);
         ticksSinceLast++;
 
-        if (ticksSinceLast >= Config.TICKS_BETWEEN_MELTS.get()) {
+        if (ticksSinceLast >= Config.getTicksBetweenMelts()) {
             ticksSinceLast = 0;
 
             int heat = getHeat();

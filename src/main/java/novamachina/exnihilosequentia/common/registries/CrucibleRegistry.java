@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CrucibleRegistry implements ICrucibleRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -28,7 +29,8 @@ public class CrucibleRegistry implements ICrucibleRegistry {
 
     @Override
     public CrucibleRecipe findRecipe(IItemProvider item) {
-        return recipeList.stream().filter(recipe -> recipe.getInput().test(new ItemStack(item))).findFirst().get();
+        Optional<CrucibleRecipe> optional = recipeList.stream().filter(recipe -> recipe.getInput().test(new ItemStack(item))).findFirst();
+        return optional.orElse(null);
     }
 
     @Override

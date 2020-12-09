@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,7 +31,7 @@ public class FluidItemTransformRegistry implements IFluidItemTransformRegistry {
     public IItemProvider getResult(Fluid fluid, Item input) {
         for (FluidItemRecipe recipe : recipeList) {
             if (recipe.validInputs(fluid, input)) {
-                return recipe.getResult().getItem();
+                return recipe.getRecipeOutput().getItem();
             }
         }
         return ItemStack.EMPTY.getItem();

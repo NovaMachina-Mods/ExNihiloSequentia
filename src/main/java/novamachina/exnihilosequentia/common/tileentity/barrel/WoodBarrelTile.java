@@ -11,6 +11,6 @@ public class WoodBarrelTile extends AbstractBarrelTile {
 
     @Override
     public boolean canAcceptFluidTemperature(FluidStack resource) {
-        return resource.getFluid().getAttributes().getTemperature() <= Config.WOOD_BARREL_MAX_TEMP.get();
+        return resource.getFluid().getAttributes().getTemperature() <= Config.getWoodBarrelMaxTemp();
     }
 }

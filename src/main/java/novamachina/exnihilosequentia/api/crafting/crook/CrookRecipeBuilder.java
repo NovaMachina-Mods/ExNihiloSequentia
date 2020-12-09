@@ -10,7 +10,7 @@ import net.minecraft.util.IItemProvider;
 
 public class CrookRecipeBuilder extends ExNihiloFinishedRecipe<CrookRecipeBuilder> {
     private CrookRecipeBuilder() {
-        super(CrookRecipe.SERIALIZER.get());
+        super(CrookRecipe.getStaticSerializer().get());
         setMultipleResults(Integer.MAX_VALUE);
     }
 

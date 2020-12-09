@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.builder;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -10,15 +10,15 @@ import java.util.function.Supplier;
 
 public class BlockBuilder {
 
-    public static final Block.Properties DEFAULT =
-        Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
+    public static final AbstractBlock.Properties DEFAULT =
+        AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
 
-    private Block.Properties properties = DEFAULT;
+    private AbstractBlock.Properties properties = DEFAULT;
     private Supplier<TileEntity> tileEntitySupplier;
     private ToolType toolType = ToolType.PICKAXE;
     private int harvestLevel = 0;
 
-    public Block.Properties getProperties() {
+    public AbstractBlock.Properties getProperties() {
         return properties;
     }
 
@@ -34,7 +34,7 @@ public class BlockBuilder {
         return harvestLevel;
     }
 
-    public BlockBuilder properties(Block.Properties properties) {
+    public BlockBuilder properties(AbstractBlock.Properties properties) {
         this.properties = properties;
         return this;
     }

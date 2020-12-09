@@ -20,10 +20,8 @@ import org.apache.logging.log4j.LogManager;
 
 public class ModTiles {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-
     private static final DeferredRegister<TileEntityType<?>> TILES =
         DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Constants.ModIds.EX_NIHILO_SEQUENTIA);
-
     public static final RegistryObject<TileEntityType<FiredCrucibleTile>> CRUCIBLE_FIRED = TILES
         .register(Blocks.CRUCIBLE_UNFIRED, () -> TileEntityType.Builder
             .create(FiredCrucibleTile::new, ModBlocks.CRUCIBLE_FIRED.get()).build(null));
@@ -45,6 +43,8 @@ public class ModTiles {
     public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_STONE = TILES
         .register(Blocks.BARREL_STONE, () -> TileEntityType.Builder
             .create(StoneBarrelTile::new, ModBlocks.BARREL_STONE.get()).build(null));
+    private ModTiles() {
+    }
 
     public static void init(IEventBus eventBus) {
         logger.debug("Register Tile Entities");

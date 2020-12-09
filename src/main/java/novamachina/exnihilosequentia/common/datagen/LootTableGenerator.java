@@ -26,7 +26,7 @@ public abstract class LootTableGenerator implements IDataProvider {
     private static final Gson GSON =(new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
     protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
 
-    public LootTableGenerator(DataGenerator generator) {
+    protected LootTableGenerator(DataGenerator generator) {
         this.generator = generator;
     }
 
@@ -37,15 +37,11 @@ public abstract class LootTableGenerator implements IDataProvider {
 
         createLootTables();
 
-        ValidationTracker validator = new ValidationTracker(LootParameterSets.GENERIC, (function) -> null, lootTables::get);
-        lootTables.forEach((name, table) -> {
-            LootTableManager.validateLootTable(validator, name, table);
-        });
+        ValidationTracker validator = new ValidationTracker(LootParameterSets.GENERIC, function -> null, lootTables::get);
+        lootTables.forEach((name, table) -> LootTableManager.validateLootTable(validator, name, table));
         Multimap<String, String> problems = validator.getProblems();
         if(!problems.isEmpty()) {
-            problems.forEach((name, table) -> {
-                logger.warn("Found validation problem in "+ name + ": " + table);
-            });
+            problems.forEach((name, table) -> logger.warn("Found validation problem in "+ name + ": " + table));
             throw new IllegalStateException("Failed to validate loot tables, see logs");
         } else {
             lootTables.forEach((name, table) -> {

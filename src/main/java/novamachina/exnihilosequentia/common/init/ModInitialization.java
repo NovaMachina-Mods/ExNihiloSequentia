@@ -13,7 +13,7 @@ import novamachina.exnihilosequentia.api.compat.ore.IOreCompat;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
@@ -52,18 +52,19 @@ import java.util.stream.Stream;
 
 @Mod.EventBusSubscriber(modid = Constants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModInitialization {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    private static final List<IOreCompat> oreCompats = new ArrayList<>();
-
     public static final ItemGroup ITEM_GROUP = new ItemGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA) {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ModBlocks.SIEVE.get());
         }
     };
-
     @ObjectHolder(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
-    public static GlobalLootModifierSerializer<?> HAMMER_MODIFIER = null;
+    public static final GlobalLootModifierSerializer<?> hammerModifier = null;
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final List<IOreCompat> oreCompats = new ArrayList<>();
+
+    private ModInitialization() {
+    }
 
     public static void init(IEventBus modEventBus) {
         logger.debug("Initializing modded items");
@@ -86,12 +87,12 @@ public class ModInitialization {
         logger.debug("Fired FMLServerStartingEvent");
         registerOreCompat();
         activateOreCompat();
-        if(event.getServer().isDedicatedServer()) {
+        if (event.getServer().isDedicatedServer()) {
             loadRecipes(event.getServer().getRecipeManager());
         }
     }
 
-    public static void loadClientRecipes(RecipesUpdatedEvent event){
+    public static void loadClientRecipes(RecipesUpdatedEvent event) {
         loadRecipes(event.getRecipeManager());
     }
 
@@ -125,23 +126,29 @@ public class ModInitialization {
     private static void loadRecipes(RecipeManager manager) {
         logger.debug("Loading Recipes");
         Collection<IRecipe<?>> recipes = manager.getRecipes();
-        if(recipes.size() == 0) {
+        if (recipes.isEmpty()) {
             return;
         }
 
-        ExNihiloRegistries.HAMMER_REGISTRY.setRecipes(filterRecipes(recipes, HammerRecipe.class, HammerRecipe.TYPE));
-        ExNihiloRegistries.CROOK_REGISTRY.setRecipes(filterRecipes(recipes, CrookRecipe.class, CrookRecipe.TYPE));
-        ExNihiloRegistries.COMPOST_REGISTRY.setRecipes(filterRecipes(recipes, CompostRecipe.class, CompostRecipe.TYPE));
-        ExNihiloRegistries.FLUID_BLOCK_REGISTRY.setRecipes(filterRecipes(recipes, FluidItemRecipe.class, FluidItemRecipe.TYPE));
-        ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.setRecipes(filterRecipes(recipes, FluidOnTopRecipe.class, FluidOnTopRecipe.TYPE));
-        ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.setRecipes(filterRecipes(recipes, FluidTransformRecipe.class, FluidTransformRecipe.TYPE));
-        ExNihiloRegistries.CRUCIBLE_REGISTRY.setRecipes(filterRecipes(recipes, CrucibleRecipe.class, CrucibleRecipe.TYPE));
-        ExNihiloRegistries.HEAT_REGISTRY.setRecipes(filterRecipes(recipes, HeatRecipe.class, HeatRecipe.TYPE));
-        ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(filterRecipes(recipes, SieveRecipe.class, SieveRecipe.TYPE));
+        ExNihiloRegistries.HAMMER_REGISTRY
+            .setRecipes(filterRecipes(recipes, HammerRecipe.class, HammerRecipe.RECIPE_TYPE));
+        ExNihiloRegistries.CROOK_REGISTRY
+            .setRecipes(filterRecipes(recipes, CrookRecipe.class, CrookRecipe.RECIPE_TYPE));
+        ExNihiloRegistries.COMPOST_REGISTRY
+            .setRecipes(filterRecipes(recipes, CompostRecipe.class, CompostRecipe.RECIPE_TYPE));
+        ExNihiloRegistries.FLUID_BLOCK_REGISTRY
+            .setRecipes(filterRecipes(recipes, FluidItemRecipe.class, FluidItemRecipe.RECIPE_TYPE));
+        ExNihiloRegistries.FLUID_ON_TOP_REGISTRY
+            .setRecipes(filterRecipes(recipes, FluidOnTopRecipe.class, FluidOnTopRecipe.RECIPE_TYPE));
+        ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY
+            .setRecipes(filterRecipes(recipes, FluidTransformRecipe.class, FluidTransformRecipe.RECIPE_TYPE));
+        ExNihiloRegistries.CRUCIBLE_REGISTRY
+            .setRecipes(filterRecipes(recipes, CrucibleRecipe.class, CrucibleRecipe.RECIPE_TYPE));
+        ExNihiloRegistries.HEAT_REGISTRY.setRecipes(filterRecipes(recipes, HeatRecipe.class, HeatRecipe.RECIPE_TYPE));
+        ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(filterRecipes(recipes, SieveRecipe.class, SieveRecipe.RECIPE_TYPE));
     }
 
-    private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)
-    {
+    private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType) {
         logger.debug("Filter Recipes, Class: " + recipeClass + ", Recipe Type: " + recipeType);
         return recipes.stream()
             .filter(iRecipe -> iRecipe.getType() == recipeType)
@@ -161,32 +168,33 @@ public class ModInitialization {
         oreCompats.add(new ExNihilo());
 
         logger.debug("Thermal Expansion detected: " + ModList.get().isLoaded(Constants.ModIds.THERMAL_EXPANSION));
-        logger.debug("Thermal Expansion config enabled: " + Config.ENABLE_THERMAL.get());
-        if (ModList.get().isLoaded(Constants.ModIds.THERMAL_EXPANSION) || Config.ENABLE_THERMAL.get()) {
+        logger.debug("Thermal Expansion config enabled: " + Config.getEnableThermal());
+        if (ModList.get().isLoaded(Constants.ModIds.THERMAL_EXPANSION) || Config.getEnableThermal()) {
             logger.debug("Added Thermal Expansion");
             oreCompats.add(new ThermalExpansion());
         }
-        logger.debug("Immersive Engineering detected: " + ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING));
-        logger.debug("Immersive Engineering config enabled: " + Config.ENABLE_IMMERSIVE.get());
-        if (ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING) || Config.ENABLE_IMMERSIVE.get()) {
+        logger
+            .debug("Immersive Engineering detected: " + ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING));
+        logger.debug("Immersive Engineering config enabled: " + Config.getEnableImmersive());
+        if (ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING) || Config.getEnableImmersive()) {
             logger.debug("Added Immersive Engineering");
             oreCompats.add(new ImmersiveEngineering());
         }
         logger.debug("Mekanism detected: " + ModList.get().isLoaded(Constants.ModIds.MEKANISM));
-        logger.debug("Mekanism config enabled: " + Config.ENABLE_MEKANISM.get());
-        if (ModList.get().isLoaded(Constants.ModIds.MEKANISM) || Config.ENABLE_MEKANISM.get()) {
+        logger.debug("Mekanism config enabled: " + Config.getEnableMekanism());
+        if (ModList.get().isLoaded(Constants.ModIds.MEKANISM) || Config.getEnableMekanism()) {
             logger.debug("Added Mekanism");
             oreCompats.add(new Mekanism());
         }
         logger.debug("Create detected: " + ModList.get().isLoaded(Constants.ModIds.CREATE));
-        logger.debug("Create config enabled: " + Config.ENABLE_CREATE.get());
-        if (ModList.get().isLoaded(Constants.ModIds.CREATE) || Config.ENABLE_CREATE.get()) {
+        logger.debug("Create config enabled: " + Config.getEnableMekanism());
+        if (ModList.get().isLoaded(Constants.ModIds.CREATE) || Config.getEnableCreate()) {
             logger.debug("Added Create");
             oreCompats.add(new Create());
         }
         logger.debug("Silent Mechanism detected: " + ModList.get().isLoaded(Constants.ModIds.SILENT_MECHANISM));
-        logger.debug("Silent Mechanism enabled: " + Config.ENABLE_SILENT.get());
-        if (ModList.get().isLoaded(Constants.ModIds.SILENT_MECHANISM) || Config.ENABLE_SILENT.get()) {
+        logger.debug("Silent Mechanism enabled: " + Config.getEnableSilent());
+        if (ModList.get().isLoaded(Constants.ModIds.SILENT_MECHANISM) || Config.getEnableSilent()) {
             logger.debug("Added Silent Mechanism");
             oreCompats.add(new SilentMechanism());
         }

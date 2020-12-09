@@ -28,6 +28,10 @@ import java.util.UUID;
 
 public class SieveTile extends TileEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final String BLOCK_TAG = "block";
+    private static final String PROGRESS_TAG = "progress";
+    private static final String MESH_TAG = "mesh";
+    private final Random random = new Random();
 
     private ItemStack meshStack = ItemStack.EMPTY;
     private ItemStack blockStack = ItemStack.EMPTY;
@@ -77,8 +81,8 @@ public class SieveTile extends TileEntity {
 
     @Override
     public void read(BlockState state, CompoundNBT compound) {
-        if (compound.contains("mesh")) {
-            meshStack = ItemStack.read((CompoundNBT) compound.get("mesh"));
+        if (compound.contains(MESH_TAG)) {
+            meshStack = ItemStack.read((CompoundNBT) compound.get(MESH_TAG));
             if (meshStack.getItem() instanceof MeshItem) {
                 meshType = ((MeshItem) meshStack.getItem()).getMesh();
             }
@@ -86,31 +90,30 @@ public class SieveTile extends TileEntity {
             meshStack = ItemStack.EMPTY;
         }
 
-        if (compound.contains("block")) {
-            blockStack = ItemStack.read((CompoundNBT) compound.get("block"));
+        if (compound.contains(BLOCK_TAG)) {
+            blockStack = ItemStack.read((CompoundNBT) compound.get(BLOCK_TAG));
         } else {
             blockStack = ItemStack.EMPTY;
         }
 
-        progress = compound.getFloat("progress");
+        progress = compound.getFloat(PROGRESS_TAG);
 
         super.read(state, compound);
-//        setSieveState();
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         if (!meshStack.isEmpty()) {
             CompoundNBT meshNBT = meshStack.write(new CompoundNBT());
-            compound.put("mesh", meshNBT);
+            compound.put(MESH_TAG, meshNBT);
         }
 
         if (!blockStack.isEmpty()) {
             CompoundNBT blockNBT = blockStack.write(new CompoundNBT());
-            compound.put("block", blockNBT);
+            compound.put(BLOCK_TAG, blockNBT);
         }
 
-        compound.putFloat("progress", progress);
+        compound.putFloat(PROGRESS_TAG, progress);
 
         return super.write(compound);
     }
@@ -141,15 +144,13 @@ public class SieveTile extends TileEntity {
                 logger.debug("Sieve progress complete");
                 List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
-                Random random = new Random();
-                drops.forEach((entry -> {
-                    entry.getRolls().forEach(meshWithChance -> {
-                        if(random.nextFloat() <= meshWithChance.getChance()) {
-                            logger.debug("Spawning Item: " + entry.getDrop());
-                            world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.1F, pos.getZ() + 0.5F, entry.getDrop()));
-                        }
-                    });
-                }));
+                drops.forEach((entry -> entry.getRolls().forEach(meshWithChance -> {
+                    if (random.nextFloat() <= meshWithChance.getChance()) {
+                        logger.debug("Spawning Item: " + entry.getDrop());
+                        world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.1F, pos
+                            .getZ() + 0.5F, entry.getDrop()));
+                    }
+                })));
                 resetSieve();
             }
         }
@@ -157,13 +158,14 @@ public class SieveTile extends TileEntity {
 
     private void resetSieve() {
         logger.debug("Resetting sieve");
-        if(Config.ENABLE_MESH_DURABILITY.get()) {
+        if (Config.getEnableMeshDurability()) {
             logger.debug("Damaging mesh");
-            meshStack.damageItem(1, new FakePlayer((ServerWorld) world, new GameProfile(UUID.randomUUID(), "Fake Player")), player -> System.out.println("Broken"));
+            meshStack.damageItem(1, new FakePlayer((ServerWorld) world, new GameProfile(UUID
+                .randomUUID(), "Fake Player")), player -> logger.debug("Broken"));
         }
         blockStack = ItemStack.EMPTY;
         progress = 0.0F;
-        if(meshStack.isEmpty()) {
+        if (meshStack.isEmpty()) {
             logger.debug("Setting mesh to none, potential broken mesh");
             meshType = EnumMesh.NONE;
             setSieveState();
@@ -194,14 +196,14 @@ public class SieveTile extends TileEntity {
         CompoundNBT nbt = new CompoundNBT();
         if (!meshStack.isEmpty()) {
             CompoundNBT meshNBT = meshStack.write(new CompoundNBT());
-            nbt.put("mesh", meshNBT);
+            nbt.put(MESH_TAG, meshNBT);
         }
 
         if (!blockStack.isEmpty()) {
             CompoundNBT blockNbt = blockStack.write(new CompoundNBT());
-            nbt.put("block", blockNbt);
+            nbt.put(BLOCK_TAG, blockNbt);
         }
-        nbt.putFloat("progress", progress);
+        nbt.putFloat(PROGRESS_TAG, progress);
 
         return new SUpdateTileEntityPacket(getPos(), -1, nbt);
     }
@@ -209,8 +211,8 @@ public class SieveTile extends TileEntity {
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         CompoundNBT nbt = packet.getNbtCompound();
-        if (nbt.contains("mesh")) {
-            meshStack = ItemStack.read((CompoundNBT) nbt.get("mesh"));
+        if (nbt.contains(MESH_TAG)) {
+            meshStack = ItemStack.read((CompoundNBT) nbt.get(MESH_TAG));
             if (meshStack.getItem() instanceof MeshItem) {
                 meshType = ((MeshItem) meshStack.getItem()).getMesh();
             }
@@ -218,12 +220,12 @@ public class SieveTile extends TileEntity {
             meshStack = ItemStack.EMPTY;
         }
 
-        if (nbt.contains("block")) {
-            blockStack = ItemStack.read((CompoundNBT) nbt.get("block"));
+        if (nbt.contains(BLOCK_TAG)) {
+            blockStack = ItemStack.read((CompoundNBT) nbt.get(BLOCK_TAG));
         } else {
             blockStack = ItemStack.EMPTY;
         }
-        progress = nbt.getFloat("progress");
+        progress = nbt.getFloat(PROGRESS_TAG);
     }
 
     public EnumMesh getMesh() {

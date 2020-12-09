@@ -4,7 +4,6 @@ import net.minecraft.network.PacketBuffer;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
-import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +13,10 @@ import java.util.stream.Collectors;
 
 public class HandshakeMessages {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
+    private HandshakeMessages() {
+
+    }
 
     static class LoginIndexedMessage implements IntSupplier {
         private int loginIndex;
@@ -33,9 +36,12 @@ public class HandshakeMessages {
     }
 
     static class C2SAcknowledge extends LoginIndexedMessage {
-        void encode(PacketBuffer buf) {}
         static C2SAcknowledge decode(PacketBuffer buf) {
             return new C2SAcknowledge();
+        }
+
+        void encode(PacketBuffer buf) {
+            // NOOP
         }
     }
 
@@ -43,6 +49,7 @@ public class HandshakeMessages {
         private List<EnumOre> oreList;
 
         public S2COreList() {
+            // NOOP
         }
 
         static S2COreList decode(PacketBuffer buffer) {

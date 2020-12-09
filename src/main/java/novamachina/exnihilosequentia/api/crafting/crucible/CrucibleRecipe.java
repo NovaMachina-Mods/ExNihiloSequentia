@@ -15,20 +15,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CrucibleRecipe extends SerializableRecipe {
-    public static IRecipeType<CrucibleRecipe> TYPE = IRecipeType
+    public static final IRecipeType<CrucibleRecipe> RECIPE_TYPE = IRecipeType
         .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
-    public static RegistryObject<RecipeSerializer<CrucibleRecipe>> SERIALIZER;
+    private static RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer;
     private final Ingredient input;
     private final int amount;
     private final FluidStack resultFluid;
-    private final CrucilbeTypeEnum type;
+    private final CrucilbeTypeEnum crucipleType;
 
     public CrucibleRecipe(ResourceLocation id, Ingredient input, int amount, FluidStack fluid, CrucilbeTypeEnum crucibleType) {
-        super(null, TYPE, id);
+        super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
         this.resultFluid = fluid;
-        this.type = crucibleType;
+        this.crucipleType = crucibleType;
+    }
+
+    public static RegistryObject<RecipeSerializer<CrucibleRecipe>> getStaticSerializer() {
+        return serializer;
+    }
+
+    public static void setSerializer(RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer) {
+        CrucibleRecipe.serializer = serializer;
     }
 
     public Ingredient getInput() {
@@ -44,12 +52,12 @@ public class CrucibleRecipe extends SerializableRecipe {
     }
 
     public CrucilbeTypeEnum getCrucibleType() {
-        return type;
+        return crucipleType;
     }
 
     @Override
     protected RecipeSerializer getENSerializer() {
-        return SERIALIZER.get();
+        return serializer.get();
     }
 
     @Override

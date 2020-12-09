@@ -35,11 +35,21 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
         super(builder);
     }
 
+    /**
+     *
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;
     }
 
+    /**
+     *
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (worldIn.isRemote()) {

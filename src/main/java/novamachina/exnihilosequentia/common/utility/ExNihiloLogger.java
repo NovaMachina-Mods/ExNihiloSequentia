@@ -4,32 +4,30 @@ import org.apache.logging.log4j.Logger;
 
 public class ExNihiloLogger {
 
-    private final Logger LOGGER;
+    private static final String LOGGING_PATTERN = "{} {}";
+    private static final String PREFIX = "[Ex Nihilo: Sequentia]:";
+    private final Logger logger;
 
     public ExNihiloLogger(Logger logger) {
-        LOGGER = logger;
+        this.logger = logger;
     }
 
     public void info(String msg) {
-        LOGGER.info(addPrefix(msg));
+        logger.info(LOGGING_PATTERN, PREFIX, msg);
     }
 
     public void warn(String msg) {
-        LOGGER.warn(addPrefix(msg));
+        logger.warn(LOGGING_PATTERN, PREFIX, msg);
     }
 
     public void debug(String msg) {
-        if(Config.ENABLE_DEBUG_LOGGING.get()) {
-            LOGGER.info(addPrefix(msg));
+        if(Config.getEnableDebugLogging()) {
+            logger.info(LOGGING_PATTERN, PREFIX, msg);
         }
     }
 
     public void error(String msg) {
-        LOGGER.error(addPrefix(msg));
-    }
-
-    private String addPrefix(String msg) {
-        return "[Ex Nihilo: Sequentia]: " + msg;
+        logger.error(LOGGING_PATTERN, PREFIX, msg);
     }
 
     public void info(int num) {

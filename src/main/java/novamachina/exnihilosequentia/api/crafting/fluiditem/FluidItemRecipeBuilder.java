@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.crafting.fluidItem;
+package novamachina.exnihilosequentia.api.crafting.fluiditem;
 
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import net.minecraft.fluid.Fluid;
@@ -9,7 +9,7 @@ import net.minecraftforge.common.Tags;
 
 public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemRecipeBuilder> {
     private FluidItemRecipeBuilder() {
-        super(FluidItemRecipe.SERIALIZER.get());
+        super(FluidItemRecipe.getStaticSerializer().get());
     }
 
     public static FluidItemRecipeBuilder builder() {
