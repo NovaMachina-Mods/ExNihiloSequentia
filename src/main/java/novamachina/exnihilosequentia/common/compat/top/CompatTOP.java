@@ -17,8 +17,10 @@ import java.util.function.Function;
 
 public class CompatTOP {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-
     private static boolean registered;
+
+    private CompatTOP() {
+    }
 
     public static void register() {
         logger.debug("Registering The One Probe");
@@ -32,13 +34,10 @@ public class CompatTOP {
     public static class GetTheOneProbe implements Function<ITheOneProbe, Void> {
         private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-        public static ITheOneProbe probe;
-
         @Override
         public Void apply(ITheOneProbe iTheOneProbe) {
-            probe = iTheOneProbe;
             logger.info("Enabled support for The One Probe");
-            probe.registerProvider(new IProbeInfoProvider() {
+            iTheOneProbe.registerProvider(new IProbeInfoProvider() {
                 @Override
                 public String getID() {
                     return Constants.ModIds.EX_NIHILO_SEQUENTIA + ":default";

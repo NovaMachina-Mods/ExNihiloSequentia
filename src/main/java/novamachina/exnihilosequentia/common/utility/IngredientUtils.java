@@ -7,6 +7,9 @@ import org.apache.logging.log4j.LogManager;
 public class IngredientUtils {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
+    private IngredientUtils() {
+    }
+
     public static boolean areIngredientsEqual(Ingredient i1, Ingredient i2) {
         JsonElement item1;
         JsonElement item2;

@@ -32,7 +32,6 @@ import org.apache.logging.log4j.LogManager;
 
 public class ModItems {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-
     // Begin Block Items
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
         ForgeRegistries.ITEMS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
@@ -90,7 +89,6 @@ public class ModItems {
     public static final RegistryObject<Item> BARREL_STONE = ITEMS
         .register(Blocks.BARREL_STONE, () -> new BlockItem(ModBlocks.BARREL_STONE.get(),
             new Properties().group(ModInitialization.ITEM_GROUP)));
-
     // Begin Items Only
     public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
         .register(Constants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
@@ -106,18 +104,18 @@ public class ModItems {
     static {
         for (EnumCrook crook : EnumCrook.values()) {
             crook.setRegistryObject(ITEMS
-                .register(crook.name, () -> new CrookBaseItem(crook.tier, crook.defaultDurability)));
+                .register(crook.crookName, () -> new CrookBaseItem(crook.tier, crook.defaultDurability)));
         }
 
         for (EnumHammer hammer : EnumHammer.values()) {
-            hammer.setRegistryObject(ITEMS.register(hammer.name,
+            hammer.setRegistryObject(ITEMS.register(hammer.hammerName,
                 () -> new HammerBaseItem(hammer.tier, hammer.defaultDurability)));
         }
 
         for (EnumOre ore : EnumOre.values()) {
             ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
             ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
-            if(!ore.isVanilla()) {
+            if (!ore.isVanilla()) {
                 ore.setIngotItem(ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
             }
         }
@@ -133,7 +131,7 @@ public class ModItems {
         }
 
         for (EnumPebbleType type : EnumPebbleType.values()) {
-            type.setRegistryObject(ITEMS.register(type.getType(), () -> new PebbleItem(type)));
+            type.setRegistryObject(ITEMS.register(type.getType(), () -> new PebbleItem()));
         }
 
         for (EnumMesh mesh : EnumMesh.values()) {
@@ -145,6 +143,9 @@ public class ModItems {
         for (DollEnum doll : DollEnum.values()) {
             doll.setRegistryObject(ITEMS.register(doll.getDollName(), () -> new DollItem(doll)));
         }
+    }
+
+    private ModItems() {
     }
 
     public static void init(IEventBus modEventBus) {

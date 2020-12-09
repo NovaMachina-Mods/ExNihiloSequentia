@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.init;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
@@ -27,20 +27,23 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 public class ModSerializers {
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
+        .create(ForgeRegistries.RECIPE_SERIALIZERS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
-
     static {
-        HammerRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new);
-        CrookRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("crook", CrookRecipeSerializer::new);
-        CompostRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new);
-        FluidItemRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new);
-        FluidOnTopRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new);
-        FluidTransformRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new);
-        CrucibleRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("crucible", CrucibleRecipeSerializer::new);
-        HeatRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("heat", HeatRecipeSerializer::new);
-        SieveRecipe.SERIALIZER = RECIPE_SERIALIZERS.register("sieve", SieveRecipeSerializer::new);
+        HammerRecipe.setSerializer(RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new));
+        CrookRecipe.setSerializer(RECIPE_SERIALIZERS.register("crook", CrookRecipeSerializer::new));
+        CompostRecipe.setSerializer(RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new));
+        FluidItemRecipe.setSerializer(RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new));
+        FluidOnTopRecipe.setSerializer(RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new));
+        FluidTransformRecipe.setSerializer(RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new));
+        CrucibleRecipe.setSerializer(RECIPE_SERIALIZERS.register("crucible", CrucibleRecipeSerializer::new));
+        HeatRecipe.setSerializer(RECIPE_SERIALIZERS.register("heat", HeatRecipeSerializer::new));
+        SieveRecipe.setSerializer(RECIPE_SERIALIZERS.register("sieve", SieveRecipeSerializer::new));
+    }
+
+    private ModSerializers() {
     }
 
     public static void init(IEventBus modEventBus) {

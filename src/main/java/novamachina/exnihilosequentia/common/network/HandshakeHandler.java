@@ -11,9 +11,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
 public class HandshakeHandler {
+    private HandshakeHandler() {
+    }
+
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public static void handleOreList(HandshakeMessages.S2COreList msg, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleOreList(HandshakeMessages.S2COreList msg, Supplier<NetworkEvent.Context> ctx) throws InterruptedException {
         logger.debug("Recieved ore data from server");
 
         AtomicBoolean updatedOreList = new AtomicBoolean(false);
@@ -31,6 +34,8 @@ public class HandshakeHandler {
             block.await();
         } catch (InterruptedException e) {
             Thread.interrupted();
+            logger.error(e.getMessage());
+            throw e;
         }
 
         ctx.get().setPacketHandled(true);
@@ -45,7 +50,7 @@ public class HandshakeHandler {
     }
 
     public static void handleAcknowledge(HandshakeMessages.C2SAcknowledge message, Supplier<NetworkEvent.Context> ctx) {
-        logger.debug("Received acknowledgement from client.");
+        logger.debug("Received acknowledgement from client. " + message);
         ctx.get().setPacketHandled(true);
     }
 }

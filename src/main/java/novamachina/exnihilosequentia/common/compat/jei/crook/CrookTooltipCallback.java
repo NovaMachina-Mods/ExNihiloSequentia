@@ -19,7 +19,7 @@ public class CrookTooltipCallback implements ITooltipCallback<ItemStack> {
     @Override
     public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
         if (!input) {
-            crookRecipe.getOutputsWithChance().stream()
+            crookRecipe.getOutput().stream()
                 .filter(stack -> ItemStack.areItemsEqual(ingredient, stack.getStack()))
                 .forEach(stack -> tooltip.add(new StringTextComponent(String.format("%s", StringUtils.formatPercent(stack.getChance())))));
         }

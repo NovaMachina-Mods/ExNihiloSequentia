@@ -1,39 +1,39 @@
 package novamachina.exnihilosequentia.common.block;
 
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.init.ModBlocks;
 import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
 
 import java.util.Random;
 
 // TODO: Add progressive render
 public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider {
 
+    private static final Random random = new Random();
+
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
-            .properties(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).sound(
+            .properties(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).sound(
                 SoundType.PLANT).notSolid()).tileEntitySupplier(InfestingLeavesTile::new));
     }
 
-    public static void normalToInfesting(World world, BlockState state, BlockPos pos) {
+    public static void normalToInfesting(World world, BlockPos pos) {
         world.setBlockState(pos, ModBlocks.INFESTING_LEAVES.get().getDefaultState());
     }
 
@@ -45,10 +45,9 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
         if (!world.isRemote()) {
             NonNullList<BlockPos> nearbyLeaves = getNearbyLeaves(world, pos);
 
-            Random random = new Random();
             nearbyLeaves.forEach(leafPos -> {
-                if (random.nextDouble() <= Config.SPREAD_CHANCE.get()) {
-                    normalToInfesting(world, world.getBlockState(leafPos), leafPos);
+                if (random.nextDouble() <= Config.getSpreadChance()) {
+                    normalToInfesting(world, leafPos);
                 }
             });
         }
@@ -65,11 +64,6 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
         });
 
         return nearbyLeaves;
-    }
-
-    @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-
     }
 
     @Override

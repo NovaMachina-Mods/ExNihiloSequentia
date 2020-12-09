@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class AbstractBarrelMode {
     private final String modeName;
 
-    public AbstractBarrelMode(String name) {
+    protected AbstractBarrelMode(String name) {
         this.modeName = name;
     }
 

@@ -23,7 +23,7 @@ import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipeBuilder;
-import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipeBuilder;
@@ -49,6 +49,16 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class Recipes extends RecipeProvider {
+    private static final String GRAVEL_SUFFIX = "_gravel";
+    private static final String COBBLESTONE = "cobblestone";
+    private static final String NETHERRACK = "netherrack";
+    private static final String LEAVES = "leaves";
+    private static final String PORCELAIN_CLAY_CONDITION = "has_porcelain_clay";
+    private static final String MATERIAL_CONDITION = "has_material";
+    private static final String DOLL_CONDITION = "has_doll";
+    private static final String CHUNK_CONDITION = "has_chunk";
+    private static final String PEBBLE_CONDITION = "has_pebble";
+
     public Recipes(DataGenerator generator) {
         super(generator);
     }
@@ -191,45 +201,24 @@ public class Recipes extends RecipeProvider {
             .addResult(Items.BLAZE_POWDER)
             .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
             .build(consumer, sieveLoc("blaze_powder"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_END_STONE.get()))
+                .addResult(Items.ENDER_PEARL)
+                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.005F))
+                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
+                .addRoll(new MeshWithChance(EnumMesh.EMERALD, 0.015F))
+                .addRoll(new MeshWithChance(EnumMesh.NETHERITE, 0.02F))
+                .build(consumer, sieveLoc("ender_pearl"));
 
         for(EnumOre ore : EnumOre.values()) {
             switch (ore) {
-                case IRON: {
-                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
-                        .addResult(ore.getPieceItem().get())
-                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.1F))
-                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.15F))
-                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.25F))
-                        .build(consumer, sieveLoc(ore.getPieceName() + "_gravel"));
-                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
-                        .addResult(ore.getPieceItem().get())
-                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.5F))
-                        .build(consumer, sieveLoc(ore.getPieceName() + "_sand"));
+                case IRON:
+                    registerIronOres(consumer, ore);
                     break;
-                }
-                case GOLD: {
-                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_NETHERRACK.get()))
-                        .addResult(ore.getPieceItem().get())
-                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.25F))
-                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.25F))
-                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.4F))
-                        .build(consumer, sieveLoc(ore.getPieceName() + "_crushed_netherrack"));
-                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
-                        .addResult(ore.getPieceItem().get())
-                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
-                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
-                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.15F))
-                        .build(consumer, sieveLoc(ore.getPieceName() + "_gravel"));
+                case GOLD:
+                    registerGoldOres(consumer, ore);
                     break;
-                }
-                default: {
-                    SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
-                        .addResult(ore.getPieceItem().get())
-                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
-                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
-                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.1F))
-                        .build(consumer, sieveLoc(ore.getPieceName() + "_gravel"));
-                }
+                default:
+                    registerDefaultOres(consumer, ore);
             }
         }
 
@@ -315,6 +304,43 @@ public class Recipes extends RecipeProvider {
             .build(consumer, sieveLoc("seed_red_coral"));
     }
 
+    private void registerDefaultOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+            .addResult(ore.getPieceItem().get())
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.1F))
+            .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));
+    }
+
+    private void registerGoldOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.CRUSHED_NETHERRACK.get()))
+            .addResult(ore.getPieceItem().get())
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.25F))
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.25F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.4F))
+            .build(consumer, sieveLoc(ore.getPieceName() + "_crushed_netherrack"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+            .addResult(ore.getPieceItem().get())
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.15F))
+            .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));
+    }
+
+    private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+            .addResult(ore.getPieceItem().get())
+            .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.1F))
+            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.15F))
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.25F))
+            .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
+            .addResult(ore.getPieceItem().get())
+            .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.5F))
+            .build(consumer, sieveLoc(ore.getPieceName() + "_sand"));
+    }
+
     private ResourceLocation sieveLoc(String id) {
         return new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "sieve/" + id);
     }
@@ -350,7 +376,7 @@ public class Recipes extends RecipeProvider {
 
     private void registerCrucibleRecipes(Consumer<IFinishedRecipe> consumer) {
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.COBBLESTONE)).amount(250)
-            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("cobblestone"));
+            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(COBBLESTONE));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIORITE)).amount(250).fluidResult(Fluids.LAVA)
             .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("diorite"));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.ANDESITE)).amount(250)
@@ -378,14 +404,14 @@ public class Recipes extends RecipeProvider {
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ModBlocks.DUST.get())).amount(50)
             .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("dust"));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.NETHERRACK)).amount(1000)
-            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("netherrack"));
+            .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(NETHERRACK));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.OBSIDIAN)).amount(1000)
             .fluidResult(Fluids.LAVA).crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("obsidian"));
 
         CrucibleRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.SAPLINGS)).amount(250)
             .fluidResult(Fluids.WATER).crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc("saplings"));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromTag(ItemTags.LEAVES)).amount(250).fluidResult(Fluids.WATER)
-            .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc("leaves"));
+            .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc(LEAVES));
     }
 
     private ResourceLocation crucibleLoc(String id) {
@@ -407,7 +433,7 @@ public class Recipes extends RecipeProvider {
         FluidOnTopRecipeBuilder.builder().fluidInTank(Fluids.LAVA).fluidOnTop(Fluids.WATER).result(Blocks.OBSIDIAN)
             .build(consumer, fluidOnTopLoc("obsidian"));
         FluidOnTopRecipeBuilder.builder().fluidInTank(Fluids.WATER).fluidOnTop(Fluids.LAVA).result(Blocks.COBBLESTONE)
-            .build(consumer, fluidOnTopLoc("cobblestone"));
+            .build(consumer, fluidOnTopLoc(COBBLESTONE));
     }
 
     private ResourceLocation fluidOnTopLoc(String id) {
@@ -418,7 +444,7 @@ public class Recipes extends RecipeProvider {
         FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.WATER).input(ModBlocks.DUST.get()).result(Blocks.CLAY)
             .build(consumer, fluidItemLoc("clay"));
         FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Tags.Items.DUSTS_REDSTONE).result(Blocks.NETHERRACK)
-            .build(consumer, fluidItemLoc("netherrack"));
+            .build(consumer, fluidItemLoc(NETHERRACK));
         FluidItemRecipeBuilder.builder().fluidInBarrel(Fluids.LAVA).input(Tags.Items.DUSTS_GLOWSTONE).result(Blocks.END_STONE)
             .build(consumer, fluidItemLoc("end_stone"));
         FluidItemRecipeBuilder.builder().fluidInBarrel(ModFluids.WITCH_WATER.get()).input(Tags.Items.SAND)
@@ -454,7 +480,7 @@ public class Recipes extends RecipeProvider {
 
     private void registerCompostRecipes(Consumer<IFinishedRecipe> consumer) {
         CompostRecipeBuilder.builder().input(ItemTags.SAPLINGS).amount(125).build(consumer, compostLoc("saplings"));
-        CompostRecipeBuilder.builder().input(ItemTags.LEAVES).amount(125).build(consumer, compostLoc("leaves"));
+        CompostRecipeBuilder.builder().input(ItemTags.LEAVES).amount(125).build(consumer, compostLoc(LEAVES));
         CompostRecipeBuilder.builder().input(ItemTags.FLOWERS).amount(100).build(consumer, compostLoc("flowers"));
         CompostRecipeBuilder.builder().input(ItemTags.FISHES).amount(150).build(consumer, compostLoc("fishes"));
         CompostRecipeBuilder.builder().input(ExNihiloTags.MEAT_COOKED).amount(200)
@@ -509,7 +535,7 @@ public class Recipes extends RecipeProvider {
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
         CrookRecipeBuilder.builder().input(ItemTags.LEAVES)
-            .addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F).build(consumer, crookLoc("leaves"));
+            .addDrop(EnumResource.SILKWORM.getRegistryObject().get(), 0.1F).build(consumer, crookLoc(LEAVES));
     }
 
     private ResourceLocation crookLoc(String id) {
@@ -518,14 +544,14 @@ public class Recipes extends RecipeProvider {
 
     private void registerHammerRecipes(Consumer<IFinishedRecipe> consumer) {
         HammerRecipeBuilder.builder().input(Blocks.STONE).result(Blocks.COBBLESTONE)
-            .build(consumer, hammerLoc("cobblestone"));
+            .build(consumer, hammerLoc(COBBLESTONE));
         HammerRecipeBuilder.builder().input(Blocks.COBBLESTONE).result(Blocks.GRAVEL)
             .build(consumer, hammerLoc("gravel"));
         HammerRecipeBuilder.builder().input(Blocks.GRAVEL).result(Blocks.SAND).build(consumer, hammerLoc("sand"));
         HammerRecipeBuilder.builder().input(Blocks.SAND).result(ModBlocks.DUST.get())
             .build(consumer, hammerLoc("dust"));
         HammerRecipeBuilder.builder().input(Blocks.NETHERRACK).result(ModBlocks.CRUSHED_NETHERRACK.get())
-            .build(consumer, hammerLoc("netherrack"));
+            .build(consumer, hammerLoc(NETHERRACK));
         HammerRecipeBuilder.builder().input(Blocks.ANDESITE).result(ModBlocks.CRUSHED_ANDESITE.get())
             .build(consumer, hammerLoc("andesite"));
         HammerRecipeBuilder.builder().input(Blocks.DIORITE).result(ModBlocks.CRUSHED_DIORITE.get())
@@ -600,7 +626,7 @@ public class Recipes extends RecipeProvider {
             .patternLine("c c")
             .patternLine("ccc")
             .key('c', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
-            .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
+            .addCriterion(PORCELAIN_CLAY_CONDITION, InventoryChangeTrigger.Instance
                 .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
             .build(consumer);
 
@@ -620,7 +646,7 @@ public class Recipes extends RecipeProvider {
             .patternLine("x x")
             .key('x', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
             .key('e', Tags.Items.GEMS_DIAMOND)
-            .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
+            .addCriterion(PORCELAIN_CLAY_CONDITION, InventoryChangeTrigger.Instance
                 .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
             .addCriterion("has_diamond", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(Tags.Items.GEMS_DIAMOND).build()))
             .build(consumer, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x4"));
@@ -631,7 +657,7 @@ public class Recipes extends RecipeProvider {
             .patternLine("x x")
             .key('x', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
             .key('e', Tags.Items.GEMS_EMERALD)
-            .addCriterion("has_porcelain_clay", InventoryChangeTrigger.Instance
+            .addCriterion(PORCELAIN_CLAY_CONDITION, InventoryChangeTrigger.Instance
                 .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
             .addCriterion("has_emerald", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(Tags.Items.GEMS_EMERALD).build()))
             .build(consumer, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x6"));
@@ -674,7 +700,7 @@ public class Recipes extends RecipeProvider {
         SmithingRecipeBuilder
             .smithingRecipe(Ingredient.fromItems(EnumMesh.DIAMOND.getRegistryObject().get()), Ingredient.fromTag(Tags.Items.INGOTS_NETHERITE), EnumMesh.NETHERITE.getRegistryObject().get())
             .addCriterion("has_diamond_mesh", InventoryChangeTrigger.Instance.forItems(EnumMesh.DIAMOND.getRegistryObject().get()))
-            .addCriterion("has_material", hasItem(Tags.Items.INGOTS_NETHERITE))
+            .addCriterion(MATERIAL_CONDITION, hasItem(Tags.Items.INGOTS_NETHERITE))
             .build(consumer,  new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE.getMeshName()));
 
         ShapedRecipeBuilder.shapedRecipe(EnumMesh.STRING.getRegistryObject().get())
@@ -718,7 +744,7 @@ public class Recipes extends RecipeProvider {
             .key('t', Tags.Items.END_STONES)
             .key('b', Tags.Items.ENDER_PEARLS)
             .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
             .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(DollEnum.GUARDIAN.getRegistryObject().get())
             .patternLine("ctc")
@@ -729,7 +755,7 @@ public class Recipes extends RecipeProvider {
             .key('t', Tags.Items.DUSTS_REDSTONE)
             .key('b', ItemTags.FISHES)
             .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
             .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(DollEnum.BEE.getRegistryObject().get())
             .patternLine("ctc")
@@ -740,7 +766,7 @@ public class Recipes extends RecipeProvider {
             .key('t', ItemTags.FLOWERS)
             .key('b', EnumResource.BEEHIVE_FRAME.getRegistryObject().get())
             .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
             .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(DollEnum.BLAZE.getRegistryObject().get())
             .patternLine("ctc")
@@ -751,7 +777,7 @@ public class Recipes extends RecipeProvider {
             .key('t', Tags.Items.DUSTS_REDSTONE)
             .key('b', Tags.Items.CROPS_NETHER_WART)
             .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
             .build(consumer);
         ShapedRecipeBuilder.shapedRecipe(DollEnum.ENDERMAN.getRegistryObject().get())
             .patternLine("ctc")
@@ -762,7 +788,7 @@ public class Recipes extends RecipeProvider {
             .key('t', Tags.Items.DUSTS_REDSTONE)
             .key('b', Tags.Items.CROPS_NETHER_WART)
             .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-            .addCriterion("has_doll", InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+            .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance.forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
             .build(consumer);
     }
 
@@ -770,8 +796,8 @@ public class Recipes extends RecipeProvider {
         SmithingRecipeBuilder
                 .smithingRecipe(Ingredient.fromItems(EnumHammer.DIAMOND.getRegistryObject().get()), Ingredient.fromTag(Tags.Items.INGOTS_NETHERITE), EnumHammer.NETHERITE.getRegistryObject().get())
                 .addCriterion("has_diamond_hammer", InventoryChangeTrigger.Instance.forItems(EnumHammer.DIAMOND.getRegistryObject().get()))
-                .addCriterion("has_material", hasItem(Tags.Items.INGOTS_NETHERITE))
-                .build(consumer,  new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.name));
+                .addCriterion(MATERIAL_CONDITION, hasItem(Tags.Items.INGOTS_NETHERITE))
+                .build(consumer,  new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.hammerName));
         registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND, consumer);
         registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Tags.Items.INGOTS_GOLD, consumer);
         registerHammer(EnumHammer.IRON.getRegistryObject().get(), Tags.Items.INGOTS_IRON, consumer);
@@ -787,7 +813,7 @@ public class Recipes extends RecipeProvider {
             .key('x', input)
             .key('-', Tags.Items.RODS)
             .addCriterion("has_stick", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(Tags.Items.RODS).build()))
-            .addCriterion("has_material", hasItem(input))
+            .addCriterion(MATERIAL_CONDITION, hasItem(input))
             .build(consumer);
     }
 
@@ -801,13 +827,13 @@ public class Recipes extends RecipeProvider {
                 if (ore == EnumOre.IRON) {
                     CookingRecipeBuilder
                         .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 200)
-                        .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
+                        .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
                         .build(consumer, new ResourceLocation(Constants.ModIds.MINECRAFT, "ingot_iron"));
                 }
                 if (ore == EnumOre.GOLD) {
                     CookingRecipeBuilder
                         .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
-                        .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
+                        .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
                         .build(consumer, new ResourceLocation(Constants.ModIds.MINECRAFT, "ingot_gold"));
                 }
             }
@@ -817,7 +843,7 @@ public class Recipes extends RecipeProvider {
     private void registerSmelting(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
         CookingRecipeBuilder
             .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem().get(), 0.7F, 200)
-            .addCriterion("has_chunk", InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
+            .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
             .build(consumer);
     }
 
@@ -867,7 +893,7 @@ public class Recipes extends RecipeProvider {
             .patternLine("xx")
             .key('x', input)
             .setGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA)
-            .addCriterion("has_pebble", InventoryChangeTrigger.Instance.forItems(input))
+            .addCriterion(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.forItems(input))
             .build(consumer);
     }
 
@@ -894,7 +920,7 @@ public class Recipes extends RecipeProvider {
             .patternLine(" x")
             .key('x', input)
             .setGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA)
-            .addCriterion("has_pebble", InventoryChangeTrigger.Instance.forItems(input))
+            .addCriterion(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.forItems(input))
             .build(consumer);
     }
     private void registerCrook(Item result, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
@@ -904,7 +930,7 @@ public class Recipes extends RecipeProvider {
             .patternLine(" x")
             .key('x', input)
             .setGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA)
-            .addCriterion("has_pebble", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(input).build()))
+            .addCriterion(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(input).build()))
             .build(consumer);
     }
 }

@@ -35,8 +35,13 @@ import javax.annotation.Nullable;
 
 public abstract class BaseCrucibleTile extends TileEntity implements ITickableTileEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final String INVENTORY_TAG = "inventory";
+    private static final String SOLID_AMOUNT_TAG = "solidAmount";
+    private static final String CURRENT_ITEM_TAG = "currentItem";
+    private static final String BLOCK_TAG = "block";
+    private static final String FLUID_TAG = "fluid";
 
-    protected static int MAX_FLUID_AMOUNT = Config.CRUCIBLE_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
+    protected static final int MAX_FLUID_AMOUNT = Config.getCrucibleNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
     protected MeltableItemHandler inventory;
     private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
     protected FluidTank tank;
@@ -45,10 +50,10 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     protected int solidAmount;
     protected ItemStack currentItem;
 
-    public BaseCrucibleTile(
+    protected BaseCrucibleTile(
         TileEntityType<? extends BaseCrucibleTile> tileEntityType) {
         super(tileEntityType);
-        inventory = new MeltableItemHandler(getCrucibleType(), this);
+        inventory = new MeltableItemHandler(getCrucibleType());
         tank = new FluidTank(MAX_FLUID_AMOUNT);
         ticksSinceLast = 0;
         solidAmount = 0;
@@ -57,21 +62,21 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     @Override
     public void read(BlockState state, CompoundNBT compound) {
-        inventory.deserializeNBT(compound.getCompound("inventory"));
+        inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
-        this.solidAmount = compound.getInt("solidAmount");
-        this.currentItem = ItemStack.read(compound.getCompound("currentItem"));
+        this.solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
+        this.currentItem = ItemStack.read(compound.getCompound(CURRENT_ITEM_TAG));
         super.read(state, compound);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        compound.put("inventory", inventory.serializeNBT());
+        compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put("tank", tank.writeToNBT(new CompoundNBT()));
         compound.putInt("ticksSinceLast", ticksSinceLast);
-        compound.putInt("solidAmount", solidAmount);
-        compound.put("currentItem", currentItem.write(new CompoundNBT()));
+        compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
+        compound.put(CURRENT_ITEM_TAG, currentItem.write(new CompoundNBT()));
         return super.write(compound);
     }
 
@@ -86,9 +91,6 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         }
         return super.getCapability(cap, side);
     }
-
-    @Override
-    public abstract void tick();
 
     public abstract int getHeat();
 
@@ -113,11 +115,9 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             return ActionResultType.SUCCESS;
         }
 
-        if (!tank.isEmpty()) {
-            if (!tank.getFluid().getFluid()
-                .isEquivalentTo(getMeltable().getResultFluid().getFluid())) {
-                return ActionResultType.SUCCESS;
-            }
+        if (!tank.isEmpty() && !tank.getFluid().getFluid()
+            .isEquivalentTo(getMeltable().getResultFluid().getFluid())) {
+            return ActionResultType.SUCCESS;
         }
 
         logger.debug("Inserting item");
@@ -158,17 +158,17 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         CompoundNBT nbt = new CompoundNBT();
         if (!inventory.getStackInSlot(0).isEmpty()) {
             CompoundNBT blockNbt = inventory.getStackInSlot(0).write(new CompoundNBT());
-            nbt.put("block", blockNbt);
+            nbt.put(BLOCK_TAG, blockNbt);
         }
         if (!currentItem.isEmpty()) {
             CompoundNBT currentItemTag = currentItem.write(new CompoundNBT());
-            nbt.put("currentItem", currentItemTag);
+            nbt.put(CURRENT_ITEM_TAG, currentItemTag);
         }
         if (!tank.isEmpty()) {
             CompoundNBT fluidNbt = tank.writeToNBT(new CompoundNBT());
-            nbt.put("fluid", fluidNbt);
+            nbt.put(FLUID_TAG, fluidNbt);
         }
-        nbt.putInt("solidAmount", solidAmount);
+        nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
         return new SUpdateTileEntityPacket(getPos(), -1, nbt);
     }
@@ -176,24 +176,24 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         CompoundNBT nbt = packet.getNbtCompound();
-        if (nbt.contains("currentItem")) {
-            currentItem = ItemStack.read((CompoundNBT) nbt.get("currentItem"));
+        if (nbt.contains(CURRENT_ITEM_TAG)) {
+            currentItem = ItemStack.read((CompoundNBT) nbt.get(CURRENT_ITEM_TAG));
         } else {
             currentItem = ItemStack.EMPTY;
         }
 
-        if (nbt.contains("block")) {
-            inventory.setStackInSlot(0, ItemStack.read((CompoundNBT) nbt.get("block")));
+        if (nbt.contains(BLOCK_TAG)) {
+            inventory.setStackInSlot(0, ItemStack.read((CompoundNBT) nbt.get(BLOCK_TAG)));
         } else {
             inventory.setStackInSlot(0, ItemStack.EMPTY);
         }
 
-        if (nbt.contains("fluid")) {
-            tank.readFromNBT(nbt.getCompound("fluid"));
+        if (nbt.contains(FLUID_TAG)) {
+            tank.readFromNBT(nbt.getCompound(FLUID_TAG));
         } else {
             tank.setFluid(FluidStack.EMPTY);
         }
-        solidAmount = nbt.getInt("solidAmount");
+        solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
     }
 
     public float getFluidProportion() {

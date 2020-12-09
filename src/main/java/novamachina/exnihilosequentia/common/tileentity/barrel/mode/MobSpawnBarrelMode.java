@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MobSpawnBarrelMode extends AbstractBarrelMode {
+    private static final String CURRENT_PROGRESS_TAG = "currentProgress";
+    private static final String DOLL_TYPE_TAG = "dollType";
     private int currentProgress;
     private DollItem doll;
 
@@ -41,11 +43,9 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
         if (doll != null) {
             currentProgress++;
             spawnParticle(barrelTile);
-            if (currentProgress >= Config.SECONDS_TO_SPAWN.get() * 20) {
-                if (doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
-                    barrelTile.getTank().setFluid(FluidStack.EMPTY);
-                    barrelTile.setMode(Constants.BarrelModes.EMPTY);
-                }
+            if (currentProgress >= Config.getSecondsToSpawn() * 20 && doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
+                barrelTile.getTank().setFluid(FluidStack.EMPTY);
+                barrelTile.setMode(Constants.BarrelModes.EMPTY);
             }
         }
     }
@@ -72,13 +72,13 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void read(CompoundNBT nbt) {
-        if (nbt.contains("currentProgress")) {
-            this.currentProgress = nbt.getInt("currentProgress");
+        if (nbt.contains(CURRENT_PROGRESS_TAG)) {
+            this.currentProgress = nbt.getInt(CURRENT_PROGRESS_TAG);
         } else {
             this.currentProgress = 0;
         }
-        if (nbt.contains("dollType")) {
-            setDoll((DollItem) DollEnum.getDollFromString(nbt.getString("dollType")).getRegistryObject().get());
+        if (nbt.contains(DOLL_TYPE_TAG)) {
+            setDoll((DollItem) DollEnum.getDollFromString(nbt.getString(DOLL_TYPE_TAG)).getRegistryObject().get());
         } else {
             this.setDoll(null);
         }
@@ -87,8 +87,8 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     @Override
     public CompoundNBT write() {
         CompoundNBT nbt = new CompoundNBT();
-        nbt.putInt("currentProgress", currentProgress);
-        nbt.putString("dollType", doll.getDollType());
+        nbt.putInt(CURRENT_PROGRESS_TAG, currentProgress);
+        nbt.putString(DOLL_TYPE_TAG, doll.getDollType());
         return nbt;
     }
 
@@ -111,7 +111,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
         List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils
-            .formatPercent((float) currentProgress / (Config.SECONDS_TO_SPAWN.get() * 20))));
+            .formatPercent((float) currentProgress / (Config.getSecondsToSpawn() * 20))));
 
         return info;
     }

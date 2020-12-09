@@ -19,22 +19,14 @@ public enum EnumCrook {
     DIAMOND(Constants.Items.CROOK_DIAMOND, 2048, ItemTier.DIAMOND),
 
     BONE(Constants.Items.CROOK_BONE, 256, ItemTier.STONE);
-//    CLAY_UNCOOKED(Constants.Items.CROOK_CLAY_UNCOOKED, 0, 0, ItemTier.WOOD),
-//    CLAY(Constants.Items.CROOK_CLAY, 256, 0, ItemTier.WOOD),
 
-//    PRISMARINE(Constants.Items.CROOK_PRISMARINE, 512, 2, ItemTier.IRON),
-//    NETHERRACK(Constants.Items.CROOK_NETHERRACK, 512, 2, ItemTier.IRON),
-//    PURPUR(Constants.Items.CROOK_PURPUR, 512, 2, ItemTier.IRON),
-
-//    BLAZE(Constants.Items.CROOK_BLAZE, 1024, 3, ItemTier.DIAMOND);
-
-    public final String name;
+    public final String crookName;
     public final int defaultDurability;
     public final IItemTier tier;
     private RegistryObject<Item> registryObject;
 
-    EnumCrook(String name, int durability, IItemTier tier) {
-        this.name = name;
+    EnumCrook(String crookName, int durability, IItemTier tier) {
+        this.crookName = crookName;
         this.defaultDurability = durability;
         this.tier = tier;
     }

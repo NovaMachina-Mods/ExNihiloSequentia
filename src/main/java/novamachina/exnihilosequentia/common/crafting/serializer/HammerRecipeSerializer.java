@@ -32,6 +32,6 @@ public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
     @Override
     public void write(PacketBuffer buffer, HammerRecipe recipe) {
         buffer.writeItemStack(recipe.getInput());
-        buffer.writeItemStack(recipe.getOutput());
+        buffer.writeItemStack(recipe.getRecipeOutput());
     }
 }

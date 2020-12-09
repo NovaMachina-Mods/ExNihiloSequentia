@@ -24,6 +24,10 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
         super(builder);
     }
 
+    /**
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
                                              PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {

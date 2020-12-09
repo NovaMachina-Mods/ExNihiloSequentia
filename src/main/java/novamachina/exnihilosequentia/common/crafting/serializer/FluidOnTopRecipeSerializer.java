@@ -36,6 +36,6 @@ public class FluidOnTopRecipeSerializer extends RecipeSerializer<FluidOnTopRecip
     public void write(PacketBuffer buffer, FluidOnTopRecipe recipe) {
         recipe.getFluidInTank().writeToPacket(buffer);
         recipe.getFluidOnTop().writeToPacket(buffer);
-        buffer.writeItemStack(recipe.getResult());
+        buffer.writeItemStack(recipe.getRecipeOutput());
     }
 }

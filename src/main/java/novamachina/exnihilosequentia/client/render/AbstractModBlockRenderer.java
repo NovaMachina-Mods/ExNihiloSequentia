@@ -8,15 +8,14 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.tileentity.TileEntity;
 
 public abstract class AbstractModBlockRenderer<T extends TileEntity> extends TileEntityRenderer<T> {
-    public AbstractModBlockRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
+    protected AbstractModBlockRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
-    protected void add(IVertexBuilder renderer, MatrixStack stack, float x, float y, float z, float u,
-                       float v, Color color) {
-        renderer.pos(stack.getLast().getMatrix(), x, y, z)
+    protected void add(IVertexBuilder renderer, MatrixStack stack, VertexLocation vertexLocation, UVLocation uvLocation, Color color) {
+        renderer.pos(stack.getLast().getMatrix(), vertexLocation.getX(), vertexLocation.getY(), vertexLocation.getZ())
             .color(color.r, color.g, color.b, color.a)
-            .tex(u, v)
+            .tex(uvLocation.getU(), uvLocation.getV())
             .lightmap(0, 240)
             .normal(1, 0, 0)
             .endVertex();

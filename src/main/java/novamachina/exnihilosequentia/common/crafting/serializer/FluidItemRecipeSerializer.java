@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.crafting.serializer;
 import com.google.gson.JsonObject;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.api.crafting.fluidItem.FluidItemRecipe;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.init.ModBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -37,6 +37,6 @@ public class FluidItemRecipeSerializer extends RecipeSerializer<FluidItemRecipe>
     public void write(PacketBuffer buffer, FluidItemRecipe recipe) {
         recipe.getFluidInBarrel().writeToPacket(buffer);
         recipe.getInput().write(buffer);
-        buffer.writeItemStack(recipe.getResult());
+        buffer.writeItemStack(recipe.getRecipeOutput());
     }
 }

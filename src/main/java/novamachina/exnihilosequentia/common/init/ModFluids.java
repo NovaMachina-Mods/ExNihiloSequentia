@@ -13,24 +13,25 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 public class ModFluids {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister
         .create(ForgeRegistries.FLUIDS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
-
     public static final RegistryObject<FlowingFluid> WITCH_WATER = FLUIDS
         .register(Constants.Fluids.WITCH_WATER,
             () -> new WitchWaterFluid.Source(WitchWaterFluid.WITCH_WATER_PROPS));
     public static final RegistryObject<FlowingFluid> WITCH_WATER_FLOW = FLUIDS
         .register(Constants.Fluids.WITCH_WATER_FLOW,
             () -> new WitchWaterFluid.Flowing(WitchWaterFluid.WITCH_WATER_PROPS));
-
     public static final RegistryObject<FlowingFluid> SEA_WATER = FLUIDS
         .register(Constants.Fluids.SEA_WATER,
             () -> new SeaWaterFluid.Source(SeaWaterFluid.SEA_WATER_PROPS));
     public static final RegistryObject<FlowingFluid> SEA_WATER_FLOW = FLUIDS
         .register(Constants.Fluids.SEA_WATER_FLOW,
             () -> new SeaWaterFluid.Flowing(SeaWaterFluid.SEA_WATER_PROPS));
+    private ModFluids() {
+
+    }
 
     public static void init(IEventBus modEventBus) {
         logger.debug("Register fluids");

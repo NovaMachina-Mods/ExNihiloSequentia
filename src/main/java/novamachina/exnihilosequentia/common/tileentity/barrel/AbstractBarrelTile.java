@@ -1,9 +1,5 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel;
 
-import novamachina.exnihilosequentia.common.tileentity.barrel.mode.AbstractBarrelMode;
-import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
-import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -33,18 +29,23 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
+import novamachina.exnihilosequentia.common.tileentity.barrel.mode.AbstractBarrelMode;
+import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
+import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.Constants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
 public abstract class AbstractBarrelTile extends TileEntity implements ITickableTileEntity {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-
-    public static int MAX_SOLID_AMOUNT = Config.BARREL_MAX_SOLID_AMOUNT.get();
-    public static int MAX_FLUID_AMOUNT = Config.BARREL_NUMBER_OF_BUCKETS.get() * FluidAttributes.BUCKET_VOLUME;
+    public static final int MAX_SOLID_AMOUNT = Config.getBarrelMaxSolidAmount();
+    public static final int MAX_FLUID_AMOUNT = Config.getBarrelNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
+    private static final String INVENTORY_TAG = "inventory";
+    private static final String MODE_TAG = "barrelMode";
+    private static final String MODE_INFO_TAG = "modeInfo";
+    private static final String SOLID_AMOUNT_TAG = "solidAmount";
+    private static final String TANK_TAG = "tank";
     private BarrelInventoryHandler inventory;
     private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
     private BarrelFluidHandler tank;
@@ -52,7 +53,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     private AbstractBarrelMode mode;
     private int solidAmount;
 
-    public AbstractBarrelTile(TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
+    protected AbstractBarrelTile(TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
         super(tileEntityType);
         this.mode = BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY);
         inventory = new BarrelInventoryHandler(this);
@@ -77,7 +78,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         if (mode.isEmptyMode() || mode.getModeName().equals(Constants.BarrelModes.FLUID)) {
             BlockPos abovePos = pos.add(0, 1, 0);
             if (getWorld().isRainingAt(abovePos)) {
-                FluidStack stack = new FluidStack(Fluids.WATER, Config.RAIN_FILL_AMOUNT.get());
+                FluidStack stack = new FluidStack(Fluids.WATER, Config.getRainFillAmount());
                 tank.fill(stack, IFluidHandler.FluidAction.EXECUTE);
             }
         }
@@ -87,30 +88,30 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        compound.put("inventory", inventory.serializeNBT());
-        compound.put("tank", tank.writeToNBT(new CompoundNBT()));
-        compound.putString("barrelMode", mode.getModeName());
-        compound.put("modeInfo", mode.write());
-        compound.putInt("solidAmount", solidAmount);
+        compound.put(INVENTORY_TAG, inventory.serializeNBT());
+        compound.put(TANK_TAG, tank.writeToNBT(new CompoundNBT()));
+        compound.putString(MODE_TAG, mode.getModeName());
+        compound.put(MODE_INFO_TAG, mode.write());
+        compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
         return super.write(compound);
     }
 
     @Override
     public void read(BlockState state, CompoundNBT compound) {
-        if (compound.contains("inventory")) {
-            inventory.deserializeNBT(compound.getCompound("inventory"));
+        if (compound.contains(INVENTORY_TAG)) {
+            inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         }
-        if (compound.contains("tank")) {
-            tank.readFromNBT(compound.getCompound("tank"));
+        if (compound.contains(TANK_TAG)) {
+            tank.readFromNBT(compound.getCompound(TANK_TAG));
         }
-        if (compound.contains("barrelMode")) {
-            mode = BarrelModeRegistry.getModeFromName(compound.getString("barrelMode"));
+        if (compound.contains(MODE_TAG)) {
+            mode = BarrelModeRegistry.getModeFromName(compound.getString(MODE_TAG));
         }
-        if (compound.contains("modeInfo")) {
-            mode.read(compound.getCompound("modeInfo"));
+        if (compound.contains(MODE_INFO_TAG)) {
+            mode.read(compound.getCompound(MODE_INFO_TAG));
         }
-        if (compound.contains("solidAmount")) {
-            this.solidAmount = compound.getInt("solidAmount");
+        if (compound.contains(SOLID_AMOUNT_TAG)) {
+            this.solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
         }
         super.read(state, compound);
     }
@@ -118,28 +119,28 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         CompoundNBT nbt = pkt.getNbtCompound();
-        if (nbt.contains("inventory")) {
-            inventory.deserializeNBT(nbt.getCompound("inventory"));
+        if (nbt.contains(INVENTORY_TAG)) {
+            inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
         }
-        if (nbt.contains("tank")) {
-            tank.readFromNBT(nbt.getCompound("tank"));
+        if (nbt.contains(TANK_TAG)) {
+            tank.readFromNBT(nbt.getCompound(TANK_TAG));
         }
-        mode = BarrelModeRegistry.getModeFromName(nbt.getString("mode"));
-        if (nbt.contains("modeInfo")) {
-            mode.read(nbt.getCompound("modeInfo"));
+        mode = BarrelModeRegistry.getModeFromName(nbt.getString(MODE_TAG));
+        if (nbt.contains(MODE_INFO_TAG)) {
+            mode.read(nbt.getCompound(MODE_INFO_TAG));
         }
-        solidAmount = nbt.getInt("solidAmount");
+        solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbt = new CompoundNBT();
-        nbt.put("inventory", inventory.serializeNBT());
-        nbt.put("tank", tank.writeToNBT(new CompoundNBT()));
-        nbt.putString("mode", mode.getModeName());
-        nbt.put("modeInfo", mode.write());
-        nbt.putInt("solidAmount", solidAmount);
+        nbt.put(INVENTORY_TAG, inventory.serializeNBT());
+        nbt.put(TANK_TAG, tank.writeToNBT(new CompoundNBT()));
+        nbt.putString(MODE_TAG, mode.getModeName());
+        nbt.put(MODE_INFO_TAG, mode.write());
+        nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
         return new SUpdateTileEntityPacket(getPos(), -1, nbt);
     }
@@ -196,7 +197,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     public void setMode(String nextState) {
         mode = BarrelModeRegistry.getModeFromName(nextState);
         if (mode == null) {
-            mode = BarrelModeRegistry.getModeFromName("empty");
+            mode = BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY);
         }
     }
 

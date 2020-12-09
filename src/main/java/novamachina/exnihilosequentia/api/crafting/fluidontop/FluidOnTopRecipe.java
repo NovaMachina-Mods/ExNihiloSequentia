@@ -1,27 +1,36 @@
 package novamachina.exnihilosequentia.api.crafting.fluidontop;
 
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.utility.Constants;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
-    public static IRecipeType<FluidOnTopRecipe> TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
-    public static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> SERIALIZER;
+    public static final IRecipeType<FluidOnTopRecipe> RECIPE_TYPE = IRecipeType
+        .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
+    private static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> serializer;
     private final FluidStack fluidInTank;
     private final FluidStack fluidOnTop;
     private final ItemStack result;
 
     public FluidOnTopRecipe(ResourceLocation id, FluidStack fluidInTank, FluidStack fluidOnTop, ItemStack result) {
-        super(result, TYPE, id);
+        super(result, RECIPE_TYPE, id);
         this.fluidInTank = fluidInTank;
         this.fluidOnTop = fluidOnTop;
         this.result = result;
+    }
+
+    public static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> getStaticSerializer() {
+        return serializer;
+    }
+
+    public static void setSerializer(RegistryObject<RecipeSerializer<FluidOnTopRecipe>> serializer) {
+        FluidOnTopRecipe.serializer = serializer;
     }
 
     public FluidStack getFluidInTank() {
@@ -32,13 +41,9 @@ public class FluidOnTopRecipe extends SerializableRecipe {
         return fluidOnTop;
     }
 
-    public ItemStack getResult() {
-        return result;
-    }
-
     @Override
     protected RecipeSerializer getENSerializer() {
-        return SERIALIZER.get();
+        return serializer.get();
     }
 
     @Override
@@ -47,6 +52,7 @@ public class FluidOnTopRecipe extends SerializableRecipe {
     }
 
     public boolean validInputs(Fluid fluidInTank, Fluid fluidOnTop) {
-        return this.fluidInTank.getFluid().isEquivalentTo(fluidInTank) && this.fluidOnTop.getFluid().isEquivalentTo(fluidOnTop);
+        return this.fluidInTank.getFluid().isEquivalentTo(fluidInTank) && this.fluidOnTop.getFluid()
+            .isEquivalentTo(fluidOnTop);
     }
 }

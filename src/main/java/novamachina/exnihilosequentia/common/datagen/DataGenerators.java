@@ -9,20 +9,25 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
+
+    private DataGenerators() {
+    }
+
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
 
-        if(event.includeServer()) {
+        if (event.includeServer()) {
             // Recipes
             generator.addProvider(new Recipes(generator));
             // LootTable
             generator.addProvider(new LootTables(generator));
             // Tags
-            generator.addProvider(new ItemTagsGenerator(generator, new BlockTagsProvider(generator, Constants.ModIds.EX_NIHILO_SEQUENTIA, event
-                .getExistingFileHelper()), event.getExistingFileHelper()));
+            generator
+                .addProvider(new ItemTagsGenerator(generator, new BlockTagsProvider(generator, Constants.ModIds.EX_NIHILO_SEQUENTIA, event
+                    .getExistingFileHelper()), event.getExistingFileHelper()));
         }
-        if(event.includeClient()) {
+        if (event.includeClient()) {
             // BlockStates
             generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
             // Items

@@ -17,7 +17,7 @@ public class CompostTooltipCallback implements ITooltipCallback<ItemStack> {
             int solidAmount = ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(itemStack.getItem());
 
             list.add(new StringTextComponent(String
-                .format("Amount: %d / %d", solidAmount, Config.BARREL_MAX_SOLID_AMOUNT.get())));
+                .format("Amount: %d / %d", solidAmount, Config.getBarrelMaxSolidAmount())));
         }
     }
 }

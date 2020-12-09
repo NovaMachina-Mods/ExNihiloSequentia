@@ -31,10 +31,8 @@ import org.apache.logging.log4j.LogManager;
 
 public class ModBlocks {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister
         .create(ForgeRegistries.BLOCKS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
-
     public static final RegistryObject<BaseFallingBlock> DUST = BLOCKS
         .register(Constants.Blocks.DUST, () -> new BaseFallingBlock(new BlockBuilder().properties(
             Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
@@ -89,6 +87,9 @@ public class ModBlocks {
         .register(Blocks.BARREL_STONE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
             .properties(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.75F).sound(SoundType.STONE))
             .tileEntitySupplier(StoneBarrelTile::new)));
+    private ModBlocks() {
+
+    }
 
     public static void init(IEventBus modEventBus) {
         logger.debug("Register blocks");

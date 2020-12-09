@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.block;
 
+import net.minecraft.block.AbstractBlock;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
@@ -51,7 +52,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
 
     public BlockSieve() {
         super(new BlockBuilder().properties(
-            Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7F)
+            AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.7F)
                 .sound(SoundType.WOOD).notSolid().setOpaque((state, reader, pos) -> false)
                     .setSuffocates((state, reader, pos) -> false).setBlocksVision((state, reader, pos) -> false))
                 .harvestLevel(ToolType.AXE, 0).tileEntitySupplier(
@@ -59,10 +60,16 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         this.setDefaultState(this.stateContainer.getBaseState().with(MESH, EnumMesh.NONE).with(WATERLOGGED, false));
     }
 
+    @Override
     protected void fillStateContainer(Builder<Block, BlockState> builder) {
         builder.add(MESH, WATERLOGGED);
     }
 
+    /**
+     *
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote()) {
@@ -109,17 +116,27 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
     }
 
+    /**
+     *
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
     @Override
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.get(WATERLOGGED)) {
+        if (Boolean.TRUE.equals(stateIn.get(WATERLOGGED))) {
             worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }
         return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
+    /**
+     *
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return Boolean.TRUE.equals(state.get(WATERLOGGED)) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 
     @Override
@@ -144,9 +161,8 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         NonNullList<BlockPos> nearbySieves = NonNullList.create();
 
         BlockPos
-            .getAllInBox(new BlockPos(pos.getX() - Config.SIEVE_RANGE.get(), pos.getY(), pos.getZ() - Config.SIEVE_RANGE
-                    .get()),
-                new BlockPos(pos.getX() + Config.SIEVE_RANGE.get(), pos.getY(), pos.getZ() + Config.SIEVE_RANGE.get()))
+            .getAllInBox(new BlockPos(pos.getX() - Config.getSieveRange(), pos.getY(), pos.getZ() - Config.getSieveRange()),
+                new BlockPos(pos.getX() + Config.getSieveRange(), pos.getY(), pos.getZ() + Config.getSieveRange()))
             .forEach(item -> {
                 if (world.getBlockState(item).getBlock() instanceof BlockSieve) {
                     nearbySieves.add(new BlockPos(item));

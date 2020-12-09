@@ -1,21 +1,21 @@
 package novamachina.exnihilosequentia.api.crafting.sieve;
 
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import novamachina.exnihilosequentia.common.utility.Constants;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
+import novamachina.exnihilosequentia.common.utility.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SieveRecipe extends SerializableRecipe {
-    public static IRecipeType<SieveRecipe> TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
-    public static RegistryObject<RecipeSerializer<SieveRecipe>> SERIALIZER;
+    public static final IRecipeType<SieveRecipe> RECIPE_TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
+    private static RegistryObject<RecipeSerializer<SieveRecipe>> serializer;
 
     private final Ingredient input;
     private final ItemStack drop;
@@ -24,12 +24,20 @@ public class SieveRecipe extends SerializableRecipe {
     private final ResourceLocation recipeId;
 
     public SieveRecipe(ResourceLocation id, Ingredient input, ItemStack drop, List<MeshWithChance> rolls, boolean isWaterlogged) {
-        super(drop, TYPE, id);
+        super(drop, RECIPE_TYPE, id);
         this.recipeId = id;
         this.input = input;
         this.drop = drop;
         this.rolls = rolls;
         this.isWaterlogged = isWaterlogged;
+    }
+
+    public static RegistryObject<RecipeSerializer<SieveRecipe>> getStaticSerializer() {
+        return serializer;
+    }
+
+    public static void setSerializer(RegistryObject<RecipeSerializer<SieveRecipe>> serializer) {
+        SieveRecipe.serializer = serializer;
     }
 
     public Ingredient getInput() {
@@ -46,7 +54,7 @@ public class SieveRecipe extends SerializableRecipe {
 
     @Override
     protected RecipeSerializer getENSerializer() {
-        return SERIALIZER.get();
+        return serializer.get();
     }
 
     @Override

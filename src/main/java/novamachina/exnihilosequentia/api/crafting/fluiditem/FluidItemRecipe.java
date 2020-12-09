@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.crafting.fluidItem;
+package novamachina.exnihilosequentia.api.crafting.fluiditem;
 
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
@@ -16,22 +16,30 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FluidItemRecipe extends SerializableRecipe {
-    public static IRecipeType<FluidItemRecipe> TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
-    public static RegistryObject<RecipeSerializer<FluidItemRecipe>> SERIALIZER;
+    public static final IRecipeType<FluidItemRecipe> RECIPE_TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
+    private static RegistryObject<RecipeSerializer<FluidItemRecipe>> serializer;
     private final FluidStack fluid;
     private final Ingredient input;
     private final ItemStack output;
 
     public FluidItemRecipe(ResourceLocation id, FluidStack fluid, Ingredient input, ItemStack output) {
-        super(output, TYPE, id);
+        super(output, RECIPE_TYPE, id);
         this.fluid = fluid;
         this.input = input;
         this.output = output;
     }
 
+    public static RegistryObject<RecipeSerializer<FluidItemRecipe>> getStaticSerializer() {
+        return serializer;
+    }
+
+    public static void setSerializer(RegistryObject<RecipeSerializer<FluidItemRecipe>> serializer) {
+        FluidItemRecipe.serializer = serializer;
+    }
+
     @Override
     protected RecipeSerializer getENSerializer() {
-        return SERIALIZER.get();
+        return serializer.get();
     }
 
     @Override
@@ -49,10 +57,6 @@ public class FluidItemRecipe extends SerializableRecipe {
 
     public List<ItemStack> getInputs() {
         return Arrays.asList(input.getMatchingStacks());
-    }
-
-    public ItemStack getResult() {
-        return output;
     }
 
     public boolean validInputs(Fluid fluid, Item input) {

@@ -6,7 +6,7 @@ import net.minecraft.util.IItemProvider;
 
 public class FluidOnTopRecipeBuilder extends ExNihiloFinishedRecipe<FluidOnTopRecipeBuilder> {
     private FluidOnTopRecipeBuilder() {
-        super(FluidOnTopRecipe.SERIALIZER.get());
+        super(FluidOnTopRecipe.getStaticSerializer().get());
     }
 
     public static FluidOnTopRecipeBuilder builder() {

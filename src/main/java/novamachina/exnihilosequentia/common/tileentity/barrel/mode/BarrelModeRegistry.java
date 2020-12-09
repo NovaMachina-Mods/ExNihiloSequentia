@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -20,7 +21,7 @@ public class BarrelModeRegistry {
         return modeNameMap.getOrDefault(barrelMode, null).get();
     }
 
-    public static ArrayList<Supplier<AbstractBarrelMode>> getModes(TriggerType type) {
+    public static List<Supplier<AbstractBarrelMode>> getModes(TriggerType type) {
         logger.debug("Getting barrel mode, Trigger: " + type);
         return modeMap.get(type);
     }

@@ -54,13 +54,13 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
             matrixStack.translate(.5, .5, .5);
             matrixStack.translate(-.5, -.5, -.5);
 
-            add(builder, matrixStack, 0.0625f, 0.25f + fillAmount, 0.9375f, sprite.getMinU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(0.0625f, 0.25f + fillAmount, 0.9375f), new UVLocation(sprite.getMinU(), sprite.getMaxV()),
                 fluidColor);
-            add(builder, matrixStack, 0.9375f, 0.25f + fillAmount, 0.9375f, sprite.getMaxU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(0.9375f, 0.25f + fillAmount, 0.9375f), new UVLocation(sprite.getMaxU(), sprite.getMaxV()),
                 fluidColor);
-            add(builder, matrixStack, 0.9375f, 0.25f + fillAmount, 0.0625f, sprite.getMaxU(), sprite.getMinV(),
+            add(builder, matrixStack, new VertexLocation(0.9375f, 0.25f + fillAmount, 0.0625f), new UVLocation(sprite.getMaxU(), sprite.getMinV()),
                 fluidColor);
-            add(builder, matrixStack, 0.0625f, 0.25f + fillAmount, 0.0625f, sprite.getMinU(), sprite.getMinV(),
+            add(builder, matrixStack, new VertexLocation(0.0625f, 0.25f + fillAmount, 0.0625f), new UVLocation(sprite.getMinU(), sprite.getMinV()),
                 fluidColor);
 
             matrixStack.pop();
@@ -80,13 +80,13 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
             matrixStack.translate(.5, .5, .5);
             matrixStack.translate(-.5, -.5, -.5);
 
-            add(builder, matrixStack, 0.0625f, fillAmount, 0.9375f, sprite.getMinU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(0.0625f, fillAmount, 0.9375f), new UVLocation(sprite.getMinU(), sprite.getMaxV()),
                 Color.WHITE);
-            add(builder, matrixStack, 0.9375f, fillAmount, 0.9375f, sprite.getMaxU(), sprite.getMaxV(),
+            add(builder, matrixStack,  new VertexLocation(0.9375f, fillAmount, 0.9375f), new UVLocation(sprite.getMaxU(), sprite.getMaxV()),
                 Color.WHITE);
-            add(builder, matrixStack, 0.9375f, fillAmount, 0.0625f, sprite.getMaxU(), sprite.getMinV(),
+            add(builder, matrixStack,  new VertexLocation(0.9375f, fillAmount, 0.0625f), new UVLocation(sprite.getMaxU(), sprite.getMinV()),
                 Color.WHITE);
-            add(builder, matrixStack, 0.0625f, fillAmount, 0.0625f, sprite.getMinU(), sprite.getMinV(),
+            add(builder, matrixStack,  new VertexLocation(0.0625f, fillAmount, 0.0625f), new UVLocation(sprite.getMinU(), sprite.getMinV()),
                 Color.WHITE);
 
             matrixStack.pop();
@@ -109,13 +109,13 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
             matrixStack.translate(.5, .5, .5);
             matrixStack.translate(-.5, -.5, -.5);
 
-            add(builder, matrixStack, 0.0625f, 0.25f + fillAmount, 0.9375f, sprite.getMinU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(0.0625f, 0.25f + fillAmount, 0.9375f), new UVLocation(sprite.getMinU(), sprite.getMaxV()),
                 color);
-            add(builder, matrixStack, 0.9375f, 0.25f + fillAmount, 0.9375f, sprite.getMaxU(), sprite.getMaxV(),
+            add(builder, matrixStack, new VertexLocation(0.9375f, 0.25f + fillAmount, 0.9375f), new UVLocation(sprite.getMaxU(), sprite.getMaxV()),
                 color);
-            add(builder, matrixStack, 0.9375f, 0.25f + fillAmount, 0.0625f, sprite.getMaxU(), sprite.getMinV(),
+            add(builder, matrixStack, new VertexLocation(0.9375f, 0.25f + fillAmount, 0.0625f), new UVLocation(sprite.getMaxU(), sprite.getMinV()),
                 color);
-            add(builder, matrixStack, 0.0625f, 0.25f + fillAmount, 0.0625f, sprite.getMinU(), sprite.getMinV(),
+            add(builder, matrixStack, new VertexLocation(0.0625f, 0.25f + fillAmount, 0.0625f), new UVLocation(sprite.getMinU(), sprite.getMinV()),
                 color);
 
             matrixStack.pop();
@@ -124,11 +124,9 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
 
     private Color getBlockColor(ResourceLocation solidTexture,
                                 AbstractBarrelTile tileEntity) {
-        if (solidTexture != null) {
-            if (solidTexture.toString().contains("leaves")) {
-                return new Color(
-                    tileEntity.getWorld().getBiome(tileEntity.getPos()).getFoliageColor());
-            }
+        if (solidTexture != null && solidTexture.toString().contains("leaves")) {
+            return new Color(
+                tileEntity.getWorld().getBiome(tileEntity.getPos()).getFoliageColor());
         }
         return Color.WHITE;
     }

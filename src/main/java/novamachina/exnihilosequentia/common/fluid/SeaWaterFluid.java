@@ -22,7 +22,7 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
             .bucket(ModItems.SEA_WATER_BUCKET)
             .block(ModBlocks.SEA_WATER);
 
-    public SeaWaterFluid(Properties properties) {
+    protected SeaWaterFluid(Properties properties) {
         super(properties);
     }
 

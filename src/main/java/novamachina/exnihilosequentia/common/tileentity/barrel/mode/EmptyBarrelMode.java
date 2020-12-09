@@ -24,6 +24,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(AbstractBarrelTile barrelTile) {
+        // NOOP
     }
 
     @Override
@@ -68,7 +69,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void read(CompoundNBT nbt) {
-
+        // NOOP
     }
 
     @Override
@@ -78,7 +79,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-
+        // NOOP
     }
 
     @Override

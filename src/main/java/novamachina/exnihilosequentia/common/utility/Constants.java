@@ -1,10 +1,11 @@
 package novamachina.exnihilosequentia.common.utility;
 
-import net.minecraftforge.fml.loading.FMLPaths;
-
-import java.nio.file.Path;
-
 public class Constants {
+
+    private static final String STONE_TAG = "stone";
+
+    private Constants() {
+    }
 
     public static class Blocks {
 
@@ -26,12 +27,14 @@ public class Constants {
         public static final String SEA_WATER = "sea_water";
         public static final String BARREL_STONE = "barrel_stone";
         public static final String CRUSHED_SKYSTONE = "crushed_skystone";
+        private Blocks() {
+        }
     }
 
     public static class Items {
 
         public static final String CROOK_WOOD = createCrookName("wood");
-        public static final String CROOK_STONE = createCrookName("stone");
+        public static final String CROOK_STONE = createCrookName(STONE_TAG);
         public static final String CROOK_ANDESITE = createCrookName("andesite");
         public static final String CROOK_GRANITE = createCrookName("granite");
         public static final String CROOK_DIORITE = createCrookName("diorite");
@@ -47,7 +50,7 @@ public class Constants {
         public static final String CROOK_BLAZE = createCrookName("blaze");
         public static final String SILKWORM = "silkworm";
         public static final String HAMMER_WOOD = createHammerName("wood");
-        public static final String HAMMER_STONE = createHammerName("stone");
+        public static final String HAMMER_STONE = createHammerName(STONE_TAG);
         public static final String HAMMER_IRON = createHammerName("iron");
         public static final String HAMMER_DIAMOND = createHammerName("diamond");
         public static final String HAMMER_NETHERITE = createHammerName("netherite");
@@ -67,7 +70,7 @@ public class Constants {
         public static final String GRASS_SEED = "grass_seeds";
         public static final String COOKED_SILKWORM = "cooked_silkworm";
         public static final String PORCELAIN_CLAY = "porcelain_clay";
-        public static final String PEBBLE_STONE = createPebbleName("stone");
+        public static final String PEBBLE_STONE = createPebbleName(STONE_TAG);
         public static final String PEBBLE_GRANITE = createPebbleName("granite");
         public static final String PEBBLE_DIORITE = createPebbleName("diorite");
         public static final String PEBBLE_ANDESITE = createPebbleName("andesite");
@@ -83,6 +86,8 @@ public class Constants {
         public static final String YELLOW_CORAL_SEED = "seed_yellow_coral";
         public static final String SEED_BAMBOO = "bamboo";
         public static final String BEEHIVE_FRAME = "beehive_frame";
+        private Items() {
+        }
 
         private static String createHammerName(String name) {
             return "hammer_" + name;
@@ -98,6 +103,7 @@ public class Constants {
     }
 
     public static class Ore {
+
         public static final String GOLD = "gold";
         public static final String IRON = "iron";
         public static final String COPPER = "copper";
@@ -111,6 +117,8 @@ public class Constants {
         public static final String URANIUM = "uranium";
         public static final String ZINC = "zinc";
         public static final String BISMUTH = "bismuth";
+        private Ore() {
+        }
     }
 
     public static class Fluids {
@@ -119,34 +127,24 @@ public class Constants {
         public static final String WITCH_WATER_FLOW = "witchwater_flow";
         public static final String SEA_WATER = "sea_water";
         public static final String SEA_WATER_FLOW = "sea_water_flow";
+        private Fluids() {
+        }
     }
 
     public static class BarrelModes {
+
         public static final String EMPTY = "empty";
         public static final String COMPOST = "compost";
         public static final String FLUID = "fluid";
         public static final String BLOCK = "block";
         public static final String MOB = "mob";
         public static final String TRANSFORM = "transform";
-    }
-
-    public static class Json {
-        public static final Path baseJsonPath = FMLPaths.getOrCreateGameRelativePath(FMLPaths.CONFIGDIR.get()
-            .resolve("exnihilosequentia"), "Ex Nihilo: Sequentia Json folder");
-        public static final String CRUCIBLE_FILE = "CrucibleRegistry.json";
-        public static String COMPOST_FILE = "CompostRegistry.json";
-        public static String FLUID_BLOCK_FILE = "FluidBlockTransformRegistry.json";
-        public static String FLUID_TRANSFORM_FILE = "FluidTransformRegistry.json";
-        public static String FLUID_ON_TOP_FILE = "FluidOnTopRegistry.json";
-        public static String HEAT_FILE = "HeatRegistry.json";
-        public static String WOOD_CRUCIBLE_FILE = "WoodCrucibleRegistry.json";
-        public static String FIRED_CRUCIBLE_FILE = "FiredCrucibleRegistry.json";
-        public static String SIEVE_FILE = "SieveRegistry.json";
-        public static String CROOK_FILE = "CrookRegistry.json";
-        public static String HAMMER_FILE = "HammerRegistry.json";
+        private BarrelModes() {
+        }
     }
 
     public static class ModIds {
+
         public static final String THERMAL_EXPANSION = "thermalexpansion";
         public static final String IMMERSIVE_ENGINEERING = "immersiveengineering";
         public static final String JEI = "jei";
@@ -156,13 +154,18 @@ public class Constants {
         public static final String CREATE = "create";
         public static final String MINECRAFT = "minecraft";
         public static final String SILENT_MECHANISM = "silent_mechanism";
+        private ModIds() {
+        }
     }
 
     public static class Tooltips {
+
         public static final String ENDERMAN = "tooltip.doll.enderman";
         public static final String BLAZE = "tooltip.doll.blaze";
         public static final String SHULKER = "tooltip.doll.shulker";
         public static final String GUARDIAN = "tooltip.doll.guardian";
         public static final String BEE = "tooltip.doll.bee";
+        private Tooltips() {
+        }
     }
 }

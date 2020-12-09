@@ -13,7 +13,7 @@ import java.util.List;
 public class HammerRegistry implements IHammerRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public static List<HammerRecipe> recipeList = new ArrayList<>();
+    public static final List<HammerRecipe> recipeList = new ArrayList<>();
 
     @Override
     public ItemStack getResult(ResourceLocation input) {
