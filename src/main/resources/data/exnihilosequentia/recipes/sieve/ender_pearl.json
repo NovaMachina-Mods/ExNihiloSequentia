@@ -1,0 +1,27 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.005,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.01,
+      "mesh": "diamond"
+    },
+    {
+      "chance": 0.015,
+      "mesh": "emerald"
+    },
+    {
+      "chance": 0.02,
+      "mesh": "netherite"
+    }
+  ],
+  "input": {
+    "item": "exnihilosequentia:crushed_end_stone"
+  },
+  "result": {
+    "item": "minecraft:ender_pearl"
+  }
+}
