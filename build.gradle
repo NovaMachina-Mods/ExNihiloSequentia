@@ -148,25 +148,28 @@ jar.finalizedBy('reobfJar')
 //publish.dependsOn('reobfJar')
 
 repositories {
-    maven { // JEI
-        name = "DVS1 Maven FS"
-        url = "https://dvs1.progwml6.com/files/maven"
+    maven {
+        name = "Minecraft Forge"
+        url = "https://files.minecraftforge.net/maven"
     }
     maven {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
     }
     maven {
-        name = "TTerrag Repo"
-        url = "https://maven.tterrag.com/"
+        url "https://www.cursemaven.com"
+    }
+    maven { // JEI
+        name = "DVS1 Maven FS"
+        url = "https://dvs1.progwml6.com/files/maven"
     }
     maven { // WAILA
         name = "Mobius Repo"
         url = "https://maven.tehnut.info"
     }
     maven {
-        name = "Minecraft Forge"
-        url = "https://files.minecraftforge.net/maven"
+        name = "TTerrag Repo"
+        url = "https://maven.tterrag.com/"
     }
 }
 

@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PATH = "/usr/local/go/bin:/home/pi/go/bin:$PATH"
+        PATH = "/usr/local/go/bin:$PATH"
     }
 
     stages {
