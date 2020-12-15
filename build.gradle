@@ -163,6 +163,7 @@ repositories {
     maven {
         url "https://www.cursemaven.com"
     }
+    maven { url = 'https://files.minecraftforge.net/maven' }
 }
 
 publishing {
