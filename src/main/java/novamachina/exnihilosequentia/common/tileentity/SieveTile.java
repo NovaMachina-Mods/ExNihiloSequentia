@@ -118,14 +118,13 @@ public class SieveTile extends TileEntity {
         return super.write(compound);
     }
 
-//    @Override
-//    public void remove() {
-//        if (!world.isRemote()) {
-//            logger.debug("Block Still in world: " + world.isBlockPresent(pos));
-//            removeMesh(false);
-//        }
-//        super.remove();
-//    }
+    @Override
+    public void remove() {
+        if (!world.isRemote()) {
+            removeMesh(false);
+        }
+        super.remove();
+    }
 
     public void insertSiftableBlock(ItemStack stack) {
         logger.debug("Insert Siftable Block: " + stack);

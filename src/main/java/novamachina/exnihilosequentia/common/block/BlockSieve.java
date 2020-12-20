@@ -67,23 +67,6 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         builder.add(MESH, WATERLOGGED);
     }
 
-    /**
-     *
-     * @deprecated Ask Mojang
-     */
-    @Deprecated
-    @Override
-    public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        super.onBlockClicked(state, worldIn, pos, player);
-
-        if(!worldIn.isRemote()) {
-            SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
-            if (player.isSneaking()) {
-                sieveTile.removeMesh(true);
-            }
-        }
-    }
-
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
@@ -104,6 +87,9 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
             logger.debug("Sieve Activated");
             SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
             ItemStack stack = player.getHeldItem(handIn);
+            if (player.isSneaking() && stack.isEmpty()) {
+                sieveTile.removeMesh(true);
+            }
 
             for (BlockPos sievePos : getNearbySieves(worldIn, pos)) {
                 BlockState currentState = worldIn.getBlockState(sievePos);
