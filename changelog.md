@@ -1,3 +1,4 @@
-1.3.2.0
-- Ore recipes sync correctly now
-- Add ender pearls to end stone sieving
+1.4.0.0
+- Add structure for addons
+- Removed Skystone (Moved to AE2 Addon)
+- Update some textures
