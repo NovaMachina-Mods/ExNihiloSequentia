@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.init.ModBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ModBlocks.CRUCIBLE_FIRED.get());
+        return new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get());
     }
 
     @Override

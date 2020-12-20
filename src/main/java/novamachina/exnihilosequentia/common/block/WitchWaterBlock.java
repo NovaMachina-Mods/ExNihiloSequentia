@@ -27,12 +27,12 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import novamachina.exnihilosequentia.common.init.ModFluids;
+import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 
 public class WitchWaterBlock extends FlowingFluidBlock {
 
     public WitchWaterBlock() {
-        super(ModFluids.WITCH_WATER,
+        super(ExNihiloFluids.WITCH_WATER,
             AbstractBlock.Properties.create(Material.WATER).doesNotBlockMovement()
                 .hardnessAndResistance(100.0F).noDrops());
     }

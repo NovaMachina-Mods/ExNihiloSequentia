@@ -18,7 +18,7 @@ import novamachina.exnihilosequentia.common.crafting.serializer.FluidTransformRe
 import novamachina.exnihilosequentia.common.crafting.serializer.HammerRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.serializer.HeatRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.serializer.SieveRecipeSerializer;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -26,9 +26,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class ModSerializers {
+public class ExNihiloSerializers {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
-        .create(ForgeRegistries.RECIPE_SERIALIZERS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
+        .create(ForgeRegistries.RECIPE_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     static {
@@ -43,7 +43,7 @@ public class ModSerializers {
         SieveRecipe.setSerializer(RECIPE_SERIALIZERS.register("sieve", SieveRecipeSerializer::new));
     }
 
-    private ModSerializers() {
+    private ExNihiloSerializers() {
     }
 
     public static void init(IEventBus modEventBus) {

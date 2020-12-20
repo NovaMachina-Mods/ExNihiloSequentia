@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ModTiles;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -20,7 +20,7 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
     private int spreadCounter = 0;
 
     public InfestingLeavesTile() {
-        super(ModTiles.INFESTING_LEAVES.get());
+        super(ExNihiloTiles.INFESTING_LEAVES.get());
     }
 
     public int getProgress() {

@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.crafting.serializer;
 import com.google.gson.JsonObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.common.init.ModBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 public class CompostRecipeSerializer extends RecipeSerializer<CompostRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ModBlocks.BARREL_WOOD.get());
+        return new ItemStack(ExNihiloBlocks.BARREL_WOOD.get());
     }
 
     @Override

@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.tileentity.barrel;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class BarrelInventoryHandler extends ItemStackHandler {
 
@@ -21,7 +21,7 @@ public class BarrelInventoryHandler extends ItemStackHandler {
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
         ItemStack returnStack = super.extractItem(slot, amount, simulate);
         if(!simulate && returnStack != ItemStack.EMPTY ) {
-            barrel.setMode(Constants.BarrelModes.EMPTY);
+            barrel.setMode(ExNihiloConstants.BarrelModes.EMPTY);
         }
         return returnStack;
     }

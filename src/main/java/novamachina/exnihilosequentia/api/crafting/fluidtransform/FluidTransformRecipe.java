@@ -8,11 +8,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidTransformRecipe extends SerializableRecipe {
     public static final IRecipeType<FluidTransformRecipe> RECIPE_TYPE = IRecipeType
-        .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
+        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
     private static RegistryObject<RecipeSerializer<FluidTransformRecipe>> serializer;
     private final FluidStack fluidInTank;
     private final Ingredient blockBelow;

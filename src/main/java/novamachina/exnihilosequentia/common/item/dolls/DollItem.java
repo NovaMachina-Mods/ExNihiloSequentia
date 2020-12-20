@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
 import net.minecraft.fluid.Fluids;
-import novamachina.exnihilosequentia.common.init.ModInitialization;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluid;
@@ -20,7 +20,7 @@ public class DollItem extends Item {
     private final DollEnum type;
 
     public DollItem(DollEnum type) {
-        super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
+        super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
         this.type = type;
     }
 

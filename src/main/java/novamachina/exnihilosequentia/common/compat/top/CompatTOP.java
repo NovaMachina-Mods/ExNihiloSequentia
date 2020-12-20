@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.top;
 
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -40,7 +40,7 @@ public class CompatTOP {
             iTheOneProbe.registerProvider(new IProbeInfoProvider() {
                 @Override
                 public String getID() {
-                    return Constants.ModIds.EX_NIHILO_SEQUENTIA + ":default";
+                    return ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":default";
                 }
 
                 @Override

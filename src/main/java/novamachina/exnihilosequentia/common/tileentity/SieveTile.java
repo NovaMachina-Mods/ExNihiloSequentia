@@ -6,7 +6,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
-import novamachina.exnihilosequentia.common.init.ModTiles;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import net.minecraft.block.BlockState;
@@ -39,7 +39,7 @@ public class SieveTile extends TileEntity {
     private float progress = 0;
 
     public SieveTile() {
-        super(ModTiles.SIEVE.get());
+        super(ExNihiloTiles.SIEVE.get());
     }
 
     public void insertMesh(ItemStack stack) {
@@ -71,7 +71,7 @@ public class SieveTile extends TileEntity {
         }
     }
 
-    private void setSieveState() {
+    public void setSieveState() {
         logger.debug("Set Sieve State, Mesh: " + meshType);
         BlockState state = getBlockState();
         if (state.getBlock() instanceof BlockSieve) {

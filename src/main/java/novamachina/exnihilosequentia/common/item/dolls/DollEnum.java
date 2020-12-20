@@ -1,15 +1,15 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
 public enum DollEnum {
-    BLAZE(Constants.ModIds.MINECRAFT, "blaze", "minecraft", "lava", 1, Constants.Tooltips.BLAZE),
-    ENDERMAN(Constants.ModIds.MINECRAFT, "enderman", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 2, Constants.Tooltips.ENDERMAN),
-    SHULKER(Constants.ModIds.MINECRAFT, "shulker", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1.5, Constants.Tooltips.SHULKER),
-    GUARDIAN(Constants.ModIds.MINECRAFT, "guardian", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.SEA_WATER, 1, Constants.Tooltips.GUARDIAN),
-    BEE(Constants.ModIds.MINECRAFT, "bee", Constants.ModIds.EX_NIHILO_SEQUENTIA, Constants.Fluids.WITCH_WATER, 1, Constants.Tooltips.BEE);
+    BLAZE(ExNihiloConstants.ModIds.MINECRAFT, "blaze", "minecraft", "lava", 1, ExNihiloConstants.Tooltips.BLAZE),
+    ENDERMAN(ExNihiloConstants.ModIds.MINECRAFT, "enderman", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 2, ExNihiloConstants.Tooltips.ENDERMAN),
+    SHULKER(ExNihiloConstants.ModIds.MINECRAFT, "shulker", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 1.5, ExNihiloConstants.Tooltips.SHULKER),
+    GUARDIAN(ExNihiloConstants.ModIds.MINECRAFT, "guardian", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.SEA_WATER, 1, ExNihiloConstants.Tooltips.GUARDIAN),
+    BEE(ExNihiloConstants.ModIds.MINECRAFT, "bee", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 1, ExNihiloConstants.Tooltips.BEE);
 
 
     private final String entityModId;

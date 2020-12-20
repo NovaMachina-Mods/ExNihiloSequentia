@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.crafting.serializer;
 import com.google.gson.JsonObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.common.init.ModBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ModBlocks.CRUCIBLE_FIRED.get());
+        return new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get());
     }
 
     @Override

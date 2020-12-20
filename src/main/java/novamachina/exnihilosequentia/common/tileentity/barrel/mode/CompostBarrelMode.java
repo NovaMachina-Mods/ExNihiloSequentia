@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.resources.I18n;
@@ -43,7 +43,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
                 barrelTile.getInventory()
                     .setStackInSlot(0, new ItemStack(ForgeRegistries.BLOCKS.getValue(Blocks.DIRT.getRegistryName())));
                 barrelTile.removeSolid(barrelTile.getSolidAmount());
-                barrelTile.setMode(Constants.BarrelModes.BLOCK);
+                barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
             }
         }
     }

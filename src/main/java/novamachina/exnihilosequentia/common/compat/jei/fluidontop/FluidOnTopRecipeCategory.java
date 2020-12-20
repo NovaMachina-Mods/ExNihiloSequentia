@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidontop;
 
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import java.util.Arrays;
 
 public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "fluidontop");
-    private static final ResourceLocation texture = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_on_top.png");
+    public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluidontop");
+    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_on_top.png");
     private final IDrawableStatic background;
 
     public FluidOnTopRecipeCategory(IGuiHelper guiHelper) {

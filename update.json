@@ -1,12 +1,14 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
   "promos": {
-    "1.16-latest": "1.3.1.2",
-    "1.16-recommended": "1.3.1.2",
+    "1.16-latest": "1.4.0.0",
+    "1.16-recommended": "1.4.0.0",
     "1.15.2-latest": "1.2.1.0",
     "1.15.2-recommended": "1.2.1.0"
   },
   "1.16": {
+    "1.4.0.0": "Add structure for addons, Removed Skystone (Moved to AE2 Addon), Update some textures",
+    "1.3.2.0": "Ore recipes sync correctly now, Add ender pearls to end stone sieving",
     "1.3.1.2": "Fix bug with barrel not being able to accept items after extracting an item.",
     "1.3.1.1": "Fix server crash when eating end cake, Removed hunger requirement for end cake, Change netherite mesh recipe to be more vanilla like",
     "1.3.1.0": "Fix issue with hammer and crook dropping absurd amounts of resources, Fix crash when using auto-clickers on a barrel, Fix duplicate JEI recipes",

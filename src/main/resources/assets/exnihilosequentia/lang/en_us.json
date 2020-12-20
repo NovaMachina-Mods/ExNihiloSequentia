@@ -6,7 +6,6 @@
   "block.exnihilosequentia.crushed_andesite": "Crushed Andesite",
   "block.exnihilosequentia.crushed_diorite": "Crushed Diorite",
   "block.exnihilosequentia.crushed_granite": "Crushed Granite",
-  "block.exnihilosequentia.crushed_skystone": "Crushed Skystone",
 
   "block.exnihilosequentia.infesting_leaves": "Infesting Leaves",
   "block.exnihilosequentia.infested_leaves": "Infested Leaves",
@@ -121,7 +120,7 @@
 
   "item.exnihilosequentia.pebble_stone": "Stone Pebble",
   "item.exnihilosequentia.pebble_granite": "Granite Pebble",
-  "item.exnihilosequentia.pebble_diorite": "diorite Pebble",
+  "item.exnihilosequentia.pebble_diorite": "Diorite Pebble",
   "item.exnihilosequentia.pebble_andesite": "Andesite Pebble",
 
   "item.exnihilosequentia.mesh_string": "String Mesh",

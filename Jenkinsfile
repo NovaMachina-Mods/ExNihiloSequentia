@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PATH = "/usr/local/go/bin:/home/pi/go/bin:$PATH"
+        PATH = "/usr/local/go/bin:$PATH"
     }
 
     stages {
@@ -26,7 +26,8 @@ pipeline {
             }
             steps {
                 sh './create-release.sh'
-                sh './gradlew curseforge400012'
+                sh './gradlew curseforge'
+                sh './gradlew publish'
             }
         }
     }
