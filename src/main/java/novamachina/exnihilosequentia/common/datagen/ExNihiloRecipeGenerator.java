@@ -382,9 +382,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ExNihiloBlocks.CRUSHED_ANDESITE.get())).amount(200)
             .fluidResult(Fluids.LAVA)
             .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_andesite"));
-        CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ExNihiloBlocks.CRUSHED_SKYSTONE.get())).amount(200)
-            .fluidResult(Fluids.LAVA)
-            .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_skystone"));
         CrucibleRecipeBuilder.builder().input(Ingredient.fromItems(ExNihiloBlocks.CRUSHED_DIORITE.get())).amount(200)
             .fluidResult(Fluids.LAVA)
             .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc("crushed_diorite"));

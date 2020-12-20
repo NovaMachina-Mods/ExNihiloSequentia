@@ -53,7 +53,6 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.CRUSHED_END_STONE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_GRANITE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_NETHERRACK.get());
-        registerSelfDrop(ExNihiloBlocks.CRUSHED_SKYSTONE.get());
         registerSelfDrop(ExNihiloBlocks.DUST.get());
         registerSelfDrop(ExNihiloBlocks.SIEVE.get());
     }

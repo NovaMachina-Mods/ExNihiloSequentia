@@ -58,10 +58,6 @@ public class ExNihiloBlocks {
         .register(ExNihiloConstants.Blocks.CRUSHED_GRANITE, () -> new BaseFallingBlock(new BlockBuilder()
             .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
-    public static final RegistryObject<BaseFallingBlock> CRUSHED_SKYSTONE = BLOCKS
-        .register(ExNihiloConstants.Blocks.CRUSHED_SKYSTONE, () -> new BaseFallingBlock(new BlockBuilder()
-            .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
-                .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<EndCakeBlock> END_CAKE = BLOCKS
         .register(ExNihiloConstants.Blocks.END_CAKE, EndCakeBlock::new);
     public static final RegistryObject<BlockSieve> SIEVE = BLOCKS

@@ -115,7 +115,6 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         basicBlock(ExNihiloBlocks.CRUSHED_GRANITE.get());
         basicBlock(ExNihiloBlocks.CRUSHED_NETHERRACK.get());
         basicBlock(ExNihiloBlocks.CRUSHED_END_STONE.get());
-        basicBlock(ExNihiloBlocks.CRUSHED_SKYSTONE.get());
         basicBlock(ExNihiloBlocks.DUST.get());
         basicBlock(ExNihiloBlocks.INFESTED_LEAVES.get());
         basicBlock(ExNihiloBlocks.INFESTING_LEAVES.get());

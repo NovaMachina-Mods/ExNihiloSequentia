@@ -26,7 +26,6 @@ public class ExNihiloConstants {
         public static final String BARREL_WOOD = "barrel_wood";
         public static final String SEA_WATER = "sea_water";
         public static final String BARREL_STONE = "barrel_stone";
-        public static final String CRUSHED_SKYSTONE = "crushed_skystone";
         private Blocks() {
         }
     }

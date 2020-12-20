@@ -58,10 +58,6 @@ public class ExNihiloItems {
         .register(ExNihiloConstants.Blocks.CRUSHED_GRANITE,
             () -> new BlockItem(ExNihiloBlocks.CRUSHED_GRANITE.get(),
                 new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_SKYSTONE = ITEMS
-        .register(ExNihiloConstants.Blocks.CRUSHED_SKYSTONE,
-            () -> new BlockItem(ExNihiloBlocks.CRUSHED_SKYSTONE.get(),
-                new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> END_CAKE = ITEMS
         .register(ExNihiloConstants.Blocks.END_CAKE, () -> new BlockItem(ExNihiloBlocks.END_CAKE.get(),
             new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
