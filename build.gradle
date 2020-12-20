@@ -139,7 +139,7 @@ publishing {
         maven {
             credentials {
                 username = ENV.NEXUS_USERNAME
-                password = ENV.NEXUEXUS_USERNAME
+                password = ENV.NEXUS_PASSWORD
             }
             url = "https://repo.jacob-williams.me/repository/maven-releases/"
         }
