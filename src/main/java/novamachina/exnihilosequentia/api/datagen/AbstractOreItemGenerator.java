@@ -8,7 +8,7 @@ import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public abstract class AbstractOreItemGenerator extends ItemModelProvider {
-    public AbstractOreItemGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
+    protected AbstractOreItemGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
     protected void registerIngot(EnumOre ore) {

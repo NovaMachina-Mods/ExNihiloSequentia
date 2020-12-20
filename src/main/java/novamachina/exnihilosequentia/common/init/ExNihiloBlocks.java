@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.init;
 
+import net.minecraft.block.AbstractBlock;
 import novamachina.exnihilosequentia.common.block.BaseBlock;
 import novamachina.exnihilosequentia.common.block.BaseFallingBlock;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
@@ -35,31 +36,31 @@ public class ExNihiloBlocks {
         .create(ForgeRegistries.BLOCKS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
     public static final RegistryObject<BaseFallingBlock> DUST = BLOCKS
         .register(ExNihiloConstants.Blocks.DUST, () -> new BaseFallingBlock(new BlockBuilder().properties(
-            Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+            AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.CLOTH)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_NETHERRACK = BLOCKS
         .register(ExNihiloConstants.Blocks.CRUSHED_NETHERRACK, () -> new BaseFallingBlock(new BlockBuilder()
-            .properties(Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+            .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_END_STONE = BLOCKS
         .register(ExNihiloConstants.Blocks.CRUSHED_END_STONE, () -> new BaseFallingBlock(new BlockBuilder()
-            .properties(Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+            .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_ANDESITE = BLOCKS
         .register(ExNihiloConstants.Blocks.CRUSHED_ANDESITE, () -> new BaseFallingBlock(new BlockBuilder()
-            .properties(Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+            .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_DIORITE = BLOCKS
         .register(ExNihiloConstants.Blocks.CRUSHED_DIORITE, () -> new BaseFallingBlock(new BlockBuilder()
-            .properties(Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+            .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_GRANITE = BLOCKS
         .register(ExNihiloConstants.Blocks.CRUSHED_GRANITE, () -> new BaseFallingBlock(new BlockBuilder()
-            .properties(Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+            .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_SKYSTONE = BLOCKS
         .register(ExNihiloConstants.Blocks.CRUSHED_SKYSTONE, () -> new BaseFallingBlock(new BlockBuilder()
-            .properties(Block.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+            .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
                 .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<EndCakeBlock> END_CAKE = BLOCKS
         .register(ExNihiloConstants.Blocks.END_CAKE, EndCakeBlock::new);
@@ -81,11 +82,11 @@ public class ExNihiloBlocks {
         .register(Blocks.CRUCIBLE_WOOD, WoodCrucibleBlock::new);
     public static final RegistryObject<BaseBlock> BARREL_WOOD = BLOCKS
         .register(Blocks.BARREL_WOOD, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
-            .properties(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
+            .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
             .tileEntitySupplier(WoodBarrelTile::new)));
     public static final RegistryObject<BaseBlock> BARREL_STONE = BLOCKS
         .register(Blocks.BARREL_STONE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
-            .properties(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.75F).sound(SoundType.STONE))
+            .properties(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(0.75F).sound(SoundType.STONE))
             .tileEntitySupplier(StoneBarrelTile::new)));
     private ExNihiloBlocks() {
 

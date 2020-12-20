@@ -12,7 +12,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     protected static final String PARTICLE_TAG = "particle";
 
-    public AbstractBlockStateGenerator(DataGenerator gen, String modId, ExistingFileHelper exFileHelper) {
+    protected AbstractBlockStateGenerator(DataGenerator gen, String modId, ExistingFileHelper exFileHelper) {
         super(gen, modId, exFileHelper);
     }
 

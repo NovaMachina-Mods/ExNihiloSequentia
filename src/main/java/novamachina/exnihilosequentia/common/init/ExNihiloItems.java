@@ -131,7 +131,7 @@ public class ExNihiloItems {
         }
 
         for (EnumPebbleType type : EnumPebbleType.values()) {
-            type.setRegistryObject(ITEMS.register(type.getType(), () -> new PebbleItem()));
+            type.setRegistryObject(ITEMS.register(type.getType(), PebbleItem::new));
         }
 
         for (EnumMesh mesh : EnumMesh.values()) {

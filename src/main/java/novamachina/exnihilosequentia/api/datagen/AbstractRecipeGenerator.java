@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
     private final String modId;
 
-    public AbstractRecipeGenerator(DataGenerator generator, String modId) {
+    protected AbstractRecipeGenerator(DataGenerator generator, String modId) {
         super(generator);
         this.modId = modId;
     }
