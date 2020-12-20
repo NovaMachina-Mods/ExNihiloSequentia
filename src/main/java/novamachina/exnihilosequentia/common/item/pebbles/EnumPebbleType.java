@@ -1,14 +1,14 @@
 package novamachina.exnihilosequentia.common.item.pebbles;
 
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
 public enum EnumPebbleType {
-    STONE(Constants.Items.PEBBLE_STONE),
-    GRANITE(Constants.Items.PEBBLE_GRANITE),
-    DIORITE(Constants.Items.PEBBLE_DIORITE),
-    ANDESITE(Constants.Items.PEBBLE_ANDESITE);
+    STONE(ExNihiloConstants.Items.PEBBLE_STONE),
+    GRANITE(ExNihiloConstants.Items.PEBBLE_GRANITE),
+    DIORITE(ExNihiloConstants.Items.PEBBLE_DIORITE),
+    ANDESITE(ExNihiloConstants.Items.PEBBLE_ANDESITE);
 
     private final String type;
     private RegistryObject<Item> registryObject;

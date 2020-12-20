@@ -26,10 +26,12 @@ import novamachina.exnihilosequentia.common.compat.Mekanism;
 import novamachina.exnihilosequentia.common.compat.SilentMechanism;
 import novamachina.exnihilosequentia.common.compat.ThermalExpansion;
 import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
+import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.network.PacketHandler;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
+import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
@@ -50,29 +52,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Mod.EventBusSubscriber(modid = Constants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ModInitialization {
-    public static final ItemGroup ITEM_GROUP = new ItemGroup(Constants.ModIds.EX_NIHILO_SEQUENTIA) {
+@Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class ExNihiloInitialization {
+    public static final ItemGroup ITEM_GROUP = new ItemGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModBlocks.SIEVE.get());
+            return new ItemStack(ExNihiloBlocks.SIEVE.get());
         }
     };
-    @ObjectHolder(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
+    @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
     public static final GlobalLootModifierSerializer<?> hammerModifier = null;
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final List<IOreCompat> oreCompats = new ArrayList<>();
 
-    private ModInitialization() {
+    private ExNihiloInitialization() {
     }
 
     public static void init(IEventBus modEventBus) {
         logger.debug("Initializing modded items");
-        ModBlocks.init(modEventBus);
-        ModItems.init(modEventBus);
-        ModTiles.init(modEventBus);
-        ModFluids.init(modEventBus);
-        ModSerializers.init(modEventBus);
+        ExNihiloBlocks.init(modEventBus);
+        ExNihiloItems.init(modEventBus);
+        ExNihiloTiles.init(modEventBus);
+        ExNihiloFluids.init(modEventBus);
+        ExNihiloSerializers.init(modEventBus);
     }
 
     @SubscribeEvent
@@ -117,8 +119,8 @@ public class ModInitialization {
 
     @SubscribeEvent
     public static void registerTOP(InterModEnqueueEvent event) {
-        logger.debug("The One Probe detected: " + ModList.get().isLoaded(Constants.ModIds.TOP));
-        if (ModList.get().isLoaded(Constants.ModIds.TOP)) {
+        logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
+        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
             CompatTOP.register();
         }
     }
@@ -167,34 +169,34 @@ public class ModInitialization {
 
         oreCompats.add(new ExNihilo());
 
-        logger.debug("Thermal Expansion detected: " + ModList.get().isLoaded(Constants.ModIds.THERMAL_EXPANSION));
+        logger.debug("Thermal Expansion detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.THERMAL_EXPANSION));
         logger.debug("Thermal Expansion config enabled: " + Config.getEnableThermal());
-        if (ModList.get().isLoaded(Constants.ModIds.THERMAL_EXPANSION) || Config.getEnableThermal()) {
+        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.THERMAL_EXPANSION) || Config.getEnableThermal()) {
             logger.debug("Added Thermal Expansion");
             oreCompats.add(new ThermalExpansion());
         }
         logger
-            .debug("Immersive Engineering detected: " + ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING));
+            .debug("Immersive Engineering detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING));
         logger.debug("Immersive Engineering config enabled: " + Config.getEnableImmersive());
-        if (ModList.get().isLoaded(Constants.ModIds.IMMERSIVE_ENGINEERING) || Config.getEnableImmersive()) {
+        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING) || Config.getEnableImmersive()) {
             logger.debug("Added Immersive Engineering");
             oreCompats.add(new ImmersiveEngineering());
         }
-        logger.debug("Mekanism detected: " + ModList.get().isLoaded(Constants.ModIds.MEKANISM));
+        logger.debug("Mekanism detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.MEKANISM));
         logger.debug("Mekanism config enabled: " + Config.getEnableMekanism());
-        if (ModList.get().isLoaded(Constants.ModIds.MEKANISM) || Config.getEnableMekanism()) {
+        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.MEKANISM) || Config.getEnableMekanism()) {
             logger.debug("Added Mekanism");
             oreCompats.add(new Mekanism());
         }
-        logger.debug("Create detected: " + ModList.get().isLoaded(Constants.ModIds.CREATE));
+        logger.debug("Create detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE));
         logger.debug("Create config enabled: " + Config.getEnableMekanism());
-        if (ModList.get().isLoaded(Constants.ModIds.CREATE) || Config.getEnableCreate()) {
+        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE) || Config.getEnableCreate()) {
             logger.debug("Added Create");
             oreCompats.add(new Create());
         }
-        logger.debug("Silent Mechanism detected: " + ModList.get().isLoaded(Constants.ModIds.SILENT_MECHANISM));
+        logger.debug("Silent Mechanism detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.SILENT_MECHANISM));
         logger.debug("Silent Mechanism enabled: " + Config.getEnableSilent());
-        if (ModList.get().isLoaded(Constants.ModIds.SILENT_MECHANISM) || Config.getEnableSilent()) {
+        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.SILENT_MECHANISM) || Config.getEnableSilent()) {
             logger.debug("Added Silent Mechanism");
             oreCompats.add(new SilentMechanism());
         }

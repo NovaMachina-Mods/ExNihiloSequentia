@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import novamachina.exnihilosequentia.common.init.ModTiles;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.block.Blocks;
@@ -27,8 +27,8 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
 
     public static void register() {
         logger.debug("Register barrel renderer");
-        ClientRegistry.bindTileEntityRenderer(ModTiles.BARREL_WOOD.get(), BarrelRender::new);
-        ClientRegistry.bindTileEntityRenderer(ModTiles.BARREL_STONE.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_WOOD.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_STONE.get(), BarrelRender::new);
     }
 
     @Override

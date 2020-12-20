@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
@@ -42,7 +42,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
                 currentProgress = 0;
                 Fluid newFluid = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getResult(fluidInTank, blockBelow);
                 barrelTile.getTank().setFluid(new FluidStack(newFluid, AbstractBarrelTile.MAX_FLUID_AMOUNT));
-                barrelTile.setMode(Constants.BarrelModes.FLUID);
+                barrelTile.setMode(ExNihiloConstants.BarrelModes.FLUID);
             }
         }
     }

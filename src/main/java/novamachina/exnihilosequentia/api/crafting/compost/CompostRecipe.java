@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.api.crafting.compost;
 
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CompostRecipe extends SerializableRecipe {
     public static final IRecipeType<CompostRecipe> RECIPE_TYPE = IRecipeType
-        .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
+        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
     private static RegistryObject<RecipeSerializer<CompostRecipe>> serializer;
     private final Ingredient input;
     private final int amount;

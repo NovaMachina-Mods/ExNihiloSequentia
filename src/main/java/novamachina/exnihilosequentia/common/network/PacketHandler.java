@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.FMLHandshakeHandler;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ public class PacketHandler {
 
     public static void registerMessages() {
         handshakeChannel = NetworkRegistry.ChannelBuilder
-            .named(new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "handshake"))
+            .named(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "handshake"))
             .networkProtocolVersion(() -> "1")
             .clientAcceptedVersions(s -> true)
             .serverAcceptedVersions(s -> true)

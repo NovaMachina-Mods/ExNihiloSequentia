@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.init;
 
 import novamachina.exnihilosequentia.common.fluid.SeaWaterFluid;
 import novamachina.exnihilosequentia.common.fluid.WitchWaterFluid;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -12,24 +12,24 @@ import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class ModFluids {
+public class ExNihiloFluids {
 
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister
-        .create(ForgeRegistries.FLUIDS, Constants.ModIds.EX_NIHILO_SEQUENTIA);
+        .create(ForgeRegistries.FLUIDS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
     public static final RegistryObject<FlowingFluid> WITCH_WATER = FLUIDS
-        .register(Constants.Fluids.WITCH_WATER,
+        .register(ExNihiloConstants.Fluids.WITCH_WATER,
             () -> new WitchWaterFluid.Source(WitchWaterFluid.WITCH_WATER_PROPS));
     public static final RegistryObject<FlowingFluid> WITCH_WATER_FLOW = FLUIDS
-        .register(Constants.Fluids.WITCH_WATER_FLOW,
+        .register(ExNihiloConstants.Fluids.WITCH_WATER_FLOW,
             () -> new WitchWaterFluid.Flowing(WitchWaterFluid.WITCH_WATER_PROPS));
     public static final RegistryObject<FlowingFluid> SEA_WATER = FLUIDS
-        .register(Constants.Fluids.SEA_WATER,
+        .register(ExNihiloConstants.Fluids.SEA_WATER,
             () -> new SeaWaterFluid.Source(SeaWaterFluid.SEA_WATER_PROPS));
     public static final RegistryObject<FlowingFluid> SEA_WATER_FLOW = FLUIDS
-        .register(Constants.Fluids.SEA_WATER_FLOW,
+        .register(ExNihiloConstants.Fluids.SEA_WATER_FLOW,
             () -> new SeaWaterFluid.Flowing(SeaWaterFluid.SEA_WATER_PROPS));
-    private ModFluids() {
+    private ExNihiloFluids() {
 
     }
 

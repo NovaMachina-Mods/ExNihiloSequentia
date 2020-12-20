@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,7 +35,7 @@ public class BlockBarrelMode extends AbstractBarrelMode {
                 barrelTile.getPos().getZ() + 0.5F, new ItemStack(barrelTile.getInventory().getStackInSlot(0)
                 .getItem())));
         barrelTile.getInventory().setStackInSlot(0, ItemStack.EMPTY);
-        barrelTile.setMode(Constants.BarrelModes.EMPTY);
+        barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
         return ActionResultType.SUCCESS;
     }
 

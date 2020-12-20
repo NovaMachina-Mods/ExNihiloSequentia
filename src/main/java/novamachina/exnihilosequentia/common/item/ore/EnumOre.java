@@ -2,30 +2,31 @@ package novamachina.exnihilosequentia.common.item.ore;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.IExtensibleEnum;
+import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.network.HandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
-import novamachina.exnihilosequentia.common.utility.Constants;
-import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.Arrays;
 import java.util.List;
 
-public enum EnumOre {
-    COPPER(Type.MODDED, Constants.Ore.COPPER, new Color("FF9933"), false),
-    LEAD(Type.MODDED, Constants.Ore.LEAD, new Color("330066"), false),
-    NICKEL(Type.MODDED, Constants.Ore.NICKEL, new Color("FFFFCC"), false),
-    SILVER(Type.MODDED, Constants.Ore.SILVER, new Color("C2FAFF"), false),
-    TIN(Type.MODDED, Constants.Ore.TIN, new Color("F5FEFF"), false),
-    ALUMINUM(Type.MODDED, Constants.Ore.ALUMINUM, new Color("BFBFBF"), false),
-    PLATINUM(Type.MODDED, Constants.Ore.PLATINUM, new Color("00FFF7"), false),
-    OSMIUM(Type.MODDED, Constants.Ore.OSMIUM, new Color("BBDDFF"), false),
-    URANIUM(Type.MODDED, Constants.Ore.URANIUM, new Color("4E5B43"), false),
-    ZINC(Type.MODDED, Constants.Ore.ZINC, new Color("A59C74"), false),
-    IRON(Type.VANILLA, Constants.Ore.IRON, new Color("BF8040"), true),
-    GOLD(Type.VANILLA, Constants.Ore.GOLD, new Color("FFFF00"), true),
-    BISMUTH(Type.MODDED, Constants.Ore.BISMUTH, new Color("908194"), false);
+public enum EnumOre implements IExtensibleEnum {
+    COPPER(Type.MODDED, ExNihiloConstants.Ore.COPPER, new Color("FF9933"), false),
+    LEAD(Type.MODDED, ExNihiloConstants.Ore.LEAD, new Color("330066"), false),
+    NICKEL(Type.MODDED, ExNihiloConstants.Ore.NICKEL, new Color("FFFFCC"), false),
+    SILVER(Type.MODDED, ExNihiloConstants.Ore.SILVER, new Color("C2FAFF"), false),
+    TIN(Type.MODDED, ExNihiloConstants.Ore.TIN, new Color("F5FEFF"), false),
+    ALUMINUM(Type.MODDED, ExNihiloConstants.Ore.ALUMINUM, new Color("BFBFBF"), false),
+    PLATINUM(Type.MODDED, ExNihiloConstants.Ore.PLATINUM, new Color("00FFF7"), false),
+    OSMIUM(Type.MODDED, ExNihiloConstants.Ore.OSMIUM, new Color("BBDDFF"), false),
+    URANIUM(Type.MODDED, ExNihiloConstants.Ore.URANIUM, new Color("4E5B43"), false),
+    ZINC(Type.MODDED, ExNihiloConstants.Ore.ZINC, new Color("A59C74"), false),
+    IRON(Type.VANILLA, ExNihiloConstants.Ore.IRON, new Color("BF8040"), true),
+    GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true),
+    BISMUTH(Type.MODDED, ExNihiloConstants.Ore.BISMUTH, new Color("908194"), false);
 
-    private final String name;
+    private final String oreName;
     private final Color color;
     private boolean isEnabled;
     private RegistryObject<OreItem> pieceItem;
@@ -33,11 +34,15 @@ public enum EnumOre {
     private RegistryObject<OreItem> ingotItem;
     private Type type;
 
-    EnumOre(Type type, String name, Color color, boolean isEnabled) {
+    EnumOre(Type type, String oreName, Color color, boolean isEnabled) {
         this.type = type;
-        this.name = name;
+        this.oreName = oreName;
         this.color = color;
         this.isEnabled = isEnabled;
+    }
+
+    public static EnumOre create(String name, Type type, String oreName, Color color, boolean isEnabled) {
+        throw new IllegalStateException("Enum not extended");
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -61,8 +66,8 @@ public enum EnumOre {
         isEnabled = true;
     }
 
-    public String getName() {
-        return name;
+    public String getOreName() {
+        return oreName;
     }
 
     public Color getColor() {
@@ -70,15 +75,15 @@ public enum EnumOre {
     }
 
     public String getChunkName() {
-        return "chunk_" + name;
+        return "chunk_" + oreName;
     }
 
     public String getPieceName() {
-        return "piece_" + name;
+        return "piece_" + oreName;
     }
 
     public String getIngotName() {
-        return "ingot_" + name;
+        return "ingot_" + oreName;
     }
 
     public RegistryObject<OreItem> getPieceItem() {
@@ -112,7 +117,7 @@ public enum EnumOre {
     @Override
     public String toString() {
         return "EnumOre{" +
-            "name='" + name + '\'' +
+            "name='" + oreName + '\'' +
             ", color=" + color +
             ", isEnabled=" + isEnabled +
             ", type=" + type +
@@ -123,7 +128,7 @@ public enum EnumOre {
         isEnabled = false;
     }
 
-    private enum Type {
+    public enum Type {
         VANILLA,
         MODDED
     }

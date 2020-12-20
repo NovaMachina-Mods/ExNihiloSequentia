@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -90,7 +90,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     @Override
     public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
         if(ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(stack.getItem())) {
-            barrelTile.setMode(Constants.BarrelModes.COMPOST);
+            barrelTile.setMode(ExNihiloConstants.BarrelModes.COMPOST);
             return barrelTile.getMode().handleInsert(barrelTile, stack);
         }
         return stack;

@@ -2,8 +2,8 @@ package novamachina.exnihilosequentia.common.item.tools.hammer;
 
 import com.google.common.collect.Sets;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.init.ModBlocks;
-import novamachina.exnihilosequentia.common.init.ModInitialization;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,9 +20,9 @@ public class HammerBaseItem extends ToolItem {
     private static final Set<Block> effectiveBlocksOn = Sets
         .newHashSet(Blocks.STONE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.GRANITE,
             Blocks.NETHERRACK, Blocks.END_STONE, Blocks.COBBLESTONE,
-            ModBlocks.CRUSHED_DIORITE.get(), ModBlocks.CRUSHED_ANDESITE.get(),
-            ModBlocks.CRUSHED_GRANITE.get(), ModBlocks.CRUSHED_NETHERRACK.get(),
-            ModBlocks.CRUSHED_END_STONE.get(), Blocks.GRAVEL, Blocks.SAND,
+            ExNihiloBlocks.CRUSHED_DIORITE.get(), ExNihiloBlocks.CRUSHED_ANDESITE.get(),
+            ExNihiloBlocks.CRUSHED_GRANITE.get(), ExNihiloBlocks.CRUSHED_NETHERRACK.get(),
+            ExNihiloBlocks.CRUSHED_END_STONE.get(), Blocks.GRAVEL, Blocks.SAND,
             Blocks.TUBE_CORAL_BLOCK, Blocks.BRAIN_CORAL_BLOCK, Blocks.BUBBLE_CORAL_BLOCK,
             Blocks.FIRE_CORAL_BLOCK, Blocks.HORN_CORAL_BLOCK,
             Blocks.TUBE_CORAL, Blocks.BRAIN_CORAL, Blocks.BUBBLE_CORAL,
@@ -30,7 +30,7 @@ public class HammerBaseItem extends ToolItem {
 
     public HammerBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
-            new Item.Properties().defaultMaxDamage(maxDamage).group(ModInitialization.ITEM_GROUP)
+            new Item.Properties().defaultMaxDamage(maxDamage).group(ExNihiloInitialization.ITEM_GROUP)
                 .addToolType(
                     ToolType.PICKAXE, tier.getHarvestLevel()));
     }

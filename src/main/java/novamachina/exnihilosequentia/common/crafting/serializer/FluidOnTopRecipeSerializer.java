@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.common.init.ModBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class FluidOnTopRecipeSerializer extends RecipeSerializer<FluidOnTopRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ModBlocks.BARREL_WOOD.get());
+        return new ItemStack(ExNihiloBlocks.BARREL_WOOD.get());
     }
 
     @Override

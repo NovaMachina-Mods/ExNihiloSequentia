@@ -9,15 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ModInitialization;
-import novamachina.exnihilosequentia.common.utility.Constants.Items;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 
 public class ResourceItem extends Item {
 
     private final String resourceName;
 
     public ResourceItem(String name) {
-        super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
+        super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
         this.resourceName = name;
     }
 

@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import novamachina.exnihilosequentia.common.init.ModItems;
+import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
+import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
@@ -9,36 +10,35 @@ import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class Items extends ItemModelProvider {
+public class ExNihiloItemGenerator extends AbstractItemGenerator {
     private static final String ITEM_HANDHELD_TAG = "item/handheld";
     private static final String LAYER_0_TAG = "layer0";
     private static final String ITEMS_TAG = "items/";
 
-    public Items(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, Constants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
+    public ExNihiloItemGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
+        super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
 
     @Override
     protected void registerModels() {
-        singleTexture(ModItems.COOKED_SILKWORM.get().getRegistryName()
+        singleTexture(ExNihiloItems.COOKED_SILKWORM.get().getRegistryName()
                 .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-            LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/cooked_silkworm"));
-        singleTexture(ModItems.WITCH_WATER_BUCKET.get().getRegistryName()
+            LAYER_0_TAG, new ResourceLocation(modid, "items/cooked_silkworm"));
+        singleTexture(ExNihiloItems.WITCH_WATER_BUCKET.get().getRegistryName()
                 .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-            LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/bucket_witchwater"));
-        singleTexture(ModItems.SEA_WATER_BUCKET.get().getRegistryName()
+            LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_witchwater"));
+        singleTexture(ExNihiloItems.SEA_WATER_BUCKET.get().getRegistryName()
                 .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-            LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/bucket_sea_water"));
+            LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_sea_water"));
 
         registerCrooks();
         registerHammers();
-        registerOres();
         registerSeeds();
         registerResources();
         registerPebbles();
@@ -50,7 +50,7 @@ public class Items extends ItemModelProvider {
         for (DollEnum doll : DollEnum.values()) {
             singleTexture(doll.getRegistryObject().get().getRegistryName()
                     .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, ITEMS_TAG + doll
+                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + doll
                     .getDollName()));
         }
     }
@@ -59,7 +59,7 @@ public class Items extends ItemModelProvider {
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
                 withExistingParent(mesh.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "block/" + mesh
+                    .getPath(), new ResourceLocation(modid, "block/" + mesh
                     .getMeshName()));
             }
         }
@@ -69,7 +69,7 @@ public class Items extends ItemModelProvider {
         for (EnumPebbleType pebble : EnumPebbleType.values()) {
             singleTexture(pebble.getRegistryObject().get().getRegistryName()
                     .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, ITEMS_TAG + pebble.getType()));
+                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + pebble.getType()));
         }
     }
 
@@ -77,7 +77,7 @@ public class Items extends ItemModelProvider {
         for (EnumResource resource : EnumResource.values()) {
             singleTexture(resource.getRegistryObject().get().getRegistryName()
                     .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, ITEMS_TAG + resource
+                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + resource
                     .getResourceName()));
         }
     }
@@ -86,41 +86,16 @@ public class Items extends ItemModelProvider {
         for (EnumSeed seed : EnumSeed.values()) {
             singleTexture(seed.getRegistryObject().get().getRegistryName()
                     .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, ITEMS_TAG + seed
+                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + seed
                     .getSeedName()));
         }
-    }
-
-    private void registerOres() {
-        for (EnumOre ore : EnumOre.values()) {
-            registerChunk(ore);
-            registerPiece(ore);
-            if (!ore.isVanilla()) {
-                registerIngot(ore);
-            }
-        }
-    }
-
-    private void registerIngot(EnumOre ore) {
-        withExistingParent(ore.getIngotItem().get().getRegistryName()
-            .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "item/ingot_ore"));
-    }
-
-    private void registerPiece(EnumOre ore) {
-        withExistingParent(ore.getPieceItem().get().getRegistryName()
-            .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "item/piece_ore"));
-    }
-
-    private void registerChunk(EnumOre ore) {
-        withExistingParent(ore.getChunkItem().get().getRegistryName()
-            .getPath(), new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "item/chunk_ore"));
     }
 
     private void registerHammers() {
         for (EnumHammer hammer : EnumHammer.values()) {
             singleTexture(hammer.getRegistryObject().get().getRegistryName()
                     .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/tools/hammer/" + hammer.hammerName));
+                LAYER_0_TAG, new ResourceLocation(modid, "items/tools/hammer/" + hammer.hammerName));
         }
     }
 
@@ -128,7 +103,7 @@ public class Items extends ItemModelProvider {
         for (EnumCrook crook : EnumCrook.values()) {
             singleTexture(crook.getRegistryObject().get().getRegistryName()
                     .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "items/tools/crook/" + crook.crookName));
+                LAYER_0_TAG, new ResourceLocation(modid, "items/tools/crook/" + crook.crookName));
         }
     }
 }

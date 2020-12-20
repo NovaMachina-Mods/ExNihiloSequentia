@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel;
 
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
@@ -29,9 +29,9 @@ public class BarrelFluidHandler extends FluidTank {
         int amount = super.fill(resource, action);
         
         if (amount > 0 && this.fluid != FluidStack.EMPTY && (this.barrel.getMode().getModeName()
-            .equals(Constants.BarrelModes.EMPTY) || this.barrel.getMode()
-            .getModeName().equals(Constants.BarrelModes.FLUID))) {
-            this.barrel.setMode(Constants.BarrelModes.FLUID);
+            .equals(ExNihiloConstants.BarrelModes.EMPTY) || this.barrel.getMode()
+            .getModeName().equals(ExNihiloConstants.BarrelModes.FLUID))) {
+            this.barrel.setMode(ExNihiloConstants.BarrelModes.FLUID);
         }
         return amount;
     }

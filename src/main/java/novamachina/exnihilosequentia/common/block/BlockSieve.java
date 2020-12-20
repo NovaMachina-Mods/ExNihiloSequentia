@@ -1,6 +1,8 @@
 package novamachina.exnihilosequentia.common.block;
 
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
@@ -8,7 +10,7 @@ import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -42,13 +44,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoProvider {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-
     public static final EnumProperty<EnumMesh> MESH = EnumProperty.create("mesh", EnumMesh.class);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public BlockSieve() {
         super(new BlockBuilder().properties(
@@ -71,6 +73,32 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
      */
     @Deprecated
     @Override
+    public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+        super.onBlockClicked(state, worldIn, pos, player);
+
+        if(!worldIn.isRemote()) {
+            SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
+            if (player.isSneaking()) {
+                sieveTile.removeMesh(true);
+            }
+        }
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        if(!worldIn.isRemote()) {
+            SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
+            sieveTile.setSieveState();
+        }
+    }
+
+    /**
+     *
+     * @deprecated Ask Mojang
+     */
+    @Deprecated
+    @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote()) {
             logger.debug("Sieve Activated");
@@ -82,9 +110,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
                 activateBlock(currentState, worldIn, player, sievePos, handIn);
             }
 
-            if (stack.isEmpty() && player.isSneaking()) {
-                sieveTile.removeMesh(true);
-            } else if (stack.getItem() instanceof MeshItem) {
+             if (stack.getItem() instanceof MeshItem) {
                 sieveTile.insertMesh(stack);
             }
         }
@@ -150,7 +176,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", block));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
-            String meshName = I18n.format("item." + Constants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName());
+            String meshName = I18n.format("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName());
             if(meshName.equals(sieveTile.getMesh().getMeshName()))
                 meshName = sieveTile.getMesh().getName();
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", meshName));
@@ -170,5 +196,13 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
             });
 
         return nearbySieves;
+    }
+
+    @Override
+    public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
+        if(!worldIn.isRemote() && te instanceof SieveTile) {
+            ((SieveTile)te).removeMesh(true);
+        }
     }
 }

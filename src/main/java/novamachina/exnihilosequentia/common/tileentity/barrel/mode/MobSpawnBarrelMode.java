@@ -4,7 +4,7 @@ import novamachina.exnihilosequentia.common.item.dolls.DollEnum;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -45,7 +45,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
             spawnParticle(barrelTile);
             if (currentProgress >= Config.getSecondsToSpawn() * 20 && doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
                 barrelTile.getTank().setFluid(FluidStack.EMPTY);
-                barrelTile.setMode(Constants.BarrelModes.EMPTY);
+                barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
             }
         }
     }

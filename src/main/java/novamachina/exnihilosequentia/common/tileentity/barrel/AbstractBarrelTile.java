@@ -32,7 +32,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.AbstractBarrelMode;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -55,7 +55,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
 
     protected AbstractBarrelTile(TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
         super(tileEntityType);
-        this.mode = BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY);
+        this.mode = BarrelModeRegistry.getModeFromName(ExNihiloConstants.BarrelModes.EMPTY);
         inventory = new BarrelInventoryHandler(this);
         tank = new BarrelFluidHandler(this);
         solidAmount = 0;
@@ -75,7 +75,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
             return;
         }
 
-        if (mode.isEmptyMode() || mode.getModeName().equals(Constants.BarrelModes.FLUID)) {
+        if (mode.isEmptyMode() || mode.getModeName().equals(ExNihiloConstants.BarrelModes.FLUID)) {
             BlockPos abovePos = pos.add(0, 1, 0);
             if (getWorld().isRainingAt(abovePos)) {
                 FluidStack stack = new FluidStack(Fluids.WATER, Config.getRainFillAmount());
@@ -197,7 +197,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     public void setMode(String nextState) {
         mode = BarrelModeRegistry.getModeFromName(nextState);
         if (mode == null) {
-            mode = BarrelModeRegistry.getModeFromName(Constants.BarrelModes.EMPTY);
+            mode = BarrelModeRegistry.getModeFromName(ExNihiloConstants.BarrelModes.EMPTY);
         }
     }
 

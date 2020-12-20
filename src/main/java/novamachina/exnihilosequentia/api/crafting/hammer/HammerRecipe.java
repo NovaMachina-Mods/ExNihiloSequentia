@@ -6,11 +6,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class HammerRecipe extends SerializableRecipe {
     public static final IRecipeType<HammerRecipe> RECIPE_TYPE = IRecipeType
-        .register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":hammer");
+        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":hammer");
     public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), ItemStack.EMPTY, ItemStack.EMPTY);
     private static RegistryObject<RecipeSerializer<HammerRecipe>> serializer;
     private final ItemStack input;

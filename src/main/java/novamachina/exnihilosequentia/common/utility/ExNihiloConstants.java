@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.utility;
 
-public class Constants {
+public class ExNihiloConstants {
 
     private static final String STONE_TAG = "stone";
 
-    private Constants() {
+    private ExNihiloConstants() {
     }
 
     public static class Blocks {

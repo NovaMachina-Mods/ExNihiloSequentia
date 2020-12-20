@@ -1,24 +1,24 @@
 package novamachina.exnihilosequentia.common.item.tools.crook;
 
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraftforge.fml.RegistryObject;
 
 public enum EnumCrook {
-    WOOD(Constants.Items.CROOK_WOOD, 64, ItemTier.WOOD),
+    WOOD(ExNihiloConstants.Items.CROOK_WOOD, 64, ItemTier.WOOD),
 
-    STONE(Constants.Items.CROOK_STONE, 128, ItemTier.STONE),
-    ANDESITE(Constants.Items.CROOK_ANDESITE, 128, ItemTier.STONE),
-    GRANITE(Constants.Items.CROOK_GRANITE, 128, ItemTier.STONE),
-    DIORITE(Constants.Items.CROOK_DIORITE, 128, ItemTier.STONE),
+    STONE(ExNihiloConstants.Items.CROOK_STONE, 128, ItemTier.STONE),
+    ANDESITE(ExNihiloConstants.Items.CROOK_ANDESITE, 128, ItemTier.STONE),
+    GRANITE(ExNihiloConstants.Items.CROOK_GRANITE, 128, ItemTier.STONE),
+    DIORITE(ExNihiloConstants.Items.CROOK_DIORITE, 128, ItemTier.STONE),
 
-    GOLD(Constants.Items.CROOK_GOLD, 32, ItemTier.IRON),
-    IRON(Constants.Items.CROOK_IRON, 256, ItemTier.IRON),
-    DIAMOND(Constants.Items.CROOK_DIAMOND, 2048, ItemTier.DIAMOND),
+    GOLD(ExNihiloConstants.Items.CROOK_GOLD, 32, ItemTier.IRON),
+    IRON(ExNihiloConstants.Items.CROOK_IRON, 256, ItemTier.IRON),
+    DIAMOND(ExNihiloConstants.Items.CROOK_DIAMOND, 2048, ItemTier.DIAMOND),
 
-    BONE(Constants.Items.CROOK_BONE, 256, ItemTier.STONE);
+    BONE(ExNihiloConstants.Items.CROOK_BONE, 256, ItemTier.STONE);
 
     public final String crookName;
     public final int defaultDurability;
