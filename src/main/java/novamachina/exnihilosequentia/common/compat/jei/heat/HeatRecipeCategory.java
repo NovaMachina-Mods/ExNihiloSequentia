@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.compat.jei.heat;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -21,12 +21,12 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
+    public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
     private final IDrawableStatic background;
 
     public HeatRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper
-            .drawableBuilder(new ResourceLocation(Constants.ModIds.JEI, "textures/gui/gui_vanilla.png"),
+            .drawableBuilder(new ResourceLocation(ExNihiloConstants.ModIds.JEI, "textures/gui/gui_vanilla.png"),
                 0, 134, 18, 34).addPadding(0, 0, 0, 80).build();
     }
 

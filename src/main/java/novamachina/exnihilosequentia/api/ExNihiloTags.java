@@ -1,12 +1,13 @@
 package novamachina.exnihilosequentia.api;
 
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +17,9 @@ import java.util.function.Function;
 public class ExNihiloTags {
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
-    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(Constants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
+    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
-    private static Map<EnumOre, OreTag> ores = new HashMap<>();
+    private static Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
 
     static {
         for (EnumOre ore : EnumOre.values()) {
@@ -66,8 +67,8 @@ public class ExNihiloTags {
         private final ITag.INamedTag<Item> ore;
 
         public OreTag(EnumOre ore) {
-            this.ingot = createItemWrapper(getIngot(ore.getName()));
-            this.ore = createItemWrapper(getOre(ore.getName()));
+            this.ingot = createItemWrapper(getIngot(ore.getOreName()));
+            this.ore = createItemWrapper(getOre(ore.getOreName()));
         }
 
         public ITag.INamedTag<Item> getIngotTag() {

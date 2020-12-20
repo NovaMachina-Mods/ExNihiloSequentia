@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.init.ModTiles;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 public class WoodCrucibleTile extends BaseCrucibleTile {
 
     public WoodCrucibleTile() {
-        super(ModTiles.CRUCIBLE_WOOD.get());
+        super(ExNihiloTiles.CRUCIBLE_WOOD.get());
     }
 
     @Override

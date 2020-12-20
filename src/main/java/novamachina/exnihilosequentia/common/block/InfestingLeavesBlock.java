@@ -15,7 +15,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
-import novamachina.exnihilosequentia.common.init.ModBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
@@ -34,11 +34,11 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
     }
 
     public static void normalToInfesting(World world, BlockPos pos) {
-        world.setBlockState(pos, ModBlocks.INFESTING_LEAVES.get().getDefaultState());
+        world.setBlockState(pos, ExNihiloBlocks.INFESTING_LEAVES.get().getDefaultState());
     }
 
     public static void finishInfestingBlock(World world, BlockPos pos) {
-        world.setBlockState(pos, ModBlocks.INFESTED_LEAVES.get().getDefaultState());
+        world.setBlockState(pos, ExNihiloBlocks.INFESTED_LEAVES.get().getDefaultState());
     }
 
     public static void spread(World world, BlockPos pos) {

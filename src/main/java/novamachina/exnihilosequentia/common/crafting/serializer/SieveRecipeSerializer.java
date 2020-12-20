@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.common.init.ModBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
@@ -17,7 +17,7 @@ import java.util.List;
 public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ModBlocks.SIEVE.get());
+        return new ItemStack(ExNihiloBlocks.SIEVE.get());
     }
 
     @Override

@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import novamachina.exnihilosequentia.common.init.ModTiles;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.client.Minecraft;
@@ -26,7 +26,7 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
 
     public static void register() {
         logger.debug("Registering sieve renderer");
-        ClientRegistry.bindTileEntityRenderer(ModTiles.SIEVE.get(), SieveRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.SIEVE.get(), SieveRender::new);
     }
 
     @Override

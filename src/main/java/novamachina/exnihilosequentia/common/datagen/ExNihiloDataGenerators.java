@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -8,9 +8,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class DataGenerators {
+public class ExNihiloDataGenerators {
 
-    private DataGenerators() {
+    private ExNihiloDataGenerators() {
     }
 
     @SubscribeEvent
@@ -19,19 +19,21 @@ public class DataGenerators {
 
         if (event.includeServer()) {
             // Recipes
-            generator.addProvider(new Recipes(generator));
+            generator.addProvider(new ExNihiloRecipeGenerator(generator));
             // LootTable
-            generator.addProvider(new LootTables(generator));
+            generator.addProvider(new ExNihiloLootTableGenerator(generator));
             // Tags
             generator
-                .addProvider(new ItemTagsGenerator(generator, new BlockTagsProvider(generator, Constants.ModIds.EX_NIHILO_SEQUENTIA, event
+                .addProvider(new ExNihiloItemTagsGenerator(generator, new BlockTagsProvider(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, event
                     .getExistingFileHelper()), event.getExistingFileHelper()));
         }
         if (event.includeClient()) {
             // BlockStates
-            generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
+            generator.addProvider(new ExNihiloBlockStateGenerator(generator, event.getExistingFileHelper()));
             // Items
-            generator.addProvider(new Items(generator, event.getExistingFileHelper()));
+            generator.addProvider(new ExNihiloItemGenerator(generator, event.getExistingFileHelper()));
+            // Ores
+            generator.addProvider(new ExNihiloOreItemGenerator(generator, event.getExistingFileHelper()));
         }
     }
 }

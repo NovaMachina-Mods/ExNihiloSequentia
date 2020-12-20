@@ -1,18 +1,18 @@
 package novamachina.exnihilosequentia.common.item.tools.hammer;
 
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraftforge.fml.RegistryObject;
 
 public enum EnumHammer {
-    WOOD(Constants.Items.HAMMER_WOOD, 64, ItemTier.WOOD),
-    STONE(Constants.Items.HAMMER_STONE, 125, ItemTier.STONE),
-    IRON(Constants.Items.HAMMER_IRON, 512, ItemTier.IRON),
-    DIAMOND(Constants.Items.HAMMER_DIAMOND, 4096, ItemTier.DIAMOND),
-    NETHERITE(Constants.Items.HAMMER_NETHERITE, 8192, ItemTier.NETHERITE),
-    GOLD(Constants.Items.HAMMER_GOLD, 64, ItemTier.GOLD);
+    WOOD(ExNihiloConstants.Items.HAMMER_WOOD, 64, ItemTier.WOOD),
+    STONE(ExNihiloConstants.Items.HAMMER_STONE, 125, ItemTier.STONE),
+    IRON(ExNihiloConstants.Items.HAMMER_IRON, 512, ItemTier.IRON),
+    DIAMOND(ExNihiloConstants.Items.HAMMER_DIAMOND, 4096, ItemTier.DIAMOND),
+    NETHERITE(ExNihiloConstants.Items.HAMMER_NETHERITE, 8192, ItemTier.NETHERITE),
+    GOLD(ExNihiloConstants.Items.HAMMER_GOLD, 64, ItemTier.GOLD);
 
     public final String hammerName;
     public final int defaultDurability;

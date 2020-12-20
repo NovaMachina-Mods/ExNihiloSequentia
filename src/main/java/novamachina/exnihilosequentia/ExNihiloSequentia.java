@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia;
 
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
-import novamachina.exnihilosequentia.common.init.ModInitialization;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
@@ -20,22 +20,22 @@ import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 
-@Mod(Constants.ModIds.EX_NIHILO_SEQUENTIA)
+@Mod(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
 public class ExNihiloSequentia {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public ExNihiloSequentia() {
         logger.debug("Starting Ex Nihilo: Sequentia");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
-        ModInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
+        ExNihiloInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::setupNonTagBasedRegistries);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModInitialization::registerTOP);
-        MinecraftForge.EVENT_BUS.addListener(ModInitialization::loadClientRecipes);
-        MinecraftForge.EVENT_BUS.addListener(ModInitialization::onPlayerLogin);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::setupNonTagBasedRegistries);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::registerTOP);
+        MinecraftForge.EVENT_BUS.addListener(ExNihiloInitialization::loadClientRecipes);
+        MinecraftForge.EVENT_BUS.addListener(ExNihiloInitialization::onPlayerLogin);
     }
 
-    @EventBusSubscriber(modid = Constants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)
+    @EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)
     public static class EventHandlers {
         private EventHandlers() {
         }
@@ -46,7 +46,7 @@ public class ExNihiloSequentia {
             logger.debug("Registering Loot Modifiers");
             event.getRegistry()
                 .register(new UseHammerModifier.Serializer()
-                    .setRegistryName(Constants.ModIds.EX_NIHILO_SEQUENTIA, "use_hammer"));
+                    .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_hammer"));
         }
     }
 }

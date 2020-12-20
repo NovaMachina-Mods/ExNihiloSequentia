@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.api.crafting.fluiditem;
 
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FluidItemRecipe extends SerializableRecipe {
-    public static final IRecipeType<FluidItemRecipe> RECIPE_TYPE = IRecipeType.register(Constants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
+    public static final IRecipeType<FluidItemRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
     private static RegistryObject<RecipeSerializer<FluidItemRecipe>> serializer;
     private final FluidStack fluid;
     private final Ingredient input;

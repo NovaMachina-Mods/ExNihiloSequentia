@@ -9,7 +9,6 @@ pipeline {
             steps{
                 sh 'chmod +x gradlew'
                 sh 'chmod +x create-release.sh'
-                sh './gradlew --stop'
                 sh './gradlew clean'
             }
         }
@@ -27,7 +26,8 @@ pipeline {
             }
             steps {
                 sh './create-release.sh'
-                sh './gradlew curseforge400012'
+                sh './gradlew curseforge'
+                sh './gradlew publish'
             }
         }
     }

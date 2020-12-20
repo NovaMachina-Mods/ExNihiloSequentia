@@ -4,13 +4,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.init.ModTiles;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 public class FiredCrucibleTile extends BaseCrucibleTile {
 
     public FiredCrucibleTile() {
-        super(ModTiles.CRUCIBLE_FIRED.get());
+        super(ExNihiloTiles.CRUCIBLE_FIRED.get());
     }
 
     @Override

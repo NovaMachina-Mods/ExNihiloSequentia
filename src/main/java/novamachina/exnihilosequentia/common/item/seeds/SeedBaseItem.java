@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.item.seeds;
 
-import novamachina.exnihilosequentia.common.init.ModInitialization;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,7 +21,7 @@ public class SeedBaseItem extends Item implements IPlantable {
     private PlantType type;
 
     public SeedBaseItem(BlockState plant) {
-        super(new Item.Properties().group(ModInitialization.ITEM_GROUP));
+        super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
         this.plant = plant;
     }
 

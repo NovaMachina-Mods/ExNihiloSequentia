@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.compat.waila;
 
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.IDataAccessor;
@@ -25,7 +25,7 @@ public class SieveComponentProvider implements IComponentProvider {
             tooltip.add(new TranslationTextComponent("waila.sieve.block", block));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
-            String meshName = I18n.format("item." + Constants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName());
+            String meshName = I18n.format("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName());
             if(meshName.equals(sieveTile.getMesh().getMeshName()))
                 meshName = sieveTile.getMesh().getName();
             tooltip.add(new TranslationTextComponent("waila.sieve.mesh", meshName));

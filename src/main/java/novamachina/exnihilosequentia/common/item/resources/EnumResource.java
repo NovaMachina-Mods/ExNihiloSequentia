@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.item.resources;
 
-import novamachina.exnihilosequentia.common.utility.Constants.Items;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 

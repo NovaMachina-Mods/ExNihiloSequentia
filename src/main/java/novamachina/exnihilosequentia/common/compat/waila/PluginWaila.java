@@ -5,13 +5,13 @@ import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.block.FiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.block.WoodCrucibleBlock;
-import novamachina.exnihilosequentia.common.utility.Constants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
 import mcp.mobius.waila.api.WailaPlugin;
 
-@WailaPlugin(Constants.ModIds.EX_NIHILO_SEQUENTIA)
+@WailaPlugin(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
 public class PluginWaila implements IWailaPlugin {
     @Override
     public void register(IRegistrar registrar) {

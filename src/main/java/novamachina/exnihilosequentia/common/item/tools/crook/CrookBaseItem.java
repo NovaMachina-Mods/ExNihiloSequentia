@@ -5,7 +5,7 @@ import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ModInitialization;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.block.Block;
@@ -35,7 +35,7 @@ public class CrookBaseItem extends ToolItem {
 
     public CrookBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, Sets.newHashSet(),
-            new Item.Properties().defaultMaxDamage(maxDamage).group(ModInitialization.ITEM_GROUP));
+            new Item.Properties().defaultMaxDamage(maxDamage).group(ExNihiloInitialization.ITEM_GROUP));
     }
 
     @Override
