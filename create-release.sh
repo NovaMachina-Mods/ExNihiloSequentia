@@ -1,3 +1,5 @@
+#!/bin/bash
+
 getVersion() {
   readarray -d = -t mc_release<<< "$(grep minecraft_release gradle.properties)"
   readarray -d = -t major<<< "$(grep version_major gradle.properties)"
