@@ -29,7 +29,7 @@ public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
             rolls.add(MeshWithChance.deserialize(element));
         }
         if(json.has("waterlogged")) {
-            return new SieveRecipe(recipeId, input, drop, rolls, true);
+            return new SieveRecipe(recipeId, input, drop, rolls, json.get("waterlogged").getAsBoolean());
         }
         return new SieveRecipe(recipeId, input, drop, rolls, false);
     }
