@@ -29,4 +29,9 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
             getOrCreateBuilder(Tags.Items.ORES).addTag(tags.getOreTag());
         }
     }
+
+    @Override
+    public String getName() {
+        return "Item Tags" + modId;
+    }
 }
