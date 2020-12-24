@@ -50,34 +50,36 @@ public class CrookBaseItem extends ToolItem {
         super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
         List<ItemStack> itemDrops = new ArrayList<>();
 
-        for (int i = 0; i < Config.getVanillaSimulateDropCount(); i++) {
-            List<ItemStack> items = Block
-                .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimensionKey()),
-                    pos, null);
-            itemDrops.addAll(items);
-        }
+        if (ExNihiloRegistries.CROOK_REGISTRY.isCrookable(state.getBlock())) {
+            for (int i = 0; i < Config.getVanillaSimulateDropCount(); i++) {
+                List<ItemStack> items = Block
+                    .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimensionKey()),
+                        pos, null);
+                itemDrops.addAll(items);
+            }
 
-        for(CrookRecipe recipe : ExNihiloRegistries.CROOK_REGISTRY.getDrops(state.getBlock())) {
-            for(ItemStackWithChance result : recipe.getOutput()) {
-                if(random.nextFloat() <= result.getChance()) {
-                    itemDrops.add(result.getStack());
+            for (CrookRecipe recipe : ExNihiloRegistries.CROOK_REGISTRY.getDrops(state.getBlock())) {
+                for (ItemStackWithChance result : recipe.getOutput()) {
+                    if (random.nextFloat() <= result.getChance()) {
+                        itemDrops.add(result.getStack());
+                    }
                 }
             }
-        }
 
-        if (state.getBlock() instanceof InfestedLeavesBlock) {
-            itemDrops.add(new ItemStack(Items.STRING, random
-                .nextInt(Config.getMaxBonusStringCount()) + Config.getMinStringCount()));
-            if (random.nextDouble() <= 0.8) {
-                itemDrops
-                    .add(new ItemStack(EnumResource.SILKWORM.getRegistryObject().get()));
+            if (state.getBlock() instanceof InfestedLeavesBlock) {
+                itemDrops.add(new ItemStack(Items.STRING, random
+                    .nextInt(Config.getMaxBonusStringCount()) + Config.getMinStringCount()));
+                if (random.nextDouble() <= 0.8) {
+                    itemDrops
+                        .add(new ItemStack(EnumResource.SILKWORM.getRegistryObject().get()));
+                }
             }
-        }
 
-        for (ItemStack item : itemDrops) {
-            worldIn.addEntity(
-                new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
-                    item));
+            for (ItemStack item : itemDrops) {
+                worldIn.addEntity(
+                    new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
+                        item));
+            }
         }
         return true;
     }
