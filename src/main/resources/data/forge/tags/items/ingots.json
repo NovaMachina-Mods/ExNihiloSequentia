@@ -8,9 +8,7 @@
     "#forge:ingots/tin",
     "#forge:ingots/aluminum",
     "#forge:ingots/platinum",
-    "#forge:ingots/osmium",
     "#forge:ingots/uranium",
-    "#forge:ingots/zinc",
-    "#forge:ingots/bismuth"
+    "#forge:ingots/zinc"
   ]
 }
