@@ -63,7 +63,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CookingRecipeBuilder
             .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem(), 0.7F, 200)
             .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
-            .build(consumer);
+            .build(consumer, new ResourceLocation(modId, ore.getIngotName()));
     }
 
     protected void registerOre(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
