@@ -32,6 +32,6 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
 
     @Override
     public String getName() {
-        return "Item Tags" + modId;
+        return "Item Tags: " + modId;
     }
 }
