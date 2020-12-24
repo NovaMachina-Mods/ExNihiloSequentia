@@ -56,7 +56,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     private static final String PORCELAIN_CLAY_CONDITION = "has_porcelain_clay";
     private static final String MATERIAL_CONDITION = "has_material";
     private static final String DOLL_CONDITION = "has_doll";
-    private static final String CHUNK_CONDITION = "has_chunk";
     private static final String PEBBLE_CONDITION = "has_pebble";
 
     public ExNihiloRecipeGenerator(DataGenerator generator) {
@@ -827,23 +826,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 }
             }
         }
-    }
-
-    private void registerSmelting(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
-        CookingRecipeBuilder
-            .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem().get(), 0.7F, 200)
-            .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
-            .build(consumer);
-    }
-
-    private void registerOre(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(ore.getChunkItem().get())
-            .patternLine("xx")
-            .patternLine("xx")
-            .key('x', ore.getPieceItem().get())
-            .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
-            .addCriterion("has_piece", InventoryChangeTrigger.Instance.forItems(ore.getPieceItem().get()))
-            .build(consumer);
     }
 
     private void registerBarrels(Consumer<IFinishedRecipe> consumer) {

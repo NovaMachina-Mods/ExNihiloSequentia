@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.datagen;
 
 import novamachina.exnihilosequentia.api.ExNihiloTags;
+import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
@@ -13,7 +14,7 @@ import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ExNihiloItemTagsGenerator extends ItemTagsProvider {
+public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     public ExNihiloItemTagsGenerator(DataGenerator generator, BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper) {
         super(generator, blockTagsProvider, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
@@ -71,19 +72,7 @@ public class ExNihiloItemTagsGenerator extends ItemTagsProvider {
     private void registerOres() {
         for(EnumOre ore : EnumOre.values()) {
             ExNihiloTags.OreTag tags = ExNihiloTags.getOreTags(ore);
-            if(!ore.isVanilla()) {
-                Item ingot = ore.getIngotItem().get();
-                Item chunk = ore.getChunkItem().get();
-
-                getOrCreateBuilder(tags.getIngotTag()).addItemEntry(ingot);
-                getOrCreateBuilder(Tags.Items.INGOTS).addTag(tags.getIngotTag());
-                getOrCreateBuilder(tags.getOreTag()).addItemEntry(chunk);
-                getOrCreateBuilder(Tags.Items.ORES).addTag(tags.getOreTag());
-            } else {
-                Item chunk = ore.getChunkItem().get();
-                getOrCreateBuilder(tags.getOreTag()).addItemEntry(chunk);
-                getOrCreateBuilder(Tags.Items.ORES).addTag(tags.getOreTag());
-            }
+            registerOre(ore, tags);
         }
     }
 }

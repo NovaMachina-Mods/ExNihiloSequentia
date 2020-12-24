@@ -30,8 +30,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public class ExNihiloItems {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final Map<EnumOre, RegistryObject<OreItem>> ingotMap = new EnumMap<>(EnumOre.class);
     // Begin Block Items
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
         ForgeRegistries.ITEMS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
@@ -111,8 +115,10 @@ public class ExNihiloItems {
         for (EnumOre ore : EnumOre.values()) {
             ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
             ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
-            if (!ore.isVanilla()) {
-                ore.setIngotItem(ITEMS.register(ore.getIngotName(), () -> new OreItem(ore)));
+            if (ore.shouldGenerateIngot()) {
+                RegistryObject<OreItem> item = ITEMS.register(ore.getIngotName(), () -> new OreItem(ore));
+                ore.setIngotRegistryItem(item);
+                ingotMap.put(ore, item);
             }
         }
 
@@ -144,8 +150,20 @@ public class ExNihiloItems {
     private ExNihiloItems() {
     }
 
+    public static Map<EnumOre, RegistryObject<OreItem>> getIngotMap() {
+        return ingotMap;
+    }
+
     public static void init(IEventBus modEventBus) {
         logger.debug("Register items");
         ITEMS.register(modEventBus);
+    }
+
+    public static void fillOreIngots() {
+        for(EnumOre ore : EnumOre.values()) {
+            if(ore.shouldGenerateIngot()) {
+                ore.setIngotItem(ingotMap.get(ore).get());
+            }
+        }
     }
 }
