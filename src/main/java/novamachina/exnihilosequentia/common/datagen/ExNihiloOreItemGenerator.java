@@ -15,7 +15,7 @@ public class ExNihiloOreItemGenerator extends AbstractOreItemGenerator {
         for (EnumOre ore : EnumOre.values()) {
             registerChunk(ore);
             registerPiece(ore);
-            if (!ore.isVanilla()) {
+            if (ore.shouldGenerateIngot()) {
                 registerIngot(ore);
             }
         }

@@ -51,8 +51,8 @@ public class ClientSetup {
         for (EnumOre ore : EnumOre.values()) {
             event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
             event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
-            if (!ore.isVanilla()) {
-                event.getItemColors().register(new OreColor(), ore.getIngotItem().get());
+            if (ore.shouldGenerateIngot()) {
+                event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
             }
         }
     }

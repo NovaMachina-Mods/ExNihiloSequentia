@@ -12,7 +12,7 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
         super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
     protected void registerIngot(EnumOre ore) {
-        withExistingParent(ore.getIngotItem().get().getRegistryName()
+        withExistingParent(ore.getIngotItem().getRegistryName()
             .getPath(), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "item/ingot_ore"));
     }
 

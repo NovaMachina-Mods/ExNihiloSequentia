@@ -71,8 +71,8 @@ public class ExNihiloItemTagsGenerator extends ItemTagsProvider {
     private void registerOres() {
         for(EnumOre ore : EnumOre.values()) {
             ExNihiloTags.OreTag tags = ExNihiloTags.getOreTags(ore);
-            if(!ore.isVanilla()) {
-                Item ingot = ore.getIngotItem().get();
+            if(ore.shouldGenerateIngot()) {
+                Item ingot = ore.getIngotItem();
                 Item chunk = ore.getChunkItem().get();
 
                 getOrCreateBuilder(tags.getIngotTag()).addItemEntry(ingot);

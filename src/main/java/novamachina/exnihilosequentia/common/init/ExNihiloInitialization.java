@@ -77,6 +77,7 @@ public class ExNihiloInitialization {
     @SubscribeEvent
     public static void setupNonTagBasedRegistries(FMLCommonSetupEvent event) {
         logger.debug("Fired FMLCommonSetupEvent");
+        ExNihiloItems.fillOreIngots();
         BarrelModeRegistry.initialize();
         PacketHandler.registerMessages();
     }

@@ -831,7 +831,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
 
     private void registerSmelting(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
         CookingRecipeBuilder
-            .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem().get(), 0.7F, 200)
+            .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem(), 0.7F, 200)
             .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
             .build(consumer);
     }
