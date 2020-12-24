@@ -19,12 +19,12 @@ public enum EnumOre implements IExtensibleEnum {
     TIN(Type.MODDED, ExNihiloConstants.Ore.TIN, new Color("F5FEFF"), false),
     ALUMINUM(Type.MODDED, ExNihiloConstants.Ore.ALUMINUM, new Color("BFBFBF"), false),
     PLATINUM(Type.MODDED, ExNihiloConstants.Ore.PLATINUM, new Color("00FFF7"), false),
-    OSMIUM(Type.MODDED, ExNihiloConstants.Ore.OSMIUM, new Color("BBDDFF"), false),
+//    OSMIUM(Type.MODDED, ExNihiloConstants.Ore.OSMIUM, new Color("BBDDFF"), false),
     URANIUM(Type.MODDED, ExNihiloConstants.Ore.URANIUM, new Color("4E5B43"), false),
     ZINC(Type.MODDED, ExNihiloConstants.Ore.ZINC, new Color("A59C74"), false),
     IRON(Type.VANILLA, ExNihiloConstants.Ore.IRON, new Color("BF8040"), true),
-    GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true),
-    BISMUTH(Type.MODDED, ExNihiloConstants.Ore.BISMUTH, new Color("908194"), false);
+    GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true);
+//    BISMUTH(Type.MODDED, ExNihiloConstants.Ore.BISMUTH, new Color("908194"), false);
 
     private final String oreName;
     private final Color color;

@@ -8,6 +8,6 @@ public class Mekanism implements IOreCompat {
     public void activateOres() {
         EnumOre.TIN.setEnabled();
         EnumOre.COPPER.setEnabled();
-        EnumOre.OSMIUM.setEnabled();
+//        EnumOre.OSMIUM.setEnabled();
     }
 }

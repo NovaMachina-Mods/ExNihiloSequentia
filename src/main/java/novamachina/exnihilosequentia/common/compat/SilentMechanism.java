@@ -15,6 +15,6 @@ public class SilentMechanism implements IOreCompat {
         EnumOre.PLATINUM.setEnabled();
         EnumOre.LEAD.setEnabled();
         EnumOre.SILVER.setEnabled();
-        EnumOre.BISMUTH.setEnabled();
+//        EnumOre.BISMUTH.setEnabled();
     }
 }
