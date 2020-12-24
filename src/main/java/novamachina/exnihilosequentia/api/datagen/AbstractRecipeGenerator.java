@@ -9,7 +9,6 @@ import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.function.Consumer;
 
@@ -71,9 +70,9 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
             .patternLine("xx")
             .patternLine("xx")
             .key('x', ore.getPieceItem().get())
-            .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+            .setGroup(this.modId)
             .addCriterion("has_piece", InventoryChangeTrigger.Instance.forItems(ore.getPieceItem().get()))
-            .build(consumer);
+            .build(consumer, new ResourceLocation(modId, ore.getChunkName()));
     }
 
     @Override
