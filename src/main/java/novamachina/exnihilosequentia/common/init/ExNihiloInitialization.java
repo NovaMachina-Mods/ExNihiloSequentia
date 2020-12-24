@@ -33,7 +33,6 @@ import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.compat.Create;
 import novamachina.exnihilosequentia.common.compat.ExNihilo;
 import novamachina.exnihilosequentia.common.compat.ImmersiveEngineering;
-import novamachina.exnihilosequentia.common.compat.Mekanism;
 import novamachina.exnihilosequentia.common.compat.SilentMechanism;
 import novamachina.exnihilosequentia.common.compat.ThermalExpansion;
 import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
@@ -179,12 +178,6 @@ public class ExNihiloInitialization {
         if (ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING) || Config.getEnableImmersive()) {
             logger.debug("Added Immersive Engineering");
             oreCompats.add(new ImmersiveEngineering());
-        }
-        logger.debug("Mekanism detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.MEKANISM));
-        logger.debug("Mekanism config enabled: " + Config.getEnableMekanism());
-        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.MEKANISM) || Config.getEnableMekanism()) {
-            logger.debug("Added Mekanism");
-            oreCompats.add(new Mekanism());
         }
         logger.debug("Create detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE));
         logger.debug("Create config enabled: " + Config.getEnableMekanism());

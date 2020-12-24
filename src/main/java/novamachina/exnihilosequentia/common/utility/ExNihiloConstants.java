@@ -112,7 +112,6 @@ public class ExNihiloConstants {
         public static final String TIN = "tin";
         public static final String ALUMINUM = "aluminum";
         public static final String PLATINUM = "platinum";
-        public static final String OSMIUM = "osmium";
         public static final String URANIUM = "uranium";
         public static final String ZINC = "zinc";
         public static final String BISMUTH = "bismuth";
@@ -149,7 +148,6 @@ public class ExNihiloConstants {
         public static final String JEI = "jei";
         public static final String EX_NIHILO_SEQUENTIA = "exnihilosequentia";
         public static final String TOP = "theoneprobe";
-        public static final String MEKANISM = "mekanism";
         public static final String CREATE = "create";
         public static final String MINECRAFT = "minecraft";
         public static final String SILENT_MECHANISM = "silent_mechanism";
