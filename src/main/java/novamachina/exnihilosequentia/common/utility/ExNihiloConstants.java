@@ -151,6 +151,8 @@ public class ExNihiloConstants {
         public static final String CREATE = "create";
         public static final String MINECRAFT = "minecraft";
         public static final String SILENT_MECHANISM = "silent_mechanism";
+        public static final String CRAFT_TWEAKER = "crafttweaker";
+
         private ModIds() {
         }
     }
