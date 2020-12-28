@@ -9,27 +9,27 @@ import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenHammerRecipe")
-public class ZenHammerRecipie {
+public class ZenHammerRecipe {
 
     private HammerRecipe internal;
 
-    private ZenHammerRecipie(ResourceLocation recipeId) {
+    private ZenHammerRecipe(ResourceLocation recipeId) {
         this.internal = new HammerRecipe(recipeId, ItemStack.EMPTY, ItemStack.EMPTY);
     }
 
     @ZenCodeType.Method
-    public static ZenHammerRecipie builder(ResourceLocation recipeId) {
-        return new ZenHammerRecipie(recipeId);
+    public static ZenHammerRecipe builder(ResourceLocation recipeId) {
+        return new ZenHammerRecipe(recipeId);
     }
 
     @ZenCodeType.Method
-    public ZenHammerRecipie setInput(IItemStack input) {
+    public ZenHammerRecipe setInput(IItemStack input) {
         internal.setInput(input.getInternal());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenHammerRecipie setOutput(IItemStack output) {
+    public ZenHammerRecipe setOutput(IItemStack output) {
         internal.setOutput(output.getInternal());
         return this;
     }
