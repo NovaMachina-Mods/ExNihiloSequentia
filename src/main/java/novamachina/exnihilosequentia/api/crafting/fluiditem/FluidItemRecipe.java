@@ -18,9 +18,9 @@ import java.util.List;
 public class FluidItemRecipe extends SerializableRecipe {
     public static final IRecipeType<FluidItemRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
     private static RegistryObject<RecipeSerializer<FluidItemRecipe>> serializer;
-    private final FluidStack fluid;
-    private final Ingredient input;
-    private final ItemStack output;
+    private FluidStack fluid;
+    private Ingredient input;
+    private ItemStack output;
 
     public FluidItemRecipe(ResourceLocation id, FluidStack fluid, Ingredient input, ItemStack output) {
         super(output, RECIPE_TYPE, id);
@@ -47,12 +47,24 @@ public class FluidItemRecipe extends SerializableRecipe {
         return output;
     }
 
+    public void setOutput(ItemStack output) {
+        this.output = output;
+    }
+
     public FluidStack getFluidInBarrel() {
         return fluid;
     }
 
+    public void setFluid(FluidStack fluidInBarrel) {
+        this.fluid = fluidInBarrel;
+    }
+
     public Ingredient getInput() {
         return input;
+    }
+
+    public void setInput(Ingredient input) {
+        this.input = input;
     }
 
     public List<ItemStack> getInputs() {
