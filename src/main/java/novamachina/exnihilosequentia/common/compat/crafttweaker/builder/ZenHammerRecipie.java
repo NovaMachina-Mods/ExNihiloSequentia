@@ -2,11 +2,9 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IItemStack;
-import com.blamejared.crafttweaker.impl.blocks.MCBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
