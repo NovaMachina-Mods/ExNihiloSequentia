@@ -16,8 +16,8 @@ public class CompostRecipe extends SerializableRecipe {
     public static final IRecipeType<CompostRecipe> RECIPE_TYPE = IRecipeType
         .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
     private static RegistryObject<RecipeSerializer<CompostRecipe>> serializer;
-    private final Ingredient input;
-    private final int amount;
+    private Ingredient input;
+    private int amount;
     public CompostRecipe(ResourceLocation id, Ingredient input, int amount) {
         super(null, RECIPE_TYPE, id);
         this.input = input;
@@ -36,8 +36,16 @@ public class CompostRecipe extends SerializableRecipe {
         return input;
     }
 
+    public void setInput(Ingredient input) {
+        this.input = input;
+    }
+
     public int getAmount() {
         return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @Override
