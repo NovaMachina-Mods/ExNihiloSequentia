@@ -10,6 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -93,6 +94,7 @@ public class ExNihiloInitialization {
     }
 
     public static void loadClientRecipes(RecipesUpdatedEvent event) {
+        ExNihiloRegistries.clearRegistries();
         loadRecipes(event.getRecipeManager());
     }
 
@@ -104,15 +106,7 @@ public class ExNihiloInitialization {
     @SubscribeEvent
     public static void clearRegistries(ClientPlayerNetworkEvent.LoggedOutEvent event) {
         logger.debug("Fired LoggedOutEvent");
-        ExNihiloRegistries.HAMMER_REGISTRY.clearRecipes();
-        ExNihiloRegistries.CROOK_REGISTRY.clearRecipes();
-        ExNihiloRegistries.COMPOST_REGISTRY.clearRecipes();
-        ExNihiloRegistries.FLUID_BLOCK_REGISTRY.clearRecipes();
-        ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.clearRecipes();
-        ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.clearRecipes();
-        ExNihiloRegistries.CRUCIBLE_REGISTRY.clearRecipes();
-        ExNihiloRegistries.HEAT_REGISTRY.clearRecipes();
-        ExNihiloRegistries.SIEVE_REGISTRY.clearRecipes();
+        ExNihiloRegistries.clearRegistries();
     }
 
     @SubscribeEvent
