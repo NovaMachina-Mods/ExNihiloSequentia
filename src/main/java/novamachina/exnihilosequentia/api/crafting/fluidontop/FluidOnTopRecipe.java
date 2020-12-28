@@ -14,9 +14,9 @@ public class FluidOnTopRecipe extends SerializableRecipe {
     public static final IRecipeType<FluidOnTopRecipe> RECIPE_TYPE = IRecipeType
         .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
     private static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> serializer;
-    private final FluidStack fluidInTank;
-    private final FluidStack fluidOnTop;
-    private final ItemStack result;
+    private FluidStack fluidInTank;
+    private FluidStack fluidOnTop;
+    private ItemStack result;
 
     public FluidOnTopRecipe(ResourceLocation id, FluidStack fluidInTank, FluidStack fluidOnTop, ItemStack result) {
         super(result, RECIPE_TYPE, id);
@@ -37,8 +37,16 @@ public class FluidOnTopRecipe extends SerializableRecipe {
         return fluidInTank;
     }
 
+    public void setFluidInTank(FluidStack fluidInTank) {
+        this.fluidInTank = fluidInTank;
+    }
+
     public FluidStack getFluidOnTop() {
         return fluidOnTop;
+    }
+
+    public void setFluidOnTop(FluidStack fluidOnTop) {
+        this.fluidOnTop = fluidOnTop;
     }
 
     @Override
@@ -49,6 +57,10 @@ public class FluidOnTopRecipe extends SerializableRecipe {
     @Override
     public ItemStack getRecipeOutput() {
         return result;
+    }
+
+    public void setResult(ItemStack result) {
+        this.result = result;
     }
 
     public boolean validInputs(Fluid fluidInTank, Fluid fluidOnTop) {
