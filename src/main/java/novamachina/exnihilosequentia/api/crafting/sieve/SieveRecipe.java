@@ -14,14 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SieveRecipe extends SerializableRecipe {
-    public static final IRecipeType<SieveRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
+    public static final IRecipeType<SieveRecipe> RECIPE_TYPE = IRecipeType
+        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
     private static RegistryObject<RecipeSerializer<SieveRecipe>> serializer;
 
-    private final Ingredient input;
-    private final ItemStack drop;
-    private final List<MeshWithChance> rolls;
-    private final boolean isWaterlogged;
-    private final ResourceLocation recipeId;
+    private Ingredient input;
+    private ItemStack drop;
+    private List<MeshWithChance> rolls;
+    private boolean isWaterlogged;
+    private ResourceLocation recipeId;
 
     public SieveRecipe(ResourceLocation id, Ingredient input, ItemStack drop, List<MeshWithChance> rolls, boolean isWaterlogged) {
         super(drop, RECIPE_TYPE, id);
@@ -40,20 +41,45 @@ public class SieveRecipe extends SerializableRecipe {
         SieveRecipe.serializer = serializer;
     }
 
+    public ResourceLocation getRecipeId() {
+        return recipeId;
+    }
+
     public Ingredient getInput() {
         return input;
+    }
+
+    public void setInput(Ingredient input) {
+        this.input = input;
     }
 
     public ItemStack getDrop() {
         return drop.copy();
     }
 
+    public void setDrop(ItemStack drop) {
+        this.drop = drop;
+    }
+
     public List<MeshWithChance> getRolls() {
         return rolls;
     }
 
+    public void addRoll(String meshString, float chance) {
+        EnumMesh mesh = EnumMesh.getMeshFromName(meshString);
+        addRoll(mesh, chance);
+    }
+
+    public void addRoll(EnumMesh mesh, float chance) {
+        this.rolls.add(new MeshWithChance(mesh, chance));
+    }
+
+    public void setWaterlogged() {
+        this.isWaterlogged = true;
+    }
+
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<SieveRecipe> getENSerializer() {
         return serializer.get();
     }
 
@@ -68,13 +94,13 @@ public class SieveRecipe extends SerializableRecipe {
 
     public SieveRecipe filterByMesh(EnumMesh meshType, boolean flattenRecipes) {
         List<MeshWithChance> possibleMeshes = new ArrayList<>();
-        for(MeshWithChance mesh : rolls) {
-            if(flattenRecipes) {
-                if(mesh.getMesh().getId() <= meshType.getId()) {
+        for (MeshWithChance mesh : rolls) {
+            if (flattenRecipes) {
+                if (mesh.getMesh().getId() <= meshType.getId()) {
                     possibleMeshes.add(mesh);
                 }
             } else {
-                if(mesh.getMesh().getId() == meshType.getId()) {
+                if (mesh.getMesh().getId() == meshType.getId()) {
                     possibleMeshes.add(mesh);
                 }
             }

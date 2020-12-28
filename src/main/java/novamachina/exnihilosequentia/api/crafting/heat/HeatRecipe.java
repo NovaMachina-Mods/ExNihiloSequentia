@@ -12,8 +12,8 @@ import net.minecraftforge.fml.RegistryObject;
 public class HeatRecipe extends SerializableRecipe {
     public static final IRecipeType<HeatRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
     private static RegistryObject<RecipeSerializer<HeatRecipe>> serializer;
-    private final Block input;
-    private final int amount;
+    private Block input;
+    private int amount;
 
     public HeatRecipe(ResourceLocation id, Block input, int amount) {
         super(null, RECIPE_TYPE, id);
@@ -33,12 +33,20 @@ public class HeatRecipe extends SerializableRecipe {
         return input;
     }
 
+    public void setInput(Block input) {
+        this.input = input;
+    }
+
     public int getAmount() {
         return amount;
     }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<HeatRecipe> getENSerializer() {
         return serializer.get();
     }
 

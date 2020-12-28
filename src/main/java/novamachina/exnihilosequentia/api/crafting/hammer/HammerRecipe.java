@@ -13,8 +13,8 @@ public class HammerRecipe extends SerializableRecipe {
         .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":hammer");
     public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), ItemStack.EMPTY, ItemStack.EMPTY);
     private static RegistryObject<RecipeSerializer<HammerRecipe>> serializer;
-    private final ItemStack input;
-    private final ItemStack output;
+    private ItemStack input;
+    private ItemStack output;
 
     public HammerRecipe(ResourceLocation id, ItemStack input, ItemStack output) {
         super(output, RECIPE_TYPE, id);
@@ -34,13 +34,21 @@ public class HammerRecipe extends SerializableRecipe {
         return input.copy();
     }
 
+    public void setInput(ItemStack input) {
+        this.input = input;
+    }
+
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<HammerRecipe> getENSerializer() {
         return serializer.get();
     }
 
     @Override
     public ItemStack getRecipeOutput() {
         return this.output.copy();
+    }
+
+    public void setOutput(ItemStack output) {
+        this.output = output;
     }
 }

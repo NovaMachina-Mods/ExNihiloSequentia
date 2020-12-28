@@ -61,7 +61,7 @@ public abstract class SerializableRecipe implements IRecipe<IInventory> {
         return getENSerializer();
     }
 
-    protected abstract RecipeSerializer getENSerializer();
+    protected abstract RecipeSerializer<? extends SerializableRecipe> getENSerializer();
 
     @Override
     public IRecipeType<?> getType()
