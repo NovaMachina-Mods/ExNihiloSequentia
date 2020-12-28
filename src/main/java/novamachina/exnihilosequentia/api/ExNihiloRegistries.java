@@ -31,4 +31,16 @@ public class ExNihiloRegistries {
     public static final IFluidItemTransformRegistry FLUID_BLOCK_REGISTRY = new FluidItemTransformRegistry();
     private ExNihiloRegistries() {
     }
+
+    public static void clearRegistries() {
+        CROOK_REGISTRY.clearRecipes();
+        COMPOST_REGISTRY.clearRecipes();
+        HAMMER_REGISTRY.clearRecipes();
+        SIEVE_REGISTRY.clearRecipes();
+        HEAT_REGISTRY.clearRecipes();
+        CRUCIBLE_REGISTRY.clearRecipes();
+        FLUID_ON_TOP_REGISTRY.clearRecipes();
+        FLUID_TRANSFORM_REGISTRY.clearRecipes();
+        FLUID_BLOCK_REGISTRY.clearRecipes();
+    }
 }
