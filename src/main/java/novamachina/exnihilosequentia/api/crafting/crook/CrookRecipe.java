@@ -17,8 +17,8 @@ import java.util.List;
 public class CrookRecipe extends SerializableRecipe {
     public static final IRecipeType<CrookRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
     private static RegistryObject<RecipeSerializer<CrookRecipe>> serializer;
-    private final Ingredient input;
-    private final List<ItemStackWithChance> output;
+    private Ingredient input;
+    private List<ItemStackWithChance> output;
     public CrookRecipe(ResourceLocation id, Ingredient input, List<ItemStackWithChance> output) {
         super(output.get(0).getStack(), RECIPE_TYPE, id);
         this.input = input;
@@ -41,6 +41,10 @@ public class CrookRecipe extends SerializableRecipe {
         return input;
     }
 
+    public void setInput(Ingredient input) {
+        this.input = input;
+    }
+
     @Override
     protected RecipeSerializer getENSerializer() {
         return serializer.get();
@@ -49,6 +53,10 @@ public class CrookRecipe extends SerializableRecipe {
     @Override
     public ItemStack getRecipeOutput() {
         return output.get(0).getStack().copy();
+    }
+
+    public void addOutput(ItemStack item, float chance) {
+        output.add(new ItemStackWithChance(item, chance));
     }
 
     public List<ItemStack> getInputs() {
