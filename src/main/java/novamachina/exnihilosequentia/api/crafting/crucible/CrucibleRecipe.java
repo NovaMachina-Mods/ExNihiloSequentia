@@ -18,17 +18,17 @@ public class CrucibleRecipe extends SerializableRecipe {
     public static final IRecipeType<CrucibleRecipe> RECIPE_TYPE = IRecipeType
         .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
     private static RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer;
-    private final Ingredient input;
-    private final int amount;
-    private final FluidStack resultFluid;
-    private final CrucilbeTypeEnum crucipleType;
+    private Ingredient input;
+    private int amount;
+    private FluidStack resultFluid;
+    private CrucilbeTypeEnum crucibleType;
 
     public CrucibleRecipe(ResourceLocation id, Ingredient input, int amount, FluidStack fluid, CrucilbeTypeEnum crucibleType) {
         super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
         this.resultFluid = fluid;
-        this.crucipleType = crucibleType;
+        this.crucibleType = crucibleType;
     }
 
     public static RegistryObject<RecipeSerializer<CrucibleRecipe>> getStaticSerializer() {
@@ -43,16 +43,32 @@ public class CrucibleRecipe extends SerializableRecipe {
         return input;
     }
 
+    public void setInput(Ingredient input) {
+        this.input = input;
+    }
+
     public int getAmount() {
         return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public FluidStack getResultFluid() {
         return resultFluid;
     }
 
+    public void setResultFluid(FluidStack resultFluid) {
+        this.resultFluid = resultFluid;
+    }
+
     public CrucilbeTypeEnum getCrucibleType() {
-        return crucipleType;
+        return crucibleType;
+    }
+
+    public void setCrucibleType(String crucibleType) {
+        this.crucibleType = CrucilbeTypeEnum.getTypeByName(crucibleType);
     }
 
     @Override
