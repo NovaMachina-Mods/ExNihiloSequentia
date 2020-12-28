@@ -58,7 +58,7 @@ public class FluidTransformRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<FluidTransformRecipe> getENSerializer() {
         return serializer.get();
     }
 

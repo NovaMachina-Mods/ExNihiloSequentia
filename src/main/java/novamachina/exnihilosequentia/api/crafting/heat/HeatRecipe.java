@@ -46,7 +46,7 @@ public class HeatRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<HeatRecipe> getENSerializer() {
         return serializer.get();
     }
 

@@ -46,7 +46,7 @@ public class CrookRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<CrookRecipe> getENSerializer() {
         return serializer.get();
     }
 

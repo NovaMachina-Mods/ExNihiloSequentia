@@ -49,7 +49,7 @@ public class CompostRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<CompostRecipe> getENSerializer() {
         return serializer.get();
     }
 

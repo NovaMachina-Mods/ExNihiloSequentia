@@ -39,7 +39,7 @@ public class HammerRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<HammerRecipe> getENSerializer() {
         return serializer.get();
     }
 

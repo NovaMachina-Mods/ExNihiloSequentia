@@ -72,7 +72,7 @@ public class CrucibleRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<CrucibleRecipe> getENSerializer() {
         return serializer.get();
     }
 

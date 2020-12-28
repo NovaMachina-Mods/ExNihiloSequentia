@@ -38,7 +38,7 @@ public class FluidItemRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<FluidItemRecipe> getENSerializer() {
         return serializer.get();
     }
 

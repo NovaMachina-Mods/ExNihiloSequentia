@@ -7,9 +7,7 @@ import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenFluidOnTopRecipe;
-import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenFluidTransformRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 

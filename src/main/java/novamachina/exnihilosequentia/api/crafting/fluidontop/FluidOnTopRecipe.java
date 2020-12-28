@@ -50,7 +50,7 @@ public class FluidOnTopRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<FluidOnTopRecipe> getENSerializer() {
         return serializer.get();
     }
 

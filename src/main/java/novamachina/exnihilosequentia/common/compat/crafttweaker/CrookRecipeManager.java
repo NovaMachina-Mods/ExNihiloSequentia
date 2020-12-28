@@ -7,9 +7,7 @@ import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenCrookRecipe;
-import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenCrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 

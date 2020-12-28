@@ -79,7 +79,7 @@ public class SieveRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer getENSerializer() {
+    protected RecipeSerializer<SieveRecipe> getENSerializer() {
         return serializer.get();
     }
 

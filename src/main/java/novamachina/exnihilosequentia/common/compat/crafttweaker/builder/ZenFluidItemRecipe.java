@@ -9,7 +9,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
@@ -19,7 +18,7 @@ public class ZenFluidItemRecipe {
     private final FluidItemRecipe internal;
 
     private ZenFluidItemRecipe(ResourceLocation recipeId) {
-        this.internal = new FluidItemRecipe(recipeId, FluidStack.EMPTY, Ingredient.EMPTY.EMPTY, ItemStack.EMPTY);
+        this.internal = new FluidItemRecipe(recipeId, FluidStack.EMPTY, Ingredient.EMPTY, ItemStack.EMPTY);
     }
 
     @ZenCodeType.Method
