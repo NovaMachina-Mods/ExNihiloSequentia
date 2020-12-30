@@ -4,7 +4,7 @@
     "fluid": "minecraft:water"
   },
   "blockBelow": {
-    "item": "minecraft:sand"
+    "tag": "forge:sand"
   },
   "result": {
     "fluid": "exnihilosequentia:sea_water"

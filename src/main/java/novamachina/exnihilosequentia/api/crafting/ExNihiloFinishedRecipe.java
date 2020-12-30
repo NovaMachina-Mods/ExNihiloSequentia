@@ -148,10 +148,14 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     protected R addInput(Ingredient input) {
+        return addInput("input", input);
+    }
+
+    protected R addInput(String key, Ingredient input) {
         if (inputArray != null) {
             return addMultiInput(input.serialize());
         } else {
-            return addItem("input", input);
+            return addItem(key, input);
         }
     }
 

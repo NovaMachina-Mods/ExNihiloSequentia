@@ -409,9 +409,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerFluidTransformRecipes(Consumer<IFinishedRecipe> consumer) {
-        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).blockBelow(Blocks.MYCELIUM)
+        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).blockBelow(Ingredient.fromItems(Blocks.MYCELIUM))
             .result(ExNihiloFluids.WITCH_WATER.get()).build(consumer, fluidTransformLoc("witch_water"));
-        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).blockBelow(Blocks.SAND)
+        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).blockBelow(Ingredient.fromTag(Tags.Items.SAND))
             .result(ExNihiloFluids.SEA_WATER.get()).build(consumer, fluidTransformLoc("sea_water"));
     }
 
@@ -516,43 +516,43 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerHammerRecipes(Consumer<IFinishedRecipe> consumer) {
-        HammerRecipeBuilder.builder().input(Blocks.STONE).result(Blocks.COBBLESTONE)
+        HammerRecipeBuilder.builder().input(Blocks.STONE).addDrop(Blocks.COBBLESTONE)
             .build(consumer, hammerLoc(COBBLESTONE));
-        HammerRecipeBuilder.builder().input(Blocks.COBBLESTONE).result(Blocks.GRAVEL)
+        HammerRecipeBuilder.builder().input(Blocks.COBBLESTONE).addDrop(Blocks.GRAVEL)
             .build(consumer, hammerLoc("gravel"));
-        HammerRecipeBuilder.builder().input(Blocks.GRAVEL).result(Blocks.SAND).build(consumer, hammerLoc("sand"));
-        HammerRecipeBuilder.builder().input(Blocks.SAND).result(ExNihiloBlocks.DUST.get())
+        HammerRecipeBuilder.builder().input(Blocks.GRAVEL).addDrop(Blocks.SAND).build(consumer, hammerLoc("sand"));
+        HammerRecipeBuilder.builder().input(Blocks.SAND).addDrop(ExNihiloBlocks.DUST.get())
             .build(consumer, hammerLoc("dust"));
-        HammerRecipeBuilder.builder().input(Blocks.NETHERRACK).result(ExNihiloBlocks.CRUSHED_NETHERRACK.get())
+        HammerRecipeBuilder.builder().input(Blocks.NETHERRACK).addDrop(ExNihiloBlocks.CRUSHED_NETHERRACK.get())
             .build(consumer, hammerLoc(NETHERRACK));
-        HammerRecipeBuilder.builder().input(Blocks.ANDESITE).result(ExNihiloBlocks.CRUSHED_ANDESITE.get())
+        HammerRecipeBuilder.builder().input(Blocks.ANDESITE).addDrop(ExNihiloBlocks.CRUSHED_ANDESITE.get())
             .build(consumer, hammerLoc("andesite"));
-        HammerRecipeBuilder.builder().input(Blocks.DIORITE).result(ExNihiloBlocks.CRUSHED_DIORITE.get())
+        HammerRecipeBuilder.builder().input(Blocks.DIORITE).addDrop(ExNihiloBlocks.CRUSHED_DIORITE.get())
             .build(consumer, hammerLoc("diorite"));
-        HammerRecipeBuilder.builder().input(Blocks.GRANITE).result(ExNihiloBlocks.CRUSHED_GRANITE.get())
+        HammerRecipeBuilder.builder().input(Blocks.GRANITE).addDrop(ExNihiloBlocks.CRUSHED_GRANITE.get())
             .build(consumer, hammerLoc("granite"));
-        HammerRecipeBuilder.builder().input(Blocks.END_STONE).result(ExNihiloBlocks.CRUSHED_END_STONE.get())
+        HammerRecipeBuilder.builder().input(Blocks.END_STONE).addDrop(ExNihiloBlocks.CRUSHED_END_STONE.get())
             .build(consumer, hammerLoc("end_stone"));
 
-        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL_BLOCK).result(Blocks.TUBE_CORAL)
+        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL_BLOCK).addDrop(Blocks.TUBE_CORAL)
             .build(consumer, hammerLoc("tube_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL_BLOCK).result(Blocks.BRAIN_CORAL)
+        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL_BLOCK).addDrop(Blocks.BRAIN_CORAL)
             .build(consumer, hammerLoc("brain_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL_BLOCK).result(Blocks.BUBBLE_CORAL)
+        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL_BLOCK).addDrop(Blocks.BUBBLE_CORAL)
             .build(consumer, hammerLoc("bubble_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL_BLOCK).result(Blocks.FIRE_CORAL)
+        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL_BLOCK).addDrop(Blocks.FIRE_CORAL)
             .build(consumer, hammerLoc("fire_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL_BLOCK).result(Blocks.HORN_CORAL)
+        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL_BLOCK).addDrop(Blocks.HORN_CORAL)
             .build(consumer, hammerLoc("horn_coral"));
-        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL).result(Blocks.TUBE_CORAL_FAN)
+        HammerRecipeBuilder.builder().input(Blocks.TUBE_CORAL).addDrop(Blocks.TUBE_CORAL_FAN)
             .build(consumer, hammerLoc("tube_coral_fan"));
-        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL).result(Blocks.BRAIN_CORAL_FAN)
+        HammerRecipeBuilder.builder().input(Blocks.BRAIN_CORAL).addDrop(Blocks.BRAIN_CORAL_FAN)
             .build(consumer, hammerLoc("brain_coral_fan"));
-        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL).result(Blocks.BUBBLE_CORAL_FAN)
+        HammerRecipeBuilder.builder().input(Blocks.BUBBLE_CORAL).addDrop(Blocks.BUBBLE_CORAL_FAN)
             .build(consumer, hammerLoc("bubble_coral_fan"));
-        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL).result(Blocks.FIRE_CORAL_FAN)
+        HammerRecipeBuilder.builder().input(Blocks.FIRE_CORAL).addDrop(Blocks.FIRE_CORAL_FAN)
             .build(consumer, hammerLoc("fire_coral_fan"));
-        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL).result(Blocks.HORN_CORAL_FAN)
+        HammerRecipeBuilder.builder().input(Blocks.HORN_CORAL).addDrop(Blocks.HORN_CORAL_FAN)
             .build(consumer, hammerLoc("horn_coral_fan"));
     }
 

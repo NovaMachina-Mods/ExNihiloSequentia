@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -17,9 +18,12 @@ import org.apache.logging.log4j.LogManager;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class UseHammerModifier extends LootModifier {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
+    private Random random = new Random();
 
     public UseHammerModifier(ILootCondition[] conditionsIn) {
         super(conditionsIn);
@@ -33,10 +37,14 @@ public class UseHammerModifier extends LootModifier {
         BlockState blockState = context.get(LootParameters.BLOCK_STATE);
         List<ItemStack> newLoot = new ArrayList<>();
 
-        if (tool != null && blockState != null && tool.getItem() instanceof HammerBaseItem && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock().getRegistryName())) {
-            ItemStack returnStack = ExNihiloRegistries.HAMMER_REGISTRY.getResult(blockState.getBlock().getRegistryName());
-            if(returnStack != ItemStack.EMPTY){
-                newLoot.add(returnStack);
+        if (tool != null && blockState != null && tool.getItem() instanceof HammerBaseItem && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {
+            List<ItemStackWithChance> list = ExNihiloRegistries.HAMMER_REGISTRY.getResult(blockState.getBlock());
+            for(ItemStackWithChance stackWithChance : list) {
+                if(random.nextFloat() <= stackWithChance.getChance()) {
+                    if(stackWithChance.getStack() != ItemStack.EMPTY){
+                        newLoot.add(stackWithChance.getStack());
+                    }
+                }
             }
         }
         if(!newLoot.isEmpty()) {
