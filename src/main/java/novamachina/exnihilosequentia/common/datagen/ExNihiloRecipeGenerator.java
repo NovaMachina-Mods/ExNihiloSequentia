@@ -486,6 +486,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             .build(consumer, compostLoc("brown_mushroom"));
         CompostRecipeBuilder.builder().input(Blocks.RED_MUSHROOM).amount(100)
             .build(consumer, compostLoc("red_mushroom"));
+        CompostRecipeBuilder.builder().input(Items.CRIMSON_FUNGUS).amount(100)
+            .build(consumer, compostLoc("crimson_fungus"));
+        CompostRecipeBuilder.builder().input(Items.WARPED_FUNGUS).amount(100)
+            .build(consumer, compostLoc("warped_fungus"));
         CompostRecipeBuilder.builder().input(Items.PUMPKIN_PIE).amount(160).build(consumer, compostLoc("pumpkin_pie"));
         CompostRecipeBuilder.builder().input(EnumResource.SILKWORM.getRegistryObject().get()).amount(40)
             .build(consumer, compostLoc("silkworm"));
@@ -506,6 +510,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             .build(consumer, compostLoc("poisonous_potato"));
         CompostRecipeBuilder.builder().input(Items.LILY_PAD).amount(100).build(consumer, compostLoc("lily_pad"));
         CompostRecipeBuilder.builder().input(Items.VINE).amount(100).build(consumer, compostLoc("vine"));
+        CompostRecipeBuilder.builder().input(Items.WEEPING_VINES).amount(100).build(consumer, compostLoc("weeping_vine"));
+        CompostRecipeBuilder.builder().input(Items.TWISTING_VINES).amount(100).build(consumer, compostLoc("twisting_vine"));
         CompostRecipeBuilder.builder().input(Items.TALL_GRASS).amount(100).build(consumer, compostLoc("tall_grass"));
         CompostRecipeBuilder.builder().input(Items.SUGAR_CANE).amount(80).build(consumer, compostLoc("sugar_cane"));
     }
