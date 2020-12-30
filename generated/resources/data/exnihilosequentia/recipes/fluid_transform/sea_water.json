@@ -3,7 +3,7 @@
   "fluidInTank": {
     "fluid": "minecraft:water"
   },
-  "blockBelow": {
+  "catalyst": {
     "tag": "forge:sand"
   },
   "result": {

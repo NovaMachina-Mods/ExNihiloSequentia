@@ -18,8 +18,8 @@ public class FluidTransformRecipeBuilder extends ExNihiloFinishedRecipe<FluidTra
         return this.addFluid("fluidInTank", fluid);
     }
 
-    public FluidTransformRecipeBuilder blockBelow(Ingredient block) {
-        return this.addInput("blockBelow", block);
+    public FluidTransformRecipeBuilder catalyst(Ingredient catalyst) {
+        return this.addInput("catalyst", catalyst);
     }
 
     public FluidTransformRecipeBuilder result(Fluid fluid) {

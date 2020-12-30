@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
@@ -38,7 +39,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             if (fluidOnTop(barrelTile)) {
                 return;
             }
-            fluidTransform(barrelTile);
+            Block blockBelow = barrelTile.getWorld().getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock();
+            fluidTransform(barrelTile, blockBelow);
         }
     }
 
@@ -58,12 +60,12 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         return false;
     }
 
-    private boolean fluidTransform(AbstractBarrelTile barrelTile) {
+    private boolean fluidTransform(AbstractBarrelTile barrelTile, IItemProvider catalyst) {
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
-        Block blockBelow = barrelTile.getWorld().getBlockState(barrelTile.getPos().add(0, -1, 0)).getBlock();
 
-        if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, blockBelow)) {
+        if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, catalyst)) {
             barrelTile.setMode(ExNihiloConstants.BarrelModes.TRANSFORM);
+            ((FluidTransformBarrelMode)barrelTile.getMode()).setCatalyst(catalyst);
             return true;
         }
         return false;
@@ -104,6 +106,11 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
         if (fluidBlockTransform(barrelTile, player, handIn)) {
             return ActionResultType.SUCCESS;
+        }
+
+        IItemProvider catalyst = player.getHeldItem(handIn).getItem();
+        if(fluidTransform(barrelTile, catalyst)) {
+            player.getHeldItem(handIn).shrink(1);
         }
 
         doMobSpawn(barrelTile, player, handIn);
