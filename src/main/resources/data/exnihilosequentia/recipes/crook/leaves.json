@@ -3,7 +3,8 @@
   "results": [
     {
       "chance": 0.1,
-      "item": "exnihilosequentia:silkworm"
+      "item": "exnihilosequentia:silkworm",
+      "count": 1
     }
   ],
   "input": {

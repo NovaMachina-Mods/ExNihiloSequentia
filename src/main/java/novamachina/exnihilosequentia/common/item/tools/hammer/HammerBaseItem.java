@@ -1,17 +1,16 @@
 package novamachina.exnihilosequentia.common.item.tools.hammer;
 
 import com.google.common.collect.Sets;
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolItem;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 import java.util.Set;
 
@@ -37,8 +36,7 @@ public class HammerBaseItem extends ToolItem {
 
     @Override
     public boolean canHarvestBlock(BlockState blockIn) {
-        ResourceLocation blockID = blockIn.getBlock().getRegistryName();
-        if (ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockID)) {
+        if (ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockIn.getBlock())) {
             return true;
         }
         return super.canHarvestBlock(blockIn);
