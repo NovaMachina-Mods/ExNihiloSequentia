@@ -409,9 +409,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerFluidTransformRecipes(Consumer<IFinishedRecipe> consumer) {
-        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).blockBelow(Ingredient.fromItems(Blocks.MYCELIUM))
+        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).catalyst(Ingredient.fromItems(Blocks.MYCELIUM))
             .result(ExNihiloFluids.WITCH_WATER.get()).build(consumer, fluidTransformLoc("witch_water"));
-        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).blockBelow(Ingredient.fromTag(Tags.Items.SAND))
+        FluidTransformRecipeBuilder.builder().fluidInTank(Fluids.WATER).catalyst(Ingredient.fromTag(Tags.Items.SAND))
             .result(ExNihiloFluids.SEA_WATER.get()).build(consumer, fluidTransformLoc("sea_water"));
     }
 

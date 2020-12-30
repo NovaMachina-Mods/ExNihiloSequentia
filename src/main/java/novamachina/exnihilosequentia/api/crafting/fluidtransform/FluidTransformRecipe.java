@@ -15,13 +15,13 @@ public class FluidTransformRecipe extends SerializableRecipe {
         .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
     private static RegistryObject<RecipeSerializer<FluidTransformRecipe>> serializer;
     private FluidStack fluidInTank;
-    private Ingredient blockBelow;
+    private Ingredient catalyst;
     private FluidStack result;
 
-    public FluidTransformRecipe(ResourceLocation id, FluidStack fluidInTank, Ingredient blockBelow, FluidStack result) {
+    public FluidTransformRecipe(ResourceLocation id, FluidStack fluidInTank, Ingredient catalyst, FluidStack result) {
         super(null, RECIPE_TYPE, id);
         this.fluidInTank = fluidInTank;
-        this.blockBelow = blockBelow;
+        this.catalyst = catalyst;
         this.result = result;
     }
 
@@ -41,12 +41,12 @@ public class FluidTransformRecipe extends SerializableRecipe {
         this.fluidInTank = fluidInTank;
     }
 
-    public Ingredient getBlockBelow() {
-        return blockBelow;
+    public Ingredient getCatalyst() {
+        return catalyst;
     }
 
-    public void setBlockBelow(Ingredient blockBelow) {
-        this.blockBelow = blockBelow;
+    public void setCatalyst(Ingredient catalyst) {
+        this.catalyst = catalyst;
     }
 
     public FluidStack getResult() {
