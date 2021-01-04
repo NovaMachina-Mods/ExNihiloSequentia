@@ -137,8 +137,9 @@
 
   "waila.progress": "Progress: %s",
   "waila.barrel.fluidAmount": "Fluid(%s): %s mB",
-  "waila.barrel.solidAmount": "Solid(%s): %s",
+  "waila.barrel.solidAmount": "Solid(%s): %s / %s",
   "waila.barrel.block": "Block: %s",
+  "waila.barrel.compost": "Compost: %s / %s",
   "waila.sieve.block": "Sifting: %s",
   "waila.sieve.mesh": "Mesh: %s",
   "waila.crucible.fluid": "Fluid(%s): %s mB",
