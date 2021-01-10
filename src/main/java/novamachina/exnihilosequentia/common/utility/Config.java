@@ -17,7 +17,7 @@ public class Config {
     private static final String CATEGORY_CRUCIBLE = "crucible";
     private static final String CATEGORY_INFESTED_LEAVES = "infested_leaves";
     private static final String CATEGORY_SIEVE = "sieve";
-    private static final String CATEGORY_COMPAT = "compatibility";
+    private static final String CATEGORY_ORE = "ore";
     private static final String CATEGORY_DEBUG = "debug";
     private static final String SUBCATEGORY_BARREL_MOB = "mob_spawn";
     private static final String SUBCATEGORY_BARREL_COMPOST = "compost";
@@ -49,12 +49,19 @@ public class Config {
     private static ForgeConfigSpec.BooleanValue flattenSieveRecipes;
     private static ForgeConfigSpec.IntValue sieveRange;
     private static ForgeConfigSpec.BooleanValue enableMeshDurability;
-    // Compat
-    private static ForgeConfigSpec.BooleanValue enableThermal;
-    private static ForgeConfigSpec.BooleanValue enableImmersive;
-    private static ForgeConfigSpec.BooleanValue enableMekanism;
-    private static ForgeConfigSpec.BooleanValue enableCreate;
-    private static ForgeConfigSpec.BooleanValue enableSilent;
+    // Ore
+    private static ForgeConfigSpec.BooleanValue enableOreOverride;
+    private static ForgeConfigSpec.BooleanValue enableCopper;
+    private static ForgeConfigSpec.BooleanValue enableLead;
+    private static ForgeConfigSpec.BooleanValue enableNickel;
+    private static ForgeConfigSpec.BooleanValue enableSilver;
+    private static ForgeConfigSpec.BooleanValue enableTin;
+    private static ForgeConfigSpec.BooleanValue enableAluminum;
+    private static ForgeConfigSpec.BooleanValue enablePlatinum;
+    private static ForgeConfigSpec.BooleanValue enableUranium;
+    private static ForgeConfigSpec.BooleanValue enableZinc;
+    private static ForgeConfigSpec.BooleanValue enableIron;
+    private static ForgeConfigSpec.BooleanValue enableGold;
     // Debugging
     private static ForgeConfigSpec.BooleanValue enableDebugLogging;
 
@@ -74,8 +81,8 @@ public class Config {
         COMMON_BUILDER.comment("Sieve Configs").push(CATEGORY_SIEVE);
         sieveConfigs();
         COMMON_BUILDER.pop();
-        COMMON_BUILDER.comment("Compatibility Configs").push(CATEGORY_COMPAT);
-        compatConfigs();
+        COMMON_BUILDER.comment("Ore Configs").push(CATEGORY_ORE);
+        oreConfigs();
         COMMON_BUILDER.pop();
         COMMON_BUILDER.comment("Debug Configs").push(CATEGORY_DEBUG);
         debugConfigs();
@@ -83,7 +90,56 @@ public class Config {
 
         COMMON_CONFIG = COMMON_BUILDER.build();
     }
+
     private Config() {
+    }
+
+    public static boolean enableOreOverride() {
+        return enableOreOverride.get();
+    }
+    
+    public static boolean enableCopper() {
+        return enableCopper.get();
+    }
+
+    public static boolean enableLead() {
+        return enableLead.get();
+    }
+
+    public static boolean enableNickel() {
+        return enableNickel.get();
+    }
+
+    public static boolean enableSilver() {
+        return enableSilver.get();
+    }
+
+    public static boolean enableTin() {
+        return enableTin.get();
+    }
+
+    public static boolean enableAluminum() {
+        return enableAluminum.get();
+    }
+
+    public static boolean enablePlatinum() {
+        return enablePlatinum.get();
+    }
+
+    public static boolean enableUranium() {
+        return enableUranium.get();
+    }
+
+    public static boolean enableZinc() {
+        return enableZinc.get();
+    }
+
+    public static boolean enableIron() {
+        return enableIron.get();
+    }
+
+    public static boolean getEnableGold() {
+        return enableGold.get();
     }
 
     public static int getSecondsToSpawn() {
@@ -150,7 +206,7 @@ public class Config {
         return ticksBetweenSpreadAttempt.get();
     }
 
-    public static boolean getFlattenSieveRecipes() {
+    public static boolean flattenSieveRecipes() {
         return flattenSieveRecipes.get();
     }
 
@@ -158,31 +214,11 @@ public class Config {
         return sieveRange.get();
     }
 
-    public static boolean getEnableMeshDurability() {
+    public static boolean enableMeshDurability() {
         return enableMeshDurability.get();
     }
 
-    public static boolean getEnableThermal() {
-        return enableThermal.get();
-    }
-
-    public static boolean getEnableImmersive() {
-        return enableImmersive.get();
-    }
-
-    public static boolean getEnableMekanism() {
-        return enableMekanism.get();
-    }
-
-    public static boolean getEnableCreate() {
-        return enableCreate.get();
-    }
-
-    public static boolean getEnableSilent() {
-        return enableSilent.get();
-    }
-
-    public static boolean getEnableDebugLogging() {
+    public static boolean enableDebugLogging() {
         return enableDebugLogging.get();
     }
 
@@ -191,17 +227,31 @@ public class Config {
             .define("enableDebugLogging", false);
     }
 
-    private static void compatConfigs() {
-        enableThermal = COMMON_BUILDER.comment("Should Thermal Expansion ores be enabled? (Default: false)")
-            .define("enableThermalExpansion", false);
-        enableImmersive = COMMON_BUILDER.comment("Should Immersive Engineering ores be enabled? (Default: false)")
-            .define("enableImmersiveEngineering", false);
-        enableMekanism = COMMON_BUILDER.comment("Should Mekanism ores be enabled? (Default: false)")
-            .define("enableMekanism", false);
-        enableCreate = COMMON_BUILDER.comment("Should Create ores be enabled? (Default: false)")
-            .define("enableCreate", false);
-        enableSilent = COMMON_BUILDER.comment("Should Silent Mechanism ores be enabled? (Default: false)")
-            .define("enableSilentMechanism", false);
+    private static void oreConfigs() {
+        enableOreOverride = COMMON_BUILDER.comment("Allows ores to be enabled or disabled by this config file. (Default: false)")
+            .define("enableOreOverride", false);
+        enableCopper = COMMON_BUILDER.comment("Enable copper ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableCopper", true);
+        enableLead = COMMON_BUILDER.comment("Enable lead ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableLead", true);
+        enableNickel = COMMON_BUILDER.comment("Enable nickel ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableNickel", true);
+        enableSilver = COMMON_BUILDER.comment("Enable silver ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableSilver", true);
+        enableTin = COMMON_BUILDER.comment("Enable tin ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableTin", true);
+        enableAluminum = COMMON_BUILDER.comment("Enable aluminum ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableAluminum", true);
+        enablePlatinum = COMMON_BUILDER.comment("Enable platinum ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enablePlatinum", true);
+        enableUranium = COMMON_BUILDER.comment("Enable uranium ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableUranium", true);
+        enableZinc = COMMON_BUILDER.comment("Enable zinc ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableZinc", true);
+        enableIron = COMMON_BUILDER.comment("Enable iron ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableIron", true);
+        enableGold = COMMON_BUILDER.comment("Enable gold ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+            .define("enableGold", true);
     }
 
     private static void sieveConfigs() {

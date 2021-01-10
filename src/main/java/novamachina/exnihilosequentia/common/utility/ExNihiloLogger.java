@@ -21,7 +21,7 @@ public class ExNihiloLogger {
     }
 
     public void debug(String msg) {
-        if(Config.getEnableDebugLogging()) {
+        if(Config.enableDebugLogging()) {
             logger.info(LOGGING_PATTERN, PREFIX, msg);
         }
     }

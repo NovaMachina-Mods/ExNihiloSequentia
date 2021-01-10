@@ -24,7 +24,6 @@ public enum EnumOre implements IExtensibleEnum {
     ZINC(Type.MODDED, ExNihiloConstants.Ore.ZINC, new Color("A59C74"), false, true),
     IRON(Type.VANILLA, ExNihiloConstants.Ore.IRON, new Color("BF8040"), true, false),
     GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true, false);
-//    BISMUTH(Type.MODDED, ExNihiloConstants.Ore.BISMUTH, new Color("908194"), false);
 
     private final String oreName;
     private final Color color;
@@ -54,7 +53,7 @@ public enum EnumOre implements IExtensibleEnum {
         Arrays.stream(EnumOre.values()).forEach(EnumOre::disable);
         if (oreList != null) {
             for (EnumOre ore : oreList) {
-                EnumOre.valueOf(ore.name()).setEnabled();
+                EnumOre.valueOf(ore.name()).setEnabled(true);
             }
             return true;
         }
@@ -65,8 +64,8 @@ public enum EnumOre implements IExtensibleEnum {
         return isEnabled;
     }
 
-    public void setEnabled() {
-        isEnabled = true;
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 
     public String getOreName() {
