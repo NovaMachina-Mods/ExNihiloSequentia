@@ -11,8 +11,8 @@ public class WoodCrucibleBlock extends CrucibleBaseBlock {
 
     public WoodCrucibleBlock() {
         super(new BlockBuilder().properties(
-            AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(.75F)
-                .sound(SoundType.STONE).notSolid()).harvestLevel(ToolType.AXE, 0)
-            .tileEntitySupplier(WoodCrucibleTile::new));
+                AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(.75F)
+                        .sound(SoundType.STONE).notSolid()).harvestLevel(ToolType.AXE, 0)
+                .tileEntitySupplier(WoodCrucibleTile::new));
     }
 }

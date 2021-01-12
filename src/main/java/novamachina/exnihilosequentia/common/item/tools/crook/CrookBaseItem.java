@@ -1,13 +1,10 @@
 package novamachina.exnihilosequentia.common.item.tools.crook;
 
 import com.google.common.collect.Sets;
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.item.resources.EnumResource;
-import novamachina.exnihilosequentia.common.utility.Config;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -20,22 +17,24 @@ import net.minecraft.item.Items;
 import net.minecraft.item.ToolItem;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.common.item.resources.EnumResource;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 public class CrookBaseItem extends ToolItem {
 
     private static final Set<Material> effectiveMaterialsOn = Sets
-        .newHashSet(Material.LEAVES);
+            .newHashSet(Material.LEAVES);
 
     private final Random random = new Random();
 
     public CrookBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, Sets.newHashSet(),
-            new Item.Properties().defaultMaxDamage(maxDamage).group(ExNihiloInitialization.ITEM_GROUP));
+                new Item.Properties().defaultMaxDamage(maxDamage).group(ExNihiloInitialization.ITEM_GROUP));
     }
 
     @Override
@@ -53,8 +52,8 @@ public class CrookBaseItem extends ToolItem {
         if (ExNihiloRegistries.CROOK_REGISTRY.isCrookable(state.getBlock())) {
             for (int i = 0; i < Config.getVanillaSimulateDropCount(); i++) {
                 List<ItemStack> items = Block
-                    .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimensionKey()),
-                        pos, null);
+                        .getDrops(state, worldIn.getServer().getWorld(worldIn.getDimensionKey()),
+                                pos, null);
                 itemDrops.addAll(items);
             }
 
@@ -68,17 +67,17 @@ public class CrookBaseItem extends ToolItem {
 
             if (state.getBlock() instanceof InfestedLeavesBlock) {
                 itemDrops.add(new ItemStack(Items.STRING, random
-                    .nextInt(Config.getMaxBonusStringCount()) + Config.getMinStringCount()));
+                        .nextInt(Config.getMaxBonusStringCount()) + Config.getMinStringCount()));
                 if (random.nextDouble() <= 0.8) {
                     itemDrops
-                        .add(new ItemStack(EnumResource.SILKWORM.getRegistryObject().get()));
+                            .add(new ItemStack(EnumResource.SILKWORM.getRegistryObject().get()));
                 }
             }
 
             for (ItemStack item : itemDrops) {
                 worldIn.addEntity(
-                    new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
-                        item));
+                        new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
+                                item));
             }
         }
         return true;

@@ -13,7 +13,7 @@ import org.openzen.zencode.java.ZenCodeType;
 @ZenCodeType.Name("mods.exnihilosequentia.ZenFluidTransformRecipe")
 public class ZenFluidTransformRecipe {
 
-    private FluidTransformRecipe internal;
+    private final FluidTransformRecipe internal;
 
     private ZenFluidTransformRecipe(ResourceLocation recipeId) {
         this.internal = new FluidTransformRecipe(recipeId, FluidStack.EMPTY, Ingredient.EMPTY, FluidStack.EMPTY);
@@ -24,10 +24,8 @@ public class ZenFluidTransformRecipe {
         return new ZenFluidTransformRecipe(recipeId);
     }
 
-    @ZenCodeType.Method
-    public ZenFluidTransformRecipe setFluidInTank(IFluidStack fluidInTank) {
-        internal.setFluidInTank(fluidInTank.getInternal());
-        return this;
+    public FluidTransformRecipe build() {
+        return internal;
     }
 
     @ZenCodeType.Method
@@ -37,12 +35,14 @@ public class ZenFluidTransformRecipe {
     }
 
     @ZenCodeType.Method
-    public ZenFluidTransformRecipe setResult(IFluidStack result) {
-        internal.setResult(result.getInternal());
+    public ZenFluidTransformRecipe setFluidInTank(IFluidStack fluidInTank) {
+        internal.setFluidInTank(fluidInTank.getInternal());
         return this;
     }
 
-    public FluidTransformRecipe build() {
-        return internal;
+    @ZenCodeType.Method
+    public ZenFluidTransformRecipe setResult(IFluidStack result) {
+        internal.setResult(result.getInternal());
+        return this;
     }
 }

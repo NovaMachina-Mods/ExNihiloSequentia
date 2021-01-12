@@ -12,7 +12,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
     public static final IRecipeType<FluidOnTopRecipe> RECIPE_TYPE = IRecipeType
-        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
+            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
     private static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> serializer;
     private FluidStack fluidInTank;
     private FluidStack fluidOnTop;
@@ -50,11 +50,6 @@ public class FluidOnTopRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer<FluidOnTopRecipe> getENSerializer() {
-        return serializer.get();
-    }
-
-    @Override
     public ItemStack getRecipeOutput() {
         return result;
     }
@@ -65,6 +60,11 @@ public class FluidOnTopRecipe extends SerializableRecipe {
 
     public boolean validInputs(Fluid fluidInTank, Fluid fluidOnTop) {
         return this.fluidInTank.getFluid().isEquivalentTo(fluidInTank) && this.fluidOnTop.getFluid()
-            .isEquivalentTo(fluidOnTop);
+                .isEquivalentTo(fluidOnTop);
+    }
+
+    @Override
+    protected RecipeSerializer<FluidOnTopRecipe> getENSerializer() {
+        return serializer.get();
     }
 }

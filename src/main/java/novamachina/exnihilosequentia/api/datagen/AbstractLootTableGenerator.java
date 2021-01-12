@@ -3,32 +3,31 @@ package novamachina.exnihilosequentia.api.datagen;
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.conditions.SurvivesExplosion;
-import net.minecraft.util.IItemProvider;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTableManager;
-import net.minecraft.loot.ValidationTracker;
-import net.minecraft.util.ResourceLocation;
-import org.apache.logging.log4j.LogManager;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import net.minecraft.block.Block;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DirectoryCache;
+import net.minecraft.data.IDataProvider;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTableManager;
+import net.minecraft.loot.ValidationTracker;
+import net.minecraft.loot.conditions.SurvivesExplosion;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public abstract class AbstractLootTableGenerator implements IDataProvider {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
     private final DataGenerator generator;
     private final String modId;
@@ -70,15 +69,11 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
         return "Loot Tables: " + modId;
     }
 
-    private Path getPath(Path outFolder, ResourceLocation name) {
-        return outFolder.resolve("data/" + name.getNamespace() + "/loot_tables/" + name.getPath() + ".json");
+    protected LootPool.Builder createLootPoolBuilder() {
+        return LootPool.builder().acceptCondition(SurvivesExplosion.builder());
     }
 
     protected abstract void createLootTables();
-
-    protected void registerSelfDrop(Block block) {
-        register(block, singleItem(block));
-    }
 
     protected void register(Block block, LootPool.Builder... pools) {
         LootTable.Builder builder = LootTable.builder();
@@ -86,6 +81,14 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
             builder.addLootPool(pool);
         }
         register(block, builder);
+    }
+
+    protected void registerSelfDrop(Block block) {
+        register(block, singleItem(block));
+    }
+
+    private Path getPath(Path outFolder, ResourceLocation name) {
+        return outFolder.resolve("data/" + name.getNamespace() + "/loot_tables/" + name.getPath() + ".json");
     }
 
     private void register(Block block, LootTable.Builder table) {
@@ -98,15 +101,11 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
         }
     }
 
-    private ResourceLocation toTableLoc(ResourceLocation registryName) {
-        return new ResourceLocation(registryName.getNamespace(), "blocks/" + registryName.getPath());
-    }
-
     private LootPool.Builder singleItem(IItemProvider in) {
         return createLootPoolBuilder().rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(in));
     }
 
-    protected LootPool.Builder createLootPoolBuilder() {
-        return LootPool.builder().acceptCondition(SurvivesExplosion.builder());
+    private ResourceLocation toTableLoc(ResourceLocation registryName) {
+        return new ResourceLocation(registryName.getNamespace(), "blocks/" + registryName.getPath());
     }
 }

@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.crucible;
 
-import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -12,12 +10,14 @@ import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
-    private final ResourceLocation uid;
     private final IDrawableStatic background;
     private final IDrawableStatic slotHighlight;
+    private final ResourceLocation uid;
 
     public CrucibleRecipeCategory(IGuiHelper guiHelper, String uid) {
         this.background = guiHelper.createDrawable(texture, 0, 168, 166, 58);
@@ -26,8 +26,13 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return uid;
+    public IDrawable getBackground() {
+        return background;
+    }
+
+    @Override
+    public IDrawable getIcon() {
+        return null;
     }
 
     @Override
@@ -41,13 +46,8 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return null;
+    public ResourceLocation getUid() {
+        return uid;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
             recipeLayout.getItemStacks().set(i + slotIndex, stack);
 
             if (focus != null && focus.getValue() instanceof ItemStack && stack
-                .isItemEqual((ItemStack) focus.getValue())) {
+                    .isItemEqual((ItemStack) focus.getValue())) {
                 recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
             }
         }

@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
+import java.util.Arrays;
+import java.util.List;
 import net.minecraft.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -8,9 +10,6 @@ import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.network.HandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-
-import java.util.Arrays;
-import java.util.List;
 
 public enum EnumOre implements IExtensibleEnum {
     COPPER(Type.MODDED, ExNihiloConstants.Ore.COPPER, new Color("FF9933"), false, true),
@@ -25,15 +24,15 @@ public enum EnumOre implements IExtensibleEnum {
     IRON(Type.VANILLA, ExNihiloConstants.Ore.IRON, new Color("BF8040"), true, false),
     GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true, false);
 
-    private final String oreName;
     private final Color color;
-    private boolean isEnabled;
-    private boolean generateIngot;
-    private RegistryObject<OreItem> pieceItem;
+    private final String oreName;
     private RegistryObject<OreItem> chunkItem;
-    private RegistryObject<OreItem> ingotRegistryItem;
+    private final boolean generateIngot;
     private Item ingotItem;
-    private Type type;
+    private RegistryObject<OreItem> ingotRegistryItem;
+    private boolean isEnabled;
+    private RegistryObject<OreItem> pieceItem;
+    private final Type type;
 
     EnumOre(Type type, String oreName, Color color, boolean isEnabled, boolean generateIngot) {
         this.type = type;
@@ -60,42 +59,6 @@ public enum EnumOre implements IExtensibleEnum {
         return false;
     }
 
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean isEnabled) {
-        this.isEnabled = isEnabled;
-    }
-
-    public String getOreName() {
-        return oreName;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public String getChunkName() {
-        return "chunk_" + oreName;
-    }
-
-    public String getPieceName() {
-        return "piece_" + oreName;
-    }
-
-    public String getIngotName() {
-        return "ingot_" + oreName;
-    }
-
-    public RegistryObject<OreItem> getPieceItem() {
-        return pieceItem;
-    }
-
-    public void setPieceItem(RegistryObject<OreItem> pieceItem) {
-        this.pieceItem = pieceItem;
-    }
-
     public RegistryObject<OreItem> getChunkItem() {
         return chunkItem;
     }
@@ -104,8 +67,24 @@ public enum EnumOre implements IExtensibleEnum {
         this.chunkItem = chunkItem;
     }
 
+    public String getChunkName() {
+        return "chunk_" + oreName;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
     public Item getIngotItem() {
         return ingotItem;
+    }
+
+    public void setIngotItem(Item ingotItem) {
+        this.ingotItem = ingotItem;
+    }
+
+    public String getIngotName() {
+        return "ingot_" + oreName;
     }
 
     public RegistryObject<OreItem> getIngotRegistryItem() {
@@ -116,30 +95,50 @@ public enum EnumOre implements IExtensibleEnum {
         this.ingotRegistryItem = ingotRegistryItem;
     }
 
-    public void setIngotItem(Item ingotItem) {
-        this.ingotItem = ingotItem;
+    public String getOreName() {
+        return oreName;
+    }
+
+    public RegistryObject<OreItem> getPieceItem() {
+        return pieceItem;
+    }
+
+    public void setPieceItem(RegistryObject<OreItem> pieceItem) {
+        this.pieceItem = pieceItem;
+    }
+
+    public String getPieceName() {
+        return "piece_" + oreName;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 
     public boolean isVanilla() {
         return this.type == Type.VANILLA;
     }
 
+    public boolean shouldGenerateIngot() {
+        return generateIngot;
+    }
+
     @Override
     public String toString() {
         return "EnumOre{" +
-            "name='" + oreName + '\'' +
-            ", color=" + color +
-            ", isEnabled=" + isEnabled +
-            ", type=" + type +
-            '}';
+                "name='" + oreName + '\'' +
+                ", color=" + color +
+                ", isEnabled=" + isEnabled +
+                ", type=" + type +
+                '}';
     }
 
     private void disable() {
         isEnabled = false;
-    }
-
-    public boolean shouldGenerateIngot() {
-        return generateIngot;
     }
 
     public enum Type {

@@ -9,63 +9,55 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public abstract class SerializableRecipe implements IRecipe<IInventory> {
+    protected final ResourceLocation id;
     protected final ItemStack outputDummy;
     protected final IRecipeType<?> type;
-    protected final ResourceLocation id;
 
-    protected SerializableRecipe(ItemStack outputDummy, IRecipeType<?> type, ResourceLocation id)
-    {
+    protected SerializableRecipe(ItemStack outputDummy, IRecipeType<?> type, ResourceLocation id) {
         this.outputDummy = outputDummy;
         this.type = type;
         this.id = id;
     }
 
     @Override
-    public boolean isDynamic()
-    {
-        return true;
-    }
-
-    @Override
-    public ItemStack getIcon(){
-        return getENSerializer().getIcon();
-    }
-
-    @Override
-    public boolean matches(IInventory inv, World worldIn)
-    {
+    public boolean canFit(int width, int height) {
         return false;
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv)
-    {
+    public ItemStack getCraftingResult(IInventory inv) {
         return this.outputDummy;
     }
 
     @Override
-    public boolean canFit(int width, int height)
-    {
-        return false;
+    public ItemStack getIcon() {
+        return getENSerializer().getIcon();
     }
 
     @Override
-    public ResourceLocation getId()
-    {
+    public ResourceLocation getId() {
         return this.id;
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer()
-    {
+    public IRecipeSerializer<?> getSerializer() {
         return getENSerializer();
     }
 
-    protected abstract RecipeSerializer<? extends SerializableRecipe> getENSerializer();
-
     @Override
-    public IRecipeType<?> getType()
-    {
+    public IRecipeType<?> getType() {
         return this.type;
     }
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
+
+    @Override
+    public boolean matches(IInventory inv, World worldIn) {
+        return false;
+    }
+
+    protected abstract RecipeSerializer<? extends SerializableRecipe> getENSerializer();
 }

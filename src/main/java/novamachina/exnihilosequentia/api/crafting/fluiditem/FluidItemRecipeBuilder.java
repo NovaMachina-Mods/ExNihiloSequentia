@@ -1,11 +1,11 @@
 package novamachina.exnihilosequentia.api.crafting.fluiditem;
 
-import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.Tags;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemRecipeBuilder> {
     private FluidItemRecipeBuilder() {
@@ -28,11 +28,11 @@ public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemReci
         return this.addInput(input);
     }
 
-    public FluidItemRecipeBuilder result(IItemProvider output) {
-        return this.addResult(output);
-    }
-
     public FluidItemRecipeBuilder input(Tags.IOptionalNamedTag<Item> tag) {
         return this.addInput(tag);
+    }
+
+    public FluidItemRecipeBuilder result(IItemProvider output) {
+        return this.addResult(output);
     }
 }

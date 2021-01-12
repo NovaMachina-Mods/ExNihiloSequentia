@@ -17,8 +17,8 @@ public class CrookRegistry implements ICrookRegistry {
 
     @Override
     public boolean isCrookable(IItemProvider block) {
-        for(CrookRecipe recipe : recipeList) {
-            if(recipe.getInput().test(new ItemStack(block))) {
+        for (CrookRecipe recipe : recipeList) {
+            if (recipe.getInput().test(new ItemStack(block))) {
                 return true;
             }
         }
@@ -28,8 +28,8 @@ public class CrookRegistry implements ICrookRegistry {
     @Override
     public List<CrookRecipe> getDrops(IItemProvider block) {
         List<CrookRecipe> returnList = new ArrayList<>();
-        for(CrookRecipe recipe : recipeList) {
-            if(recipe.getInput().test(new ItemStack(block))) {
+        for (CrookRecipe recipe : recipeList) {
+            if (recipe.getInput().test(new ItemStack(block))) {
                 returnList.add(recipe);
             }
         }

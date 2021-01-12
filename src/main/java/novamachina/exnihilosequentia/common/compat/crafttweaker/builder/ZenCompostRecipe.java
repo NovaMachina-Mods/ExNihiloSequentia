@@ -11,7 +11,7 @@ import org.openzen.zencode.java.ZenCodeType;
 @ZenCodeType.Name("mods.exnihilosequentia.ZenCompostRecipe")
 public class ZenCompostRecipe {
 
-    private CompostRecipe internal;
+    private final CompostRecipe internal;
 
     private ZenCompostRecipe(ResourceLocation recipeId) {
         this.internal = new CompostRecipe(recipeId, Ingredient.EMPTY, 0);
@@ -22,10 +22,8 @@ public class ZenCompostRecipe {
         return new ZenCompostRecipe(recipeId);
     }
 
-    @ZenCodeType.Method
-    public ZenCompostRecipe setInput(IIngredient input) {
-        internal.setInput(input.asVanillaIngredient());
-        return this;
+    public CompostRecipe build() {
+        return internal;
     }
 
     @ZenCodeType.Method
@@ -34,7 +32,9 @@ public class ZenCompostRecipe {
         return this;
     }
 
-    public CompostRecipe build() {
-        return internal;
+    @ZenCodeType.Method
+    public ZenCompostRecipe setInput(IIngredient input) {
+        internal.setInput(input.asVanillaIngredient());
+        return this;
     }
 }

@@ -3,19 +3,18 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
+import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
-import java.util.ArrayList;
-
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenSieveRecipe")
 public class ZenSeiveRecipe {
 
-    private SieveRecipe internal;
+    private final SieveRecipe internal;
 
     private ZenSeiveRecipe(ResourceLocation recipeId) {
         this.internal = new SieveRecipe(recipeId, Ingredient.EMPTY, ItemStack.EMPTY, new ArrayList<>(), false);
@@ -27,14 +26,14 @@ public class ZenSeiveRecipe {
     }
 
     @ZenCodeType.Method
-    public ZenSeiveRecipe addInput(IIngredient input) {
-        internal.setInput(input.asVanillaIngredient());
+    public ZenSeiveRecipe addDrop(IItemStack drop) {
+        internal.setDrop(drop.getInternal());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenSeiveRecipe addDrop(IItemStack drop) {
-        internal.setDrop(drop.getInternal());
+    public ZenSeiveRecipe addInput(IIngredient input) {
+        internal.setInput(input.asVanillaIngredient());
         return this;
     }
 
@@ -44,13 +43,13 @@ public class ZenSeiveRecipe {
         return this;
     }
 
+    public SieveRecipe build() {
+        return internal;
+    }
+
     @ZenCodeType.Method
     public ZenSeiveRecipe setWaterlogged() {
         internal.setWaterlogged();
         return this;
-    }
-
-    public SieveRecipe build() {
-        return internal;
     }
 }

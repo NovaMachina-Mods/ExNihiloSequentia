@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.api.crafting.sieve;
 
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -10,19 +12,15 @@ import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SieveRecipe extends SerializableRecipe {
     public static final IRecipeType<SieveRecipe> RECIPE_TYPE = IRecipeType
-        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
+            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
     private static RegistryObject<RecipeSerializer<SieveRecipe>> serializer;
-
-    private Ingredient input;
     private ItemStack drop;
-    private List<MeshWithChance> rolls;
+    private Ingredient input;
     private boolean isWaterlogged;
-    private ResourceLocation recipeId;
+    private final ResourceLocation recipeId;
+    private final List<MeshWithChance> rolls;
 
     public SieveRecipe(ResourceLocation id, Ingredient input, ItemStack drop, List<MeshWithChance> rolls, boolean isWaterlogged) {
         super(drop, RECIPE_TYPE, id);
@@ -41,30 +39,6 @@ public class SieveRecipe extends SerializableRecipe {
         SieveRecipe.serializer = serializer;
     }
 
-    public ResourceLocation getRecipeId() {
-        return recipeId;
-    }
-
-    public Ingredient getInput() {
-        return input;
-    }
-
-    public void setInput(Ingredient input) {
-        this.input = input;
-    }
-
-    public ItemStack getDrop() {
-        return drop.copy();
-    }
-
-    public void setDrop(ItemStack drop) {
-        this.drop = drop;
-    }
-
-    public List<MeshWithChance> getRolls() {
-        return rolls;
-    }
-
     public void addRoll(String meshString, float chance) {
         EnumMesh mesh = EnumMesh.getMeshFromName(meshString);
         addRoll(mesh, chance);
@@ -72,24 +46,6 @@ public class SieveRecipe extends SerializableRecipe {
 
     public void addRoll(EnumMesh mesh, float chance) {
         this.rolls.add(new MeshWithChance(mesh, chance));
-    }
-
-    public void setWaterlogged() {
-        this.isWaterlogged = true;
-    }
-
-    @Override
-    protected RecipeSerializer<SieveRecipe> getENSerializer() {
-        return serializer.get();
-    }
-
-    @Override
-    public ItemStack getRecipeOutput() {
-        return drop.copy();
-    }
-
-    public boolean isWaterlogged() {
-        return isWaterlogged;
     }
 
     public SieveRecipe filterByMesh(EnumMesh meshType, boolean flattenRecipes) {
@@ -108,14 +64,56 @@ public class SieveRecipe extends SerializableRecipe {
         return new SieveRecipe(recipeId, input, drop, possibleMeshes, isWaterlogged);
     }
 
+    public ItemStack getDrop() {
+        return drop.copy();
+    }
+
+    public void setDrop(ItemStack drop) {
+        this.drop = drop;
+    }
+
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public void setInput(Ingredient input) {
+        this.input = input;
+    }
+
+    public ResourceLocation getRecipeId() {
+        return recipeId;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return drop.copy();
+    }
+
+    public List<MeshWithChance> getRolls() {
+        return rolls;
+    }
+
+    public boolean isWaterlogged() {
+        return isWaterlogged;
+    }
+
+    public void setWaterlogged() {
+        this.isWaterlogged = true;
+    }
+
     @Override
     public String toString() {
         return "SieveRecipe{" +
-            "input=" + input +
-            ", drop=" + drop +
-            ", rolls=" + rolls +
-            ", isWaterlogged=" + isWaterlogged +
-            ", recipeId=" + recipeId +
-            '}';
+                "input=" + input +
+                ", drop=" + drop +
+                ", rolls=" + rolls +
+                ", isWaterlogged=" + isWaterlogged +
+                ", recipeId=" + recipeId +
+                '}';
+    }
+
+    @Override
+    protected RecipeSerializer<SieveRecipe> getENSerializer() {
+        return serializer.get();
     }
 }

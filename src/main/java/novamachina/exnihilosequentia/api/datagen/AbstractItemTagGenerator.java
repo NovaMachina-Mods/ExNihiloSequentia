@@ -14,8 +14,13 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
         super(generator, blockTagsProvider, modId, existingFileHelper);
     }
 
+    @Override
+    public String getName() {
+        return "Item Tags: " + modId;
+    }
+
     protected void registerOre(EnumOre ore, ExNihiloTags.OreTag tags) {
-        if(ore.shouldGenerateIngot()) {
+        if (ore.shouldGenerateIngot()) {
             Item ingot = ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get();
             Item chunk = ore.getChunkItem().get();
 
@@ -28,10 +33,5 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
             getOrCreateBuilder(tags.getOreTag()).addItemEntry(chunk);
             getOrCreateBuilder(Tags.Items.ORES).addTag(tags.getOreTag());
         }
-    }
-
-    @Override
-    public String getName() {
-        return "Item Tags: " + modId;
     }
 }

@@ -1,15 +1,14 @@
 package novamachina.exnihilosequentia.common.network;
 
-import net.minecraft.network.PacketBuffer;
-import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
+import net.minecraft.network.PacketBuffer;
+import novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 public class HandshakeMessages {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -18,38 +17,15 @@ public class HandshakeMessages {
 
     }
 
-    static class LoginIndexedMessage implements IntSupplier {
-        private int loginIndex;
-
-        int getLoginIndex() {
-            return loginIndex;
-        }
-
-        void setLoginIndex(final int loginIndex) {
-            this.loginIndex = loginIndex;
-        }
-
-        @Override
-        public int getAsInt() {
-            return getLoginIndex();
-        }
-    }
-
-    static class C2SAcknowledge extends LoginIndexedMessage {
-        static C2SAcknowledge decode(PacketBuffer buf) {
-            return new C2SAcknowledge();
-        }
-
-        void encode(PacketBuffer buf) {
-            // NOOP
-        }
-    }
-
     public static class S2COreList extends LoginIndexedMessage {
         private List<EnumOre> oreList;
 
         public S2COreList() {
             // NOOP
+        }
+
+        public List<EnumOre> getOreList() {
+            return oreList;
         }
 
         static S2COreList decode(PacketBuffer buffer) {
@@ -64,10 +40,6 @@ public class HandshakeMessages {
             return message;
         }
 
-        public List<EnumOre> getOreList() {
-            return oreList;
-        }
-
         void encode(PacketBuffer buffer) {
             oreList = Arrays.stream(EnumOre.values()).filter(EnumOre::isEnabled).collect(Collectors.toList());
             logger.debug("Writing ore list: " + oreList);
@@ -75,6 +47,33 @@ public class HandshakeMessages {
             for (EnumOre ore : oreList) {
                 buffer.writeEnumValue(ore);
             }
+        }
+    }
+
+    static class LoginIndexedMessage implements IntSupplier {
+        private int loginIndex;
+
+        @Override
+        public int getAsInt() {
+            return getLoginIndex();
+        }
+
+        int getLoginIndex() {
+            return loginIndex;
+        }
+
+        void setLoginIndex(final int loginIndex) {
+            this.loginIndex = loginIndex;
+        }
+    }
+
+    static class C2SAcknowledge extends LoginIndexedMessage {
+        static C2SAcknowledge decode(PacketBuffer buf) {
+            return new C2SAcknowledge();
+        }
+
+        void encode(PacketBuffer buf) {
+            // NOOP
         }
     }
 }

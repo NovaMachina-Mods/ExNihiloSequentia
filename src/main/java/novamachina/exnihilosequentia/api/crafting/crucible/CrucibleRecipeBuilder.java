@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.api.crafting.crucible;
 
-import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.crafting.Ingredient;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 
 public class CrucibleRecipeBuilder extends ExNihiloFinishedRecipe<CrucibleRecipeBuilder> {
     private CrucibleRecipeBuilder() {
@@ -14,19 +14,19 @@ public class CrucibleRecipeBuilder extends ExNihiloFinishedRecipe<CrucibleRecipe
         return new CrucibleRecipeBuilder();
     }
 
-    public CrucibleRecipeBuilder input(Ingredient input) {
-        return this.addInput(input);
-    }
-
     public CrucibleRecipeBuilder amount(int amount) {
         return addWriter(jsonObj -> jsonObj.addProperty("amount", amount));
+    }
+
+    public CrucibleRecipeBuilder crucibleType(CrucilbeTypeEnum type) {
+        return addWriter(jsonObj -> jsonObj.addProperty("crucibleType", type.getName()));
     }
 
     public CrucibleRecipeBuilder fluidResult(Fluid fluidResult) {
         return this.addFluid("fluidResult", fluidResult);
     }
 
-    public CrucibleRecipeBuilder crucibleType(CrucilbeTypeEnum type) {
-        return addWriter(jsonObj -> jsonObj.addProperty("crucibleType", type.getName()));
+    public CrucibleRecipeBuilder input(Ingredient input) {
+        return this.addInput(input);
     }
 }

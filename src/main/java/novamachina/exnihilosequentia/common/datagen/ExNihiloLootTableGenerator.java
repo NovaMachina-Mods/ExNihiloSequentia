@@ -1,8 +1,5 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Items;
@@ -11,6 +8,9 @@ import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.conditions.SurvivesExplosion;
+import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {

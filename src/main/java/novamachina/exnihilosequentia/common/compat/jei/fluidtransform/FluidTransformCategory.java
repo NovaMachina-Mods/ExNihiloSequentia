@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidtransform;
 
-import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import java.util.ArrayList;
+import java.util.Arrays;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -10,13 +10,12 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
-    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_transform.png");
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluidtransform");
+    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_transform.png");
     private final IDrawableStatic background;
 
     public FluidTransformCategory(IGuiHelper guiHelper) {
@@ -24,8 +23,13 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return UID;
+    public IDrawable getBackground() {
+        return background;
+    }
+
+    @Override
+    public IDrawable getIcon() {
+        return null;
     }
 
     @Override
@@ -39,13 +43,8 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return null;
+    public ResourceLocation getUid() {
+        return UID;
     }
 
     @Override

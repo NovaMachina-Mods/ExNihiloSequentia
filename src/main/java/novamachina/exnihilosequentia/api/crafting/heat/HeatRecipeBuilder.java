@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.crafting.heat;
 
-import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.crafting.Ingredient;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder> {
     private HeatRecipeBuilder() {
@@ -13,12 +13,12 @@ public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder>
         return new HeatRecipeBuilder();
     }
 
-    public HeatRecipeBuilder input(Ingredient input) {
-        return this.addInput(input);
-    }
-
     public HeatRecipeBuilder amount(int amount) {
         return addWriter(jsonObj -> jsonObj.addProperty("amount", amount));
+    }
+
+    public HeatRecipeBuilder input(Ingredient input) {
+        return this.addInput(input);
     }
 
     public HeatRecipeBuilder input(Block block) {

@@ -10,7 +10,7 @@ import org.openzen.zencode.java.ZenCodeType;
 @ZenCodeType.Name("mods.exnihilosequentia.ZenHeatRecipe")
 public class ZenHeatRecipe {
 
-    private HeatRecipe internal;
+    private final HeatRecipe internal;
 
     private ZenHeatRecipe(ResourceLocation recipeId) {
         this.internal = new HeatRecipe(recipeId, null, 0);
@@ -21,10 +21,8 @@ public class ZenHeatRecipe {
         return new ZenHeatRecipe(recipeId);
     }
 
-    @ZenCodeType.Method
-    public ZenHeatRecipe setBlock(MCBlock input) {
-        internal.setInput(input.getInternal());
-        return this;
+    public HeatRecipe build() {
+        return internal;
     }
 
     @ZenCodeType.Method
@@ -33,7 +31,9 @@ public class ZenHeatRecipe {
         return this;
     }
 
-    public HeatRecipe build() {
-        return internal;
+    @ZenCodeType.Method
+    public ZenHeatRecipe setBlock(MCBlock input) {
+        internal.setInput(input.getInternal());
+        return this;
     }
 }

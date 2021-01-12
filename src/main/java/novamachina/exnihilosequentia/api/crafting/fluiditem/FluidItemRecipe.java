@@ -1,8 +1,7 @@
 package novamachina.exnihilosequentia.api.crafting.fluiditem;
 
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import java.util.Arrays;
+import java.util.List;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,9 +10,9 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
-
-import java.util.Arrays;
-import java.util.List;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidItemRecipe extends SerializableRecipe {
     public static final IRecipeType<FluidItemRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
@@ -37,26 +36,8 @@ public class FluidItemRecipe extends SerializableRecipe {
         FluidItemRecipe.serializer = serializer;
     }
 
-    @Override
-    protected RecipeSerializer<FluidItemRecipe> getENSerializer() {
-        return serializer.get();
-    }
-
-    @Override
-    public ItemStack getRecipeOutput() {
-        return output;
-    }
-
-    public void setOutput(ItemStack output) {
-        this.output = output;
-    }
-
     public FluidStack getFluidInBarrel() {
         return fluid;
-    }
-
-    public void setFluid(FluidStack fluidInBarrel) {
-        this.fluid = fluidInBarrel;
     }
 
     public Ingredient getInput() {
@@ -71,7 +52,25 @@ public class FluidItemRecipe extends SerializableRecipe {
         return Arrays.asList(input.getMatchingStacks());
     }
 
+    @Override
+    public ItemStack getRecipeOutput() {
+        return output;
+    }
+
+    public void setFluid(FluidStack fluidInBarrel) {
+        this.fluid = fluidInBarrel;
+    }
+
+    public void setOutput(ItemStack output) {
+        this.output = output;
+    }
+
     public boolean validInputs(Fluid fluid, Item input) {
         return this.fluid.getFluid().isEquivalentTo(fluid) && this.input.test(new ItemStack(input));
+    }
+
+    @Override
+    protected RecipeSerializer<FluidItemRecipe> getENSerializer() {
+        return serializer.get();
     }
 }

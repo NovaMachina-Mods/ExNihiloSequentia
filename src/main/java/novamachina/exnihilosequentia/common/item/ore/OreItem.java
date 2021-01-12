@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 public class OreItem extends Item {
 

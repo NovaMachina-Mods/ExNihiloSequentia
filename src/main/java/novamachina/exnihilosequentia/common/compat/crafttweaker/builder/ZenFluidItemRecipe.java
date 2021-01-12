@@ -26,15 +26,13 @@ public class ZenFluidItemRecipe {
         return new ZenFluidItemRecipe(recipeId);
     }
 
-    @ZenCodeType.Method
-    public ZenFluidItemRecipe setFluidInTank(IFluidStack fluidInTank) {
-        internal.setFluid(fluidInTank.getInternal());
-        return this;
+    public FluidItemRecipe build() {
+        return internal;
     }
 
     @ZenCodeType.Method
-    public ZenFluidItemRecipe setResult(IItemStack result) {
-        internal.setOutput(result.getInternal());
+    public ZenFluidItemRecipe setFluidInTank(IFluidStack fluidInTank) {
+        internal.setFluid(fluidInTank.getInternal());
         return this;
     }
 
@@ -44,7 +42,9 @@ public class ZenFluidItemRecipe {
         return this;
     }
 
-    public FluidItemRecipe build() {
-        return internal;
+    @ZenCodeType.Method
+    public ZenFluidItemRecipe setResult(IItemStack result) {
+        internal.setOutput(result.getInternal());
+        return this;
     }
 }

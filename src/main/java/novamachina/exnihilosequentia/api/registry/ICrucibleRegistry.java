@@ -1,18 +1,17 @@
 package novamachina.exnihilosequentia.api.registry;
 
+import java.util.List;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 
-import java.util.List;
-
 public interface ICrucibleRegistry {
-    List<CrucibleRecipe> getRecipeList();
-
-    void setRecipes(List<CrucibleRecipe> recipes);
+    void clearRecipes();
 
     CrucibleRecipe findRecipe(IItemProvider item);
 
+    List<CrucibleRecipe> getRecipeList();
+
     boolean isMeltable(IItemProvider item, int level);
 
-    void clearRecipes();
+    void setRecipes(List<CrucibleRecipe> recipes);
 }

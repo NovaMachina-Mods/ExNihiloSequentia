@@ -12,16 +12,8 @@ public class ExNihiloLogger {
         this.logger = logger;
     }
 
-    public void info(String msg) {
-        logger.info(LOGGING_PATTERN, PREFIX, msg);
-    }
-
-    public void warn(String msg) {
-        logger.warn(LOGGING_PATTERN, PREFIX, msg);
-    }
-
     public void debug(String msg) {
-        if(Config.enableDebugLogging()) {
+        if (Config.enableDebugLogging()) {
             logger.info(LOGGING_PATTERN, PREFIX, msg);
         }
     }
@@ -30,7 +22,15 @@ public class ExNihiloLogger {
         logger.error(LOGGING_PATTERN, PREFIX, msg);
     }
 
+    public void info(String msg) {
+        logger.info(LOGGING_PATTERN, PREFIX, msg);
+    }
+
     public void info(int num) {
         info(String.format("%d", num));
+    }
+
+    public void warn(String msg) {
+        logger.warn(LOGGING_PATTERN, PREFIX, msg);
     }
 }

@@ -1,14 +1,13 @@
 package novamachina.exnihilosequentia.common.compat.waila;
 
-import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
-import novamachina.exnihilosequentia.common.utility.StringUtils;
+import java.util.List;
 import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.IDataAccessor;
 import mcp.mobius.waila.api.IPluginConfig;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-
-import java.util.List;
+import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 public class InfestingLeavesComponentProvider implements IComponentProvider {
     @Override
@@ -16,6 +15,6 @@ public class InfestingLeavesComponentProvider implements IComponentProvider {
         InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) accessor.getTileEntity();
 
         tooltip.add(new TranslationTextComponent("waila.progress", StringUtils
-            .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
+                .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
     }
 }

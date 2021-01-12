@@ -1,6 +1,5 @@
 package novamachina.exnihilosequentia.common.item.seeds;
 
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,6 +13,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 public class SeedBaseItem extends Item implements IPlantable {
 
@@ -25,19 +25,14 @@ public class SeedBaseItem extends Item implements IPlantable {
         this.plant = plant;
     }
 
-    public SeedBaseItem setPlantType(PlantType type) {
-        this.type = type;
-        return this;
+    @Override
+    public BlockState getPlant(IBlockReader world, BlockPos pos) {
+        return plant;
     }
 
     @Override
     public PlantType getPlantType(IBlockReader world, BlockPos pos) {
         return type;
-    }
-
-    @Override
-    public BlockState getPlant(IBlockReader world, BlockPos pos) {
-        return plant;
     }
 
     @Override
@@ -52,7 +47,7 @@ public class SeedBaseItem extends Item implements IPlantable {
         Direction direction = context.getFace();
         World world = context.getWorld();
         if (player.canPlayerEdit(pos, direction, item) && player
-            .canPlayerEdit(pos.add(0, 1, 0), direction, item)) {
+                .canPlayerEdit(pos.add(0, 1, 0), direction, item)) {
 
             BlockState soil;
             if (type == PlantType.WATER) {
@@ -65,7 +60,7 @@ public class SeedBaseItem extends Item implements IPlantable {
             boolean blockEmpty = isBlockSpaceEmpty(world, pos, type);
             if (canSustain && blockEmpty && this.getPlant(world, pos) != null) {
                 world.setBlockState(pos.add(0, 1, 0),
-                    this.getPlant(world, pos));
+                        this.getPlant(world, pos));
                 if (!player.isCreative()) {
                     item.shrink(1);
                 }
@@ -73,6 +68,11 @@ public class SeedBaseItem extends Item implements IPlantable {
             }
         }
         return ActionResultType.PASS;
+    }
+
+    public SeedBaseItem setPlantType(PlantType type) {
+        this.type = type;
+        return this;
     }
 
     private boolean isBlockSpaceEmpty(World world, BlockPos pos, PlantType type) {

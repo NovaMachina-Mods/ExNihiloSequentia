@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.item.tools.hammer;
 
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumHammer {
     WOOD(ExNihiloConstants.Items.HAMMER_WOOD, 64, ItemTier.WOOD),
@@ -14,8 +14,8 @@ public enum EnumHammer {
     NETHERITE(ExNihiloConstants.Items.HAMMER_NETHERITE, 8192, ItemTier.NETHERITE),
     GOLD(ExNihiloConstants.Items.HAMMER_GOLD, 64, ItemTier.GOLD);
 
-    public final String hammerName;
     public final int defaultDurability;
+    public final String hammerName;
     public final IItemTier tier;
     private RegistryObject<Item> registryObject;
 

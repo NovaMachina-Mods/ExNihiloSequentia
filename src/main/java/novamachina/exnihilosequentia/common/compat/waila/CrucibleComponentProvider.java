@@ -1,13 +1,12 @@
 package novamachina.exnihilosequentia.common.compat.waila;
 
-import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
+import java.util.List;
 import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.IDataAccessor;
 import mcp.mobius.waila.api.IPluginConfig;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-
-import java.util.List;
+import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 
 public class CrucibleComponentProvider implements IComponentProvider {
     @Override

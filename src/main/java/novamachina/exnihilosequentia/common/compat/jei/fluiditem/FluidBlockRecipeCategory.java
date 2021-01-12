@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluiditem;
 
-import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -10,10 +8,12 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe> {
-    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_block_transform.png");
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluiditem");
+    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_block_transform.png");
     private final IDrawableStatic background;
 
     public FluidBlockRecipeCategory(IGuiHelper guiHelper) {
@@ -21,8 +21,13 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return UID;
+    public IDrawable getBackground() {
+        return background;
+    }
+
+    @Override
+    public IDrawable getIcon() {
+        return null;
     }
 
     @Override
@@ -36,13 +41,8 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return null;
+    public ResourceLocation getUid() {
+        return UID;
     }
 
     @Override

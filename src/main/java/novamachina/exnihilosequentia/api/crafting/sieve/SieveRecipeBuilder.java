@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.api.crafting.sieve;
 
 import com.google.gson.JsonArray;
-import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilder> {
-    private JsonArray meshArray = new JsonArray();
+    private final JsonArray meshArray = new JsonArray();
 
     private SieveRecipeBuilder() {
         super(SieveRecipe.getStaticSerializer().get());
@@ -18,17 +18,17 @@ public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilde
         return new SieveRecipeBuilder();
     }
 
-    public SieveRecipeBuilder input(Ingredient input) {
-        return this.addInput(input);
+    public SieveRecipeBuilder addRoll(MeshWithChance mesh) {
+        meshArray.add(mesh.serialize());
+        return this;
     }
 
     public SieveRecipeBuilder drop(IItemProvider drop) {
         return this.addResult(drop);
     }
 
-    public SieveRecipeBuilder addRoll(MeshWithChance mesh) {
-        meshArray.add(mesh.serialize());
-        return this;
+    public SieveRecipeBuilder input(Ingredient input) {
+        return this.addInput(input);
     }
 
     public SieveRecipeBuilder isWaterlogged() {

@@ -16,16 +16,16 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         super(gen, modId, exFileHelper);
     }
 
+    protected void basicBlock(Block block) {
+        simpleItemBlock(block, cubeAll(block));
+    }
+
     protected void registerFluid(Fluid fluid) {
         ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
         ModelFile model = models().getBuilder("block/" + fluid.getRegistryName().getPath())
-            .texture(PARTICLE_TAG, stillTexture);
+                .texture(PARTICLE_TAG, stillTexture);
         getVariantBuilder(fluid.getDefaultState().getBlockState().getBlock()).partialState()
-            .setModels(new ConfiguredModel(model));
-    }
-
-    protected void basicBlock(Block block) {
-        simpleItemBlock(block, cubeAll(block));
+                .setModels(new ConfiguredModel(model));
     }
 
     protected void simpleItemBlock(Block block, ModelFile modelFile) {

@@ -1,5 +1,8 @@
 package novamachina.exnihilosequentia.api.crafting.crook;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -10,15 +13,12 @@ import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class CrookRecipe extends SerializableRecipe {
     public static final IRecipeType<CrookRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
     private static RegistryObject<RecipeSerializer<CrookRecipe>> serializer;
     private Ingredient input;
-    private List<ItemStackWithChance> output;
+    private final List<ItemStackWithChance> output;
+
     public CrookRecipe(ResourceLocation id, Ingredient input, List<ItemStackWithChance> output) {
         super(output.get(0).getStack(), RECIPE_TYPE, id);
         this.input = input;
@@ -33,8 +33,8 @@ public class CrookRecipe extends SerializableRecipe {
         CrookRecipe.serializer = serializer;
     }
 
-    public List<ItemStackWithChance> getOutput() {
-        return output;
+    public void addOutput(ItemStack item, float chance) {
+        output.add(new ItemStackWithChance(item, chance));
     }
 
     public Ingredient getInput() {
@@ -45,9 +45,18 @@ public class CrookRecipe extends SerializableRecipe {
         this.input = input;
     }
 
-    @Override
-    protected RecipeSerializer<CrookRecipe> getENSerializer() {
-        return serializer.get();
+    public List<ItemStack> getInputs() {
+        return Arrays.asList(input.getMatchingStacks());
+    }
+
+    public List<ItemStackWithChance> getOutput() {
+        return output;
+    }
+
+    public List<ItemStack> getOutputsWithoutChance() {
+        List<ItemStack> returnList = new ArrayList<>();
+        output.forEach(stack -> returnList.add(stack.getStack()));
+        return returnList;
     }
 
     @Override
@@ -55,17 +64,8 @@ public class CrookRecipe extends SerializableRecipe {
         return output.get(0).getStack().copy();
     }
 
-    public void addOutput(ItemStack item, float chance) {
-        output.add(new ItemStackWithChance(item, chance));
-    }
-
-    public List<ItemStack> getInputs() {
-        return Arrays.asList(input.getMatchingStacks());
-    }
-
-    public List<ItemStack> getOutputsWithoutChance() {
-        List<ItemStack> returnList = new ArrayList<>();
-        output.forEach(stack -> returnList.add(stack.getStack()));
-        return returnList;
+    @Override
+    protected RecipeSerializer<CrookRecipe> getENSerializer() {
+        return serializer.get();
     }
 }

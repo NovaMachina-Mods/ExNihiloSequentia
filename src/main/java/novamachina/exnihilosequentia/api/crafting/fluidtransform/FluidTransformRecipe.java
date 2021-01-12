@@ -12,10 +12,10 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidTransformRecipe extends SerializableRecipe {
     public static final IRecipeType<FluidTransformRecipe> RECIPE_TYPE = IRecipeType
-        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
+            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
     private static RegistryObject<RecipeSerializer<FluidTransformRecipe>> serializer;
-    private FluidStack fluidInTank;
     private Ingredient catalyst;
+    private FluidStack fluidInTank;
     private FluidStack result;
 
     public FluidTransformRecipe(ResourceLocation id, FluidStack fluidInTank, Ingredient catalyst, FluidStack result) {
@@ -33,6 +33,14 @@ public class FluidTransformRecipe extends SerializableRecipe {
         FluidTransformRecipe.serializer = serializer;
     }
 
+    public Ingredient getCatalyst() {
+        return catalyst;
+    }
+
+    public void setCatalyst(Ingredient catalyst) {
+        this.catalyst = catalyst;
+    }
+
     public FluidStack getFluidInTank() {
         return fluidInTank;
     }
@@ -41,12 +49,9 @@ public class FluidTransformRecipe extends SerializableRecipe {
         this.fluidInTank = fluidInTank;
     }
 
-    public Ingredient getCatalyst() {
-        return catalyst;
-    }
-
-    public void setCatalyst(Ingredient catalyst) {
-        this.catalyst = catalyst;
+    @Override
+    public ItemStack getRecipeOutput() {
+        return ItemStack.EMPTY;
     }
 
     public FluidStack getResult() {
@@ -60,10 +65,5 @@ public class FluidTransformRecipe extends SerializableRecipe {
     @Override
     protected RecipeSerializer<FluidTransformRecipe> getENSerializer() {
         return serializer.get();
-    }
-
-    @Override
-    public ItemStack getRecipeOutput() {
-        return ItemStack.EMPTY;
     }
 }

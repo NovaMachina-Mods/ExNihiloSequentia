@@ -2,13 +2,7 @@ package novamachina.exnihilosequentia.common.compat.jei.sieve.dry;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
-import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
-import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.utility.StringUtils;
+import java.util.List;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -25,8 +19,13 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.List;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
+import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
+import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
+import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "dry_sieve");
@@ -41,8 +40,13 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return UID;
+    public IDrawable getBackground() {
+        return background;
+    }
+
+    @Override
+    public IDrawable getIcon() {
+        return null;
     }
 
     @Override
@@ -56,13 +60,8 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return null;
+    public ResourceLocation getUid() {
+        return UID;
     }
 
     @Override
@@ -93,9 +92,9 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
             if (focus != null) {
                 ItemStack focusStack = (ItemStack) focus.getValue();
                 if (focus.getMode() == IFocus.Mode.OUTPUT
-                    && !focusStack.isEmpty()
-                    && focusStack.getItem() == outputStack.getItem()
-                    && focusStack.getDamage() == outputStack.getDamage()) {
+                        && !focusStack.isEmpty()
+                        && focusStack.getItem() == outputStack.getItem()
+                        && focusStack.getDamage() == outputStack.getDamage()) {
                     recipeLayout.getItemStacks().setBackground(slotIndex + i, slotHighlight);
                 }
             }
@@ -108,14 +107,14 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
                 if (!input) {
                     Multiset<String> condensedTooltips = HashMultiset.create();
                     List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
-                        .getDrops(recipe.getInputs().get(1).get(0).getItem(), ((MeshItem) recipe
-                            .getInputs().get(0).get(0).getItem()).getMesh(), false);
+                            .getDrops(recipe.getInputs().get(1).get(0).getItem(), ((MeshItem) recipe
+                                    .getInputs().get(0).get(0).getItem()).getMesh(), false);
                     for (SieveRecipe entry : drops) {
                         ItemStack drop = entry.getDrop();
                         if (!drop.isItemEqual(ingredient)) {
                             continue;
                         }
-                        for(MeshWithChance meshWithChance : entry.getRolls()) {
+                        for (MeshWithChance meshWithChance : entry.getRolls()) {
                             condensedTooltips.add(StringUtils.formatPercent(meshWithChance.getChance()));
                         }
                     }

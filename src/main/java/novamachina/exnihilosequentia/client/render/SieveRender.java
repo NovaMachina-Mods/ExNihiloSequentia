@@ -2,9 +2,6 @@ package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
-import novamachina.exnihilosequentia.common.tileentity.SieveTile;
-import novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -13,6 +10,9 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
+import novamachina.exnihilosequentia.common.tileentity.SieveTile;
+import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -20,7 +20,7 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public SieveRender(
-        TileEntityRendererDispatcher rendererDispatcherIn) {
+            TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
@@ -36,9 +36,9 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
         ResourceLocation blockTexture = tileEntity.getTexture();
         if (blockTexture != null) {
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
-                    new ResourceLocation(blockTexture.getNamespace(),
-                        "block/" + blockTexture.getPath()));
+                    .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
+                            new ResourceLocation(blockTexture.getNamespace(),
+                                    "block/" + blockTexture.getPath()));
             IVertexBuilder builder = buffer.getBuffer(RenderType.getTranslucent());
 
             matrixStack.push();

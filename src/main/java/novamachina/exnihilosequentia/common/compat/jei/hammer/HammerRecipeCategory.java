@@ -1,21 +1,19 @@
 package novamachina.exnihilosequentia.common.compat.jei.hammer;
 
-import mezz.jei.api.recipe.IFocus;
-import net.minecraft.item.ItemStack;
-import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.common.compat.jei.crook.CrookTooltipCallback;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import java.util.ArrayList;
+import java.util.Arrays;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer");
@@ -30,8 +28,13 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return UID;
+    public IDrawable getBackground() {
+        return background;
+    }
+
+    @Override
+    public IDrawable getIcon() {
+        return null;
     }
 
     @Override
@@ -45,13 +48,8 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return null;
+    public ResourceLocation getUid() {
+        return UID;
     }
 
     @Override
@@ -80,7 +78,7 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
             if (focus != null) {
                 ItemStack focusStack = (ItemStack) focus.getValue();
                 if (focus.getMode() == IFocus.Mode.OUTPUT && !focusStack.isEmpty() && focusStack
-                    .getItem() == outputStack.getItem() && focusStack.getDamage() == outputStack.getDamage()) {
+                        .getItem() == outputStack.getItem() && focusStack.getDamage() == outputStack.getDamage()) {
                     recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
                 }
             }

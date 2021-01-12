@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
-import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -13,10 +11,12 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
-    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "compost");
+    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
     private final IDrawableStatic background;
     private final IDrawableStatic slotHighlight;
 
@@ -26,8 +26,13 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return UID;
+    public IDrawable getBackground() {
+        return background;
+    }
+
+    @Override
+    public IDrawable getIcon() {
+        return null;
     }
 
     @Override
@@ -41,13 +46,8 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return null;
+    public ResourceLocation getUid() {
+        return UID;
     }
 
     @Override

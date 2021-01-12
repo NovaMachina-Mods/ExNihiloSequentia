@@ -14,7 +14,7 @@ import org.openzen.zencode.java.ZenCodeType;
 @ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")
 public class ZenCrucibleRecipe {
 
-    private CrucibleRecipe internal;
+    private final CrucibleRecipe internal;
 
     private ZenCrucibleRecipe(ResourceLocation recipeId) {
         this.internal = new CrucibleRecipe(recipeId, Ingredient.EMPTY, 0, FluidStack.EMPTY, CrucilbeTypeEnum.WOOD);
@@ -25,10 +25,8 @@ public class ZenCrucibleRecipe {
         return new ZenCrucibleRecipe(recipeId);
     }
 
-    @ZenCodeType.Method
-    public ZenCrucibleRecipe setInput(IIngredient input) {
-        internal.setInput(input.asVanillaIngredient());
-        return this;
+    public CrucibleRecipe build() {
+        return internal;
     }
 
     @ZenCodeType.Method
@@ -38,18 +36,20 @@ public class ZenCrucibleRecipe {
     }
 
     @ZenCodeType.Method
-    public ZenCrucibleRecipe setResultFluid(IFluidStack fluid) {
-        internal.setResultFluid(fluid.getInternal());
-        return this;
-    }
-
-    @ZenCodeType.Method
     public ZenCrucibleRecipe setCrucibleType(String crucibleType) {
         internal.setCrucibleType(crucibleType);
         return this;
     }
 
-    public CrucibleRecipe build() {
-        return internal;
+    @ZenCodeType.Method
+    public ZenCrucibleRecipe setInput(IIngredient input) {
+        internal.setInput(input.asVanillaIngredient());
+        return this;
+    }
+
+    @ZenCodeType.Method
+    public ZenCrucibleRecipe setResultFluid(IFluidStack fluid) {
+        internal.setResultFluid(fluid.getInternal());
+        return this;
     }
 }

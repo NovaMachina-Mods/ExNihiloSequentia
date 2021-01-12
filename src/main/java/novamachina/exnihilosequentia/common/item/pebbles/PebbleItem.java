@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.item.pebbles;
 
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import net.minecraft.item.Item;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 public class PebbleItem extends Item {
 

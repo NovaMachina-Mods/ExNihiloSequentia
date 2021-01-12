@@ -1,9 +1,10 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import javax.annotation.Nonnull;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -12,18 +13,16 @@ import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class UseHammerModifier extends LootModifier {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public UseHammerModifier(ILootCondition[] conditionsIn) {
         super(conditionsIn);
@@ -39,15 +38,15 @@ public class UseHammerModifier extends LootModifier {
 
         if (tool != null && blockState != null && tool.getItem() instanceof HammerBaseItem && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {
             List<ItemStackWithChance> list = ExNihiloRegistries.HAMMER_REGISTRY.getResult(blockState.getBlock());
-            for(ItemStackWithChance stackWithChance : list) {
-                if(random.nextFloat() <= stackWithChance.getChance()) {
-                    if(stackWithChance.getStack() != ItemStack.EMPTY){
+            for (ItemStackWithChance stackWithChance : list) {
+                if (random.nextFloat() <= stackWithChance.getChance()) {
+                    if (stackWithChance.getStack() != ItemStack.EMPTY) {
                         newLoot.add(stackWithChance.getStack());
                     }
                 }
             }
         }
-        if(!newLoot.isEmpty()) {
+        if (!newLoot.isEmpty()) {
             logger.debug("Adding new loot");
             generatedLoot = newLoot;
         }
