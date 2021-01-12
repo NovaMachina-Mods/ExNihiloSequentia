@@ -140,8 +140,9 @@
 
   "waila.progress": "进度: %s",
   "waila.barrel.fluidAmount": "流体(%s): %s mB",
-  "waila.barrel.solidAmount": "固体(%s): %s",
+  "waila.barrel.solidAmount": "固体(%s): %s / %s",
   "waila.barrel.block": "方块: %s",
+  "waila.barrel.compost": "堆肥: %s / %s",
   "waila.sieve.block": "过筛中: %s",
   "waila.sieve.mesh": "筛网: %s",
   "waila.crucible.fluid": "流体(%s): %s mB",

@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -168,10 +168,15 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
-        String fluidName = barrelTile.getFluid() != null ? I18n
-            .format(barrelTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey()) : "None";
 
-        info.add(new TranslationTextComponent("waila.barrel.fluidAmount", fluidName, barrelTile.getFluidAmount()));
+        String key;
+        if(barrelTile.getFluid() == null){
+            key = Fluids.EMPTY.getDefaultState().getBlockState().getBlock().getTranslationKey();
+        } else{
+            key = barrelTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey();
+        }
+
+        info.add(new TranslationTextComponent("waila.barrel.fluidAmount", new TranslationTextComponent(key), barrelTile.getFluidAmount()));
 
         return info;
     }

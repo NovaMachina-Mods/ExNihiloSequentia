@@ -7,7 +7,6 @@ import novamachina.exnihilosequentia.common.utility.StringUtils;
 import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.IDataAccessor;
 import mcp.mobius.waila.api.IPluginConfig;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -17,18 +16,14 @@ public class SieveComponentProvider implements IComponentProvider {
     @Override
     public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
         SieveTile sieveTile = (SieveTile) accessor.getTileEntity();
-        String block = I18n.format(sieveTile.getBlockStack().getTranslationKey());
 
         if (!sieveTile.getBlockStack().isEmpty()) {
             tooltip.add(new TranslationTextComponent("waila.progress", StringUtils
-                .formatPercent(sieveTile.getProgress() / 1.0F)));
-            tooltip.add(new TranslationTextComponent("waila.sieve.block", block));
+                    .formatPercent(sieveTile.getProgress() / 1.0F)));
+            tooltip.add(new TranslationTextComponent("waila.sieve.block", new TranslationTextComponent(sieveTile.getBlockStack().getTranslationKey())));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
-            String meshName = I18n.format("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName());
-            if(meshName.equals(sieveTile.getMesh().getMeshName()))
-                meshName = sieveTile.getMesh().getName();
-            tooltip.add(new TranslationTextComponent("waila.sieve.mesh", meshName));
+            tooltip.add(new TranslationTextComponent("waila.sieve.mesh", new TranslationTextComponent("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName())));
         }
     }
 }

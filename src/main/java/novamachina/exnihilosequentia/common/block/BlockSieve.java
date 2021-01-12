@@ -21,7 +21,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -154,18 +153,14 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
         SieveTile sieveTile = (SieveTile) world.getTileEntity(iProbeHitData.getPos());
-        String block = I18n.format(sieveTile.getBlockStack().getTranslationKey());
 
         if (!sieveTile.getBlockStack().isEmpty()) {
             iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
                 .formatPercent(sieveTile.getProgress() / 1.0F)));
-            iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", block));
+            iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", new TranslationTextComponent(sieveTile.getBlockStack().getTranslationKey())));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
-            String meshName = I18n.format("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName());
-            if(meshName.equals(sieveTile.getMesh().getMeshName()))
-                meshName = sieveTile.getMesh().getName();
-            iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", meshName));
+            iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", new TranslationTextComponent("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName())));
         }
     }
 

@@ -7,7 +7,6 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -50,12 +49,10 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
         BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getTileEntity(data.getPos());
         if (crucibleTile.getSolidAmount() > 0) {
-            String itemName = I18n.format(crucibleTile.getCurrentItem().getItem().getTranslationKey());
-            probeInfo.text(new TranslationTextComponent("waila.crucible.solid", itemName, crucibleTile.getSolidAmount()));
+            probeInfo.text(new TranslationTextComponent("waila.crucible.solid", new TranslationTextComponent(crucibleTile.getCurrentItem().getItem().getTranslationKey()), crucibleTile.getSolidAmount()));
         }
         if (crucibleTile.getFluidAmount() > 0) {
-            String fluidName = I18n.format(crucibleTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey());
-            probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", fluidName, crucibleTile.getFluidAmount()));
+            probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey()), crucibleTile.getFluidAmount()));
         }
             probeInfo.text(new TranslationTextComponent("waila.crucible.heat", crucibleTile.getHeat()));
     }
