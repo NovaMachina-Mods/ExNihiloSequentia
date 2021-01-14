@@ -29,8 +29,8 @@ public class ZenFluidTransformRecipe {
     }
 
     @ZenCodeType.Method
-    public ZenFluidTransformRecipe setBlockBelow(IIngredient blockBelow) {
-        internal.setCatalyst(blockBelow.asVanillaIngredient());
+    public ZenFluidTransformRecipe setCatalyst(IIngredient catalyst) {
+        internal.setCatalyst(catalyst.asVanillaIngredient());
         return this;
     }
 

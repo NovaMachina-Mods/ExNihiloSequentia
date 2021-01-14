@@ -32,7 +32,7 @@ public class ZenSeiveRecipe {
     }
 
     @ZenCodeType.Method
-    public ZenSeiveRecipe addInput(IIngredient input) {
+    public ZenSeiveRecipe setInput(IIngredient input) {
         internal.setInput(input.asVanillaIngredient());
         return this;
     }

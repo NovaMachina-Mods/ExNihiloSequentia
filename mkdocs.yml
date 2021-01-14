@@ -9,6 +9,7 @@ nav:
   - Sieve: 'sieve.md'
   - Misc: 'misc.md'
   - Data Pack: 'data_pack.md'
+  - CraftTweaker: 'crafttweaker.md'
   - Configuration File: 'config.md'
 
 # Do not edit in PRs below here

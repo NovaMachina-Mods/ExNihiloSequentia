@@ -28,7 +28,8 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
     "results": [
         {
             "chance": 0.1,
-            "item": "exnihilosequentia:silkworm"
+            "item": "exnihilosequentia:silkworm",
+            "count": 1
         }
     ],
     "input": {
@@ -39,7 +40,8 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
 
 - `results`: A list of items that can be dropped and the chance that they will be.
   - `chance`: A value from `0.0` to `1.0`.
-  - `item`: The item to be dropped
+  - `item`: The item to be dropped.
+  - `count`: A value greater than 0.
 - `input`: The block/type of block that must be broken by a crook to produce the results.
 
 ## Crucible
@@ -112,7 +114,7 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
     "fluidInTank": {
         "fluid": "minecraft:water"
     },
-    "blockBelow": {
+    "catalyst": {
         "item/tag": "minecraft:sand"
     },
     "result": {
@@ -122,7 +124,7 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
 ```
 
 - `fluidInTank`: The fluid to be transformed.
-- `blockBelow`: The block/type of block that must be below the barrel to transform the fluid.
+- `catalyst`: The block/type of block that must be below the barrel to transform the fluid. May also be an item that is inserted into the barrel with the fluid in it.
 - `result`: The resulting fluid.
 
 ## Hammer
@@ -130,16 +132,24 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
 ```lang-json
 {
     "type": "exnihilosequentia:hammer",
+    "results": [
+        {
+            "item": "minecraft:sand",
+            "chance": 1.0,
+            "count": 1
+        }
+    ],
     "input": {
         "item": "minecraft:gravel"
-    },
-    "result": {
-        "item": "minecraft:sand"
     }
 }
 ```
 
-- `input`: The block to be hammered. Does not support tags.
+- `results`: A list of possible drops.
+    - `item`: The item to be dropped. Must be an item.
+    - `chance`: A value from `0.0` to `1.0`.
+    - `count`: A value greater than `0`.
+- `input`: The block to be hammered. May be a tag.
 - `result`: The resulting block.
 
 ## Heat
@@ -181,4 +191,4 @@ Ex Nihilo: Sequentia supports datapacks for the creation of recipes. Defined bel
     - `mesh`: The mesh required to cause this roll to be considered. Must be `string`, `flint`, `iron`, `diamond`, `emerald`, or `netherite`.
 - `input`: The block/type of block that will be consumed by the sieve.
 - `result`: The resulting item.
-- `waterlogged`: The sieve must be placed in water to produce result. Either `true` or `false`. Optional and enitire tag may be omitted. Will default to false. 
+- `waterlogged`: The sieve must be placed in water to produce result. Either `true` or `false`. Optional and enitire tag may be omitted. Will default to `false`. 
