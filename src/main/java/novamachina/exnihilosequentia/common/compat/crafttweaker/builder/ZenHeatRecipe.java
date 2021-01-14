@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
-import com.blamejared.crafttweaker.impl.blocks.MCBlock;
+import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import org.openzen.zencode.java.ZenCodeType;
@@ -32,8 +32,8 @@ public class ZenHeatRecipe {
     }
 
     @ZenCodeType.Method
-    public ZenHeatRecipe setBlock(MCBlock input) {
-        internal.setInput(input.getInternal());
+    public ZenHeatRecipe setBlock(Block input) {
+        internal.setInput(input);
         return this;
     }
 }

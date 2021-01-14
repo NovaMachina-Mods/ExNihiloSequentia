@@ -1,11 +1,2 @@
-2.0.0.0
-- Fix issue with waterlogged tag not working in datapacks
-- Fix duplication issue with crooks
-- Remove Osmium and Bismuth (moved to addons)
-- Fix issue where `\reload` causes recipes to break
-- Add CraftTweaker support
-- Add count and chance tags to hammer recipes
-- Add fluid transform with item
-- Add Nether fungi to composting
-- Add better support for addons
-- Various bug fixes
+2.0.0.1
+- Fix issue associated with CraftTweaker API change
