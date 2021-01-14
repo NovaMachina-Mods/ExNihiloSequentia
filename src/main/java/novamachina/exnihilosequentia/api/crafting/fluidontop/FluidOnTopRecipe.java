@@ -12,11 +12,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
     public static final IRecipeType<FluidOnTopRecipe> RECIPE_TYPE = IRecipeType
-        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
+            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
     private static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> serializer;
-    private final FluidStack fluidInTank;
-    private final FluidStack fluidOnTop;
-    private final ItemStack result;
+    private FluidStack fluidInTank;
+    private FluidStack fluidOnTop;
+    private ItemStack result;
 
     public FluidOnTopRecipe(ResourceLocation id, FluidStack fluidInTank, FluidStack fluidOnTop, ItemStack result) {
         super(result, RECIPE_TYPE, id);
@@ -37,13 +37,16 @@ public class FluidOnTopRecipe extends SerializableRecipe {
         return fluidInTank;
     }
 
+    public void setFluidInTank(FluidStack fluidInTank) {
+        this.fluidInTank = fluidInTank;
+    }
+
     public FluidStack getFluidOnTop() {
         return fluidOnTop;
     }
 
-    @Override
-    protected RecipeSerializer getENSerializer() {
-        return serializer.get();
+    public void setFluidOnTop(FluidStack fluidOnTop) {
+        this.fluidOnTop = fluidOnTop;
     }
 
     @Override
@@ -51,8 +54,17 @@ public class FluidOnTopRecipe extends SerializableRecipe {
         return result;
     }
 
+    public void setResult(ItemStack result) {
+        this.result = result;
+    }
+
     public boolean validInputs(Fluid fluidInTank, Fluid fluidOnTop) {
         return this.fluidInTank.getFluid().isEquivalentTo(fluidInTank) && this.fluidOnTop.getFluid()
-            .isEquivalentTo(fluidOnTop);
+                .isEquivalentTo(fluidOnTop);
+    }
+
+    @Override
+    protected RecipeSerializer<FluidOnTopRecipe> getENSerializer() {
+        return serializer.get();
     }
 }

@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.registries;
 
+import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
@@ -20,9 +21,9 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
     private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
 
     @Override
-    public boolean isValidRecipe(Fluid fluidInTank, Block blockBelow) {
+    public boolean isValidRecipe(Fluid fluidInTank, IItemProvider catalyst) {
         for(FluidTransformRecipe recipe : recipeList) {
-            if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getBlockBelow().test(new ItemStack(blockBelow))) {
+            if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getCatalyst().test(new ItemStack(catalyst))) {
                 return true;
             }
         }
@@ -30,9 +31,9 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
     }
 
     @Override
-    public Fluid getResult(Fluid fluidInTank, Block blockBelow) {
+    public Fluid getResult(Fluid fluidInTank, IItemProvider catalyst) {
         for(FluidTransformRecipe recipe : recipeList) {
-            if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getBlockBelow().test(new ItemStack(blockBelow))) {
+            if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getCatalyst().test(new ItemStack(catalyst))) {
                 return recipe.getResult().getFluid();
             }
         }

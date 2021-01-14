@@ -1,10 +1,9 @@
 package novamachina.exnihilosequentia.api.compat.jei;
 
-import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
-import net.minecraft.item.ItemStack;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import net.minecraft.item.ItemStack;
+import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 
 public class JEISieveRecipe {
     private final List<List<ItemStack>> inputs;
@@ -19,12 +18,12 @@ public class JEISieveRecipe {
         return inputs;
     }
 
-    public List<ItemStack> getResults() {
-        return results;
-    }
-
     public ItemStack getMesh() {
         return inputs.get(0).get(0);
+    }
+
+    public List<ItemStack> getResults() {
+        return results;
     }
 
     public List<ItemStack> getSieveables() {

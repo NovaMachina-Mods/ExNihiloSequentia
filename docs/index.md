@@ -11,10 +11,12 @@ Ex Nihilo: Sequentia has support for:
 - [JEI]
 - [The One Probe]
 - [WAILA/HWYLA]
+- [CraftTweaker]
 
 To report any issues or make a suggestion, go to the [GitHub Issues] page.
 
 [JEI]: https://www.curseforge.com/minecraft/mc-mods/jei
 [The One Probe]: https://www.curseforge.com/minecraft/mc-mods/the-one-probe
 [WAILA/HWYLA]: https://www.curseforge.com/minecraft/mc-mods/hwyla/
+[CraftTweaker]: https://www.curseforge.com/minecraft/mc-mods/crafttweaker
 [GitHub Issues]: https://github.com/NovaMachina/ExNihiloSequentia/issues

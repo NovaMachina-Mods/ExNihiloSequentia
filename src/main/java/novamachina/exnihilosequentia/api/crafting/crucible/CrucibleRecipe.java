@@ -1,34 +1,33 @@
 package novamachina.exnihilosequentia.api.crafting.crucible;
 
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import java.util.Arrays;
+import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
-
-import java.util.Arrays;
-import java.util.List;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CrucibleRecipe extends SerializableRecipe {
     public static final IRecipeType<CrucibleRecipe> RECIPE_TYPE = IRecipeType
-        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
+            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
     private static RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer;
-    private final Ingredient input;
-    private final int amount;
-    private final FluidStack resultFluid;
-    private final CrucilbeTypeEnum crucipleType;
+    private int amount;
+    private CrucilbeTypeEnum crucibleType;
+    private Ingredient input;
+    private FluidStack resultFluid;
 
     public CrucibleRecipe(ResourceLocation id, Ingredient input, int amount, FluidStack fluid, CrucilbeTypeEnum crucibleType) {
         super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
         this.resultFluid = fluid;
-        this.crucipleType = crucibleType;
+        this.crucibleType = crucibleType;
     }
 
     public static RegistryObject<RecipeSerializer<CrucibleRecipe>> getStaticSerializer() {
@@ -39,25 +38,32 @@ public class CrucibleRecipe extends SerializableRecipe {
         CrucibleRecipe.serializer = serializer;
     }
 
-    public Ingredient getInput() {
-        return input;
-    }
-
     public int getAmount() {
         return amount;
     }
 
-    public FluidStack getResultFluid() {
-        return resultFluid;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public CrucilbeTypeEnum getCrucibleType() {
-        return crucipleType;
+        return crucibleType;
     }
 
-    @Override
-    protected RecipeSerializer getENSerializer() {
-        return serializer.get();
+    public void setCrucibleType(String crucibleType) {
+        this.crucibleType = CrucilbeTypeEnum.getTypeByName(crucibleType);
+    }
+
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public void setInput(Ingredient input) {
+        this.input = input;
+    }
+
+    public List<ItemStack> getInputs() {
+        return Arrays.asList(input.getMatchingStacks());
     }
 
     @Override
@@ -65,7 +71,16 @@ public class CrucibleRecipe extends SerializableRecipe {
         return ItemStack.EMPTY;
     }
 
-    public List<ItemStack> getInputs() {
-        return Arrays.asList(input.getMatchingStacks());
+    public FluidStack getResultFluid() {
+        return resultFluid;
+    }
+
+    public void setResultFluid(FluidStack resultFluid) {
+        this.resultFluid = resultFluid;
+    }
+
+    @Override
+    protected RecipeSerializer<CrucibleRecipe> getENSerializer() {
+        return serializer.get();
     }
 }

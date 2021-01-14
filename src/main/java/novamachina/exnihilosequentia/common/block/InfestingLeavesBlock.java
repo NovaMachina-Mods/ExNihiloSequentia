@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.block;
 
+import java.util.Random;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -20,8 +21,6 @@ import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
-import java.util.Random;
-
 // TODO: Add progressive render
 public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider {
 
@@ -29,16 +28,16 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
 
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
-            .properties(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).sound(
-                SoundType.PLANT).notSolid()).tileEntitySupplier(InfestingLeavesTile::new));
-    }
-
-    public static void normalToInfesting(World world, BlockPos pos) {
-        world.setBlockState(pos, ExNihiloBlocks.INFESTING_LEAVES.get().getDefaultState());
+                .properties(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).sound(
+                        SoundType.PLANT).notSolid()).tileEntitySupplier(InfestingLeavesTile::new));
     }
 
     public static void finishInfestingBlock(World world, BlockPos pos) {
         world.setBlockState(pos, ExNihiloBlocks.INFESTED_LEAVES.get().getDefaultState());
+    }
+
+    public static void normalToInfesting(World world, BlockPos pos) {
+        world.setBlockState(pos, ExNihiloBlocks.INFESTING_LEAVES.get().getDefaultState());
     }
 
     public static void spread(World world, BlockPos pos) {
@@ -57,7 +56,7 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
         NonNullList<BlockPos> nearbyLeaves = NonNullList.create();
 
         BlockPos.getAllInBox(new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1),
-            new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1)).forEach(item -> {
+                new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1)).forEach(item -> {
             if (world.getBlockState(item).getBlock() instanceof LeavesBlock) {
                 nearbyLeaves.add(new BlockPos(item));
             }
@@ -71,6 +70,6 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
         InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getTileEntity(iProbeHitData.getPos());
 
         iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
-            .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
+                .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
     }
 }

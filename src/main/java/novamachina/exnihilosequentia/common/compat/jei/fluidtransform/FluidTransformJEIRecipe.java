@@ -4,8 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FluidTransformJEIRecipe {
-    private final FluidStack fluidInBarrel;
     private final ItemStack blockBelow;
+    private final FluidStack fluidInBarrel;
     private final FluidStack result;
 
     public FluidTransformJEIRecipe(FluidStack fluidInBarrel, ItemStack blockBelow, FluidStack result) {
@@ -14,12 +14,12 @@ public class FluidTransformJEIRecipe {
         this.result = result;
     }
 
-    public FluidStack getFluidInBarrel() {
-        return fluidInBarrel;
-    }
-
     public ItemStack getBlockBelow() {
         return blockBelow;
+    }
+
+    public FluidStack getFluidInBarrel() {
+        return fluidInBarrel;
     }
 
     public FluidStack getResult() {

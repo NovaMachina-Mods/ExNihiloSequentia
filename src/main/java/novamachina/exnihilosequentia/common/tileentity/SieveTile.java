@@ -158,7 +158,7 @@ public class SieveTile extends TileEntity {
 
     private void resetSieve() {
         logger.debug("Resetting sieve");
-        if (Config.getEnableMeshDurability()) {
+        if (Config.enableMeshDurability()) {
             logger.debug("Damaging mesh");
             meshStack.damageItem(1, new FakePlayer((ServerWorld) world, new GameProfile(UUID
                 .randomUUID(), "Fake Player")), player -> logger.debug("Broken"));

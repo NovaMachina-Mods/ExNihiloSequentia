@@ -2,17 +2,16 @@ package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
-import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
-import java.util.List;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 
 public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
     @Override
@@ -21,21 +20,10 @@ public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
     }
 
     @Override
-    protected CrookRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        Ingredient input = Ingredient.deserialize(json.get("input"));
-        JsonArray results = json.getAsJsonArray("results");
-        List<ItemStackWithChance> output = new ArrayList<>(results.size());
-        for(int i = 0; i < results.size(); i++) {
-            output.add(ItemStackWithChance.deserialize(results.get(i)));
-        }
-        return new CrookRecipe(recipeId, input, output);
-    }
-
-    @Override
     public CrookRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
         int outputCount = buffer.readInt();
         List<ItemStackWithChance> output = new ArrayList<>(outputCount);
-        for(int i = 0; i < outputCount; i++) {
+        for (int i = 0; i < outputCount; i++) {
             output.add(ItemStackWithChance.read(buffer));
         }
         Ingredient input = Ingredient.read(buffer);
@@ -45,9 +33,20 @@ public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
     @Override
     public void write(PacketBuffer buffer, CrookRecipe recipe) {
         buffer.writeInt(recipe.getOutput().size());
-        for(ItemStackWithChance stack : recipe.getOutput()) {
+        for (ItemStackWithChance stack : recipe.getOutput()) {
             stack.write(buffer);
         }
         recipe.getInput().write(buffer);
+    }
+
+    @Override
+    protected CrookRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
+        Ingredient input = Ingredient.deserialize(json.get("input"));
+        JsonArray results = json.getAsJsonArray("results");
+        List<ItemStackWithChance> output = new ArrayList<>(results.size());
+        for (int i = 0; i < results.size(); i++) {
+            output.add(ItemStackWithChance.deserialize(results.get(i)));
+        }
+        return new CrookRecipe(recipeId, input, output);
     }
 }

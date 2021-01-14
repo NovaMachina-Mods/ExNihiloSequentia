@@ -1,8 +1,6 @@
 package novamachina.exnihilosequentia.common.block;
 
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
-import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import java.util.List;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -25,8 +23,9 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import java.util.List;
+import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 
 public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
@@ -35,8 +34,27 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
         super(builder);
     }
 
+    @Override
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
+        AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getTileEntity(data.getPos());
+        if (barrelTile == null) {
+            return;
+        }
+        if (probeMode == ProbeMode.EXTENDED) {
+            probeInfo
+                    .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).modifyStyle(style -> {
+                        style.setColor(Color.fromTextFormatting(TextFormatting.GREEN));
+                        return style;
+                    }));
+        }
+
+        List<ITextComponent> info = barrelTile.getWailaInfo();
+        for (ITextComponent tooltip : info) {
+            probeInfo.text(tooltip);
+        }
+    }
+
     /**
-     *
      * @deprecated Ask Mojang
      */
     @Deprecated
@@ -46,7 +64,6 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     }
 
     /**
-     *
      * @deprecated Ask Mojang
      */
     @Deprecated
@@ -60,33 +77,13 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
 
         if (tile != null) {
             IFluidHandler fluidHandler = tile
-                .getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, hit.getFace())
-                .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
+                    .getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, hit.getFace())
+                    .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
             IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, hit.getFace())
-                .orElseThrow(() -> new RuntimeException("Missing Item Handler"));
+                    .orElseThrow(() -> new RuntimeException("Missing Item Handler"));
             return tile.onBlockActivated(player, handIn, fluidHandler, itemHandler);
         }
 
         return ActionResultType.SUCCESS;
-    }
-
-    @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
-        AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getTileEntity(data.getPos());
-        if (barrelTile == null) {
-            return;
-        }
-        if (probeMode == ProbeMode.EXTENDED) {
-            probeInfo
-                .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).modifyStyle(style -> {
-                    style.setColor(Color.fromTextFormatting(TextFormatting.GREEN));
-                    return style;
-                }));
-        }
-
-        List<ITextComponent> info = barrelTile.getWailaInfo();
-        for (ITextComponent tooltip : info) {
-            probeInfo.text(tooltip);
-        }
     }
 }

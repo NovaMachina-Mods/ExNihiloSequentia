@@ -10,7 +10,7 @@ public class InfestedLeavesBlock extends BaseBlock {
 
     public InfestedLeavesBlock() {
         super(new BlockBuilder().properties(
-            AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).sound(
-                SoundType.PLANT).notSolid()).tileEntitySupplier(InfestedLeavesTile::new));
+                AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).sound(
+                        SoundType.PLANT).notSolid()).tileEntitySupplier(InfestedLeavesTile::new));
     }
 }

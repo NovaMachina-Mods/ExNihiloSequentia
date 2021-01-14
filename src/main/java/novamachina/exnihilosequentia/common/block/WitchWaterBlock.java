@@ -33,8 +33,8 @@ public class WitchWaterBlock extends FlowingFluidBlock {
 
     public WitchWaterBlock() {
         super(ExNihiloFluids.WITCH_WATER,
-            AbstractBlock.Properties.create(Material.WATER).doesNotBlockMovement()
-                .hardnessAndResistance(100.0F).noDrops());
+                AbstractBlock.Properties.create(Material.WATER).doesNotBlockMovement()
+                        .hardnessAndResistance(100.0F).noDrops());
     }
 
     /**
@@ -49,7 +49,7 @@ public class WitchWaterBlock extends FlowingFluidBlock {
 
         if (entityIn instanceof SkeletonEntity) {
             replaceMob(worldIn, (SkeletonEntity) entityIn,
-                new WitherSkeletonEntity(EntityType.WITHER_SKELETON, worldIn));
+                    new WitherSkeletonEntity(EntityType.WITHER_SKELETON, worldIn));
         }
 
         if (entityIn instanceof CreeperEntity && !((CreeperEntity) entityIn).isCharged()) {
@@ -61,7 +61,7 @@ public class WitchWaterBlock extends FlowingFluidBlock {
 
         if (entityIn instanceof SpiderEntity && !(entityIn instanceof CaveSpiderEntity)) {
             replaceMob(worldIn, (SpiderEntity) entityIn,
-                new CaveSpiderEntity(EntityType.CAVE_SPIDER, worldIn));
+                    new CaveSpiderEntity(EntityType.CAVE_SPIDER, worldIn));
         }
 
         if (entityIn instanceof SquidEntity) {
@@ -76,12 +76,12 @@ public class WitchWaterBlock extends FlowingFluidBlock {
                 replaceMob(worldIn, villagerEntity, new WitchEntity(EntityType.WITCH, worldIn));
             } else if (profession == VillagerProfession.BUTCHER) {
                 replaceMob(worldIn, villagerEntity,
-                    new VindicatorEntity(EntityType.VINDICATOR, worldIn));
+                        new VindicatorEntity(EntityType.VINDICATOR, worldIn));
             } else if (profession == VillagerProfession.LIBRARIAN) {
                 replaceMob(worldIn, villagerEntity, new EvokerEntity(EntityType.EVOKER, worldIn));
             } else {
                 ZombieVillagerEntity zombieVillagerEntity = new ZombieVillagerEntity(
-                    EntityType.ZOMBIE_VILLAGER, worldIn);
+                        EntityType.ZOMBIE_VILLAGER, worldIn);
                 zombieVillagerEntity.setVillagerData(villagerEntity.getVillagerData());
                 replaceMob(worldIn, villagerEntity, zombieVillagerEntity);
             }
@@ -104,14 +104,14 @@ public class WitchWaterBlock extends FlowingFluidBlock {
     private void applyPotion(PlayerEntity entityIn, EffectInstance potionEffect) {
         EffectInstance currentEffect = entityIn.getActivePotionEffect(potionEffect.getPotion());
         if (currentEffect != null
-            && currentEffect.getDuration() <= potionEffect.getDuration() - 20) {
+                && currentEffect.getDuration() <= potionEffect.getDuration() - 20) {
             entityIn.addPotionEffect(potionEffect);
         }
     }
 
     private void replaceMob(World world, LivingEntity toKill, LivingEntity toSpawn) {
         toSpawn.setLocationAndAngles(toKill.getPosX(), toKill.getPosY(), toKill.getPosZ(),
-            toKill.rotationYaw, toKill.rotationPitch);
+                toKill.rotationYaw, toKill.rotationPitch);
         toSpawn.renderYawOffset = toKill.renderYawOffset;
         toSpawn.setHealth(toSpawn.getMaxHealth() * toKill.getHealth() / toKill.getMaxHealth());
 

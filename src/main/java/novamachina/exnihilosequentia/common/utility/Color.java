@@ -1,19 +1,17 @@
 package novamachina.exnihilosequentia.common.utility;
 
-import net.minecraft.nbt.CompoundNBT;
-
 import java.util.Objects;
+import net.minecraft.nbt.CompoundNBT;
 
 public class Color {
 
     public static final Color INVALID_COLOR = new Color(-1, -1, -1, -1);
     public static final Color WHITE = new Color(1, 1, 1, 1);
     private static final String COLOR_TAG = "color";
-
-    public final float r;
-    public final float g;
-    public final float b;
     public final float a;
+    public final float b;
+    public final float g;
+    public final float r;
 
     public Color(float red, float green, float blue, float alpha) {
         this.r = red;
@@ -49,11 +47,11 @@ public class Color {
         //Gamma correction
 
         float averageR = (float) Math
-            .sqrt((colorA.r * colorA.r) * (opposite) + (colorB.r * colorB.r) * (percentage));
+                .sqrt((colorA.r * colorA.r) * (opposite) + (colorB.r * colorB.r) * (percentage));
         float averageG = (float) Math
-            .sqrt((colorA.g * colorA.g) * (opposite) + (colorB.r * colorB.g) * (percentage));
+                .sqrt((colorA.g * colorA.g) * (opposite) + (colorB.r * colorB.g) * (percentage));
         float averageB = (float) Math
-            .sqrt((colorA.b * colorA.b) * (opposite) + (colorB.r * colorB.b) * (percentage));
+                .sqrt((colorA.b * colorA.b) * (opposite) + (colorB.r * colorB.b) * (percentage));
         float averageA = colorA.a * opposite + colorB.a * percentage;
 
         return new Color(averageR, averageG, averageB, averageA);
@@ -70,6 +68,40 @@ public class Color {
             return new Color(a, r, b, g);
         }
         return INVALID_COLOR;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Color color = (Color) o;
+        return Float.compare(color.r, r) == 0 &&
+                Float.compare(color.g, g) == 0 &&
+                Float.compare(color.b, b) == 0 &&
+                Float.compare(color.a, a) == 0;
+    }
+
+    public String getAsHexNoAlpha() {
+        return Integer.toHexString(toIntNoAlpha());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(r, g, b, a);
+    }
+
+    public void putIntoNBT(CompoundNBT compoundNBT) {
+        CompoundNBT colorTag = new CompoundNBT();
+        colorTag.putFloat("colorA", a);
+        colorTag.putFloat("colorR", r);
+        colorTag.putFloat("colorB", b);
+        colorTag.putFloat("colorG", g);
+        compoundNBT.put(COLOR_TAG, colorTag);
     }
 
     public int toInt() {
@@ -89,47 +121,13 @@ public class Color {
         return color;
     }
 
-    public String getAsHexNoAlpha() {
-        return Integer.toHexString(toIntNoAlpha());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Color color = (Color) o;
-        return Float.compare(color.r, r) == 0 &&
-            Float.compare(color.g, g) == 0 &&
-            Float.compare(color.b, b) == 0 &&
-            Float.compare(color.a, a) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(r, g, b, a);
-    }
-
     @Override
     public String toString() {
         return "Color{" +
-            "r=" + r +
-            ", g=" + g +
-            ", b=" + b +
-            ", a=" + a +
-            '}';
-    }
-
-    public void putIntoNBT(CompoundNBT compoundNBT) {
-        CompoundNBT colorTag = new CompoundNBT();
-        colorTag.putFloat("colorA", a);
-        colorTag.putFloat("colorR", r);
-        colorTag.putFloat("colorB", b);
-        colorTag.putFloat("colorG", g);
-        compoundNBT.put(COLOR_TAG, colorTag);
+                "r=" + r +
+                ", g=" + g +
+                ", b=" + b +
+                ", a=" + a +
+                '}';
     }
 }

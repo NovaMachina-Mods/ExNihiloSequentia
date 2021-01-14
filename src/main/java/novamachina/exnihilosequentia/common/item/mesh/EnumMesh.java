@@ -9,8 +9,8 @@ public enum EnumMesh implements IStringSerializable {
     NONE(0, "none", 0), STRING(1, "string", 59), FLINT(2, "flint", 131), IRON(3, "iron", 250), DIAMOND(4, "diamond", 1561), EMERALD(5, "emerald", 1561), NETHERITE(6, "netherite", 2031);
 
     private final int id;
-    private final String name;
     private final int maxDamage;
+    private final String name;
     private RegistryObject<Item> registryObject;
 
     EnumMesh(int id, String name, int maxDamage) {
@@ -20,8 +20,8 @@ public enum EnumMesh implements IStringSerializable {
     }
 
     public static EnumMesh getMeshFromName(String name) {
-        for(EnumMesh mesh : EnumMesh.values()) {
-            if(mesh.getName().equals(name)) {
+        for (EnumMesh mesh : EnumMesh.values()) {
+            if (mesh.getName().equals(name)) {
                 return mesh;
             }
         }
@@ -32,17 +32,16 @@ public enum EnumMesh implements IStringSerializable {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public int getMaxDamage() {
+        return maxDamage;
     }
 
     public String getMeshName() {
         return "mesh_" + name;
     }
 
-    @Override
-    public String getString() {
-        return this.name;
+    public String getName() {
+        return name;
     }
 
     public RegistryObject<Item> getRegistryObject() {
@@ -53,7 +52,8 @@ public enum EnumMesh implements IStringSerializable {
         this.registryObject = registryObject;
     }
 
-    public int getMaxDamage() {
-        return maxDamage;
+    @Override
+    public String getString() {
+        return this.name;
     }
 }

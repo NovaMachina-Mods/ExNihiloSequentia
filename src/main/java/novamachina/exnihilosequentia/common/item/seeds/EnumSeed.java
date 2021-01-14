@@ -1,11 +1,11 @@
 package novamachina.exnihilosequentia.common.item.seeds;
 
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumSeed {
 
@@ -24,9 +24,9 @@ public enum EnumSeed {
     SEED_PICKLE(ExNihiloConstants.Items.SEED_PICKLE, Blocks.SEA_PICKLE.getDefaultState(), PlantType.WATER),
     SEED_BAMBOO(ExNihiloConstants.Items.SEED_BAMBOO, Blocks.BAMBOO_SAPLING.getDefaultState(), PlantType.PLAINS);
 
-    private final String seedName;
     private final BlockState defaultState;
     private final PlantType plantType;
+    private final String seedName;
     private RegistryObject<Item> registryObject;
 
     EnumSeed(String seedName, BlockState defaultState, PlantType plantType) {
@@ -43,15 +43,15 @@ public enum EnumSeed {
         return plantType;
     }
 
-    public String getSeedName() {
-        return "seed_" + seedName;
-    }
-
     public RegistryObject<Item> getRegistryObject() {
         return registryObject;
     }
 
     public void setRegistryObject(RegistryObject<Item> registryObject) {
         this.registryObject = registryObject;
+    }
+
+    public String getSeedName() {
+        return "seed_" + seedName;
     }
 }

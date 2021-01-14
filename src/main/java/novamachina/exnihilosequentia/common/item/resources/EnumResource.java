@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.item.resources;
 
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 
 public enum EnumResource {
     ANCIENT_SPORE(Items.ANCIENT_SPORE),
@@ -24,15 +24,15 @@ public enum EnumResource {
         this.resourceName = resourceName;
     }
 
-    public String getResourceName() {
-        return resourceName;
-    }
-
     public RegistryObject<Item> getRegistryObject() {
         return registryObject;
     }
 
     public void setRegistryObject(RegistryObject<Item> registryObject) {
         this.registryObject = registryObject;
+    }
+
+    public String getResourceName() {
+        return resourceName;
     }
 }

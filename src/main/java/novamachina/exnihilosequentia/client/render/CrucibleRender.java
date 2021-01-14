@@ -2,8 +2,6 @@ package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
-import novamachina.exnihilosequentia.common.utility.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -14,6 +12,8 @@ import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
+import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -27,7 +27,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     public static void register(TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         logger.debug("Register crucible renderer, Type" + tileTileEntityType);
         ClientRegistry
-            .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
+                .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
     }
 
     @Override
@@ -36,16 +36,16 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
         ResourceLocation solidTexture = tileEntity.getSolidTexture();
         Fluid fluid = tileEntity.getFluid();
         ResourceLocation fluidTexture =
-            fluid != null ? fluid.getAttributes().getStillTexture() : null;
+                fluid != null ? fluid.getAttributes().getStillTexture() : null;
         Color fluidColor =
-            fluid != null ? new Color(fluid.getAttributes().getColor()) : Color.INVALID_COLOR;
+                fluid != null ? new Color(fluid.getAttributes().getColor()) : Color.INVALID_COLOR;
         Color blockColor = getBlockColor(solidTexture, tileEntity);
         if (fluidTexture != null) {
             IVertexBuilder builder = buffer.getBuffer(RenderType.getTranslucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
-                    fluidTexture);
+                    .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
+                            fluidTexture);
 
             // Subtract 0.005 to prevent texture fighting
             float fillAmount = (0.75f * tileEntity.getFluidProportion()) - 0.005f;
@@ -55,17 +55,17 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             matrixStack.translate(-.5, -.5, -.5);
 
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 1), new UVLocation(sprite
-                    .getMinU(), sprite.getMaxV()),
-                fluidColor);
+                            .getMinU(), sprite.getMaxV()),
+                    fluidColor);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 1), new UVLocation(sprite
-                    .getMaxU(), sprite.getMaxV()),
-                fluidColor);
+                            .getMaxU(), sprite.getMaxV()),
+                    fluidColor);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 0), new UVLocation(sprite
-                    .getMaxU(), sprite.getMinV()),
-                fluidColor);
+                            .getMaxU(), sprite.getMinV()),
+                    fluidColor);
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 0), new UVLocation(sprite
-                    .getMinU(), sprite.getMinV()),
-                fluidColor);
+                            .getMinU(), sprite.getMinV()),
+                    fluidColor);
 
             matrixStack.pop();
         }
@@ -73,9 +73,9 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             IVertexBuilder builder = buffer.getBuffer(RenderType.getSolid());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
-                    new ResourceLocation(solidTexture.getNamespace(),
-                        "block/" + solidTexture.getPath()));
+                    .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
+                            new ResourceLocation(solidTexture.getNamespace(),
+                                    "block/" + solidTexture.getPath()));
 
             // Subtract 0.005 to prevent texture fighting
             float fillAmount = (0.75f * Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.005f;
@@ -85,17 +85,17 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             matrixStack.translate(-.5, -.5, -.5);
 
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 1), new UVLocation(sprite
-                    .getMinU(), sprite.getMaxV()),
-                blockColor);
+                            .getMinU(), sprite.getMaxV()),
+                    blockColor);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 1), new UVLocation(sprite
-                    .getMaxU(), sprite.getMaxV()),
-                blockColor);
+                            .getMaxU(), sprite.getMaxV()),
+                    blockColor);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 0), new UVLocation(sprite
-                    .getMaxU(), sprite.getMinV()),
-                blockColor);
+                            .getMaxU(), sprite.getMinV()),
+                    blockColor);
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 0), new UVLocation(sprite
-                    .getMinU(), sprite.getMinV()),
-                blockColor);
+                            .getMinU(), sprite.getMinV()),
+                    blockColor);
 
             matrixStack.pop();
         }

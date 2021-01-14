@@ -1,13 +1,12 @@
 package novamachina.exnihilosequentia.common.compat.jei.crucible;
 
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
+import java.util.List;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-
-import java.util.List;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 
 public class WoodCrucibleTooltipCallback implements ITooltipCallback<ItemStack> {
     @Override

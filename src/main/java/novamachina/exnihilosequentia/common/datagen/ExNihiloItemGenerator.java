@@ -15,9 +15,9 @@ import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloItemGenerator extends AbstractItemGenerator {
+    private static final String ITEMS_TAG = "items/";
     private static final String ITEM_HANDHELD_TAG = "item/handheld";
     private static final String LAYER_0_TAG = "layer0";
-    private static final String ITEMS_TAG = "items/";
 
     public ExNihiloItemGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
@@ -26,14 +26,14 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
     @Override
     protected void registerModels() {
         singleTexture(ExNihiloItems.COOKED_SILKWORM.get().getRegistryName()
-                .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-            LAYER_0_TAG, new ResourceLocation(modid, "items/cooked_silkworm"));
+                        .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(modid, "items/cooked_silkworm"));
         singleTexture(ExNihiloItems.WITCH_WATER_BUCKET.get().getRegistryName()
-                .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-            LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_witchwater"));
+                        .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_witchwater"));
         singleTexture(ExNihiloItems.SEA_WATER_BUCKET.get().getRegistryName()
-                .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-            LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_sea_water"));
+                        .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_sea_water"));
 
         registerCrooks();
         registerHammers();
@@ -44,12 +44,28 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
         registerDolls();
     }
 
+    private void registerCrooks() {
+        for (EnumCrook crook : EnumCrook.values()) {
+            singleTexture(crook.getRegistryObject().get().getRegistryName()
+                            .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                    LAYER_0_TAG, new ResourceLocation(modid, "items/tools/crook/" + crook.crookName));
+        }
+    }
+
     private void registerDolls() {
         for (DollEnum doll : DollEnum.values()) {
             singleTexture(doll.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + doll
-                    .getDollName()));
+                            .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                    LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + doll
+                            .getDollName()));
+        }
+    }
+
+    private void registerHammers() {
+        for (EnumHammer hammer : EnumHammer.values()) {
+            singleTexture(hammer.getRegistryObject().get().getRegistryName()
+                            .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                    LAYER_0_TAG, new ResourceLocation(modid, "items/tools/hammer/" + hammer.hammerName));
         }
     }
 
@@ -57,8 +73,8 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
                 withExistingParent(mesh.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(modid, "block/" + mesh
-                    .getMeshName()));
+                        .getPath(), new ResourceLocation(modid, "block/" + mesh
+                        .getMeshName()));
             }
         }
     }
@@ -66,42 +82,26 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
     private void registerPebbles() {
         for (EnumPebbleType pebble : EnumPebbleType.values()) {
             singleTexture(pebble.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + pebble.getType()));
+                            .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                    LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + pebble.getType()));
         }
     }
 
     private void registerResources() {
         for (EnumResource resource : EnumResource.values()) {
             singleTexture(resource.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + resource
-                    .getResourceName()));
+                            .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                    LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + resource
+                            .getResourceName()));
         }
     }
 
     private void registerSeeds() {
         for (EnumSeed seed : EnumSeed.values()) {
             singleTexture(seed.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + seed
-                    .getSeedName()));
-        }
-    }
-
-    private void registerHammers() {
-        for (EnumHammer hammer : EnumHammer.values()) {
-            singleTexture(hammer.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, "items/tools/hammer/" + hammer.hammerName));
-        }
-    }
-
-    private void registerCrooks() {
-        for (EnumCrook crook : EnumCrook.values()) {
-            singleTexture(crook.getRegistryObject().get().getRegistryName()
-                    .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, "items/tools/crook/" + crook.crookName));
+                            .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                    LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + seed
+                            .getSeedName()));
         }
     }
 }

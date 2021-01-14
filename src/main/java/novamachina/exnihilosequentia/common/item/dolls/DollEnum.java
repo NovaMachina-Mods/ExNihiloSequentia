@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum DollEnum {
     BLAZE(ExNihiloConstants.ModIds.MINECRAFT, "blaze", "minecraft", "lava", 1, ExNihiloConstants.Tooltips.BLAZE),
@@ -16,8 +16,8 @@ public enum DollEnum {
     private final String entityName;
     private final String fluidModId;
     private final String fluidName;
-    private final double yOffset;
     private final String tooltip;
+    private final double yOffset;
     private RegistryObject<Item> registryObject;
 
     DollEnum(String entityModId, String entityName, String fluidModId, String fluidName, double yOffset, String tooltip) {
@@ -38,8 +38,8 @@ public enum DollEnum {
         return null;
     }
 
-    public String getFluidModId() {
-        return fluidModId;
+    public String getDollName() {
+        return "doll_" + entityName;
     }
 
     public String getEntityModId() {
@@ -50,20 +50,12 @@ public enum DollEnum {
         return entityName;
     }
 
+    public String getFluidModId() {
+        return fluidModId;
+    }
+
     public String getFluidName() {
         return fluidName;
-    }
-
-    public double getYOffset() {
-        return yOffset;
-    }
-
-    public String getDollName() {
-        return "doll_" + entityName;
-    }
-
-    public String getToolTip() {
-        return tooltip;
     }
 
     public RegistryObject<Item> getRegistryObject() {
@@ -72,5 +64,13 @@ public enum DollEnum {
 
     public void setRegistryObject(RegistryObject<Item> registryObject) {
         this.registryObject = registryObject;
+    }
+
+    public String getToolTip() {
+        return tooltip;
+    }
+
+    public double getYOffset() {
+        return yOffset;
     }
 }

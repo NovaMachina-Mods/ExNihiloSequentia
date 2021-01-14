@@ -82,6 +82,8 @@ dependencies {
 
     compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
     runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
+
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
 }
 
 jar {
@@ -105,22 +107,11 @@ jar.finalizedBy('reobfJar')
 //publish.dependsOn('reobfJar')
 
 repositories {
-    maven { // JEI
-        name = "DVS1 Maven FS"
-        url = "https://dvs1.progwml6.com/files/maven"
-    }
-    maven { // WAILA
-        name = "Mobius Repo"
-        url = "https://maven.tehnut.info"
-    }
-    maven {
-        name = "TTerrag Repo"
-        url = "https://maven.tterrag.com/"
-    }
-    maven {
-        url "https://www.cursemaven.com"
-    }
+    maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
+    maven { url = "https://maven.tehnut.info"} // WAILA
+    maven { url = "https://maven.tterrag.com/" } // TOP
     maven { url = 'https://files.minecraftforge.net/maven' }
+    maven { url = "https://maven.blamejared.com" } // CraftTweaker
 }
 
 publishing {

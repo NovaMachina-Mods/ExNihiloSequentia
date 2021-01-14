@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.crafting.fluidtransform;
 
-import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
-import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.crafting.Ingredient;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 public class FluidTransformRecipeBuilder extends ExNihiloFinishedRecipe<FluidTransformRecipeBuilder> {
     public FluidTransformRecipeBuilder() {
@@ -13,12 +13,12 @@ public class FluidTransformRecipeBuilder extends ExNihiloFinishedRecipe<FluidTra
         return new FluidTransformRecipeBuilder();
     }
 
-    public FluidTransformRecipeBuilder fluidInTank(Fluid fluid) {
-        return this.addFluid("fluidInTank", fluid);
+    public FluidTransformRecipeBuilder catalyst(Ingredient catalyst) {
+        return this.addInput("catalyst", catalyst);
     }
 
-    public FluidTransformRecipeBuilder blockBelow(Block block) {
-        return this.addInput("blockBelow", block);
+    public FluidTransformRecipeBuilder fluidInTank(Fluid fluid) {
+        return this.addFluid("fluidInTank", fluid);
     }
 
     public FluidTransformRecipeBuilder result(Fluid fluid) {

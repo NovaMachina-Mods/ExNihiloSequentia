@@ -1,22 +1,24 @@
 package novamachina.exnihilosequentia.common.builder;
 
+import java.util.function.Supplier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ToolType;
 
-import java.util.function.Supplier;
-
 public class BlockBuilder {
 
     public static final AbstractBlock.Properties DEFAULT =
-        AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
-
+            AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
+    private int harvestLevel = 0;
     private AbstractBlock.Properties properties = DEFAULT;
     private Supplier<TileEntity> tileEntitySupplier;
     private ToolType toolType = ToolType.PICKAXE;
-    private int harvestLevel = 0;
+
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
 
     public AbstractBlock.Properties getProperties() {
         return properties;
@@ -30,8 +32,10 @@ public class BlockBuilder {
         return toolType;
     }
 
-    public int getHarvestLevel() {
-        return harvestLevel;
+    public BlockBuilder harvestLevel(ToolType type, int level) {
+        this.toolType = type;
+        this.harvestLevel = level;
+        return this;
     }
 
     public BlockBuilder properties(AbstractBlock.Properties properties) {
@@ -41,12 +45,6 @@ public class BlockBuilder {
 
     public BlockBuilder tileEntitySupplier(Supplier<TileEntity> supplier) {
         this.tileEntitySupplier = supplier;
-        return this;
-    }
-
-    public BlockBuilder harvestLevel(ToolType type, int level) {
-        this.toolType = type;
-        this.harvestLevel = level;
         return this;
     }
 

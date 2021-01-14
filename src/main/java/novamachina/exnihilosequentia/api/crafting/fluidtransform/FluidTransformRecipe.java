@@ -12,16 +12,16 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidTransformRecipe extends SerializableRecipe {
     public static final IRecipeType<FluidTransformRecipe> RECIPE_TYPE = IRecipeType
-        .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
+            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
     private static RegistryObject<RecipeSerializer<FluidTransformRecipe>> serializer;
-    private final FluidStack fluidInTank;
-    private final Ingredient blockBelow;
-    private final FluidStack result;
+    private Ingredient catalyst;
+    private FluidStack fluidInTank;
+    private FluidStack result;
 
-    public FluidTransformRecipe(ResourceLocation id, FluidStack fluidInTank, Ingredient blockBelow, FluidStack result) {
+    public FluidTransformRecipe(ResourceLocation id, FluidStack fluidInTank, Ingredient catalyst, FluidStack result) {
         super(null, RECIPE_TYPE, id);
         this.fluidInTank = fluidInTank;
-        this.blockBelow = blockBelow;
+        this.catalyst = catalyst;
         this.result = result;
     }
 
@@ -33,25 +33,37 @@ public class FluidTransformRecipe extends SerializableRecipe {
         FluidTransformRecipe.serializer = serializer;
     }
 
+    public Ingredient getCatalyst() {
+        return catalyst;
+    }
+
+    public void setCatalyst(Ingredient catalyst) {
+        this.catalyst = catalyst;
+    }
+
     public FluidStack getFluidInTank() {
         return fluidInTank;
     }
 
-    public Ingredient getBlockBelow() {
-        return blockBelow;
+    public void setFluidInTank(FluidStack fluidInTank) {
+        this.fluidInTank = fluidInTank;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return ItemStack.EMPTY;
     }
 
     public FluidStack getResult() {
         return result;
     }
 
-    @Override
-    protected RecipeSerializer getENSerializer() {
-        return serializer.get();
+    public void setResult(FluidStack result) {
+        this.result = result;
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
-        return ItemStack.EMPTY;
+    protected RecipeSerializer<FluidTransformRecipe> getENSerializer() {
+        return serializer.get();
     }
 }

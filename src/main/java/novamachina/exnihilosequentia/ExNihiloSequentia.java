@@ -31,8 +31,6 @@ public class ExNihiloSequentia {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::setupNonTagBasedRegistries);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::registerTOP);
-        MinecraftForge.EVENT_BUS.addListener(ExNihiloInitialization::loadClientRecipes);
-        MinecraftForge.EVENT_BUS.addListener(ExNihiloInitialization::onPlayerLogin);
     }
 
     @EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)

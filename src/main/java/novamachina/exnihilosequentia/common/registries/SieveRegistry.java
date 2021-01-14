@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class SieveRegistry implements ISieveRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private final boolean flattenRecipes = Config.getFlattenSieveRecipes();
+    private final boolean flattenRecipes = Config.flattenSieveRecipes();
 
     private List<SieveRecipe> recipeList = new ArrayList<>();
 

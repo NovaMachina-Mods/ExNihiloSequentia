@@ -2,25 +2,19 @@ package novamachina.exnihilosequentia.api.crafting.sieve;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
+import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 
 public class MeshWithChance {
     private static final String CHANCE_KEY = "chance";
     private static final String MESH_KEY = "mesh";
-    private final EnumMesh mesh;
     private final float chance;
+    private final EnumMesh mesh;
 
     public MeshWithChance(EnumMesh mesh, float chance) {
         this.mesh = mesh;
         this.chance = chance;
-    }
-
-    public static MeshWithChance read(PacketBuffer buffer) {
-        final EnumMesh mesh = buffer.readEnumValue(EnumMesh.class);
-        final float chance = buffer.readFloat();
-        return new MeshWithChance(mesh, chance);
     }
 
     public static MeshWithChance deserialize(JsonElement json) {
@@ -34,17 +28,18 @@ public class MeshWithChance {
         }
     }
 
-    public EnumMesh getMesh() {
-        return mesh;
+    public static MeshWithChance read(PacketBuffer buffer) {
+        final EnumMesh mesh = buffer.readEnumValue(EnumMesh.class);
+        final float chance = buffer.readFloat();
+        return new MeshWithChance(mesh, chance);
     }
 
     public float getChance() {
         return chance;
     }
 
-    public void write(PacketBuffer buffer) {
-        buffer.writeEnumValue(getMesh());
-        buffer.writeFloat(getChance());
+    public EnumMesh getMesh() {
+        return mesh;
     }
 
     public JsonElement serialize() {
@@ -52,5 +47,10 @@ public class MeshWithChance {
         json.addProperty(CHANCE_KEY, getChance());
         json.addProperty(MESH_KEY, getMesh().getName());
         return json;
+    }
+
+    public void write(PacketBuffer buffer) {
+        buffer.writeEnumValue(getMesh());
+        buffer.writeFloat(getChance());
     }
 }

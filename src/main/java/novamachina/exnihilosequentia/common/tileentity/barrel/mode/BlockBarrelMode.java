@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -73,9 +72,7 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
-        String block = I18n.format(barrelTile.getInventory().getStackInSlot(0).getTranslationKey());
-
-        info.add(new TranslationTextComponent("waila.barrel.block", block));
+        info.add(new TranslationTextComponent("waila.barrel.block", new TranslationTextComponent(barrelTile.getInventory().getStackInSlot(0).getTranslationKey())));
 
         return info;
     }

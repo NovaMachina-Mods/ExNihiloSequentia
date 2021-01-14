@@ -1,13 +1,5 @@
 package novamachina.exnihilosequentia.client.setup;
 
-import novamachina.exnihilosequentia.client.render.BarrelRender;
-import novamachina.exnihilosequentia.client.render.CrucibleRender;
-import novamachina.exnihilosequentia.client.render.SieveRender;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
-import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.item.ore.OreColor;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,6 +8,14 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import novamachina.exnihilosequentia.client.render.BarrelRender;
+import novamachina.exnihilosequentia.client.render.CrucibleRender;
+import novamachina.exnihilosequentia.client.render.SieveRender;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
+import novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import novamachina.exnihilosequentia.common.item.ore.OreColor;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -51,8 +51,8 @@ public class ClientSetup {
         for (EnumOre ore : EnumOre.values()) {
             event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
             event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
-            if (!ore.isVanilla()) {
-                event.getItemColors().register(new OreColor(), ore.getIngotItem().get());
+            if (ore.shouldGenerateIngot()) {
+                event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
             }
         }
     }

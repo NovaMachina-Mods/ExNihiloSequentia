@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidtransform;
 
-import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import java.util.ArrayList;
+import java.util.Arrays;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -10,32 +10,16 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
-    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_transform.png");
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluidtransform");
+    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_transform.png");
     private final IDrawableStatic background;
 
     public FluidTransformCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(texture, 0, 0, 166, 63);
-    }
-
-    @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
-
-    @Override
-    public Class<? extends FluidTransformRecipe> getRecipeClass() {
-        return FluidTransformRecipe.class;
-    }
-
-    @Override
-    public String getTitle() {
-        return "Fluid Transform";
     }
 
     @Override
@@ -49,9 +33,24 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
     }
 
     @Override
+    public Class<? extends FluidTransformRecipe> getRecipeClass() {
+        return FluidTransformRecipe.class;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Fluid Transform";
+    }
+
+    @Override
+    public ResourceLocation getUid() {
+        return UID;
+    }
+
+    @Override
     public void setIngredients(FluidTransformRecipe recipe, IIngredients ingredients) {
         ingredients.setInput(VanillaTypes.FLUID, recipe.getFluidInTank());
-        ingredients.setInputs(VanillaTypes.ITEM, new ArrayList<>(Arrays.asList(recipe.getBlockBelow().getMatchingStacks())));
+        ingredients.setInputs(VanillaTypes.ITEM, new ArrayList<>(Arrays.asList(recipe.getCatalyst().getMatchingStacks())));
         ingredients.setOutput(VanillaTypes.FLUID, recipe.getResult());
     }
 
@@ -62,7 +61,7 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
         recipeLayout.getFluidStacks().init(1, false, 102, 10);
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInTank());
-        recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getBlockBelow().getMatchingStacks())));
+        recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getCatalyst().getMatchingStacks())));
         recipeLayout.getFluidStacks().set(1, recipe.getResult());
     }
 }

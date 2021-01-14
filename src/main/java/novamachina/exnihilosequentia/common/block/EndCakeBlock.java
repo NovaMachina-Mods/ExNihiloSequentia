@@ -50,9 +50,9 @@ public class EndCakeBlock extends CakeBlock {
     private ActionResultType eatCake(World worldIn, BlockPos pos, BlockState state,
                                      PlayerEntity player) {
         if (!worldIn.isRemote() && player.getRidingEntity() == null && player
-            .isCreative() && worldIn instanceof ServerWorld && !player.isPassenger()) {
+                .isCreative() && worldIn instanceof ServerWorld && !player.isPassenger()) {
             RegistryKey<World> registrykey = worldIn
-                .getDimensionKey() == World.OVERWORLD ? World.THE_END : World.OVERWORLD;
+                    .getDimensionKey() == World.OVERWORLD ? World.THE_END : World.OVERWORLD;
             ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registrykey);
             if (serverworld == null) {
                 return ActionResultType.FAIL;
@@ -75,9 +75,9 @@ public class EndCakeBlock extends CakeBlock {
             }
 
             if (!worldIn.isRemote() && player.getRidingEntity() == null && worldIn instanceof ServerWorld && !player
-                .isPassenger()) {
+                    .isPassenger()) {
                 RegistryKey<World> registrykey = worldIn
-                    .getDimensionKey() == World.THE_END ? World.OVERWORLD : World.THE_END;
+                        .getDimensionKey() == World.THE_END ? World.OVERWORLD : World.THE_END;
                 ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registrykey);
                 if (serverworld == null) {
                     return ActionResultType.FAIL;

@@ -1,6 +1,17 @@
 package novamachina.exnihilosequentia.common.compat.jei;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
+import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
@@ -17,7 +28,6 @@ import novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopReci
 import novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
 import novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipeCategory;
-import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.common.compat.jei.sieve.dry.DrySieveRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.sieve.wet.WetSieveRecipeCategory;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -26,18 +36,7 @@ import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
@@ -66,6 +65,24 @@ public class JEIPlugin implements IModPlugin {
     }
 
     @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        for (EnumCrook crook : EnumCrook.values()) {
+            registration
+                    .addRecipeCatalyst(new ItemStack(crook.getRegistryObject().get()), CrookRecipeCategory.UID);
+        }
+        for (EnumHammer hammer : EnumHammer.values()) {
+            registration
+                    .addRecipeCatalyst(new ItemStack(hammer.getRegistryObject().get()), HammerRecipeCategory.UID);
+        }
+
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_WOOD.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_STONE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WOOD.get()), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_WOOD), HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_FIRED), HeatRecipeCategory.UID);
+    }
+
+    @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registerCrook(registration);
         registerSieve(registration);
@@ -79,16 +96,16 @@ public class JEIPlugin implements IModPlugin {
         registerHeat(registration);
     }
 
-    private void registerHeat(IRecipeRegistration registration) {
-        List<HeatRecipe> recipes = ExNihiloRegistries.HEAT_REGISTRY.getRecipeList();
-        registration.addRecipes(recipes, HeatRecipeCategory.UID);
-        logger.info("Heat Recipes Loaded: " + recipes.size());
+    private void registerCompost(IRecipeRegistration registration) {
+        List<CompostRecipe> recipes = ExNihiloRegistries.COMPOST_REGISTRY.getRecipeList();
+        registration.addRecipes(recipes, CompostRecipeCategory.UID);
+        logger.info("Compost Recipes Loaded: " + recipes.size());
     }
 
-    private void registerWoodCrucible(IRecipeRegistration registration) {
-        List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList().stream().filter(recipe -> recipe.getCrucibleType() == CrucilbeTypeEnum.WOOD).collect(Collectors.toList());
-        registration.addRecipes(recipes, new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_WOOD));
-        logger.info("Wooden Crucible Recipes Loaded: " + recipes.size());
+    private void registerCrook(IRecipeRegistration registration) {
+        List<CrookRecipe> crookRecipes = ExNihiloRegistries.CROOK_REGISTRY.getRecipeList();
+        registration.addRecipes(crookRecipes, CrookRecipeCategory.UID);
+        logger.info("Crook Recipes Loaded: " + crookRecipes.size());
     }
 
     private void registerFiredCrucible(IRecipeRegistration registration) {
@@ -97,22 +114,10 @@ public class JEIPlugin implements IModPlugin {
         logger.info("Fired Crucible Recipes Loaded: " + recipes.size());
     }
 
-    private void registerCompost(IRecipeRegistration registration) {
-        List<CompostRecipe> recipes = ExNihiloRegistries.COMPOST_REGISTRY.getRecipeList();
-        registration.addRecipes(recipes, CompostRecipeCategory.UID);
-        logger.info("Compost Recipes Loaded: " + recipes.size());
-    }
-
     private void registerFluidBlock(IRecipeRegistration registration) {
         List<FluidItemRecipe> recipes = ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getRecipeList();
         registration.addRecipes(recipes, FluidBlockRecipeCategory.UID);
         logger.info("Fluid Item Recipes Loaded: " + recipes.size());
-    }
-
-    private void registerFluidTransform(IRecipeRegistration registration) {
-        List<FluidTransformRecipe> recipes = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getRecipeList();
-        registration.addRecipes(recipes, FluidTransformCategory.UID);
-        logger.info("Fluid Transform Recipes Loaded: " + recipes.size());
     }
 
     private void registerFluidOnTop(IRecipeRegistration registration) {
@@ -121,10 +126,22 @@ public class JEIPlugin implements IModPlugin {
         logger.info("Fluid On Top Recipes Loaded: " + recipes.size());
     }
 
+    private void registerFluidTransform(IRecipeRegistration registration) {
+        List<FluidTransformRecipe> recipes = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getRecipeList();
+        registration.addRecipes(recipes, FluidTransformCategory.UID);
+        logger.info("Fluid Transform Recipes Loaded: " + recipes.size());
+    }
+
     private void registerHammer(IRecipeRegistration registration) {
         List<HammerRecipe> recipes = ExNihiloRegistries.HAMMER_REGISTRY.getRecipeList();
         registration.addRecipes(recipes, HammerRecipeCategory.UID);
         logger.info("Hammer Recipes Loaded: " + recipes.size());
+    }
+
+    private void registerHeat(IRecipeRegistration registration) {
+        List<HeatRecipe> recipes = ExNihiloRegistries.HEAT_REGISTRY.getRecipeList();
+        registration.addRecipes(recipes, HeatRecipeCategory.UID);
+        logger.info("Heat Recipes Loaded: " + recipes.size());
     }
 
     private void registerSieve(IRecipeRegistration registration) {
@@ -135,27 +152,9 @@ public class JEIPlugin implements IModPlugin {
         logger.info("Sieve Recipes Loaded: " + (drySieveRecipes.size() + wetSieveRecipes.size()));
     }
 
-    @Override
-    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        for (EnumCrook crook : EnumCrook.values()) {
-            registration
-                .addRecipeCatalyst(new ItemStack(crook.getRegistryObject().get()), CrookRecipeCategory.UID);
-        }
-        for (EnumHammer hammer : EnumHammer.values()) {
-            registration
-                .addRecipeCatalyst(new ItemStack(hammer.getRegistryObject().get()), HammerRecipeCategory.UID);
-        }
-
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_WOOD.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_STONE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WOOD.get()), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_WOOD), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_FIRED), HeatRecipeCategory.UID);
-    }
-
-    private void registerCrook(IRecipeRegistration registration) {
-        List<CrookRecipe> crookRecipes = ExNihiloRegistries.CROOK_REGISTRY.getRecipeList();
-        registration.addRecipes(crookRecipes, CrookRecipeCategory.UID);
-        logger.info("Crook Recipes Loaded: " + crookRecipes.size());
+    private void registerWoodCrucible(IRecipeRegistration registration) {
+        List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList().stream().filter(recipe -> recipe.getCrucibleType() == CrucilbeTypeEnum.WOOD).collect(Collectors.toList());
+        registration.addRecipes(recipes, new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_WOOD));
+        logger.info("Wooden Crucible Recipes Loaded: " + recipes.size());
     }
 }

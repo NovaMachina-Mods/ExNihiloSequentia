@@ -1,13 +1,12 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.utility.Config;
+import java.util.List;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-
-import java.util.List;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 public class CompostTooltipCallback implements ITooltipCallback<ItemStack> {
 
@@ -17,7 +16,7 @@ public class CompostTooltipCallback implements ITooltipCallback<ItemStack> {
             int solidAmount = ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(itemStack.getItem());
 
             list.add(new StringTextComponent(String
-                .format("Amount: %d / %d", solidAmount, Config.getBarrelMaxSolidAmount())));
+                    .format("Amount: %d / %d", solidAmount, Config.getBarrelMaxSolidAmount())));
         }
     }
 }

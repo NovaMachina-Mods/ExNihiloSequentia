@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.api.registry.IHammerRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -16,23 +17,22 @@ public class HammerRegistry implements IHammerRegistry {
     private static final List<HammerRecipe> recipeList = new ArrayList<>();
 
     @Override
-    public ItemStack getResult(ResourceLocation input) {
-        ItemStack returnStack = findRecipe(input).getRecipeOutput();
-        returnStack.setCount(1);
-        logger.debug("Hammer Drop Stack: " + returnStack);
-        return returnStack;
+    public List<ItemStackWithChance> getResult(Block input) {
+        List<ItemStackWithChance> returnList = findRecipe(input).getOutput();
+        logger.debug("Hammer Drop Stack: " + returnList);
+        return returnList;
     }
 
     @Override
-    public boolean isHammerable(ResourceLocation blockID) {
+    public boolean isHammerable(Block block) {
 
-        return findRecipe(blockID) != HammerRecipe.EMPTY;
+        return findRecipe(block) != HammerRecipe.EMPTY;
     }
 
     @Override
-    public HammerRecipe findRecipe(ResourceLocation blockID) {
+    public HammerRecipe findRecipe(Block block) {
         for (HammerRecipe recipe : recipeList) {
-            if (recipe.getInput().getItem().getRegistryName().equals(blockID)) {
+            if (recipe.getInput().test(new ItemStack(block))) {
                 return recipe;
             }
         }

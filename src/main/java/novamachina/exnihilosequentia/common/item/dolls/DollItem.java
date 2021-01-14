@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
-import net.minecraft.fluid.Fluids;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import java.util.List;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -13,8 +13,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.List;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 public class DollItem extends Item {
     private final DollEnum type;
@@ -24,15 +23,14 @@ public class DollItem extends Item {
         this.type = type;
     }
 
-    public boolean spawnMob(World world, BlockPos pos) {
-        ResourceLocation spawneeResourceLocation = new ResourceLocation(type.getEntityModId(), type.getEntityName());
+    @Override
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        tooltip.add(new TranslationTextComponent(type.getToolTip()));
+    }
 
-        if (ForgeRegistries.ENTITIES.containsKey(spawneeResourceLocation)) {
-            Entity spawnee = ForgeRegistries.ENTITIES.getValue(spawneeResourceLocation).create(world);
-            spawnee.setPosition(pos.getX(), pos.getY() + type.getYOffset(), pos.getZ());
-            return world.addEntity(spawnee);
-        }
-        return false;
+    public String getDollType() {
+        return type.getEntityName();
     }
 
     public Fluid getSpawnFluid() {
@@ -45,13 +43,14 @@ public class DollItem extends Item {
         return Fluids.EMPTY;
     }
 
-    public String getDollType() {
-        return type.getEntityName();
-    }
+    public boolean spawnMob(World world, BlockPos pos) {
+        ResourceLocation spawneeResourceLocation = new ResourceLocation(type.getEntityModId(), type.getEntityName());
 
-    @Override
-    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent(type.getToolTip()));
+        if (ForgeRegistries.ENTITIES.containsKey(spawneeResourceLocation)) {
+            Entity spawnee = ForgeRegistries.ENTITIES.getValue(spawneeResourceLocation).create(world);
+            spawnee.setPosition(pos.getX(), pos.getY() + type.getYOffset(), pos.getZ());
+            return world.addEntity(spawnee);
+        }
+        return false;
     }
 }

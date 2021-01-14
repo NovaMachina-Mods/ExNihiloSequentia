@@ -1,21 +1,20 @@
 package novamachina.exnihilosequentia.api.registry;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import java.util.List;
+import net.minecraft.block.Block;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 
-import java.util.List;
-
 public interface IHammerRegistry {
-    ItemStack getResult(ResourceLocation input);
+    void clearRecipes();
 
-    boolean isHammerable(ResourceLocation blockID);
-
-    HammerRecipe findRecipe(ResourceLocation blockID);
-
-    void setRecipes(List<HammerRecipe> recipes);
+    HammerRecipe findRecipe(Block block);
 
     List<HammerRecipe> getRecipeList();
 
-    void clearRecipes();
+    List<ItemStackWithChance> getResult(Block input);
+
+    boolean isHammerable(Block block);
+
+    void setRecipes(List<HammerRecipe> recipes);
 }

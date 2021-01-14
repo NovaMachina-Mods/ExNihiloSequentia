@@ -15,14 +15,14 @@ public abstract class RecipeSerializer<R extends IRecipe<?>> extends ForgeRegist
 
     @Override
     public R read(ResourceLocation recipeId, JsonObject json) {
-        if(CraftingHelper.processConditions(json, "conditions"))
+        if (CraftingHelper.processConditions(json, "conditions"))
             return readFromJson(recipeId, json);
         return null;
     }
 
+    protected abstract R readFromJson(ResourceLocation recipeId, JsonObject json);
+
     protected ItemStack readOutput(JsonElement outputObject) {
         return ShapedRecipe.deserializeItem(outputObject.getAsJsonObject());
     }
-
-    protected abstract R readFromJson(ResourceLocation recipeId, JsonObject json);
 }

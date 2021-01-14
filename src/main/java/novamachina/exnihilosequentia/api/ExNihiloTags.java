@@ -1,25 +1,23 @@
 package novamachina.exnihilosequentia.api;
 
-import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
-
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import net.minecraft.item.Item;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
+import novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloTags {
-    public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
-    public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
-    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
-    private static Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
+    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
+    public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
+    public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
+    private static final Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
 
     static {
         for (EnumOre ore : EnumOre.values()) {
@@ -30,8 +28,8 @@ public class ExNihiloTags {
     private ExNihiloTags() {
     }
 
-    public static OreTag getOreTags(EnumOre ore) {
-        return ores.get(ore);
+    public static ITag.INamedTag<Item> createItemWrapper(ResourceLocation name) {
+        return createWrapperTag(ItemTags.getAllTags(), name, ItemTags::makeWrapperTag);
     }
 
     public static ResourceLocation getIngot(String ingot) {
@@ -42,24 +40,24 @@ public class ExNihiloTags {
         return forgeLoc("ores/" + ore);
     }
 
-    private static ResourceLocation forgeLoc(String path) {
-        return new ResourceLocation("forge", path);
-    }
-
-    public static ITag.INamedTag<Item> createItemWrapper(ResourceLocation name) {
-        return createWrapperTag(ItemTags.getAllTags(), name, ItemTags::makeWrapperTag);
+    public static OreTag getOreTags(EnumOre ore) {
+        return ores.get(ore);
     }
 
     private static <T> ITag.INamedTag<T> createWrapperTag(List<? extends ITag.INamedTag<T>> allExisting, ResourceLocation name,
                                                           Function<String, ITag.INamedTag<T>> createNew) {
         Optional<? extends ITag.INamedTag<T>> existing = allExisting
-            .stream()
-            .filter(tag -> tag.getName().equals(name))
-            .findAny();
+                .stream()
+                .filter(tag -> tag.getName().equals(name))
+                .findAny();
         if (existing.isPresent())
             return existing.get();
         else
             return createNew.apply(name.toString());
+    }
+
+    private static ResourceLocation forgeLoc(String path) {
+        return new ResourceLocation("forge", path);
     }
 
     public static class OreTag {

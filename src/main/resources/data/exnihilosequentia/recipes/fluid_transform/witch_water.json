@@ -3,7 +3,7 @@
   "fluidInTank": {
     "fluid": "minecraft:water"
   },
-  "blockBelow": {
+  "catalyst": {
     "item": "minecraft:mycelium"
   },
   "result": {

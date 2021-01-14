@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.item.tools.crook;
 
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumCrook {
     WOOD(ExNihiloConstants.Items.CROOK_WOOD, 64, ItemTier.WOOD),

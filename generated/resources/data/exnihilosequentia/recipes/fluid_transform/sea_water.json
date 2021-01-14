@@ -3,8 +3,8 @@
   "fluidInTank": {
     "fluid": "minecraft:water"
   },
-  "blockBelow": {
-    "item": "minecraft:sand"
+  "catalyst": {
+    "tag": "forge:sand"
   },
   "result": {
     "fluid": "exnihilosequentia:sea_water"

@@ -1,11 +1,11 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ExNihiloDataGenerators {
@@ -24,8 +24,8 @@ public class ExNihiloDataGenerators {
             generator.addProvider(new ExNihiloLootTableGenerator(generator));
             // Tags
             generator
-                .addProvider(new ExNihiloItemTagsGenerator(generator, new BlockTagsProvider(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, event
-                    .getExistingFileHelper()), event.getExistingFileHelper()));
+                    .addProvider(new ExNihiloItemTagsGenerator(generator, new BlockTagsProvider(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, event
+                            .getExistingFileHelper()), event.getExistingFileHelper()));
         }
         if (event.includeClient()) {
             // BlockStates
