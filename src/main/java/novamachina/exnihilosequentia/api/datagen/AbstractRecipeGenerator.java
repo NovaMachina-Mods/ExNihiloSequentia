@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.api.datagen;
 
 import java.util.function.Consumer;
+
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
@@ -26,35 +27,35 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     }
 
     protected ResourceLocation compostLoc(String id) {
-        return new ResourceLocation(modId, "compost/" + id);
+        return new ResourceLocation(modId, "compost/" + prependRecipePrefix(id));
     }
 
     protected ResourceLocation crookLoc(String id) {
-        return new ResourceLocation(modId, "crook/" + id);
+        return new ResourceLocation(modId, "crook/" + prependRecipePrefix(id));
     }
 
     protected ResourceLocation crucibleLoc(String id) {
-        return new ResourceLocation(modId, "crucible/" + id);
+        return new ResourceLocation(modId, "crucible/" + prependRecipePrefix(id));
     }
 
     protected ResourceLocation fluidItemLoc(String id) {
-        return new ResourceLocation(modId, "fluid_item/" + id);
+        return new ResourceLocation(modId, "fluid_item/" + prependRecipePrefix(id));
     }
 
     protected ResourceLocation fluidOnTopLoc(String id) {
-        return new ResourceLocation(modId, "fluid_on_top/" + id);
+        return new ResourceLocation(modId, "fluid_on_top/" + prependRecipePrefix(id));
     }
 
     protected ResourceLocation fluidTransformLoc(String id) {
-        return new ResourceLocation(modId, "fluid_transform/" + id);
+        return new ResourceLocation(modId, "fluid_transform/" + prependRecipePrefix(id));
     }
 
     protected ResourceLocation hammerLoc(String id) {
-        return new ResourceLocation(modId, "hammer/" + id);
+        return new ResourceLocation(modId, "hammer/" + prependRecipePrefix(id));
     }
 
     protected ResourceLocation heatLoc(String id) {
-        return new ResourceLocation(modId, "heat/" + id);
+        return new ResourceLocation(modId, "heat/" + prependRecipePrefix(id));
     }
 
     protected void registerOre(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
@@ -64,17 +65,25 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .key('x', ore.getPieceItem().get())
                 .setGroup(this.modId)
                 .addCriterion("has_piece", InventoryChangeTrigger.Instance.forItems(ore.getPieceItem().get()))
-                .build(consumer, new ResourceLocation(modId, ore.getChunkName()));
+                .build(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getChunkName())));
     }
 
     protected void registerSmelting(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
         CookingRecipeBuilder
                 .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 200)
                 .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
-                .build(consumer, new ResourceLocation(modId, ore.getIngotName()));
+                .build(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotName())));
     }
 
     protected ResourceLocation sieveLoc(String id) {
-        return new ResourceLocation(modId, "sieve/" + id);
+        return new ResourceLocation(modId, "sieve/" + prependRecipePrefix(id));
+    }
+
+    protected String prependRecipePrefix(String id) {
+        return "ens_" + id;
+    }
+
+    protected ResourceLocation createSaveLocation(ResourceLocation location) {
+        return new ResourceLocation(location.getNamespace(), prependRecipePrefix(location.getPath()));
     }
 }
