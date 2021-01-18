@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_mesh_netherite"
+    ]
+  },
+  "criteria": {
+    "has_diamond_mesh": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "exnihilosequentia:mesh_diamond"
+          }
+        ]
+      }
+    },
+    "has_material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/netherite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_mesh_netherite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_diamond_mesh",
+      "has_material",
+      "has_the_recipe"
+    ]
+  ]
+}

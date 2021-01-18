@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_ingot_aluminum"
+    ]
+  },
+  "criteria": {
+    "has_chunk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "exnihilosequentia:chunk_aluminum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_ingot_aluminum"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chunk",
+      "has_the_recipe"
+    ]
+  ]
+}

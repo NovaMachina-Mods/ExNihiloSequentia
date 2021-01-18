@@ -97,7 +97,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .addCriterion("has_walls", hasItem(Tags.Items.STONE))
                 .addCriterion("has_base", hasItem(Blocks.STONE_SLAB))
-                .build(consumer);
+                .build(consumer, createSaveLocation(ExNihiloBlocks.BARREL_STONE.getId()));
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.BARREL_WOOD.get())
                 .patternLine("x x")
                 .patternLine("x x")
@@ -107,7 +107,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .addCriterion("has_walls", hasItem(ItemTags.PLANKS))
                 .addCriterion("has_base", hasItem(ItemTags.WOODEN_SLABS))
-                .build(consumer);
+                .build(consumer, createSaveLocation(ExNihiloBlocks.BARREL_WOOD.getId()));
     }
 
     private void registerCompostRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -175,7 +175,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('x', input)
                 .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .addCriterion(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.forItems(input))
-                .build(consumer);
+                .build(consumer, createSaveLocation(result.getRegistryName()));
     }
 
     private void registerCrook(Item result, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
@@ -187,7 +187,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .addCriterion(PEBBLE_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(input).build()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(result.getRegistryName()));
     }
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -287,7 +287,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(DollEnum.SHULKER.getRegistryObject().getId()));
         ShapedRecipeBuilder.shapedRecipe(DollEnum.GUARDIAN.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
@@ -299,7 +299,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(DollEnum.GUARDIAN.getRegistryObject().getId()));
         ShapedRecipeBuilder.shapedRecipe(DollEnum.BEE.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
@@ -311,7 +311,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(DollEnum.BEE.getRegistryObject().getId()));
         ShapedRecipeBuilder.shapedRecipe(DollEnum.BLAZE.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
@@ -323,7 +323,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(DollEnum.BLAZE.getRegistryObject().getId()));
         ShapedRecipeBuilder.shapedRecipe(DollEnum.ENDERMAN.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
@@ -335,7 +335,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(DollEnum.ENDERMAN.getRegistryObject().getId()));
     }
 
     private void registerFluidItemRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -413,7 +413,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_stick", InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(Tags.Items.RODS).build()))
                 .addCriterion(MATERIAL_CONDITION, hasItem(input))
-                .build(consumer);
+                .build(consumer, createSaveLocation(output.getRegistryName()));
     }
 
     private void registerHammerRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -464,7 +464,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_diamond_hammer", InventoryChangeTrigger.Instance
                         .forItems(EnumHammer.DIAMOND.getRegistryObject().get()))
                 .addCriterion(MATERIAL_CONDITION, hasItem(Tags.Items.INGOTS_NETHERITE))
-                .build(consumer, new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.hammerName));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.hammerName)));
         registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND, consumer);
         registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Tags.Items.INGOTS_GOLD, consumer);
         registerHammer(EnumHammer.IRON.getRegistryObject().get(), Tags.Items.INGOTS_IRON, consumer);
@@ -506,7 +506,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('i', inputItem)
                 .key('m', inputMesh)
                 .addCriterion("has_mesh", InventoryChangeTrigger.Instance.forItems(inputMesh))
-                .build(consumer);
+                .build(consumer, createSaveLocation(output.getRegistryName()));
     }
 
     private void registerMesh(Item output, Item inputMesh, Item inputItem, Consumer<IFinishedRecipe> consumer) {
@@ -517,7 +517,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('i', inputItem)
                 .key('m', inputMesh)
                 .addCriterion("has_mesh", InventoryChangeTrigger.Instance.forItems(inputMesh))
-                .build(consumer);
+                .build(consumer, createSaveLocation(output.getRegistryName()));
     }
 
     private void registerMeshes(Consumer<IFinishedRecipe> consumer) {
@@ -535,8 +535,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_diamond_mesh", InventoryChangeTrigger.Instance
                         .forItems(EnumMesh.DIAMOND.getRegistryObject().get()))
                 .addCriterion(MATERIAL_CONDITION, hasItem(Tags.Items.INGOTS_NETHERITE))
-                .build(consumer, new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE
-                        .getMeshName()));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE
+                        .getMeshName())));
 
         ShapedRecipeBuilder.shapedRecipe(EnumMesh.STRING.getRegistryObject().get())
                 .patternLine("iii")
@@ -544,7 +544,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .patternLine("iii")
                 .key('i', Tags.Items.STRING)
                 .addCriterion("has_sieve", InventoryChangeTrigger.Instance.forItems(ExNihiloBlocks.SIEVE.get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(EnumMesh.STRING.getRegistryObject().getId()));
     }
 
     private void registerMisc(Consumer<IFinishedRecipe> consumer) {
@@ -556,7 +556,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('f', EnumResource.BEEHIVE_FRAME.getRegistryObject().get())
                 .addCriterion("has_frame", InventoryChangeTrigger.Instance
                         .forItems(EnumResource.BEEHIVE_FRAME.getRegistryObject().get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(Blocks.BEEHIVE.getRegistryName()));
 
         ShapedRecipeBuilder.shapedRecipe(EnumResource.BEEHIVE_FRAME.getRegistryObject().get())
                 .patternLine("xxx")
@@ -568,20 +568,20 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .forItems(ItemPredicate.Builder.create().tag(Tags.Items.RODS_WOODEN).build()))
                 .addCriterion("has_string", InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(Tags.Items.STRING).build()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(EnumResource.BEEHIVE_FRAME.getRegistryObject().getId()));
 
         CookingRecipeBuilder.smeltingRecipe(Ingredient
                 .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 200)
                 .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
                         .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(EnumResource.SILKWORM.getRegistryObject().getId()));
 
         CookingRecipeBuilder
                 .smeltingRecipe(Ingredient.fromItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()), ExNihiloBlocks.CRUCIBLE_FIRED
                         .get(), 0.7F, 200)
                 .addCriterion("has_uncooked_crucible", InventoryChangeTrigger.Instance
                         .forItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_FIRED.getId()));
 
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_UNFIRED.get())
                 .patternLine("c c")
@@ -590,7 +590,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('c', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
                 .addCriterion(PORCELAIN_CLAY_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_UNFIRED.getId()));
 
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_WOOD.get())
                 .patternLine("c c")
@@ -600,7 +600,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('l', ItemTags.WOODEN_SLABS)
                 .key('s', Tags.Items.RODS_WOODEN)
                 .addCriterion("has_logs", hasItem(ItemTags.LOGS))
-                .build(consumer);
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_WOOD.getId()));
 
         ShapedRecipeBuilder.shapedRecipe(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 4)
                 .patternLine("xex")
@@ -612,7 +612,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
                 .addCriterion("has_diamond", InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(Tags.Items.GEMS_DIAMOND).build()))
-                .build(consumer, new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x4"));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x4")));
 
         ShapedRecipeBuilder.shapedRecipe(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 6)
                 .patternLine("xex")
@@ -624,7 +624,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
                 .addCriterion("has_emerald", InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(Tags.Items.GEMS_EMERALD).build()))
-                .build(consumer, new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x6"));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x6")));
 
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.END_CAKE.get())
                 .patternLine("ece")
@@ -634,7 +634,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('c', Items.END_CRYSTAL)
                 .key('k', Items.CAKE)
                 .addCriterion("has_ender_pearl", InventoryChangeTrigger.Instance.forItems(Items.ENDER_PEARL))
-                .build(consumer);
+                .build(consumer, createSaveLocation(ExNihiloBlocks.END_CAKE.getId()));
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.SIEVE.get())
                 .patternLine("p p")
                 .patternLine("plp")
@@ -644,14 +644,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('s', Tags.Items.RODS_WOODEN)
                 .addCriterion("has_plank", InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(ItemTags.PLANKS).build()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(ExNihiloBlocks.SIEVE.getId()));
 
         ShapelessRecipeBuilder.shapelessRecipe(EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
                 .addIngredient(ExNihiloTags.CLAY)
                 .addIngredient(Items.BONE_MEAL)
                 .addCriterion("has_clay", InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(ExNihiloTags.CLAY).build()))
-                .build(consumer);
+                .build(consumer, createSaveLocation(EnumResource.PORCELAIN_CLAY.getRegistryObject().getId()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
@@ -666,14 +666,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                             .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 200)
                             .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance
                                     .forItems(ore.getChunkItem().get()))
-                            .build(consumer, new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron"));
+                            .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron")));
                 }
                 if (ore == EnumOre.GOLD) {
                     CookingRecipeBuilder
                             .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
                             .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance
                                     .forItems(ore.getChunkItem().get()))
-                            .build(consumer, new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold"));
+                            .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold")));
                 }
             }
         }
@@ -686,7 +686,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('x', input)
                 .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .addCriterion(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.forItems(input))
-                .build(consumer);
+                .build(consumer, createSaveLocation(result.getRegistryName()));
     }
 
     private void registerPebbleBlocks(Consumer<IFinishedRecipe> consumer) {
