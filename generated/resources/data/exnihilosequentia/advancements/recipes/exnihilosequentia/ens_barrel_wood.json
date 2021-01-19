@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_barrel_wood"
+    ]
+  },
+  "criteria": {
+    "has_walls": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:planks"
+          }
+        ]
+      }
+    },
+    "has_base": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:wooden_slabs"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_barrel_wood"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_walls",
+      "has_base",
+      "has_the_recipe"
+    ]
+  ]
+}

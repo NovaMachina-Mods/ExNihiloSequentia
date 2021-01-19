@@ -21,7 +21,7 @@ getRepo() {
 getVersion
 getDescription
 getRepo
-github-release release --user NovaMachina --repo "$repo" --tag "$full_version" --name "$full_version" --description "$description"
+github-release release --user NovaMachina-Mods --repo "$repo" --tag "$full_version" --name "$full_version" --description "$description"
 echo "Created Release $full_version"
-github-release upload --user NovaMachina --repo "$repo" --tag "$full_version" --name "$full_version.jar" --file build/libs/*.jar
+github-release upload --user NovaMachina-Mods --repo "$repo" --tag "$full_version" --name "$full_version.jar" --file build/libs/*.jar
 echo "Uploaded $full_version.jar to release $full_version"
