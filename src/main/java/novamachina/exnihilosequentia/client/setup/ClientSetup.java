@@ -49,10 +49,16 @@ public class ClientSetup {
         logger.debug("Fired ColorHandlerEvent.Item event");
 
         for (EnumOre ore : EnumOre.values()) {
-            event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
-            event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
+            if(ore.getChunkItem().isPresent()) {
+                event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
+            }
+            if(ore.getPieceItem().isPresent()) {
+                event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
+            }
             if (ore.shouldGenerateIngot()) {
-                event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
+                if(ore.getIngotRegistryItem().isPresent()) {
+                    event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
+                }
             }
         }
     }
