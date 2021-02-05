@@ -51,13 +51,19 @@ public class ClientSetup {
         for (EnumOre ore : EnumOre.values()) {
             if(ore.getChunkItem().isPresent()) {
                 event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
+            } else {
+                logger.warn("Missing ore chunk");
             }
             if(ore.getPieceItem().isPresent()) {
                 event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
+            } else {
+                logger.warn("Missing ore piece");
             }
             if (ore.shouldGenerateIngot()) {
                 if(ore.getIngotRegistryItem().isPresent()) {
                     event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
+                } else {
+                    logger.warn("Missing ore ingot");
                 }
             }
         }
