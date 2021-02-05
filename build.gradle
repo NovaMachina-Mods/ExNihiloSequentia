@@ -21,7 +21,7 @@ version = "${minecraft_release}-${version_major}.${version_api_major}.${version_
 group = "${artifact_group}.${artifact_basename}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "${artifact_basename}"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '15' // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 //Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
