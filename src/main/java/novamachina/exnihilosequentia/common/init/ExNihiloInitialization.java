@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -35,6 +37,8 @@ import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import novamachina.exnihilosequentia.common.item.resources.EnumResource;
+import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.network.PacketHandler;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
 import novamachina.exnihilosequentia.common.utility.Config;
@@ -114,6 +118,15 @@ public class ExNihiloInitialization {
         ExNihiloItems.fillOreIngots();
         BarrelModeRegistry.initialize();
         PacketHandler.registerMessages();
+        registerVanillaCompost();
+    }
+
+    private static void registerVanillaCompost() {
+        for(EnumSeed seed : EnumSeed.values()) {
+            ComposterBlock.CHANCES.put(seed.getRegistryObject().get().asItem(), 0.3F);
+        }
+        ComposterBlock.CHANCES.put(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
+        ComposterBlock.CHANCES.put(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
     }
 
     private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType) {
