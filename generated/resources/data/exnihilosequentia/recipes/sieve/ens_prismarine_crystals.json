@@ -2,11 +2,7 @@
   "type": "exnihilosequentia:sieve",
   "rolls": [
     {
-      "chance": 0.02,
-      "mesh": "iron"
-    },
-    {
-      "chance": 0.04,
+      "chance": 0.01,
       "mesh": "diamond"
     }
   ],
@@ -14,6 +10,6 @@
     "item": "minecraft:sand"
   },
   "result": {
-    "item": "minecraft:prismarine_shard"
+    "item": "minecraft:prismarine_crystals"
   }
 }

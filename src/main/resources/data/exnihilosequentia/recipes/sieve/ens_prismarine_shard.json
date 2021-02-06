@@ -3,6 +3,10 @@
   "rolls": [
     {
       "chance": 0.02,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.04,
       "mesh": "diamond"
     }
   ],
