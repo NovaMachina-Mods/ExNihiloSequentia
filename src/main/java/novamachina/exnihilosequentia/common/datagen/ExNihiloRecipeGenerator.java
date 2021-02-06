@@ -747,8 +747,13 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .build(consumer, sieveLoc("cocoa_beans"));
         SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
                 .addResult(Items.PRISMARINE_SHARD)
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.02F))
+                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.02F))
+                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.04F))
                 .build(consumer, sieveLoc("prismarine_shard"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
+                .addResult(Items.PRISMARINE_CRYSTALS)
+                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
+                .build(consumer, sieveLoc("prismarine_crystals"));
         SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
                 .addResult(Items.FLINT)
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.25F))
