@@ -22,7 +22,9 @@ public enum EnumSeed {
     SEED_SWEET_BERRY(ExNihiloConstants.Items.SEED_SWEET_BERRY, Blocks.SWEET_BERRY_BUSH.getDefaultState(), PlantType.PLAINS),
     SEED_KELP(ExNihiloConstants.Items.SEED_KELP, Blocks.KELP_PLANT.getDefaultState(), PlantType.WATER),
     SEED_PICKLE(ExNihiloConstants.Items.SEED_PICKLE, Blocks.SEA_PICKLE.getDefaultState(), PlantType.WATER),
-    SEED_BAMBOO(ExNihiloConstants.Items.SEED_BAMBOO, Blocks.BAMBOO_SAPLING.getDefaultState(), PlantType.PLAINS);
+    SEED_BAMBOO(ExNihiloConstants.Items.SEED_BAMBOO, Blocks.BAMBOO_SAPLING.getDefaultState(), PlantType.PLAINS),
+    SEED_FERN(ExNihiloConstants.Items.SEED_FERN, Blocks.FERN.getDefaultState(), PlantType.PLAINS),
+    SEED_LARGE_FERN(ExNihiloConstants.Items.SEED_LARGE_FERN, Blocks.LARGE_FERN.getDefaultState(), PlantType.PLAINS);
 
     private final BlockState defaultState;
     private final PlantType plantType;
