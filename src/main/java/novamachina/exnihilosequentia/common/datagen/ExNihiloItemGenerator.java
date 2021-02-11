@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.item.dolls.DollEnum;
+import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
@@ -53,7 +53,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
     }
 
     private void registerDolls() {
-        for (DollEnum doll : DollEnum.values()) {
+        for (EnumDoll doll : EnumDoll.values()) {
             singleTexture(doll.getRegistryObject().get().getRegistryName()
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                     LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + doll

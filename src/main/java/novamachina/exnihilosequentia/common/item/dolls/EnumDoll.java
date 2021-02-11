@@ -1,10 +1,11 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public enum DollEnum {
+public enum EnumDoll implements IExtensibleEnum {
     BLAZE(ExNihiloConstants.ModIds.MINECRAFT, "blaze", "minecraft", "lava", 1, ExNihiloConstants.Tooltips.BLAZE),
     ENDERMAN(ExNihiloConstants.ModIds.MINECRAFT, "enderman", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 2, ExNihiloConstants.Tooltips.ENDERMAN),
     SHULKER(ExNihiloConstants.ModIds.MINECRAFT, "shulker", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 1.5, ExNihiloConstants.Tooltips.SHULKER),
@@ -20,7 +21,7 @@ public enum DollEnum {
     private final double yOffset;
     private RegistryObject<Item> registryObject;
 
-    DollEnum(String entityModId, String entityName, String fluidModId, String fluidName, double yOffset, String tooltip) {
+    EnumDoll(String entityModId, String entityName, String fluidModId, String fluidName, double yOffset, String tooltip) {
         this.entityModId = entityModId;
         this.entityName = entityName;
         this.fluidModId = fluidModId;
@@ -29,8 +30,12 @@ public enum DollEnum {
         this.tooltip = tooltip;
     }
 
-    public static DollEnum getDollFromString(String dollType) {
-        for (DollEnum doll : values()) {
+    public static EnumDoll create(String enumName, String entityModId, String entityName, String fluidModId, String fluidName, double yOffset, String tooltip) {
+        throw new IllegalStateException("Enum not extended");
+    }
+
+    public static EnumDoll getDollFromString(String dollType) {
+        for (EnumDoll doll : values()) {
             if (doll.name().equalsIgnoreCase(dollType)) {
                 return doll;
             }

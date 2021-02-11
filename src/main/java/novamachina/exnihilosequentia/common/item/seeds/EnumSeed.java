@@ -3,11 +3,12 @@ package novamachina.exnihilosequentia.common.item.seeds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public enum EnumSeed {
+public enum EnumSeed implements IExtensibleEnum {
 
     SEED_OAK(ExNihiloConstants.Items.SEED_OAK, Blocks.OAK_SAPLING.getDefaultState(), PlantType.PLAINS),
     SEED_SPRUCE(ExNihiloConstants.Items.SEED_SPRUCE, Blocks.SPRUCE_SAPLING.getDefaultState(), PlantType.PLAINS),
@@ -22,7 +23,9 @@ public enum EnumSeed {
     SEED_SWEET_BERRY(ExNihiloConstants.Items.SEED_SWEET_BERRY, Blocks.SWEET_BERRY_BUSH.getDefaultState(), PlantType.PLAINS),
     SEED_KELP(ExNihiloConstants.Items.SEED_KELP, Blocks.KELP_PLANT.getDefaultState(), PlantType.WATER),
     SEED_PICKLE(ExNihiloConstants.Items.SEED_PICKLE, Blocks.SEA_PICKLE.getDefaultState(), PlantType.WATER),
-    SEED_BAMBOO(ExNihiloConstants.Items.SEED_BAMBOO, Blocks.BAMBOO_SAPLING.getDefaultState(), PlantType.PLAINS);
+    SEED_BAMBOO(ExNihiloConstants.Items.SEED_BAMBOO, Blocks.BAMBOO_SAPLING.getDefaultState(), PlantType.PLAINS),
+    SEED_FERN(ExNihiloConstants.Items.SEED_FERN, Blocks.FERN.getDefaultState(), PlantType.PLAINS),
+    SEED_LARGE_FERN(ExNihiloConstants.Items.SEED_LARGE_FERN, Blocks.LARGE_FERN.getDefaultState(), PlantType.PLAINS);
 
     private final BlockState defaultState;
     private final PlantType plantType;
@@ -33,6 +36,10 @@ public enum EnumSeed {
         this.seedName = seedName;
         this.defaultState = defaultState;
         this.plantType = plantType;
+    }
+
+    public static EnumSeed create(String enumName, String seedName, BlockState defaultState, PlantType plantType) {
+        throw new IllegalStateException("Enum not extended");
     }
 
     public BlockState getDefaultState() {

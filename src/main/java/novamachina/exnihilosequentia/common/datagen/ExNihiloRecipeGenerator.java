@@ -16,6 +16,7 @@ import net.minecraft.data.SmithingRecipeBuilder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
@@ -36,7 +37,7 @@ import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.item.dolls.DollEnum;
+import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
@@ -276,7 +277,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerDolls(Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.SHULKER.getRegistryObject().get())
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.SHULKER.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -287,8 +288,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.SHULKER.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.GUARDIAN.getRegistryObject().get())
+                .build(consumer, createSaveLocation(EnumDoll.SHULKER.getRegistryObject().getId()));
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.GUARDIAN.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -299,8 +300,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.GUARDIAN.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.BEE.getRegistryObject().get())
+                .build(consumer, createSaveLocation(EnumDoll.GUARDIAN.getRegistryObject().getId()));
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.BEE.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -311,8 +312,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.BEE.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.BLAZE.getRegistryObject().get())
+                .build(consumer, createSaveLocation(EnumDoll.BEE.getRegistryObject().getId()));
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.BLAZE.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -323,8 +324,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.BLAZE.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.ENDERMAN.getRegistryObject().get())
+                .build(consumer, createSaveLocation(EnumDoll.BLAZE.getRegistryObject().getId()));
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.ENDERMAN.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -335,7 +336,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.ENDERMAN.getRegistryObject().getId()));
+                .build(consumer, createSaveLocation(EnumDoll.ENDERMAN.getRegistryObject().getId()));
     }
 
     private void registerFluidItemRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -574,7 +575,19 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 200)
                 .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
                         .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(EnumResource.SILKWORM.getRegistryObject().getId()));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm")));
+
+        CookingRecipeBuilder.cookingRecipe(Ingredient
+                .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 600, IRecipeSerializer.CAMPFIRE_COOKING)
+                .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
+                        .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm_from_campfilre")));
+
+        CookingRecipeBuilder.cookingRecipe(Ingredient
+                .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 100, IRecipeSerializer.SMOKING)
+                .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
+                        .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm_from_smoker")));
 
         CookingRecipeBuilder
                 .smeltingRecipe(Ingredient.fromItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()), ExNihiloBlocks.CRUCIBLE_FIRED
@@ -734,6 +747,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.35F))
                 .build(consumer, sieveLoc("seed_pumpkin"));
         SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+                .addResult(Items.BEETROOT_SEEDS)
+                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.35F))
+                .build(consumer, sieveLoc("seed_beetroot"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
                 .addResult(EnumResource.ANCIENT_SPORE.getRegistryObject().get())
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
                 .build(consumer, sieveLoc("ancient_spore"));
@@ -747,8 +764,13 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .build(consumer, sieveLoc("cocoa_beans"));
         SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
                 .addResult(Items.PRISMARINE_SHARD)
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.02F))
+                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.02F))
+                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.04F))
                 .build(consumer, sieveLoc("prismarine_shard"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
+                .addResult(Items.PRISMARINE_CRYSTALS)
+                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
+                .build(consumer, sieveLoc("prismarine_crystals"));
         SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
                 .addResult(Items.FLINT)
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.25F))

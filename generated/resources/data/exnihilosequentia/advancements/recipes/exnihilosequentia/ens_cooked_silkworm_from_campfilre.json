@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "exnihilosequentia:ens_silkworm"
+      "exnihilosequentia:ens_cooked_silkworm_from_campfilre"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "exnihilosequentia:ens_silkworm"
+        "recipe": "exnihilosequentia:ens_cooked_silkworm_from_campfilre"
       }
     }
   },

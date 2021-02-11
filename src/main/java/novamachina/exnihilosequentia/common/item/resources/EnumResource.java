@@ -24,6 +24,10 @@ public enum EnumResource {
         this.resourceName = resourceName;
     }
 
+    public static EnumResource create(String enumName, String resourceName) {
+        throw new IllegalStateException("Enum not extended");
+    }
+
     public RegistryObject<Item> getRegistryObject() {
         return registryObject;
     }

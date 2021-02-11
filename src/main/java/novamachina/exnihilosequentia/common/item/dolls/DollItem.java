@@ -16,9 +16,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 public class DollItem extends Item {
-    private final DollEnum type;
+    private final EnumDoll type;
 
-    public DollItem(DollEnum type) {
+    public DollItem(EnumDoll type) {
         super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
         this.type = type;
     }

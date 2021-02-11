@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import novamachina.exnihilosequentia.common.item.dolls.DollEnum;
+import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
@@ -78,7 +78,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
             this.currentProgress = 0;
         }
         if (nbt.contains(DOLL_TYPE_TAG)) {
-            setDoll((DollItem) DollEnum.getDollFromString(nbt.getString(DOLL_TYPE_TAG)).getRegistryObject().get());
+            setDoll((DollItem) EnumDoll.getDollFromString(nbt.getString(DOLL_TYPE_TAG)).getRegistryObject().get());
         } else {
             this.setDoll(null);
         }
