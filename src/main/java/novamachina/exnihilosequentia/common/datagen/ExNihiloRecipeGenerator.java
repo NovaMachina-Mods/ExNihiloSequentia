@@ -16,6 +16,7 @@ import net.minecraft.data.SmithingRecipeBuilder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
@@ -574,7 +575,19 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 200)
                 .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
                         .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(EnumResource.SILKWORM.getRegistryObject().getId()));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm")));
+
+        CookingRecipeBuilder.cookingRecipe(Ingredient
+                .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 600, IRecipeSerializer.CAMPFIRE_COOKING)
+                .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
+                        .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm_from_campfilre")));
+
+        CookingRecipeBuilder.cookingRecipe(Ingredient
+                .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 100, IRecipeSerializer.SMOKING)
+                .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
+                        .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm_from_smoker")));
 
         CookingRecipeBuilder
                 .smeltingRecipe(Ingredient.fromItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()), ExNihiloBlocks.CRUCIBLE_FIRED
