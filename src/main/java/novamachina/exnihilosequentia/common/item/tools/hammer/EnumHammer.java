@@ -3,10 +3,11 @@ package novamachina.exnihilosequentia.common.item.tools.hammer;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
+import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public enum EnumHammer {
+public enum EnumHammer implements IExtensibleEnum {
     WOOD(ExNihiloConstants.Items.HAMMER_WOOD, 64, ItemTier.WOOD),
     STONE(ExNihiloConstants.Items.HAMMER_STONE, 125, ItemTier.STONE),
     IRON(ExNihiloConstants.Items.HAMMER_IRON, 512, ItemTier.IRON),
@@ -23,6 +24,10 @@ public enum EnumHammer {
         this.hammerName = hammerName;
         this.defaultDurability = durability;
         this.tier = tier;
+    }
+
+    public static EnumHammer create(String enumName, String hammerName, int durability, IItemTier tier) {
+        throw new IllegalStateException("Enum not extended");
     }
 
     public RegistryObject<Item> getRegistryObject() {

@@ -42,7 +42,7 @@ public enum EnumOre implements IExtensibleEnum {
         this.generateIngot = generateIngot;
     }
 
-    public static EnumOre create(String name, Type type, String oreName, Color color, boolean isEnabled, boolean generateIngot) {
+    public static EnumOre create(String enumName, Type type, String oreName, Color color, boolean isEnabled, boolean generateIngot) {
         throw new IllegalStateException("Enum not extended");
     }
 
