@@ -72,7 +72,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
             BlockItem blockItem = (BlockItem) stack.getItem();
             logger.debug("Is Block Siftable: " + ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED)));
             if (ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
-                sieveTile.insertSiftableBlock(stack);
+                sieveTile.insertSiftableBlock(stack, player);
             }
         }
         worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
@@ -135,7 +135,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
             }
 
             if (stack.getItem() instanceof MeshItem) {
-                sieveTile.insertMesh(stack);
+                sieveTile.insertMesh(stack, player);
             }
         }
         worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);

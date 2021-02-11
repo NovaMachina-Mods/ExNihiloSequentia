@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -42,13 +43,15 @@ public class SieveTile extends TileEntity {
         super(ExNihiloTiles.SIEVE.get());
     }
 
-    public void insertMesh(ItemStack stack) {
+    public void insertMesh(ItemStack stack, PlayerEntity player) {
         logger.debug("Insert Mesh: " + stack);
         EnumMesh mesh = ((MeshItem) stack.getItem()).getMesh();
         if (meshStack.isEmpty()) {
             meshStack = stack.copy();
             meshStack.setCount(1);
-            stack.shrink(1);
+            if(!player.isCreative()) {
+                stack.shrink(1);
+            }
             meshType = mesh;
             if (!isRemoved()) {
                 setSieveState();
@@ -126,12 +129,14 @@ public class SieveTile extends TileEntity {
         super.remove();
     }
 
-    public void insertSiftableBlock(ItemStack stack) {
+    public void insertSiftableBlock(ItemStack stack, PlayerEntity player) {
         logger.debug("Insert Siftable Block: " + stack);
         if (!meshStack.isEmpty() && blockStack.isEmpty()) {
             blockStack = stack.copy();
             blockStack.setCount(1);
-            stack.shrink(1);
+            if(!player.isCreative()) {
+                stack.shrink(1);
+            }
         }
     }
 

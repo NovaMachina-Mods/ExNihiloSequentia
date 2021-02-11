@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.registries;
 
+import com.google.common.collect.Lists;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.api.registry.ISieveRegistry;
@@ -109,11 +110,14 @@ public class SieveRegistry implements ISieveRegistry {
             if(mesh != EnumMesh.NONE) {
                 for(Ingredient ingredient : inputs) {
                     List<SieveRecipe> drops = getDrops(ingredient, mesh, false);
+                    List<List<SieveRecipe>> dropLists = Lists.partition(drops, 21);
                     if(!drops.isEmpty()) {
                         List<List<ItemStack>> inputList = new ArrayList<>();
                         inputList.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
                         inputList.add(Arrays.asList(ingredient.getMatchingStacks()));
-                        returnList.add(new JEISieveRecipe(inputList, drops));
+                        for(List<SieveRecipe> dropList : dropLists) {
+                            returnList.add(new JEISieveRecipe(inputList, dropList));
+                        }
                     }
                 }
             }
@@ -144,11 +148,14 @@ public class SieveRegistry implements ISieveRegistry {
             if(mesh != EnumMesh.NONE) {
                 for(Ingredient ingredient : inputs) {
                     List<SieveRecipe> drops = getDrops(ingredient, mesh, true);
+                    List<List<SieveRecipe>> dropLists = Lists.partition(drops, 21);
                     if(!drops.isEmpty()) {
                         List<List<ItemStack>> inputList = new ArrayList<>();
                         inputList.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
                         inputList.add(Arrays.asList(ingredient.getMatchingStacks()));
-                        returnList.add(new JEISieveRecipe(inputList, drops));
+                        for(List<SieveRecipe> dropList : dropLists) {
+                            returnList.add(new JEISieveRecipe(inputList, dropList));
+                        }
                     }
                 }
             }

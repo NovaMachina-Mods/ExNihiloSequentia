@@ -734,6 +734,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.35F))
                 .build(consumer, sieveLoc("seed_pumpkin"));
         SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+                .addResult(Items.BEETROOT_SEEDS)
+                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.35F))
+                .build(consumer, sieveLoc("seed_beetroot"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
                 .addResult(EnumResource.ANCIENT_SPORE.getRegistryObject().get())
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
                 .build(consumer, sieveLoc("ancient_spore"));
