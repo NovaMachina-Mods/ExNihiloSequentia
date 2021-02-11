@@ -37,7 +37,7 @@ import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.item.dolls.DollEnum;
+import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
@@ -277,7 +277,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerDolls(Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.SHULKER.getRegistryObject().get())
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.SHULKER.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -288,8 +288,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.SHULKER.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.GUARDIAN.getRegistryObject().get())
+                .build(consumer, createSaveLocation(EnumDoll.SHULKER.getRegistryObject().getId()));
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.GUARDIAN.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -300,8 +300,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.GUARDIAN.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.BEE.getRegistryObject().get())
+                .build(consumer, createSaveLocation(EnumDoll.GUARDIAN.getRegistryObject().getId()));
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.BEE.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -312,8 +312,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.BEE.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.BLAZE.getRegistryObject().get())
+                .build(consumer, createSaveLocation(EnumDoll.BEE.getRegistryObject().getId()));
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.BLAZE.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -324,8 +324,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.BLAZE.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shapedRecipe(DollEnum.ENDERMAN.getRegistryObject().get())
+                .build(consumer, createSaveLocation(EnumDoll.BLAZE.getRegistryObject().getId()));
+        ShapedRecipeBuilder.shapedRecipe(EnumDoll.ENDERMAN.getRegistryObject().get())
                 .patternLine("ctc")
                 .patternLine("sms")
                 .patternLine("cbc")
@@ -336,7 +336,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
                 .addCriterion(DOLL_CONDITION, InventoryChangeTrigger.Instance
                         .forItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(DollEnum.ENDERMAN.getRegistryObject().getId()));
+                .build(consumer, createSaveLocation(EnumDoll.ENDERMAN.getRegistryObject().getId()));
     }
 
     private void registerFluidItemRecipes(Consumer<IFinishedRecipe> consumer) {

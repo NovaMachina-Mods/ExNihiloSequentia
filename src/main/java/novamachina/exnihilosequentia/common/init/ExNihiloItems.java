@@ -11,7 +11,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.item.CookedSilkwormItem;
-import novamachina.exnihilosequentia.common.item.dolls.DollEnum;
+import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
@@ -141,7 +141,7 @@ public class ExNihiloItems {
             }
         }
 
-        for (DollEnum doll : DollEnum.values()) {
+        for (EnumDoll doll : EnumDoll.values()) {
             doll.setRegistryObject(ITEMS.register(doll.getDollName(), () -> new DollItem(doll)));
         }
     }

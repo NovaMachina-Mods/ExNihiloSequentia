@@ -3,10 +3,11 @@ package novamachina.exnihilosequentia.common.item.tools.crook;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
+import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public enum EnumCrook {
+public enum EnumCrook implements IExtensibleEnum {
     WOOD(ExNihiloConstants.Items.CROOK_WOOD, 64, ItemTier.WOOD),
 
     STONE(ExNihiloConstants.Items.CROOK_STONE, 128, ItemTier.STONE),
@@ -29,6 +30,10 @@ public enum EnumCrook {
         this.crookName = crookName;
         this.defaultDurability = durability;
         this.tier = tier;
+    }
+
+    public static EnumCrook create(String enumName, String crookName, int durability, IItemTier tier) {
+        throw new IllegalStateException("Enum not extended");
     }
 
     public RegistryObject<Item> getRegistryObject() {
