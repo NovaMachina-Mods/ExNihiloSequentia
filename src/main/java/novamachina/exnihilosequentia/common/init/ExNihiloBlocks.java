@@ -23,8 +23,7 @@ import novamachina.exnihilosequentia.common.block.UnfiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.WitchWaterBlock;
 import novamachina.exnihilosequentia.common.block.WoodCrucibleBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
-import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
+import novamachina.exnihilosequentia.common.tileentity.barrel.*;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -75,10 +74,31 @@ public class ExNihiloBlocks {
             .register(Blocks.CRUCIBLE_FIRED, FiredCrucibleBlock::new);
     public static final RegistryObject<BaseBlock> CRUCIBLE_WOOD = BLOCKS
             .register(Blocks.CRUCIBLE_WOOD, WoodCrucibleBlock::new);
-    public static final RegistryObject<BaseBlock> BARREL_WOOD = BLOCKS
-            .register(Blocks.BARREL_WOOD, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
+    //TODO Able to Simplify???
+    public static final RegistryObject<BaseBlock> BARREL_ACACIA = BLOCKS
+            .register(Blocks.BARREL_ACACIA, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
-                    .tileEntitySupplier(WoodBarrelTile::new)));
+                    .tileEntitySupplier(AcaciaBarrelTile::new)));
+    public static final RegistryObject<BaseBlock> BARREL_BIRCH = BLOCKS
+            .register(Blocks.BARREL_BIRCH, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
+                    .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
+                    .tileEntitySupplier(BirchBarrelTile::new)));
+    public static final RegistryObject<BaseBlock> BARREL_DARK_OAK = BLOCKS
+            .register(Blocks.BARREL_DARK_OAK, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
+                    .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
+                    .tileEntitySupplier(DarkOakBarrelTile::new)));
+    public static final RegistryObject<BaseBlock> BARREL_JUNGLE = BLOCKS
+            .register(Blocks.BARREL_JUNGLE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
+                    .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
+                    .tileEntitySupplier(JungleBarrelTile::new)));
+    public static final RegistryObject<BaseBlock> BARREL_SPRUCE = BLOCKS
+            .register(Blocks.BARREL_SPRUCE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
+                    .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
+                    .tileEntitySupplier(SpruceBarrelTile::new)));
+    public static final RegistryObject<BaseBlock> BARREL_OAK = BLOCKS
+            .register(Blocks.BARREL_OAK, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
+                    .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
+                    .tileEntitySupplier(OakBarrelTile::new)));
     public static final RegistryObject<BaseBlock> BARREL_STONE = BLOCKS
             .register(Blocks.BARREL_STONE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(0.75F).sound(SoundType.STONE))

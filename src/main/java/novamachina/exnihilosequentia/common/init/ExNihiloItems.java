@@ -80,8 +80,24 @@ public class ExNihiloItems {
     public static final RegistryObject<Item> CRUCIBLE_WOOD = ITEMS
             .register(Blocks.CRUCIBLE_WOOD, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_WOOD.get(),
                     new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_WOOD = ITEMS
-            .register(Blocks.BARREL_WOOD, () -> new BlockItem(ExNihiloBlocks.BARREL_WOOD.get(),
+    //TODO Able to Simplify???
+    public static final RegistryObject<Item> BARREL_ACACIA = ITEMS
+            .register(Blocks.BARREL_ACACIA, () -> new BlockItem(ExNihiloBlocks.BARREL_ACACIA.get(),
+                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_BIRCH = ITEMS
+            .register(Blocks.BARREL_BIRCH, () -> new BlockItem(ExNihiloBlocks.BARREL_BIRCH.get(),
+                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_DARK_OAK = ITEMS
+            .register(Blocks.BARREL_DARK_OAK, () -> new BlockItem(ExNihiloBlocks.BARREL_DARK_OAK.get(),
+                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_JUNGLE = ITEMS
+            .register(Blocks.BARREL_JUNGLE, () -> new BlockItem(ExNihiloBlocks.BARREL_JUNGLE.get(),
+                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_SPRUCE = ITEMS
+            .register(Blocks.BARREL_SPRUCE, () -> new BlockItem(ExNihiloBlocks.BARREL_SPRUCE.get(),
+                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_OAK = ITEMS
+            .register(Blocks.BARREL_OAK, () -> new BlockItem(ExNihiloBlocks.BARREL_OAK.get(),
                     new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> BARREL_STONE = ITEMS
             .register(Blocks.BARREL_STONE, () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(),

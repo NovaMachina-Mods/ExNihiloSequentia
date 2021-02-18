@@ -46,7 +46,12 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
 
     private void registerBarrels() {
         registerBarrel(ExNihiloBlocks.BARREL_STONE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stone"));
-        registerBarrel(ExNihiloBlocks.BARREL_WOOD.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_ACACIA.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/acacia_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_BIRCH.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/birch_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_DARK_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/dark_oak_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_JUNGLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/jungle_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_SPRUCE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/spruce_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_planks"));
     }
 
     private void registerCake() {

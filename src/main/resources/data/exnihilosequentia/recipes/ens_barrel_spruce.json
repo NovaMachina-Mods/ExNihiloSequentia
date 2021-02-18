@@ -8,13 +8,13 @@
   ],
   "key": {
     "x": {
-      "tag": "minecraft:planks"
+      "item": "minecraft:spruce_planks"
     },
     "-": {
-      "tag": "minecraft:wooden_slabs"
+      "item": "minecraft:spruce_slab"
     }
   },
   "result": {
-    "item": "exnihilosequentia:barrel_wood"
+    "item": "exnihilosequentia:barrel_spruce"
   }
 }

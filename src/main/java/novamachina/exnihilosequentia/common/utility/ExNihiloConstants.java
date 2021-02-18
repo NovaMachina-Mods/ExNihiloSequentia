@@ -22,8 +22,13 @@ public class ExNihiloConstants {
 
     public static class Blocks {
 
+        public static final String BARREL_ACACIA = "barrel_acacia";
+        public static final String BARREL_BIRCH = "barrel_birch";
+        public static final String BARREL_DARK_OAK = "barrel_dark_oak";
+        public static final String BARREL_JUNGLE = "barrel_jungle";
+        public static final String BARREL_SPRUCE = "barrel_spruce";
+        public static final String BARREL_OAK = "barrel_oak";
         public static final String BARREL_STONE = "barrel_stone";
-        public static final String BARREL_WOOD = "barrel_wood";
         public static final String CRUCIBLE_FIRED = "crucible_fired";
         public static final String CRUCIBLE_UNFIRED = "crucible_unfired";
         public static final String CRUCIBLE_WOOD = "crucible_wood";

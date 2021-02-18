@@ -76,7 +76,12 @@ public class JEIPlugin implements IModPlugin {
         }
 
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_WOOD.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_ACACIA.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_BIRCH.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_DARK_OAK.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_JUNGLE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_SPRUCE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_OAK.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_STONE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WOOD.get()), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_WOOD), HeatRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_FIRED), HeatRecipeCategory.UID);

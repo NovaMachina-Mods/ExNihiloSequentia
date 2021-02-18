@@ -27,7 +27,12 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
 
     public static void register() {
         logger.debug("Register barrel renderer");
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_WOOD.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_ACACIA.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_BIRCH.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_DARK_OAK.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_JUNGLE.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_SPRUCE.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_OAK.get(), BarrelRender::new);
         ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_STONE.get(), BarrelRender::new);
     }
 

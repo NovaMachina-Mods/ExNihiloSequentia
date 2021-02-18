@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "exnihilosequentia:ens_barrel_wood"
+      "exnihilosequentia:ens_barrel_jungle"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:planks"
+            "item": "minecraft:jungle_planks"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:wooden_slabs"
+            "item": "minecraft:jungle_slabs"
           }
         ]
       }
@@ -29,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "exnihilosequentia:ens_barrel_wood"
+        "recipe": "exnihilosequentia:ens_barrel_jungle"
       }
     }
   },

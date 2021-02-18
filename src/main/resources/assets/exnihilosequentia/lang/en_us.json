@@ -11,7 +11,12 @@
   "block.exnihilosequentia.infested_leaves": "Infested Leaves",
 
   "block.exnihilosequentia.sieve": "Sieve",
-  "block.exnihilosequentia.barrel_wood": "Wooden Barrel",
+  "block.exnihilosequentia.barrel_acacia": "Acacia Barrel",
+  "block.exnihilosequentia.barrel_birch": "Birch Barrel",
+  "block.exnihilosequentia.barrel_dark_oak": "Dark Oak Barrel",
+  "block.exnihilosequentia.barrel_jungle": "Jungle Barrel",
+  "block.exnihilosequentia.barrel_spruce": "Spruce Barrel",
+  "block.exnihilosequentia.barrel_oak": "Oak Barrel",
   "block.exnihilosequentia.barrel_stone": "Stone Barrel",
   "block.exnihilosequentia.crucible_unfired": "Unfired Crucible",
   "block.exnihilosequentia.crucible_fired": "Fired Crucible",
