@@ -31,7 +31,12 @@ public class ExNihiloConstants {
         public static final String BARREL_STONE = "barrel_stone";
         public static final String CRUCIBLE_FIRED = "crucible_fired";
         public static final String CRUCIBLE_UNFIRED = "crucible_unfired";
-        public static final String CRUCIBLE_WOOD = "crucible_wood";
+        public static final String CRUCIBLE_ACACIA = "crucible_acacia";
+        public static final String CRUCIBLE_BIRCH = "crucible_birch";
+        public static final String CRUCIBLE_DARK_OAK = "crucible_dark_oak";
+        public static final String CRUCIBLE_JUNGLE = "crucible_jungle";
+        public static final String CRUCIBLE_SPRUCE = "crucible_spruce";
+        public static final String CRUCIBLE_OAK = "crucible_oak";
         public static final String CRUSHED_ANDESITE = "crushed_andesite";
         public static final String CRUSHED_DIORITE = "crushed_diorite";
         public static final String CRUSHED_END_STONE = "crushed_end_stone";
@@ -42,7 +47,12 @@ public class ExNihiloConstants {
         public static final String INFESTED_LEAVES = "infested_leaves";
         public static final String INFESTING_LEAVES = "infesting_leaves";
         public static final String SEA_WATER = "sea_water";
-        public static final String SIEVE = "sieve";
+        public static final String SIEVE_ACACIA = "sieve_acacia";
+        public static final String SIEVE_BIRCH = "sieve_birch";
+        public static final String SIEVE_DARK_OAK = "sieve_dark_oak";
+        public static final String SIEVE_JUNGLE = "sieve_jungle";
+        public static final String SIEVE_SPRUCE = "sieve_spruce";
+        public static final String SIEVE_OAK = "sieve_oak";
         public static final String WITCH_WATER = "witchwater";
 
         private Blocks() {

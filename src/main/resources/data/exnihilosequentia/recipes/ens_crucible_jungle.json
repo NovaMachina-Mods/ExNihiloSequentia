@@ -13,7 +13,7 @@
       "item": "minecraft:jungle_slab"
     },
     "s": {
-      "item": "forge:rods/wooden"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {

@@ -22,40 +22,26 @@ public class ExNihiloTiles {
     public static final RegistryObject<TileEntityType<FiredCrucibleTile>> CRUCIBLE_FIRED = TILES
             .register(Blocks.CRUCIBLE_UNFIRED, () -> TileEntityType.Builder
                     .create(FiredCrucibleTile::new, ExNihiloBlocks.CRUCIBLE_FIRED.get()).build(null));
+    //TODO is this right???
     public static final RegistryObject<TileEntityType<WoodCrucibleTile>> CRUCIBLE_WOOD = TILES
-            .register(Blocks.CRUCIBLE_WOOD, () -> TileEntityType.Builder
-                    .create(WoodCrucibleTile::new, ExNihiloBlocks.CRUCIBLE_WOOD.get()).build(null));
+            .register(Blocks.CRUCIBLE_OAK, () -> TileEntityType.Builder
+                    .create(WoodCrucibleTile::new, ExNihiloBlocks.CRUCIBLE_OAK.get()).build(null));
     public static final RegistryObject<TileEntityType<SieveTile>> SIEVE = TILES
-            .register(Blocks.SIEVE, () -> TileEntityType.Builder
-                    .create(SieveTile::new, ExNihiloBlocks.SIEVE.get()).build(null));
+            .register(Blocks.SIEVE_OAK, () -> TileEntityType.Builder
+                    .create(SieveTile::new, ExNihiloBlocks.SIEVE_OAK.get()).build(null));
+    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_WOOD = TILES
+            .register(Blocks.BARREL_OAK, () -> TileEntityType.Builder
+                    .create(WoodBarrelTile::new, ExNihiloBlocks.BARREL_OAK.get()).build(null));
+    //TODO until here
+    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_STONE = TILES
+            .register(Blocks.BARREL_STONE, () -> TileEntityType.Builder
+                    .create(StoneBarrelTile::new, ExNihiloBlocks.BARREL_STONE.get()).build(null));
     public static final RegistryObject<TileEntityType<InfestingLeavesTile>> INFESTING_LEAVES = TILES
             .register(Blocks.INFESTING_LEAVES, () -> TileEntityType.Builder
                     .create(InfestingLeavesTile::new, ExNihiloBlocks.INFESTING_LEAVES.get()).build(null));
     public static final RegistryObject<TileEntityType<InfestedLeavesTile>> INFESTED_LEAVES = TILES
             .register(Blocks.INFESTED_LEAVES, () -> TileEntityType.Builder
                     .create(InfestedLeavesTile::new, ExNihiloBlocks.INFESTED_LEAVES.get()).build(null));
-    //TODO Able to Simplify???
-    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_ACACIA = TILES
-            .register(Blocks.BARREL_ACACIA, () -> TileEntityType.Builder
-                    .create(AcaciaBarrelTile::new, ExNihiloBlocks.BARREL_ACACIA.get()).build(null));
-    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_BIRCH = TILES
-            .register(Blocks.BARREL_BIRCH, () -> TileEntityType.Builder
-                    .create(BirchBarrelTile::new, ExNihiloBlocks.BARREL_BIRCH.get()).build(null));
-    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_DARK_OAK = TILES
-            .register(Blocks.BARREL_DARK_OAK, () -> TileEntityType.Builder
-                    .create(DarkOakBarrelTile::new, ExNihiloBlocks.BARREL_DARK_OAK.get()).build(null));
-    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_JUNGLE = TILES
-            .register(Blocks.BARREL_JUNGLE, () -> TileEntityType.Builder
-                    .create(JungleBarrelTile::new, ExNihiloBlocks.BARREL_JUNGLE.get()).build(null));
-    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_SPRUCE = TILES
-            .register(Blocks.BARREL_SPRUCE, () -> TileEntityType.Builder
-                    .create(SpruceBarrelTile::new, ExNihiloBlocks.BARREL_SPRUCE.get()).build(null));
-    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_OAK = TILES
-            .register(Blocks.BARREL_OAK, () -> TileEntityType.Builder
-                    .create(OakBarrelTile::new, ExNihiloBlocks.BARREL_OAK.get()).build(null));
-    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_STONE = TILES
-            .register(Blocks.BARREL_STONE, () -> TileEntityType.Builder
-                    .create(StoneBarrelTile::new, ExNihiloBlocks.BARREL_STONE.get()).build(null));
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloTiles() {

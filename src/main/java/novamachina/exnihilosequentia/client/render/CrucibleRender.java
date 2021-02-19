@@ -26,8 +26,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
 
     public static void register(TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         logger.debug("Register crucible renderer, Type" + tileTileEntityType);
-        ClientRegistry
-                .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
+        ClientRegistry.bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
     }
 
     @Override

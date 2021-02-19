@@ -51,7 +51,7 @@ public class ExNihiloInitialization {
     public static final ItemGroup ITEM_GROUP = new ItemGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ExNihiloBlocks.SIEVE.get());
+            return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
         }
     };
     @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")

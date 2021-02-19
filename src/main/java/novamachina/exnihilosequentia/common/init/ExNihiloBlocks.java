@@ -58,8 +58,19 @@ public class ExNihiloBlocks {
                             .sound(SoundType.GROUND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<EndCakeBlock> END_CAKE = BLOCKS
             .register(ExNihiloConstants.Blocks.END_CAKE, EndCakeBlock::new);
-    public static final RegistryObject<BlockSieve> SIEVE = BLOCKS
-            .register(Blocks.SIEVE, BlockSieve::new);
+    //TODO here are the sieves
+    public static final RegistryObject<BlockSieve> SIEVE_ACACIA = BLOCKS
+            .register(Blocks.SIEVE_ACACIA, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_BIRCH = BLOCKS
+            .register(Blocks.SIEVE_BIRCH, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_DARK_OAK = BLOCKS
+            .register(Blocks.SIEVE_DARK_OAK, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_JUNGLE = BLOCKS
+            .register(Blocks.SIEVE_JUNGLE, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_SPRUCE = BLOCKS
+            .register(Blocks.SIEVE_SPRUCE, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_OAK = BLOCKS
+            .register(Blocks.SIEVE_OAK, BlockSieve::new);
     public static final RegistryObject<FlowingFluidBlock> WITCH_WATER = BLOCKS
             .register(ExNihiloConstants.Blocks.WITCH_WATER, WitchWaterBlock::new);
     public static final RegistryObject<FlowingFluidBlock> SEA_WATER = BLOCKS
@@ -72,33 +83,44 @@ public class ExNihiloBlocks {
             .register(Blocks.CRUCIBLE_UNFIRED, UnfiredCrucibleBlock::new);
     public static final RegistryObject<BaseBlock> CRUCIBLE_FIRED = BLOCKS
             .register(Blocks.CRUCIBLE_FIRED, FiredCrucibleBlock::new);
-    public static final RegistryObject<BaseBlock> CRUCIBLE_WOOD = BLOCKS
-            .register(Blocks.CRUCIBLE_WOOD, WoodCrucibleBlock::new);
-    //TODO Able to Simplify???
+    //TODO added Crucible
+    public static final RegistryObject<BaseBlock> CRUCIBLE_ACACIA = BLOCKS
+            .register(Blocks.CRUCIBLE_ACACIA, WoodCrucibleBlock::new);
+    public static final RegistryObject<BaseBlock> CRUCIBLE_BIRCH = BLOCKS
+            .register(Blocks.CRUCIBLE_BIRCH, WoodCrucibleBlock::new);
+    public static final RegistryObject<BaseBlock> CRUCIBLE_DARK_OAK = BLOCKS
+            .register(Blocks.CRUCIBLE_DARK_OAK, WoodCrucibleBlock::new);
+    public static final RegistryObject<BaseBlock> CRUCIBLE_JUNGLE = BLOCKS
+            .register(Blocks.CRUCIBLE_JUNGLE, WoodCrucibleBlock::new);
+    public static final RegistryObject<BaseBlock> CRUCIBLE_SPRUCE = BLOCKS
+            .register(Blocks.CRUCIBLE_SPRUCE, WoodCrucibleBlock::new);
+    public static final RegistryObject<BaseBlock> CRUCIBLE_OAK = BLOCKS
+            .register(Blocks.CRUCIBLE_OAK, WoodCrucibleBlock::new);
+    //TODO here are the barrels
     public static final RegistryObject<BaseBlock> BARREL_ACACIA = BLOCKS
             .register(Blocks.BARREL_ACACIA, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
-                    .tileEntitySupplier(AcaciaBarrelTile::new)));
+                    .tileEntitySupplier(WoodBarrelTile::new)));
     public static final RegistryObject<BaseBlock> BARREL_BIRCH = BLOCKS
             .register(Blocks.BARREL_BIRCH, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
-                    .tileEntitySupplier(BirchBarrelTile::new)));
+                    .tileEntitySupplier(WoodBarrelTile::new)));
     public static final RegistryObject<BaseBlock> BARREL_DARK_OAK = BLOCKS
             .register(Blocks.BARREL_DARK_OAK, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
-                    .tileEntitySupplier(DarkOakBarrelTile::new)));
+                    .tileEntitySupplier(WoodBarrelTile::new)));
     public static final RegistryObject<BaseBlock> BARREL_JUNGLE = BLOCKS
             .register(Blocks.BARREL_JUNGLE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
-                    .tileEntitySupplier(JungleBarrelTile::new)));
+                    .tileEntitySupplier(WoodBarrelTile::new)));
     public static final RegistryObject<BaseBlock> BARREL_SPRUCE = BLOCKS
             .register(Blocks.BARREL_SPRUCE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
-                    .tileEntitySupplier(SpruceBarrelTile::new)));
+                    .tileEntitySupplier(WoodBarrelTile::new)));
     public static final RegistryObject<BaseBlock> BARREL_OAK = BLOCKS
             .register(Blocks.BARREL_OAK, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F).sound(SoundType.WOOD))
-                    .tileEntitySupplier(OakBarrelTile::new)));
+                    .tileEntitySupplier(WoodBarrelTile::new)));
     public static final RegistryObject<BaseBlock> BARREL_STONE = BLOCKS
             .register(Blocks.BARREL_STONE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
                     .properties(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(0.75F).sound(SoundType.STONE))

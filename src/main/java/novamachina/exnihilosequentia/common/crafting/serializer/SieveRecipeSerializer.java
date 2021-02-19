@@ -16,7 +16,7 @@ import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ExNihiloBlocks.SIEVE.get());
+        return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
     }
 
     @Override

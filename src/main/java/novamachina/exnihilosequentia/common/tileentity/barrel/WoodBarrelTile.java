@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class WoodBarrelTile extends AbstractBarrelTile {
     public WoodBarrelTile() {
-        super(ExNihiloTiles.BARREL_ACACIA.get());
+        super(ExNihiloTiles.BARREL_WOOD.get());
     }
 
     @Override

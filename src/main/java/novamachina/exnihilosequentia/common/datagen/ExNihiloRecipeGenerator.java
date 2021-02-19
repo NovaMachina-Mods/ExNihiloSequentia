@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.datagen;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -34,6 +35,7 @@ import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
+import novamachina.exnihilosequentia.common.block.BaseBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
@@ -67,6 +69,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerCrooks(consumer);
         registerPebbleBlocks(consumer);
         registerBarrels(consumer);
+        registerWoodCrucibles(consumer);
+        registerWoodSieves(consumer);
         registerOres(consumer);
         registerHammers(consumer);
         registerDolls(consumer);
@@ -89,6 +93,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerBarrels(Consumer<IFinishedRecipe> consumer) {
+        //TODO Simplify this one
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.BARREL_STONE.get())
                 .patternLine("x x")
                 .patternLine("x x")
@@ -159,6 +164,134 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_walls", hasItem(Items.OAK_PLANKS))
                 .addCriterion("has_base", hasItem(Items.OAK_SLAB))
                 .build(consumer, createSaveLocation(ExNihiloBlocks.BARREL_OAK.getId()));
+    }
+
+    private void registerWoodCrucibles(Consumer<IFinishedRecipe> consumer) {
+        //TODO Simplify this one
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_ACACIA.get())
+                .patternLine("c c")
+                .patternLine("clc")
+                .patternLine("s s")
+                .key('c', Items.ACACIA_LOG)
+                .key('l', Items.ACACIA_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+                .addCriterion("has_logs", hasItem(Items.ACACIA_LOG))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_ACACIA.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_BIRCH.get())
+                .patternLine("c c")
+                .patternLine("clc")
+                .patternLine("s s")
+                .key('c', Items.BIRCH_LOG)
+                .key('l', Items.BIRCH_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+                .addCriterion("has_logs", hasItem(Items.BIRCH_LOG))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_BIRCH.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get())
+                .patternLine("c c")
+                .patternLine("clc")
+                .patternLine("s s")
+                .key('c', Items.DARK_OAK_LOG)
+                .key('l', Items.DARK_OAK_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+                .addCriterion("has_logs", hasItem(Items.DARK_OAK_LOG))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_DARK_OAK.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_JUNGLE.get())
+                .patternLine("c c")
+                .patternLine("clc")
+                .patternLine("s s")
+                .key('c', Items.JUNGLE_LOG)
+                .key('l', Items.JUNGLE_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+                .addCriterion("has_logs", hasItem(Items.JUNGLE_LOG))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_JUNGLE.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_SPRUCE.get())
+                .patternLine("c c")
+                .patternLine("clc")
+                .patternLine("s s")
+                .key('c', Items.SPRUCE_LOG)
+                .key('l', Items.SPRUCE_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+                .addCriterion("has_logs", hasItem(Items.SPRUCE_LOG))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_SPRUCE.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_OAK.get())
+                .patternLine("c c")
+                .patternLine("clc")
+                .patternLine("s s")
+                .key('c', Items.OAK_LOG)
+                .key('l', Items.OAK_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .setGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+                .addCriterion("has_logs", hasItem(Items.OAK_LOG))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_OAK.getId()));
+        }
+
+    private void registerWoodSieves(Consumer<IFinishedRecipe> consumer) {
+        //TODO Simplify this one
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.SIEVE_ACACIA.get())
+                .patternLine("p p")
+                .patternLine("plp")
+                .patternLine("s s")
+                .key('p', Items.ACACIA_PLANKS)
+                .key('l', Items.ACACIA_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .addCriterion("has_plank", InventoryChangeTrigger.Instance
+                        .forItems(ItemPredicate.Builder.create().item(Items.ACACIA_PLANKS).build()))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.SIEVE_ACACIA.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.SIEVE_BIRCH.get())
+                .patternLine("p p")
+                .patternLine("plp")
+                .patternLine("s s")
+                .key('p', Items.BIRCH_PLANKS)
+                .key('l', Items.BIRCH_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .addCriterion("has_plank", InventoryChangeTrigger.Instance
+                        .forItems(ItemPredicate.Builder.create().item(Items.BIRCH_PLANKS).build()))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.SIEVE_BIRCH.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.SIEVE_DARK_OAK.get())
+                .patternLine("p p")
+                .patternLine("plp")
+                .patternLine("s s")
+                .key('p', Items.DARK_OAK_PLANKS)
+                .key('l', Items.DARK_OAK_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .addCriterion("has_plank", InventoryChangeTrigger.Instance
+                        .forItems(ItemPredicate.Builder.create().item(Items.DARK_OAK_PLANKS).build()))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.SIEVE_DARK_OAK.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.SIEVE_JUNGLE.get())
+                .patternLine("p p")
+                .patternLine("plp")
+                .patternLine("s s")
+                .key('p', Items.JUNGLE_PLANKS)
+                .key('l', Items.JUNGLE_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .addCriterion("has_plank", InventoryChangeTrigger.Instance
+                        .forItems(ItemPredicate.Builder.create().item(Items.JUNGLE_PLANKS).build()))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.SIEVE_JUNGLE.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.SIEVE_SPRUCE.get())
+                .patternLine("p p")
+                .patternLine("plp")
+                .patternLine("s s")
+                .key('p', Items.SPRUCE_PLANKS)
+                .key('l', Items.SPRUCE_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .addCriterion("has_plank", InventoryChangeTrigger.Instance
+                        .forItems(ItemPredicate.Builder.create().item(Items.SPRUCE_PLANKS).build()))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.SIEVE_SPRUCE.getId()));
+        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.SIEVE_OAK.get())
+                .patternLine("p p")
+                .patternLine("plp")
+                .patternLine("s s")
+                .key('p', Items.OAK_PLANKS)
+                .key('l', Items.OAK_SLAB)
+                .key('s', Tags.Items.RODS_WOODEN)
+                .addCriterion("has_plank", InventoryChangeTrigger.Instance
+                        .forItems(ItemPredicate.Builder.create().item(Items.OAK_PLANKS).build()))
+                .build(consumer, createSaveLocation(ExNihiloBlocks.SIEVE_OAK.getId()));
     }
 
     private void registerCompostRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -594,7 +727,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .patternLine("iii")
                 .patternLine("iii")
                 .key('i', Tags.Items.STRING)
-                .addCriterion("has_sieve", InventoryChangeTrigger.Instance.forItems(ExNihiloBlocks.SIEVE.get()))
+                .addCriterion("has_sieve", InventoryChangeTrigger.Instance.forItems(ExNihiloBlocks.SIEVE_OAK.get()))
                 .build(consumer, createSaveLocation(EnumMesh.STRING.getRegistryObject().getId()));
     }
 
@@ -655,16 +788,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .forItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
                 .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_UNFIRED.getId()));
 
-        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_WOOD.get())
-                .patternLine("c c")
-                .patternLine("clc")
-                .patternLine("s s")
-                .key('c', ItemTags.LOGS)
-                .key('l', ItemTags.WOODEN_SLABS)
-                .key('s', Tags.Items.RODS_WOODEN)
-                .addCriterion("has_logs", hasItem(ItemTags.LOGS))
-                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_WOOD.getId()));
-
         ShapedRecipeBuilder.shapedRecipe(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 4)
                 .patternLine("xex")
                 .patternLine(" x ")
@@ -698,16 +821,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .key('k', Items.CAKE)
                 .addCriterion("has_ender_pearl", InventoryChangeTrigger.Instance.forItems(Items.ENDER_PEARL))
                 .build(consumer, createSaveLocation(ExNihiloBlocks.END_CAKE.getId()));
-        ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.SIEVE.get())
-                .patternLine("p p")
-                .patternLine("plp")
-                .patternLine("s s")
-                .key('p', ItemTags.PLANKS)
-                .key('l', ItemTags.WOODEN_SLABS)
-                .key('s', Tags.Items.RODS_WOODEN)
-                .addCriterion("has_plank", InventoryChangeTrigger.Instance
-                        .forItems(ItemPredicate.Builder.create().tag(ItemTags.PLANKS).build()))
-                .build(consumer, createSaveLocation(ExNihiloBlocks.SIEVE.getId()));
 
         ShapelessRecipeBuilder.shapelessRecipe(EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
                 .addIngredient(ExNihiloTags.CLAY)
