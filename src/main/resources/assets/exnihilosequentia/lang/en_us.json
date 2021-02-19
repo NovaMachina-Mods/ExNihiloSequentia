@@ -10,7 +10,12 @@
   "block.exnihilosequentia.infesting_leaves": "Infesting Leaves",
   "block.exnihilosequentia.infested_leaves": "Infested Leaves",
 
-  "block.exnihilosequentia.sieve": "Sieve",
+  "block.exnihilosequentia.sieve_acacia": "Acacia Sieve",
+  "block.exnihilosequentia.sieve_birch": "Birch Sieve",
+  "block.exnihilosequentia.sieve_dark_oak": "Dark Oak Sieve",
+  "block.exnihilosequentia.sieve_jungle": "Jungle Sieve",
+  "block.exnihilosequentia.sieve_spruce": "Spruce Sieve",
+  "block.exnihilosequentia.sieve_oak": "Oak Sieve",
   "block.exnihilosequentia.barrel_acacia": "Acacia Barrel",
   "block.exnihilosequentia.barrel_birch": "Birch Barrel",
   "block.exnihilosequentia.barrel_dark_oak": "Dark Oak Barrel",
@@ -20,7 +25,12 @@
   "block.exnihilosequentia.barrel_stone": "Stone Barrel",
   "block.exnihilosequentia.crucible_unfired": "Unfired Crucible",
   "block.exnihilosequentia.crucible_fired": "Fired Crucible",
-  "block.exnihilosequentia.crucible_wood": "Wooden Crucible",
+  "block.exnihilosequentia.crucible_acacia": "Acacia Crucible",
+  "block.exnihilosequentia.crucible_birch": "Birch Crucible",
+  "block.exnihilosequentia.crucible_dark_oak": "Dark Oak Crucible",
+  "block.exnihilosequentia.crucible_jungle": "Jungle Crucible",
+  "block.exnihilosequentia.crucible_spruce": "Spruce Crucible",
+  "block.exnihilosequentia.crucible_oak": "Oak Crucible",
 
   "block.exnihilosequentia.end_cake": "End Cake",
 

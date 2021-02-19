@@ -1,22 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "c c",
-    "clc",
+    "p p",
+    "plp",
     "s s"
   ],
   "key": {
-    "c": {
-      "tag": "minecraft:logs"
+    "p": {
+      "item": "minecraft:jungle_planks"
     },
     "l": {
-      "tag": "minecraft:wooden_slabs"
+      "item": "minecraft:jungle_slab"
     },
     "s": {
       "tag": "forge:rods/wooden"
     }
   },
   "result": {
-    "item": "exnihilosequentia:crucible_wood"
+    "item": "exnihilosequentia:sieve_jungle"
   }
 }

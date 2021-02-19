@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "clc",
+    "s s"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:spruce_log"
+    },
+    "l": {
+      "item": "minecraft:spruce_slab"
+    },
+    "s": {
+      "item": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:crucible_spruce"
+  }
+}

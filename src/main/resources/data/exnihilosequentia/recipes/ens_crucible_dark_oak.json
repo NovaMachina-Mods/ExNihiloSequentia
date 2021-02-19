@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "clc",
+    "s s"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:dark_oak_log"
+    },
+    "l": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "s": {
+      "item": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:crucible_dark_oak"
+  }
+}
