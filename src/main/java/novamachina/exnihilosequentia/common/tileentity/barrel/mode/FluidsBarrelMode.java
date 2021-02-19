@@ -1,19 +1,15 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.IItemProvider;
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.item.dolls.DollItem;
-import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -21,6 +17,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.common.item.dolls.DollItem;
+import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +45,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     private boolean doMobSpawn(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn) {
+        if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
+            return false;
+        }
+
         Item item = player.getHeldItem(handIn).getItem();
 
         if (item instanceof DollItem) {
@@ -61,6 +65,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     private boolean fluidTransform(AbstractBarrelTile barrelTile, IItemProvider catalyst) {
+
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
         if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, catalyst)) {
@@ -72,6 +77,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     private boolean fluidOnTop(AbstractBarrelTile barrelTile) {
+        if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
+            return false;
+        }
         Fluid fluidOnTop = barrelTile.getWorld().getFluidState(barrelTile.getPos().add(0, 1, 0)).getFluid();
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
@@ -119,6 +127,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     private boolean fluidBlockTransform(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn) {
+        if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
+            return false;
+        }
         Fluid fluid = barrelTile.getTank().getFluid().getFluid();
         Item input = player.getHeldItem(handIn).getItem();
         if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
@@ -183,6 +194,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+        if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
+            return stack.copy();
+        }
         ItemStack returnStack = stack.copy();
         Fluid fluid = barrelTile.getTank().getFluid().getFluid();
         Item input = stack.getItem();

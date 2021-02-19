@@ -112,6 +112,7 @@ repositories {
     maven { url = "https://maven.tterrag.com/" } // TOP
     maven { url = 'https://files.minecraftforge.net/maven' }
     maven { url = "https://maven.blamejared.com" } // CraftTweaker
+    maven { url = "https://cursemaven.com"}
 }
 
 publishing {
