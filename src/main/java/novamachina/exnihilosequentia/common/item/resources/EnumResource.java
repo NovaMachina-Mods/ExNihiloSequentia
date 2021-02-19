@@ -1,10 +1,11 @@
 package novamachina.exnihilosequentia.common.item.resources;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 
-public enum EnumResource {
+public enum EnumResource implements IExtensibleEnum {
     ANCIENT_SPORE(Items.ANCIENT_SPORE),
     GRASS_SEED(Items.GRASS_SEED),
     SILKWORM(Items.SILKWORM),
