@@ -2,6 +2,10 @@ package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.text.Color;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -38,6 +42,9 @@ public class SieveTile extends TileEntity {
     private ItemStack blockStack = ItemStack.EMPTY;
     private EnumMesh meshType = EnumMesh.NONE;
     private float progress = 0;
+
+    private long lastSieveAction = 0;
+    private UUID lastPlayer;
 
     public SieveTile() {
         super(ExNihiloTiles.SIEVE.get());
@@ -140,8 +147,28 @@ public class SieveTile extends TileEntity {
         }
     }
 
-    public void activateSieve(boolean isWaterlogged) {
+    public void activateSieve(PlayerEntity player, boolean isWaterlogged) {
         logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
+
+        // 4 ticks is the same period of holding down right click
+        if (getWorld().getWorldInfo().getGameTime() - lastSieveAction < 4) {
+            return;
+        }
+
+        // Really good chance that they're using a macro
+        if (player != null && getWorld().getWorldInfo().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUniqueID())) {
+            player.setFire(1);
+
+            ITextComponent message = new StringTextComponent("Bad").setStyle(Style.EMPTY.setColor(Color.fromInt(16711680)).setBold(true));
+
+            player.sendMessage(message, null);
+        }
+
+        lastSieveAction = getWorld().getWorldInfo().getGameTime();
+        if (player != null) {
+            lastPlayer = player.getUniqueID();
+        }
+
         if (isReadyToSieve()) {
             progress += 0.1F;
 

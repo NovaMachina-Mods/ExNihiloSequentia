@@ -65,7 +65,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
 
         logger.debug("isReadyToSieve: " + sieveTile.isReadyToSieve());
         if (sieveTile.isReadyToSieve()) {
-            sieveTile.activateSieve(state.get(WATERLOGGED));
+            sieveTile.activateSieve(player, state.get(WATERLOGGED));
         }
         if (!sieveTile.isReadyToSieve() && stack.getItem() instanceof BlockItem) {
             BlockItem blockItem = (BlockItem) stack.getItem();
