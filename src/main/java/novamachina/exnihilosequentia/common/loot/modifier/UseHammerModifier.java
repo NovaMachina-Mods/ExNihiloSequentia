@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -36,7 +37,7 @@ public class UseHammerModifier extends LootModifier {
         BlockState blockState = context.get(LootParameters.BLOCK_STATE);
         List<ItemStack> newLoot = new ArrayList<>();
 
-        if (tool != null && blockState != null && tool.getItem() instanceof HammerBaseItem && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {
+        if (tool != null && blockState != null && ExNihiloTags.HAMMER.contains(tool.getItem()) && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {
             List<ItemStackWithChance> list = ExNihiloRegistries.HAMMER_REGISTRY.getResult(blockState.getBlock());
             for (ItemStackWithChance stackWithChance : list) {
                 if (random.nextFloat() <= stackWithChance.getChance()) {

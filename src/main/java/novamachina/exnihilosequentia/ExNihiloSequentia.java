@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia;
 
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
 import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -45,6 +46,9 @@ public class ExNihiloSequentia {
             event.getRegistry()
                 .register(new UseHammerModifier.Serializer()
                     .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_hammer"));
+            event.getRegistry()
+                    .register(new UseCrookModifier.Serializer()
+                            .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_crook"));
         }
     }
 }
