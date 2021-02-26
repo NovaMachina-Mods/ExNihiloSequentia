@@ -9,6 +9,7 @@ import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
+import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -23,7 +24,14 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         registerSeeds();
         registerMeats();
         registerHammers();
+        registerCrooks();
         registerMisc();
+    }
+
+    private void registerCrooks() {
+        for (EnumCrook crook : EnumCrook.values()) {
+            getOrCreateBuilder(ExNihiloTags.CROOK).addItemEntry(crook.getRegistryObject().get());
+        }
     }
 
     private void registerCooked() {

@@ -56,6 +56,10 @@ public class ExNihiloInitialization {
     };
     @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
     public static final GlobalLootModifierSerializer<?> hammerModifier = null;
+
+    @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_crook")
+    public static final GlobalLootModifierSerializer<?> crookModifier = null;
+
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloInitialization() {
