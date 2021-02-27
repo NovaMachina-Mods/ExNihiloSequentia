@@ -170,16 +170,16 @@ public class ExNihiloInitialization {
     private static void overrideOres() {
         if (Config.enableOreOverride()) {
             EnumOre.COPPER.setEnabled(Config.enableCopper());
-            EnumOre.LEAD.setEnabled(Config.enableCopper());
-            EnumOre.NICKEL.setEnabled(Config.enableCopper());
-            EnumOre.SILVER.setEnabled(Config.enableCopper());
-            EnumOre.TIN.setEnabled(Config.enableCopper());
-            EnumOre.ALUMINUM.setEnabled(Config.enableCopper());
-            EnumOre.PLATINUM.setEnabled(Config.enableCopper());
-            EnumOre.URANIUM.setEnabled(Config.enableCopper());
-            EnumOre.ZINC.setEnabled(Config.enableCopper());
-            EnumOre.IRON.setEnabled(Config.enableCopper());
-            EnumOre.GOLD.setEnabled(Config.enableCopper());
+            EnumOre.LEAD.setEnabled(Config.enableLead());
+            EnumOre.NICKEL.setEnabled(Config.enableNickel());
+            EnumOre.SILVER.setEnabled(Config.enableSilver());
+            EnumOre.TIN.setEnabled(Config.enableTin());
+            EnumOre.ALUMINUM.setEnabled(Config.enableAluminum());
+            EnumOre.PLATINUM.setEnabled(Config.enablePlatinum());
+            EnumOre.URANIUM.setEnabled(Config.enableUranium());
+            EnumOre.ZINC.setEnabled(Config.enableZinc());
+            EnumOre.IRON.setEnabled(Config.enableIron());
+            EnumOre.GOLD.setEnabled(Config.enableGold());
         }
     }
 
