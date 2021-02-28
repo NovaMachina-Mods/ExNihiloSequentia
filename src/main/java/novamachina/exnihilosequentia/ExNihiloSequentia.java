@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia;
 
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.loading.FMLPaths;
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
@@ -28,6 +30,7 @@ public class ExNihiloSequentia {
     public ExNihiloSequentia() {
         logger.debug("Starting Ex Nihilo: Sequentia");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+        Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "-common.toml"));
         ExNihiloInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::setupNonTagBasedRegistries);
