@@ -34,6 +34,11 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
+    public boolean canAcceptFluidTemperature(FluidStack fluidStack) {
+        return true;
+    }
+
+    @Override
     public void tick() {
         if (world.isRemote()) {
             return;

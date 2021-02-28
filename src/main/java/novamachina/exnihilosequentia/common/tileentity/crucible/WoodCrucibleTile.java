@@ -95,4 +95,9 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
         return solidAmount;
     }
 
+    @Override
+    public boolean canAcceptFluidTemperature(FluidStack fluidStack) {
+        return fluidStack.getFluid().getAttributes().getTemperature() <= Config.getWoodBarrelMaxTemp();
+    }
+
 }
