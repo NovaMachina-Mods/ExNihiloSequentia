@@ -25,13 +25,13 @@ public class ExNihiloTiles {
     //TODO is this right???
     public static final RegistryObject<TileEntityType<WoodCrucibleTile>> CRUCIBLE_WOOD = TILES
             .register(Blocks.CRUCIBLE_OAK, () -> TileEntityType.Builder
-                    .create(WoodCrucibleTile::new, ExNihiloBlocks.CRUCIBLE_OAK.get()).build(null));
+                    .create(WoodCrucibleTile::new, ExNihiloBlocks.CRUCIBLE_WOOD.get()).build(null));
     public static final RegistryObject<TileEntityType<SieveTile>> SIEVE = TILES
             .register(Blocks.SIEVE_OAK, () -> TileEntityType.Builder
-                    .create(SieveTile::new, ExNihiloBlocks.SIEVE_OAK.get()).build(null));
+                    .create(SieveTile::new, ExNihiloBlocks.SIEVE_WOOD.get()).build(null));
     public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_WOOD = TILES
             .register(Blocks.BARREL_OAK, () -> TileEntityType.Builder
-                    .create(WoodBarrelTile::new, ExNihiloBlocks.BARREL_OAK.get()).build(null));
+                    .create(WoodBarrelTile::new, ExNihiloBlocks.BARREL_WOOD.get()).build(null));
     //TODO until here
     public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_STONE = TILES
             .register(Blocks.BARREL_STONE, () -> TileEntityType.Builder

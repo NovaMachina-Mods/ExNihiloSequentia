@@ -12,7 +12,7 @@ import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 public class CompostRecipeSerializer extends RecipeSerializer<CompostRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ExNihiloBlocks.BARREL_OAK.get());
+        return new ItemStack(ExNihiloBlocks.BARREL_WOOD.get());
     }
 
     @Override

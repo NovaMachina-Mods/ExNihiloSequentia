@@ -1,0 +1,7 @@
+{
+  "parent": "exnihilosequentia:block/barrel",
+  "textures": {
+    "texture": "minecraft:block/gray_stained_glass",
+    "particle": "minecraft:block/gray_stained_glass"
+  }
+}

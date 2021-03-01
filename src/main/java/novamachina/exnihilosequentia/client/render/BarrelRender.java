@@ -15,6 +15,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Color;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 

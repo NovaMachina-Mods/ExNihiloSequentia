@@ -51,7 +51,26 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         registerBarrel(ExNihiloBlocks.BARREL_DARK_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/dark_oak_planks"));
         registerBarrel(ExNihiloBlocks.BARREL_JUNGLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/jungle_planks"));
         registerBarrel(ExNihiloBlocks.BARREL_SPRUCE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/spruce_planks"));
-        registerBarrel(ExNihiloBlocks.BARREL_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_WOOD.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_CRIMSON.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/crimson_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_WARPED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/warped_planks"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_YELLOW.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/yellow_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_WHITE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/white_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_RED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/red_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_PURPLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/purple_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_PINK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/pink_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_ORANGE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/orange_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_MAGENTA.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/magenta_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_LIME.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/lime_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/light_gray_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/light_blue_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_GREEN.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/green_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_GRAY.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/gray_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_CYAN.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/cyan_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_BROWN.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/brown_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_BLUE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/blue_stained_glass"));
+        registerBarrel(ExNihiloBlocks.BARREL_GLASS_BLACK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/black_stained_glass"));
     }
 
     private void registerCake() {
@@ -87,7 +106,9 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         registerCrucible(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/dark_oak_log"));
         registerCrucible(ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/jungle_log"));
         registerCrucible(ExNihiloBlocks.CRUCIBLE_SPRUCE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/spruce_log"));
-        registerCrucible(ExNihiloBlocks.CRUCIBLE_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_log"));
+        registerCrucible(ExNihiloBlocks.CRUCIBLE_WOOD.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_log"));
+        registerCrucible(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/crimson_hyphae"));
+        registerCrucible(ExNihiloBlocks.CRUCIBLE_WARPED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/warped_hyphae"));
     }
 
     private void registerFluids() {
@@ -120,7 +141,9 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         registerSieve(ExNihiloBlocks.SIEVE_DARK_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/dark_oak_planks"));
         registerSieve(ExNihiloBlocks.SIEVE_JUNGLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/jungle_planks"));
         registerSieve(ExNihiloBlocks.SIEVE_SPRUCE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/spruce_planks"));
-        registerSieve(ExNihiloBlocks.SIEVE_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_planks"));
+        registerSieve(ExNihiloBlocks.SIEVE_WOOD.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_planks"));
+        registerSieve(ExNihiloBlocks.SIEVE_CRIMSON.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/crimson_planks"));
+        registerSieve(ExNihiloBlocks.SIEVE_WARPED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/warped_planks"));
     }
 
     private void registerSimpleBlocks() {

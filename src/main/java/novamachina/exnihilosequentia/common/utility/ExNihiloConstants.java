@@ -22,6 +22,8 @@ public class ExNihiloConstants {
 
     public static class Blocks {
 
+        public static final String BARREL_CRIMSON = "barrel_crimson";
+        public static final String BARREL_WARPED = "barrel_warped";
         public static final String BARREL_ACACIA = "barrel_acacia";
         public static final String BARREL_BIRCH = "barrel_birch";
         public static final String BARREL_DARK_OAK = "barrel_dark_oak";
@@ -29,6 +31,23 @@ public class ExNihiloConstants {
         public static final String BARREL_SPRUCE = "barrel_spruce";
         public static final String BARREL_OAK = "barrel_oak";
         public static final String BARREL_STONE = "barrel_stone";
+        public static final String BARREL_GLASS = "barrel_glass";
+        public static final String BARREL_GLASS_WHITE = "barrel_glass_white";
+        public static final String BARREL_GLASS_GRAY = "barrel_glass_gray";
+        public static final String BARREL_GLASS_LIGHT_GRAY = "barrel_glass_light_gray";
+        public static final String BARREL_GLASS_BLACK = "barrel_glass_black";
+        public static final String BARREL_GLASS_BROWN = "barrel_glass_brown";
+        public static final String BARREL_GLASS_RED = "barrel_glass_red";
+        public static final String BARREL_GLASS_MAGENTA = "barrel_glass_magenta";
+        public static final String BARREL_GLASS_ORANGE = "barrel_glass_orange";
+        public static final String BARREL_GLASS_PINK = "barrel_glass_pink";
+        public static final String BARREL_GLASS_PURPLE = "barrel_glass_purple";
+        public static final String BARREL_GLASS_YELLOW = "barrel_glass_yellow";
+        public static final String BARREL_GLASS_LIME = "barrel_glass_lime";
+        public static final String BARREL_GLASS_GREEN = "barrel_glass_green";
+        public static final String BARREL_GLASS_LIGHT_BLUE = "barrel_glass_light_blue";
+        public static final String BARREL_GLASS_CYAN = "barrel_glass_cyan";
+        public static final String BARREL_GLASS_BLUE = "barrel_glass_blue";
         public static final String CRUCIBLE_FIRED = "crucible_fired";
         public static final String CRUCIBLE_UNFIRED = "crucible_unfired";
         public static final String CRUCIBLE_ACACIA = "crucible_acacia";
@@ -37,6 +56,8 @@ public class ExNihiloConstants {
         public static final String CRUCIBLE_JUNGLE = "crucible_jungle";
         public static final String CRUCIBLE_SPRUCE = "crucible_spruce";
         public static final String CRUCIBLE_OAK = "crucible_oak";
+        public static final String CRUCIBLE_CRIMSON = "crucible_crimson";
+        public static final String CRUCIBLE_WARPED = "crucible_warped";
         public static final String CRUSHED_ANDESITE = "crushed_andesite";
         public static final String CRUSHED_DIORITE = "crushed_diorite";
         public static final String CRUSHED_END_STONE = "crushed_end_stone";
@@ -53,6 +74,8 @@ public class ExNihiloConstants {
         public static final String SIEVE_JUNGLE = "sieve_jungle";
         public static final String SIEVE_SPRUCE = "sieve_spruce";
         public static final String SIEVE_OAK = "sieve_oak";
+        public static final String SIEVE_CRIMSON = "sieve_crimson";
+        public static final String SIEVE_WARPED = "sieve_warped";
         public static final String WITCH_WATER = "witchwater";
 
         private Blocks() {

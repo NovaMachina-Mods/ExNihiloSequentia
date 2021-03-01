@@ -13,7 +13,7 @@ import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 public class FluidOnTopRecipeSerializer extends RecipeSerializer<FluidOnTopRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ExNihiloBlocks.BARREL_OAK.get());
+        return new ItemStack(ExNihiloBlocks.BARREL_WOOD.get());
     }
 
     @Override

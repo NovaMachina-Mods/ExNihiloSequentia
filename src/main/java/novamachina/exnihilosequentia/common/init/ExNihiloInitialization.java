@@ -51,7 +51,7 @@ public class ExNihiloInitialization {
     public static final ItemGroup ITEM_GROUP = new ItemGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
+            return new ItemStack(ExNihiloBlocks.SIEVE_WOOD.get());
         }
     };
     @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
@@ -71,8 +71,8 @@ public class ExNihiloInitialization {
 
     public static void init(IEventBus modEventBus) {
         logger.debug("Initializing modded items");
-        ExNihiloBlocks.init(modEventBus);
         ExNihiloItems.init(modEventBus);
+        ExNihiloBlocks.init(modEventBus);
         ExNihiloTiles.init(modEventBus);
         ExNihiloFluids.init(modEventBus);
         ExNihiloSerializers.init(modEventBus);

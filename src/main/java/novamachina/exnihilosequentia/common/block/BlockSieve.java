@@ -50,13 +50,8 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public BlockSieve() {
-        super(new BlockBuilder().properties(
-                AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.7F)
-                        .sound(SoundType.WOOD).notSolid().setOpaque((state, reader, pos) -> false)
-                        .setSuffocates((state, reader, pos) -> false).setBlocksVision((state, reader, pos) -> false))
-                .harvestLevel(ToolType.AXE, 0).tileEntitySupplier(
-                        SieveTile::new));
+    public BlockSieve(BlockBuilder builder) {
+        super(builder);
         this.setDefaultState(this.stateContainer.getBaseState().with(MESH, EnumMesh.NONE).with(WATERLOGGED, false));
     }
 

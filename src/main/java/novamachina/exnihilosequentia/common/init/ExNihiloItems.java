@@ -2,14 +2,22 @@ package novamachina.exnihilosequentia.common.init;
 
 import java.util.EnumMap;
 import java.util.Map;
+
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.common.block.*;
+import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.item.CookedSilkwormItem;
 import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
@@ -27,6 +35,8 @@ import novamachina.exnihilosequentia.common.item.tools.crook.CrookBaseItem;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
+import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
+import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -36,104 +46,115 @@ public class ExNihiloItems {
     // Begin Block Items
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
             ForgeRegistries.ITEMS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
-    public static final RegistryObject<Item> DUST = ITEMS
-            .register(ExNihiloConstants.Blocks.DUST, () -> new BlockItem(ExNihiloBlocks.DUST.get(),
-                    new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_NETHERRACK = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_NETHERRACK,
-                    () -> new BlockItem(ExNihiloBlocks.CRUSHED_NETHERRACK.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_END_STONE = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_END_STONE,
-                    () -> new BlockItem(ExNihiloBlocks.CRUSHED_END_STONE.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_ANDESITE = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_ANDESITE,
-                    () -> new BlockItem(ExNihiloBlocks.CRUSHED_ANDESITE.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_DIORITE = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_DIORITE,
-                    () -> new BlockItem(ExNihiloBlocks.CRUSHED_DIORITE.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUSHED_GRANITE = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_GRANITE,
-                    () -> new BlockItem(ExNihiloBlocks.CRUSHED_GRANITE.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> END_CAKE = ITEMS
-            .register(ExNihiloConstants.Blocks.END_CAKE, () -> new BlockItem(ExNihiloBlocks.END_CAKE.get(),
-                    new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> INFESTING_LEAVES = ITEMS
-            .register(Blocks.INFESTING_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTING_LEAVES.get(),
-                    new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> INFESTED_LEAVES = ITEMS
-            .register(Blocks.INFESTED_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTED_LEAVES.get(),
-                    new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> DUST = ITEMS.register(Blocks.DUST,
+            () -> new BlockItem(ExNihiloBlocks.DUST.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUSHED_NETHERRACK = ITEMS.register(Blocks.CRUSHED_NETHERRACK,
+            () -> new BlockItem(ExNihiloBlocks.CRUSHED_NETHERRACK.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUSHED_END_STONE = ITEMS.register(Blocks.CRUSHED_END_STONE,
+            () -> new BlockItem(ExNihiloBlocks.CRUSHED_END_STONE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUSHED_ANDESITE = ITEMS.register(Blocks.CRUSHED_ANDESITE,
+            () -> new BlockItem(ExNihiloBlocks.CRUSHED_ANDESITE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUSHED_DIORITE = ITEMS.register(Blocks.CRUSHED_DIORITE,
+            () -> new BlockItem(ExNihiloBlocks.CRUSHED_DIORITE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUSHED_GRANITE = ITEMS.register(Blocks.CRUSHED_GRANITE,
+            () -> new BlockItem(ExNihiloBlocks.CRUSHED_GRANITE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> END_CAKE = ITEMS.register(Blocks.END_CAKE,
+            () -> new BlockItem(ExNihiloBlocks.END_CAKE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> INFESTING_LEAVES = ITEMS.register(Blocks.INFESTING_LEAVES,
+            () -> new BlockItem(ExNihiloBlocks.INFESTING_LEAVES.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> INFESTED_LEAVES = ITEMS.register(Blocks.INFESTED_LEAVES,
+            () -> new BlockItem(ExNihiloBlocks.INFESTED_LEAVES.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     //TODO wooden sieves
+    public static final RegistryObject<Item> SIEVE_CRIMSON = ITEMS.register(Blocks.SIEVE_CRIMSON,
+            () -> new BlockItem(ExNihiloBlocks.SIEVE_CRIMSON.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> SIEVE_WARPED = ITEMS.register(Blocks.SIEVE_WARPED,
+            () -> new BlockItem(ExNihiloBlocks.SIEVE_WARPED.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> SIEVE_ACACIA = ITEMS.register(Blocks.SIEVE_ACACIA,
-            () -> new BlockItem(ExNihiloBlocks.SIEVE_ACACIA.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+            () -> new BlockItem(ExNihiloBlocks.SIEVE_ACACIA.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> SIEVE_BIRCH = ITEMS.register(Blocks.SIEVE_BIRCH,
-            () -> new BlockItem(ExNihiloBlocks.SIEVE_BIRCH.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+            () -> new BlockItem(ExNihiloBlocks.SIEVE_BIRCH.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> SIEVE_DARK_OAK = ITEMS.register(Blocks.SIEVE_DARK_OAK,
-            () -> new BlockItem(ExNihiloBlocks.SIEVE_DARK_OAK.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+            () -> new BlockItem(ExNihiloBlocks.SIEVE_DARK_OAK.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> SIEVE_JUNGLE = ITEMS.register(Blocks.SIEVE_JUNGLE,
-            () -> new BlockItem(ExNihiloBlocks.SIEVE_JUNGLE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+            () -> new BlockItem(ExNihiloBlocks.SIEVE_JUNGLE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> SIEVE_SPRUCE = ITEMS.register(Blocks.SIEVE_SPRUCE,
-            () -> new BlockItem(ExNihiloBlocks.SIEVE_SPRUCE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+            () -> new BlockItem(ExNihiloBlocks.SIEVE_SPRUCE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> SIEVE_OAK = ITEMS.register(Blocks.SIEVE_OAK,
-            () -> new BlockItem(ExNihiloBlocks.SIEVE_OAK.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_UNFIRED = ITEMS
-            .register(Blocks.CRUCIBLE_UNFIRED, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_FIRED = ITEMS
-            .register(Blocks.CRUCIBLE_FIRED, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_FIRED.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+            () -> new BlockItem(ExNihiloBlocks.SIEVE_WOOD.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_UNFIRED = ITEMS.register(Blocks.CRUCIBLE_UNFIRED,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_FIRED = ITEMS.register(Blocks.CRUCIBLE_FIRED,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_FIRED.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     //TODO Wooden Crucibles
-    public static final RegistryObject<Item> CRUCIBLE_ACACIA = ITEMS
-            .register(Blocks.CRUCIBLE_ACACIA, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_ACACIA.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_BIRCH = ITEMS
-            .register(Blocks.CRUCIBLE_BIRCH, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_BIRCH.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_DARK_OAK = ITEMS
-            .register(Blocks.CRUCIBLE_DARK_OAK, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_JUNGLE = ITEMS
-            .register(Blocks.CRUCIBLE_JUNGLE, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_SPRUCE = ITEMS
-            .register(Blocks.CRUCIBLE_SPRUCE, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_SPRUCE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_OAK = ITEMS
-            .register(Blocks.CRUCIBLE_OAK, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_OAK.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_ACACIA = ITEMS.register(Blocks.CRUCIBLE_ACACIA,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_ACACIA.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_BIRCH = ITEMS.register(Blocks.CRUCIBLE_BIRCH,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_BIRCH.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_DARK_OAK = ITEMS.register(Blocks.CRUCIBLE_DARK_OAK,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_JUNGLE = ITEMS.register(Blocks.CRUCIBLE_JUNGLE,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_SPRUCE = ITEMS.register(Blocks.CRUCIBLE_SPRUCE,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_SPRUCE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_OAK = ITEMS.register(Blocks.CRUCIBLE_OAK,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_WOOD.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_CRIMSON = ITEMS.register(Blocks.CRUCIBLE_CRIMSON,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> CRUCIBLE_WARPED = ITEMS.register(Blocks.CRUCIBLE_WARPED,
+            () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_WARPED.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     //TODO Wooden Barrels
-    public static final RegistryObject<Item> BARREL_ACACIA = ITEMS
-            .register(Blocks.BARREL_ACACIA, () -> new BlockItem(ExNihiloBlocks.BARREL_ACACIA.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_BIRCH = ITEMS
-            .register(Blocks.BARREL_BIRCH, () -> new BlockItem(ExNihiloBlocks.BARREL_BIRCH.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_DARK_OAK = ITEMS
-            .register(Blocks.BARREL_DARK_OAK, () -> new BlockItem(ExNihiloBlocks.BARREL_DARK_OAK.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_JUNGLE = ITEMS
-            .register(Blocks.BARREL_JUNGLE, () -> new BlockItem(ExNihiloBlocks.BARREL_JUNGLE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_SPRUCE = ITEMS
-            .register(Blocks.BARREL_SPRUCE, () -> new BlockItem(ExNihiloBlocks.BARREL_SPRUCE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_OAK = ITEMS
-            .register(Blocks.BARREL_OAK, () -> new BlockItem(ExNihiloBlocks.BARREL_OAK.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_STONE = ITEMS
-            .register(Blocks.BARREL_STONE, () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_ACACIA = ITEMS.register(Blocks.BARREL_ACACIA,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_ACACIA.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_BIRCH = ITEMS.register(Blocks.BARREL_BIRCH,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_BIRCH.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_DARK_OAK = ITEMS.register(Blocks.BARREL_DARK_OAK,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_DARK_OAK.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_JUNGLE = ITEMS.register(Blocks.BARREL_JUNGLE,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_JUNGLE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_SPRUCE = ITEMS.register(Blocks.BARREL_SPRUCE,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_SPRUCE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_OAK = ITEMS.register(Blocks.BARREL_OAK,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_WOOD.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_CRIMSON = ITEMS.register(Blocks.BARREL_CRIMSON,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_CRIMSON.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_WARPED = ITEMS.register(Blocks.BARREL_WARPED,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_WARPED.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_STONE = ITEMS.register(Blocks.BARREL_STONE,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS = ITEMS.register(Blocks.BARREL_GLASS,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_WHITE = ITEMS.register(Blocks.BARREL_GLASS_WHITE,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_WHITE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_GRAY = ITEMS.register(Blocks.BARREL_GLASS_GRAY,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_GRAY.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_LIGHT_GRAY = ITEMS.register(Blocks.BARREL_GLASS_LIGHT_GRAY,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_BLACK = ITEMS.register(Blocks.BARREL_GLASS_BLACK,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_BLACK.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_BROWN = ITEMS.register(Blocks.BARREL_GLASS_BROWN,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_BROWN.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_RED = ITEMS.register(Blocks.BARREL_GLASS_RED,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_RED.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_MAGENTA = ITEMS.register(Blocks.BARREL_GLASS_MAGENTA,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_MAGENTA.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_ORANGE = ITEMS.register(Blocks.BARREL_GLASS_ORANGE,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_ORANGE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_PINK = ITEMS.register(Blocks.BARREL_GLASS_PINK,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_PINK.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_PURPLE = ITEMS.register(Blocks.BARREL_GLASS_PURPLE,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_PURPLE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_YELLOW = ITEMS.register(Blocks.BARREL_GLASS_YELLOW,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_YELLOW.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_LIME = ITEMS.register(Blocks.BARREL_GLASS_LIME,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_LIME.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_GREEN = ITEMS.register(Blocks.BARREL_GLASS_GREEN,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_GREEN.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_LIGHT_BLUE = ITEMS.register(Blocks.BARREL_GLASS_LIGHT_BLUE,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_CYAN = ITEMS.register(Blocks.BARREL_GLASS_CYAN,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_CYAN.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> BARREL_GLASS_BLUE = ITEMS.register(Blocks.BARREL_GLASS_BLUE,
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_BLUE.get(), new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
     // Begin Items Only
     public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
             .register(ExNihiloConstants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
@@ -213,4 +234,8 @@ public class ExNihiloItems {
         logger.debug("Register items");
         ITEMS.register(modEventBus);
     }
+
+    /*private static RegistryObject<Item> createItemBlocks(String name, Block object) {
+        return ITEMS.register(name, () -> new BlockItem(object, new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+    }*/
 }
