@@ -1,11 +1,2 @@
-2.0.2.2
-- Add external autoclicker prevention
-- Add netherite scrap to sieve drops
-- Add crook and mesh durability configuration options
-- Make pebbles throwable
-- Fix issues where crooks would drop duplicates
-- Fix issue where water could not be removed from barrels and crucibles using a water bottle
-- Fix issue where fired crucible would not melt down wood crucible recipes
-- Fix wood crucible requiring a heat source
-- Fix lighting issue of blocks inside other blocks
-- Fix ancient spores and grass seeds that could convert any block
+2.0.2.3
+- Fix ancient seeds getting voided when used on non-dirt blocks
