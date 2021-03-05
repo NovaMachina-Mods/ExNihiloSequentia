@@ -21,6 +21,7 @@ import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.TankUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +98,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         ItemStack stack = player.getHeldItem(handIn);
         if (stack.isEmpty()) {
+            return ActionResultType.SUCCESS;
+        }
+
+        if(TankUtil.drainWaterIntoBottle(barrelTile, player, fluidHandler)) {
             return ActionResultType.SUCCESS;
         }
 
