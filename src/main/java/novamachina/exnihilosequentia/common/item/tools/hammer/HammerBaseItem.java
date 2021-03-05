@@ -29,8 +29,7 @@ public class HammerBaseItem extends ToolItem {
     public HammerBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
                 new Item.Properties().defaultMaxDamage(maxDamage).group(ExNihiloInitialization.ITEM_GROUP)
-                        .addToolType(
-                                ToolType.PICKAXE, tier.getHarvestLevel()));
+                        .addToolType(ToolType.PICKAXE, tier.getHarvestLevel()));
     }
 
     @Override

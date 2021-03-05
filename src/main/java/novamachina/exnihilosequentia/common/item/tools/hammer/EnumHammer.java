@@ -5,28 +5,29 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumHammer implements IExtensibleEnum {
-    WOOD(ExNihiloConstants.Items.HAMMER_WOOD, 64, ItemTier.WOOD),
-    STONE(ExNihiloConstants.Items.HAMMER_STONE, 125, ItemTier.STONE),
-    IRON(ExNihiloConstants.Items.HAMMER_IRON, 512, ItemTier.IRON),
-    DIAMOND(ExNihiloConstants.Items.HAMMER_DIAMOND, 4096, ItemTier.DIAMOND),
-    NETHERITE(ExNihiloConstants.Items.HAMMER_NETHERITE, 8192, ItemTier.NETHERITE),
-    GOLD(ExNihiloConstants.Items.HAMMER_GOLD, 64, ItemTier.GOLD);
+    WOOD(ExNihiloConstants.Items.HAMMER_WOOD, Config.getHammerWoodDurability(), ItemTier.WOOD),
+    STONE(ExNihiloConstants.Items.HAMMER_STONE, Config.getHammerStoneDurability(), ItemTier.STONE),
+    IRON(ExNihiloConstants.Items.HAMMER_IRON, Config.getHammerIronDurability(), ItemTier.IRON),
+    DIAMOND(ExNihiloConstants.Items.HAMMER_DIAMOND, Config.getHammerDiamondDurability(), ItemTier.DIAMOND),
+    NETHERITE(ExNihiloConstants.Items.HAMMER_NETHERITE, Config.getHammerNetheriteDurability(), ItemTier.NETHERITE),
+    GOLD(ExNihiloConstants.Items.HAMMER_GOLD, Config.getHammerGoldDurability(), ItemTier.GOLD);
 
-    public final int defaultDurability;
+    public int maxDamage;
     public final String hammerName;
     public final IItemTier tier;
     private RegistryObject<Item> registryObject;
 
-    EnumHammer(String hammerName, int durability, IItemTier tier) {
+    EnumHammer(String hammerName, int maxDamage, IItemTier tier) {
         this.hammerName = hammerName;
-        this.defaultDurability = durability;
+        this.maxDamage = maxDamage;
         this.tier = tier;
     }
 
-    public static EnumHammer create(String enumName, String hammerName, int durability, IItemTier tier) {
+    public static EnumHammer create(String enumName, String hammerName, int maxDamage, IItemTier tier) {
         throw new IllegalStateException("Enum not extended");
     }
 

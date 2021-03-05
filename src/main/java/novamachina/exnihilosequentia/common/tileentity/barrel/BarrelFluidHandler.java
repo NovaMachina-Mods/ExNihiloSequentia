@@ -12,7 +12,7 @@ public class BarrelFluidHandler extends FluidTank {
         this.barrel = barrelTile;
     }
 
-    public BarrelFluidHandler(int bucketVolume) {
+    private BarrelFluidHandler(int bucketVolume) {
         super(bucketVolume);
     }
 

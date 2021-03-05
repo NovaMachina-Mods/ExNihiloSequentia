@@ -41,16 +41,18 @@ public class ResourceItem extends Item {
             if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) || resourceItem.getResourceName()
                     .equals(Items.GRASS_SEED) && state.getBlock().equals(Blocks.DIRT)) {
                 context.getItem().shrink(1);
-                if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE)) {
+                if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) && state.getBlock().equals(Blocks.DIRT)) {
                     Block.replaceBlock(state,
                             Blocks.MYCELIUM.getDefaultState(), context.getWorld(),
                             context.getPos(), 1);
-                } else {
+                    return ActionResultType.SUCCESS;
+                } else if (resourceItem.getResourceName().equals(Items.GRASS_SEED) && state.getBlock().equals(Blocks.DIRT)) {
                     Block.replaceBlock(state,
                             Blocks.GRASS_BLOCK.getDefaultState(), context.getWorld(),
                             context.getPos(), 1);
+                    return ActionResultType.SUCCESS;
                 }
-                return ActionResultType.SUCCESS;
+                return ActionResultType.FAIL;
             }
         }
         return ActionResultType.PASS;
