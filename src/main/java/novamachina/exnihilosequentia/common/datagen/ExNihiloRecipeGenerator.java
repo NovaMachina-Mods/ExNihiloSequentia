@@ -790,6 +790,11 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.016F))
                 .build(consumer, sieveLoc("diamond"));
         SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
+                .addResult(Items.NETHERITE_SCRAP)
+                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.004F))
+                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.008F))
+                .build(consumer, sieveLoc("netherite_scrap"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.GRAVEL))
                 .addResult(Items.EMERALD)
                 .addRoll(new MeshWithChance(EnumMesh.IRON, 0.008F))
                 .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.016F))
