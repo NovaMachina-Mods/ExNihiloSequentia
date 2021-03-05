@@ -11,7 +11,7 @@
     }
   ],
   "input": {
-    "item": "minecraft:gravel"
+    "item": "exnihilosequentia:crushed_netherrack"
   },
   "result": {
     "item": "minecraft:netherite_scrap"
