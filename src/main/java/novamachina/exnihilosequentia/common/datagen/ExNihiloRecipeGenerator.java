@@ -685,7 +685,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                             .blastingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 200)
                             .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance
                                     .forItems(ore.getChunkItem().get()))
-                            .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron")));
+                            .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "blast_ingot_iron")));
                 }
                 if (ore == EnumOre.GOLD) {
                     CookingRecipeBuilder
@@ -697,7 +697,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                             .blastingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
                             .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance
                                     .forItems(ore.getChunkItem().get()))
-                            .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold")));
+                            .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "blast_ingot_gold")));
                 }
             }
         }
