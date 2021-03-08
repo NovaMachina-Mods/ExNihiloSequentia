@@ -665,6 +665,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_clay", InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(ExNihiloTags.CLAY).build()))
                 .build(consumer, createSaveLocation(EnumResource.PORCELAIN_CLAY.getRegistryObject().getId()));
+
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
@@ -680,10 +681,20 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                             .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance
                                     .forItems(ore.getChunkItem().get()))
                             .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron")));
+                    CookingRecipeBuilder
+                            .blastingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 200)
+                            .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance
+                                    .forItems(ore.getChunkItem().get()))
+                            .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron")));
                 }
                 if (ore == EnumOre.GOLD) {
                     CookingRecipeBuilder
                             .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
+                            .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance
+                                    .forItems(ore.getChunkItem().get()))
+                            .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold")));
+                    CookingRecipeBuilder
+                            .blastingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
                             .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance
                                     .forItems(ore.getChunkItem().get()))
                             .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold")));
