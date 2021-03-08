@@ -1,6 +1,2 @@
-2.0.2.0
-- Fix crash on start issue
-- Add prismarine crystal drops to sieve
-- Add seeds to vanilla composter
-- Add fern seeds and beetroot drops to sieve
-- Add campfire and smoker silkworm recipes
+2.0.2.3
+- Fix ancient seeds getting voided when used on non-dirt blocks

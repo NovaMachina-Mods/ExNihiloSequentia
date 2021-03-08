@@ -12,11 +12,11 @@ public abstract class AbstractModBlockRenderer<T extends TileEntity> extends Til
         super(rendererDispatcherIn);
     }
 
-    protected void add(IVertexBuilder renderer, MatrixStack stack, VertexLocation vertexLocation, UVLocation uvLocation, Color color) {
+    protected void add(IVertexBuilder renderer, MatrixStack stack, VertexLocation vertexLocation, UVLocation uvLocation, Color color, int combinedLight) {
         renderer.pos(stack.getLast().getMatrix(), vertexLocation.getX(), vertexLocation.getY(), vertexLocation.getZ())
                 .color(color.r, color.g, color.b, color.a)
                 .tex(uvLocation.getU(), uvLocation.getV())
-                .lightmap(0, 240)
+                .lightmap(combinedLight)
                 .normal(1, 0, 0)
                 .endVertex();
     }

@@ -1,15 +1,9 @@
 package novamachina.exnihilosequentia.common.block;
 
-import java.util.List;
-import javax.annotation.Nullable;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,8 +24,11 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
@@ -45,6 +42,9 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoProvider {
     public static final EnumProperty<EnumMesh> MESH = EnumProperty.create("mesh", EnumMesh.class);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -55,8 +55,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
                 AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.7F)
                         .sound(SoundType.WOOD).notSolid().setOpaque((state, reader, pos) -> false)
                         .setSuffocates((state, reader, pos) -> false).setBlocksVision((state, reader, pos) -> false))
-                .harvestLevel(ToolType.AXE, 0).tileEntitySupplier(
-                        SieveTile::new));
+                .harvestLevel(ToolType.AXE, 0).tileEntitySupplier(SieveTile::new));
         this.setDefaultState(this.stateContainer.getBaseState().with(MESH, EnumMesh.NONE).with(WATERLOGGED, false));
     }
 
@@ -66,7 +65,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
 
         logger.debug("isReadyToSieve: " + sieveTile.isReadyToSieve());
         if (sieveTile.isReadyToSieve()) {
-            sieveTile.activateSieve(state.get(WATERLOGGED));
+            sieveTile.activateSieve(player, state.get(WATERLOGGED));
         }
         if (!sieveTile.isReadyToSieve() && stack.getItem() instanceof BlockItem) {
             BlockItem blockItem = (BlockItem) stack.getItem();
@@ -181,5 +180,14 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
                 });
 
         return nearbySieves;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return 1.0F;
+    }
+
+    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+        return true;
     }
 }
