@@ -76,7 +76,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CookingRecipeBuilder
                 .blastingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 200)
                 .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
-                .build(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotName())));
+                .build(consumer, new ResourceLocation(modId, "blast_" + prependRecipePrefix(ore.getIngotName())));
     }
 
     protected ResourceLocation sieveLoc(String id) {
