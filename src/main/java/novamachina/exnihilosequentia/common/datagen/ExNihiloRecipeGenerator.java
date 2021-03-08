@@ -592,7 +592,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 100)
                 .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
                         .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
-                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm_from_smoker")));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "blast_cooked_silkworm")));
 
         CookingRecipeBuilder
                 .smeltingRecipe(Ingredient.fromItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()), ExNihiloBlocks.CRUCIBLE_FIRED
@@ -605,7 +605,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .get(), 0.7F, 200)
                 .addCriterion("has_uncooked_crucible", InventoryChangeTrigger.Instance
                         .forItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()))
-                .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_FIRED.getId()));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "blast_crucible_fired"));
 
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_UNFIRED.get())
                 .patternLine("c c")
