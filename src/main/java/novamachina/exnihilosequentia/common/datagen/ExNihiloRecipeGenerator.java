@@ -350,6 +350,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .build(consumer, fluidItemLoc("end_stone"));
         FluidItemRecipeBuilder.builder().fluidInBarrel(ExNihiloFluids.WITCH_WATER.get()).input(Tags.Items.SAND)
                 .result(Blocks.SOUL_SAND).build(consumer, fluidItemLoc("soul_sand"));
+        FluidItemRecipeBuilder.builder().fluidInBarrel(ExNihiloFluids.WITCH_WATER.get()).input(Items.COARSE_DIRT)
+                .result(Blocks.SOUL_SOIL).build(consumer, fluidItemLoc("soul_soil"));
         FluidItemRecipeBuilder.builder().fluidInBarrel(ExNihiloFluids.WITCH_WATER.get()).input(Tags.Items.MUSHROOMS)
                 .result(Blocks.SLIME_BLOCK).build(consumer, fluidItemLoc("slime"));
         FluidItemRecipeBuilder.builder().fluidInBarrel(ExNihiloFluids.SEA_WATER.get())
@@ -576,18 +578,21 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
                         .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
                 .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm")));
-
         CookingRecipeBuilder.cookingRecipe(Ingredient
                 .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 600, IRecipeSerializer.CAMPFIRE_COOKING)
                 .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
                         .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
                 .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm_from_campfilre")));
-
         CookingRecipeBuilder.cookingRecipe(Ingredient
                 .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 100, IRecipeSerializer.SMOKING)
                 .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
                         .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
                 .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "cooked_silkworm_from_smoker")));
+        CookingRecipeBuilder.blastingRecipe(Ingredient
+                .fromItems(EnumResource.SILKWORM.getRegistryObject().get()), ExNihiloItems.COOKED_SILKWORM.get(), 0.1F, 100)
+                .addCriterion("has_silkworm", InventoryChangeTrigger.Instance
+                        .forItems(EnumResource.SILKWORM.getRegistryObject().get()))
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "blast_cooked_silkworm")));
 
         CookingRecipeBuilder
                 .smeltingRecipe(Ingredient.fromItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()), ExNihiloBlocks.CRUCIBLE_FIRED
@@ -595,6 +600,12 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_uncooked_crucible", InventoryChangeTrigger.Instance
                         .forItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()))
                 .build(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_FIRED.getId()));
+        CookingRecipeBuilder
+                .blastingRecipe(Ingredient.fromItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()), ExNihiloBlocks.CRUCIBLE_FIRED
+                        .get(), 0.7F, 200)
+                .addCriterion("has_uncooked_crucible", InventoryChangeTrigger.Instance
+                        .forItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()))
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "blast_crucible_fired"));
 
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_UNFIRED.get())
                 .patternLine("c c")
@@ -936,5 +947,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
                 .isWaterlogged()
                 .build(consumer, sieveLoc("seed_red_coral"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.SAND))
+                .addResult(Items.SEAGRASS)
+                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
+                .isWaterlogged()
+                .build(consumer, sieveLoc("seagrass"));
     }
 }
