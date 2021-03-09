@@ -484,6 +484,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .build(consumer, heatLoc("magma_block"));
         HeatRecipeBuilder.builder().input(Blocks.GLOWSTONE).amount(2)
                 .build(consumer, heatLoc("glowstone"));
+        HeatRecipeBuilder.builder().input(Blocks.SHROOMLIGHT).amount(2)
+                .build(consumer, heatLoc("shroomlight"));
     }
 
     private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
@@ -531,10 +533,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerMesh(EnumMesh.EMERALD.getRegistryObject().get(), EnumMesh.DIAMOND.getRegistryObject()
                 .get(), Tags.Items.GEMS_EMERALD, consumer);
         SmithingRecipeBuilder
-                .smithingRecipe(Ingredient.fromItems(EnumMesh.DIAMOND.getRegistryObject().get()), Ingredient
+                .smithingRecipe(Ingredient.fromItems(EnumMesh.EMERALD.getRegistryObject().get()), Ingredient
                         .fromTag(Tags.Items.INGOTS_NETHERITE), EnumMesh.NETHERITE.getRegistryObject().get())
-                .addCriterion("has_diamond_mesh", InventoryChangeTrigger.Instance
-                        .forItems(EnumMesh.DIAMOND.getRegistryObject().get()))
+                .addCriterion("has_emerald_mesh", InventoryChangeTrigger.Instance
+                        .forItems(EnumMesh.EMERALD.getRegistryObject().get()))
                 .addCriterion(MATERIAL_CONDITION, hasItem(Tags.Items.INGOTS_NETHERITE))
                 .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE
                         .getMeshName())));
@@ -665,6 +667,25 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_clay", InventoryChangeTrigger.Instance
                         .forItems(ItemPredicate.Builder.create().tag(ExNihiloTags.CLAY).build()))
                 .build(consumer, createSaveLocation(EnumResource.PORCELAIN_CLAY.getRegistryObject().getId()));
+
+        ShapedRecipeBuilder.shapedRecipe(Blocks.GILDED_BLACKSTONE)
+                .patternLine("xxx")
+                .patternLine("xgx")
+                .patternLine("xxx")
+                .key('x', EnumPebbleType.BLACKSTONE.getRegistryObject().get())
+                .key('g', EnumOre.GOLD.getChunkItem().get())
+                .addCriterion("has_gold", InventoryChangeTrigger.Instance
+                        .forItems(EnumOre.GOLD.getChunkItem().get()))
+                .build(consumer, createSaveLocation(Blocks.GILDED_BLACKSTONE.getRegistryName()));
+        ShapedRecipeBuilder.shapedRecipe(Blocks.CRYING_OBSIDIAN)
+                .patternLine(" o ")
+                .patternLine("obo")
+                .patternLine(" o ")
+                .key('b', Items.WATER_BUCKET)
+                .key('o', Blocks.OBSIDIAN)
+                .addCriterion("has_obsidian", InventoryChangeTrigger.Instance
+                        .forItems(Blocks.OBSIDIAN))
+                .build(consumer, createSaveLocation(Blocks.CRYING_OBSIDIAN.getRegistryName()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
@@ -707,6 +728,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerPebbleBlock(Blocks.COBBLESTONE, EnumPebbleType.STONE.getRegistryObject().get(), consumer);
         registerPebbleBlock(Blocks.DIORITE, EnumPebbleType.DIORITE.getRegistryObject().get(), consumer);
         registerPebbleBlock(Blocks.GRANITE, EnumPebbleType.GRANITE.getRegistryObject().get(), consumer);
+        registerPebbleBlock(Blocks.BASALT, EnumPebbleType.BASALT.getRegistryObject().get(), consumer);
+        registerPebbleBlock(Blocks.BLACKSTONE, EnumPebbleType.BLACKSTONE.getRegistryObject().get(), consumer);
     }
 
     private void registerSieveRecipes(Consumer<IFinishedRecipe> consumer) {
