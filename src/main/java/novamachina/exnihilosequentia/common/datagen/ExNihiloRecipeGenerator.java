@@ -697,6 +697,15 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addCriterion("has_obsidian", InventoryChangeTrigger.Instance
                         .forItems(Blocks.OBSIDIAN))
                 .build(consumer, createSaveLocation(Blocks.CRYING_OBSIDIAN.getRegistryName()));
+        ShapedRecipeBuilder.shapedRecipe(Blocks.ANCIENT_DEBRIS)
+                .patternLine("xxx")
+                .patternLine("xox")
+                .patternLine("xxx")
+                .key('x', Items.NETHERITE_SCRAP)
+                .key('o', Blocks.OBSIDIAN)
+                .addCriterion("has_obsidian", InventoryChangeTrigger.Instance
+                        .forItems(Blocks.OBSIDIAN))
+                .build(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
