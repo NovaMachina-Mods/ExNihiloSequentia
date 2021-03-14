@@ -48,6 +48,7 @@ public class Config {
     private static ForgeConfigSpec.BooleanValue enableZinc;
     // Sieve
     private static ForgeConfigSpec.BooleanValue flattenSieveRecipes;
+    private static ForgeConfigSpec.IntValue sieveClicksPerSecond;
     // Crook
     private static ForgeConfigSpec.IntValue maxBonusStringCount;
     private static ForgeConfigSpec.IntValue minStringCount;
@@ -270,6 +271,10 @@ public class Config {
     public static int getWoodHeatRate() {
         return woodHeatRate.get();
     }
+    
+    public static int getSieveClicksPerSecond() {
+        return sieveClicksPerSecond.get();
+    }
 
     public static void loadConfig(ForgeConfigSpec spec, Path path) {
         final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
@@ -437,5 +442,8 @@ public class Config {
         enableMeshDurability = COMMON_BUILDER
                 .comment("Meshes will have durability and can break. (Default: false)")
                 .define("enableMeshDurability", false);
+        sieveClicksPerSecond = COMMON_BUILDER
+                .comment("How many clicks you can do on a sieve per second. (Default: 6)")
+                .defineInRange("sieveClicksPerSecond", 6, 1, Integer.MAX_VALUE);
     }
 }
