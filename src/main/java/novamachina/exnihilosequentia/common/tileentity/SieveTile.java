@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.text.Color;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -31,7 +32,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class SieveTile extends TileEntity {
+public class SieveTile extends TileEntity implements ITickableTileEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String BLOCK_TAG = "block";
     private static final String PROGRESS_TAG = "progress";
@@ -42,6 +43,8 @@ public class SieveTile extends TileEntity {
     private ItemStack blockStack = ItemStack.EMPTY;
     private EnumMesh meshType = EnumMesh.NONE;
     private float progress = 0;
+    private int clicksSinceSecond;
+    private int ticksSinceSecond = 0;
 
     private long lastSieveAction = 0;
     private UUID lastPlayer;
@@ -170,17 +173,24 @@ public class SieveTile extends TileEntity {
         }
 
         if (isReadyToSieve()) {
-            progress += 0.1F;
+            if (player.abilities.isCreativeMode) {
+                progress = 1F;
+            } else {
+                clicksSinceSecond++;
+                if (clicksSinceSecond <= Config.getSieveClicksPerSecond()) {
+                    progress += 0.1F;
+                }
+            }
 
             if (progress >= 1.0F) {
                 logger.debug("Sieve progress complete");
                 List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
-                    .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
+                        .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 drops.forEach((entry -> entry.getRolls().forEach(meshWithChance -> {
                     if (random.nextFloat() <= meshWithChance.getChance()) {
                         logger.debug("Spawning Item: " + entry.getDrop());
                         world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.1F, pos
-                            .getZ() + 0.5F, entry.getDrop()));
+                                .getZ() + 0.5F, entry.getDrop()));
                     }
                 })));
                 resetSieve();
@@ -262,5 +272,14 @@ public class SieveTile extends TileEntity {
 
     public EnumMesh getMesh() {
         return meshType;
+    }
+
+    @Override
+    public void tick() {
+        ticksSinceSecond++;
+        if (ticksSinceSecond >= 20) {
+            clicksSinceSecond = 0;
+            ticksSinceSecond = 0;
+        }
     }
 }
