@@ -788,6 +788,16 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                 .build(consumer, sieveLoc("pebble_granite"));
         SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+                .addResult(EnumPebbleType.BASALT.getRegistryObject().get())
+                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
+                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
+                .build(consumer, sieveLoc("pebble_basalt"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+                .addResult(EnumPebbleType.BLACKSTONE.getRegistryObject().get())
+                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
+                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
+                .build(consumer, sieveLoc("pebble_blackstone"));
+        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
                 .addResult(Items.WHEAT_SEEDS)
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.7F))
                 .build(consumer, sieveLoc("seed_wheat"));
