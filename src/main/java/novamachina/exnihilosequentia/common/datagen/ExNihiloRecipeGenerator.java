@@ -605,7 +605,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .get(), 0.7F, 200)
                 .addCriterion("has_uncooked_crucible", InventoryChangeTrigger.Instance
                         .forItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()))
-                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "blast_crucible_fired"));
+                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "blast_crucible_fired")));
 
         ShapedRecipeBuilder.shapedRecipe(ExNihiloBlocks.CRUCIBLE_UNFIRED.get())
                 .patternLine("c c")
