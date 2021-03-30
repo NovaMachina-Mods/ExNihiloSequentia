@@ -9,6 +9,9 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ExNihiloDataGenerators {
+    private static final String[] LOCALE_CODES = new String[] {
+            "en_us"
+    };
 
     private ExNihiloDataGenerators() {
     }
@@ -34,6 +37,15 @@ public class ExNihiloDataGenerators {
             generator.addProvider(new ExNihiloItemGenerator(generator, event.getExistingFileHelper()));
             // Ores
             generator.addProvider(new ExNihiloOreItemGenerator(generator, event.getExistingFileHelper()));
+            // Languages
+            addLanguageGenerator(generator);
+        }
+    }
+
+    private static void addLanguageGenerator(DataGenerator generator) {
+        for(String locale : LOCALE_CODES)
+        {
+            generator.addProvider(new ExNihiloLangGenerator(generator, locale));
         }
     }
 }

@@ -1,7 +1,0 @@
-{
-  "parent": "exnihilosequentia:block/sieve_base",
-  "textures": {
-    "texture": "minecraft:block/warped_planks",
-    "particle": "minecraft:block/warped_planks"
-  }
-}

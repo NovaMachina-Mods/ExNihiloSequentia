@@ -8,7 +8,7 @@ import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.block.FiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.block.WoodCrucibleBlock;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 @WailaPlugin(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
@@ -20,7 +20,7 @@ public class PluginWaila implements IWailaPlugin {
         registrar
                 .registerComponentProvider(new InfestingLeavesComponentProvider(), TooltipPosition.BODY, InfestingLeavesBlock.class);
         registrar
-                .registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, WoodCrucibleBlock.class);
+                .registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, ExNihiloBlocks.CRUCIBLE_WOOD.getClass());
         registrar
                 .registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, FiredCrucibleBlock.class);
     }

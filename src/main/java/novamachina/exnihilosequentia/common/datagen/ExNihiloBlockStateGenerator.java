@@ -107,8 +107,8 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         registerCrucible(ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/jungle_log"));
         registerCrucible(ExNihiloBlocks.CRUCIBLE_SPRUCE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/spruce_log"));
         registerCrucible(ExNihiloBlocks.CRUCIBLE_WOOD.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_log"));
-        registerCrucible(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/crimson_hyphae"));
-        registerCrucible(ExNihiloBlocks.CRUCIBLE_WARPED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/warped_hyphae"));
+        registerCrucible(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/crimson_stem"));
+        registerCrucible(ExNihiloBlocks.CRUCIBLE_WARPED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/warped_stem"));
     }
 
     private void registerFluids() {

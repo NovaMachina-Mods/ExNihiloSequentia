@@ -60,7 +60,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'exnihilosequentia', '--all', '--output', file('generated/resources/'), '--existing', file('src/main/resources')
+            args '--mod', 'exnihilosequentia', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources'), '--existing', file('src/generated/resources')
 
             mods {
                 exnihilosequentia {
@@ -71,11 +71,16 @@ minecraft {
     }
 }
 
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+    srcDir 'src/main/resources'
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_release}.2:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_release}.2:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
     compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
     runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")

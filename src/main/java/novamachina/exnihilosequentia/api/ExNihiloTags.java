@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
@@ -14,9 +17,20 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloTags {
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
-    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
+    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(exNihiloLoc("hammer"));
+    public static final ITag.INamedTag<Item> CROOK = createItemWrapper(exNihiloLoc("crook"));
+    public static final ITag.INamedTag<Item> WOODEN_CRUCIBLE = createItemWrapper(exNihiloLoc("wooden_crucible"));
+    public static final ITag.INamedTag<Item> FIRED_CRUCIBLE = createItemWrapper(exNihiloLoc("fired_crucible"));
+    public static final ITag.INamedTag<Item> WOODEN_BARREL = createItemWrapper(exNihiloLoc("wooden_barrel"));
+    public static final ITag.INamedTag<Item> FIRED_BARREL = createItemWrapper(exNihiloLoc("fired_barrel"));
+    public static final ITag.INamedTag<Item> SIEVE = createItemWrapper(exNihiloLoc("sieve"));
+    public static final ITag.INamedTag<Block> WOODEN_CRUCIBLE_BLOCK = createBlockWrapper(exNihiloLoc("wooden_crucible"));
+    public static final ITag.INamedTag<Block> FIRED_CRUCIBLE_BLOCK = createBlockWrapper(exNihiloLoc("fired_crucible"));
+    public static final ITag.INamedTag<Block> WOODEN_BARREL_BLOCK = createBlockWrapper(exNihiloLoc("wooden_barrel"));
+    public static final ITag.INamedTag<Block> FIRED_BARREL_BLOCK = createBlockWrapper(exNihiloLoc("fired_barrel"));
+    public static final ITag.INamedTag<Block> SIEVE_BLOCK = createBlockWrapper(exNihiloLoc("sieve"));
     private static final Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
 
     static {
@@ -26,6 +40,10 @@ public class ExNihiloTags {
     }
 
     private ExNihiloTags() {
+    }
+
+    public static ITag.INamedTag<Block> createBlockWrapper(ResourceLocation name) {
+        return createWrapperTag(BlockTags.getAllTags(), name, BlockTags::makeWrapperTag);
     }
 
     public static ITag.INamedTag<Item> createItemWrapper(ResourceLocation name) {
@@ -59,6 +77,8 @@ public class ExNihiloTags {
     private static ResourceLocation forgeLoc(String path) {
         return new ResourceLocation("forge", path);
     }
+
+    private static ResourceLocation exNihiloLoc(String path) { return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, path); }
 
     public static class OreTag {
         private final ITag.INamedTag<Item> ingot;
