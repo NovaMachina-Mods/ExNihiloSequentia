@@ -61,7 +61,7 @@ public class HammerRecipe extends SerializableRecipe {
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return ItemStack.EMPTY;
     }
 

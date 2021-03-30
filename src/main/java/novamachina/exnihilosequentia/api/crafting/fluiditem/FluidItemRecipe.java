@@ -49,11 +49,11 @@ public class FluidItemRecipe extends SerializableRecipe {
     }
 
     public List<ItemStack> getInputs() {
-        return Arrays.asList(input.getMatchingStacks());
+        return Arrays.asList(input.getItems());
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return output;
     }
 
@@ -66,7 +66,7 @@ public class FluidItemRecipe extends SerializableRecipe {
     }
 
     public boolean validInputs(Fluid fluid, Item input) {
-        return this.fluid.getFluid().isEquivalentTo(fluid) && this.input.test(new ItemStack(input));
+        return this.fluid.getFluid().isSame(fluid) && this.input.test(new ItemStack(input));
     }
 
     @Override

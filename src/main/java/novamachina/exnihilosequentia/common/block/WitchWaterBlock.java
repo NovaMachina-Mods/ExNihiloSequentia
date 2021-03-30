@@ -33,8 +33,8 @@ public class WitchWaterBlock extends FlowingFluidBlock {
 
     public WitchWaterBlock() {
         super(ExNihiloFluids.WITCH_WATER,
-                AbstractBlock.Properties.create(Material.WATER).doesNotBlockMovement()
-                        .hardnessAndResistance(100.0F).noDrops());
+                AbstractBlock.Properties.of(Material.WATER).noCollission()
+                        .strength(100.0F).noDrops());
     }
 
     /**
@@ -42,8 +42,8 @@ public class WitchWaterBlock extends FlowingFluidBlock {
      */
     @Deprecated
     @Override
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-        if (worldIn.isRemote() || !entityIn.isAlive()) {
+    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+        if (worldIn.isClientSide() || !entityIn.isAlive()) {
             return;
         }
 
@@ -52,8 +52,8 @@ public class WitchWaterBlock extends FlowingFluidBlock {
                     new WitherSkeletonEntity(EntityType.WITHER_SKELETON, worldIn));
         }
 
-        if (entityIn instanceof CreeperEntity && !((CreeperEntity) entityIn).isCharged()) {
-            entityIn.func_241841_a((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+        if (entityIn instanceof CreeperEntity && !((CreeperEntity) entityIn).isPowered()) {
+            entityIn.thunderHit((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
             ((CreeperEntity) entityIn).setHealth(((CreeperEntity) entityIn).getMaxHealth());
         }
 
@@ -90,32 +90,32 @@ public class WitchWaterBlock extends FlowingFluidBlock {
         // TODO Cows
 
         if (entityIn instanceof AnimalEntity) {
-            entityIn.func_241841_a((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+            entityIn.thunderHit((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
         }
 
         if (entityIn instanceof PlayerEntity) {
             applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.BLINDNESS, 210, 0));
             applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.WEAKNESS, 210, 2));
             applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.WITHER, 210, 0));
-            applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.SLOWNESS, 210, 0));
+            applyPotion((PlayerEntity) entityIn, new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 210, 0));
         }
     }
 
     private void applyPotion(PlayerEntity entityIn, EffectInstance potionEffect) {
-        EffectInstance currentEffect = entityIn.getActivePotionEffect(potionEffect.getPotion());
+        EffectInstance currentEffect = entityIn.getEffect(potionEffect.getEffect());
         if (currentEffect != null
                 && currentEffect.getDuration() <= potionEffect.getDuration() - 20) {
-            entityIn.addPotionEffect(potionEffect);
+            entityIn.addEffect(potionEffect);
         }
     }
 
     private void replaceMob(World world, LivingEntity toKill, LivingEntity toSpawn) {
-        toSpawn.setLocationAndAngles(toKill.getPosX(), toKill.getPosY(), toKill.getPosZ(),
-                toKill.rotationYaw, toKill.rotationPitch);
-        toSpawn.renderYawOffset = toKill.renderYawOffset;
+        toSpawn.moveTo(toKill.getX(), toKill.getY(), toKill.getZ(),
+                toKill.yRot, toKill.xRot);
+        toSpawn.yBodyRot = toKill.yBodyRot;
         toSpawn.setHealth(toSpawn.getMaxHealth() * toKill.getHealth() / toKill.getMaxHealth());
 
         toKill.remove();
-        world.addEntity(toSpawn);
+        world.addFreshEntity(toSpawn);
     }
 }

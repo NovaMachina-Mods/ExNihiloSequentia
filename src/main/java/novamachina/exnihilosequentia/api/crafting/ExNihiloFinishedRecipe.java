@@ -67,27 +67,27 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     @Override
-    public ResourceLocation getAdvancementID() {
+    public ResourceLocation getAdvancementId() {
         return null;
     }
 
     @Override
-    public JsonObject getAdvancementJson() {
+    public JsonObject serializeAdvancement() {
         return null;
     }
 
     @Override
-    public ResourceLocation getID() {
+    public ResourceLocation getId() {
         return id;
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public IRecipeSerializer<?> getType() {
         return serializer;
     }
 
     @Override
-    public void serialize(JsonObject json) {
+    public void serializeRecipeData(JsonObject json) {
         for (Consumer<JsonObject> writer : this.writerFunctions) {
             writer.accept(json);
         }
@@ -129,7 +129,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
     protected R addInput(String key, Ingredient input) {
         if (inputArray != null) {
-            return addMultiInput(input.serialize());
+            return addMultiInput(input.toJson());
         } else {
             return addItem(key, input);
         }
@@ -140,7 +140,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     protected R addInput(ITag.INamedTag<Item> tag) {
-        return addInput(Ingredient.fromTag(tag));
+        return addInput(Ingredient.of(tag));
     }
 
     protected R addInput(String id, IItemProvider block) {
@@ -165,7 +165,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     private R addItem(String key, Ingredient ingredient) {
-        return addWriter(jsonObj -> jsonObj.add(key, ingredient.serialize()));
+        return addWriter(jsonObj -> jsonObj.add(key, ingredient.toJson()));
     }
 
     private R addItem(String key, JsonElement obj) {

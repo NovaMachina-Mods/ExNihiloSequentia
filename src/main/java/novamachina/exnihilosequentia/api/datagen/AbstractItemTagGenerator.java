@@ -24,14 +24,14 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
             Item ingot = ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get();
             Item chunk = ore.getChunkItem().get();
 
-            getOrCreateBuilder(tags.getIngotTag()).addItemEntry(ingot);
-            getOrCreateBuilder(Tags.Items.INGOTS).addTag(tags.getIngotTag());
-            getOrCreateBuilder(tags.getOreTag()).addItemEntry(chunk);
-            getOrCreateBuilder(Tags.Items.ORES).addTag(tags.getOreTag());
+            tag(tags.getIngotTag()).add(ingot);
+            tag(Tags.Items.INGOTS).addTag(tags.getIngotTag());
+            tag(tags.getOreTag()).add(chunk);
+            tag(Tags.Items.ORES).addTag(tags.getOreTag());
         } else {
             Item chunk = ore.getChunkItem().get();
-            getOrCreateBuilder(tags.getOreTag()).addItemEntry(chunk);
-            getOrCreateBuilder(Tags.Items.ORES).addTag(tags.getOreTag());
+            tag(tags.getOreTag()).add(chunk);
+            tag(Tags.Items.ORES).addTag(tags.getOreTag());
         }
     }
 }

@@ -15,7 +15,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public void tick() {
-        if (world.isRemote()) {
+        if (level.isClientSide()) {
             return;
         }
 
@@ -46,7 +46,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
             }
 
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
-                .isItemEqual(currentItem)) {
+                .sameItem(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
                     solidAmount += ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem())
                         .getAmount();
@@ -70,12 +70,12 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                 solidAmount -= filled;
             }
         }
-        world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
+        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
     }
 
     @Override
     public int getHeat() {
-        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(world.getBlockState(pos.down()).getBlock());
+        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(level.getBlockState(worldPosition.below()).getBlock());
         return Math.max(blockHeat, Config.getWoodHeatRate());
     }
 

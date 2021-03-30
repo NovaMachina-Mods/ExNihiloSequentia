@@ -11,6 +11,8 @@ import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import net.minecraftforge.fluids.ForgeFlowingFluid.Properties;
+
 public abstract class SeaWaterFluid extends ForgeFlowingFluid {
 
     public static final ForgeFlowingFluid.Properties SEA_WATER_PROPS =
@@ -30,12 +32,12 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
 
         public Flowing(Properties properties) {
             super(properties);
-            setDefaultState(getStateContainer().getBaseState().with(LEVEL_1_8, 7));
+            registerDefaultState(getStateDefinition().any().setValue(LEVEL, 7));
         }
 
         @Override
-        public int getLevel(FluidState fluidState) {
-            return fluidState.get(LEVEL_1_8);
+        public int getAmount(FluidState fluidState) {
+            return fluidState.getValue(LEVEL);
         }
 
         @Override
@@ -44,9 +46,9 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        protected void fillStateContainer(StateContainer.Builder<Fluid, FluidState> builder) {
-            super.fillStateContainer(builder);
-            builder.add(LEVEL_1_8);
+        protected void createFluidStateDefinition(StateContainer.Builder<Fluid, FluidState> builder) {
+            super.createFluidStateDefinition(builder);
+            builder.add(LEVEL);
         }
     }
 
@@ -57,7 +59,7 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        public int getLevel(FluidState fluidState) {
+        public int getAmount(FluidState fluidState) {
             return 8;
         }
 

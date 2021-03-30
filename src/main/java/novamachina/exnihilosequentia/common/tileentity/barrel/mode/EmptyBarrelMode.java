@@ -29,17 +29,17 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        if (!player.getHeldItem(handIn).isEmpty()) {
+        if (!player.getItemInHand(handIn).isEmpty()) {
             boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
 
             if (result) {
-                barrelTile.getWorld()
-                    .notifyBlockUpdate(barrelTile.getPos(), barrelTile.getBlockState(), barrelTile.getBlockState(), 2);
-                barrelTile.markDirty();
+                barrelTile.getLevel()
+                    .sendBlockUpdated(barrelTile.getBlockPos(), barrelTile.getBlockState(), barrelTile.getBlockState(), 2);
+                barrelTile.setChanged();
                 return ActionResultType.SUCCESS;
             }
 
-            ItemStack stack = player.getHeldItem(handIn);
+            ItemStack stack = player.getItemInHand(handIn);
             List<Supplier<AbstractBarrelMode>> modes = BarrelModeRegistry.getModes(BarrelModeRegistry.TriggerType.ITEM);
             for (Supplier<AbstractBarrelMode> mode : modes) {
                 if (mode.get().isTriggerItem(stack)) {
