@@ -10,7 +10,7 @@ import net.minecraftforge.common.ToolType;
 public class BlockBuilder {
 
     public static final AbstractBlock.Properties DEFAULT =
-            AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
+            AbstractBlock.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD);
     private int harvestLevel = 0;
     private AbstractBlock.Properties properties = DEFAULT;
     private Supplier<TileEntity> tileEntitySupplier;

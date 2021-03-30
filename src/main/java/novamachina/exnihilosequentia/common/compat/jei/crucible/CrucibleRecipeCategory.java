@@ -74,7 +74,7 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
             recipeLayout.getItemStacks().set(i + slotIndex, stack);
 
             if (focus != null && focus.getValue() instanceof ItemStack && stack
-                    .isItemEqual((ItemStack) focus.getValue())) {
+                    .sameItem((ItemStack) focus.getValue())) {
                 recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
             }
         }

@@ -29,13 +29,13 @@ public class ClientSetup {
     public static void init(final FMLClientSetupEvent event) {
         logger.debug("Initializing client renderers");
 
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_FIRED.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_WOOD.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_WOOD.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTED_LEAVES.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTING_LEAVES.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_FIRED.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_WOOD.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_WOOD.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTED_LEAVES.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTING_LEAVES.get(), RenderType.cutout());
 
         SieveRender.register();
         BarrelRender.register();

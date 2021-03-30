@@ -14,18 +14,18 @@ public class TankUtil {
     private static final ItemStack WATER_BOTTLE;
 
     static {
-        WATER_BOTTLE = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.WATER);
+        WATER_BOTTLE = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
     }
 
     public static boolean drainWaterIntoBottle(TileEntity tileEntity, PlayerEntity player, IFluidHandler tank) {
-        if (player.getHeldItemMainhand().getItem() == Items.GLASS_BOTTLE) {
+        if (player.getMainHandItem().getItem() == Items.GLASS_BOTTLE) {
             if(tank.getFluidInTank(0).getFluid() != null && tank.getFluidInTank(0).getAmount() >= 250 && tank.getFluidInTank(0).getFluid().getFluid() == Fluids.WATER) {
-                if(player.addItemStackToInventory(WATER_BOTTLE.copy())){
+                if(player.addItem(WATER_BOTTLE.copy())){
                     if(!player.isCreative()) {
-                        player.getHeldItemMainhand().shrink(1);
+                        player.getMainHandItem().shrink(1);
                     }
                     tank.drain(250, IFluidHandler.FluidAction.EXECUTE);
-                    tileEntity.markDirty();
+                    tileEntity.setChanged();
                     return true;
                 }
             }
@@ -34,17 +34,17 @@ public class TankUtil {
     }
 
     public static boolean drainWaterFromBottle(TileEntity tileEntity, PlayerEntity player, IFluidHandler tank) {
-        if (player.getHeldItemMainhand().getItem() == Items.POTION && WATER_BOTTLE.getTag().equals(player.getHeldItemMainhand().getTag())) {
+        if (player.getMainHandItem().getItem() == Items.POTION && WATER_BOTTLE.getTag().equals(player.getMainHandItem().getTag())) {
             FluidStack water = new FluidStack(Fluids.WATER, 250);
 
             if (tank.fill(water, IFluidHandler.FluidAction.SIMULATE) == water.getAmount()) {
-                if (player.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE))) {
+                if (player.addItem(new ItemStack(Items.GLASS_BOTTLE))) {
 
                     if (!player.isCreative())
-                        player.getHeldItemMainhand().shrink(1);
+                        player.getMainHandItem().shrink(1);
                     tank.fill(water, IFluidHandler.FluidAction.EXECUTE);
 
-                    tileEntity.markDirty();
+                    tileEntity.setChanged();
                     return true;
                 }
             }

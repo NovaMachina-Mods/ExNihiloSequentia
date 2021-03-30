@@ -36,12 +36,12 @@ public class CrookBaseItem extends ToolItem {
 
     public CrookBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, Sets.newHashSet(),
-                new Item.Properties().defaultMaxDamage(maxDamage).group(ExNihiloInitialization.ITEM_GROUP));
+                new Item.Properties().defaultDurability(maxDamage).tab(ExNihiloInitialization.ITEM_GROUP));
     }
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
-        return effectiveMaterialsOn.contains(material) ? this.efficiency : super.getDestroySpeed(stack, state);
+        return effectiveMaterialsOn.contains(material) ? this.speed : super.getDestroySpeed(stack, state);
     }
 }

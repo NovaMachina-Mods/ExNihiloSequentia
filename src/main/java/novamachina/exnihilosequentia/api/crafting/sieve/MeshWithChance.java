@@ -19,17 +19,17 @@ public class MeshWithChance {
 
     public static MeshWithChance deserialize(JsonElement json) {
         if (json.isJsonObject() && json.getAsJsonObject().has(MESH_KEY)) {
-            final float chance = JSONUtils.getFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
-            final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getString(json.getAsJsonObject(), MESH_KEY));
+            final float chance = JSONUtils.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
+            final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
             return new MeshWithChance(mesh, chance);
         } else {
-            final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getString(json.getAsJsonObject(), MESH_KEY));
+            final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
             return new MeshWithChance(mesh, 1.0F);
         }
     }
 
     public static MeshWithChance read(PacketBuffer buffer) {
-        final EnumMesh mesh = buffer.readEnumValue(EnumMesh.class);
+        final EnumMesh mesh = buffer.readEnum(EnumMesh.class);
         final float chance = buffer.readFloat();
         return new MeshWithChance(mesh, chance);
     }
@@ -50,7 +50,7 @@ public class MeshWithChance {
     }
 
     public void write(PacketBuffer buffer) {
-        buffer.writeEnumValue(getMesh());
+        buffer.writeEnum(getMesh());
         buffer.writeFloat(getChance());
     }
 }

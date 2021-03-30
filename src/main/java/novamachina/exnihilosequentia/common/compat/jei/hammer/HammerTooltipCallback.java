@@ -19,7 +19,7 @@ public class HammerTooltipCallback implements ITooltipCallback<ItemStack> {
     public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
         if (!input) {
             hammerRecipe.getOutput().stream()
-                    .filter(stack -> ItemStack.areItemsEqual(ingredient, stack.getStack()))
+                    .filter(stack -> ItemStack.isSame(ingredient, stack.getStack()))
                     .forEach(stack -> tooltip.add(new StringTextComponent(String.format("%s", StringUtils.formatPercent(stack.getChance())))));
         }
     }

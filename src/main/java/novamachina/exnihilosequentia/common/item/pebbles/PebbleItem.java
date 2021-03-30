@@ -8,7 +8,7 @@ import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 public class PebbleItem extends SnowballItem {
 
     public PebbleItem() {
-        super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
+        super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
     }
 
     // TODO: Throwable pebbles (SnowballItem?)

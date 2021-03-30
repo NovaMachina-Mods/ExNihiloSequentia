@@ -19,7 +19,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         registerOres();
         registerSeeds();
         registerMeats();
@@ -30,23 +30,23 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerCrooks() {
         for (EnumCrook crook : EnumCrook.values()) {
-            getOrCreateBuilder(ExNihiloTags.CROOK).addItemEntry(crook.getRegistryObject().get());
+            tag(ExNihiloTags.CROOK).add(crook.getRegistryObject().get());
         }
     }
 
     private void registerCooked() {
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_CHICKEN);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_COD);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_MUTTON);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_PORKCHOP);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_RABBIT);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_SALMON);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_BEEF);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_CHICKEN);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_COD);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_MUTTON);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_PORKCHOP);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_RABBIT);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_SALMON);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_BEEF);
     }
 
     private void registerHammers() {
         for (EnumHammer hammer : EnumHammer.values()) {
-            getOrCreateBuilder(ExNihiloTags.HAMMER).addItemEntry(hammer.getRegistryObject().get());
+            tag(ExNihiloTags.HAMMER).add(hammer.getRegistryObject().get());
         }
     }
 
@@ -56,7 +56,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     private void registerMisc() {
-        getOrCreateBuilder(ExNihiloTags.CLAY).addItemEntry(Items.CLAY_BALL);
+        tag(ExNihiloTags.CLAY).add(Items.CLAY_BALL);
     }
 
     private void registerOres() {
@@ -68,17 +68,17 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerSeeds() {
         for (EnumSeed seed : EnumSeed.values()) {
-            getOrCreateBuilder(Tags.Items.SEEDS).addItemEntry(seed.getRegistryObject().get());
+            tag(Tags.Items.SEEDS).add(seed.getRegistryObject().get());
         }
     }
 
     private void registerUncooked() {
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.CHICKEN);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.COD);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.MUTTON);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.PORKCHOP);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.RABBIT);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.SALMON);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.BEEF);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.CHICKEN);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.COD);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.MUTTON);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.PORKCHOP);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.RABBIT);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.SALMON);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.BEEF);
     }
 }

@@ -24,7 +24,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
         ModelFile model = models().getBuilder("block/" + fluid.getRegistryName().getPath())
                 .texture(PARTICLE_TAG, stillTexture);
-        getVariantBuilder(fluid.getDefaultState().getBlockState().getBlock()).partialState()
+        getVariantBuilder(fluid.defaultFluidState().createLegacyBlock().getBlock()).partialState()
                 .setModels(new ConfiguredModel(model));
     }
 

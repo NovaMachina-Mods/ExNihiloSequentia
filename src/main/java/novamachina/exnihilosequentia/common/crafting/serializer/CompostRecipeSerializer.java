@@ -16,21 +16,21 @@ public class CompostRecipeSerializer extends RecipeSerializer<CompostRecipe> {
     }
 
     @Override
-    public CompostRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        Ingredient input = Ingredient.read(buffer);
+    public CompostRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        Ingredient input = Ingredient.fromNetwork(buffer);
         int amount = buffer.readInt();
         return new CompostRecipe(recipeId, input, amount);
     }
 
     @Override
-    public void write(PacketBuffer buffer, CompostRecipe recipe) {
-        recipe.getInput().write(buffer);
+    public void toNetwork(PacketBuffer buffer, CompostRecipe recipe) {
+        recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getAmount());
     }
 
     @Override
     protected CompostRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        Ingredient input = Ingredient.deserialize(json.get("input"));
+        Ingredient input = Ingredient.fromJson(json.get("input"));
         int amount = json.get("amount").getAsInt();
         return new CompostRecipe(recipeId, input, amount);
     }
