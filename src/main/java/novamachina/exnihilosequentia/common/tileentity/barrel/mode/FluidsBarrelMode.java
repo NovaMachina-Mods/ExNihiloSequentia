@@ -100,6 +100,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             return ActionResultType.SUCCESS;
         }
 
+        if(TankUtil.drainWaterIntoBottle(barrelTile, player, fluidHandler)) {
+            return ActionResultType.SUCCESS;
+        }
+
         boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
 
         if (result) {

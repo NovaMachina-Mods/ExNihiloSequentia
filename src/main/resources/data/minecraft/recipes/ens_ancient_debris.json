@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "xxx",
+    "xox",
+    "xxx"
+  ],
+  "key": {
+    "o": {
+      "item": "minecraft:obsidian"
+    },
+    "x": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "result": {
+    "item": "minecraft:ancient_debris"
+  }
+}

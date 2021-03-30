@@ -128,6 +128,8 @@ public class ExNihiloConstants {
         public static final String PEBBLE_BASALT = createPebbleName("basalt");
         public static final String PEBBLE_BLACKSTONE = createPebbleName("blackstone");
         public static final String PEBBLE_STONE = createPebbleName(STONE_TAG);
+        public static final String PEBBLE_BASALT = createPebbleName("basalt");
+        public static final String PEBBLE_BLACKSTONE = createPebbleName("blackstone");
         public static final String PINK_CORAL_SEED = "seed_pink_coral";
         public static final String PORCELAIN_CLAY = "porcelain_clay";
         public static final String PURPLE_CORAL_SEED = "seed_purple_coral";

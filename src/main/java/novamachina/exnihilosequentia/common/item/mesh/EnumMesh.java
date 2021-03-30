@@ -4,10 +4,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fml.RegistryObject;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 public enum EnumMesh implements IStringSerializable, IExtensibleEnum {
     // TODO Mesh damage is configurable
-    NONE(0, "none", 0), STRING(1, "string", 59), FLINT(2, "flint", 131), IRON(3, "iron", 250), DIAMOND(4, "diamond", 1561), EMERALD(5, "emerald", 1561), NETHERITE(6, "netherite", 2031);
+    NONE(0, "none", 0), STRING(1, "string", Config.getMeshStringValue()), FLINT(2, "flint", Config.getMeshFlintValue()), IRON(3, "iron", Config.getMeshIronValue()), DIAMOND(4, "diamond", Config.getMeshDiamondValue()), EMERALD(5, "emerald", Config.getMeshEmeraldValue()), NETHERITE(6, "netherite", Config.getMeshNetheriteValue());
 
     private final int id;
     private final int maxDamage;

@@ -18,11 +18,15 @@ public class Config {
     private static final String CATEGORY_INFESTED_LEAVES = "infested_leaves";
     private static final String CATEGORY_ORE = "ore";
     private static final String CATEGORY_SIEVE = "sieve";
+    private static final String CATEGORY_DURABILITY = "durability";
     private static final ForgeConfigSpec.Builder COMMON_BUILDER = new Builder();
     private static final String SUBCATEGORY_BARREL_COMPOST = "compost";
     private static final String SUBCATEGORY_BARREL_FLUID = "fluid_transform";
     private static final String SUBCATEGORY_BARREL_MOB = "mob_spawn";
     private static final String SUBCATEGORY_CRUCIBLE_WOOD = "wood";
+    private static final String SUBCATEGORY_CROOKS = "crook";
+    private static final String SUBCATEGORY_HAMMERS = "hammer";
+    private static final String SUBCATEGORY_MESHES = "mesh";
     private static ForgeConfigSpec.IntValue barrelMaxSolidAmount;
     private static ForgeConfigSpec.IntValue barrelNumberOfBuckets;
     private static ForgeConfigSpec.IntValue crucibleNumberOfBuckets;
@@ -50,6 +54,30 @@ public class Config {
     private static ForgeConfigSpec.IntValue rainFillAmount;
     private static ForgeConfigSpec.IntValue secondsToCompost;
     private static ForgeConfigSpec.IntValue secondsToFluidTransform;
+    // Durability Hammer
+    private static ForgeConfigSpec.IntValue hammerWoodValue;
+    private static ForgeConfigSpec.IntValue hammerStoneValue;
+    private static ForgeConfigSpec.IntValue hammerIronValue;
+    private static ForgeConfigSpec.IntValue hammerGoldValue;
+    private static ForgeConfigSpec.IntValue hammerDiamondValue;
+    private static ForgeConfigSpec.IntValue hammerNetheriteValue;
+    // Durability Crooks
+    private static ForgeConfigSpec.IntValue crookWoodValue;
+    private static ForgeConfigSpec.IntValue crookStoneValue;
+    private static ForgeConfigSpec.IntValue crookAndesiteValue;
+    private static ForgeConfigSpec.IntValue crookGraniteValue;
+    private static ForgeConfigSpec.IntValue crookDioriteValue;
+    private static ForgeConfigSpec.IntValue crookGoldValue;
+    private static ForgeConfigSpec.IntValue crookIronValue;
+    private static ForgeConfigSpec.IntValue crookDiamondValue;
+    private static ForgeConfigSpec.IntValue crookBoneValue;
+    // Durability Meshes
+    private static ForgeConfigSpec.IntValue meshStringValue;
+    private static ForgeConfigSpec.IntValue meshFlintValue;
+    private static ForgeConfigSpec.IntValue meshIronValue;
+    private static ForgeConfigSpec.IntValue meshDiamondValue;
+    private static ForgeConfigSpec.IntValue meshNetheriteValue;
+    private static ForgeConfigSpec.IntValue meshEmeraldValue;
     // Barrel
     private static ForgeConfigSpec.IntValue secondsToSpawn;
     // Infested Leaves
@@ -85,12 +113,37 @@ public class Config {
         COMMON_BUILDER.comment("Debug Configs").push(CATEGORY_DEBUG);
         debugConfigs();
         COMMON_BUILDER.pop();
+        COMMON_BUILDER.comment("Durability Configs").push(CATEGORY_DURABILITY);
+        durabilityConfigs();
+        COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
     }
 
     private Config() {
     }
+
+    public static int getCrookWoodDurability() { return crookWoodValue.get(); }
+    public static int getCrookStoneDurability() { return crookStoneValue.get(); }
+    public static int getCrookAndesiteDurability() { return crookAndesiteValue.get(); }
+    public static int getCrookGraniteDurability() { return crookGraniteValue.get(); }
+    public static int getCrookDioriteDurability() { return crookDioriteValue.get(); }
+    public static int getCrookGoldDurability() { return crookGoldValue.get(); }
+    public static int getCrookIronDurability() { return crookIronValue.get(); }
+    public static int getCrookDiamondDurability() { return crookDiamondValue.get(); }
+    public static int getCrookBoneDurability() { return crookBoneValue.get(); }
+    public static int getHammerWoodDurability() { return hammerWoodValue.get(); }
+    public static int getHammerStoneDurability() { return hammerStoneValue.get(); }
+    public static int getHammerIronDurability() { return hammerIronValue.get(); }
+    public static int getHammerGoldDurability() { return hammerGoldValue.get(); }
+    public static int getHammerDiamondDurability() { return hammerDiamondValue.get(); }
+    public static int getHammerNetheriteDurability() { return hammerNetheriteValue.get(); }
+    public static int getMeshStringValue() { return meshStringValue.get(); }
+    public static int getMeshFlintValue() { return meshFlintValue.get(); }
+    public static int getMeshIronValue() { return meshIronValue.get(); }
+    public static int getMeshEmeraldValue() { return meshEmeraldValue.get(); }
+    public static int getMeshDiamondValue() { return meshDiamondValue.get(); }
+    public static int getMeshNetheriteValue() { return meshNetheriteValue.get(); }
 
     public static boolean enableAluminum() {
         return enableAluminum.get();
@@ -160,9 +213,7 @@ public class Config {
         return crucibleNumberOfBuckets.get();
     }
 
-    public static boolean getEnableGold() {
-        return enableGold.get();
-    }
+    public static boolean enableGold() { return enableGold.get(); }
 
     public static int getMaxBonusStringCount() {
         return maxBonusStringCount.get();
@@ -221,9 +272,7 @@ public class Config {
     }
 
     public static void loadConfig(ForgeConfigSpec spec, Path path) {
-        final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave()
-                .writingMode(
-                        WritingMode.REPLACE).build();
+        final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
 
         configData.load();
         spec.setConfig(configData);
@@ -285,6 +334,59 @@ public class Config {
     private static void debugConfigs() {
         enableDebugLogging = COMMON_BUILDER.comment("Enable extra logging? (Default: false)")
                 .define("enableDebugLogging", false);
+    }
+
+    private static void durabilityConfigs() {
+        COMMON_BUILDER.comment("Durability of Hammers").push(SUBCATEGORY_HAMMERS);
+        hammerWoodValue = COMMON_BUILDER.comment("Durability of Wooden Hammer (Default: 128)")
+                .defineInRange("hammerWoodValue", 128, 1, Integer.MAX_VALUE);
+        hammerStoneValue = COMMON_BUILDER.comment("Durability of Stone Hammer (Default: 256)")
+                .defineInRange("hammerStoneValue", 256, 1, Integer.MAX_VALUE);
+        hammerIronValue = COMMON_BUILDER.comment("Durability of Iron Hammer (Default: 512)")
+                .defineInRange("hammerIronValue", 512, 1, Integer.MAX_VALUE);
+        hammerGoldValue = COMMON_BUILDER.comment("Durability of Gold Hammer (Default: 64)")
+                .defineInRange("hammerGoldValue", 64, 1, Integer.MAX_VALUE);
+        hammerDiamondValue = COMMON_BUILDER.comment("Durability of Diamond Hammer (Default: 4096)")
+                .defineInRange("hammerDiamondValue", 4096, 1, Integer.MAX_VALUE);
+        hammerNetheriteValue = COMMON_BUILDER.comment("Durability of Netherite Hammer (Default: 8192)")
+                .defineInRange("hammerNetheriteValue", 8192, 1, Integer.MAX_VALUE);
+        COMMON_BUILDER.pop();
+
+        COMMON_BUILDER.comment("Durability of Crooks").push(SUBCATEGORY_CROOKS);
+        crookWoodValue = COMMON_BUILDER.comment("Durability of Wooden Crook (Default: 128)")
+                .defineInRange("crookWoodValue", 128, 1, Integer.MAX_VALUE);
+        crookStoneValue = COMMON_BUILDER.comment("Durability of Stone Crook (Default: 256)")
+                .defineInRange("crookStoneValue", 256, 1, Integer.MAX_VALUE);
+        crookAndesiteValue = COMMON_BUILDER.comment("Durability of Andesite Crook (Default: 256)")
+                .defineInRange("crookAndesiteValue", 256, 1, Integer.MAX_VALUE);
+        crookGraniteValue = COMMON_BUILDER.comment("Durability of Granite Crook (Default: 256)")
+                .defineInRange("crookGraniteValue", 256, 1, Integer.MAX_VALUE);
+        crookDioriteValue = COMMON_BUILDER.comment("Durability of Diorite Crook (Default: 256)")
+                .defineInRange("crookDioriteValue", 256, 1, Integer.MAX_VALUE);
+        crookGoldValue = COMMON_BUILDER.comment("Durability of Gold Crook (Default: 32)")
+                .defineInRange("crookGoldValue", 64, 1, Integer.MAX_VALUE);
+        crookIronValue = COMMON_BUILDER.comment("Durability of Iron Crook (Default: 256)")
+                .defineInRange("crookIronValue", 512, 1, Integer.MAX_VALUE);
+        crookDiamondValue = COMMON_BUILDER.comment("Durability of Diamond Crook (Default: 2048)")
+                .defineInRange("crookDiamondValue", 2048, 1, Integer.MAX_VALUE);
+        crookBoneValue = COMMON_BUILDER.comment("Durability of Bone Crook (Default: 256)")
+                .defineInRange("crookBoneValue", 256, 1, Integer.MAX_VALUE);
+        COMMON_BUILDER.pop();
+
+        COMMON_BUILDER.comment("Durability of Meshes").push(SUBCATEGORY_MESHES);
+        meshStringValue = COMMON_BUILDER.comment("Durability of String Mesh (Only useful if enableMeshDurability is true) (Default: 59)")
+                .defineInRange("meshStringValue", 59, 1, Integer.MAX_VALUE);
+        meshFlintValue = COMMON_BUILDER.comment("Durability of Flint Mesh (Only useful if enableMeshDurability is true) (Default: 131)")
+                .defineInRange("meshFlintValue", 131, 1, Integer.MAX_VALUE);
+        meshIronValue = COMMON_BUILDER.comment("Durability of Iron Mesh (Only useful if enableMeshDurability is true) (Default: 250)")
+                .defineInRange("meshIronValue", 250, 1, Integer.MAX_VALUE);
+        meshDiamondValue = COMMON_BUILDER.comment("Durability of Diamond Mesh (Only useful if enableMeshDurability is true) (Default: 1561)")
+                .defineInRange("meshDiamondValue", 1561, 1, Integer.MAX_VALUE);
+        meshEmeraldValue = COMMON_BUILDER.comment("Durability of Emerald Mesh (Only useful if enableMeshDurability is true) (Default: 1561)")
+                .defineInRange("meshEmeraldValue", 1561, 1, Integer.MAX_VALUE);
+        meshNetheriteValue = COMMON_BUILDER.comment("Durability of Netherite Mesh (Only useful if enableMeshDurability is true) (Default: 2031)")
+                .defineInRange("meshNetheriteValue", 2031, 1, Integer.MAX_VALUE);
+        COMMON_BUILDER.pop();
     }
 
     private static void infestedLeavesConfigs() {

@@ -25,6 +25,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         registerSeeds();
         registerMeats();
         registerHammers();
+        registerCrooks();
         registerMisc();
         registerCrooks();
         registerFiredBarrels();
@@ -32,6 +33,12 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         registerSieves();
         registerWoodenBarrels();
         registerWoodenCrucibles();
+    }
+
+    private void registerCrooks() {
+        for (EnumCrook crook : EnumCrook.values()) {
+            getOrCreateBuilder(ExNihiloTags.CROOK).addItemEntry(crook.getRegistryObject().get());
+        }
     }
 
     private void registerCrooks() {

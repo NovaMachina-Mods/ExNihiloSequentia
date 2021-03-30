@@ -28,6 +28,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.utility.TankUtil;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
@@ -44,7 +45,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     protected static final int MAX_FLUID_AMOUNT = Config.getCrucibleNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
     protected MeltableItemHandler inventory;
     private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
-    protected FluidTank tank;
+    protected CrucibleFluidHandler tank;
     private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
     protected int ticksSinceLast;
     protected int solidAmount;
@@ -54,7 +55,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         TileEntityType<? extends BaseCrucibleTile> tileEntityType) {
         super(tileEntityType);
         inventory = new MeltableItemHandler(getCrucibleType());
-        tank = new FluidTank(MAX_FLUID_AMOUNT);
+        tank = new CrucibleFluidHandler(this);
         ticksSinceLast = 0;
         solidAmount = 0;
         currentItem = ItemStack.EMPTY;
@@ -103,6 +104,10 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             return ActionResultType.SUCCESS;
         }
 
+        if(TankUtil.drainWaterIntoBottle(this, player, handler)) {
+            return ActionResultType.SUCCESS;
+        }
+
         boolean result = FluidUtil.interactWithFluidHandler(player, handIn, handler);
 
         if (result) {
@@ -115,8 +120,9 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             return ActionResultType.SUCCESS;
         }
 
-        if (!tank.isEmpty() && !tank.getFluid().getFluid()
-            .isEquivalentTo(getMeltable().getResultFluid().getFluid())) {
+        CrucibleRecipe recipe = getMeltable();
+        if (recipe != null && !tank.isEmpty() && !tank.getFluid().getFluid()
+            .isEquivalentTo(recipe.getResultFluid().getFluid())) {
             return ActionResultType.SUCCESS;
         }
 
@@ -228,4 +234,6 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     public abstract int getSolidAmount();
+
+    public abstract boolean canAcceptFluidTemperature(FluidStack fluidStack);
 }
