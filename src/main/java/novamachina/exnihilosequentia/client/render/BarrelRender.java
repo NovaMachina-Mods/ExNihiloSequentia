@@ -93,7 +93,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
         }
 
         if (tileEntity.getSolidAmount() > 0) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.getSolid());
+            IVertexBuilder builder = buffer.getBuffer(RenderType.getTranslucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
                     .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
