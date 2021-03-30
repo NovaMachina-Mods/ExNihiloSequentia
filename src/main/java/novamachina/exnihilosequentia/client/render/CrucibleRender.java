@@ -55,16 +55,16 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
 
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 1), new UVLocation(sprite
                             .getMinU(), sprite.getMaxV()),
-                    fluidColor);
+                    fluidColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 1), new UVLocation(sprite
                             .getMaxU(), sprite.getMaxV()),
-                    fluidColor);
+                    fluidColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 0), new UVLocation(sprite
                             .getMaxU(), sprite.getMinV()),
-                    fluidColor);
+                    fluidColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 0), new UVLocation(sprite
                             .getMinU(), sprite.getMinV()),
-                    fluidColor);
+                    fluidColor, combinedLightIn);
 
             matrixStack.pop();
         }
@@ -85,16 +85,16 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
 
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 1), new UVLocation(sprite
                             .getMinU(), sprite.getMaxV()),
-                    blockColor);
+                    blockColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 1), new UVLocation(sprite
                             .getMaxU(), sprite.getMaxV()),
-                    blockColor);
+                    blockColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 0), new UVLocation(sprite
                             .getMaxU(), sprite.getMinV()),
-                    blockColor);
+                    blockColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 0), new UVLocation(sprite
                             .getMinU(), sprite.getMinV()),
-                    blockColor);
+                    blockColor, combinedLightIn);
 
             matrixStack.pop();
         }

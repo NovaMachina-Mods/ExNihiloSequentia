@@ -1,3 +1,2 @@
-2.0.2.1
-- Fix issue where barrel recipes could be done with less than a full barrel.
-- Fix sieve lighting issues.
+2.0.2.3
+- Fix ancient seeds getting voided when used on non-dirt blocks

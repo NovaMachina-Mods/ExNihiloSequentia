@@ -172,12 +172,12 @@ public class ExNihiloItems {
     static {
         for (EnumCrook crook : EnumCrook.values()) {
             crook.setRegistryObject(ITEMS
-                    .register(crook.crookName, () -> new CrookBaseItem(crook.tier, crook.defaultDurability)));
+                    .register(crook.crookName, () -> new CrookBaseItem(crook.tier, crook.maxDamage)));
         }
 
         for (EnumHammer hammer : EnumHammer.values()) {
             hammer.setRegistryObject(ITEMS.register(hammer.hammerName,
-                    () -> new HammerBaseItem(hammer.tier, hammer.defaultDurability)));
+                    () -> new HammerBaseItem(hammer.tier, hammer.maxDamage)));
         }
 
         for (EnumOre ore : EnumOre.values()) {
