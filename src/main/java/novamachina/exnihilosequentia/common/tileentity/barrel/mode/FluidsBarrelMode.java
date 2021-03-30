@@ -20,7 +20,7 @@ import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.BarrelModes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     @Override
     public void tick(AbstractBarrelTile barrelTile) {
         if(barrelTile.getFluidAmount() <= 0) {
-            barrelTile.setMode(BarrelModeRegistry.getModeFromName(ExNihiloConstants.BarrelModes.EMPTY));
+            barrelTile.setMode(BarrelModeRegistry.getModeFromName(BarrelModes.EMPTY));
         }
         if (barrelTile.getFluidAmount() >= AbstractBarrelTile.MAX_FLUID_AMOUNT) {
             if (fluidOnTop(barrelTile)) {
@@ -54,7 +54,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         if (item instanceof DollItem) {
             DollItem doll = (DollItem) item;
             if (barrelTile.getFluid().isEquivalentTo(doll.getSpawnFluid())) {
-                barrelTile.setMode(ExNihiloConstants.BarrelModes.MOB);
+                barrelTile.setMode(BarrelModes.MOB);
                 ((MobSpawnBarrelMode) barrelTile.getMode()).setDoll(doll);
                 player.getHeldItem(handIn).shrink(1);
                 return true;
@@ -69,7 +69,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
         if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, catalyst)) {
-            barrelTile.setMode(ExNihiloConstants.BarrelModes.TRANSFORM);
+            barrelTile.setMode(BarrelModes.TRANSFORM);
             ((FluidTransformBarrelMode)barrelTile.getMode()).setCatalyst(catalyst);
             return true;
         }
@@ -87,7 +87,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             barrelTile.getTank().setFluid(FluidStack.EMPTY);
             barrelTile.getInventory().setStackInSlot(0, ExNihiloRegistries.FLUID_ON_TOP_REGISTRY
                 .getResult(fluidInTank, fluidOnTop));
-            barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
+            barrelTile.setMode(BarrelModes.BLOCK);
             return true;
         }
         return false;
@@ -139,7 +139,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             if(!player.isCreative()) {
                 player.getHeldItem(handIn).shrink(1);
             }
-            barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
+            barrelTile.setMode(BarrelModes.BLOCK);
             return true;
         }
         return false;
@@ -204,7 +204,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
             barrelTile.getInventory()
                 .setStackInSlot(0, new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
-            barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
+            barrelTile.setMode(BarrelModes.BLOCK);
             returnStack.shrink(1);
             return returnStack;
         }
@@ -212,7 +212,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         if (input instanceof DollItem) {
             DollItem doll = (DollItem) input;
             if (barrelTile.getFluid().isEquivalentTo(doll.getSpawnFluid())) {
-                barrelTile.setMode(ExNihiloConstants.BarrelModes.MOB);
+                barrelTile.setMode(BarrelModes.MOB);
                 ((MobSpawnBarrelMode) barrelTile.getMode()).setDoll(doll);
                 returnStack.shrink(1);
             }

@@ -9,9 +9,9 @@ import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.block.FiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
-@WailaPlugin(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+@WailaPlugin(ModIds.EX_NIHILO_SEQUENTIA)
 public class PluginWaila implements IWailaPlugin {
     @Override
     public void register(IRegistrar registrar) {

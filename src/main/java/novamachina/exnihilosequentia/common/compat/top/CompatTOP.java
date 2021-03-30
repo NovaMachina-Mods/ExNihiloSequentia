@@ -10,7 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.InterModComms;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -47,7 +47,7 @@ public class CompatTOP {
 
                 @Override
                 public String getID() {
-                    return ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":default";
+                    return ModIds.EX_NIHILO_SEQUENTIA + ":default";
                 }
             });
             return null;

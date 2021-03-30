@@ -9,11 +9,11 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluiditem");
-    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_block_transform.png");
+    public static final ResourceLocation UID = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "fluiditem");
+    private static final ResourceLocation texture = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_block_transform.png");
     private final IDrawableStatic background;
 
     public FluidBlockRecipeCategory(IGuiHelper guiHelper) {

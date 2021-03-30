@@ -12,10 +12,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class FluidItemRecipe extends SerializableRecipe {
-    public static final IRecipeType<FluidItemRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
+    public static final IRecipeType<FluidItemRecipe> RECIPE_TYPE = IRecipeType.register(ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
     private static RegistryObject<RecipeSerializer<FluidItemRecipe>> serializer;
     private FluidStack fluid;
     private Ingredient input;

@@ -17,15 +17,15 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
+    public static final ResourceLocation UID = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "heat");
     private final IDrawableStatic background;
 
     public HeatRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper
-                .drawableBuilder(new ResourceLocation(ExNihiloConstants.ModIds.JEI, "textures/gui/gui_vanilla.png"),
+                .drawableBuilder(new ResourceLocation(ModIds.JEI, "textures/gui/gui_vanilla.png"),
                         0, 134, 18, 34).addPadding(0, 0, 0, 80).build();
     }
 

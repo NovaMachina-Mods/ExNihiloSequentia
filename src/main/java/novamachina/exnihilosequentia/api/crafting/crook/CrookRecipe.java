@@ -11,16 +11,20 @@ import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
+
+import javax.annotation.Nonnull;
 
 public class CrookRecipe extends SerializableRecipe {
-    public static final IRecipeType<CrookRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
+    public static final IRecipeType<CrookRecipe> RECIPE_TYPE = IRecipeType.register(ModIds.EX_NIHILO_SEQUENTIA + ":crook");
     private static RegistryObject<RecipeSerializer<CrookRecipe>> serializer;
     private Ingredient input;
     private final List<ItemStackWithChance> output;
 
     public CrookRecipe(ResourceLocation id, Ingredient input, List<ItemStackWithChance> output) {
-        super(output.get(0).getStack(), RECIPE_TYPE, id);
+        //TODO This one throws IndexOutOfBoundsException due to it always just use the first output
+        //super(output.get(0).getStack(), RECIPE_TYPE, id);
+        super(ItemStack.EMPTY, RECIPE_TYPE, id);
         this.input = input;
         this.output = output;
     }
@@ -59,9 +63,11 @@ public class CrookRecipe extends SerializableRecipe {
         return returnList;
     }
 
+    @Nonnull
     @Override
     public ItemStack getRecipeOutput() {
-        return output.get(0).getStack().copy();
+        return outputDummy;
+        //return output.get(0).getStack().copy();
     }
 
     @Override

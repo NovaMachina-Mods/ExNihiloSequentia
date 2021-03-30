@@ -9,11 +9,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class CompostRecipe extends SerializableRecipe {
     public static final IRecipeType<CompostRecipe> RECIPE_TYPE = IRecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
+            .register(ModIds.EX_NIHILO_SEQUENTIA + ":compost");
     private static RegistryObject<RecipeSerializer<CompostRecipe>> serializer;
     private int amount;
     private Ingredient input;

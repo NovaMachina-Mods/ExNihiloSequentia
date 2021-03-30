@@ -11,11 +11,11 @@ import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class CrucibleRecipe extends SerializableRecipe {
     public static final IRecipeType<CrucibleRecipe> RECIPE_TYPE = IRecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
+            .register(ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
     private static RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer;
     private int amount;
     private CrucilbeTypeEnum crucibleType;

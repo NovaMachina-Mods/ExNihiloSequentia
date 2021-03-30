@@ -42,19 +42,19 @@ import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.network.PacketHandler;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-@Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloInitialization {
-    public static final ItemGroup ITEM_GROUP = new ItemGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
+    public static final ItemGroup ITEM_GROUP = new ItemGroup(ModIds.EX_NIHILO_SEQUENTIA) {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ExNihiloBlocks.SIEVE_WOOD.get());
         }
     };
-    @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
+    @ObjectHolder(ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
     public static final GlobalLootModifierSerializer<?> hammerModifier = null;
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
@@ -105,8 +105,8 @@ public class ExNihiloInitialization {
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
     public static void registerTOP(InterModEnqueueEvent event) {
-        logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
-        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
+        logger.debug("The One Probe detected: " + ModList.get().isLoaded(ModIds.TOP));
+        if (ModList.get().isLoaded(ModIds.TOP)) {
             CompatTOP.register();
         }
     }
@@ -186,8 +186,8 @@ public class ExNihiloInitialization {
         EnumOre.GOLD.setEnabled(true);
 
         logger
-                .debug("Immersive Engineering detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING));
-        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING)) {
+                .debug("Immersive Engineering detected: " + ModList.get().isLoaded(ModIds.IMMERSIVE_ENGINEERING));
+        if (ModList.get().isLoaded(ModIds.IMMERSIVE_ENGINEERING)) {
             logger.debug("Added Immersive Engineering");
             EnumOre.ALUMINUM.setEnabled(true);
             EnumOre.COPPER.setEnabled(true);
@@ -196,8 +196,8 @@ public class ExNihiloInitialization {
             EnumOre.LEAD.setEnabled(true);
             EnumOre.URANIUM.setEnabled(true);
         }
-        logger.debug("Create detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE));
-        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE)) {
+        logger.debug("Create detected: " + ModList.get().isLoaded(ModIds.CREATE));
+        if (ModList.get().isLoaded(ModIds.CREATE)) {
             logger.debug("Added Create");
             EnumOre.COPPER.setEnabled(true);
             EnumOre.ZINC.setEnabled(true);

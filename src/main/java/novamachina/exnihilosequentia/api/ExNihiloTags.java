@@ -13,7 +13,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class ExNihiloTags {
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
@@ -78,7 +78,7 @@ public class ExNihiloTags {
         return new ResourceLocation("forge", path);
     }
 
-    private static ResourceLocation exNihiloLoc(String path) { return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, path); }
+    private static ResourceLocation exNihiloLoc(String path) { return new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, path); }
 
     public static class OreTag {
         private final ITag.INamedTag<Item> ingot;

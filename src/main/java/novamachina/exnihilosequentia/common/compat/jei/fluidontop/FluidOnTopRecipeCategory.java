@@ -10,11 +10,11 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluidontop");
-    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_on_top.png");
+    public static final ResourceLocation UID = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "fluidontop");
+    private static final ResourceLocation texture = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_on_top.png");
     private final IDrawableStatic background;
 
     public FluidOnTopRecipeCategory(IGuiHelper guiHelper) {

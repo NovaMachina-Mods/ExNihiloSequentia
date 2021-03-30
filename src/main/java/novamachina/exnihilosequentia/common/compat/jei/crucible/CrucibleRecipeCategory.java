@@ -11,10 +11,10 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
-    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
+    private static final ResourceLocation texture = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
     private final IDrawableStatic background;
     private final IDrawableStatic slotHighlight;
     private final ResourceLocation uid;
@@ -22,7 +22,7 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
     public CrucibleRecipeCategory(IGuiHelper guiHelper, String uid) {
         this.background = guiHelper.createDrawable(texture, 0, 168, 166, 58);
         this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
-        this.uid = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, uid);
+        this.uid = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, uid);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
             }
         }
 
-        if (uid.equals(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"))) {
+        if (uid.equals(new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"))) {
             recipeLayout.getItemStacks().addTooltipCallback(new FiredCrucibleTooltipCallback());
         } else {
             recipeLayout.getItemStacks().addTooltipCallback(new WoodCrucibleTooltipCallback());

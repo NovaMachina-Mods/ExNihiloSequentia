@@ -10,11 +10,11 @@ import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class SieveRecipe extends SerializableRecipe {
     public static final IRecipeType<SieveRecipe> RECIPE_TYPE = IRecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
+            .register(ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
     private static RegistryObject<RecipeSerializer<SieveRecipe>> serializer;
     private ItemStack drop;
     private Ingredient input;
