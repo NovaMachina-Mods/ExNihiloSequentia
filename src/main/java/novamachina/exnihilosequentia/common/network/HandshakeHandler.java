@@ -49,7 +49,7 @@ public class HandshakeHandler {
             PacketHandler.getHandshakeChannel().reply(new HandshakeMessages.C2SAcknowledge(), ctx.get());
         } else {
             logger.debug("Failed to synchronize ore list from server.");
-            ctx.get().getNetworkManager().closeChannel(new StringTextComponent("Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));
+            ctx.get().getNetworkManager().disconnect(new StringTextComponent("Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));
         }
     }
 }

@@ -20,8 +20,8 @@ public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
     }
 
     @Override
-    public HammerRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        Ingredient input = Ingredient.read(buffer);
+    public HammerRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        Ingredient input = Ingredient.fromNetwork(buffer);
         int outputCount = buffer.readInt();
         List<ItemStackWithChance> output = new ArrayList<>(outputCount);
         for (int i = 0; i < outputCount; i++) {
@@ -32,8 +32,8 @@ public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
     }
 
     @Override
-    public void write(PacketBuffer buffer, HammerRecipe recipe) {
-        recipe.getInput().write(buffer);
+    public void toNetwork(PacketBuffer buffer, HammerRecipe recipe) {
+        recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getOutput().size());
         for (ItemStackWithChance stack : recipe.getOutput()) {
             stack.write(buffer);
@@ -42,7 +42,7 @@ public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
 
     @Override
     protected HammerRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        Ingredient input = Ingredient.deserialize(json.get("input"));
+        Ingredient input = Ingredient.fromJson(json.get("input"));
         JsonArray results = json.getAsJsonArray("results");
         List<ItemStackWithChance> output = new ArrayList<>(results.size());
         for (int i = 0; i < results.size(); i++) {

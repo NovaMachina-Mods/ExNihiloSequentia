@@ -28,7 +28,7 @@ import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 
 public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
-    protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+    protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
     public BlockBarrel(BlockBuilder builder) {
         super(builder);
@@ -36,14 +36,14 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
-        AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getTileEntity(data.getPos());
+        AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getBlockEntity(data.getPos());
         if (barrelTile == null) {
             return;
         }
         if (probeMode == ProbeMode.EXTENDED) {
             probeInfo
-                    .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).modifyStyle(style -> {
-                        style.setColor(Color.fromTextFormatting(TextFormatting.GREEN));
+                    .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).withStyle(style -> {
+                        style.withColor(Color.fromLegacyFormat(TextFormatting.GREEN));
                         return style;
                     }));
         }
@@ -68,18 +68,18 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
      */
     @Deprecated
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote()) {
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (worldIn.isClientSide()) {
             return ActionResultType.SUCCESS;
         }
 
-        AbstractBarrelTile tile = (AbstractBarrelTile) worldIn.getTileEntity(pos);
+        AbstractBarrelTile tile = (AbstractBarrelTile) worldIn.getBlockEntity(pos);
 
         if (tile != null) {
             IFluidHandler fluidHandler = tile
-                    .getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, hit.getFace())
+                    .getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, hit.getDirection())
                     .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
-            IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, hit.getFace())
+            IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, hit.getDirection())
                     .orElseThrow(() -> new RuntimeException("Missing Item Handler"));
             return tile.onBlockActivated(player, handIn, fluidHandler, itemHandler);
         }

@@ -19,13 +19,13 @@ public class InfestedLeavesTile extends TileEntity implements ITickableTileEntit
 
     @Override
     public void tick() {
-        if (!world.isRemote()) {
+        if (!level.isClientSide()) {
             progressWaitInterval++;
             if (progressWaitInterval >= Config.getTicksBetweenSpreadAttempt()) {
                 logger.debug("Spreading infested leaves");
 
                 progressWaitInterval = 0;
-                InfestingLeavesBlock.spread(world, pos);
+                InfestingLeavesBlock.spread(level, worldPosition);
             }
         }
     }

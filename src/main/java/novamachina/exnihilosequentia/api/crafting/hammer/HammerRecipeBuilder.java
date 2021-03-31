@@ -38,6 +38,6 @@ public class HammerRecipeBuilder extends ExNihiloFinishedRecipe<HammerRecipeBuil
     }
 
     public HammerRecipeBuilder input(IItemProvider input) {
-        return this.input(Ingredient.fromItems(input));
+        return this.input(Ingredient.of(input));
     }
 }

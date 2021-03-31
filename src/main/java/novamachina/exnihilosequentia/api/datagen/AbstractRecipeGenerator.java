@@ -59,20 +59,24 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     }
 
     protected void registerOre(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shapedRecipe(ore.getChunkItem().get())
-                .patternLine("xx")
-                .patternLine("xx")
-                .key('x', ore.getPieceItem().get())
-                .setGroup(this.modId)
-                .addCriterion("has_piece", InventoryChangeTrigger.Instance.forItems(ore.getPieceItem().get()))
-                .build(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getChunkName())));
+        ShapedRecipeBuilder.shaped(ore.getChunkItem().get())
+                .pattern("xx")
+                .pattern("xx")
+                .define('x', ore.getPieceItem().get())
+                .group(this.modId)
+                .unlockedBy("has_piece", InventoryChangeTrigger.Instance.hasItems(ore.getPieceItem().get()))
+                .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getChunkName())));
     }
 
     protected void registerSmelting(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
         CookingRecipeBuilder
-                .smeltingRecipe(Ingredient.fromItems(ore.getChunkItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 200)
-                .addCriterion(CHUNK_CONDITION, InventoryChangeTrigger.Instance.forItems(ore.getChunkItem().get()))
-                .build(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotName())));
+                .smelting(Ingredient.of(ore.getChunkItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 200)
+                .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.Instance.hasItems(ore.getChunkItem().get()))
+                .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotName())));
+        CookingRecipeBuilder
+                .blasting(Ingredient.of(ore.getChunkItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 200)
+                .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.Instance.hasItems(ore.getChunkItem().get()))
+                .save(consumer, new ResourceLocation(modId, "blast_" + prependRecipePrefix(ore.getIngotName())));
     }
 
     protected ResourceLocation sieveLoc(String id) {

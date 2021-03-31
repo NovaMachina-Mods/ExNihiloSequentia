@@ -1,7 +1,11 @@
 pipeline {
     agent any
     environment {
-        PATH = "/usr/local/go/bin:$PATH"
+	    PATH = "/usr/local/go/bin:$PATH"
+        GITHUB_TOKEN = credentials('github-release')
+        CURSEFORGE_KEY = credentials('curseforge-token')
+        NEXUS_USERNAME = credentials('nexus-username')
+        NEXUS_PASSWORD = credentials('nexus-password')
     }
 
     stages {

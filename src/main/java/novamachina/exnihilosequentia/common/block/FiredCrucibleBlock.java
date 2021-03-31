@@ -11,8 +11,8 @@ public class FiredCrucibleBlock extends CrucibleBaseBlock {
 
     public FiredCrucibleBlock() {
         super(new BlockBuilder().properties(
-                AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(1.5F)
-                        .sound(SoundType.STONE).notSolid()).harvestLevel(ToolType.PICKAXE, 0)
+                AbstractBlock.Properties.of(Material.STONE).strength(1.5F)
+                        .sound(SoundType.STONE).noOcclusion()).harvestLevel(ToolType.PICKAXE, 0)
                 .tileEntitySupplier(FiredCrucibleTile::new));
     }
 }

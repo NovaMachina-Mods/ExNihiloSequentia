@@ -46,7 +46,7 @@ public class HeatRecipe extends SerializableRecipe {
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return ItemStack.EMPTY;
     }
 

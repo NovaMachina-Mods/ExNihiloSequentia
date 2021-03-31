@@ -41,70 +41,70 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
                 fluid != null ? new Color(fluid.getAttributes().getColor()) : Color.INVALID_COLOR;
         Color blockColor = getBlockColor(solidTexture, tileEntity);
         if (fluidTexture != null) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.getTranslucent());
+            IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
+                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
                             fluidTexture);
 
             // Subtract 0.005 to prevent texture fighting
             float fillAmount = (0.75f * tileEntity.getFluidProportion()) - 0.005f;
 
-            matrixStack.push();
+            matrixStack.pushPose();
             matrixStack.translate(.5, .5, .5);
             matrixStack.translate(-.5, -.5, -.5);
 
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 1), new UVLocation(sprite
-                            .getMinU(), sprite.getMaxV()),
+                            .getU0(), sprite.getV1()),
                     fluidColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 1), new UVLocation(sprite
-                            .getMaxU(), sprite.getMaxV()),
+                            .getU1(), sprite.getV1()),
                     fluidColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 0), new UVLocation(sprite
-                            .getMaxU(), sprite.getMinV()),
+                            .getU1(), sprite.getV0()),
                     fluidColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 0), new UVLocation(sprite
-                            .getMinU(), sprite.getMinV()),
+                            .getU0(), sprite.getV0()),
                     fluidColor, combinedLightIn);
 
-            matrixStack.pop();
+            matrixStack.popPose();
         }
         if (solidTexture != null) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.getSolid());
+            IVertexBuilder builder = buffer.getBuffer(RenderType.solid());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
+                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
                             new ResourceLocation(solidTexture.getNamespace(),
                                     "block/" + solidTexture.getPath()));
 
             // Subtract 0.005 to prevent texture fighting
             float fillAmount = (0.75f * Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.005f;
 
-            matrixStack.push();
+            matrixStack.pushPose();
             matrixStack.translate(.5, .5, .5);
             matrixStack.translate(-.5, -.5, -.5);
 
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 1), new UVLocation(sprite
-                            .getMinU(), sprite.getMaxV()),
+                            .getU0(), sprite.getV1()),
                     blockColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 1), new UVLocation(sprite
-                            .getMaxU(), sprite.getMaxV()),
+                            .getU1(), sprite.getV1()),
                     blockColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(1, 0.25f + fillAmount, 0), new UVLocation(sprite
-                            .getMaxU(), sprite.getMinV()),
+                            .getU1(), sprite.getV0()),
                     blockColor, combinedLightIn);
             add(builder, matrixStack, new VertexLocation(0, 0.25f + fillAmount, 0), new UVLocation(sprite
-                            .getMinU(), sprite.getMinV()),
+                            .getU0(), sprite.getV0()),
                     blockColor, combinedLightIn);
 
-            matrixStack.pop();
+            matrixStack.popPose();
         }
     }
 
     private Color getBlockColor(ResourceLocation solidTexture,
                                 BaseCrucibleTile tileEntity) {
         if (solidTexture != null && solidTexture.toString().contains("leaves")) {
-            return new Color(tileEntity.getWorld().getBiome(tileEntity.getPos()).getFoliageColor());
+            return new Color(tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
         }
         return Color.WHITE;
     }

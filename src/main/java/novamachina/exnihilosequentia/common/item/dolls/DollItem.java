@@ -19,13 +19,13 @@ public class DollItem extends Item {
     private final EnumDoll type;
 
     public DollItem(EnumDoll type) {
-        super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
+        super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
         this.type = type;
     }
 
     @Override
-    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
         tooltip.add(new TranslationTextComponent(type.getToolTip()));
     }
 
@@ -48,8 +48,8 @@ public class DollItem extends Item {
 
         if (ForgeRegistries.ENTITIES.containsKey(spawneeResourceLocation)) {
             Entity spawnee = ForgeRegistries.ENTITIES.getValue(spawneeResourceLocation).create(world);
-            spawnee.setPosition(pos.getX(), pos.getY() + type.getYOffset(), pos.getZ());
-            return world.addEntity(spawnee);
+            spawnee.setPos(pos.getX(), pos.getY() + type.getYOffset(), pos.getZ());
+            return world.addFreshEntity(spawnee);
         }
         return false;
     }

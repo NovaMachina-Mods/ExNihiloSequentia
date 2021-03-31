@@ -31,8 +31,8 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
 
     @Override
     public void draw(HeatRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        Minecraft.getInstance().fontRenderer
-                .drawString(matrixStack, recipe.getAmount() + "X", 24, 12, Color.gray.getRGB());
+        Minecraft.getInstance().font
+                .draw(matrixStack, recipe.getAmount() + "X", 24, 12, Color.gray.getRGB());
     }
 
     @Override
@@ -65,7 +65,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
         if (ForgeRegistries.FLUIDS.containsKey(recipe.getInput().getRegistryName())) {
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getInput().getRegistryName()), FluidAttributes.BUCKET_VOLUME));
         } else {
-            ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(Ingredient.fromItems(recipe.getInput()).getMatchingStacks()));
+            ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(Ingredient.of(recipe.getInput()).getItems()));
         }
     }
 
@@ -76,7 +76,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getFluidStacks().set(0, new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getInput().getRegistryName()), FluidAttributes.BUCKET_VOLUME));
         } else {
             recipeLayout.getItemStacks().init(0, true, 0, 16);
-            recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.fromItems(recipe.getInput()).getMatchingStacks()));
+            recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(recipe.getInput()).getItems()));
         }
     }
 }

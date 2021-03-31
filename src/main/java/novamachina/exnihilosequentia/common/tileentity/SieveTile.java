@@ -66,15 +66,15 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
             if (!isRemoved()) {
                 setSieveState();
             }
-            markDirty();
+            setChanged();
         }
     }
 
     public void removeMesh(boolean rerenderSieve) {
         logger.debug("Remove mesh: Rerender Sieve: " + rerenderSieve);
         if (!meshStack.isEmpty()) {
-            world.addEntity(
-                new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F,
+            level.addFreshEntity(
+                new ItemEntity(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F,
                     meshStack.copy()));
             meshStack = ItemStack.EMPTY;
             meshType = EnumMesh.NONE;
@@ -88,14 +88,14 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
         logger.debug("Set Sieve State, Mesh: " + meshType);
         BlockState state = getBlockState();
         if (state.getBlock() instanceof BlockSieve) {
-            world.setBlockState(getPos(), state.with(BlockSieve.MESH, meshType));
+            level.setBlockAndUpdate(getBlockPos(), state.setValue(BlockSieve.MESH, meshType));
         }
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundNBT compound) {
         if (compound.contains(MESH_TAG)) {
-            meshStack = ItemStack.read((CompoundNBT) compound.get(MESH_TAG));
+            meshStack = ItemStack.of((CompoundNBT) compound.get(MESH_TAG));
             if (meshStack.getItem() instanceof MeshItem) {
                 meshType = ((MeshItem) meshStack.getItem()).getMesh();
             }
@@ -104,39 +104,39 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
         }
 
         if (compound.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.read((CompoundNBT) compound.get(BLOCK_TAG));
+            blockStack = ItemStack.of((CompoundNBT) compound.get(BLOCK_TAG));
         } else {
             blockStack = ItemStack.EMPTY;
         }
 
         progress = compound.getFloat(PROGRESS_TAG);
 
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         if (!meshStack.isEmpty()) {
-            CompoundNBT meshNBT = meshStack.write(new CompoundNBT());
+            CompoundNBT meshNBT = meshStack.save(new CompoundNBT());
             compound.put(MESH_TAG, meshNBT);
         }
 
         if (!blockStack.isEmpty()) {
-            CompoundNBT blockNBT = blockStack.write(new CompoundNBT());
+            CompoundNBT blockNBT = blockStack.save(new CompoundNBT());
             compound.put(BLOCK_TAG, blockNBT);
         }
 
         compound.putFloat(PROGRESS_TAG, progress);
 
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Override
-    public void remove() {
-        if (!world.isRemote()) {
+    public void setRemoved() {
+        if (!level.isClientSide()) {
             removeMesh(false);
         }
-        super.remove();
+        super.setRemoved();
     }
 
     public void insertSiftableBlock(ItemStack stack, PlayerEntity player) {
@@ -154,22 +154,22 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
         logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
 
         // 4 ticks is the same period of holding down right click
-        if (getWorld().getWorldInfo().getGameTime() - lastSieveAction < 4) {
+        if (getLevel().getLevelData().getGameTime() - lastSieveAction < 4) {
             return;
         }
 
         // Really good chance that they're using a macro
-        if (player != null && getWorld().getWorldInfo().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUniqueID())) {
-            player.setFire(1);
+        if (player != null && getLevel().getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
+            player.setSecondsOnFire(1);
 
-            ITextComponent message = new StringTextComponent("Bad").setStyle(Style.EMPTY.setColor(Color.fromInt(16711680)).setBold(true));
+            ITextComponent message = new StringTextComponent("Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
 
             player.sendMessage(message, null);
         }
 
-        lastSieveAction = getWorld().getWorldInfo().getGameTime();
+        lastSieveAction = getLevel().getLevelData().getGameTime();
         if (player != null) {
-            lastPlayer = player.getUniqueID();
+            lastPlayer = player.getUUID();
         }
 
         if (isReadyToSieve()) {
@@ -189,8 +189,8 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
                 drops.forEach((entry -> entry.getRolls().forEach(meshWithChance -> {
                     if (random.nextFloat() <= meshWithChance.getChance()) {
                         logger.debug("Spawning Item: " + entry.getDrop());
-                        world.addEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.1F, pos
-                                .getZ() + 0.5F, entry.getDrop()));
+						level.addFreshEntity(new ItemEntity(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.1F, worldPosition
+                            .getZ() + 0.5F, entry.getDrop()));
                     }
                 })));
                 resetSieve();
@@ -202,7 +202,7 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
         logger.debug("Resetting sieve");
         if (Config.enableMeshDurability()) {
             logger.debug("Damaging mesh");
-            meshStack.damageItem(1, new FakePlayer((ServerWorld) world, new GameProfile(UUID
+            meshStack.hurtAndBreak(1, new FakePlayer((ServerWorld) level, new GameProfile(UUID
                 .randomUUID(), "Fake Player")), player -> logger.debug("Broken"));
         }
         blockStack = ItemStack.EMPTY;
@@ -237,24 +237,24 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbt = new CompoundNBT();
         if (!meshStack.isEmpty()) {
-            CompoundNBT meshNBT = meshStack.write(new CompoundNBT());
+            CompoundNBT meshNBT = meshStack.save(new CompoundNBT());
             nbt.put(MESH_TAG, meshNBT);
         }
 
         if (!blockStack.isEmpty()) {
-            CompoundNBT blockNbt = blockStack.write(new CompoundNBT());
+            CompoundNBT blockNbt = blockStack.save(new CompoundNBT());
             nbt.put(BLOCK_TAG, blockNbt);
         }
         nbt.putFloat(PROGRESS_TAG, progress);
 
-        return new SUpdateTileEntityPacket(getPos(), -1, nbt);
+        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
-        CompoundNBT nbt = packet.getNbtCompound();
+        CompoundNBT nbt = packet.getTag();
         if (nbt.contains(MESH_TAG)) {
-            meshStack = ItemStack.read((CompoundNBT) nbt.get(MESH_TAG));
+            meshStack = ItemStack.of((CompoundNBT) nbt.get(MESH_TAG));
             if (meshStack.getItem() instanceof MeshItem) {
                 meshType = ((MeshItem) meshStack.getItem()).getMesh();
             }
@@ -263,7 +263,7 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.read((CompoundNBT) nbt.get(BLOCK_TAG));
+            blockStack = ItemStack.of((CompoundNBT) nbt.get(BLOCK_TAG));
         } else {
             blockStack = ItemStack.EMPTY;
         }

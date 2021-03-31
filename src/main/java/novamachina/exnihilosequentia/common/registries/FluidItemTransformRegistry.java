@@ -31,7 +31,7 @@ public class FluidItemTransformRegistry implements IFluidItemTransformRegistry {
     public IItemProvider getResult(Fluid fluid, Item input) {
         for (FluidItemRecipe recipe : recipeList) {
             if (recipe.validInputs(fluid, input)) {
-                return recipe.getRecipeOutput().getItem();
+                return recipe.getResultItem().getItem();
             }
         }
         return ItemStack.EMPTY.getItem();
