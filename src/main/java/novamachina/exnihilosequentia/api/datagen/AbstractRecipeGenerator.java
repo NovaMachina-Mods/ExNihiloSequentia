@@ -46,6 +46,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         return "Recipes: " + modId;
     }
 
+    protected ResourceLocation exNihiloLoc(String id) {
+        return new ResourceLocation(modId, id);
+    }
+
     protected ResourceLocation compostLoc(String id) {
         return new ResourceLocation(modId, "compost/" + prependRecipePrefix(id));
     }
@@ -178,7 +182,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .define('x', input)
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.hasItems(input))
-                .save(consumer, createSaveLocation(result.getRegistryName()));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
     }
 
     protected void registerCrook(Item result, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
@@ -190,7 +194,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.Instance
                         .hasItems(ItemPredicate.Builder.item().of(input).build()))
-                .save(consumer, createSaveLocation(result.getRegistryName()));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
     }
 
     protected void createFiredCrucibleRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {
@@ -231,7 +235,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .define('i', inputItem)
                 .define('m', inputMesh)
                 .unlockedBy("has_mesh", InventoryChangeTrigger.Instance.hasItems(inputMesh))
-                .save(consumer, createSaveLocation(output.getRegistryName()));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
     }
 
     protected void registerMesh(Item output, Item inputMesh, Item inputItem, Consumer<IFinishedRecipe> consumer) {
@@ -242,7 +246,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .define('i', inputItem)
                 .define('m', inputMesh)
                 .unlockedBy("has_mesh", InventoryChangeTrigger.Instance.hasItems(inputMesh))
-                .save(consumer, createSaveLocation(output.getRegistryName()));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
     }
 
     protected void createHeatRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {

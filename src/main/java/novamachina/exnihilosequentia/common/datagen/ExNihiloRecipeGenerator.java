@@ -14,9 +14,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipeBuilder;
@@ -220,67 +222,33 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));
     }
 
+    protected void createDolls(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> inputCorner, ITag.INamedTag<Item> inputTop,
+                               ITag.INamedTag<Item> inputSides,  ITag.INamedTag<Item> inputBottom, RegistryObject<Item> newDoll) {
+        ShapedRecipeBuilder.shaped(newDoll.get())
+                .pattern("ctc")
+                .pattern("sms")
+                .pattern("cbc")
+                .define('c', inputCorner)
+                .define('s', inputSides)
+                .define('t', inputTop)
+                .define('b', inputBottom)
+                .define('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
+                .unlockedBy(DOLL_CONDITION, InventoryChangeTrigger.Instance
+                        .hasItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
+                .save(consumer, createSaveLocation(newDoll.getId()));
+    }
+
     private void registerDolls(Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(EnumDoll.SHULKER.getRegistryObject().get())
-                .pattern("ctc")
-                .pattern("sms")
-                .pattern("cbc")
-                .define('c', Tags.Items.DYES_PURPLE)
-                .define('s', Tags.Items.DUSTS_GLOWSTONE)
-                .define('t', Tags.Items.END_STONES)
-                .define('b', Tags.Items.ENDER_PEARLS)
-                .define('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-                .unlockedBy(DOLL_CONDITION, InventoryChangeTrigger.Instance
-                        .hasItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumDoll.SHULKER.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shaped(EnumDoll.GUARDIAN.getRegistryObject().get())
-                .pattern("ctc")
-                .pattern("sms")
-                .pattern("cbc")
-                .define('c', Tags.Items.GEMS_PRISMARINE)
-                .define('s', Tags.Items.DUSTS_GLOWSTONE)
-                .define('t', Tags.Items.DUSTS_REDSTONE)
-                .define('b', ItemTags.FISHES)
-                .define('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-                .unlockedBy(DOLL_CONDITION, InventoryChangeTrigger.Instance
-                        .hasItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumDoll.GUARDIAN.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shaped(EnumDoll.BEE.getRegistryObject().get())
-                .pattern("ctc")
-                .pattern("sms")
-                .pattern("cbc")
-                .define('c', Tags.Items.DYES_YELLOW)
-                .define('s', Tags.Items.DUSTS_GLOWSTONE)
-                .define('t', ItemTags.FLOWERS)
-                .define('b', EnumResource.BEEHIVE_FRAME.getRegistryObject().get())
-                .define('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-                .unlockedBy(DOLL_CONDITION, InventoryChangeTrigger.Instance
-                        .hasItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumDoll.BEE.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shaped(EnumDoll.BLAZE.getRegistryObject().get())
-                .pattern("ctc")
-                .pattern("sms")
-                .pattern("cbc")
-                .define('c', Items.BLAZE_POWDER)
-                .define('s', Tags.Items.DUSTS_GLOWSTONE)
-                .define('t', Tags.Items.DUSTS_REDSTONE)
-                .define('b', Tags.Items.CROPS_NETHER_WART)
-                .define('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-                .unlockedBy(DOLL_CONDITION, InventoryChangeTrigger.Instance
-                        .hasItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumDoll.BLAZE.getRegistryObject().getId()));
-        ShapedRecipeBuilder.shaped(EnumDoll.ENDERMAN.getRegistryObject().get())
-                .pattern("ctc")
-                .pattern("sms")
-                .pattern("cbc")
-                .define('c', Tags.Items.DYES_BLACK)
-                .define('s', Tags.Items.DUSTS_GLOWSTONE)
-                .define('t', Tags.Items.DUSTS_REDSTONE)
-                .define('b', Tags.Items.CROPS_NETHER_WART)
-                .define('m', EnumResource.CRAFTING_DOLL.getRegistryObject().get())
-                .unlockedBy(DOLL_CONDITION, InventoryChangeTrigger.Instance
-                        .hasItems(EnumResource.CRAFTING_DOLL.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumDoll.ENDERMAN.getRegistryObject().getId()));
+        createDolls(consumer, Tags.Items.DYES_PURPLE, Tags.Items.DUSTS_GLOWSTONE, Tags.Items.END_STONES,
+                Tags.Items.ENDER_PEARLS, EnumDoll.SHULKER.getRegistryObject());
+        createDolls(consumer, Tags.Items.GEMS_PRISMARINE, Tags.Items.DUSTS_GLOWSTONE, Tags.Items.DUSTS_REDSTONE,
+                ItemTags.FISHES, EnumDoll.GUARDIAN.getRegistryObject());
+        createDolls(consumer, Tags.Items.DYES_YELLOW, Tags.Items.DUSTS_GLOWSTONE, ItemTags.FLOWERS,
+                EnumResource.BEEHIVE_FRAME.getRegistryObject().get(), EnumDoll.BEE.getRegistryObject());
+        createDolls(consumer, Items.BLAZE_POWDER, Tags.Items.DUSTS_GLOWSTONE, Tags.Items.DUSTS_REDSTONE,
+                Tags.Items.CROPS_NETHER_WART, EnumDoll.BLAZE.getRegistryObject());
+        createDolls(consumer, Tags.Items.DYES_BLACK, Tags.Items.DUSTS_GLOWSTONE, Tags.Items.DUSTS_REDSTONE,
+                Tags.Items.CROPS_NETHER_WART, EnumDoll.ENDERMAN.getRegistryObject());
     }
 
     private void registerFluidItemRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -398,7 +366,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlocks("has_diamond_hammer", InventoryChangeTrigger.Instance
                         .hasItems(EnumHammer.DIAMOND.getRegistryObject().get()))
                 .unlocks(MATERIAL_CONDITION, has(Tags.Items.INGOTS_NETHERITE))
-                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.hammerName)));
+                .save(consumer, createSaveLocation(exNihiloLoc(EnumHammer.NETHERITE.hammerName)));
         registerHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND, consumer);
         registerHammer(EnumHammer.GOLD.getRegistryObject().get(), Tags.Items.INGOTS_GOLD, consumer);
         registerHammer(EnumHammer.IRON.getRegistryObject().get(), Tags.Items.INGOTS_IRON, consumer);
@@ -444,8 +412,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlocks("has_emerald_mesh", InventoryChangeTrigger.Instance
                         .hasItems(EnumMesh.EMERALD.getRegistryObject().get()))
                 .unlocks(MATERIAL_CONDITION, has(Tags.Items.INGOTS_NETHERITE))
-                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE
-                        .getMeshName())));
+                .save(consumer, createSaveLocation(exNihiloLoc(EnumMesh.NETHERITE.getMeshName())));
 
         ShapedRecipeBuilder.shaped(EnumMesh.STRING.getRegistryObject().get())
                 .pattern("iii")
@@ -512,7 +479,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .hasItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
                 .unlockedBy("has_diamond", InventoryChangeTrigger.Instance
                         .hasItems(ItemPredicate.Builder.item().of(Tags.Items.GEMS_DIAMOND).build()))
-                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x4")));
+                .save(consumer, createSaveLocation(exNihiloLoc("doll_x4")));
 
         ShapedRecipeBuilder.shaped(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 6)
                 .pattern("xex")
@@ -524,7 +491,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .hasItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
                 .unlockedBy("has_emerald", InventoryChangeTrigger.Instance
                         .hasItems(ItemPredicate.Builder.item().of(Tags.Items.GEMS_EMERALD).build()))
-                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x6")));
+                .save(consumer, createSaveLocation(exNihiloLoc("doll_x6")));
 
         ShapedRecipeBuilder.shaped(ExNihiloBlocks.END_CAKE.get())
                 .pattern("ece")
