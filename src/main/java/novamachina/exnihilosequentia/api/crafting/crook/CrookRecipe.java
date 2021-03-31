@@ -20,7 +20,7 @@ public class CrookRecipe extends SerializableRecipe {
     private final List<ItemStackWithChance> output;
 
     public CrookRecipe(ResourceLocation id, Ingredient input, List<ItemStackWithChance> output) {
-        super(output.get(0).getStack(), RECIPE_TYPE, id);
+        super(output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack(), RECIPE_TYPE, id);
         this.input = input;
         this.output = output;
     }
@@ -61,7 +61,7 @@ public class CrookRecipe extends SerializableRecipe {
 
     @Override
     public ItemStack getResultItem() {
-        return output.get(0).getStack().copy();
+        return output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack().copy();
     }
 
     @Override
