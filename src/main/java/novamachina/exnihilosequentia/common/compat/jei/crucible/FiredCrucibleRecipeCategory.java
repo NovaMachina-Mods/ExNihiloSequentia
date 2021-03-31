@@ -13,13 +13,13 @@ import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
-public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
+public class FiredCrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
     private static final ResourceLocation texture = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
-    public static final ResourceLocation UID = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "crucible");
+    public static final ResourceLocation UID = new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "fired_crucible");
     private final IDrawableStatic background;
     private final IDrawableStatic slotHighlight;
 
-    public CrucibleRecipeCategory(IGuiHelper guiHelper) {
+    public FiredCrucibleRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(texture, 0, 168, 166, 58);
         this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
     }
@@ -41,7 +41,7 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
 
     @Override
     public String getTitle() {
-        return "Crucible";
+        return "Fired Crucible";
     }
 
     @Override
@@ -77,6 +77,6 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
                 recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
             }
         }
-        recipeLayout.getItemStacks().addTooltipCallback(new WoodCrucibleTooltipCallback());
+        recipeLayout.getItemStacks().addTooltipCallback(new FiredCrucibleTooltipCallback());
     }
 }

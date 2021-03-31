@@ -11,15 +11,23 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipeBuilder;
+import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.block.BaseBlock;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
@@ -101,6 +109,15 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_blast")));
     }
 
+    protected void createCookingRecipe(Consumer<IFinishedRecipe> consumer, Item input, Item output, float xpCampfire, int durationCampfire, float xpSmoker, int durationSmoker, String condition, ResourceLocation rl) {
+        CookingRecipeBuilder.cooking(Ingredient.of(input), output, xpCampfire, durationCampfire, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE)
+                .unlockedBy(condition, InventoryChangeTrigger.Instance.hasItems(input))
+                .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_from_campfire")));
+        CookingRecipeBuilder.cooking(Ingredient.of(input), output, xpSmoker, durationSmoker, IRecipeSerializer.SMOKING_RECIPE)
+                .unlockedBy(condition, InventoryChangeTrigger.Instance.hasItems(input))
+                .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_from_smoker")));
+    }
+
     protected ResourceLocation sieveLoc(String id) {
         return new ResourceLocation(modId, "sieve/" + prependRecipePrefix(id));
     }
@@ -174,7 +191,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CompostRecipeBuilder.builder().input(item).amount(amount).build(consumer, compostLoc(string));
     }
 
-    protected void registerCrook(Item result, Item input, Consumer<IFinishedRecipe> consumer) {
+    protected void createCrook(Item result, Item input, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("xx")
                 .pattern(" x")
@@ -185,7 +202,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
     }
 
-    protected void registerCrook(Item result, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
+    protected void createCrook(Item result, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("xx")
                 .pattern(" x")
@@ -214,7 +231,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
 
-    protected void registerHammer(Item output, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
+    protected void createHammer(Item output, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(output)
                 .pattern(" x ")
                 .pattern(" -x")
@@ -227,7 +244,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
     }
 
-    protected void registerMesh(Item output, Item inputMesh, ITag.INamedTag<Item> inputItem, Consumer<IFinishedRecipe> consumer) {
+    protected void createMesh(Item output, Item inputMesh, Tags.IOptionalNamedTag<Item> inputItem, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(output)
                 .pattern("i i")
                 .pattern("imi")
@@ -238,7 +255,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
     }
 
-    protected void registerMesh(Item output, Item inputMesh, Item inputItem, Consumer<IFinishedRecipe> consumer) {
+    protected void createMesh(Item output, Item inputMesh, Item inputItem, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(output)
                 .pattern("i i")
                 .pattern("imi")
@@ -254,13 +271,40 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     }
 
 
-    protected void registerPebbleBlock(Block result, Item input, Consumer<IFinishedRecipe> consumer) {
+    protected void createPebbleBlock(Block result, Item input, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("xx")
                 .pattern("xx")
                 .define('x', input)
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.hasItems(input))
-                .save(consumer, createSaveLocation(result.getRegistryName()));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
+    }
+
+    protected void createCrookRecipes(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> itemInput,
+                                      IItemProvider itemDrop, float chance, String id) {
+        CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
+    }
+
+    protected void createFluidItemRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInput, Item itemInput, Block blockOutput, String id) {
+        FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput).build(consumer, fluidItemLoc(id));
+    }
+    protected void createFluidItemRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInput, Tags.IOptionalNamedTag<Item> itemInput, Block blockOutput, String id) {
+        FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput).build(consumer, fluidItemLoc(id));
+    }
+
+    protected void createFluidOnTopRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInTank, Fluid fluidOnTop, Block blockOutput, String id) {
+        FluidOnTopRecipeBuilder.builder().fluidInTank(fluidInTank).fluidOnTop(fluidOnTop).result(blockOutput)
+                .build(consumer, fluidOnTopLoc(id));
+    }
+
+    protected void createFluidTransformRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInTank,
+                                               ITag.INamedTag<Item> catalyst, Fluid fluidResult, String id) {
+        FluidTransformRecipeBuilder.builder().fluidInTank(fluidInTank).catalyst(Ingredient.of(catalyst))
+                .result(fluidResult).build(consumer, fluidTransformLoc(id));
+    }
+
+    protected void createHammerRecipes(Consumer<IFinishedRecipe> consumer, Block blockInput, Block blockOutput, String id) {
+        HammerRecipeBuilder.builder().input(blockInput).addDrop(blockOutput).build(consumer, hammerLoc(id));
     }
 }

@@ -23,6 +23,7 @@ import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipeCategory;
+import novamachina.exnihilosequentia.common.compat.jei.crucible.FiredCrucibleRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.fluiditem.FluidBlockRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
@@ -63,15 +64,8 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new FluidTransformCategory(guiHelper));
         registration.addRecipeCategories(new FluidBlockRecipeCategory(guiHelper));
         registration.addRecipeCategories(new CompostRecipeCategory(guiHelper));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_ACACIA));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_BIRCH));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_DARK_OAK));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_JUNGLE));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_SPRUCE));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_OAK));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_WARPED));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_CRIMSON));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, Blocks.CRUCIBLE_FIRED));
+        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new FiredCrucibleRecipeCategory(guiHelper));
         registration.addRecipeCategories(new HeatRecipeCategory(guiHelper));
     }
 
@@ -120,15 +114,15 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_YELLOW.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_RED.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_WHITE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_ACACIA.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_ACACIA), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_BIRCH.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_BIRCH), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_DARK_OAK), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_JUNGLE.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_JUNGLE), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_SPRUCE.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_SPRUCE), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_OAK.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_OAK), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_FIRED), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_CRIMSON), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WARPED.get()), new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_WARPED), HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_ACACIA.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_BIRCH.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_JUNGLE.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_SPRUCE.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_OAK.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()), FiredCrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()), FiredCrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WARPED.get()), FiredCrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
     }
 
     @Override
@@ -159,9 +153,7 @@ public class JEIPlugin implements IModPlugin {
 
     private void registerFiredCrucible(IRecipeRegistration registration) {
         List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList();
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_FIRED));
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_CRIMSON));
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_WARPED));
+        registration.addRecipes(recipes, FiredCrucibleRecipeCategory.UID);
         logger.info("Fired Crucible Recipes Loaded: " + recipes.size());
     }
 
@@ -205,12 +197,7 @@ public class JEIPlugin implements IModPlugin {
 
     private void registerWoodCrucible(IRecipeRegistration registration) {
         List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList().stream().filter(recipe -> recipe.getCrucibleType() == CrucilbeTypeEnum.WOOD).collect(Collectors.toList());
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_ACACIA));
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_BIRCH));
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_DARK_OAK));
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_JUNGLE));
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_SPRUCE));
-        registration.addRecipes(recipes, new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, Blocks.CRUCIBLE_OAK));
+        registration.addRecipes(recipes, CrucibleRecipeCategory.UID);
         logger.info("Wooden Crucible Recipes Loaded: " + recipes.size());
     }
 }

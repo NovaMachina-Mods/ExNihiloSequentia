@@ -24,12 +24,12 @@ public class AbstractLangGenerator extends LanguageProvider {
     }
 
     protected void addPiece(String item, String name) {
-        final String PIECE_LANG = ITEM_LANG + ".piece_";
+        final String PIECE_LANG = ITEM_LANG + "piece_";
         add(PIECE_LANG + item, name);
     }
 
     protected void addIngot(String item, String name) {
-        final String INGOT_LANG = ITEM_LANG + ".ingot_";
+        final String INGOT_LANG = ITEM_LANG + "ingot_";
         add(INGOT_LANG + item, name);
     }
 
