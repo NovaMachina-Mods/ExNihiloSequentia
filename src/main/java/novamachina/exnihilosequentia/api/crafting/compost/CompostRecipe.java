@@ -49,11 +49,11 @@ public class CompostRecipe extends SerializableRecipe {
     }
 
     public List<ItemStack> getInputs() {
-        return Arrays.asList(input.getMatchingStacks());
+        return Arrays.asList(input.getItems());
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return ItemStack.EMPTY;
     }
 

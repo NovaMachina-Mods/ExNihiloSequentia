@@ -30,7 +30,7 @@ public class BarrelModeRegistry {
         logger.debug("Adding barrel modes");
         addMode(() -> new EmptyBarrelMode(BarrelModes.EMPTY), TriggerType.NONE);
         addMode(() -> new CompostBarrelMode(BarrelModes.COMPOST), TriggerType.ITEM);
-        addMode(() -> new FluidsBarrelMode(BarrelModes.FLUID), TriggerType.FLUID);
+        addMode(() -> new FluidsBarrelMode(BarrelModes.FLUID), TriggerType.ITEM);
         addMode(() -> new BlockBarrelMode(BarrelModes.BLOCK), TriggerType.NONE);
         addMode(() -> new MobSpawnBarrelMode(BarrelModes.MOB), TriggerType.NONE);
         addMode(() -> new FluidTransformBarrelMode(BarrelModes.TRANSFORM), TriggerType.NONE);

@@ -20,7 +20,7 @@ public class PluginWaila implements IWailaPlugin {
         registrar
                 .registerComponentProvider(new InfestingLeavesComponentProvider(), TooltipPosition.BODY, InfestingLeavesBlock.class);
         registrar
-                .registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, ExNihiloBlocks.CRUCIBLE_WOOD.getClass());
+                .registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, ExNihiloBlocks.CRUCIBLE_OAK.getClass());
         registrar
                 .registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, FiredCrucibleBlock.class);
     }

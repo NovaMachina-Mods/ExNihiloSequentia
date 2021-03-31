@@ -41,15 +41,15 @@ public class UseCrookModifier extends LootModifier {
     @Override
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         logger.debug("Fired Crook Modifier");
-        ItemStack tool = context.get(LootParameters.TOOL);
-        BlockState blockState = context.get(LootParameters.BLOCK_STATE);
-        BlockPos pos = new BlockPos(context.get(LootParameters.field_237457_g_).getX(), context.get(LootParameters.field_237457_g_).getY(), context.get(LootParameters.field_237457_g_).getZ());
+        ItemStack tool = context.getParamOrNull(LootParameters.TOOL);
+        BlockState blockState = context.getParamOrNull(LootParameters.BLOCK_STATE);
+        BlockPos pos = new BlockPos(context.getParamOrNull(LootParameters.ORIGIN).x(), context.getParamOrNull(LootParameters.ORIGIN).y(), context.getParamOrNull(LootParameters.ORIGIN).z());
         List<ItemStack> newLoot = new ArrayList<>();
 
         if (tool != null && blockState != null && ExNihiloTags.CROOK.contains(tool.getItem()) && ExNihiloRegistries.CROOK_REGISTRY.isCrookable(blockState.getBlock())) {
             for (int i = 0; i < Config.getVanillaSimulateDropCount(); i++) {
                 List<ItemStack> items = Block
-                        .getDrops(blockState, context.getWorld().getServer().getWorld(context.getWorld().getDimensionKey()),
+                        .getDrops(blockState, context.getLevel().getServer().getLevel(context.getLevel().dimension()),
                                 pos, null);
                 newLoot.addAll(items.stream().filter(drop -> !drop.getItem().getRegistryName().equals(blockState.getBlock().getRegistryName())).collect(Collectors.toList()));
             }

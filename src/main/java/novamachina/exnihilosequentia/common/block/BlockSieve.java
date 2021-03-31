@@ -51,37 +51,37 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
 
     public BlockSieve(BlockBuilder builder) {
         super(builder);
-        this.setDefaultState(this.stateContainer.getBaseState().with(MESH, EnumMesh.NONE).with(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(MESH, EnumMesh.NONE).setValue(WATERLOGGED, false));
     }
 
     public void activateBlock(BlockState state, World worldIn, PlayerEntity player, BlockPos pos, Hand handIn) {
-        ItemStack stack = player.getHeldItem(handIn);
-        SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
+        ItemStack stack = player.getItemInHand(handIn);
+        SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
 
         assert sieveTile != null;
         logger.debug("isReadyToSieve: " + sieveTile.isReadyToSieve());
         if (sieveTile.isReadyToSieve()) {
-            sieveTile.activateSieve(player, state.get(WATERLOGGED));
+            sieveTile.activateSieve(player, state.getValue(WATERLOGGED));
         }
         if (!sieveTile.isReadyToSieve() && stack.getItem() instanceof BlockItem) {
             BlockItem blockItem = (BlockItem) stack.getItem();
-            logger.debug("Is Block Siftable: " + ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED)));
-            if (ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.get(WATERLOGGED))) {
+            logger.debug("Is Block Siftable: " + ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.getValue(WATERLOGGED)));
+            if (ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(blockItem.getBlock(), sieveTile.getMesh(), state.getValue(WATERLOGGED))) {
                 sieveTile.insertSiftableBlock(stack, player);
             }
         }
-        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
+        worldIn.sendBlockUpdated(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
     }
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
-        SieveTile sieveTile = (SieveTile) world.getTileEntity(iProbeHitData.getPos());
+        SieveTile sieveTile = (SieveTile) world.getBlockEntity(iProbeHitData.getPos());
 
         assert sieveTile != null;
         if (!sieveTile.getBlockStack().isEmpty()) {
             iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
                     .formatPercent(sieveTile.getProgress() / 1.0F)));
-            iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", new TranslationTextComponent(sieveTile.getBlockStack().getTranslationKey())));
+            iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", new TranslationTextComponent(sieveTile.getBlockStack().getDescriptionId())));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.mesh", new TranslationTextComponent("item." + ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName())));
@@ -96,19 +96,19 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     @Nonnull
     @Override
     public FluidState getFluidState(BlockState state) {
-        return Boolean.TRUE.equals(state.get(WATERLOGGED)) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return Boolean.TRUE.equals(state.getValue(WATERLOGGED)) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidState = context.getWorld().getFluidState(context.getPos());
-        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState().setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @Override
-    public void harvestBlock(@Nonnull World worldIn, @Nonnull PlayerEntity player, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable TileEntity te, @Nonnull ItemStack stack) {
-        super.harvestBlock(worldIn, player, pos, state, te, stack);
-        if (!worldIn.isRemote() && te instanceof SieveTile) {
+    public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+        super.playerDestroy(worldIn, player, pos, state, te, stack);
+        if (!worldIn.isClientSide() && te instanceof SieveTile) {
             ((SieveTile) te).removeMesh(true);
         }
     }
@@ -120,13 +120,12 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     @SuppressWarnings("deprecation")
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
-        if (!worldIn.isRemote()) {
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide()) {
             logger.debug("Sieve Activated");
-            SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
-            ItemStack stack = player.getHeldItem(handIn);
-            assert sieveTile != null;
-            if (player.isSneaking() && stack.isEmpty()) {
+            SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
+            ItemStack stack = player.getItemInHand(handIn);
+            if (player.isShiftKeyDown() && stack.isEmpty()) {
                 sieveTile.removeMesh(true);
             }
 
@@ -139,16 +138,15 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
                 sieveTile.insertMesh(stack, player);
             }
         }
-        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
+        worldIn.sendBlockUpdated(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
         return ActionResultType.SUCCESS;
     }
 
     @Override
-    public void onBlockPlacedBy(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        if (!worldIn.isRemote()) {
-            SieveTile sieveTile = (SieveTile) worldIn.getTileEntity(pos);
-            assert sieveTile != null;
+    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(worldIn, pos, state, placer, stack);
+        if (!worldIn.isClientSide()) {
+            SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
             sieveTile.setSieveState();
         }
     }
@@ -160,15 +158,15 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     @Deprecated
     @Nonnull
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld worldIn, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
-        if (Boolean.TRUE.equals(stateIn.get(WATERLOGGED))) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if (Boolean.TRUE.equals(stateIn.getValue(WATERLOGGED))) {
+            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
-        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
     @Override
-    protected void fillStateContainer(Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         builder.add(MESH, WATERLOGGED);
     }
 
@@ -176,7 +174,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         NonNullList<BlockPos> nearbySieves = NonNullList.create();
 
         BlockPos
-                .getAllInBox(new BlockPos(pos.getX() - Config.getSieveRange(), pos.getY(), pos.getZ() - Config.getSieveRange()),
+                .betweenClosedStream(new BlockPos(pos.getX() - Config.getSieveRange(), pos.getY(), pos.getZ() - Config.getSieveRange()),
                         new BlockPos(pos.getX() + Config.getSieveRange(), pos.getY(), pos.getZ() + Config.getSieveRange()))
                 .forEach(item -> {
                     if (world.getBlockState(item).getBlock() instanceof BlockSieve) {
@@ -189,7 +187,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
 
     @SuppressWarnings("deprecation")
     @OnlyIn(Dist.CLIENT)
-    public float getAmbientOcclusionLightValue(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
+    public float getShadeBrightness(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return 1.0F;
     }
 

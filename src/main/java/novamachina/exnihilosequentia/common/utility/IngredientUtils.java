@@ -14,12 +14,12 @@ public class IngredientUtils {
         String item1;
         String item2;
         try {
-            item1 = Arrays.toString(i1.getMatchingStacks());
-            item2 = Arrays.toString(i2.getMatchingStacks());
+            item1 = Arrays.toString(i1.getItems());
+            item2 = Arrays.toString(i2.getItems());
         } catch (Exception e) {
             logger.debug("Cannot compare ingredients");
-            logger.debug("Ingredient 1: " + Arrays.toString(i1.getMatchingStacks()));
-            logger.debug("Ingredient 2: " + Arrays.toString(i2.getMatchingStacks()));
+            logger.debug("Ingredient 1: " + Arrays.toString(i1.getItems()));
+            logger.debug("Ingredient 2: " + Arrays.toString(i2.getItems()));
             logger.debug(e.getMessage());
             return false;
         }

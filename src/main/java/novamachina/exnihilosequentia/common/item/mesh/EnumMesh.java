@@ -59,7 +59,7 @@ public enum EnumMesh implements IStringSerializable, IExtensibleEnum {
     }
 
     @Override
-    public String getString() {
+    public String getSerializedName() {
         return this.name;
     }
 }

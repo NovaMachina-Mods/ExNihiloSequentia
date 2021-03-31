@@ -49,7 +49,7 @@ public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecip
     @Override
     public void setIngredients(FluidOnTopRecipe recipe, IIngredients ingredients) {
         ingredients.setInputs(VanillaTypes.FLUID, Arrays.asList(recipe.getFluidInTank(), recipe.getFluidOnTop()));
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
     }
 
     @Override
@@ -60,6 +60,6 @@ public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecip
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInTank());
         recipeLayout.getFluidStacks().set(1, recipe.getFluidOnTop());
-        recipeLayout.getItemStacks().set(0, recipe.getRecipeOutput());
+        recipeLayout.getItemStacks().set(0, recipe.getResultItem());
     }
 }

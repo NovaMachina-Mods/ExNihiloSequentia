@@ -32,12 +32,12 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
 
     private void registerLeaves(Block block) {
         LootPool.Builder stringPool = createLootPoolBuilder();
-        stringPool.rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(Items.STRING));
-        stringPool.acceptCondition(SurvivesExplosion.builder());
+        stringPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.STRING));
+        stringPool.when(SurvivesExplosion.survivesExplosion());
 
         LootPool.Builder silkWormPool = createLootPoolBuilder();
-        silkWormPool.rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(EnumResource.SILKWORM.getRegistryObject().get()));
-        silkWormPool.acceptCondition(RandomChance.builder(0.7F));
+        silkWormPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(EnumResource.SILKWORM.getRegistryObject().get()));
+        silkWormPool.when(RandomChance.randomChance(0.7F));
 
         register(block, stringPool, silkWormPool);
     }
@@ -48,7 +48,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.BARREL_DARK_OAK.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_JUNGLE.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_SPRUCE.get());
-        registerSelfDrop(ExNihiloBlocks.BARREL_WOOD.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_OAK.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_CRIMSON.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_WARPED.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_STONE.get());
@@ -76,7 +76,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_JUNGLE.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_SPRUCE.get());
-        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_WOOD.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_OAK.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_ANDESITE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_DIORITE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_END_STONE.get());
@@ -88,6 +88,6 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.SIEVE_DARK_OAK.get());
         registerSelfDrop(ExNihiloBlocks.SIEVE_JUNGLE.get());
         registerSelfDrop(ExNihiloBlocks.SIEVE_SPRUCE.get());
-        registerSelfDrop(ExNihiloBlocks.SIEVE_WOOD.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_OAK.get());
     }
 }

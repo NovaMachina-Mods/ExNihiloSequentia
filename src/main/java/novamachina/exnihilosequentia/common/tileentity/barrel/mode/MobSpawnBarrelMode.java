@@ -43,7 +43,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
         if (doll != null) {
             currentProgress++;
             spawnParticle(barrelTile);
-            if (currentProgress >= Config.getSecondsToSpawn() * 20 && doll.spawnMob(barrelTile.getWorld(), barrelTile.getPos())) {
+            if (currentProgress >= Config.getSecondsToSpawn() * 20 && doll.spawnMob(barrelTile.getLevel(), barrelTile.getBlockPos())) {
                 barrelTile.getTank().setFluid(FluidStack.EMPTY);
                 barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
             }
@@ -94,11 +94,11 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerWorld) barrelTile.getWorld())
-            .spawnParticle(ParticleTypes.LARGE_SMOKE,
-                barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
-                barrelTile.getPos().getY() + barrelTile.getWorld().rand.nextDouble(),
-                barrelTile.getPos().getZ() + barrelTile.getWorld().rand.nextDouble(),
+        ((ServerWorld) barrelTile.getLevel())
+            .sendParticles(ParticleTypes.LARGE_SMOKE,
+                barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
+                barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
+                barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
                 5,
                 0.0,
                 0.0,

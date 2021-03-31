@@ -22,9 +22,7 @@ public class CrookRecipe extends SerializableRecipe {
     private final List<ItemStackWithChance> output;
 
     public CrookRecipe(ResourceLocation id, Ingredient input, List<ItemStackWithChance> output) {
-        //TODO This one throws IndexOutOfBoundsException due to it always just use the first output
-        //super(output.get(0).getStack(), RECIPE_TYPE, id);
-        super(ItemStack.EMPTY, RECIPE_TYPE, id);
+        super(output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack(), RECIPE_TYPE, id);
         this.input = input;
         this.output = output;
     }
@@ -50,7 +48,7 @@ public class CrookRecipe extends SerializableRecipe {
     }
 
     public List<ItemStack> getInputs() {
-        return Arrays.asList(input.getMatchingStacks());
+        return Arrays.asList(input.getItems());
     }
 
     public List<ItemStackWithChance> getOutput() {
@@ -65,9 +63,8 @@ public class CrookRecipe extends SerializableRecipe {
 
     @Nonnull
     @Override
-    public ItemStack getRecipeOutput() {
-        return outputDummy;
-        //return output.get(0).getStack().copy();
+    public ItemStack getResultItem() {
+        return output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack().copy();
     }
 
     @Override

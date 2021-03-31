@@ -25,12 +25,12 @@ public class ExNihiloBlocks {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister
             .create(ForgeRegistries.BLOCKS, ModIds.EX_NIHILO_SEQUENTIA);
     //TODO Simplified due to no TileEntity or further usage
-    public static final RegistryObject<BaseFallingBlock> DUST = createFallingBlocks(Blocks.DUST, SoundType.CLOTH);
-    public static final RegistryObject<BaseFallingBlock> CRUSHED_NETHERRACK = createFallingBlocks(Blocks.CRUSHED_NETHERRACK, SoundType.GROUND);
-    public static final RegistryObject<BaseFallingBlock> CRUSHED_END_STONE = createFallingBlocks(Blocks.CRUSHED_END_STONE, SoundType.GROUND);
-    public static final RegistryObject<BaseFallingBlock> CRUSHED_ANDESITE = createFallingBlocks(Blocks.CRUSHED_ANDESITE, SoundType.GROUND);
-    public static final RegistryObject<BaseFallingBlock> CRUSHED_DIORITE = createFallingBlocks(Blocks.CRUSHED_DIORITE, SoundType.GROUND);
-    public static final RegistryObject<BaseFallingBlock> CRUSHED_GRANITE = createFallingBlocks(Blocks.CRUSHED_GRANITE, SoundType.GROUND);
+    public static final RegistryObject<BaseFallingBlock> DUST = createFallingBlocks(Blocks.DUST, SoundType.SAND);
+    public static final RegistryObject<BaseFallingBlock> CRUSHED_NETHERRACK = createFallingBlocks(Blocks.CRUSHED_NETHERRACK, SoundType.STONE);
+    public static final RegistryObject<BaseFallingBlock> CRUSHED_END_STONE = createFallingBlocks(Blocks.CRUSHED_END_STONE, SoundType.STONE);
+    public static final RegistryObject<BaseFallingBlock> CRUSHED_ANDESITE = createFallingBlocks(Blocks.CRUSHED_ANDESITE, SoundType.STONE);
+    public static final RegistryObject<BaseFallingBlock> CRUSHED_DIORITE = createFallingBlocks(Blocks.CRUSHED_DIORITE, SoundType.STONE);
+    public static final RegistryObject<BaseFallingBlock> CRUSHED_GRANITE = createFallingBlocks(Blocks.CRUSHED_GRANITE, SoundType.STONE);
     public static final RegistryObject<EndCakeBlock> END_CAKE = BLOCKS
             .register(Blocks.END_CAKE, EndCakeBlock::new);
     public static final RegistryObject<FlowingFluidBlock> WITCH_WATER = BLOCKS
@@ -47,7 +47,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BlockSieve> SIEVE_DARK_OAK = createWoodSieve(Blocks.SIEVE_DARK_OAK);
     public static final RegistryObject<BlockSieve> SIEVE_JUNGLE = createWoodSieve(Blocks.SIEVE_JUNGLE);
     public static final RegistryObject<BlockSieve> SIEVE_SPRUCE = createWoodSieve(Blocks.SIEVE_SPRUCE);
-    public static final RegistryObject<BlockSieve> SIEVE_WOOD = createWoodSieve(Blocks.SIEVE_OAK);
+    public static final RegistryObject<BlockSieve> SIEVE_OAK = createWoodSieve(Blocks.SIEVE_OAK);
     public static final RegistryObject<BlockSieve> SIEVE_CRIMSON = createNetherSieve(Blocks.SIEVE_CRIMSON);
     public static final RegistryObject<BlockSieve> SIEVE_WARPED = createNetherSieve(Blocks.SIEVE_WARPED);
     //TODO added Crucible
@@ -57,7 +57,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> CRUCIBLE_DARK_OAK = createWoodCrucible(Blocks.CRUCIBLE_DARK_OAK);
     public static final RegistryObject<BaseBlock> CRUCIBLE_JUNGLE = createWoodCrucible(Blocks.CRUCIBLE_JUNGLE);
     public static final RegistryObject<BaseBlock> CRUCIBLE_SPRUCE = createWoodCrucible(Blocks.CRUCIBLE_SPRUCE);
-    public static final RegistryObject<BaseBlock> CRUCIBLE_WOOD = createWoodCrucible(Blocks.CRUCIBLE_OAK);
+    public static final RegistryObject<BaseBlock> CRUCIBLE_OAK = createWoodCrucible(Blocks.CRUCIBLE_OAK);
     //Fired
     public static final RegistryObject<BaseBlock> CRUCIBLE_CRIMSON = createNetherCrucible(Blocks.CRUCIBLE_CRIMSON);
     public static final RegistryObject<BaseBlock> CRUCIBLE_WARPED = createNetherCrucible(Blocks.CRUCIBLE_WARPED);
@@ -72,7 +72,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> BARREL_DARK_OAK = createWoodBarrel(Blocks.BARREL_DARK_OAK);
     public static final RegistryObject<BaseBlock> BARREL_JUNGLE = createWoodBarrel(Blocks.BARREL_JUNGLE);
     public static final RegistryObject<BaseBlock> BARREL_SPRUCE = createWoodBarrel(Blocks.BARREL_SPRUCE);
-    public static final RegistryObject<BaseBlock> BARREL_WOOD = createWoodBarrel(Blocks.BARREL_OAK);
+    public static final RegistryObject<BaseBlock> BARREL_OAK = createWoodBarrel(Blocks.BARREL_OAK);
     //Fired
     public static final RegistryObject<BaseBlock> BARREL_STONE = createStoneBarrel(Blocks.BARREL_STONE);
     public static final RegistryObject<BaseBlock> BARREL_CRIMSON = createNetherBarrel(Blocks.BARREL_CRIMSON);
@@ -96,6 +96,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> BARREL_GLASS_CYAN = createGlassBarrel(Blocks.BARREL_GLASS_CYAN);
     public static final RegistryObject<BaseBlock> BARREL_GLASS_BLUE = createGlassBarrel(Blocks.BARREL_GLASS_BLUE);
 
+
     private ExNihiloBlocks() {
 
     }
@@ -107,7 +108,7 @@ public class ExNihiloBlocks {
 
     private static RegistryObject<BaseFallingBlock> createFallingBlocks(String block, SoundType sound) {
         return BLOCKS.register(block, () -> new BaseFallingBlock(new BlockBuilder()
-                        .properties(AbstractBlock.Properties.create(Material.SAND).hardnessAndResistance(0.7F)
+                        .properties(AbstractBlock.Properties.of(Material.SAND).strength(0.7F)
                                 .sound(sound)).harvestLevel(ToolType.SHOVEL, 0)));
     }
 
@@ -116,13 +117,13 @@ public class ExNihiloBlocks {
     }
 
     protected static RegistryObject<BaseBlock> createNetherCrucible(String crucible) {
-        return createCrucible(crucible, Material.NETHER_WOOD, SoundType.HYPHAE);
+        return createCrucible(crucible, Material.NETHER_WOOD, SoundType.STEM);
     }
     private static RegistryObject<BaseBlock> createCrucible(String crucible, Material material, SoundType sound) {
         return BLOCKS.register(crucible,
                 () -> new CrucibleBaseBlock(new BlockBuilder().properties(
-                        AbstractBlock.Properties.create(material).hardnessAndResistance(.75F)
-                                .sound(sound).notSolid()).harvestLevel(ToolType.AXE, 0)
+                        AbstractBlock.Properties.of(material).strength(.75F)
+                                .sound(sound).noOcclusion()).harvestLevel(ToolType.AXE, 0)
                         .tileEntitySupplier(WoodCrucibleTile::new)));
     }
 
@@ -131,25 +132,25 @@ public class ExNihiloBlocks {
     }
 
     protected static RegistryObject<BlockSieve> createNetherSieve(String sieve) {
-        return createSieve(sieve, Material.NETHER_WOOD, SoundType.HYPHAE);
+        return createSieve(sieve, Material.NETHER_WOOD, SoundType.STEM);
     }
     private static RegistryObject<BlockSieve> createSieve(String sieve, Material material, SoundType sound) {
         return BLOCKS.register(sieve, () -> new BlockSieve(new BlockBuilder().properties(
-                        AbstractBlock.Properties.create(material).hardnessAndResistance(0.7F)
-                                .sound(sound).notSolid().setOpaque((state, reader, pos) -> false)
-                                .setSuffocates((state, reader, pos) -> false).setBlocksVision((state, reader, pos) -> false))
+                        AbstractBlock.Properties.of(material).strength(0.7F)
+                                .sound(sound).noOcclusion().isRedstoneConductor((state, reader, pos) -> false)
+                                .isSuffocating((state, reader, pos) -> false).isViewBlocking((state, reader, pos) -> false))
                         .harvestLevel(ToolType.AXE, 0).tileEntitySupplier(SieveTile::new)));
     }
 
     protected static RegistryObject<BaseBlock> createWoodBarrel(String barrel) {
         return BLOCKS.register(barrel, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
-                        .properties(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(0.75F)
+                        .properties(AbstractBlock.Properties.of(Material.WOOD).strength(0.75F)
                                 .sound(SoundType.WOOD))
                         .tileEntitySupplier(WoodBarrelTile::new)));
     }
 
     protected static RegistryObject<BaseBlock> createNetherBarrel(String barrel) {
-        return createStoneBarrels(barrel, ToolType.AXE, Material.NETHER_WOOD, SoundType.HYPHAE);
+        return createStoneBarrels(barrel, ToolType.AXE, Material.NETHER_WOOD, SoundType.STEM);
     }
 
     protected static RegistryObject<BaseBlock> createGlassBarrel(String barrel) {
@@ -157,13 +158,13 @@ public class ExNihiloBlocks {
     }
 
     protected static RegistryObject<BaseBlock> createStoneBarrel(String barrel) {
-        return createStoneBarrels(barrel, ToolType.PICKAXE, Material.ROCK, SoundType.STONE);
+        return createStoneBarrels(barrel, ToolType.PICKAXE, Material.STONE, SoundType.STONE);
     }
 
     private static RegistryObject<BaseBlock> createStoneBarrels(String barrel, ToolType tool, Material material, SoundType sound) {
         return BLOCKS.register(barrel,
                 () -> new BlockBarrel(new BlockBuilder().harvestLevel(tool, 0)
-                        .properties(AbstractBlock.Properties.create(material).hardnessAndResistance(0.75F).sound(sound))
+                        .properties(AbstractBlock.Properties.of(material).strength(0.75F).sound(sound))
                         .tileEntitySupplier(StoneBarrelTile::new)));
     }
 }

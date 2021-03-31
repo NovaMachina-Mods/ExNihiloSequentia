@@ -73,7 +73,7 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
             recipeLayout.getItemStacks().init(i + slotIndex, true, slotX, slotY);
             recipeLayout.getItemStacks().set(i + slotIndex, stack);
 
-            if (focus != null && stack.isItemEqual((ItemStack) focus.getValue())) {
+            if (focus != null && stack.sameItem((ItemStack) focus.getValue())) {
                 recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
             }
         }

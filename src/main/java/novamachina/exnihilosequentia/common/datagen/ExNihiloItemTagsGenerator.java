@@ -20,7 +20,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         registerOres();
         registerSeeds();
         registerMeats();
@@ -37,29 +37,23 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerCrooks() {
         for (EnumCrook crook : EnumCrook.values()) {
-            getOrCreateBuilder(ExNihiloTags.CROOK).addItemEntry(crook.getRegistryObject().get());
-        }
-    }
-
-    private void registerCrooks() {
-        for (EnumCrook crook : EnumCrook.values()) {
-            getOrCreateBuilder(ExNihiloTags.CROOK).addItemEntry(crook.getRegistryObject().get());
+            tag(ExNihiloTags.CROOK).add(crook.getRegistryObject().get());
         }
     }
 
     private void registerCooked() {
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_CHICKEN);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_COD);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_MUTTON);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_PORKCHOP);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_RABBIT);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_SALMON);
-        getOrCreateBuilder(ExNihiloTags.MEAT_COOKED).addItemEntry(Items.COOKED_BEEF);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_CHICKEN);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_COD);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_MUTTON);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_PORKCHOP);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_RABBIT);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_SALMON);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_BEEF);
     }
 
     private void registerHammers() {
         for (EnumHammer hammer : EnumHammer.values()) {
-            getOrCreateBuilder(ExNihiloTags.HAMMER).addItemEntry(hammer.getRegistryObject().get());
+            tag(ExNihiloTags.HAMMER).add(hammer.getRegistryObject().get());
         }
     }
 
@@ -69,7 +63,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     private void registerMisc() {
-        getOrCreateBuilder(ExNihiloTags.CLAY).addItemEntry(Items.CLAY_BALL);
+        tag(ExNihiloTags.CLAY).add(Items.CLAY_BALL);
     }
 
     private void registerOres() {
@@ -81,73 +75,73 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerSeeds() {
         for (EnumSeed seed : EnumSeed.values()) {
-            getOrCreateBuilder(Tags.Items.SEEDS).addItemEntry(seed.getRegistryObject().get());
+            tag(Tags.Items.SEEDS).add(seed.getRegistryObject().get());
         }
     }
 
     private void registerUncooked() {
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.CHICKEN);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.COD);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.MUTTON);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.PORKCHOP);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.RABBIT);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.SALMON);
-        getOrCreateBuilder(ExNihiloTags.MEAT_UNCOOKED).addItemEntry(Items.BEEF);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.CHICKEN);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.COD);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.MUTTON);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.PORKCHOP);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.RABBIT);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.SALMON);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.BEEF);
     }
 
     private void registerWoodenCrucibles() {
-        getOrCreateBuilder(ExNihiloTags.WOODEN_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_ACACIA.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_BIRCH.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_JUNGLE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_SPRUCE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_WOOD.get().asItem());
+        tag(ExNihiloTags.WOODEN_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_ACACIA.get().asItem());
+        tag(ExNihiloTags.WOODEN_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_BIRCH.get().asItem());
+        tag(ExNihiloTags.WOODEN_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get().asItem());
+        tag(ExNihiloTags.WOODEN_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_JUNGLE.get().asItem());
+        tag(ExNihiloTags.WOODEN_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_SPRUCE.get().asItem());
+        tag(ExNihiloTags.WOODEN_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_OAK.get().asItem());
     }
 
     private void registerFiredCrucibles() {
-        getOrCreateBuilder(ExNihiloTags.FIRED_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_WARPED.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_CRIMSON.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_CRUCIBLE).addItemEntry(ExNihiloBlocks.CRUCIBLE_FIRED.get().asItem());
+        tag(ExNihiloTags.FIRED_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_WARPED.get().asItem());
+        tag(ExNihiloTags.FIRED_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_CRIMSON.get().asItem());
+        tag(ExNihiloTags.FIRED_CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_FIRED.get().asItem());
     }
 
     private void registerWoodenBarrels() {
-        getOrCreateBuilder(ExNihiloTags.WOODEN_BARREL).addItemEntry(ExNihiloBlocks.BARREL_ACACIA.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_BARREL).addItemEntry(ExNihiloBlocks.BARREL_BIRCH.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_BARREL).addItemEntry(ExNihiloBlocks.BARREL_DARK_OAK.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_BARREL).addItemEntry(ExNihiloBlocks.BARREL_JUNGLE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_BARREL).addItemEntry(ExNihiloBlocks.BARREL_SPRUCE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.WOODEN_BARREL).addItemEntry(ExNihiloBlocks.BARREL_WOOD.get().asItem());
+        tag(ExNihiloTags.WOODEN_BARREL).add(ExNihiloBlocks.BARREL_ACACIA.get().asItem());
+        tag(ExNihiloTags.WOODEN_BARREL).add(ExNihiloBlocks.BARREL_BIRCH.get().asItem());
+        tag(ExNihiloTags.WOODEN_BARREL).add(ExNihiloBlocks.BARREL_DARK_OAK.get().asItem());
+        tag(ExNihiloTags.WOODEN_BARREL).add(ExNihiloBlocks.BARREL_JUNGLE.get().asItem());
+        tag(ExNihiloTags.WOODEN_BARREL).add(ExNihiloBlocks.BARREL_SPRUCE.get().asItem());
+        tag(ExNihiloTags.WOODEN_BARREL).add(ExNihiloBlocks.BARREL_OAK.get().asItem());
     }
 
     private void registerFiredBarrels() {
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_STONE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_BLACK.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_BLUE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_BROWN.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_CYAN.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_GRAY.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_GREEN.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_LIME.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_MAGENTA.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_ORANGE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_PINK.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_PURPLE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_YELLOW.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_RED.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.FIRED_BARREL).addItemEntry(ExNihiloBlocks.BARREL_GLASS_WHITE.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_STONE.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BLACK.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BLUE.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BROWN.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_CYAN.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_GRAY.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_GREEN.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_LIME.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_MAGENTA.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_ORANGE.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_PINK.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_PURPLE.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_YELLOW.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_RED.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_WHITE.get().asItem());
     }
 
     private void registerSieves() {
-        getOrCreateBuilder(ExNihiloTags.SIEVE).addItemEntry(ExNihiloBlocks.SIEVE_WARPED.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.SIEVE).addItemEntry(ExNihiloBlocks.SIEVE_CRIMSON.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.SIEVE).addItemEntry(ExNihiloBlocks.SIEVE_WOOD.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.SIEVE).addItemEntry(ExNihiloBlocks.SIEVE_SPRUCE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.SIEVE).addItemEntry(ExNihiloBlocks.SIEVE_JUNGLE.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.SIEVE).addItemEntry(ExNihiloBlocks.SIEVE_DARK_OAK.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.SIEVE).addItemEntry(ExNihiloBlocks.SIEVE_ACACIA.get().asItem());
-        getOrCreateBuilder(ExNihiloTags.SIEVE).addItemEntry(ExNihiloBlocks.SIEVE_BIRCH.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_WARPED.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_CRIMSON.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_OAK.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_SPRUCE.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_JUNGLE.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_DARK_OAK.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_ACACIA.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_BIRCH.get().asItem());
     }
 }

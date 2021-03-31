@@ -13,22 +13,22 @@ import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 public class FluidOnTopRecipeSerializer extends RecipeSerializer<FluidOnTopRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ExNihiloBlocks.BARREL_WOOD.get());
+        return new ItemStack(ExNihiloBlocks.BARREL_OAK.get());
     }
 
     @Override
-    public FluidOnTopRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+    public FluidOnTopRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
         FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
         FluidStack fluidOnTop = FluidStack.readFromPacket(buffer);
-        ItemStack result = buffer.readItemStack();
+        ItemStack result = buffer.readItem();
         return new FluidOnTopRecipe(recipeId, fluidInTank, fluidOnTop, result);
     }
 
     @Override
-    public void write(PacketBuffer buffer, FluidOnTopRecipe recipe) {
+    public void toNetwork(PacketBuffer buffer, FluidOnTopRecipe recipe) {
         recipe.getFluidInTank().writeToPacket(buffer);
         recipe.getFluidOnTop().writeToPacket(buffer);
-        buffer.writeItemStack(recipe.getRecipeOutput());
+        buffer.writeItem(recipe.getResultItem());
     }
 
     @Override

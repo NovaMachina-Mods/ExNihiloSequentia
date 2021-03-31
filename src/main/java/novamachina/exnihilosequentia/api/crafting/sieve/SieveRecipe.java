@@ -85,7 +85,7 @@ public class SieveRecipe extends SerializableRecipe {
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return drop.copy();
     }
 

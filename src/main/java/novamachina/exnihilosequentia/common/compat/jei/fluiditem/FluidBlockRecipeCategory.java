@@ -49,7 +49,7 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe
     public void setIngredients(FluidItemRecipe recipe, IIngredients ingredients) {
         ingredients.setInputs(VanillaTypes.ITEM, recipe.getInputs());
         ingredients.setInput(VanillaTypes.FLUID, recipe.getFluidInBarrel());
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
     }
 
     @Override
@@ -60,6 +60,6 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInBarrel());
         recipeLayout.getItemStacks().set(0, recipe.getInputs());
-        recipeLayout.getItemStacks().set(1, recipe.getRecipeOutput());
+        recipeLayout.getItemStacks().set(1, recipe.getResultItem());
     }
 }

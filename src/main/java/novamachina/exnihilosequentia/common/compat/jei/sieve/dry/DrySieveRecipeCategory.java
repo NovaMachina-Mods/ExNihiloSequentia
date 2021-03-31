@@ -94,7 +94,7 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
                 if (focus.getMode() == IFocus.Mode.OUTPUT
                         && !focusStack.isEmpty()
                         && focusStack.getItem() == outputStack.getItem()
-                        && focusStack.getDamage() == outputStack.getDamage()) {
+                        && focusStack.getDamageValue() == outputStack.getDamageValue()) {
                     recipeLayout.getItemStacks().setBackground(slotIndex + i, slotHighlight);
                 }
             }
@@ -111,7 +111,7 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
                                     .getInputs().get(0).get(0).getItem()).getMesh(), false);
                     for (SieveRecipe entry : drops) {
                         ItemStack drop = entry.getDrop();
-                        if (!drop.isItemEqual(ingredient)) {
+                        if (!drop.sameItem(ingredient)) {
                             continue;
                         }
                         for (MeshWithChance meshWithChance : entry.getRolls()) {

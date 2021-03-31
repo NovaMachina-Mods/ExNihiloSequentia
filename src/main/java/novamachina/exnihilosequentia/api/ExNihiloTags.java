@@ -43,11 +43,11 @@ public class ExNihiloTags {
     }
 
     public static ITag.INamedTag<Block> createBlockWrapper(ResourceLocation name) {
-        return createWrapperTag(BlockTags.getAllTags(), name, BlockTags::makeWrapperTag);
+        return createWrapperTag(BlockTags.getWrappers(), name, BlockTags::bind);
     }
 
     public static ITag.INamedTag<Item> createItemWrapper(ResourceLocation name) {
-        return createWrapperTag(ItemTags.getAllTags(), name, ItemTags::makeWrapperTag);
+        return createWrapperTag(ItemTags.getWrappers(), name, ItemTags::bind);
     }
 
     public static ResourceLocation getIngot(String ingot) {

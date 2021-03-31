@@ -76,7 +76,7 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
             if (focus != null) {
                 ItemStack focusStack = (ItemStack) focus.getValue();
                 if (focus.getMode() == IFocus.Mode.OUTPUT && !focusStack.isEmpty() && focusStack
-                        .getItem() == outputStack.getItem() && focusStack.getDamage() == outputStack.getDamage()) {
+                        .getItem() == outputStack.getItem() && focusStack.getDamageValue() == outputStack.getDamageValue()) {
                     recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
                 }
             }

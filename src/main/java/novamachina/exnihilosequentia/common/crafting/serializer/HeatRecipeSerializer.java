@@ -17,15 +17,15 @@ public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
     }
 
     @Override
-    public HeatRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        Block input = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(buffer.readString()));
+    public HeatRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        Block input = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(buffer.readUtf()));
         int amount = buffer.readInt();
         return new HeatRecipe(recipeId, input, amount);
     }
 
     @Override
-    public void write(PacketBuffer buffer, HeatRecipe recipe) {
-        buffer.writeString(recipe.getInput().getRegistryName().toString());
+    public void toNetwork(PacketBuffer buffer, HeatRecipe recipe) {
+        buffer.writeUtf(recipe.getInput().getRegistryName().toString());
         buffer.writeInt(recipe.getAmount());
     }
 

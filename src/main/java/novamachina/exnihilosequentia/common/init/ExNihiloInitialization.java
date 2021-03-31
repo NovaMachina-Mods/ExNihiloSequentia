@@ -50,14 +50,14 @@ import org.apache.logging.log4j.LogManager;
 public class ExNihiloInitialization {
     public static final ItemGroup ITEM_GROUP = new ItemGroup(ModIds.EX_NIHILO_SEQUENTIA) {
         @Override
-        public ItemStack createIcon() {
-            return new ItemStack(ExNihiloBlocks.SIEVE_WOOD.get());
+        public ItemStack makeIcon() {
+            return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
         }
     };
     @ObjectHolder(ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
     public static final GlobalLootModifierSerializer<?> hammerModifier = null;
 
-    @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_crook")
+    @ObjectHolder(ModIds.EX_NIHILO_SEQUENTIA + ":use_crook")
     public static final GlobalLootModifierSerializer<?> crookModifier = null;
 
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -127,10 +127,10 @@ public class ExNihiloInitialization {
 
     private static void registerVanillaCompost() {
         for(EnumSeed seed : EnumSeed.values()) {
-            ComposterBlock.CHANCES.put(seed.getRegistryObject().get().asItem(), 0.3F);
+            ComposterBlock.COMPOSTABLES.put(seed.getRegistryObject().get().asItem(), 0.3F);
         }
-        ComposterBlock.CHANCES.put(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
-        ComposterBlock.CHANCES.put(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
+        ComposterBlock.COMPOSTABLES.put(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
+        ComposterBlock.COMPOSTABLES.put(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
     }
 
     private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType) {

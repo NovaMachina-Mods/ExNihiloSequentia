@@ -16,13 +16,13 @@ import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ExNihiloBlocks.SIEVE_WOOD.get());
+        return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
     }
 
     @Override
-    public SieveRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        Ingredient input = Ingredient.read(buffer);
-        ItemStack drop = buffer.readItemStack();
+    public SieveRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        Ingredient input = Ingredient.fromNetwork(buffer);
+        ItemStack drop = buffer.readItem();
         List<MeshWithChance> rolls = new ArrayList<>();
         int count = buffer.readInt();
         for (int i = 0; i < count; i++) {
@@ -33,9 +33,9 @@ public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     }
 
     @Override
-    public void write(PacketBuffer buffer, SieveRecipe recipe) {
-        recipe.getInput().write(buffer);
-        buffer.writeItemStack(recipe.getDrop());
+    public void toNetwork(PacketBuffer buffer, SieveRecipe recipe) {
+        recipe.getInput().toNetwork(buffer);
+        buffer.writeItem(recipe.getDrop());
         buffer.writeInt(recipe.getRolls().size());
         for (MeshWithChance meshWithChance : recipe.getRolls()) {
             meshWithChance.write(buffer);
@@ -45,7 +45,7 @@ public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
 
     @Override
     protected SieveRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        Ingredient input = Ingredient.deserialize(json.get("input"));
+        Ingredient input = Ingredient.fromJson(json.get("input"));
         ItemStack drop = readOutput(json.get("result"));
         List<MeshWithChance> rolls = new ArrayList<>();
         for (JsonElement element : json.get("rolls").getAsJsonArray()) {
