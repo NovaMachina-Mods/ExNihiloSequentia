@@ -108,6 +108,10 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             return ActionResultType.SUCCESS;
         }
 
+        if(TankUtil.drainWaterFromBottle(this, player, handler)) {
+            return ActionResultType.SUCCESS;
+        }
+
         boolean result = FluidUtil.interactWithFluidHandler(player, handIn, handler);
 
         if (result) {

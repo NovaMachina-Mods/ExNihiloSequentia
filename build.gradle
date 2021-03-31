@@ -109,10 +109,10 @@ jar.finalizedBy('reobfJar')
 //publish.dependsOn('reobfJar')
 
 repositories {
+    maven { url = 'https://files.minecraftforge.net/maven' }
     maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
     maven { url = "https://maven.tehnut.info"} // WAILA
     maven { url = "https://maven.tterrag.com/" } // TOP
-    maven { url = 'https://files.minecraftforge.net/maven' }
     maven { url = "https://maven.blamejared.com" } // CraftTweaker
     maven { url = "https://cursemaven.com"}
 }
