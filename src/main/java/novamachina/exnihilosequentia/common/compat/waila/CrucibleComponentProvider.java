@@ -13,10 +13,10 @@ public class CrucibleComponentProvider implements IComponentProvider {
     public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
         BaseCrucibleTile crucibleTile = (BaseCrucibleTile) accessor.getTileEntity();
         if (crucibleTile.getSolidAmount() > 0) {
-            tooltip.add(new TranslationTextComponent("waila.crucible.solid", new TranslationTextComponent(crucibleTile.getCurrentItem().getItem().getTranslationKey()), crucibleTile.getSolidAmount()));
+            tooltip.add(new TranslationTextComponent("waila.crucible.solid", new TranslationTextComponent(crucibleTile.getCurrentItem().getItem().getDescriptionId()), crucibleTile.getSolidAmount()));
         }
         if (crucibleTile.getFluidAmount() > 0) {
-            tooltip.add(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey()), crucibleTile.getFluidAmount()));
+            tooltip.add(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
         }
         tooltip.add(new TranslationTextComponent("waila.crucible.heat", crucibleTile.getHeat()));
     }

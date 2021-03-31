@@ -114,7 +114,7 @@ public class SieveRegistry implements ISieveRegistry {
                     if(!drops.isEmpty()) {
                         List<List<ItemStack>> inputList = new ArrayList<>();
                         inputList.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
-                        inputList.add(Arrays.asList(ingredient.getMatchingStacks()));
+                        inputList.add(Arrays.asList(ingredient.getItems()));
                         for(List<SieveRecipe> dropList : dropLists) {
                             returnList.add(new JEISieveRecipe(inputList, dropList));
                         }
@@ -152,7 +152,7 @@ public class SieveRegistry implements ISieveRegistry {
                     if(!drops.isEmpty()) {
                         List<List<ItemStack>> inputList = new ArrayList<>();
                         inputList.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
-                        inputList.add(Arrays.asList(ingredient.getMatchingStacks()));
+                        inputList.add(Arrays.asList(ingredient.getItems()));
                         for(List<SieveRecipe> dropList : dropLists) {
                             returnList.add(new JEISieveRecipe(inputList, dropList));
                         }

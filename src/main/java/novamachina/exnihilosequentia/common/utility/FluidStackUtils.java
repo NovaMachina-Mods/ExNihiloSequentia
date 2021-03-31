@@ -16,9 +16,9 @@ public class FluidStackUtils {
     }
 
     public static FluidStack jsonDeserializeFluidStack(JsonObject jsonObject) {
-        Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(JSONUtils.getString(jsonObject, "fluid")));
+        Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(JSONUtils.getAsString(jsonObject, "fluid")));
         FluidStack fluidStack = new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME);
-        if (JSONUtils.hasField(jsonObject, "tag"))
+        if (JSONUtils.isValidNode(jsonObject, "tag"))
             fluidStack.setTag(JsonUtils.readNBT(jsonObject, "tag"));
         return fluidStack;
     }

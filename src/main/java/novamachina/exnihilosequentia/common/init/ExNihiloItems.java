@@ -38,65 +38,65 @@ public class ExNihiloItems {
             ForgeRegistries.ITEMS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
     public static final RegistryObject<Item> DUST = ITEMS
             .register(ExNihiloConstants.Blocks.DUST, () -> new BlockItem(ExNihiloBlocks.DUST.get(),
-                    new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_NETHERRACK = ITEMS
             .register(ExNihiloConstants.Blocks.CRUSHED_NETHERRACK,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_NETHERRACK.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                            new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_END_STONE = ITEMS
             .register(ExNihiloConstants.Blocks.CRUSHED_END_STONE,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_END_STONE.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                            new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_ANDESITE = ITEMS
             .register(ExNihiloConstants.Blocks.CRUSHED_ANDESITE,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_ANDESITE.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                            new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_DIORITE = ITEMS
             .register(ExNihiloConstants.Blocks.CRUSHED_DIORITE,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_DIORITE.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                            new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_GRANITE = ITEMS
             .register(ExNihiloConstants.Blocks.CRUSHED_GRANITE,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_GRANITE.get(),
-                            new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                            new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> END_CAKE = ITEMS
             .register(ExNihiloConstants.Blocks.END_CAKE, () -> new BlockItem(ExNihiloBlocks.END_CAKE.get(),
-                    new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> INFESTING_LEAVES = ITEMS
             .register(Blocks.INFESTING_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTING_LEAVES.get(),
-                    new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> INFESTED_LEAVES = ITEMS
             .register(Blocks.INFESTED_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTED_LEAVES.get(),
-                    new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> SIEVE = ITEMS.register(Blocks.SIEVE,
             () -> new BlockItem(ExNihiloBlocks.SIEVE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUCIBLE_UNFIRED = ITEMS
             .register(Blocks.CRUCIBLE_UNFIRED, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUCIBLE_FIRED = ITEMS
             .register(Blocks.CRUCIBLE_FIRED, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_FIRED.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUCIBLE_WOOD = ITEMS
             .register(Blocks.CRUCIBLE_WOOD, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_WOOD.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> BARREL_WOOD = ITEMS
             .register(Blocks.BARREL_WOOD, () -> new BlockItem(ExNihiloBlocks.BARREL_WOOD.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> BARREL_STONE = ITEMS
             .register(Blocks.BARREL_STONE, () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(),
-                    new Properties().group(ExNihiloInitialization.ITEM_GROUP)));
+                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     // Begin Items Only
     public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
             .register(ExNihiloConstants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
     public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = ITEMS
             .register(ExNihiloConstants.Items.WITCH_WATER_BUCKET,
                     () -> new BucketItem(ExNihiloFluids.WITCH_WATER,
-                            new Properties().group(ExNihiloInitialization.ITEM_GROUP).maxStackSize(1)));
+                            new Properties().tab(ExNihiloInitialization.ITEM_GROUP).stacksTo(1)));
     public static final RegistryObject<BucketItem> SEA_WATER_BUCKET = ITEMS
             .register(ExNihiloConstants.Items.SEA_WATER_BUCKET,
                     () -> new BucketItem(ExNihiloFluids.SEA_WATER,
-                            new Properties().group(ExNihiloInitialization.ITEM_GROUP).maxStackSize(1)));
+                            new Properties().tab(ExNihiloInitialization.ITEM_GROUP).stacksTo(1)));
     private static final Map<EnumOre, RegistryObject<OreItem>> ingotMap = new EnumMap<>(EnumOre.class);
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 

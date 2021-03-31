@@ -33,8 +33,8 @@ public class UseHammerModifier extends LootModifier {
     @Override
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         logger.debug("Fired Hammer Modifier");
-        ItemStack tool = context.get(LootParameters.TOOL);
-        BlockState blockState = context.get(LootParameters.BLOCK_STATE);
+        ItemStack tool = context.getParamOrNull(LootParameters.TOOL);
+        BlockState blockState = context.getParamOrNull(LootParameters.BLOCK_STATE);
         List<ItemStack> newLoot = new ArrayList<>();
 
         if (tool != null && blockState != null && ExNihiloTags.HAMMER.contains(tool.getItem()) && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {

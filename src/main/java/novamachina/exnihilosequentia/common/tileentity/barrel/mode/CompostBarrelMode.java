@@ -49,9 +49,9 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        if (ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(player.getHeldItem(handIn).getItem()) && barrelTile
-            .addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(player.getHeldItem(handIn).getItem()))) {
-            player.getHeldItem(handIn).shrink(1);
+        if (ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(player.getItemInHand(handIn).getItem()) && barrelTile
+            .addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(player.getItemInHand(handIn).getItem()))) {
+            player.getItemInHand(handIn).shrink(1);
         }
 
         return ActionResultType.SUCCESS;
@@ -86,11 +86,11 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerWorld) barrelTile.getWorld())
-            .spawnParticle(ParticleTypes.EFFECT,
-                barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
-                barrelTile.getPos().getY() + barrelTile.getWorld().rand.nextDouble(),
-                barrelTile.getPos().getZ() + barrelTile.getWorld().rand.nextDouble(),
+        ((ServerWorld) barrelTile.getLevel())
+            .sendParticles(ParticleTypes.EFFECT,
+                barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
+                barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
+                barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
                 1,
                 0.0,
                 0.0,

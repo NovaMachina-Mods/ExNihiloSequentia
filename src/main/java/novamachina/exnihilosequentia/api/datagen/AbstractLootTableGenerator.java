@@ -38,14 +38,14 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
     }
 
     @Override
-    public void act(DirectoryCache cache) {
+    public void run(DirectoryCache cache) {
         lootTables.clear();
         Path outFolder = generator.getOutputFolder();
 
         createLootTables();
 
-        ValidationTracker validator = new ValidationTracker(LootParameterSets.GENERIC, function -> null, lootTables::get);
-        lootTables.forEach((name, table) -> LootTableManager.validateLootTable(validator, name, table));
+        ValidationTracker validator = new ValidationTracker(LootParameterSets.ALL_PARAMS, function -> null, lootTables::get);
+        lootTables.forEach((name, table) -> LootTableManager.validate(validator, name, table));
         Multimap<String, String> problems = validator.getProblems();
         if (!problems.isEmpty()) {
             problems.forEach((name, table) -> logger.warn("Found validation problem in " + name + ": " + table));
@@ -55,7 +55,7 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
                 Path out = getPath(outFolder, name);
 
                 try {
-                    IDataProvider.save(GSON, cache, LootTableManager.toJson(table), out);
+                    IDataProvider.save(GSON, cache, LootTableManager.serialize(table), out);
                 } catch (IOException e) {
                     logger.error("Couldn't save loot table " + out);
                     logger.error(Arrays.toString(e.getStackTrace()));
@@ -70,15 +70,15 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
     }
 
     protected LootPool.Builder createLootPoolBuilder() {
-        return LootPool.builder().acceptCondition(SurvivesExplosion.builder());
+        return LootPool.lootPool().when(SurvivesExplosion.survivesExplosion());
     }
 
     protected abstract void createLootTables();
 
     protected void register(Block block, LootPool.Builder... pools) {
-        LootTable.Builder builder = LootTable.builder();
+        LootTable.Builder builder = LootTable.lootTable();
         for (LootPool.Builder pool : pools) {
-            builder.addLootPool(pool);
+            builder.withPool(pool);
         }
         register(block, builder);
     }
@@ -96,13 +96,13 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
     }
 
     private void register(ResourceLocation registryName, LootTable.Builder table) {
-        if (lootTables.put(toTableLoc(registryName), table.setParameterSet(LootParameterSets.BLOCK).build()) != null) {
+        if (lootTables.put(toTableLoc(registryName), table.setParamSet(LootParameterSets.BLOCK).build()) != null) {
             throw new IllegalStateException("Duplicate loot table: " + table);
         }
     }
 
     private LootPool.Builder singleItem(IItemProvider in) {
-        return createLootPoolBuilder().rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(in));
+        return createLootPoolBuilder().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(in));
     }
 
     private ResourceLocation toTableLoc(ResourceLocation registryName) {
