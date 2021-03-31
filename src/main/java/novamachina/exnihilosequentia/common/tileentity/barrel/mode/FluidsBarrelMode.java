@@ -6,7 +6,10 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.potion.Potions;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.IItemProvider;
@@ -104,6 +107,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         if(TankUtil.drainWaterIntoBottle(barrelTile, player, fluidHandler)) {
             return ActionResultType.SUCCESS;
         }
+        if(TankUtil.drainWaterFromBottle(barrelTile, player, fluidHandler)) {
+            return ActionResultType.SUCCESS;
+        }
 
         boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
 
@@ -162,7 +168,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected boolean isTriggerItem(ItemStack stack) {
-        return false;
+        return ItemStack.isSame(stack, new ItemStack(Items.WATER_BUCKET)) || ItemStack.isSame(stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
     }
 
     @Override

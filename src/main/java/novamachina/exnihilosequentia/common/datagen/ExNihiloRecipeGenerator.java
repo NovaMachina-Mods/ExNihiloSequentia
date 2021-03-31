@@ -535,12 +535,12 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerMesh(EnumMesh.EMERALD.getRegistryObject().get(), EnumMesh.DIAMOND.getRegistryObject()
                 .get(), Tags.Items.GEMS_EMERALD, consumer);
         SmithingRecipeBuilder
-                .smithingRecipe(Ingredient.fromItems(EnumMesh.EMERALD.getRegistryObject().get()), Ingredient
-                        .fromTag(Tags.Items.INGOTS_NETHERITE), EnumMesh.NETHERITE.getRegistryObject().get())
-                .addCriterion("has_emerald_mesh", InventoryChangeTrigger.Instance
-                        .forItems(EnumMesh.EMERALD.getRegistryObject().get()))
-                .addCriterion(MATERIAL_CONDITION, hasItem(Tags.Items.INGOTS_NETHERITE))
-                .build(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE
+                .smithing(Ingredient.of(EnumMesh.EMERALD.getRegistryObject().get()), Ingredient
+                        .of(Tags.Items.INGOTS_NETHERITE), EnumMesh.NETHERITE.getRegistryObject().get())
+                .unlocks("has_emerald_mesh", InventoryChangeTrigger.Instance
+                        .hasItems(EnumMesh.EMERALD.getRegistryObject().get()))
+                .unlocks(MATERIAL_CONDITION, has(Tags.Items.INGOTS_NETHERITE))
+                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE
                         .getMeshName())));
 
         ShapedRecipeBuilder.shaped(EnumMesh.STRING.getRegistryObject().get())
@@ -679,33 +679,33 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .hasItems(ItemPredicate.Builder.item().of(ExNihiloTags.CLAY).build()))
                 .save(consumer, createSaveLocation(EnumResource.PORCELAIN_CLAY.getRegistryObject().getId()));
 
-        ShapedRecipeBuilder.shapedRecipe(Blocks.GILDED_BLACKSTONE)
-                .patternLine("xxx")
-                .patternLine("xgx")
-                .patternLine("xxx")
-                .key('x', EnumPebbleType.BLACKSTONE.getRegistryObject().get())
-                .key('g', EnumOre.GOLD.getChunkItem().get())
-                .addCriterion("has_gold", InventoryChangeTrigger.Instance
-                        .forItems(EnumOre.GOLD.getChunkItem().get()))
-                .build(consumer, createSaveLocation(Blocks.GILDED_BLACKSTONE.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(Blocks.CRYING_OBSIDIAN)
-                .patternLine(" o ")
-                .patternLine("obo")
-                .patternLine(" o ")
-                .key('b', Items.WATER_BUCKET)
-                .key('o', Blocks.OBSIDIAN)
-                .addCriterion("has_obsidian", InventoryChangeTrigger.Instance
-                        .forItems(Blocks.OBSIDIAN))
-                .build(consumer, createSaveLocation(Blocks.CRYING_OBSIDIAN.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(Blocks.ANCIENT_DEBRIS)
-                .patternLine("xxx")
-                .patternLine("xox")
-                .patternLine("xxx")
-                .key('x', Items.NETHERITE_SCRAP)
-                .key('o', Blocks.OBSIDIAN)
-                .addCriterion("has_obsidian", InventoryChangeTrigger.Instance
-                        .forItems(Blocks.OBSIDIAN))
-                .build(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
+        ShapedRecipeBuilder.shaped(Blocks.GILDED_BLACKSTONE)
+                .pattern("xxx")
+                .pattern("xgx")
+                .pattern("xxx")
+                .define('x', EnumPebbleType.BLACKSTONE.getRegistryObject().get())
+                .define('g', EnumOre.GOLD.getChunkItem().get())
+                .unlockedBy("has_gold", InventoryChangeTrigger.Instance
+                        .hasItems(EnumOre.GOLD.getChunkItem().get()))
+                .save(consumer, createSaveLocation(Blocks.GILDED_BLACKSTONE.getRegistryName()));
+        ShapedRecipeBuilder.shaped(Blocks.CRYING_OBSIDIAN)
+                .pattern(" o ")
+                .pattern("obo")
+                .pattern(" o ")
+                .define('b', Items.WATER_BUCKET)
+                .define('o', Blocks.OBSIDIAN)
+                .unlockedBy("has_obsidian", InventoryChangeTrigger.Instance
+                        .hasItems(Blocks.OBSIDIAN))
+                .save(consumer, createSaveLocation(Blocks.CRYING_OBSIDIAN.getRegistryName()));
+        ShapedRecipeBuilder.shaped(Blocks.ANCIENT_DEBRIS)
+                .pattern("xxx")
+                .pattern("xox")
+                .pattern("xxx")
+                .define('x', Items.NETHERITE_SCRAP)
+                .define('o', Blocks.OBSIDIAN)
+                .unlockedBy("has_obsidian", InventoryChangeTrigger.Instance
+                        .hasItems(Blocks.OBSIDIAN))
+                .save(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
@@ -787,17 +787,17 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                 .build(consumer, sieveLoc("pebble_granite"));
-        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                 .addResult(EnumPebbleType.BASALT.getRegistryObject().get())
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                 .build(consumer, sieveLoc("pebble_basalt"));
-        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                 .addResult(EnumPebbleType.BLACKSTONE.getRegistryObject().get())
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                 .build(consumer, sieveLoc("pebble_blackstone"));
-        SieveRecipeBuilder.builder().input(Ingredient.fromItems(Blocks.DIRT))
+        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                 .addResult(Items.WHEAT_SEEDS)
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.7F))
                 .build(consumer, sieveLoc("seed_wheat"));
