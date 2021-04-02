@@ -1,11 +1,11 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel;
 
-import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import net.minecraftforge.fluids.FluidStack;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 
-public class StoneBarrelTile extends AbstractBarrelTile{
-    public StoneBarrelTile() {
-        super(ExNihiloTiles.BARRELS_STONE.get());
+public class GlassBarrelTile extends AbstractBarrelTile{
+    public GlassBarrelTile() {
+        super(ExNihiloTiles.BARRELS_GLASS.get());
     }
 
     @Override

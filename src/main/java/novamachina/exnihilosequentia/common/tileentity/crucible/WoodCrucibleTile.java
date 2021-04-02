@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 public class WoodCrucibleTile extends BaseCrucibleTile {
 
     public WoodCrucibleTile() {
-        super(ExNihiloTiles.CRUCIBLE_WOOD.get());
+        super(ExNihiloTiles.CRUCIBLES_WOOD.get());
     }
 
     @Override

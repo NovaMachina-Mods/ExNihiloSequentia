@@ -11,26 +11,12 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Color;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
-public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-
-    public BarrelRender(TileEntityRendererDispatcher rendererDispatcherIn) {
+public class GlassBarrelRender extends BarrelRender {
+    public GlassBarrelRender(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
-    }
-
-    public static void register() {
-        logger.debug("Register barrel renderer");
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARRELS_WOOD.get(), BarrelRender::new);
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARRELS_STONE.get(), BarrelRender::new);
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARRELS_GLASS.get(), GlassBarrelRender::new);
     }
 
     @Override
@@ -122,14 +108,5 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
 
             matrixStack.popPose();
         }
-    }
-
-    Color getBlockColor(ResourceLocation solidTexture,
-                        AbstractBarrelTile tileEntity) {
-        if (solidTexture != null && solidTexture.toString().contains("leaves")) {
-            return new Color(
-                    tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
-        }
-        return Color.WHITE;
     }
 }

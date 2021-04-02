@@ -10,7 +10,7 @@ import novamachina.exnihilosequentia.common.utility.Config;
 public class FiredCrucibleTile extends BaseCrucibleTile {
 
     public FiredCrucibleTile() {
-        super(ExNihiloTiles.CRUCIBLE_FIRED.get());
+        super(ExNihiloTiles.CRUCIBLES_FIRED.get());
     }
 
     @Override

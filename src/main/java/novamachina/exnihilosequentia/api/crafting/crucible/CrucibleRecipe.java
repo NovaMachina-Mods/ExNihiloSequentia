@@ -39,7 +39,11 @@ public class CrucibleRecipe extends SerializableRecipe {
     }
 
     public int getAmount() {
-        return amount;
+        try {
+            return amount;
+        } catch (NullPointerException e) {
+            return 0;
+        }
     }
 
     public void setAmount(int amount) {

@@ -47,7 +47,7 @@ public class SieveTile extends TileEntity {
     private UUID lastPlayer;
 
     public SieveTile() {
-        super(ExNihiloTiles.SIEVE.get());
+        super(ExNihiloTiles.SIEVES.get());
     }
 
     public void insertMesh(ItemStack stack, PlayerEntity player) {

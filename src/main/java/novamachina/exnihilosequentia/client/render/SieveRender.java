@@ -25,7 +25,7 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
 
     public static void register() {
         logger.debug("Registering sieve renderer");
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.SIEVE.get(), SieveRender::new);
+        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.SIEVES.get(), SieveRender::new);
     }
 
     @Override

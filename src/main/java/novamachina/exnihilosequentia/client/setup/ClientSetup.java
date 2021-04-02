@@ -77,8 +77,8 @@ public class ClientSetup {
 
         SieveRender.register();
         BarrelRender.register();
-        CrucibleRender.register(ExNihiloTiles.CRUCIBLE_FIRED.get());
-        CrucibleRender.register(ExNihiloTiles.CRUCIBLE_WOOD.get());
+        CrucibleRender.register(ExNihiloTiles.CRUCIBLES_FIRED.get());
+        CrucibleRender.register(ExNihiloTiles.CRUCIBLES_WOOD.get());
     }
 
     @OnlyIn(Dist.CLIENT)

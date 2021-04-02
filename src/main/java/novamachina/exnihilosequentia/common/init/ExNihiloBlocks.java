@@ -115,7 +115,6 @@ public class ExNihiloBlocks {
     protected static RegistryObject<BaseBlock> createWoodCrucible(String crucible) {
         return createCrucible(crucible, Material.WOOD, SoundType.WOOD);
     }
-
     protected static RegistryObject<BaseBlock> createNetherCrucible(String crucible) {
         return createCrucible(crucible, Material.NETHER_WOOD, SoundType.STEM);
     }
@@ -154,7 +153,11 @@ public class ExNihiloBlocks {
     }
 
     protected static RegistryObject<BaseBlock> createGlassBarrel(String barrel) {
-        return createStoneBarrels(barrel, ToolType.PICKAXE, Material.GLASS, SoundType.GLASS);
+        //return createStoneBarrels(barrel, ToolType.PICKAXE, Material.GLASS, SoundType.GLASS);
+        return BLOCKS.register(barrel,
+                () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
+                        .properties(AbstractBlock.Properties.of(Material.GLASS).strength(0.75F).sound(SoundType.GLASS))
+                        .tileEntitySupplier(GlassBarrelTile::new)));
     }
 
     protected static RegistryObject<BaseBlock> createStoneBarrel(String barrel) {
