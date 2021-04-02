@@ -1,14 +1,14 @@
 package novamachina.exnihilosequentia;
 
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.loading.FMLPaths;
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.common.init.ExNihiloSounds;
 import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
 import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,6 +33,7 @@ public class ExNihiloSequentia {
         Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "-common.toml"));
         ExNihiloInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(SoundEvent.class, ExNihiloSounds::registerSounds);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::setupNonTagBasedRegistries);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::registerTOP);
     }

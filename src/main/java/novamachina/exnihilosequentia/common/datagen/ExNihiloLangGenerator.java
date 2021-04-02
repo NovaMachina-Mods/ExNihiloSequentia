@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
 import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.*;
 
 public class ExNihiloLangGenerator extends AbstractLangGenerator {
@@ -52,6 +53,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         add(Tooltips.ENDERMAN, "Add to a barrel of witchwater to spawn an Enderman");
         add(Tooltips.GUARDIAN, "Add to a barrel of sea water to spawn a Guardian");
         add(Tooltips.SHULKER, "Add to a barrel of witchwater to spawn a Shulker");
+        add(ModIds.EX_NIHILO_SEQUENTIA + ".subtitle.pebbleThrow", "Pebble flies");
     }
 
     private void addItemEN() {
