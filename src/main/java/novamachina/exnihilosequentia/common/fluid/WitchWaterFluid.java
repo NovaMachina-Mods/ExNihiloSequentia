@@ -18,7 +18,7 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
     public static final ForgeFlowingFluid.Properties WITCH_WATER_PROPS =
             new ForgeFlowingFluid.Properties(
                     ExNihiloFluids.WITCH_WATER, ExNihiloFluids.WITCH_WATER_FLOW, FluidAttributes
-                    .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witchwater"),
+                    .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witchwater_still"),
                             new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witchwater_flow"))
                     .color(0x3F1080FF))
                     .bucket(ExNihiloItems.WITCH_WATER_BUCKET)

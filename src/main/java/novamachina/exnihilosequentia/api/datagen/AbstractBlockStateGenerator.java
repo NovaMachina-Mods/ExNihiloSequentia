@@ -9,6 +9,8 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.Objects;
+
 public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     protected static final String PARTICLE_TAG = "particle";
 
@@ -22,7 +24,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
 
     protected void registerFluid(Fluid fluid) {
         ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
-        ModelFile model = models().getBuilder("block/" + fluid.getRegistryName().getPath())
+        ModelFile model = models().getBuilder("block/" + Objects.requireNonNull(fluid.getRegistryName()).getPath())
                 .texture(PARTICLE_TAG, stillTexture);
         getVariantBuilder(fluid.defaultFluidState().createLegacyBlock().getBlock()).partialState()
                 .setModels(new ConfiguredModel(model));

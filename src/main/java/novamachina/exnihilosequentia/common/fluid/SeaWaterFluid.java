@@ -18,7 +18,7 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
     public static final ForgeFlowingFluid.Properties SEA_WATER_PROPS =
             new ForgeFlowingFluid.Properties(
                     ExNihiloFluids.SEA_WATER, ExNihiloFluids.SEA_WATER_FLOW, FluidAttributes
-                    .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water"),
+                    .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water_still"),
                             new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water_flow"))
                     .color(0x3F1080FF))
                     .bucket(ExNihiloItems.SEA_WATER_BUCKET)
