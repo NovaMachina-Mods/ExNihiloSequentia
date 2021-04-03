@@ -42,11 +42,8 @@ public class ExNihiloTiles {
                     .build(null));
     public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARRELS_STONE = TILES
             .register(Blocks.BARREL_STONE, () -> TileEntityType.Builder.of(
-                    StoneBarrelTile::new, ExNihiloBlocks.BARREL_STONE.get(), ExNihiloBlocks.BARREL_CRIMSON.get(), ExNihiloBlocks.BARREL_WARPED.get())
-                    .build(null));
-    public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARRELS_GLASS = TILES
-            .register(Blocks.BARREL_GLASS, () -> TileEntityType.Builder.of(
-                    GlassBarrelTile::new, ExNihiloBlocks.BARREL_GLASS.get(), ExNihiloBlocks.BARREL_GLASS_BLACK.get(),
+                    StoneBarrelTile::new, ExNihiloBlocks.BARREL_STONE.get(), ExNihiloBlocks.BARREL_CRIMSON.get(), ExNihiloBlocks.BARREL_WARPED.get(),
+                    ExNihiloBlocks.BARREL_GLASS.get(), ExNihiloBlocks.BARREL_GLASS_BLACK.get(),
                     ExNihiloBlocks.BARREL_GLASS_BLUE.get(), ExNihiloBlocks.BARREL_GLASS_BROWN.get(), ExNihiloBlocks.BARREL_GLASS_CYAN.get(),
                     ExNihiloBlocks.BARREL_GLASS_GRAY.get(), ExNihiloBlocks.BARREL_GLASS_GREEN.get(), ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE.get(),
                     ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY.get(), ExNihiloBlocks.BARREL_GLASS_LIME.get(), ExNihiloBlocks.BARREL_GLASS_MAGENTA.get(),

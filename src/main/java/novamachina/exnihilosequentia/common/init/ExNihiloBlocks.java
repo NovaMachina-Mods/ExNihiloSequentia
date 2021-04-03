@@ -153,11 +153,7 @@ public class ExNihiloBlocks {
     }
 
     protected static RegistryObject<BaseBlock> createGlassBarrel(String barrel) {
-        //return createStoneBarrels(barrel, ToolType.PICKAXE, Material.GLASS, SoundType.GLASS);
-        return BLOCKS.register(barrel,
-                () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
-                        .properties(AbstractBlock.Properties.of(Material.GLASS).strength(0.75F).sound(SoundType.GLASS))
-                        .tileEntitySupplier(GlassBarrelTile::new)));
+        return createStoneBarrels(barrel, ToolType.PICKAXE, Material.GLASS, SoundType.GLASS);
     }
 
     protected static RegistryObject<BaseBlock> createStoneBarrel(String barrel) {

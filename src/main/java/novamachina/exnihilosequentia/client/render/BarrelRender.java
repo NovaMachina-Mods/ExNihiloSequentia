@@ -30,7 +30,6 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
         logger.debug("Register barrel renderer");
         ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARRELS_WOOD.get(), BarrelRender::new);
         ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARRELS_STONE.get(), BarrelRender::new);
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARRELS_GLASS.get(), GlassBarrelRender::new);
     }
 
     @Override
