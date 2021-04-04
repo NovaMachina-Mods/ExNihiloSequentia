@@ -130,8 +130,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_JUNGLE, Items.JUNGLE_LOG, Items.JUNGLE_SLAB);
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_SPRUCE, Items.SPRUCE_LOG, Items.SPRUCE_SLAB);
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_OAK, Items.OAK_LOG, Items.OAK_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_CRIMSON, ExNihiloTags.CRIMSON_WOOD, Items.CRIMSON_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_WARPED, ExNihiloTags.WARPED_WOOD, Items.WARPED_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_CRIMSON, ItemTags.CRIMSON_STEMS, Items.CRIMSON_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_WARPED, ItemTags.WARPED_STEMS, Items.WARPED_SLAB);
         }
 
     private void registerSieves(Consumer<IFinishedRecipe> consumer) {
