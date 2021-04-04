@@ -216,7 +216,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public float getSolidProportion() {
         try {
             int itemCount =
-                    inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
+                inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
             float solidProportion = ((float) itemCount) / 4;
 
             if (solidAmount > 0) {

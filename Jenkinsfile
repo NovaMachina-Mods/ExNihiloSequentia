@@ -6,6 +6,7 @@ pipeline {
         CURSEFORGE_KEY = credentials('curseforge-token')
         NEXUS_USERNAME = credentials('nexus-username')
         NEXUS_PASSWORD = credentials('nexus-password')
+        BUILD_RESULT_EMAIL = credentials('build-result-email')
     }
 
     stages {

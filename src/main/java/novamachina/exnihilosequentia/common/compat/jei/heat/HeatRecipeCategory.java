@@ -3,6 +3,8 @@ package novamachina.exnihilosequentia.common.compat.jei.heat;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import java.awt.Color;
 import java.util.Arrays;
+
+import com.mojang.blaze3d.platform.GlStateManager;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,6 +18,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -79,7 +82,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getFluidStacks().set(0, new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getInput().getRegistryName()), FluidAttributes.BUCKET_VOLUME));
         } else {
             IItemProvider input = recipe.getInput();
-            if(input == Blocks.FIRE)  {
+            if(input == Blocks.FIRE) {
                 input = Items.FLINT_AND_STEEL;
             }
             recipeLayout.getItemStacks().init(0, true, 0, 16);
