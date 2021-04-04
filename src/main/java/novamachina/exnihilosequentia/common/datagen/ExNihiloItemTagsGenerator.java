@@ -21,6 +21,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     @Override
     protected void addTags() {
+        registerWoods();
         registerOres();
         registerSeeds();
         registerMeats();
@@ -33,6 +34,17 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         registerSieves();
         registerWoodenBarrels();
         registerWoodenCrucibles();
+    }
+
+    private void registerWoods() {
+        tag(ExNihiloTags.CRIMSON_WOOD).add(Items.CRIMSON_HYPHAE);
+        tag(ExNihiloTags.CRIMSON_WOOD).add(Items.STRIPPED_CRIMSON_HYPHAE);
+        tag(ExNihiloTags.CRIMSON_WOOD).add(Items.CRIMSON_STEM);
+        tag(ExNihiloTags.CRIMSON_WOOD).add(Items.STRIPPED_CRIMSON_STEM);
+        tag(ExNihiloTags.WARPED_WOOD).add(Items.WARPED_HYPHAE);
+        tag(ExNihiloTags.WARPED_WOOD).add(Items.STRIPPED_WARPED_HYPHAE);
+        tag(ExNihiloTags.WARPED_WOOD).add(Items.WARPED_STEM);
+        tag(ExNihiloTags.WARPED_WOOD).add(Items.STRIPPED_WARPED_STEM);
     }
 
     private void registerCrooks() {
@@ -115,7 +127,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerFiredBarrels() {
         tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_STONE.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS.get().asItem());
+        /*tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS.get().asItem());
         tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BLACK.get().asItem());
         tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BLUE.get().asItem());
         tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BROWN.get().asItem());
@@ -131,7 +143,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_PURPLE.get().asItem());
         tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_YELLOW.get().asItem());
         tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_RED.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_WHITE.get().asItem());
+        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_WHITE.get().asItem());*/
     }
 
     private void registerSieves() {

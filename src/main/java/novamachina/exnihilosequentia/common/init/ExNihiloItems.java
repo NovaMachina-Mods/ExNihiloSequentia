@@ -57,7 +57,7 @@ public class ExNihiloItems {
             () -> new BlockItem(ExNihiloBlocks.INFESTING_LEAVES.get(), properties));
     public static final RegistryObject<Item> INFESTED_LEAVES = ITEMS.register(Blocks.INFESTED_LEAVES,
             () -> new BlockItem(ExNihiloBlocks.INFESTED_LEAVES.get(), properties));
-    //TODO wooden sieves
+    // sieves
     public static final RegistryObject<Item> SIEVE_CRIMSON = ITEMS.register(Blocks.SIEVE_CRIMSON,
             () -> new BlockItem(ExNihiloBlocks.SIEVE_CRIMSON.get(), properties));
     public static final RegistryObject<Item> SIEVE_WARPED = ITEMS.register(Blocks.SIEVE_WARPED,
@@ -78,7 +78,7 @@ public class ExNihiloItems {
             () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), properties));
     public static final RegistryObject<Item> CRUCIBLE_FIRED = ITEMS.register(Blocks.CRUCIBLE_FIRED,
             () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_FIRED.get(), properties));
-    //TODO Wooden Crucibles
+    // Wooden Crucibles
     public static final RegistryObject<Item> CRUCIBLE_ACACIA = ITEMS.register(Blocks.CRUCIBLE_ACACIA,
             () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_ACACIA.get(), properties));
     public static final RegistryObject<Item> CRUCIBLE_BIRCH = ITEMS.register(Blocks.CRUCIBLE_BIRCH,
@@ -95,7 +95,7 @@ public class ExNihiloItems {
             () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), properties));
     public static final RegistryObject<Item> CRUCIBLE_WARPED = ITEMS.register(Blocks.CRUCIBLE_WARPED,
             () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_WARPED.get(), properties));
-    //TODO Wooden Barrels
+    // Wooden Barrels
     public static final RegistryObject<Item> BARREL_ACACIA = ITEMS.register(Blocks.BARREL_ACACIA,
             () -> new BlockItem(ExNihiloBlocks.BARREL_ACACIA.get(), properties));
     public static final RegistryObject<Item> BARREL_BIRCH = ITEMS.register(Blocks.BARREL_BIRCH,
@@ -114,7 +114,7 @@ public class ExNihiloItems {
             () -> new BlockItem(ExNihiloBlocks.BARREL_WARPED.get(), properties));
     public static final RegistryObject<Item> BARREL_STONE = ITEMS.register(Blocks.BARREL_STONE,
             () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS = ITEMS.register(Blocks.BARREL_GLASS,
+    /*public static final RegistryObject<Item> BARREL_GLASS = ITEMS.register(Blocks.BARREL_GLASS,
             () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS.get(), properties));
     public static final RegistryObject<Item> BARREL_GLASS_WHITE = ITEMS.register(Blocks.BARREL_GLASS_WHITE,
             () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_WHITE.get(), properties));
@@ -147,7 +147,7 @@ public class ExNihiloItems {
     public static final RegistryObject<Item> BARREL_GLASS_CYAN = ITEMS.register(Blocks.BARREL_GLASS_CYAN,
             () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_CYAN.get(), properties));
     public static final RegistryObject<Item> BARREL_GLASS_BLUE = ITEMS.register(Blocks.BARREL_GLASS_BLUE,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_BLUE.get(), properties));
+            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_BLUE.get(), properties));*/
 
     // Begin Items Only
     public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS

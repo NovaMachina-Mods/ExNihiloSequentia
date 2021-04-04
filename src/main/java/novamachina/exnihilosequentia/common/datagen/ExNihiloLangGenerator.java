@@ -201,7 +201,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         addBlock(Blocks.BARREL_SPRUCE, "Spruce Barrel");
         addBlock(Blocks.BARREL_STONE, "Stone Barrel");
         addBlock(Blocks.BARREL_WARPED, "Warped Barrel");
-        addBlock(Blocks.BARREL_GLASS, "Glass Barrel");
+        /*addBlock(Blocks.BARREL_GLASS, "Glass Barrel");
         addBlock(Blocks.BARREL_GLASS_BLACK, "Black Stained Glass Barrel");
         addBlock(Blocks.BARREL_GLASS_BLUE, "Blue Stained Glass Barrel");
         addBlock(Blocks.BARREL_GLASS_BROWN, "Brown Stained Glass Barrel");
@@ -217,7 +217,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         addBlock(Blocks.BARREL_GLASS_PURPLE, "Purple Stained Glass Barrel");
         addBlock(Blocks.BARREL_GLASS_RED, "Red Stained Glass Barrel");
         addBlock(Blocks.BARREL_GLASS_WHITE, "White Stained Glass Barrel");
-        addBlock(Blocks.BARREL_GLASS_YELLOW, "Yellow Stained Glass Barrel");
+        addBlock(Blocks.BARREL_GLASS_YELLOW, "Yellow Stained Glass Barrel");*/
         // Crucibles
         addBlock(Blocks.CRUCIBLE_ACACIA, "Acacia Crucible");
         addBlock(Blocks.CRUCIBLE_BIRCH, "Birch Crucible");

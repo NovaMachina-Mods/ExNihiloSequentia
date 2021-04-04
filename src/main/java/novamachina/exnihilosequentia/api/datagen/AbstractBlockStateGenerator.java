@@ -18,6 +18,10 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         super(gen, modId, exFileHelper);
     }
 
+    protected String getRegistryName(Block b) {
+        return b.getRegistryName().toString();
+    }
+
     protected void basicBlock(Block block) {
         simpleItemBlock(block, cubeAll(block));
     }
@@ -33,5 +37,21 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     protected void simpleItemBlock(Block block, ModelFile modelFile) {
         simpleBlock(block, modelFile);
         simpleBlockItem(block, modelFile);
+    }
+
+    protected void createBarrel(Block block, ResourceLocation texture) {
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/barrel"))
+                .texture("texture", texture)
+                .texture(PARTICLE_TAG, texture));
+
+        simpleItemBlock(block, model.model);
+    }
+
+    protected void createGlassBarrel(Block block, ResourceLocation texture) {
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/glass_barrels"))
+                .texture("texture", texture)
+                .texture(PARTICLE_TAG, texture));
+
+        simpleItemBlock(block, model.model);
     }
 }

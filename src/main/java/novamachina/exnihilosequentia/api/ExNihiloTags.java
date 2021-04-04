@@ -19,6 +19,8 @@ public class ExNihiloTags {
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
+    public static final ITag.INamedTag<Item> CRIMSON_WOOD = createItemWrapper(forgeLoc("crimson_wood"));
+    public static final ITag.INamedTag<Item> WARPED_WOOD = createItemWrapper(forgeLoc("warped_wood"));
     public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(exNihiloLoc("hammer"));
     public static final ITag.INamedTag<Item> CROOK = createItemWrapper(exNihiloLoc("crook"));
     public static final ITag.INamedTag<Item> WOODEN_CRUCIBLE = createItemWrapper(exNihiloLoc("wooden_crucible"));

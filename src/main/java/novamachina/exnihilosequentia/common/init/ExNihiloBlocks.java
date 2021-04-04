@@ -24,7 +24,6 @@ public class ExNihiloBlocks {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister
             .create(ForgeRegistries.BLOCKS, ModIds.EX_NIHILO_SEQUENTIA);
-    //TODO Simplified due to no TileEntity or further usage
     public static final RegistryObject<BaseFallingBlock> DUST = createFallingBlocks(Blocks.DUST, SoundType.SAND);
     public static final RegistryObject<BaseFallingBlock> CRUSHED_NETHERRACK = createFallingBlocks(Blocks.CRUSHED_NETHERRACK, SoundType.STONE);
     public static final RegistryObject<BaseFallingBlock> CRUSHED_END_STONE = createFallingBlocks(Blocks.CRUSHED_END_STONE, SoundType.STONE);
@@ -41,7 +40,6 @@ public class ExNihiloBlocks {
             .register(Blocks.INFESTING_LEAVES, InfestingLeavesBlock::new);
     public static final RegistryObject<BaseBlock> INFESTED_LEAVES = BLOCKS
             .register(Blocks.INFESTED_LEAVES, InfestedLeavesBlock::new);
-    //TODO here are the sieves
     public static final RegistryObject<BlockSieve> SIEVE_ACACIA = createWoodSieve(Blocks.SIEVE_ACACIA);
     public static final RegistryObject<BlockSieve> SIEVE_BIRCH = createWoodSieve(Blocks.SIEVE_BIRCH);
     public static final RegistryObject<BlockSieve> SIEVE_DARK_OAK = createWoodSieve(Blocks.SIEVE_DARK_OAK);
@@ -50,7 +48,6 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BlockSieve> SIEVE_OAK = createWoodSieve(Blocks.SIEVE_OAK);
     public static final RegistryObject<BlockSieve> SIEVE_CRIMSON = createNetherSieve(Blocks.SIEVE_CRIMSON);
     public static final RegistryObject<BlockSieve> SIEVE_WARPED = createNetherSieve(Blocks.SIEVE_WARPED);
-    //TODO added Crucible
     //Wood
     public static final RegistryObject<BaseBlock> CRUCIBLE_ACACIA = createWoodCrucible(Blocks.CRUCIBLE_ACACIA);
     public static final RegistryObject<BaseBlock> CRUCIBLE_BIRCH = createWoodCrucible(Blocks.CRUCIBLE_BIRCH);
@@ -65,7 +62,6 @@ public class ExNihiloBlocks {
             .register(Blocks.CRUCIBLE_UNFIRED, UnfiredCrucibleBlock::new);
     public static final RegistryObject<BaseBlock> CRUCIBLE_FIRED = BLOCKS
             .register(Blocks.CRUCIBLE_FIRED, FiredCrucibleBlock::new);
-    //TODO here are the barrels
     //Wood
     public static final RegistryObject<BaseBlock> BARREL_ACACIA = createWoodBarrel(Blocks.BARREL_ACACIA);
     public static final RegistryObject<BaseBlock> BARREL_BIRCH = createWoodBarrel(Blocks.BARREL_BIRCH);
@@ -78,7 +74,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> BARREL_CRIMSON = createNetherBarrel(Blocks.BARREL_CRIMSON);
     public static final RegistryObject<BaseBlock> BARREL_WARPED = createNetherBarrel(Blocks.BARREL_WARPED);
     //Glass
-    public static final RegistryObject<BaseBlock> BARREL_GLASS = createGlassBarrel(Blocks.BARREL_GLASS);
+    /*public static final RegistryObject<BaseBlock> BARREL_GLASS = createGlassBarrel(Blocks.BARREL_GLASS);
     public static final RegistryObject<BaseBlock> BARREL_GLASS_WHITE = createGlassBarrel(Blocks.BARREL_GLASS_WHITE);
     public static final RegistryObject<BaseBlock> BARREL_GLASS_GRAY = createGlassBarrel(Blocks.BARREL_GLASS_GRAY);
     public static final RegistryObject<BaseBlock> BARREL_GLASS_LIGHT_GRAY = createGlassBarrel(Blocks.BARREL_GLASS_LIGHT_GRAY);
@@ -94,7 +90,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> BARREL_GLASS_GREEN = createGlassBarrel(Blocks.BARREL_GLASS_GREEN);
     public static final RegistryObject<BaseBlock> BARREL_GLASS_LIGHT_BLUE = createGlassBarrel(Blocks.BARREL_GLASS_LIGHT_BLUE);
     public static final RegistryObject<BaseBlock> BARREL_GLASS_CYAN = createGlassBarrel(Blocks.BARREL_GLASS_CYAN);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_BLUE = createGlassBarrel(Blocks.BARREL_GLASS_BLUE);
+    public static final RegistryObject<BaseBlock> BARREL_GLASS_BLUE = createGlassBarrel(Blocks.BARREL_GLASS_BLUE);*/
 
 
     private ExNihiloBlocks() {

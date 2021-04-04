@@ -97,7 +97,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_STONE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_CRIMSON.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_WARPED.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        /*registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_BLACK.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_BLUE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_BROWN.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
@@ -113,7 +113,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_PURPLE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_YELLOW.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_RED.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_WHITE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_GLASS_WHITE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID*/
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_ACACIA.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_BIRCH.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
@@ -121,8 +121,8 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_SPRUCE.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_OAK.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()), FiredCrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()), FiredCrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WARPED.get()), FiredCrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WARPED.get()), CrucibleRecipeCategory.UID, HeatRecipeCategory.UID);
     }
 
     @Override

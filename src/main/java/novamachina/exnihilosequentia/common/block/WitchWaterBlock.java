@@ -9,17 +9,10 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.entity.monster.CaveSpiderEntity;
-import net.minecraft.entity.monster.CreeperEntity;
-import net.minecraft.entity.monster.EvokerEntity;
-import net.minecraft.entity.monster.GhastEntity;
-import net.minecraft.entity.monster.SkeletonEntity;
-import net.minecraft.entity.monster.SpiderEntity;
-import net.minecraft.entity.monster.VindicatorEntity;
-import net.minecraft.entity.monster.WitchEntity;
-import net.minecraft.entity.monster.WitherSkeletonEntity;
-import net.minecraft.entity.monster.ZombieVillagerEntity;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
@@ -58,6 +51,9 @@ public class WitchWaterBlock extends FlowingFluidBlock {
         }
 
         // TODO Slime
+        /*if (entityIn instanceof SlimeEntity) {
+            replaceMob(worldIn, (SlimeEntity) entityIn, new SlimeEntity(EntityType.SLIME, worldIn));
+        }*/
 
         if (entityIn instanceof SpiderEntity && !(entityIn instanceof CaveSpiderEntity)) {
             replaceMob(worldIn, (SpiderEntity) entityIn,
@@ -88,6 +84,10 @@ public class WitchWaterBlock extends FlowingFluidBlock {
         }
 
         // TODO Cows
+        /*if (entityIn instanceof CowEntity && !(entityIn instanceof MooshroomEntity)) {
+            entityIn.thunderHit((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+            replaceMob(worldIn, (CowEntity) entityIn, new MooshroomEntity(EntityType.MOOSHROOM, worldIn));
+        }*/
 
         if (entityIn instanceof AnimalEntity) {
             entityIn.thunderHit((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));

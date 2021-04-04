@@ -169,6 +169,19 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(crucible.getId()));
     }
 
+    protected void createCrucible(Consumer<IFinishedRecipe> consumer, RegistryObject<BaseBlock> crucible, ITag.INamedTag<Item> block, Item slab) {
+        ShapedRecipeBuilder.shaped(crucible.get())
+                .pattern("c c")
+                .pattern("clc")
+                .pattern("s s")
+                .define('c', block)
+                .define('l', slab)
+                .define('s', Tags.Items.RODS_WOODEN)
+                .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+                .unlockedBy("has_logs", has(block))
+                .save(consumer, createSaveLocation(crucible.getId()));
+    }
+
     protected void createSieve(Consumer<IFinishedRecipe> consumer, RegistryObject<BlockSieve> sieve, Item block, Item slab) {
         ShapedRecipeBuilder.shaped(sieve.get())
                 .pattern("p p")

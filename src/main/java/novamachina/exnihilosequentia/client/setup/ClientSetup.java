@@ -55,7 +55,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_OAK.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_CRIMSON.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_WARPED.get(), RenderType.cutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS.get(), RenderType.translucent());
+        /*RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS.get(), RenderType.translucent());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS_BLACK.get(), RenderType.translucent());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS_BLUE.get(), RenderType.translucent());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS_BROWN.get(), RenderType.translucent());
@@ -71,7 +71,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS_PURPLE.get(), RenderType.translucent());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS_RED.get(), RenderType.translucent());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS_WHITE.get(), RenderType.translucent());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS_YELLOW.get(), RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_GLASS_YELLOW.get(), RenderType.translucent());*/
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTED_LEAVES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTING_LEAVES.get(), RenderType.cutout());
 

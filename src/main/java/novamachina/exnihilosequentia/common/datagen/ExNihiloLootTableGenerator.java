@@ -52,7 +52,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.BARREL_CRIMSON.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_WARPED.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_STONE.get());
-        registerSelfDrop(ExNihiloBlocks.BARREL_GLASS.get());
+        /*registerSelfDrop(ExNihiloBlocks.BARREL_GLASS.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_GLASS_WHITE.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_GLASS_RED.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_GLASS_YELLOW.get());
@@ -68,7 +68,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.BARREL_GLASS_CYAN.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_GLASS_BROWN.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_GLASS_BLUE.get());
-        registerSelfDrop(ExNihiloBlocks.BARREL_GLASS_BLACK.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_GLASS_BLACK.get());*/
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_FIRED.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_UNFIRED.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_ACACIA.get());
