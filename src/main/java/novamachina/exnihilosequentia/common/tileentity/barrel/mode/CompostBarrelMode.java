@@ -21,6 +21,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CompostBarrelMode extends AbstractBarrelMode {
     private int currentProgress;
@@ -86,7 +87,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerWorld) barrelTile.getLevel())
+        ((ServerWorld) Objects.requireNonNull(barrelTile.getLevel()))
             .sendParticles(ParticleTypes.EFFECT,
                 barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
@@ -113,10 +114,11 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
-        ItemStack returnStack = stack.copy();
         if (barrelTile.addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(stack.getItem()))) {
+            ItemStack returnStack = stack.copy();
             returnStack.shrink(1);
+            return returnStack;
         }
-        return returnStack;
+        return stack;
     }
 }

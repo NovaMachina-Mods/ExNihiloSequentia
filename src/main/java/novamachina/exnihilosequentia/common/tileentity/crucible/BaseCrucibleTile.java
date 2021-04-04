@@ -33,6 +33,7 @@ import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public abstract class BaseCrucibleTile extends TileEntity implements ITickableTileEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -62,7 +63,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT compound) {
+    public void load(@Nonnull BlockState state, CompoundNBT compound) {
         inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
@@ -71,6 +72,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         super.load(state, compound);
     }
 
+    @Nonnull
     @Override
     public CompoundNBT save(CompoundNBT compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
@@ -119,6 +121,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
+            assert level != null;
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
             setChanged();
             return ActionResultType.SUCCESS;
@@ -187,13 +190,13 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         CompoundNBT nbt = packet.getTag();
         if (nbt.contains(CURRENT_ITEM_TAG)) {
-            currentItem = ItemStack.of((CompoundNBT) nbt.get(CURRENT_ITEM_TAG));
+            currentItem = ItemStack.of((CompoundNBT) Objects.requireNonNull(nbt.get(CURRENT_ITEM_TAG)));
         } else {
             currentItem = ItemStack.EMPTY;
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            inventory.setStackInSlot(0, ItemStack.of((CompoundNBT) nbt.get(BLOCK_TAG)));
+            inventory.setStackInSlot(0, ItemStack.of((CompoundNBT) Objects.requireNonNull(nbt.get(BLOCK_TAG))));
         } else {
             inventory.setStackInSlot(0, ItemStack.EMPTY);
         }
@@ -211,16 +214,20 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     public float getSolidProportion() {
+        try {
+            int itemCount =
+                    inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
+            float solidProportion = ((float) itemCount) / 4;
 
-        int itemCount =
-            inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
-        float solidProportion = ((float) itemCount) / 4;
-
-        if (solidAmount > 0) {
-            CrucibleRecipe meltable = getMeltable();
-            solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
+            if (solidAmount > 0) {
+                CrucibleRecipe meltable = getMeltable();
+                solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
+            }
+            return solidProportion;
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
-        return solidProportion;
+        return 0;
     }
 
     public abstract CrucilbeTypeEnum getCrucibleType();

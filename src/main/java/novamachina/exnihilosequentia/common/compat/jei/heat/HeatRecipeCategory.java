@@ -10,8 +10,11 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
@@ -75,8 +78,12 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getFluidStacks().init(0, true, 1, 17);
             recipeLayout.getFluidStacks().set(0, new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getInput().getRegistryName()), FluidAttributes.BUCKET_VOLUME));
         } else {
+            IItemProvider input = recipe.getInput();
+            if(input == Blocks.FIRE)  {
+                input = Items.FLINT_AND_STEEL;
+            }
             recipeLayout.getItemStacks().init(0, true, 0, 16);
-            recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(recipe.getInput()).getItems()));
+            recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(input).getItems()));
         }
     }
 }

@@ -17,6 +17,7 @@ public class BarrelInventoryHandler extends ItemStackHandler {
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+        //TODO make simulate for all mods & hoppers right
         return barrel.getMode().handleInsert(barrel, stack);
     }
 

@@ -89,6 +89,12 @@ dependencies {
 
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
     runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+
+    runtimeOnly fg.deobf("mekanism:Mekanism:${minecraft_version}-${mekanism_version}")
+    //runtimeOnly fg.deobf("appeng:appliedenergistics2:${appeng_version}")
+    runtimeOnly fg.deobf("curse.maven:pipez-443900:${pipez_version}")
+    runtimeOnly fg.deobf("curse.maven:refinedpipes-370696:${refinedpipes_version}")
+    runtimeOnly fg.deobf("curse.maven:refinedstorage-243076:${refinedstorage_version}")
 }
 
 jar {
@@ -114,10 +120,11 @@ jar.finalizedBy('reobfJar')
 repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
     maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
-    maven { url = "https://maven.tehnut.info"} // WAILA
+    maven { url = "https://maven.tehnut.info" } // WAILA
     maven { url = "https://maven.tterrag.com/" } // TOP
     maven { url = "https://maven.blamejared.com" } // CraftTweaker
-    maven { url = "https://cursemaven.com"}
+    maven { url = "https://cursemaven.com" }
+    maven { url = "https://modmaven.dev/" }
 }
 
 publishing {
