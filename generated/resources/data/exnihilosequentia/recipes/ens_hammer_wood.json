@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    " -x",
+    "-  "
+  ],
+  "key": {
+    "x": {
+      "tag": "minecraft:planks"
+    },
+    "-": {
+      "tag": "forge:rods"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:hammer_wood"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "xx",
+    " x",
+    " x"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:pebble_stone"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:crook_stone"
+  }
+}

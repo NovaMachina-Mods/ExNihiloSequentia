@@ -1,0 +1,10 @@
+{
+  "parent": "exnihilosequentia:block/crucible",
+  "textures": {
+    "particle": "minecraft:block/acacia_log",
+    "top": "minecraft:block/acacia_log",
+    "bottom": "minecraft:block/acacia_log",
+    "side": "minecraft:block/acacia_log",
+    "inside": "minecraft:block/acacia_log"
+  }
+}

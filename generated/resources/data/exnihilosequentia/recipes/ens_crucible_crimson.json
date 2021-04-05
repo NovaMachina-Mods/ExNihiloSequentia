@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "c c",
+    "clc",
+    "s s"
+  ],
+  "key": {
+    "c": {
+      "tag": "minecraft:crimson_stems"
+    },
+    "l": {
+      "item": "minecraft:crimson_slab"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:crucible_crimson"
+  }
+}

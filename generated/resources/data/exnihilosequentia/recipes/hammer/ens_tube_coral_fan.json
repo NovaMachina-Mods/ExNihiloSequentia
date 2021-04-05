@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:hammer",
+  "results": [
+    {
+      "chance": 1.0,
+      "item": "minecraft:tube_coral_fan",
+      "count": 1
+    }
+  ],
+  "input": {
+    "item": "minecraft:tube_coral"
+  }
+}

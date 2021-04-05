@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ctc",
+    "sms",
+    "cbc"
+  ],
+  "key": {
+    "c": {
+      "tag": "forge:dyes/purple"
+    },
+    "s": {
+      "tag": "forge:dusts/glowstone"
+    },
+    "t": {
+      "tag": "forge:end_stones"
+    },
+    "b": {
+      "tag": "forge:ender_pearls"
+    },
+    "m": {
+      "item": "exnihilosequentia:doll_crafting"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:doll_shulker"
+  }
+}
