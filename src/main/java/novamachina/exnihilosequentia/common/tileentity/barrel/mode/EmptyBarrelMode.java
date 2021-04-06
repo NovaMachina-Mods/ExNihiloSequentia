@@ -9,7 +9,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -80,10 +79,14 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
         if(ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(stack.getItem())) {
             barrelTile.setMode(ExNihiloConstants.BarrelModes.COMPOST);
-            return barrelTile.getMode().handleInsert(barrelTile, stack);
+            ItemStack returnStack = barrelTile.getMode().handleInsert(barrelTile, stack, simulate);
+            if(simulate) {
+                barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
+            }
+            return returnStack;
         }
         return stack;
     }

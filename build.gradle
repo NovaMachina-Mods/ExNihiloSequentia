@@ -86,8 +86,7 @@ dependencies {
     runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
 
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
-	runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
-    //runtimeOnly fg.deobf("mekanism:Mekanism:${minecraft_version}-${mekanism_version}")
+	  runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
 }
 
 jar {
@@ -117,7 +116,7 @@ repositories {
     maven { url = "https://maven.tterrag.com/" } // TOP
     maven { url = "https://maven.blamejared.com" } // CraftTweaker
     maven { url = "https://cursemaven.com"}
-	maven { url = "https://modmaven.dev/" }
+    maven { url = "https://modmaven.dev"}
 }
 
 publishing {

@@ -212,15 +212,20 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     public float getSolidProportion() {
 
-        int itemCount =
-            inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
-        float solidProportion = ((float) itemCount) / 4;
+        try {
+            int itemCount =
+                inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
+            float solidProportion = ((float) itemCount) / 4;
 
-        if (solidAmount > 0) {
-            CrucibleRecipe meltable = getMeltable();
-            solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
+            if (solidAmount > 0) {
+                CrucibleRecipe meltable = getMeltable();
+                solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
+            }
+            return solidProportion;
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
-        return solidProportion;
+        return 0;
     }
 
     public abstract CrucilbeTypeEnum getCrucibleType();

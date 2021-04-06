@@ -75,7 +75,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             TextureAtlasSprite sprite = Minecraft.getInstance()
                     .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
                             new ResourceLocation(solidTexture.getNamespace(),
-                                    "block/" + solidTexture.getPath()));
+                                    "block/" + resolveTexture(solidTexture.getPath())));
 
             // Subtract 0.005 to prevent texture fighting
             float fillAmount = (0.75f * Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.005f;

@@ -38,7 +38,7 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
             TextureAtlasSprite sprite = Minecraft.getInstance()
                     .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
                             new ResourceLocation(blockTexture.getNamespace(),
-                                    "block/" + blockTexture.getPath()));
+                                    "block/" + resolveTexture(blockTexture.getPath())));
             IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
 
             matrixStack.pushPose();
