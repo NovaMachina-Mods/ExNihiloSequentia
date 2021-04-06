@@ -210,7 +210,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
         if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
             return stack.copy();
         }
@@ -218,10 +218,12 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         Fluid fluid = barrelTile.getTank().getFluid().getFluid();
         Item input = stack.getItem();
         if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
-            barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
-            barrelTile.getInventory()
-                .setStackInSlot(0, new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
-            barrelTile.setMode(BarrelModes.BLOCK);
+            if(!simulate) {
+                barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+                barrelTile.getInventory()
+                        .setStackInSlot(0, new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
+                barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
+            }
             returnStack.shrink(1);
             return returnStack;
         }
@@ -229,8 +231,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         if (input instanceof DollItem) {
             DollItem doll = (DollItem) input;
             if (barrelTile.getFluid().isSame(doll.getSpawnFluid())) {
-                barrelTile.setMode(BarrelModes.MOB);
-                ((MobSpawnBarrelMode) barrelTile.getMode()).setDoll(doll);
+                if(!simulate) {
+                    barrelTile.setMode(ExNihiloConstants.BarrelModes.MOB);
+                    ((MobSpawnBarrelMode) barrelTile.getMode()).setDoll(doll);
+                }
                 returnStack.shrink(1);
             }
         }

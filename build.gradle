@@ -90,11 +90,11 @@ dependencies {
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
     runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
 
-    runtimeOnly fg.deobf("mekanism:Mekanism:${minecraft_version}-${mekanism_version}")
+    //runtimeOnly fg.deobf("mekanism:Mekanism:${minecraft_version}-${mekanism_version}")
     //runtimeOnly fg.deobf("appeng:appliedenergistics2:${appeng_version}")
-    runtimeOnly fg.deobf("curse.maven:pipez-443900:${pipez_version}")
-    runtimeOnly fg.deobf("curse.maven:refinedpipes-370696:${refinedpipes_version}")
-    runtimeOnly fg.deobf("curse.maven:refinedstorage-243076:${refinedstorage_version}")
+    //runtimeOnly fg.deobf("curse.maven:pipez-443900:${pipez_version}")
+    //runtimeOnly fg.deobf("curse.maven:refinedpipes-370696:${refinedpipes_version}")
+    //runtimeOnly fg.deobf("curse.maven:refinedstorage-243076:${refinedstorage_version}")
 }
 
 jar {
