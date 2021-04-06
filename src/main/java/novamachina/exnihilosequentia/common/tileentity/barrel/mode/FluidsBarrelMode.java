@@ -25,6 +25,7 @@ import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.BarrelModes;
 import novamachina.exnihilosequentia.common.utility.TankUtil;
 
