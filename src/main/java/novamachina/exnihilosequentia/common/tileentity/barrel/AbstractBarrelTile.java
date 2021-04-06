@@ -169,16 +169,18 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         return tank.getFluidAmount();
     }
 
-    public boolean addSolid(int amount) {
+    public boolean addSolid(int amount, boolean simulate) {
         if (amount <= 0) {
             return false;
         }
         if (solidAmount == MAX_SOLID_AMOUNT) {
             return false;
         }
-        solidAmount += amount;
-        if (solidAmount > MAX_SOLID_AMOUNT) {
-            solidAmount = MAX_SOLID_AMOUNT;
+        if(!simulate) {
+            solidAmount += amount;
+            if (solidAmount > MAX_SOLID_AMOUNT) {
+                solidAmount = MAX_SOLID_AMOUNT;
+            }
         }
         return true;
     }

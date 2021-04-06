@@ -31,8 +31,7 @@ public abstract class AbstractModBlockRenderer<T extends TileEntity> extends Til
                 return "cactus_top";
             }
             default: {
-                logger.warn("Could not find texture " + path +". Returning missing texture.");
-                return "missing";
+                return path;
             }
         }
     }
