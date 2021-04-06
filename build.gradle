@@ -116,6 +116,7 @@ repositories {
     maven { url = "https://maven.tterrag.com/" } // TOP
     maven { url = "https://maven.blamejared.com" } // CraftTweaker
     maven { url = "https://cursemaven.com"}
+    maven { url = "https://modmaven.dev"}
 }
 
 publishing {

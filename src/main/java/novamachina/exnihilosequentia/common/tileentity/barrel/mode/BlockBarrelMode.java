@@ -78,7 +78,7 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
         return stack;
     }
 }

@@ -14,7 +14,7 @@ public class BarrelInventoryHandler extends ItemStackHandler {
 
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-        return barrel.getMode().handleInsert(barrel, stack);
+        return barrel.getMode().handleInsert(barrel, stack, simulate);
     }
 
     @Override

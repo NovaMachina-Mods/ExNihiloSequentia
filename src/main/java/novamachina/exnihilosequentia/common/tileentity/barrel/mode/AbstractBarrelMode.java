@@ -41,5 +41,5 @@ public abstract class AbstractBarrelMode {
 
     public abstract List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile);
 
-    public abstract ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack);
+    public abstract ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate);
 }
