@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xgx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:pebble_blackstone"
+    },
+    "g": {
+      "item": "exnihilosequentia:chunk_gold"
+    }
+  },
+  "result": {
+    "item": "minecraft:gilded_blackstone"
+  }
+}

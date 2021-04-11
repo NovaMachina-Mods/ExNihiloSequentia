@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -45,6 +44,8 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import static novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator.createMCCompost;
 
 @Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloInitialization {
@@ -127,10 +128,12 @@ public class ExNihiloInitialization {
 
     private static void registerVanillaCompost() {
         for(EnumSeed seed : EnumSeed.values()) {
-            ComposterBlock.COMPOSTABLES.put(seed.getRegistryObject().get().asItem(), 0.3F);
+            createMCCompost(seed.getRegistryObject().get().asItem(), 0.3F);
         }
-        ComposterBlock.COMPOSTABLES.put(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
-        ComposterBlock.COMPOSTABLES.put(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
+        createMCCompost(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
+        createMCCompost(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
+        createMCCompost(EnumResource.SILKWORM.getRegistryObject().get(), 0.3F);
+        createMCCompost(ExNihiloItems.COOKED_SILKWORM.get(), 0.3F);
     }
 
     private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType) {

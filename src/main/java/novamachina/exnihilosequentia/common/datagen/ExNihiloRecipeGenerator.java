@@ -488,6 +488,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .build(consumer, heatLoc("glowstone"));
         HeatRecipeBuilder.builder().input(Blocks.SHROOMLIGHT).amount(2)
                 .build(consumer, heatLoc("shroomlight"));
+        HeatRecipeBuilder.builder().input(Blocks.SOUL_FIRE).amount(4)
+                .build(consumer, heatLoc("soul_fire"));
     }
 
     private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
