@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "exnihilosequentia:pebble_stone"
+    },
+    {
+      "item": "exnihilosequentia:pebble_stone"
+    },
+    {
+      "item": "exnihilosequentia:pebble_stone"
+    }
+  ],
+  "result": {
+    "item": "exnihilosequentia:item_stick_stone"
+  }
+}

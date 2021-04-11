@@ -114,6 +114,7 @@ public class ExNihiloConstants {
         public static final String YELLOW_CORAL_SEED = "seed_yellow_coral";
         public static final String SEED_FERN = "fern";
         public static final String SEED_LARGE_FERN = "large_fern";
+        public static final String STONE_STICK = "item_stick_stone";
 
         private Items() {
         }

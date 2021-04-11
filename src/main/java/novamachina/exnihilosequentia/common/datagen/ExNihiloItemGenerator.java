@@ -27,13 +27,13 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
     protected void registerModels() {
         singleTexture(ExNihiloItems.COOKED_SILKWORM.get().getRegistryName()
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, "items/cooked_silkworm"));
+                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + "cooked_silkworm"));
         singleTexture(ExNihiloItems.WITCH_WATER_BUCKET.get().getRegistryName()
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_witchwater"));
+                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + "bucket_witchwater"));
         singleTexture(ExNihiloItems.SEA_WATER_BUCKET.get().getRegistryName()
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_sea_water"));
+                LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + "bucket_sea_water"));
 
         registerCrooks();
         registerHammers();
@@ -48,7 +48,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
         for (EnumCrook crook : EnumCrook.values()) {
             singleTexture(crook.getRegistryObject().get().getRegistryName()
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                    LAYER_0_TAG, new ResourceLocation(modid, "items/tools/crook/" + crook.crookName));
+                    LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + "tools/crook/" + crook.crookName));
         }
     }
 
@@ -65,7 +65,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
         for (EnumHammer hammer : EnumHammer.values()) {
             singleTexture(hammer.getRegistryObject().get().getRegistryName()
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                    LAYER_0_TAG, new ResourceLocation(modid, "items/tools/hammer/" + hammer.hammerName));
+                    LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + "tools/hammer/" + hammer.hammerName));
         }
     }
 

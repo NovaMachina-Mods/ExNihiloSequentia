@@ -2,16 +2,23 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.util.List;
 
 public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     public ExNihiloItemTagsGenerator(DataGenerator generator, BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper) {
@@ -57,6 +64,8 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerMisc() {
         tag(ExNihiloTags.CLAY).add(Items.CLAY_BALL);
+        tag(ExNihiloTags.STONE_STICK).add(EnumResource.STONE_STICK.getRegistryObject().get());
+        tag(Tags.Items.RODS).add(EnumResource.STONE_STICK.getRegistryObject().get());
     }
 
     private void registerOres() {
