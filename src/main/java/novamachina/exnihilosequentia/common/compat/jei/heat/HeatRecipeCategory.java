@@ -85,6 +85,9 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             if(input == Blocks.FIRE) {
                 input = Items.FLINT_AND_STEEL;
             }
+			if (input instanceof FlowingFluidBlock) {
+				input = ((FlowingFluidBlock) input).getFluid().getBucket();
+			}
             recipeLayout.getItemStacks().init(0, true, 0, 16);
             recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(input).getItems()));
         }
