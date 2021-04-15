@@ -173,14 +173,10 @@ public class SieveTile extends TileEntity implements ITickableTileEntity {
         }
 
         if (isReadyToSieve()) {
-            if (player.abilities.isCreativeMode) {
-                progress = 1F;
-            } else {
-                clicksSinceSecond++;
-                if (clicksSinceSecond <= Config.getSieveClicksPerSecond()) {
-                    progress += 0.1F;
-                }
-            }
+			clicksSinceSecond++;
+			if (clicksSinceSecond <= Config.getSieveClicksPerSecond()) {
+				progress += 0.1F;
+			}
 
             if (progress >= 1.0F) {
                 logger.debug("Sieve progress complete");
