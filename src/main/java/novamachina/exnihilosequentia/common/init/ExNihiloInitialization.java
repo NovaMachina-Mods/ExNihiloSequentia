@@ -129,7 +129,7 @@ public class ExNihiloInitialization {
 
     private static void registerVanillaCompost() {
         for(EnumSeed seed : EnumSeed.values()) {
-            ComposterBlock.COMPOSTABLES.put(seed.getRegistryObject().get().asItem(), 0.3F);
+            createMCCompost(seed.getRegistryObject().get().asItem(), 0.3F);
         }
         createMCCompost(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
         createMCCompost(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
