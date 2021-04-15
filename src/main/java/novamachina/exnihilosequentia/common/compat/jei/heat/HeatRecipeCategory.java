@@ -82,7 +82,8 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getFluidStacks().set(0, new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getInput().getRegistryName()), FluidAttributes.BUCKET_VOLUME));
         } else {
             IItemProvider input = recipe.getInput();
-            if(input == Blocks.FIRE) {
+			//TODO doing something else, both show flint and steel
+            if(input == Blocks.FIRE || input == Blocks.SOUL_FIRE) {
                 input = Items.FLINT_AND_STEEL;
             }
             recipeLayout.getItemStacks().init(0, true, 0, 16);
