@@ -74,7 +74,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerDolls(consumer);
         registerMeshes(consumer);
         registerMisc(consumer);
-        //registerGlassBarrels(consumer);
 
         registerCustomRecipes(consumer);
     }
@@ -102,26 +101,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createBarrel(consumer, ExNihiloBlocks.BARREL_CRIMSON, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
         createBarrel(consumer, ExNihiloBlocks.BARREL_WARPED, Items.WARPED_PLANKS, Items.WARPED_SLAB);
     }
-
-    /*private void registerGlassBarrels(Consumer<IFinishedRecipe> consumer) {
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS, Items.GLASS, Items.GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_BLACK, Items.BLACK_STAINED_GLASS, Items.BLACK_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_BLUE, Items.BLUE_STAINED_GLASS, Items.BLUE_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_BROWN, Items.BROWN_STAINED_GLASS, Items.BROWN_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_CYAN, Items.CYAN_STAINED_GLASS, Items.CYAN_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_GRAY, Items.GRAY_STAINED_GLASS, Items.GRAY_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_GREEN, Items.GREEN_STAINED_GLASS, Items.GREEN_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE, Items.LIGHT_BLUE_STAINED_GLASS, Items.LIGHT_BLUE_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY, Items.LIGHT_GRAY_STAINED_GLASS, Items.LIGHT_GRAY_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_LIME, Items.LIME_STAINED_GLASS, Items.LIME_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_MAGENTA, Items.MAGENTA_STAINED_GLASS, Items.MAGENTA_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_ORANGE, Items.ORANGE_STAINED_GLASS, Items.ORANGE_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_PINK, Items.PINK_STAINED_GLASS, Items.PINK_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_PURPLE, Items.PURPLE_STAINED_GLASS, Items.PURPLE_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_RED, Items.RED_STAINED_GLASS, Items.RED_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_WHITE, Items.WHITE_STAINED_GLASS, Items.WHITE_STAINED_GLASS_PANE);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_GLASS_YELLOW, Items.YELLOW_STAINED_GLASS, Items.YELLOW_STAINED_GLASS_PANE);
-    }*/
 
     private void registerCrucibles(Consumer<IFinishedRecipe> consumer) {
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_ACACIA, Items.ACACIA_LOG, Items.ACACIA_SLAB);
