@@ -115,23 +115,6 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerFiredBarrels() {
         tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_STONE.get().asItem());
-        /*tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BLACK.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BLUE.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_BROWN.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_CYAN.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_GRAY.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_GREEN.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_LIME.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_MAGENTA.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_ORANGE.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_PINK.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_PURPLE.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_YELLOW.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_RED.get().asItem());
-        tag(ExNihiloTags.FIRED_BARREL).add(ExNihiloBlocks.BARREL_GLASS_WHITE.get().asItem());*/
     }
 
     private void registerSieves() {
