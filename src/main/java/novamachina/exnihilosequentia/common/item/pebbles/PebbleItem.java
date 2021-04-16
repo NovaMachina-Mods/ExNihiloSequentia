@@ -19,31 +19,4 @@ public class PebbleItem extends SnowballItem {
     public PebbleItem() {
         super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
     }
-
-    @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        //TODO Placeable like redstone?
-        world.playSound(null, player.getX(), player.getY(), player.getZ(), ExNihiloSounds.PEBBLE_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-        if (!world.isClientSide) {
-            SnowballEntity snowballentity = new SnowballEntity(world, player){
-                @Override
-                public void onHitEntity(EntityRayTraceResult entityRayTraceResult) {
-                    Entity entity = entityRayTraceResult.getEntity();
-                    entity.hurt(DamageSource.thrown(this, this.getOwner()), (float) Config.getPebbleDamage());
-                }
-            };
-            snowballentity.setItem(itemstack);
-            snowballentity.shootFromRotation(player, player.xRot, player.yRot, 0.0F, 1.5F, 1.0F);
-            world.addFreshEntity(snowballentity);
-        }
-
-        player.awardStat(Stats.ITEM_USED.get(this));
-        if (!player.abilities.instabuild) {
-            itemstack.shrink(1);
-        }
-
-        return ActionResult.sidedSuccess(itemstack, world.isClientSide());
-    }
-
 }
