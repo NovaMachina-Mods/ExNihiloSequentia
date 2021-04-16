@@ -33,7 +33,6 @@ public class ExNihiloSequentia {
         Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "-common.toml"));
         ExNihiloInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(SoundEvent.class, ExNihiloSounds::registerSounds);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::setupNonTagBasedRegistries);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::registerTOP);
     }
