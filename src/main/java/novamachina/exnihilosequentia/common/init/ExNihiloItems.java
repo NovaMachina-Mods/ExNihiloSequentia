@@ -114,40 +114,6 @@ public class ExNihiloItems {
             () -> new BlockItem(ExNihiloBlocks.BARREL_WARPED.get(), properties));
     public static final RegistryObject<Item> BARREL_STONE = ITEMS.register(Blocks.BARREL_STONE,
             () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(), properties));
-    /*public static final RegistryObject<Item> BARREL_GLASS = ITEMS.register(Blocks.BARREL_GLASS,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_WHITE = ITEMS.register(Blocks.BARREL_GLASS_WHITE,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_WHITE.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_GRAY = ITEMS.register(Blocks.BARREL_GLASS_GRAY,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_GRAY.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_LIGHT_GRAY = ITEMS.register(Blocks.BARREL_GLASS_LIGHT_GRAY,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_BLACK = ITEMS.register(Blocks.BARREL_GLASS_BLACK,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_BLACK.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_BROWN = ITEMS.register(Blocks.BARREL_GLASS_BROWN,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_BROWN.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_RED = ITEMS.register(Blocks.BARREL_GLASS_RED,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_RED.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_MAGENTA = ITEMS.register(Blocks.BARREL_GLASS_MAGENTA,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_MAGENTA.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_ORANGE = ITEMS.register(Blocks.BARREL_GLASS_ORANGE,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_ORANGE.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_PINK = ITEMS.register(Blocks.BARREL_GLASS_PINK,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_PINK.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_PURPLE = ITEMS.register(Blocks.BARREL_GLASS_PURPLE,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_PURPLE.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_YELLOW = ITEMS.register(Blocks.BARREL_GLASS_YELLOW,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_YELLOW.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_LIME = ITEMS.register(Blocks.BARREL_GLASS_LIME,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_LIME.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_GREEN = ITEMS.register(Blocks.BARREL_GLASS_GREEN,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_GREEN.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_LIGHT_BLUE = ITEMS.register(Blocks.BARREL_GLASS_LIGHT_BLUE,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_CYAN = ITEMS.register(Blocks.BARREL_GLASS_CYAN,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_CYAN.get(), properties));
-    public static final RegistryObject<Item> BARREL_GLASS_BLUE = ITEMS.register(Blocks.BARREL_GLASS_BLUE,
-            () -> new BlockItem(ExNihiloBlocks.BARREL_GLASS_BLUE.get(), properties));*/
 
     // Begin Items Only
     public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
