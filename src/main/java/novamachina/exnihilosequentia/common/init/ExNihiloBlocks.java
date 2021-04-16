@@ -73,25 +73,6 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> BARREL_STONE = createStoneBarrel(Blocks.BARREL_STONE);
     public static final RegistryObject<BaseBlock> BARREL_CRIMSON = createNetherBarrel(Blocks.BARREL_CRIMSON);
     public static final RegistryObject<BaseBlock> BARREL_WARPED = createNetherBarrel(Blocks.BARREL_WARPED);
-    //Glass
-    /*public static final RegistryObject<BaseBlock> BARREL_GLASS = createGlassBarrel(Blocks.BARREL_GLASS);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_WHITE = createGlassBarrel(Blocks.BARREL_GLASS_WHITE);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_GRAY = createGlassBarrel(Blocks.BARREL_GLASS_GRAY);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_LIGHT_GRAY = createGlassBarrel(Blocks.BARREL_GLASS_LIGHT_GRAY);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_BLACK = createGlassBarrel(Blocks.BARREL_GLASS_BLACK);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_BROWN = createGlassBarrel(Blocks.BARREL_GLASS_BROWN);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_RED = createGlassBarrel(Blocks.BARREL_GLASS_RED);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_MAGENTA = createGlassBarrel(Blocks.BARREL_GLASS_MAGENTA);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_ORANGE = createGlassBarrel(Blocks.BARREL_GLASS_ORANGE);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_PINK = createGlassBarrel(Blocks.BARREL_GLASS_PINK);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_PURPLE = createGlassBarrel(Blocks.BARREL_GLASS_PURPLE);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_YELLOW = createGlassBarrel(Blocks.BARREL_GLASS_YELLOW);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_LIME = createGlassBarrel(Blocks.BARREL_GLASS_LIME);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_GREEN = createGlassBarrel(Blocks.BARREL_GLASS_GREEN);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_LIGHT_BLUE = createGlassBarrel(Blocks.BARREL_GLASS_LIGHT_BLUE);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_CYAN = createGlassBarrel(Blocks.BARREL_GLASS_CYAN);
-    public static final RegistryObject<BaseBlock> BARREL_GLASS_BLUE = createGlassBarrel(Blocks.BARREL_GLASS_BLUE);*/
-
 
     private ExNihiloBlocks() {
 
@@ -146,10 +127,6 @@ public class ExNihiloBlocks {
 
     protected static RegistryObject<BaseBlock> createNetherBarrel(String barrel) {
         return createStoneBarrels(barrel, ToolType.AXE, Material.NETHER_WOOD, SoundType.STEM);
-    }
-
-    protected static RegistryObject<BaseBlock> createGlassBarrel(String barrel) {
-        return createStoneBarrels(barrel, ToolType.PICKAXE, Material.GLASS, SoundType.GLASS);
     }
 
     protected static RegistryObject<BaseBlock> createStoneBarrel(String barrel) {
