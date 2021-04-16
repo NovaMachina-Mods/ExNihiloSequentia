@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xox",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "o": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minecraft:ancient_debris"
+  }
+}
