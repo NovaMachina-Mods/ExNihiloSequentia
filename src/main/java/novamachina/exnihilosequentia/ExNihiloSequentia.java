@@ -4,7 +4,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.loading.FMLPaths;
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.init.ExNihiloSounds;
 import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
 import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
 import novamachina.exnihilosequentia.common.utility.Config;
