@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:pebble_basalt"
+    }
+  },
+  "result": {
+    "item": "minecraft:basalt"
+  }
+}
