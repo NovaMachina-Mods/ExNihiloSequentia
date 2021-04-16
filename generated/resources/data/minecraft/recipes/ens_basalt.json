@@ -3,15 +3,14 @@
   "group": "exnihilosequentia",
   "pattern": [
     "xx",
-    " x",
-    " x"
+    "xx"
   ],
   "key": {
     "x": {
-      "tag": "forge:rods/stone"
+      "item": "exnihilosequentia:pebble_basalt"
     }
   },
   "result": {
-    "item": "exnihilosequentia:crook_stone"
+    "item": "minecraft:basalt"
   }
 }
