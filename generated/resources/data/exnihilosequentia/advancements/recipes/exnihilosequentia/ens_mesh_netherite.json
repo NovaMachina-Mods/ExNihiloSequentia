@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_diamond_mesh": {
+    "has_emerald_mesh": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "exnihilosequentia:mesh_diamond"
+            "item": "exnihilosequentia:mesh_emerald"
           }
         ]
       }
@@ -35,7 +35,7 @@
   },
   "requirements": [
     [
-      "has_diamond_mesh",
+      "has_emerald_mesh",
       "has_material",
       "has_the_recipe"
     ]
