@@ -42,23 +42,6 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         createBarrel(ExNihiloBlocks.BARREL_OAK.get(), mcLoc("block/oak_planks"));
         createBarrel(ExNihiloBlocks.BARREL_CRIMSON.get(), mcLoc("block/crimson_planks"));
         createBarrel(ExNihiloBlocks.BARREL_WARPED.get(), mcLoc("block/warped_planks"));
-        /*createGlassBarrel(ExNihiloBlocks.BARREL_GLASS.get(), mcLoc("block/glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_YELLOW.get(), mcLoc("block/yellow_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_WHITE.get(), mcLoc("block/white_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_RED.get(), mcLoc("block/red_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_PURPLE.get(), mcLoc("block/purple_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_PINK.get(), mcLoc("block/pink_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_ORANGE.get(), mcLoc("block/orange_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_MAGENTA.get(), mcLoc("block/magenta_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_LIME.get(), mcLoc("block/lime_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_LIGHT_GRAY.get(), mcLoc("block/light_gray_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_LIGHT_BLUE.get(), mcLoc("block/light_blue_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_GREEN.get(), mcLoc("block/green_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_GRAY.get(), mcLoc("block/gray_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_CYAN.get(), mcLoc("block/cyan_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_BROWN.get(), mcLoc("block/brown_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_BLUE.get(), mcLoc("block/blue_stained_glass"));
-        createGlassBarrel(ExNihiloBlocks.BARREL_GLASS_BLACK.get(), mcLoc("block/black_stained_glass"));*/
     }
 
     private void registerCake() {
