@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_blast_cooked_silkworm"
+    ]
+  },
+  "criteria": {
+    "has_silkworm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "exnihilosequentia:silkworm"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_blast_cooked_silkworm"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_silkworm",
+      "has_the_recipe"
+    ]
+  ]
+}

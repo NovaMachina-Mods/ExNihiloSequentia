@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "exnihilosequentia:silkworm"
+  },
+  "result": "exnihilosequentia:cooked_silkworm",
+  "experience": 0.1,
+  "cookingtime": 100
+}
