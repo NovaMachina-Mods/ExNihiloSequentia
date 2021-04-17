@@ -17,13 +17,13 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
-//    id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '1.66'
 }
 apply plugin: 'net.minecraftforge.gradle'
 
 
 def ENV = System.getenv()
-String semver = "${minecraft_release}-${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
+String semver = "${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
+version = "${minecraft_release}-${semver}"
 group = "${artifact_group}.${artifact_basename}"
 archivesBaseName = "${artifact_basename}"
 
@@ -52,14 +52,14 @@ dependencies {
     minecraft([
             group: "net.minecraftforge",
             name: 'forge',
-            version: "${minecraft_version}-${forge_version_major}.${forge_version_minor}.${forge_version_patch}"
+            version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
     ])
 
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_release}.4:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_release}.4:${jei_version}")
 
     compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
-    runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
+    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
 
     compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
     runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
@@ -132,7 +132,7 @@ minecraft {
 
 task makeChangelog(type: GitChangelogTask) {
     file = file('changelog.html')
-    untaggedName = "Current Release ${semver}"
+    untaggedName = "Current Release ${version}"
     fromCommit = "1be698f061a24f615c2a770d1190c995259ecbcd"
     toRef = 'HEAD'
     templateContent = file('changelog.mustache').getText('UTF-8')
@@ -165,9 +165,9 @@ jar {
         attributes([
                 "Specification-Title": "Ex Nihilo: Sequentia",
                 "Specification-Vendor": "NovaMachina",
-                "Specification-Version": "${semver}", // We are version 1 of ourselves
+                "Specification-Version": version, // We are version 1 of ourselves
                 "Implementation-Title": project.name,
-                "Implementation-Version": "${project.version}",
+                "Implementation-Version": version,
                 "Implementation-Vendor" :"NovaMachina",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])

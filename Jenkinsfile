@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy') {
             when{
                 expression {
-                    return env.GIT_BRANCH == 'origin/1.16';
+                    return env.GIT_BRANCH == '1.16';
                 }
             }
             steps {
@@ -37,11 +37,6 @@ pipeline {
         }
     }
     post {
-        when {
-            expression {
-                return env.GIT_BRANCH == 'origin/1.16' || env.GIT_BRANCH == 'origin/1.16';
-            }
-        }
         success {
             archiveArtifacts artifacts: 'build/libs/*.jar'
             mail to: env.BUILD_RESULT_EMAIL,
