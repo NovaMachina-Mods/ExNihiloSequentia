@@ -83,6 +83,7 @@ public class Config {
     private static ForgeConfigSpec.IntValue barrelNumberOfBuckets;
     private static ForgeConfigSpec.IntValue secondsToSpawn;
     private static ForgeConfigSpec.IntValue rainFillAmount;
+    private static ForgeConfigSpec.BooleanValue showParticles;
     // Infested Leaves
     private static ForgeConfigSpec.IntValue secondsToTransformLeaves;
     private static ForgeConfigSpec.DoubleValue spreadChance;
@@ -241,6 +242,9 @@ public class Config {
     public static int getWoodBarrelMaxTemp() {
         return woodBarrelMaxTemp.get();
     }
+    public static boolean getShowParticles() {
+        return showParticles.get();
+    }
 
     // Infested Leaves
     public static int getMaxBonusStringCount() {
@@ -277,6 +281,8 @@ public class Config {
         woodBarrelMaxTemp = COMMON_BUILDER
                 .comment("The max temperature a barrel can accept; water is 300 (Default: 300)")
                 .defineInRange("woodBarrelMaxTemp", 300, 0, Integer.MAX_VALUE);
+        showParticles = COMMON_BUILDER.comment("Should Ex Nihilo show any Patricle?")
+                .define("showParticles", true);
 
         COMMON_BUILDER.comment("Mob Spawn Configs").push(SUBCATEGORY_BARREL_MOB);
         secondsToSpawn = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)")
