@@ -86,15 +86,15 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
         ((ServerWorld) barrelTile.getLevel())
-            .sendParticles(ParticleTypes.EFFECT,
-                barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
-                barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
-                barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
-                1,
-                0.0,
-                0.0,
-                0.0,
-                0.05);
+                .sendParticles(ParticleTypes.EFFECT,
+                        barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
+                        barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
+                        barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
+                        1,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.05);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
         List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils
-            .formatPercent((float) currentProgress / (Config.getSecondsToFluidTransform() * 20))));
+                .formatPercent((float) currentProgress / (Config.getSecondsToFluidTransform() * 20))));
 
         return info;
     }

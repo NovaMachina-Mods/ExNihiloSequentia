@@ -40,7 +40,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
                 }
             }
         }
-        return ActionResultType.FAIL;
+        return ActionResultType.SUCCESS;
     }
 
     @Override

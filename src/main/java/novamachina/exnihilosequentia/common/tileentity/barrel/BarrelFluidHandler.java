@@ -29,10 +29,10 @@ public class BarrelFluidHandler extends FluidTank {
         }
 
         int amount = super.fill(resource, action);
-        
+
         if (amount > 0 && this.fluid != FluidStack.EMPTY && (this.barrel.getMode().getModeName()
-            .equals(ExNihiloConstants.BarrelModes.EMPTY) || this.barrel.getMode()
-            .getModeName().equals(ExNihiloConstants.BarrelModes.FLUID))) {
+                .equals(ExNihiloConstants.BarrelModes.EMPTY) || this.barrel.getMode()
+                .getModeName().equals(ExNihiloConstants.BarrelModes.FLUID))) {
             this.barrel.setMode(ExNihiloConstants.BarrelModes.FLUID);
         }
         return amount;

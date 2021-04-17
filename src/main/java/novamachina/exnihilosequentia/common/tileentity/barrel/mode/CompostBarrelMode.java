@@ -21,7 +21,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CompostBarrelMode extends AbstractBarrelMode {
     private int currentProgress;
@@ -34,14 +33,14 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     @Override
     public void tick(AbstractBarrelTile barrelTile) {
         if (barrelTile.getSolidAmount() >= AbstractBarrelTile.MAX_SOLID_AMOUNT && barrelTile.getInventory()
-            .getStackInSlot(0)
-            .isEmpty()) {
+                .getStackInSlot(0)
+                .isEmpty()) {
             currentProgress++;
             spawnParticle(barrelTile);
             if (currentProgress >= Config.getSecondsToCompost() * 20) {
                 currentProgress = 0;
                 barrelTile.getInventory()
-                    .setStackInSlot(0, new ItemStack(ForgeRegistries.BLOCKS.getValue(Blocks.DIRT.getRegistryName())));
+                        .setStackInSlot(0, new ItemStack(ForgeRegistries.BLOCKS.getValue(Blocks.DIRT.getRegistryName())));
                 barrelTile.removeSolid(barrelTile.getSolidAmount());
                 barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
             }
@@ -51,11 +50,11 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     @Override
     public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         if (ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(player.getItemInHand(handIn).getItem()) && barrelTile
-            .addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(player.getItemInHand(handIn).getItem()), true)) {
+                .addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(player.getItemInHand(handIn).getItem()), false)) {
             player.getItemInHand(handIn).shrink(1);
         }
 
-        return ActionResultType.SUCCESS;
+        return ActionResultType.FAIL;
     }
 
     @Override
@@ -87,16 +86,16 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerWorld) Objects.requireNonNull(barrelTile.getLevel()))
-            .sendParticles(ParticleTypes.EFFECT,
-                barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
-                barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
-                barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
-                1,
-                0.0,
-                0.0,
-                0.0,
-                0.05);
+        ((ServerWorld) barrelTile.getLevel())
+                .sendParticles(ParticleTypes.EFFECT,
+                        barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
+                        barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
+                        barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
+                        1,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.05);
     }
 
     @Override
@@ -104,10 +103,10 @@ public class CompostBarrelMode extends AbstractBarrelMode {
         List<ITextComponent> info = new ArrayList<>();
         if (currentProgress <= 0) {
             info.add(new TranslationTextComponent("waila.barrel.compost", barrelTile
-                .getSolidAmount(), AbstractBarrelTile.MAX_SOLID_AMOUNT));
+                    .getSolidAmount(), AbstractBarrelTile.MAX_SOLID_AMOUNT));
         } else {
             info.add(new TranslationTextComponent("waila.progress", StringUtils
-                .formatPercent((float) currentProgress / (Config.getSecondsToCompost() * 20))));
+                    .formatPercent((float) currentProgress / (Config.getSecondsToCompost() * 20))));
         }
         return info;
     }

@@ -95,15 +95,15 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
         ((ServerWorld) barrelTile.getLevel())
-            .sendParticles(ParticleTypes.LARGE_SMOKE,
-                barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
-                barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
-                barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
-                5,
-                0.0,
-                0.0,
-                0.0,
-                0.05);
+                .sendParticles(ParticleTypes.LARGE_SMOKE,
+                        barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
+                        barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
+                        barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
+                        5,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.05);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
         List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils
-            .formatPercent((float) currentProgress / (Config.getSecondsToSpawn() * 20))));
+                .formatPercent((float) currentProgress / (Config.getSecondsToSpawn() * 20))));
 
         return info;
     }

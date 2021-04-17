@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.BarrelModes;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -28,12 +28,12 @@ public class BarrelModeRegistry {
 
     public static void initialize() {
         logger.debug("Adding barrel modes");
-        addMode(() -> new EmptyBarrelMode(BarrelModes.EMPTY), TriggerType.NONE);
-        addMode(() -> new CompostBarrelMode(BarrelModes.COMPOST), TriggerType.ITEM);
-        addMode(() -> new FluidsBarrelMode(BarrelModes.FLUID), TriggerType.ITEM);
-        addMode(() -> new BlockBarrelMode(BarrelModes.BLOCK), TriggerType.NONE);
-        addMode(() -> new MobSpawnBarrelMode(BarrelModes.MOB), TriggerType.NONE);
-        addMode(() -> new FluidTransformBarrelMode(BarrelModes.TRANSFORM), TriggerType.NONE);
+        addMode(() -> new EmptyBarrelMode(ExNihiloConstants.BarrelModes.EMPTY), TriggerType.NONE);
+        addMode(() -> new CompostBarrelMode(ExNihiloConstants.BarrelModes.COMPOST), TriggerType.ITEM);
+        addMode(() -> new FluidsBarrelMode(ExNihiloConstants.BarrelModes.FLUID), TriggerType.ITEM);
+        addMode(() -> new BlockBarrelMode(ExNihiloConstants.BarrelModes.BLOCK), TriggerType.NONE);
+        addMode(() -> new MobSpawnBarrelMode(ExNihiloConstants.BarrelModes.MOB), TriggerType.NONE);
+        addMode(() -> new FluidTransformBarrelMode(ExNihiloConstants.BarrelModes.TRANSFORM), TriggerType.NONE);
     }
 
     public static void addMode(Supplier<AbstractBarrelMode> mode, TriggerType type) {
