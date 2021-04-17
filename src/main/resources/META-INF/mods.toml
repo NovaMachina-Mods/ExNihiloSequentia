@@ -4,7 +4,7 @@ license="All rights reserved"
 issueTrackerURL="https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues" #optional
 [[mods]] #mandatory
 modId="exnihilosequentia" #mandatory
-version="${file.jarVersion}" #mandatory
+version="${version}" #mandatory
 displayName="Ex Nihilo: Sequentia" #mandatory
 updateJSONURL="https://raw.githubusercontent.com/NovaMachina-Mods/ExNihiloSequentia/1.16/update.json" #optional
 displayURL="https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia" #optional
@@ -19,12 +19,12 @@ This mod allows you to create resources from absolutely nothing. Well...I guess 
 [[dependencies.exnihilosequentia]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[32,)" #mandatory
+    versionRange="${forge_version}" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.exnihilosequentia]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16, )"
+    versionRange="${mc_version}"
     ordering="NONE"
     side="BOTH"

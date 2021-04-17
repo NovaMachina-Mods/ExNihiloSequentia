@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "x",
+    "x",
+    "x"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:pebble_stone"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:item_stick_stone"
+  }
+}

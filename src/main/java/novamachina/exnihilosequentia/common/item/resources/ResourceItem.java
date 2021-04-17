@@ -17,7 +17,7 @@ public class ResourceItem extends Item {
     private final String resourceName;
 
     public ResourceItem(String name) {
-        super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
+        super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
         this.resourceName = name;
     }
 
@@ -26,31 +26,31 @@ public class ResourceItem extends Item {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        ItemStack item = context.getItem();
-        if (!context.getWorld().isRemote() && item.getItem() instanceof ResourceItem) {
+    public ActionResultType useOn(ItemUseContext context) {
+        ItemStack item = context.getItemInHand();
+        if (!context.getLevel().isClientSide() && item.getItem() instanceof ResourceItem) {
             ResourceItem resourceItem = (ResourceItem) item.getItem();
 
-            BlockState state = context.getWorld().getBlockState(context.getPos());
+            BlockState state = context.getLevel().getBlockState(context.getClickedPos());
             if (resourceItem.getResourceName().equals(Items.SILKWORM) && state.getBlock() instanceof LeavesBlock) {
-                context.getItem().shrink(1);
-                InfestingLeavesBlock.normalToInfesting(context.getWorld(),
-                        context.getPos());
+                context.getItemInHand().shrink(1);
+                InfestingLeavesBlock.normalToInfesting(context.getLevel(),
+                        context.getClickedPos());
                 return ActionResultType.SUCCESS;
             }
             if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) || resourceItem.getResourceName()
                     .equals(Items.GRASS_SEED)) {
                 if(state.getBlock().equals(Blocks.DIRT)) {
-                    context.getItem().shrink(1);
+                    context.getItemInHand().shrink(1);
                     if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) && state.getBlock().equals(Blocks.DIRT)) {
-                        Block.replaceBlock(state,
-                                Blocks.MYCELIUM.getDefaultState(), context.getWorld(),
-                                context.getPos(), 1);
+                        Block.updateOrDestroy(state,
+                                Blocks.MYCELIUM.defaultBlockState(), context.getLevel(),
+                                context.getClickedPos(), 1);
                         return ActionResultType.SUCCESS;
                     } else if (resourceItem.getResourceName().equals(Items.GRASS_SEED) && state.getBlock().equals(Blocks.DIRT)) {
-                        Block.replaceBlock(state,
-                                Blocks.GRASS_BLOCK.getDefaultState(), context.getWorld(),
-                                context.getPos(), 1);
+                        Block.updateOrDestroy(state,
+                                Blocks.GRASS_BLOCK.defaultBlockState(), context.getLevel(),
+                                context.getClickedPos(), 1);
                         return ActionResultType.SUCCESS;
                     }
                 }

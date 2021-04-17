@@ -50,7 +50,7 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
     @Override
     public void setIngredients(FluidTransformRecipe recipe, IIngredients ingredients) {
         ingredients.setInput(VanillaTypes.FLUID, recipe.getFluidInTank());
-        ingredients.setInputs(VanillaTypes.ITEM, new ArrayList<>(Arrays.asList(recipe.getCatalyst().getMatchingStacks())));
+        ingredients.setInputs(VanillaTypes.ITEM, new ArrayList<>(Arrays.asList(recipe.getCatalyst().getItems())));
         ingredients.setOutput(VanillaTypes.FLUID, recipe.getResult());
     }
 
@@ -61,7 +61,7 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
         recipeLayout.getFluidStacks().init(1, false, 102, 10);
 
         recipeLayout.getFluidStacks().set(0, recipe.getFluidInTank());
-        recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getCatalyst().getMatchingStacks())));
+        recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getCatalyst().getItems())));
         recipeLayout.getFluidStacks().set(1, recipe.getResult());
     }
 }

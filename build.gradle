@@ -1,3 +1,5 @@
+import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
+
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
@@ -6,27 +8,84 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-        classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.1.0'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.66'
     }
 }
+plugins {
+    id 'java'
+    id 'idea'
+    id 'maven-publish'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+}
 apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'idea'
-apply plugin: 'maven-publish'
-apply plugin: 'com.matthewprenger.cursegradle'
+
 
 def ENV = System.getenv()
-version = "${minecraft_release}-${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
-group = "${artifact_group}.${artifact_basename}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+String semver = "${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
+version = "${minecraft_release}-${semver}"
+group = "${artifact_group}.${artifact_basename}"
 archivesBaseName = "${artifact_basename}"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-//Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+sourceSets {
+    main {
+        resources {
+            srcDir 'generated/resources'
+        }
+    }
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+
+repositories {
+    maven { url = 'https://files.minecraftforge.net/maven' }
+    maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
+    maven { url = "https://maven.tehnut.info"} // WAILA
+    maven { url = "https://maven.tterrag.com/" } // TOP
+    maven { url = "https://maven.blamejared.com" } // CraftTweaker
+    maven { url = "https://cursemaven.com"}
+    maven { url = "https://modmaven.dev"}
+}
+
+
+dependencies {
+    minecraft([
+            group: "net.minecraftforge",
+            name: 'forge',
+            version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
+    ])
+
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_release}.4:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_release}.4:${jei_version}")
+
+    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
+    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
+
+    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
+    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
+
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+}
+
+task replaceResources(type: Copy) {
+    outputs.upToDateWhen { false }
+    from(sourceSets.main.resources.srcDirs) {
+        include 'META-INF/mods.toml'
+        expand 'version': version, 'mc_version': minecraft_version_range, 'forge_version': forge_version_range
+    }
+    into "$buildDir/resources/main"
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'META-INF/mods.toml'
+    }
+    finalizedBy replaceResources
+}
 
 minecraft {
-    mappings channel: 'snapshot', version: "${mcp_mappings}"
+    mappings channel: 'official', version: "${minecraft_version}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -71,19 +130,34 @@ minecraft {
     }
 }
 
-dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+task makeChangelog(type: GitChangelogTask) {
+    file = file('changelog.html')
+    untaggedName = "Current Release ${version}"
+    fromCommit = "1be698f061a24f615c2a770d1190c995259ecbcd"
+    toRef = 'HEAD'
+    templateContent = file('changelog.mustache').getText('UTF-8')
+}
 
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_release}.4:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_release}.4:${jei_version}")
+curseforge {
+    apiKey = ENV.CURSEFORGE_KEY ?: '3b1f081b-0ae8-4c3f-9a8d-3d09ff3dda9e'
 
-    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
-    runtime fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
+    project {
+        id = "${curseforge_project}"
+        releaseType = 'release'
+        mainArtifact jar
+        addGameVersion '1.16'
+        addGameVersion '1.16.1'
+        addGameVersion '1.16.2'
+        addGameVersion '1.16.3'
+        addGameVersion '1.16.4'
+        addGameVersion '1.16.5'
+        changelog = file('changelog.html')
+        changelogType = 'html'
+    }
+}
 
-    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
-    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
-
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+afterEvaluate {
+    tasks.curseforge400012.dependsOn makeChangelog
 }
 
 jar {
@@ -91,9 +165,9 @@ jar {
         attributes([
                 "Specification-Title": "Ex Nihilo: Sequentia",
                 "Specification-Vendor": "NovaMachina",
-                "Specification-Version": "1", // We are version 1 of ourselves
+                "Specification-Version": version, // We are version 1 of ourselves
                 "Implementation-Title": project.name,
-                "Implementation-Version": "${version}",
+                "Implementation-Version": version,
                 "Implementation-Vendor" :"NovaMachina",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
@@ -105,15 +179,6 @@ jar {
 jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 //publish.dependsOn('reobfJar')
-
-repositories {
-    maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
-    maven { url = "https://maven.tehnut.info"} // WAILA
-    maven { url = "https://maven.tterrag.com/" } // TOP
-    maven { url = 'https://files.minecraftforge.net/maven' }
-    maven { url = "https://maven.blamejared.com" } // CraftTweaker
-    maven { url = "https://cursemaven.com"}
-}
 
 publishing {
     publications {
@@ -134,26 +199,6 @@ publishing {
                 password = ENV.NEXUS_PASSWORD
             }
             url = "https://repo.jacob-williams.me/repository/maven-releases/"
-        }
-    }
-}
-
-if(ENV.CURSEFORGE_KEY) {
-    curseforge {
-        apiKey = ENV.CURSEFORGE_KEY
-
-        project {
-            id = "${curseforge_project}"
-            releaseType = 'release'
-            mainArtifact jar
-            addGameVersion '1.16'
-            addGameVersion '1.16.1'
-            addGameVersion '1.16.2'
-            addGameVersion '1.16.3'
-            addGameVersion '1.16.4'
-            addGameVersion '1.16.5'
-            changelog = file('changelog.md')
-            changelogType = 'markdown'
         }
     }
 }

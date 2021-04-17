@@ -28,15 +28,15 @@ public class HammerBaseItem extends ToolItem {
 
     public HammerBaseItem(IItemTier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
-                new Item.Properties().defaultMaxDamage(maxDamage).group(ExNihiloInitialization.ITEM_GROUP)
-                        .addToolType(ToolType.PICKAXE, tier.getHarvestLevel()));
+                new Item.Properties().defaultDurability(maxDamage).tab(ExNihiloInitialization.ITEM_GROUP)
+                        .addToolType(ToolType.PICKAXE, tier.getLevel()));
     }
 
     @Override
-    public boolean canHarvestBlock(BlockState blockIn) {
+    public boolean isCorrectToolForDrops(BlockState blockIn) {
         if (ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockIn.getBlock())) {
             return true;
         }
-        return super.canHarvestBlock(blockIn);
+        return super.isCorrectToolForDrops(blockIn);
     }
 }

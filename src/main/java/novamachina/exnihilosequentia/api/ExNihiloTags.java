@@ -16,6 +16,7 @@ public class ExNihiloTags {
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
     public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
     public static final ITag.INamedTag<Item> CROOK = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crook"));
+	public static final ITag.INamedTag<Item> STONE_STICK = createItemWrapper(forgeLoc("rods/stone"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
     private static final Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
@@ -30,7 +31,7 @@ public class ExNihiloTags {
     }
 
     public static ITag.INamedTag<Item> createItemWrapper(ResourceLocation name) {
-        return createWrapperTag(ItemTags.getAllTags(), name, ItemTags::makeWrapperTag);
+        return createWrapperTag(ItemTags.getWrappers(), name, ItemTags::bind);
     }
 
     public static ResourceLocation getIngot(String ingot) {

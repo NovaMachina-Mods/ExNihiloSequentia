@@ -19,25 +19,25 @@ public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
     }
 
     @Override
-    public CrucibleRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        Ingredient input = Ingredient.read(buffer);
+    public CrucibleRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        Ingredient input = Ingredient.fromNetwork(buffer);
         int amount = buffer.readInt();
         FluidStack fluid = FluidStack.readFromPacket(buffer);
-        CrucilbeTypeEnum type = buffer.readEnumValue(CrucilbeTypeEnum.class);
+        CrucilbeTypeEnum type = buffer.readEnum(CrucilbeTypeEnum.class);
         return new CrucibleRecipe(recipeId, input, amount, fluid, type);
     }
 
     @Override
-    public void write(PacketBuffer buffer, CrucibleRecipe recipe) {
-        recipe.getInput().write(buffer);
+    public void toNetwork(PacketBuffer buffer, CrucibleRecipe recipe) {
+        recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getAmount());
         recipe.getResultFluid().writeToPacket(buffer);
-        buffer.writeEnumValue(recipe.getCrucibleType());
+        buffer.writeEnum(recipe.getCrucibleType());
     }
 
     @Override
     protected CrucibleRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        Ingredient input = Ingredient.deserialize(json.get("input"));
+        Ingredient input = Ingredient.fromJson(json.get("input"));
         int amount = json.get("amount").getAsInt();
         FluidStack fluid = FluidStackUtils.jsonDeserializeFluidStack(json.get("fluidResult").getAsJsonObject());
         CrucilbeTypeEnum typeEnum = CrucilbeTypeEnum.getTypeByName(json.get("crucibleType").getAsString());

@@ -29,7 +29,7 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
 
     @Override
     public void tick() {
-        if (!world.isRemote()) {
+        if (!level.isClientSide()) {
             progressWaitInterval--;
             if (progressWaitInterval <= 0) {
                 progress++;
@@ -37,16 +37,16 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
 
                 if (progress >= 100) {
                     logger.debug("Finish insfesting leaves");
-                    InfestingLeavesBlock.finishInfestingBlock(world, pos);
+                    InfestingLeavesBlock.finishInfestingBlock(level, worldPosition);
                 }
 
                 if (spreadCounter >= Config.getTicksBetweenSpreadAttempt()) {
                     logger.debug("Spreading infested leaves");
-                    InfestingLeavesBlock.spread(world, pos);
+                    InfestingLeavesBlock.spread(level, worldPosition);
                     spreadCounter = 0;
                 }
                 progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
-                world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
+                level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), 2);
             }
         }
     }
@@ -55,12 +55,12 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt(PROGRESS_TAG, progress);
-        return new SUpdateTileEntityPacket(getPos(), -1, nbt);
+        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        CompoundNBT nbt = pkt.getNbtCompound();
+        CompoundNBT nbt = pkt.getTag();
         if (nbt.contains(PROGRESS_TAG)) {
             progress = nbt.getInt(PROGRESS_TAG);
         }
