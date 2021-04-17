@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.block.Block;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
@@ -37,6 +38,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 
+import javax.annotation.Nonnull;
+
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
     protected static final String CHUNK_CONDITION = "has_chunk";
     private static final String PEBBLE_CONDITION = "has_pebble";
@@ -48,7 +51,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         this.modId = modId;
     }
 
-    @Nonnull
+	@Nonnull
     @Override
     public String getName() {
         return "Recipes: " + modId;
@@ -319,5 +322,8 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
     protected void createHammerRecipes(Consumer<IFinishedRecipe> consumer, Block blockInput, Block blockOutput, String id) {
         HammerRecipeBuilder.builder().input(blockInput).addDrop(blockOutput).build(consumer, hammerLoc(id));
+
+	public static void createMCCompost(IItemProvider item, float chance) {
+        ComposterBlock.COMPOSTABLES.put(item, chance);
     }
 }

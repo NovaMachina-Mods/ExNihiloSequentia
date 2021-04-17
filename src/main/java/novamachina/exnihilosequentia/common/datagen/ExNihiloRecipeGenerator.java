@@ -528,7 +528,15 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .define('o', Blocks.OBSIDIAN)
                 .unlockedBy("has_obsidian", InventoryChangeTrigger.Instance
                         .hasItems(Blocks.OBSIDIAN))
-                .save(consumer, createSaveLocation(Objects.requireNonNull(Blocks.ANCIENT_DEBRIS.getRegistryName())));
+                .save(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
+		ShapedRecipeBuilder.shaped(EnumResource.STONE_STICK.getRegistryObject().get())
+                .pattern("x")
+                .pattern("x")
+                .pattern("x")
+				.define('x', EnumPebbleType.STONE.getRegistryObject().get())
+                .unlockedBy("has_stone_pebble", InventoryChangeTrigger.Instance
+                    .hasItems(EnumPebbleType.STONE.getRegistryObject().get()))
+                .save(consumer, createSaveLocation(EnumResource.STONE_STICK.getRegistryObject().getId()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {

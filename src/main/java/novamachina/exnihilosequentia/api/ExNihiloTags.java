@@ -17,6 +17,9 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class ExNihiloTags {
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
+    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
+    public static final ITag.INamedTag<Item> CROOK = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crook"));
+	public static final ITag.INamedTag<Item> STONE_STICK = createItemWrapper(forgeLoc("rods/stone"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
     public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(exNihiloLoc("hammer"));

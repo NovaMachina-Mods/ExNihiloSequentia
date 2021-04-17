@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy') {
             when{
                 expression {
-                    return env.GIT_BRANCH == 'origin/1.16';
+                    return env.GIT_BRANCH == '1.16';
                 }
             }
             steps {
