@@ -13,6 +13,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -86,6 +87,9 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             if(input == Blocks.FIRE || input == Blocks.SOUL_FIRE) {
                 input = Items.FLINT_AND_STEEL;
             }
+			if (input instanceof FlowingFluidBlock) {
+				input = ((FlowingFluidBlock) input).getFluid().getBucket();
+			}
             recipeLayout.getItemStacks().init(0, true, 0, 16);
             recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(input).getItems()));
         }
