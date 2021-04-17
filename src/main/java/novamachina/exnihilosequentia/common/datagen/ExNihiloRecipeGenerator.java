@@ -207,8 +207,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerCrook(EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject()
                 .get(), consumer);
         registerCrook(EnumCrook.IRON.getRegistryObject().get(), Tags.Items.NUGGETS_IRON, consumer);
-        registerCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject()
-                .get(), consumer);
+        registerCrook(EnumCrook.STONE.getRegistryObject().get(), ExNihiloTags.STONE_STICK, consumer);
         registerCrook(EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN, consumer);
     }
 
@@ -488,6 +487,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .build(consumer, heatLoc("glowstone"));
         HeatRecipeBuilder.builder().input(Blocks.SHROOMLIGHT).amount(2)
                 .build(consumer, heatLoc("shroomlight"));
+		HeatRecipeBuilder.builder().input(Blocks.SOUL_FIRE).amount(4)
+                .build(consumer, heatLoc("soul_fire"));
     }
 
     private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
@@ -706,6 +707,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlockedBy("has_obsidian", InventoryChangeTrigger.Instance
                         .hasItems(Blocks.OBSIDIAN))
                 .save(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
+		ShapedRecipeBuilder.shaped(EnumResource.STONE_STICK.getRegistryObject().get())
+                .pattern("x")
+                .pattern("x")
+                .pattern("x")
+				.define('x', EnumPebbleType.STONE.getRegistryObject().get())
+                .unlockedBy("has_stone_pebble", InventoryChangeTrigger.Instance
+                    .hasItems(EnumPebbleType.STONE.getRegistryObject().get()))
+                .save(consumer, createSaveLocation(EnumResource.STONE_STICK.getRegistryObject().getId()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {

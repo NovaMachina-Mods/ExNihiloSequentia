@@ -3,14 +3,18 @@ package novamachina.exnihilosequentia.api.datagen;
 import java.util.function.Consumer;
 
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
+
+import javax.annotation.Nonnull;
 
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
     protected static final String CHUNK_CONDITION = "has_chunk";
@@ -21,6 +25,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         this.modId = modId;
     }
 
+	@Nonnull
     @Override
     public String getName() {
         return "Recipes: " + modId;
@@ -89,5 +94,9 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
     protected ResourceLocation createSaveLocation(ResourceLocation location) {
         return new ResourceLocation(location.getNamespace(), prependRecipePrefix(location.getPath()));
+    }
+	
+	public static void createMCCompost(IItemProvider item, float chance) {
+        ComposterBlock.COMPOSTABLES.put(item, chance);
     }
 }
