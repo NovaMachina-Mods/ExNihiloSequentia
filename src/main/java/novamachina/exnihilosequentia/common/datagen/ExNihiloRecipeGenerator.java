@@ -605,7 +605,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .save(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_FIRED.getId()));
         CookingRecipeBuilder
                 .blasting(Ingredient.of(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()), ExNihiloBlocks.CRUCIBLE_FIRED
-                        .get(), 0.7F, 200)
+                        .get(), 0.7F, 100)
                 .unlockedBy("has_uncooked_crucible", InventoryChangeTrigger.Instance
                         .hasItems(ExNihiloBlocks.CRUCIBLE_UNFIRED.get()))
                 .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "blast_crucible_fired")));
@@ -731,7 +731,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                                     .hasItems(ore.getChunkItem().get()))
                             .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron")));
                     CookingRecipeBuilder
-                            .blasting(Ingredient.of(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 200)
+                            .blasting(Ingredient.of(ore.getChunkItem().get()), Items.IRON_INGOT, 0.7F, 100)
                             .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.Instance
                                     .hasItems(ore.getChunkItem().get()))
                             .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "blast_ingot_iron")));
@@ -743,7 +743,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                                     .hasItems(ore.getChunkItem().get()))
                             .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold")));
                     CookingRecipeBuilder
-                            .blasting(Ingredient.of(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 200)
+                            .blasting(Ingredient.of(ore.getChunkItem().get()), Items.GOLD_INGOT, 0.7F, 100)
                             .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.Instance
                                     .hasItems(ore.getChunkItem().get()))
                             .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "blast_ingot_gold")));

@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "exnihilosequentia:ens_crook_stone"
+      "exnihilosequentia:ens_blast_ingot_platinum"
     ]
   },
   "criteria": {
-    "has_pebble": {
+    "has_chunk": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:rods/stone"
+            "item": "exnihilosequentia:chunk_platinum"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "exnihilosequentia:ens_crook_stone"
+        "recipe": "exnihilosequentia:ens_blast_ingot_platinum"
       }
     }
   },
   "requirements": [
     [
-      "has_pebble",
+      "has_chunk",
       "has_the_recipe"
     ]
   ]

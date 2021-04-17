@@ -1,17 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "exnihilosequentia",
   "pattern": [
     " o ",
     "obo",
     " o "
   ],
   "key": {
-    "o": {
-      "item": "minecraft:obsidian"
-    },
     "b": {
       "item": "minecraft:water_bucket"
+    },
+    "o": {
+      "item": "minecraft:obsidian"
     }
   },
   "result": {

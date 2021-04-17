@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_diamond_mesh": {
+    "has_emerald_mesh": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "exnihilosequentia",
   "pattern": [
     "xxx",
     "xgx",
@@ -11,7 +10,7 @@
       "item": "exnihilosequentia:pebble_blackstone"
     },
     "g": {
-      "tag": "forge:ores/gold"
+      "item": "exnihilosequentia:chunk_gold"
     }
   },
   "result": {

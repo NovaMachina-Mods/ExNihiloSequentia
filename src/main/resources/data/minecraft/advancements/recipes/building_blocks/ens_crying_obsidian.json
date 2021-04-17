@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "exnihilosequentia:ens_crook_stone"
+      "minecraft:ens_crying_obsidian"
     ]
   },
   "criteria": {
-    "has_pebble": {
+    "has_obsidian": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:rods/stone"
+            "item": "minecraft:obsidian"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "exnihilosequentia:ens_crook_stone"
+        "recipe": "minecraft:ens_crying_obsidian"
       }
     }
   },
   "requirements": [
     [
-      "has_pebble",
+      "has_obsidian",
       "has_the_recipe"
     ]
   ]

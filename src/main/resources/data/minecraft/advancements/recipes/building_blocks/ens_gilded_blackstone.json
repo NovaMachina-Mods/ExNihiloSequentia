@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:ens_blackstone"
+      "minecraft:ens_gilded_blackstone"
     ]
   },
   "criteria": {
-    "has_pebble": {
+    "has_gold": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "exnihilosequentia:pebble_blackstone"
+            "item": "exnihilosequentia:chunk_gold"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:ens_blackstone"
+        "recipe": "minecraft:ens_gilded_blackstone"
       }
     }
   },
   "requirements": [
     [
-      "has_pebble",
+      "has_gold",
       "has_the_recipe"
     ]
   ]
