@@ -37,6 +37,11 @@ pipeline {
         }
     }
     post {
+        when {
+            expression {
+                return env.GIT_BRANCH == 'origin/1.16' || env.GIT_BRANCH == 'origin/1.16';
+            }
+        }
         success {
             archiveArtifacts artifacts: 'build/libs/*.jar'
             mail to: env.BUILD_RESULT_EMAIL,
