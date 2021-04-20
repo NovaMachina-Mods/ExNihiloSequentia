@@ -15,7 +15,6 @@ getRepo() {
 }
 
 getVersion
-getDescription
 getRepo
 github-release release --user NovaMachina-Mods --repo "$repo" --tag "$full_version" --name "$full_version"
 echo "Created Release $full_version"
