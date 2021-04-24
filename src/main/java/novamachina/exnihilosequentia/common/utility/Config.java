@@ -269,11 +269,6 @@ public class Config {
         spec.setConfig(configData);
     }
 
-    private static void pebbleConfigs() {
-        pebbleDamage = COMMON_BUILDER.comment("How much half hearts damage a pebble should do. (Default: 0)")
-                .defineInRange("pebbleDamage", 0, 0, Integer.MAX_VALUE);
-    }
-
     private static void barrelConfigs() {
         barrelNumberOfBuckets = COMMON_BUILDER.comment("Number of buckets the barrel will hold (Default: 1)")
                 .defineInRange("barrelNumberOfBuckets", 1, 1, Integer.MAX_VALUE);

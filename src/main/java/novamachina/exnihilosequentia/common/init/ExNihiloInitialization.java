@@ -48,7 +48,7 @@ import org.apache.logging.log4j.LogManager;
 
 import static novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator.createMCCompost;
 
-@Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloInitialization {
     public static final ItemGroup ITEM_GROUP = new ItemGroup(ModIds.EX_NIHILO_SEQUENTIA) {
         @Override
