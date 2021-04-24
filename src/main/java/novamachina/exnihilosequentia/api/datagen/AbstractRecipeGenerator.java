@@ -322,6 +322,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
     protected void createHammerRecipes(Consumer<IFinishedRecipe> consumer, Block blockInput, Block blockOutput, String id) {
         HammerRecipeBuilder.builder().input(blockInput).addDrop(blockOutput).build(consumer, hammerLoc(id));
+    }
 
 	public static void createMCCompost(IItemProvider item, float chance) {
         ComposterBlock.COMPOSTABLES.put(item, chance);
