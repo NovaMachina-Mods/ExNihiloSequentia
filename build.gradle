@@ -55,8 +55,8 @@ dependencies {
             version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
     ])
 
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_release}.4:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_release}.4:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
     compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
     runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
