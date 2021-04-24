@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -168,7 +169,11 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected boolean isTriggerItem(ItemStack stack) {
-        return ItemStack.isSame(stack, new ItemStack(Items.WATER_BUCKET)) || ItemStack.isSame(stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
+        return ItemStack.isSame(stack, new ItemStack(Items.WATER_BUCKET)) ||
+                ItemStack.isSame(stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER)) ||
+                ItemStack.isSame(stack, new ItemStack(Items.LAVA_BUCKET)) ||
+                ItemStack.isSame(stack, new ItemStack(ExNihiloItems.WITCH_WATER_BUCKET.get())) ||
+                ItemStack.isSame(stack, new ItemStack(ExNihiloItems.SEA_WATER_BUCKET.get()));
     }
 
     @Override
