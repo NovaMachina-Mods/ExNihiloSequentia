@@ -125,7 +125,6 @@ public class ExNihiloInitialization {
         BarrelModeRegistry.initialize();
         PacketHandler.registerMessages();
         registerVanillaCompost();
-        ExNihiloStats.register();
     }
 
     private static void registerVanillaCompost() {
