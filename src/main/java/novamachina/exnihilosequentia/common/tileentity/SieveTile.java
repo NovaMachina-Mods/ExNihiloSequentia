@@ -11,6 +11,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
+import novamachina.exnihilosequentia.common.init.ExNihiloStats;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
@@ -183,6 +184,9 @@ public class SieveTile extends TileEntity {
                             .getZ() + 0.5F, entry.getDrop()));
                     }
                 })));
+                if (player != null) {
+                    player.awardStat(ExNihiloStats.SIEVED);
+                }
                 resetSieve();
             }
         }
