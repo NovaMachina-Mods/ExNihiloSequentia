@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -168,7 +169,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected boolean isTriggerItem(ItemStack stack) {
-        return ItemStack.isSame(stack, new ItemStack(Items.WATER_BUCKET)) || ItemStack.isSame(stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
+        return stack.getItem() instanceof BucketItem ||
+               ItemStack.isSame(stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
     }
 
     @Override

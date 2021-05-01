@@ -136,10 +136,11 @@ task makeChangelog(type: GitChangelogTask) {
     fromCommit = "1be698f061a24f615c2a770d1190c995259ecbcd"
     toRef = 'HEAD'
     templateContent = file('changelog.mustache').getText('UTF-8')
+    fromRepo = file(".")
 }
 
 curseforge {
-    apiKey = ENV.CURSEFORGE_KEY ?: '3b1f081b-0ae8-4c3f-9a8d-3d09ff3dda9e'
+    apiKey = ENV.CURSEFORGE_KEY ?: '0'
 
     project {
         id = "${curseforge_project}"
