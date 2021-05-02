@@ -698,14 +698,11 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlockedBy("has_obsidian", InventoryChangeTrigger.Instance
                         .hasItems(Blocks.OBSIDIAN))
                 .save(consumer, createSaveLocation(Blocks.CRYING_OBSIDIAN.getRegistryName()));
-        ShapedRecipeBuilder.shaped(Blocks.ANCIENT_DEBRIS)
-                .pattern("xxx")
-                .pattern("xox")
-                .pattern("xxx")
-                .define('x', Items.NETHERITE_SCRAP)
-                .define('o', Blocks.OBSIDIAN)
-                .unlockedBy("has_obsidian", InventoryChangeTrigger.Instance
-                        .hasItems(Blocks.OBSIDIAN))
+        ShapelessRecipeBuilder.shapeless(Blocks.ANCIENT_DEBRIS)
+                .requires(Items.NETHERITE_SCRAP)
+                .requires(Blocks.OBSIDIAN)
+                .unlockedBy("has_scrap", InventoryChangeTrigger.Instance
+                        .hasItems(Items.NETHERITE_SCRAP))
                 .save(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
 		ShapedRecipeBuilder.shaped(EnumResource.STONE_STICK.getRegistryObject().get())
                 .pattern("x")
