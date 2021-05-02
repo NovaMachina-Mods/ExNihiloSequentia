@@ -29,7 +29,7 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
                 .properties(AbstractBlock.Properties.of(Material.LEAVES).strength(0.2F).sound(
-                        SoundType.GRASS).noOcclusion()).tileEntitySupplier(InfestingLeavesTile::new));
+                        SoundType.GRASS).noOcclusion().isValidSpawn(BaseBlock::never)).tileEntitySupplier(InfestingLeavesTile::new));
     }
 
     public static void finishInfestingBlock(World world, BlockPos pos) {
