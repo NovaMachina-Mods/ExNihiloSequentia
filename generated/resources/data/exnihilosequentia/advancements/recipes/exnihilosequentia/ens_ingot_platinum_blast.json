@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:ens_ancient_debris"
+      "exnihilosequentia:ens_ingot_platinum_blast"
     ]
   },
   "criteria": {
-    "has_scrap": {
+    "has_chunk": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:netherite_scrap"
+            "item": "exnihilosequentia:chunk_platinum"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:ens_ancient_debris"
+        "recipe": "exnihilosequentia:ens_ingot_platinum_blast"
       }
     }
   },
   "requirements": [
     [
-      "has_scrap",
+      "has_chunk",
       "has_the_recipe"
     ]
   ]
