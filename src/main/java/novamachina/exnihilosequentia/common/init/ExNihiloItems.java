@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.init;
 
-import java.util.EnumMap;
-import java.util.Map;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
@@ -10,7 +8,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.exnihilosequentia.common.item.CookedSilkwormItem;
+import novamachina.exnihilosequentia.api.creation.AbstractItemCreation;
 import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
@@ -27,40 +25,43 @@ import novamachina.exnihilosequentia.common.item.tools.crook.CrookBaseItem;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class ExNihiloItems {
+public class ExNihiloItems extends AbstractItemCreation {
+
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     // Begin Block Items
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
-            ForgeRegistries.ITEMS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+            ForgeRegistries.ITEMS, ModIds.EX_NIHILO_SEQUENTIA);
     public static final RegistryObject<Item> DUST = ITEMS
-            .register(ExNihiloConstants.Blocks.DUST, () -> new BlockItem(ExNihiloBlocks.DUST.get(),
+            .register(Blocks.DUST, () -> new BlockItem(ExNihiloBlocks.DUST.get(),
                     new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_NETHERRACK = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_NETHERRACK,
+            .register(Blocks.CRUSHED_NETHERRACK,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_NETHERRACK.get(),
                             new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_END_STONE = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_END_STONE,
+            .register(Blocks.CRUSHED_END_STONE,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_END_STONE.get(),
                             new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_ANDESITE = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_ANDESITE,
+            .register(Blocks.CRUSHED_ANDESITE,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_ANDESITE.get(),
                             new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_DIORITE = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_DIORITE,
+            .register(Blocks.CRUSHED_DIORITE,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_DIORITE.get(),
                             new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> CRUSHED_GRANITE = ITEMS
-            .register(ExNihiloConstants.Blocks.CRUSHED_GRANITE,
+            .register(Blocks.CRUSHED_GRANITE,
                     () -> new BlockItem(ExNihiloBlocks.CRUSHED_GRANITE.get(),
                             new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> END_CAKE = ITEMS
-            .register(ExNihiloConstants.Blocks.END_CAKE, () -> new BlockItem(ExNihiloBlocks.END_CAKE.get(),
+            .register(Blocks.END_CAKE, () -> new BlockItem(ExNihiloBlocks.END_CAKE.get(),
                     new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     public static final RegistryObject<Item> INFESTING_LEAVES = ITEMS
             .register(Blocks.INFESTING_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTING_LEAVES.get(),
@@ -68,37 +69,25 @@ public class ExNihiloItems {
     public static final RegistryObject<Item> INFESTED_LEAVES = ITEMS
             .register(Blocks.INFESTED_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTED_LEAVES.get(),
                     new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> SIEVE = ITEMS.register(Blocks.SIEVE,
-            () -> new BlockItem(ExNihiloBlocks.SIEVE.get(),
-                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_UNFIRED = ITEMS
-            .register(Blocks.CRUCIBLE_UNFIRED, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(),
-                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_FIRED = ITEMS
-            .register(Blocks.CRUCIBLE_FIRED, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_FIRED.get(),
-                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> CRUCIBLE_WOOD = ITEMS
-            .register(Blocks.CRUCIBLE_WOOD, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_WOOD.get(),
-                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_WOOD = ITEMS
-            .register(Blocks.BARREL_WOOD, () -> new BlockItem(ExNihiloBlocks.BARREL_WOOD.get(),
-                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
-    public static final RegistryObject<Item> BARREL_STONE = ITEMS
-            .register(Blocks.BARREL_STONE, () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(),
-                    new Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
+    public static final RegistryObject<Item> SIEVE = createBlockItem(
+            Blocks.SIEVE, ExNihiloBlocks.SIEVE.get());
+    public static final RegistryObject<Item> CRUCIBLE_UNFIRED = createBlockItem(
+            Blocks.CRUCIBLE_UNFIRED, ExNihiloBlocks.CRUCIBLE_UNFIRED.get());
+    public static final RegistryObject<Item> CRUCIBLE_FIRED = createBlockItem(
+            Blocks.CRUCIBLE_FIRED, ExNihiloBlocks.CRUCIBLE_FIRED.get());
+    public static final RegistryObject<Item> CRUCIBLE_WOOD = createBlockItem(
+            Blocks.CRUCIBLE_WOOD, ExNihiloBlocks.CRUCIBLE_WOOD.get());
+    public static final RegistryObject<Item> BARREL_WOOD = createBlockItem(
+            Blocks.BARREL_WOOD, ExNihiloBlocks.BARREL_WOOD.get());
+    public static final RegistryObject<Item> BARREL_STONE = createBlockItem(
+            Blocks.BARREL_STONE, ExNihiloBlocks.BARREL_STONE.get());
     // Begin Items Only
-    public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
-            .register(ExNihiloConstants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
-    public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = ITEMS
-            .register(ExNihiloConstants.Items.WITCH_WATER_BUCKET,
-                    () -> new BucketItem(ExNihiloFluids.WITCH_WATER,
-                            new Properties().tab(ExNihiloInitialization.ITEM_GROUP).stacksTo(1)));
-    public static final RegistryObject<BucketItem> SEA_WATER_BUCKET = ITEMS
-            .register(ExNihiloConstants.Items.SEA_WATER_BUCKET,
-                    () -> new BucketItem(ExNihiloFluids.SEA_WATER,
-                            new Properties().tab(ExNihiloInitialization.ITEM_GROUP).stacksTo(1)));
-    private static final Map<EnumOre, RegistryObject<OreItem>> ingotMap = new EnumMap<>(EnumOre.class);
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    public static final RegistryObject<Item> COOKED_SILKWORM = createFoodItem(
+            Items.COOKED_SILKWORM, 2, 0.6F);
+    public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = createBucketItem(
+            Items.WITCH_WATER_BUCKET, ExNihiloFluids.WITCH_WATER.get());
+    public static final RegistryObject<BucketItem> SEA_WATER_BUCKET = createBucketItem(
+            Items.SEA_WATER_BUCKET, ExNihiloFluids.SEA_WATER.get());
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {
@@ -117,7 +106,7 @@ public class ExNihiloItems {
             if (ore.shouldGenerateIngot()) {
                 RegistryObject<OreItem> item = ITEMS.register(ore.getIngotName(), () -> new OreItem(ore));
                 ore.setIngotRegistryItem(item);
-                ingotMap.put(ore, item);
+                AbstractItemCreation.ingotMap.put(ore, item);
             }
         }
 
@@ -147,18 +136,6 @@ public class ExNihiloItems {
     }
 
     private ExNihiloItems() {
-    }
-
-    public static void fillOreIngots() {
-        for (EnumOre ore : EnumOre.values()) {
-            if (ore.shouldGenerateIngot()) {
-                ore.setIngotItem(ingotMap.get(ore).get());
-            }
-        }
-    }
-
-    public static Map<EnumOre, RegistryObject<OreItem>> getIngotMap() {
-        return ingotMap;
     }
 
     public static void init(IEventBus modEventBus) {

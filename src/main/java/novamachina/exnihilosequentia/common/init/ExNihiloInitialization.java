@@ -35,6 +35,7 @@ import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformR
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
+import novamachina.exnihilosequentia.api.creation.AbstractItemCreation;
 import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
@@ -121,7 +122,7 @@ public class ExNihiloInitialization {
     @SubscribeEvent
     public static void setupNonTagBasedRegistries(FMLCommonSetupEvent event) {
         logger.debug("Fired FMLCommonSetupEvent");
-        ExNihiloItems.fillOreIngots();
+        AbstractItemCreation.fillOreIngots();
         BarrelModeRegistry.initialize();
         PacketHandler.registerMessages();
         registerVanillaCompost();
