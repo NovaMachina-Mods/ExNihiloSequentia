@@ -166,6 +166,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         CompostRecipeBuilder.builder().input(Items.TWISTING_VINES).amount(100).build(consumer, compostLoc("twisting_vine"));
         CompostRecipeBuilder.builder().input(Items.TALL_GRASS).amount(100).build(consumer, compostLoc("tall_grass"));
         CompostRecipeBuilder.builder().input(Items.SUGAR_CANE).amount(80).build(consumer, compostLoc("sugar_cane"));
+        CompostRecipeBuilder.builder().input(Items.KELP).amount(40).build(consumer, compostLoc("kelp"));
     }
 
     private void registerCrook(Item result, Item input, Consumer<IFinishedRecipe> consumer) {
