@@ -17,6 +17,7 @@ public enum CrucilbeTypeEnum {
                 return type;
             }
         }
+        //TODO this one needs to be changed due to crash with mekanism pipes and fired crucibles
         return null;
     }
 

@@ -54,14 +54,14 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
 
     @Override
     public void setIngredients(HammerRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputs(VanillaTypes.ITEM, new ArrayList<>(Arrays.asList(recipe.getInput().getMatchingStacks())));
+        ingredients.setInputs(VanillaTypes.ITEM, new ArrayList<>(Arrays.asList(recipe.getInput().getItems())));
         ingredients.setOutputs(VanillaTypes.ITEM, recipe.getOutputsWithoutChance());
     }
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, HammerRecipe recipe, IIngredients ingredients) {
         recipeLayout.getItemStacks().init(0, true, 10, 38);
-        recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getInput().getMatchingStacks())));
+        recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getInput().getItems())));
 
         IFocus<?> focus = recipeLayout.getFocus();
 
@@ -78,7 +78,7 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
             if (focus != null) {
                 ItemStack focusStack = (ItemStack) focus.getValue();
                 if (focus.getMode() == IFocus.Mode.OUTPUT && !focusStack.isEmpty() && focusStack
-                        .getItem() == outputStack.getItem() && focusStack.getDamage() == outputStack.getDamage()) {
+                        .getItem() == outputStack.getItem() && focusStack.getDamageValue() == outputStack.getDamageValue()) {
                     recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
                 }
             }

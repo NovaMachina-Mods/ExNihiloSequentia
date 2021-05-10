@@ -53,7 +53,7 @@ public class FluidOnTopRecipe extends SerializableRecipe {
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return result.copy();
     }
 
@@ -62,8 +62,8 @@ public class FluidOnTopRecipe extends SerializableRecipe {
     }
 
     public boolean validInputs(Fluid fluidInTank, Fluid fluidOnTop) {
-        return this.fluidInTank.getFluid().isEquivalentTo(fluidInTank) && this.fluidOnTop.getFluid()
-                .isEquivalentTo(fluidOnTop);
+        return this.fluidInTank.getFluid().isSame(fluidInTank) && this.fluidOnTop.getFluid()
+                .isSame(fluidOnTop);
     }
 
     @Override

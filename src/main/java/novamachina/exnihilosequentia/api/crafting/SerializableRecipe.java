@@ -20,17 +20,17 @@ public abstract class SerializableRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return false;
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv) {
+    public ItemStack assemble(IInventory inv) {
         return this.outputDummy;
     }
 
     @Override
-    public ItemStack getIcon() {
+    public ItemStack getToastSymbol() {
         return getENSerializer().getIcon();
     }
 
@@ -50,7 +50,7 @@ public abstract class SerializableRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 

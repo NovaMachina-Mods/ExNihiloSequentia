@@ -21,7 +21,7 @@ public class SeedBaseItem extends Item implements IPlantable {
     private PlantType type;
 
     public SeedBaseItem(BlockState plant) {
-        super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
+        super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
         this.plant = plant;
     }
 
@@ -36,30 +36,30 @@ public class SeedBaseItem extends Item implements IPlantable {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        if (!context.getFace().equals(Direction.UP)) {
+    public ActionResultType useOn(ItemUseContext context) {
+        if (!context.getClickedFace().equals(Direction.UP)) {
             return ActionResultType.PASS;
         }
 
-        ItemStack item = context.getItem();
+        ItemStack item = context.getItemInHand();
         PlayerEntity player = context.getPlayer();
-        BlockPos pos = context.getPos();
-        Direction direction = context.getFace();
-        World world = context.getWorld();
-        if (player.canPlayerEdit(pos, direction, item) && player
-                .canPlayerEdit(pos.add(0, 1, 0), direction, item)) {
+        BlockPos pos = context.getClickedPos();
+        Direction direction = context.getClickedFace();
+        World world = context.getLevel();
+        if (player.mayUseItemAt(pos, direction, item) && player
+                .mayUseItemAt(pos.offset(0, 1, 0), direction, item)) {
 
             BlockState soil;
             if (type == PlantType.WATER) {
-                soil = world.getBlockState(context.getPos().add(0, 1, 0));
+                soil = world.getBlockState(context.getClickedPos().offset(0, 1, 0));
             } else {
-                soil = world.getBlockState(context.getPos());
+                soil = world.getBlockState(context.getClickedPos());
             }
 
             boolean canSustain = soil.getBlock().canSustainPlant(soil, world, pos, Direction.UP, this);
             boolean blockEmpty = isBlockSpaceEmpty(world, pos, type);
             if (canSustain && blockEmpty && this.getPlant(world, pos) != null) {
-                world.setBlockState(pos.add(0, 1, 0),
+                world.setBlockAndUpdate(pos.offset(0, 1, 0),
                         this.getPlant(world, pos));
                 if (!player.isCreative()) {
                     item.shrink(1);
@@ -77,9 +77,9 @@ public class SeedBaseItem extends Item implements IPlantable {
 
     private boolean isBlockSpaceEmpty(World world, BlockPos pos, PlantType type) {
         if (type == PlantType.WATER) {
-            return world.getBlockState(pos.add(0, 1, 0)).getBlock() == Blocks.WATER;
+            return world.getBlockState(pos.offset(0, 1, 0)).getBlock() == Blocks.WATER;
         }
 
-        return world.isAirBlock(pos.add(0, 1, 0));
+        return world.isEmptyBlock(pos.offset(0, 1, 0));
     }
 }

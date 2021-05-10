@@ -33,7 +33,7 @@ public class HandshakeMessages {
             message.oreList = new ArrayList<>();
             int count = buffer.readInt();
             for (int i = 0; i < count; i++) {
-                EnumOre ore = buffer.readEnumValue(EnumOre.class);
+                EnumOre ore = buffer.readEnum(EnumOre.class);
                 message.oreList.add(ore);
             }
             logger.debug("Created ore list: " + message.oreList);
@@ -45,7 +45,7 @@ public class HandshakeMessages {
             logger.debug("Writing ore list: " + oreList);
             buffer.writeInt(oreList.size());
             for (EnumOre ore : oreList) {
-                buffer.writeEnumValue(ore);
+                buffer.writeEnum(ore);
             }
         }
     }

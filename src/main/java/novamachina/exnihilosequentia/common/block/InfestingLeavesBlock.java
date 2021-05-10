@@ -28,20 +28,20 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
 
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
-                .properties(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).sound(
-                        SoundType.PLANT).notSolid()).tileEntitySupplier(InfestingLeavesTile::new));
+                .properties(AbstractBlock.Properties.of(Material.LEAVES).strength(0.2F).sound(
+                        SoundType.GRASS).noOcclusion()).tileEntitySupplier(InfestingLeavesTile::new));
     }
 
     public static void finishInfestingBlock(World world, BlockPos pos) {
-        world.setBlockState(pos, ExNihiloBlocks.INFESTED_LEAVES.get().getDefaultState());
+        world.setBlockAndUpdate(pos, ExNihiloBlocks.INFESTED_LEAVES.get().defaultBlockState());
     }
 
     public static void normalToInfesting(World world, BlockPos pos) {
-        world.setBlockState(pos, ExNihiloBlocks.INFESTING_LEAVES.get().getDefaultState());
+        world.setBlockAndUpdate(pos, ExNihiloBlocks.INFESTING_LEAVES.get().defaultBlockState());
     }
 
     public static void spread(World world, BlockPos pos) {
-        if (!world.isRemote()) {
+        if (!world.isClientSide()) {
             NonNullList<BlockPos> nearbyLeaves = getNearbyLeaves(world, pos);
 
             nearbyLeaves.forEach(leafPos -> {
@@ -55,7 +55,7 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
     private static NonNullList<BlockPos> getNearbyLeaves(World world, BlockPos pos) {
         NonNullList<BlockPos> nearbyLeaves = NonNullList.create();
 
-        BlockPos.getAllInBox(new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1),
+        BlockPos.betweenClosedStream(new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1),
                 new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1)).forEach(item -> {
             if (world.getBlockState(item).getBlock() instanceof LeavesBlock) {
                 nearbyLeaves.add(new BlockPos(item));
@@ -67,7 +67,7 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
-        InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getTileEntity(iProbeHitData.getPos());
+        InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
 
         iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
                 .formatPercent((float) infestingLeavesTile.getProgress() / 100)));

@@ -9,7 +9,7 @@ public class OreItem extends Item {
     private final EnumOre ore;
 
     public OreItem(EnumOre ore) {
-        super(new Item.Properties().group(ExNihiloInitialization.ITEM_GROUP));
+        super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
         this.ore = ore;
     }
 
@@ -18,7 +18,7 @@ public class OreItem extends Item {
     }
 
     @Override
-    protected boolean isInGroup(ItemGroup group) {
+    protected boolean allowdedIn(ItemGroup group) {
         if (group == ExNihiloInitialization.ITEM_GROUP) {
             return ore.isEnabled();
         }

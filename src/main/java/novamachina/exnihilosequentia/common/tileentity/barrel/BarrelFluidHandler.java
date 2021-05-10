@@ -4,6 +4,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+
 public class BarrelFluidHandler extends FluidTank {
     private AbstractBarrelTile barrel;
 

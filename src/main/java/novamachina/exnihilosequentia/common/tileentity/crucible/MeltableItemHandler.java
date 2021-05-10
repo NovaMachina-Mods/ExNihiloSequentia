@@ -45,7 +45,9 @@ public class MeltableItemHandler extends ItemStackHandler {
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = super.serializeNBT();
         nbt.putBoolean("hasRoom", crucibleHasRoom);
-        nbt.putString("type", type.getName());
+        if(type != null) {
+            nbt.putString("type", type.getName());
+        }
         return nbt;
     }
 
