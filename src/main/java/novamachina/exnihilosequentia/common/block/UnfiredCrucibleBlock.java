@@ -10,7 +10,7 @@ public class UnfiredCrucibleBlock extends BaseBlock {
 
     public UnfiredCrucibleBlock() {
         super(new BlockBuilder().properties(
-                AbstractBlock.Properties.create(Material.CLAY).hardnessAndResistance(0.6F)
-                        .sound(SoundType.GROUND).notSolid()).harvestLevel(ToolType.SHOVEL, 0));
+                AbstractBlock.Properties.of(Material.CLAY).strength(0.6F)
+                        .sound(SoundType.GRAVEL).noOcclusion()).harvestLevel(ToolType.SHOVEL, 0));
     }
 }

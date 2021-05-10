@@ -25,12 +25,12 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
-        BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getTileEntity(data.getPos());
+        BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
         if (crucibleTile.getSolidAmount() > 0) {
-            probeInfo.text(new TranslationTextComponent("waila.crucible.solid", new TranslationTextComponent(crucibleTile.getCurrentItem().getItem().getTranslationKey()), crucibleTile.getSolidAmount()));
+            probeInfo.text(new TranslationTextComponent("waila.crucible.solid", new TranslationTextComponent(crucibleTile.getCurrentItem().getItem().getDescriptionId()), crucibleTile.getSolidAmount()));
         }
         if (crucibleTile.getFluidAmount() > 0) {
-            probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey()), crucibleTile.getFluidAmount()));
+            probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
         }
         probeInfo.text(new TranslationTextComponent("waila.crucible.heat", crucibleTile.getHeat()));
     }
@@ -40,17 +40,17 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
      */
     @Deprecated
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos,
                                              PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote()) {
+        if (worldIn.isClientSide()) {
             return ActionResultType.SUCCESS;
         }
 
-        BaseCrucibleTile tile = (BaseCrucibleTile) worldIn.getTileEntity(pos);
+        BaseCrucibleTile tile = (BaseCrucibleTile) worldIn.getBlockEntity(pos);
 
         if (tile != null) {
             IFluidHandler fluidHandler = tile
-                    .getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, hit.getFace())
+                    .getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, hit.getDirection())
                     .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
             return tile.onBlockActivated(player, handIn, fluidHandler);
         }

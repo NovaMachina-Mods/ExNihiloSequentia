@@ -19,6 +19,7 @@ public class Config {
     private static final String CATEGORY_ORE = "ore";
     private static final String CATEGORY_SIEVE = "sieve";
     private static final String CATEGORY_DURABILITY = "durability";
+    private static final String CATEGORY_PEBBLE = "pebble";
     private static final ForgeConfigSpec.Builder COMMON_BUILDER = new Builder();
     private static final String SUBCATEGORY_BARREL_COMPOST = "compost";
     private static final String SUBCATEGORY_BARREL_FLUID = "fluid_transform";
@@ -27,20 +28,18 @@ public class Config {
     private static final String SUBCATEGORY_CROOKS = "crook";
     private static final String SUBCATEGORY_HAMMERS = "hammer";
     private static final String SUBCATEGORY_MESHES = "mesh";
-    private static ForgeConfigSpec.IntValue barrelMaxSolidAmount;
-    private static ForgeConfigSpec.IntValue barrelNumberOfBuckets;
-    private static ForgeConfigSpec.IntValue crucibleNumberOfBuckets;
-    private static ForgeConfigSpec.BooleanValue enableAluminum;
-    private static ForgeConfigSpec.BooleanValue enableCopper;
     // Debugging
     private static ForgeConfigSpec.BooleanValue enableDebugLogging;
+    // Pebble
+    private static ForgeConfigSpec.IntValue pebbleDamage;
+    // Ore
+    private static ForgeConfigSpec.BooleanValue enableOreOverride;
+    private static ForgeConfigSpec.BooleanValue enableAluminum;
+    private static ForgeConfigSpec.BooleanValue enableCopper;
     private static ForgeConfigSpec.BooleanValue enableGold;
     private static ForgeConfigSpec.BooleanValue enableIron;
     private static ForgeConfigSpec.BooleanValue enableLead;
-    private static ForgeConfigSpec.BooleanValue enableMeshDurability;
     private static ForgeConfigSpec.BooleanValue enableNickel;
-    // Ore
-    private static ForgeConfigSpec.BooleanValue enableOreOverride;
     private static ForgeConfigSpec.BooleanValue enablePlatinum;
     private static ForgeConfigSpec.BooleanValue enableSilver;
     private static ForgeConfigSpec.BooleanValue enableTin;
@@ -48,10 +47,10 @@ public class Config {
     private static ForgeConfigSpec.BooleanValue enableZinc;
     // Sieve
     private static ForgeConfigSpec.BooleanValue flattenSieveRecipes;
+    private static ForgeConfigSpec.IntValue sieveRange;
     // Crook
     private static ForgeConfigSpec.IntValue maxBonusStringCount;
     private static ForgeConfigSpec.IntValue minStringCount;
-    private static ForgeConfigSpec.IntValue rainFillAmount;
     private static ForgeConfigSpec.IntValue secondsToCompost;
     private static ForgeConfigSpec.IntValue secondsToFluidTransform;
     // Durability Hammer
@@ -72,6 +71,7 @@ public class Config {
     private static ForgeConfigSpec.IntValue crookDiamondValue;
     private static ForgeConfigSpec.IntValue crookBoneValue;
     // Durability Meshes
+    private static ForgeConfigSpec.BooleanValue enableMeshDurability;
     private static ForgeConfigSpec.IntValue meshStringValue;
     private static ForgeConfigSpec.IntValue meshFlintValue;
     private static ForgeConfigSpec.IntValue meshIronValue;
@@ -79,12 +79,16 @@ public class Config {
     private static ForgeConfigSpec.IntValue meshNetheriteValue;
     private static ForgeConfigSpec.IntValue meshEmeraldValue;
     // Barrel
+    private static ForgeConfigSpec.IntValue barrelMaxSolidAmount;
+    private static ForgeConfigSpec.IntValue barrelNumberOfBuckets;
     private static ForgeConfigSpec.IntValue secondsToSpawn;
+    private static ForgeConfigSpec.IntValue rainFillAmount;
+    private static ForgeConfigSpec.BooleanValue showParticles;
     // Infested Leaves
     private static ForgeConfigSpec.IntValue secondsToTransformLeaves;
-    private static ForgeConfigSpec.IntValue sieveRange;
     private static ForgeConfigSpec.DoubleValue spreadChance;
     // Crucible
+    private static ForgeConfigSpec.IntValue crucibleNumberOfBuckets;
     private static ForgeConfigSpec.IntValue ticksBetweenMelts;
     private static ForgeConfigSpec.IntValue ticksBetweenSpreadAttempt;
     private static ForgeConfigSpec.IntValue vanillaSimulateDropCount;
@@ -92,6 +96,9 @@ public class Config {
     private static ForgeConfigSpec.IntValue woodHeatRate;
 
     static {
+        COMMON_BUILDER.comment("Pebble Configs").push(CATEGORY_PEBBLE);
+        pebbleConfigs();
+        COMMON_BUILDER.pop();
         COMMON_BUILDER.comment("Barrel Configs").push(CATEGORY_BARREL);
         barrelConfigs();
         COMMON_BUILDER.pop();
@@ -122,7 +129,7 @@ public class Config {
 
     private Config() {
     }
-
+    // Crook
     public static int getCrookWoodDurability() { return crookWoodValue.get(); }
     public static int getCrookStoneDurability() { return crookStoneValue.get(); }
     public static int getCrookAndesiteDurability() { return crookAndesiteValue.get(); }
@@ -132,12 +139,22 @@ public class Config {
     public static int getCrookIronDurability() { return crookIronValue.get(); }
     public static int getCrookDiamondDurability() { return crookDiamondValue.get(); }
     public static int getCrookBoneDurability() { return crookBoneValue.get(); }
+    public static int getVanillaSimulateDropCount() {
+        return vanillaSimulateDropCount.get();
+    }
+
+    // Hammer
     public static int getHammerWoodDurability() { return hammerWoodValue.get(); }
     public static int getHammerStoneDurability() { return hammerStoneValue.get(); }
     public static int getHammerIronDurability() { return hammerIronValue.get(); }
     public static int getHammerGoldDurability() { return hammerGoldValue.get(); }
     public static int getHammerDiamondDurability() { return hammerDiamondValue.get(); }
     public static int getHammerNetheriteDurability() { return hammerNetheriteValue.get(); }
+
+    // Mesh
+    public static boolean enableMeshDurability() {
+        return enableMeshDurability.get();
+    }
     public static int getMeshStringValue() { return meshStringValue.get(); }
     public static int getMeshFlintValue() { return meshFlintValue.get(); }
     public static int getMeshIronValue() { return meshIronValue.get(); }
@@ -145,131 +162,109 @@ public class Config {
     public static int getMeshDiamondValue() { return meshDiamondValue.get(); }
     public static int getMeshNetheriteValue() { return meshNetheriteValue.get(); }
 
-    public static boolean enableAluminum() {
-        return enableAluminum.get();
-    }
-
-    public static boolean enableCopper() {
-        return enableCopper.get();
-    }
-
+    // Debug
     public static boolean enableDebugLogging() {
         return enableDebugLogging.get();
     }
 
-    public static boolean enableIron() {
-        return enableIron.get();
-    }
-
-    public static boolean enableLead() {
-        return enableLead.get();
-    }
-
-    public static boolean enableMeshDurability() {
-        return enableMeshDurability.get();
-    }
-
-    public static boolean enableNickel() {
-        return enableNickel.get();
-    }
-
+    // Ore
     public static boolean enableOreOverride() {
         return enableOreOverride.get();
     }
-
+    public static boolean enableAluminum() {
+        return enableAluminum.get();
+    }
+    public static boolean enableCopper() {
+        return enableCopper.get();
+    }
+    public static boolean enableIron() {
+        return enableIron.get();
+    }
+    public static boolean enableLead() {
+        return enableLead.get();
+    }
+    public static boolean enableNickel() {
+        return enableNickel.get();
+    }
     public static boolean enablePlatinum() {
         return enablePlatinum.get();
     }
-
     public static boolean enableSilver() {
         return enableSilver.get();
     }
-
     public static boolean enableTin() {
         return enableTin.get();
     }
-
     public static boolean enableUranium() {
         return enableUranium.get();
     }
-
     public static boolean enableZinc() {
         return enableZinc.get();
     }
+    public static boolean enableGold() { return enableGold.get(); }
 
+    // Sieve
     public static boolean flattenSieveRecipes() {
         return flattenSieveRecipes.get();
     }
-
-    public static int getBarrelMaxSolidAmount() {
-        return barrelMaxSolidAmount.get();
-    }
-
-    public static int getBarrelNumberOfBuckets() {
-        return barrelNumberOfBuckets.get();
-    }
-
-    public static int getCrucibleNumberOfBuckets() {
-        return crucibleNumberOfBuckets.get();
-    }
-
-    public static boolean enableGold() { return enableGold.get(); }
-
-    public static int getMaxBonusStringCount() {
-        return maxBonusStringCount.get();
-    }
-
-    public static int getMinStringCount() {
-        return minStringCount.get();
-    }
-
-    public static int getRainFillAmount() {
-        return rainFillAmount.get();
-    }
-
-    public static int getSecondsToCompost() {
-        return secondsToCompost.get();
-    }
-
-    public static int getSecondsToFluidTransform() {
-        return secondsToFluidTransform.get();
-    }
-
-    public static int getSecondsToSpawn() {
-        return secondsToSpawn.get();
-    }
-
-    public static int getSecondsToTransformLeaves() {
-        return secondsToTransformLeaves.get();
-    }
-
     public static int getSieveRange() {
         return sieveRange.get();
     }
 
-    public static double getSpreadChance() {
-        return spreadChance.get();
+    // Crucible
+    public static int getCrucibleNumberOfBuckets() {
+        return crucibleNumberOfBuckets.get();
     }
-
     public static int getTicksBetweenMelts() {
         return ticksBetweenMelts.get();
     }
+    public static int getWoodHeatRate() {
+        return woodHeatRate.get();
+    }
 
+    // Barrel
+    public static int getBarrelMaxSolidAmount() {
+        return barrelMaxSolidAmount.get();
+    }
+    public static int getBarrelNumberOfBuckets() {
+        return barrelNumberOfBuckets.get();
+    }
+    public static int getSecondsToCompost() {
+        return secondsToCompost.get();
+    }
+    public static int getSecondsToFluidTransform() {
+        return secondsToFluidTransform.get();
+    }
+    public static int getSecondsToSpawn() { return secondsToSpawn.get(); }
+    public static int getRainFillAmount() {
+        return rainFillAmount.get();
+    }
+    public static int getWoodBarrelMaxTemp() {
+        return woodBarrelMaxTemp.get();
+    }
+    public static boolean getShowParticles() {
+        return showParticles.get();
+    }
+
+    // Infested Leaves
+    public static int getMaxBonusStringCount() {
+        return maxBonusStringCount.get();
+    }
+    public static int getMinStringCount() {
+        return minStringCount.get();
+    }
+    public static int getSecondsToTransformLeaves() {
+        return secondsToTransformLeaves.get();
+    }
+    public static double getSpreadChance() {
+        return spreadChance.get();
+    }
     public static int getTicksBetweenSpreadAttempt() {
         return ticksBetweenSpreadAttempt.get();
     }
 
-    public static int getVanillaSimulateDropCount() {
-        return vanillaSimulateDropCount.get();
-    }
-
-    public static int getWoodBarrelMaxTemp() {
-        return woodBarrelMaxTemp.get();
-    }
-
-    public static int getWoodHeatRate() {
-        return woodHeatRate.get();
-    }
+    // Pebble
+    public static int getPebbleDamage() { return pebbleDamage.get(); }
 
     public static void loadConfig(ForgeConfigSpec spec, Path path) {
         final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
@@ -286,6 +281,8 @@ public class Config {
         woodBarrelMaxTemp = COMMON_BUILDER
                 .comment("The max temperature a barrel can accept; water is 300 (Default: 300)")
                 .defineInRange("woodBarrelMaxTemp", 300, 0, Integer.MAX_VALUE);
+        showParticles = COMMON_BUILDER.comment("Should Ex Nihilo show any Patricle?")
+                .define("showParticles", true);
 
         COMMON_BUILDER.comment("Mob Spawn Configs").push(SUBCATEGORY_BARREL_MOB);
         secondsToSpawn = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)")
@@ -425,6 +422,11 @@ public class Config {
                 .define("enableIron", true);
         enableGold = COMMON_BUILDER.comment("Enable gold ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
                 .define("enableGold", true);
+    }
+
+    private static void pebbleConfigs() {
+        pebbleDamage = COMMON_BUILDER.comment("How much half hearts damage a pebble should do. (Default: 0)")
+                .defineInRange("pebbleDamage", 0, 0, Integer.MAX_VALUE);
     }
 
     private static void sieveConfigs() {

@@ -1,7 +1,12 @@
 pipeline {
     agent any
     environment {
-        PATH = "/usr/local/go/bin:$PATH"
+	    PATH = "/usr/local/go/bin:$PATH"
+        GITHUB_TOKEN = credentials('github-release')
+        CURSEFORGE_KEY = credentials('curseforge-token')
+        NEXUS_USERNAME = credentials('nexus-username')
+        NEXUS_PASSWORD = credentials('nexus-password')
+        BUILD_RESULT_EMAIL = credentials('build-result-email')
     }
 
     stages {
@@ -21,7 +26,7 @@ pipeline {
         stage('Deploy') {
             when{
                 expression {
-                    return env.GIT_BRANCH == 'origin/1.16';
+                    return env.GIT_BRANCH == '1.16';
                 }
             }
             steps {

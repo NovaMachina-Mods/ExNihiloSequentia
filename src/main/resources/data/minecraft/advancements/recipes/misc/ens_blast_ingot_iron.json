@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:ens_blast_ingot_iron"
+    ]
+  },
+  "criteria": {
+    "has_chunk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "exnihilosequentia:chunk_iron"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:ens_blast_ingot_iron"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chunk",
+      "has_the_recipe"
+    ]
+  ]
+}

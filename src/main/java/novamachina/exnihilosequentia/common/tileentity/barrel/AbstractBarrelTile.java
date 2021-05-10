@@ -71,33 +71,33 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
 
     @Override
     public void tick() {
-        if (world.isRemote()) {
+        if (level.isClientSide()) {
             return;
         }
 
         if (mode.isEmptyMode() || mode.getModeName().equals(ExNihiloConstants.BarrelModes.FLUID)) {
-            BlockPos abovePos = pos.add(0, 1, 0);
-            if (getWorld().isRainingAt(abovePos)) {
+            BlockPos abovePos = worldPosition.offset(0, 1, 0);
+            if (getLevel().isRainingAt(abovePos)) {
                 FluidStack stack = new FluidStack(Fluids.WATER, Config.getRainFillAmount());
                 tank.fill(stack, IFluidHandler.FluidAction.EXECUTE);
             }
         }
         mode.tick(this);
-        getWorld().notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
+        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put(TANK_TAG, tank.writeToNBT(new CompoundNBT()));
         compound.putString(MODE_TAG, mode.getModeName());
         compound.put(MODE_INFO_TAG, mode.write());
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundNBT compound) {
         if (compound.contains(INVENTORY_TAG)) {
             inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         }
@@ -113,12 +113,12 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         if (compound.contains(SOLID_AMOUNT_TAG)) {
             this.solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
         }
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        CompoundNBT nbt = pkt.getNbtCompound();
+        CompoundNBT nbt = pkt.getTag();
         if (nbt.contains(INVENTORY_TAG)) {
             inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
         }
@@ -142,7 +142,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         nbt.put(MODE_INFO_TAG, mode.write());
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
-        return new SUpdateTileEntityPacket(getPos(), -1, nbt);
+        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
     }
 
     public ActionResultType onBlockActivated(PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
@@ -169,16 +169,18 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         return tank.getFluidAmount();
     }
 
-    public boolean addSolid(int amount) {
+    public boolean addSolid(int amount, boolean simulate) {
         if (amount <= 0) {
             return false;
         }
         if (solidAmount == MAX_SOLID_AMOUNT) {
             return false;
         }
-        solidAmount += amount;
-        if (solidAmount > MAX_SOLID_AMOUNT) {
-            solidAmount = MAX_SOLID_AMOUNT;
+        if(!simulate) {
+            solidAmount += amount;
+            if (solidAmount > MAX_SOLID_AMOUNT) {
+                solidAmount = MAX_SOLID_AMOUNT;
+            }
         }
         return true;
     }
@@ -229,11 +231,11 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
 
 
     @Override
-    public void remove() {
-        super.remove();
+    public void setRemoved() {
+        super.setRemoved();
         NonNullList<ItemStack> list = NonNullList.create();
         list.add(inventory.getStackInSlot(0));
-        InventoryHelper.dropItems(getWorld(), getPos(), list);
+        InventoryHelper.dropContents(getLevel(), getBlockPos(), list);
     }
 
     public List<ITextComponent> getWailaInfo() {

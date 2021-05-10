@@ -72,24 +72,24 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
     @Override
     public void read(CompoundNBT nbt) {
         currentProgress = nbt.getInt("currentProgress");
-        catalyst = ItemStack.read(nbt).getItem();
+        catalyst = ItemStack.of(nbt).getItem();
     }
 
     @Override
     public CompoundNBT write() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("currentProgress", currentProgress);
-        new ItemStack(catalyst).write(nbt);
+        new ItemStack(catalyst).save(nbt);
         return nbt;
     }
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerWorld) barrelTile.getWorld())
-            .spawnParticle(ParticleTypes.EFFECT,
-                barrelTile.getPos().getX() + barrelTile.getWorld().rand.nextDouble(),
-                barrelTile.getPos().getY() + barrelTile.getWorld().rand.nextDouble(),
-                barrelTile.getPos().getZ() + barrelTile.getWorld().rand.nextDouble(),
+        ((ServerWorld) barrelTile.getLevel())
+            .sendParticles(ParticleTypes.EFFECT,
+                barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
+                barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
+                barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
                 1,
                 0.0,
                 0.0,
@@ -108,7 +108,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
         return stack;
     }
 }

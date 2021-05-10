@@ -62,23 +62,23 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundNBT compound) {
         inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
         this.solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
-        this.currentItem = ItemStack.read(compound.getCompound(CURRENT_ITEM_TAG));
-        super.read(state, compound);
+        this.currentItem = ItemStack.of(compound.getCompound(CURRENT_ITEM_TAG));
+        super.load(state, compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put("tank", tank.writeToNBT(new CompoundNBT()));
         compound.putInt("ticksSinceLast", ticksSinceLast);
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
-        compound.put(CURRENT_ITEM_TAG, currentItem.write(new CompoundNBT()));
-        return super.write(compound);
+        compound.put(CURRENT_ITEM_TAG, currentItem.save(new CompoundNBT()));
+        return super.save(compound);
     }
 
     @Nonnull
@@ -99,12 +99,16 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
                                              IFluidHandler handler) {
         logger.debug("Crucible activated");
 
-        ItemStack stack = player.getHeldItem(handIn);
+        ItemStack stack = player.getItemInHand(handIn);
         if (stack.isEmpty()) {
             return ActionResultType.SUCCESS;
         }
 
         if(TankUtil.drainWaterIntoBottle(this, player, handler)) {
+            return ActionResultType.SUCCESS;
+        }
+
+        if(TankUtil.drainWaterFromBottle(this, player, handler)) {
             return ActionResultType.SUCCESS;
         }
 
@@ -115,14 +119,14 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
-            world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 2);
-            markDirty();
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+            setChanged();
             return ActionResultType.SUCCESS;
         }
 
         CrucibleRecipe recipe = getMeltable();
         if (recipe != null && !tank.isEmpty() && !tank.getFluid().getFluid()
-            .isEquivalentTo(recipe.getResultFluid().getFluid())) {
+            .isSame(recipe.getResultFluid().getFluid())) {
             return ActionResultType.SUCCESS;
         }
 
@@ -130,13 +134,13 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         ItemStack addStack = stack.copy();
         addStack.setCount(1);
         ItemStack insertStack = inventory.insertItem(0, addStack, true);
-        if (!ItemStack.areItemStacksEqual(addStack, insertStack)) {
+        if (!ItemStack.matches(addStack, insertStack)) {
             inventory.insertItem(0, addStack, false);
 
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
-            markDirty();
+            setChanged();
             return ActionResultType.SUCCESS;
         }
         return ActionResultType.SUCCESS;
@@ -163,11 +167,11 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbt = new CompoundNBT();
         if (!inventory.getStackInSlot(0).isEmpty()) {
-            CompoundNBT blockNbt = inventory.getStackInSlot(0).write(new CompoundNBT());
+            CompoundNBT blockNbt = inventory.getStackInSlot(0).save(new CompoundNBT());
             nbt.put(BLOCK_TAG, blockNbt);
         }
         if (!currentItem.isEmpty()) {
-            CompoundNBT currentItemTag = currentItem.write(new CompoundNBT());
+            CompoundNBT currentItemTag = currentItem.save(new CompoundNBT());
             nbt.put(CURRENT_ITEM_TAG, currentItemTag);
         }
         if (!tank.isEmpty()) {
@@ -176,20 +180,20 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         }
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
-        return new SUpdateTileEntityPacket(getPos(), -1, nbt);
+        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
-        CompoundNBT nbt = packet.getNbtCompound();
+        CompoundNBT nbt = packet.getTag();
         if (nbt.contains(CURRENT_ITEM_TAG)) {
-            currentItem = ItemStack.read((CompoundNBT) nbt.get(CURRENT_ITEM_TAG));
+            currentItem = ItemStack.of((CompoundNBT) nbt.get(CURRENT_ITEM_TAG));
         } else {
             currentItem = ItemStack.EMPTY;
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            inventory.setStackInSlot(0, ItemStack.read((CompoundNBT) nbt.get(BLOCK_TAG)));
+            inventory.setStackInSlot(0, ItemStack.of((CompoundNBT) nbt.get(BLOCK_TAG)));
         } else {
             inventory.setStackInSlot(0, ItemStack.EMPTY);
         }
@@ -208,15 +212,20 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     public float getSolidProportion() {
 
-        int itemCount =
-            inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
-        float solidProportion = ((float) itemCount) / 4;
+        try {
+            int itemCount =
+                inventory.getStackInSlot(0).isEmpty() ? 0 : inventory.getStackInSlot(0).getCount();
+            float solidProportion = ((float) itemCount) / 4;
 
-        if (solidAmount > 0) {
-            CrucibleRecipe meltable = getMeltable();
-            solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
+            if (solidAmount > 0) {
+                CrucibleRecipe meltable = getMeltable();
+                solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
+            }
+            return solidProportion;
+        } catch (NullPointerException e) {
+            logger.error(e.getMessage());
         }
-        return solidProportion;
+        return 0;
     }
 
     public abstract CrucilbeTypeEnum getCrucibleType();

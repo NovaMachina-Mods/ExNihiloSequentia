@@ -9,7 +9,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -29,17 +28,9 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        if (!player.getHeldItem(handIn).isEmpty()) {
-            boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
+        if (!player.getItemInHand(handIn).isEmpty()) {
 
-            if (result) {
-                barrelTile.getWorld()
-                    .notifyBlockUpdate(barrelTile.getPos(), barrelTile.getBlockState(), barrelTile.getBlockState(), 2);
-                barrelTile.markDirty();
-                return ActionResultType.SUCCESS;
-            }
-
-            ItemStack stack = player.getHeldItem(handIn);
+            ItemStack stack = player.getItemInHand(handIn);
             List<Supplier<AbstractBarrelMode>> modes = BarrelModeRegistry.getModes(BarrelModeRegistry.TriggerType.ITEM);
             for (Supplier<AbstractBarrelMode> mode : modes) {
                 if (mode.get().isTriggerItem(stack)) {
@@ -88,10 +79,14 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
         if(ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(stack.getItem())) {
             barrelTile.setMode(ExNihiloConstants.BarrelModes.COMPOST);
-            return barrelTile.getMode().handleInsert(barrelTile, stack);
+            ItemStack returnStack = barrelTile.getMode().handleInsert(barrelTile, stack, simulate);
+            if(simulate) {
+                barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
+            }
+            return returnStack;
         }
         return stack;
     }

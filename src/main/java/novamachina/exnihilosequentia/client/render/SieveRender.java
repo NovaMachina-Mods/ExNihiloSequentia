@@ -36,29 +36,29 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
         ResourceLocation blockTexture = tileEntity.getTexture();
         if (blockTexture != null) {
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(
+                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
                             new ResourceLocation(blockTexture.getNamespace(),
-                                    "block/" + blockTexture.getPath()));
-            IVertexBuilder builder = buffer.getBuffer(RenderType.getTranslucent());
+                                    "block/" + resolveTexture(blockTexture.getPath())));
+            IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
 
-            matrixStack.push();
+            matrixStack.pushPose();
             matrixStack.translate(.5, .5, .5);
             matrixStack.translate(-.5, -.5, -.5);
 
             double height = 0.99f - tileEntity.getProgress();
             float fillAmount = (float) (0.15625 * height + 0.84375);
 
-            add(builder, matrixStack, new VertexLocation(0, fillAmount, 0), new UVLocation(sprite.getMinU(), sprite.getMinV()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(1, fillAmount, 0), new UVLocation(sprite.getMaxU(), sprite.getMinV()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(1, fillAmount, 1), new UVLocation(sprite.getMaxU(), sprite.getMaxV()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(0, fillAmount, 1), new UVLocation(sprite.getMinU(), sprite.getMaxV()), Color.WHITE, combinedLight);
+            add(builder, matrixStack, new VertexLocation(0, fillAmount, 0), new UVLocation(sprite.getU0(), sprite.getV0()), Color.WHITE, combinedLight);
+            add(builder, matrixStack, new VertexLocation(1, fillAmount, 0), new UVLocation(sprite.getU1(), sprite.getV0()), Color.WHITE, combinedLight);
+            add(builder, matrixStack, new VertexLocation(1, fillAmount, 1), new UVLocation(sprite.getU1(), sprite.getV1()), Color.WHITE, combinedLight);
+            add(builder, matrixStack, new VertexLocation(0, fillAmount, 1), new UVLocation(sprite.getU0(), sprite.getV1()), Color.WHITE, combinedLight);
 
-            add(builder, matrixStack, new VertexLocation(0, fillAmount, 1), new UVLocation(sprite.getMinU(), sprite.getMaxV()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(1, fillAmount, 1), new UVLocation(sprite.getMaxU(), sprite.getMaxV()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(1, fillAmount, 0), new UVLocation(sprite.getMaxU(), sprite.getMinV()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(0, fillAmount, 0), new UVLocation(sprite.getMinU(), sprite.getMinV()), Color.WHITE, combinedLight);
+            add(builder, matrixStack, new VertexLocation(0, fillAmount, 1), new UVLocation(sprite.getU0(), sprite.getV1()), Color.WHITE, combinedLight);
+            add(builder, matrixStack, new VertexLocation(1, fillAmount, 1), new UVLocation(sprite.getU1(), sprite.getV1()), Color.WHITE, combinedLight);
+            add(builder, matrixStack, new VertexLocation(1, fillAmount, 0), new UVLocation(sprite.getU1(), sprite.getV0()), Color.WHITE, combinedLight);
+            add(builder, matrixStack, new VertexLocation(0, fillAmount, 0), new UVLocation(sprite.getU0(), sprite.getV0()), Color.WHITE, combinedLight);
 
-            matrixStack.pop();
+            matrixStack.popPose();
         }
     }
 }

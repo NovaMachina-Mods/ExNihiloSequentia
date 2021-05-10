@@ -28,10 +28,10 @@ public class BlockBarrelMode extends AbstractBarrelMode {
 
     @Override
     public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        barrelTile.getWorld()
-            .addEntity(new ItemEntity(barrelTile.getWorld(), barrelTile.getPos().getX() + 0.5F, barrelTile.getPos()
+        barrelTile.getLevel()
+            .addFreshEntity(new ItemEntity(barrelTile.getLevel(), barrelTile.getBlockPos().getX() + 0.5F, barrelTile.getBlockPos()
                 .getY() + 0.5F,
-                barrelTile.getPos().getZ() + 0.5F, new ItemStack(barrelTile.getInventory().getStackInSlot(0)
+                barrelTile.getBlockPos().getZ() + 0.5F, new ItemStack(barrelTile.getInventory().getStackInSlot(0)
                 .getItem())));
         barrelTile.getInventory().setStackInSlot(0, ItemStack.EMPTY);
         barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
@@ -72,13 +72,13 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
-        info.add(new TranslationTextComponent("waila.barrel.block", new TranslationTextComponent(barrelTile.getInventory().getStackInSlot(0).getTranslationKey())));
+        info.add(new TranslationTextComponent("waila.barrel.block", new TranslationTextComponent(barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
 
         return info;
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack) {
+    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
         return stack;
     }
 }

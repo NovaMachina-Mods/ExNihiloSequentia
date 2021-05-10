@@ -130,12 +130,18 @@
 
   "fluid.exnihilosequentia.witchwater": "Witchwater",
   "fluid.exnihilosequentia.sea_water": "Sea Water",
+  
+  "item.exnihilosequentia.item_stick_stone": "Stone Stick",
+
+  "stat.exnihilosequentia.sieved": "Blocks Sieved",
 
   "tooltip.doll.blaze": "Add to a barrel of lava to spawn a Blaze",
   "tooltip.doll.enderman": "Add to a barrel of witchwater to spawn an Enderman",
   "tooltip.doll.shulker": "Add to a barrel of witchwater to spawn a Shulker",
   "tooltip.doll.guardian": "Add to a barrel of sea water to spawn a Guardian",
   "tooltip.doll.bee": "Add to a barrel of witchwater to spawn a Bee",
+
+  "exnihilosequentia.subtitle.pebbleThrow": "Pebble flies",
 
   "jei.sieve.dropChance": "Drop Chance",
 
