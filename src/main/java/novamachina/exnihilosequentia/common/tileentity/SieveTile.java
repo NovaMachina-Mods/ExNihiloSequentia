@@ -131,9 +131,10 @@ public class SieveTile extends TileEntity {
 
     @Override
     public void setRemoved() {
-        if (!level.isClientSide()) {
+        //TODO this one is doing that dupe with CarryOn
+        /*if (!level.isClientSide()) {
             removeMesh(false);
-        }
+        }*/
         super.setRemoved();
     }
 

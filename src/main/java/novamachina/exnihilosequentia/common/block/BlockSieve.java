@@ -120,9 +120,12 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     @Deprecated
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
+        if (sieveTile == null) {
+            return ActionResultType.PASS;
+        }
         if (!worldIn.isClientSide()) {
             logger.debug("Sieve Activated");
-            SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
             ItemStack stack = player.getItemInHand(handIn);
             if (player.isShiftKeyDown() && stack.isEmpty()) {
                 sieveTile.removeMesh(true);
