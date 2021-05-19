@@ -40,7 +40,7 @@ import javax.annotation.Nonnull;
 
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
     protected static final String CHUNK_CONDITION = "has_chunk";
-    private static final String PEBBLE_CONDITION = "has_pebble";
+    public static final String PEBBLE_CONDITION = "has_pebble";
     private static final String MATERIAL_CONDITION = "has_material";
     private final String modId;
 

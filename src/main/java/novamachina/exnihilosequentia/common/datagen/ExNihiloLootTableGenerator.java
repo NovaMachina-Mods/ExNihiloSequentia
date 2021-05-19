@@ -43,17 +43,32 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
     }
 
     private void registerSelfDrops() {
-        registerSelfDrop(ExNihiloBlocks.BARREL_WOOD.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_ACACIA.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_BIRCH.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_DARK_OAK.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_JUNGLE.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_OAK.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_SPRUCE.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_STONE.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_FIRED.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_UNFIRED.get());
-        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_WOOD.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_ACACIA.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_BIRCH.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_JUNGLE.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_OAK.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_SPRUCE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_ANDESITE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_DIORITE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_END_STONE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_GRANITE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_NETHERRACK.get());
         registerSelfDrop(ExNihiloBlocks.DUST.get());
-        registerSelfDrop(ExNihiloBlocks.SIEVE.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_ACACIA.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_BIRCH.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_DARK_OAK.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_JUNGLE.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_OAK.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_SPRUCE.get());
     }
 }

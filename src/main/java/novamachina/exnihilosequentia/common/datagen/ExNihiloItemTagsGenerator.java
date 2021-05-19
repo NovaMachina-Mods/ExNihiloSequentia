@@ -7,6 +7,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
@@ -83,5 +84,32 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.RABBIT);
         tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.SALMON);
         tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.BEEF);
+    }
+
+    private void registerWoodenCrucible() {
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_ACACIA.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_BIRCH.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_JUNGLE.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_OAK.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_SPRUCE.get().asItem());
+    }
+
+    private void registerWoodenBarrel() {
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_ACACIA.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_BIRCH.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_DARK_OAK.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_JUNGLE.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_OAK.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_SPRUCE.get().asItem());
+    }
+
+    private void registerWoodenSieve() {
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_ACACIA.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_BIRCH.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_DARK_OAK.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_JUNGLE.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_OAK.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_SPRUCE.get().asItem());
     }
 }

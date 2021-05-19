@@ -59,8 +59,6 @@ public class ExNihiloBlocks {
                             .sound(SoundType.GRAVEL)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<EndCakeBlock> END_CAKE = BLOCKS
             .register(ExNihiloConstants.Blocks.END_CAKE, EndCakeBlock::new);
-    public static final RegistryObject<BlockSieve> SIEVE = BLOCKS
-            .register(Blocks.SIEVE, BlockSieve::new);
     public static final RegistryObject<FlowingFluidBlock> WITCH_WATER = BLOCKS
             .register(ExNihiloConstants.Blocks.WITCH_WATER, WitchWaterBlock::new);
     public static final RegistryObject<FlowingFluidBlock> SEA_WATER = BLOCKS
@@ -83,6 +81,18 @@ public class ExNihiloBlocks {
             .register(Blocks.BARREL_STONE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
                     .properties(AbstractBlock.Properties.of(Material.STONE).strength(0.75F).sound(SoundType.STONE))
                     .tileEntitySupplier(StoneBarrelTile::new)));
+    public static final RegistryObject<BlockSieve> SIEVE_ACACIA = BLOCKS
+            .register(Blocks.SIEVE, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_BIRCH = BLOCKS
+            .register(Blocks.SIEVE, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_DARK_OAK = BLOCKS
+            .register(Blocks.SIEVE, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_JUNGLE = BLOCKS
+            .register(Blocks.SIEVE, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE_OAK = BLOCKS
+            .register(Blocks.SIEVE, BlockSieve::new);
+    public static final RegistryObject<BlockSieve> SIEVE = BLOCKS
+            .register(Blocks.SIEVE, BlockSieve::new);
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloBlocks() {

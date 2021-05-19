@@ -28,8 +28,10 @@ public class ClientSetup {
 
     public static void init(final FMLClientSetupEvent event) {
         logger.debug("Initializing client renderers");
+        registerSieveRenderLayer();
+        registerCrucibleRenderLayer();
+        registerBarrelRenderLayer();
 
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_FIRED.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_WOOD.get(), RenderType.cutoutMipped());
@@ -67,5 +69,32 @@ public class ClientSetup {
                 }
             }
         }
+    }
+
+    private static void registerBarrelRenderLayer() {
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_ACACIA.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_BIRCH.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_DARK_OAK.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_JUNGLE.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_OAK.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_SPRUCE.get(), RenderType.cutoutMipped());
+    }
+
+    private static void registerCrucibleRenderLayer() {
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_ACACIA.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_BIRCH.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_OAK.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_SPRUCE.get(), RenderType.cutoutMipped());
+    }
+
+    private static void registerSieveRenderLayer() {
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_ACACIA.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_BIRCH.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_DARK_OAK.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_JUNGLE.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_OAK.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_SPRUCE.get(), RenderType.cutoutMipped());
     }
 }
