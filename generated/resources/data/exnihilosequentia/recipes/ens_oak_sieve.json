@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "plp",
+    "s s"
+  ],
+  "key": {
+    "p": {
+      "item": "minecraft:stripped_oak_log"
+    },
+    "l": {
+      "item": "minecraft:oak_slab"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:oak_sieve"
+  }
+}

@@ -22,10 +22,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
+import novamachina.exnihilosequentia.common.block.barrels.NetherBarrelBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
@@ -61,6 +63,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerCrooks(consumer);
         registerPebbleBlocks(consumer);
         registerBarrels(consumer);
+        registerCrucibles(consumer);
+        registerSieves(consumer);
         registerOres(consumer);
         registerHammers(consumer);
         registerDolls(consumer);
@@ -90,6 +94,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createBarrel(consumer, ExNihiloBlocks.BARREL_JUNGLE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
         createBarrel(consumer, ExNihiloBlocks.BARREL_OAK, Items.OAK_PLANKS, Items.OAK_SLAB);
         createBarrel(consumer, ExNihiloBlocks.BARREL_SPRUCE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.BARREL_CRIMSON, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.BARREL_WARPED, Items.WARPED_PLANKS, Items.WARPED_SLAB);
     }
 
     private void registerCompostRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -150,13 +156,15 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCrook(EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN, consumer);
     }
 
-    private void registerCrucible(Consumer<IFinishedRecipe> consumer) {
+    private void registerCrucibles(Consumer<IFinishedRecipe> consumer) {
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_ACACIA, Items.ACACIA_LOG, Items.ACACIA_SLAB);
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_BIRCH, Items.BIRCH_LOG, Items.BIRCH_SLAB);
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_DARK_OAK, Items.DARK_OAK_LOG, Items.DARK_OAK_SLAB);
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_JUNGLE, Items.JUNGLE_LOG, Items.JUNGLE_SLAB);
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_OAK, Items.OAK_LOG, Items.OAK_SLAB);
         createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_SPRUCE, Items.SPRUCE_LOG, Items.SPRUCE_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_CRIMSON, Items.CRIMSON_STEM, Items.CRIMSON_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_WARPED, Items.WARPED_STEM, Items.WARPED_SLAB);
     }
 
     private void registerCrucibleRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -390,7 +398,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .pattern("iii")
                 .pattern("iii")
                 .define('i', Tags.Items.STRING)
-                .unlockedBy("has_sieve", InventoryChangeTrigger.Instance.hasItems(ExNihiloBlocks.SIEVE.get()))
+                .unlockedBy("has_sieve", InventoryChangeTrigger.Instance.hasItems(ExNihiloBlocks.SIEVE_OAK.get(),
+                        ExNihiloBlocks.SIEVE_ACACIA.get(), ExNihiloBlocks.SIEVE_BIRCH.get(), ExNihiloBlocks.SIEVE_JUNGLE.get(),
+                        ExNihiloBlocks.SIEVE_DARK_OAK.get(), ExNihiloBlocks.SIEVE_SPRUCE.get(), ExNihiloBlocks.SIEVE_CRIMSON.get(),
+                        ExNihiloBlocks.SIEVE_WARPED.get()))
                 .save(consumer, createSaveLocation(EnumMesh.STRING.getRegistryObject().getId()));
     }
 
@@ -541,13 +552,15 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createPebbleBlock(Blocks.BLACKSTONE, EnumPebbleType.BLACKSTONE.getRegistryObject().get(), consumer);
     }
 
-    private void registerSieve(Consumer<IFinishedRecipe> consumer) {
+    private void registerSieves(Consumer<IFinishedRecipe> consumer) {
         createSieve(consumer, ExNihiloBlocks.SIEVE_ACACIA, Items.STRIPPED_ACACIA_LOG, Items.ACACIA_SLAB);
         createSieve(consumer, ExNihiloBlocks.SIEVE_BIRCH, Items.STRIPPED_BIRCH_LOG, Items.BIRCH_SLAB);
         createSieve(consumer, ExNihiloBlocks.SIEVE_DARK_OAK, Items.STRIPPED_DARK_OAK_LOG, Items.DARK_OAK_SLAB);
         createSieve(consumer, ExNihiloBlocks.SIEVE_JUNGLE, Items.STRIPPED_JUNGLE_LOG, Items.JUNGLE_SLAB);
         createSieve(consumer, ExNihiloBlocks.SIEVE_OAK, Items.STRIPPED_OAK_LOG, Items.OAK_SLAB);
         createSieve(consumer, ExNihiloBlocks.SIEVE_SPRUCE, Items.STRIPPED_SPRUCE_LOG, Items.SPRUCE_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_CRIMSON, Items.STRIPPED_CRIMSON_STEM, Items.CRIMSON_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_WARPED, Items.STRIPPED_WARPED_STEM, Items.WARPED_SLAB);
     }
 
     private void registerSieveRecipes(Consumer<IFinishedRecipe> consumer) {

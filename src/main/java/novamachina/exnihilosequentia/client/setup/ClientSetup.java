@@ -32,10 +32,6 @@ public class ClientSetup {
         registerCrucibleRenderLayer();
         registerBarrelRenderLayer();
 
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), RenderType.cutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_FIRED.get(), RenderType.cutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_WOOD.get(), RenderType.cutoutMipped());
-        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_WOOD.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTED_LEAVES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTING_LEAVES.get(), RenderType.cutout());
 
@@ -78,6 +74,8 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_JUNGLE.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_OAK.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_SPRUCE.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_CRIMSON.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_WARPED.get(), RenderType.cutoutMipped());
     }
 
     private static void registerCrucibleRenderLayer() {
@@ -87,6 +85,10 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_OAK.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_SPRUCE.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_WARPED.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.CRUCIBLE_FIRED.get(), RenderType.cutoutMipped());
     }
 
     private static void registerSieveRenderLayer() {
@@ -96,5 +98,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_JUNGLE.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_OAK.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_SPRUCE.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_CRIMSON.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.SIEVE_WARPED.get(), RenderType.cutoutMipped());
     }
 }

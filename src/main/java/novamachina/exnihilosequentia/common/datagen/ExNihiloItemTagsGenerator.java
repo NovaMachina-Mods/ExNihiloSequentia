@@ -28,6 +28,9 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         registerHammers();
         registerCrooks();
         registerMisc();
+        registerWoodenBarrel();
+        registerWoodenCrucible();
+        registerWoodenSieve();
     }
 
     private void registerCrooks() {
@@ -93,6 +96,8 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_JUNGLE.get().asItem());
         tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_OAK.get().asItem());
         tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_SPRUCE.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_CRIMSON.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_WARPED.get().asItem());
     }
 
     private void registerWoodenBarrel() {
@@ -102,6 +107,8 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_JUNGLE.get().asItem());
         tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_OAK.get().asItem());
         tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_SPRUCE.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_CRIMSON.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_WARPED.get().asItem());
     }
 
     private void registerWoodenSieve() {
@@ -111,5 +118,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_JUNGLE.get().asItem());
         tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_OAK.get().asItem());
         tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_SPRUCE.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_CRIMSON.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_WARPED.get().asItem());
     }
 }

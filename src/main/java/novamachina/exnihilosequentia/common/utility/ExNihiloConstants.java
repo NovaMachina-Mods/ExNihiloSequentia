@@ -23,10 +23,26 @@ public class ExNihiloConstants {
     public static class Blocks {
 
         public static final String BARREL_STONE = "barrel_stone";
-        public static final String BARREL_WOOD = "barrel_wood";
+        public static final String BARRELS = "barrels";
+        public static final String BARREL_ACACIA = "acacia_barrel";
+        public static final String BARREL_BIRCH = "birch_barrel";
+        public static final String BARREL_DARK_OAK = "dark_oak_barrel";
+        public static final String BARREL_JUNGLE = "jungle_barrel";
+        public static final String BARREL_OAK = "oak_barrel";
+        public static final String BARREL_SPRUCE = "spruce_barrel";
+        public static final String BARREL_CRIMSON = "crimson_barrel";
+        public static final String BARREL_WARPED = "warped_barrel";
         public static final String CRUCIBLE_FIRED = "crucible_fired";
         public static final String CRUCIBLE_UNFIRED = "crucible_unfired";
-        public static final String CRUCIBLE_WOOD = "crucible_wood";
+        public static final String CRUCIBLES = "crucibles";
+        public static final String CRUCIBLE_ACACIA = "acacia_crucible";
+        public static final String CRUCIBLE_BIRCH = "birch_crucible";
+        public static final String CRUCIBLE_DARK_OAK = "dark_oak_crucible";
+        public static final String CRUCIBLE_JUNGLE = "jungle_crucible";
+        public static final String CRUCIBLE_OAK = "oak_crucible";
+        public static final String CRUCIBLE_SPRUCE = "spruce_crucible";
+        public static final String CRUCIBLE_CRIMSON = "crimson_crucible";
+        public static final String CRUCIBLE_WARPED = "warped_crucible";
         public static final String CRUSHED_ANDESITE = "crushed_andesite";
         public static final String CRUSHED_DIORITE = "crushed_diorite";
         public static final String CRUSHED_END_STONE = "crushed_end_stone";
@@ -37,7 +53,15 @@ public class ExNihiloConstants {
         public static final String INFESTED_LEAVES = "infested_leaves";
         public static final String INFESTING_LEAVES = "infesting_leaves";
         public static final String SEA_WATER = "sea_water";
-        public static final String SIEVE = "sieve";
+        public static final String SIEVES = "sieves";
+        public static final String SIEVE_ACACIA = "acacia_sieve";
+        public static final String SIEVE_BIRCH = "birch_sieve";
+        public static final String SIEVE_DARK_OAK = "dark_oak_sieve";
+        public static final String SIEVE_JUNGLE = "jungle_sieve";
+        public static final String SIEVE_OAK = "oak_sieve";
+        public static final String SIEVE_SPRUCE = "spruce_sieve";
+        public static final String SIEVE_CRIMSON = "crimson_sieve";
+        public static final String SIEVE_WARPED = "warped_sieve";
         public static final String WITCH_WATER = "witchwater";
 
         private Blocks() {

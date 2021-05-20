@@ -50,6 +50,8 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.BARREL_OAK.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_SPRUCE.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_STONE.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_CRIMSON.get());
+        registerSelfDrop(ExNihiloBlocks.BARREL_WARPED.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_FIRED.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_UNFIRED.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_ACACIA.get());
@@ -58,6 +60,8 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_JUNGLE.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_OAK.get());
         registerSelfDrop(ExNihiloBlocks.CRUCIBLE_SPRUCE.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_CRIMSON.get());
+        registerSelfDrop(ExNihiloBlocks.CRUCIBLE_WARPED.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_ANDESITE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_DIORITE.get());
         registerSelfDrop(ExNihiloBlocks.CRUSHED_END_STONE.get());
@@ -70,5 +74,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         registerSelfDrop(ExNihiloBlocks.SIEVE_JUNGLE.get());
         registerSelfDrop(ExNihiloBlocks.SIEVE_OAK.get());
         registerSelfDrop(ExNihiloBlocks.SIEVE_SPRUCE.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_CRIMSON.get());
+        registerSelfDrop(ExNihiloBlocks.SIEVE_WARPED.get());
     }
 }

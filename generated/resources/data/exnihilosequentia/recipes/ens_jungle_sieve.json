@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "plp",
+    "s s"
+  ],
+  "key": {
+    "p": {
+      "item": "minecraft:stripped_jungle_log"
+    },
+    "l": {
+      "item": "minecraft:jungle_slab"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:jungle_sieve"
+  }
+}
