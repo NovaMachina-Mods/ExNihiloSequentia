@@ -31,6 +31,7 @@ import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformR
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.block.BaseBlock;
+import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
@@ -40,7 +41,7 @@ import javax.annotation.Nonnull;
 
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
     protected static final String CHUNK_CONDITION = "has_chunk";
-    private static final String PEBBLE_CONDITION = "has_pebble";
+    public static final String PEBBLE_CONDITION = "has_pebble";
     private static final String MATERIAL_CONDITION = "has_material";
     private final String modId;
 
@@ -219,7 +220,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(barrel.getId()));
     }
 
-    protected void createBarrel(Consumer<IFinishedRecipe> consumer, RegistryObject<BaseBlock> barrel, ITag.INamedTag<Item> block, ITag.INamedTag<Item> slab) {
+    protected void createBarrel(Consumer<IFinishedRecipe> consumer, RegistryObject<BaseBlock> barrel, Item block, Item slab) {
         ShapedRecipeBuilder.shaped(barrel.get())
                 .pattern("x x")
                 .pattern("x x")
@@ -258,8 +259,8 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(crucible.getId()));
     }
 
-    protected void createSieve(Consumer<IFinishedRecipe> consumer, RegistryObject<BlockSieve> sieve, Item block, Item slab) {
-        ShapedRecipeBuilder.shaped(sieve.get())
+    protected void createSieve(Consumer<IFinishedRecipe> consumer, RegistryObject<?> sieve, Item block, Item slab) {
+        ShapedRecipeBuilder.shaped((BlockSieve) sieve.get())
                 .pattern("p p")
                 .pattern("plp")
                 .pattern("s s")
