@@ -7,11 +7,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 
 public class HammerBaseItem extends ToolItem {
 
@@ -38,5 +40,13 @@ public class HammerBaseItem extends ToolItem {
             return true;
         }
         return super.isCorrectToolForDrops(blockIn);
+    }
+
+    @Override
+    public int getBurnTime(ItemStack itemStack) {
+        if (itemStack.getItem() == EnumHammer.WOOD.getRegistryObject().get()) {
+            return 200;
+        }
+        else return 0;
     }
 }

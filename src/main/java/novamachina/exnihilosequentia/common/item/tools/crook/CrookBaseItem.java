@@ -44,4 +44,12 @@ public class CrookBaseItem extends ToolItem {
         Material material = state.getMaterial();
         return effectiveMaterialsOn.contains(material) ? this.speed : super.getDestroySpeed(stack, state);
     }
+
+    @Override
+    public int getBurnTime(ItemStack itemStack) {
+        if (itemStack.getItem() == EnumCrook.WOOD.getRegistryObject().get()) {
+            return 200;
+        }
+        else return 0;
+    }
 }
