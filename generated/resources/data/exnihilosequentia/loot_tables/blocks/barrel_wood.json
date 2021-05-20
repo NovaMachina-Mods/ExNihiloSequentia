@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "exnihilosequentia:oak_barrel"
+          "name": "exnihilosequentia:barrel_wood"
         }
       ],
       "conditions": [

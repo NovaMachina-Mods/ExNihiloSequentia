@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "exnihilosequentia:oak_crucible"
+          "name": "exnihilosequentia:crucible_wood"
         }
       ],
       "conditions": [

@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "exnihilosequentia:block/oak_sieve"
+        "model": "exnihilosequentia:block/sieve"
       }
     },
     {

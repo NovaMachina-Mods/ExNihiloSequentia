@@ -2,26 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "exnihilosequentia:ens_oak_barrel"
+      "exnihilosequentia:ens_sieve"
     ]
   },
   "criteria": {
-    "has_walls": {
+    "has_plank": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:oak_planks"
-          }
-        ]
-      }
-    },
-    "has_base": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:oak_slab"
+            "item": "minecraft:stripped_oak_log"
           }
         ]
       }
@@ -29,14 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "exnihilosequentia:ens_oak_barrel"
+        "recipe": "exnihilosequentia:ens_sieve"
       }
     }
   },
   "requirements": [
     [
-      "has_walls",
-      "has_base",
+      "has_plank",
       "has_the_recipe"
     ]
   ]

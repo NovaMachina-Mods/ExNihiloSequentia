@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "exnihilosequentia:ens_oak_crucible"
+      "exnihilosequentia:ens_crucible_wood"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "exnihilosequentia:ens_oak_crucible"
+        "recipe": "exnihilosequentia:ens_crucible_wood"
       }
     }
   },
