@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:planks"
+            "item": "minecraft:stripped_oak_log"
           }
         ]
       }
