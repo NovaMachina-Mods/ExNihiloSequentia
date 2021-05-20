@@ -18,6 +18,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
@@ -85,28 +86,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createBarrel(consumer, ExNihiloBlocks.BARREL_STONE, Tags.Items.STONE, Items.STONE_SLAB);
         createBarrel(consumer, ExNihiloBlocks.BARREL_WOOD, ItemTags.PLANKS, ItemTags.WOODEN_SLABS);
     }
-  
-  private void registerCrook(Item result, Item input, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(result)
-                .pattern("xx")
-                .pattern(" x")
-                .pattern(" x")
-                .define('x', input)
-                .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
-                .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.hasItems(input))
-                .save(consumer, createSaveLocation(result.getRegistryName()));
-    }
-
-    private void registerCrook(Item result, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(result)
-                .pattern("xx")
-                .pattern(" x")
-                .pattern(" x")
-                .define('x', input)
-                .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
-                .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.Instance
-                        .hasItems(ItemPredicate.Builder.item().of(input).build()))
-                .save(consumer, createSaveLocation(result.getRegistryName()));
 
     private void registerCompostRecipes(Consumer<IFinishedRecipe> consumer) {
         createCompostRecipe(consumer, ItemTags.SAPLINGS, 125, "saplings");
