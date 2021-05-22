@@ -21,6 +21,8 @@ public class MeshItem extends Item {
     }
     @Override
     public int getBurnTime(ItemStack itemStack) {
-        return 100;
+        if (itemStack.getItem() == EnumMesh.STRING.getRegistryObject().get()) {
+            return 200;
+        } else return 0;
     }
 }

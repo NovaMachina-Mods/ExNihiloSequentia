@@ -8,7 +8,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 public enum EnumResource implements IExtensibleEnum {
     ANCIENT_SPORE(Items.ANCIENT_SPORE),
     GRASS_SEED(Items.GRASS_SEED),
-    SILKWORM(Items.SILKWORM),
+    //SILKWORM(Items.SILKWORM),
     PORCELAIN_CLAY(Items.PORCELAIN_CLAY),
     CRAFTING_DOLL(Items.CRAFTING_DOLL),
     BLUE_CORAL_SEED(Items.BLUE_CORAL_SEED),

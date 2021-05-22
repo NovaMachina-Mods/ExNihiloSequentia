@@ -119,6 +119,8 @@ public class ExNihiloItems {
     // Begin Items Only
     public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
             .register(ExNihiloConstants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
+    public static final RegistryObject<Item> SILKWORM = ITEMS
+            .register(ExNihiloConstants.Items.SILKWORM, () -> new ResourceItem(ExNihiloConstants.Items.SILKWORM));
     public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = ITEMS
             .register(ExNihiloConstants.Items.WITCH_WATER_BUCKET,
                     () -> new BucketItem(ExNihiloFluids.WITCH_WATER, tab.stacksTo(1)));
@@ -198,7 +200,7 @@ public class ExNihiloItems {
         return new BlockItem(block, tab){
             @Override
             public int getBurnTime(ItemStack itemStack) {
-                return 200;
+                return 400;
             }
         };
     }
