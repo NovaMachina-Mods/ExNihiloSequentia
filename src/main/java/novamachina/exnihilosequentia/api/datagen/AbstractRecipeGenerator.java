@@ -271,18 +271,6 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(sieve.getId()));
     }
 
-    protected void createSieve(Consumer<IFinishedRecipe> consumer, RegistryObject<BlockSieve> sieve, ITag.INamedTag<Item> block, ITag.INamedTag<Item> slab) {
-        ShapedRecipeBuilder.shaped(sieve.get())
-                .pattern("p p")
-                .pattern("plp")
-                .pattern("s s")
-                .define('p', block)
-                .define('l', slab)
-                .define('s', Tags.Items.RODS_WOODEN)
-                .unlockedBy("has_plank", has(block))
-                .save(consumer, createSaveLocation(sieve.getId()));
-    }
-
     protected void createCrook(Item result, Item input, Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("xx")

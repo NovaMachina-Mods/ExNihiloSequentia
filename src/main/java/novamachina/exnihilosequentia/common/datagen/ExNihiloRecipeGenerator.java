@@ -547,14 +547,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerSieves(Consumer<IFinishedRecipe> consumer) {
-        createSieve(consumer, ExNihiloBlocks.SIEVE_ACACIA, Items.STRIPPED_ACACIA_LOG, Items.ACACIA_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_BIRCH, Items.STRIPPED_BIRCH_LOG, Items.BIRCH_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_DARK_OAK, Items.STRIPPED_DARK_OAK_LOG, Items.DARK_OAK_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_JUNGLE, Items.STRIPPED_JUNGLE_LOG, Items.JUNGLE_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_OAK, Items.STRIPPED_OAK_LOG, Items.OAK_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_SPRUCE, Items.STRIPPED_SPRUCE_LOG, Items.SPRUCE_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_CRIMSON, Items.STRIPPED_CRIMSON_STEM, Items.CRIMSON_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_WARPED, Items.STRIPPED_WARPED_STEM, Items.WARPED_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_ACACIA, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_BIRCH, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_DARK_OAK, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_JUNGLE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_OAK, Items.OAK_PLANKS, Items.OAK_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_SPRUCE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_CRIMSON, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_WARPED, Items.WARPED_PLANKS, Items.WARPED_SLAB);
     }
 
     private void registerSieveRecipes(Consumer<IFinishedRecipe> consumer) {
