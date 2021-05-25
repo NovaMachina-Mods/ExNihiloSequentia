@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
   "pattern": [
     "c c",
     "clc",
@@ -7,10 +8,10 @@
   ],
   "key": {
     "c": {
-      "tag": "minecraft:logs"
+      "item": "minecraft:oak_log"
     },
     "l": {
-      "tag": "minecraft:wooden_slabs"
+      "item": "minecraft:oak_slab"
     },
     "s": {
       "tag": "forge:rods/wooden"
