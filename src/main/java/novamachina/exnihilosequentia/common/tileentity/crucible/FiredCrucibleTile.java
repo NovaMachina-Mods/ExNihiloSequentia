@@ -1,9 +1,12 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 
@@ -15,7 +18,21 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public int getHeat() {
-        return ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(level.getBlockState(worldPosition.below()).getBlock());
+
+        BlockState stateBelow = level.getBlockState(worldPosition.below());
+
+        HeatRecipe heatRecipe = ExNihiloRegistries.HEAT_REGISTRY.getRecipeList().stream()
+                .filter(recipe -> recipe.getInput().getRegistryName().equals(stateBelow.getBlock().getRegistryName()))
+                .findFirst().orElse(null);
+
+        if(heatRecipe != null){
+            if(heatRecipe.isLiquid()){
+                int level = stateBelow.getFluidState().getAmount();
+                return heatRecipe.getHeatByLevel().get(String.valueOf(level)) == null ? heatRecipe.getHeatByLevel().get("*") : heatRecipe.getHeatByLevel().get(String.valueOf(level));
+            }
+        }
+
+        return heatRecipe == null ? 0 : heatRecipe.getAmount();
     }
 
     @Override
