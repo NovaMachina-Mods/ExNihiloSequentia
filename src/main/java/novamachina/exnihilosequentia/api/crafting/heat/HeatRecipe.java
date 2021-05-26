@@ -25,7 +25,6 @@ public class HeatRecipe extends SerializableRecipe {
         super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
-        this.heatByLevel.put("*", amount);
     }
 
     public HeatRecipe(ResourceLocation id, Block input, int amount, boolean isLiquid, Map<String, Integer> heatByLevel){

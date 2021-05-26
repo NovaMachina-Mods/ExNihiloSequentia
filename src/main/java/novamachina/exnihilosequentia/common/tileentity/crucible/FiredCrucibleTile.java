@@ -28,7 +28,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
         if(heatRecipe != null){
             if(heatRecipe.isLiquid()){
                 int level = stateBelow.getFluidState().getAmount();
-                return heatRecipe.getHeatByLevel().get(String.valueOf(level)) == null ? heatRecipe.getHeatByLevel().get("*") : heatRecipe.getHeatByLevel().get(String.valueOf(level));
+                return heatRecipe.getHeatByLevel().get(String.valueOf(level)) == null ? heatRecipe.getAmount() : heatRecipe.getHeatByLevel().get(String.valueOf(level));
             }
         }
 
