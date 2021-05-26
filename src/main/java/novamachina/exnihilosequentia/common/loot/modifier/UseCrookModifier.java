@@ -77,7 +77,7 @@ public class UseCrookModifier extends LootModifier {
             logger.debug("Adding new loot");
             generatedLoot = newLoot;
         }
-        logger.debug("Hammer Generated Loot: " + generatedLoot);
+        logger.debug("Crook Generated Loot: " + generatedLoot);
         return generatedLoot;
     }
 
