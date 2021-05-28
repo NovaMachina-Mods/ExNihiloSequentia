@@ -36,4 +36,16 @@ public class ZenHeatRecipe {
         internal.setInput(input);
         return this;
     }
+
+    @ZenCodeType.Method
+    public ZenHeatRecipe isLiquid(boolean isLiquid) {
+        internal.setIsLiquid(true);
+        return this;
+    }
+
+    @ZenCodeType.Method
+    public ZenHeatRecipe addHeatLevel(int level, int heatAmount) {
+        internal.getHeatByLevel().put(String.valueOf(level), heatAmount);
+        return this;
+    }
 }
