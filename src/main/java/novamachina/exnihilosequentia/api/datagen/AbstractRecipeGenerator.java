@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.api.datagen;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -120,7 +121,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     protected ResourceLocation createSaveLocation(ResourceLocation location) {
         return new ResourceLocation(location.getNamespace(), prependRecipePrefix(location.getPath()));
     }
-	
+
 	public static void createMCCompost(IItemProvider item, float chance) {
         ComposterBlock.COMPOSTABLES.put(item, chance);
     }
@@ -187,6 +188,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
     protected void createHeatRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {
         HeatRecipeBuilder.builder().input(block).amount(amount).build(consumer, heatLoc(id));
+    }
+
+    protected void createHeatRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, boolean isLiquid, Map<String, Integer> heatByLevel, String id){
+        HeatRecipeBuilder.builder().input(block).amount(amount).liquid(isLiquid).heatByLevel(heatByLevel).build(consumer, heatLoc(id));
     }
 
     protected void createSmeltingRecipe(Consumer<IFinishedRecipe> consumer, Item input, Item output, float xpSmelt, int durationSmelt, float xpBlast, int durationBlast, String condition, ResourceLocation rl) {
