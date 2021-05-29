@@ -29,6 +29,7 @@ import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.MapUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -346,7 +347,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerHeatRecipes(Consumer<IFinishedRecipe> consumer) {
-        createHeatRecipes(consumer, Blocks.LAVA, 3, "lava");
+        String[] keys =  {"8", "7", "6", "5", "4", "3", "2", "1"};
+        Integer[] values =  {4, 4, 3, 3, 2, 2, 1, 1};
+        createHeatRecipes(consumer, Blocks.LAVA, 3, true, MapUtil.fromArrays(keys, values),  "lava");
         createHeatRecipes(consumer, Blocks.FIRE, 4, "fire");
         createHeatRecipes(consumer, Blocks.TORCH, 1, "torch");
         createHeatRecipes(consumer, Blocks.WALL_TORCH, 1, "wall_torch");
