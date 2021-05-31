@@ -1,5 +1,10 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.fluid.FlowingFluid;
+import net.minecraft.state.properties.BlockStateProperties;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
@@ -75,7 +80,14 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public int getHeat() {
-        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(level.getBlockState(worldPosition.below()).getBlock());
+        BlockState source = level.getBlockState(worldPosition.below());
+        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock());
+        if(source.getBlock() instanceof FlowingFluidBlock) {
+            int level = 8 - source.getValue(BlockStateProperties.LEVEL);
+            double partial = (double)blockHeat / 8;
+            int returnVal = Math.min((int) Math.ceil(partial * level), Config.getWoodHeatRate());
+            return returnVal;
+        }
         return Math.max(blockHeat, Config.getWoodHeatRate());
     }
 
