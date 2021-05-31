@@ -115,7 +115,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, Items.CRIMSON_FUNGUS, 100, "crimson_fungus");
         createCompostRecipe(consumer, Items.WARPED_FUNGUS, 100, "warped_fungus");
         createCompostRecipe(consumer, Items.PUMPKIN_PIE, 160, "pumpkin_pie");
-        createCompostRecipe(consumer, EnumResource.SILKWORM.getRegistryObject().get(), 40, "silkworm");
+        createCompostRecipe(consumer, ExNihiloItems.SILKWORM.get(), 40, "silkworm");
         createCompostRecipe(consumer, ExNihiloItems.COOKED_SILKWORM.get(), 40, "cooked_silkworm");
         createCompostRecipe(consumer, Items.APPLE, 100, "apple");
         createCompostRecipe(consumer, Items.MELON_SLICE, 40, "melon_slice");
@@ -135,7 +135,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
-        createCrookRecipes(consumer, ItemTags.LEAVES, EnumResource.SILKWORM.getRegistryObject().get(), 0.1F, LEAVES);
+        createCrookRecipes(consumer, ItemTags.LEAVES, ExNihiloItems.SILKWORM.get(), 0.1F, LEAVES);
     }
 
     private void registerCrooks(Consumer<IFinishedRecipe> consumer) {
@@ -422,9 +422,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .hasItems(ItemPredicate.Builder.item().of(Tags.Items.STRING).build()))
                 .save(consumer, createSaveLocation(EnumResource.BEEHIVE_FRAME.getRegistryObject().getId()));
 
-        createCookingRecipe(consumer, EnumResource.SILKWORM.getRegistryObject().get(), ExNihiloItems.COOKED_SILKWORM.get(),
+        createCookingRecipe(consumer, ExNihiloItems.SILKWORM.get(), ExNihiloItems.COOKED_SILKWORM.get(),
                 0.1F, 600,0.1F, 100, "has_silkworm", ExNihiloItems.COOKED_SILKWORM.getId());
-        createSmeltingRecipe(consumer, EnumResource.SILKWORM.getRegistryObject().get(), ExNihiloItems.COOKED_SILKWORM.get(),
+        createSmeltingRecipe(consumer, ExNihiloItems.SILKWORM.get(), ExNihiloItems.COOKED_SILKWORM.get(),
                 0.1F, 200,0.1F, 100, "has_silkworm", ExNihiloItems.COOKED_SILKWORM.getId());
 
         createSmeltingRecipe(consumer, ExNihiloBlocks.CRUCIBLE_UNFIRED.get().asItem(), ExNihiloBlocks.CRUCIBLE_FIRED.get().asItem(),
@@ -763,7 +763,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                     .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
                     .build(consumer, sieveLoc("golden_apple"));
             SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.LEAVES))
-                    .addResult(EnumResource.SILKWORM.getRegistryObject().get())
+                    .addResult(ExNihiloItems.SILKWORM.get())
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.025F))
                     .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
                     .addRoll(new MeshWithChance(EnumMesh.IRON, 0.1F))

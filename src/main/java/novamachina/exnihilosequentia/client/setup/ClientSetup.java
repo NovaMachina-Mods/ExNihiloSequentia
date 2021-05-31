@@ -76,6 +76,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_SPRUCE.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_CRIMSON.get(), RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_WARPED.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ExNihiloBlocks.BARREL_STONE.get(), RenderType.cutoutMipped());
     }
 
     private static void registerCrucibleRenderLayer() {

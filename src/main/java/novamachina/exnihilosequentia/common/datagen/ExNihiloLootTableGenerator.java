@@ -10,6 +10,7 @@ import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.conditions.SurvivesExplosion;
 import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -36,7 +37,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         stringPool.when(SurvivesExplosion.survivesExplosion());
 
         LootPool.Builder silkWormPool = createLootPoolBuilder();
-        silkWormPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(EnumResource.SILKWORM.getRegistryObject().get()));
+        silkWormPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ExNihiloItems.SILKWORM.get()));
         silkWormPool.when(RandomChance.randomChance(0.7F));
 
         register(block, stringPool, silkWormPool);

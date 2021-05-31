@@ -165,7 +165,7 @@ public class ExNihiloInitialization {
         }
         createMCCompost(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
         createMCCompost(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
-		createMCCompost(EnumResource.SILKWORM.getRegistryObject().get(), 0.3F);
+		createMCCompost(ExNihiloItems.SILKWORM.get(), 0.3F);
         createMCCompost(ExNihiloItems.COOKED_SILKWORM.get(), 0.3F);
     }
 
