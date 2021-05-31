@@ -48,6 +48,7 @@ public class Config {
     // Sieve
     private static ForgeConfigSpec.BooleanValue flattenSieveRecipes;
     private static ForgeConfigSpec.IntValue sieveRange;
+    private static ForgeConfigSpec.IntValue maxSieveClicks;
     // Crook
     private static ForgeConfigSpec.IntValue maxBonusStringCount;
     private static ForgeConfigSpec.IntValue minStringCount;
@@ -209,6 +210,9 @@ public class Config {
     }
     public static int getSieveRange() {
         return sieveRange.get();
+    }
+    public static int getMaxSieveClicks() {
+        return maxSieveClicks.get();
     }
 
     // Crucible
@@ -439,5 +443,8 @@ public class Config {
         enableMeshDurability = COMMON_BUILDER
                 .comment("Meshes will have durability and can break. (Default: false)")
                 .define("enableMeshDurability", false);
+        maxSieveClicks = COMMON_BUILDER
+                .comment("The number of sieve clicks required to sieve a block. (Default: 10)")
+                .defineInRange("maxSieveClicks", 10, 1, 10);
     }
 }

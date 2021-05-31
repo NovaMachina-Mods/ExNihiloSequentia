@@ -18,7 +18,7 @@ public class SieveComponentProvider implements IComponentProvider {
 
         if (!sieveTile.getBlockStack().isEmpty()) {
             tooltip.add(new TranslationTextComponent("waila.progress", StringUtils
-                    .formatPercent(sieveTile.getProgress() / 1.0F)));
+                    .formatPercent(sieveTile.getProgress())));
             tooltip.add(new TranslationTextComponent("waila.sieve.block", new TranslationTextComponent(sieveTile.getBlockStack().getDescriptionId())));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
