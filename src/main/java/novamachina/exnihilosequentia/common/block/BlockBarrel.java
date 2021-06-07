@@ -36,6 +36,7 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
+
         AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getBlockEntity(data.getPos());
         if (barrelTile == null) {
             return;

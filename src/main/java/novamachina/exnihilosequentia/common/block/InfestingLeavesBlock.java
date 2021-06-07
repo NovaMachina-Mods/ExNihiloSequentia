@@ -67,9 +67,11 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
-        InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
+        if(probeMode == ProbeMode.EXTENDED) {
+            InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
 
-        iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
-                .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
+            iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
+                    .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
+        }
     }
 }

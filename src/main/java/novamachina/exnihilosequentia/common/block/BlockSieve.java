@@ -78,8 +78,10 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         SieveTile sieveTile = (SieveTile) world.getBlockEntity(iProbeHitData.getPos());
 
         if (!sieveTile.getBlockStack().isEmpty()) {
-            iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
-                    .formatPercent(sieveTile.getProgress())));
+            if(probeMode == ProbeMode.EXTENDED) {
+                iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
+                        .formatPercent(sieveTile.getProgress())));
+            }
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", new TranslationTextComponent(sieveTile.getBlockStack().getDescriptionId())));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
