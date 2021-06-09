@@ -115,7 +115,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, Items.CRIMSON_FUNGUS, 100, "crimson_fungus");
         createCompostRecipe(consumer, Items.WARPED_FUNGUS, 100, "warped_fungus");
         createCompostRecipe(consumer, Items.PUMPKIN_PIE, 160, "pumpkin_pie");
-        createCompostRecipe(consumer, EnumResource.SILKWORM.getRegistryObject().get(), 40, "silkworm");
+        createCompostRecipe(consumer, ExNihiloItems.SILKWORM.get(), 40, "silkworm");
         createCompostRecipe(consumer, ExNihiloItems.COOKED_SILKWORM.get(), 40, "cooked_silkworm");
         createCompostRecipe(consumer, Items.APPLE, 100, "apple");
         createCompostRecipe(consumer, Items.MELON_SLICE, 40, "melon_slice");
@@ -135,7 +135,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
-        createCrookRecipes(consumer, ItemTags.LEAVES, EnumResource.SILKWORM.getRegistryObject().get(), 0.1F, LEAVES);
+        createCrookRecipes(consumer, ItemTags.LEAVES, ExNihiloItems.SILKWORM.get(), 0.1F, LEAVES);
     }
 
     private void registerCrooks(Consumer<IFinishedRecipe> consumer) {
@@ -422,9 +422,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .hasItems(ItemPredicate.Builder.item().of(Tags.Items.STRING).build()))
                 .save(consumer, createSaveLocation(EnumResource.BEEHIVE_FRAME.getRegistryObject().getId()));
 
-        createCookingRecipe(consumer, EnumResource.SILKWORM.getRegistryObject().get(), ExNihiloItems.COOKED_SILKWORM.get(),
+        createCookingRecipe(consumer, ExNihiloItems.SILKWORM.get(), ExNihiloItems.COOKED_SILKWORM.get(),
                 0.1F, 600,0.1F, 100, "has_silkworm", ExNihiloItems.COOKED_SILKWORM.getId());
-        createSmeltingRecipe(consumer, EnumResource.SILKWORM.getRegistryObject().get(), ExNihiloItems.COOKED_SILKWORM.get(),
+        createSmeltingRecipe(consumer, ExNihiloItems.SILKWORM.get(), ExNihiloItems.COOKED_SILKWORM.get(),
                 0.1F, 200,0.1F, 100, "has_silkworm", ExNihiloItems.COOKED_SILKWORM.getId());
 
         createSmeltingRecipe(consumer, ExNihiloBlocks.CRUCIBLE_UNFIRED.get().asItem(), ExNihiloBlocks.CRUCIBLE_FIRED.get().asItem(),
@@ -547,14 +547,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerSieves(Consumer<IFinishedRecipe> consumer) {
-        createSieve(consumer, ExNihiloBlocks.SIEVE_ACACIA, Items.STRIPPED_ACACIA_LOG, Items.ACACIA_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_BIRCH, Items.STRIPPED_BIRCH_LOG, Items.BIRCH_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_DARK_OAK, Items.STRIPPED_DARK_OAK_LOG, Items.DARK_OAK_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_JUNGLE, Items.STRIPPED_JUNGLE_LOG, Items.JUNGLE_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_OAK, Items.STRIPPED_OAK_LOG, Items.OAK_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_SPRUCE, Items.STRIPPED_SPRUCE_LOG, Items.SPRUCE_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_CRIMSON, Items.STRIPPED_CRIMSON_STEM, Items.CRIMSON_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_WARPED, Items.STRIPPED_WARPED_STEM, Items.WARPED_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_ACACIA, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_BIRCH, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_DARK_OAK, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_JUNGLE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_OAK, Items.OAK_PLANKS, Items.OAK_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_SPRUCE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_CRIMSON, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SIEVE_WARPED, Items.WARPED_PLANKS, Items.WARPED_SLAB);
     }
 
     private void registerSieveRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -763,7 +763,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                     .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
                     .build(consumer, sieveLoc("golden_apple"));
             SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.LEAVES))
-                    .addResult(EnumResource.SILKWORM.getRegistryObject().get())
+                    .addResult(ExNihiloItems.SILKWORM.get())
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.025F))
                     .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
                     .addRoll(new MeshWithChance(EnumMesh.IRON, 0.1F))

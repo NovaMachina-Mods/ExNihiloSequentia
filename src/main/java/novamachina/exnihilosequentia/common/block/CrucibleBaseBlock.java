@@ -25,14 +25,16 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
-        BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
-        if (crucibleTile.getSolidAmount() > 0) {
-            probeInfo.text(new TranslationTextComponent("waila.crucible.solid", new TranslationTextComponent(crucibleTile.getCurrentItem().getItem().getDescriptionId()), crucibleTile.getSolidAmount()));
+        if(probeMode == ProbeMode.EXTENDED) {
+            BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
+            if (crucibleTile.getSolidAmount() > 0) {
+                probeInfo.text(new TranslationTextComponent("waila.crucible.solid", new TranslationTextComponent(crucibleTile.getCurrentItem().getItem().getDescriptionId()), crucibleTile.getSolidAmount()));
+            }
+            if (crucibleTile.getFluidAmount() > 0) {
+                probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
+            }
+            probeInfo.text(new TranslationTextComponent("waila.crucible.heat", crucibleTile.getHeat()));
         }
-        if (crucibleTile.getFluidAmount() > 0) {
-            probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
-        }
-        probeInfo.text(new TranslationTextComponent("waila.crucible.heat", crucibleTile.getHeat()));
     }
 
     /**

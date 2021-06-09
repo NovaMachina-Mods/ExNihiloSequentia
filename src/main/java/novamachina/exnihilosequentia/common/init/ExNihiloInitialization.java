@@ -6,11 +6,21 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.dispenser.IDispenseItemBehavior;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
@@ -125,7 +135,28 @@ public class ExNihiloInitialization {
         BarrelModeRegistry.initialize();
         PacketHandler.registerMessages();
         registerVanillaCompost();
+        registerDispenserFluids();
         ExNihiloStats.register();
+    }
+
+    private static void registerDispenserFluids() {
+        IDispenseItemBehavior idispenseitembehavior = new DefaultDispenseItemBehavior() {
+            private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+
+            public ItemStack execute(IBlockSource p_82487_1_, ItemStack p_82487_2_) {
+                BucketItem bucketitem = (BucketItem)p_82487_2_.getItem();
+                BlockPos blockpos = p_82487_1_.getPos().relative(p_82487_1_.getBlockState().getValue(DispenserBlock.FACING));
+                World world = p_82487_1_.getLevel();
+                if (bucketitem.emptyBucket((PlayerEntity)null, world, blockpos, (BlockRayTraceResult)null)) {
+                    bucketitem.checkExtraContent(world, p_82487_2_, blockpos);
+                    return new ItemStack(Items.BUCKET);
+                } else {
+                    return this.defaultDispenseItemBehavior.dispense(p_82487_1_, p_82487_2_);
+                }
+            }
+        };
+        DispenserBlock.registerBehavior(ExNihiloItems.SEA_WATER_BUCKET.get(), idispenseitembehavior);
+        DispenserBlock.registerBehavior(ExNihiloItems.WITCH_WATER_BUCKET.get(), idispenseitembehavior);
     }
 
     private static void registerVanillaCompost() {
@@ -134,7 +165,7 @@ public class ExNihiloInitialization {
         }
         createMCCompost(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
         createMCCompost(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
-		createMCCompost(EnumResource.SILKWORM.getRegistryObject().get(), 0.3F);
+		createMCCompost(ExNihiloItems.SILKWORM.get(), 0.3F);
         createMCCompost(ExNihiloItems.COOKED_SILKWORM.get(), 0.3F);
     }
 
