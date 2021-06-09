@@ -297,7 +297,7 @@ public class Config {
         barrelMaxSolidAmount = COMMON_BUILDER
                 .comment("How much solids need to be in barrel before composting starts (Default: 1000)")
                 .defineInRange("maxSolidAmount", 1000, 1, Integer.MAX_VALUE);
-        secondsToCompost = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)")
+        secondsToCompost = COMMON_BUILDER.comment("Number of seconds to compost (Default: 10)")
                 .defineInRange("secondsToCompost", 10, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
 
