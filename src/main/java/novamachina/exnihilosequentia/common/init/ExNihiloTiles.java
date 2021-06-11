@@ -31,7 +31,7 @@ public class ExNihiloTiles {
                             ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
                             ExNihiloBlocks.CRUCIBLE_OAK.get(), ExNihiloBlocks.CRUCIBLE_SPRUCE.get()).build(null));
     public static final RegistryObject<TileEntityType<SieveTile>> SIEVE = TILES
-            .register(Blocks.SIEVES, () -> TileEntityType.Builder
+            .register(Blocks.SIEVE_OAK, () -> TileEntityType.Builder
                     .of(SieveTile::new, ExNihiloBlocks.SIEVE_ACACIA.get(), ExNihiloBlocks.SIEVE_BIRCH.get(),
                             ExNihiloBlocks.SIEVE_DARK_OAK.get(), ExNihiloBlocks.SIEVE_JUNGLE.get(),
                             ExNihiloBlocks.SIEVE_OAK.get(), ExNihiloBlocks.SIEVE_SPRUCE.get(),

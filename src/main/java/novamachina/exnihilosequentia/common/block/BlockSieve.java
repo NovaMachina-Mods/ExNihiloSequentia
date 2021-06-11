@@ -108,7 +108,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
         super.playerDestroy(worldIn, player, pos, state, te, stack);
         if (!worldIn.isClientSide() && te instanceof SieveTile) {
-            ((SieveTile) te).removeMesh(true);
+            ((SieveTile) te).removeMesh(false);
         }
     }
 
