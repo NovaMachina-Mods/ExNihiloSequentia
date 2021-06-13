@@ -73,6 +73,7 @@ public class Config {
     private static ForgeConfigSpec.IntValue crookBoneValue;
     // Durability Meshes
     private static ForgeConfigSpec.BooleanValue enableMeshDurability;
+    private static ForgeConfigSpec.IntValue meshStackSize;
     private static ForgeConfigSpec.IntValue meshStringValue;
     private static ForgeConfigSpec.IntValue meshFlintValue;
     private static ForgeConfigSpec.IntValue meshIronValue;
@@ -156,6 +157,7 @@ public class Config {
     public static boolean enableMeshDurability() {
         return enableMeshDurability.get();
     }
+    public static int getMeshStackSize() { return meshStackSize.get(); }
     public static int getMeshStringValue() { return meshStringValue.get(); }
     public static int getMeshFlintValue() { return meshFlintValue.get(); }
     public static int getMeshIronValue() { return meshIronValue.get(); }
@@ -441,8 +443,11 @@ public class Config {
                 .comment("Defines the radius that a sieve will attempt to activate other sieves (Default: 2)")
                 .defineInRange("sieveRange", 2, 0, 5);
         enableMeshDurability = COMMON_BUILDER
-                .comment("Meshes will have durability and can break. (Default: false)")
+                .comment("Meshes will have durability and can break, but don't stack. (Default: false)")
                 .define("enableMeshDurability", false);
+        meshStackSize = COMMON_BUILDER
+                .comment("Meshes will stack, but don't have durability. (Default: 64)")
+                .defineInRange("meshStackSize", 64, 1, 64);
         maxSieveClicks = COMMON_BUILDER
                 .comment("The number of sieve clicks required to sieve a block. (Default: 10)")
                 .defineInRange("maxSieveClicks", 10, 1, 10);
