@@ -1,10 +1,12 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
   "promos": {
-    "1.16-latest": "2.0.2.6",
-    "1.16-recommended": "2.0.2.6"
+    "1.16-latest": "2.0.2.8",
+    "1.16-recommended": "2.0.2.8"
   },
   "1.16": {
+    "2.0.2.8": "Bug fixes, add config option for stackable vs durable meshes",
+    "2.0.2.7": "Bug fixes",
     "2.0.2.6": "Add stats for sieve, Fix fluid issues with barrels, Fix various other bugs",
     "2.0.2.5": "Fix issue where composting could not be done by hand",
     "2.0.2.4": "Add blast recipes, Add blackstone and basalt pebbles, Fix some barrel issues, Fix pipe issues, Make pebbles throwable, Add stone stick",
