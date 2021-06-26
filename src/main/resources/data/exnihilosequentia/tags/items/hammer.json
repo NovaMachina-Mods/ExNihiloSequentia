@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "exnihilosequentia:hammer_wood",
-    "exnihilosequentia:hammer_stone",
-    "exnihilosequentia:hammer_iron",
-    "exnihilosequentia:hammer_diamond",
-    "exnihilosequentia:hammer_netherite",
-    "exnihilosequentia:hammer_gold"
+    "exnihilosequentia:wood_hammer",
+    "exnihilosequentia:stone_hammer",
+    "exnihilosequentia:iron_hammer",
+    "exnihilosequentia:diamond_hammer",
+    "exnihilosequentia:netherite_hammer",
+    "exnihilosequentia:gold_hammer"
   ]
 }

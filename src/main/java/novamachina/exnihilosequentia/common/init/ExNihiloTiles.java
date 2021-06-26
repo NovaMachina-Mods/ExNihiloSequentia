@@ -22,7 +22,7 @@ public class ExNihiloTiles {
     private static final DeferredRegister<TileEntityType<?>> TILES =
             DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
     public static final RegistryObject<TileEntityType<FiredCrucibleTile>> CRUCIBLE_FIRED = TILES
-            .register(Blocks.CRUCIBLE_FIRED, () -> TileEntityType.Builder
+            .register(Blocks.FIRED_CRUCIBLE, () -> TileEntityType.Builder
                     .of(FiredCrucibleTile::new, ExNihiloBlocks.CRUCIBLE_FIRED.get(), ExNihiloBlocks.CRUCIBLE_CRIMSON.get(),
                             ExNihiloBlocks.CRUCIBLE_WARPED.get()).build(null));
     public static final RegistryObject<TileEntityType<WoodCrucibleTile>> CRUCIBLE_WOOD = TILES
@@ -31,7 +31,7 @@ public class ExNihiloTiles {
                             ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
                             ExNihiloBlocks.CRUCIBLE_OAK.get(), ExNihiloBlocks.CRUCIBLE_SPRUCE.get()).build(null));
     public static final RegistryObject<TileEntityType<SieveTile>> SIEVE = TILES
-            .register(Blocks.SIEVE_OAK, () -> TileEntityType.Builder
+            .register(Blocks.OAK_SIEVE, () -> TileEntityType.Builder
                     .of(SieveTile::new, ExNihiloBlocks.SIEVE_ACACIA.get(), ExNihiloBlocks.SIEVE_BIRCH.get(),
                             ExNihiloBlocks.SIEVE_DARK_OAK.get(), ExNihiloBlocks.SIEVE_JUNGLE.get(),
                             ExNihiloBlocks.SIEVE_OAK.get(), ExNihiloBlocks.SIEVE_SPRUCE.get(),
@@ -48,7 +48,7 @@ public class ExNihiloTiles {
                             ExNihiloBlocks.BARREL_DARK_OAK.get(), ExNihiloBlocks.BARREL_JUNGLE.get(),
                             ExNihiloBlocks.BARREL_OAK.get(), ExNihiloBlocks.BARREL_SPRUCE.get()).build(null));
     public static final RegistryObject<TileEntityType<? extends AbstractBarrelTile>> BARREL_STONE = TILES
-            .register(Blocks.BARREL_STONE, () -> TileEntityType.Builder
+            .register(Blocks.STONE_BARREL, () -> TileEntityType.Builder
                     .of(StoneBarrelTile::new, ExNihiloBlocks.BARREL_STONE.get(), ExNihiloBlocks.BARREL_CRIMSON.get(),
                             ExNihiloBlocks.BARREL_WARPED.get()).build(null));
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());

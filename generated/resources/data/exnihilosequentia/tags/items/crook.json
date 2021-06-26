@@ -1,14 +1,14 @@
 {
   "replace": false,
   "values": [
-    "exnihilosequentia:crook_wood",
-    "exnihilosequentia:crook_stone",
-    "exnihilosequentia:crook_andesite",
-    "exnihilosequentia:crook_granite",
-    "exnihilosequentia:crook_diorite",
-    "exnihilosequentia:crook_gold",
-    "exnihilosequentia:crook_iron",
-    "exnihilosequentia:crook_diamond",
-    "exnihilosequentia:crook_bone"
+    "exnihilosequentia:wood_crook",
+    "exnihilosequentia:stone_crook",
+    "exnihilosequentia:andesite_crook",
+    "exnihilosequentia:granite_crook",
+    "exnihilosequentia:diorite_crook",
+    "exnihilosequentia:gold_crook",
+    "exnihilosequentia:iron_crook",
+    "exnihilosequentia:diamond_crook",
+    "exnihilosequentia:bone_crook"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "replace": false,
   "values": [
-    "exnihilosequentia:seed_oak",
-    "exnihilosequentia:seed_spruce",
-    "exnihilosequentia:seed_birch",
-    "exnihilosequentia:seed_jungle",
-    "exnihilosequentia:seed_acacia",
-    "exnihilosequentia:seed_darkoak",
-    "exnihilosequentia:seed_cactus",
-    "exnihilosequentia:seed_sugarcane",
-    "exnihilosequentia:seed_carrot",
-    "exnihilosequentia:seed_potato",
-    "exnihilosequentia:seed_berry",
-    "exnihilosequentia:seed_kelp",
-    "exnihilosequentia:seed_pickle",
-    "exnihilosequentia:seed_bamboo",
-    "exnihilosequentia:seed_fern",
-    "exnihilosequentia:seed_large_fern"
+    "exnihilosequentia:oak_seed",
+    "exnihilosequentia:spruce_seed",
+    "exnihilosequentia:birch_seed",
+    "exnihilosequentia:jungle_seed",
+    "exnihilosequentia:acacia_seed",
+    "exnihilosequentia:darkoak_seed",
+    "exnihilosequentia:cactus_seed",
+    "exnihilosequentia:sugarcane_seed",
+    "exnihilosequentia:carrot_seed",
+    "exnihilosequentia:potato_seed",
+    "exnihilosequentia:berry_seed",
+    "exnihilosequentia:kelp_seed",
+    "exnihilosequentia:pickle_seed",
+    "exnihilosequentia:bamboo_seed",
+    "exnihilosequentia:fern_seed",
+    "exnihilosequentia:large_fern_seed"
   ]
 }

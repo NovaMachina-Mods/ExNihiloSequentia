@@ -9,12 +9,12 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumHammer implements IExtensibleEnum {
-    WOOD(ExNihiloConstants.Items.HAMMER_WOOD, Config.getHammerWoodDurability(), ItemTier.WOOD),
-    STONE(ExNihiloConstants.Items.HAMMER_STONE, Config.getHammerStoneDurability(), ItemTier.STONE),
-    IRON(ExNihiloConstants.Items.HAMMER_IRON, Config.getHammerIronDurability(), ItemTier.IRON),
-    DIAMOND(ExNihiloConstants.Items.HAMMER_DIAMOND, Config.getHammerDiamondDurability(), ItemTier.DIAMOND),
-    NETHERITE(ExNihiloConstants.Items.HAMMER_NETHERITE, Config.getHammerNetheriteDurability(), ItemTier.NETHERITE),
-    GOLD(ExNihiloConstants.Items.HAMMER_GOLD, Config.getHammerGoldDurability(), ItemTier.GOLD);
+    WOOD(ExNihiloConstants.Items.WOOD_HAMMER, Config.getHammerWoodDurability(), ItemTier.WOOD),
+    STONE(ExNihiloConstants.Items.STONE_HAMMER, Config.getHammerStoneDurability(), ItemTier.STONE),
+    IRON(ExNihiloConstants.Items.IRON_HAMMER, Config.getHammerIronDurability(), ItemTier.IRON),
+    DIAMOND(ExNihiloConstants.Items.DIAMOND_HAMMER, Config.getHammerDiamondDurability(), ItemTier.DIAMOND),
+    NETHERITE(ExNihiloConstants.Items.NETHERITE_HAMMER, Config.getHammerNetheriteDurability(), ItemTier.NETHERITE),
+    GOLD(ExNihiloConstants.Items.GOLD_HAMMER, Config.getHammerGoldDurability(), ItemTier.GOLD);
 
     public int maxDamage;
     public final String hammerName;

@@ -1,0 +1,10 @@
+{
+  "parent": "exnihilosequentia:block/crucible",
+  "textures": {
+    "particle": "exnihilosequentia:block/unfired_crucible",
+    "top": "exnihilosequentia:block/unfired_crucible",
+    "bottom": "exnihilosequentia:block/unfired_crucible",
+    "side": "exnihilosequentia:block/unfired_crucible",
+    "inside": "exnihilosequentia:block/unfired_crucible"
+  }
+}

@@ -1,10 +1,10 @@
 {
   "type": "exnihilosequentia:fluid_item",
   "fluid": {
-    "fluid": "exnihilosequentia:sea_water"
+    "fluid": "exnihilosequentia:sea_water_still"
   },
   "input": {
-    "item": "exnihilosequentia:seed_yellow_coral"
+    "item": "exnihilosequentia:yellow_coral_larvae"
   },
   "result": {
     "item": "minecraft:horn_coral_block"

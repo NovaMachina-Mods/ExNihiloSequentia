@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_fired_crucible"
+    ]
+  },
+  "criteria": {
+    "has_uncooked_crucible": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "exnihilosequentia:unfired_crucible"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_fired_crucible"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uncooked_crucible",
+      "has_the_recipe"
+    ]
+  ]
+}

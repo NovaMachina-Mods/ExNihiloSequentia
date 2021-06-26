@@ -42,7 +42,7 @@ import org.apache.logging.log4j.LogManager;
 public class JEIPlugin implements IModPlugin {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final ResourceLocation CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLES);
-    private static final ResourceLocation FIRED_CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_FIRED);
+    private static final ResourceLocation FIRED_CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.FIRED_CRUCIBLE);
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -62,7 +62,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new FluidBlockRecipeCategory(guiHelper));
         registration.addRecipeCategories(new CompostRecipeCategory(guiHelper));
         registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.CRUCIBLES));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.CRUCIBLE_FIRED));
+        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.FIRED_CRUCIBLE));
         registration.addRecipeCategories(new HeatRecipeCategory(guiHelper));
     }
 

@@ -7,10 +7,10 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumDoll implements IExtensibleEnum {
     BLAZE(ExNihiloConstants.ModIds.MINECRAFT, "blaze", "minecraft", "lava", 1, ExNihiloConstants.Tooltips.BLAZE),
-    ENDERMAN(ExNihiloConstants.ModIds.MINECRAFT, "enderman", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 2, ExNihiloConstants.Tooltips.ENDERMAN),
-    SHULKER(ExNihiloConstants.ModIds.MINECRAFT, "shulker", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 1.5, ExNihiloConstants.Tooltips.SHULKER),
-    GUARDIAN(ExNihiloConstants.ModIds.MINECRAFT, "guardian", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.SEA_WATER, 1, ExNihiloConstants.Tooltips.GUARDIAN),
-    BEE(ExNihiloConstants.ModIds.MINECRAFT, "bee", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 1, ExNihiloConstants.Tooltips.BEE);
+    ENDERMAN(ExNihiloConstants.ModIds.MINECRAFT, "enderman", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER_STILL, 2, ExNihiloConstants.Tooltips.ENDERMAN),
+    SHULKER(ExNihiloConstants.ModIds.MINECRAFT, "shulker", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER_STILL, 1.5, ExNihiloConstants.Tooltips.SHULKER),
+    GUARDIAN(ExNihiloConstants.ModIds.MINECRAFT, "guardian", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.SEA_WATER_STILL, 1, ExNihiloConstants.Tooltips.GUARDIAN),
+    BEE(ExNihiloConstants.ModIds.MINECRAFT, "bee", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER_STILL, 1, ExNihiloConstants.Tooltips.BEE);
 
 
     private final String entityModId;
