@@ -4,7 +4,14 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- 1.16
+  branches:
+    include:
+      - 1.16-dev
+pr:
+  branches:
+    include:
+      - 1.16-dev
+      - 1.16
 
 pool: Bisect Pool
 
@@ -17,4 +24,4 @@ steps:
     jdkVersionOption: '1.8'
     jdkDirectory: '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.272.b10-0.fc31.x86_64'
     jdkArchitectureOption: 'x64'
-    tasks: 'build jar'
+    tasks: 'build'
