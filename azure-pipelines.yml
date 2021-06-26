@@ -6,12 +6,12 @@
 trigger:
   branches:
     include:
-      - 1.16-dev
+      - 1.17-dev
 pr:
   branches:
     include:
-      - 1.16-dev
-      - 1.16
+      - 1.17-dev
+      - 1.17
 
 pool: Bisect Pool
 

@@ -22,7 +22,6 @@ apply plugin: 'net.minecraftforge.gradle'
 
 
 def ENV = System.getenv()
-String semver = "${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
 version = "${minecraft_release}-" + new Date().format("yyyyMMddHHmmss")
 group = "${artifact_group}.${artifact_basename}"
 archivesBaseName = "${artifact_basename}"
@@ -89,6 +88,19 @@ processResources {
     finalizedBy replaceResources
 }
 
+task updateVersion() {
+    doLast {
+        new File(projectDir, "update.json").text =
+"""{
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
+    "promos": {
+        "1.17-latest": "${version}",
+        "1.17-recommended": "${version}"
+    }
+}"""
+    }
+}
+
 minecraft {
     mappings channel: 'official', version: "${minecraft_version}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
@@ -151,12 +163,7 @@ curseforge {
         id = "${curseforge_project}"
         releaseType = 'release'
         mainArtifact jar
-        addGameVersion '1.16'
-        addGameVersion '1.16.1'
-        addGameVersion '1.16.2'
-        addGameVersion '1.16.3'
-        addGameVersion '1.16.4'
-        addGameVersion '1.16.5'
+        addGameVersion '1.17'
         changelog = file('changelog.html')
         changelogType = 'html'
         debug=true
