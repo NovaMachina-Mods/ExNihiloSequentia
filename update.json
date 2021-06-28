@@ -1,33 +1,7 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
   "promos": {
-    "1.16-latest": "2.0.2.8",
-    "1.16-recommended": "2.0.2.8"
-  },
-  "1.16": {
-    "2.0.2.8": "Bug fixes, add config option for stackable vs durable meshes",
-    "2.0.2.7": "Bug fixes",
-    "2.0.2.6": "Add stats for sieve, Fix fluid issues with barrels, Fix various other bugs",
-    "2.0.2.5": "Fix issue where composting could not be done by hand",
-    "2.0.2.4": "Add blast recipes, Add blackstone and basalt pebbles, Fix some barrel issues, Fix pipe issues, Make pebbles throwable, Add stone stick",
-    "2.0.2.3": "Fix ancient seeds getting voided when used on non-dirt blocks",
-    "2.0.2.2": "Add external autoclicker prevention, Add netherite scrap to sieve drops, Add crook and mesh durability configuration options, Make pebbles throwable, Fix issues where crooks would drop duplicates, Fix issue where water could not be removed from barrels and crucibles using a water bottle, Fix issue where fired crucible would not melt down wood crucible recipes, Fix wood crucible requiring a heat source, Fix lighting issue of blocks inside other blocks, Fix ancient spores and grass seeds that could convert any block",
-    "2.0.2.1": "Fix issue where barrel recipes could be done with less than a full barrel, Fix sieve lighting issues.",
-    "2.0.2.0": "Fix crash on start issue, Add prismarine crystal drops to sieve, Add seeds to vanilla composter, Add fern seeds and beetroot drops to sieve, Add campfire and smoker silkworm recipes",
-    "2.0.1.0": "Fix recipe conflicts, Fix incorrect textures for flint and iron meshes",
-    "2.0.0.1": "Fix issue associated with CraftTweaker API change",
-    "2.0.0.0": "Fix issue with waterlogged tag not working in datapacks, Fix duplication issue with crooks, Remove Osmium and Bismuth (moved to addons), Fix issue where `reload` causes recipes to break, Add CraftTweaker support, Add count and chance tags to hammer recipes, Add fluid transform with item, Add Nether fungi to composting, Add better support for addons, Various bug fixes",
-    "1.4.0.0": "Add structure for addons, Removed Skystone (Moved to AE2 Addon), Update some textures",
-    "1.3.2.0": "Ore recipes sync correctly now, Add ender pearls to end stone sieving",
-    "1.3.1.2": "Fix bug with barrel not being able to accept items after extracting an item.",
-    "1.3.1.1": "Fix server crash when eating end cake, Removed hunger requirement for end cake, Change netherite mesh recipe to be more vanilla like",
-    "1.3.1.0": "Fix issue with hammer and crook dropping absurd amounts of resources, Fix crash when using auto-clickers on a barrel, Fix duplicate JEI recipes",
-    "1.3.0.2": "Fix recipes not being populated on server, Fix overridden gold and iron ingot recipe",
-    "1.3.0.1": "Fix bug with mods that require non-null output from recipe",
-    "1.3.0.0": "Removed JSON registry files, Added datapack support, New API package, Validated support for 1.16.X, Added Silent Mechanism support, Added Crushed Skystone, Added emerald mesh, Added Netherite mesh and hammer, Fix issues with recipes not being synced from server to client",
-    "1.2.1.2": "Fix issue where Immersive Engineering ores were not being added",
-    "1.2.1.1": "Fix some barrel bugs, Check compatibility with 1.16.3",
-    "1.2.1.0": "Add integration for various mods, Add stone barrel and temperature, Add registry reload command, Add Simplified Chinese Translation",
-    "1.2.0.1": "Initial port to 1.16.2"
+    "1.16-latest": "2.0.2.9",
+    "1.16-recommended": "2.0.2.9"
   }
 }
