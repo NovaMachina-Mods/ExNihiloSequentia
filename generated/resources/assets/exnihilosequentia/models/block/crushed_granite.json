@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "exnihilosequentia:block/crushed_granite"
-  }
-}

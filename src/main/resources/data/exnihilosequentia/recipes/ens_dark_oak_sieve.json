@@ -1,23 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "exnihilosequentia",
   "pattern": [
-    "c c",
-    "clc",
+    "p p",
+    "plp",
     "s s"
   ],
   "key": {
-    "c": {
-      "item": "minecraft:oak_log"
+    "p": {
+      "item": "minecraft:dark_oak_planks"
     },
     "l": {
-      "item": "minecraft:oak_slab"
+      "item": "minecraft:dark_oak_slab"
     },
     "s": {
       "tag": "forge:rods/wooden"
     }
   },
   "result": {
-    "item": "exnihilosequentia:crucible_wood"
+    "item": "exnihilosequentia:dark_oak_sieve"
   }
 }
