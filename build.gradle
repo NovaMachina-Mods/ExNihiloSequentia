@@ -159,7 +159,6 @@ curseforge {
         addGameVersion '1.16.5'
         changelog = file('changelog.html')
         changelogType = 'html'
-        debug=true
     }
 }
 
