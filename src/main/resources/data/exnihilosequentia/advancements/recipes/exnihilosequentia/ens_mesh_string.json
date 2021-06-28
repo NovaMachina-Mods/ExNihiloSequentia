@@ -12,6 +12,27 @@
         "items": [
           {
             "item": "exnihilosequentia:sieve"
+          },
+          {
+            "item": "exnihilosequentia:acacia_sieve"
+          },
+          {
+            "item": "exnihilosequentia:birch_sieve"
+          },
+          {
+            "item": "exnihilosequentia:jungle_sieve"
+          },
+          {
+            "item": "exnihilosequentia:dark_oak_sieve"
+          },
+          {
+            "item": "exnihilosequentia:spruce_sieve"
+          },
+          {
+            "item": "exnihilosequentia:crimson_sieve"
+          },
+          {
+            "item": "exnihilosequentia:warped_sieve"
           }
         ]
       }
