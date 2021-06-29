@@ -7,10 +7,10 @@
   ],
   "key": {
     "p": {
-      "tag": "minecraft:planks"
+      "item": "minecraft:oak_planks"
     },
     "l": {
-      "tag": "minecraft:wooden_slabs"
+      "item": "minecraft:oak_slab"
     },
     "s": {
       "tag": "forge:rods/wooden"
