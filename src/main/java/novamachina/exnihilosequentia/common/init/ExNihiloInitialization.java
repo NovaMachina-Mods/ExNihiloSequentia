@@ -49,6 +49,7 @@ import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
+import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.network.PacketHandler;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
 import novamachina.exnihilosequentia.common.utility.Config;
@@ -63,7 +64,7 @@ public class ExNihiloInitialization {
     public static final ItemGroup ITEM_GROUP = new ItemGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
+            return new ItemStack(EnumCrook.WOOD.getRegistryObject().get());
         }
     };
     @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
