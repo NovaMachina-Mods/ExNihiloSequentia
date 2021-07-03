@@ -26,6 +26,7 @@ public class ExNihiloDataGenerators {
             generator
                     .addProvider(new ExNihiloItemTagsGenerator(generator, new BlockTagsProvider(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, event
                             .getExistingFileHelper()), event.getExistingFileHelper()));
+            generator.addProvider(new ExNihiloFluidTagsGenerator(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, event.getExistingFileHelper()));
         }
         if (event.includeClient()) {
             // BlockStates

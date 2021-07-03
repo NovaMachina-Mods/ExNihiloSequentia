@@ -4,6 +4,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -20,7 +21,8 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
                     ExNihiloFluids.SEA_WATER, ExNihiloFluids.SEA_WATER_FLOW, FluidAttributes
                     .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water_still"),
                             new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water_flow"))
-                    .color(0x3F1080FF))
+                    .color(0x3F1080FF)
+                    .sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
                     .bucket(ExNihiloItems.SEA_WATER_BUCKET)
                     .block(ExNihiloBlocks.SEA_WATER);
 

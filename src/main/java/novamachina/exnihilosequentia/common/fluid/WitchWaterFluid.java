@@ -4,6 +4,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -20,7 +21,8 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
                     ExNihiloFluids.WITCH_WATER, ExNihiloFluids.WITCH_WATER_FLOW, FluidAttributes
                     .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witchwater_still"),
                             new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witchwater_flow"))
-                    .color(0x3F1080FF))
+                    .color(0x3F1080FF)
+                    .sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
                     .bucket(ExNihiloItems.WITCH_WATER_BUCKET)
                     .block(ExNihiloBlocks.WITCH_WATER);
 
