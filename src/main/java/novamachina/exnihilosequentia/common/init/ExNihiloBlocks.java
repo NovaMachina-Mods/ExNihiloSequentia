@@ -32,7 +32,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseFallingBlock> DUST = BLOCKS
             .register(ExNihiloConstants.Blocks.DUST, () -> new BaseFallingBlock(new BlockBuilder().properties(
                     AbstractBlock.Properties.of(Material.SAND).strength(0.7F)
-                            .sound(SoundType.WOOL)).harvestLevel(ToolType.SHOVEL, 0)));
+                            .sound(SoundType.SAND)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_NETHERRACK = BLOCKS
             .register(ExNihiloConstants.Blocks.CRUSHED_NETHERRACK, () -> new BaseFallingBlock(new BlockBuilder()
                     .properties(AbstractBlock.Properties.of(Material.SAND).strength(0.7F)
