@@ -2,13 +2,12 @@ package novamachina.exnihilosequentia.common.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CakeBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.RegistryKey;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
@@ -18,7 +17,7 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 public class EndCakeBlock extends CakeBlock {
 
     public EndCakeBlock() {
-        super(new BlockBuilder().getProperties().strength(0.5F));
+        super(new BlockBuilder().getProperties().strength(0.5F).sound(SoundType.WOOL));
     }
 
 
@@ -65,6 +64,7 @@ public class EndCakeBlock extends CakeBlock {
             return ActionResultType.FAIL;
         } else {
             player.awardStat(Stats.EAT_CAKE_SLICE);
+            worldIn.playSound(player, pos, SoundEvents.GENERIC_EAT, SoundCategory.BLOCKS, 1.0F, 1.0F);
             player.getFoodData().eat(2, 0.1F);
             int i = state.getValue(BITES);
 
