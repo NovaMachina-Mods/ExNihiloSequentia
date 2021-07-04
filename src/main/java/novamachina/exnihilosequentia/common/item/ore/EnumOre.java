@@ -26,7 +26,7 @@ public enum EnumOre implements IExtensibleEnum {
 
     private final Color color;
     private final String oreName;
-    private RegistryObject<OreItem> chunkItem;
+    private RegistryObject<OreItem> rawOreItem;
     private final boolean generateIngot;
     private Item ingotItem;
     private RegistryObject<OreItem> ingotRegistryItem;
@@ -59,16 +59,16 @@ public enum EnumOre implements IExtensibleEnum {
         return false;
     }
 
-    public RegistryObject<OreItem> getChunkItem() {
-        return chunkItem;
+    public RegistryObject<OreItem> getRawOreItem() {
+        return rawOreItem;
     }
 
-    public void setChunkItem(RegistryObject<OreItem> chunkItem) {
-        this.chunkItem = chunkItem;
+    public void setRawOreItem(RegistryObject<OreItem> rawOreItem) {
+        this.rawOreItem = rawOreItem;
     }
 
-    public String getChunkName() {
-        return "chunk_" + oreName;
+    public String getRawOreName() {
+        return "raw_" + oreName;
     }
 
     public Color getColor() {

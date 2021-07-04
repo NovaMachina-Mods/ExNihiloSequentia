@@ -47,8 +47,8 @@ public class ClientSetup {
         logger.debug("Fired ColorHandlerEvent.Item event");
 
         for (EnumOre ore : EnumOre.values()) {
-            if(ore.getChunkItem().isPresent()) {
-                event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
+            if(ore.getRawOreItem().isPresent()) {
+                event.getItemColors().register(new OreColor(), ore.getRawOreItem().get());
             } else {
                 logger.warn("Missing ore chunk");
             }

@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "exnihilosequentia:chunk_tin"
+    "item": "exnihilosequentia:raw_tin"
   },
   "result": "exnihilosequentia:ingot_tin",
   "experience": 0.7,
-  "cookingtime": 200
+  "cookingtime": 100
 }

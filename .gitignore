@@ -21,7 +21,7 @@ build
 eclipse
 run
 
-src/generated
+generated
 logs
 
 # Files from Forge MDK

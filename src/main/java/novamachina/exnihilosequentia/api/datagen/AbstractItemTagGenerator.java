@@ -22,14 +22,14 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
     protected void registerOre(EnumOre ore, ExNihiloTags.OreTag tags) {
         if (ore.shouldGenerateIngot()) {
             Item ingot = ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get();
-            Item chunk = ore.getChunkItem().get();
+            Item chunk = ore.getRawOreItem().get();
 
             tag(tags.getIngotTag()).add(ingot);
             tag(Tags.Items.INGOTS).addTag(tags.getIngotTag());
             tag(tags.getOreTag()).add(chunk);
             tag(Tags.Items.ORES).addTag(tags.getOreTag());
         } else {
-            Item chunk = ore.getChunkItem().get();
+            Item chunk = ore.getRawOreItem().get();
             tag(tags.getOreTag()).add(chunk);
             tag(Tags.Items.ORES).addTag(tags.getOreTag());
         }

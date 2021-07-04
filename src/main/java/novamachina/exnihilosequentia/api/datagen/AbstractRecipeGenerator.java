@@ -31,7 +31,6 @@ import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformR
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.block.BaseBlock;
-import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
@@ -40,7 +39,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import javax.annotation.Nonnull;
 
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
-    protected static final String CHUNK_CONDITION = "has_chunk";
+    protected static final String RAW_ORE_CONDITION = "has_raw_ore";
     public static final String PEBBLE_CONDITION = "has_pebble";
     private static final String MATERIAL_CONDITION = "has_material";
     private final String modId;
@@ -93,23 +92,23 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     }
 
     protected void registerOre(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(ore.getChunkItem().get())
+        ShapedRecipeBuilder.shaped(ore.getRawOreItem().get())
                 .pattern("xx")
                 .pattern("xx")
                 .define('x', ore.getPieceItem().get())
                 .group(this.modId)
                 .unlockedBy("has_piece", InventoryChangeTrigger.Instance.hasItems(ore.getPieceItem().get()))
-                .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getChunkName())));
+                .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getRawOreName())));
     }
 
     protected void registerSmelting(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
         CookingRecipeBuilder
-                .smelting(Ingredient.of(ore.getChunkItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 200)
-                .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.Instance.hasItems(ore.getChunkItem().get()))
+                .smelting(Ingredient.of(ore.getRawOreItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 200)
+                .unlockedBy(RAW_ORE_CONDITION, InventoryChangeTrigger.Instance.hasItems(ore.getRawOreItem().get()))
                 .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotName())));
         CookingRecipeBuilder
-                .blasting(Ingredient.of(ore.getChunkItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 100)
-                .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.Instance.hasItems(ore.getChunkItem().get()))
+                .blasting(Ingredient.of(ore.getRawOreItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 100)
+                .unlockedBy(RAW_ORE_CONDITION, InventoryChangeTrigger.Instance.hasItems(ore.getRawOreItem().get()))
                 .save(consumer, new ResourceLocation(modId, prependRecipePrefix("blast_" + ore.getIngotName())));
     }
 

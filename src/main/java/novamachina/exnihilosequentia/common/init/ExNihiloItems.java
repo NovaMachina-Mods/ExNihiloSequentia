@@ -142,7 +142,7 @@ public class ExNihiloItems {
         }
 
         for (EnumOre ore : EnumOre.values()) {
-            ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
+            ore.setRawOreItem(ITEMS.register(ore.getRawOreName(), () -> new OreItem(ore)));
             ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
             if (ore.shouldGenerateIngot()) {
                 RegistryObject<OreItem> item = ITEMS.register(ore.getIngotName(), () -> new OreItem(ore));

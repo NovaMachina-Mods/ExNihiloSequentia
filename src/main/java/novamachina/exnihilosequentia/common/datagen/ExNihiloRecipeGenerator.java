@@ -485,9 +485,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .pattern("xgx")
                 .pattern("xxx")
                 .define('x', EnumPebbleType.BLACKSTONE.getRegistryObject().get())
-                .define('g', EnumOre.GOLD.getChunkItem().get())
+                .define('g', EnumOre.GOLD.getRawOreItem().get())
                 .unlockedBy("has_gold", InventoryChangeTrigger.Instance
-                        .hasItems(EnumOre.GOLD.getChunkItem().get()))
+                        .hasItems(EnumOre.GOLD.getRawOreItem().get()))
                 .save(consumer, createSaveLocation(Blocks.GILDED_BLACKSTONE.getRegistryName()));
         ShapedRecipeBuilder.shaped(Blocks.CRYING_OBSIDIAN)
                 .pattern(" o ")
@@ -518,19 +518,19 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         for (EnumOre ore : EnumOre.values()) {
             registerOre(ore, consumer);
             if (!ore.isVanilla()) {
-                createSmeltingRecipe(consumer, ore.getChunkItem().get(), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(),
-                        0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                createSmeltingRecipe(consumer, ore.getRawOreItem().get(), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(),
+                        0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
                         new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
             }
             if (ore.isVanilla()) {
                 if (ore == EnumOre.IRON) {
-                    createSmeltingRecipe(consumer, ore.getChunkItem().get(), Items.IRON_INGOT,
-                            0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                    createSmeltingRecipe(consumer, ore.getRawOreItem().get(), Items.IRON_INGOT,
+                            0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron"));
                 }
                 if (ore == EnumOre.GOLD) {
-                    createSmeltingRecipe(consumer, ore.getChunkItem().get(), Items.GOLD_INGOT,
-                            0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                    createSmeltingRecipe(consumer, ore.getRawOreItem().get(), Items.GOLD_INGOT,
+                            0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold"));
                 }
             }

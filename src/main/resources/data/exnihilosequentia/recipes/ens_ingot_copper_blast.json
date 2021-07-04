@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "exnihilosequentia:chunk_copper"
+    "item": "exnihilosequentia:raw_copper"
   },
   "result": "exnihilosequentia:ingot_copper",
   "experience": 0.7,
-  "cookingtime": 200
+  "cookingtime": 100
 }

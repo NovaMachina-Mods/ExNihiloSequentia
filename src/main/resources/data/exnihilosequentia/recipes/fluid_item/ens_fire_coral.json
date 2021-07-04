@@ -1,7 +1,7 @@
 {
   "type": "exnihilosequentia:fluid_item",
   "fluid": {
-    "fluid": "exnihilosequentia:sea_water"
+    "fluid": "exnihilosequentia:sea_water_still"
   },
   "input": {
     "item": "exnihilosequentia:red_coral_larvae"

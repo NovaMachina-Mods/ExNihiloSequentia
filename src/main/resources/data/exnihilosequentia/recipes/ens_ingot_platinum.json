@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "exnihilosequentia:chunk_platinum"
+    "item": "exnihilosequentia:raw_platinum"
   },
   "result": "exnihilosequentia:ingot_platinum",
   "experience": 0.7,

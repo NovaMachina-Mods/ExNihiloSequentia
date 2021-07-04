@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_chunk": {
+    "has_raw_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "exnihilosequentia:chunk_tin"
+            "item": "exnihilosequentia:raw_tin"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_chunk",
+      "has_raw_ore",
       "has_the_recipe"
     ]
   ]

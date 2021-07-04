@@ -1,7 +1,7 @@
 {
   "type": "exnihilosequentia:fluid_item",
   "fluid": {
-    "fluid": "exnihilosequentia:witchwater"
+    "fluid": "exnihilosequentia:witchwater_still"
   },
   "input": {
     "tag": "forge:mushrooms"
