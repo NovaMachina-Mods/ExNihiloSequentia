@@ -86,6 +86,7 @@ public class Config {
     private static ForgeConfigSpec.IntValue secondsToSpawn;
     private static ForgeConfigSpec.IntValue rainFillAmount;
     private static ForgeConfigSpec.BooleanValue showParticles;
+    private static ForgeConfigSpec.IntValue barrelRange;
     // Infested Leaves
     private static ForgeConfigSpec.IntValue secondsToTransformLeaves;
     private static ForgeConfigSpec.DoubleValue spreadChance;
@@ -251,6 +252,9 @@ public class Config {
     public static boolean getShowParticles() {
         return showParticles.get();
     }
+    public static int getBarrelRange() {
+        return barrelRange.get();
+    }
 
     // Infested Leaves
     public static int getMaxBonusStringCount() {
@@ -306,6 +310,9 @@ public class Config {
         COMMON_BUILDER.comment("Fluid Transform Configs").push(SUBCATEGORY_BARREL_FLUID);
         secondsToFluidTransform = COMMON_BUILDER.comment("Number of seconds to transform fluids (Default: 10)")
                 .defineInRange("secondsToTransformFluid", 10, 1, Integer.MAX_VALUE);
+        barrelRange = COMMON_BUILDER
+                .comment("Defines the radius that a barrel will attempt to activate other barrels (Default: 2)")
+                .defineInRange("barrelRange", 2, 0, 5);
         COMMON_BUILDER.pop();
     }
 

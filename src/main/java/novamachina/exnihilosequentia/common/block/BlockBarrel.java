@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -26,6 +27,7 @@ import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
@@ -74,17 +76,34 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
             return ActionResultType.SUCCESS;
         }
 
-        AbstractBarrelTile tile = (AbstractBarrelTile) worldIn.getBlockEntity(pos);
+        for(BlockPos barrel : getNearbyBarrels(worldIn, pos)) {
+            AbstractBarrelTile tile = (AbstractBarrelTile) worldIn.getBlockEntity(barrel);
 
-        if (tile != null) {
-            IFluidHandler fluidHandler = tile
-                    .getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, hit.getDirection())
-                    .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
-            IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, hit.getDirection())
-                    .orElseThrow(() -> new RuntimeException("Missing Item Handler"));
-            return tile.onBlockActivated(player, handIn, fluidHandler, itemHandler);
+            if (tile != null) {
+                IFluidHandler fluidHandler = tile
+                        .getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, hit.getDirection())
+                        .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
+                IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, hit.getDirection())
+                        .orElseThrow(() -> new RuntimeException("Missing Item Handler"));
+                tile.onBlockActivated(player, handIn, fluidHandler, itemHandler);
+            }
         }
 
         return ActionResultType.SUCCESS;
+    }
+
+    private List<BlockPos> getNearbyBarrels(World world, BlockPos pos) {
+        NonNullList<BlockPos> nearbyBarrels = NonNullList.create();
+
+        BlockPos
+                .betweenClosedStream(new BlockPos(pos.getX() - Config.getBarrelRange(), pos.getY(), pos.getZ() - Config.getBarrelRange()),
+                        new BlockPos(pos.getX() + Config.getBarrelRange(), pos.getY(), pos.getZ() + Config.getBarrelRange()))
+                .forEach(item -> {
+                    if (world.getBlockState(item).getBlock() instanceof BlockBarrel) {
+                        nearbyBarrels.add(new BlockPos(item));
+                    }
+                });
+
+        return nearbyBarrels;
     }
 }
