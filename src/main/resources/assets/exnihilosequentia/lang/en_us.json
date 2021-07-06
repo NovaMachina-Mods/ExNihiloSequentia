@@ -157,6 +157,8 @@
   "item.exnihilosequentia.item_stick_stone": "Stone Stick",
 
   "stat.exnihilosequentia.sieved": "Blocks Sieved",
+  "stat.exnihilosequentia.hammered": "Blocks Hammered",
+  "stat.exnihilosequentia.crooked": "Blocks Crooked",
 
   "tooltip.doll.blaze": "Add to a barrel of lava to spawn a Blaze",
   "tooltip.doll.enderman": "Add to a barrel of witchwater to spawn an Enderman",

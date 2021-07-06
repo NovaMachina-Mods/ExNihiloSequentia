@@ -3,6 +3,7 @@ package novamachina.exnihilosequentia.common.loot.modifier;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootContext;
@@ -18,6 +19,7 @@ import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.common.init.ExNihiloStats;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -79,6 +81,7 @@ public class UseCrookModifier extends LootModifier {
             generatedLoot = newLoot;
         }
         logger.debug("Crook Generated Loot: " + generatedLoot);
+        ((PlayerEntity)context.getParamOrNull(LootParameters.THIS_ENTITY)).awardStat(ExNihiloStats.CROOKED);
         return generatedLoot;
     }
 

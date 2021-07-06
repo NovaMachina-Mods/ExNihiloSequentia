@@ -8,9 +8,17 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloStats {
     public static final ResourceLocation SIEVED = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "sieved");
+    public static final ResourceLocation HAMMERED = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammered");
+    public static final ResourceLocation CROOKED = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crooked");
 
     public static void register() {
-        Registry.register(Registry.CUSTOM_STAT, SIEVED, SIEVED);
-        Stats.CUSTOM.get(SIEVED, IStatFormatter.DEFAULT);
+        registerStat(SIEVED);
+        registerStat(HAMMERED);
+        registerStat(CROOKED);
+    }
+
+    private static void registerStat(ResourceLocation stat) {
+        Registry.register(Registry.CUSTOM_STAT, stat, stat);
+        Stats.CUSTOM.get(stat, IStatFormatter.DEFAULT);
     }
 }

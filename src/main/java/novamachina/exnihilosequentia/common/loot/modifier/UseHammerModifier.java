@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootParameters;
@@ -16,6 +17,7 @@ import net.minecraftforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.common.init.ExNihiloStats;
 import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -52,6 +54,7 @@ public class UseHammerModifier extends LootModifier {
             generatedLoot = newLoot;
         }
         logger.debug("Hammer Generated Loot: " + generatedLoot);
+        ((PlayerEntity)context.getParamOrNull(LootParameters.THIS_ENTITY)).awardStat(ExNihiloStats.HAMMERED);
         return generatedLoot;
     }
 
