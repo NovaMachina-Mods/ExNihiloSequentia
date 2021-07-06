@@ -2,11 +2,12 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.data.*;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -280,6 +281,22 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createFluidItemRecipes(consumer, seawater, EnumResource.YELLOW_CORAL_SEED.getRegistryObject().get(), Blocks.HORN_CORAL_BLOCK, "horn_coral");
         createFluidItemRecipes(consumer, witchwater, EnumResource.ANCIENT_SPORE.getRegistryObject().get(), Blocks.BROWN_MUSHROOM_BLOCK, "brown_mushroom");
         createFluidItemRecipes(consumer, witchwater, Blocks.BROWN_MUSHROOM_BLOCK.asItem(), Blocks.RED_MUSHROOM_BLOCK, "red_mushroom");
+        createFluidItemRecipes(consumer, water, Blocks.WHITE_CONCRETE_POWDER.asItem(), Blocks.WHITE_CONCRETE, "white_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.ORANGE_CONCRETE_POWDER.asItem(), Blocks.ORANGE_CONCRETE, "orange_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.MAGENTA_CONCRETE_POWDER.asItem(), Blocks.MAGENTA_CONCRETE, "magenta_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.LIGHT_BLUE_CONCRETE_POWDER.asItem(), Blocks.LIGHT_BLUE_CONCRETE, "light_blue_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.YELLOW_CONCRETE_POWDER.asItem(), Blocks.YELLOW_CONCRETE, "yellow_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.LIME_CONCRETE_POWDER.asItem(), Blocks.LIME_CONCRETE, "lime_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.PINK_CONCRETE_POWDER.asItem(), Blocks.PINK_CONCRETE, "pink_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.GRAY_CONCRETE_POWDER.asItem(), Blocks.GRAY_CONCRETE, "gray_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.LIGHT_GRAY_CONCRETE_POWDER.asItem(), Blocks.LIGHT_GRAY_CONCRETE, "light_gray_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.CYAN_CONCRETE_POWDER.asItem(), Blocks.CYAN_CONCRETE, "cyan_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.PURPLE_CONCRETE_POWDER.asItem(), Blocks.PURPLE_CONCRETE, "purple_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.BLUE_CONCRETE_POWDER.asItem(), Blocks.BLUE_CONCRETE, "blue_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.BROWN_CONCRETE_POWDER.asItem(), Blocks.BROWN_CONCRETE, "brown_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.GREEN_CONCRETE_POWDER.asItem(), Blocks.GREEN_CONCRETE, "green_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.RED_CONCRETE_POWDER.asItem(), Blocks.RED_CONCRETE, "red_concrete");
+        createFluidItemRecipes(consumer, water, Blocks.BLACK_CONCRETE_POWDER.asItem(), Blocks.BLACK_CONCRETE, "black_concrete");
     }
 
     private void registerFluidOnTopRecipes(Consumer<IFinishedRecipe> consumer) {
