@@ -68,10 +68,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     protected void createCrucible(Block block, ResourceLocation texture) {
         ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/crucible"))
                 .texture(PARTICLE_TAG, texture)
-                .texture("top", texture)
-                .texture("bottom", texture)
-                .texture("side", texture)
-                .texture("inside", texture));
+                .texture("0", texture));
 
         simpleItemBlock(block, model.model);
     }
@@ -86,8 +83,11 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
 
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
-                partBuilder = builder.part()
-                        .modelFile(new ModelFile.ExistingModelFile(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/" + mesh.getMeshName()), models().existingFileHelper)).addModel();
+                partBuilder = builder.part().modelFile(
+                        new ModelFile.ExistingModelFile(
+                                new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+                                        "block/" + mesh.getMeshName()), models().existingFileHelper))
+                        .addModel();
                 partBuilder.condition(BlockSieve.MESH, mesh);
                 partBuilder.end();
             }

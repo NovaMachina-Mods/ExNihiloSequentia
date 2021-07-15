@@ -23,8 +23,6 @@ import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import novamachina.exnihilosequentia.common.item.pebbles.PebbleItem;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.resources.ResourceItem;
-import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
-import novamachina.exnihilosequentia.common.item.seeds.SeedBaseItem;
 import novamachina.exnihilosequentia.common.item.tools.crook.CrookBaseItem;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
@@ -62,6 +60,8 @@ public class ExNihiloItems {
             .register(Blocks.INFESTING_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTING_LEAVES.get(), tab));
     public static final RegistryObject<Item> INFESTED_LEAVES = ITEMS
             .register(Blocks.INFESTED_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTED_LEAVES.get(), tab));
+
+    //sieves
     public static final RegistryObject<Item> SIEVE_ACACIA = ITEMS.register(Blocks.ACACIA_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_ACACIA.get()));
     public static final RegistryObject<Item> SIEVE_BIRCH = ITEMS.register(Blocks.BIRCH_SIEVE,
@@ -78,6 +78,8 @@ public class ExNihiloItems {
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_CRIMSON.get()));
     public static final RegistryObject<Item> SIEVE_WARPED = ITEMS.register(Blocks.WARPED_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_WARPED.get()));
+
+    //crucibles
     public static final RegistryObject<Item> CRUCIBLE_UNFIRED = ITEMS
             .register(Blocks.UNFIRED_CRUCIBLE, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), tab));
     public static final RegistryObject<Item> CRUCIBLE_FIRED = ITEMS
@@ -98,6 +100,8 @@ public class ExNihiloItems {
             .register(Blocks.CRIMSON_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()));
     public static final RegistryObject<Item> CRUCIBLE_WARPED = ITEMS
             .register(Blocks.WARPED_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_WARPED.get()));
+
+    //barrels
     public static final RegistryObject<Item> BARREL_ACACIA = ITEMS
             .register(Blocks.ACACIA_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_ACACIA.get()));
     public static final RegistryObject<Item> BARREL_BIRCH = ITEMS
@@ -116,6 +120,7 @@ public class ExNihiloItems {
             .register(Blocks.WARPED_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_WARPED.get()));
     public static final RegistryObject<Item> BARREL_STONE = ITEMS
             .register(Blocks.STONE_BARREL, () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(), tab));
+
     // Begin Items Only
     public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
             .register(ExNihiloConstants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
@@ -149,11 +154,6 @@ public class ExNihiloItems {
                 ore.setIngotRegistryItem(item);
                 ingotMap.put(ore, item);
             }
-        }
-
-        for (EnumSeed seed : EnumSeed.values()) {
-            seed.setRegistryObject(ITEMS.register(seed.getSeedName(),
-                    () -> new SeedBaseItem(seed.getDefaultState()).setPlantType(seed.getPlantType())));
         }
 
         for (EnumResource resource : EnumResource.values()) {

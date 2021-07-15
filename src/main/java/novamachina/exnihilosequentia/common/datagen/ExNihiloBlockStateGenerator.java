@@ -6,12 +6,13 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractBlockStateGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
+    private static final String MODID = ModIds.EX_NIHILO_SEQUENTIA;
 
     public ExNihiloBlockStateGenerator(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, exFileHelper);
+        super(gen, MODID, exFileHelper);
     }
 
     @Override
@@ -29,28 +30,28 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
     }
 
     private void registerBarrels() {
-        createBarrel(ExNihiloBlocks.BARREL_STONE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stone"));
-        createBarrel(ExNihiloBlocks.BARREL_ACACIA.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/acacia_planks"));
-        createBarrel(ExNihiloBlocks.BARREL_BIRCH.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/birch_planks"));
-        createBarrel(ExNihiloBlocks.BARREL_DARK_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/dark_oak_planks"));
-        createBarrel(ExNihiloBlocks.BARREL_JUNGLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/jungle_planks"));
-        createBarrel(ExNihiloBlocks.BARREL_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_planks"));
-        createBarrel(ExNihiloBlocks.BARREL_SPRUCE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/spruce_planks"));
-        createBarrel(ExNihiloBlocks.BARREL_CRIMSON.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/crimson_planks"));
-        createBarrel(ExNihiloBlocks.BARREL_WARPED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/warped_planks"));
+        createBarrel(ExNihiloBlocks.BARREL_STONE.get(), new ResourceLocation(MODID, "block/stone_barrel"));
+        createBarrel(ExNihiloBlocks.BARREL_ACACIA.get(), new ResourceLocation(MODID, "block/acacia_barrel"));
+        createBarrel(ExNihiloBlocks.BARREL_BIRCH.get(), new ResourceLocation(MODID, "block/birch_barrel"));
+        createBarrel(ExNihiloBlocks.BARREL_DARK_OAK.get(), new ResourceLocation(MODID, "block/dark_oak_barrel"));
+        createBarrel(ExNihiloBlocks.BARREL_JUNGLE.get(), new ResourceLocation(MODID, "block/jungle_barrel"));
+        createBarrel(ExNihiloBlocks.BARREL_OAK.get(), new ResourceLocation(MODID, "block/oak_barrel"));
+        createBarrel(ExNihiloBlocks.BARREL_SPRUCE.get(), new ResourceLocation(MODID, "block/spruce_barrel"));
+        createBarrel(ExNihiloBlocks.BARREL_CRIMSON.get(), new ResourceLocation(MODID, "block/crimson_barrel"));
+        createBarrel(ExNihiloBlocks.BARREL_WARPED.get(), new ResourceLocation(MODID, "block/warped_barrel"));
     }
 
     private void registerCrucibles() {
-        createCrucible(ExNihiloBlocks.CRUCIBLE_FIRED.get(), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/fired_crucible"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/unfired_crucible"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_ACACIA.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/acacia_log"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_BIRCH.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/birch_log"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/dark_oak_log"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/jungle_log"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/oak_log"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_SPRUCE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/spruce_log"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/crimson_stem"));
-        createCrucible(ExNihiloBlocks.CRUCIBLE_WARPED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/warped_stem"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_FIRED.get(), new ResourceLocation(MODID, "block/fired_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), new ResourceLocation(MODID, "block/unfired_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_ACACIA.get(), new ResourceLocation(MODID, "block/acacia_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_BIRCH.get(), new ResourceLocation(MODID, "block/birch_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), new ResourceLocation(MODID, "block/dark_oak_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), new ResourceLocation(MODID, "block/jungle_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_OAK.get(), new ResourceLocation(MODID, "block/oak_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_SPRUCE.get(), new ResourceLocation(MODID, "block/spruce_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), new ResourceLocation(MODID, "block/crimson_crucible"));
+        createCrucible(ExNihiloBlocks.CRUCIBLE_WARPED.get(), new ResourceLocation(MODID, "block/warped_crucible"));
     }
 
     private void registerFluids() {
@@ -59,14 +60,14 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
     }
 
     private void registerSieves() {
-        createSieve(ExNihiloBlocks.SIEVE_ACACIA.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stripped_acacia_log"));
-        createSieve(ExNihiloBlocks.SIEVE_BIRCH.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stripped_birch_log"));
-        createSieve(ExNihiloBlocks.SIEVE_DARK_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stripped_dark_oak_log"));
-        createSieve(ExNihiloBlocks.SIEVE_JUNGLE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stripped_jungle_log"));
-        createSieve(ExNihiloBlocks.SIEVE_OAK.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stripped_oak_log"));
-        createSieve(ExNihiloBlocks.SIEVE_SPRUCE.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stripped_spruce_log"));
-        createSieve(ExNihiloBlocks.SIEVE_CRIMSON.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stripped_crimson_stem"));
-        createSieve(ExNihiloBlocks.SIEVE_WARPED.get(), new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "block/stripped_warped_stem"));
+        createSieve(ExNihiloBlocks.SIEVE_ACACIA.get(), new ResourceLocation(MODID, "block/acacia_sieve"));
+        createSieve(ExNihiloBlocks.SIEVE_BIRCH.get(), new ResourceLocation(MODID, "block/birch_sieve"));
+        createSieve(ExNihiloBlocks.SIEVE_DARK_OAK.get(), new ResourceLocation(MODID, "block/dark_oak_sieve"));
+        createSieve(ExNihiloBlocks.SIEVE_JUNGLE.get(), new ResourceLocation(MODID, "block/jungle_sieve"));
+        createSieve(ExNihiloBlocks.SIEVE_OAK.get(), new ResourceLocation(MODID, "block/oak_sieve"));
+        createSieve(ExNihiloBlocks.SIEVE_SPRUCE.get(), new ResourceLocation(MODID, "block/spruce_sieve"));
+        createSieve(ExNihiloBlocks.SIEVE_CRIMSON.get(), new ResourceLocation(MODID, "block/crimson_sieve"));
+        createSieve(ExNihiloBlocks.SIEVE_WARPED.get(), new ResourceLocation(MODID, "block/warped_sieve"));
     }
 
     private void registerSimpleBlocks() {

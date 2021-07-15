@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
@@ -48,7 +47,6 @@ import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
-import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.network.PacketHandler;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
@@ -161,9 +159,6 @@ public class ExNihiloInitialization {
     }
 
     private static void registerVanillaCompost() {
-        for(EnumSeed seed : EnumSeed.values()) {
-            createMCCompost(seed.getRegistryObject().get().asItem(), 0.3F);
-        }
         createMCCompost(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
         createMCCompost(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
 		createMCCompost(ExNihiloItems.SILKWORM.get(), 0.3F);
@@ -226,8 +221,7 @@ public class ExNihiloInitialization {
         EnumOre.IRON.setEnabled(true);
         EnumOre.GOLD.setEnabled(true);
 
-        logger
-                .debug("Immersive Engineering detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING));
+        logger.debug("Immersive Engineering detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING));
         if (ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING)) {
             logger.debug("Added Immersive Engineering");
             EnumOre.ALUMINUM.setEnabled(true);

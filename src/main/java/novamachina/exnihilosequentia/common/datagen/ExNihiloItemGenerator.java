@@ -9,7 +9,6 @@ import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
-import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -30,14 +29,13 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
                 LAYER_0_TAG, new ResourceLocation(modid, "items/cooked_silkworm"));
         singleTexture(ExNihiloItems.WITCH_WATER_BUCKET.get().getRegistryName()
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_witchwater"));
+                LAYER_0_TAG, new ResourceLocation(modid, "items/witch_water_bucket"));
         singleTexture(ExNihiloItems.SEA_WATER_BUCKET.get().getRegistryName()
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                LAYER_0_TAG, new ResourceLocation(modid, "items/bucket_sea_water"));
+                LAYER_0_TAG, new ResourceLocation(modid, "items/sea_water_bucket"));
 
         registerCrooks();
         registerHammers();
-        registerSeeds();
         registerResources();
         registerPebbles();
         registerMeshes();
@@ -93,15 +91,6 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                     LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + resource
                             .getResourceName()));
-        }
-    }
-
-    private void registerSeeds() {
-        for (EnumSeed seed : EnumSeed.values()) {
-            singleTexture(seed.getRegistryObject().get().getRegistryName()
-                            .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
-                    LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + seed
-                            .getSeedName()));
         }
     }
 }

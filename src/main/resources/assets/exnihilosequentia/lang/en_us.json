@@ -27,7 +27,7 @@
   "block.exnihilosequentia.spruce_barrel": "Spruce Barrel",
   "block.exnihilosequentia.crimson_barrel": "Crimson Barrel",
   "block.exnihilosequentia.warped_barrel": "Warped Barrel",
-  "block.exnihilosequentia.barrel_stone": "Stone Barrel",
+  "block.exnihilosequentia.stone_barrel": "Stone Barrel",
 
   "block.exnihilosequentia.unfired_crucible": "Unfired Crucible",
   "block.exnihilosequentia.fired_crucible": "Fired Crucible",
@@ -42,8 +42,10 @@
 
   "block.exnihilosequentia.end_cake": "End Cake",
 
-  "block.exnihilosequentia.witchwater": "Witchwater",
-  "block.exnihilosequentia.sea_water": "Sea Water",
+  "block.exnihilosequentia.witch_water_still": "Witch Water",
+  "block.exnihilosequentia.witch_water_flow": "Witch Water",
+  "block.exnihilosequentia.sea_water_still": "Sea Water",
+  "block.exnihilosequentia.sea_water_flow": "Sea Water",
 
   "item.exnihilosequentia.andesite_crook": "Andesite Crook",
   "item.exnihilosequentia.bone_crook": "Bone Crook",
@@ -65,7 +67,7 @@
   "item.exnihilosequentia.silkworm": "Silkworm",
   "item.exnihilosequentia.cooked_silkworm": "Cooked Silkworm",
 
-  "item.exnihilosequentia.witchwater_bucket": "Witchwater Bucket",
+  "item.exnihilosequentia.witch_water_bucket": "Witch Water Bucket",
   "item.exnihilosequentia.sea_water_bucket": "Sea Water Bucket",
 
   "item.exnihilosequentia.doll_crafting": "Porcelain Doll",
@@ -109,25 +111,8 @@
   "item.exnihilosequentia.ingot_uranium": "Uranium Ingot",
   "item.exnihilosequentia.ingot_zinc": "Zinc Ingot",
 
-  "item.exnihilosequentia.oak_seed": "Oak Seed",
-  "item.exnihilosequentia.spruce_seed": "Spruce Seed",
-  "item.exnihilosequentia.birch_seed": "Birch Seed",
-  "item.exnihilosequentia.jungle_seed": "Jungle Seed",
-  "item.exnihilosequentia.acacia_seed": "Acacia Seed",
-  "item.exnihilosequentia.darkoak_seed": "Dark Oak Seed",
-  "item.exnihilosequentia.cactus_seed": "Cactus Seeds",
-  "item.exnihilosequentia.sugarcane_seed": "Sugarcane Seeds",
-  "item.exnihilosequentia.carrot_seed": "Carrot Seeds",
-  "item.exnihilosequentia.potato_seed": "Potato Seeds",
-  "item.exnihilosequentia.berry_seed": "Sweet Berry Seeds",
   "item.exnihilosequentia.ancient_spores": "Ancient Spores",
   "item.exnihilosequentia.grass_seeds": "Grass Seeds",
-  "item.exnihilosequentia.kelp_seed": "Kelp Seeds",
-  "item.exnihilosequentia.pickle_seed": "Sea Pickle Egg",
-  "item.exnihilosequentia.bamboo_seed": "Bamboo Seed",
-  "item.exnihilosequentia.fern_seed": "Fern Seed",
-  "item.exnihilosequentia.large_fern_seed": "Large Fern Seed",
-
   "item.exnihilosequentia.red_coral_larvae": "Fire Coral Larvae",
   "item.exnihilosequentia.blue_coral_larvae": "Tube Coral Larvae",
   "item.exnihilosequentia.pink_coral_larvae": "Brain Coral Larvae",
@@ -136,6 +121,7 @@
 
   "item.exnihilosequentia.porcelain_clay": "Porcelain Clay",
   "item.exnihilosequentia.beehive_frame": "Beehive Frame",
+  "item.exnihilosequentia.stone_stick": "Stone Stick",
 
   "item.exnihilosequentia.stone_pebble": "Stone Pebble",
   "item.exnihilosequentia.granite_pebble": "Granite Pebble",
@@ -151,10 +137,10 @@
   "item.exnihilosequentia.mesh_emerald": "Emerald Mesh",
   "item.exnihilosequentia.mesh_netherite": "Netherite Mesh",
 
-  "fluid.exnihilosequentia.witchwater": "Witchwater",
-  "fluid.exnihilosequentia.sea_water": "Sea Water",
-  
-  "item.exnihilosequentia.item_stick_stone": "Stone Stick",
+  "fluid.exnihilosequentia.witch_water_still": "Witch Water",
+  "fluid.exnihilosequentia.witch_water_flow": "Witch Water",
+  "fluid.exnihilosequentia.sea_water_still": "Sea Water",
+  "fluid.exnihilosequentia.sea_water_flow": "Sea Water",
 
   "stat.exnihilosequentia.sieved": "Blocks Sieved",
 
