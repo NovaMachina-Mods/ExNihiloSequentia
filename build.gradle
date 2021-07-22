@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.66'
     }
 }
@@ -34,7 +34,7 @@ sourceSets {
     }
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
