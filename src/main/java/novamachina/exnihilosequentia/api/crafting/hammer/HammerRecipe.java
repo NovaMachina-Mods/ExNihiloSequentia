@@ -2,11 +2,11 @@ package novamachina.exnihilosequentia.api.crafting.hammer;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
@@ -14,7 +14,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class HammerRecipe extends SerializableRecipe {
     public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), Ingredient.EMPTY, new ArrayList<>());
-    public static final IRecipeType<HammerRecipe> RECIPE_TYPE = IRecipeType
+    public static final RecipeType<HammerRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":hammer");
     private static RegistryObject<RecipeSerializer<HammerRecipe>> serializer;
     private Ingredient input;

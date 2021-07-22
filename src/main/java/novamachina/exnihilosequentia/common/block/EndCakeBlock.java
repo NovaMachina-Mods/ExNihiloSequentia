@@ -1,17 +1,23 @@
 package novamachina.exnihilosequentia.common.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CakeBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
 public class EndCakeBlock extends CakeBlock {
@@ -26,8 +32,8 @@ public class EndCakeBlock extends CakeBlock {
      */
     @Deprecated
     @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos,
-                                             PlayerEntity player, Hand handIn, BlockRayTraceResult blockRayTraceResult) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos,
+                                 Player player, InteractionHand handIn, BlockHitResult blockRayTraceResult) {
         ItemStack itemStack = player.getItemInHand(handIn);
 
         if (itemStack.isEmpty()) {
@@ -40,31 +46,31 @@ public class EndCakeBlock extends CakeBlock {
                     worldIn.setBlockAndUpdate(pos, state.setValue(BITES, bites - 1));
                     itemStack.shrink(1);
                 }
-                return ActionResultType.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResultType.CONSUME;
+        return InteractionResult.CONSUME;
     }
 
-    private ActionResultType eatCake(World worldIn, BlockPos pos, BlockState state,
-                                     PlayerEntity player) {
+    private InteractionResult eatCake(Level worldIn, BlockPos pos, BlockState state,
+                                     Player player) {
         if (!worldIn.isClientSide() && player.getVehicle() == null && player
-                .isCreative() && worldIn instanceof ServerWorld && !player.isPassenger()) {
-            RegistryKey<World> registrykey = worldIn
-                    .dimension() == World.OVERWORLD ? World.END : World.OVERWORLD;
-            ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getLevel(registrykey);
+                .isCreative() && worldIn instanceof ServerLevel && !player.isPassenger()) {
+            ResourceKey<Level> registrykey = worldIn
+                    .dimension() == Level.OVERWORLD ? Level.END : Level.OVERWORLD;
+            ServerLevel serverworld = ((ServerLevel) worldIn).getServer().getLevel(registrykey);
             if (serverworld == null) {
-                return ActionResultType.FAIL;
+                return InteractionResult.FAIL;
             }
 
             player.changeDimension(serverworld);
         }
 
-        if (!player.canEat(true) || player.getCommandSenderWorld().dimension() == World.END) {
-            return ActionResultType.FAIL;
+        if (!player.canEat(true) || player.getCommandSenderWorld().dimension() == Level.END) {
+            return InteractionResult.FAIL;
         } else {
             player.awardStat(Stats.EAT_CAKE_SLICE);
-            worldIn.playSound(player, pos, SoundEvents.GENERIC_EAT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            worldIn.playSound(player, pos, SoundEvents.GENERIC_EAT, SoundSource.BLOCKS, 1.0F, 1.0F);
             player.getFoodData().eat(2, 0.1F);
             int i = state.getValue(BITES);
 
@@ -74,18 +80,18 @@ public class EndCakeBlock extends CakeBlock {
                 worldIn.removeBlock(pos, false);
             }
 
-            if (!worldIn.isClientSide() && player.getVehicle() == null && worldIn instanceof ServerWorld && !player
+            if (!worldIn.isClientSide() && player.getVehicle() == null && worldIn instanceof ServerLevel && !player
                     .isPassenger()) {
-                RegistryKey<World> registrykey = worldIn
-                        .dimension() == World.END ? World.OVERWORLD : World.END;
-                ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getLevel(registrykey);
+                ResourceKey<Level> registrykey = worldIn
+                        .dimension() == Level.END ? Level.OVERWORLD : Level.END;
+                ServerLevel serverworld = ((ServerLevel) worldIn).getServer().getLevel(registrykey);
                 if (serverworld == null) {
-                    return ActionResultType.FAIL;
+                    return InteractionResult.FAIL;
                 }
 
                 player.changeDimension(serverworld);
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 }

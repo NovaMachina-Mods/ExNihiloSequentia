@@ -1,17 +1,16 @@
 package novamachina.exnihilosequentia.api.crafting.fluidtransform;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidTransformRecipe extends SerializableRecipe {
-    public static final IRecipeType<FluidTransformRecipe> RECIPE_TYPE = IRecipeType
+    public static final RecipeType<FluidTransformRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
     private static RegistryObject<RecipeSerializer<FluidTransformRecipe>> serializer;
     private Ingredient catalyst;

@@ -1,9 +1,8 @@
 package novamachina.exnihilosequentia.common.item.mesh;
 
-import net.minecraft.item.Item;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 public enum EnumMesh implements IStringSerializable, IExtensibleEnum {

@@ -1,10 +1,9 @@
 package novamachina.exnihilosequentia.common.item.mesh;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
-import net.minecraft.item.Item.Properties;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.utility.Config;
 

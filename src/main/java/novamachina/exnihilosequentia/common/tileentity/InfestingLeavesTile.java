@@ -1,17 +1,15 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class InfestingLeavesTile extends TileEntity implements ITickableTileEntity {
+public class InfestingLeavesTile extends Entity implements TickingBlockEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String PROGRESS_TAG = "progress";
 
@@ -53,14 +51,14 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
 
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         nbt.putInt(PROGRESS_TAG, progress);
         return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        CompoundNBT nbt = pkt.getTag();
+        CompoundTag nbt = pkt.getTag();
         if (nbt.contains(PROGRESS_TAG)) {
             progress = nbt.getInt(PROGRESS_TAG);
         }

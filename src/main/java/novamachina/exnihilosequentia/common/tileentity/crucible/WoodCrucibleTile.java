@@ -1,14 +1,11 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.fluid.FlowingFluid;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
@@ -16,6 +13,11 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     public WoodCrucibleTile() {
         super(ExNihiloTiles.CRUCIBLE_WOOD.get());
+    }
+
+    @Override
+    protected void defineSynchedData() {
+
     }
 
     @Override
@@ -76,6 +78,21 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
             }
         }
         level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag p_20052_) {
+
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag p_20139_) {
+
+    }
+
+    @Override
+    public Packet<?> getAddEntityPacket() {
+        return null;
     }
 
     @Override

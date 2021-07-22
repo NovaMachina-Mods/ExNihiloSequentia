@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.registries;
 
+import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
@@ -16,7 +17,7 @@ public class CrookRegistry implements ICrookRegistry {
     private List<CrookRecipe> recipeList = new ArrayList<>();
 
     @Override
-    public boolean isCrookable(IItemProvider block) {
+    public boolean isCrookable(Block block) {
         for (CrookRecipe recipe : recipeList) {
             if (recipe.getInput().test(new ItemStack(block))) {
                 return true;

@@ -2,18 +2,17 @@ package novamachina.exnihilosequentia.api.crafting.sieve;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class SieveRecipe extends SerializableRecipe {
-    public static final IRecipeType<SieveRecipe> RECIPE_TYPE = IRecipeType
+    public static final RecipeType<SieveRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
     private static RegistryObject<RecipeSerializer<SieveRecipe>> serializer;
     private ItemStack drop;

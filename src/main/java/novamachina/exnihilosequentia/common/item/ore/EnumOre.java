@@ -2,11 +2,12 @@ package novamachina.exnihilosequentia.common.item.ore;
 
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.item.Item;
+
+import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.common.network.HandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;

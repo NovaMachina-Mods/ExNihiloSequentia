@@ -7,18 +7,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.ToolItem;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
@@ -34,7 +27,7 @@ public class CrookBaseItem extends ToolItem {
 
     private final Random random = new Random();
 
-    public CrookBaseItem(IItemTier tier, int maxDamage) {
+    public CrookBaseItem(Tiers tier, int maxDamage) {
         super(0.5F, 0.5F, tier, Sets.newHashSet(),
                 new Item.Properties().defaultDurability(maxDamage).tab(ExNihiloInitialization.ITEM_GROUP));
     }

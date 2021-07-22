@@ -1,17 +1,18 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
 import java.util.List;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
@@ -24,9 +25,9 @@ public class DollItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent(type.getToolTip()));
+        tooltip.add(new TranslatableComponent(type.getToolTip()));
     }
 
     public String getDollType() {
@@ -43,7 +44,7 @@ public class DollItem extends Item {
         return Fluids.EMPTY;
     }
 
-    public boolean spawnMob(World world, BlockPos pos) {
+    public boolean spawnMob(Level world, BlockPos pos) {
         ResourceLocation spawneeResourceLocation = new ResourceLocation(type.getEntityModId(), type.getEntityName());
 
         if (ForgeRegistries.ENTITIES.containsKey(spawneeResourceLocation)) {

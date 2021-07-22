@@ -1,14 +1,5 @@
 package novamachina.exnihilosequentia;
 
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.loading.FMLPaths;
-import novamachina.exnihilosequentia.client.setup.ClientSetup;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
-import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
-import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,6 +9,13 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
+import novamachina.exnihilosequentia.client.setup.ClientSetup;
+import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
+import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
+import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 

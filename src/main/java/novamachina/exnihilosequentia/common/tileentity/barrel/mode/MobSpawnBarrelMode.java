@@ -1,20 +1,14 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.TranslatableComponent;
 import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -43,7 +37,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
         if (doll != null) {
             currentProgress++;
             spawnParticle(barrelTile);
-            if (currentProgress >= Config.getSecondsToSpawn() * 20 && doll.spawnMob(barrelTile.getLevel(), barrelTile.getBlockPos())) {
+            if (currentProgress >= Config.getSecondsToSpawn() * 20 && doll.spawnMob(barrelTile.level, barrelTile.blockPosition())) {
                 barrelTile.getTank().setFluid(FluidStack.EMPTY);
                 barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
             }
@@ -71,7 +65,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void read(CompoundNBT nbt) {
+    public void read(CompoundTag nbt) {
         if (nbt.contains(CURRENT_PROGRESS_TAG)) {
             this.currentProgress = nbt.getInt(CURRENT_PROGRESS_TAG);
         } else {
@@ -85,7 +79,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public CompoundNBT write() {
+    public Tag write() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt(CURRENT_PROGRESS_TAG, currentProgress);
         nbt.putString(DOLL_TYPE_TAG, doll.getDollType());
@@ -107,7 +101,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
+    public List<TranslatableComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils

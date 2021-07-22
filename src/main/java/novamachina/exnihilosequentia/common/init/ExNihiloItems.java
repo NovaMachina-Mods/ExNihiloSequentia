@@ -3,13 +3,14 @@ package novamachina.exnihilosequentia.common.init;
 import java.util.EnumMap;
 import java.util.Map;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.item.CookedSilkwormItem;
@@ -199,7 +200,7 @@ public class ExNihiloItems {
     private static BlockItem createBurnableItem(Block block) {
         return new BlockItem(block, tab){
             @Override
-            public int getBurnTime(ItemStack itemStack) {
+            public int getBurnTime(ItemStack itemStack, RecipeType<?> type) {
                 return 400;
             }
         };

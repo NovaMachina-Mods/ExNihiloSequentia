@@ -2,13 +2,13 @@ package novamachina.exnihilosequentia.common.item.tools.hammer;
 
 import com.google.common.collect.Sets;
 import java.util.Set;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -28,7 +28,7 @@ public class HammerBaseItem extends ToolItem {
                     Blocks.TUBE_CORAL, Blocks.BRAIN_CORAL, Blocks.BUBBLE_CORAL,
                     Blocks.FIRE_CORAL, Blocks.HORN_CORAL);
 
-    public HammerBaseItem(IItemTier tier, int maxDamage) {
+    public HammerBaseItem(Tiers tier, int maxDamage) {
         super(0.5F, 0.5F, tier, effectiveBlocksOn,
                 new Item.Properties().defaultDurability(maxDamage).tab(ExNihiloInitialization.ITEM_GROUP)
                         .addToolType(ToolType.PICKAXE, tier.getLevel()));

@@ -1,17 +1,17 @@
 package novamachina.exnihilosequentia.api.registry;
 
 import java.util.List;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.Item;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 
 public interface ICompostRegistry {
     void clearRecipes();
 
-    boolean containsSolid(IItemProvider item);
+    boolean containsSolid(Item item);
 
     List<CompostRecipe> getRecipeList();
 
-    int getSolidAmount(IItemProvider item);
+    int getSolidAmount(Item item);
 
     void setRecipes(List<CompostRecipe> recipes);
 }

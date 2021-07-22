@@ -4,21 +4,15 @@ import java.util.List;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.Color;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -35,7 +29,7 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     }
 
     @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
+    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData data) {
 
         AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getBlockEntity(data.getPos());
         if (barrelTile == null) {
@@ -43,8 +37,8 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
         }
         if (probeMode == ProbeMode.EXTENDED) {
             probeInfo
-                    .text(new TranslationTextComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).withStyle(style -> {
-                        style.withColor(Color.fromLegacyFormat(TextFormatting.GREEN));
+                    .text(new TranslatableComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).withStyle(style -> {
+                        style.withColor(TextColor.fromLegacyFormat(ChatFormatting.GREEN));
                         return style;
                     }));
         }

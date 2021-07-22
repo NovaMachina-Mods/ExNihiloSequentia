@@ -1,14 +1,14 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -27,7 +27,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         if (!player.getItemInHand(handIn).isEmpty()) {
 
             ItemStack stack = player.getItemInHand(handIn);
@@ -59,13 +59,13 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void read(CompoundNBT nbt) {
+    public void read(CompoundTag nbt) {
         // NOOP
     }
 
     @Override
-    public CompoundNBT write() {
-        return new CompoundNBT();
+    public Tag write() {
+        return new CompoundTag();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
+    public List<TranslatableComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
         return new ArrayList<>();
     }
 

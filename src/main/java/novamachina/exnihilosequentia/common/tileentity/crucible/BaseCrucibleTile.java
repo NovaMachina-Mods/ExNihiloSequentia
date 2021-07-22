@@ -1,22 +1,17 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.TickingBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -24,9 +19,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.TankUtil;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +31,7 @@ import org.apache.logging.log4j.LogManager;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class BaseCrucibleTile extends TileEntity implements ITickableTileEntity {
+public abstract class BaseCrucibleTile extends Entity implements TickingBlockEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String INVENTORY_TAG = "inventory";
     private static final String SOLID_AMOUNT_TAG = "solidAmount";
@@ -52,7 +49,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     protected ItemStack currentItem;
 
     protected BaseCrucibleTile(
-        TileEntityType<? extends BaseCrucibleTile> tileEntityType) {
+        EntityType<? extends BaseCrucibleTile> tileEntityType) {
         super(tileEntityType);
         inventory = new MeltableItemHandler(getCrucibleType());
         tank = new CrucibleFluidHandler(this);
@@ -62,7 +59,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundTag compound) {
         inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
@@ -72,13 +69,33 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT compound) {
+    protected void defineSynchedData() {
+
+    }
+
+    @Override
+    public boolean save(CompoundTag compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
-        compound.put("tank", tank.writeToNBT(new CompoundNBT()));
+        compound.put("tank", tank.writeToNBT(new CompoundTag()));
         compound.putInt("ticksSinceLast", ticksSinceLast);
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
-        compound.put(CURRENT_ITEM_TAG, currentItem.save(new CompoundNBT()));
+        compound.put(CURRENT_ITEM_TAG, currentItem.save(new CompoundTag()));
         return super.save(compound);
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag p_20052_) {
+
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag p_20139_) {
+
+    }
+
+    @Override
+    public Packet<?> getAddEntityPacket() {
+        return null;
     }
 
     @Nonnull
@@ -95,7 +112,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     public abstract int getHeat();
 
-    public ActionResultType onBlockActivated(PlayerEntity player, Hand handIn,
+    public ActionResultType onBlockActivated(Player player, Hand handIn,
                                              IFluidHandler handler) {
         logger.debug("Crucible activated");
 
@@ -165,17 +182,17 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         if (!inventory.getStackInSlot(0).isEmpty()) {
-            CompoundNBT blockNbt = inventory.getStackInSlot(0).save(new CompoundNBT());
+            CompoundTag blockNbt = inventory.getStackInSlot(0).save(new CompoundTag());
             nbt.put(BLOCK_TAG, blockNbt);
         }
         if (!currentItem.isEmpty()) {
-            CompoundNBT currentItemTag = currentItem.save(new CompoundNBT());
+            CompoundTag currentItemTag = currentItem.save(new CompoundTag());
             nbt.put(CURRENT_ITEM_TAG, currentItemTag);
         }
         if (!tank.isEmpty()) {
-            CompoundNBT fluidNbt = tank.writeToNBT(new CompoundNBT());
+            CompoundTag fluidNbt = tank.writeToNBT(new CompoundTag());
             nbt.put(FLUID_TAG, fluidNbt);
         }
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
@@ -185,15 +202,15 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
-        CompoundNBT nbt = packet.getTag();
+        CompoundTag nbt = packet.getTag();
         if (nbt.contains(CURRENT_ITEM_TAG)) {
-            currentItem = ItemStack.of((CompoundNBT) nbt.get(CURRENT_ITEM_TAG));
+            currentItem = ItemStack.of((CompoundTag) nbt.get(CURRENT_ITEM_TAG));
         } else {
             currentItem = ItemStack.EMPTY;
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            inventory.setStackInSlot(0, ItemStack.of((CompoundNBT) nbt.get(BLOCK_TAG)));
+            inventory.setStackInSlot(0, ItemStack.of((CompoundTag) nbt.get(BLOCK_TAG)));
         } else {
             inventory.setStackInSlot(0, ItemStack.EMPTY);
         }
@@ -245,4 +262,9 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public abstract int getSolidAmount();
 
     public abstract boolean canAcceptFluidTemperature(FluidStack fluidStack);
+
+    @Override
+    public BlockPos getPos() {
+        return null;
+    }
 }

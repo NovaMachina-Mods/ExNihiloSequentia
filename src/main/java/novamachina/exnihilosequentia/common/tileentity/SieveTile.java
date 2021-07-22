@@ -1,12 +1,16 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.text.Color;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
@@ -14,15 +18,8 @@ import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -31,7 +28,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class SieveTile extends TileEntity {
+public class SieveTile extends Entity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String BLOCK_TAG = "block";
     private static final String PROGRESS_TAG = "progress";
@@ -50,7 +47,7 @@ public class SieveTile extends TileEntity {
         super(ExNihiloTiles.SIEVE.get());
     }
 
-    public void insertMesh(ItemStack stack, PlayerEntity player) {
+    public void insertMesh(ItemStack stack, Player player) {
         logger.debug("Insert Mesh: " + stack);
         EnumMesh mesh = ((MeshItem) stack.getItem()).getMesh();
         if (meshStack.isEmpty()) {
@@ -90,9 +87,9 @@ public class SieveTile extends TileEntity {
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundTag compound) {
         if (compound.contains(MESH_TAG)) {
-            meshStack = ItemStack.of((CompoundNBT) compound.get(MESH_TAG));
+            meshStack = ItemStack.of((CompoundTag) compound.get(MESH_TAG));
             if (meshStack.getItem() instanceof MeshItem) {
                 meshType = ((MeshItem) meshStack.getItem()).getMesh();
             }
@@ -101,7 +98,7 @@ public class SieveTile extends TileEntity {
         }
 
         if (compound.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.of((CompoundNBT) compound.get(BLOCK_TAG));
+            blockStack = ItemStack.of((CompoundTag) compound.get(BLOCK_TAG));
         } else {
             blockStack = ItemStack.EMPTY;
         }
@@ -112,14 +109,14 @@ public class SieveTile extends TileEntity {
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT compound) {
+    public CompoundTag save(CompoundTag compound) {
         if (!meshStack.isEmpty()) {
-            CompoundNBT meshNBT = meshStack.save(new CompoundNBT());
+            CompoundTag meshNBT = meshStack.save(new CompoundTag());
             compound.put(MESH_TAG, meshNBT);
         }
 
         if (!blockStack.isEmpty()) {
-            CompoundNBT blockNBT = blockStack.save(new CompoundNBT());
+            CompoundTag blockNBT = blockStack.save(new CompoundTag());
             compound.put(BLOCK_TAG, blockNBT);
         }
 
@@ -137,7 +134,7 @@ public class SieveTile extends TileEntity {
         super.setRemoved();
     }
 
-    public void insertSiftableBlock(ItemStack stack, PlayerEntity player) {
+    public void insertSiftableBlock(ItemStack stack, Player player) {
         logger.debug("Insert Siftable Block: " + stack);
         if (!meshStack.isEmpty() && blockStack.isEmpty()) {
             blockStack = stack.copy();
@@ -148,7 +145,7 @@ public class SieveTile extends TileEntity {
         }
     }
 
-    public void activateSieve(PlayerEntity player, boolean isWaterlogged) {
+    public void activateSieve(Player player, boolean isWaterlogged) {
         logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
 
         // 4 ticks is the same period of holding down right click
@@ -192,7 +189,7 @@ public class SieveTile extends TileEntity {
         logger.debug("Resetting sieve");
         if (Config.enableMeshDurability()) {
             logger.debug("Damaging mesh");
-            meshStack.hurtAndBreak(1, new FakePlayer((ServerWorld) level, new GameProfile(UUID
+            meshStack.hurtAndBreak(1, new FakePlayer((ServerLevel) level, new GameProfile(UUID
                 .randomUUID(), "Fake Player")), player -> logger.debug("Broken"));
         }
         blockStack = ItemStack.EMPTY;
@@ -225,14 +222,14 @@ public class SieveTile extends TileEntity {
 
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         if (!meshStack.isEmpty()) {
-            CompoundNBT meshNBT = meshStack.save(new CompoundNBT());
+            CompoundTag meshNBT = meshStack.save(new CompoundTag());
             nbt.put(MESH_TAG, meshNBT);
         }
 
         if (!blockStack.isEmpty()) {
-            CompoundNBT blockNbt = blockStack.save(new CompoundNBT());
+            CompoundTag blockNbt = blockStack.save(new CompoundTag());
             nbt.put(BLOCK_TAG, blockNbt);
         }
         nbt.putInt(PROGRESS_TAG, progress);
@@ -242,9 +239,9 @@ public class SieveTile extends TileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
-        CompoundNBT nbt = packet.getTag();
+        CompoundTag nbt = packet.getTag();
         if (nbt.contains(MESH_TAG)) {
-            meshStack = ItemStack.of((CompoundNBT) nbt.get(MESH_TAG));
+            meshStack = ItemStack.of((CompoundTag) nbt.get(MESH_TAG));
             if (meshStack.getItem() instanceof MeshItem) {
                 meshType = ((MeshItem) meshStack.getItem()).getMesh();
             }
@@ -253,7 +250,7 @@ public class SieveTile extends TileEntity {
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.of((CompoundNBT) nbt.get(BLOCK_TAG));
+            blockStack = ItemStack.of((CompoundTag) nbt.get(BLOCK_TAG));
         } else {
             blockStack = ItemStack.EMPTY;
         }

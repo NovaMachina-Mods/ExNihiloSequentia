@@ -2,10 +2,8 @@ package novamachina.exnihilosequentia.common.block;
 
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FallingBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 

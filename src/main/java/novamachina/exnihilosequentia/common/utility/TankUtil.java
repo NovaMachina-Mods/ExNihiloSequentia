@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.common.utility;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -19,13 +19,13 @@ public class TankUtil {
     }
 
     // TODO: Figure out how to completely fill and drain
-    public static boolean drainWaterIntoBottle(TileEntity tileEntity, PlayerEntity player, IFluidHandler tank) {
+    public static boolean drainWaterIntoBottle(Entity tileEntity, Player player, IFluidHandler tank) {
         int waterAmount = 333;
         if(tank.getFluidInTank(0).getAmount() % FluidAttributes.BUCKET_VOLUME == 334) {
             waterAmount = 334;
         }
         if (player.getMainHandItem().getItem() == Items.GLASS_BOTTLE) {
-            if(tank.getFluidInTank(0).getFluid() != null && tank.getFluidInTank(0).getAmount() >= waterAmount && tank.getFluidInTank(0).getFluid().getFluid() == Fluids.WATER) {
+            if(tank.getFluidInTank(0).getFluid() != null && tank.getFluidInTank(0).getAmount() >= waterAmount && tank.getFluidInTank(0).getFluid() == Fluids.WATER) {
                 if(player.addItem(WATER_BOTTLE.copy())){
                     if(!player.isCreative()) {
                         player.getMainHandItem().shrink(1);
@@ -39,7 +39,7 @@ public class TankUtil {
         return false;
     }
 
-    public static boolean drainWaterFromBottle(TileEntity tileEntity, PlayerEntity player, IFluidHandler tank) {
+    public static boolean drainWaterFromBottle(Entity tileEntity, Player player, IFluidHandler tank) {
         int waterAmount = 333;
         if(tank.getFluidInTank(0).getAmount() % FluidAttributes.BUCKET_VOLUME == 666) {
             waterAmount = 334;

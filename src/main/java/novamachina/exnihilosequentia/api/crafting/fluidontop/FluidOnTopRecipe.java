@@ -1,11 +1,10 @@
 package novamachina.exnihilosequentia.api.crafting.fluidontop;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -14,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    public static final IRecipeType<FluidOnTopRecipe> RECIPE_TYPE = IRecipeType
+    public static final RecipeType<FluidOnTopRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
     private static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> serializer;
     private FluidStack fluidInTank;

@@ -2,12 +2,12 @@ package novamachina.exnihilosequentia.common.block;
 
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
@@ -24,13 +24,14 @@ public class BaseBlock extends Block {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, BlockGetter world) {
         if (tileEntitySupplier == null) {
             return null;
         } else {
             return tileEntitySupplier.get();
         }
     }
+
 
     @Nullable
     @Override
@@ -43,7 +44,7 @@ public class BaseBlock extends Block {
         return tileEntitySupplier != null;
     }
 
-    protected static Boolean never(BlockState p_235427_0_, IBlockReader p_235427_1_, BlockPos p_235427_2_, EntityType<?> p_235427_3_) {
+    protected static Boolean never(BlockState p_235427_0_, BlockGetter p_235427_1_, BlockPos p_235427_2_, EntityType<?> p_235427_3_) {
         return (boolean)false;
     }
 

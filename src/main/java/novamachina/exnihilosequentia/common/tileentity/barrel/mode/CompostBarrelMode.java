@@ -1,20 +1,19 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -48,7 +47,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         if (ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(player.getItemInHand(handIn).getItem()) && barrelTile
                 .addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(player.getItemInHand(handIn).getItem()), false)) {
             player.getItemInHand(handIn).shrink(1);
@@ -73,13 +72,13 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void read(CompoundNBT nbt) {
+    public void read(CompoundTag nbt) {
         this.currentProgress = nbt.getInt("currentProgress");
     }
 
     @Override
-    public CompoundNBT write() {
-        CompoundNBT modeInfo = new CompoundNBT();
+    public Tag write() {
+        CompoundTag modeInfo = new CompoundTag();
         modeInfo.putInt("currentProgress", currentProgress);
         return modeInfo;
     }
@@ -87,11 +86,11 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
         if (Config.getShowParticles()) {
-            ((ServerWorld) barrelTile.getLevel())
+            ((ServerLevel) barrelTile.level)
                     .sendParticles(ParticleTypes.EFFECT,
-                            barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
-                            barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
-                            barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
+                            barrelTile.blockPosition().getX() + barrelTile.level.random.nextDouble(),
+                            barrelTile.blockPosition().getY() + barrelTile.level.random.nextDouble(),
+                            barrelTile.blockPosition().getZ() + barrelTile.level.random.nextDouble(),
                             1,
                             0.0,
                             0.0,
@@ -101,13 +100,13 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
-        List<ITextComponent> info = new ArrayList<>();
+    public List<TranslatableComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
+        List<TranslatableComponent> info = new ArrayList<>();
         if (currentProgress <= 0) {
-            info.add(new TranslationTextComponent("waila.barrel.compost", barrelTile
+            info.add(new TranslatableComponent("waila.barrel.compost", barrelTile
                     .getSolidAmount(), AbstractBarrelTile.MAX_SOLID_AMOUNT));
         } else {
-            info.add(new TranslationTextComponent("waila.progress", StringUtils
+            info.add(new TranslatableComponent("waila.progress", StringUtils
                     .formatPercent((float) currentProgress / (Config.getSecondsToCompost() * 20))));
         }
         return info;

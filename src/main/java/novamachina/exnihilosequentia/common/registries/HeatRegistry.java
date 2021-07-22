@@ -2,7 +2,8 @@ package novamachina.exnihilosequentia.common.registries;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.util.IItemProvider;
+
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
@@ -20,7 +21,7 @@ public class HeatRegistry implements IHeatRegistry {
     }
 
     @Override
-    public int getHeatAmount(ForgeRegistryEntry<? extends IItemProvider> entry) {
+    public int getHeatAmount(ForgeRegistryEntry<? extends Item> entry) {
         return recipeList.stream().filter(recipe -> recipe.getInput().getRegistryName().equals(entry.getRegistryName())).findFirst().map(HeatRecipe::getAmount).orElse(0);
     }
 

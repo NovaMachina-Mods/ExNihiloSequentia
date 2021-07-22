@@ -2,19 +2,19 @@ package novamachina.exnihilosequentia.api.crafting.crucible;
 
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CrucibleRecipe extends SerializableRecipe {
-    public static final IRecipeType<CrucibleRecipe> RECIPE_TYPE = IRecipeType
+    public static final RecipeType<CrucibleRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
     private static RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer;
     private int amount;
