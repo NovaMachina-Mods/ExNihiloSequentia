@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.66'
     }
 }
@@ -34,7 +34,7 @@ sourceSets {
     }
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
@@ -59,17 +59,17 @@ dependencies {
             version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
     ])
 
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+//    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+//    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
-    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
-    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
+//    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
+//    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
 
-    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
-    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
+//    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
+//    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
 
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
-    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+//    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+//    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
 }
 
 task replaceResources(type: Copy) {
