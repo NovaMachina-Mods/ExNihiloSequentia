@@ -71,6 +71,8 @@ dependencies {
 
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
     runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+
+    runtimeOnly fg.deobf("curse.maven:ctm-267602:3137659")
 }
 
 task replaceResources(type: Copy) {
