@@ -4,8 +4,8 @@ import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
 import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenCompostRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -25,7 +25,7 @@ public class CompostRecipeManager implements IRecipeManager {
     }
 
     @Override
-    public IRecipeType<CompostRecipe> getRecipeType() {
+    public RecipeType<CompostRecipe> getRecipeType() {
         return CompostRecipe.RECIPE_TYPE;
     }
 }

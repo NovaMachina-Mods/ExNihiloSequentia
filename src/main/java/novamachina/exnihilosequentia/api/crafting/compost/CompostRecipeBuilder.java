@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.crafting.compost;
 
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 public class CompostRecipeBuilder extends ExNihiloFinishedRecipe<CompostRecipeBuilder> {
@@ -18,11 +18,15 @@ public class CompostRecipeBuilder extends ExNihiloFinishedRecipe<CompostRecipeBu
         return addWriter(jsonObj -> jsonObj.addProperty("amount", amount));
     }
 
-    public CompostRecipeBuilder input(ITag.INamedTag<Item> tag) {
+    public CompostRecipeBuilder input(Tag.Named<Item> tag) {
         return this.addInput(tag);
     }
 
-    public CompostRecipeBuilder input(IItemProvider input) {
+    public CompostRecipeBuilder input(Item input) {
         return this.addInput(input);
+    }
+
+    public CompostRecipeBuilder input(Block input) {
+        return this.addInput(input.asItem());
     }
 }

@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
@@ -18,7 +18,7 @@ public class FluidTransformRecipeSerializer extends RecipeSerializer<FluidTransf
     }
 
     @Override
-    public FluidTransformRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public FluidTransformRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
         Ingredient catalyst = Ingredient.fromNetwork(buffer);
         FluidStack result = FluidStack.readFromPacket(buffer);
@@ -26,7 +26,7 @@ public class FluidTransformRecipeSerializer extends RecipeSerializer<FluidTransf
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, FluidTransformRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, FluidTransformRecipe recipe) {
         recipe.getFluidInTank().writeToPacket(buffer);
         recipe.getCatalyst().toNetwork(buffer);
         recipe.getResult().writeToPacket(buffer);

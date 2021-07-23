@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
 
@@ -14,7 +15,7 @@ public class BlockBuilder {
             Block.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD);
     private int harvestLevel = 0;
     private Block.Properties properties = DEFAULT;
-    private Supplier<Entity> tileEntitySupplier;
+    private Supplier<BlockEntity> tileEntitySupplier;
     private ToolType toolType = ToolType.PICKAXE;
 
     public int getHarvestLevel() {
@@ -25,7 +26,7 @@ public class BlockBuilder {
         return properties;
     }
 
-    public Supplier<Entity> getTileEntitySupplier() {
+    public Supplier<BlockEntity> getTileEntitySupplier() {
         return tileEntitySupplier;
     }
 
@@ -44,7 +45,7 @@ public class BlockBuilder {
         return this;
     }
 
-    public BlockBuilder tileEntitySupplier(Supplier<Entity> supplier) {
+    public BlockBuilder tileEntitySupplier(Supplier<BlockEntity> supplier) {
         this.tileEntitySupplier = supplier;
         return this;
     }

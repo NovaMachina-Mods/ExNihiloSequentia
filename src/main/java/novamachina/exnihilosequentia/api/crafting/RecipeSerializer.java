@@ -22,7 +22,7 @@ public abstract class RecipeSerializer<R extends Recipe<?>> extends ForgeRegistr
 
     protected abstract R readFromJson(ResourceLocation recipeId, JsonObject json);
 
-    protected Item readOutput(JsonElement outputObject) {
-        return ShapedRecipe.itemFromJson(outputObject.getAsJsonObject());
+    protected ItemStack readOutput(JsonElement outputObject) {
+        return ShapedRecipe.itemFromJson(outputObject.getAsJsonObject()).getDefaultInstance();
     }
 }

@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
@@ -17,7 +17,7 @@ public class FluidOnTopRecipeSerializer extends RecipeSerializer<FluidOnTopRecip
     }
 
     @Override
-    public FluidOnTopRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public FluidOnTopRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
         FluidStack fluidOnTop = FluidStack.readFromPacket(buffer);
         ItemStack result = buffer.readItem();
@@ -25,7 +25,7 @@ public class FluidOnTopRecipeSerializer extends RecipeSerializer<FluidOnTopRecip
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, FluidOnTopRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, FluidOnTopRecipe recipe) {
         recipe.getFluidInTank().writeToPacket(buffer);
         recipe.getFluidOnTop().writeToPacket(buffer);
         buffer.writeItem(recipe.getResultItem());

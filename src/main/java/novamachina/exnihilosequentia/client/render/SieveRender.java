@@ -1,15 +1,13 @@
 package novamachina.exnihilosequentia.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Color;
@@ -19,8 +17,7 @@ import org.apache.logging.log4j.LogManager;
 public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public SieveRender(
-            TileEntityRendererDispatcher rendererDispatcherIn) {
+    public SieveRender(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
@@ -30,8 +27,8 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
     }
 
     @Override
-    public void render(SieveTile tileEntity, float partialTicks, MatrixStack matrixStack,
-                       IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
+    public void render(SieveTile tileEntity, float partialTicks, float combinedOverlay, PoseStack matrixStack,
+                       MultiBufferSource buffer, int combinedLight) {
 
         ResourceLocation blockTexture = tileEntity.getTexture();
         if (blockTexture != null) {

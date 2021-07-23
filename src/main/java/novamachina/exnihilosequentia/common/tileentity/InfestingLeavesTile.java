@@ -1,7 +1,10 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
@@ -9,7 +12,7 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class InfestingLeavesTile extends Entity implements TickingBlockEntity {
+public class InfestingLeavesTile extends BlockEntity implements TickingBlockEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String PROGRESS_TAG = "progress";
 
@@ -50,14 +53,14 @@ public class InfestingLeavesTile extends Entity implements TickingBlockEntity {
     }
 
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         CompoundTag nbt = new CompoundTag();
         nbt.putInt(PROGRESS_TAG, progress);
-        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
+        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         CompoundTag nbt = pkt.getTag();
         if (nbt.contains(PROGRESS_TAG)) {
             progress = nbt.getInt(PROGRESS_TAG);

@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.api.crafting.fluidontop;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 public class FluidOnTopRecipeBuilder extends ExNihiloFinishedRecipe<FluidOnTopRecipeBuilder> {
@@ -21,7 +21,7 @@ public class FluidOnTopRecipeBuilder extends ExNihiloFinishedRecipe<FluidOnTopRe
         return this.addFluid("fluidOnTop", fluid);
     }
 
-    public FluidOnTopRecipeBuilder result(IItemProvider result) {
+    public FluidOnTopRecipeBuilder result(Item result) {
         return this.addResult(result);
     }
 }

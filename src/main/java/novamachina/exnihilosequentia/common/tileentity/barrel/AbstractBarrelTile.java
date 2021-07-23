@@ -4,14 +4,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
@@ -33,7 +36,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public abstract class AbstractBarrelTile extends Entity implements TickingBlockEntity {
+public abstract class AbstractBarrelTile extends BlockEntity implements TickingBlockEntity {
     public static final int MAX_SOLID_AMOUNT = Config.getBarrelMaxSolidAmount();
     public static final int MAX_FLUID_AMOUNT = Config.getBarrelNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
     private static final String INVENTORY_TAG = "inventory";
@@ -48,7 +51,7 @@ public abstract class AbstractBarrelTile extends Entity implements TickingBlockE
     private AbstractBarrelMode mode;
     private int solidAmount;
 
-    protected AbstractBarrelTile(EntityType<? extends AbstractBarrelTile> tileEntityType) {
+    protected AbstractBarrelTile(BlockEntityType<? extends AbstractBarrelTile> tileEntityType) {
         super(tileEntityType);
         this.mode = BarrelModeRegistry.getModeFromName(ExNihiloConstants.BarrelModes.EMPTY);
         inventory = new BarrelInventoryHandler(this);
@@ -78,11 +81,11 @@ public abstract class AbstractBarrelTile extends Entity implements TickingBlockE
             }
         }
         mode.tick(this);
-        level.sendBlockUpdated(blockPosition(), getBlockStateOn(), getBlockStateOn(), 2);
+        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
     }
 
     @Override
-    public boolean save(CompoundTag compound) {
+    public CompoundTag save(CompoundTag compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put(TANK_TAG, tank.writeToNBT(new CompoundTag()));
         compound.putString(MODE_TAG, mode.getModeName());
@@ -112,7 +115,7 @@ public abstract class AbstractBarrelTile extends Entity implements TickingBlockE
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         CompoundTag nbt = pkt.getTag();
         if (nbt.contains(INVENTORY_TAG)) {
             inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
@@ -129,7 +132,7 @@ public abstract class AbstractBarrelTile extends Entity implements TickingBlockE
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         CompoundTag nbt = new CompoundTag();
         nbt.put(INVENTORY_TAG, inventory.serializeNBT());
         nbt.put(TANK_TAG, tank.writeToNBT(new CompoundTag()));
@@ -137,10 +140,10 @@ public abstract class AbstractBarrelTile extends Entity implements TickingBlockE
         nbt.put(MODE_INFO_TAG, mode.write());
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
-        return new SUpdateTileEntityPacket(blockPosition(), -1, nbt);
+        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
-    public ActionResultType onBlockActivated(Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public InteractionResult onBlockActivated(Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         return mode.onBlockActivated(this, player, handIn, fluidHandler, itemHandler);
     }
 
@@ -224,16 +227,15 @@ public abstract class AbstractBarrelTile extends Entity implements TickingBlockE
         return (float) tank.getFluidAmount() / MAX_FLUID_AMOUNT;
     }
 
-
     @Override
     public void setRemoved() {
-        super.setRemoved(RemovalReason.DISCARDED);
+        super.setRemoved();
         NonNullList<ItemStack> list = NonNullList.create();
         list.add(inventory.getStackInSlot(0));
-        InventoryHelper.dropContents(level, blockPosition(), list);
+        InventoryHelper.dropContents(level, getBlockPos(), list);
     }
 
-    public List<ITextComponent> getWailaInfo() {
+    public List<TextComponent> getWailaInfo() {
         return mode.getWailaInfo(this);
     }
 

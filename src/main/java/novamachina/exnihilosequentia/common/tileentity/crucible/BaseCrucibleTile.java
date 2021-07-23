@@ -3,14 +3,17 @@ package novamachina.exnihilosequentia.common.tileentity.crucible;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -31,7 +34,7 @@ import org.apache.logging.log4j.LogManager;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class BaseCrucibleTile extends Entity implements TickingBlockEntity {
+public abstract class BaseCrucibleTile extends BlockEntity implements TickingBlockEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String INVENTORY_TAG = "inventory";
     private static final String SOLID_AMOUNT_TAG = "solidAmount";
@@ -49,7 +52,7 @@ public abstract class BaseCrucibleTile extends Entity implements TickingBlockEnt
     protected ItemStack currentItem;
 
     protected BaseCrucibleTile(
-        EntityType<? extends BaseCrucibleTile> tileEntityType) {
+        BlockEntityType<? extends BaseCrucibleTile> tileEntityType) {
         super(tileEntityType);
         inventory = new MeltableItemHandler(getCrucibleType());
         tank = new CrucibleFluidHandler(this);
@@ -59,43 +62,23 @@ public abstract class BaseCrucibleTile extends Entity implements TickingBlockEnt
     }
 
     @Override
-    public void load(BlockState state, CompoundTag compound) {
+    public void load(CompoundTag compound) {
         inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
         this.solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
         this.currentItem = ItemStack.of(compound.getCompound(CURRENT_ITEM_TAG));
-        super.load(state, compound);
+        super.load(compound);
     }
 
     @Override
-    protected void defineSynchedData() {
-
-    }
-
-    @Override
-    public boolean save(CompoundTag compound) {
+    public CompoundTag save(CompoundTag compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put("tank", tank.writeToNBT(new CompoundTag()));
         compound.putInt("ticksSinceLast", ticksSinceLast);
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
         compound.put(CURRENT_ITEM_TAG, currentItem.save(new CompoundTag()));
         return super.save(compound);
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag p_20052_) {
-
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag p_20139_) {
-
-    }
-
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return null;
     }
 
     @Nonnull
@@ -112,21 +95,21 @@ public abstract class BaseCrucibleTile extends Entity implements TickingBlockEnt
 
     public abstract int getHeat();
 
-    public ActionResultType onBlockActivated(Player player, Hand handIn,
-                                             IFluidHandler handler) {
+    public InteractionResult onBlockActivated(Player player, InteractionHand handIn,
+                                              IFluidHandler handler) {
         logger.debug("Crucible activated");
 
         ItemStack stack = player.getItemInHand(handIn);
         if (stack.isEmpty()) {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         if(TankUtil.drainWaterIntoBottle(this, player, handler)) {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         if(TankUtil.drainWaterFromBottle(this, player, handler)) {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         boolean result = FluidUtil.interactWithFluidHandler(player, handIn, handler);
@@ -138,13 +121,13 @@ public abstract class BaseCrucibleTile extends Entity implements TickingBlockEnt
             }
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
             setChanged();
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         CrucibleRecipe recipe = getMeltable();
         if (recipe != null && !tank.isEmpty() && !tank.getFluid().getFluid()
             .isSame(recipe.getResultFluid().getFluid())) {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         logger.debug("Inserting item");
@@ -158,9 +141,9 @@ public abstract class BaseCrucibleTile extends Entity implements TickingBlockEnt
                 stack.shrink(1);
             }
             setChanged();
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     public ResourceLocation getSolidTexture() {
@@ -181,7 +164,7 @@ public abstract class BaseCrucibleTile extends Entity implements TickingBlockEnt
     }
 
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         CompoundTag nbt = new CompoundTag();
         if (!inventory.getStackInSlot(0).isEmpty()) {
             CompoundTag blockNbt = inventory.getStackInSlot(0).save(new CompoundTag());
@@ -197,11 +180,11 @@ public abstract class BaseCrucibleTile extends Entity implements TickingBlockEnt
         }
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
-        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
+        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         CompoundTag nbt = packet.getTag();
         if (nbt.contains(CURRENT_ITEM_TAG)) {
             currentItem = ItemStack.of((CompoundTag) nbt.get(CURRENT_ITEM_TAG));

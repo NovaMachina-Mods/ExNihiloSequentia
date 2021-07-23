@@ -4,10 +4,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
@@ -20,7 +20,7 @@ public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
     }
 
     @Override
-    public HammerRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public HammerRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         Ingredient input = Ingredient.fromNetwork(buffer);
         int outputCount = buffer.readInt();
         List<ItemStackWithChance> output = new ArrayList<>(outputCount);
@@ -32,7 +32,7 @@ public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, HammerRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, HammerRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getOutput().size());
         for (ItemStackWithChance stack : recipe.getOutput()) {

@@ -2,8 +2,9 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
@@ -25,7 +26,7 @@ public abstract class AbstractBarrelMode {
 
     public abstract void tick(AbstractBarrelTile barrelTile);
 
-    public abstract ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
+    public abstract InteractionResult onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
 
     public abstract boolean canFillWithFluid(AbstractBarrelTile barrel);
 
@@ -39,7 +40,7 @@ public abstract class AbstractBarrelMode {
 
     protected abstract void spawnParticle(AbstractBarrelTile barrelTile);
 
-    public abstract List<TranslatableComponent> getWailaInfo(AbstractBarrelTile barrelTile);
+    public abstract List<TextComponent> getWailaInfo(AbstractBarrelTile barrelTile);
 
     public abstract ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate);
 }

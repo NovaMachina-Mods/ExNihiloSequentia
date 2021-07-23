@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
@@ -19,7 +20,7 @@ public class TankUtil {
     }
 
     // TODO: Figure out how to completely fill and drain
-    public static boolean drainWaterIntoBottle(Entity tileEntity, Player player, IFluidHandler tank) {
+    public static boolean drainWaterIntoBottle(BlockEntity tileEntity, Player player, IFluidHandler tank) {
         int waterAmount = 333;
         if(tank.getFluidInTank(0).getAmount() % FluidAttributes.BUCKET_VOLUME == 334) {
             waterAmount = 334;
@@ -39,7 +40,7 @@ public class TankUtil {
         return false;
     }
 
-    public static boolean drainWaterFromBottle(Entity tileEntity, Player player, IFluidHandler tank) {
+    public static boolean drainWaterFromBottle(BlockEntity tileEntity, Player player, IFluidHandler tank) {
         int waterAmount = 333;
         if(tank.getFluidInTank(0).getAmount() % FluidAttributes.BUCKET_VOLUME == 666) {
             waterAmount = 334;

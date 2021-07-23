@@ -1,19 +1,20 @@
 package novamachina.exnihilosequentia.common.block;
 
-import java.util.function.Supplier;
-import javax.annotation.Nullable;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
+
 public class BaseBlock extends Block {
 
-    private final Supplier<TileEntity> tileEntitySupplier;
+    private final Supplier<BlockEntity> tileEntitySupplier;
     private final ToolType toolType;
 
     public BaseBlock(BlockBuilder builder) {
@@ -22,9 +23,10 @@ public class BaseBlock extends Block {
         this.toolType = builder.getToolType();
     }
 
+
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, BlockGetter world) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
         if (tileEntitySupplier == null) {
             return null;
         } else {

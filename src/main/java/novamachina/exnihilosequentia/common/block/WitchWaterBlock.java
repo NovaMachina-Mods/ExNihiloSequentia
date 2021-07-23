@@ -2,15 +2,26 @@ package novamachina.exnihilosequentia.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.SetTag;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 
@@ -22,72 +33,70 @@ public class WitchWaterBlock extends FlowingFluid {
                         .strength(100.0F).noDrops());
     }
 
-    /**
-     * @deprecated Ask Mojang
-     */
-    @Deprecated
     @Override
-    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+    public boolean isEntityInside(FluidState state, LevelReader worldIn, BlockPos pos, Entity entityIn, double yToTest, SetTag<Fluid> tag, boolean testingHead) {
         if (worldIn.isClientSide() || !entityIn.isAlive()) {
-            return;
+            return false;
+        }
+        Level levelIn = (Level) worldIn;
+
+        if (entityIn instanceof Skeleton) {
+            replaceMob(levelIn, (Skeleton) entityIn,
+                    new WitherSkeleton(EntityType.WITHER_SKELETON, levelIn));
         }
 
-        if (entityIn instanceof SkeletonEntity) {
-            replaceMob(worldIn, (SkeletonEntity) entityIn,
-                    new WitherSkeletonEntity(EntityType.WITHER_SKELETON, worldIn));
-        }
-
-        if (entityIn instanceof CreeperEntity && !((CreeperEntity) entityIn).isPowered()) {
-            entityIn.thunderHit((ServerLevel) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
-            ((CreeperEntity) entityIn).setHealth(((CreeperEntity) entityIn).getMaxHealth());
+        if (entityIn instanceof Creeper && !((Creeper) entityIn).isPowered()) {
+            entityIn.thunderHit((ServerLevel) worldIn, EntityType.LIGHTNING_BOLT.create(levelIn));
+            ((Creeper) entityIn).setHealth(((Creeper) entityIn).getMaxHealth());
         }
 
         // TODO Slime
 
-        if (entityIn instanceof SpiderEntity && !(entityIn instanceof CaveSpiderEntity)) {
-            replaceMob(worldIn, (SpiderEntity) entityIn,
-                    new CaveSpiderEntity(EntityType.CAVE_SPIDER, worldIn));
+        if (entityIn instanceof Spider && !(entityIn instanceof CaveSpider)) {
+            replaceMob(levelIn, (Spider) entityIn,
+                    new CaveSpider(EntityType.CAVE_SPIDER, levelIn));
         }
 
-        if (entityIn instanceof SquidEntity) {
-            replaceMob(worldIn, (SquidEntity) entityIn, new GhastEntity(EntityType.GHAST, worldIn));
+        if (entityIn instanceof Squid) {
+            replaceMob(levelIn, (Squid) entityIn, new Ghast(EntityType.GHAST, levelIn));
         }
 
-        if (entityIn instanceof VillagerEntity) {
-            VillagerEntity villagerEntity = (VillagerEntity) entityIn;
+        if (entityIn instanceof Villager) {
+            Villager villagerEntity = (Villager) entityIn;
             VillagerProfession profession = villagerEntity.getVillagerData().getProfession();
 
             if (profession == VillagerProfession.CLERIC) {
-                replaceMob(worldIn, villagerEntity, new WitchEntity(EntityType.WITCH, worldIn));
+                replaceMob(levelIn, villagerEntity, new Witch(EntityType.WITCH, levelIn));
             } else if (profession == VillagerProfession.BUTCHER) {
-                replaceMob(worldIn, villagerEntity,
-                        new VindicatorEntity(EntityType.VINDICATOR, worldIn));
+                replaceMob(levelIn, villagerEntity,
+                        new Vindicator(EntityType.VINDICATOR, levelIn));
             } else if (profession == VillagerProfession.LIBRARIAN) {
-                replaceMob(worldIn, villagerEntity, new EvokerEntity(EntityType.EVOKER, worldIn));
+                replaceMob(levelIn, villagerEntity, new Evoker(EntityType.EVOKER, levelIn));
             } else {
-                ZombieVillagerEntity zombieVillagerEntity = new ZombieVillagerEntity(
-                        EntityType.ZOMBIE_VILLAGER, worldIn);
+                ZombieVillager zombieVillagerEntity = new ZombieVillager(
+                        EntityType.ZOMBIE_VILLAGER, levelIn);
                 zombieVillagerEntity.setVillagerData(villagerEntity.getVillagerData());
-                replaceMob(worldIn, villagerEntity, zombieVillagerEntity);
+                replaceMob(levelIn, villagerEntity, zombieVillagerEntity);
             }
         }
 
         // TODO Cows
 
-        if (entityIn instanceof AnimalEntity) {
-            entityIn.thunderHit((ServerLevel) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+        if (entityIn instanceof Animal) {
+            entityIn.thunderHit((ServerLevel) worldIn, EntityType.LIGHTNING_BOLT.create(levelIn));
         }
 
         if (entityIn instanceof Player) {
-            applyPotion((Player) entityIn, new EffectInstance(Effects.BLINDNESS, 210, 0));
-            applyPotion((Player) entityIn, new EffectInstance(Effects.WEAKNESS, 210, 2));
-            applyPotion((Player) entityIn, new EffectInstance(Effects.WITHER, 210, 0));
-            applyPotion((Player) entityIn, new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 210, 0));
+            applyPotion((Player) entityIn, new MobEffectInstance(MobEffects.BLINDNESS, 210, 0));
+            applyPotion((Player) entityIn, new MobEffectInstance(MobEffects.WEAKNESS, 210, 2));
+            applyPotion((Player) entityIn, new MobEffectInstance(MobEffects.WITHER, 210, 0));
+            applyPotion((Player) entityIn, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 210, 0));
         }
+        return true;
     }
 
-    private void applyPotion(Player entityIn, EffectInstance potionEffect) {
-        EffectInstance currentEffect = entityIn.getEffect(potionEffect.getEffect());
+    private void applyPotion(Player entityIn, MobEffectInstance potionEffect) {
+        MobEffectInstance currentEffect = entityIn.getEffect(potionEffect.getEffect());
         if (currentEffect != null
                 && currentEffect.getDuration() <= potionEffect.getDuration() - 20) {
             entityIn.addEffect(potionEffect);

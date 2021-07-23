@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -16,14 +16,14 @@ public class CompostRecipeSerializer extends RecipeSerializer<CompostRecipe> {
     }
 
     @Override
-    public CompostRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public CompostRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         Ingredient input = Ingredient.fromNetwork(buffer);
         int amount = buffer.readInt();
         return new CompostRecipe(recipeId, input, amount);
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, CompostRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, CompostRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getAmount());
     }

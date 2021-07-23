@@ -12,11 +12,11 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -103,7 +103,7 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
         recipeLayout.getItemStacks().addTooltipCallback(new ITooltipCallback<ItemStack>() {
             @OnlyIn(Dist.CLIENT)
             @Override
-            public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
+            public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<MutableComponent> tooltip) {
                 if (!input) {
                     Multiset<String> condensedTooltips = HashMultiset.create();
                     List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
@@ -118,9 +118,9 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
                             condensedTooltips.add(StringUtils.formatPercent(meshWithChance.getChance()));
                         }
                     }
-                    tooltip.add(new TranslationTextComponent("jei.sieve.dropChance"));
+                    tooltip.add(new TranslatableComponent("jei.sieve.dropChance"));
                     for (String line : condensedTooltips.elementSet()) {
-                        tooltip.add(new StringTextComponent(" * " + condensedTooltips.count(line) + "x " + line));
+                        tooltip.add(new TextComponent(" * " + condensedTooltips.count(line) + "x " + line));
                     }
                 }
             }

@@ -1,14 +1,15 @@
 package novamachina.exnihilosequentia.api.registry;
 
 import java.util.List;
-import net.minecraft.util.IItemProvider;
+
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 
 public interface ICrookRegistry {
     void clearRecipes();
 
-    List<CrookRecipe> getDrops(IItemProvider block);
+    List<CrookRecipe> getDrops(Item block);
 
     List<CrookRecipe> getRecipeList();
 

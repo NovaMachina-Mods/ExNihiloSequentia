@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.api.crafting.sieve;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
@@ -28,7 +29,7 @@ public class MeshWithChance {
         }
     }
 
-    public static MeshWithChance read(PacketBuffer buffer) {
+    public static MeshWithChance read(FriendlyByteBuf buffer) {
         final EnumMesh mesh = buffer.readEnum(EnumMesh.class);
         final float chance = buffer.readFloat();
         return new MeshWithChance(mesh, chance);
@@ -49,7 +50,7 @@ public class MeshWithChance {
         return json;
     }
 
-    public void write(PacketBuffer buffer) {
+    public void write(FriendlyByteBuf buffer) {
         buffer.writeEnum(getMesh());
         buffer.writeFloat(getChance());
     }

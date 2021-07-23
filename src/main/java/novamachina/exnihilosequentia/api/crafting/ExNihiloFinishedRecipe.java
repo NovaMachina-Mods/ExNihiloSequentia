@@ -7,21 +7,19 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import net.minecraft.block.Block;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
-public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements IFinishedRecipe {
+public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements FinishedRecipe {
     protected JsonArray conditions = null;
     protected JsonArray inputArray = null;
     protected int inputCount = 0;
@@ -50,7 +48,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    public R addResult(IItemProvider result) {
+    public R addResult(Item result) {
         return addResult(new ItemStack(result));
     }
 
@@ -60,7 +58,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         return (R) this;
     }
 
-    public void build(Consumer<IFinishedRecipe> out, ResourceLocation id) {
+    public void build(Consumer<FinishedRecipe> out, ResourceLocation id) {
         Preconditions.checkArgument(isComplete(), "This recipe is incomplete.");
         this.id = id;
         out.accept(this);
@@ -82,7 +80,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     @Override
-    public IRecipeSerializer<?> getType() {
+    public RecipeSerializer<?> getType() {
         return serializer;
     }
 
@@ -135,15 +133,15 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    protected R addInput(IItemProvider input) {
+    protected R addInput(Item input) {
         return addInput(new ItemStack(input));
     }
 
-    protected R addInput(ITag.INamedTag<Item> tag) {
+    protected R addInput(Tag.Named<Item> tag) {
         return addInput(Ingredient.of(tag));
     }
 
-    protected R addInput(String id, IItemProvider block) {
+    protected R addInput(String id, Item block) {
         return this.addItem(id, new ItemStack(block));
     }
 

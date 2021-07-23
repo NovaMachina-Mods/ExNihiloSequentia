@@ -3,25 +3,25 @@ package novamachina.exnihilosequentia.api.datagen;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.block.Block;
-import net.minecraft.block.ComposterBlock;
-import net.minecraft.data.CookingRecipeBuilder;
+
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipeBuilder;
@@ -91,24 +91,24 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         return new ResourceLocation(modId, "sieve/" + prependRecipePrefix(id));
     }
 
-    protected void registerOre(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
+    protected void registerOre(EnumOre ore, Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(ore.getRawOreItem().get())
                 .pattern("xx")
                 .pattern("xx")
                 .define('x', ore.getPieceItem().get())
                 .group(this.modId)
-                .unlockedBy("has_piece", InventoryChangeTrigger.Instance.hasItems(ore.getPieceItem().get()))
+                .unlockedBy("has_piece", InventoryChangeTrigger.TriggerInstance.hasItems(ore.getPieceItem().get()))
                 .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getRawOreName())));
     }
 
-    protected void registerSmelting(EnumOre ore, Consumer<IFinishedRecipe> consumer) {
-        CookingRecipeBuilder
+    protected void registerSmelting(EnumOre ore, Consumer<FinishedRecipe> consumer) {
+        SimpleCookingRecipeBuilder
                 .smelting(Ingredient.of(ore.getRawOreItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 200)
-                .unlockedBy(RAW_ORE_CONDITION, InventoryChangeTrigger.Instance.hasItems(ore.getRawOreItem().get()))
+                .unlockedBy(RAW_ORE_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(ore.getRawOreItem().get()))
                 .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotName())));
-        CookingRecipeBuilder
+        SimpleCookingRecipeBuilder
                 .blasting(Ingredient.of(ore.getRawOreItem().get()), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(), 0.7F, 100)
-                .unlockedBy(RAW_ORE_CONDITION, InventoryChangeTrigger.Instance.hasItems(ore.getRawOreItem().get()))
+                .unlockedBy(RAW_ORE_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(ore.getRawOreItem().get()))
                 .save(consumer, new ResourceLocation(modId, prependRecipePrefix("blast_" + ore.getIngotName())));
     }
 
@@ -120,93 +120,93 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         return new ResourceLocation(location.getNamespace(), prependRecipePrefix(location.getPath()));
     }
 	
-	public static void createMCCompost(IItemProvider item, float chance) {
+	public static void createMCCompost(Item item, float chance) {
         ComposterBlock.COMPOSTABLES.put(item, chance);
     }
 
-    protected void createCompostRecipe(Consumer<IFinishedRecipe> consumer, Item item, int amount, String string) {
+    protected void createCompostRecipe(Consumer<FinishedRecipe> consumer, Item item, int amount, String string) {
         CompostRecipeBuilder.builder().input(item).amount(amount).build(consumer, compostLoc(string));
     }
-    protected void createCompostRecipe(Consumer<IFinishedRecipe> consumer, Block block, int amount, String string) {
+    protected void createCompostRecipe(Consumer<FinishedRecipe> consumer, Block block, int amount, String string) {
         CompostRecipeBuilder.builder().input(block).amount(amount).build(consumer, compostLoc(string));
     }
-    protected void createCompostRecipe(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> item, int amount, String string) {
+    protected void createCompostRecipe(Consumer<FinishedRecipe> consumer, Tag.Named<Item> item, int amount, String string) {
         CompostRecipeBuilder.builder().input(item).amount(amount).build(consumer, compostLoc(string));
     }
 
-    protected void createCrookRecipes(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> itemInput,
-                                      IItemProvider itemDrop, float chance, String id) {
+    protected void createCrookRecipes(Consumer<FinishedRecipe> consumer, Tag.Named<Item> itemInput,
+                                      Item itemDrop, float chance, String id) {
         CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
     }
 
-    protected void createFiredCrucibleRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {
+    protected void createFiredCrucibleRecipes(Consumer<FinishedRecipe> consumer, Block block, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(block)).amount(amount).fluidResult(Fluids.LAVA)
                 .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(id));
     }
-    protected void createFiredCrucibleRecipes(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> item, int amount, String id) {
+    protected void createFiredCrucibleRecipes(Consumer<FinishedRecipe> consumer, Tag.Named<Item> item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.LAVA)
                 .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(id));
     }
-    protected void createWaterCrucibleRecipes(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> item, int amount, String id) {
+    protected void createWaterCrucibleRecipes(Consumer<FinishedRecipe> consumer, Tag.Named<Item> item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.WATER)
                 .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
-    protected void createWaterCrucibleRecipes(Consumer<IFinishedRecipe> consumer, Item item, int amount, String id) {
+    protected void createWaterCrucibleRecipes(Consumer<FinishedRecipe> consumer, Item item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.WATER)
                 .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
 
-    protected void createFluidItemRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInput, Item itemInput, Block blockOutput, String id) {
-        FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput).build(consumer, fluidItemLoc(id));
+    protected void createFluidItemRecipes(Consumer<FinishedRecipe> consumer, Fluid fluidInput, Item itemInput, Block blockOutput, String id) {
+        FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput.asItem()).build(consumer, fluidItemLoc(id));
     }
-    protected void createFluidItemRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInput, Tags.IOptionalNamedTag<Item> itemInput, Block blockOutput, String id) {
-        FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput).build(consumer, fluidItemLoc(id));
+    protected void createFluidItemRecipes(Consumer<FinishedRecipe> consumer, Fluid fluidInput, Tags.IOptionalNamedTag<Item> itemInput, Block blockOutput, String id) {
+        FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput.asItem()).build(consumer, fluidItemLoc(id));
     }
 
-    protected void createFluidOnTopRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInTank, Fluid fluidOnTop, Block blockOutput, String id) {
-        FluidOnTopRecipeBuilder.builder().fluidInTank(fluidInTank).fluidOnTop(fluidOnTop).result(blockOutput)
+    protected void createFluidOnTopRecipes(Consumer<FinishedRecipe> consumer, Fluid fluidInTank, Fluid fluidOnTop, Block blockOutput, String id) {
+        FluidOnTopRecipeBuilder.builder().fluidInTank(fluidInTank).fluidOnTop(fluidOnTop).result(blockOutput.asItem())
                 .build(consumer, fluidOnTopLoc(id));
     }
 
-    protected void createFluidTransformRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInTank,
-                                               ITag.INamedTag<Item> catalyst, Fluid fluidResult, String id) {
+    protected void createFluidTransformRecipes(Consumer<FinishedRecipe> consumer, Fluid fluidInTank,
+                                               Tag.Named<Item> catalyst, Fluid fluidResult, String id) {
         FluidTransformRecipeBuilder.builder().fluidInTank(fluidInTank).catalyst(Ingredient.of(catalyst))
                 .result(fluidResult).build(consumer, fluidTransformLoc(id));
     }
 
-    protected void createFluidTransformRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInTank,
+    protected void createFluidTransformRecipes(Consumer<FinishedRecipe> consumer, Fluid fluidInTank,
                                                Item catalyst, Fluid fluidResult, String id) {
         FluidTransformRecipeBuilder.builder().fluidInTank(fluidInTank).catalyst(Ingredient.of(catalyst))
                 .result(fluidResult).build(consumer, fluidTransformLoc(id));
     }
 
-    protected void createHammerRecipes(Consumer<IFinishedRecipe> consumer, Block blockInput, Block blockOutput, String id) {
-        HammerRecipeBuilder.builder().input(blockInput).addDrop(blockOutput).build(consumer, hammerLoc(id));
+    protected void createHammerRecipes(Consumer<FinishedRecipe> consumer, Block blockInput, Block blockOutput, String id) {
+        HammerRecipeBuilder.builder().input(Ingredient.of(blockInput)).addDrop(blockOutput.asItem()).build(consumer, hammerLoc(id));
     }
 
-    protected void createHeatRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {
+    protected void createHeatRecipes(Consumer<FinishedRecipe> consumer, Block block, int amount, String id) {
         HeatRecipeBuilder.builder().input(block).amount(amount).build(consumer, heatLoc(id));
     }
 
-    protected void createSmeltingRecipe(Consumer<IFinishedRecipe> consumer, Item input, Item output, float xpSmelt, int durationSmelt, float xpBlast, int durationBlast, String condition, ResourceLocation rl) {
-        CookingRecipeBuilder.smelting(Ingredient.of(input), output, xpSmelt, durationSmelt)
-                .unlockedBy(condition, InventoryChangeTrigger.Instance.hasItems(input))
+    protected void createSmeltingRecipe(Consumer<FinishedRecipe> consumer, Item input, Item output, float xpSmelt, int durationSmelt, float xpBlast, int durationBlast, String condition, ResourceLocation rl) {
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(input), output, xpSmelt, durationSmelt)
+                .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
                 .save(consumer, createSaveLocation(rl));
-        CookingRecipeBuilder.blasting(Ingredient.of(input), output, xpBlast, durationBlast)
-                .unlockedBy(condition, InventoryChangeTrigger.Instance.hasItems(input))
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(input), output, xpBlast, durationBlast)
+                .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
                 .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_blast")));
     }
 
-    protected void createCookingRecipe(Consumer<IFinishedRecipe> consumer, Item input, Item output, float xpCampfire, int durationCampfire, float xpSmoker, int durationSmoker, String condition, ResourceLocation rl) {
-        CookingRecipeBuilder.cooking(Ingredient.of(input), output, xpCampfire, durationCampfire, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE)
-                .unlockedBy(condition, InventoryChangeTrigger.Instance.hasItems(input))
+    protected void createCookingRecipe(Consumer<FinishedRecipe> consumer, Item input, Item output, float xpCampfire, int durationCampfire, float xpSmoker, int durationSmoker, String condition, ResourceLocation rl) {
+        SimpleCookingRecipeBuilder.cooking(Ingredient.of(input), output, xpCampfire, durationCampfire, RecipeSerializer.CAMPFIRE_COOKING_RECIPE)
+                .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
                 .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_from_campfire")));
-        CookingRecipeBuilder.cooking(Ingredient.of(input), output, xpSmoker, durationSmoker, IRecipeSerializer.SMOKING_RECIPE)
-                .unlockedBy(condition, InventoryChangeTrigger.Instance.hasItems(input))
+        SimpleCookingRecipeBuilder.cooking(Ingredient.of(input), output, xpSmoker, durationSmoker, RecipeSerializer.SMOKING_RECIPE)
+                .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
                 .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_from_smoker")));
     }
 
-    protected void createBarrel(Consumer<IFinishedRecipe> consumer, RegistryObject<BaseBlock> barrel, Tags.IOptionalNamedTag<Item> block, Item slab) {
+    protected void createBarrel(Consumer<FinishedRecipe> consumer, RegistryObject<BaseBlock> barrel, Tags.IOptionalNamedTag<Item> block, Item slab) {
         ShapedRecipeBuilder.shaped(barrel.get())
                 .pattern("x x")
                 .pattern("x x")
@@ -219,7 +219,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(barrel.getId()));
     }
 
-    protected void createBarrel(Consumer<IFinishedRecipe> consumer, RegistryObject<BaseBlock> barrel, Item block, Item slab) {
+    protected void createBarrel(Consumer<FinishedRecipe> consumer, RegistryObject<BaseBlock> barrel, Item block, Item slab) {
         ShapedRecipeBuilder.shaped(barrel.get())
                 .pattern("x x")
                 .pattern("x x")
@@ -232,7 +232,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(barrel.getId()));
     }
 
-    protected void createCrucible(Consumer<IFinishedRecipe> consumer, RegistryObject<BaseBlock> crucible, Item block, Item slab) {
+    protected void createCrucible(Consumer<FinishedRecipe> consumer, RegistryObject<BaseBlock> crucible, Item block, Item slab) {
         ShapedRecipeBuilder.shaped(crucible.get())
                 .pattern("c c")
                 .pattern("clc")
@@ -245,7 +245,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(crucible.getId()));
     }
 
-    protected void createCrucible(Consumer<IFinishedRecipe> consumer, RegistryObject<BaseBlock> crucible, ITag.INamedTag<Item> block, ITag.INamedTag<Item> slab) {
+    protected void createCrucible(Consumer<FinishedRecipe> consumer, RegistryObject<BaseBlock> crucible, Tag.Named<Item> block, Tag.Named<Item> slab) {
         ShapedRecipeBuilder.shaped(crucible.get())
                 .pattern("c c")
                 .pattern("clc")
@@ -258,7 +258,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(crucible.getId()));
     }
 
-    protected void createSieve(Consumer<IFinishedRecipe> consumer, RegistryObject<?> sieve, Item block, Item slab) {
+    protected void createSieve(Consumer<FinishedRecipe> consumer, RegistryObject<?> sieve, Item block, Item slab) {
         ShapedRecipeBuilder.shaped((BlockSieve) sieve.get())
                 .pattern("p p")
                 .pattern("plp")
@@ -270,71 +270,71 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(sieve.getId()));
     }
 
-    protected void createCrook(Item result, Item input, Consumer<IFinishedRecipe> consumer) {
+    protected void createCrook(Item result, Item input, Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("xx")
                 .pattern(" x")
                 .pattern(" x")
                 .define('x', input)
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
-                .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.hasItems(input))
+                .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(input))
                 .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
     }
 
-    protected void createCrook(Item result, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
+    protected void createCrook(Item result, Tag.Named<Item> input, Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("xx")
                 .pattern(" x")
                 .pattern(" x")
                 .define('x', input)
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
-                .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.Instance
+                .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.TriggerInstance
                         .hasItems(ItemPredicate.Builder.item().of(input).build()))
                 .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
     }
 
-    protected void createHammer(Item output, ITag.INamedTag<Item> input, Consumer<IFinishedRecipe> consumer) {
+    protected void createHammer(Item output, Tag.Named<Item> input, Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(output)
                 .pattern(" x ")
                 .pattern(" -x")
                 .pattern("-  ")
                 .define('x', input)
                 .define('-', Tags.Items.RODS)
-                .unlockedBy("has_stick", InventoryChangeTrigger.Instance
+                .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance
                         .hasItems(ItemPredicate.Builder.item().of(Tags.Items.RODS).build()))
                 .unlockedBy(MATERIAL_CONDITION, has(input))
                 .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
     }
 
-    protected void createPebbleBlock(Block result, Item input, Consumer<IFinishedRecipe> consumer) {
+    protected void createPebbleBlock(Block result, Item input, Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(result)
                 .pattern("xx")
                 .pattern("xx")
                 .define('x', input)
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
-                .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.Instance.hasItems(input))
+                .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(input))
                 .save(consumer, createSaveLocation(result.getRegistryName()));
     }
 
-    protected void createMesh(Item output, Item inputMesh, Tags.IOptionalNamedTag<Item> inputItem, Consumer<IFinishedRecipe> consumer) {
+    protected void createMesh(Item output, Item inputMesh, Tags.IOptionalNamedTag<Item> inputItem, Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(output)
                 .pattern("i i")
                 .pattern("imi")
                 .pattern("i i")
                 .define('i', inputItem)
                 .define('m', inputMesh)
-                .unlockedBy("has_mesh", InventoryChangeTrigger.Instance.hasItems(inputMesh))
+                .unlockedBy("has_mesh", InventoryChangeTrigger.TriggerInstance.hasItems(inputMesh))
                 .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
     }
 
-    protected void createMesh(Item output, Item inputMesh, Item inputItem, Consumer<IFinishedRecipe> consumer) {
+    protected void createMesh(Item output, Item inputMesh, Item inputItem, Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(output)
                 .pattern("i i")
                 .pattern("imi")
                 .pattern("i i")
                 .define('i', inputItem)
                 .define('m', inputMesh)
-                .unlockedBy("has_mesh", InventoryChangeTrigger.Instance.hasItems(inputMesh))
+                .unlockedBy("has_mesh", InventoryChangeTrigger.TriggerInstance.hasItems(inputMesh))
                 .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
     }
 }

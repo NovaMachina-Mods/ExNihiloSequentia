@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
@@ -19,7 +19,7 @@ public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
     }
 
     @Override
-    public CrucibleRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public CrucibleRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         Ingredient input = Ingredient.fromNetwork(buffer);
         int amount = buffer.readInt();
         FluidStack fluid = FluidStack.readFromPacket(buffer);
@@ -28,7 +28,7 @@ public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, CrucibleRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, CrucibleRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getAmount());
         recipe.getResultFluid().writeToPacket(buffer);

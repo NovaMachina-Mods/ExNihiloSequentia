@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
-import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 

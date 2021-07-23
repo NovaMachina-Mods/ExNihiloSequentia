@@ -4,8 +4,8 @@ import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
 import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenFluidOnTopRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -25,7 +25,7 @@ public class FluidOnTopRecipeManager implements IRecipeManager {
     }
 
     @Override
-    public IRecipeType<FluidOnTopRecipe> getRecipeType() {
+    public RecipeType<FluidOnTopRecipe> getRecipeType() {
         return FluidOnTopRecipe.RECIPE_TYPE;
     }
 }

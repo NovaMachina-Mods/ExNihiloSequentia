@@ -2,14 +2,20 @@ package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.text.Color;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -18,8 +24,6 @@ import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +32,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class SieveTile extends Entity {
+public class SieveTile extends BlockEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String BLOCK_TAG = "block";
     private static final String PROGRESS_TAG = "progress";
@@ -87,7 +91,7 @@ public class SieveTile extends Entity {
     }
 
     @Override
-    public void load(BlockState state, CompoundTag compound) {
+    public void load(CompoundTag compound) {
         if (compound.contains(MESH_TAG)) {
             meshStack = ItemStack.of((CompoundTag) compound.get(MESH_TAG));
             if (meshStack.getItem() instanceof MeshItem) {
@@ -105,7 +109,7 @@ public class SieveTile extends Entity {
 
         progress = compound.getInt(PROGRESS_TAG);
 
-        super.load(state, compound);
+        super.load(compound);
     }
 
     @Override
@@ -154,7 +158,7 @@ public class SieveTile extends Entity {
             if (player != null && getLevel().getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
                 player.setSecondsOnFire(1);
 
-                ITextComponent message = new StringTextComponent("Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
+                MutableComponent message = new TextComponent("Bad").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(16711680)).withBold(true));
 
                 player.sendMessage(message, null);
             }
@@ -172,7 +176,7 @@ public class SieveTile extends Entity {
             if (progress >= Config.getMaxSieveClicks()) {
                 logger.debug("Sieve progress complete");
                 List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
-                    .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
+                    .getDrops(Ingredient.of(((BlockItem)blockStack.getItem()).getBlock()), meshType, isWaterlogged);
                 drops.forEach((entry -> entry.getRolls().forEach(meshWithChance -> {
                     if (random.nextFloat() <= meshWithChance.getChance()) {
                         logger.debug("Spawning Item: " + entry.getDrop());
@@ -221,7 +225,7 @@ public class SieveTile extends Entity {
     }
 
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         CompoundTag nbt = new CompoundTag();
         if (!meshStack.isEmpty()) {
             CompoundTag meshNBT = meshStack.save(new CompoundTag());
@@ -234,11 +238,11 @@ public class SieveTile extends Entity {
         }
         nbt.putInt(PROGRESS_TAG, progress);
 
-        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
+        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         CompoundTag nbt = packet.getTag();
         if (nbt.contains(MESH_TAG)) {
             meshStack = ItemStack.of((CompoundTag) nbt.get(MESH_TAG));

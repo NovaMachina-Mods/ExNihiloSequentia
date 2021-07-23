@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import java.awt.Color;
 import java.util.Arrays;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -12,13 +12,11 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
@@ -37,7 +35,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     }
 
     @Override
-    public void draw(HeatRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(HeatRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         Minecraft.getInstance().font
                 .draw(matrixStack, recipe.getAmount() + "X", 24, 12, Color.gray.getRGB());
     }

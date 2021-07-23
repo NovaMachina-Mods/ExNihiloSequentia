@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;

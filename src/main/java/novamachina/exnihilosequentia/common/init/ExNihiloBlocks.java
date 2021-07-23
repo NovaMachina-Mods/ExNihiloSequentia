@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.init;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Material;
@@ -54,9 +55,9 @@ public class ExNihiloBlocks {
                             .sound(SoundType.GRAVEL)).harvestLevel(ToolType.SHOVEL, 0)));
     public static final RegistryObject<EndCakeBlock> END_CAKE = BLOCKS
             .register(ExNihiloConstants.Blocks.END_CAKE, EndCakeBlock::new);
-    public static final RegistryObject<FlowingFluid> WITCH_WATER = BLOCKS
+    public static final RegistryObject<LiquidBlock> WITCH_WATER = BLOCKS
             .register(ExNihiloConstants.Fluids.WITCH_WATER_STILL, WitchWaterBlock::new);
-    public static final RegistryObject<FlowingFluid> SEA_WATER = BLOCKS
+    public static final RegistryObject<LiquidBlock> SEA_WATER = BLOCKS
             .register(ExNihiloConstants.Fluids.SEA_WATER_STILL, SeaWaterBlock::new);
     public static final RegistryObject<BaseBlock> INFESTING_LEAVES = BLOCKS
             .register(Blocks.INFESTING_LEAVES, InfestingLeavesBlock::new);

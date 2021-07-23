@@ -3,13 +3,14 @@ package novamachina.exnihilosequentia.common.block;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
 public class BaseFallingBlock extends FallingBlock {
 
-    private final Supplier<TileEntity> tileEntitySupplier;
+    private final Supplier<BlockEntity> tileEntitySupplier;
     private final ToolType toolType;
 
     public BaseFallingBlock(BlockBuilder builder) {
@@ -20,7 +21,7 @@ public class BaseFallingBlock extends FallingBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public BlockEntity createTileEntity(BlockState state, IBlockReader world) {
         if (tileEntitySupplier == null) {
             return null;
         } else {

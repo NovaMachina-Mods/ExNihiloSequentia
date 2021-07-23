@@ -1,17 +1,16 @@
 package novamachina.exnihilosequentia.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -20,19 +19,19 @@ import org.apache.logging.log4j.LogManager;
 public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public CrucibleRender(TileEntityRendererDispatcher rendererDispatcher) {
+    public CrucibleRender(BlockEntityRenderDispatcher rendererDispatcher) {
         super(rendererDispatcher);
     }
 
-    public static void register(TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
+    public static void register(EntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         logger.debug("Register crucible renderer, Type" + tileTileEntityType);
-        ClientRegistry
+        ClientRegistry.
                 .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
     }
 
     @Override
-    public void render(BaseCrucibleTile tileEntity, float partialTicks, MatrixStack matrixStack,
-                       IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
+    public void render(BaseCrucibleTile tileEntity, float partialTicks, float combinedOverlayIn, PoseStack matrixStack,
+                       MultiBufferSource buffer, int combinedLightIn) {
         ResourceLocation solidTexture = tileEntity.getSolidTexture();
         Fluid fluid = tileEntity.getFluid();
         ResourceLocation fluidTexture =
@@ -41,7 +40,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
                 fluid != null ? new Color(fluid.getAttributes().getColor()) : Color.INVALID_COLOR;
         Color blockColor = getBlockColor(solidTexture, tileEntity);
         if (fluidTexture != null) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
+            VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
                     .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
@@ -70,7 +69,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             matrixStack.popPose();
         }
         if (solidTexture != null) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.solid());
+            VertexConsumer builder = buffer.getBuffer(RenderType.solid());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
                     .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
@@ -104,7 +103,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     private Color getBlockColor(ResourceLocation solidTexture,
                                 BaseCrucibleTile tileEntity) {
         if (solidTexture != null && solidTexture.toString().contains("leaves")) {
-            return new Color(tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
+            return new Color(tileEntity.level.getBiome(tileEntity.blockPosition()).getFoliageColor());
         }
         return Color.WHITE;
     }

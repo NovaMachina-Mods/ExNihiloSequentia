@@ -2,8 +2,8 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IIngredient;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
