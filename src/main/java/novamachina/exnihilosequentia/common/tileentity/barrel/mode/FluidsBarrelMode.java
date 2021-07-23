@@ -126,7 +126,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             return InteractionResult.SUCCESS;
         }
 
-        Item catalyst = player.getItemInHand(handIn).getItem();
+        ItemLike catalyst = player.getItemInHand(handIn).getItem();
         if(fluidTransform(barrelTile, catalyst)) {
             player.getItemInHand(handIn).shrink(1);
         }
