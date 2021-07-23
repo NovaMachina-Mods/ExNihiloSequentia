@@ -2,6 +2,8 @@ package novamachina.exnihilosequentia.common.block;
 
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
+
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,7 +23,7 @@ public class BaseFallingBlock extends FallingBlock {
 
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, IBlockReader world) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
         if (tileEntitySupplier == null) {
             return null;
         } else {

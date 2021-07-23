@@ -3,9 +3,11 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
@@ -47,13 +49,13 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public InteractionResult onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         if (ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(player.getItemInHand(handIn).getItem()) && barrelTile
                 .addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(player.getItemInHand(handIn).getItem()), false)) {
             player.getItemInHand(handIn).shrink(1);
         }
 
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -86,11 +88,11 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
         if (Config.getShowParticles()) {
-            ((ServerLevel) barrelTile.level)
+            ((ServerLevel) barrelTile.getLevel())
                     .sendParticles(ParticleTypes.EFFECT,
-                            barrelTile.blockPosition().getX() + barrelTile.level.random.nextDouble(),
-                            barrelTile.blockPosition().getY() + barrelTile.level.random.nextDouble(),
-                            barrelTile.blockPosition().getZ() + barrelTile.level.random.nextDouble(),
+                            barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
+                            barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
+                            barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
                             1,
                             0.0,
                             0.0,
@@ -100,8 +102,8 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<TranslatableComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
-        List<TranslatableComponent> info = new ArrayList<>();
+    public List<Component> getWailaInfo(AbstractBarrelTile barrelTile) {
+        List<Component> info = new ArrayList<>();
         if (currentProgress <= 0) {
             info.add(new TranslatableComponent("waila.barrel.compost", barrelTile
                     .getSolidAmount(), AbstractBarrelTile.MAX_SOLID_AMOUNT));

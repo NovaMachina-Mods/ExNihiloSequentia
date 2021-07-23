@@ -13,6 +13,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -48,7 +49,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    public R addResult(Item result) {
+    public R addResult(ItemLike result) {
         return addResult(new ItemStack(result));
     }
 
@@ -133,7 +134,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    protected R addInput(Item input) {
+    protected R addInput(ItemLike input) {
         return addInput(new ItemStack(input));
     }
 
@@ -141,7 +142,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         return addInput(Ingredient.of(tag));
     }
 
-    protected R addInput(String id, Item block) {
+    protected R addInput(String id, ItemLike block) {
         return this.addItem(id, new ItemStack(block));
     }
 

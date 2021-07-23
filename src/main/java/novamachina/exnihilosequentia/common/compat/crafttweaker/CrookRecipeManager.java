@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
@@ -13,8 +15,10 @@ import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.CrookRecipes")
-public class CrookRecipeManager implements IRecipeManager {
 
+ */
+public class CrookRecipeManager /*implements IRecipeManager */{
+/*
     @ZenCodeType.Method
     public ZenCrookRecipe create(String recipeId) {
         recipeId = fixRecipeName(recipeId);
@@ -28,4 +32,6 @@ public class CrookRecipeManager implements IRecipeManager {
     public RecipeType<CrookRecipe> getRecipeType() {
         return CrookRecipe.RECIPE_TYPE;
     }
+
+ */
 }

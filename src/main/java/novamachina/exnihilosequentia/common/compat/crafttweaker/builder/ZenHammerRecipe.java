@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
@@ -11,9 +13,9 @@ import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenHammerRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.ZenHammerRecipe") */
 public class ZenHammerRecipe {
-
+/*
     private final HammerRecipe internal;
 
     private ZenHammerRecipe(ResourceLocation recipeId) {
@@ -46,4 +48,5 @@ public class ZenHammerRecipe {
         internal.setInput(input.asVanillaIngredient());
         return this;
     }
+ */
 }

@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
@@ -13,8 +15,10 @@ import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.CrucibleRecipes")
-public class CrucibleRecipeManager implements IRecipeManager {
 
+ */
+public class CrucibleRecipeManager /*implements IRecipeManager */{
+/*
     @ZenCodeType.Method
     public ZenCrucibleRecipe create(String recipeId) {
         recipeId = fixRecipeName(recipeId);
@@ -27,5 +31,5 @@ public class CrucibleRecipeManager implements IRecipeManager {
     @Override
     public RecipeType<CrucibleRecipe> getRecipeType() {
         return CrucibleRecipe.RECIPE_TYPE;
-    }
+    } */
 }

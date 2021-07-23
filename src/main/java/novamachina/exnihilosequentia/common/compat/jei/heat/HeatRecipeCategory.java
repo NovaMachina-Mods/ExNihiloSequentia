@@ -1,9 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
-import java.awt.Color;
-import java.util.Arrays;
-
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -16,13 +12,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.event.TickEvent;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.awt.*;
+import java.util.Arrays;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
@@ -80,13 +80,13 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getFluidStacks().init(0, true, 1, 17);
             recipeLayout.getFluidStacks().set(0, new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getInput().getRegistryName()), FluidAttributes.BUCKET_VOLUME));
         } else {
-            IItemProvider input = recipe.getInput();
+            ItemLike input = recipe.getInput();
 			//TODO doing something else, both show flint and steel
             if(input == Blocks.FIRE || input == Blocks.SOUL_FIRE) {
                 input = Items.FLINT_AND_STEEL;
             }
-			if (input instanceof FlowingFluidBlock) {
-				input = ((FlowingFluidBlock) input).getFluid().getBucket();
+			if (input instanceof LiquidBlock) {
+				input = ((LiquidBlock) input).getFluid().getBucket();
 			}
             recipeLayout.getItemStacks().init(0, true, 0, 16);
             recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(input).getItems()));

@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.api.registry.IFluidTransformRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +20,7 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
     private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
 
     @Override
-    public boolean isValidRecipe(Fluid fluidInTank, Item catalyst) {
+    public boolean isValidRecipe(Fluid fluidInTank, ItemLike catalyst) {
         for(FluidTransformRecipe recipe : recipeList) {
             if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getCatalyst().test(new ItemStack(catalyst))) {
                 return true;
@@ -30,7 +30,7 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
     }
 
     @Override
-    public Fluid getResult(Fluid fluidInTank, Item catalyst) {
+    public Fluid getResult(Fluid fluidInTank, ItemLike catalyst) {
         for(FluidTransformRecipe recipe : recipeList) {
             if(recipe.getFluidInTank().isFluidEqual(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME)) && recipe.getCatalyst().test(new ItemStack(catalyst))) {
                 return recipe.getResult().getFluid();

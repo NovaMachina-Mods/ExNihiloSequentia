@@ -2,8 +2,6 @@ package novamachina.exnihilosequentia.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.SetTag;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -16,16 +14,13 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 
-public class WitchWaterBlock extends FlowingFluid {
+public class WitchWaterBlock extends LiquidBlock {
 
     public WitchWaterBlock() {
         super(ExNihiloFluids.WITCH_WATER,
@@ -34,9 +29,9 @@ public class WitchWaterBlock extends FlowingFluid {
     }
 
     @Override
-    public boolean isEntityInside(FluidState state, LevelReader worldIn, BlockPos pos, Entity entityIn, double yToTest, SetTag<Fluid> tag, boolean testingHead) {
+    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         if (worldIn.isClientSide() || !entityIn.isAlive()) {
-            return false;
+            return;
         }
         Level levelIn = (Level) worldIn;
 
@@ -92,7 +87,6 @@ public class WitchWaterBlock extends FlowingFluid {
             applyPotion((Player) entityIn, new MobEffectInstance(MobEffects.WITHER, 210, 0));
             applyPotion((Player) entityIn, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 210, 0));
         }
-        return true;
     }
 
     private void applyPotion(Player entityIn, MobEffectInstance potionEffect) {

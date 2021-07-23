@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.registries;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.api.registry.IFluidItemTransformRegistry;
@@ -27,7 +28,7 @@ public class FluidItemTransformRegistry implements IFluidItemTransformRegistry {
     }
 
     @Override
-    public Item getResult(Fluid fluid, Item input) {
+    public ItemLike getResult(Fluid fluid, Item input) {
         for (FluidItemRecipe recipe : recipeList) {
             if (recipe.validInputs(fluid, input)) {
                 return recipe.getResultItem().getItem();

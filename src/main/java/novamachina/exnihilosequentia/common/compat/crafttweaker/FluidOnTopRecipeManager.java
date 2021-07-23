@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
@@ -13,8 +15,10 @@ import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.FluidOnTopRecipes")
-public class FluidOnTopRecipeManager implements IRecipeManager {
 
+ */
+public class FluidOnTopRecipeManager /*implements IRecipeManager */{
+/*
     @ZenCodeType.Method
     public ZenFluidOnTopRecipe create(String recipeId) {
         recipeId = fixRecipeName(recipeId);
@@ -28,4 +32,6 @@ public class FluidOnTopRecipeManager implements IRecipeManager {
     public RecipeType<FluidOnTopRecipe> getRecipeType() {
         return FluidOnTopRecipe.RECIPE_TYPE;
     }
+
+ */
 }

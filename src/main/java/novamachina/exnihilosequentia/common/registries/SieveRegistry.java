@@ -3,6 +3,7 @@ package novamachina.exnihilosequentia.common.registries;
 import com.google.common.collect.Lists;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
@@ -26,7 +27,7 @@ public class SieveRegistry implements ISieveRegistry {
     private List<SieveRecipe> recipeList = new ArrayList<>();
 
     @Override
-    public List<SieveRecipe> getDrops(Ingredient input, EnumMesh meshType, boolean isWaterlogged) {
+    public List<SieveRecipe> getDrops(ItemLike input, EnumMesh meshType, boolean isWaterlogged) {
         return recipeList.parallelStream()
             .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
             .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), input))

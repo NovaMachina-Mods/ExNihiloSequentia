@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.common.block;
 
-import mcjty.theoneprobe.api.IProbeHitData;
+//TODO activate TOP when available
+/*import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.ProbeMode;*/
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
@@ -17,12 +18,12 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 
-public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
+public class CrucibleBaseBlock extends BaseBlock/* implements ITOPInfoProvider */{
 
     public CrucibleBaseBlock(BlockBuilder builder) {
         super(builder);
     }
-
+/*
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData data) {
         if(probeMode == ProbeMode.EXTENDED) {
@@ -36,7 +37,7 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
             probeInfo.text(new TranslatableComponent("waila.crucible.heat", crucibleTile.getHeat()));
         }
     }
-
+*/
     /**
      * @deprecated Ask Mojang
      */

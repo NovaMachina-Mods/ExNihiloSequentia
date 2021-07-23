@@ -4,6 +4,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
@@ -18,7 +19,7 @@ public class CrookRecipeBuilder extends ExNihiloFinishedRecipe<CrookRecipeBuilde
         return new CrookRecipeBuilder();
     }
 
-    public CrookRecipeBuilder addDrop(Item drop, float chance) {
+    public CrookRecipeBuilder addDrop(ItemLike drop, float chance) {
         return this.addResult(new ItemStackWithChance(new ItemStack(drop), chance));
     }
 

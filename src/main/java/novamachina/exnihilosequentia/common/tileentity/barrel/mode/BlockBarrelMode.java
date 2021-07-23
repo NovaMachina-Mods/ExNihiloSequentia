@@ -2,8 +2,10 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,14 +28,14 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        barrelTile.level
-            .addFreshEntity(new ItemEntity(barrelTile.level, barrelTile.blockPosition().getX() + 0.5F, barrelTile.blockPosition()
-                .getY() + 0.5F,barrelTile.blockPosition().getZ() + 0.5F, new ItemStack(barrelTile.getInventory().getStackInSlot(0)
+    public InteractionResult onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+        barrelTile.getLevel()
+            .addFreshEntity(new ItemEntity(barrelTile.getLevel(), barrelTile.getBlockPos().getX() + 0.5F, barrelTile.getBlockPos()
+                .getY() + 0.5F,barrelTile.getBlockPos().getZ() + 0.5F, new ItemStack(barrelTile.getInventory().getStackInSlot(0)
                 .getItem())));
         barrelTile.getInventory().setStackInSlot(0, ItemStack.EMPTY);
         barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -67,8 +69,8 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<TranslatableComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
-        List<TranslatableComponent> info = new ArrayList<>();
+    public List<Component> getWailaInfo(AbstractBarrelTile barrelTile) {
+        List<Component> info = new ArrayList<>();
 
         info.add(new TranslatableComponent("waila.barrel.block", new TranslatableComponent(barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
 

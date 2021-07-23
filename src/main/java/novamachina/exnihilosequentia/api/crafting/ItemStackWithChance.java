@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -22,8 +22,8 @@ public class ItemStackWithChance {
 
     public static ItemStackWithChance deserialize(JsonElement json) {
         if (json.isJsonObject() && json.getAsJsonObject().has(BASE_KEY)) {
-            final float chance = JSONUtils.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
-            final String itemString = JSONUtils.getAsString(json.getAsJsonObject(), BASE_KEY);
+            final float chance = GsonHelper.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
+            final String itemString = GsonHelper.getAsString(json.getAsJsonObject(), BASE_KEY);
             int count = 1;
             if (json.getAsJsonObject().has(COUNT_KEY)) {
                 count = json.getAsJsonObject().get(COUNT_KEY).getAsInt();
@@ -31,7 +31,7 @@ public class ItemStackWithChance {
             return new ItemStackWithChance(new ItemStack(ForgeRegistries.ITEMS
                     .getValue(new ResourceLocation(itemString)), count), chance);
         } else {
-            final String itemString = JSONUtils.convertToString(json, BASE_KEY);
+            final String itemString = GsonHelper.convertToString(json, BASE_KEY);
             return new ItemStackWithChance(new ItemStack(ForgeRegistries.ITEMS
                     .getValue(new ResourceLocation(itemString))), 1.0F);
         }

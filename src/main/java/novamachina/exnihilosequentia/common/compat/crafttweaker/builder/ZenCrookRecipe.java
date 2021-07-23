@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
@@ -11,9 +13,9 @@ import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenCrookRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.ZenCrookRecipe")*/
 public class ZenCrookRecipe {
-
+/*
     private final CrookRecipe internal;
 
     private ZenCrookRecipe(ResourceLocation recipeId) {
@@ -39,5 +41,5 @@ public class ZenCrookRecipe {
     public ZenCrookRecipe setInput(IIngredient input) {
         internal.setInput(input.asVanillaIngredient());
         return this;
-    }
+    }*/
 }

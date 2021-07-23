@@ -1,12 +1,16 @@
 package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
@@ -27,35 +31,20 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
     }
 
     @Override
-    public void render(SieveTile tileEntity, float partialTicks, float combinedOverlay, PoseStack matrixStack,
-                       MultiBufferSource buffer, int combinedLight) {
+    public void render(SieveTile tileEntity, float partialTicks, PoseStack matrixStack,
+                       MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 
         ResourceLocation blockTexture = tileEntity.getTexture();
         if (blockTexture != null) {
-            TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
-                            new ResourceLocation(blockTexture.getNamespace(),
-                                    "block/" + resolveTexture(blockTexture.getPath())));
-            IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
-
-            matrixStack.pushPose();
-            matrixStack.translate(.5, .5, .5);
-            matrixStack.translate(-.5, -.5, -.5);
-
-            double height = 0.99f - tileEntity.getProgress();
-            float fillAmount = (float) (0.15625 * height + 0.84375);
-
-            add(builder, matrixStack, new VertexLocation(0, fillAmount, 0), new UVLocation(sprite.getU0(), sprite.getV0()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(1, fillAmount, 0), new UVLocation(sprite.getU1(), sprite.getV0()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(1, fillAmount, 1), new UVLocation(sprite.getU1(), sprite.getV1()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(0, fillAmount, 1), new UVLocation(sprite.getU0(), sprite.getV1()), Color.WHITE, combinedLight);
-
-            add(builder, matrixStack, new VertexLocation(0, fillAmount, 1), new UVLocation(sprite.getU0(), sprite.getV1()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(1, fillAmount, 1), new UVLocation(sprite.getU1(), sprite.getV1()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(1, fillAmount, 0), new UVLocation(sprite.getU1(), sprite.getV0()), Color.WHITE, combinedLight);
-            add(builder, matrixStack, new VertexLocation(0, fillAmount, 0), new UVLocation(sprite.getU0(), sprite.getV0()), Color.WHITE, combinedLight);
-
-            matrixStack.popPose();
+            BlockState state = getStateFromItemStack(tileEntity.getBlockStack());
+            if (state != null) {
+                matrixStack.pushPose();
+                matrixStack.translate(0, 0.819, 0);
+                matrixStack.scale(0.999F, 0.18F - tileEntity.getProgress() * 0.16F, 0.999F);
+                BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
+                blockRenderer.renderSingleBlock(state, matrixStack, buffer, combinedLight, combinedOverlay, EmptyModelData.INSTANCE);
+                matrixStack.popPose();
+            }
         }
     }
 }

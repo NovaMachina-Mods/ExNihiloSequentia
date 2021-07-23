@@ -1,9 +1,10 @@
 package novamachina.exnihilosequentia.common.block;
 
+//TODO activate TOP when available
 import java.util.Random;
-import mcjty.theoneprobe.api.IProbeHitData;
+/*import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.ProbeMode;*/
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -22,7 +23,7 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 // TODO: Add progressive render
-public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider {
+public class InfestingLeavesBlock extends BaseBlock /*implements ITOPInfoProvider*/ {
 
     private static final Random random = new Random();
 
@@ -65,7 +66,7 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
         return nearbyLeaves;
     }
 
-    @Override
+    /*@Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData iProbeHitData) {
         if(probeMode == ProbeMode.EXTENDED) {
             InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
@@ -73,5 +74,5 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
             iProbeInfo.text(new TranslatableComponent("waila.progress", StringUtils
                     .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
         }
-    }
+    }*/
 }

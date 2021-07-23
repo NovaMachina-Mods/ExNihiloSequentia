@@ -3,8 +3,7 @@ package novamachina.exnihilosequentia.api.crafting.sieve;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.util.GsonHelper;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 
 public class MeshWithChance {
@@ -20,11 +19,11 @@ public class MeshWithChance {
 
     public static MeshWithChance deserialize(JsonElement json) {
         if (json.isJsonObject() && json.getAsJsonObject().has(MESH_KEY)) {
-            final float chance = JSONUtils.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
-            final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
+            final float chance = GsonHelper.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
+            final EnumMesh mesh = EnumMesh.getMeshFromName(GsonHelper.getAsString(json.getAsJsonObject(), MESH_KEY));
             return new MeshWithChance(mesh, chance);
         } else {
-            final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
+            final EnumMesh mesh = EnumMesh.getMeshFromName(GsonHelper.getAsString(json.getAsJsonObject(), MESH_KEY));
             return new MeshWithChance(mesh, 1.0F);
         }
     }

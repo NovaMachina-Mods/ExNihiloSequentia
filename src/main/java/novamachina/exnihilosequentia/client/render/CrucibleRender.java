@@ -6,9 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
@@ -23,15 +24,14 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
         super(rendererDispatcher);
     }
 
-    public static void register(EntityType<? extends BaseCrucibleTile> tileTileEntityType) {
+    public static void register(BlockEntityRenderer<? extends BaseCrucibleTile> tileTileEntityType) {
         logger.debug("Register crucible renderer, Type" + tileTileEntityType);
-        ClientRegistry.
-                .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
+        ClientRegistry.bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
     }
 
     @Override
-    public void render(BaseCrucibleTile tileEntity, float partialTicks, float combinedOverlayIn, PoseStack matrixStack,
-                       MultiBufferSource buffer, int combinedLightIn) {
+    public void render(BaseCrucibleTile tileEntity, float partialTicks, PoseStack matrixStack,
+                       MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation solidTexture = tileEntity.getSolidTexture();
         Fluid fluid = tileEntity.getFluid();
         ResourceLocation fluidTexture =
@@ -43,7 +43,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             fluidTexture);
 
             // Subtract 0.005 to prevent texture fighting
@@ -72,7 +72,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             VertexConsumer builder = buffer.getBuffer(RenderType.solid());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             new ResourceLocation(solidTexture.getNamespace(),
                                     "block/" + resolveTexture(solidTexture.getPath())));
 
@@ -103,7 +103,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     private Color getBlockColor(ResourceLocation solidTexture,
                                 BaseCrucibleTile tileEntity) {
         if (solidTexture != null && solidTexture.toString().contains("leaves")) {
-            return new Color(tileEntity.level.getBiome(tileEntity.blockPosition()).getFoliageColor());
+            return new Color(tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
         }
         return Color.WHITE;
     }

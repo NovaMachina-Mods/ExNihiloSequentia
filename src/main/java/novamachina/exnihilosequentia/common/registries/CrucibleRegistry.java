@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.registries;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.api.registry.ICrucibleRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -28,13 +29,13 @@ public class CrucibleRegistry implements ICrucibleRegistry {
     }
 
     @Override
-    public CrucibleRecipe findRecipe(Item item) {
+    public CrucibleRecipe findRecipe(ItemLike item) {
         Optional<CrucibleRecipe> optional = recipeList.stream().filter(recipe -> recipe.getInput().test(new ItemStack(item))).findFirst();
         return optional.orElse(null);
     }
 
     @Override
-    public boolean isMeltable(Item item, int level) {
+    public boolean isMeltable(ItemLike item, int level) {
         boolean result = recipeList.stream().anyMatch(recipe -> recipe.getInput().test(new ItemStack(item)) && recipe.getCrucibleType().getLevel() <= level);
         return result;
     }

@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.managers.IRecipeManager;
@@ -13,8 +15,10 @@ import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.HeatRecipes")
-public class HeatRecipeManager implements IRecipeManager {
 
+ */
+public class HeatRecipeManager /* implements IRecipeManager*/ {
+/*
     @ZenCodeType.Method
     public ZenHeatRecipe create(String recipeId) {
         recipeId = fixRecipeName(recipeId);
@@ -28,4 +32,6 @@ public class HeatRecipeManager implements IRecipeManager {
     public RecipeType<HeatRecipe> getRecipeType() {
         return HeatRecipe.RECIPE_TYPE;
     }
+
+ */
 }

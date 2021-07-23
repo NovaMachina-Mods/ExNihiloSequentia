@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.fluid.IFluidStack;
 import com.blamejared.crafttweaker.api.item.IIngredient;
@@ -12,9 +14,9 @@ import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenFluidItemRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.ZenFluidItemRecipe")*/
 public class ZenFluidItemRecipe {
-
+/*
     private final FluidItemRecipe internal;
 
     private ZenFluidItemRecipe(ResourceLocation recipeId) {
@@ -46,5 +48,5 @@ public class ZenFluidItemRecipe {
     public ZenFluidItemRecipe setResult(IItemStack result) {
         internal.setOutput(result.getInternal());
         return this;
-    }
+    }*/
 }

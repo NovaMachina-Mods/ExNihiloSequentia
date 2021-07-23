@@ -2,6 +2,8 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -40,7 +42,7 @@ public abstract class AbstractBarrelMode {
 
     protected abstract void spawnParticle(AbstractBarrelTile barrelTile);
 
-    public abstract List<TextComponent> getWailaInfo(AbstractBarrelTile barrelTile);
+    public abstract List<Component> getWailaInfo(AbstractBarrelTile barrelTile);
 
     public abstract ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate);
 }

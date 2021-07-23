@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -8,8 +10,10 @@ import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenHeatRecipe")
-public class ZenHeatRecipe {
 
+ */
+public class ZenHeatRecipe {
+/*
     private final HeatRecipe internal;
 
     private ZenHeatRecipe(ResourceLocation recipeId) {
@@ -36,4 +40,6 @@ public class ZenHeatRecipe {
         internal.setInput(input);
         return this;
     }
+
+ */
 }

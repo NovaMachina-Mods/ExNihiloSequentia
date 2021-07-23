@@ -6,9 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fmlclient.registry.ClientRegistry;
@@ -33,7 +33,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
 
 
     @Override
-    public void render(AbstractBarrelTile tileEntity, float partialTicks, float something, PoseStack matrixStack, MultiBufferSource buffer, int combinedLightIn) {
+    public void render(AbstractBarrelTile tileEntity, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation inventoryTexture = tileEntity.getSolidTexture();
         ResourceLocation solidTexture = Blocks.OAK_LEAVES.getRegistryName();
         Fluid fluid = tileEntity.getFluid();
@@ -45,7 +45,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
             VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             fluidTexture);
 
             // Subtract 0.005 to prevent texture fighting
@@ -70,7 +70,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
             VertexConsumer builder = buffer.getBuffer(RenderType.solid());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             new ResourceLocation(inventoryTexture.getNamespace(),
                                     "block/" + inventoryTexture.getPath()));
 
@@ -97,7 +97,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
             VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             new ResourceLocation(solidTexture.getNamespace(),
                                     "block/" + solidTexture.getPath()));
 
@@ -127,7 +127,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
                                 AbstractBarrelTile tileEntity) {
         if (solidTexture != null && solidTexture.toString().contains("leaves")) {
             return new Color(
-                    tileEntity.level.getBiome(tileEntity.blockPosition()).getFoliageColor());
+                    tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
         }
         return Color.WHITE;
     }

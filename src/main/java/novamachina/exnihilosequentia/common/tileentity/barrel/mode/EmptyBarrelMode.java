@@ -2,8 +2,10 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -27,7 +29,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public InteractionResult onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         if (!player.getItemInHand(handIn).isEmpty()) {
 
             ItemStack stack = player.getItemInHand(handIn);
@@ -36,11 +38,11 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
                 if (mode.get().isTriggerItem(stack)) {
                     barrelTile.setMode(mode.get());
                     barrelTile.getMode().onBlockActivated(barrelTile, player, handIn, fluidHandler, itemHandler);
-                    return ActionResultType.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -74,7 +76,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<TranslatableComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
+    public List<Component> getWailaInfo(AbstractBarrelTile barrelTile) {
         return new ArrayList<>();
     }
 

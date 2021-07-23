@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
@@ -13,33 +15,35 @@ import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenSieveRecipe")
-public class ZenSeiveRecipe {
 
+ */
+public class ZenSieveRecipe {
+/*
     private final SieveRecipe internal;
 
-    private ZenSeiveRecipe(ResourceLocation recipeId) {
+    private ZenSieveRecipe(ResourceLocation recipeId) {
         this.internal = new SieveRecipe(recipeId, Ingredient.EMPTY, ItemStack.EMPTY, new ArrayList<>(), false);
     }
 
     @ZenCodeType.Method
-    public static ZenSeiveRecipe builder(ResourceLocation recipeId) {
-        return new ZenSeiveRecipe(recipeId);
+    public static ZenSieveRecipe builder(ResourceLocation recipeId) {
+        return new ZenSieveRecipe(recipeId);
     }
 
     @ZenCodeType.Method
-    public ZenSeiveRecipe addDrop(IItemStack drop) {
+    public ZenSieveRecipe addDrop(IItemStack drop) {
         internal.setDrop(drop.getInternal());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenSeiveRecipe setInput(IIngredient input) {
+    public ZenSieveRecipe setInput(IIngredient input) {
         internal.setInput(input.asVanillaIngredient());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenSeiveRecipe addRoll(String mesh, float chance) {
+    public ZenSieveRecipe addRoll(String mesh, float chance) {
         internal.addRoll(mesh, chance);
         return this;
     }
@@ -49,8 +53,10 @@ public class ZenSeiveRecipe {
     }
 
     @ZenCodeType.Method
-    public ZenSeiveRecipe setWaterlogged() {
+    public ZenSieveRecipe setWaterlogged() {
         internal.setWaterlogged();
         return this;
     }
+
+ */
 }

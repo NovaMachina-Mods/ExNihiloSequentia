@@ -2,13 +2,18 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -37,7 +42,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             if (fluidOnTop(barrelTile)) {
                 return;
             }
-            Block blockBelow = barrelTile.level.getBlockState(barrelTile.blockPosition().offset(0, -1, 0)).getBlock();
+            Block blockBelow = barrelTile.getLevel().getBlockState(barrelTile.getBlockPos().offset(0, -1, 0)).getBlock();
             fluidTransform(barrelTile, blockBelow);
         }
     }
@@ -62,7 +67,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         return false;
     }
 
-    private boolean fluidTransform(AbstractBarrelTile barrelTile, Block catalyst) {
+    private boolean fluidTransform(AbstractBarrelTile barrelTile, ItemLike catalyst) {
 
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
@@ -78,7 +83,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
             return false;
         }
-        Fluid fluidOnTop = barrelTile.level.getFluidState(barrelTile.blockPosition().offset(0, 1, 0)).getType();
+        Fluid fluidOnTop = barrelTile.getLevel().getFluidState(barrelTile.getBlockPos().offset(0, 1, 0)).getType();
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
         if (ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.isValidRecipe(fluidInTank, fluidOnTop)) {
@@ -92,17 +97,17 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    public InteractionResult onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
         ItemStack stack = player.getItemInHand(handIn);
         if (stack.isEmpty()) {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         if(TankUtil.drainWaterIntoBottle(barrelTile, player, fluidHandler)) {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
         if(TankUtil.drainWaterFromBottle(barrelTile, player, fluidHandler)) {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
@@ -114,24 +119,24 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             barrelTile.getLevel()
                 .sendBlockUpdated(barrelTile.getBlockPos(), barrelTile.getBlockState(), barrelTile.getBlockState(), 2);
             barrelTile.setChanged();
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         if (fluidBlockTransform(barrelTile, player, handIn)) {
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
-        IItemProvider catalyst = player.getItemInHand(handIn).getItem();
+        Item catalyst = player.getItemInHand(handIn).getItem();
         if(fluidTransform(barrelTile, catalyst)) {
             player.getItemInHand(handIn).shrink(1);
         }
 
         doMobSpawn(barrelTile, player, handIn);
 
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    private boolean fluidBlockTransform(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn) {
+    private boolean fluidBlockTransform(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn) {
         if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
             return false;
         }
@@ -173,7 +178,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     public Tag write() {
-        return new CompoundNBT();
+        return new CompoundTag();
     }
 
     @Override
@@ -182,8 +187,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<TranslatableComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
-        List<ITextComponent> info = new ArrayList<>();
+    public List<Component> getWailaInfo(AbstractBarrelTile barrelTile) {
+        List<Component> info = new ArrayList<>();
 
 
         String key;
@@ -193,7 +198,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             key = barrelTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId();
         }
 
-        info.add(new TranslationTextComponent("waila.barrel.fluidAmount", new TranslationTextComponent(key), barrelTile.getFluidAmount()));
+        info.add(new TranslatableComponent("waila.barrel.fluidAmount", new TranslatableComponent(key), barrelTile.getFluidAmount()));
 
         return info;
     }

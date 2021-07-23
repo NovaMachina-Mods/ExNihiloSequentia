@@ -5,6 +5,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -235,7 +237,7 @@ public abstract class AbstractBarrelTile extends BlockEntity implements TickingB
         InventoryHelper.dropContents(level, getBlockPos(), list);
     }
 
-    public List<TextComponent> getWailaInfo() {
+    public List<Component> getWailaInfo() {
         return mode.getWailaInfo(this);
     }
 

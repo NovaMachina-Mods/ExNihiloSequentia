@@ -1,11 +1,12 @@
 package novamachina.exnihilosequentia.common.item.mesh;
 
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.Config;
 
-public enum EnumMesh implements IStringSerializable, IExtensibleEnum {
+public enum EnumMesh implements /*IStringSerializable,*/ IExtensibleEnum, StringRepresentable {
     // TODO Mesh damage is configurable
     NONE(0, "none", 0), STRING(1, "string", Config.getMeshStringValue()), FLINT(2, "flint", Config.getMeshFlintValue()), IRON(3, "iron", Config.getMeshIronValue()), DIAMOND(4, "diamond", Config.getMeshDiamondValue()), EMERALD(5, "emerald", Config.getMeshEmeraldValue()), NETHERITE(6, "netherite", Config.getMeshNetheriteValue());
 
@@ -57,8 +58,8 @@ public enum EnumMesh implements IStringSerializable, IExtensibleEnum {
         this.registryObject = registryObject;
     }
 
-    @Override
+    /*@Override
     public String getSerializedName() {
         return this.name;
-    }
+    }*/
 }

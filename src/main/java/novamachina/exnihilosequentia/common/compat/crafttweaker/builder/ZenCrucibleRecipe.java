@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
+//TODO activate CT when available
+/*
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.fluid.IFluidStack;
 import com.blamejared.crafttweaker.api.item.IIngredient;
@@ -11,9 +13,9 @@ import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")*/
 public class ZenCrucibleRecipe {
-
+/*
     private final CrucibleRecipe internal;
 
     private ZenCrucibleRecipe(ResourceLocation recipeId) {
@@ -51,5 +53,5 @@ public class ZenCrucibleRecipe {
     public ZenCrucibleRecipe setResultFluid(IFluidStack fluid) {
         internal.setResultFluid(fluid.getInternal());
         return this;
-    }
+    }*/
 }
