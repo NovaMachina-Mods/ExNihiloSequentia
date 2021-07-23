@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_obsidian": {
+    "has_scrap": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:obsidian"
+            "item": "minecraft:netherite_scrap"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_obsidian",
+      "has_scrap",
       "has_the_recipe"
     ]
   ]

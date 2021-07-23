@@ -48,6 +48,7 @@ public class Config {
     // Sieve
     private static ForgeConfigSpec.BooleanValue flattenSieveRecipes;
     private static ForgeConfigSpec.IntValue sieveRange;
+    private static ForgeConfigSpec.IntValue maxSieveClicks;
     // Crook
     private static ForgeConfigSpec.IntValue maxBonusStringCount;
     private static ForgeConfigSpec.IntValue minStringCount;
@@ -72,6 +73,7 @@ public class Config {
     private static ForgeConfigSpec.IntValue crookBoneValue;
     // Durability Meshes
     private static ForgeConfigSpec.BooleanValue enableMeshDurability;
+    private static ForgeConfigSpec.IntValue meshStackSize;
     private static ForgeConfigSpec.IntValue meshStringValue;
     private static ForgeConfigSpec.IntValue meshFlintValue;
     private static ForgeConfigSpec.IntValue meshIronValue;
@@ -155,6 +157,7 @@ public class Config {
     public static boolean enableMeshDurability() {
         return enableMeshDurability.get();
     }
+    public static int getMeshStackSize() { return meshStackSize.get(); }
     public static int getMeshStringValue() { return meshStringValue.get(); }
     public static int getMeshFlintValue() { return meshFlintValue.get(); }
     public static int getMeshIronValue() { return meshIronValue.get(); }
@@ -209,6 +212,9 @@ public class Config {
     }
     public static int getSieveRange() {
         return sieveRange.get();
+    }
+    public static int getMaxSieveClicks() {
+        return maxSieveClicks.get();
     }
 
     // Crucible
@@ -293,7 +299,7 @@ public class Config {
         barrelMaxSolidAmount = COMMON_BUILDER
                 .comment("How much solids need to be in barrel before composting starts (Default: 1000)")
                 .defineInRange("maxSolidAmount", 1000, 1, Integer.MAX_VALUE);
-        secondsToCompost = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)")
+        secondsToCompost = COMMON_BUILDER.comment("Number of seconds to compost (Default: 10)")
                 .defineInRange("secondsToCompost", 10, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
 
@@ -437,7 +443,13 @@ public class Config {
                 .comment("Defines the radius that a sieve will attempt to activate other sieves (Default: 2)")
                 .defineInRange("sieveRange", 2, 0, 5);
         enableMeshDurability = COMMON_BUILDER
-                .comment("Meshes will have durability and can break. (Default: false)")
+                .comment("Meshes will have durability and can break, but don't stack. (Default: false)")
                 .define("enableMeshDurability", false);
+        meshStackSize = COMMON_BUILDER
+                .comment("Meshes will stack, but don't have durability. (Default: 64)")
+                .defineInRange("meshStackSize", 64, 1, 64);
+        maxSieveClicks = COMMON_BUILDER
+                .comment("The number of sieve clicks required to sieve a block. (Default: 10)")
+                .defineInRange("maxSieveClicks", 10, 1, 10);
     }
 }

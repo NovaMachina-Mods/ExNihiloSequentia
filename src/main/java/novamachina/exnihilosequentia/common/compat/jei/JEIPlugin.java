@@ -41,6 +41,8 @@ import org.apache.logging.log4j.LogManager;
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ResourceLocation CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLES);
+    private static final ResourceLocation FIRED_CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_FIRED);
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -59,7 +61,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new FluidTransformCategory(guiHelper));
         registration.addRecipeCategories(new FluidBlockRecipeCategory(guiHelper));
         registration.addRecipeCategories(new CompostRecipeCategory(guiHelper));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.CRUCIBLE_WOOD));
+        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.CRUCIBLES));
         registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.CRUCIBLE_FIRED));
         registration.addRecipeCategories(new HeatRecipeCategory(guiHelper));
     }
@@ -75,11 +77,44 @@ public class JEIPlugin implements IModPlugin {
                     .addRecipeCatalyst(new ItemStack(hammer.getRegistryObject().get()), HammerRecipeCategory.UID);
         }
 
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_WOOD.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registerCrucibles(registration);
+        registerBarrels(registration);
+        registerSieves(registration);
+    }
+
+    private void registerCrucibles(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_ACACIA.get()), CRUCIBLES, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_BIRCH.get()), CRUCIBLES, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get()), CRUCIBLES, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_JUNGLE.get()), CRUCIBLES, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_OAK.get()), CRUCIBLES, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_SPRUCE.get()), CRUCIBLES, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()), FIRED_CRUCIBLES, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()), FIRED_CRUCIBLES, HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WARPED.get()), FIRED_CRUCIBLES, HeatRecipeCategory.UID);
+    }
+
+    private void registerBarrels(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_ACACIA.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_BIRCH.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_DARK_OAK.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_JUNGLE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_OAK.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_SPRUCE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_STONE.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_WOOD.get()), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_WOOD), HeatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()), new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_FIRED), HeatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_CRIMSON.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.BARREL_WARPED.get()), FluidOnTopRecipeCategory.UID, FluidTransformCategory.UID, FluidBlockRecipeCategory.UID, CompostRecipeCategory.UID);
+    }
+
+    private void registerSieves(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE_ACACIA.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE_BIRCH.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE_DARK_OAK.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE_JUNGLE.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE_OAK.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE_SPRUCE.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE_CRIMSON.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ExNihiloBlocks.SIEVE_WARPED.get()), DrySieveRecipeCategory.UID, WetSieveRecipeCategory.UID);
     }
 
     @Override
@@ -110,7 +145,7 @@ public class JEIPlugin implements IModPlugin {
 
     private void registerFiredCrucible(IRecipeRegistration registration) {
         List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList();
-        registration.addRecipes(recipes, new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_FIRED));
+        registration.addRecipes(recipes, FIRED_CRUCIBLES);
         logger.info("Fired Crucible Recipes Loaded: " + recipes.size());
     }
 
@@ -154,7 +189,7 @@ public class JEIPlugin implements IModPlugin {
 
     private void registerWoodCrucible(IRecipeRegistration registration) {
         List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList().stream().filter(recipe -> recipe.getCrucibleType() == CrucilbeTypeEnum.WOOD).collect(Collectors.toList());
-        registration.addRecipes(recipes, new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_WOOD));
+        registration.addRecipes(recipes, CRUCIBLES);
         logger.info("Wooden Crucible Recipes Loaded: " + recipes.size());
     }
 }

@@ -41,7 +41,7 @@ public class SieveTile extends TileEntity {
     private ItemStack meshStack = ItemStack.EMPTY;
     private ItemStack blockStack = ItemStack.EMPTY;
     private EnumMesh meshType = EnumMesh.NONE;
-    private float progress = 0;
+    private int progress = 0;
 
     private long lastSieveAction = 0;
     private UUID lastPlayer;
@@ -106,7 +106,7 @@ public class SieveTile extends TileEntity {
             blockStack = ItemStack.EMPTY;
         }
 
-        progress = compound.getFloat(PROGRESS_TAG);
+        progress = compound.getInt(PROGRESS_TAG);
 
         super.load(state, compound);
     }
@@ -123,16 +123,17 @@ public class SieveTile extends TileEntity {
             compound.put(BLOCK_TAG, blockNBT);
         }
 
-        compound.putFloat(PROGRESS_TAG, progress);
+        compound.putInt(PROGRESS_TAG, progress);
 
         return super.save(compound);
     }
 
     @Override
     public void setRemoved() {
-        if (!level.isClientSide()) {
+        //TODO this one is doing that dupe with CarryOn
+        /*if (!level.isClientSide()) {
             removeMesh(false);
-        }
+        }*/
         super.setRemoved();
     }
 
@@ -152,16 +153,15 @@ public class SieveTile extends TileEntity {
 
         // 4 ticks is the same period of holding down right click
         if (getLevel().getLevelData().getGameTime() - lastSieveAction < 4) {
+            // Really good chance that they're using a macro
+            if (player != null && getLevel().getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
+                player.setSecondsOnFire(1);
+
+                ITextComponent message = new StringTextComponent("Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
+
+                player.sendMessage(message, null);
+            }
             return;
-        }
-
-        // Really good chance that they're using a macro
-        if (player != null && getLevel().getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
-            player.setSecondsOnFire(1);
-
-            ITextComponent message = new StringTextComponent("Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
-
-            player.sendMessage(message, null);
         }
 
         lastSieveAction = getLevel().getLevelData().getGameTime();
@@ -170,9 +170,9 @@ public class SieveTile extends TileEntity {
         }
 
         if (isReadyToSieve()) {
-            progress += 0.1F;
+            progress += 1;
 
-            if (progress >= 1.0F) {
+            if (progress >= Config.getMaxSieveClicks()) {
                 logger.debug("Sieve progress complete");
                 List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
@@ -196,7 +196,7 @@ public class SieveTile extends TileEntity {
                 .randomUUID(), "Fake Player")), player -> logger.debug("Broken"));
         }
         blockStack = ItemStack.EMPTY;
-        progress = 0.0F;
+        progress = 0;
         if (meshStack.isEmpty()) {
             logger.debug("Setting mesh to none, potential broken mesh");
             meshType = EnumMesh.NONE;
@@ -220,7 +220,7 @@ public class SieveTile extends TileEntity {
     }
 
     public float getProgress() {
-        return progress;
+        return (float)progress / Config.getMaxSieveClicks();
     }
 
     @Override
@@ -235,7 +235,7 @@ public class SieveTile extends TileEntity {
             CompoundNBT blockNbt = blockStack.save(new CompoundNBT());
             nbt.put(BLOCK_TAG, blockNbt);
         }
-        nbt.putFloat(PROGRESS_TAG, progress);
+        nbt.putInt(PROGRESS_TAG, progress);
 
         return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
     }
@@ -257,7 +257,7 @@ public class SieveTile extends TileEntity {
         } else {
             blockStack = ItemStack.EMPTY;
         }
-        progress = nbt.getFloat(PROGRESS_TAG);
+        progress = nbt.getInt(PROGRESS_TAG);
     }
 
     public EnumMesh getMesh() {

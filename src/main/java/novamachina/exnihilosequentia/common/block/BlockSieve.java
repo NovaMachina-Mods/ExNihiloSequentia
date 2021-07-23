@@ -50,12 +50,8 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public BlockSieve() {
-        super(new BlockBuilder().properties(
-                AbstractBlock.Properties.of(Material.WOOD).strength(0.7F)
-                        .sound(SoundType.WOOD).noOcclusion().isRedstoneConductor((state, reader, pos) -> false)
-                        .isSuffocating((state, reader, pos) -> false).isViewBlocking((state, reader, pos) -> false))
-                .harvestLevel(ToolType.AXE, 0).tileEntitySupplier(SieveTile::new));
+    public BlockSieve(BlockBuilder builder) {
+        super(builder);
         this.registerDefaultState(this.stateDefinition.any().setValue(MESH, EnumMesh.NONE).setValue(WATERLOGGED, false));
     }
 
@@ -82,8 +78,10 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
         SieveTile sieveTile = (SieveTile) world.getBlockEntity(iProbeHitData.getPos());
 
         if (!sieveTile.getBlockStack().isEmpty()) {
-            iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
-                    .formatPercent(sieveTile.getProgress() / 1.0F)));
+            if(probeMode == ProbeMode.EXTENDED) {
+                iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
+                        .formatPercent(sieveTile.getProgress())));
+            }
             iProbeInfo.text(new TranslationTextComponent("waila.sieve.block", new TranslationTextComponent(sieveTile.getBlockStack().getDescriptionId())));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
@@ -110,7 +108,7 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
         super.playerDestroy(worldIn, player, pos, state, te, stack);
         if (!worldIn.isClientSide() && te instanceof SieveTile) {
-            ((SieveTile) te).removeMesh(true);
+            ((SieveTile) te).removeMesh(false);
         }
     }
 
@@ -120,9 +118,12 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     @Deprecated
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
+        if (sieveTile == null) {
+            return ActionResultType.PASS;
+        }
         if (!worldIn.isClientSide()) {
             logger.debug("Sieve Activated");
-            SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
             ItemStack stack = player.getItemInHand(handIn);
             if (player.isShiftKeyDown() && stack.isEmpty()) {
                 sieveTile.removeMesh(true);

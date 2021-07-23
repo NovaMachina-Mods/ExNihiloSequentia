@@ -17,6 +17,7 @@ import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
+import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -69,7 +70,7 @@ public class UseCrookModifier extends LootModifier {
                         .nextInt(Config.getMaxBonusStringCount()) + Config.getMinStringCount()));
                 if (random.nextDouble() <= 0.8) {
                     newLoot
-                            .add(new ItemStack(EnumResource.SILKWORM.getRegistryObject().get()));
+                            .add(new ItemStack(ExNihiloItems.SILKWORM.get()));
                 }
             }
         }
@@ -77,7 +78,7 @@ public class UseCrookModifier extends LootModifier {
             logger.debug("Adding new loot");
             generatedLoot = newLoot;
         }
-        logger.debug("Hammer Generated Loot: " + generatedLoot);
+        logger.debug("Crook Generated Loot: " + generatedLoot);
         return generatedLoot;
     }
 

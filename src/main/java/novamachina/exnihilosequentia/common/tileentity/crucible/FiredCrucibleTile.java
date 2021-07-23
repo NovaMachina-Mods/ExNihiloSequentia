@@ -1,6 +1,9 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -15,7 +18,15 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public int getHeat() {
-        return ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(level.getBlockState(worldPosition.below()).getBlock());
+        BlockState source = level.getBlockState(worldPosition.below());
+        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock());
+        if(source.getBlock() instanceof FlowingFluidBlock) {
+            int level = 8 - source.getValue(BlockStateProperties.LEVEL);
+            double partial = (double)blockHeat / 8;
+            int returnVal = (int)Math.ceil(partial * level);
+            return returnVal;
+        }
+        return blockHeat;
     }
 
     @Override

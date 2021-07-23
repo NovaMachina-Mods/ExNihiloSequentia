@@ -29,7 +29,7 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
                 .properties(AbstractBlock.Properties.of(Material.LEAVES).strength(0.2F).sound(
-                        SoundType.GRASS).noOcclusion()).tileEntitySupplier(InfestingLeavesTile::new));
+                        SoundType.GRASS).noOcclusion().isValidSpawn(BaseBlock::never)).tileEntitySupplier(InfestingLeavesTile::new));
     }
 
     public static void finishInfestingBlock(World world, BlockPos pos) {
@@ -67,9 +67,11 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
 
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
-        InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
+        if(probeMode == ProbeMode.EXTENDED) {
+            InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
 
-        iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
-                .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
+            iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
+                    .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
+        }
     }
 }
