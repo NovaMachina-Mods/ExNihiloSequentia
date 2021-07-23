@@ -140,6 +140,11 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
     }
 
+    protected void createCrookRecipes(Consumer<IFinishedRecipe> consumer, Block itemInput,
+                                      IItemProvider itemDrop, float chance, String id) {
+        CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
+    }
+
     protected void createFiredCrucibleRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(block)).amount(amount).fluidResult(Fluids.LAVA)
                 .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(id));

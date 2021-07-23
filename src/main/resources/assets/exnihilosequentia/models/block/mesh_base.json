@@ -1,8 +1,5 @@
 {
   "parent": "minecraft:block/block",
-  "textures": {
-    "texture": "#texture"
-  },
   "name": "mesh_base",
   "display": {
     "thirdperson_righthand": {

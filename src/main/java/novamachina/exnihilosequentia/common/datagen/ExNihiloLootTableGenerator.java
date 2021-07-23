@@ -32,7 +32,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
     }
 
     private void registerLeaves(Block block) {
-        LootPool.Builder stringPool = createLootPoolBuilder();
+        /*LootPool.Builder stringPool = createLootPoolBuilder();
         stringPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.STRING));
         stringPool.when(SurvivesExplosion.survivesExplosion());
 
@@ -40,7 +40,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
         silkWormPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ExNihiloItems.SILKWORM.get()));
         silkWormPool.when(RandomChance.randomChance(0.7F));
 
-        register(block, stringPool, silkWormPool);
+        register(block, stringPool, silkWormPool);*/
     }
 
     private void registerSelfDrops() {
