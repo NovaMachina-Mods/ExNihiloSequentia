@@ -5,18 +5,21 @@ package novamachina.exnihilosequentia.common.block;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;*/
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+//import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
+
+import javax.annotation.Nullable;
 
 public class CrucibleBaseBlock extends BaseBlock/* implements ITOPInfoProvider */{
 

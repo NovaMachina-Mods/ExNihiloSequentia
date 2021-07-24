@@ -44,7 +44,7 @@ import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformR
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
+//import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
@@ -122,7 +122,7 @@ public class ExNihiloInitialization {
     public static void registerTOP(InterModEnqueueEvent event) {
         logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
         if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
-            CompatTOP.register();
+            //CompatTOP.register();
         }
     }
 

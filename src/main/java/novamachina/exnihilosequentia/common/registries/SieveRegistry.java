@@ -30,7 +30,7 @@ public class SieveRegistry implements ISieveRegistry {
     public List<SieveRecipe> getDrops(ItemLike input, EnumMesh meshType, boolean isWaterlogged) {
         return recipeList.parallelStream()
             .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
-            .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), input))
+            .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), (Ingredient) input))
             .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
             .filter(recipe -> {
                 if(recipe.getDrop().getItem() instanceof OreItem) {
@@ -86,7 +86,7 @@ public class SieveRegistry implements ISieveRegistry {
         for(EnumMesh mesh : EnumMesh.values()) {
             if(mesh != EnumMesh.NONE) {
                 for(Ingredient ingredient : inputs) {
-                    List<SieveRecipe> drops = getDrops(ingredient, mesh, false);
+                    List<SieveRecipe> drops = getDrops((ItemLike) ingredient, mesh, false);
                     List<List<SieveRecipe>> dropLists = Lists.partition(drops, 21);
                     if(!drops.isEmpty()) {
                         List<List<ItemStack>> inputList = new ArrayList<>();
@@ -124,7 +124,7 @@ public class SieveRegistry implements ISieveRegistry {
         for(EnumMesh mesh : EnumMesh.values()) {
             if(mesh != EnumMesh.NONE) {
                 for(Ingredient ingredient : inputs) {
-                    List<SieveRecipe> drops = getDrops(ingredient, mesh, true);
+                    List<SieveRecipe> drops = getDrops((ItemLike) ingredient, mesh, true);
                     List<List<SieveRecipe>> dropLists = Lists.partition(drops, 21);
                     if(!drops.isEmpty()) {
                         List<List<ItemStack>> inputList = new ArrayList<>();

@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.MutableComponent;
@@ -47,8 +48,8 @@ public class SieveTile extends BlockEntity {
     private long lastSieveAction = 0;
     private UUID lastPlayer;
 
-    public SieveTile() {
-        super(ExNihiloTiles.SIEVE.get());
+    public SieveTile(BlockPos pos, BlockState state) {
+        super(ExNihiloTiles.SIEVE.get(), pos, state);
     }
 
     public void insertMesh(ItemStack stack, Player player) {
@@ -176,7 +177,7 @@ public class SieveTile extends BlockEntity {
             if (progress >= Config.getMaxSieveClicks()) {
                 logger.debug("Sieve progress complete");
                 List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
-                    .getDrops(Ingredient.of(((BlockItem)blockStack.getItem()).getBlock()), meshType, isWaterlogged);
+                    .getDrops((((BlockItem)blockStack.getItem()).getBlock()), meshType, isWaterlogged);
                 drops.forEach((entry -> entry.getRolls().forEach(meshWithChance -> {
                     if (random.nextFloat() <= meshWithChance.getChance()) {
                         logger.debug("Spawning Item: " + entry.getDrop());

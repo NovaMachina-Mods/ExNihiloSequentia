@@ -7,30 +7,31 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;*/
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+//import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.StringUtils;
+
+import javax.annotation.Nullable;
 
 // TODO: Add progressive render
-public class InfestingLeavesBlock extends BaseBlock /*implements ITOPInfoProvider*/ {
+public class InfestingLeavesBlock extends BaseBlock implements EntityBlock/*implements ITOPInfoProvider*/ {
 
     private static final Random random = new Random();
 
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
                 .properties(Block.Properties.of(Material.LEAVES).strength(0.2F).sound(
-                        SoundType.GRASS).noOcclusion().isValidSpawn(BaseBlock::never)).tileEntitySupplier(InfestingLeavesTile::new));
+                        SoundType.GRASS).noOcclusion().isValidSpawn(BaseBlock::never)));
     }
 
     public static void finishInfestingBlock(Level world, BlockPos pos) {
@@ -64,6 +65,12 @@ public class InfestingLeavesBlock extends BaseBlock /*implements ITOPInfoProvide
         });
 
         return nearbyLeaves;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new InfestingLeavesTile(blockPos, blockState);
     }
 
     /*@Override

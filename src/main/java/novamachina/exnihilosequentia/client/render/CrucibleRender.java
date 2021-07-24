@@ -7,9 +7,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
@@ -24,9 +26,10 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
         super(rendererDispatcher);
     }
 
-    public static void register(BlockEntityRenderer<? extends BaseCrucibleTile> tileTileEntityType) {
+    public static void register(BlockEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         logger.debug("Register crucible renderer, Type" + tileTileEntityType);
-        ClientRegistry.bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
+        //TODO
+        //BlockEntityRenderers.register(tileTileEntityType, CrucibleRender::new);
     }
 
     @Override

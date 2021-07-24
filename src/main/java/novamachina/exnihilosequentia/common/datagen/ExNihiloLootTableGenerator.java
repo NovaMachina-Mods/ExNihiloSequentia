@@ -1,13 +1,13 @@
 package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.conditions.RandomChance;
-import net.minecraft.loot.conditions.SurvivesExplosion;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
@@ -32,12 +32,12 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
 
     private void registerLeaves(Block block) {
         LootPool.Builder stringPool = createLootPoolBuilder();
-        stringPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.STRING));
-        stringPool.when(SurvivesExplosion.survivesExplosion());
+        stringPool.setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(Items.STRING));
+        stringPool.when(ExplosionCondition.survivesExplosion());
 
         LootPool.Builder silkWormPool = createLootPoolBuilder();
-        silkWormPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ExNihiloItems.SILKWORM.get()));
-        silkWormPool.when(RandomChance.randomChance(0.7F));
+        silkWormPool.setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(ExNihiloItems.SILKWORM.get()));
+        silkWormPool.when(LootItemRandomChanceCondition.randomChance(0.7F));
 
         register(block, stringPool, silkWormPool);
     }

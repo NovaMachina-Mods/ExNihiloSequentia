@@ -1,18 +1,22 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class InfestingLeavesTile extends BlockEntity implements TickingBlockEntity {
+public class InfestingLeavesTile extends BlockEntity implements BlockEntityTicker<BlockEntity> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String PROGRESS_TAG = "progress";
 
@@ -20,8 +24,8 @@ public class InfestingLeavesTile extends BlockEntity implements TickingBlockEnti
     private int progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
     private int spreadCounter = 0;
 
-    public InfestingLeavesTile() {
-        super(ExNihiloTiles.INFESTING_LEAVES.get());
+    public InfestingLeavesTile(BlockPos pos, BlockState state) {
+        super(ExNihiloTiles.INFESTING_LEAVES.get(), pos, state);
     }
 
     public int getProgress() {
@@ -29,7 +33,7 @@ public class InfestingLeavesTile extends BlockEntity implements TickingBlockEnti
     }
 
     @Override
-    public void tick() {
+    public void tick(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity) {
         if (!level.isClientSide()) {
             progressWaitInterval--;
             if (progressWaitInterval <= 0) {

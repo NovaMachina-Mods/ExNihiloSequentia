@@ -9,11 +9,14 @@ import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntries;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -100,7 +103,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
     }
 
     private LootPool.Builder singleItem(ItemLike in) {
-        return createLootPoolBuilder().setRolls((NumberProvider) IntRange.exact(1)).add(LootPoolEntries.lootTableItem(in));
+        return createLootPoolBuilder().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(in));
     }
 
     private ResourceLocation toTableLoc(ResourceLocation registryName) {

@@ -7,7 +7,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.MushroomCow;
 import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.Villager;
@@ -46,6 +49,10 @@ public class WitchWaterBlock extends LiquidBlock {
         }
 
         // TODO Slime
+        // Just a meme :D
+        if (entityIn instanceof Bat) {
+            replaceMob(levelIn, (Bat) entityIn, new Slime(EntityType.SLIME, levelIn));
+        }
 
         if (entityIn instanceof Spider && !(entityIn instanceof CaveSpider)) {
             replaceMob(levelIn, (Spider) entityIn,
@@ -75,7 +82,9 @@ public class WitchWaterBlock extends LiquidBlock {
             }
         }
 
-        // TODO Cows
+        if (entityIn instanceof Cow && !(entityIn instanceof MushroomCow)) {
+            replaceMob(levelIn, (Cow) entityIn, new MushroomCow(EntityType.MOOSHROOM, levelIn));
+        }
 
         if (entityIn instanceof Animal) {
             entityIn.thunderHit((ServerLevel) worldIn, EntityType.LIGHTNING_BOLT.create(levelIn));

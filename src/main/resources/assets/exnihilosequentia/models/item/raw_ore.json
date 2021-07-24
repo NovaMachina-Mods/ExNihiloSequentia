@@ -1,7 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "exnihilosequentia:items/raw_ore",
-    "layer1": "exnihilosequentia:items/raw_ore_overlay"
-  }
-}

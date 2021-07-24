@@ -48,6 +48,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     private static final Fluid lava = Fluids.LAVA;
     private static final Fluid witchwater = ExNihiloFluids.WITCH_WATER.get();
     private static final Fluid seawater = ExNihiloFluids.SEA_WATER.get();
+    private static final List<Item> seeds = new ArrayList<>();
 
     public ExNihiloRecipeGenerator(DataGenerator generator) {
         super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
@@ -693,39 +694,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             }
         }
 
-        //TODO Itemlist for all Seeds
-        List<Item> seeds = new ArrayList<>();
-        seeds.add(Items.ACACIA_SAPLING);
-        seeds.add(Items.BIRCH_SAPLING);
-        seeds.add(Items.DARK_OAK_SAPLING);
-        seeds.add(Items.JUNGLE_SAPLING);
-        seeds.add(Items.OAK_SAPLING);
-        seeds.add(Items.SPRUCE_SAPLING);
-        seeds.add(Items.CACTUS);
-        seeds.add(Items.SUGAR_CANE);
-        seeds.add(Items.CARROT);
-        seeds.add(Items.POTATO);
-        seeds.add(Items.SWEET_BERRIES);
-        seeds.add(Items.BAMBOO);
-        seeds.add(Items.FERN);
-        seeds.add(Items.LARGE_FERN);
-        seeds.add(EnumResource.GRASS_SEED.getRegistryObject().get());
-        seeds.add(EnumResource.ANCIENT_SPORE.getRegistryObject().get());
-        seeds.add(Items.WHEAT_SEEDS);
-        seeds.add(Items.BEETROOT_SEEDS);
-        seeds.add(Items.MELON_SEEDS);
-        seeds.add(Items.PUMPKIN_SEEDS);
-        seeds.add(Items.KELP);
-        seeds.add(Items.SEA_PICKLE);
-        seeds.add(Items.COCOA_BEANS);
-        seeds.add(EnumResource.BLUE_CORAL_SEED.getRegistryObject().get());
-        seeds.add(EnumResource.PURPLE_CORAL_SEED.getRegistryObject().get());
-        seeds.add(EnumResource.PINK_CORAL_SEED.getRegistryObject().get());
-        seeds.add(EnumResource.YELLOW_CORAL_SEED.getRegistryObject().get());
-        seeds.add(EnumResource.RED_CORAL_SEED.getRegistryObject().get());
-        seeds.add(Items.SEAGRASS);
-
-        for (Item seed : seeds) {
+        for (Item seed : getAllSeeds()) {
             assert seed.getRegistryName() != null;
             if (seed == Items.BEETROOT_SEEDS || seed == Items.PUMPKIN_SEEDS || seed == Items.MELON_SEEDS) {
                 SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
@@ -813,5 +782,30 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addRoll(new MeshWithChance(EnumMesh.IRON, 0.1F))
                 .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.2F))
                 .build(consumer, sieveLoc("silkworm"));
+    }
+
+    private static List<Item> getAllSeeds() {
+        seeds.addAll(Tags.Items.SEEDS.getValues());
+        seeds.addAll(ItemTags.SAPLINGS.getValues());
+        seeds.add(Items.CACTUS);
+        seeds.add(Items.SUGAR_CANE);
+        seeds.add(Items.CARROT);
+        seeds.add(Items.POTATO);
+        seeds.add(Items.SWEET_BERRIES);
+        seeds.add(Items.BAMBOO);
+        seeds.add(Items.FERN);
+        seeds.add(Items.LARGE_FERN);
+        seeds.add(EnumResource.GRASS_SEED.getRegistryObject().get());
+        seeds.add(EnumResource.ANCIENT_SPORE.getRegistryObject().get());
+        seeds.add(Items.KELP);
+        seeds.add(Items.SEA_PICKLE);
+        seeds.add(Items.COCOA_BEANS);
+        seeds.add(EnumResource.BLUE_CORAL_SEED.getRegistryObject().get());
+        seeds.add(EnumResource.PURPLE_CORAL_SEED.getRegistryObject().get());
+        seeds.add(EnumResource.PINK_CORAL_SEED.getRegistryObject().get());
+        seeds.add(EnumResource.YELLOW_CORAL_SEED.getRegistryObject().get());
+        seeds.add(EnumResource.RED_CORAL_SEED.getRegistryObject().get());
+        seeds.add(Items.SEAGRASS);
+        return seeds;
     }
 }

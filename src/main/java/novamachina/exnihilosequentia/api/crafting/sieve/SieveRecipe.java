@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fmllegacy.RegistryObject;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -15,7 +15,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 public class SieveRecipe extends SerializableRecipe {
     public static final RecipeType<SieveRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
-    private static RegistryObject<RecipeSerializer<SieveRecipe>> serializer;
+    private static RegistryObject<IRecipeSerializer<SieveRecipe>> serializer;
     private ItemStack drop;
     private Ingredient input;
     private boolean isWaterlogged;
@@ -31,11 +31,11 @@ public class SieveRecipe extends SerializableRecipe {
         this.isWaterlogged = isWaterlogged;
     }
 
-    public static RegistryObject<RecipeSerializer<SieveRecipe>> getStaticSerializer() {
+    public static RegistryObject<IRecipeSerializer<SieveRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(RegistryObject<RecipeSerializer<SieveRecipe>> serializer) {
+    public static void setSerializer(RegistryObject<IRecipeSerializer<SieveRecipe>> serializer) {
         SieveRecipe.serializer = serializer;
     }
 
@@ -113,7 +113,7 @@ public class SieveRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer<SieveRecipe> getENSerializer() {
+    protected IRecipeSerializer<SieveRecipe> getENSerializer() {
         return serializer.get();
     }
 }

@@ -1,6 +1,0 @@
-{
-  "parent": "exnihilosequentia:block/mesh_base",
-  "textures": {
-    "texture": "exnihilosequentia:block/diamond_mesh"
-  }
-}

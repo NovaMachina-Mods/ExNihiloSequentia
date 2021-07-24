@@ -8,10 +8,9 @@ import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 
-public class NetherBarrelBlock extends BlockBarrel {
+public class NetherBarrelBlock extends FiredBarrels {
     public NetherBarrelBlock() {
         super(new BlockBuilder().harvestLevel(ToolType.AXE, 0).properties(
-                Block.Properties.of(Material.NETHER_WOOD).strength(1.0F).sound(SoundType.STEM))
-                .tileEntitySupplier(StoneBarrelTile::new));
+                Block.Properties.of(Material.NETHER_WOOD).strength(1.0F).sound(SoundType.STEM)));
     }
 }

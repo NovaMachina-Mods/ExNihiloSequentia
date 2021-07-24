@@ -60,5 +60,5 @@ public abstract class SerializableRecipe implements Recipe<Inventory> {
         return false;
     }
 
-    protected abstract RecipeSerializer<? extends SerializableRecipe> getENSerializer();
+    protected abstract IRecipeSerializer<? extends SerializableRecipe> getENSerializer();
 }

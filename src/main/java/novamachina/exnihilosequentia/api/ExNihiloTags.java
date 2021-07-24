@@ -6,10 +6,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.StaticTagHelper;
+import net.minecraft.tags.StaticTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.util.ReverseTagWrapper;
 import novamachina.exnihilosequentia.api.datagen.AbstractBlockStateGenerator;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -36,7 +40,8 @@ public class ExNihiloTags {
     }
 
     public static Tag.Named<Item> createItemWrapper(ResourceLocation name) {
-        return createWrapperTag(ItemTags.getWrappers(), name, ItemTags::bind);
+        return null;
+        //return createWrapperTag(ItemTags.getAllTags(), name, ItemTags::bind);
     }
 
     public static ResourceLocation getIngot(String ingot) {
@@ -51,6 +56,7 @@ public class ExNihiloTags {
         return ores.get(ore);
     }
 
+    //TODO
     private static <T> Tag.Named<T> createWrapperTag(List<? extends Tag.Named<T>> allExisting, ResourceLocation name,
                                                           Function<String, Tag.Named<T>> createNew) {
         Optional<? extends Tag.Named<T>> existing = allExisting
@@ -63,7 +69,7 @@ public class ExNihiloTags {
             return createNew.apply(name.toString());
     }
 
-    private static ResourceLocation forgeLoc(String path) {
+    public static ResourceLocation forgeLoc(String path) {
         return new ResourceLocation("forge", path);
     }
 

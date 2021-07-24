@@ -8,7 +8,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fmllegacy.RegistryObject;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -16,7 +16,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 public class CrucibleRecipe extends SerializableRecipe {
     public static final RecipeType<CrucibleRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
-    private static RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer;
+    private static RegistryObject<IRecipeSerializer<CrucibleRecipe>> serializer;
     private int amount;
     private CrucilbeTypeEnum crucibleType;
     private Ingredient input;
@@ -30,11 +30,11 @@ public class CrucibleRecipe extends SerializableRecipe {
         this.crucibleType = crucibleType;
     }
 
-    public static RegistryObject<RecipeSerializer<CrucibleRecipe>> getStaticSerializer() {
+    public static RegistryObject<IRecipeSerializer<CrucibleRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer) {
+    public static void setSerializer(RegistryObject<IRecipeSerializer<CrucibleRecipe>> serializer) {
         CrucibleRecipe.serializer = serializer;
     }
 
@@ -80,7 +80,7 @@ public class CrucibleRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer<CrucibleRecipe> getENSerializer() {
+    protected IRecipeSerializer<CrucibleRecipe> getENSerializer() {
         return serializer.get();
     }
 }

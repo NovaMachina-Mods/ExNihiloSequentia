@@ -8,11 +8,10 @@ import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 
-public class NetherCrucibleBlock extends CrucibleBaseBlock {
+public class NetherCrucibleBlock extends FiredCruciblesBlocks {
     public NetherCrucibleBlock() {
         super(new BlockBuilder().properties(
                 Block.Properties.of(Material.NETHER_WOOD).strength(1.0F)
-                        .sound(SoundType.STEM).noOcclusion()).harvestLevel(ToolType.AXE, 0)
-                .tileEntitySupplier(FiredCrucibleTile::new));
+                        .sound(SoundType.STEM).noOcclusion()).harvestLevel(ToolType.AXE, 0));
     }
 }

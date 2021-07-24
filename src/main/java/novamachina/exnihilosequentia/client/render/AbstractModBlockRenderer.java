@@ -22,7 +22,8 @@ public abstract class AbstractModBlockRenderer<T extends BlockEntity> implements
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     protected AbstractModBlockRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+        //TODO
+        super();
     }
 
     protected void add(VertexConsumer renderer, PoseStack stack, VertexLocation vertexLocation, UVLocation uvLocation, Color color, int combinedLight) {

@@ -29,10 +29,10 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     protected JsonArray outputArray = null;
     protected int outputCount = 0;
     private ResourceLocation id;
-    private final RecipeSerializer<?> serializer;
+    private final IRecipeSerializer<?> serializer;
     private final List<Consumer<JsonObject>> writerFunctions;
 
-    protected ExNihiloFinishedRecipe(RecipeSerializer<?> serializer) {
+    protected ExNihiloFinishedRecipe(IRecipeSerializer<?> serializer) {
         this.serializer = serializer;
         this.writerFunctions = new ArrayList<>();
     }
@@ -81,7 +81,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     @Override
-    public RecipeSerializer<?> getType() {
+    public IRecipeSerializer<?> getType() {
         return serializer;
     }
 

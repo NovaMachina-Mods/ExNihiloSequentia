@@ -7,14 +7,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
+public class CrookRecipeSerializer extends IRecipeSerializer<CrookRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(EnumCrook.WOOD.getRegistryObject().get());

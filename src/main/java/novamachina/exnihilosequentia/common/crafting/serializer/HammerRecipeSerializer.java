@@ -8,12 +8,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 
-public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
+public class HammerRecipeSerializer extends IRecipeSerializer<HammerRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(EnumHammer.DIAMOND.getRegistryObject().get());

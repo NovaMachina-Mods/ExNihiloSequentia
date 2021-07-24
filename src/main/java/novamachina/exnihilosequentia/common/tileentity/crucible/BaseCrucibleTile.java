@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -12,8 +11,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.TickingBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -34,7 +34,7 @@ import org.apache.logging.log4j.LogManager;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class BaseCrucibleTile extends BlockEntity implements TickingBlockEntity {
+public abstract class BaseCrucibleTile extends BlockEntity implements BlockEntityTicker<BlockEntity> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String INVENTORY_TAG = "inventory";
     private static final String SOLID_AMOUNT_TAG = "solidAmount";
@@ -51,9 +51,8 @@ public abstract class BaseCrucibleTile extends BlockEntity implements TickingBlo
     protected int solidAmount;
     protected ItemStack currentItem;
 
-    protected BaseCrucibleTile(
-        BlockEntityType<? extends BaseCrucibleTile> tileEntityType) {
-        super(tileEntityType);
+    protected BaseCrucibleTile(BlockEntityType<? extends BaseCrucibleTile> tileEntityType, BlockPos pos, BlockState state) {
+        super(tileEntityType, pos, state);
         inventory = new MeltableItemHandler(getCrucibleType());
         tank = new CrucibleFluidHandler(this);
         ticksSinceLast = 0;
@@ -245,9 +244,4 @@ public abstract class BaseCrucibleTile extends BlockEntity implements TickingBlo
     public abstract int getSolidAmount();
 
     public abstract boolean canAcceptFluidTemperature(FluidStack fluidStack);
-
-    @Override
-    public BlockPos getPos() {
-        return null;
-    }
 }

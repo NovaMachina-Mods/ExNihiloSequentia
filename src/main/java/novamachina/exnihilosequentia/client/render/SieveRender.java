@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,7 +28,8 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
 
     public static void register() {
         logger.debug("Registering sieve renderer");
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.SIEVE.get(), SieveRender::new);
+        //TODO
+        //BlockEntityRenderers.register(ExNihiloTiles.SIEVE.get(), SieveRender::new);
     }
 
     @Override

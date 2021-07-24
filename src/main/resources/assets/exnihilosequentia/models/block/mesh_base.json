@@ -1,9 +1,6 @@
 {
 	"ambientocclusion": false,
 	"parent": "minecraft:block/block",
-	"textures": {
-		"texture": "#texture"
-	},
 	"elements": [
 		{
 			"from": [1, 13, 1],

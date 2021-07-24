@@ -39,7 +39,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
     maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
-    maven { url = "https://maven.tehnut.info"} // WAILA
+    //maven { url = "https://maven.tehnut.info"} // WAILA
     maven { url = "https://maven.tterrag.com/" } // TOP
     maven { url = "https://maven.blamejared.com" } // CraftTweaker
     maven {
@@ -61,7 +61,6 @@ dependencies {
 
 //    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
 //    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
-
     compileOnly fg.deobf("curse.maven:jade-324717:3398501:api")
     runtimeOnly fg.deobf("curse.maven:jade-324717:3398501")
 
@@ -82,6 +81,7 @@ task replaceResources(type: Copy) {
 }
 
 processResources {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
     from(sourceSets.main.resources.srcDirs) {
         exclude 'META-INF/mods.toml'
     }

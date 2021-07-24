@@ -6,11 +6,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 
-public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
+public class HeatRecipeSerializer extends IRecipeSerializer<HeatRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get());

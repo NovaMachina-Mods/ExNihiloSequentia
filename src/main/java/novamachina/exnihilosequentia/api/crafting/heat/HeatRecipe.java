@@ -5,13 +5,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fmllegacy.RegistryObject;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class HeatRecipe extends SerializableRecipe {
     public static final RecipeType<HeatRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
-    private static RegistryObject<RecipeSerializer<HeatRecipe>> serializer;
+    private static RegistryObject<IRecipeSerializer<HeatRecipe>> serializer;
     private int amount;
     private Block input;
 
@@ -21,11 +21,11 @@ public class HeatRecipe extends SerializableRecipe {
         this.amount = amount;
     }
 
-    public static RegistryObject<RecipeSerializer<HeatRecipe>> getStaticSerializer() {
+    public static RegistryObject<IRecipeSerializer<HeatRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(RegistryObject<RecipeSerializer<HeatRecipe>> serializer) {
+    public static void setSerializer(RegistryObject<IRecipeSerializer<HeatRecipe>> serializer) {
         HeatRecipe.serializer = serializer;
     }
 
@@ -51,7 +51,7 @@ public class HeatRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer<HeatRecipe> getENSerializer() {
+    protected IRecipeSerializer<HeatRecipe> getENSerializer() {
         return serializer.get();
     }
 }
