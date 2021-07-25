@@ -64,6 +64,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
         ConfiguredModel model = new ConfiguredModel(models().getExistingFile(modLoc("block/cake_uneaten")));
         partialBlockstate.with(BITES, 0).addModels(model);
+
     }
 
     protected void createCrucible(Block block, ResourceLocation texture) {

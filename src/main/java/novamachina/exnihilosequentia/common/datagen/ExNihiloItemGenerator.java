@@ -24,9 +24,15 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
     @Override
     protected void registerModels() {
+        singleTexture(ExNihiloItems.END_CAKE.get().getRegistryName().getPath(),
+                new ResourceLocation(ITEM_HANDHELD_TAG), LAYER_0_TAG,
+                new ResourceLocation(modid, "items/end_cake"));
         singleTexture(ExNihiloItems.COOKED_SILKWORM.get().getRegistryName()
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                 LAYER_0_TAG, new ResourceLocation(modid, "items/cooked_silkworm"));
+        singleTexture(ExNihiloItems.SILKWORM.get().getRegistryName()
+                        .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
+                LAYER_0_TAG, new ResourceLocation(modid, "items/silkworm"));
         singleTexture(ExNihiloItems.WITCH_WATER_BUCKET.get().getRegistryName()
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                 LAYER_0_TAG, new ResourceLocation(modid, "items/witch_water_bucket"));
