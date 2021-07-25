@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "exnihilosequentia:items/ingot",
+    "layer1": "exnihilosequentia:items/ingot"
+  }
+}

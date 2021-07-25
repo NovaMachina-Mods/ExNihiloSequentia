@@ -71,7 +71,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
     }
 
     protected LootPool.Builder createLootPoolBuilder() {
-        return LootPool.lootPool().when(ExplosionCondition.survivesExplosion());
+        return LootPool.lootPool()/*.when(ExplosionCondition.survivesExplosion()*/;
     }
 
     protected abstract void createLootTables();

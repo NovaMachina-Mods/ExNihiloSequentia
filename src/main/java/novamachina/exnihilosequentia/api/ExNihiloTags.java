@@ -19,15 +19,15 @@ import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloTags {
-    public static final Tag.Named<Item> CLAY = createItemWrapper(forgeLoc("clay"));
-    public static final Tag.Named<Item> HAMMER = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
-    public static final Tag.Named<Item> CROOK = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crook"));
-	public static final Tag.Named<Item> STONE_STICK = createItemWrapper(forgeLoc("rods/stone"));
-    public static final Tag.Named<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
-    public static final Tag.Named<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
-    public static final Tag.Named<Item> CRUCIBLE = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucibles"));
-    public static final Tag.Named<Item> BARREL = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "barrels"));
-    public static final Tag.Named<Item> SIEVE = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "sieves"));
+    public static final Tag.Named<Item> CLAY = ItemTags.createOptional(forgeLoc("clay"));
+    public static final Tag.Named<Item> HAMMER = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
+    public static final Tag.Named<Item> CROOK = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crook"));
+	public static final Tag.Named<Item> STONE_STICK = ItemTags.createOptional(forgeLoc("rods/stone"));
+    public static final Tag.Named<Item> MEAT_COOKED = ItemTags.createOptional(forgeLoc("meat_cooked"));
+    public static final Tag.Named<Item> MEAT_UNCOOKED = ItemTags.createOptional(forgeLoc("meat_uncooked"));
+    public static final Tag.Named<Item> CRUCIBLE = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucibles"));
+    public static final Tag.Named<Item> BARREL = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "barrels"));
+    public static final Tag.Named<Item> SIEVE = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "sieves"));
     private static final Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
 
     static {
@@ -39,10 +39,9 @@ public class ExNihiloTags {
     private ExNihiloTags() {
     }
 
-    public static Tag.Named<Item> createItemWrapper(ResourceLocation name) {
-        return null;
-        //return createWrapperTag(ItemTags.getAllTags(), name, ItemTags::bind);
-    }
+    /*public static Tag.Named<Item> createItemWrapper(ResourceLocation name) {
+        return createWrapperTag(ItemTags.getAllTags(), name, ItemTags::bind);
+    }*/
 
     public static ResourceLocation getIngot(String ingot) {
         return forgeLoc("ingots/" + ingot);
@@ -78,8 +77,8 @@ public class ExNihiloTags {
         private final Tag.Named<Item> ore;
 
         public OreTag(EnumOre ore) {
-            this.ingot = createItemWrapper(getIngot(ore.getOreName()));
-            this.ore = createItemWrapper(getOre(ore.getOreName()));
+            this.ingot = ItemTags.createOptional(getIngot(ore.getOreName()));
+            this.ore = ItemTags.createOptional(getOre(ore.getOreName()));
         }
 
         public Tag.Named<Item> getIngotTag() {

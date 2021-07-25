@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
@@ -22,14 +23,14 @@ import org.apache.logging.log4j.LogManager;
 public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public CrucibleRender(BlockEntityRenderDispatcher rendererDispatcher) {
-        super(rendererDispatcher);
+    public CrucibleRender(BlockEntityRendererProvider.Context context) {
+        super(context);
     }
 
     public static void register(BlockEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         logger.debug("Register crucible renderer, Type" + tileTileEntityType);
         //TODO
-        //BlockEntityRenderers.register(tileTileEntityType, CrucibleRender::new);
+        BlockEntityRenderers.register(tileTileEntityType, CrucibleRender::new);
     }
 
     @Override

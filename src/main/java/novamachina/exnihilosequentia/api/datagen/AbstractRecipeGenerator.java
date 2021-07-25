@@ -16,6 +16,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.material.Fluid;
@@ -120,7 +121,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         return new ResourceLocation(location.getNamespace(), prependRecipePrefix(location.getPath()));
     }
 	
-	public static void createMCCompost(Item item, float chance) {
+	public static void createMCCompost(ItemLike item, float chance) {
         ComposterBlock.COMPOSTABLES.put(item, chance);
     }
 
@@ -135,7 +136,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     }
 
     protected void createCrookRecipes(Consumer<FinishedRecipe> consumer, Tag.Named<Item> itemInput,
-                                      Item itemDrop, float chance, String id) {
+                                      ItemLike itemDrop, float chance, String id) {
         CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
     }
 

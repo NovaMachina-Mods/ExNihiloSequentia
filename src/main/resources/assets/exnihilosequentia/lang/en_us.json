@@ -130,12 +130,12 @@
   "item.exnihilosequentia.basalt_pebble": "Basalt Pebble",
   "item.exnihilosequentia.blackstone_pebble": "Blackstone Pebble",
 
-  "item.exnihilosequentia.mesh_string": "String Mesh",
-  "item.exnihilosequentia.mesh_flint": "Flint Mesh",
-  "item.exnihilosequentia.mesh_iron": "Iron Mesh",
-  "item.exnihilosequentia.mesh_diamond": "Diamond Mesh",
-  "item.exnihilosequentia.mesh_emerald": "Emerald Mesh",
-  "item.exnihilosequentia.mesh_netherite": "Netherite Mesh",
+  "item.exnihilosequentia.string_mesh": "String Mesh",
+  "item.exnihilosequentia.flint_mesh": "Flint Mesh",
+  "item.exnihilosequentia.iron_mesh": "Iron Mesh",
+  "item.exnihilosequentia.diamond_mesh": "Diamond Mesh",
+  "item.exnihilosequentia.emerald_mesh": "Emerald Mesh",
+  "item.exnihilosequentia.netherite_mesh": "Netherite Mesh",
 
   "fluid.exnihilosequentia.witch_water_still": "Witch Water",
   "fluid.exnihilosequentia.witch_water_flow": "Witch Water",

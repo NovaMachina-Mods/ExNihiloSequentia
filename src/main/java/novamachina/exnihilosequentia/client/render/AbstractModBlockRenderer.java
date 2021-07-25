@@ -2,8 +2,10 @@ package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.BlockItem;
@@ -20,10 +22,11 @@ import javax.annotation.Nullable;
 
 public abstract class AbstractModBlockRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    protected BlockEntityRendererProvider.Context context;
 
-    protected AbstractModBlockRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
+    protected AbstractModBlockRenderer(BlockEntityRendererProvider.Context context) {
         //TODO
-        super();
+        this.context = context;
     }
 
     protected void add(VertexConsumer renderer, PoseStack stack, VertexLocation vertexLocation, UVLocation uvLocation, Color color, int combinedLight) {

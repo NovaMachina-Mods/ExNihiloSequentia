@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
@@ -22,15 +23,15 @@ import org.apache.logging.log4j.LogManager;
 public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public BarrelRender(BlockEntityRenderDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+    public BarrelRender(BlockEntityRendererProvider.Context context) {
+        super(context);
     }
 
     public static void register() {
         logger.debug("Register barrel renderer");
         //TODO
-        //BlockEntityRenderers.register(ExNihiloTiles.BARREL_WOOD.get(), BarrelRender::new);
-        //BlockEntityRenderers.register(ExNihiloTiles.BARREL_STONE.get(), BarrelRender::new);
+        BlockEntityRenderers.register(ExNihiloTiles.BARREL_WOOD.get(), BarrelRender::new);
+        BlockEntityRenderers.register(ExNihiloTiles.BARREL_STONE.get(), BarrelRender::new);
     }
 
 

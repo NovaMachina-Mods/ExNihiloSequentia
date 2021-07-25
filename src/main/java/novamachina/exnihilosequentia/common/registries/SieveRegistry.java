@@ -30,7 +30,7 @@ public class SieveRegistry implements ISieveRegistry {
     public List<SieveRecipe> getDrops(ItemLike input, EnumMesh meshType, boolean isWaterlogged) {
         return recipeList.parallelStream()
             .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
-            .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), (Ingredient) input))
+            .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), Ingredient.of(input)))
             .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
             .filter(recipe -> {
                 if(recipe.getDrop().getItem() instanceof OreItem) {

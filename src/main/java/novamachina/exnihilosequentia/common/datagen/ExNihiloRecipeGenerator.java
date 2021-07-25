@@ -785,8 +785,16 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private static List<Item> getAllSeeds() {
-        seeds.addAll(Tags.Items.SEEDS.getValues());
-        seeds.addAll(ItemTags.SAPLINGS.getValues());
+        seeds.add(Items.WHEAT_SEEDS);
+        seeds.add(Items.BEETROOT_SEEDS);
+        seeds.add(Items.MELON_SEEDS);
+        seeds.add(Items.PUMPKIN_SEEDS);
+        seeds.add(Items.ACACIA_SAPLING);
+        seeds.add(Items.BIRCH_SAPLING);
+        seeds.add(Items.DARK_OAK_SAPLING);
+        seeds.add(Items.JUNGLE_SAPLING);
+        seeds.add(Items.OAK_SAPLING);
+        seeds.add(Items.SPRUCE_SAPLING);
         seeds.add(Items.CACTUS);
         seeds.add(Items.SUGAR_CANE);
         seeds.add(Items.CARROT);

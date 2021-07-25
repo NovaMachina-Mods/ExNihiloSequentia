@@ -33,7 +33,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
     private void registerLeaves(Block block) {
         LootPool.Builder stringPool = createLootPoolBuilder();
         stringPool.setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(Items.STRING));
-        stringPool.when(ExplosionCondition.survivesExplosion());
+        //stringPool.when(ExplosionCondition.survivesExplosion());
 
         LootPool.Builder silkWormPool = createLootPoolBuilder();
         silkWormPool.setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(ExNihiloItems.SILKWORM.get()));

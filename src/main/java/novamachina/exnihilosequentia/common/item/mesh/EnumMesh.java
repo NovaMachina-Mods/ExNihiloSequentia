@@ -44,7 +44,7 @@ public enum EnumMesh implements IExtensibleEnum, StringRepresentable {
     }
 
     public String getMeshName() {
-        return "mesh_" + name;
+        return name + "_mesh";
     }
 
     public String getName() {
