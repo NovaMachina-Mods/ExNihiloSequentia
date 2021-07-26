@@ -1,24 +1,27 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class InfestedLeavesTile extends TileEntity implements ITickableTileEntity {
+public class InfestedLeavesTile extends BlockEntity implements BlockEntityTicker<BlockEntity> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private int progressWaitInterval = 0;
 
-    public InfestedLeavesTile() {
-        super(ExNihiloTiles.INFESTED_LEAVES.get());
+    public InfestedLeavesTile(BlockPos pos, BlockState state) {
+        super(ExNihiloTiles.INFESTED_LEAVES.get(), pos, state);
     }
 
     @Override
-    public void tick() {
+    public void tick(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity) {
         if (!level.isClientSide()) {
             progressWaitInterval++;
             if (progressWaitInterval >= Config.getTicksBetweenSpreadAttempt()) {

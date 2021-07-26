@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -42,8 +42,8 @@ public class MeltableItemHandler extends ItemStackHandler {
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT nbt = super.serializeNBT();
+    public CompoundTag serializeNBT() {
+        CompoundTag nbt = super.serializeNBT();
         nbt.putBoolean("hasRoom", crucibleHasRoom);
         if(type != null) {
             nbt.putString("type", type.getName());
@@ -52,7 +52,7 @@ public class MeltableItemHandler extends ItemStackHandler {
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
+    public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
         this.crucibleHasRoom = nbt.getBoolean("hasRoom");
         this.type = CrucilbeTypeEnum.getTypeByName(nbt.getString("type"));

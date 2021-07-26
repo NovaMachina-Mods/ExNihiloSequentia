@@ -1,18 +1,19 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
-import com.blamejared.crafttweaker.api.annotations.ZenRegister;
+//TODO
+/*import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.fluid.IFluidStack;
 import com.blamejared.crafttweaker.api.item.IItemStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenFluidOnTopRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.ZenFluidOnTopRecipe")*/
 public class ZenFluidOnTopRecipe {
-
+/*
     private final FluidOnTopRecipe internal;
 
     private ZenFluidOnTopRecipe(ResourceLocation recipeId) {
@@ -45,4 +46,6 @@ public class ZenFluidOnTopRecipe {
         internal.setResult(result.getInternal());
         return this;
     }
+
+ */
 }

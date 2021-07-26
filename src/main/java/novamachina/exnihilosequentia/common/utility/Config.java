@@ -406,8 +406,6 @@ public class Config {
     private static void oreConfigs() {
         enableOreOverride = COMMON_BUILDER.comment("Allows ores to be enabled or disabled by this config file. (Default: false)")
                 .define("enableOreOverride", false);
-        enableCopper = COMMON_BUILDER.comment("Enable copper ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
-                .define("enableCopper", true);
         enableLead = COMMON_BUILDER.comment("Enable lead ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
                 .define("enableLead", true);
         enableNickel = COMMON_BUILDER.comment("Enable nickel ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
@@ -428,6 +426,8 @@ public class Config {
                 .define("enableIron", true);
         enableGold = COMMON_BUILDER.comment("Enable gold ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
                 .define("enableGold", true);
+        enableCopper = COMMON_BUILDER.comment("Enable copper ore pieces, chunks and ingots if they exist. 'enableOreOverride' must be true for this to work. (Default: true)")
+                .define("enableCopper", true);
     }
 
     private static void pebbleConfigs() {

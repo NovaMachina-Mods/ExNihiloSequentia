@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +28,7 @@ public class HandshakeMessages {
             return oreList;
         }
 
-        static S2COreList decode(PacketBuffer buffer) {
+        static S2COreList decode(FriendlyByteBuf buffer) {
             S2COreList message = new S2COreList();
             message.oreList = new ArrayList<>();
             int count = buffer.readInt();
@@ -40,7 +40,7 @@ public class HandshakeMessages {
             return message;
         }
 
-        void encode(PacketBuffer buffer) {
+        void encode(FriendlyByteBuf buffer) {
             oreList = Arrays.stream(EnumOre.values()).filter(EnumOre::isEnabled).collect(Collectors.toList());
             logger.debug("Writing ore list: " + oreList);
             buffer.writeInt(oreList.size());
@@ -68,11 +68,11 @@ public class HandshakeMessages {
     }
 
     static class C2SAcknowledge extends LoginIndexedMessage {
-        static C2SAcknowledge decode(PacketBuffer buf) {
+        static C2SAcknowledge decode(FriendlyByteBuf buf) {
             return new C2SAcknowledge();
         }
 
-        void encode(PacketBuffer buf) {
+        void encode(FriendlyByteBuf buf) {
             // NOOP
         }
     }

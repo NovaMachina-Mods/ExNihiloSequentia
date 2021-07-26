@@ -1,9 +1,12 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -12,15 +15,15 @@ import novamachina.exnihilosequentia.common.utility.Config;
 
 public class FiredCrucibleTile extends BaseCrucibleTile {
 
-    public FiredCrucibleTile() {
-        super(ExNihiloTiles.CRUCIBLE_FIRED.get());
+    public FiredCrucibleTile(BlockPos pos, BlockState state) {
+        super(ExNihiloTiles.CRUCIBLE_FIRED.get(), pos, state);
     }
 
     @Override
     public int getHeat() {
         BlockState source = level.getBlockState(worldPosition.below());
         int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock());
-        if(source.getBlock() instanceof FlowingFluidBlock) {
+        if(source.getBlock() instanceof LiquidBlock) {
             int level = 8 - source.getValue(BlockStateProperties.LEVEL);
             double partial = (double)blockHeat / 8;
             int returnVal = (int)Math.ceil(partial * level);
@@ -49,8 +52,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
         return true;
     }
 
-    @Override
-    public void tick() {
+    public void tick(Level level, BlockPos blockPos, BlockState blockState, BaseCrucibleTile blockEntity) {
         if (level.isClientSide()) {
             return;
         }
@@ -106,6 +108,6 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                 solidAmount -= filled;
             }
         }
-        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+        level.sendBlockUpdated(blockPos, blockState, blockEntity.getBlockState(), 2);
     }
 }

@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei;
 
-import java.util.List;
+//TODO
+/*import java.util.List;
 import java.util.stream.Collectors;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -8,8 +9,8 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
@@ -39,7 +40,9 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 @JeiPlugin
-public class JEIPlugin implements IModPlugin {
+ */
+public class JEIPlugin {//implements IModPlugin {
+    /*
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final ResourceLocation CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLES);
     private static final ResourceLocation FIRED_CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.FIRED_CRUCIBLE);
@@ -192,4 +195,6 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipes(recipes, CRUCIBLES);
         logger.info("Wooden Crucible Recipes Loaded: " + recipes.size());
     }
+
+     */
 }

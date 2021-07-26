@@ -1,21 +1,23 @@
 package novamachina.exnihilosequentia.common.item.pebbles;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.SnowballEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SnowballItem;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SnowballItem;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.level.Level;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.init.ExNihiloSounds;
 import novamachina.exnihilosequentia.common.utility.Config;
+
+import java.util.Random;
 
 public class PebbleItem extends SnowballItem {
 
@@ -24,29 +26,29 @@ public class PebbleItem extends SnowballItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         //TODO Placeable like redstone?
-        world.playSound(null, player.getX(), player.getY(), player.getZ(), ExNihiloSounds.PEBBLE_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), ExNihiloSounds.PEBBLE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (new Random().nextFloat() * 0.4F + 0.8F));
         if (!world.isClientSide) {
-            SnowballEntity snowballentity = new SnowballEntity(world, player){
+            Snowball snowballentity = new Snowball(world, player){
                 @Override
-                public void onHitEntity(EntityRayTraceResult entityRayTraceResult) {
+                public void onHitEntity(EntityHitResult entityRayTraceResult) {
                     Entity entity = entityRayTraceResult.getEntity();
                     entity.hurt(DamageSource.thrown(this, this.getOwner()), (float) Config.getPebbleDamage());
                 }
             };
             snowballentity.setItem(itemstack);
-            snowballentity.shootFromRotation(player, player.xRot, player.yRot, 0.0F, 1.5F, 1.0F);
+            snowballentity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             world.addFreshEntity(snowballentity);
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));
-        if (!player.abilities.instabuild) {
+        if (!player.getAbilities().instabuild) {
             itemstack.shrink(1);
         }
 
-        return ActionResult.sidedSuccess(itemstack, world.isClientSide());
+        return InteractionResultHolder.sidedSuccess(itemstack, world.isClientSide());
     }
 
 }

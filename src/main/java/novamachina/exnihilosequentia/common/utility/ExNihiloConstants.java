@@ -70,8 +70,8 @@ public class ExNihiloConstants {
 
         public static final String SEA_WATER_STILL = "sea_water_still";
         public static final String SEA_WATER_FLOW = "sea_water_flow";
-        public static final String WITCH_WATER_STILL = "witchwater_still";
-        public static final String WITCH_WATER_FLOW = "witchwater_flow";
+        public static final String WITCH_WATER_STILL = "witch_water_still";
+        public static final String WITCH_WATER_FLOW = "witch_water_flow";
 
         private Fluids() {
         }
@@ -79,30 +79,23 @@ public class ExNihiloConstants {
 
     public static class Items {
 
-        public static final String ACACIA_SEED = "acacia";
         public static final String ANCIENT_SPORE = "ancient_spores";
         public static final String ANDESITE_CROOK = createCrookName("andesite");
         public static final String ANDESITE_PEBBLE = createPebbleName("andesite");
-        public static final String BAMBOO_SEED = "bamboo";
         public static final String BASALT_PEBBLE = createPebbleName("basalt");
         public static final String BEEHIVE_FRAME = "beehive_frame";
-        public static final String BIRCH_SEED = "birch";
         public static final String BLACKSTONE_PEBBLE = createPebbleName("blackstone");
         public static final String BLAZE_CROOK = createCrookName("blaze");
         public static final String BLUE_CORAL_LARVAE = "blue_coral_larvae";
         public static final String BONE_CROOK = createCrookName("bone");
-        public static final String CACTUS_SEED = "cactus";
-        public static final String CARROT_SEED = "carrot";
         public static final String CLAY_CROOK = createCrookName("clay");
         public static final String CLAY_UNCOOKED_CROOK = createCrookName("clay_uncooked");
         public static final String COOKED_SILKWORM = "cooked_silkworm";
-        public static final String CRAFTING_DOLL = "doll_crafting";
-        public static final String DARK_OAK_SEED = "darkoak";
+        public static final String CRAFTING_DOLL = "crafting_doll";
         public static final String DIAMOND_CROOK = createCrookName("diamond");
         public static final String DIAMOND_HAMMER = createHammerName("diamond");
         public static final String DIORITE_CROOK = createCrookName("diorite");
         public static final String DIORITE_PEBBLE = createPebbleName("diorite");
-        public static final String FERN_SEED = "fern";
         public static final String GOLD_CROOK = createCrookName("gold");
         public static final String GOLD_HAMMER = createHammerName("gold");
         public static final String GRANITE_CROOK = createCrookName("granite");
@@ -110,30 +103,21 @@ public class ExNihiloConstants {
         public static final String GRASS_SEED = "grass_seeds";
         public static final String IRON_CROOK = createCrookName("iron");
         public static final String IRON_HAMMER = createHammerName("iron");
-        public static final String JUNGLE_SEED = "jungle";
-        public static final String KELP_SEED = "kelp";
-        public static final String LARGE_FERN_SEED = "large_fern";
         public static final String NETHERITE_HAMMER = createHammerName("netherite");
         public static final String NETHERRACK_CROOK = createCrookName("netherrack");
-        public static final String OAK_SEED = "oak";
-        public static final String PICKLE_SEED = "pickle";
         public static final String PINK_CORAL_LARVAE = "pink_coral_larvae";
         public static final String PORCELAIN_CLAY = "porcelain_clay";
-        public static final String POTATO_SEED = "potato";
         public static final String PRISMARINE_CROOK = createCrookName("prismarine");
         public static final String PURPLE_CORAL_LARVAE = "purple_coral_larvae";
         public static final String PURPUR_CROOK = createCrookName("purpur");
         public static final String RED_CORAL_LARVAE = "red_coral_larvae";
         public static final String SEA_WATER_BUCKET = "sea_water_bucket";
         public static final String SILKWORM = "silkworm";
-        public static final String SPRUCE_SEED = "spruce";
         public static final String STONE_CROOK = createCrookName(STONE_TAG);
         public static final String STONE_HAMMER = createHammerName(STONE_TAG);
         public static final String STONE_PEBBLE = createPebbleName(STONE_TAG);
-        public static final String STONE_STICK = "item_stick_stone";
-        public static final String SUGARCANE_SEED = "sugarcane";
-        public static final String SWEET_BERRY_SEED = "berry";
-        public static final String WITCH_WATER_BUCKET = "witchwater_bucket";
+        public static final String STONE_STICK = "stone_stick";
+        public static final String WITCH_WATER_BUCKET = "witch_water_bucket";
         public static final String WOOD_CROOK = createCrookName("wood");
         public static final String WOOD_HAMMER = createHammerName("wood");
         public static final String YELLOW_CORAL_LARVAE = "yellow_coral_larvae";

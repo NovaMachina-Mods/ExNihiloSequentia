@@ -1,19 +1,20 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
-import com.blamejared.crafttweaker.api.annotations.ZenRegister;
+//TODO
+/*import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import java.util.ArrayList;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenSieveRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.ZenSieveRecipe")*/
 public class ZenSeiveRecipe {
-
+/*
     private final SieveRecipe internal;
 
     private ZenSeiveRecipe(ResourceLocation recipeId) {
@@ -52,4 +53,6 @@ public class ZenSeiveRecipe {
         internal.setWaterlogged();
         return this;
     }
+
+ */
 }

@@ -1,20 +1,24 @@
 package novamachina.exnihilosequentia.common.compat.top;
 
-import java.util.function.Function;
+//TODO
+/*import java.util.function.Function;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.InterModComms;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+ */
+
 public class CompatTOP {
+    /*
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static boolean registered;
 
@@ -38,7 +42,7 @@ public class CompatTOP {
             logger.info("Enabled support for The One Probe");
             iTheOneProbe.registerProvider(new IProbeInfoProvider() {
                 @Override
-                public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
+                public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData iProbeHitData) {
                     if (blockState.getBlock() instanceof ITOPInfoProvider) {
                         ITOPInfoProvider provider = (ITOPInfoProvider) blockState.getBlock();
                         provider.addProbeInfo(probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData);
@@ -53,4 +57,6 @@ public class CompatTOP {
             return null;
         }
     }
+
+     */
 }

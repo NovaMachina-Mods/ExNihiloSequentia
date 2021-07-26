@@ -1,15 +1,16 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
-import com.blamejared.crafttweaker.api.annotations.ZenRegister;
-import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
+//TODO
+/*import com.blamejared.crafttweaker.api.annotations.ZenRegister;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenHeatRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.ZenHeatRecipe")*/
 public class ZenHeatRecipe {
-
+/*
     private final HeatRecipe internal;
 
     private ZenHeatRecipe(ResourceLocation recipeId) {
@@ -36,4 +37,6 @@ public class ZenHeatRecipe {
         internal.setInput(input);
         return this;
     }
+
+ */
 }
