@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.block;
 
 import java.util.List;
-//import mcjty.theoneprobe.api.IProbeHitData;
-//import mcjty.theoneprobe.api.IProbeInfo;
-//import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
@@ -34,28 +34,25 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
         super(builder);
     }
 
-    //TODO
-/*    @Override
+    @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData data) {
 
         AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getBlockEntity(data.getPos());
         if (barrelTile == null) {
             return;
         }
-        if (probeMode == ProbeMode.EXTENDED) {
-            probeInfo
-                    .text(new TranslatableComponent("top.barrel.mode", barrelTile.getMode().getModeName().toUpperCase()).withStyle(style -> {
-                        style.withColor(TextColor.fromLegacyFormat(ChatFormatting.GREEN));
-                        return style;
-                    }));
-        }
+            probeInfo.text(new TranslatableComponent("top.barrel.mode",
+                barrelTile.getMode().getModeName().toUpperCase()).withStyle(style -> {
+                    style.withColor(TextColor.fromLegacyFormat(ChatFormatting.GREEN));
+                    return style;
+                }));
 
         List<Component> info = barrelTile.getWailaInfo();
         for (Component tooltip : info) {
             probeInfo.text(tooltip);
         }
     }
-*/
+
     /**
      * @deprecated Ask Mojang
      */

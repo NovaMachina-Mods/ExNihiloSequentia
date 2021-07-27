@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.block;
 
-//import mcjty.theoneprobe.api.IProbeHitData;
-//import mcjty.theoneprobe.api.IProbeInfo;
-//import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
@@ -24,21 +24,18 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider, En
         super(builder);
     }
 
-    //TODO
-/*    @Override
+    @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData data) {
-        if(probeMode == ProbeMode.EXTENDED) {
-            BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
-            if (crucibleTile.getSolidAmount() > 0) {
-                probeInfo.text(new TranslatableComponent("waila.crucible.solid", new TranslatableComponent(crucibleTile.getCurrentItem().getItem().getDescriptionId()), crucibleTile.getSolidAmount()));
-            }
-            if (crucibleTile.getFluidAmount() > 0) {
-                probeInfo.text(new TranslatableComponent("waila.crucible.fluid", new TranslatableComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
-            }
-            probeInfo.text(new TranslatableComponent("waila.crucible.heat", crucibleTile.getHeat()));
+        BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
+        if (crucibleTile.getSolidAmount() > 0) {
+            probeInfo.text(new TranslatableComponent("waila.crucible.solid", new TranslatableComponent(crucibleTile.getCurrentItem().getItem().getDescriptionId()), crucibleTile.getSolidAmount()));
         }
+        if (crucibleTile.getFluidAmount() > 0) {
+            probeInfo.text(new TranslatableComponent("waila.crucible.fluid", new TranslatableComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
+        }
+        probeInfo.text(new TranslatableComponent("waila.crucible.heat", crucibleTile.getHeat()));
     }
-*/
+
     /**
      * @deprecated Ask Mojang
      */

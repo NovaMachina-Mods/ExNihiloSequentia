@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.top;
 
-//TODO
-/*import java.util.function.Function;
+import java.util.function.Function;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
@@ -15,10 +14,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
- */
-
 public class CompatTOP {
-    /*
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static boolean registered;
 
@@ -43,8 +39,7 @@ public class CompatTOP {
             iTheOneProbe.registerProvider(new IProbeInfoProvider() {
                 @Override
                 public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData iProbeHitData) {
-                    if (blockState.getBlock() instanceof ITOPInfoProvider) {
-                        ITOPInfoProvider provider = (ITOPInfoProvider) blockState.getBlock();
+                    if (blockState.getBlock() instanceof ITOPInfoProvider provider) {
                         provider.addProbeInfo(probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData);
                     }
                 }
@@ -57,6 +52,4 @@ public class CompatTOP {
             return null;
         }
     }
-
-     */
 }
