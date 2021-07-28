@@ -1,11 +1,9 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
@@ -52,7 +50,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
         return true;
     }
 
-    public void tick(Level level, BlockPos blockPos, BlockState blockState, BaseCrucibleTile blockEntity) {
+    public void tick() {
         if (level.isClientSide()) {
             return;
         }
@@ -108,6 +106,6 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                 solidAmount -= filled;
             }
         }
-        level.sendBlockUpdated(blockPos, blockState, blockEntity.getBlockState(), 2);
+        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
     }
 }

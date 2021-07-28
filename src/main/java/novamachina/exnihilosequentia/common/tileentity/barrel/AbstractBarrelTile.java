@@ -39,7 +39,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public abstract class AbstractBarrelTile extends BlockEntity implements BlockEntityTicker<BlockEntity> {
+public abstract class AbstractBarrelTile extends BlockEntity {
     public static final int MAX_SOLID_AMOUNT = Config.getBarrelMaxSolidAmount();
     public static final int MAX_FLUID_AMOUNT = Config.getBarrelNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
     private static final String INVENTORY_TAG = "inventory";
@@ -70,8 +70,7 @@ public abstract class AbstractBarrelTile extends BlockEntity implements BlockEnt
         return tank;
     }
 
-    @Override
-    public void tick(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity) {
+    public void tick() {
         if (level.isClientSide()) {
             return;
         }
@@ -84,7 +83,7 @@ public abstract class AbstractBarrelTile extends BlockEntity implements BlockEnt
             }
         }
         mode.tick(this);
-        getLevel().sendBlockUpdated(blockPos, blockState, blockEntity.getBlockState(), 2);
+        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
     }
 
     @Override

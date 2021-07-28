@@ -1,7 +1,10 @@
 package novamachina.exnihilosequentia.common.init;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -14,6 +17,7 @@ import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.block.*;
+import novamachina.exnihilosequentia.common.block.barrels.AbstractBarrelBlock;
 import novamachina.exnihilosequentia.common.block.barrels.NetherBarrelBlock;
 import novamachina.exnihilosequentia.common.block.barrels.WoodBarrelBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.FiredCrucibleBlock;
@@ -23,6 +27,7 @@ import novamachina.exnihilosequentia.common.block.crucibles.WoodCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.sieves.NetherSieveBlock;
 import novamachina.exnihilosequentia.common.block.sieves.WoodSieveBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
@@ -105,14 +110,8 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> BARREL_WARPED = BLOCKS
             .register(Blocks.WARPED_BARREL, NetherBarrelBlock::new);
     public static final RegistryObject<BaseBlock> BARREL_STONE = BLOCKS
-            .register(Blocks.STONE_BARREL, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
-                    .properties(BlockBehaviour.Properties.of(Material.STONE).strength(0.75F).sound(SoundType.STONE))){
-                @Nullable
-                @Override
-                public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                    return new StoneBarrelTile(pos, state);
-                }
-            });
+            .register(Blocks.STONE_BARREL, () -> new AbstractBarrelBlock(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
+                    .properties(BlockBehaviour.Properties.of(Material.STONE).strength(0.75F).sound(SoundType.STONE))));
     public static final RegistryObject<WoodSieveBlock> SIEVE_ACACIA = BLOCKS
             .register(Blocks.ACACIA_SIEVE, WoodSieveBlock::new);
     public static final RegistryObject<WoodSieveBlock> SIEVE_BIRCH = BLOCKS
