@@ -140,6 +140,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
 
     private void registerCrookRecipes(Consumer<FinishedRecipe> consumer) {
         createCrookRecipes(consumer, ItemTags.LEAVES, ExNihiloItems.SILKWORM.get(), 0.1F, LEAVES);
+        createCrookRecipes(consumer, ExNihiloBlocks.INFESTED_LEAVES.get(), ExNihiloItems.SILKWORM.get(), 0.2F, "infested_leaves_silkworm");
+        createCrookRecipes(consumer, ExNihiloBlocks.INFESTED_LEAVES.get(), Items.STRING, 0.4F, "infested_leaves_string");
     }
 
     private void registerCrooks(Consumer<FinishedRecipe> consumer) {

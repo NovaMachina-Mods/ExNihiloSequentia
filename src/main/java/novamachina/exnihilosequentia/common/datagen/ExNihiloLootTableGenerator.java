@@ -23,24 +23,6 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
     @Override
     protected void createLootTables() {
         registerSelfDrops();
-        registerInfestedLeaves();
-    }
-
-    private void registerInfestedLeaves() {
-        registerLeaves(ExNihiloBlocks.INFESTING_LEAVES.get());
-        registerLeaves(ExNihiloBlocks.INFESTED_LEAVES.get());
-    }
-
-    private void registerLeaves(Block block) {
-        LootPool.Builder stringPool = createLootPoolBuilder();
-        stringPool.setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(Items.STRING));
-        stringPool.when(ExplosionCondition.survivesExplosion());
-
-        LootPool.Builder silkWormPool = createLootPoolBuilder();
-        silkWormPool.setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(ExNihiloItems.SILKWORM.get()));
-        silkWormPool.when(LootItemRandomChanceCondition.randomChance(0.7F));
-
-        register(block, stringPool, silkWormPool);
     }
 
     private void registerSelfDrops() {

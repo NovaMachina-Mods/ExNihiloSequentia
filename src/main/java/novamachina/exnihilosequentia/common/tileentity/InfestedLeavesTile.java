@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class InfestedLeavesTile extends BlockEntity implements BlockEntityTicker<BlockEntity> {
+public class InfestedLeavesTile extends BlockEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private int progressWaitInterval = 0;
@@ -20,8 +20,7 @@ public class InfestedLeavesTile extends BlockEntity implements BlockEntityTicker
         super(ExNihiloTiles.INFESTED_LEAVES.get(), pos, state);
     }
 
-    @Override
-    public void tick(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity) {
+    public void tick() {
         if (!level.isClientSide()) {
             progressWaitInterval++;
             if (progressWaitInterval >= Config.getTicksBetweenSpreadAttempt()) {

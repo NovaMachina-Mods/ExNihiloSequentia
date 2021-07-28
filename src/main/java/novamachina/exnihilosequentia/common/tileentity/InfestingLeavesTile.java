@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class InfestingLeavesTile extends BlockEntity implements BlockEntityTicker<BlockEntity> {
+public class InfestingLeavesTile extends BlockEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final String PROGRESS_TAG = "progress";
 
@@ -30,8 +30,7 @@ public class InfestingLeavesTile extends BlockEntity implements BlockEntityTicke
         return progress;
     }
 
-    @Override
-    public void tick(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity) {
+    public void tick() {
         if (!level.isClientSide()) {
             progressWaitInterval--;
             if (progressWaitInterval <= 0) {
