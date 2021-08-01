@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolItem;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -27,10 +28,11 @@ import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.utility.Config;
 
+import javax.annotation.Nullable;
+
 public class CrookBaseItem extends ToolItem {
 
-    private static final Set<Material> effectiveMaterialsOn = Sets
-            .newHashSet(Material.LEAVES);
+    private static final Set<Material> effectiveMaterialsOn = Sets.newHashSet(Material.LEAVES);
 
     private final Random random = new Random();
 
@@ -46,7 +48,7 @@ public class CrookBaseItem extends ToolItem {
     }
 
     @Override
-    public int getBurnTime(ItemStack itemStack) {
+    public int getBurnTime(ItemStack itemStack, @Nullable IRecipeType<?> recipeType) {
         if (itemStack.getItem() == EnumCrook.WOOD.getRegistryObject().get()) {
             return 200;
         }

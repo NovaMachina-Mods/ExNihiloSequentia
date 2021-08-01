@@ -44,6 +44,7 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
     }
 
     private void registerSelfDrops() {
+        registerSelfDrop(ExNihiloBlocks.STONE_CRAFTING_TABLE.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_ACACIA.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_BIRCH.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_DARK_OAK.get());
