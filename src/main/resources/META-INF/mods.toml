@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 loaderVersion="[32,)" #mandatory
-license="All rights reserved"
+license="Creative Commons"
 issueTrackerURL="https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues" #optional
 [[mods]] #mandatory
 modId="exnihilosequentia" #mandatory
