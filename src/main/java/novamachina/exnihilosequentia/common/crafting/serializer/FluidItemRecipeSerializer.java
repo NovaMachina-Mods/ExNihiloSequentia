@@ -1,24 +1,24 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
-public class FluidItemRecipeSerializer extends RecipeSerializer<FluidItemRecipe> {
+public class FluidItemRecipeSerializer extends IRecipeSerializer<FluidItemRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(ExNihiloBlocks.BARREL_OAK.get());
     }
 
     @Override
-    public FluidItemRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public FluidItemRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         FluidStack fluid = FluidStack.readFromPacket(buffer);
         Ingredient input = Ingredient.fromNetwork(buffer);
         ItemStack output = buffer.readItem();
@@ -26,7 +26,7 @@ public class FluidItemRecipeSerializer extends RecipeSerializer<FluidItemRecipe>
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, FluidItemRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, FluidItemRecipe recipe) {
         recipe.getFluidInBarrel().writeToPacket(buffer);
         recipe.getInput().toNetwork(buffer);
         buffer.writeItem(recipe.getResultItem());

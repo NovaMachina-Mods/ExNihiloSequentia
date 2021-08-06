@@ -1,19 +1,20 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
-import com.blamejared.crafttweaker.api.annotations.ZenRegister;
+//TODO
+/*import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.fluid.IFluidStack;
 import com.blamejared.crafttweaker.api.item.IIngredient;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")*/
 public class ZenCrucibleRecipe {
-
+/*
     private final CrucibleRecipe internal;
 
     private ZenCrucibleRecipe(ResourceLocation recipeId) {
@@ -52,4 +53,6 @@ public class ZenCrucibleRecipe {
         internal.setResultFluid(fluid.getInternal());
         return this;
     }
+
+ */
 }

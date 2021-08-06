@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.registries;
 
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.registry.IFluidOnTopRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;

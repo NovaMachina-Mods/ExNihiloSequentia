@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.sieve.dry;
 
-import com.google.common.collect.HashMultiset;
+//TODO
+/*import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import java.util.List;
 import mezz.jei.api.constants.VanillaTypes;
@@ -12,11 +13,11 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -27,7 +28,10 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
-public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
+ */
+
+public class DrySieveRecipeCategory {//implements IRecipeCategory<JEISieveRecipe> {
+    /*
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "dry_sieve");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
@@ -103,7 +107,7 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
         recipeLayout.getItemStacks().addTooltipCallback(new ITooltipCallback<ItemStack>() {
             @OnlyIn(Dist.CLIENT)
             @Override
-            public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
+            public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<Component> tooltip) {
                 if (!input) {
                     Multiset<String> condensedTooltips = HashMultiset.create();
                     List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
@@ -118,12 +122,14 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
                             condensedTooltips.add(StringUtils.formatPercent(meshWithChance.getChance()));
                         }
                     }
-                    tooltip.add(new TranslationTextComponent("jei.sieve.dropChance"));
+                    tooltip.add(new TranslatableComponent("jei.sieve.dropChance"));
                     for (String line : condensedTooltips.elementSet()) {
-                        tooltip.add(new StringTextComponent(" * " + condensedTooltips.count(line) + "x " + line));
+                        tooltip.add(new TextComponent(" * " + condensedTooltips.count(line) + "x " + line));
                     }
                 }
             }
         });
     }
+
+     */
 }

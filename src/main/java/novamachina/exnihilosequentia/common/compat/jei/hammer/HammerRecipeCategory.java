@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.hammer;
 
-import java.util.ArrayList;
+//TODO
+/*import java.util.ArrayList;
 import java.util.Arrays;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -10,12 +11,15 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
+ */
+
+public class HammerRecipeCategory {//implements IRecipeCategory<HammerRecipe> {
+    /*
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
@@ -85,4 +89,6 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
         }
         recipeLayout.getItemStacks().addTooltipCallback(new HammerTooltipCallback(recipe));
     }
+
+     */
 }

@@ -1,24 +1,22 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.fluid.FlowingFluid;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
 public class WoodCrucibleTile extends BaseCrucibleTile {
 
-    public WoodCrucibleTile() {
-        super(ExNihiloTiles.CRUCIBLE_WOOD.get());
+    public WoodCrucibleTile(BlockPos pos, BlockState state) {
+        super(ExNihiloTiles.CRUCIBLE_WOOD.get(), pos, state);
     }
 
-    @Override
     public void tick() {
         if (level.isClientSide()) {
             return;
@@ -82,7 +80,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     public int getHeat() {
         BlockState source = level.getBlockState(worldPosition.below());
         int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock());
-        if(source.getBlock() instanceof FlowingFluidBlock) {
+        if(source.getBlock() instanceof LiquidBlock) {
             int level = 8 - source.getValue(BlockStateProperties.LEVEL);
             double partial = (double)blockHeat / 8;
             int returnVal = Math.min((int) Math.ceil(partial * level), Config.getWoodHeatRate());
@@ -111,5 +109,4 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     public boolean canAcceptFluidTemperature(FluidStack fluidStack) {
         return fluidStack.getFluid().getAttributes().getTemperature() <= Config.getWoodBarrelMaxTemp();
     }
-
 }

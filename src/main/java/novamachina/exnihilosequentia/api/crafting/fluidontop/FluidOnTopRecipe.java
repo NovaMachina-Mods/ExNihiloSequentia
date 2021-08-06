@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.api.crafting.fluidontop;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.RegistryObject;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import net.minecraftforge.fmllegacy.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -14,9 +14,9 @@ import org.apache.logging.log4j.LogManager;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    public static final IRecipeType<FluidOnTopRecipe> RECIPE_TYPE = IRecipeType
+    public static final RecipeType<FluidOnTopRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
-    private static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> serializer;
+    private static RegistryObject<IRecipeSerializer<FluidOnTopRecipe>> serializer;
     private FluidStack fluidInTank;
     private FluidStack fluidOnTop;
     private ItemStack result;
@@ -28,11 +28,11 @@ public class FluidOnTopRecipe extends SerializableRecipe {
         this.result = result;
     }
 
-    public static RegistryObject<RecipeSerializer<FluidOnTopRecipe>> getStaticSerializer() {
+    public static RegistryObject<IRecipeSerializer<FluidOnTopRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(RegistryObject<RecipeSerializer<FluidOnTopRecipe>> serializer) {
+    public static void setSerializer(RegistryObject<IRecipeSerializer<FluidOnTopRecipe>> serializer) {
         FluidOnTopRecipe.serializer = serializer;
     }
 
@@ -67,7 +67,7 @@ public class FluidOnTopRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer<FluidOnTopRecipe> getENSerializer() {
+    protected IRecipeSerializer<FluidOnTopRecipe> getENSerializer() {
         return serializer.get();
     }
 }

@@ -1,13 +1,13 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Items;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.conditions.RandomChance;
-import net.minecraft.loot.conditions.SurvivesExplosion;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
@@ -23,24 +23,6 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
     @Override
     protected void createLootTables() {
         registerSelfDrops();
-        registerInfestedLeaves();
-    }
-
-    private void registerInfestedLeaves() {
-        registerLeaves(ExNihiloBlocks.INFESTING_LEAVES.get());
-        registerLeaves(ExNihiloBlocks.INFESTED_LEAVES.get());
-    }
-
-    private void registerLeaves(Block block) {
-        LootPool.Builder stringPool = createLootPoolBuilder();
-        stringPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.STRING));
-        stringPool.when(SurvivesExplosion.survivesExplosion());
-
-        LootPool.Builder silkWormPool = createLootPoolBuilder();
-        silkWormPool.setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ExNihiloItems.SILKWORM.get()));
-        silkWormPool.when(RandomChance.randomChance(0.7F));
-
-        register(block, stringPool, silkWormPool);
     }
 
     private void registerSelfDrops() {

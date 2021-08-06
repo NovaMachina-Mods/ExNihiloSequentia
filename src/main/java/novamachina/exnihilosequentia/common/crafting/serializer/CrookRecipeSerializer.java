@@ -4,23 +4,23 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 
-public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
+public class CrookRecipeSerializer extends IRecipeSerializer<CrookRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(EnumCrook.WOOD.getRegistryObject().get());
     }
 
     @Override
-    public CrookRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public CrookRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         int outputCount = buffer.readInt();
         List<ItemStackWithChance> output = new ArrayList<>(outputCount);
         for (int i = 0; i < outputCount; i++) {
@@ -31,7 +31,7 @@ public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, CrookRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, CrookRecipe recipe) {
         buffer.writeInt(recipe.getOutput().size());
         for (ItemStackWithChance stack : recipe.getOutput()) {
             stack.write(buffer);

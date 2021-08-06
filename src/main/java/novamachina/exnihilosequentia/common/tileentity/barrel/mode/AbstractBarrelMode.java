@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -25,7 +25,7 @@ public abstract class AbstractBarrelMode {
 
     public abstract void tick(AbstractBarrelTile barrelTile);
 
-    public abstract ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
+    public abstract InteractionResult onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
 
     public abstract boolean canFillWithFluid(AbstractBarrelTile barrel);
 
@@ -33,13 +33,13 @@ public abstract class AbstractBarrelMode {
 
     protected abstract boolean isTriggerItem(ItemStack stack);
 
-    public abstract void read(CompoundNBT nbt);
+    public abstract void read(CompoundTag nbt);
 
-    public abstract CompoundNBT write();
+    public abstract CompoundTag write();
 
     protected abstract void spawnParticle(AbstractBarrelTile barrelTile);
 
-    public abstract List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile);
+    public abstract List<Component> getWailaInfo(AbstractBarrelTile barrelTile);
 
     public abstract ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate);
 }

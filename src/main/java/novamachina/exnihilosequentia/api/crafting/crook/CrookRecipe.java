@@ -3,19 +3,19 @@ package novamachina.exnihilosequentia.api.crafting.crook;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CrookRecipe extends SerializableRecipe {
-    public static final IRecipeType<CrookRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
-    private static RegistryObject<RecipeSerializer<CrookRecipe>> serializer;
+    public static final RecipeType<CrookRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
+    private static RegistryObject<IRecipeSerializer<CrookRecipe>> serializer;
     private Ingredient input;
     private final List<ItemStackWithChance> output;
 
@@ -25,11 +25,11 @@ public class CrookRecipe extends SerializableRecipe {
         this.output = output;
     }
 
-    public static RegistryObject<RecipeSerializer<CrookRecipe>> getStaticSerializer() {
+    public static RegistryObject<IRecipeSerializer<CrookRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(RegistryObject<RecipeSerializer<CrookRecipe>> serializer) {
+    public static void setSerializer(RegistryObject<IRecipeSerializer<CrookRecipe>> serializer) {
         CrookRecipe.serializer = serializer;
     }
 
@@ -65,7 +65,7 @@ public class CrookRecipe extends SerializableRecipe {
     }
 
     @Override
-    protected RecipeSerializer<CrookRecipe> getENSerializer() {
+    protected IRecipeSerializer<CrookRecipe> getENSerializer() {
         return serializer.get();
     }
 }

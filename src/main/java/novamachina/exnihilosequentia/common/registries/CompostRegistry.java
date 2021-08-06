@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.registries;
 
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.registry.ICompostRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,7 @@ public class CompostRegistry implements ICompostRegistry {
     public final List<CompostRecipe> recipeList = new ArrayList<>();
 
     @Override
-    public boolean containsSolid(IItemProvider item) {
+    public boolean containsSolid(ItemLike item) {
         for(CompostRecipe recipe : recipeList) {
             if(recipe.getInput().test(new ItemStack(item))) {
                 return true;
@@ -25,7 +25,7 @@ public class CompostRegistry implements ICompostRegistry {
     }
 
     @Override
-    public int getSolidAmount(IItemProvider item) {
+    public int getSolidAmount(ItemLike item) {
         for(CompostRecipe recipe : recipeList) {
             if(recipe.getInput().test(new ItemStack(item))) {
                 return recipe.getAmount();

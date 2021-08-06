@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.crucible;
 
-import mezz.jei.api.constants.VanillaTypes;
+//TODO
+/*import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -8,12 +9,15 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
+ */
+
+public class CrucibleRecipeCategory {//implements IRecipeCategory<CrucibleRecipe> {
+    /*
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
     private final IDrawableStatic background;
     private final IDrawableStatic slotHighlight;
@@ -85,4 +89,6 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
             recipeLayout.getItemStacks().addTooltipCallback(new WoodCrucibleTooltipCallback());
         }
     }
+
+     */
 }

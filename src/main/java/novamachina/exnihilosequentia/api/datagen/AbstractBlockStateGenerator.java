@@ -1,16 +1,16 @@
 package novamachina.exnihilosequentia.api.datagen;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-import static net.minecraft.block.CakeBlock.BITES;
+import static net.minecraft.world.level.block.CakeBlock.BITES;
 
 public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     protected static final String PARTICLE_TAG = "particle";

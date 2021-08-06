@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "exnihilosequentia:raw_zinc"
-  },
-  "result": "exnihilosequentia:ingot_zinc",
-  "experience": 0.7,
-  "cookingtime": 100
-}

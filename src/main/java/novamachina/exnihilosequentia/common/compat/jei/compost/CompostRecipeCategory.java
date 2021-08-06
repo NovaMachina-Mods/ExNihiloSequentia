@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
-import mezz.jei.api.constants.VanillaTypes;
+//TODO
+/*import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -8,13 +9,16 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
+ */
+
+public class CompostRecipeCategory { //implements IRecipeCategory<CompostRecipe> {
+    /*
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "compost");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
     private final IDrawableStatic background;
@@ -79,4 +83,6 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
         }
         recipeLayout.getItemStacks().addTooltipCallback(new CompostTooltipCallback());
     }
+
+     */
 }

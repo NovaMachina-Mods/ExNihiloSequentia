@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumDoll implements IExtensibleEnum {
@@ -44,7 +44,7 @@ public enum EnumDoll implements IExtensibleEnum {
     }
 
     public String getDollName() {
-        return "doll_" + entityName;
+        return entityName + "_doll";
     }
 
     public String getEntityModId() {

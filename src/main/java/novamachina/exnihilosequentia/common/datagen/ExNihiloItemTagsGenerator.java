@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import net.minecraft.data.BlockTagsProvider;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
@@ -10,7 +10,6 @@ import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
-import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -23,7 +22,6 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     @Override
     protected void addTags() {
         registerOres();
-        registerSeeds();
         registerMeats();
         registerHammers();
         registerCrooks();
@@ -70,12 +68,6 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
         for (EnumOre ore : EnumOre.values()) {
             ExNihiloTags.OreTag tags = ExNihiloTags.getOreTags(ore);
             registerOre(ore, tags);
-        }
-    }
-
-    private void registerSeeds() {
-        for (EnumSeed seed : EnumSeed.values()) {
-            tag(Tags.Items.SEEDS).add(seed.getRegistryObject().get());
         }
     }
 

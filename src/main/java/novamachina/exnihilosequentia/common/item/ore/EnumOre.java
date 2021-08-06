@@ -2,17 +2,16 @@ package novamachina.exnihilosequentia.common.item.ore;
 
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.common.network.HandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumOre implements IExtensibleEnum {
-    COPPER(Type.MODDED, ExNihiloConstants.Ore.COPPER, new Color("FF9933"), false, true),
     LEAD(Type.MODDED, ExNihiloConstants.Ore.LEAD, new Color("330066"), false, true),
     NICKEL(Type.MODDED, ExNihiloConstants.Ore.NICKEL, new Color("FFFFCC"), false, true),
     SILVER(Type.MODDED, ExNihiloConstants.Ore.SILVER, new Color("C2FAFF"), false, true),
@@ -22,7 +21,8 @@ public enum EnumOre implements IExtensibleEnum {
     URANIUM(Type.MODDED, ExNihiloConstants.Ore.URANIUM, new Color("4E5B43"), false, true),
     ZINC(Type.MODDED, ExNihiloConstants.Ore.ZINC, new Color("A59C74"), false, true),
     IRON(Type.VANILLA, ExNihiloConstants.Ore.IRON, new Color("BF8040"), true, false),
-    GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true, false);
+    GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true, false),
+    COPPER(Type.VANILLA, ExNihiloConstants.Ore.COPPER, new Color("FF9933"), true, false);
 
     private final Color color;
     private final String oreName;
@@ -84,7 +84,7 @@ public enum EnumOre implements IExtensibleEnum {
     }
 
     public String getIngotName() {
-        return "ingot_" + oreName;
+        return oreName + "_ingot";
     }
 
     public RegistryObject<OreItem> getIngotRegistryItem() {
@@ -108,7 +108,7 @@ public enum EnumOre implements IExtensibleEnum {
     }
 
     public String getPieceName() {
-        return "piece_" + oreName;
+        return oreName + "_piece";
     }
 
     public boolean isEnabled() {
