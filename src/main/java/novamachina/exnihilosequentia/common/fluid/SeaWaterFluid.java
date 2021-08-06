@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.fluid;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -19,8 +19,8 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
     public static final ForgeFlowingFluid.Properties SEA_WATER_PROPS =
             new ForgeFlowingFluid.Properties(
                     ExNihiloFluids.SEA_WATER, ExNihiloFluids.SEA_WATER_FLOW, FluidAttributes
-                    .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water_still"),
-                            new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water_flow"))
+                    .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/" + ExNihiloConstants.Fluids.SEA_WATER_STILL),
+                            new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/" + ExNihiloConstants.Fluids.SEA_WATER_FLOW))
                     .color(0x3F1080FF)
                     .sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
                     .bucket(ExNihiloItems.SEA_WATER_BUCKET)
@@ -48,7 +48,7 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        protected void createFluidStateDefinition(StateContainer.Builder<Fluid, FluidState> builder) {
+        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
             super.createFluidStateDefinition(builder);
             builder.add(LEVEL);
         }

@@ -10,10 +10,10 @@ import novamachina.exnihilosequentia.common.item.ore.OreItem;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.IngredientUtils;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class SieveRegistry implements ISieveRegistry {
     }
 
     @Override
-    public List<SieveRecipe> getDrops(IItemProvider input, EnumMesh meshType, boolean isWaterlogged) {
+    public List<SieveRecipe> getDrops(ItemLike input, EnumMesh meshType, boolean isWaterlogged) {
         return recipeList.parallelStream()
             .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
             .filter(sieveRecipe -> sieveRecipe.getInput().test(new ItemStack(input)))

@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidtransform;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FluidTransformJEIRecipe {

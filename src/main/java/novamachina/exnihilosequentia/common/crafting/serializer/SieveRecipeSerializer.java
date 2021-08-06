@@ -4,23 +4,23 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 
-public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
+public class SieveRecipeSerializer extends IRecipeSerializer<SieveRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
     }
 
     @Override
-    public SieveRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public SieveRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         Ingredient input = Ingredient.fromNetwork(buffer);
         ItemStack drop = buffer.readItem();
         List<MeshWithChance> rolls = new ArrayList<>();
@@ -33,7 +33,7 @@ public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, SieveRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, SieveRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeItem(recipe.getDrop());
         buffer.writeInt(recipe.getRolls().size());

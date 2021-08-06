@@ -5,19 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.common.init.ExNihiloStats;
 import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -27,7 +25,7 @@ public class UseHammerModifier extends LootModifier {
 
     private final Random random = new Random();
 
-    public UseHammerModifier(ILootCondition[] conditionsIn) {
+    public UseHammerModifier(LootItemCondition[] conditionsIn) {
         super(conditionsIn);
     }
 
@@ -35,8 +33,8 @@ public class UseHammerModifier extends LootModifier {
     @Override
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         logger.debug("Fired Hammer Modifier");
-        ItemStack tool = context.getParamOrNull(LootParameters.TOOL);
-        BlockState blockState = context.getParamOrNull(LootParameters.BLOCK_STATE);
+        ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
+        BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
         List<ItemStack> newLoot = new ArrayList<>();
 
         if (tool != null && blockState != null && ExNihiloTags.HAMMER.contains(tool.getItem()) && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {
@@ -54,7 +52,6 @@ public class UseHammerModifier extends LootModifier {
             generatedLoot = newLoot;
         }
         logger.debug("Hammer Generated Loot: " + generatedLoot);
-        ((PlayerEntity)context.getParamOrNull(LootParameters.THIS_ENTITY)).awardStat(ExNihiloStats.HAMMERED);
         return generatedLoot;
     }
 
@@ -63,7 +60,7 @@ public class UseHammerModifier extends LootModifier {
 
         @Override
         public UseHammerModifier read(ResourceLocation location, JsonObject object,
-                                      ILootCondition[] ailootcondition) {
+                                      LootItemCondition[] ailootcondition) {
             return new UseHammerModifier(ailootcondition);
         }
 

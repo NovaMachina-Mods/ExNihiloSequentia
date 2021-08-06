@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.utility;
 
 import java.util.Objects;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 
 public class Color {
 
@@ -57,9 +57,9 @@ public class Color {
         return new Color(averageR, averageG, averageB, averageA);
     }
 
-    public static Color fromNBT(CompoundNBT compoundNBT) {
+    public static Color fromNBT(CompoundTag compoundNBT) {
         if (compoundNBT.contains(COLOR_TAG)) {
-            CompoundNBT colorTag = compoundNBT.getCompound(COLOR_TAG);
+            CompoundTag colorTag = compoundNBT.getCompound(COLOR_TAG);
             float a = colorTag.getFloat("colorA");
             float r = colorTag.getFloat("colorR");
             float b = colorTag.getFloat("colorB");
@@ -95,8 +95,8 @@ public class Color {
         return Objects.hash(r, g, b, a);
     }
 
-    public void putIntoNBT(CompoundNBT compoundNBT) {
-        CompoundNBT colorTag = new CompoundNBT();
+    public void putIntoNBT(CompoundTag compoundNBT) {
+        CompoundTag colorTag = new CompoundTag();
         colorTag.putFloat("colorA", a);
         colorTag.putFloat("colorR", r);
         colorTag.putFloat("colorB", b);

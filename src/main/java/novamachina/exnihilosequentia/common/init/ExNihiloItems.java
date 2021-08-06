@@ -3,13 +3,14 @@ package novamachina.exnihilosequentia.common.init;
 import java.util.EnumMap;
 import java.util.Map;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.item.CookedSilkwormItem;
@@ -23,8 +24,6 @@ import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import novamachina.exnihilosequentia.common.item.pebbles.PebbleItem;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.resources.ResourceItem;
-import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
-import novamachina.exnihilosequentia.common.item.seeds.SeedBaseItem;
 import novamachina.exnihilosequentia.common.item.tools.crook.CrookBaseItem;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
@@ -33,6 +32,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import javax.annotation.Nullable;
 
 public class ExNihiloItems {
     // Begin Block Items
@@ -151,11 +152,6 @@ public class ExNihiloItems {
             }
         }
 
-        for (EnumSeed seed : EnumSeed.values()) {
-            seed.setRegistryObject(ITEMS.register(seed.getSeedName(),
-                    () -> new SeedBaseItem(seed.getDefaultState()).setPlantType(seed.getPlantType())));
-        }
-
         for (EnumResource resource : EnumResource.values()) {
             resource.setRegistryObject(ITEMS.register(resource.getResourceName(),
                     () -> new ResourceItem(resource.getResourceName())));
@@ -199,7 +195,7 @@ public class ExNihiloItems {
     private static BlockItem createBurnableItem(Block block) {
         return new BlockItem(block, tab){
             @Override
-            public int getBurnTime(ItemStack itemStack) {
+            public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
                 return 400;
             }
         };

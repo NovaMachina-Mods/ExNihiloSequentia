@@ -1,16 +1,15 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -19,7 +18,6 @@ import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.init.ExNihiloStats;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -36,7 +34,7 @@ public class UseCrookModifier extends LootModifier {
 
     private final Random random = new Random();
 
-    public UseCrookModifier(ILootCondition[] conditionsIn) {
+    public UseCrookModifier(LootItemCondition[] conditionsIn) {
         super(conditionsIn);
     }
 
@@ -44,9 +42,9 @@ public class UseCrookModifier extends LootModifier {
     @Override
     public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         logger.debug("Fired Crook Modifier");
-        ItemStack tool = context.getParamOrNull(LootParameters.TOOL);
-        BlockState blockState = context.getParamOrNull(LootParameters.BLOCK_STATE);
-        BlockPos pos = new BlockPos(context.getParamOrNull(LootParameters.ORIGIN).x(), context.getParamOrNull(LootParameters.ORIGIN).y(), context.getParamOrNull(LootParameters.ORIGIN).z());
+        ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
+        BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
+        BlockPos pos = new BlockPos(context.getParamOrNull(LootContextParams.ORIGIN).x(), context.getParamOrNull(LootContextParams.ORIGIN).y(), context.getParamOrNull(LootContextParams.ORIGIN).z());
         List<ItemStack> newLoot = new ArrayList<>();
 
         if (tool != null && blockState != null && ExNihiloTags.CROOK.contains(tool.getItem()) && ExNihiloRegistries.CROOK_REGISTRY.isCrookable(blockState.getBlock())) {
@@ -81,7 +79,6 @@ public class UseCrookModifier extends LootModifier {
             generatedLoot = newLoot;
         }
         logger.debug("Crook Generated Loot: " + generatedLoot);
-        ((PlayerEntity)context.getParamOrNull(LootParameters.THIS_ENTITY)).awardStat(ExNihiloStats.CROOKED);
         return generatedLoot;
     }
 
@@ -89,7 +86,7 @@ public class UseCrookModifier extends LootModifier {
 
         @Override
         public UseCrookModifier read(ResourceLocation location, JsonObject object,
-                                      ILootCondition[] ailootcondition) {
+                                      LootItemCondition[] ailootcondition) {
             return new UseCrookModifier(ailootcondition);
         }
 

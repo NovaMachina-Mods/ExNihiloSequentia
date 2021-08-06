@@ -1,10 +1,11 @@
 package novamachina.exnihilosequentia.common.item.mesh;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.utility.Config;
 
@@ -27,7 +28,7 @@ public class MeshItem extends Item {
         return mesh;
     }
     @Override
-    public int getBurnTime(ItemStack itemStack) {
+    public int getBurnTime(ItemStack itemStack, RecipeType<?> recipeType) {
         if (itemStack.getItem() == EnumMesh.STRING.getRegistryObject().get()) {
             return 200;
         } else return 0;

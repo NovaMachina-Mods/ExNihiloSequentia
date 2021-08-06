@@ -1,17 +1,17 @@
 package novamachina.exnihilosequentia.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.Blocks;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Color;
@@ -21,18 +21,18 @@ import org.apache.logging.log4j.LogManager;
 public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public BarrelRender(TileEntityRendererDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+    public BarrelRender(BlockEntityRendererProvider.Context context) {
+        super(context);
     }
 
     public static void register() {
         logger.debug("Register barrel renderer");
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_WOOD.get(), BarrelRender::new);
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_STONE.get(), BarrelRender::new);
+        BlockEntityRenderers.register(ExNihiloTiles.BARREL_WOOD.get(), BarrelRender::new);
+        BlockEntityRenderers.register(ExNihiloTiles.BARREL_STONE.get(), BarrelRender::new);
     }
 
     @Override
-    public void render(AbstractBarrelTile tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
+    public void render(AbstractBarrelTile tileEntity, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation inventoryTexture = tileEntity.getSolidTexture();
         ResourceLocation solidTexture = Blocks.OAK_LEAVES.getRegistryName();
         Fluid fluid = tileEntity.getFluid();
@@ -41,10 +41,10 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
         Color fluidColor =
                 fluid != null ? new Color(fluid.getAttributes().getColor()) : Color.INVALID_COLOR;
         if (fluidTexture != null) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
+            VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             fluidTexture);
 
             // Subtract 0.005 to prevent texture fighting
@@ -66,10 +66,10 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
             matrixStack.popPose();
         }
         if (inventoryTexture != null) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.solid());
+            VertexConsumer builder = buffer.getBuffer(RenderType.solid());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             new ResourceLocation(inventoryTexture.getNamespace(),
                                     "block/" + inventoryTexture.getPath()));
 
@@ -93,10 +93,10 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
         }
 
         if (tileEntity.getSolidAmount() > 0) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
+            VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
             TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             new ResourceLocation(solidTexture.getNamespace(),
                                     "block/" + solidTexture.getPath()));
 

@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.api.compat.jei;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 
 public class JEISieveRecipe {

@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.registry;
 
 import java.util.List;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 
 public interface IFluidTransformRegistry {
@@ -10,9 +10,9 @@ public interface IFluidTransformRegistry {
 
     List<FluidTransformRecipe> getRecipeList();
 
-    Fluid getResult(Fluid fluidInTank, IItemProvider catalyst);
+    Fluid getResult(Fluid fluidInTank, ItemLike catalyst);
 
-    boolean isValidRecipe(Fluid fluidInTank, IItemProvider catalyst);
+    boolean isValidRecipe(Fluid fluidInTank, ItemLike catalyst);
 
     void setRecipes(List<FluidTransformRecipe> recipes);
 }
