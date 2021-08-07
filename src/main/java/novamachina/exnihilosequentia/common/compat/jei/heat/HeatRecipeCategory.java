@@ -1,10 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import java.awt.Color;
-import java.util.Arrays;
-
-import com.mojang.blaze3d.platform.GlStateManager;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -19,14 +15,19 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
+
+import java.awt.Color;
+import java.util.Arrays;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
     private final IDrawableStatic background;
 
@@ -38,8 +39,8 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
 
     @Override
     public void draw(HeatRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        Minecraft.getInstance().font
-                .draw(matrixStack, recipe.getAmount() + "X", 24, 12, Color.gray.getRGB());
+        Minecraft.getInstance().font.draw(matrixStack, recipe.getAmount() + "X",
+                24, 12, Color.gray.getRGB());
     }
 
     @Override
