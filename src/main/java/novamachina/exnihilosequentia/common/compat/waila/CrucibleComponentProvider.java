@@ -17,6 +17,10 @@ public class CrucibleComponentProvider implements IComponentProvider {
         if (crucibleTile.getFluidAmount() > 0) {
             tooltip.add(new TranslatableComponent("waila.crucible.fluid", new TranslatableComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
         }
-        tooltip.add(new TranslatableComponent("waila.crucible.heat", crucibleTile.getHeat()));
+        Object heat = crucibleTile.getHeat();
+        if ((int) heat == 0) {
+            heat = "No Heat Source";
+        }
+        tooltip.add(new TranslatableComponent("waila.crucible.heat", heat));
     }
 }

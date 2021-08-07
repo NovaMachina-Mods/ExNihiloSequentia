@@ -8,6 +8,7 @@ import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.block.crucibles.FiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
+import novamachina.exnihilosequentia.common.block.crucibles.NetherCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.WoodCrucibleBlock;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -17,11 +18,9 @@ public class PluginWaila implements IWailaPlugin {
     public void register(IRegistrar registrar) {
         registrar.registerComponentProvider(new BarrelComponentProvider(), TooltipPosition.BODY, BlockBarrel.class);
         registrar.registerComponentProvider(new SieveComponentProvider(), TooltipPosition.BODY, BlockSieve.class);
-        registrar
-                .registerComponentProvider(new InfestingLeavesComponentProvider(), TooltipPosition.BODY, InfestingLeavesBlock.class);
-        registrar
-                .registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, WoodCrucibleBlock.class);
-        registrar
-                .registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, FiredCrucibleBlock.class);
+        registrar.registerComponentProvider(new InfestingLeavesComponentProvider(), TooltipPosition.BODY, InfestingLeavesBlock.class);
+        registrar.registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, WoodCrucibleBlock.class);
+        registrar.registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, FiredCrucibleBlock.class);
+        registrar.registerComponentProvider(new CrucibleComponentProvider(), TooltipPosition.BODY, NetherCrucibleBlock.class);
     }
 }
