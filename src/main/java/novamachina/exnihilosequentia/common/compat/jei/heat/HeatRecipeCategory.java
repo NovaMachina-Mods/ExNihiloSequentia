@@ -8,6 +8,7 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
@@ -23,7 +24,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Arrays;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
@@ -41,6 +42,15 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     public void draw(HeatRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         Minecraft.getInstance().font.draw(matrixStack, recipe.getAmount() + "X",
                 24, 12, Color.gray.getRGB());
+
+        Block block = recipe.getInput();
+        if (block == Blocks.WALL_TORCH) {
+            Minecraft.getInstance().font.draw(matrixStack, "Wall Torch",
+                    24, 0, Color.DARK_GRAY.getRGB());
+        } else {
+            Minecraft.getInstance().font.draw(matrixStack, block.getName(),
+                    24, 0, Color.DARK_GRAY.getRGB());
+        }
     }
 
     @Override
