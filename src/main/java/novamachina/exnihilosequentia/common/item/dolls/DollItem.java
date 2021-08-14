@@ -1,6 +1,8 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
 import java.util.List;
+import java.util.Objects;
+
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.material.Fluid;
@@ -15,6 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
+import javax.annotation.Nonnull;
+
 public class DollItem extends Item {
     private final EnumDoll type;
 
@@ -24,7 +28,7 @@ public class DollItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+    public void appendHoverText(@Nonnull ItemStack stack, Level worldIn, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         tooltip.add(new TranslatableComponent(type.getToolTip()));
     }
@@ -47,7 +51,8 @@ public class DollItem extends Item {
         ResourceLocation spawneeResourceLocation = new ResourceLocation(type.getEntityModId(), type.getEntityName());
 
         if (ForgeRegistries.ENTITIES.containsKey(spawneeResourceLocation)) {
-            Entity spawnee = ForgeRegistries.ENTITIES.getValue(spawneeResourceLocation).create(world);
+            Entity spawnee = Objects.requireNonNull(ForgeRegistries.ENTITIES.getValue(spawneeResourceLocation)).create(world);
+            assert spawnee != null;
             spawnee.setPos(pos.getX(), pos.getY() + type.getYOffset(), pos.getZ());
             return world.addFreshEntity(spawnee);
         }

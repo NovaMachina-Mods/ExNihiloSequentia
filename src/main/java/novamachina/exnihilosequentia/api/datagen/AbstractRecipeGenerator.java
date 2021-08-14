@@ -34,7 +34,7 @@ import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.block.BaseBlock;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
@@ -92,7 +92,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         return new ResourceLocation(modId, "sieve/" + prependRecipePrefix(id));
     }
 
-    protected void registerOre(EnumOre ore, Consumer<FinishedRecipe> consumer) {
+    protected void createOre(EnumOre ore, Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(ore.getRawOreItem().get())
                 .pattern("xx")
                 .pattern("xx")
@@ -102,11 +102,12 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getRawOreName())));
     }
 
-    protected void registerVanillaOre(EnumOre ore, Consumer<FinishedRecipe> consumer) {
-        Item result;
-        if (ore.getPieceName().contains("iron")) { result = Items.RAW_IRON; }
-        else if (ore.getPieceName().contains("gold")) { result = Items.RAW_GOLD; }
-        else { result = Items.RAW_COPPER; }
+    protected void createVanillaOre(EnumOre ore, Consumer<FinishedRecipe> consumer) {
+        Item result = switch (ore.getOreName()) {
+            case "iron" -> Items.RAW_IRON;
+            case "gold" -> Items.RAW_GOLD;
+            default -> Items.RAW_COPPER;
+        };
         ShapedRecipeBuilder.shaped(result)
                 .pattern("xx")
                 .pattern("xx")
@@ -160,19 +161,19 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
     protected void createFiredCrucibleRecipes(Consumer<FinishedRecipe> consumer, Block block, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(block)).amount(amount).fluidResult(Fluids.LAVA)
-                .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(id));
+                .crucibleType(CrucibleTypeEnum.FIRED).build(consumer, crucibleLoc(id));
     }
     protected void createFiredCrucibleRecipes(Consumer<FinishedRecipe> consumer, Tag.Named<Item> item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.LAVA)
-                .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(id));
+                .crucibleType(CrucibleTypeEnum.FIRED).build(consumer, crucibleLoc(id));
     }
     protected void createWaterCrucibleRecipes(Consumer<FinishedRecipe> consumer, Tag.Named<Item> item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.WATER)
-                .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc(id));
+                .crucibleType(CrucibleTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
     protected void createWaterCrucibleRecipes(Consumer<FinishedRecipe> consumer, Item item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.WATER)
-                .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc(id));
+                .crucibleType(CrucibleTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
 
     protected void createFluidItemRecipes(Consumer<FinishedRecipe> consumer, Fluid fluidInput, Item itemInput, Block blockOutput, String id) {
@@ -213,7 +214,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(rl));
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(input), output, xpBlast, durationBlast)
                 .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-                .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_from_blaster")));
+                .save(consumer, createSaveLocation(new ResourceLocation(rl + "_from_blaster")));
     }
 
     protected void createCookingRecipe(Consumer<FinishedRecipe> consumer, Item input, Item output, float xpCampfire, int durationCampfire, float xpSmoker, int durationSmoker, String condition, ResourceLocation rl) {
@@ -222,7 +223,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_from_campfire")));
         SimpleCookingRecipeBuilder.cooking(Ingredient.of(input), output, xpSmoker, durationSmoker, RecipeSerializer.SMOKING_RECIPE)
                 .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-                .save(consumer, createSaveLocation(new ResourceLocation(rl.toString() + "_from_smoker")));
+                .save(consumer, createSaveLocation(new ResourceLocation(rl + "_from_smoker")));
     }
 
     protected void createBarrel(Consumer<FinishedRecipe> consumer, RegistryObject<BaseBlock> barrel, Tags.IOptionalNamedTag<Item> block, Item slab) {
@@ -332,7 +333,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .define('x', input)
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-                .save(consumer, createSaveLocation(result.getRegistryName()));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
     }
 
     protected void createMesh(Item output, Item inputMesh, Tags.IOptionalNamedTag<Item> inputItem, Consumer<FinishedRecipe> consumer) {

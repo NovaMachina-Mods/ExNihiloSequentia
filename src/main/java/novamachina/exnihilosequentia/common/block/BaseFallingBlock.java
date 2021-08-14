@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
@@ -24,13 +25,13 @@ public class BaseFallingBlock extends FallingBlock implements EntityBlock {
 
     @Nullable
     @Override
-    public ToolType getHarvestTool(BlockState state) {
+    public ToolType getHarvestTool(@Nonnull BlockState state) {
         return toolType;
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
+    public BlockEntity newBlockEntity(@Nonnull BlockPos p_153215_, @Nonnull BlockState p_153216_) {
         if (tileEntitySupplier == null) {
             return null;
         } else {

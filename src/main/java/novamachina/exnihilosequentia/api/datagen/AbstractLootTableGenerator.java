@@ -25,6 +25,8 @@ import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+
 public abstract class AbstractLootTableGenerator implements DataProvider {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -38,7 +40,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
     }
 
     @Override
-    public void run(HashCache cache) {
+    public void run(@Nonnull HashCache cache) {
         lootTables.clear();
         Path outFolder = generator.getOutputFolder();
 
@@ -64,6 +66,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
         }
     }
 
+    @Nonnull
     @Override
     public String getName() {
         return "Loot Tables: " + modId;
@@ -83,7 +86,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
         register(block, builder);
     }
 
-    protected void registerSelfDrop(Block block) {
+    protected void createSelfDrop(Block block) {
         register(block, singleItem(block));
     }
 

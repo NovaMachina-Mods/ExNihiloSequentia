@@ -11,6 +11,8 @@ import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformR
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
+import javax.annotation.Nonnull;
+
 public class FluidTransformRecipeSerializer extends IRecipeSerializer<FluidTransformRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -18,7 +20,7 @@ public class FluidTransformRecipeSerializer extends IRecipeSerializer<FluidTrans
     }
 
     @Override
-    public FluidTransformRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public FluidTransformRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer) {
         FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
         Ingredient catalyst = Ingredient.fromNetwork(buffer);
         FluidStack result = FluidStack.readFromPacket(buffer);
@@ -26,7 +28,7 @@ public class FluidTransformRecipeSerializer extends IRecipeSerializer<FluidTrans
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer, FluidTransformRecipe recipe) {
+    public void toNetwork(@Nonnull FriendlyByteBuf buffer, FluidTransformRecipe recipe) {
         recipe.getFluidInTank().writeToPacket(buffer);
         recipe.getCatalyst().toNetwork(buffer);
         recipe.getResult().writeToPacket(buffer);

@@ -13,7 +13,7 @@ import java.util.List;
 public class FluidOnTopRegistry implements IFluidOnTopRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private List<FluidOnTopRecipe> recipeList = new ArrayList<>();
+    private final List<FluidOnTopRecipe> recipeList = new ArrayList<>();
 
     @Override
     public boolean isValidRecipe(Fluid fluidInTank, Fluid fluidOnTop) {

@@ -1,24 +1,24 @@
 package novamachina.exnihilosequentia.common.block;
 
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.CakeBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import javax.annotation.Nonnull;
 
 public class EndCakeBlock extends CakeBlock {
 
@@ -31,9 +31,10 @@ public class EndCakeBlock extends CakeBlock {
      * @deprecated Ask Mojang
      */
     @Deprecated
+    @Nonnull
     @Override
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos,
-                                             Player player, InteractionHand handIn, BlockHitResult blockRayTraceResult) {
+    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos,
+                                             Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult blockRayTraceResult) {
         ItemStack itemStack = player.getItemInHand(handIn);
 
         if (itemStack.isEmpty()) {
@@ -56,14 +57,14 @@ public class EndCakeBlock extends CakeBlock {
                                      Player player) {
         if (!worldIn.isClientSide() && player.getVehicle() == null && player
                 .isCreative() && worldIn instanceof ServerLevel && !player.isPassenger()) {
-            ResourceKey<Level> registrykey = worldIn
+            ResourceKey<Level> registryKey = worldIn
                     .dimension() == Level.OVERWORLD ? Level.END : Level.OVERWORLD;
-            ServerLevel serverworld = ((ServerLevel) worldIn).getServer().getLevel(registrykey);
-            if (serverworld == null) {
+            ServerLevel serverWorld = ((ServerLevel) worldIn).getServer().getLevel(registryKey);
+            if (serverWorld == null) {
                 return InteractionResult.FAIL;
             }
 
-            player.changeDimension(serverworld);
+            player.changeDimension(serverWorld);
         }
 
         if (!player.canEat(true) || player.getCommandSenderWorld().dimension() == Level.END) {
@@ -82,14 +83,14 @@ public class EndCakeBlock extends CakeBlock {
 
             if (!worldIn.isClientSide() && player.getVehicle() == null && worldIn instanceof ServerLevel && !player
                     .isPassenger()) {
-                ResourceKey<Level> registrykey = worldIn
+                ResourceKey<Level> registryKey = worldIn
                         .dimension() == Level.END ? Level.OVERWORLD : Level.END;
-                ServerLevel serverworld = ((ServerLevel) worldIn).getServer().getLevel(registrykey);
-                if (serverworld == null) {
+                ServerLevel serverWorld = ((ServerLevel) worldIn).getServer().getLevel(registryKey);
+                if (serverWorld == null) {
                     return InteractionResult.FAIL;
                 }
 
-                player.changeDimension(serverworld);
+                player.changeDimension(serverWorld);
             }
         }
         return InteractionResult.SUCCESS;

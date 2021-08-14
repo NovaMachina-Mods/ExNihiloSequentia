@@ -10,10 +10,10 @@ import javax.annotation.Nonnull;
 public class MeltableItemHandler extends ItemStackHandler {
 
     private boolean crucibleHasRoom = true;
-    private CrucilbeTypeEnum type;
+    private CrucibleTypeEnum type;
 
     public MeltableItemHandler(
-        CrucilbeTypeEnum crucibleType) {
+        CrucibleTypeEnum crucibleType) {
         super(1);
         type = crucibleType;
     }
@@ -55,7 +55,7 @@ public class MeltableItemHandler extends ItemStackHandler {
     public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
         this.crucibleHasRoom = nbt.getBoolean("hasRoom");
-        this.type = CrucilbeTypeEnum.getTypeByName(nbt.getString("type"));
+        this.type = CrucibleTypeEnum.getTypeByName(nbt.getString("type"));
     }
 
     @Nonnull

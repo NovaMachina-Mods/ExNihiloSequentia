@@ -13,6 +13,8 @@ import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 
+import javax.annotation.Nonnull;
+
 public class SieveRecipeSerializer extends IRecipeSerializer<SieveRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -20,7 +22,7 @@ public class SieveRecipeSerializer extends IRecipeSerializer<SieveRecipe> {
     }
 
     @Override
-    public SieveRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public SieveRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer) {
         Ingredient input = Ingredient.fromNetwork(buffer);
         ItemStack drop = buffer.readItem();
         List<MeshWithChance> rolls = new ArrayList<>();
@@ -33,7 +35,7 @@ public class SieveRecipeSerializer extends IRecipeSerializer<SieveRecipe> {
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer, SieveRecipe recipe) {
+    public void toNetwork(@Nonnull FriendlyByteBuf buffer, SieveRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeItem(recipe.getDrop());
         buffer.writeInt(recipe.getRolls().size());

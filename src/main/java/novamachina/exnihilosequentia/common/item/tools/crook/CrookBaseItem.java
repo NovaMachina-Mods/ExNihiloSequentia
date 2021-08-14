@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class CrookBaseItem extends DiggerItem {
     }
 
     @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
+    public float getDestroySpeed(@Nonnull ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
         return effectiveMaterialsOn.contains(material) ? this.speed : super.getDestroySpeed(stack, state);
     }

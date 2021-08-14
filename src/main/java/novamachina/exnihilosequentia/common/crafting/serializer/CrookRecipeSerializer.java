@@ -13,6 +13,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 
+import javax.annotation.Nonnull;
+
 public class CrookRecipeSerializer extends IRecipeSerializer<CrookRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -20,7 +22,7 @@ public class CrookRecipeSerializer extends IRecipeSerializer<CrookRecipe> {
     }
 
     @Override
-    public CrookRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public CrookRecipe fromNetwork(@Nonnull ResourceLocation recipeId, FriendlyByteBuf buffer) {
         int outputCount = buffer.readInt();
         List<ItemStackWithChance> output = new ArrayList<>(outputCount);
         for (int i = 0; i < outputCount; i++) {

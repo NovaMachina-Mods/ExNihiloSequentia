@@ -74,6 +74,7 @@ public class HandshakeMessages {
 
         void encode(FriendlyByteBuf buf) {
             // NOOP
+            //TODO remove???
         }
     }
 }

@@ -16,7 +16,7 @@ public enum EnumHammer implements IExtensibleEnum {
     NETHERITE(ExNihiloConstants.Items.NETHERITE_HAMMER, Config.getHammerNetheriteDurability(), Tiers.NETHERITE),
     GOLD(ExNihiloConstants.Items.GOLD_HAMMER, Config.getHammerGoldDurability(), Tiers.GOLD);
 
-    public int maxDamage;
+    public final int maxDamage;
     public final String hammerName;
     public final Tier tier;
     private RegistryObject<Item> registryObject;

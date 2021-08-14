@@ -13,6 +13,8 @@ import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import java.util.Objects;
+
 public class ExNihiloItemGenerator extends AbstractItemGenerator {
     private static final String ITEMS_TAG = "items/";
     private static final String ITEM_HANDHELD_TAG = "item/handheld";
@@ -24,13 +26,13 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
     @Override
     protected void registerModels() {
-        singleTexture(ExNihiloItems.COOKED_SILKWORM.get().getRegistryName()
+        singleTexture(Objects.requireNonNull(ExNihiloItems.COOKED_SILKWORM.get().getRegistryName())
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                 LAYER_0_TAG, new ResourceLocation(modid, "items/cooked_silkworm"));
-        singleTexture(ExNihiloItems.WITCH_WATER_BUCKET.get().getRegistryName()
+        singleTexture(Objects.requireNonNull(ExNihiloItems.WITCH_WATER_BUCKET.get().getRegistryName())
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                 LAYER_0_TAG, new ResourceLocation(modid, "items/witch_water_bucket"));
-        singleTexture(ExNihiloItems.SEA_WATER_BUCKET.get().getRegistryName()
+        singleTexture(Objects.requireNonNull(ExNihiloItems.SEA_WATER_BUCKET.get().getRegistryName())
                         .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                 LAYER_0_TAG, new ResourceLocation(modid, "items/sea_water_bucket"));
 
@@ -44,7 +46,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
     private void registerCrooks() {
         for (EnumCrook crook : EnumCrook.values()) {
-            singleTexture(crook.getRegistryObject().get().getRegistryName()
+            singleTexture(Objects.requireNonNull(crook.getRegistryObject().get().getRegistryName())
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                     LAYER_0_TAG, new ResourceLocation(modid, "items/tools/crook/" + crook.crookName));
         }
@@ -52,7 +54,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
     private void registerDolls() {
         for (EnumDoll doll : EnumDoll.values()) {
-            singleTexture(doll.getRegistryObject().get().getRegistryName()
+            singleTexture(Objects.requireNonNull(doll.getRegistryObject().get().getRegistryName())
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                     LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + doll.getDollName()));
         }
@@ -60,7 +62,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
     private void registerHammers() {
         for (EnumHammer hammer : EnumHammer.values()) {
-            singleTexture(hammer.getRegistryObject().get().getRegistryName()
+            singleTexture(Objects.requireNonNull(hammer.getRegistryObject().get().getRegistryName())
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                     LAYER_0_TAG, new ResourceLocation(modid, "items/tools/hammer/" + hammer.hammerName));
         }
@@ -69,7 +71,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
     private void registerMeshes() {
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
-                withExistingParent(mesh.getRegistryObject().get().getRegistryName()
+                withExistingParent(Objects.requireNonNull(mesh.getRegistryObject().get().getRegistryName())
                         .getPath(), new ResourceLocation(modid, "block/" + mesh.getMeshName()));
             }
         }
@@ -77,7 +79,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
     private void registerPebbles() {
         for (EnumPebbleType pebble : EnumPebbleType.values()) {
-            singleTexture(pebble.getRegistryObject().get().getRegistryName()
+            singleTexture(Objects.requireNonNull(pebble.getRegistryObject().get().getRegistryName())
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                     LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + pebble.getType()));
         }
@@ -85,7 +87,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
     private void registerResources() {
         for (EnumResource resource : EnumResource.values()) {
-            singleTexture(resource.getRegistryObject().get().getRegistryName()
+            singleTexture(Objects.requireNonNull(resource.getRegistryObject().get().getRegistryName())
                             .getPath(), new ResourceLocation(ITEM_HANDHELD_TAG),
                     LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + resource.getResourceName()));
         }

@@ -8,7 +8,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
@@ -18,7 +18,7 @@ public class ZenCrucibleRecipe {
     private final CrucibleRecipe internal;
 
     private ZenCrucibleRecipe(ResourceLocation recipeId) {
-        this.internal = new CrucibleRecipe(recipeId, Ingredient.EMPTY, 0, FluidStack.EMPTY, CrucilbeTypeEnum.WOOD);
+        this.internal = new CrucibleRecipe(recipeId, Ingredient.EMPTY, 0, FluidStack.EMPTY, CrucibleTypeEnum.WOOD);
     }
 
     @ZenCodeType.Method

@@ -17,6 +17,9 @@ import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
 public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
@@ -30,8 +33,8 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     }
 
     @Override
-    public void render(BaseCrucibleTile tileEntity, float partialTicks, PoseStack matrixStack,
-                       MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
+    public void render(BaseCrucibleTile tileEntity, float partialTicks, @Nonnull PoseStack matrixStack,
+                       @Nonnull MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation solidTexture = tileEntity.getSolidTexture();
         Fluid fluid = tileEntity.getFluid();
         ResourceLocation fluidTexture =
@@ -103,7 +106,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     private Color getBlockColor(ResourceLocation solidTexture,
                                 BaseCrucibleTile tileEntity) {
         if (solidTexture != null && solidTexture.toString().contains("leaves")) {
-            return new Color(tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
+            return new Color(Objects.requireNonNull(tileEntity.getLevel()).getBiome(tileEntity.getBlockPos()).getFoliageColor());
         }
         return Color.WHITE;
     }

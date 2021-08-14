@@ -34,7 +34,7 @@ import novamachina.exnihilosequentia.common.compat.jei.sieve.wet.WetSieveRecipeC
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -191,7 +191,7 @@ public class JEIPlugin {//implements IModPlugin {
     }
 
     private void registerWoodCrucible(IRecipeRegistration registration) {
-        List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList().stream().filter(recipe -> recipe.getCrucibleType() == CrucilbeTypeEnum.WOOD).collect(Collectors.toList());
+        List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList().stream().filter(recipe -> recipe.getCrucibleType() == CrucibleTypeEnum.WOOD).collect(Collectors.toList());
         registration.addRecipes(recipes, CRUCIBLES);
         logger.info("Wooden Crucible Recipes Loaded: " + recipes.size());
     }

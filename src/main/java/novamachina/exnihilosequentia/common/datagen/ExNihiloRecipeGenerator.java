@@ -526,7 +526,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 createSmeltingRecipe(consumer, ore.getRawOreItem().get(), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(),
                         0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
                         new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
-                registerOre(ore, consumer);
+                createOre(ore, consumer);
             }
             if (ore.isVanilla()) {
                 if (ore == EnumOre.IRON) {
@@ -544,7 +544,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                             0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "copper_ingot"));
                 }
-                registerVanillaOre(ore, consumer);
+                createVanillaOre(ore, consumer);
             }
         }
     }

@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +13,6 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
@@ -50,16 +48,17 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator.createMCCompost;
 
 @Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloInitialization {
     public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
+        @Nonnull
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(EnumCrook.WOOD.getRegistryObject().get());
@@ -139,14 +138,15 @@ public class ExNihiloInitialization {
     }
 
     private static void registerDispenserFluids() {
-        DispenseItemBehavior idispenseitembehavior = new DefaultDispenseItemBehavior() {
+        DispenseItemBehavior iDispenseItemBehavior = new DefaultDispenseItemBehavior() {
             private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
+            @Nonnull
             public ItemStack execute(BlockSource p_82487_1_, ItemStack p_82487_2_) {
                 BucketItem bucketitem = (BucketItem)p_82487_2_.getItem();
                 BlockPos blockpos = p_82487_1_.getPos().relative(p_82487_1_.getBlockState().getValue(DispenserBlock.FACING));
                 Level world = p_82487_1_.getLevel();
-                if (bucketitem.emptyContents((Player)null, world, blockpos, (BlockHitResult)null)) {
+                if (bucketitem.emptyContents(null, world, blockpos, null)) {
                     bucketitem.checkExtraContent(null, world, p_82487_2_, blockpos);
                     return new ItemStack(Items.BUCKET);
                 } else {
@@ -154,8 +154,8 @@ public class ExNihiloInitialization {
                 }
             }
         };
-        DispenserBlock.registerBehavior(ExNihiloItems.SEA_WATER_BUCKET.get(), idispenseitembehavior);
-        DispenserBlock.registerBehavior(ExNihiloItems.WITCH_WATER_BUCKET.get(), idispenseitembehavior);
+        DispenserBlock.registerBehavior(ExNihiloItems.SEA_WATER_BUCKET.get(), iDispenseItemBehavior);
+        DispenserBlock.registerBehavior(ExNihiloItems.WITCH_WATER_BUCKET.get(), iDispenseItemBehavior);
     }
 
     private static void registerVanillaCompost() {
@@ -169,7 +169,6 @@ public class ExNihiloInitialization {
         logger.debug("Filter Recipes, Class: " + recipeClass + ", Recipe Type: " + recipeType);
         return recipes.stream()
                 .filter(iRecipe -> iRecipe.getType() == recipeType)
-                .flatMap(Stream::of)
                 .map(recipeClass::cast)
                 .collect(Collectors.toList());
     }

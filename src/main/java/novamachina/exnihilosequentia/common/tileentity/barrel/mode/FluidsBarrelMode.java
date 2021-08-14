@@ -29,6 +29,7 @@ import novamachina.exnihilosequentia.common.utility.TankUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FluidsBarrelMode extends AbstractBarrelMode {
     public FluidsBarrelMode(String name) {
@@ -44,29 +45,26 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             if (fluidOnTop(barrelTile)) {
                 return;
             }
-            Block blockBelow = barrelTile.getLevel().getBlockState(barrelTile.getBlockPos().offset(0, -1, 0)).getBlock();
+            Block blockBelow = Objects.requireNonNull(barrelTile.getLevel()).getBlockState(barrelTile.getBlockPos().offset(0, -1, 0)).getBlock();
             fluidTransform(barrelTile, blockBelow);
         }
     }
 
-    private boolean doMobSpawn(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn) {
+    private void doMobSpawn(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn) {
         if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
-            return false;
+            return;
         }
 
         Item item = player.getItemInHand(handIn).getItem();
 
-        if (item instanceof DollItem) {
-            DollItem doll = (DollItem) item;
+        if (item instanceof DollItem doll) {
             if (barrelTile.getFluid().isSame(doll.getSpawnFluid())) {
                 barrelTile.setMode(ExNihiloConstants.BarrelModes.MOB);
                 ((MobSpawnBarrelMode) barrelTile.getMode()).setDoll(doll);
                 player.getItemInHand(handIn).shrink(1);
-                return true;
             }
         }
 
-        return false;
     }
 
     private boolean fluidTransform(AbstractBarrelTile barrelTile, ItemLike catalyst) {
@@ -85,7 +83,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         if(barrelTile.getFluidAmount() < AbstractBarrelTile.MAX_FLUID_AMOUNT) {
             return false;
         }
-        Fluid fluidOnTop = barrelTile.getLevel().getFluidState(barrelTile.getBlockPos().offset(0, 1, 0)).getType();
+        Fluid fluidOnTop = Objects.requireNonNull(barrelTile.getLevel()).getFluidState(barrelTile.getBlockPos().offset(0, 1, 0)).getType();
         Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
         if (ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.isValidRecipe(fluidInTank, fluidOnTop)) {
@@ -118,7 +116,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
-            barrelTile.getLevel()
+            Objects.requireNonNull(barrelTile.getLevel())
                 .sendBlockUpdated(barrelTile.getBlockPos(), barrelTile.getBlockState(), barrelTile.getBlockState(), 2);
             barrelTile.setChanged();
             return InteractionResult.SUCCESS;
@@ -224,8 +222,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
             return returnStack;
         }
 
-        if (input instanceof DollItem) {
-            DollItem doll = (DollItem) input;
+        if (input instanceof DollItem doll) {
             if (barrelTile.getFluid().isSame(doll.getSpawnFluid())) {
                 if(!simulate) {
                     barrelTile.setMode(ExNihiloConstants.BarrelModes.MOB);

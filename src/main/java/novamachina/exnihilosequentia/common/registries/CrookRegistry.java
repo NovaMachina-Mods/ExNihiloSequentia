@@ -13,7 +13,7 @@ import java.util.List;
 public class CrookRegistry implements ICrookRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private List<CrookRecipe> recipeList = new ArrayList<>();
+    private final List<CrookRecipe> recipeList = new ArrayList<>();
 
     @Override
     public boolean isCrookable(ItemLike block) {

@@ -10,6 +10,8 @@ import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
+import javax.annotation.Nonnull;
+
 public class FluidOnTopRecipeSerializer extends IRecipeSerializer<FluidOnTopRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -17,7 +19,7 @@ public class FluidOnTopRecipeSerializer extends IRecipeSerializer<FluidOnTopReci
     }
 
     @Override
-    public FluidOnTopRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public FluidOnTopRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer) {
         FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
         FluidStack fluidOnTop = FluidStack.readFromPacket(buffer);
         ItemStack result = buffer.readItem();
@@ -25,7 +27,7 @@ public class FluidOnTopRecipeSerializer extends IRecipeSerializer<FluidOnTopReci
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer, FluidOnTopRecipe recipe) {
+    public void toNetwork(@Nonnull FriendlyByteBuf buffer, FluidOnTopRecipe recipe) {
         recipe.getFluidInTank().writeToPacket(buffer);
         recipe.getFluidOnTop().writeToPacket(buffer);
         buffer.writeItem(recipe.getResultItem());

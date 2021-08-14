@@ -19,20 +19,20 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public int getHeat() {
+        assert level != null;
         BlockState source = level.getBlockState(worldPosition.below());
         int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock());
         if(source.getBlock() instanceof LiquidBlock) {
             int level = 8 - source.getValue(BlockStateProperties.LEVEL);
             double partial = (double)blockHeat / 8;
-            int returnVal = (int)Math.ceil(partial * level);
-            return returnVal;
+            return (int)Math.ceil(partial * level);
         }
         return blockHeat;
     }
 
     @Override
-    public CrucilbeTypeEnum getCrucibleType() {
-        return CrucilbeTypeEnum.FIRED;
+    public CrucibleTypeEnum getCrucibleType() {
+        return CrucibleTypeEnum.FIRED;
     }
 
     @Override
@@ -51,6 +51,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     }
 
     public void tick() {
+        assert level != null;
         if (level.isClientSide()) {
             return;
         }

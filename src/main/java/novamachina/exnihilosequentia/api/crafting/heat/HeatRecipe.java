@@ -9,6 +9,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class HeatRecipe extends SerializableRecipe {
     public static final RecipeType<HeatRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
     private static RegistryObject<IRecipeSerializer<HeatRecipe>> serializer;
@@ -45,6 +47,7 @@ public class HeatRecipe extends SerializableRecipe {
         this.input = input;
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return ItemStack.EMPTY;

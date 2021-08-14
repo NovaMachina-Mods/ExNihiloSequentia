@@ -10,6 +10,9 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
 public class HeatRecipeSerializer extends IRecipeSerializer<HeatRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -17,7 +20,7 @@ public class HeatRecipeSerializer extends IRecipeSerializer<HeatRecipe> {
     }
 
     @Override
-    public HeatRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public HeatRecipe fromNetwork(@Nonnull ResourceLocation recipeId, FriendlyByteBuf buffer) {
         Block input = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(buffer.readUtf()));
         int amount = buffer.readInt();
         return new HeatRecipe(recipeId, input, amount);
@@ -25,7 +28,7 @@ public class HeatRecipeSerializer extends IRecipeSerializer<HeatRecipe> {
 
     @Override
     public void toNetwork(FriendlyByteBuf buffer, HeatRecipe recipe) {
-        buffer.writeUtf(recipe.getInput().getRegistryName().toString());
+        buffer.writeUtf(Objects.requireNonNull(recipe.getInput().getRegistryName()).toString());
         buffer.writeInt(recipe.getAmount());
     }
 

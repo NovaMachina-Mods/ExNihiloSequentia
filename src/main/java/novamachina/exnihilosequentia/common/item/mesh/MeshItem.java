@@ -4,9 +4,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-
-import net.minecraft.world.item.Item.Properties;
-import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 public class MeshItem extends Item {

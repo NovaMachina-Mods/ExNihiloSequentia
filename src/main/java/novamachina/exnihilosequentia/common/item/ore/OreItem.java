@@ -4,6 +4,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.CreativeModeTab;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
+import javax.annotation.Nonnull;
+
 public class OreItem extends Item {
 
     private final EnumOre ore;
@@ -18,7 +20,7 @@ public class OreItem extends Item {
     }
 
     @Override
-    protected boolean allowdedIn(CreativeModeTab group) {
+    protected boolean allowdedIn(@Nonnull CreativeModeTab group) {
         if (group == ExNihiloInitialization.ITEM_GROUP) {
             return ore.isEnabled();
         }

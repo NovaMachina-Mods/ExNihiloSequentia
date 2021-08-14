@@ -6,16 +6,9 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 
-public class MeshWithChance {
+public record MeshWithChance(EnumMesh mesh, float chance) {
     private static final String CHANCE_KEY = "chance";
     private static final String MESH_KEY = "mesh";
-    private final float chance;
-    private final EnumMesh mesh;
-
-    public MeshWithChance(EnumMesh mesh, float chance) {
-        this.mesh = mesh;
-        this.chance = chance;
-    }
 
     public static MeshWithChance deserialize(JsonElement json) {
         if (json.isJsonObject() && json.getAsJsonObject().has(MESH_KEY)) {

@@ -3,7 +3,6 @@ package novamachina.exnihilosequentia.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.common.utility.Color;
@@ -12,10 +11,8 @@ import org.apache.logging.log4j.LogManager;
 
 public abstract class AbstractModBlockRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    private final BlockEntityRendererProvider.Context context;
 
     protected AbstractModBlockRenderer(BlockEntityRendererProvider.Context context) {
-        this.context = context;
     }
 
     protected void add(VertexConsumer renderer, PoseStack stack, VertexLocation vertexLocation, UVLocation uvLocation, Color color, int combinedLight) {
@@ -28,13 +25,9 @@ public abstract class AbstractModBlockRenderer<T extends BlockEntity> implements
     }
 
     protected String resolveTexture(String path) {
-        switch (path) {
-            case "cactus": {
-                return "cactus_top";
-            }
-            default: {
-                return path;
-            }
+        if ("cactus".equals(path)) {
+            return "cactus_top";
         }
+        return path;
     }
 }

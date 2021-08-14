@@ -18,6 +18,8 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 
+import javax.annotation.Nonnull;
+
 public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider, EntityBlock {
 
     public CrucibleBaseBlock(BlockBuilder builder) {
@@ -27,6 +29,7 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider, En
     @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData data) {
         BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
+        assert crucibleTile != null;
         if (crucibleTile.getSolidAmount() > 0) {
             probeInfo.text(new TranslatableComponent("waila.crucible.solid", new TranslatableComponent(crucibleTile.getCurrentItem().getItem().getDescriptionId()), crucibleTile.getSolidAmount()));
         }
@@ -44,9 +47,10 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider, En
      * @deprecated Ask Mojang
      */
     @Deprecated
+    @Nonnull
     @Override
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos,
-                                             Player player, InteractionHand handIn, BlockHitResult hit) {
+    public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos,
+                                 @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
         if (worldIn.isClientSide()) {
             return InteractionResult.SUCCESS;
         }

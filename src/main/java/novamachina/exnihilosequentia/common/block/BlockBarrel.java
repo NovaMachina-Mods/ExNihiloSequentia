@@ -27,6 +27,8 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 
+import javax.annotation.Nonnull;
+
 public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
@@ -57,8 +59,9 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
      * @deprecated Ask Mojang
      */
     @Deprecated
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return SHAPE;
     }
 
@@ -66,8 +69,9 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
      * @deprecated Ask Mojang
      */
     @Deprecated
+    @Nonnull
     @Override
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+    public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
         if (worldIn.isClientSide()) {
             return InteractionResult.SUCCESS;
         }

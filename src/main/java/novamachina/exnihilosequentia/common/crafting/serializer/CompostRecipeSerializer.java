@@ -9,6 +9,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 
+import javax.annotation.Nonnull;
+
 public class CompostRecipeSerializer extends IRecipeSerializer<CompostRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -16,14 +18,14 @@ public class CompostRecipeSerializer extends IRecipeSerializer<CompostRecipe> {
     }
 
     @Override
-    public CompostRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public CompostRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer) {
         Ingredient input = Ingredient.fromNetwork(buffer);
         int amount = buffer.readInt();
         return new CompostRecipe(recipeId, input, amount);
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer, CompostRecipe recipe) {
+    public void toNetwork(@Nonnull FriendlyByteBuf buffer, CompostRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getAmount());
     }

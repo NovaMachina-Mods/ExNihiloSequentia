@@ -14,6 +14,7 @@ import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FiredCrucibleBlock extends CrucibleBaseBlock {
@@ -26,13 +27,13 @@ public class FiredCrucibleBlock extends CrucibleBaseBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
         return new FiredCrucibleTile(pos, state);
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level1, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level1, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
         if (level1.isClientSide) {
             return null;
         }
