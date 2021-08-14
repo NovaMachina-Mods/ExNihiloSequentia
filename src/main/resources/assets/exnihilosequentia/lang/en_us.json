@@ -179,6 +179,7 @@
   "waila.crucible.fluid": "Fluid(%s): %s mB",
   "waila.crucible.solid": "Solid(%s): %s",
   "waila.crucible.heat": "Heat: %s",
+  "waila.crucible.no_heat": "No Heat Source",
 
   "top.barrel.mode": "Mode: %s"
 }

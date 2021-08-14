@@ -33,11 +33,11 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
             if (crucibleTile.getFluidAmount() > 0) {
                 probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
             }
-            Object heat = crucibleTile.getHeat();
-            if ((int) heat == 0) {
-                heat = "No Heat Source";
+            if (crucibleTile.getHeat() == 0) {
+                probeInfo.text(new TranslationTextComponent("waila.crucible.no_heat"));
+            } else {
+                probeInfo.text(new TranslationTextComponent("waila.crucible.heat", crucibleTile.getHeat()));
             }
-            probeInfo.text(new TranslationTextComponent("waila.crucible.heat", heat));
         }
     }
 
