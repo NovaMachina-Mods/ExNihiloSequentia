@@ -23,6 +23,7 @@ public class ExNihiloTags {
     public static final ITag.INamedTag<Item> CRUCIBLE = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucibles"));
     public static final ITag.INamedTag<Item> BARREL = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "barrels"));
     public static final ITag.INamedTag<Item> SIEVE = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "sieves"));
+    public static final ITag.INamedTag<Item> WORKBENCH = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crafting_tables"));
     private static final Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
 
     static {

@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractBlockStateGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -22,6 +23,18 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         registerCrucibles();
         registerCakes();
         registerFluids();
+        registerCraftingTable();
+    }
+
+    private void registerCraftingTable() {
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(ExNihiloBlocks.STONE_CRAFTING_TABLE.get()), mcLoc("block/orientable"))
+                .texture(PARTICLE_TAG, modLoc("block/stone_crafting_table_front"))
+                .texture("top", modLoc("block/stone_crafting_table_top"))
+                .texture("down", modLoc("block/stone_crafting_table_bottom"))
+                .texture("front", modLoc("block/stone_crafting_table_front"))
+                .texture("side", modLoc("block/stone_crafting_table_side")));
+
+        simpleItemBlock(ExNihiloBlocks.STONE_CRAFTING_TABLE.get(), model.model);
     }
 
     private void registerCakes() {

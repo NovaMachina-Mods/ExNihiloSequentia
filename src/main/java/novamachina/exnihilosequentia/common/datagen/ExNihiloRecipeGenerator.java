@@ -514,6 +514,13 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlockedBy("has_stone_pebble", InventoryChangeTrigger.Instance
                     .hasItems(EnumPebbleType.STONE.getRegistryObject().get()))
                 .save(consumer, createSaveLocation(EnumResource.STONE_STICK.getRegistryObject().getId()));
+		ShapedRecipeBuilder.shaped(ExNihiloBlocks.STONE_CRAFTING_TABLE.get())
+                .pattern("xx")
+                .pattern("xx")
+                .define('x', Blocks.COBBLESTONE)
+                .unlockedBy("has_cobble_stone", InventoryChangeTrigger.Instance
+                .hasItems(Blocks.COBBLESTONE))
+                .save(consumer, createSaveLocation(ExNihiloBlocks.STONE_CRAFTING_TABLE.getId()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {

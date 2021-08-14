@@ -19,6 +19,7 @@ import novamachina.exnihilosequentia.common.block.crucibles.UnfiredCrucibleBlock
 import novamachina.exnihilosequentia.common.block.crucibles.WoodCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.sieves.NetherSieveBlock;
 import novamachina.exnihilosequentia.common.block.sieves.WoodSieveBlock;
+import novamachina.exnihilosequentia.common.block.workbench.StoneWorkbenchCraftingBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -119,6 +120,9 @@ public class ExNihiloBlocks {
             .register(Blocks.SIEVE_CRIMSON, NetherSieveBlock::new);
     public static final RegistryObject<NetherSieveBlock> SIEVE_WARPED = BLOCKS
             .register(Blocks.SIEVE_WARPED, NetherSieveBlock::new);
+    public static final RegistryObject<StoneWorkbenchCraftingBlock> STONE_CRAFTING_TABLE = BLOCKS
+            .register("stone_crafting_table", () -> new StoneWorkbenchCraftingBlock(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.CRAFTING_TABLE)
+            .strength(2F).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE)));
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloBlocks() {
