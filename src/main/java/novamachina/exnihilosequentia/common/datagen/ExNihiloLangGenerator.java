@@ -34,7 +34,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         final String WAILA_LANG = "waila.";
         // JEI
         add("jei.sieve.dropChance", "Drop Chance");
-        // WAILA/HYWLA
+        // WAILA/HYWLA + TOP
         add(WAILA_LANG + "progress", "Progress: %s");
         add(WAILA_LANG + "barrel.fluidAmount", "Fluid(%s): %s mB");
         add(WAILA_LANG + "barrel.solidAmount", "Solid(%s): %s / %s");
@@ -45,7 +45,8 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         add(WAILA_LANG + "crucible.fluid", "Fluid(%s): %s mB");
         add(WAILA_LANG + "crucible.solid", "Solid(%s): %s");
         add(WAILA_LANG + "crucible.heat", "Heat: %s");
-        // TOP
+        add(WAILA_LANG + "crucible.no_heat", "No Heat Source");
+        // TOP only
         add("top.barrel.mode", "Mode: %s");
         // Fluids
         addFluid(Fluids.WITCH_WATER_STILL, "Witch Water");
@@ -211,6 +212,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         add(WAILA_LANG + "crucible.fluid", "Fluid(%s): %s mB");
         add(WAILA_LANG + "crucible.solid", "Solid(%s): %s");
         add(WAILA_LANG + "crucible.heat", "Heat: %s");
+        add(WAILA_LANG + "crucible.no_heat", "No Heat Source");
         // TOP
         add("top.barrel.mode", "Mode: %s");
     }
