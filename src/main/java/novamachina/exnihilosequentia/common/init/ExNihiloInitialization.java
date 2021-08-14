@@ -122,7 +122,7 @@ public class ExNihiloInitialization {
     public static void registerTOP(InterModEnqueueEvent event) {
         logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
         if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
-            //CompatTOP.register();
+            CompatTOP.register();
         }
     }
 
