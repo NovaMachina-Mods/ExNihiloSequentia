@@ -11,6 +11,8 @@ import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
+import javax.annotation.Nonnull;
+
 public class FluidItemRecipeSerializer extends IRecipeSerializer<FluidItemRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -18,7 +20,7 @@ public class FluidItemRecipeSerializer extends IRecipeSerializer<FluidItemRecipe
     }
 
     @Override
-    public FluidItemRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public FluidItemRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer) {
         FluidStack fluid = FluidStack.readFromPacket(buffer);
         Ingredient input = Ingredient.fromNetwork(buffer);
         ItemStack output = buffer.readItem();
@@ -26,7 +28,7 @@ public class FluidItemRecipeSerializer extends IRecipeSerializer<FluidItemRecipe
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer, FluidItemRecipe recipe) {
+    public void toNetwork(@Nonnull FriendlyByteBuf buffer, FluidItemRecipe recipe) {
         recipe.getFluidInBarrel().writeToPacket(buffer);
         recipe.getInput().toNetwork(buffer);
         buffer.writeItem(recipe.getResultItem());

@@ -12,6 +12,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+
 public class FluidOnTopRecipe extends SerializableRecipe {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     public static final RecipeType<FluidOnTopRecipe> RECIPE_TYPE = RecipeType
@@ -52,6 +54,7 @@ public class FluidOnTopRecipe extends SerializableRecipe {
         this.fluidOnTop = fluidOnTop;
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return result.copy();

@@ -5,7 +5,7 @@ import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.*;
 
 public class ExNihiloLangGenerator extends AbstractLangGenerator {
-    String locale;
+    final String locale;
     public ExNihiloLangGenerator(DataGenerator gen, String locale) {
         super(gen, locale);
         this.locale = locale;
@@ -34,7 +34,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         final String WAILA_LANG = "waila.";
         // JEI
         add("jei.sieve.dropChance", "Drop Chance");
-        // WAILA/HYWLA
+        // WAILA/HYWLA + TOP
         add(WAILA_LANG + "progress", "Progress: %s");
         add(WAILA_LANG + "barrel.fluidAmount", "Fluid(%s): %s mB");
         add(WAILA_LANG + "barrel.solidAmount", "Solid(%s): %s / %s");
@@ -45,7 +45,8 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         add(WAILA_LANG + "crucible.fluid", "Fluid(%s): %s mB");
         add(WAILA_LANG + "crucible.solid", "Solid(%s): %s");
         add(WAILA_LANG + "crucible.heat", "Heat: %s");
-        // TOP
+        add(WAILA_LANG + "crucible.no_heat", "No Heat Source");
+        // TOP only
         add("top.barrel.mode", "Mode: %s");
         // Fluids
         addFluid(Fluids.WITCH_WATER_STILL, "Witch Water");
@@ -88,15 +89,15 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         addItem("guardian_doll", "Protecting Doll");
         addItem("shulker_doll", "Floating Doll");
         // Chunks
-        addChunk(Ore.ALUMINUM, "Raw Aluminum Ore");
-        addChunk(Ore.BISMUTH, "Raw Bismuth Ore");
-        addChunk(Ore.LEAD, "Raw Lead Ore");
-        addChunk(Ore.NICKEL, "Raw Nickel Ore");
-        addChunk(Ore.PLATINUM, "Raw Platinum Ore");
-        addChunk(Ore.SILVER, "Raw Silver Ore");
-        addChunk(Ore.TIN, "Raw Tin Ore");
-        addChunk(Ore.URANIUM, "Raw Uranium Ore");
-        addChunk(Ore.ZINC, "Raw Zinc Ore");
+        addChunk(Ore.ALUMINUM, "Raw Aluminum");
+        addChunk(Ore.BISMUTH, "Raw Bismuth");
+        addChunk(Ore.LEAD, "Raw Lead");
+        addChunk(Ore.NICKEL, "Raw Nickel");
+        addChunk(Ore.PLATINUM, "Raw Platinum");
+        addChunk(Ore.SILVER, "Raw Silver");
+        addChunk(Ore.TIN, "Raw Tin");
+        addChunk(Ore.URANIUM, "Raw Uranium");
+        addChunk(Ore.ZINC, "Raw Zinc");
         // Pieces
         addPiece(Ore.ALUMINUM, "Aluminum Piece");
         addPiece(Ore.BISMUTH, "Bismuth Piece");
@@ -211,6 +212,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         add(WAILA_LANG + "crucible.fluid", "Fluid(%s): %s mB");
         add(WAILA_LANG + "crucible.solid", "Solid(%s): %s");
         add(WAILA_LANG + "crucible.heat", "Heat: %s");
+        add(WAILA_LANG + "crucible.no_heat", "No Heat Source");
         // TOP
         add("top.barrel.mode", "Mode: %s");
     }
@@ -260,15 +262,15 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         addItem("guardian_doll", "Protecting Doll");
         addItem("shulker_doll", "Floating Doll");
         // Chunks
-        addChunk(Ore.ALUMINUM, "Raw Aluminum Ore");
-        addChunk(Ore.BISMUTH, "Raw Bismuth Ore");
-        addChunk(Ore.LEAD, "Raw Lead Ore");
-        addChunk(Ore.NICKEL, "Raw Nickel Ore");
-        addChunk(Ore.PLATINUM, "Raw Platinum Ore");
-        addChunk(Ore.SILVER, "Raw Silver Ore");
-        addChunk(Ore.TIN, "Raw Tin Ore");
-        addChunk(Ore.URANIUM, "Raw Uranium Ore");
-        addChunk(Ore.ZINC, "Raw Zinc Ore");
+        addChunk(Ore.ALUMINUM, "Raw Aluminum");
+        addChunk(Ore.BISMUTH, "Raw Bismuth");
+        addChunk(Ore.LEAD, "Raw Lead");
+        addChunk(Ore.NICKEL, "Raw Nickel");
+        addChunk(Ore.PLATINUM, "Raw Platinum");
+        addChunk(Ore.SILVER, "Raw Silver");
+        addChunk(Ore.TIN, "Raw Tin");
+        addChunk(Ore.URANIUM, "Raw Uranium");
+        addChunk(Ore.ZINC, "Raw Zinc");
         // Pieces
         addPiece(Ore.ALUMINUM, "Aluminum Piece");
         addPiece(Ore.BISMUTH, "Bismuth Piece");

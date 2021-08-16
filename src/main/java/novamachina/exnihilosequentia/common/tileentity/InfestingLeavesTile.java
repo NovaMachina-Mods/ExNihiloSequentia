@@ -1,16 +1,14 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.state.BlockState;
-import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
-import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
+import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -31,6 +29,7 @@ public class InfestingLeavesTile extends BlockEntity {
     }
 
     public void tick() {
+        assert level != null;
         if (!level.isClientSide()) {
             progressWaitInterval--;
             if (progressWaitInterval <= 0) {
@@ -38,7 +37,7 @@ public class InfestingLeavesTile extends BlockEntity {
                 spreadCounter++;
 
                 if (progress >= 100) {
-                    logger.debug("Finish insfesting leaves");
+                    logger.debug("Finish infesting leaves");
                     InfestingLeavesBlock.finishInfestingBlock(level, worldPosition);
                 }
 

@@ -291,7 +291,7 @@ public class Config {
         woodBarrelMaxTemp = COMMON_BUILDER
                 .comment("The max temperature a barrel can accept; water is 300 (Default: 300)")
                 .defineInRange("woodBarrelMaxTemp", 300, 0, Integer.MAX_VALUE);
-        showParticles = COMMON_BUILDER.comment("Should Ex Nihilo show any Patricle?")
+        showParticles = COMMON_BUILDER.comment("Should Ex Nihilo show any Particle?")
                 .define("showParticles", true);
 
         COMMON_BUILDER.comment("Mob Spawn Configs").push(SUBCATEGORY_BARREL_MOB);

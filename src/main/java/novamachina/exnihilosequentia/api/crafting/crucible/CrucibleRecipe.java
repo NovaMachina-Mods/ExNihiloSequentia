@@ -10,19 +10,21 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import javax.annotation.Nonnull;
 
 public class CrucibleRecipe extends SerializableRecipe {
     public static final RecipeType<CrucibleRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
     private static RegistryObject<IRecipeSerializer<CrucibleRecipe>> serializer;
     private int amount;
-    private CrucilbeTypeEnum crucibleType;
+    private CrucibleTypeEnum crucibleType;
     private Ingredient input;
     private FluidStack resultFluid;
 
-    public CrucibleRecipe(ResourceLocation id, Ingredient input, int amount, FluidStack fluid, CrucilbeTypeEnum crucibleType) {
+    public CrucibleRecipe(ResourceLocation id, Ingredient input, int amount, FluidStack fluid, CrucibleTypeEnum crucibleType) {
         super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
@@ -46,12 +48,12 @@ public class CrucibleRecipe extends SerializableRecipe {
         this.amount = amount;
     }
 
-    public CrucilbeTypeEnum getCrucibleType() {
+    public CrucibleTypeEnum getCrucibleType() {
         return crucibleType;
     }
 
     public void setCrucibleType(String crucibleType) {
-        this.crucibleType = CrucilbeTypeEnum.getTypeByName(crucibleType);
+        this.crucibleType = CrucibleTypeEnum.getTypeByName(crucibleType);
     }
 
     public Ingredient getInput() {
@@ -66,6 +68,7 @@ public class CrucibleRecipe extends SerializableRecipe {
         return Arrays.asList(input.getItems());
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return ItemStack.EMPTY;

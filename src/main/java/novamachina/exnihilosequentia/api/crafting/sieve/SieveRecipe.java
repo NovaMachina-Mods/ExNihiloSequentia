@@ -12,6 +12,8 @@ import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class SieveRecipe extends SerializableRecipe {
     public static final RecipeType<SieveRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
@@ -84,6 +86,7 @@ public class SieveRecipe extends SerializableRecipe {
         return recipeId;
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return drop.copy();

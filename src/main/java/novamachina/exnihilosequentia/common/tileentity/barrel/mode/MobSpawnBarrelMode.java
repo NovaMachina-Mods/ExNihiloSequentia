@@ -21,6 +21,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MobSpawnBarrelMode extends AbstractBarrelMode {
     private static final String CURRENT_PROGRESS_TAG = "currentProgress";
@@ -78,7 +79,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
             this.currentProgress = 0;
         }
         if (nbt.contains(DOLL_TYPE_TAG)) {
-            setDoll((DollItem) EnumDoll.getDollFromString(nbt.getString(DOLL_TYPE_TAG)).getRegistryObject().get());
+            setDoll((DollItem) Objects.requireNonNull(EnumDoll.getDollFromString(nbt.getString(DOLL_TYPE_TAG))).getRegistryObject().get());
         } else {
             this.setDoll(null);
         }
@@ -94,7 +95,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerLevel) barrelTile.getLevel())
+        ((ServerLevel) Objects.requireNonNull(barrelTile.getLevel()))
             .sendParticles(ParticleTypes.LARGE_SMOKE,
                 barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),

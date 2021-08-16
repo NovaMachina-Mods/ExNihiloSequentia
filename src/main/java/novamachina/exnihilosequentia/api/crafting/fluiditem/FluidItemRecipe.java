@@ -14,6 +14,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class FluidItemRecipe extends SerializableRecipe {
     public static final RecipeType<FluidItemRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
     private static RegistryObject<IRecipeSerializer<FluidItemRecipe>> serializer;
@@ -52,6 +54,7 @@ public class FluidItemRecipe extends SerializableRecipe {
         return Arrays.asList(input.getItems());
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return output;

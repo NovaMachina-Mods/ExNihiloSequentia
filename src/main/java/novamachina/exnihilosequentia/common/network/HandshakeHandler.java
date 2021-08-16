@@ -21,7 +21,7 @@ public class HandshakeHandler {
     }
 
     public static void handleOreList(HandshakeMessages.S2COreList msg, Supplier<NetworkEvent.Context> ctx) throws InterruptedException {
-        logger.debug("Recieved ore data from server");
+        logger.debug("Received ore data from server");
 
         AtomicBoolean updatedOreList = new AtomicBoolean(false);
         CountDownLatch block = new CountDownLatch(1);
@@ -37,7 +37,8 @@ public class HandshakeHandler {
         try {
             block.await();
         } catch (InterruptedException e) {
-            Thread.interrupted();
+            //TODO remove???
+            //Thread.interrupted();
             logger.error(e.getMessage());
             throw e;
         }

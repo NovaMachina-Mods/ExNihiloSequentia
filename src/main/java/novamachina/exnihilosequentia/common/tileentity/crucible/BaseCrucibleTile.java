@@ -32,6 +32,7 @@ import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public abstract class BaseCrucibleTile extends BlockEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -69,6 +70,7 @@ public abstract class BaseCrucibleTile extends BlockEntity {
         super.load(compound);
     }
 
+    @Nonnull
     @Override
     public CompoundTag save(CompoundTag compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
@@ -117,6 +119,7 @@ public abstract class BaseCrucibleTile extends BlockEntity {
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
+            assert level != null;
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
             setChanged();
             return InteractionResult.SUCCESS;
@@ -141,7 +144,7 @@ public abstract class BaseCrucibleTile extends BlockEntity {
             setChanged();
             return InteractionResult.SUCCESS;
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     public ResourceLocation getSolidTexture() {
@@ -185,13 +188,13 @@ public abstract class BaseCrucibleTile extends BlockEntity {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         CompoundTag nbt = packet.getTag();
         if (nbt.contains(CURRENT_ITEM_TAG)) {
-            currentItem = ItemStack.of((CompoundTag) nbt.get(CURRENT_ITEM_TAG));
+            currentItem = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(CURRENT_ITEM_TAG)));
         } else {
             currentItem = ItemStack.EMPTY;
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            inventory.setStackInSlot(0, ItemStack.of((CompoundTag) nbt.get(BLOCK_TAG)));
+            inventory.setStackInSlot(0, ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(BLOCK_TAG))));
         } else {
             inventory.setStackInSlot(0, ItemStack.EMPTY);
         }
@@ -226,7 +229,7 @@ public abstract class BaseCrucibleTile extends BlockEntity {
         return 0;
     }
 
-    public abstract CrucilbeTypeEnum getCrucibleType();
+    public abstract CrucibleTypeEnum getCrucibleType();
 
     private CrucibleRecipe getMeltable() {
         return ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());

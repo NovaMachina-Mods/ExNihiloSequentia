@@ -15,6 +15,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BlockBarrelMode extends AbstractBarrelMode {
     public BlockBarrelMode(String name) {
@@ -28,7 +29,7 @@ public class BlockBarrelMode extends AbstractBarrelMode {
 
     @Override
     public InteractionResult onBlockActivated(AbstractBarrelTile barrelTile, Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        barrelTile.getLevel()
+        Objects.requireNonNull(barrelTile.getLevel())
             .addFreshEntity(new ItemEntity(barrelTile.getLevel(), barrelTile.getBlockPos().getX() + 0.5F, barrelTile.getBlockPos()
                 .getY() + 0.5F,
                 barrelTile.getBlockPos().getZ() + 0.5F, new ItemStack(barrelTile.getInventory().getStackInSlot(0)

@@ -10,6 +10,8 @@ import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import java.util.Objects;
+
 import static net.minecraft.world.level.block.CakeBlock.BITES;
 
 public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
@@ -19,17 +21,13 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         super(gen, modId, exFileHelper);
     }
 
-    protected ResourceLocation exnihiloLoc(String string) {
-        return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, string);
-    }
-
     protected void basicBlock(Block block) {
         simpleItemBlock(block, cubeAll(block));
     }
 
-    protected void registerFluid(Fluid fluid) {
+    protected void createFluid(Fluid fluid) {
         ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
-        ModelFile model = models().getBuilder("block/" + fluid.getRegistryName().getPath())
+        ModelFile model = models().getBuilder("block/" + Objects.requireNonNull(fluid.getRegistryName()).getPath())
                 .texture(PARTICLE_TAG, stillTexture);
         getVariantBuilder(fluid.defaultFluidState().createLegacyBlock().getBlock()).partialState()
                 .setModels(new ConfiguredModel(model));
@@ -41,11 +39,11 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     }
 
     protected String getRegistryName(Block b) {
-        return b.getRegistryName().toString();
+        return Objects.requireNonNull(b.getRegistryName()).toString();
     }
 
     protected void createBarrel(Block block, ResourceLocation texture) {
-        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), exnihiloLoc("block/barrel"))
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/barrel"))
                 .texture("texture", texture)
                 .texture(PARTICLE_TAG, texture));
 
@@ -56,13 +54,13 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         VariantBlockStateBuilder builder = getVariantBuilder(block);
 
         for (int i = 1; i < 7; i++) {
-            VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
+            VariantBlockStateBuilder.PartialBlockstate partialBlockState = builder.partialState();
             ConfiguredModel model = new ConfiguredModel(models().getExistingFile(modLoc("block/cake_slice" + i)));
-            partialBlockstate.with(BITES, i).addModels(model);
+            partialBlockState.with(BITES, i).addModels(model);
         }
-        VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
+        VariantBlockStateBuilder.PartialBlockstate partialBlockState = builder.partialState();
         ConfiguredModel model = new ConfiguredModel(models().getExistingFile(modLoc("block/cake_uneaten")));
-        partialBlockstate.with(BITES, 0).addModels(model);
+        partialBlockState.with(BITES, 0).addModels(model);
     }
 
     protected void createCrucible(Block block, ResourceLocation texture) {

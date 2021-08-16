@@ -2,18 +2,18 @@ package novamachina.exnihilosequentia.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.IForgeShearable;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.InfestedLeavesTile;
-import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable {
@@ -26,13 +26,13 @@ public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
         return new InfestedLeavesTile(pos, state);
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level1, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level1, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
         if (level1.isClientSide) {
             return null;
         }

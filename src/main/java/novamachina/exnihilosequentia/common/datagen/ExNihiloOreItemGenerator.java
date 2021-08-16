@@ -13,11 +13,11 @@ public class ExNihiloOreItemGenerator extends AbstractOreItemGenerator {
     @Override
     protected void registerModels() {
         for (EnumOre ore : EnumOre.values()) {
-            registerPiece(ore);
+            createPiece(ore);
             if (!ore.isVanilla()) {
-                registerRawOre(ore);
+                createRawOre(ore);
                 if (ore.shouldGenerateIngot()) {
-                    registerIngot(ore);
+                    createIngot(ore);
                 }
             }
         }

@@ -18,6 +18,9 @@ import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
 public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
@@ -32,7 +35,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
     }
 
     @Override
-    public void render(AbstractBarrelTile tileEntity, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
+    public void render(AbstractBarrelTile tileEntity, float partialTicks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
         ResourceLocation inventoryTexture = tileEntity.getSolidTexture();
         ResourceLocation solidTexture = Blocks.OAK_LEAVES.getRegistryName();
         Fluid fluid = tileEntity.getFluid();
@@ -95,6 +98,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
         if (tileEntity.getSolidAmount() > 0) {
             VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
+            assert solidTexture != null;
             TextureAtlasSprite sprite = Minecraft.getInstance()
                     .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             new ResourceLocation(solidTexture.getNamespace(),
@@ -126,7 +130,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
                                 AbstractBarrelTile tileEntity) {
         if (solidTexture != null && solidTexture.toString().contains("leaves")) {
             return new Color(
-                    tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
+                    Objects.requireNonNull(tileEntity.getLevel()).getBiome(tileEntity.getBlockPos()).getFoliageColor());
         }
         return Color.WHITE;
     }

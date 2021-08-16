@@ -1,13 +1,11 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -21,6 +19,7 @@ public class InfestedLeavesTile extends BlockEntity {
     }
 
     public void tick() {
+        assert level != null;
         if (!level.isClientSide()) {
             progressWaitInterval++;
             if (progressWaitInterval >= Config.getTicksBetweenSpreadAttempt()) {

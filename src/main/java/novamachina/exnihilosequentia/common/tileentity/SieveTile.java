@@ -29,7 +29,9 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
@@ -69,15 +71,16 @@ public class SieveTile extends BlockEntity {
         }
     }
 
-    public void removeMesh(boolean rerenderSieve) {
-        logger.debug("Remove mesh: Rerender Sieve: " + rerenderSieve);
+    public void removeMesh(boolean reRenderSieve) {
+        logger.debug("Remove mesh: Re-render Sieve: " + reRenderSieve);
         if (!meshStack.isEmpty()) {
+            assert level != null;
             level.addFreshEntity(
                 new ItemEntity(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F,
                     meshStack.copy()));
             meshStack = ItemStack.EMPTY;
             meshType = EnumMesh.NONE;
-            if (rerenderSieve) {
+            if (reRenderSieve) {
                 setSieveState();
             }
         }
@@ -87,6 +90,7 @@ public class SieveTile extends BlockEntity {
         logger.debug("Set Sieve State, Mesh: " + meshType);
         BlockState state = getBlockState();
         if (state.getBlock() instanceof BlockSieve) {
+            assert level != null;
             level.setBlockAndUpdate(getBlockPos(), state.setValue(BlockSieve.MESH, meshType));
         }
     }
@@ -94,7 +98,7 @@ public class SieveTile extends BlockEntity {
     @Override
     public void load(CompoundTag compound) {
         if (compound.contains(MESH_TAG)) {
-            meshStack = ItemStack.of((CompoundTag) compound.get(MESH_TAG));
+            meshStack = ItemStack.of((CompoundTag) Objects.requireNonNull(compound.get(MESH_TAG)));
             if (meshStack.getItem() instanceof MeshItem) {
                 meshType = ((MeshItem) meshStack.getItem()).getMesh();
             }
@@ -103,7 +107,7 @@ public class SieveTile extends BlockEntity {
         }
 
         if (compound.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.of((CompoundTag) compound.get(BLOCK_TAG));
+            blockStack = ItemStack.of((CompoundTag) Objects.requireNonNull(compound.get(BLOCK_TAG)));
         } else {
             blockStack = ItemStack.EMPTY;
         }
@@ -113,8 +117,9 @@ public class SieveTile extends BlockEntity {
         super.load(compound);
     }
 
+    @Nonnull
     @Override
-    public CompoundTag save(CompoundTag compound) {
+    public CompoundTag save(@Nonnull CompoundTag compound) {
         if (!meshStack.isEmpty()) {
             CompoundTag meshNBT = meshStack.save(new CompoundTag());
             compound.put(MESH_TAG, meshNBT);
@@ -132,7 +137,7 @@ public class SieveTile extends BlockEntity {
 
     @Override
     public void setRemoved() {
-        //TODO this one is doing that dupe with CarryOn
+        //TODO remove complete method or do something else? (dupe with CarryOn mod)
         /*if (!level.isClientSide()) {
             removeMesh(false);
         }*/
@@ -154,19 +159,20 @@ public class SieveTile extends BlockEntity {
         logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
 
         // 4 ticks is the same period of holding down right click
-        if (getLevel().getLevelData().getGameTime() - lastSieveAction < 4) {
+        assert level != null;
+        if (level.getLevelData().getGameTime() - lastSieveAction < 4) {
             // Really good chance that they're using a macro
-            if (player != null && getLevel().getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
+            if (player != null && level.getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
                 player.setSecondsOnFire(1);
 
                 Component message = new TextComponent("Bad").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(16711680)).withBold(true));
 
-                player.sendMessage(message, null);
+                player.sendMessage(message, player.getUUID());
             }
             return;
         }
 
-        lastSieveAction = getLevel().getLevelData().getGameTime();
+        lastSieveAction = level.getLevelData().getGameTime();
         if (player != null) {
             lastPlayer = player.getUUID();
         }
@@ -197,6 +203,7 @@ public class SieveTile extends BlockEntity {
         logger.debug("Resetting sieve");
         if (Config.enableMeshDurability()) {
             logger.debug("Damaging mesh");
+            assert level != null;
             meshStack.hurtAndBreak(1, new FakePlayer((ServerLevel) level, new GameProfile(UUID
                 .randomUUID(), "Fake Player")), player -> logger.debug("Broken"));
         }
@@ -249,7 +256,7 @@ public class SieveTile extends BlockEntity {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         CompoundTag nbt = packet.getTag();
         if (nbt.contains(MESH_TAG)) {
-            meshStack = ItemStack.of((CompoundTag) nbt.get(MESH_TAG));
+            meshStack = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(MESH_TAG)));
             if (meshStack.getItem() instanceof MeshItem) {
                 meshType = ((MeshItem) meshStack.getItem()).getMesh();
             }
@@ -258,7 +265,7 @@ public class SieveTile extends BlockEntity {
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.of((CompoundTag) nbt.get(BLOCK_TAG));
+            blockStack = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(BLOCK_TAG)));
         } else {
             blockStack = ItemStack.EMPTY;
         }

@@ -12,6 +12,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class HammerRecipe extends SerializableRecipe {
     public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), Ingredient.EMPTY, new ArrayList<>());
     public static final RecipeType<HammerRecipe> RECIPE_TYPE = RecipeType
@@ -60,6 +62,7 @@ public class HammerRecipe extends SerializableRecipe {
         return returnList;
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return ItemStack.EMPTY;

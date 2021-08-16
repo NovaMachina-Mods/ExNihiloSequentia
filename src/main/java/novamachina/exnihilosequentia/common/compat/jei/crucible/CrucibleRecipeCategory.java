@@ -46,7 +46,11 @@ public class CrucibleRecipeCategory {//implements IRecipeCategory<CrucibleRecipe
 
     @Override
     public String getTitle() {
-        return "Crucible";
+        if(uid.equals(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"))) {
+            return "Fired Crucible";
+        } else {
+            return "Crucible";
+        }
     }
 
     @Override

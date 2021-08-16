@@ -14,6 +14,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import net.minecraftforge.fluids.ForgeFlowingFluid.Properties;
 
+import javax.annotation.Nonnull;
+
 public abstract class WitchWaterFluid extends ForgeFlowingFluid {
 
     public static final ForgeFlowingFluid.Properties WITCH_WATER_PROPS =
@@ -43,12 +45,12 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        public boolean isSource(FluidState state) {
+        public boolean isSource(@Nonnull FluidState state) {
             return false;
         }
 
         @Override
-        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
+        protected void createFluidStateDefinition(@Nonnull StateDefinition.Builder<Fluid, FluidState> builder) {
             super.createFluidStateDefinition(builder);
             builder.add(LEVEL);
         }
@@ -61,12 +63,12 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        public int getAmount(FluidState fluidState) {
+        public int getAmount(@Nonnull FluidState fluidState) {
             return 8;
         }
 
         @Override
-        public boolean isSource(FluidState state) {
+        public boolean isSource(@Nonnull FluidState state) {
             return true;
         }
     }

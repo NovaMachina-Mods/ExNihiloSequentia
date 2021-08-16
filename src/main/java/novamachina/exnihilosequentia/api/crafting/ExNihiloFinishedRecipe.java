@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -21,11 +22,13 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
+import javax.annotation.Nonnull;
+
 public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements FinishedRecipe {
     protected JsonArray conditions = null;
-    protected JsonArray inputArray = null;
+    protected final JsonArray inputArray = null;
     protected int inputCount = 0;
-    protected int maxInputCount = 1;
+    protected final int maxInputCount = 1;
     protected int maxOutputCount = 1;
     protected JsonArray outputArray = null;
     protected int outputCount = 0;
@@ -76,31 +79,33 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         return null;
     }
 
+    @Nonnull
     @Override
     public ResourceLocation getId() {
         return id;
     }
 
+    @Nonnull
     @Override
     public RecipeSerializer<?> getType() {
         return serializer;
     }
 
     @Override
-    public void serializeRecipeData(JsonObject json) {
+    public void serializeRecipeData(@Nonnull JsonObject json) {
         for (Consumer<JsonObject> writer : this.writerFunctions) {
             writer.accept(json);
         }
     }
 
-    public R setMultipleResults(int maxResultCount) {
+    public void setMultipleResults(int maxResultCount) {
         this.outputArray = new JsonArray();
         this.maxOutputCount = maxResultCount;
-        return addWriter(jsonObject -> jsonObject.add("results", outputArray));
+        addWriter(jsonObject -> jsonObject.add("results", outputArray));
     }
 
     protected R addBlock(Block block) {
-        return addWriter(jsonObject -> jsonObject.addProperty("block", block.getRegistryName().toString()));
+        return addWriter(jsonObject -> jsonObject.addProperty("block", Objects.requireNonNull(block.getRegistryName()).toString()));
     }
 
     protected R addBoolean(String key, boolean value) {
@@ -116,11 +121,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     protected R addInput(ItemStack input) {
-        if (inputArray != null) {
-            return addMultiInput(serializeItemStack(input));
-        } else {
-            return addItem("input", input);
-        }
+        return addItem("input", input);
     }
 
     protected R addInput(Ingredient input) {
@@ -128,11 +129,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     protected R addInput(String key, Ingredient input) {
-        if (inputArray != null) {
-            return addMultiInput(input.toJson());
-        } else {
-            return addItem(key, input);
-        }
+        return addItem(key, input);
     }
 
     protected R addInput(ItemLike input) {
@@ -192,11 +189,12 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
     private JsonObject serializeItemStack(ItemStack itemStack) {
         JsonObject obj = new JsonObject();
-        obj.addProperty("item", itemStack.getItem().getRegistryName().toString());
+        obj.addProperty("item", Objects.requireNonNull(itemStack.getItem().getRegistryName()).toString());
         if (itemStack.getCount() > 1) {
             obj.addProperty("count", itemStack.getCount());
         }
         if (itemStack.hasTag()) {
+            assert itemStack.getTag() != null;
             obj.addProperty("nbt", itemStack.getTag().toString());
         }
         return obj;

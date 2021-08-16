@@ -17,6 +17,7 @@ import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.init.ExNihiloSounds;
 import novamachina.exnihilosequentia.common.utility.Config;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class PebbleItem extends SnowballItem {
@@ -25,22 +26,23 @@ public class PebbleItem extends SnowballItem {
         super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
     }
 
+    @Nonnull
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, @Nonnull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         //TODO Placeable like redstone?
         world.playSound(null, player.getX(), player.getY(), player.getZ(), ExNihiloSounds.PEBBLE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (new Random().nextFloat() * 0.4F + 0.8F));
         if (!world.isClientSide) {
-            Snowball snowballentity = new Snowball(world, player){
+            Snowball snowballEntity = new Snowball(world, player){
                 @Override
                 public void onHitEntity(EntityHitResult entityRayTraceResult) {
                     Entity entity = entityRayTraceResult.getEntity();
                     entity.hurt(DamageSource.thrown(this, this.getOwner()), (float) Config.getPebbleDamage());
                 }
             };
-            snowballentity.setItem(itemstack);
-            snowballentity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
-            world.addFreshEntity(snowballentity);
+            snowballEntity.setItem(itemstack);
+            snowballEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+            world.addFreshEntity(snowballEntity);
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));

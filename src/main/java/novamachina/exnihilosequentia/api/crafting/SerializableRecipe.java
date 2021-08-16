@@ -8,6 +8,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nonnull;
+
 public abstract class SerializableRecipe implements Recipe<Container> {
     protected final ResourceLocation id;
     protected final ItemStack outputDummy;
@@ -24,27 +26,32 @@ public abstract class SerializableRecipe implements Recipe<Container> {
         return false;
     }
 
+    @Nonnull
     @Override
-    public ItemStack assemble(Container inv) {
+    public ItemStack assemble(@Nonnull Container inv) {
         return this.outputDummy;
     }
 
     //TODO
-    /*@Override
+    /*
+    @Override
     public ItemStack getToastSymbol() {
         return getENSerializer();
     }*/
 
+    @Nonnull
     @Override
     public ResourceLocation getId() {
         return this.id;
     }
 
+    @Nonnull
     @Override
     public RecipeSerializer<?> getSerializer() {
         return getENSerializer();
     }
 
+    @Nonnull
     @Override
     public RecipeType<?> getType() {
         return this.type;
@@ -56,7 +63,7 @@ public abstract class SerializableRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container inv, Level worldIn) {
+    public boolean matches(@Nonnull Container inv, @Nonnull Level worldIn) {
         return false;
     }
 

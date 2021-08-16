@@ -16,6 +16,8 @@ import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+
 public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
@@ -29,8 +31,8 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
     }
 
     @Override
-    public void render(SieveTile tileEntity, float partialTicks, PoseStack matrixStack,
-                       MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(SieveTile tileEntity, float partialTicks, @Nonnull PoseStack matrixStack,
+                       @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 
         ResourceLocation blockTexture = tileEntity.getTexture();
         if (blockTexture != null) {

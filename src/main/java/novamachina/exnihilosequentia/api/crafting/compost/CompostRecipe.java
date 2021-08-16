@@ -11,6 +11,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class CompostRecipe extends SerializableRecipe {
     public static final RecipeType<CompostRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
@@ -52,6 +54,7 @@ public class CompostRecipe extends SerializableRecipe {
         return Arrays.asList(input.getItems());
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return ItemStack.EMPTY;

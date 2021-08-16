@@ -22,6 +22,7 @@ import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FluidTransformBarrelMode extends AbstractBarrelMode {
     private int currentProgress;
@@ -85,7 +86,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerLevel) barrelTile.getLevel())
+        ((ServerLevel) Objects.requireNonNull(barrelTile.getLevel()))
             .sendParticles(ParticleTypes.EFFECT,
                 barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),

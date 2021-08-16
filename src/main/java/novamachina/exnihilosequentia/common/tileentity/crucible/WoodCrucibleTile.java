@@ -18,6 +18,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     }
 
     public void tick() {
+        assert level != null;
         if (level.isClientSide()) {
             return;
         }
@@ -78,20 +79,20 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public int getHeat() {
+        assert level != null;
         BlockState source = level.getBlockState(worldPosition.below());
         int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock());
         if(source.getBlock() instanceof LiquidBlock) {
             int level = 8 - source.getValue(BlockStateProperties.LEVEL);
             double partial = (double)blockHeat / 8;
-            int returnVal = Math.min((int) Math.ceil(partial * level), Config.getWoodHeatRate());
-            return returnVal;
+            return Math.min((int) Math.ceil(partial * level), Config.getWoodHeatRate());
         }
         return Math.max(blockHeat, Config.getWoodHeatRate());
     }
 
     @Override
-    public CrucilbeTypeEnum getCrucibleType() {
-        return CrucilbeTypeEnum.WOOD;
+    public CrucibleTypeEnum getCrucibleType() {
+        return CrucibleTypeEnum.WOOD;
     }
 
     @Override

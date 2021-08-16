@@ -2,15 +2,10 @@ package novamachina.exnihilosequentia.common.utility;
 
 import org.apache.logging.log4j.Logger;
 
-public class ExNihiloLogger {
+public record ExNihiloLogger(Logger logger) {
 
     private static final String LOGGING_PATTERN = "{} {}";
     private static final String PREFIX = "[Ex Nihilo: Sequentia]:";
-    private final Logger logger;
-
-    public ExNihiloLogger(Logger logger) {
-        this.logger = logger;
-    }
 
     public void debug(String msg) {
         if (Config.enableDebugLogging()) {

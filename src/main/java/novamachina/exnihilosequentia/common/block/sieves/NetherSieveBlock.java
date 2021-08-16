@@ -1,12 +1,11 @@
 package novamachina.exnihilosequentia.common.block.sieves;
 
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 
 public class NetherSieveBlock extends BlockSieve {
     public NetherSieveBlock() {

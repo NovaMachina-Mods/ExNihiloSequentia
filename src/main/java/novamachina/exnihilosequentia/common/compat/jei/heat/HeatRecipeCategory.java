@@ -42,8 +42,17 @@ public class HeatRecipeCategory {//implements IRecipeCategory<HeatRecipe> {
 
     @Override
     public void draw(HeatRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
-        Minecraft.getInstance().font
-                .draw(matrixStack, recipe.getAmount() + "X", 24, 12, Color.gray.getRGB());
+        Minecraft.getInstance().font.draw(matrixStack, recipe.getAmount() + "X",
+            24, 12, Color.gray.getRGB());
+
+        Block block = recipe.getInput();
+        if (block == Blocks.WALL_TORCH) {
+            Minecraft.getInstance().font.draw(matrixStack, "Wall Torch",
+                24, 0, Color.DARK_GRAY.getRGB());
+        } else {
+            Minecraft.getInstance().font.draw(matrixStack, block.getName(),
+                24, 0, Color.DARK_GRAY.getRGB());
+        }
     }
 
     @Override

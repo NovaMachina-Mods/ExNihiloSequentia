@@ -29,6 +29,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
 public class WitchWaterBlock extends LiquidBlock {
 
     public WitchWaterBlock() {
@@ -42,7 +45,7 @@ public class WitchWaterBlock extends LiquidBlock {
      */
     @Deprecated
     @Override
-    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+    public void entityInside(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (worldIn.isClientSide() || !entityIn.isAlive()) {
             return;
         }
@@ -53,7 +56,7 @@ public class WitchWaterBlock extends LiquidBlock {
         }
 
         if (entityIn instanceof Creeper && !((Creeper) entityIn).isPowered()) {
-            entityIn.thunderHit((ServerLevel) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+            entityIn.thunderHit((ServerLevel) worldIn, Objects.requireNonNull(EntityType.LIGHTNING_BOLT.create(worldIn)));
             ((Creeper) entityIn).setHealth(((Creeper) entityIn).getMaxHealth());
         }
 
@@ -68,8 +71,7 @@ public class WitchWaterBlock extends LiquidBlock {
             replaceMob(worldIn, (Squid) entityIn, new Ghast(EntityType.GHAST, worldIn));
         }
 
-        if (entityIn instanceof Villager) {
-            Villager villagerEntity = (Villager) entityIn;
+        if (entityIn instanceof Villager villagerEntity) {
             VillagerProfession profession = villagerEntity.getVillagerData().getProfession();
 
             if (profession == VillagerProfession.CLERIC) {
@@ -90,7 +92,7 @@ public class WitchWaterBlock extends LiquidBlock {
         // TODO Cows
 
         if (entityIn instanceof Animal) {
-            entityIn.thunderHit((ServerLevel) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+            entityIn.thunderHit((ServerLevel) worldIn, Objects.requireNonNull(EntityType.LIGHTNING_BOLT.create(worldIn)));
         }
 
         if (entityIn instanceof Player) {

@@ -10,13 +10,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import javax.annotation.Nonnull;
+
 public abstract class IRecipeSerializer<R extends Recipe<?>> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<R> {
     public abstract ItemStack getIcon();
 
     @Override
-    public R fromJson(ResourceLocation recipeId, JsonObject json) {
+    public R fromJson(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
         if (CraftingHelper.processConditions(json, "conditions"))
             return readFromJson(recipeId, json);
+        //TODO
         return null;
     }
 

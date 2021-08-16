@@ -29,7 +29,7 @@ public class SieveRegistry implements ISieveRegistry {
 
     private final boolean flattenRecipes = Config.flattenSieveRecipes();
 
-    private List<SieveRecipe> recipeList = new ArrayList<>();
+    private final List<SieveRecipe> recipeList = new ArrayList<>();
 
     private List<SieveRecipe> getDrops(Ingredient input, EnumMesh meshType, boolean isWaterlogged) {
         return recipeList.parallelStream()
@@ -37,11 +37,8 @@ public class SieveRegistry implements ISieveRegistry {
             .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), input))
             .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
             .filter(recipe -> {
-                if(recipe.getDrop().getItem() instanceof OreItem) {
-                    OreItem ore = (OreItem)recipe.getDrop().getItem();
-                    if(!ore.getOre().isEnabled()) {
-                        return false;
-                    }
+                if(recipe.getDrop().getItem() instanceof OreItem ore) {
+                    return ore.getOre().isEnabled();
                 }
                 return true;
             })
@@ -56,11 +53,8 @@ public class SieveRegistry implements ISieveRegistry {
             .filter(sieveRecipe -> sieveRecipe.getInput().test(new ItemStack(input)))
             .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
             .filter(recipe -> {
-                if(recipe.getDrop().getItem() instanceof OreItem) {
-                    OreItem ore = (OreItem)recipe.getDrop().getItem();
-                    if(!ore.getOre().isEnabled()) {
-                        return false;
-                    }
+                if(recipe.getDrop().getItem() instanceof OreItem ore) {
+                    return ore.getOre().isEnabled();
                 }
                 return true;
             })

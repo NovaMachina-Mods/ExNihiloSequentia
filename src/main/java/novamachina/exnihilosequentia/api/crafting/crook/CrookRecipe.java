@@ -13,6 +13,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class CrookRecipe extends SerializableRecipe {
     public static final RecipeType<CrookRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
     private static RegistryObject<IRecipeSerializer<CrookRecipe>> serializer;
@@ -59,6 +61,7 @@ public class CrookRecipe extends SerializableRecipe {
         return returnList;
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack().copy();

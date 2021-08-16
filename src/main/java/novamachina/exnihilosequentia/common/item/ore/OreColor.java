@@ -4,19 +4,19 @@ import java.awt.Color;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class OreColor implements ItemColor {
 
     @Override
-    public int getColor(ItemStack stack, int tintIndex) {
-        switch (tintIndex) {
-            case 0:
-                return Color.WHITE.getRGB();
-            case 1:
-                return getOreColor(stack);
-            default:
-                // oops! should never get here.
-                return Color.BLACK.getRGB();
-        }
+    public int getColor(@Nonnull ItemStack stack, int tintIndex) {
+        return switch (tintIndex) {
+            case 0 -> Color.WHITE.getRGB();
+            case 1 -> getOreColor(stack);
+            default ->
+                    // oops! should never get here.
+                    Color.BLACK.getRGB();
+        };
     }
 
     private int getOreColor(ItemStack stack) {

@@ -13,6 +13,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 
+import javax.annotation.Nonnull;
+
 public class HammerRecipeSerializer extends IRecipeSerializer<HammerRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -20,7 +22,7 @@ public class HammerRecipeSerializer extends IRecipeSerializer<HammerRecipe> {
     }
 
     @Override
-    public HammerRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public HammerRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer) {
         Ingredient input = Ingredient.fromNetwork(buffer);
         int outputCount = buffer.readInt();
         List<ItemStackWithChance> output = new ArrayList<>(outputCount);
@@ -32,7 +34,7 @@ public class HammerRecipeSerializer extends IRecipeSerializer<HammerRecipe> {
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer, HammerRecipe recipe) {
+    public void toNetwork(@Nonnull FriendlyByteBuf buffer, HammerRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getOutput().size());
         for (ItemStackWithChance stack : recipe.getOutput()) {

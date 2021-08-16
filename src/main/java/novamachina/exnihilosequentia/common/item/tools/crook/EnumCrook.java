@@ -23,7 +23,7 @@ public enum EnumCrook implements IExtensibleEnum {
     BONE(ExNihiloConstants.Items.BONE_CROOK, Config.getCrookBoneDurability(), Tiers.STONE);
 
     public final String crookName;
-    public int maxDamage;
+    public final int maxDamage;
     public final Tier tier;
     private RegistryObject<Item> registryObject;
 

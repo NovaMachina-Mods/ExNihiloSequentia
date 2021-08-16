@@ -10,6 +10,8 @@ import novamachina.exnihilosequentia.api.crafting.IRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class FluidTransformRecipe extends SerializableRecipe {
     public static final RecipeType<FluidTransformRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
@@ -49,6 +51,7 @@ public class FluidTransformRecipe extends SerializableRecipe {
         this.fluidInTank = fluidInTank;
     }
 
+    @Nonnull
     @Override
     public ItemStack getResultItem() {
         return ItemStack.EMPTY;

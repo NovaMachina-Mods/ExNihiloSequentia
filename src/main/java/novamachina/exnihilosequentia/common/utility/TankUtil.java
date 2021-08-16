@@ -44,18 +44,21 @@ public class TankUtil {
         if(tank.getFluidInTank(0).getAmount() % FluidAttributes.BUCKET_VOLUME == 666) {
             waterAmount = 334;
         }
-        if (player.getMainHandItem().getItem() == Items.POTION && WATER_BOTTLE.getTag().equals(player.getMainHandItem().getTag())) {
-            FluidStack water = new FluidStack(Fluids.WATER, waterAmount);
+        if (player.getMainHandItem().getItem() == Items.POTION) {
+            assert WATER_BOTTLE.getTag() != null;
+            if (WATER_BOTTLE.getTag().equals(player.getMainHandItem().getTag())) {
+                FluidStack water = new FluidStack(Fluids.WATER, waterAmount);
 
-            if (tank.fill(water, IFluidHandler.FluidAction.SIMULATE) == water.getAmount()) {
-                if (player.addItem(new ItemStack(Items.GLASS_BOTTLE))) {
+                if (tank.fill(water, IFluidHandler.FluidAction.SIMULATE) == water.getAmount()) {
+                    if (player.addItem(new ItemStack(Items.GLASS_BOTTLE))) {
 
-                    if (!player.isCreative())
-                        player.getMainHandItem().shrink(1);
-                    tank.fill(water, IFluidHandler.FluidAction.EXECUTE);
+                        if (!player.isCreative())
+                            player.getMainHandItem().shrink(1);
+                        tank.fill(water, IFluidHandler.FluidAction.EXECUTE);
 
-                    tileEntity.setChanged();
-                    return true;
+                        tileEntity.setChanged();
+                        return true;
+                    }
                 }
             }
         }

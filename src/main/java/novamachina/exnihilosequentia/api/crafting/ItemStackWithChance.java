@@ -8,17 +8,12 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class ItemStackWithChance {
+import java.util.Objects;
+
+public record ItemStackWithChance(ItemStack itemStack, float chance) {
     private static final String BASE_KEY = "item";
     private static final String CHANCE_KEY = "chance";
     private static final String COUNT_KEY = "count";
-    private final float chance;
-    private final ItemStack itemStack;
-
-    public ItemStackWithChance(ItemStack itemStack, float chance) {
-        this.itemStack = itemStack;
-        this.chance = chance;
-    }
 
     public static ItemStackWithChance deserialize(JsonElement json) {
         if (json.isJsonObject() && json.getAsJsonObject().has(BASE_KEY)) {
@@ -54,7 +49,7 @@ public class ItemStackWithChance {
     public JsonElement serialize() {
         JsonObject json = new JsonObject();
         json.addProperty(CHANCE_KEY, getChance());
-        json.addProperty(BASE_KEY, getStack().getItem().getRegistryName().toString());
+        json.addProperty(BASE_KEY, Objects.requireNonNull(getStack().getItem().getRegistryName()).toString());
         json.addProperty(COUNT_KEY, getStack().getCount());
         return json;
     }

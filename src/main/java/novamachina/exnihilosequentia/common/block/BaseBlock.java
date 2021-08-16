@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.block;
 
 import java.util.function.Supplier;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -25,17 +26,17 @@ public class BaseBlock extends Block implements EntityBlock {
 
     @Nullable
     @Override
-    public ToolType getHarvestTool(BlockState state) {
+    public ToolType getHarvestTool(@Nonnull BlockState state) {
         return toolType;
     }
 
     protected static Boolean never(BlockState p_235427_0_, BlockGetter p_235427_1_, BlockPos p_235427_2_, EntityType<?> p_235427_3_) {
-        return (boolean)false;
+        return false;
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
         if (tileEntitySupplier == null) {
             return null;
         } else {
