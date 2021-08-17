@@ -71,7 +71,7 @@ public class ExNihiloSequentia {
         }
 
         public static void onBlockBreak(BlockEvent.BreakEvent event) {
-            if (!event.getWorld().isClientSide() && !event.getPlayer().isCreative() && event.getState().getBlock() == Blocks.STONE) {
+            if (!event.getWorld().isClientSide() && !event.getPlayer().isCreative() && event.getState().getBlock() == Blocks.STONE && Config.enableStoneblock()) {
                 ItemStack held = event.getPlayer().getMainHandItem();
                 if (!(event.getPlayer() instanceof FakePlayer) && held.isEmpty()) {
                     int j = new Random().nextInt(3);
@@ -90,7 +90,7 @@ public class ExNihiloSequentia {
         }
 
         public static void blockBreakSpeed(PlayerEvent.BreakSpeed event) {
-            if (event.getState().getBlock() == Blocks.STONE) {
+            if (event.getState().getBlock() == Blocks.STONE && Config.enableStoneblock()) {
                 double speed = 5D;
                 if (event.getPlayer().getMainHandItem().isEmpty()) {
                     event.setNewSpeed((float) speed);

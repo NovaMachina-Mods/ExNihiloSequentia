@@ -30,6 +30,7 @@ public class Config {
     private static final String SUBCATEGORY_MESHES = "mesh";
     // Debugging
     private static ForgeConfigSpec.BooleanValue enableDebugLogging;
+    private static ForgeConfigSpec.BooleanValue enableStoneblock;
     // Pebble
     private static ForgeConfigSpec.IntValue pebbleDamage;
     // Ore
@@ -169,6 +170,7 @@ public class Config {
     public static boolean enableDebugLogging() {
         return enableDebugLogging.get();
     }
+    public static boolean enableStoneblock() { return enableStoneblock.get(); }
 
     // Ore
     public static boolean enableOreOverride() {
@@ -337,6 +339,8 @@ public class Config {
     private static void debugConfigs() {
         enableDebugLogging = COMMON_BUILDER.comment("Enable extra logging? (Default: false)")
                 .define("enableDebugLogging", false);
+        enableStoneblock = COMMON_BUILDER.comment("Enable Stoneblock settings? (Default: false)")
+                .define("enableStoneblock", false);
     }
 
     private static void durabilityConfigs() {
@@ -450,6 +454,6 @@ public class Config {
                 .defineInRange("meshStackSize", 64, 1, 64);
         maxSieveClicks = COMMON_BUILDER
                 .comment("The number of sieve clicks required to sieve a block. (Default: 10)")
-                .defineInRange("maxSieveClicks", 10, 1, 10);
+                .defineInRange("maxSieveClicks", 10, 1, Integer.MAX_VALUE);
     }
 }
