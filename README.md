@@ -8,7 +8,7 @@
 </p>
 
 # Ex Nihilo: Sequentia
-Ex Nihilo: Sequentia is a port to 1.15 of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.
+Ex Nihilo: Sequentia is a port to 1.16 & 1.15 of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.
 
 # License
 Ex Nihilo: Sequentia is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license (see the license file)
