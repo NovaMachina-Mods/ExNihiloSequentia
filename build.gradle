@@ -9,8 +9,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.66'
-    }
+        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.71.4'    }
 }
 plugins {
     id 'java'
@@ -172,6 +171,7 @@ curseforge {
         addGameVersion '1.16.5'
         changelog = file('changelog.html')
         changelogType = 'html'
+        debug=true
     }
 }
 
