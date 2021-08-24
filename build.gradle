@@ -14,6 +14,7 @@ buildscript {
 }
 plugins {
     id 'java'
+    id 'eclipse'
     id 'idea'
     id 'maven-publish'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
@@ -97,6 +98,10 @@ processResources {
     finalizedBy replaceResources
 }
 
+task createVersionFile(type: CreateVersionClass) {
+    fileVersion = version
+}
+
 minecraft {
     mappings channel: 'official', version: "${minecraft_version}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
@@ -171,6 +176,8 @@ curseforge {
 }
 
 afterEvaluate {
+    tasks.jar.dependsOn createVersionFile
+    tasks.jar.dependsOn replaceResources
     tasks.curseforge400012.dependsOn makeChangelog
 }
 
@@ -214,5 +221,28 @@ publishing {
             }
             url = "https://repo.jacob-williams.me/repository/maven-releases/"
         }
+    }
+}
+
+abstract class CreateVersionClass extends DefaultTask {
+    CreateVersionClass() {
+        this.fileVersion = getFileVersion()
+    }
+
+    @Input
+    abstract Property<String> getFileVersion()
+
+    @TaskAction
+    void writeString() {
+        FileWriter fw;
+        fw = new FileWriter('update.json');
+        fw.write("{\n" +
+                "  \"homepage\": \"https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia\",\n" +
+                "  \"promos\": {\n" +
+                "    \"1.16-latest\": \"${fileVersion.get()}\",\n" +
+                "    \"1.16-recommended\": \"${fileVersion.get()}\"\n" +
+                "  }\n" +
+                "}\n");
+        fw.close();
     }
 }
