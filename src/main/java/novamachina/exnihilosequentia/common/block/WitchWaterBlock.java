@@ -117,7 +117,7 @@ public class WitchWaterBlock extends LiquidBlock {
         toSpawn.yBodyRot = toKill.yBodyRot;
         toSpawn.setHealth(toSpawn.getMaxHealth() * toKill.getHealth() / toKill.getMaxHealth());
 
-        toKill.remove(false);
+        toKill.remove(Entity.RemovalReason.DISCARDED);
         world.addFreshEntity(toSpawn);
     }
 }

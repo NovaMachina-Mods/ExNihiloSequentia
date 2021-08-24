@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,27 +32,27 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseFallingBlock> DUST = BLOCKS
             .register(ExNihiloConstants.Blocks.DUST, () -> new BaseFallingBlock(new BlockBuilder().properties(
                     BlockBehaviour.Properties.of(Material.SAND).strength(0.7F)
-                            .sound(SoundType.SAND)).harvestLevel(ToolType.SHOVEL, 0)));
+                            .sound(SoundType.SAND)).harvestLevel(ToolActions.SHOVEL_DIG, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_NETHERRACK = BLOCKS
             .register(ExNihiloConstants.Blocks.CRUSHED_NETHERRACK, () -> new BaseFallingBlock(new BlockBuilder()
                     .properties(BlockBehaviour.Properties.of(Material.SAND).strength(0.7F)
-                            .sound(SoundType.GRAVEL)).harvestLevel(ToolType.SHOVEL, 0)));
+                            .sound(SoundType.GRAVEL)).harvestLevel(ToolActions.SHOVEL_DIG, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_END_STONE = BLOCKS
             .register(ExNihiloConstants.Blocks.CRUSHED_END_STONE, () -> new BaseFallingBlock(new BlockBuilder()
                     .properties(BlockBehaviour.Properties.of(Material.SAND).strength(0.7F)
-                            .sound(SoundType.GRAVEL)).harvestLevel(ToolType.SHOVEL, 0)));
+                            .sound(SoundType.GRAVEL)).harvestLevel(ToolActions.SHOVEL_DIG, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_ANDESITE = BLOCKS
             .register(ExNihiloConstants.Blocks.CRUSHED_ANDESITE, () -> new BaseFallingBlock(new BlockBuilder()
                     .properties(BlockBehaviour.Properties.of(Material.SAND).strength(0.7F)
-                            .sound(SoundType.GRAVEL)).harvestLevel(ToolType.SHOVEL, 0)));
+                            .sound(SoundType.GRAVEL)).harvestLevel(ToolActions.SHOVEL_DIG, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_DIORITE = BLOCKS
             .register(ExNihiloConstants.Blocks.CRUSHED_DIORITE, () -> new BaseFallingBlock(new BlockBuilder()
                     .properties(BlockBehaviour.Properties.of(Material.SAND).strength(0.7F)
-                            .sound(SoundType.GRAVEL)).harvestLevel(ToolType.SHOVEL, 0)));
+                            .sound(SoundType.GRAVEL)).harvestLevel(ToolActions.SHOVEL_DIG, 0)));
     public static final RegistryObject<BaseFallingBlock> CRUSHED_GRANITE = BLOCKS
             .register(ExNihiloConstants.Blocks.CRUSHED_GRANITE, () -> new BaseFallingBlock(new BlockBuilder()
                     .properties(BlockBehaviour.Properties.of(Material.SAND).strength(0.7F)
-                            .sound(SoundType.GRAVEL)).harvestLevel(ToolType.SHOVEL, 0)));
+                            .sound(SoundType.GRAVEL)).harvestLevel(ToolActions.SHOVEL_DIG, 0)));
     public static final RegistryObject<EndCakeBlock> END_CAKE = BLOCKS
             .register(ExNihiloConstants.Blocks.END_CAKE, EndCakeBlock::new);
     public static final RegistryObject<LiquidBlock> WITCH_WATER = BLOCKS
@@ -100,7 +100,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> BARREL_WARPED = BLOCKS
             .register(Blocks.WARPED_BARREL, NetherBarrelBlock::new);
     public static final RegistryObject<BaseBlock> BARREL_STONE = BLOCKS
-            .register(Blocks.STONE_BARREL, () -> new AbstractBarrelBlock(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
+            .register(Blocks.STONE_BARREL, () -> new AbstractBarrelBlock(new BlockBuilder().harvestLevel(ToolActions.PICKAXE_DIG, 0)
                     .properties(BlockBehaviour.Properties.of(Material.STONE).strength(0.75F).sound(SoundType.STONE))));
     public static final RegistryObject<WoodSieveBlock> SIEVE_ACACIA = BLOCKS
             .register(Blocks.ACACIA_SIEVE, WoodSieveBlock::new);

@@ -5,7 +5,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 
 public class BlockBuilder {
 
@@ -14,7 +15,7 @@ public class BlockBuilder {
     private int harvestLevel = 0;
     private BlockBehaviour.Properties properties = DEFAULT;
     private Supplier<BlockEntity> tileEntitySupplier;
-    private ToolType toolType = ToolType.PICKAXE;
+    private ToolAction toolType = ToolActions.PICKAXE_DIG;
 
     public int getHarvestLevel() {
         return harvestLevel;
@@ -28,11 +29,11 @@ public class BlockBuilder {
         return tileEntitySupplier;
     }
 
-    public ToolType getToolType() {
+    public ToolAction getToolType() {
         return toolType;
     }
 
-    public BlockBuilder harvestLevel(ToolType type, int level) {
+    public BlockBuilder harvestLevel(ToolAction type, int level) {
         this.toolType = type;
         this.harvestLevel = level;
         return this;

@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolActions;
 import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
@@ -21,7 +21,7 @@ public class NetherCrucibleBlock extends CrucibleBaseBlock {
     public NetherCrucibleBlock() {
         super(new BlockBuilder().properties(
                 BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F)
-                        .sound(SoundType.STEM).noOcclusion()).harvestLevel(ToolType.AXE, 0));
+                        .sound(SoundType.STEM).noOcclusion()).harvestLevel(ToolActions.AXE_DIG, 0));
     }
 
     @Nullable

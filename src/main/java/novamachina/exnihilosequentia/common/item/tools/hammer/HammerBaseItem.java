@@ -10,7 +10,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
@@ -32,8 +31,7 @@ public class HammerBaseItem extends DiggerItem {
 
     public HammerBaseItem(Tier tier, int maxDamage) {
         super(0.5F, 0.5F, tier, Tag.fromSet(effectiveBlocksOn),
-                new Item.Properties().defaultDurability(maxDamage).tab(ExNihiloInitialization.ITEM_GROUP)
-                        .addToolType(ToolType.PICKAXE, tier.getLevel()));
+                new Item.Properties().defaultDurability(maxDamage).tab(ExNihiloInitialization.ITEM_GROUP));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.crook;
 
-//TODO
-/*import java.util.List;
+import java.util.List;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
@@ -9,10 +8,10 @@ import net.minecraft.network.chat.TextComponent;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
- */
 
-public class CrookTooltipCallback {//implements ITooltipCallback<ItemStack> {
-/*    private final CrookRecipe crookRecipe;
+
+public class CrookTooltipCallback implements ITooltipCallback<ItemStack> {
+    private final CrookRecipe crookRecipe;
 
     public CrookTooltipCallback(CrookRecipe crookRecipe) {
         this.crookRecipe = crookRecipe;
@@ -27,5 +26,4 @@ public class CrookTooltipCallback {//implements ITooltipCallback<ItemStack> {
         }
     }
 
- */
 }

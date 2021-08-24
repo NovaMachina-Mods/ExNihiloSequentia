@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei;
 
-//TODO
-/*import java.util.List;
+import java.util.List;
 import java.util.stream.Collectors;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -40,9 +39,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 @JeiPlugin
- */
-public class JEIPlugin {//implements IModPlugin {
-    /*
+public class JEIPlugin implements IModPlugin {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static final ResourceLocation CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLES);
     private static final ResourceLocation FIRED_CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.FIRED_CRUCIBLE);
@@ -195,6 +192,4 @@ public class JEIPlugin {//implements IModPlugin {
         registration.addRecipes(recipes, CRUCIBLES);
         logger.info("Wooden Crucible Recipes Loaded: " + recipes.size());
     }
-
-     */
 }

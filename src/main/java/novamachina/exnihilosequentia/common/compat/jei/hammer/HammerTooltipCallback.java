@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.hammer;
 
-//TODO
-/*import java.util.List;
+import java.util.List;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
@@ -9,10 +8,7 @@ import net.minecraft.network.chat.TextComponent;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
- */
-
-public class HammerTooltipCallback {//implements ITooltipCallback<ItemStack> {
-    /*
+public class HammerTooltipCallback implements ITooltipCallback<ItemStack> {
     private final HammerRecipe hammerRecipe;
 
     public HammerTooltipCallback(HammerRecipe hammerRecipe) {
@@ -27,6 +23,4 @@ public class HammerTooltipCallback {//implements ITooltipCallback<ItemStack> {
                     .forEach(stack -> tooltip.add(new TextComponent(String.format("%s", StringUtils.formatPercent(stack.getChance())))));
         }
     }
-
-     */
 }

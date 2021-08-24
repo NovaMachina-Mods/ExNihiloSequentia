@@ -56,8 +56,8 @@ dependencies {
             version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
     ])
 
-//    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
     compileOnly fg.deobf("curse.maven:Jade-324717:${jade_version}:api")
     runtimeOnly fg.deobf("curse.maven:Jade-324717:${jade_version}")
