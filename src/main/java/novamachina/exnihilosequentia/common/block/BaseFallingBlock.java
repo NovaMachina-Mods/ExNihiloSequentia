@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolAction;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
 import javax.annotation.Nonnull;
@@ -15,18 +15,11 @@ import java.util.function.Supplier;
 public class BaseFallingBlock extends FallingBlock implements EntityBlock {
 
     private final Supplier<BlockEntity> tileEntitySupplier;
-    private final ToolType toolType;
 
     public BaseFallingBlock(BlockBuilder builder) {
         super(builder.getProperties());
         this.tileEntitySupplier = builder.getTileEntitySupplier();
-        this.toolType = builder.getToolType();
-    }
-
-    @Nullable
-    @Override
-    public ToolType getHarvestTool(@Nonnull BlockState state) {
-        return toolType;
+        ToolAction toolType = builder.getToolType();
     }
 
     @Nullable

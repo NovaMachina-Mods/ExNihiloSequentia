@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.ToolActions;
 import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleTile;
@@ -22,7 +22,7 @@ public class WoodCrucibleBlock extends CrucibleBaseBlock {
     public WoodCrucibleBlock() {
         super(new BlockBuilder().properties(
                 BlockBehaviour.Properties.of(Material.WOOD).strength(.75F)
-                        .sound(SoundType.STONE).noOcclusion()).harvestLevel(ToolType.AXE, 0));
+                        .sound(SoundType.STONE).noOcclusion()).harvestLevel(ToolActions.AXE_DIG, 0));
     }
 
     @Nullable

@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.sieve.dry;
 
-//TODO
-/*import com.google.common.collect.HashMultiset;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import java.util.List;
 import mezz.jei.api.constants.VanillaTypes;
@@ -28,10 +27,7 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
- */
-
-public class DrySieveRecipeCategory {//implements IRecipeCategory<JEISieveRecipe> {
-    /*
+public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "dry_sieve");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
@@ -59,8 +55,8 @@ public class DrySieveRecipeCategory {//implements IRecipeCategory<JEISieveRecipe
     }
 
     @Override
-    public String getTitle() {
-        return "Sieve";
+    public Component getTitle() {
+        return new TextComponent("Sieve");
     }
 
     @Override
@@ -82,7 +78,8 @@ public class DrySieveRecipeCategory {//implements IRecipeCategory<JEISieveRecipe
         recipeLayout.getItemStacks().init(1, true, 10, 2);
         recipeLayout.getItemStacks().set(1, recipe.getSieveables());
 
-        IFocus<?> focus = recipeLayout.getFocus();
+        //TODO
+        IFocus<?> focus = recipeLayout.getFocus(this::getRecipeClass);
 
         int slotIndex = 2;
         for (int i = 0; i < recipe.getResults().size(); i++) {
@@ -130,6 +127,4 @@ public class DrySieveRecipeCategory {//implements IRecipeCategory<JEISieveRecipe
             }
         });
     }
-
-     */
 }

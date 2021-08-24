@@ -1,11 +1,9 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
-//TODO
-/*import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import java.awt.Color;
 import java.util.Arrays;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -13,6 +11,9 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
@@ -20,17 +21,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- */
-
-public class HeatRecipeCategory {//implements IRecipeCategory<HeatRecipe> {
-    /*
+public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
     private final IDrawableStatic background;
 
@@ -71,8 +68,8 @@ public class HeatRecipeCategory {//implements IRecipeCategory<HeatRecipe> {
     }
 
     @Override
-    public String getTitle() {
-        return "Crucible Heat Sources";
+    public Component getTitle() {
+        return new TextComponent("Crucible Heat Sources");
     }
 
     @Override
@@ -107,6 +104,4 @@ public class HeatRecipeCategory {//implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(input).getItems()));
         }
     }
-
-     */
 }

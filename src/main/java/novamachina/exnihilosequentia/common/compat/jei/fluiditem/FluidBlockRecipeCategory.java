@@ -1,21 +1,20 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluiditem;
 
-//TODO
-/*import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- */
 
-public class FluidBlockRecipeCategory {//implements IRecipeCategory<FluidItemRecipe> {
-    /*
+public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluiditem");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_block_transform.png");
     private final IDrawableStatic background;
@@ -40,8 +39,8 @@ public class FluidBlockRecipeCategory {//implements IRecipeCategory<FluidItemRec
     }
 
     @Override
-    public String getTitle() {
-        return "Fluid Item Transformation";
+    public Component getTitle() {
+        return new TextComponent("Fluid Item Transformation");
     }
 
     @Override
@@ -67,5 +66,4 @@ public class FluidBlockRecipeCategory {//implements IRecipeCategory<FluidItemRec
         recipeLayout.getItemStacks().set(1, recipe.getResultItem());
     }
 
-     */
 }
