@@ -157,7 +157,7 @@ task makeChangelog(type: GitChangelogTask) {
 }
 
 curseforge {
-    apiKey = ENV.CURSEFORGE_KEY ?: '0'
+    apiKey = '8fa2685a-4151-40e8-99c7-3132beb67873' ?: '0'
 
     project {
         id = "${curseforge_project}"
@@ -176,7 +176,7 @@ curseforge {
 }
 
 afterEvaluate {
-    tasks.jar.dependsOn createVersionFile
+    tasks.curseforge400012.dependsOn createVersionFile
     tasks.jar.dependsOn replaceResources
     tasks.curseforge400012.dependsOn makeChangelog
 }
