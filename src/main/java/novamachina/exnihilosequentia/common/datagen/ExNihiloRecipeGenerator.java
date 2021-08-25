@@ -491,9 +491,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .pattern("xgx")
                 .pattern("xxx")
                 .define('x', EnumPebbleType.BLACKSTONE.getRegistryObject().get())
-                .define('g', EnumOre.GOLD.getRawOreItem().get())
+                .define('g', Items.RAW_GOLD)
                 .unlockedBy("has_gold", InventoryChangeTrigger.TriggerInstance
-                        .hasItems(EnumOre.GOLD.getRawOreItem().get()))
+                        .hasItems(Items.RAW_GOLD))
                 .save(consumer, createSaveLocation(Objects.requireNonNull(Blocks.GILDED_BLACKSTONE.getRegistryName())));
         ShapedRecipeBuilder.shaped(Blocks.CRYING_OBSIDIAN)
                 .pattern(" o ")
