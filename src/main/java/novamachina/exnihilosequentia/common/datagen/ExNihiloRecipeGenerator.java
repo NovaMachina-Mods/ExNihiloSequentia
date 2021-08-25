@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.*;
@@ -286,6 +287,22 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createFluidItemRecipes(consumer, seawater, EnumResource.YELLOW_CORAL_SEED.getRegistryObject().get(), Blocks.HORN_CORAL_BLOCK, "horn_coral");
         createFluidItemRecipes(consumer, witchwater, EnumResource.ANCIENT_SPORE.getRegistryObject().get(), Blocks.BROWN_MUSHROOM_BLOCK, "brown_mushroom");
         createFluidItemRecipes(consumer, witchwater, Blocks.BROWN_MUSHROOM_BLOCK.asItem(), Blocks.RED_MUSHROOM_BLOCK, "red_mushroom");
+        createFluidItemRecipes(consumer, water, Blocks.WHITE_CONCRETE_POWDER.asItem(), Blocks.WHITE_CONCRETE, Blocks.WHITE_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.ORANGE_CONCRETE_POWDER.asItem(), Blocks.ORANGE_CONCRETE, Blocks.ORANGE_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.MAGENTA_CONCRETE_POWDER.asItem(), Blocks.MAGENTA_CONCRETE, Blocks.MAGENTA_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.LIGHT_BLUE_CONCRETE_POWDER.asItem(), Blocks.LIGHT_BLUE_CONCRETE, Blocks.LIGHT_BLUE_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.YELLOW_CONCRETE_POWDER.asItem(), Blocks.YELLOW_CONCRETE, Blocks.YELLOW_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.LIME_CONCRETE_POWDER.asItem(), Blocks.LIME_CONCRETE, Blocks.LIME_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.PINK_CONCRETE_POWDER.asItem(), Blocks.PINK_CONCRETE, Blocks.PINK_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.GRAY_CONCRETE_POWDER.asItem(), Blocks.GRAY_CONCRETE, Blocks.GRAY_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.LIGHT_GRAY_CONCRETE_POWDER.asItem(), Blocks.LIGHT_GRAY_CONCRETE, Blocks.LIGHT_GRAY_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.CYAN_CONCRETE_POWDER.asItem(), Blocks.CYAN_CONCRETE, Blocks.CYAN_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.PURPLE_CONCRETE_POWDER.asItem(), Blocks.PURPLE_CONCRETE, Blocks.PURPLE_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.BLUE_CONCRETE_POWDER.asItem(), Blocks.BLUE_CONCRETE, Blocks.BLUE_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.BROWN_CONCRETE_POWDER.asItem(), Blocks.BROWN_CONCRETE, Blocks.BROWN_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.GREEN_CONCRETE_POWDER.asItem(), Blocks.GREEN_CONCRETE, Blocks.GREEN_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.RED_CONCRETE_POWDER.asItem(), Blocks.RED_CONCRETE, Blocks.RED_CONCRETE.getRegistryName().getPath());
+        createFluidItemRecipes(consumer, water, Blocks.BLACK_CONCRETE_POWDER.asItem(), Blocks.BLACK_CONCRETE, Blocks.BLACK_CONCRETE.getRegistryName().getPath());
     }
 
     private void registerFluidOnTopRecipes(Consumer<FinishedRecipe> consumer) {

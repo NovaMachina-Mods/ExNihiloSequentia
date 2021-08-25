@@ -6,6 +6,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -45,8 +46,8 @@ public class CompatTOP {
                 }
 
                 @Override
-                public String getID() {
-                    return ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":default";
+                public ResourceLocation getID() {
+                    return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":default");
                 }
             });
             return null;

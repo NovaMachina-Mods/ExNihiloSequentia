@@ -85,7 +85,9 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
                 partBuilder = builder.part()
-                        .modelFile(new ModelFile.ExistingModelFile(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/" + mesh.getMeshName()), models().existingFileHelper)).addModel();
+                        .modelFile(models().withExistingParent(mesh.getMeshName(), modLoc("block/mesh_base"))
+                                .texture("texture", "block/" + mesh.getMeshName())
+                                .texture(PARTICLE_TAG, "block/" + mesh.getMeshName())).addModel();
                 partBuilder.condition(BlockSieve.MESH, mesh);
                 partBuilder.end();
             }

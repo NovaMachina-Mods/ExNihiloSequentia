@@ -47,21 +47,23 @@ public class ClientSetup {
         logger.debug("Fired ColorHandlerEvent.Item event");
 
         for (EnumOre ore : EnumOre.values()) {
-            if(ore.getRawOreItem().isPresent()) {
-                event.getItemColors().register(new OreColor(), ore.getRawOreItem().get());
-            } else {
-                logger.warn("Missing ore chunk");
-            }
             if(ore.getPieceItem().isPresent()) {
                 event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
             } else {
                 logger.warn("Missing ore piece");
             }
-            if (ore.shouldGenerateIngot()) {
-                if(ore.getIngotRegistryItem().isPresent()) {
-                    event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
+            if (!ore.isVanilla()) {
+                if (ore.getRawOreItem().isPresent()) {
+                    event.getItemColors().register(new OreColor(), ore.getRawOreItem().get());
                 } else {
-                    logger.warn("Missing ore ingot");
+                    logger.warn("Missing ore chunk");
+                }
+                if (ore.shouldGenerateIngot()) {
+                    if (ore.getIngotRegistryItem().isPresent()) {
+                        event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
+                    } else {
+                        logger.warn("Missing ore ingot");
+                    }
                 }
             }
         }

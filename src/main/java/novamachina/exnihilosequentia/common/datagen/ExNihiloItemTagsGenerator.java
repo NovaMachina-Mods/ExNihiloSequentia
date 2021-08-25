@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -38,13 +38,8 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     private void registerCooked() {
-        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_CHICKEN);
-        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_COD);
-        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_MUTTON);
-        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_PORKCHOP);
-        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_RABBIT);
-        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_SALMON);
-        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_BEEF);
+        tag(ExNihiloTags.MEAT_COOKED).add(Items.COOKED_CHICKEN, Items.COOKED_COD, Items.COOKED_MUTTON, Items.COOKED_PORKCHOP,
+                Items.COOKED_RABBIT, Items.COOKED_SALMON, Items.COOKED_BEEF);
     }
 
     private void registerHammers() {
@@ -72,45 +67,27 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     private void registerUncooked() {
-        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.CHICKEN);
-        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.COD);
-        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.MUTTON);
-        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.PORKCHOP);
-        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.RABBIT);
-        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.SALMON);
-        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.BEEF);
+        tag(ExNihiloTags.MEAT_UNCOOKED).add(Items.CHICKEN, Items.COD, Items.MUTTON, Items.PORKCHOP, Items.RABBIT, Items.SALMON, Items.BEEF);
     }
 
     private void registerWoodenCrucible() {
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_ACACIA.get().asItem());
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_BIRCH.get().asItem());
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get().asItem());
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_JUNGLE.get().asItem());
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_OAK.get().asItem());
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_SPRUCE.get().asItem());
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_CRIMSON.get().asItem());
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_WARPED.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_ACACIA.get().asItem(), ExNihiloBlocks.CRUCIBLE_BIRCH.get().asItem(),
+                ExNihiloBlocks.CRUCIBLE_DARK_OAK.get().asItem(), ExNihiloBlocks.CRUCIBLE_JUNGLE.get().asItem(),
+                ExNihiloBlocks.CRUCIBLE_OAK.get().asItem(), ExNihiloBlocks.CRUCIBLE_SPRUCE.get().asItem(),
+                ExNihiloBlocks.CRUCIBLE_CRIMSON.get().asItem(), ExNihiloBlocks.CRUCIBLE_WARPED.get().asItem());
     }
 
     private void registerWoodenBarrel() {
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_ACACIA.get().asItem());
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_BIRCH.get().asItem());
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_DARK_OAK.get().asItem());
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_JUNGLE.get().asItem());
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_OAK.get().asItem());
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_SPRUCE.get().asItem());
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_CRIMSON.get().asItem());
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_WARPED.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_ACACIA.get().asItem(), ExNihiloBlocks.BARREL_BIRCH.get().asItem(),
+                ExNihiloBlocks.BARREL_DARK_OAK.get().asItem(), ExNihiloBlocks.BARREL_JUNGLE.get().asItem(),
+                ExNihiloBlocks.BARREL_OAK.get().asItem(), ExNihiloBlocks.BARREL_SPRUCE.get().asItem(),
+                ExNihiloBlocks.BARREL_CRIMSON.get().asItem(), ExNihiloBlocks.BARREL_WARPED.get().asItem());
     }
 
     private void registerWoodenSieve() {
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_ACACIA.get().asItem());
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_BIRCH.get().asItem());
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_DARK_OAK.get().asItem());
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_JUNGLE.get().asItem());
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_OAK.get().asItem());
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_SPRUCE.get().asItem());
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_CRIMSON.get().asItem());
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_WARPED.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_ACACIA.get().asItem(), ExNihiloBlocks.SIEVE_BIRCH.get().asItem(),
+                ExNihiloBlocks.SIEVE_DARK_OAK.get().asItem(), ExNihiloBlocks.SIEVE_JUNGLE.get().asItem(),
+                ExNihiloBlocks.SIEVE_OAK.get().asItem(), ExNihiloBlocks.SIEVE_SPRUCE.get().asItem(),
+                ExNihiloBlocks.SIEVE_CRIMSON.get().asItem(), ExNihiloBlocks.SIEVE_WARPED.get().asItem());
     }
 }

@@ -143,12 +143,14 @@ public class ExNihiloItems {
         }
 
         for (EnumOre ore : EnumOre.values()) {
-            ore.setRawOreItem(ITEMS.register(ore.getRawOreName(), () -> new OreItem(ore)));
             ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
-            if (ore.shouldGenerateIngot()) {
-                RegistryObject<OreItem> item = ITEMS.register(ore.getIngotName(), () -> new OreItem(ore));
-                ore.setIngotRegistryItem(item);
-                ingotMap.put(ore, item);
+            if (!ore.isVanilla()) {
+                ore.setRawOreItem(ITEMS.register(ore.getRawOreName(), () -> new OreItem(ore)));
+                if (ore.shouldGenerateIngot()) {
+                    RegistryObject<OreItem> item = ITEMS.register(ore.getIngotName(), () -> new OreItem(ore));
+                    ore.setIngotRegistryItem(item);
+                    ingotMap.put(ore, item);
+                }
             }
         }
 
