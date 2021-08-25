@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "exnihilosequentia:items/piece_ore",
+    "layer1": "exnihilosequentia:items/piece_ore_overlay"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "exnihilosequentia:use_hammer",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "exnihilosequentia:hammer"
+      }
+    }
+  ]
+}

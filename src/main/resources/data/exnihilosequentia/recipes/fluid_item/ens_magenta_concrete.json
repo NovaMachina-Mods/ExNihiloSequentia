@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_item",
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "input": {
+    "item": "minecraft:magenta_concrete_powder"
+  },
+  "result": {
+    "item": "minecraft:magenta_concrete"
+  }
+}
