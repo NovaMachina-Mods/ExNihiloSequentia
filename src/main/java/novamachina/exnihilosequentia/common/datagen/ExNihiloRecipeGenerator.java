@@ -430,7 +430,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 0.1F, 200,0.1F, 100, "has_silkworm", ExNihiloItems.COOKED_SILKWORM.getId());
 
         createSmeltingRecipe(consumer, ExNihiloBlocks.CRUCIBLE_UNFIRED.get().asItem(), ExNihiloBlocks.CRUCIBLE_FIRED.get().asItem(),
-                0.7F, 200, 0.7F, 200, "has_uncooked_crucible", ExNihiloBlocks.CRUCIBLE_FIRED.getId());
+                0.7F, 200, 0.7F, 100, "has_uncooked_crucible", ExNihiloBlocks.CRUCIBLE_FIRED.getId());
 
         ShapedRecipeBuilder.shaped(ExNihiloBlocks.CRUCIBLE_UNFIRED.get())
                 .pattern("c c")
@@ -528,18 +528,18 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             registerOre(ore, consumer);
             if (!ore.isVanilla()) {
                 createSmeltingRecipe(consumer, ore.getChunkItem().get(), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(),
-                        0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                        0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                         new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
             }
             if (ore.isVanilla()) {
                 if (ore == EnumOre.IRON) {
                     createSmeltingRecipe(consumer, ore.getChunkItem().get(), Items.IRON_INGOT,
-                            0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                            0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron"));
                 }
                 if (ore == EnumOre.GOLD) {
                     createSmeltingRecipe(consumer, ore.getChunkItem().get(), Items.GOLD_INGOT,
-                            0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                            0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold"));
                 }
             }

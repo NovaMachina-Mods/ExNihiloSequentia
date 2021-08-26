@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_stone_crafting_table"
+    ]
+  },
+  "criteria": {
+    "has_cobble_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:cobblestone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_stone_crafting_table"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobble_stone",
+      "has_the_recipe"
+    ]
+  ]
+}
