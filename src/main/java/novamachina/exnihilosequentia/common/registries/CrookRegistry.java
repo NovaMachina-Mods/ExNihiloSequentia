@@ -1,5 +1,8 @@
 package novamachina.exnihilosequentia.common.registries;
 
+import com.google.common.collect.Lists;
+import net.minecraft.util.ResourceLocation;
+import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
@@ -44,7 +47,20 @@ public class CrookRegistry implements ICrookRegistry {
 
     @Override
     public List<CrookRecipe> getRecipeList() {
-        return recipeList;
+        List<CrookRecipe> recipes = new ArrayList<>();
+        for(CrookRecipe recipe : recipeList) {
+            if(recipe.getOutput().size() > 21) {
+                List<List<ItemStackWithChance>> partitions = Lists.partition(recipe.getOutput(), 21);
+                for(int i = 0; i < partitions.size(); i++) {
+                    ResourceLocation newId = new ResourceLocation(recipe.getId().getNamespace(), recipe.getId().getPath() + i);
+                    recipes.add(new CrookRecipe(newId, recipe.getInput(), partitions.get(i)));
+                }
+            }
+            else {
+                recipes.add(recipe);
+            }
+        }
+        return recipes;
     }
 
     @Override
