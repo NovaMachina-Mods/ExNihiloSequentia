@@ -1,11 +1,12 @@
 package novamachina.exnihilosequentia.api.registry;
 
-import java.util.List;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
+
+import java.util.List;
 
 public interface ISieveRegistry {
     void clearRecipes();

@@ -2,22 +2,24 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.data.*;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.UpgradeRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
-import novamachina.exnihilosequentia.api.ExNihiloTags;
-import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
-import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants.ModIds;
+import novamachina.exnihilosequentia.api.utility.ExNihiloTags;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
@@ -28,17 +30,10 @@ import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-
-import java.util.*;
-import java.util.function.Consumer;
-
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.data.recipes.UpgradeRecipeBuilder;
 
 import javax.annotation.Nonnull;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     private static final String COBBLESTONE = "cobblestone";
@@ -54,7 +49,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     private static final Fluid seawater = ExNihiloFluids.SEA_WATER.get();
 
     public ExNihiloRecipeGenerator(DataGenerator generator) {
-        super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+        super(generator, ModIds.EX_NIHILO_SEQUENTIA);
     }
 
     @Override
@@ -146,15 +141,15 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerCrooks(Consumer<FinishedRecipe> consumer) {
-        createCrook(EnumCrook.ANDESITE.getRegistryObject().get(), EnumPebbleType.ANDESITE.getRegistryObject().get(), consumer);
-        createCrook(EnumCrook.BONE.getRegistryObject().get(), Tags.Items.BONES, consumer);
-        createCrook(EnumCrook.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND, consumer);
-        createCrook(EnumCrook.DIORITE.getRegistryObject().get(), EnumPebbleType.DIORITE.getRegistryObject().get(), consumer);
-        createCrook(EnumCrook.GOLD.getRegistryObject().get(), Tags.Items.NUGGETS_GOLD, consumer);
-        createCrook(EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject().get(), consumer);
-        createCrook(EnumCrook.IRON.getRegistryObject().get(), Tags.Items.NUGGETS_IRON, consumer);
-        createCrook(EnumCrook.STONE.getRegistryObject().get(), ExNihiloTags.STONE_STICK, consumer);
-        createCrook(EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN, consumer);
+        createCrook(consumer, EnumCrook.ANDESITE.getRegistryObject().get(), EnumPebbleType.ANDESITE.getRegistryObject().get());
+        createCrook(consumer, EnumCrook.BONE.getRegistryObject().get(), Tags.Items.BONES);
+        createCrook(consumer, EnumCrook.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND);
+        createCrook(consumer, EnumCrook.DIORITE.getRegistryObject().get(), EnumPebbleType.DIORITE.getRegistryObject().get());
+        createCrook(consumer, EnumCrook.GOLD.getRegistryObject().get(), Tags.Items.NUGGETS_GOLD);
+        createCrook(consumer, EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject().get());
+        createCrook(consumer, EnumCrook.IRON.getRegistryObject().get(), Tags.Items.NUGGETS_IRON);
+        createCrook(consumer, EnumCrook.STONE.getRegistryObject().get(), ExNihiloTags.STONE_STICK);
+        createCrook(consumer, EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN);
     }
 
     private void registerCrucibles(Consumer<FinishedRecipe> consumer) {
@@ -202,12 +197,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerDefaultOres(Consumer<FinishedRecipe> consumer, EnumOre ore) {
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                .addResult(ore.getPieceItem().get())
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.1F))
-                .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));
+        createSieveRecipe(consumer, Blocks.GRAVEL, ore.getPieceItem().get(), ore.getPieceName() + GRAVEL_SUFFIX,
+                flintChance(0.05F), ironChance(0.075F), diamondChance(0.1F));
     }
 
     private void registerDolls(Consumer<FinishedRecipe> consumer) {
@@ -316,18 +307,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerGoldOres(Consumer<FinishedRecipe> consumer, EnumOre ore) {
-        SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.CRUSHED_NETHERRACK.get()))
-                .addResult(ore.getPieceItem().get())
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.25F))
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.25F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.4F))
-                .build(consumer, sieveLoc(ore.getPieceName() + "_crushed_netherrack"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                .addResult(ore.getPieceItem().get())
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.15F))
-                .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));
+        createSieveRecipe(consumer, Blocks.GRAVEL, ore.getPieceItem().get(), ore.getPieceName() + GRAVEL_SUFFIX,
+                flintChance(0.05F), ironChance(0.075F), diamondChance(0.15F));
+        createSieveRecipe(consumer, ExNihiloBlocks.CRUSHED_NETHERRACK.get(), ore.getPieceItem().get(), ore.getPieceName() + "_crushed_netherrack",
+                flintChance(0.15F), ironChance(0.25F), diamondChance(0.4F));
     }
 
     private void registerHammerRecipes(Consumer<FinishedRecipe> consumer) {
@@ -360,12 +343,13 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlocks("has_diamond_hammer", InventoryChangeTrigger.TriggerInstance
                         .hasItems(EnumHammer.DIAMOND.getRegistryObject().get()))
                 .unlocks(MATERIAL_CONDITION, has(Tags.Items.INGOTS_NETHERITE))
-                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumHammer.NETHERITE.hammerName)));
-        createHammer(EnumHammer.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND, consumer);
-        createHammer(EnumHammer.GOLD.getRegistryObject().get(), Tags.Items.INGOTS_GOLD, consumer);
-        createHammer(EnumHammer.IRON.getRegistryObject().get(), Tags.Items.INGOTS_IRON, consumer);
-        createHammer(EnumHammer.STONE.getRegistryObject().get(), Tags.Items.COBBLESTONE, consumer);
-        createHammer(EnumHammer.WOOD.getRegistryObject().get(), ItemTags.PLANKS, consumer);
+                .save(consumer, createSaveLocation(new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA,
+                        EnumHammer.NETHERITE.hammerName)));
+        createHammer(consumer, EnumHammer.DIAMOND.getRegistryObject().get(), Tags.Items.GEMS_DIAMOND);
+        createHammer(consumer, EnumHammer.GOLD.getRegistryObject().get(), Tags.Items.INGOTS_GOLD);
+        createHammer(consumer, EnumHammer.IRON.getRegistryObject().get(), Tags.Items.INGOTS_IRON);
+        createHammer(consumer, EnumHammer.STONE.getRegistryObject().get(), Tags.Items.COBBLESTONE);
+        createHammer(consumer, EnumHammer.WOOD.getRegistryObject().get(), ItemTags.PLANKS);
     }
 
     private void registerHeatRecipes(Consumer<FinishedRecipe> consumer) {
@@ -380,35 +364,29 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerVanillaOres(Consumer<FinishedRecipe> consumer, EnumOre ore) {
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                .addResult(ore.getPieceItem().get())
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.1F))
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.15F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.25F))
-                .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
-                .addResult(ore.getPieceItem().get())
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.5F))
-                .build(consumer, sieveLoc(ore.getPieceName() + "_sand"));
+        createSieveRecipe(consumer, Blocks.GRAVEL, ore.getPieceItem().get(), ore.getPieceName() + GRAVEL_SUFFIX,
+                flintChance(0.1F), ironChance(0.15F), diamondChance(0.25F));
+        createSieveRecipe(consumer, Blocks.SAND, ore.getPieceItem().get(), ore.getPieceName() + "_sand",
+                diamondChance(0.5F));
     }
 
     private void registerMeshes(Consumer<FinishedRecipe> consumer) {
-        createMesh(EnumMesh.FLINT.getRegistryObject().get(), EnumMesh.STRING.getRegistryObject()
-                .get(), Items.FLINT, consumer);
-        createMesh(EnumMesh.IRON.getRegistryObject().get(), EnumMesh.FLINT.getRegistryObject()
-                .get(), Tags.Items.INGOTS_IRON, consumer);
-        createMesh(EnumMesh.DIAMOND.getRegistryObject().get(), EnumMesh.IRON.getRegistryObject()
-                .get(), Tags.Items.GEMS_DIAMOND, consumer);
-        createMesh(EnumMesh.EMERALD.getRegistryObject().get(), EnumMesh.DIAMOND.getRegistryObject()
-                .get(), Tags.Items.GEMS_EMERALD, consumer);
+        createMesh(consumer, EnumMesh.FLINT.getRegistryObject().get(), EnumMesh.STRING.getRegistryObject()
+                .get(), Items.FLINT);
+        createMesh(consumer, EnumMesh.IRON.getRegistryObject().get(), EnumMesh.FLINT.getRegistryObject()
+                .get(), Tags.Items.INGOTS_IRON);
+        createMesh(consumer, EnumMesh.DIAMOND.getRegistryObject().get(), EnumMesh.IRON.getRegistryObject()
+                .get(), Tags.Items.GEMS_DIAMOND);
+        createMesh(consumer, EnumMesh.EMERALD.getRegistryObject().get(), EnumMesh.DIAMOND.getRegistryObject()
+                .get(), Tags.Items.GEMS_EMERALD);
         UpgradeRecipeBuilder
                 .smithing(Ingredient.of(EnumMesh.EMERALD.getRegistryObject().get()), Ingredient
                         .of(Tags.Items.INGOTS_NETHERITE), EnumMesh.NETHERITE.getRegistryObject().get())
                 .unlocks("has_emerald_mesh", InventoryChangeTrigger.TriggerInstance
                         .hasItems(EnumMesh.EMERALD.getRegistryObject().get()))
                 .unlocks(MATERIAL_CONDITION, has(Tags.Items.INGOTS_NETHERITE))
-                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EnumMesh.NETHERITE
-                        .getMeshName())));
+                .save(consumer, createSaveLocation(new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA,
+                        EnumMesh.NETHERITE.getMeshName())));
 
         ShapedRecipeBuilder.shaped(EnumMesh.STRING.getRegistryObject().get())
                 .pattern("iii")
@@ -472,7 +450,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .hasItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
                 .unlockedBy("has_diamond", InventoryChangeTrigger.TriggerInstance
                         .hasItems(ItemPredicate.Builder.item().of(Tags.Items.GEMS_DIAMOND).build()))
-                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x4")));
+                .save(consumer, createSaveLocation(new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "doll_x4")));
 
         ShapedRecipeBuilder.shaped(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 6)
                 .pattern("xex")
@@ -484,7 +462,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .hasItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
                 .unlockedBy("has_emerald", InventoryChangeTrigger.TriggerInstance
                         .hasItems(ItemPredicate.Builder.item().of(Tags.Items.GEMS_EMERALD).build()))
-                .save(consumer, createSaveLocation(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x6")));
+                .save(consumer, createSaveLocation(new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "doll_x6")));
 
         ShapedRecipeBuilder.shaped(ExNihiloBlocks.END_CAKE.get())
                 .pattern("ece")
@@ -542,37 +520,37 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             if (!ore.isVanilla()) {
                 createSmeltingRecipe(consumer, ore.getRawOreItem().get(), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(),
                         0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
-                        new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
-                createOre(ore, consumer);
+                        new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
+                createRawOreRecipe(ore, consumer);
             }
             if (ore.isVanilla()) {
                 if (ore == EnumOre.IRON) {
-                    createSmeltingRecipe(consumer, ore.getRawOreItem().get(), Items.IRON_INGOT,
+                    createSmeltingRecipe(consumer, Items.RAW_IRON, Items.IRON_INGOT,
                             0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
-                            new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "iron_ingot"));
+                            new ResourceLocation(ModIds.MINECRAFT, "iron_ingot"));
                 }
                 if (ore == EnumOre.GOLD) {
-                    createSmeltingRecipe(consumer, ore.getRawOreItem().get(), Items.GOLD_INGOT,
+                    createSmeltingRecipe(consumer, Items.RAW_GOLD, Items.GOLD_INGOT,
                             0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
-                            new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "gold_ingot"));
+                            new ResourceLocation(ModIds.MINECRAFT, "gold_ingot"));
                 }
                 if (ore == EnumOre.COPPER) {
-                    createSmeltingRecipe(consumer, ore.getRawOreItem().get(), Items.COPPER_INGOT,
+                    createSmeltingRecipe(consumer, Items.RAW_COPPER, Items.COPPER_INGOT,
                             0.7F, 200, 0.7F, 100, RAW_ORE_CONDITION,
-                            new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "copper_ingot"));
+                            new ResourceLocation(ModIds.MINECRAFT, "copper_ingot"));
                 }
-                createVanillaOre(ore, consumer);
+                createVanillaOreRecipe(ore, consumer);
             }
         }
     }
 
     private void registerPebbleBlocks(Consumer<FinishedRecipe> consumer) {
-        createPebbleBlock(Blocks.ANDESITE, EnumPebbleType.ANDESITE.getRegistryObject().get(), consumer);
-        createPebbleBlock(Blocks.COBBLESTONE, EnumPebbleType.STONE.getRegistryObject().get(), consumer);
-        createPebbleBlock(Blocks.DIORITE, EnumPebbleType.DIORITE.getRegistryObject().get(), consumer);
-        createPebbleBlock(Blocks.GRANITE, EnumPebbleType.GRANITE.getRegistryObject().get(), consumer);
-        createPebbleBlock(Blocks.BASALT, EnumPebbleType.BASALT.getRegistryObject().get(), consumer);
-        createPebbleBlock(Blocks.BLACKSTONE, EnumPebbleType.BLACKSTONE.getRegistryObject().get(), consumer);
+        createPebbleBlock(consumer, Blocks.ANDESITE, EnumPebbleType.ANDESITE.getRegistryObject().get());
+        createPebbleBlock(consumer, Blocks.COBBLESTONE, EnumPebbleType.STONE.getRegistryObject().get());
+        createPebbleBlock(consumer, Blocks.DIORITE, EnumPebbleType.DIORITE.getRegistryObject().get());
+        createPebbleBlock(consumer, Blocks.GRANITE, EnumPebbleType.GRANITE.getRegistryObject().get());
+        createPebbleBlock(consumer, Blocks.BASALT, EnumPebbleType.BASALT.getRegistryObject().get());
+        createPebbleBlock(consumer, Blocks.BLACKSTONE, EnumPebbleType.BLACKSTONE.getRegistryObject().get());
     }
 
     private void registerSieves(Consumer<FinishedRecipe> consumer) {
@@ -587,125 +565,62 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerSieveRecipes(Consumer<FinishedRecipe> consumer) {
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                .addResult(EnumPebbleType.STONE.getRegistryObject().get())
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 1.0F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 1.0F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
-                .build(consumer, sieveLoc("stone_pebble"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                .addResult(EnumPebbleType.ANDESITE.getRegistryObject().get())
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
-                .build(consumer, sieveLoc("andesite_pebble"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                .addResult(EnumPebbleType.DIORITE.getRegistryObject().get())
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
-                .build(consumer, sieveLoc("diorite_pebble"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                .addResult(EnumPebbleType.GRANITE.getRegistryObject().get())
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
-                .build(consumer, sieveLoc("granite_pebble"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                .addResult(EnumPebbleType.BASALT.getRegistryObject().get())
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
-                .build(consumer, sieveLoc("basalt_pebble"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                .addResult(EnumPebbleType.BLACKSTONE.getRegistryObject().get())
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
-                .build(consumer, sieveLoc("blackstone_pebble"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
-                .addResult(Items.PRISMARINE_SHARD)
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.02F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.04F))
-                .build(consumer, sieveLoc("prismarine_shard"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
-                .addResult(Items.PRISMARINE_CRYSTALS)
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
-                .build(consumer, sieveLoc("prismarine_crystals"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                .addResult(Items.FLINT)
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.25F))
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.25F))
-                .build(consumer, sieveLoc("flint"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                .addResult(Items.COAL)
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.125F))
-                .build(consumer, sieveLoc("coal"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                .addResult(Items.LAPIS_LAZULI)
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
-                .build(consumer, sieveLoc("lapis_lazuli"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                .addResult(Items.DIAMOND)
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.008F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.016F))
-                .build(consumer, sieveLoc("diamond"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.CRUSHED_NETHERRACK.get()))
-                .addResult(Items.NETHERITE_SCRAP)
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.004F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.008F))
-                .build(consumer, sieveLoc("netherite_scrap"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                .addResult(Items.EMERALD)
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.008F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.016F))
-                .build(consumer, sieveLoc("emerald"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SOUL_SAND))
-                .addResult(Items.QUARTZ)
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 1.0F))
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.33F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 1.0F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.8F))
-                .build(consumer, sieveLoc("quartz"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SOUL_SAND))
-                .addResult(Items.NETHER_WART)
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
-                .build(consumer, sieveLoc("nether_wart"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SOUL_SAND))
-                .addResult(Items.GHAST_TEAR)
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.02F))
-                .build(consumer, sieveLoc("ghast_tear"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.DUST.get()))
-                .addResult(Items.BONE_MEAL)
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.2F))
-                .build(consumer, sieveLoc("bone_meal"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.DUST.get()))
-                .addResult(Items.GUNPOWDER)
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.07F))
-                .build(consumer, sieveLoc("gunpowder"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.DUST.get()))
-                .addResult(Items.REDSTONE)
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.125F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.25F))
-                .build(consumer, sieveLoc("redstone"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.DUST.get()))
-                .addResult(Items.GLOWSTONE_DUST)
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.0625F))
-                .build(consumer, sieveLoc("glowstone"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.DUST.get()))
-                .addResult(Items.BLAZE_POWDER)
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
-                .build(consumer, sieveLoc("blaze_powder"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.CRUSHED_END_STONE.get()))
-                .addResult(Items.ENDER_PEARL)
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.005F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
-                .addRoll(new MeshWithChance(EnumMesh.EMERALD, 0.015F))
-                .addRoll(new MeshWithChance(EnumMesh.NETHERITE, 0.02F))
-                .build(consumer, sieveLoc("ender_pearl"));
+        createSieveRecipe(consumer, Blocks.DIRT, EnumPebbleType.STONE.getRegistryObject().get(), "stone_pebble",
+                stringChance(0), stringChance(0), stringChance(0.5F), stringChance(0.5F), stringChance(0.1F), stringChance(0.1F));
+        createSieveRecipe(consumer, Blocks.DIRT, EnumPebbleType.ANDESITE.getRegistryObject().get(), "andesite_pebble",
+                stringChance(0.5F), stringChance(0.1F));
+        createSieveRecipe(consumer, Blocks.DIRT, EnumPebbleType.DIORITE.getRegistryObject().get(), "diorite_pebble",
+                stringChance(0.5F), stringChance(0.1F));
+        createSieveRecipe(consumer, Blocks.DIRT, EnumPebbleType.GRANITE.getRegistryObject().get(), "granite_pebble",
+                stringChance(0.5F), stringChance(0.1F));
+        createSieveRecipe(consumer, Blocks.DIRT, EnumPebbleType.BASALT.getRegistryObject().get(), "basalt_pebble",
+                stringChance(0.5F), stringChance(0.1F));
+        createSieveRecipe(consumer, Blocks.DIRT, EnumPebbleType.BLACKSTONE.getRegistryObject().get(), "blackstone_pebble",
+                stringChance(0.5F), stringChance(0.1F));
+        createSieveRecipe(consumer, Blocks.SAND, Items.PRISMARINE_SHARD, "prismarine_shard",
+                ironChance(0.02F), diamondChance(0.04F));
+        createSieveRecipe(consumer, Blocks.SAND, Items.PRISMARINE_CRYSTALS, "prismarine_crystals",
+                diamondChance(0.01F));
+        createSieveRecipe(consumer, Blocks.GRAVEL, Items.FLINT, "flint",
+                stringChance(0.25F), flintChance(0.25F));
+        createSieveRecipe(consumer, Blocks.GRAVEL, Items.COAL, "coal",
+                flintChance(0.125F));
+        createSieveRecipe(consumer, Blocks.GRAVEL, Items.LAPIS_LAZULI, "lapis_lazuli",
+                flintChance(0.05F));
+        createSieveRecipe(consumer, Blocks.GRAVEL, Items.DIAMOND, "diamond",
+                ironChance(0.008F), diamondChance(0.016F));
+        createSieveRecipe(consumer, Blocks.GRAVEL, Items.EMERALD, "emerald",
+                ironChance(0.008F), diamondChance(0.016F));
+        createSieveRecipe(consumer, ExNihiloBlocks.CRUSHED_NETHERRACK.get(), Items.NETHERITE_SCRAP, "netherite_scrap",
+                ironChance(0.001F), diamondChance(0.004F), emeraldChance(0.01F));
+        createSieveRecipe(consumer, Blocks.SOUL_SAND, Items.QUARTZ, "quartz",
+                flintChance(0), flintChance(0.33F), diamondChance(0), diamondChance(0.8F));
+        createSieveRecipe(consumer, Blocks.SOUL_SAND, Items.NETHER_WART, "nether_wart",
+                stringChance(0.1F));
+        createSieveRecipe(consumer, Blocks.SOUL_SAND, Items.GHAST_TEAR, "ghast_tear",
+                diamondChance(0.02F));
+        createSieveRecipe(consumer, ExNihiloBlocks.DUST.get(), Items.BONE_MEAL, "bone_meal",
+                stringChance(0.2F));
+        createSieveRecipe(consumer, ExNihiloBlocks.DUST.get(), Items.GUNPOWDER, "gunpowder",
+                stringChance(0.07F));
+        createSieveRecipe(consumer, ExNihiloBlocks.DUST.get(), Items.REDSTONE, "redstone",
+                ironChance(0.125F), diamondChance(0.25F));
+        createSieveRecipe(consumer, ExNihiloBlocks.DUST.get(), Items.GLOWSTONE_DUST, "glowstone",
+                ironChance(0.0625F));
+        createSieveRecipe(consumer, ExNihiloBlocks.DUST.get(), Items.BLAZE_POWDER, "blaze_powder",
+                ironChance(0.05F));
+        createSieveRecipe(consumer, ExNihiloBlocks.CRUSHED_END_STONE.get(), Items.ENDER_PEARL, "ender_pearl",
+                ironChance(0.005F), diamondChance(0.01F), emeraldChance(0.015F), netheriteChance(0.02F));
 
         for (EnumOre ore : EnumOre.values()) {
             switch (ore) {
                 case IRON, COPPER -> registerVanillaOres(consumer, ore);
                 case GOLD -> registerGoldOres(consumer, ore);
+                /*case OSMIUM -> SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
+                        .drop(ore.getPieceItem().get())
+                        .addRolls(new MeshWithChance(EnumMesh.IRON, 0.05F),
+                                new MeshWithChance(EnumMesh.DIAMOND, 0.1F))
+                        .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));*/
                 default -> registerDefaultOres(consumer, ore);
             }
         }
@@ -744,84 +659,42 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         for (Item seed : seeds) {
             if (seed.getRegistryName() != null) {
                 if (seed == Items.MELON_SEEDS || seed == Items.PUMPKIN_SEEDS || seed == Items.BEETROOT_SEEDS) {
-                    SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                            .addResult(seed)
-                            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.35F))
-                            .build(consumer, sieveLoc(seed.getRegistryName().getPath()));
+                    createSieveRecipe(consumer, Blocks.DIRT, seed, seed.getRegistryName().getPath(), stringChance(0.35F));
                 } else if (seed == Items.SEA_PICKLE || seed == Items.KELP) {
-                    SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
-                            .addResult(seed)
-                            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
-                            .isWaterlogged()
-                            .build(consumer, sieveLoc(seed.getRegistryName().getPath()));
+                    createSieveRecipe(consumer, Blocks.SAND, seed, seed.getRegistryName().getPath(), stringChance(0.05F));
                 } else if (seed == Items.WHEAT_SEEDS) {
-                    SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                            .addResult(Items.WHEAT_SEEDS)
-                            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.7F))
-                            .build(consumer, sieveLoc("wheat_seeds"));
+                    createSieveRecipe(consumer, Blocks.DIRT, seed, seed.getRegistryName().getPath(), stringChance(0.7F));
                 } else if (seed == Items.SEAGRASS || seed == EnumResource.RED_CORAL_SEED.getRegistryObject().get() ||
                         seed == EnumResource.YELLOW_CORAL_SEED.getRegistryObject().get() ||
                         seed == EnumResource.PINK_CORAL_SEED.getRegistryObject().get() ||
                         seed == EnumResource.PURPLE_CORAL_SEED.getRegistryObject().get() ||
                         seed == EnumResource.BLUE_CORAL_SEED.getRegistryObject().get()) {
-                    SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
-                            .addResult(seed)
-                            .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
-                            .isWaterlogged()
-                            .build(consumer, sieveLoc(seed.getRegistryName().getPath()));
+                    createSieveRecipe(consumer, Blocks.SAND, seed, seed.getRegistryName().getPath(),
+                            ironChance(0.05F));
                 } else if (seed == Items.COCOA_BEANS) {
-                    SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
-                            .addResult(seed)
-                            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.03F))
-                            .build(consumer, sieveLoc("cocoa_beans"));
+                    createSieveRecipe(consumer, Blocks.SAND, seed, seed.getRegistryName().getPath(),
+                            stringChance(0.03F));
                 } else {
-                    SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                            .addResult(seed)
-                            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
-                            .build(consumer, sieveLoc(seed.getRegistryName().getPath()));
+                    createSieveRecipe(consumer, Blocks.DIRT, seed, seed.getRegistryName().getPath(),
+                            stringChance(0.05F));
                 }
             }
         }
 
         getLeavesSaplings().forEach((input, drop) -> {
             if (Objects.equals(input.getRegistryName(), new ResourceLocation("jungle_leaves"))) {
-                SieveRecipeBuilder.builder().input(Ingredient.of(input))
-                        .addResult(drop)
-                        .addRoll(new MeshWithChance(EnumMesh.STRING, 0.025F))
-                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
-                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.075F))
-                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.1F))
-                        .build(consumer, sieveLoc(input.getRegistryName().getPath()));
+                createSieveRecipe(consumer, input, drop, input.getRegistryName().getPath(),
+                        stringChance(0.025F), flintChance(0.05F), ironChance(0.075F), diamondChance(0.1F));
             } else {
-                SieveRecipeBuilder.builder().input(Ingredient.of(input))
-                        .addResult(drop)
-                        .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
-                        .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.1F))
-                        .addRoll(new MeshWithChance(EnumMesh.IRON, 0.15F))
-                        .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.2F))
-                        .build(consumer, sieveLoc(input.getRegistryName().getPath()));
+                createSieveRecipe(consumer, input, drop, Objects.requireNonNull(input.getRegistryName()).getPath(),
+                        stringChance(0.05F), flintChance(0.1F), ironChance(0.15F), diamondChance(0.2F));
             }
         });
-        SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.LEAVES))
-                .addResult(Items.APPLE)
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.1F))
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.15F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.2F))
-                .build(consumer, sieveLoc("apple"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.LEAVES))
-                .addResult(Items.GOLDEN_APPLE)
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.001F))
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.003F))
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.005F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.01F))
-                .build(consumer, sieveLoc("golden_apple"));
-        SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.LEAVES))
-                .addResult(ExNihiloItems.SILKWORM.get())
-                .addRoll(new MeshWithChance(EnumMesh.STRING, 0.025F))
-                .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
-                .addRoll(new MeshWithChance(EnumMesh.IRON, 0.1F))
-                .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.2F))
-                .build(consumer, sieveLoc("silkworm"));
+        createSieveRecipe(consumer, ItemTags.LEAVES, Items.APPLE, "apple",
+                stringChance(0.05F), flintChance(0.1F), ironChance(0.15F), diamondChance(0.2F));
+        createSieveRecipe(consumer, ItemTags.LEAVES, Items.GOLDEN_APPLE, "golden_apple",
+                stringChance(0.001F), flintChance(0.003F), ironChance(0.005F), diamondChance(0.01F));
+        createSieveRecipe(consumer, ItemTags.LEAVES, ExNihiloItems.SILKWORM.get(), "silkworm",
+                stringChance(0.025F), flintChance(0.05F), ironChance(0.1F), diamondChance(0.2F));
     }
 }

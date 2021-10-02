@@ -1,9 +1,10 @@
 package novamachina.exnihilosequentia.api.registry;
 
-import java.util.List;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
+
+import java.util.List;
 
 public interface IHammerRegistry {
     void clearRecipes();

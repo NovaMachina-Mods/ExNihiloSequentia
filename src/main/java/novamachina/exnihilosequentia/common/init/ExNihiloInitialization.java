@@ -37,14 +37,14 @@ import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformR
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
+import novamachina.exnihilosequentia.api.utility.Config;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.network.PacketHandler;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
-import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -55,19 +55,19 @@ import java.util.stream.Collectors;
 
 import static novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator.createMCCompost;
 
-@Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloInitialization {
-    public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
+    public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(ModIds.EX_NIHILO_SEQUENTIA) {
         @Nonnull
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(EnumCrook.WOOD.getRegistryObject().get());
         }
     };
-    @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
+    @ObjectHolder(ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
     public static final GlobalLootModifierSerializer<?> hammerModifier = null;
 
-    @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_crook")
+    @ObjectHolder(ModIds.EX_NIHILO_SEQUENTIA + ":use_crook")
     public static final GlobalLootModifierSerializer<?> crookModifier = null;
 
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -119,8 +119,8 @@ public class ExNihiloInitialization {
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
     public static void registerTOP(InterModEnqueueEvent event) {
-        logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
-        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
+        logger.debug("The One Probe detected: " + ModList.get().isLoaded(ModIds.TOP));
+        if (ModList.get().isLoaded(ModIds.TOP)) {
             CompatTOP.register();
         }
     }
@@ -142,15 +142,15 @@ public class ExNihiloInitialization {
             private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
             @Nonnull
-            public ItemStack execute(BlockSource p_82487_1_, ItemStack p_82487_2_) {
-                BucketItem bucketitem = (BucketItem)p_82487_2_.getItem();
-                BlockPos blockpos = p_82487_1_.getPos().relative(p_82487_1_.getBlockState().getValue(DispenserBlock.FACING));
-                Level world = p_82487_1_.getLevel();
+            public ItemStack execute(BlockSource source, ItemStack itemStack) {
+                BucketItem bucketitem = (BucketItem)itemStack.getItem();
+                BlockPos blockpos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+                Level world = source.getLevel();
                 if (bucketitem.emptyContents(null, world, blockpos, null)) {
-                    bucketitem.checkExtraContent(null, world, p_82487_2_, blockpos);
+                    bucketitem.checkExtraContent(null, world, itemStack, blockpos);
                     return new ItemStack(Items.BUCKET);
                 } else {
-                    return this.defaultDispenseItemBehavior.dispense(p_82487_1_, p_82487_2_);
+                    return this.defaultDispenseItemBehavior.dispense(source, itemStack);
                 }
             }
         };
@@ -221,8 +221,8 @@ public class ExNihiloInitialization {
         EnumOre.GOLD.setEnabled(true);
         EnumOre.COPPER.setEnabled(true);
 
-        logger.debug("Immersive Engineering detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING));
-        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING)) {
+        logger.debug("Immersive Engineering detected: " + ModList.get().isLoaded(ModIds.IMMERSIVE_ENGINEERING));
+        if (ModList.get().isLoaded(ModIds.IMMERSIVE_ENGINEERING)) {
             logger.debug("Added Immersive Engineering");
             EnumOre.ALUMINUM.setEnabled(true);
             EnumOre.SILVER.setEnabled(true);
@@ -230,8 +230,8 @@ public class ExNihiloInitialization {
             EnumOre.LEAD.setEnabled(true);
             EnumOre.URANIUM.setEnabled(true);
         }
-        logger.debug("Create detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE));
-        if (ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE)) {
+        logger.debug("Create detected: " + ModList.get().isLoaded(ModIds.CREATE));
+        if (ModList.get().isLoaded(ModIds.CREATE)) {
             logger.debug("Added Create");
             EnumOre.ZINC.setEnabled(true);
         }

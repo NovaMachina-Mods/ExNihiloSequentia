@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.common.utility;
 
-import java.util.Arrays;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.apache.logging.log4j.LogManager;
+
+import java.util.Arrays;
 
 public class IngredientUtils {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());

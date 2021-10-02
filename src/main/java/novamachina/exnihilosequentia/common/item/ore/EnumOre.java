@@ -1,15 +1,16 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
-import java.util.Arrays;
-import java.util.List;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fmllegacy.RegistryObject;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.network.HandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.util.Arrays;
+import java.util.List;
 
 public enum EnumOre implements IExtensibleEnum {
     LEAD(Type.MODDED, ExNihiloConstants.Ore.LEAD, new Color("330066"), false, true),

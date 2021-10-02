@@ -4,13 +4,13 @@ import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
 import mcp.mobius.waila.api.WailaPlugin;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
-import novamachina.exnihilosequentia.common.block.crucibles.FiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
+import novamachina.exnihilosequentia.common.block.crucibles.FiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.NetherCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.WoodCrucibleBlock;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 @WailaPlugin(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
 public class PluginWaila implements IWailaPlugin {

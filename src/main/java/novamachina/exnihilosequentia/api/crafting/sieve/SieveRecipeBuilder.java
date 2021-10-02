@@ -5,6 +5,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
+import java.util.Arrays;
+
 public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilder> {
     private final JsonArray meshArray = new JsonArray();
 
@@ -18,8 +20,14 @@ public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilde
         return new SieveRecipeBuilder();
     }
 
-    public SieveRecipeBuilder addRoll(MeshWithChance mesh) {
+    private void addRoll(MeshWithChance mesh) {
         meshArray.add(mesh.serialize());
+    }
+
+    public SieveRecipeBuilder addRolls(MeshWithChance... meshes) {
+        for (int i=0; i < meshes.length; i++) {
+            addRoll(Arrays.stream(meshes).toList().get(i));
+        }
         return this;
     }
 

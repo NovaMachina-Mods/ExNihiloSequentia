@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 import javax.annotation.Nonnull;

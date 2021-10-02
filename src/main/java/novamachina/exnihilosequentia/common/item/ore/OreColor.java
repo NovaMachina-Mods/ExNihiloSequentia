@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
-import java.awt.Color;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
 
 public class OreColor implements ItemColor {
 

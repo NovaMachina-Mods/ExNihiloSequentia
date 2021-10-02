@@ -5,9 +5,9 @@ import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.ITooltip;
 import mcp.mobius.waila.api.config.IPluginConfig;
 import net.minecraft.network.chat.TranslatableComponent;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 public class SieveComponentProvider implements IComponentProvider {

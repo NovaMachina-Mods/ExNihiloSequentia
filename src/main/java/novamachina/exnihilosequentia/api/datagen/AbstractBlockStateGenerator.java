@@ -1,14 +1,13 @@
 package novamachina.exnihilosequentia.api.datagen;
 
-import net.minecraft.world.level.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.Objects;
 
@@ -21,10 +20,16 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         super(gen, modId, exFileHelper);
     }
 
+    /**
+     * Needs a Block to generate the blockstates + item
+     */
     protected void basicBlock(Block block) {
         simpleItemBlock(block, cubeAll(block));
     }
 
+    /**
+     * Needs a Fluid to generate the blockstates + item
+     */
     protected void createFluid(Fluid fluid) {
         ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
         ModelFile model = models().getBuilder("block/" + Objects.requireNonNull(fluid.getRegistryName()).getPath())
@@ -33,15 +38,18 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
                 .setModels(new ConfiguredModel(model));
     }
 
-    protected void simpleItemBlock(Block block, ModelFile modelFile) {
+    private void simpleItemBlock(Block block, ModelFile modelFile) {
         simpleBlock(block, modelFile);
         simpleBlockItem(block, modelFile);
     }
 
-    protected String getRegistryName(Block b) {
+    private String getRegistryName(Block b) {
         return Objects.requireNonNull(b.getRegistryName()).toString();
     }
 
+    /**
+     * Needs a block + location to generate a barrel
+     */
     protected void createBarrel(Block block, ResourceLocation texture) {
         ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/barrel"))
                 .texture("texture", texture)
@@ -50,6 +58,9 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         simpleItemBlock(block, model.model);
     }
 
+    /**
+     * Needs a block to generate a cake
+     */
     protected void createCake(Block block) {
         VariantBlockStateBuilder builder = getVariantBuilder(block);
 
@@ -63,6 +74,9 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         partialBlockState.with(BITES, 0).addModels(model);
     }
 
+    /**
+     * Needs a block + location to generate a crucible
+     */
     protected void createCrucible(Block block, ResourceLocation texture) {
         ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/crucible"))
                 .texture(PARTICLE_TAG, texture)
@@ -74,6 +88,9 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         simpleItemBlock(block, model.model);
     }
 
+    /**
+     * Needs a block + location to generate a sieve
+     */
     protected void createSieve(Block block, ResourceLocation texture) {
         ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/sieve_base"))
                 .texture("texture", texture)

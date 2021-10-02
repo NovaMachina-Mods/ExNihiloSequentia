@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.common.utility;
+package novamachina.exnihilosequentia.api.utility;
 
 public class ExNihiloConstants {
 
@@ -139,10 +139,12 @@ public class ExNihiloConstants {
     }
 
     public static class ModIds {
+        //Ex Nihilo
+        public static final String EX_NIHILO_SEQUENTIA = "exnihilosequentia";
 
+        //Others
         public static final String CRAFT_TWEAKER = "crafttweaker";
         public static final String CREATE = "create";
-        public static final String EX_NIHILO_SEQUENTIA = "exnihilosequentia";
         public static final String IMMERSIVE_ENGINEERING = "immersiveengineering";
         public static final String JEI = "jei";
         public static final String MINECRAFT = "minecraft";

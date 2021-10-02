@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.api.registry;
 
-import java.util.List;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
+
+import java.util.List;
 
 public interface ICrucibleRegistry {
     void clearRecipes();

@@ -40,7 +40,7 @@ public class ZenSieveRecipe {
 
     @ZenCodeType.Method
     public ZenSieveRecipe addRoll(String mesh, float chance) {
-        internal.addRoll(mesh, chance);
+        internal.addRolls(mesh, chance);
         return this;
     }
 

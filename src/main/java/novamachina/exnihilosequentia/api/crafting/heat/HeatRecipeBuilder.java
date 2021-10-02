@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.api.crafting.heat;
 
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder> {

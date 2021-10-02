@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 
 import javax.annotation.Nonnull;
 

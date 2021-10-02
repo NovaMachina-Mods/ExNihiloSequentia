@@ -9,7 +9,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenFluidItemRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister

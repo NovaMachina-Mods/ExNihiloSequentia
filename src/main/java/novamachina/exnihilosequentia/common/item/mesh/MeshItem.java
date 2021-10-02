@@ -3,8 +3,8 @@ package novamachina.exnihilosequentia.common.item.mesh;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
+import novamachina.exnihilosequentia.api.utility.Config;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.utility.Config;
 
 public class MeshItem extends Item {
 

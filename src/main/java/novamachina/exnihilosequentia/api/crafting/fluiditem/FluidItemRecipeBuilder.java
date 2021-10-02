@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.api.crafting.fluiditem;
 
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 

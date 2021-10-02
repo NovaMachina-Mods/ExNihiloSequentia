@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.api.registry.ICrookRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;

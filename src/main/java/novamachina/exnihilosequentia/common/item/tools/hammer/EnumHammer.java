@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.common.item.tools.hammer;
 
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fmllegacy.RegistryObject;
-import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.api.utility.Config;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 
 public enum EnumHammer implements IExtensibleEnum {
     WOOD(ExNihiloConstants.Items.WOOD_HAMMER, Config.getHammerWoodDurability(), Tiers.WOOD),

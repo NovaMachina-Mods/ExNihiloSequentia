@@ -1,12 +1,13 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
-import java.util.List;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.api.utility.Config;
+
+import java.util.List;
 
 
 

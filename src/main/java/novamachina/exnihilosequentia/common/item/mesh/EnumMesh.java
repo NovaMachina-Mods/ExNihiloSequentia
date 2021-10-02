@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.item.mesh;
 
-import net.minecraft.world.item.Item;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fmllegacy.RegistryObject;
-import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.api.utility.Config;
 
 import javax.annotation.Nonnull;
 

@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.api.crafting.crook;
 
-import net.minecraft.world.level.block.Block;
+import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 

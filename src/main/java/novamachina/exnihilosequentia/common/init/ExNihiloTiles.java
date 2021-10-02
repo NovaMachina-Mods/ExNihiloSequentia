@@ -5,6 +5,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.api.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.tileentity.InfestedLeavesTile;
 import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
@@ -13,8 +15,6 @@ import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 import novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
 import novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleTile;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -31,7 +31,7 @@ public class ExNihiloTiles {
                             ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
                             ExNihiloBlocks.CRUCIBLE_OAK.get(), ExNihiloBlocks.CRUCIBLE_SPRUCE.get()).build(null));
     public static final RegistryObject<BlockEntityType<SieveTile>> SIEVE = TILES
-            .register(Blocks.OAK_SIEVE, () -> BlockEntityType.Builder
+            .register(Blocks.SIEVES, () -> BlockEntityType.Builder
                     .of(SieveTile::new, ExNihiloBlocks.SIEVE_ACACIA.get(), ExNihiloBlocks.SIEVE_BIRCH.get(),
                             ExNihiloBlocks.SIEVE_DARK_OAK.get(), ExNihiloBlocks.SIEVE_JUNGLE.get(),
                             ExNihiloBlocks.SIEVE_OAK.get(), ExNihiloBlocks.SIEVE_SPRUCE.get(),

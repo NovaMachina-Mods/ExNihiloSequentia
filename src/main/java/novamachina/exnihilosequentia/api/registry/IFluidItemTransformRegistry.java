@@ -1,10 +1,11 @@
 package novamachina.exnihilosequentia.api.registry;
 
-import java.util.List;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
+
+import java.util.List;
 
 public interface IFluidItemTransformRegistry {
     void clearRecipes();

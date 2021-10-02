@@ -1,11 +1,10 @@
-package novamachina.exnihilosequentia.api;
+package novamachina.exnihilosequentia.api.utility;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.EnumMap;
 import java.util.List;

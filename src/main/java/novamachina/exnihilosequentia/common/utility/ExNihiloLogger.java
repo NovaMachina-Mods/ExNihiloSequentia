@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.utility;
 
+import novamachina.exnihilosequentia.api.utility.Config;
 import org.apache.logging.log4j.Logger;
 
 public record ExNihiloLogger(Logger logger) {
