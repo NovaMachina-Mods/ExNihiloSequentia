@@ -155,9 +155,7 @@ public class SieveTile extends TileEntity {
         if (getLevel().getLevelData().getGameTime() - lastSieveAction < 4) {
             // Really good chance that they're using a macro
             if (player != null && getLevel().getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
-                player.setSecondsOnFire(1);
-
-                ITextComponent message = new StringTextComponent("Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
+                ITextComponent message = new StringTextComponent("Autoclicker Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
 
                 player.sendMessage(message, null);
             }
