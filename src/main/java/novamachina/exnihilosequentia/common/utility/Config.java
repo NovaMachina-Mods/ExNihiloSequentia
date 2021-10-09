@@ -440,6 +440,6 @@ public class Config {
                 .defineInRange("meshStackSize", 64, 1, 64);
         maxSieveClicks = COMMON_BUILDER
                 .comment("The number of sieve clicks required to sieve a block. (Default: 10)")
-                .defineInRange("maxSieveClicks", 10, 1, Integer.MAX_VALUE);
+                .defineInRange("maxSieveClicks", 10, 1, 20);
     }
 }
