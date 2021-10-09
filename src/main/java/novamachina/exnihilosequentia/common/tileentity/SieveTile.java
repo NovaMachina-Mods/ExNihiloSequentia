@@ -152,7 +152,7 @@ public class SieveTile extends TileEntity {
         logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
 
         // 4 ticks is the same period of holding down right click
-        if (getLevel().getLevelData().getGameTime() - lastSieveAction < Config.getTestMakroTime()) {
+        if (getLevel().getLevelData().getGameTime() - lastSieveAction < 4) {
             // Really good chance that they're using a macro
             if (player != null && getLevel().getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
                 player.setSecondsOnFire(1);
