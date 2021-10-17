@@ -356,6 +356,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createHeatRecipes(consumer, Blocks.GLOWSTONE, 2, "glowstone");
         createHeatRecipes(consumer, Blocks.SHROOMLIGHT, 2, "shroomlight");
         createHeatRecipes(consumer, Blocks.SOUL_FIRE, 4, "soul_fire");
+        createHeatRecipes(consumer, Blocks.CAMPFIRE, 4, "campfire");
+        createHeatRecipes(consumer, Blocks.SOUL_CAMPFIRE, 4, "soul_campfire");
     }
 
     private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
