@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
@@ -10,10 +11,12 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
@@ -356,6 +359,13 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createHeatRecipes(consumer, Blocks.GLOWSTONE, 2, "glowstone");
         createHeatRecipes(consumer, Blocks.SHROOMLIGHT, 2, "shroomlight");
         createHeatRecipes(consumer, Blocks.SOUL_FIRE, 4, "soul_fire");
+
+        // Lightable blocks
+        StatePropertiesPredicate lightable = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true).build();
+        HeatRecipeBuilder.builder().input(Blocks.CAMPFIRE).amount(4).properties(lightable).build(consumer, heatLoc("campfire"));
+        HeatRecipeBuilder.builder().input(Blocks.SOUL_CAMPFIRE).amount(4).properties(lightable).build(consumer, heatLoc("soul_campfire"));
+        HeatRecipeBuilder.builder().input(Blocks.FURNACE).amount(3).properties(lightable).build(consumer, heatLoc("furnace"));
+        HeatRecipeBuilder.builder().input(Blocks.REDSTONE_TORCH).amount(1).properties(lightable).build(consumer, heatLoc("redstone_torch"));
     }
 
     private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {

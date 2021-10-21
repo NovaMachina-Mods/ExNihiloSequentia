@@ -17,19 +17,6 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
-    public int getHeat() {
-        BlockState source = level.getBlockState(worldPosition.below());
-        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock());
-        if(source.getBlock() instanceof FlowingFluidBlock) {
-            int level = 8 - source.getValue(BlockStateProperties.LEVEL);
-            double partial = (double)blockHeat / 8;
-            int returnVal = (int)Math.ceil(partial * level);
-            return returnVal;
-        }
-        return blockHeat;
-    }
-
-    @Override
     public CrucilbeTypeEnum getCrucibleType() {
         return CrucilbeTypeEnum.FIRED;
     }
