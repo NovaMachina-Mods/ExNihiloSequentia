@@ -37,7 +37,7 @@ public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
         StatePropertiesPredicate properties = recipe.getProperties();
         if (properties != null) {
             buffer.writeBoolean(true);
-            buffer.writeUtf(recipe.getProperties().serializeToJson().toString());
+            buffer.writeUtf(properties.serializeToJson().toString());
         } else {
             buffer.writeBoolean(false);
         }
