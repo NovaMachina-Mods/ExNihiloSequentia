@@ -360,12 +360,13 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createHeatRecipes(consumer, Blocks.SHROOMLIGHT, 2, "shroomlight");
         createHeatRecipes(consumer, Blocks.SOUL_FIRE, 4, "soul_fire");
 
-        // Lightable blocks
-        StatePropertiesPredicate lightable = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true).build();
-        HeatRecipeBuilder.builder().input(Blocks.CAMPFIRE).amount(4).properties(lightable).build(consumer, heatLoc("campfire"));
-        HeatRecipeBuilder.builder().input(Blocks.SOUL_CAMPFIRE).amount(4).properties(lightable).build(consumer, heatLoc("soul_campfire"));
-        HeatRecipeBuilder.builder().input(Blocks.FURNACE).amount(3).properties(lightable).build(consumer, heatLoc("furnace"));
-        HeatRecipeBuilder.builder().input(Blocks.REDSTONE_TORCH).amount(1).properties(lightable).build(consumer, heatLoc("redstone_torch"));
+        // Lit blocks
+        StatePropertiesPredicate lit = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true).build();
+        createHeatRecipes(consumer, Blocks.CAMPFIRE, 4, lit, "campfire");
+        createHeatRecipes(consumer, Blocks.SOUL_CAMPFIRE, 4, lit, "soul_campfire");
+        createHeatRecipes(consumer, Blocks.FURNACE, 3, lit, "furnace");
+        createHeatRecipes(consumer, Blocks.REDSTONE_TORCH, 1, lit, "redstone_torch");
+        createHeatRecipes(consumer, Blocks.REDSTONE_WALL_TORCH, 1, lit, "redstone_wall_torch");
     }
 
     private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
