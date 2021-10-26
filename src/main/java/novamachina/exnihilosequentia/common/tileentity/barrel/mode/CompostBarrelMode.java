@@ -1,10 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.utility.StringUtils;
+import com.google.common.base.Preconditions;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,6 +14,11 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,16 +88,17 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
         if (Config.getShowParticles()) {
-            ((ServerWorld) barrelTile.getLevel())
-                    .sendParticles(ParticleTypes.EFFECT,
-                            barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
-                            barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
-                            barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
-                            1,
-                            0.0,
-                            0.0,
-                            0.0,
-                            0.05);
+            ServerWorld level = (ServerWorld) barrelTile.getLevel();
+            Preconditions.checkNotNull(level, "Level is null.");
+            level.sendParticles(ParticleTypes.ASH,
+                    barrelTile.getBlockPos().getX() + (.2d + (.8d - .2d) * level.random.nextDouble()),
+                    barrelTile.getBlockPos().getY() + 1.2d,
+                    barrelTile.getBlockPos().getZ() + (.2d + (.8d - .2d) * level.random.nextDouble()),
+                    1,
+                    0,
+                    0,
+                    0,
+                    0.01);
         }
     }
 
