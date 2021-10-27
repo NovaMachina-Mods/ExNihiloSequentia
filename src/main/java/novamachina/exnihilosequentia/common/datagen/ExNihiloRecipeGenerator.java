@@ -135,7 +135,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, Items.SUGAR_CANE, 80, "sugar_cane");
         createCompostRecipe(consumer, EnumResource.GRASS_SEED.getRegistryObject().get(), 100, "grass_seed");
         createCompostRecipe(consumer, EnumResource.ANCIENT_SPORE.getRegistryObject().get(), 100, "ancient_spore");
-        createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berry");
+        createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
     }
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
