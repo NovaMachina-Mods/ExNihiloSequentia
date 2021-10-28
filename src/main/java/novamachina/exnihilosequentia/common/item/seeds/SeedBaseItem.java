@@ -2,12 +2,13 @@ package novamachina.exnihilosequentia.common.item.seeds;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
+import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -61,9 +62,16 @@ public class SeedBaseItem extends Item implements IPlantable {
             if (canSustain && blockEmpty && this.getPlant(world, pos) != null) {
                 world.setBlockAndUpdate(pos.offset(0, 1, 0),
                         this.getPlant(world, pos));
+                if (this.getPlant(world, pos).getBlock() instanceof DoublePlantBlock) {
+                    world.setBlockAndUpdate(
+                            pos.above(2),
+                            this.getPlant(world, pos).setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+                    );
+                }
                 if (!player.isCreative()) {
                     item.shrink(1);
                 }
+                world.playSound(player, player.blockPosition(), SoundEvents.GRASS_PLACE, SoundCategory.AMBIENT, 1f, 1f);
                 return ActionResultType.SUCCESS;
             }
         }
