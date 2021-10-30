@@ -119,8 +119,6 @@ public class ExNihiloItems {
             .register(Blocks.BARREL_WARPED, () -> createBurnableItem(ExNihiloBlocks.BARREL_WARPED.get()));
     public static final RegistryObject<Item> BARREL_STONE = ITEMS
             .register(Blocks.BARREL_STONE, () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(), tab));
-    public static final RegistryObject<Item> STONE_CRAFTING_TABLE = ITEMS
-            .register("stone_crafting_table", () -> new BlockItem(ExNihiloBlocks.STONE_CRAFTING_TABLE.get(), tab));
     // Begin Items Only
     public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
             .register(ExNihiloConstants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);

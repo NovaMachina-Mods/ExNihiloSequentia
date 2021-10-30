@@ -148,7 +148,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCrook(EnumCrook.GOLD.getRegistryObject().get(), Tags.Items.NUGGETS_GOLD, consumer);
         createCrook(EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject().get(), consumer);
         createCrook(EnumCrook.IRON.getRegistryObject().get(), Tags.Items.NUGGETS_IRON, consumer);
-        createCrook(EnumCrook.STONE.getRegistryObject().get(), ExNihiloTags.STONE_STICK, consumer);
+        createCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject().get(), consumer);
         createCrook(EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN, consumer);
     }
 
@@ -506,21 +506,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlockedBy("has_scrap", InventoryChangeTrigger.Instance
                         .hasItems(Items.NETHERITE_SCRAP))
                 .save(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
-		ShapedRecipeBuilder.shaped(EnumResource.STONE_STICK.getRegistryObject().get())
-                .pattern("x")
-                .pattern("x")
-                .pattern("x")
-				.define('x', EnumPebbleType.STONE.getRegistryObject().get())
-                .unlockedBy("has_stone_pebble", InventoryChangeTrigger.Instance
-                    .hasItems(EnumPebbleType.STONE.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumResource.STONE_STICK.getRegistryObject().getId()));
-		ShapedRecipeBuilder.shaped(ExNihiloBlocks.STONE_CRAFTING_TABLE.get())
-                .pattern("xx")
-                .pattern("xx")
-                .define('x', Blocks.COBBLESTONE)
-                .unlockedBy("has_cobble_stone", InventoryChangeTrigger.Instance
-                .hasItems(Blocks.COBBLESTONE))
-                .save(consumer, createSaveLocation(ExNihiloBlocks.STONE_CRAFTING_TABLE.getId()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
