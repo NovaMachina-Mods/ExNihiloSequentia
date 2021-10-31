@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractBlockStateGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;

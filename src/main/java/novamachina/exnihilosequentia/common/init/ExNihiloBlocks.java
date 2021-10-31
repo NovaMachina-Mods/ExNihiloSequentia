@@ -19,7 +19,6 @@ import novamachina.exnihilosequentia.common.block.crucibles.UnfiredCrucibleBlock
 import novamachina.exnihilosequentia.common.block.crucibles.WoodCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.sieves.NetherSieveBlock;
 import novamachina.exnihilosequentia.common.block.sieves.WoodSieveBlock;
-import novamachina.exnihilosequentia.common.block.workbench.StoneWorkbenchCraftingBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;

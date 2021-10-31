@@ -31,7 +31,6 @@ public class Config {
     private static final String SUBCATEGORY_MESHES = "mesh";
     // Debugging
     private static ForgeConfigSpec.BooleanValue enableDebugLogging;
-    private static ForgeConfigSpec.BooleanValue enableStoneblock;
     // Pebble
     private static ForgeConfigSpec.IntValue pebbleDamage;
     // Ore
@@ -188,8 +187,6 @@ public class Config {
     // Debug
     public static boolean enableDebugLogging() { return enableDebugLogging.get(); }
 
-    public static boolean enableStoneblock() { return enableStoneblock.get(); }
-
     // Ore
     public static boolean enableOreOverride() { return enableOreOverride.get(); }
 
@@ -325,8 +322,6 @@ public class Config {
     private static void debugConfigs() {
         enableDebugLogging = COMMON_BUILDER.comment("Enable extra logging? (Default: false)")
                 .define("enableDebugLogging", false);
-        enableStoneblock = COMMON_BUILDER.comment("Enable Stoneblock settings? (Default: false)")
-                .define("enableStoneblock", false);
     }
 
     private static void durabilityConfigs() {
