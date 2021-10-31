@@ -2,10 +2,11 @@ package novamachina.exnihilosequentia.common.utility;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import java.nio.file.Path;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.fml.common.Mod;
+
+import java.nio.file.Path;
 
 @Mod.EventBusSubscriber
 public class Config {
@@ -30,6 +31,7 @@ public class Config {
     private static final String SUBCATEGORY_MESHES = "mesh";
     // Debugging
     private static ForgeConfigSpec.BooleanValue enableDebugLogging;
+    private static ForgeConfigSpec.BooleanValue enableStoneblock;
     // Pebble
     private static ForgeConfigSpec.IntValue pebbleDamage;
     // Ore
@@ -131,143 +133,129 @@ public class Config {
 
     private Config() {
     }
+
     // Crook
     public static int getCrookWoodDurability() { return crookWoodValue.get(); }
+
     public static int getCrookStoneDurability() { return crookStoneValue.get(); }
+
     public static int getCrookAndesiteDurability() { return crookAndesiteValue.get(); }
+
     public static int getCrookGraniteDurability() { return crookGraniteValue.get(); }
+
     public static int getCrookDioriteDurability() { return crookDioriteValue.get(); }
+
     public static int getCrookGoldDurability() { return crookGoldValue.get(); }
+
     public static int getCrookIronDurability() { return crookIronValue.get(); }
+
     public static int getCrookDiamondDurability() { return crookDiamondValue.get(); }
+
     public static int getCrookBoneDurability() { return crookBoneValue.get(); }
-    public static int getVanillaSimulateDropCount() {
-        return vanillaSimulateDropCount.get();
-    }
+
+    public static int getVanillaSimulateDropCount() { return vanillaSimulateDropCount.get(); }
 
     // Hammer
     public static int getHammerWoodDurability() { return hammerWoodValue.get(); }
+
     public static int getHammerStoneDurability() { return hammerStoneValue.get(); }
+
     public static int getHammerIronDurability() { return hammerIronValue.get(); }
+
     public static int getHammerGoldDurability() { return hammerGoldValue.get(); }
+
     public static int getHammerDiamondDurability() { return hammerDiamondValue.get(); }
+
     public static int getHammerNetheriteDurability() { return hammerNetheriteValue.get(); }
 
     // Mesh
-    public static boolean enableMeshDurability() {
-        return enableMeshDurability.get();
-    }
+    public static boolean enableMeshDurability() { return enableMeshDurability.get(); }
+
     public static int getMeshStackSize() { return meshStackSize.get(); }
+
     public static int getMeshStringValue() { return meshStringValue.get(); }
+
     public static int getMeshFlintValue() { return meshFlintValue.get(); }
+
     public static int getMeshIronValue() { return meshIronValue.get(); }
+
     public static int getMeshEmeraldValue() { return meshEmeraldValue.get(); }
+
     public static int getMeshDiamondValue() { return meshDiamondValue.get(); }
+
     public static int getMeshNetheriteValue() { return meshNetheriteValue.get(); }
 
     // Debug
-    public static boolean enableDebugLogging() {
-        return enableDebugLogging.get();
-    }
+    public static boolean enableDebugLogging() { return enableDebugLogging.get(); }
+
+    public static boolean enableStoneblock() { return enableStoneblock.get(); }
 
     // Ore
-    public static boolean enableOreOverride() {
-        return enableOreOverride.get();
-    }
-    public static boolean enableAluminum() {
-        return enableAluminum.get();
-    }
-    public static boolean enableCopper() {
-        return enableCopper.get();
-    }
-    public static boolean enableIron() {
-        return enableIron.get();
-    }
-    public static boolean enableLead() {
-        return enableLead.get();
-    }
-    public static boolean enableNickel() {
-        return enableNickel.get();
-    }
-    public static boolean enablePlatinum() {
-        return enablePlatinum.get();
-    }
-    public static boolean enableSilver() {
-        return enableSilver.get();
-    }
-    public static boolean enableTin() {
-        return enableTin.get();
-    }
-    public static boolean enableUranium() {
-        return enableUranium.get();
-    }
-    public static boolean enableZinc() {
-        return enableZinc.get();
-    }
+    public static boolean enableOreOverride() { return enableOreOverride.get(); }
+
+    public static boolean enableAluminum() { return enableAluminum.get(); }
+
+    public static boolean enableCopper() { return enableCopper.get(); }
+
+    public static boolean enableIron() { return enableIron.get(); }
+
+    public static boolean enableLead() { return enableLead.get(); }
+
+    public static boolean enableNickel() { return enableNickel.get(); }
+
+    public static boolean enablePlatinum() { return enablePlatinum.get(); }
+
+    public static boolean enableSilver() { return enableSilver.get(); }
+
+    public static boolean enableTin() { return enableTin.get(); }
+
+    public static boolean enableUranium() { return enableUranium.get(); }
+
+    public static boolean enableZinc() { return enableZinc.get(); }
+
     public static boolean enableGold() { return enableGold.get(); }
 
     // Sieve
-    public static boolean flattenSieveRecipes() {
-        return flattenSieveRecipes.get();
-    }
-    public static int getSieveRange() {
-        return sieveRange.get();
-    }
-    public static int getMaxSieveClicks() {
-        return maxSieveClicks.get();
-    }
+    public static boolean flattenSieveRecipes() { return flattenSieveRecipes.get(); }
+
+    public static int getSieveRange() { return sieveRange.get(); }
+
+    public static int getMaxSieveClicks() { return maxSieveClicks.get(); }
 
     // Crucible
-    public static int getCrucibleNumberOfBuckets() {
-        return crucibleNumberOfBuckets.get();
-    }
-    public static int getTicksBetweenMelts() {
-        return ticksBetweenMelts.get();
-    }
-    public static int getWoodHeatRate() {
-        return woodHeatRate.get();
-    }
+    public static int getCrucibleNumberOfBuckets() { return crucibleNumberOfBuckets.get(); }
+
+    public static int getTicksBetweenMelts() { return ticksBetweenMelts.get(); }
+
+    public static int getWoodHeatRate() { return woodHeatRate.get(); }
 
     // Barrel
-    public static int getBarrelMaxSolidAmount() {
-        return barrelMaxSolidAmount.get();
-    }
-    public static int getBarrelNumberOfBuckets() {
-        return barrelNumberOfBuckets.get();
-    }
-    public static int getSecondsToCompost() {
-        return secondsToCompost.get();
-    }
-    public static int getSecondsToFluidTransform() {
-        return secondsToFluidTransform.get();
-    }
+    public static int getBarrelMaxSolidAmount() { return barrelMaxSolidAmount.get(); }
+
+    public static int getBarrelNumberOfBuckets() { return barrelNumberOfBuckets.get(); }
+
+    public static int getSecondsToCompost() { return secondsToCompost.get(); }
+
+    public static int getSecondsToFluidTransform() { return secondsToFluidTransform.get(); }
+
     public static int getSecondsToSpawn() { return secondsToSpawn.get(); }
-    public static int getRainFillAmount() {
-        return rainFillAmount.get();
-    }
-    public static int getWoodBarrelMaxTemp() {
-        return woodBarrelMaxTemp.get();
-    }
-    public static boolean getShowParticles() {
-        return showParticles.get();
-    }
+
+    public static int getRainFillAmount() { return rainFillAmount.get(); }
+
+    public static int getWoodBarrelMaxTemp() { return woodBarrelMaxTemp.get(); }
+
+    public static boolean getShowParticles() { return showParticles.get(); }
 
     // Infested Leaves
-    public static int getMaxBonusStringCount() {
-        return maxBonusStringCount.get();
-    }
-    public static int getMinStringCount() {
-        return minStringCount.get();
-    }
-    public static int getSecondsToTransformLeaves() {
-        return secondsToTransformLeaves.get();
-    }
-    public static double getSpreadChance() {
-        return spreadChance.get();
-    }
-    public static int getTicksBetweenSpreadAttempt() {
-        return ticksBetweenSpreadAttempt.get();
-    }
+    public static int getMaxBonusStringCount() { return maxBonusStringCount.get(); }
+
+    public static int getMinStringCount() { return minStringCount.get(); }
+
+    public static int getSecondsToTransformLeaves() { return secondsToTransformLeaves.get(); }
+
+    public static double getSpreadChance() { return spreadChance.get(); }
+
+    public static int getTicksBetweenSpreadAttempt() { return ticksBetweenSpreadAttempt.get(); }
 
     // Pebble
     public static int getPebbleDamage() { return pebbleDamage.get(); }
@@ -337,6 +325,8 @@ public class Config {
     private static void debugConfigs() {
         enableDebugLogging = COMMON_BUILDER.comment("Enable extra logging? (Default: false)")
                 .define("enableDebugLogging", false);
+        enableStoneblock = COMMON_BUILDER.comment("Enable Stoneblock settings? (Default: false)")
+                .define("enableStoneblock", false);
     }
 
     private static void durabilityConfigs() {
@@ -450,6 +440,6 @@ public class Config {
                 .defineInRange("meshStackSize", 64, 1, 64);
         maxSieveClicks = COMMON_BUILDER
                 .comment("The number of sieve clicks required to sieve a block. (Default: 10)")
-                .defineInRange("maxSieveClicks", 10, 1, 10);
+                .defineInRange("maxSieveClicks", 10, 1, 20);
     }
 }

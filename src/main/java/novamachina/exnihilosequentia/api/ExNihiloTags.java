@@ -14,13 +14,13 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloTags {
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
-    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
-    public static final ITag.INamedTag<Item> CROOK = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crook"));
+    public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(modLoc("hammer"));
+    public static final ITag.INamedTag<Item> CROOK = createItemWrapper(modLoc("crook"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
-    public static final ITag.INamedTag<Item> CRUCIBLE = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucibles"));
-    public static final ITag.INamedTag<Item> BARREL = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "barrels"));
-    public static final ITag.INamedTag<Item> SIEVE = createItemWrapper(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "sieves"));
+    public static final ITag.INamedTag<Item> CRUCIBLE = createItemWrapper(modLoc("crucibles"));
+    public static final ITag.INamedTag<Item> BARREL = createItemWrapper(modLoc("barrels"));
+    public static final ITag.INamedTag<Item> SIEVE = createItemWrapper(modLoc("sieves"));
     private static final Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
 
     static {
@@ -62,6 +62,10 @@ public class ExNihiloTags {
 
     private static ResourceLocation forgeLoc(String path) {
         return new ResourceLocation("forge", path);
+    }
+
+    private static ResourceLocation modLoc(String path) {
+        return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, path);
     }
 
     public static class OreTag {

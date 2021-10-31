@@ -25,6 +25,7 @@ import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
+import novamachina.exnihilosequentia.common.item.resources.ResourceItem;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
@@ -132,6 +133,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, Items.TWISTING_VINES, 100, "twisting_vine");
         createCompostRecipe(consumer, Items.TALL_GRASS, 100, "tall_grass");
         createCompostRecipe(consumer, Items.SUGAR_CANE, 80, "sugar_cane");
+        createCompostRecipe(consumer, EnumResource.GRASS_SEED.getRegistryObject().get(), 100, "grass_seed");
+        createCompostRecipe(consumer, EnumResource.ANCIENT_SPORE.getRegistryObject().get(), 100, "ancient_spore");
+        createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
     }
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
