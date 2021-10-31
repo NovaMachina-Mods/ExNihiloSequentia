@@ -22,10 +22,20 @@ public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
 
     @Override
     public HeatRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        // Packet structure is:
+        // |--------------------------------------|
+        // | Block Resource Location (UTF String) |
+        // | Heat amount (int)                    |
+        // | Flag: has properties (boolean)       |
+        // | [OPTIONAL] Properties (UTF JSON)     |
+        // |--------------------------------------|
         Block input = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(buffer.readUtf()));
         int amount = buffer.readInt();
-        if (buffer.readBoolean()) {
-            return  new HeatRecipe(recipeId, input, amount, StatePropertiesPredicate.fromJson(PARSER.parse(buffer.readUtf())));
+
+        boolean hasProperties = buffer.readBoolean(); // flag showing whether recipe depends on block state
+        if (hasProperties) {
+            StatePropertiesPredicate properties = StatePropertiesPredicate.fromJson(PARSER.parse(buffer.readUtf()));
+            return new HeatRecipe(recipeId, input, amount, properties);
         }
         return new HeatRecipe(recipeId, input, amount);
     }
@@ -34,12 +44,13 @@ public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
     public void toNetwork(PacketBuffer buffer, HeatRecipe recipe) {
         buffer.writeUtf(recipe.getInput().getRegistryName().toString());
         buffer.writeInt(recipe.getAmount());
+
+        // If recipe respects block state, need to encode properties too
         StatePropertiesPredicate properties = recipe.getProperties();
-        if (properties != null) {
-            buffer.writeBoolean(true);
+        boolean hasProperties = properties != null;
+        buffer.writeBoolean(hasProperties); // Add flag to packet specifying if block state is part of recipe
+        if (hasProperties) {
             buffer.writeUtf(properties.serializeToJson().toString());
-        } else {
-            buffer.writeBoolean(false);
         }
     }
 
