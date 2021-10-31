@@ -120,9 +120,6 @@ public class ExNihiloBlocks {
             .register(Blocks.SIEVE_CRIMSON, NetherSieveBlock::new);
     public static final RegistryObject<NetherSieveBlock> SIEVE_WARPED = BLOCKS
             .register(Blocks.SIEVE_WARPED, NetherSieveBlock::new);
-    public static final RegistryObject<StoneWorkbenchCraftingBlock> STONE_CRAFTING_TABLE = BLOCKS
-            .register("stone_crafting_table", () -> new StoneWorkbenchCraftingBlock(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.CRAFTING_TABLE)
-            .strength(2F).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE)));
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloBlocks() {

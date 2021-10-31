@@ -2,16 +2,8 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Items;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.conditions.RandomChance;
-import net.minecraft.loot.conditions.SurvivesExplosion;
 import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
@@ -44,7 +36,6 @@ public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
     }
 
     private void registerSelfDrops() {
-        registerSelfDrop(ExNihiloBlocks.STONE_CRAFTING_TABLE.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_ACACIA.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_BIRCH.get());
         registerSelfDrop(ExNihiloBlocks.BARREL_DARK_OAK.get());

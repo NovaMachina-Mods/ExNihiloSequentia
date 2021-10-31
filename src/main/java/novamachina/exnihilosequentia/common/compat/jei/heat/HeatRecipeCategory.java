@@ -43,6 +43,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.font.draw(matrixStack, recipe.getAmount() + "X",
                 24, 12, Color.gray.getRGB());
+        //TODO doing something better than just writing what it is
 
         Block block = recipe.getInput();
         if (block == Blocks.WALL_TORCH) {
@@ -95,7 +96,6 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getFluidStacks().set(0, new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getInput().getRegistryName()), FluidAttributes.BUCKET_VOLUME));
         } else {
             IItemProvider input = recipe.getInput();
-			//TODO doing something else, both show flint and steel
             if(input == Blocks.FIRE || input == Blocks.SOUL_FIRE) {
                 input = Items.FLINT_AND_STEEL;
             }
