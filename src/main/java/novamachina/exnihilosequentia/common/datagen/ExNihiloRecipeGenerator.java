@@ -152,7 +152,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCrook(EnumCrook.GOLD.getRegistryObject().get(), Tags.Items.NUGGETS_GOLD, consumer);
         createCrook(EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject().get(), consumer);
         createCrook(EnumCrook.IRON.getRegistryObject().get(), Tags.Items.NUGGETS_IRON, consumer);
-        createCrook(EnumCrook.STONE.getRegistryObject().get(), ExNihiloTags.STONE_STICK, consumer);
+        createCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject().get(), consumer);
         createCrook(EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN, consumer);
     }
 
@@ -434,7 +434,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 0.1F, 200,0.1F, 100, "has_silkworm", ExNihiloItems.COOKED_SILKWORM.getId());
 
         createSmeltingRecipe(consumer, ExNihiloBlocks.CRUCIBLE_UNFIRED.get().asItem(), ExNihiloBlocks.CRUCIBLE_FIRED.get().asItem(),
-                0.7F, 200, 0.7F, 200, "has_uncooked_crucible", ExNihiloBlocks.CRUCIBLE_FIRED.getId());
+                0.7F, 200, 0.7F, 100, "has_uncooked_crucible", ExNihiloBlocks.CRUCIBLE_FIRED.getId());
 
         ShapedRecipeBuilder.shaped(ExNihiloBlocks.CRUCIBLE_UNFIRED.get())
                 .pattern("c c")
@@ -510,21 +510,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlockedBy("has_scrap", InventoryChangeTrigger.Instance
                         .hasItems(Items.NETHERITE_SCRAP))
                 .save(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
-		ShapedRecipeBuilder.shaped(EnumResource.STONE_STICK.getRegistryObject().get())
-                .pattern("x")
-                .pattern("x")
-                .pattern("x")
-				.define('x', EnumPebbleType.STONE.getRegistryObject().get())
-                .unlockedBy("has_stone_pebble", InventoryChangeTrigger.Instance
-                    .hasItems(EnumPebbleType.STONE.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumResource.STONE_STICK.getRegistryObject().getId()));
-		ShapedRecipeBuilder.shaped(ExNihiloBlocks.STONE_CRAFTING_TABLE.get())
-                .pattern("xx")
-                .pattern("xx")
-                .define('x', Blocks.COBBLESTONE)
-                .unlockedBy("has_cobble_stone", InventoryChangeTrigger.Instance
-                .hasItems(Blocks.COBBLESTONE))
-                .save(consumer, createSaveLocation(ExNihiloBlocks.STONE_CRAFTING_TABLE.getId()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
@@ -532,18 +517,18 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             registerOre(ore, consumer);
             if (!ore.isVanilla()) {
                 createSmeltingRecipe(consumer, ore.getChunkItem().get(), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(),
-                        0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                        0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                         new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
             }
             if (ore.isVanilla()) {
                 if (ore == EnumOre.IRON) {
                     createSmeltingRecipe(consumer, ore.getChunkItem().get(), Items.IRON_INGOT,
-                            0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                            0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron"));
                 }
                 if (ore == EnumOre.GOLD) {
                     createSmeltingRecipe(consumer, ore.getChunkItem().get(), Items.GOLD_INGOT,
-                            0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                            0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold"));
                 }
             }

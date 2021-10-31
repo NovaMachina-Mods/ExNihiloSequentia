@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
-import novamachina.exnihilosequentia.api.datagen.AbstractBlockStateGenerator;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -17,13 +16,11 @@ public class ExNihiloTags {
     public static final ITag.INamedTag<Item> CLAY = createItemWrapper(forgeLoc("clay"));
     public static final ITag.INamedTag<Item> HAMMER = createItemWrapper(modLoc("hammer"));
     public static final ITag.INamedTag<Item> CROOK = createItemWrapper(modLoc("crook"));
-	public static final ITag.INamedTag<Item> STONE_STICK = createItemWrapper(forgeLoc("rods/stone"));
     public static final ITag.INamedTag<Item> MEAT_COOKED = createItemWrapper(forgeLoc("meat_cooked"));
     public static final ITag.INamedTag<Item> MEAT_UNCOOKED = createItemWrapper(forgeLoc("meat_uncooked"));
     public static final ITag.INamedTag<Item> CRUCIBLE = createItemWrapper(modLoc("crucibles"));
     public static final ITag.INamedTag<Item> BARREL = createItemWrapper(modLoc("barrels"));
     public static final ITag.INamedTag<Item> SIEVE = createItemWrapper(modLoc("sieves"));
-    public static final ITag.INamedTag<Item> WORKBENCH = createItemWrapper(modLoc("crafting_tables"));
     private static final Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
 
     static {
