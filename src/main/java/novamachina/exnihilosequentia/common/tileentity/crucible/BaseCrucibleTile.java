@@ -4,12 +4,14 @@ import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -24,7 +26,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -93,7 +94,17 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         return super.getCapability(cap, side);
     }
 
-    public abstract int getHeat();
+    public int getHeat() {
+        BlockState source = level.getBlockState(worldPosition.below());
+        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source);
+        if(source.getBlock() instanceof FlowingFluidBlock) {
+            int level = 8 - source.getValue(BlockStateProperties.LEVEL);
+            double partial = (double)blockHeat / 8;
+            int returnVal = (int)Math.ceil(partial * level);
+            return returnVal;
+        }
+        return blockHeat;
+    }
 
     public ActionResultType onBlockActivated(PlayerEntity player, Hand handIn,
                                              IFluidHandler handler) {

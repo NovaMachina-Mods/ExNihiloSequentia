@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
@@ -10,10 +11,12 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
@@ -357,6 +360,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createHeatRecipes(consumer, Blocks.GLOWSTONE, 2, "glowstone");
         createHeatRecipes(consumer, Blocks.SHROOMLIGHT, 2, "shroomlight");
         createHeatRecipes(consumer, Blocks.SOUL_FIRE, 4, "soul_fire");
+
+        // Lit blocks
+        StatePropertiesPredicate lit = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true).build();
+        createHeatRecipes(consumer, Blocks.CAMPFIRE, 4, lit, "campfire");
+        createHeatRecipes(consumer, Blocks.SOUL_CAMPFIRE, 4, lit, "soul_campfire");
+        createHeatRecipes(consumer, Blocks.FURNACE, 3, lit, "furnace");
+        createHeatRecipes(consumer, Blocks.REDSTONE_TORCH, 1, lit, "redstone_torch");
+        createHeatRecipes(consumer, Blocks.REDSTONE_WALL_TORCH, 1, lit, "redstone_wall_torch");
     }
 
     private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
