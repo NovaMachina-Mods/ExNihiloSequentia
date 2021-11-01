@@ -1,5 +1,8 @@
 package novamachina.exnihilosequentia.common.item.pebbles;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -42,6 +45,7 @@ public class PebbleItem extends SnowballItem {
             };
             snowballEntity.setItem(itemstack);
             snowballEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+            snowballEntity.setCustomName(new TranslatableComponent("throwing.pebble"));
             world.addFreshEntity(snowballEntity);
         }
 

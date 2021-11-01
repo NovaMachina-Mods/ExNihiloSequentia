@@ -17,8 +17,7 @@ import java.util.Set;
 
 public class CrookBaseItem extends DiggerItem {
 
-    private static final Set<Material> effectiveMaterialsOn = Sets
-            .newHashSet(Material.LEAVES);
+    private static final Set<Material> effectiveMaterialsOn = Sets.newHashSet(Material.LEAVES);
 
     private final Random random = new Random();
 

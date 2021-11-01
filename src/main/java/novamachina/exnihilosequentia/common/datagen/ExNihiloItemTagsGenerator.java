@@ -3,14 +3,12 @@ package novamachina.exnihilosequentia.common.datagen;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.api.utility.ExNihiloTags;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 
@@ -55,8 +53,6 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerMisc() {
         tag(ExNihiloTags.CLAY).add(Items.CLAY_BALL);
-		tag(ExNihiloTags.STONE_STICK).add(EnumResource.STONE_STICK.getRegistryObject().get());
-        tag(Tags.Items.RODS).add(EnumResource.STONE_STICK.getRegistryObject().get());
     }
 
     private void registerOres() {
@@ -71,23 +67,23 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     private void registerWoodenCrucible() {
-        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.CRUCIBLE_ACACIA.get().asItem(), ExNihiloBlocks.CRUCIBLE_BIRCH.get().asItem(),
-                ExNihiloBlocks.CRUCIBLE_DARK_OAK.get().asItem(), ExNihiloBlocks.CRUCIBLE_JUNGLE.get().asItem(),
-                ExNihiloBlocks.CRUCIBLE_OAK.get().asItem(), ExNihiloBlocks.CRUCIBLE_SPRUCE.get().asItem(),
-                ExNihiloBlocks.CRUCIBLE_CRIMSON.get().asItem(), ExNihiloBlocks.CRUCIBLE_WARPED.get().asItem());
+        tag(ExNihiloTags.CRUCIBLE).add(ExNihiloBlocks.ACACIA_CRUCIBLE.get().asItem(), ExNihiloBlocks.BIRCH_CRUCIBLE.get().asItem(),
+                ExNihiloBlocks.DARK_OAK_CRUCIBLE.get().asItem(), ExNihiloBlocks.JUNGLE_CRUCIBLE.get().asItem(),
+                ExNihiloBlocks.OAK_CRUCIBLE.get().asItem(), ExNihiloBlocks.SPRUCE_CRUCIBLE.get().asItem(),
+                ExNihiloBlocks.CRIMSON_CRUCIBLE.get().asItem(), ExNihiloBlocks.WARPED_CRUCIBLE.get().asItem());
     }
 
     private void registerWoodenBarrel() {
-        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.BARREL_ACACIA.get().asItem(), ExNihiloBlocks.BARREL_BIRCH.get().asItem(),
-                ExNihiloBlocks.BARREL_DARK_OAK.get().asItem(), ExNihiloBlocks.BARREL_JUNGLE.get().asItem(),
-                ExNihiloBlocks.BARREL_OAK.get().asItem(), ExNihiloBlocks.BARREL_SPRUCE.get().asItem(),
-                ExNihiloBlocks.BARREL_CRIMSON.get().asItem(), ExNihiloBlocks.BARREL_WARPED.get().asItem());
+        tag(ExNihiloTags.BARREL).add(ExNihiloBlocks.ACACIA_BARREL.get().asItem(), ExNihiloBlocks.BIRCH_BARREL.get().asItem(),
+                ExNihiloBlocks.DARK_OAK_BARREL.get().asItem(), ExNihiloBlocks.JUNGLE_BARREL.get().asItem(),
+                ExNihiloBlocks.OAK_BARREL.get().asItem(), ExNihiloBlocks.SPRUCE_BARREL.get().asItem(),
+                ExNihiloBlocks.CRIMSON_BARREL.get().asItem(), ExNihiloBlocks.WARPED_BARREL.get().asItem());
     }
 
     private void registerWoodenSieve() {
-        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.SIEVE_ACACIA.get().asItem(), ExNihiloBlocks.SIEVE_BIRCH.get().asItem(),
-                ExNihiloBlocks.SIEVE_DARK_OAK.get().asItem(), ExNihiloBlocks.SIEVE_JUNGLE.get().asItem(),
-                ExNihiloBlocks.SIEVE_OAK.get().asItem(), ExNihiloBlocks.SIEVE_SPRUCE.get().asItem(),
-                ExNihiloBlocks.SIEVE_CRIMSON.get().asItem(), ExNihiloBlocks.SIEVE_WARPED.get().asItem());
+        tag(ExNihiloTags.SIEVE).add(ExNihiloBlocks.ACACIA_SIEVE.get().asItem(), ExNihiloBlocks.BIRCH_SIEVE.get().asItem(),
+                ExNihiloBlocks.DARK_OAK_SIEVE.get().asItem(), ExNihiloBlocks.JUNGLE_SIEVE.get().asItem(),
+                ExNihiloBlocks.OAK_SIEVE.get().asItem(), ExNihiloBlocks.SPRUCE_SIEVE.get().asItem(),
+                ExNihiloBlocks.CRIMSON_SIEVE.get().asItem(), ExNihiloBlocks.WARPED_SIEVE.get().asItem());
     }
 }

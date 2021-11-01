@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 public class FluidOnTopRecipeSerializer extends IRecipeSerializer<FluidOnTopRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ExNihiloBlocks.BARREL_OAK.get());
+        return new ItemStack(ExNihiloBlocks.OAK_BARREL.get());
     }
 
     @Override

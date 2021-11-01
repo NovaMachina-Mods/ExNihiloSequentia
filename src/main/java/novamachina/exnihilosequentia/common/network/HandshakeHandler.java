@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.network;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.fmllegacy.network.NetworkEvent;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.concurrent.CountDownLatch;

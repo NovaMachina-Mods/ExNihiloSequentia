@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
@@ -81,15 +83,15 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerBarrels(Consumer<FinishedRecipe> consumer) {
-        createBarrel(consumer, ExNihiloBlocks.BARREL_STONE, Tags.Items.STONE, Items.STONE_SLAB);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_ACACIA, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_BIRCH, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_DARK_OAK, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_JUNGLE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_OAK, Items.OAK_PLANKS, Items.OAK_SLAB);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_SPRUCE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_CRIMSON, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
-        createBarrel(consumer, ExNihiloBlocks.BARREL_WARPED, Items.WARPED_PLANKS, Items.WARPED_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.STONE_BARREL, Tags.Items.STONE, Items.STONE_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.ACACIA_BARREL, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.BIRCH_BARREL, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.DARK_OAK_BARREL, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.JUNGLE_BARREL, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.OAK_BARREL, Items.OAK_PLANKS, Items.OAK_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.SPRUCE_BARREL, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.CRIMSON_BARREL, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
+        createBarrel(consumer, ExNihiloBlocks.WARPED_BARREL, Items.WARPED_PLANKS, Items.WARPED_SLAB);
     }
 
     private void registerCompostRecipes(Consumer<FinishedRecipe> consumer) {
@@ -118,6 +120,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, ExNihiloItems.SILKWORM.get(), 40, "silkworm");
         createCompostRecipe(consumer, ExNihiloItems.COOKED_SILKWORM.get(), 40, "cooked_silkworm");
         createCompostRecipe(consumer, Items.APPLE, 100, "apple");
+        createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
         createCompostRecipe(consumer, Items.MELON_SLICE, 40, "melon_slice");
         createCompostRecipe(consumer, Items.MELON, 1000 / 6, "melon");
         createCompostRecipe(consumer, Items.PUMPKIN, 1000 / 6, "pumpkin");
@@ -148,19 +151,19 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCrook(consumer, EnumCrook.GOLD.getRegistryObject().get(), Tags.Items.NUGGETS_GOLD);
         createCrook(consumer, EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject().get());
         createCrook(consumer, EnumCrook.IRON.getRegistryObject().get(), Tags.Items.NUGGETS_IRON);
-        createCrook(consumer, EnumCrook.STONE.getRegistryObject().get(), ExNihiloTags.STONE_STICK);
+        createCrook(consumer, EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject().get());
         createCrook(consumer, EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN);
     }
 
     private void registerCrucibles(Consumer<FinishedRecipe> consumer) {
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_ACACIA, Items.ACACIA_LOG, Items.ACACIA_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_BIRCH, Items.BIRCH_LOG, Items.BIRCH_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_DARK_OAK, Items.DARK_OAK_LOG, Items.DARK_OAK_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_JUNGLE, Items.JUNGLE_LOG, Items.JUNGLE_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_OAK, Items.OAK_LOG, Items.OAK_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_SPRUCE, Items.SPRUCE_LOG, Items.SPRUCE_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_CRIMSON, Items.CRIMSON_STEM, Items.CRIMSON_SLAB);
-        createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_WARPED, Items.WARPED_STEM, Items.WARPED_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.ACACIA_CRUCIBLE, Items.ACACIA_LOG, Items.ACACIA_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.BIRCH_CRUCIBLE, Items.BIRCH_LOG, Items.BIRCH_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.DARK_OAK_CRUCIBLE, Items.DARK_OAK_LOG, Items.DARK_OAK_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.JUNGLE_CRUCIBLE, Items.JUNGLE_LOG, Items.JUNGLE_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.OAK_CRUCIBLE, Items.OAK_LOG, Items.OAK_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.SPRUCE_CRUCIBLE, Items.SPRUCE_LOG, Items.SPRUCE_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.CRIMSON_CRUCIBLE, Items.CRIMSON_STEM, Items.CRIMSON_SLAB);
+        createCrucible(consumer, ExNihiloBlocks.WARPED_CRUCIBLE, Items.WARPED_STEM, Items.WARPED_SLAB);
     }
 
     private void registerCrucibleRecipes(Consumer<FinishedRecipe> consumer) {
@@ -361,6 +364,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createHeatRecipes(consumer, Blocks.GLOWSTONE, 2, "glowstone");
         createHeatRecipes(consumer, Blocks.SHROOMLIGHT, 2, "shroomlight");
         createHeatRecipes(consumer, Blocks.SOUL_FIRE, 4, "soul_fire");
+
+        // Lit blocks
+        StatePropertiesPredicate lit = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true).build();
+        createHeatRecipes(consumer, Blocks.CAMPFIRE, 4, lit, "campfire");
+        createHeatRecipes(consumer, Blocks.SOUL_CAMPFIRE, 4, lit, "soul_campfire");
+        createHeatRecipes(consumer, Blocks.FURNACE, 3, lit, "furnace");
+        createHeatRecipes(consumer, Blocks.REDSTONE_TORCH, 1, lit, "redstone_torch");
+        createHeatRecipes(consumer, Blocks.REDSTONE_WALL_TORCH, 1, lit, "redstone_wall_torch");
     }
 
     private void registerVanillaOres(Consumer<FinishedRecipe> consumer, EnumOre ore) {
@@ -393,10 +404,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .pattern("iii")
                 .pattern("iii")
                 .define('i', Tags.Items.STRING)
-                .unlockedBy("has_sieve", InventoryChangeTrigger.TriggerInstance.hasItems(ExNihiloBlocks.SIEVE_OAK.get(),
-                        ExNihiloBlocks.SIEVE_ACACIA.get(), ExNihiloBlocks.SIEVE_BIRCH.get(), ExNihiloBlocks.SIEVE_JUNGLE.get(),
-                        ExNihiloBlocks.SIEVE_DARK_OAK.get(), ExNihiloBlocks.SIEVE_SPRUCE.get(), ExNihiloBlocks.SIEVE_CRIMSON.get(),
-                        ExNihiloBlocks.SIEVE_WARPED.get()))
+                .unlockedBy("has_sieve", InventoryChangeTrigger.TriggerInstance.hasItems(ExNihiloBlocks.OAK_SIEVE.get(),
+                        ExNihiloBlocks.ACACIA_SIEVE.get(), ExNihiloBlocks.BIRCH_SIEVE.get(), ExNihiloBlocks.JUNGLE_SIEVE.get(),
+                        ExNihiloBlocks.DARK_OAK_SIEVE.get(), ExNihiloBlocks.SPRUCE_SIEVE.get(), ExNihiloBlocks.CRIMSON_SIEVE.get(),
+                        ExNihiloBlocks.WARPED_SIEVE.get()))
                 .save(consumer, createSaveLocation(EnumMesh.STRING.getRegistryObject().getId()));
     }
 
@@ -428,17 +439,17 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createSmeltingRecipe(consumer, ExNihiloItems.SILKWORM.get(), ExNihiloItems.COOKED_SILKWORM.get(),
                 0.1F, 200,0.1F, 100, "has_silkworm", ExNihiloItems.COOKED_SILKWORM.getId());
 
-        createSmeltingRecipe(consumer, ExNihiloBlocks.CRUCIBLE_UNFIRED.get().asItem(), ExNihiloBlocks.CRUCIBLE_FIRED.get().asItem(),
-                0.7F, 200, 0.7F, 200, "has_uncooked_crucible", ExNihiloBlocks.CRUCIBLE_FIRED.getId());
+        createSmeltingRecipe(consumer, ExNihiloBlocks.UNFIRED_CRUCIBLE.get().asItem(), ExNihiloBlocks.FIRED_CRUCIBLE.get().asItem(),
+                0.7F, 200, 0.7F, 100, "has_uncooked_crucible", ExNihiloBlocks.FIRED_CRUCIBLE.getId());
 
-        ShapedRecipeBuilder.shaped(ExNihiloBlocks.CRUCIBLE_UNFIRED.get())
+        ShapedRecipeBuilder.shaped(ExNihiloBlocks.UNFIRED_CRUCIBLE.get())
                 .pattern("c c")
                 .pattern("c c")
                 .pattern("ccc")
                 .define('c', EnumResource.PORCELAIN_CLAY.getRegistryObject().get())
                 .unlockedBy(PORCELAIN_CLAY_CONDITION, InventoryChangeTrigger.TriggerInstance
                         .hasItems(EnumResource.PORCELAIN_CLAY.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(ExNihiloBlocks.CRUCIBLE_UNFIRED.getId()));
+                .save(consumer, createSaveLocation(ExNihiloBlocks.UNFIRED_CRUCIBLE.getId()));
 
         ShapedRecipeBuilder.shaped(EnumResource.CRAFTING_DOLL.getRegistryObject().get(), 4)
                 .pattern("xex")
@@ -505,14 +516,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlockedBy("has_scrap", InventoryChangeTrigger.TriggerInstance
                         .hasItems(Items.NETHERITE_SCRAP))
                 .save(consumer, createSaveLocation(Objects.requireNonNull(Blocks.ANCIENT_DEBRIS.getRegistryName())));
-		ShapedRecipeBuilder.shaped(EnumResource.STONE_STICK.getRegistryObject().get())
-                .pattern("x")
-                .pattern("x")
-                .pattern("x")
-				.define('x', EnumPebbleType.STONE.getRegistryObject().get())
-                .unlockedBy("has_stone_pebble", InventoryChangeTrigger.TriggerInstance
-                    .hasItems(EnumPebbleType.STONE.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumResource.STONE_STICK.getRegistryObject().getId()));
     }
 
     private void registerOres(Consumer<FinishedRecipe> consumer) {
@@ -554,14 +557,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerSieves(Consumer<FinishedRecipe> consumer) {
-        createSieve(consumer, ExNihiloBlocks.SIEVE_ACACIA, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_BIRCH, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_DARK_OAK, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_JUNGLE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_OAK, Items.OAK_PLANKS, Items.OAK_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_SPRUCE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_CRIMSON, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
-        createSieve(consumer, ExNihiloBlocks.SIEVE_WARPED, Items.WARPED_PLANKS, Items.WARPED_SLAB);
+        createSieve(consumer, ExNihiloBlocks.ACACIA_SIEVE, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
+        createSieve(consumer, ExNihiloBlocks.BIRCH_SIEVE, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
+        createSieve(consumer, ExNihiloBlocks.DARK_OAK_SIEVE, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
+        createSieve(consumer, ExNihiloBlocks.JUNGLE_SIEVE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
+        createSieve(consumer, ExNihiloBlocks.OAK_SIEVE, Items.OAK_PLANKS, Items.OAK_SLAB);
+        createSieve(consumer, ExNihiloBlocks.SPRUCE_SIEVE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
+        createSieve(consumer, ExNihiloBlocks.CRIMSON_SIEVE, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
+        createSieve(consumer, ExNihiloBlocks.WARPED_SIEVE, Items.WARPED_PLANKS, Items.WARPED_SLAB);
     }
 
     private void registerSieveRecipes(Consumer<FinishedRecipe> consumer) {
@@ -616,11 +619,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             switch (ore) {
                 case IRON, COPPER -> registerVanillaOres(consumer, ore);
                 case GOLD -> registerGoldOres(consumer, ore);
-                /*case OSMIUM -> SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.GRAVEL))
-                        .drop(ore.getPieceItem().get())
-                        .addRolls(new MeshWithChance(EnumMesh.IRON, 0.05F),
-                                new MeshWithChance(EnumMesh.DIAMOND, 0.1F))
-                        .build(consumer, sieveLoc(ore.getPieceName() + GRAVEL_SUFFIX));*/
                 default -> registerDefaultOres(consumer, ore);
             }
         }

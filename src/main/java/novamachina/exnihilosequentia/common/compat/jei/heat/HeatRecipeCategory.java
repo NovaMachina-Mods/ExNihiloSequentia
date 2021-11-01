@@ -23,11 +23,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
 import java.awt.*;
 import java.util.Arrays;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
     private final IDrawableStatic background;
 
@@ -39,15 +42,16 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
 
     @Override
     public void draw(HeatRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
-        Minecraft.getInstance().font.draw(matrixStack, recipe.getAmount() + "X",
+        Minecraft minecraft = Minecraft.getInstance();
+        minecraft.font.draw(matrixStack, recipe.getAmount() + "X",
             24, 12, Color.gray.getRGB());
 
         Block block = recipe.getInput();
         if (block == Blocks.WALL_TORCH) {
-            Minecraft.getInstance().font.draw(matrixStack, "Wall Torch",
+            minecraft.font.draw(matrixStack, "Wall Torch",
                 24, 0, Color.DARK_GRAY.getRGB());
         } else {
-            Minecraft.getInstance().font.draw(matrixStack, block.getName(),
+            minecraft.font.draw(matrixStack, block.getName(),
                 24, 0, Color.DARK_GRAY.getRGB());
         }
     }

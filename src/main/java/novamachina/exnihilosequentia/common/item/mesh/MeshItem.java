@@ -24,6 +24,7 @@ public class MeshItem extends Item {
     public EnumMesh getMesh() {
         return mesh;
     }
+
     @Override
     public int getBurnTime(ItemStack itemStack, RecipeType<?> recipeType) {
         if (itemStack.getItem() == EnumMesh.STRING.getRegistryObject().get()) {

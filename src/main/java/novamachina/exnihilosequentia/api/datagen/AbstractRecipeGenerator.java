@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.api.datagen;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -187,7 +188,6 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
     }
 
-
     /**
      * @param block item as input
      * @param amount how much fluid should be generated
@@ -299,6 +299,16 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      */
     protected void createHeatRecipes(Consumer<FinishedRecipe> consumer, Block block, int amount, String id) {
         HeatRecipeBuilder.builder().input(block).amount(amount).build(consumer, heatLoc(id));
+    }
+
+    /**
+     * @param block block underneath crucible
+     * @param amount heat of block
+     * @param properties is the block lit or not?
+     * @param id name of the recipe
+     */
+    protected void createHeatRecipes(Consumer<FinishedRecipe> consumer, Block block, int amount, StatePropertiesPredicate properties, String id) {
+        HeatRecipeBuilder.builder().input(block).amount(amount).properties(properties).build(consumer, heatLoc(id));
     }
 
     /**

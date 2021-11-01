@@ -4,7 +4,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.api.registry.ICrucibleRegistry;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
@@ -35,7 +35,15 @@ public class CrucibleRegistry implements ICrucibleRegistry {
 
     @Override
     public boolean isMeltable(ItemLike item, int level) {
-        return recipeList.stream().anyMatch(recipe -> recipe.getInput().test(new ItemStack(item)) && recipe.getCrucibleType().getLevel() <= level);
+        ItemStack itemStack = new ItemStack(item);
+        boolean result = false;
+        for (CrucibleRecipe recipe : recipeList) {
+            if (recipe.getInput().test(itemStack) && recipe.getCrucibleType().getLevel() <= level) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     @Override

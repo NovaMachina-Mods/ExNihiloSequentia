@@ -15,8 +15,7 @@ public enum EnumResource implements IExtensibleEnum {
     PURPLE_CORAL_SEED(Items.PURPLE_CORAL_LARVAE),
     RED_CORAL_SEED(Items.RED_CORAL_LARVAE),
     YELLOW_CORAL_SEED(Items.YELLOW_CORAL_LARVAE),
-    BEEHIVE_FRAME(Items.BEEHIVE_FRAME),
-    STONE_STICK(Items.STONE_STICK);
+    BEEHIVE_FRAME(Items.BEEHIVE_FRAME);
 
     private final String resourceName;
     private RegistryObject<Item> registryObject;

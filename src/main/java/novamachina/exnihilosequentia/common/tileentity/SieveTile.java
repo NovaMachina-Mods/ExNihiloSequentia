@@ -4,10 +4,6 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -26,7 +22,7 @@ import novamachina.exnihilosequentia.common.init.ExNihiloStats;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
@@ -161,14 +157,15 @@ public class SieveTile extends BlockEntity {
         // 4 ticks is the same period of holding down right click
         assert level != null;
         if (level.getLevelData().getGameTime() - lastSieveAction < 4) {
-            // Really good chance that they're using a macro
-            if (player != null && level.getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
+            //TODO deactivated macro punishment
+            //Really good chance that they're using a macro
+            /*if (player != null && level.getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
                 player.setSecondsOnFire(1);
 
-                Component message = new TextComponent("Bad").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(16711680)).withBold(true));
+                Component message = new TextComponent("Autoclicker Bad").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(16711680)).withBold(true));
 
                 player.sendMessage(message, player.getUUID());
-            }
+            }*/
             return;
         }
 

@@ -1,7 +1,9 @@
 {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
-    "promos": {
-        "1.17-latest": "1.16-20210626120330",
-        "1.17-recommended": "1.16-20210626120330"
-    }
+  "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
+  "promos": {
+    "1.17-latest": "1.16-20210626120330",
+    "1.17-recommended": "1.16-20210626120330",
+    "1.16-latest": "1.16-20210825185731",
+    "1.16-recommended": "1.16-20210825185731"
+  }
 }

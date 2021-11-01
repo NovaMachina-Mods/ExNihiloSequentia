@@ -8,11 +8,11 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.66'
-    }
+        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.71.4'    }
 }
 plugins {
     id 'java'
+    id 'eclipse'
     id 'idea'
     id 'maven-publish'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
@@ -88,17 +88,8 @@ processResources {
     finalizedBy replaceResources
 }
 
-task updateVersion() {
-    doLast {
-        new File(projectDir, "update.json").text =
-"""{
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia",
-    "promos": {
-        "1.17-latest": "${version}",
-        "1.17-recommended": "${version}"
-    }
-}"""
-    }
+task createVersionFile(type: CreateVersionClass) {
+    fileVersion = version
 }
 
 minecraft {
@@ -157,7 +148,7 @@ task makeChangelog(type: GitChangelogTask) {
 }
 
 curseforge {
-    apiKey = ENV.CURSEFORGE_KEY ?: '0'
+    apiKey = '8fa2685a-4151-40e8-99c7-3132beb67873' ?: '0'
 
     project {
         id = "${curseforge_project}"
@@ -166,11 +157,12 @@ curseforge {
         addGameVersion '1.17'
         changelog = file('changelog.html')
         changelogType = 'html'
-        debug=true
     }
 }
 
 afterEvaluate {
+    tasks.curseforge400012.dependsOn createVersionFile
+    tasks.jar.dependsOn replaceResources
     tasks.curseforge400012.dependsOn makeChangelog
 }
 
@@ -214,5 +206,28 @@ publishing {
             }
             url = "https://repo.jacob-williams.me/repository/maven-releases/"
         }
+    }
+}
+
+abstract class CreateVersionClass extends DefaultTask {
+    CreateVersionClass() {
+        this.fileVersion = getFileVersion()
+    }
+
+    @Input
+    abstract Property<String> getFileVersion()
+
+    @TaskAction
+    void writeString() {
+        FileWriter fw;
+        fw = new FileWriter('update.json');
+        fw.write("{\n" +
+                "  \"homepage\": \"https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia\",\n" +
+                "  \"promos\": {\n" +
+                "    \"1.16-latest\": \"${fileVersion.get()}\",\n" +
+                "    \"1.16-recommended\": \"${fileVersion.get()}\"\n" +
+                "  }\n" +
+                "}\n");
+        fw.close();
     }
 }

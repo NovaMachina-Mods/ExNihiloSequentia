@@ -18,7 +18,7 @@ import java.util.List;
 public class SieveRecipeSerializer extends IRecipeSerializer<SieveRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
+        return new ItemStack(ExNihiloBlocks.OAK_SIEVE.get());
     }
 
     @Override

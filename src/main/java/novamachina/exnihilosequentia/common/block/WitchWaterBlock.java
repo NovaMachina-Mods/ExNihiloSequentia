@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -76,6 +77,9 @@ public class WitchWaterBlock extends LiquidBlock {
                 ZombieVillager zombieVillagerEntity = new ZombieVillager(
                         EntityType.ZOMBIE_VILLAGER, worldIn);
                 zombieVillagerEntity.setVillagerData(villagerEntity.getVillagerData());
+                zombieVillagerEntity.setGossips(villagerEntity.getGossips().store(NbtOps.INSTANCE).getValue());
+                zombieVillagerEntity.setTradeOffers(villagerEntity.getOffers().createTag());
+                zombieVillagerEntity.setVillagerXp(villagerEntity.getVillagerXp());
                 replaceMob(worldIn, villagerEntity, zombieVillagerEntity);
             }
         }

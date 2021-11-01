@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.api.crafting.heat;
 
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
@@ -23,5 +24,9 @@ public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder>
 
     public HeatRecipeBuilder input(Block block) {
         return this.addBlock(block);
+    }
+
+    public HeatRecipeBuilder properties(StatePropertiesPredicate properties) {
+        return this.addWriter(jsonObj -> jsonObj.add("state", properties.serializeToJson()));
     }
 }

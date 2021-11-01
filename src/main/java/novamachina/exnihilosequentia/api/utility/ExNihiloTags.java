@@ -14,14 +14,13 @@ import java.util.function.Function;
 
 public class ExNihiloTags {
     public static final Tag.Named<Item> CLAY = ItemTags.createOptional(forgeLoc("clay"));
-    public static final Tag.Named<Item> HAMMER = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer"));
-    public static final Tag.Named<Item> CROOK = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crook"));
-	public static final Tag.Named<Item> STONE_STICK = ItemTags.createOptional(forgeLoc("rods/stone"));
+    public static final Tag.Named<Item> HAMMER = ItemTags.createOptional(modLoc("hammer"));
+    public static final Tag.Named<Item> CROOK = ItemTags.createOptional(modLoc("crook"));
     public static final Tag.Named<Item> MEAT_COOKED = ItemTags.createOptional(forgeLoc("meat_cooked"));
     public static final Tag.Named<Item> MEAT_UNCOOKED = ItemTags.createOptional(forgeLoc("meat_uncooked"));
-    public static final Tag.Named<Item> CRUCIBLE = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucibles"));
-    public static final Tag.Named<Item> BARREL = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "barrels"));
-    public static final Tag.Named<Item> SIEVE = ItemTags.createOptional(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "sieves"));
+    public static final Tag.Named<Item> CRUCIBLE = ItemTags.createOptional(modLoc("crucibles"));
+    public static final Tag.Named<Item> BARREL = ItemTags.createOptional(modLoc("barrels"));
+    public static final Tag.Named<Item> SIEVE = ItemTags.createOptional(modLoc("sieves"));
     private static final Map<EnumOre, OreTag> ores = new EnumMap<>(EnumOre.class);
 
     static {
@@ -65,6 +64,8 @@ public class ExNihiloTags {
     private static ResourceLocation forgeLoc(String path) {
         return new ResourceLocation("forge", path);
     }
+
+    private static ResourceLocation modLoc(String path) { return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, path);}
 
     public static class OreTag {
         private final Tag.Named<Item> ingot;

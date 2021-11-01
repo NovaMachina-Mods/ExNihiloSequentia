@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.api.utility.Config;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 public class InfestedLeavesTile extends BlockEntity {

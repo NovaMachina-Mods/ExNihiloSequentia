@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 public class CrucibleRecipeSerializer extends IRecipeSerializer<CrucibleRecipe> {
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get());
+        return new ItemStack(ExNihiloBlocks.FIRED_CRUCIBLE.get());
     }
 
     @Override

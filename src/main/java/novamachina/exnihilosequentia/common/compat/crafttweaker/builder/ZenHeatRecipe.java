@@ -38,5 +38,10 @@ public class ZenHeatRecipe {
         return this;
     }
 
+    @ZenCodeType.Method
+    public ZenHeatRecipe setProperties(StatePropertiesPredicate properties) {
+        internal.setProperties(properties.toVanilla());
+        return this;
+    }
  */
 }

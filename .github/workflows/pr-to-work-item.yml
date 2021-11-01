@@ -4,7 +4,9 @@ on:
   pull_request:
     types: [opened, edited, closed]
     branches:
-      - master
+      - 1.16
+      - 1.16-dev
+      - 1.17-dev
 
 jobs:
   alert:

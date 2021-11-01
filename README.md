@@ -2,7 +2,7 @@
 <p align="center">
     <a href="https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia"><img src="http://cf.way2muchnoise.eu/full_400012_downloads.svg" /></a>
     <a href="https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia"><img src="http://cf.way2muchnoise.eu/versions/400012.svg" /></a>
-    <a href="https://github.com/NovaMachina/ExNihiloSequentia/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/NovaMachina/ExNihiloSequentia"></a>
+    <a href="https://github.com/NovaMachina/ExNihiloSequentia/blob/1.16/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/NovaMachina/ExNihiloSequentia"></a>
     <a href="https://github.com/NovaMachina/ExNihiloSequentia/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/NovaMachina/ExNihiloSequentia"></a>
     <a href="https://github.com/NovaMachina/ExNihiloSequentia/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/NovaMachina/ExNihiloSequentia"></a>
 </p>

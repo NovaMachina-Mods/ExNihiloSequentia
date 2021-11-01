@@ -12,7 +12,7 @@ import novamachina.exnihilosequentia.api.registry.ISieveRegistry;
 import novamachina.exnihilosequentia.api.utility.Config;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.ore.OreItem;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.IngredientUtils;
 import org.apache.logging.log4j.LogManager;
 

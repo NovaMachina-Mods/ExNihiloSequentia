@@ -56,6 +56,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         add(Tooltips.GUARDIAN, "Add to a barrel of sea water to spawn a Guardian");
         add(Tooltips.SHULKER, "Add to a barrel of witch water to spawn a Shulker");
         add(ModIds.EX_NIHILO_SEQUENTIA + ".subtitle.pebbleThrow", "Pebble flies");
+        add("throwing.pebble", "Flying Pebble");
     }
 
     private void addItemEN() {

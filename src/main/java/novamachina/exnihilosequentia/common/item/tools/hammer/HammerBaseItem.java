@@ -14,6 +14,7 @@ import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 
 public class HammerBaseItem extends DiggerItem {
@@ -35,11 +36,11 @@ public class HammerBaseItem extends DiggerItem {
     }
 
     @Override
-    public boolean isCorrectToolForDrops(BlockState blockIn) {
+    public boolean isCorrectToolForDrops(@Nonnull ItemStack stack, BlockState blockIn) {
         if (ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockIn.getBlock())) {
             return true;
         }
-        return super.isCorrectToolForDrops(blockIn);
+        return super.isCorrectToolForDrops(stack, blockIn);
     }
 
     @Override

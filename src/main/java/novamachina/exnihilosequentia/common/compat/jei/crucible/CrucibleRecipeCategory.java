@@ -15,8 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 
-
-
 public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
 
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
