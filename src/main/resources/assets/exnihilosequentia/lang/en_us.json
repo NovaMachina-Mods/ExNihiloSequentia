@@ -1,6 +1,5 @@
 {
   "itemGroup.exnihilosequentia": "Ex Nihilo: Sequentia",
-  "block.exnihilosequentia.stone_crafting_table": "Stone Crafting Table",
   "block.exnihilosequentia.dust": "Dust",
   "block.exnihilosequentia.crushed_netherrack": "Crushed Netherrack",
   "block.exnihilosequentia.crushed_end_stone": "Crushed End Stone",
@@ -152,8 +151,6 @@
 
   "fluid.exnihilosequentia.witchwater": "Witchwater",
   "fluid.exnihilosequentia.sea_water": "Sea Water",
-  
-  "item.exnihilosequentia.item_stick_stone": "Stone Stick",
 
   "stat.exnihilosequentia.sieved": "Blocks Sieved",
 
@@ -164,8 +161,6 @@
   "tooltip.doll.bee": "Add to a barrel of witchwater to spawn a Bee",
 
   "exnihilosequentia.subtitle.pebbleThrow": "Pebble flies",
-
-  "container.stone_crafting_table": "Crafting",
 
   "jei.sieve.dropChance": "Drop Chance",
 

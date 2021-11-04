@@ -7,7 +7,6 @@ import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 public enum EnumMesh implements IStringSerializable, IExtensibleEnum {
-    // TODO Mesh damage is configurable
     NONE(0, "none", 0), STRING(1, "string", Config.getMeshStringValue()), FLINT(2, "flint", Config.getMeshFlintValue()), IRON(3, "iron", Config.getMeshIronValue()), DIAMOND(4, "diamond", Config.getMeshDiamondValue()), EMERALD(5, "emerald", Config.getMeshEmeraldValue()), NETHERITE(6, "netherite", Config.getMeshNetheriteValue());
 
     private final int id;
