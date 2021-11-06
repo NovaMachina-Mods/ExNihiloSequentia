@@ -57,16 +57,16 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
 
         for (int i = 1; i < 7; i++) {
             VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
-            ConfiguredModel model = new ConfiguredModel(models().getExistingFile(modLoc("block/cake_slice" + i)));
+            ConfiguredModel model = new ConfiguredModel(models().getExistingFile(exnihiloLoc("block/cake_slice" + i)));
             partialBlockstate.with(BITES, i).addModels(model);
         }
         VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
-        ConfiguredModel model = new ConfiguredModel(models().getExistingFile(modLoc("block/cake_uneaten")));
+        ConfiguredModel model = new ConfiguredModel(models().getExistingFile(exnihiloLoc("block/cake_uneaten")));
         partialBlockstate.with(BITES, 0).addModels(model);
     }
 
     protected void createCrucible(Block block, ResourceLocation texture) {
-        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/crucible"))
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), exnihiloLoc("block/crucible"))
                 .texture(PARTICLE_TAG, texture)
                 .texture("top", texture)
                 .texture("bottom", texture)
@@ -77,7 +77,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     }
 
     protected void createSieve(Block block, ResourceLocation texture) {
-        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), modLoc("block/sieve_base"))
+        ConfiguredModel model = new ConfiguredModel(models().withExistingParent(getRegistryName(block), exnihiloLoc("block/sieve_base"))
                 .texture("texture", texture)
                 .texture(PARTICLE_TAG, texture));
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
@@ -87,7 +87,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         for (EnumMesh mesh : EnumMesh.values()) {
             if (mesh != EnumMesh.NONE) {
                 partBuilder = builder.part()
-                        .modelFile(new ModelFile.ExistingModelFile(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/" + mesh.getMeshName()), models().existingFileHelper)).addModel();
+                        .modelFile(new ModelFile.ExistingModelFile(exnihiloLoc( "block/" + mesh.getMeshName()), models().existingFileHelper)).addModel();
                 partBuilder.condition(BlockSieve.MESH, mesh);
                 partBuilder.end();
             }

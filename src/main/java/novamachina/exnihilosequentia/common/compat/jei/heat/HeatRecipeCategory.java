@@ -4,22 +4,30 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -48,10 +56,13 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
         if (block == Blocks.WALL_TORCH) {
             minecraft.font.draw(matrixStack, "Wall Torch",
                     24, 0, Color.DARK_GRAY.getRGB());
-        } else {
-            minecraft.font.draw(matrixStack, block.getName(),
-                    24, 0, Color.DARK_GRAY.getRGB());
-        }
+        } else if (block == Blocks.REDSTONE_WALL_TORCH) {
+               minecraft.font.draw(matrixStack, "Redstone Wall Torch",
+                       24, 0, Color.DARK_GRAY.getRGB());
+            } else {
+                minecraft.font.draw(matrixStack, block.getName(),
+                        24, 0, Color.DARK_GRAY.getRGB());
+            }
     }
 
     @Override
