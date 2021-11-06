@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "exnihilosequentia:items/bucket_sea_water"
+    "layer0": "exnihilosequentia:items/sea_water_bucket"
   }
 }

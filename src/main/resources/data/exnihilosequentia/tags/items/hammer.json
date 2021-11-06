@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "exnihilosequentia:wood_hammer",
+    "exnihilosequentia:stone_hammer",
+    "exnihilosequentia:iron_hammer",
+    "exnihilosequentia:diamond_hammer",
+    "exnihilosequentia:netherite_hammer",
+    "exnihilosequentia:gold_hammer"
+  ]
+}

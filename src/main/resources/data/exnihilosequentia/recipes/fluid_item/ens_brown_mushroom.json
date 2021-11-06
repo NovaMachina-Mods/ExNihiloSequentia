@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_item",
+  "fluid": {
+    "fluid": "exnihilosequentia:witch_water_still"
+  },
+  "input": {
+    "item": "exnihilosequentia:ancient_spores"
+  },
+  "result": {
+    "item": "minecraft:brown_mushroom_block"
+  }
+}

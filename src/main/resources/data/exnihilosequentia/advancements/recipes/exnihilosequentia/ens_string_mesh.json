@@ -1,0 +1,69 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_string_mesh"
+    ]
+  },
+  "criteria": {
+    "has_sieve": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "exnihilosequentia:oak_sieve"
+            ]
+          },
+          {
+            "items": [
+              "exnihilosequentia:acacia_sieve"
+            ]
+          },
+          {
+            "items": [
+              "exnihilosequentia:birch_sieve"
+            ]
+          },
+          {
+            "items": [
+              "exnihilosequentia:jungle_sieve"
+            ]
+          },
+          {
+            "items": [
+              "exnihilosequentia:dark_oak_sieve"
+            ]
+          },
+          {
+            "items": [
+              "exnihilosequentia:spruce_sieve"
+            ]
+          },
+          {
+            "items": [
+              "exnihilosequentia:crimson_sieve"
+            ]
+          },
+          {
+            "items": [
+              "exnihilosequentia:warped_sieve"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_string_mesh"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sieve",
+      "has_the_recipe"
+    ]
+  ]
+}

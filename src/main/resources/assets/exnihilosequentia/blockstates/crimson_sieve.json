@@ -10,7 +10,7 @@
         "mesh": "string"
       },
       "apply": {
-        "model": "exnihilosequentia:block/mesh_string"
+        "model": "exnihilosequentia:block/string_mesh"
       }
     },
     {
@@ -18,7 +18,7 @@
         "mesh": "flint"
       },
       "apply": {
-        "model": "exnihilosequentia:block/mesh_flint"
+        "model": "exnihilosequentia:block/flint_mesh"
       }
     },
     {
@@ -26,7 +26,7 @@
         "mesh": "iron"
       },
       "apply": {
-        "model": "exnihilosequentia:block/mesh_iron"
+        "model": "exnihilosequentia:block/iron_mesh"
       }
     },
     {
@@ -34,7 +34,7 @@
         "mesh": "diamond"
       },
       "apply": {
-        "model": "exnihilosequentia:block/mesh_diamond"
+        "model": "exnihilosequentia:block/diamond_mesh"
       }
     },
     {
@@ -42,7 +42,7 @@
         "mesh": "emerald"
       },
       "apply": {
-        "model": "exnihilosequentia:block/mesh_emerald"
+        "model": "exnihilosequentia:block/emerald_mesh"
       }
     },
     {
@@ -50,7 +50,7 @@
         "mesh": "netherite"
       },
       "apply": {
-        "model": "exnihilosequentia:block/mesh_netherite"
+        "model": "exnihilosequentia:block/netherite_mesh"
       }
     }
   ]

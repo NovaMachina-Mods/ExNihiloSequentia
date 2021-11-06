@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_iron_mesh"
+    ]
+  },
+  "criteria": {
+    "has_mesh": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "exnihilosequentia:flint_mesh"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_iron_mesh"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mesh",
+      "has_the_recipe"
+    ]
+  ]
+}

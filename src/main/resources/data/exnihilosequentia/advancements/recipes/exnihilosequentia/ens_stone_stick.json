@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_stone_stick"
+    ]
+  },
+  "criteria": {
+    "has_stone_pebble": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "exnihilosequentia:stone_pebble"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_stone_stick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stone_pebble",
+      "has_the_recipe"
+    ]
+  ]
+}

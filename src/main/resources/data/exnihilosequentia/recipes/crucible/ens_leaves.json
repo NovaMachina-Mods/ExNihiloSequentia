@@ -1,0 +1,11 @@
+{
+  "type": "exnihilosequentia:crucible",
+  "input": {
+    "tag": "minecraft:leaves"
+  },
+  "amount": 250,
+  "fluidResult": {
+    "fluid": "minecraft:water"
+  },
+  "crucibleType": "wood"
+}
