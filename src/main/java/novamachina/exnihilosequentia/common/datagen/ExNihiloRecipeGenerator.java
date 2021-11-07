@@ -16,7 +16,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
-import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
@@ -67,7 +66,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerDolls(consumer);
         registerMeshes(consumer);
         registerMisc(consumer);
-
         registerCustomRecipes(consumer);
     }
 
@@ -121,7 +119,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, ExNihiloItems.SILKWORM.get(), 40, "silkworm");
         createCompostRecipe(consumer, ExNihiloItems.COOKED_SILKWORM.get(), 40, "cooked_silkworm");
         createCompostRecipe(consumer, Items.APPLE, 100, "apple");
-        createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
         createCompostRecipe(consumer, Items.MELON_SLICE, 40, "melon_slice");
         createCompostRecipe(consumer, Items.MELON, 1000 / 6, "melon");
         createCompostRecipe(consumer, Items.PUMPKIN, 1000 / 6, "pumpkin");
