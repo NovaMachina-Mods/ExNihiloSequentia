@@ -35,7 +35,14 @@ public class CrucibleRegistry implements ICrucibleRegistry {
 
     @Override
     public boolean isMeltable(IItemProvider item, int level) {
-        boolean result = recipeList.stream().anyMatch(recipe -> recipe.getInput().test(new ItemStack(item)) && recipe.getCrucibleType().getLevel() <= level);
+        ItemStack itemStack = new ItemStack(item);
+        boolean result = false;
+        for (CrucibleRecipe recipe : recipeList) {
+            if (recipe.getInput().test(itemStack) && recipe.getCrucibleType().getLevel() <= level) {
+                result = true;
+                break;
+            }
+        }
         return result;
     }
 

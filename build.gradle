@@ -8,12 +8,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
-        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.66'
-    }
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.71.4'    }
 }
 plugins {
     id 'java'
+    id 'eclipse'
     id 'idea'
     id 'maven-publish'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
@@ -23,7 +23,7 @@ apply plugin: 'net.minecraftforge.gradle'
 
 def ENV = System.getenv()
 String semver = "${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
-version = "${minecraft_release}-" + new Date().format("yyyyMMddHHmmss")
+version = "${minecraft_release}-" + new Date().format("yyyyMMdd-HHmmss")
 group = "${artifact_group}.${artifact_basename}"
 archivesBaseName = "${artifact_basename}"
 
@@ -64,13 +64,19 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
     compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
-    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
+    //runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
 
     compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
     runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
 
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
     runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+
+    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+
+    runtimeOnly fg.deobf("curse.maven:ctm-267602:3137659")
+
 }
 
 task replaceResources(type: Copy) {
@@ -83,10 +89,15 @@ task replaceResources(type: Copy) {
 }
 
 processResources {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
     from(sourceSets.main.resources.srcDirs) {
         exclude 'META-INF/mods.toml'
     }
     finalizedBy replaceResources
+}
+
+task createVersionFile(type: CreateVersionClass) {
+    fileVersion = version
 }
 
 minecraft {
@@ -159,11 +170,12 @@ curseforge {
         addGameVersion '1.16.5'
         changelog = file('changelog.html')
         changelogType = 'html'
-        debug=true
     }
 }
 
 afterEvaluate {
+    tasks.curseforge400012.dependsOn createVersionFile
+    tasks.jar.dependsOn replaceResources
     tasks.curseforge400012.dependsOn makeChangelog
 }
 
@@ -207,5 +219,28 @@ publishing {
             }
             url = "https://repo.jacob-williams.me/repository/maven-releases/"
         }
+    }
+}
+
+abstract class CreateVersionClass extends DefaultTask {
+    CreateVersionClass() {
+        this.fileVersion = getFileVersion()
+    }
+
+    @Input
+    abstract Property<String> getFileVersion()
+
+    @TaskAction
+    void writeString() {
+        FileWriter fw;
+        fw = new FileWriter('update.json');
+        fw.write("{\n" +
+                "  \"homepage\": \"https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia\",\n" +
+                "  \"promos\": {\n" +
+                "    \"1.16-latest\": \"${fileVersion.get()}\",\n" +
+                "    \"1.16-recommended\": \"${fileVersion.get()}\"\n" +
+                "  }\n" +
+                "}\n");
+        fw.close();
     }
 }

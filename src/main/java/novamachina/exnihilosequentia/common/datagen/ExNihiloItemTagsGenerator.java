@@ -9,7 +9,6 @@ import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
@@ -62,8 +61,6 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
     private void registerMisc() {
         tag(ExNihiloTags.CLAY).add(Items.CLAY_BALL);
-		tag(ExNihiloTags.STONE_STICK).add(EnumResource.STONE_STICK.getRegistryObject().get());
-        tag(Tags.Items.RODS).add(EnumResource.STONE_STICK.getRegistryObject().get());
     }
 
     private void registerOres() {

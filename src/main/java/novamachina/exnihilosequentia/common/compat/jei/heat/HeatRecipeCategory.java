@@ -1,32 +1,42 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import java.awt.Color;
-import java.util.Arrays;
-
-import com.mojang.blaze3d.platform.GlStateManager;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
+
+import java.awt.*;
+import java.util.Arrays;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
     private final IDrawableStatic background;
 
@@ -38,8 +48,22 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
 
     @Override
     public void draw(HeatRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        Minecraft.getInstance().font
-                .draw(matrixStack, recipe.getAmount() + "X", 24, 12, Color.gray.getRGB());
+        Minecraft minecraft = Minecraft.getInstance();
+        minecraft.font.draw(matrixStack, recipe.getAmount() + "X",
+                24, 12, Color.gray.getRGB());
+        //TODO doing something better than just writing what it is
+
+        Block block = recipe.getInput();
+        if (block == Blocks.WALL_TORCH) {
+            minecraft.font.draw(matrixStack, "Wall Torch",
+                    24, 0, Color.DARK_GRAY.getRGB());
+        } else if (block == Blocks.REDSTONE_WALL_TORCH) {
+               minecraft.font.draw(matrixStack, "Redstone Wall Torch",
+                       24, 0, Color.DARK_GRAY.getRGB());
+            } else {
+                minecraft.font.draw(matrixStack, block.getName(),
+                        24, 0, Color.DARK_GRAY.getRGB());
+            }
     }
 
     @Override
@@ -83,7 +107,6 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getFluidStacks().set(0, new FluidStack(ForgeRegistries.FLUIDS.getValue(recipe.getInput().getRegistryName()), FluidAttributes.BUCKET_VOLUME));
         } else {
             IItemProvider input = recipe.getInput();
-			//TODO doing something else, both show flint and steel
             if(input == Blocks.FIRE || input == Blocks.SOUL_FIRE) {
                 input = Items.FLINT_AND_STEEL;
             }

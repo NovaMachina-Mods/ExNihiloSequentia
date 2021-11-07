@@ -6,6 +6,7 @@ import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -108,7 +109,12 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
         super.playerDestroy(worldIn, player, pos, state, te, stack);
         if (!worldIn.isClientSide() && te instanceof SieveTile) {
-            ((SieveTile) te).removeMesh(false);
+            SieveTile sieveTile = (SieveTile) te;
+            sieveTile.removeMesh(false);
+            if (!sieveTile.getBlockStack().isEmpty()) {
+                worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 1.1F, pos
+                        .getZ() + 0.5F, sieveTile.getBlockStack()));
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.data.CookingRecipeBuilder;
@@ -31,7 +32,6 @@ import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformR
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.block.BaseBlock;
-import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
@@ -140,6 +140,11 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
     }
 
+    protected void createCrookRecipes(Consumer<IFinishedRecipe> consumer, Block itemInput,
+                                      IItemProvider itemDrop, float chance, String id) {
+        CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
+    }
+
     protected void createFiredCrucibleRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(block)).amount(amount).fluidResult(Fluids.LAVA)
                 .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(id));
@@ -187,6 +192,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
     protected void createHeatRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {
         HeatRecipeBuilder.builder().input(block).amount(amount).build(consumer, heatLoc(id));
+    }
+
+    protected void createHeatRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, StatePropertiesPredicate properties, String id) {
+        HeatRecipeBuilder.builder().input(block).amount(amount).properties(properties).build(consumer, heatLoc(id));
     }
 
     protected void createSmeltingRecipe(Consumer<IFinishedRecipe> consumer, Item input, Item output, float xpSmelt, int durationSmelt, float xpBlast, int durationBlast, String condition, ResourceLocation rl) {

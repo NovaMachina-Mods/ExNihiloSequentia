@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
@@ -10,10 +11,12 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
+import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
@@ -118,6 +121,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, ExNihiloItems.SILKWORM.get(), 40, "silkworm");
         createCompostRecipe(consumer, ExNihiloItems.COOKED_SILKWORM.get(), 40, "cooked_silkworm");
         createCompostRecipe(consumer, Items.APPLE, 100, "apple");
+        createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
         createCompostRecipe(consumer, Items.MELON_SLICE, 40, "melon_slice");
         createCompostRecipe(consumer, Items.MELON, 1000 / 6, "melon");
         createCompostRecipe(consumer, Items.PUMPKIN, 1000 / 6, "pumpkin");
@@ -132,10 +136,15 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, Items.TWISTING_VINES, 100, "twisting_vine");
         createCompostRecipe(consumer, Items.TALL_GRASS, 100, "tall_grass");
         createCompostRecipe(consumer, Items.SUGAR_CANE, 80, "sugar_cane");
+        createCompostRecipe(consumer, EnumResource.GRASS_SEED.getRegistryObject().get(), 100, "grass_seed");
+        createCompostRecipe(consumer, EnumResource.ANCIENT_SPORE.getRegistryObject().get(), 100, "ancient_spore");
+        createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
     }
 
     private void registerCrookRecipes(Consumer<IFinishedRecipe> consumer) {
         createCrookRecipes(consumer, ItemTags.LEAVES, ExNihiloItems.SILKWORM.get(), 0.1F, LEAVES);
+        createCrookRecipes(consumer, ExNihiloBlocks.INFESTED_LEAVES.get(), ExNihiloItems.SILKWORM.get(), 0.2F, "silkworm");
+        createCrookRecipes(consumer, ExNihiloBlocks.INFESTED_LEAVES.get(), Items.STRING, 0.5F, "string");
     }
 
     private void registerCrooks(Consumer<IFinishedRecipe> consumer) {
@@ -146,7 +155,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCrook(EnumCrook.GOLD.getRegistryObject().get(), Tags.Items.NUGGETS_GOLD, consumer);
         createCrook(EnumCrook.GRANITE.getRegistryObject().get(), EnumPebbleType.GRANITE.getRegistryObject().get(), consumer);
         createCrook(EnumCrook.IRON.getRegistryObject().get(), Tags.Items.NUGGETS_IRON, consumer);
-        createCrook(EnumCrook.STONE.getRegistryObject().get(), ExNihiloTags.STONE_STICK, consumer);
+        createCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject().get(), consumer);
         createCrook(EnumCrook.WOOD.getRegistryObject().get(), Tags.Items.RODS_WOODEN, consumer);
     }
 
@@ -354,6 +363,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createHeatRecipes(consumer, Blocks.GLOWSTONE, 2, "glowstone");
         createHeatRecipes(consumer, Blocks.SHROOMLIGHT, 2, "shroomlight");
         createHeatRecipes(consumer, Blocks.SOUL_FIRE, 4, "soul_fire");
+
+        // Lit blocks
+        StatePropertiesPredicate lit = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true).build();
+        createHeatRecipes(consumer, Blocks.CAMPFIRE, 4, lit, "campfire");
+        createHeatRecipes(consumer, Blocks.SOUL_CAMPFIRE, 4, lit, "soul_campfire");
+        createHeatRecipes(consumer, Blocks.FURNACE, 3, lit, "furnace");
+        createHeatRecipes(consumer, Blocks.REDSTONE_TORCH, 1, lit, "redstone_torch");
+        createHeatRecipes(consumer, Blocks.REDSTONE_WALL_TORCH, 1, lit, "redstone_wall_torch");
     }
 
     private void registerIronOres(Consumer<IFinishedRecipe> consumer, EnumOre ore) {
@@ -428,7 +445,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 0.1F, 200,0.1F, 100, "has_silkworm", ExNihiloItems.COOKED_SILKWORM.getId());
 
         createSmeltingRecipe(consumer, ExNihiloBlocks.CRUCIBLE_UNFIRED.get().asItem(), ExNihiloBlocks.CRUCIBLE_FIRED.get().asItem(),
-                0.7F, 200, 0.7F, 200, "has_uncooked_crucible", ExNihiloBlocks.CRUCIBLE_FIRED.getId());
+                0.7F, 200, 0.7F, 100, "has_uncooked_crucible", ExNihiloBlocks.CRUCIBLE_FIRED.getId());
 
         ShapedRecipeBuilder.shaped(ExNihiloBlocks.CRUCIBLE_UNFIRED.get())
                 .pattern("c c")
@@ -504,14 +521,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .unlockedBy("has_scrap", InventoryChangeTrigger.Instance
                         .hasItems(Items.NETHERITE_SCRAP))
                 .save(consumer, createSaveLocation(Blocks.ANCIENT_DEBRIS.getRegistryName()));
-		ShapedRecipeBuilder.shaped(EnumResource.STONE_STICK.getRegistryObject().get())
-                .pattern("x")
-                .pattern("x")
-                .pattern("x")
-				.define('x', EnumPebbleType.STONE.getRegistryObject().get())
-                .unlockedBy("has_stone_pebble", InventoryChangeTrigger.Instance
-                    .hasItems(EnumPebbleType.STONE.getRegistryObject().get()))
-                .save(consumer, createSaveLocation(EnumResource.STONE_STICK.getRegistryObject().getId()));
     }
 
     private void registerOres(Consumer<IFinishedRecipe> consumer) {
@@ -519,18 +528,18 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             registerOre(ore, consumer);
             if (!ore.isVanilla()) {
                 createSmeltingRecipe(consumer, ore.getChunkItem().get(), ore.getIngotItem() != null ? ore.getIngotItem() : ore.getIngotRegistryItem().get(),
-                        0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                        0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                         new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
             }
             if (ore.isVanilla()) {
                 if (ore == EnumOre.IRON) {
                     createSmeltingRecipe(consumer, ore.getChunkItem().get(), Items.IRON_INGOT,
-                            0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                            0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_iron"));
                 }
                 if (ore == EnumOre.GOLD) {
                     createSmeltingRecipe(consumer, ore.getChunkItem().get(), Items.GOLD_INGOT,
-                            0.7F, 200, 0.7F, 200, CHUNK_CONDITION,
+                            0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
                             new ResourceLocation(ExNihiloConstants.ModIds.MINECRAFT, "ingot_gold"));
                 }
             }

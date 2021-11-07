@@ -42,7 +42,11 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
 
     @Override
     public String getTitle() {
-        return "Crucible";
+        if(uid.equals(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"))) {
+            return "Fired Crucible";
+        } else {
+            return "Crucible";
+        }
     }
 
     @Override
@@ -59,6 +63,9 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, CrucibleRecipe recipe, IIngredients ingredients) {
         recipeLayout.getFluidStacks().init(0, true, 3, 21);
+        if (recipe.getResultFluid().getAmount() != 1000) {
+            recipe.getResultFluid().setAmount(1000);
+        }
         recipeLayout.getFluidStacks().set(0, recipe.getResultFluid());
 
         IFocus<?> focus = recipeLayout.getFocus();

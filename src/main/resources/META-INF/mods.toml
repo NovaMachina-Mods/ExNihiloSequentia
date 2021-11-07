@@ -1,12 +1,12 @@
 modLoader="javafml" #mandatory
 loaderVersion="[32,)" #mandatory
-license="All rights reserved"
+license="Creative Commons"
 issueTrackerURL="https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues" #optional
 [[mods]] #mandatory
 modId="exnihilosequentia" #mandatory
 version="${version}" #mandatory
 displayName="Ex Nihilo: Sequentia" #mandatory
-updateJSONURL="https://raw.githubusercontent.com/NovaMachina-Mods/ExNihiloSequentia/1.16/update.json" #optional
+updateJSONURL="https://repo.jacob-williams.me/repository/data/exnihilosequentia/1.16/update.json" #optional
 displayURL="https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia" #optional
 #logoFile="" #optional
 credits="Thanks to McJty for tutorials and those that created the Ex Nihilo series" #optional

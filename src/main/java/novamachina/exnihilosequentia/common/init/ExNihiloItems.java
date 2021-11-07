@@ -8,6 +8,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,6 +34,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import javax.annotation.Nullable;
 
 public class ExNihiloItems {
     // Begin Block Items
@@ -199,7 +202,7 @@ public class ExNihiloItems {
     private static BlockItem createBurnableItem(Block block) {
         return new BlockItem(block, tab){
             @Override
-            public int getBurnTime(ItemStack itemStack) {
+            public int getBurnTime(ItemStack itemStack, @Nullable IRecipeType<?> recipeType) {
                 return 400;
             }
         };
