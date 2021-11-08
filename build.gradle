@@ -40,7 +40,6 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
     maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
-    maven { url = "https://maven.tehnut.info"} // WAILA
     maven { url = "https://maven.tterrag.com/" } // TOP
     maven { url = "https://maven.blamejared.com" } // CraftTweaker
     maven {
@@ -63,9 +62,6 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
-    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2:api")
-    //runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${hwyla_version}_${minecraft_release}.2")
-
     compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
     runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
 
@@ -76,7 +72,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
 
     runtimeOnly fg.deobf("curse.maven:ctm-267602:3137659")
-
+    runtimeOnly fg.deobf("curse.maven:jer-240630:3066754")
 }
 
 task replaceResources(type: Copy) {
