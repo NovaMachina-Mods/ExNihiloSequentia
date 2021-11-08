@@ -1,19 +1,13 @@
 package novamachina.exnihilosequentia.common.item.mesh;
 
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-
-import net.minecraft.item.Item.Properties;
-import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.utility.Config;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class MeshItem extends Item {
