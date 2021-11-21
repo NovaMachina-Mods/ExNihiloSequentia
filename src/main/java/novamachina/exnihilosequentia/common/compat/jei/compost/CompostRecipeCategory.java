@@ -64,17 +64,22 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
         IFocus<?> focus = recipeLayout.getFocus();
 
         int slotIndex = 1;
-        for (int i = 0; i < recipe.getInputs().size(); i++) {
-            final int slotX = 38 + (i % 7 * 18);
-            final int slotY = 2 + i / 7 * 18;
+        if(recipe.getInputs().size() > 21) {
+            recipeLayout.getIngredientsGroup(VanillaTypes.ITEM).init(slotIndex, true, 38, 2);
+            recipeLayout.getIngredientsGroup(VanillaTypes.ITEM).set(slotIndex, recipe.getInputs());
+        } else {
+            for (int i = 0; i < recipe.getInputs().size(); i++) {
+                final int slotX = 38 + (i % 7 * 18);
+                final int slotY = 2 + i / 7 * 18;
 
-            ItemStack stack = recipe.getInputs().get(i);
+                ItemStack stack = recipe.getInputs().get(i);
 
-            recipeLayout.getItemStacks().init(i + slotIndex, true, slotX, slotY);
-            recipeLayout.getItemStacks().set(i + slotIndex, stack);
+                recipeLayout.getItemStacks().init(i + slotIndex, true, slotX, slotY);
+                recipeLayout.getItemStacks().set(i + slotIndex, stack);
 
-            if (focus != null && stack.sameItem((ItemStack) focus.getValue())) {
-                recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
+                if (focus != null && stack.sameItem((ItemStack) focus.getValue())) {
+                    recipeLayout.getItemStacks().setBackground(i + slotIndex, slotHighlight);
+                }
             }
         }
         recipeLayout.getItemStacks().addTooltipCallback(new CompostTooltipCallback());
