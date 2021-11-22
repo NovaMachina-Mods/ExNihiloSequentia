@@ -1,13 +1,14 @@
 package novamachina.exnihilosequentia.common.block;
 
-import java.util.function.Supplier;
-import javax.annotation.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class BaseFallingBlock extends FallingBlock {
 

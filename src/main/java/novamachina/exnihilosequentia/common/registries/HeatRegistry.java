@@ -1,12 +1,13 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.block.BlockState;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HeatRegistry implements IHeatRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());

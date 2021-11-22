@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.api.crafting.sieve;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -11,6 +9,9 @@ import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SieveRecipe extends SerializableRecipe {
     public static final IRecipeType<SieveRecipe> RECIPE_TYPE = IRecipeType

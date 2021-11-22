@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 

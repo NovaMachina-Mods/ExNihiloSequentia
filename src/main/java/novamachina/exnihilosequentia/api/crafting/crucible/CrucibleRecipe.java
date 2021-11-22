@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.api.crafting.crucible;
 
-import java.util.Arrays;
-import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -12,6 +10,9 @@ import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CrucibleRecipe extends SerializableRecipe {
     public static final IRecipeType<CrucibleRecipe> RECIPE_TYPE = IRecipeType

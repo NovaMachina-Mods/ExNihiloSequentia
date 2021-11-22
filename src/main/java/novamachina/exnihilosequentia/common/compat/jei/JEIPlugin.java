@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -37,6 +35,9 @@ import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {

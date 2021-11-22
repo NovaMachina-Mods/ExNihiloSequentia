@@ -1,14 +1,15 @@
 package novamachina.exnihilosequentia.common.network;
 
+import net.minecraft.network.PacketBuffer;
+import novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
-import net.minecraft.network.PacketBuffer;
-import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class HandshakeMessages {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());

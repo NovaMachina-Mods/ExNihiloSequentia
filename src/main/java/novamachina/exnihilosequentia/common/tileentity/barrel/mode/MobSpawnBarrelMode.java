@@ -1,11 +1,5 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
-import novamachina.exnihilosequentia.common.item.dolls.DollItem;
-import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.utility.StringUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -18,6 +12,12 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+import novamachina.exnihilosequentia.common.item.dolls.DollItem;
+import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
+import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

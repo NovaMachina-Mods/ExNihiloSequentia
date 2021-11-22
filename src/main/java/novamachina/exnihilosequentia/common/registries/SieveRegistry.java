@@ -1,27 +1,22 @@
 package novamachina.exnihilosequentia.common.registries;
 
 import com.google.common.collect.Lists;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.IItemProvider;
+import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.api.registry.ISieveRegistry;
-import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.ore.OreItem;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.IngredientUtils;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
 import org.apache.logging.log4j.LogManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SieveRegistry implements ISieveRegistry {

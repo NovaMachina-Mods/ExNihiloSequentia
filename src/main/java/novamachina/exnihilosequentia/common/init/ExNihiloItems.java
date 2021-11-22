@@ -1,8 +1,5 @@
 package novamachina.exnihilosequentia.common.init;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
@@ -14,8 +11,8 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.item.CookedSilkwormItem;
-import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
+import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
@@ -36,6 +33,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nullable;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class ExNihiloItems {
     // Begin Block Items

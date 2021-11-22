@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.api.registry.IFluidItemTransformRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;

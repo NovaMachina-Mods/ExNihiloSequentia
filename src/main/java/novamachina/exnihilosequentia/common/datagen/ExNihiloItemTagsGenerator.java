@@ -3,7 +3,6 @@ package novamachina.exnihilosequentia.common.datagen;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Items;
-import net.minecraft.tags.FluidTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.ExNihiloTags;

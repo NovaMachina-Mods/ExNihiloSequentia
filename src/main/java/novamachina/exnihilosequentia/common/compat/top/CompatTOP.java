@@ -1,11 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.top;
 
-import java.util.function.Function;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
-import mcjty.theoneprobe.api.ITheOneProbe;
-import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -13,6 +8,8 @@ import net.minecraftforge.fml.InterModComms;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import java.util.function.Function;
 
 public class CompatTOP {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());

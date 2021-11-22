@@ -1,7 +1,8 @@
 package novamachina.exnihilosequentia.common.utility;
 
-import java.util.Objects;
 import net.minecraft.nbt.CompoundNBT;
+
+import java.util.Objects;
 
 public class Color {
 

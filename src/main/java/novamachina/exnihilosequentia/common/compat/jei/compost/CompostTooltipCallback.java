@@ -1,12 +1,13 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
-import java.util.List;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
+
+import java.util.List;
 
 public class CompostTooltipCallback implements ITooltipCallback<ItemStack> {
 

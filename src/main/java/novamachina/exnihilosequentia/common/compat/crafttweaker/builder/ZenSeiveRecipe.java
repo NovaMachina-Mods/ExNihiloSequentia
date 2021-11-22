@@ -3,12 +3,13 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
-import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import org.openzen.zencode.java.ZenCodeType;
+
+import java.util.ArrayList;
 
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenSieveRecipe")

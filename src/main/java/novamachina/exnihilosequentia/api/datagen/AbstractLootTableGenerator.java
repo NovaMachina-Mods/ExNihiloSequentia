@@ -3,27 +3,22 @@ package novamachina.exnihilosequentia.api.datagen;
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTableManager;
-import net.minecraft.loot.ValidationTracker;
+import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.SurvivesExplosion;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class AbstractLootTableGenerator implements IDataProvider {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();

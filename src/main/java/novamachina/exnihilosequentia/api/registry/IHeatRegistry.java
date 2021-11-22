@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.api.registry;
 
-import java.util.List;
 import net.minecraft.block.BlockState;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
+
+import java.util.List;
 
 public interface IHeatRegistry {
     void clearRecipes();

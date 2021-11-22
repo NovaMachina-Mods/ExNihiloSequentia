@@ -1,18 +1,11 @@
 package novamachina.exnihilosequentia.api.datagen;
 
-import java.util.Objects;
-import java.util.function.Consumer;
-
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.data.CookingRecipeBuilder;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.*;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -38,6 +31,8 @@ import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
     protected static final String CHUNK_CONDITION = "has_chunk";

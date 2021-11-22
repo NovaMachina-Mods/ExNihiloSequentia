@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.item.tools.hammer;
 
 import com.google.common.collect.Sets;
-import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,9 +13,9 @@ import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class HammerBaseItem extends ToolItem {
 

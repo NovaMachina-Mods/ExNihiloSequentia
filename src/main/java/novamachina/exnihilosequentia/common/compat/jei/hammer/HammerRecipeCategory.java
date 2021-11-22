@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.hammer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -14,6 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer");

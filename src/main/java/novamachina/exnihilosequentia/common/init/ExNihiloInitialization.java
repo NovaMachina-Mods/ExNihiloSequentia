@@ -1,11 +1,5 @@
 package novamachina.exnihilosequentia.common.init;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
@@ -55,6 +49,11 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator.createMCCompost;
 

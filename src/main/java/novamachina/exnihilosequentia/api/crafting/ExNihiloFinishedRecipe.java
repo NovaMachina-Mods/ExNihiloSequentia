@@ -4,9 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
 import net.minecraft.block.Block;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.fluid.Fluid;
@@ -20,6 +17,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements IFinishedRecipe {
     protected JsonArray conditions = null;

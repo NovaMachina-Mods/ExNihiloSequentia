@@ -1,13 +1,14 @@
 package novamachina.exnihilosequentia.common.network;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Supplier;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.network.NetworkEvent;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Supplier;
 
 public class HandshakeHandler {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());

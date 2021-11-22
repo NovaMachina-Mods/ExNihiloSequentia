@@ -1,11 +1,12 @@
 package novamachina.exnihilosequentia.common.builder;
 
-import java.util.function.Supplier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ToolType;
+
+import java.util.function.Supplier;
 
 public class BlockBuilder {
 

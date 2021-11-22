@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
+import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.api.registry.ICompostRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;

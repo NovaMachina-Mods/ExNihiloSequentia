@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.common.compat.jei.sieve.wet;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import java.util.List;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -26,6 +25,8 @@ import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
+
+import java.util.List;
 
 public class WetSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "wet_sieve");

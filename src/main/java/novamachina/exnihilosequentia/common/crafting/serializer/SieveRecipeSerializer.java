@@ -2,8 +2,6 @@ package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
@@ -12,6 +10,9 @@ import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     @Override

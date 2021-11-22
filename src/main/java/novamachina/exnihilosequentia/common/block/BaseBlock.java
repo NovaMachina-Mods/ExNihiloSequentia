@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.block;
 
-import java.util.function.Supplier;
-import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -10,6 +8,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class BaseBlock extends Block {
 

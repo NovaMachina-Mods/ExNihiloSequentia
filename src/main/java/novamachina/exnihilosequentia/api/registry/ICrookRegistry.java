@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.api.registry;
 
-import java.util.List;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
+
+import java.util.List;
 
 public interface ICrookRegistry {
     void clearRecipes();

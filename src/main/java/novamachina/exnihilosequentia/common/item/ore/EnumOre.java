@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
-import java.util.Arrays;
-import java.util.List;
 import net.minecraft.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -10,6 +8,9 @@ import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.network.HandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.util.Arrays;
+import java.util.List;
 
 public enum EnumOre implements IExtensibleEnum {
     COPPER(Type.MODDED, ExNihiloConstants.Ore.COPPER, new Color("FF9933"), false, true),

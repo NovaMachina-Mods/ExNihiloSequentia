@@ -3,8 +3,6 @@ package novamachina.exnihilosequentia.common.tileentity.crucible;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-
 public class CrucibleFluidHandler extends FluidTank {
     private BaseCrucibleTile crucible;
 

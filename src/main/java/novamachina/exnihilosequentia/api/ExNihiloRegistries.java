@@ -1,23 +1,7 @@
 package novamachina.exnihilosequentia.api;
 
-import novamachina.exnihilosequentia.api.registry.ICompostRegistry;
-import novamachina.exnihilosequentia.api.registry.ICrookRegistry;
-import novamachina.exnihilosequentia.api.registry.ICrucibleRegistry;
-import novamachina.exnihilosequentia.api.registry.IFluidItemTransformRegistry;
-import novamachina.exnihilosequentia.api.registry.IFluidOnTopRegistry;
-import novamachina.exnihilosequentia.api.registry.IFluidTransformRegistry;
-import novamachina.exnihilosequentia.api.registry.IHammerRegistry;
-import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
-import novamachina.exnihilosequentia.api.registry.ISieveRegistry;
-import novamachina.exnihilosequentia.common.registries.CompostRegistry;
-import novamachina.exnihilosequentia.common.registries.CrookRegistry;
-import novamachina.exnihilosequentia.common.registries.CrucibleRegistry;
-import novamachina.exnihilosequentia.common.registries.FluidItemTransformRegistry;
-import novamachina.exnihilosequentia.common.registries.FluidOnTopRegistry;
-import novamachina.exnihilosequentia.common.registries.FluidTransformRegistry;
-import novamachina.exnihilosequentia.common.registries.HammerRegistry;
-import novamachina.exnihilosequentia.common.registries.HeatRegistry;
-import novamachina.exnihilosequentia.common.registries.SieveRegistry;
+import novamachina.exnihilosequentia.api.registry.*;
+import novamachina.exnihilosequentia.common.registries.*;
 
 public class ExNihiloRegistries {
     public static final ICompostRegistry COMPOST_REGISTRY = new CompostRegistry();

@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidtransform;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -12,6 +10,9 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluidtransform");

@@ -1,13 +1,13 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
-import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
-import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
+import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
+import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 

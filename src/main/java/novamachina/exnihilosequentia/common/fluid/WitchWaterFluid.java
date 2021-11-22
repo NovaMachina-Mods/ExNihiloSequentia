@@ -11,8 +11,6 @@ import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-import net.minecraftforge.fluids.ForgeFlowingFluid.Properties;
-
 public abstract class WitchWaterFluid extends ForgeFlowingFluid {
 
     public static final ForgeFlowingFluid.Properties WITCH_WATER_PROPS =

@@ -1,8 +1,5 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import novamachina.exnihilosequentia.api.ExNihiloRegistries;
-import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,6 +25,9 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.TankUtil;
 import org.apache.logging.log4j.LogManager;

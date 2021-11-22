@@ -1,10 +1,6 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nonnull;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -16,9 +12,13 @@ import net.minecraftforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class UseHammerModifier extends LootModifier {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());

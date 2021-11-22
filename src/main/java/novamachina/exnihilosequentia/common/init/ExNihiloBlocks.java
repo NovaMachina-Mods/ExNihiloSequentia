@@ -12,15 +12,14 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.block.*;
 import novamachina.exnihilosequentia.common.block.barrels.NetherBarrelBlock;
+import novamachina.exnihilosequentia.common.block.barrels.StoneBarrelBlock;
 import novamachina.exnihilosequentia.common.block.barrels.WoodBarrelBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.FiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.NetherCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.UnfiredCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.WoodCrucibleBlock;
-import novamachina.exnihilosequentia.common.block.sieves.NetherSieveBlock;
 import novamachina.exnihilosequentia.common.block.sieves.WoodSieveBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -100,9 +99,7 @@ public class ExNihiloBlocks {
     public static final RegistryObject<BaseBlock> BARREL_WARPED = BLOCKS
             .register(Blocks.BARREL_WARPED, NetherBarrelBlock::new);
     public static final RegistryObject<BaseBlock> BARREL_STONE = BLOCKS
-            .register(Blocks.BARREL_STONE, () -> new BlockBarrel(new BlockBuilder().harvestLevel(ToolType.PICKAXE, 0)
-                    .properties(AbstractBlock.Properties.of(Material.STONE).strength(0.75F).sound(SoundType.STONE))
-                    .tileEntitySupplier(StoneBarrelTile::new)));
+            .register(Blocks.BARREL_STONE, StoneBarrelBlock::new);
     public static final RegistryObject<WoodSieveBlock> SIEVE_ACACIA = BLOCKS
             .register(Blocks.SIEVE_ACACIA, WoodSieveBlock::new);
     public static final RegistryObject<WoodSieveBlock> SIEVE_BIRCH = BLOCKS
@@ -115,10 +112,10 @@ public class ExNihiloBlocks {
             .register(Blocks.SIEVE_OAK, WoodSieveBlock::new);
     public static final RegistryObject<WoodSieveBlock> SIEVE_SPRUCE = BLOCKS
             .register(Blocks.SIEVE_SPRUCE, WoodSieveBlock::new);
-    public static final RegistryObject<NetherSieveBlock> SIEVE_CRIMSON = BLOCKS
-            .register(Blocks.SIEVE_CRIMSON, NetherSieveBlock::new);
-    public static final RegistryObject<NetherSieveBlock> SIEVE_WARPED = BLOCKS
-            .register(Blocks.SIEVE_WARPED, NetherSieveBlock::new);
+    public static final RegistryObject<WoodSieveBlock> SIEVE_CRIMSON = BLOCKS
+            .register(Blocks.SIEVE_CRIMSON, WoodSieveBlock::new);
+    public static final RegistryObject<WoodSieveBlock> SIEVE_WARPED = BLOCKS
+            .register(Blocks.SIEVE_WARPED, WoodSieveBlock::new);
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloBlocks() {

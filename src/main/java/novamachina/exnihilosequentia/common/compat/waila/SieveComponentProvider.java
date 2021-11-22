@@ -1,6 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.waila;
 
-import java.util.List;
 import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.IDataAccessor;
 import mcp.mobius.waila.api.IPluginConfig;
@@ -10,6 +9,8 @@ import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
+
+import java.util.List;
 
 public class SieveComponentProvider implements IComponentProvider {
     @Override

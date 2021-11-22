@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
-import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,6 +10,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.ArrayList;
 import java.util.List;

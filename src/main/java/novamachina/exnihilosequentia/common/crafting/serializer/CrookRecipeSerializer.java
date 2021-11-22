@@ -2,8 +2,6 @@ package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
@@ -12,6 +10,9 @@ import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
     @Override

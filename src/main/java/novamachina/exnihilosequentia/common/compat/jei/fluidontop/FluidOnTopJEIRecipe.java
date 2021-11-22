@@ -1,9 +1,10 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidontop;
 
 import com.google.common.collect.ImmutableList;
-import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.List;
 
 public class FluidOnTopJEIRecipe {
     private final FluidStack fluidInBarrel;

@@ -1,6 +1,5 @@
 package novamachina.exnihilosequentia.common.block;
 
-import java.util.Random;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -14,12 +13,16 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 // TODO: Add progressive render
 public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider {
@@ -73,5 +76,11 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
             iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
                     .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
         }
+    }
+
+    @Nullable
+    @Override
+    public ToolType getHarvestTool(BlockState state) {
+        return ToolType.get("crook");
     }
 }

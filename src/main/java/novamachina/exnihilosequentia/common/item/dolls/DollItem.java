@@ -1,6 +1,5 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
-import java.util.List;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluid;
@@ -14,6 +13,8 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+
+import java.util.List;
 
 public class DollItem extends Item {
     private final EnumDoll type;

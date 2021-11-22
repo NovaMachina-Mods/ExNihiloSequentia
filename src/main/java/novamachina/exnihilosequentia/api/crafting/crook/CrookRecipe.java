@@ -1,8 +1,5 @@
 package novamachina.exnihilosequentia.api.crafting.crook;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -12,6 +9,10 @@ import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CrookRecipe extends SerializableRecipe {
     public static final IRecipeType<CrookRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");

@@ -1,12 +1,13 @@
 package novamachina.exnihilosequentia.common.compat.jei.crook;
 
-import java.util.List;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
+
+import java.util.List;
 
 public class CrookTooltipCallback implements ITooltipCallback<ItemStack> {
     private final CrookRecipe crookRecipe;
