@@ -242,7 +242,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public abstract CrucilbeTypeEnum getCrucibleType();
 
     private CrucibleRecipe getMeltable() {
-        return ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());
+        return ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
     }
 
     public int getFluidAmount() {

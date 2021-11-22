@@ -20,7 +20,12 @@ public class HeatRegistry implements IHeatRegistry {
 
     @Override
     public int getHeatAmount(BlockState entry) {
-        return recipeList.stream().filter(recipe -> recipe.isMatch(entry)).findFirst().map(HeatRecipe::getAmount).orElse(0);
+        return recipeList
+                .stream()
+                .filter(recipe -> recipe.isMatch(entry))
+                .findFirst()
+                .map(HeatRecipe::getAmount)
+                .orElse(0);
     }
 
     @Override

@@ -1,20 +1,24 @@
 package novamachina.exnihilosequentia.common.registries;
 
+import net.minecraft.item.Item;
+import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.registry.ICrucibleRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 public class CrucibleRegistry implements ICrucibleRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private final List<CrucibleRecipe> recipeList = new ArrayList<>();
+
+    private final Map<Item, CrucibleRecipe> recipeByItemCache = new HashMap<>();
 
     @Override
     public List<CrucibleRecipe> getRecipeList() {
@@ -29,25 +33,54 @@ public class CrucibleRegistry implements ICrucibleRegistry {
 
     @Override
     public CrucibleRecipe findRecipe(IItemProvider item) {
-        Optional<CrucibleRecipe> optional = recipeList.stream().filter(recipe -> recipe.getInput().test(new ItemStack(item))).findFirst();
-        return optional.orElse(null);
+        return findRecipeByItem(item.asItem());
+    }
+
+    @Override
+    public CrucibleRecipe findRecipeByItemStack(ItemStack itemStack) {
+        return recipeByItemCache.computeIfAbsent(itemStack.getItem(), k ->
+                recipeList
+                        .stream()
+                        .filter(recipe -> recipe.getInput().test(itemStack))
+                        .findFirst()
+                        .orElse(null));
+    }
+
+    @Override
+    public CrucibleRecipe findRecipeByItem(Item item) {
+        return recipeByItemCache.computeIfAbsent(item, k -> {
+            final ItemStack itemStack = new ItemStack(item);
+            return recipeList
+                    .stream()
+                    .filter(recipe -> recipe.getInput().test(itemStack))
+                    .findFirst()
+                    .orElse(null);
+        });
     }
 
     @Override
     public boolean isMeltable(IItemProvider item, int level) {
-        ItemStack itemStack = new ItemStack(item);
-        boolean result = false;
-        for (CrucibleRecipe recipe : recipeList) {
-            if (recipe.getInput().test(itemStack) && recipe.getCrucibleType().getLevel() <= level) {
-                result = true;
-                break;
-            }
-        }
-        return result;
+        return isMeltableByItem(item.asItem(), level);
+    }
+
+    public boolean isMeltableByItemStack(ItemStack itemStack, int level) {
+        final CrucibleRecipe recipe = findRecipeByItemStack(itemStack);
+        if (recipe == null)
+            return false;
+        return recipe.getCrucibleType().getLevel() <= level;
+    }
+
+    public boolean isMeltableByItem(Item item, int level) {
+        final CrucibleRecipe recipe = findRecipeByItem(item);
+        if (recipe == null)
+            return false;
+        return recipe.getCrucibleType().getLevel() <= level;
     }
 
     @Override
     public void clearRecipes() {
         recipeList.clear();
+
+        recipeByItemCache.clear();
     }
 }
