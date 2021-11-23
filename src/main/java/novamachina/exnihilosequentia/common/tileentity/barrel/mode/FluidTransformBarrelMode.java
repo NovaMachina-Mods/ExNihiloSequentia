@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import com.google.common.base.Preconditions;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
@@ -85,15 +86,16 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerWorld) barrelTile.getLevel())
-            .sendParticles(ParticleTypes.EFFECT,
+        ServerWorld level = (ServerWorld) barrelTile.getLevel();
+        Preconditions.checkNotNull(level, "Level is null.");
+        level.sendParticles(ParticleTypes.EFFECT,
                 barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
                 1,
-                0.0,
-                0.0,
-                0.0,
+                0,
+                0,
+                0,
                 0.05);
     }
 
@@ -102,7 +104,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
         List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils
-            .formatPercent((float) currentProgress / (Config.getSecondsToFluidTransform() * 20))));
+                .formatPercent((float) currentProgress / (Config.getSecondsToFluidTransform() * 20))));
 
         return info;
     }
