@@ -45,6 +45,8 @@ public class CrookRegistry implements ICrookRegistry {
     public void setRecipes(List<CrookRecipe> recipes) {
         logger.debug("Crook Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
+
+        recipeListByItemCache.clear();
     }
 
     @Override

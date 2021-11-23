@@ -55,6 +55,8 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
     public void setRecipes(List<FluidTransformRecipe> recipes) {
         logger.debug("Fluid Transform Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
+
+        fluidResultCache.clear();
     }
 
     @Override

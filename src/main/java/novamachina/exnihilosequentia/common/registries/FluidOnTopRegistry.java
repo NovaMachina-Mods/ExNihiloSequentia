@@ -55,6 +55,8 @@ public class FluidOnTopRegistry implements IFluidOnTopRegistry {
     public void setRecipes(List<FluidOnTopRecipe> recipes) {
         logger.debug("Fluid On Top Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
+
+        itemResultCache.clear();
     }
 
     @Override

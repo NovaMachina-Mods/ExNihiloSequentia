@@ -48,6 +48,8 @@ public class HammerRegistry implements IHammerRegistry {
     public void setRecipes(List<HammerRecipe> recipes) {
         logger.debug("Hammer Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
+
+        recipeByBlockCache.clear();
     }
 
     @Override

@@ -42,6 +42,8 @@ public class CompostRegistry implements ICompostRegistry {
     public void setRecipes(List<CompostRecipe> recipes) {
         logger.debug("Compost Registry recipes: " + recipes.size());
         this.recipeList.addAll(recipes);
+
+        itemSolidAmountCache.clear();
     }
 
     @Override
