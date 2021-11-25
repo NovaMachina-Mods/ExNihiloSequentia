@@ -7,12 +7,13 @@ import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 public class NetherCrucibleBlock extends CrucibleBaseBlock {
     public NetherCrucibleBlock() {
         super(new BlockBuilder().properties(
                 AbstractBlock.Properties.of(Material.NETHER_WOOD).strength(1.0F)
-                        .sound(SoundType.STEM).noOcclusion()).harvestLevel(ToolType.AXE, 0)
+                        .sound(Config.getNetherCrucibleSoundsEnabled() ? SoundType.STEM : SoundType.WOOD).noOcclusion()).harvestLevel(ToolType.AXE, 0)
                 .tileEntitySupplier(FiredCrucibleTile::new));
     }
 }
