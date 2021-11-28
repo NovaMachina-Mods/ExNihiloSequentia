@@ -75,7 +75,11 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                 solidAmount -= filled;
             }
         }
-        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+        final BaseCrucibleTileState currentState = new BaseCrucibleTileState(this);
+        if (!currentState.equals(lastSyncedState)) {
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+            lastSyncedState = currentState;
+        }
     }
 
     @Override

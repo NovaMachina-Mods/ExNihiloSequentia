@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -34,6 +35,7 @@ import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public abstract class BaseCrucibleTile extends TileEntity implements ITickableTileEntity {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -51,6 +53,35 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     protected int ticksSinceLast;
     protected int solidAmount;
     protected ItemStack currentItem;
+    protected BaseCrucibleTileState lastSyncedState = null;
+
+    static protected class BaseCrucibleTileState {
+        private final Fluid fluid;
+        private final int fluidAmount;
+        private final Item solid;
+        private final int solidAmount;
+        private final int heat;
+
+        BaseCrucibleTileState (final BaseCrucibleTile baseCrucibleTile) {
+            fluid = baseCrucibleTile.getFluid();
+            fluidAmount = baseCrucibleTile.getFluidAmount();
+            solid = baseCrucibleTile.inventory.getStackInSlot(0).getItem();
+            solidAmount = baseCrucibleTile.getSolidAmount();
+            heat = baseCrucibleTile.getHeat();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            BaseCrucibleTileState that = (BaseCrucibleTileState) o;
+            return fluidAmount == that.fluidAmount
+                    && solidAmount == that.solidAmount
+                    && heat == that.heat
+                    && Objects.equals(fluid, that.fluid)
+                    && Objects.equals(solid, that.solid);
+        }
+    }
 
     protected BaseCrucibleTile(
         TileEntityType<? extends BaseCrucibleTile> tileEntityType) {

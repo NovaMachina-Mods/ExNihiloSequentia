@@ -7,6 +7,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 
@@ -24,9 +25,10 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     @Override
     public int getSolidAmount() {
         if (!currentItem.isEmpty()) {
-            int itemCount = inventory.getStackInSlot(0).getCount();
-            return solidAmount + (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem)
-                .getAmount());
+            final int itemCount = inventory.getStackInSlot(0).getCount();
+            final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+            if (recipe != null)
+                return solidAmount + (itemCount * recipe.getAmount());
         }
         return solidAmount;
     }
@@ -93,6 +95,10 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                 solidAmount -= filled;
             }
         }
-        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+        final BaseCrucibleTileState currentState = new BaseCrucibleTileState(this);
+        if (!currentState.equals(lastSyncedState)) {
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+            lastSyncedState = currentState;
+        }
     }
 }
