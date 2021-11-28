@@ -9,12 +9,16 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HammerRegistry implements IHammerRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private static final List<HammerRecipe> recipeList = new ArrayList<>();
+
+    private final Map<Block, HammerRecipe> recipeByBlockCache = new HashMap<>();
 
     @Override
     public List<ItemStackWithChance> getResult(Block input) {
@@ -25,24 +29,27 @@ public class HammerRegistry implements IHammerRegistry {
 
     @Override
     public boolean isHammerable(Block block) {
-
         return findRecipe(block) != HammerRecipe.EMPTY;
     }
 
     @Override
     public HammerRecipe findRecipe(Block block) {
-        for (HammerRecipe recipe : recipeList) {
-            if (recipe.getInput().test(new ItemStack(block))) {
-                return recipe;
-            }
-        }
-        return HammerRecipe.EMPTY;
+        return recipeByBlockCache.computeIfAbsent(block, k -> {
+            final ItemStack itemStack = new ItemStack(block);
+            return recipeList
+                    .stream()
+                    .filter(recipe -> recipe.getInput().test(itemStack))
+                    .findFirst()
+                    .orElse(HammerRecipe.EMPTY);
+        });
     }
 
     @Override
     public void setRecipes(List<HammerRecipe> recipes) {
         logger.debug("Hammer Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
+
+        recipeByBlockCache.clear();
     }
 
     @Override
@@ -53,5 +60,7 @@ public class HammerRegistry implements IHammerRegistry {
     @Override
     public void clearRecipes() {
         recipeList.clear();
+
+        recipeByBlockCache.clear();
     }
 }
