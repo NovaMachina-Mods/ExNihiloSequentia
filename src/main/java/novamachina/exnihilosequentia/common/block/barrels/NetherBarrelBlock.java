@@ -7,11 +7,12 @@ import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 public class NetherBarrelBlock extends BlockBarrel {
     public NetherBarrelBlock() {
         super(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
-                .properties(AbstractBlock.Properties.of(Material.NETHER_WOOD).strength(1.0F).sound(SoundType.STEM))
+                .properties(AbstractBlock.Properties.of(Material.NETHER_WOOD).strength(1.0F).sound(Config.getNetherBarrelSoundsEnabled() ? SoundType.STEM : SoundType.WOOD))
                 .tileEntitySupplier(StoneBarrelTile::new));
     }
 }
