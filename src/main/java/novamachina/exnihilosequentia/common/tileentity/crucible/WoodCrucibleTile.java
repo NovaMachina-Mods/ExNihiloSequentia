@@ -6,6 +6,7 @@ import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.state.properties.BlockStateProperties;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 import net.minecraft.item.ItemStack;
@@ -43,8 +44,9 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
 
-                    solidAmount = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem)
-                        .getAmount();
+                    final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+                    if (recipe != null)
+                        solidAmount = recipe.getAmount();
                 } else {
                     return;
                 }
@@ -53,12 +55,14 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
                 .sameItem(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
-                    solidAmount += ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem)
-                        .getAmount();
-                    inventory.getStackInSlot(0).shrink(1);
+                    final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+                    if (recipe != null) {
+                        solidAmount += recipe.getAmount();
+                        inventory.getStackInSlot(0).shrink(1);
 
-                    if (inventory.getStackInSlot(0).isEmpty()) {
-                        inventory.setStackInSlot(0, ItemStack.EMPTY);
+                        if (inventory.getStackInSlot(0).isEmpty()) {
+                            inventory.setStackInSlot(0, ItemStack.EMPTY);
+                        }
                     }
                 }
             }
@@ -69,10 +73,12 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
             if (heat > 0 && ExNihiloRegistries.CRUCIBLE_REGISTRY
                 .isMeltableByItemStack(currentItem, getCrucibleType().getLevel())) {
-                FluidStack fluidStack = new FluidStack(
-                    ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem).getResultFluid(), heat);
-                int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
-                solidAmount -= filled;
+                final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+                if (recipe != null) {
+                    FluidStack fluidStack = new FluidStack(recipe.getResultFluid(), heat);
+                    int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
+                    solidAmount -= filled;
+                }
             }
         }
         final BaseCrucibleTileState currentState = new BaseCrucibleTileState(this);
@@ -95,10 +101,11 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     @Override
     public int getSolidAmount() {
         if(!currentItem.isEmpty()) {
-            int itemCount = inventory.getStackInSlot(0).getCount();
-            return solidAmount +
-                    (itemCount * ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem)
-                            .getAmount());
+            final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+            if (recipe != null) {
+                int itemCount = inventory.getStackInSlot(0).getCount();
+                return solidAmount + (itemCount * recipe.getAmount());
+            }
         }
         return solidAmount;
     }

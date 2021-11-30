@@ -261,7 +261,8 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
 
             if (solidAmount > 0) {
                 CrucibleRecipe meltable = getMeltable();
-                solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
+                if (meltable != null)
+                    solidProportion += ((float) solidAmount) / (4 * meltable.getAmount());
             }
             return solidProportion;
         } catch (NullPointerException e) {
