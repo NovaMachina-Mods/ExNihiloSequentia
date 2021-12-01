@@ -22,7 +22,7 @@ public class FiredCrucibleBlock extends CrucibleBaseBlock {
     public FiredCrucibleBlock() {
         super(new BlockBuilder().properties(
                 BlockBehaviour.Properties.of(Material.STONE).strength(1.5F)
-                        .sound(SoundType.STONE).noOcclusion()).harvestLevel(ToolActions.PICKAXE_DIG, 0));
+                        .sound(SoundType.STONE).noOcclusion()).harvestLevel(ToolActions.PICKAXE_DIG));
     }
 
     @Nullable

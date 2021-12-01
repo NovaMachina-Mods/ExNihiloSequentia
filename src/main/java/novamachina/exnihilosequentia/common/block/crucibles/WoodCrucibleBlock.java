@@ -22,7 +22,7 @@ public class WoodCrucibleBlock extends CrucibleBaseBlock {
     public WoodCrucibleBlock() {
         super(new BlockBuilder().properties(
                 BlockBehaviour.Properties.of(Material.WOOD).strength(.75F)
-                        .sound(SoundType.STONE).noOcclusion()).harvestLevel(ToolActions.AXE_DIG, 0));
+                        .sound(SoundType.STONE).noOcclusion()).harvestLevel(ToolActions.AXE_DIG));
     }
 
     @Nullable

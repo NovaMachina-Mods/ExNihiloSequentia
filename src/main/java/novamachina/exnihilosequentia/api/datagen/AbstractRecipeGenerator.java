@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipeBuilder;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipeBuilder;

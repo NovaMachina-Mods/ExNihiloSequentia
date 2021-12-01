@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.block;
 
-import mcjty.theoneprobe.api.IProbeHitData;
+/*import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.ProbeMode;*/
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -10,6 +10,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -80,7 +81,7 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock, ITO
         worldIn.sendBlockUpdated(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
     }
 
-    @Override
+    /*@Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData iProbeHitData) {
         SieveTile sieveTile = (SieveTile) world.getBlockEntity(iProbeHitData.getPos());
 
@@ -93,7 +94,7 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock, ITO
         if (sieveTile.getMesh() != EnumMesh.NONE) {
             iProbeInfo.text(new TranslatableComponent("waila.sieve.mesh", new TranslatableComponent("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName())));
         }
-    }
+    }*/
 
     /**
      * @deprecated Ask Mojang

@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.network;
 
 import net.minecraft.network.chat.TextComponent;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -10,10 +10,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-public class HandshakeHandler {
+public class EXNHandshakeHandler {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private HandshakeHandler() {
+    private EXNHandshakeHandler() {
     }
 
     public static void handleAcknowledge(HandshakeMessages.C2SAcknowledge message, Supplier<NetworkEvent.Context> ctx) {

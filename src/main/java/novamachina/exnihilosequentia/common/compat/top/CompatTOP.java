@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.top;
 
-import mcjty.theoneprobe.api.*;
+//import mcjty.theoneprobe.api.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -19,7 +19,7 @@ public class CompatTOP {
     private CompatTOP() {
     }
 
-    public static void register() {
+    /*public static void register() {
         logger.debug("Registering The One Probe");
         if (registered) {
             return;
@@ -49,5 +49,5 @@ public class CompatTOP {
             });
             return null;
         }
-    }
+    }*/
 }

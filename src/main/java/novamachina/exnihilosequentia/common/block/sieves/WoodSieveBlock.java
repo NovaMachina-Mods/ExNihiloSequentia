@@ -13,6 +13,6 @@ public class WoodSieveBlock extends BlockSieve {
                 BlockBehaviour.Properties.of(Material.WOOD).strength(0.7F)
                         .sound(SoundType.SCAFFOLDING).noOcclusion().isRedstoneConductor((state, reader, pos) -> false)
                         .isSuffocating((state, reader, pos) -> false).isViewBlocking((state, reader, pos) -> false))
-                .harvestLevel(ToolActions.AXE_DIG, 0));
+                .harvestLevel(ToolActions.AXE_DIG));
     }
 }

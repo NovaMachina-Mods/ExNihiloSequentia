@@ -142,7 +142,8 @@ public abstract class AbstractBarrelTile extends BlockEntity {
         nbt.put(MODE_INFO_TAG, mode.write());
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
-        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
+        return ClientboundBlockEntityDataPacket.create(this);
+        //return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
     public InteractionResult onBlockActivated(Player player, InteractionHand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {

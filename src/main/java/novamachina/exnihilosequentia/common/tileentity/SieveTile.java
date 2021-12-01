@@ -246,7 +246,8 @@ public class SieveTile extends BlockEntity {
         }
         nbt.putInt(PROGRESS_TAG, progress);
 
-        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
+        return ClientboundBlockEntityDataPacket.create(this);
+        //return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
     @Override

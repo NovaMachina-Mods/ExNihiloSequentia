@@ -181,7 +181,8 @@ public abstract class BaseCrucibleTile extends BlockEntity {
         }
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
-        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
+        return ClientboundBlockEntityDataPacket.create(this);
+        //return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
     @Override

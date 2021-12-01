@@ -12,6 +12,6 @@ public class UnfiredCrucibleBlock extends BaseBlock {
     public UnfiredCrucibleBlock() {
         super(new BlockBuilder().properties(
                 BlockBehaviour.Properties.of(Material.CLAY).strength(0.6F)
-                        .sound(SoundType.GRAVEL).noOcclusion()).harvestLevel(ToolActions.SHOVEL_DIG, 0));
+                        .sound(SoundType.GRAVEL).noOcclusion()).harvestLevel(ToolActions.SHOVEL_DIG));
     }
 }

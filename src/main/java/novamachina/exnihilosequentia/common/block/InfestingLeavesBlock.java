@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.block;
 
-import mcjty.theoneprobe.api.IProbeHitData;
+/*import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.ProbeMode;*/
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -90,13 +90,13 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
         return nearbyLeaves;
     }
 
-    @Override
+    /*@Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData iProbeHitData) {
         InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
 
         assert infestingLeavesTile != null;
         iProbeInfo.text(new TranslatableComponent("waila.progress", StringUtils
                 .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
-    }
+    }*/
 
 }

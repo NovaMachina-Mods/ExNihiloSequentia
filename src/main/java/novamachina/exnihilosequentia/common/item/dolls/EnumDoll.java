@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.item.dolls;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 
 public enum EnumDoll implements IExtensibleEnum {

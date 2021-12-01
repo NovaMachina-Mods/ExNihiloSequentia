@@ -21,7 +21,7 @@ public class NetherCrucibleBlock extends CrucibleBaseBlock {
     public NetherCrucibleBlock() {
         super(new BlockBuilder().properties(
                 BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F)
-                        .sound(SoundType.STEM).noOcclusion()).harvestLevel(ToolActions.AXE_DIG, 0));
+                        .sound(SoundType.STEM).noOcclusion()).harvestLevel(ToolActions.AXE_DIG));
     }
 
     @Nullable

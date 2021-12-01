@@ -13,14 +13,9 @@ public class BlockBuilder {
 
     public static final BlockBehaviour.Properties DEFAULT =
             BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD);
-    private int harvestLevel = 0;
     private BlockBehaviour.Properties properties = DEFAULT;
     private Supplier<BlockEntity> tileEntitySupplier;
     private ToolAction toolType = ToolActions.PICKAXE_DIG;
-
-    public int getHarvestLevel() {
-        return harvestLevel;
-    }
 
     public BlockBehaviour.Properties getProperties() {
         return properties;
@@ -34,9 +29,8 @@ public class BlockBuilder {
         return toolType;
     }
 
-    public BlockBuilder harvestLevel(ToolAction type, int level) {
+    public BlockBuilder harvestLevel(ToolAction type) {
         this.toolType = type;
-        this.harvestLevel = level;
         return this;
     }
 

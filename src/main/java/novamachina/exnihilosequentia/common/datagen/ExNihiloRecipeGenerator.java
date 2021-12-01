@@ -34,9 +34,7 @@ import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 
 import javax.annotation.Nonnull;
-import java.util.java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {

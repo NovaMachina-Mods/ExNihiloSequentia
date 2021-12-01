@@ -19,13 +19,13 @@ import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fmlserverevents.FMLServerStartingEvent;
 import net.minecraftforge.registries.ObjectHolder;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
@@ -107,7 +107,7 @@ public class ExNihiloInitialization {
 
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
-    public static void onServerStart(FMLServerStartingEvent event) {
+    public static void onServerStart(ServerStartingEvent event) {
         logger.debug("Fired FMLServerStartingEvent");
         registerOreCompat();
         overrideOres();
@@ -121,7 +121,7 @@ public class ExNihiloInitialization {
     public static void registerTOP(InterModEnqueueEvent event) {
         logger.debug("The One Probe detected: " + ModList.get().isLoaded(ModIds.TOP));
         if (ModList.get().isLoaded(ModIds.TOP)) {
-            CompatTOP.register();
+            //CompatTOP.register();
         }
     }
 

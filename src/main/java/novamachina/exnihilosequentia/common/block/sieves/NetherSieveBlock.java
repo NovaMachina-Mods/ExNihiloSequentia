@@ -13,6 +13,6 @@ public class NetherSieveBlock extends BlockSieve {
                 BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F)
                         .sound(SoundType.STEM).noOcclusion().isRedstoneConductor((state, reader, pos) -> false)
                         .isSuffocating((state, reader, pos) -> false).isViewBlocking((state, reader, pos) -> false))
-                .harvestLevel(ToolActions.AXE_DIG, 0));
+                .harvestLevel(ToolActions.AXE_DIG));
     }
 }
