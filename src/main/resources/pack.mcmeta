@@ -2,6 +2,6 @@
     "pack": {
         "description": "Ex Nihilo: Sequentia resources",
         "pack_format": 7,
-        "_comment": "pack format to 7 to allow only 1.17 resource"
+        "_comment": "pack format to 7 to allow only 1.17 + 1.18 resource"
     }
 }

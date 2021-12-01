@@ -23,10 +23,9 @@ public class ExNihiloDataGenerators {
             // LootTable
             generator.addProvider(new ExNihiloLootTableGenerator(generator));
             // Tags
-            generator
-                    .addProvider(new ExNihiloItemTagsGenerator(generator, new BlockTagsProvider(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, event
-                            .getExistingFileHelper()), event.getExistingFileHelper()));
-            generator.addProvider(new ExNihiloFluidTagsGenerator(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, event.getExistingFileHelper()));
+            generator.addProvider(new ExNihiloItemTagsGenerator(generator, new BlockTagsProvider(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+                    event.getExistingFileHelper()), event.getExistingFileHelper()));
+            generator.addProvider(new ExNihiloFluidTagsGenerator(generator, event.getExistingFileHelper()));
         }
         if (event.includeClient()) {
             // BlockStates

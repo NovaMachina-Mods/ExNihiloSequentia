@@ -26,7 +26,7 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
     private final IDrawableStatic slotHighlight;
 
     public CompostRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(texture, 0, 112, 166, 58);
+        this.background = guiHelper.createDrawable(texture, 0, 168, 166, 58);
         this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
     }
 
@@ -63,7 +63,7 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, CompostRecipe recipe, IIngredients ingredients) {
-        recipeLayout.getItemStacks().init(0, true, 10, 38);
+        recipeLayout.getItemStacks().init(0, true, 2, 20);
         recipeLayout.getItemStacks().set(0, new ItemStack(Blocks.DIRT));
 
         //TODO

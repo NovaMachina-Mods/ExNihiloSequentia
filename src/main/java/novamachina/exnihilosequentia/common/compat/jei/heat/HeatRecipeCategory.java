@@ -44,12 +44,16 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     public void draw(HeatRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.font.draw(matrixStack, recipe.getAmount() + "X",
-            24, 12, Color.gray.getRGB());
+                24, 12, Color.gray.getRGB());
+        //TODO doing something better than just writing what it is
 
         Block block = recipe.getInput();
         if (block == Blocks.WALL_TORCH) {
             minecraft.font.draw(matrixStack, "Wall Torch",
-                24, 0, Color.DARK_GRAY.getRGB());
+                    24, 0, Color.DARK_GRAY.getRGB());
+        } else if (block == Blocks.REDSTONE_WALL_TORCH) {
+            minecraft.font.draw(matrixStack, "Redstone Wall Torch",
+                    24, 0, Color.DARK_GRAY.getRGB());
         } else {
             minecraft.font.draw(matrixStack, block.getName(),
                 24, 0, Color.DARK_GRAY.getRGB());

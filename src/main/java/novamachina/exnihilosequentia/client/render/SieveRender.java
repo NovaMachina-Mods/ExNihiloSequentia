@@ -38,8 +38,8 @@ public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
             if (state != null) {
                 matrixStack.pushPose();
 
-                matrixStack.translate(0, 0.819, 0);
-                matrixStack.scale(0.999F, 0.18F - tileEntity.getProgress() * 0.16F, 0.999F);
+                matrixStack.translate(0.01, 0.819, 0.01);
+                matrixStack.scale(0.98F, 0.18F - tileEntity.getProgress() * 0.16F, 0.98F);
 
                 BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
                 blockRenderer.renderSingleBlock(state, matrixStack, buffer, combinedLight, combinedOverlay, EmptyModelData.INSTANCE);

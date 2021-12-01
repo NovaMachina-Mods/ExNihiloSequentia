@@ -13,7 +13,6 @@
 ## Want to contribute to Ex Nihilo: Sequentia?
 Awesome! We really appreciate your help and desire to see Ex Nihilo: Sequentia thrive!
 ### Have you written a bug fix?
-- Submit a pull request to the appropriate `-dev` branch. Any pull requests that are submitted to a non`-dev` branch will be rejected. The non-`dev` branches (any that are just the version number, i.e. `1.16`) are considered `master` branches and have specific rules for pushing to them.
 - Be sure to link your pull request to any issues that your bug fix effects.
 - Request a review from one of the project maintainers. (Currently there is only one maintainer, [NovaMachina].)
 - If changes are requested, or your pull request is rejected, don't get discouraged! We want to make sure that Ex Nihilo: Sequentia is a great experience for everyone, yourself and all those that use the mod. As such, we want to make sure that good code/features are added. And we are aware that we ourselves are not perfect, so you might find some code that isn't so great in the source code. Feel free to clean it up and make a pull request!

@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.api.datagen;
 
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -8,6 +9,7 @@ import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.Objects;
 
@@ -18,6 +20,13 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
 
     protected AbstractBlockStateGenerator(DataGenerator gen, String modId, ExistingFileHelper exFileHelper) {
         super(gen, modId, exFileHelper);
+    }
+
+    /**
+     * like forgeLoc just for EXN
+     */
+    protected ResourceLocation exnihiloLoc(String string) {
+        return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, string);
     }
 
     /**

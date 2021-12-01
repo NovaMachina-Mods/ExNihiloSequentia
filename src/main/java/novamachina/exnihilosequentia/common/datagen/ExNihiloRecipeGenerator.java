@@ -34,7 +34,9 @@ import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
@@ -66,7 +68,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         registerDolls(consumer);
         registerMeshes(consumer);
         registerMisc(consumer);
-
         registerCustomRecipes(consumer);
     }
 
@@ -135,6 +136,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, Items.TWISTING_VINES, 100, "twisting_vine");
         createCompostRecipe(consumer, Items.TALL_GRASS, 100, "tall_grass");
         createCompostRecipe(consumer, Items.SUGAR_CANE, 80, "sugar_cane");
+        createCompostRecipe(consumer, EnumResource.GRASS_SEED.getRegistryObject().get(), 100, "grass_seed");
+        createCompostRecipe(consumer, EnumResource.ANCIENT_SPORE.getRegistryObject().get(), 100, "ancient_spore");
+        createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
     }
 
     private void registerCrookRecipes(Consumer<FinishedRecipe> consumer) {

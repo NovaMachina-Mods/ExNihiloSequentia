@@ -1,3 +1,3 @@
 #! /bin/bash
 
-curl --fail -k -u $NEXUS_USER:$NEXUS_PASSWORD --upload-file ./update.json 'https://repo.jacob-williams.me/repository/data/exnihilosequentia/1.17/'
+curl --fail -k -u $NEXUS_USER:$NEXUS_PASSWORD --upload-file ./update.json 'https://repo.jacob-williams.me/repository/data/exnihilosequentia/1.18/'

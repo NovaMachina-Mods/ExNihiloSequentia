@@ -115,7 +115,12 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock, ITO
     public void playerDestroy(@Nonnull Level worldIn, @Nonnull Player player, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable BlockEntity te, @Nonnull ItemStack stack) {
         super.playerDestroy(worldIn, player, pos, state, te, stack);
         if (!worldIn.isClientSide() && te instanceof SieveTile) {
-            ((SieveTile) te).removeMesh(false);
+            SieveTile sieveTile = (SieveTile) te;
+            sieveTile.removeMesh(false);
+            if (!sieveTile.getBlockStack().isEmpty()) {
+                worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 1.1F, pos
+                        .getZ() + 0.5F, sieveTile.getBlockStack()));
+            }
         }
     }
 

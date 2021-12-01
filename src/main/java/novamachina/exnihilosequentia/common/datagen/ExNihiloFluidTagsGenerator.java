@@ -5,10 +5,13 @@ import net.minecraft.tags.FluidTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractFluidTagGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+
+import javax.annotation.Nullable;
 
 public class ExNihiloFluidTagsGenerator extends AbstractFluidTagGenerator {
-    public ExNihiloFluidTagsGenerator(DataGenerator generator, String modId, ExistingFileHelper existingFileHelper) {
-        super(generator, modId, existingFileHelper);
+    public ExNihiloFluidTagsGenerator(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
+        super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
 
     @Override
