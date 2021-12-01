@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
 
-public class HandshakeMessages {
+public class EXNHandshakeMessages {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private HandshakeMessages() {
+    private EXNHandshakeMessages() {
 
     }
 

@@ -2,8 +2,8 @@ package novamachina.exnihilosequentia.common.network;
 
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.network.NetworkEvent;
-import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.concurrent.CountDownLatch;
@@ -16,12 +16,12 @@ public class EXNHandshakeHandler {
     private EXNHandshakeHandler() {
     }
 
-    public static void handleAcknowledge(HandshakeMessages.C2SAcknowledge message, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleAcknowledge(EXNHandshakeMessages.C2SAcknowledge message, Supplier<NetworkEvent.Context> ctx) {
         logger.debug("Received acknowledgement from client. " + message);
         ctx.get().setPacketHandled(true);
     }
 
-    public static void handleOreList(HandshakeMessages.S2COreList msg, Supplier<NetworkEvent.Context> ctx) throws InterruptedException {
+    public static void handleOreList(EXNHandshakeMessages.S2COreList msg, Supplier<NetworkEvent.Context> ctx) throws InterruptedException {
         logger.debug("Received ore data from server");
 
         AtomicBoolean updatedOreList = new AtomicBoolean(false);
@@ -48,7 +48,7 @@ public class EXNHandshakeHandler {
 
         if (updatedOreList.get()) {
             logger.debug("Successfully synchronized ore list from server.");
-            PacketHandler.getHandshakeChannel().reply(new HandshakeMessages.C2SAcknowledge(), ctx.get());
+            PacketHandler.getHandshakeChannel().reply(new EXNHandshakeMessages.C2SAcknowledge(), ctx.get());
         } else {
             logger.debug("Failed to synchronize ore list from server.");
             ctx.get().getNetworkManager().disconnect(new TextComponent("Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));

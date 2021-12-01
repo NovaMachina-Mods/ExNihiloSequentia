@@ -27,17 +27,17 @@ public class PacketHandler {
                 .serverAcceptedVersions(s -> true)
                 .simpleChannel();
 
-        handshakeChannel.messageBuilder(HandshakeMessages.C2SAcknowledge.class, 99)
-                .loginIndex(HandshakeMessages.LoginIndexedMessage::getLoginIndex, HandshakeMessages.LoginIndexedMessage::setLoginIndex)
-                .encoder(HandshakeMessages.C2SAcknowledge::encode)
-                .decoder(HandshakeMessages.C2SAcknowledge::decode)
+        handshakeChannel.messageBuilder(EXNHandshakeMessages.C2SAcknowledge.class, 99)
+                .loginIndex(EXNHandshakeMessages.LoginIndexedMessage::getLoginIndex, EXNHandshakeMessages.LoginIndexedMessage::setLoginIndex)
+                .encoder(EXNHandshakeMessages.C2SAcknowledge::encode)
+                .decoder(EXNHandshakeMessages.C2SAcknowledge::decode)
                 .consumer(HandshakeHandler.indexFirst((handler, msg, s) -> EXNHandshakeHandler.handleAcknowledge(msg, s)))
                 .add();
 
-        handshakeChannel.messageBuilder(HandshakeMessages.S2COreList.class, 1)
-                .loginIndex(HandshakeMessages.LoginIndexedMessage::getLoginIndex, HandshakeMessages.LoginIndexedMessage::setLoginIndex)
-                .encoder(HandshakeMessages.S2COreList::encode)
-                .decoder(HandshakeMessages.S2COreList::decode)
+        handshakeChannel.messageBuilder(EXNHandshakeMessages.S2COreList.class, 1)
+                .loginIndex(EXNHandshakeMessages.LoginIndexedMessage::getLoginIndex, EXNHandshakeMessages.LoginIndexedMessage::setLoginIndex)
+                .encoder(EXNHandshakeMessages.S2COreList::encode)
+                .decoder(EXNHandshakeMessages.S2COreList::decode)
                 .consumer(HandshakeHandler.biConsumerFor((handler, msg, supplier) -> {
                     try {
                         EXNHandshakeHandler.handleOreList(msg, supplier);

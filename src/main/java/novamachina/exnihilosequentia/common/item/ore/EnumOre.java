@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.network.HandshakeMessages;
+import novamachina.exnihilosequentia.common.network.EXNHandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
 
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public enum EnumOre implements IExtensibleEnum {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static boolean updateEnabledOres(HandshakeMessages.S2COreList message) {
+    public static boolean updateEnabledOres(EXNHandshakeMessages.S2COreList message) {
         List<EnumOre> oreList = message.getOreList();
         Arrays.stream(EnumOre.values()).forEach(EnumOre::disable);
         if (oreList != null) {
