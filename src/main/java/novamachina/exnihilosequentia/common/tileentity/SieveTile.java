@@ -17,12 +17,12 @@ import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.api.utility.Config;
+import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.init.ExNihiloStats;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
@@ -113,9 +113,8 @@ public class SieveTile extends BlockEntity {
         super.load(compound);
     }
 
-    @Nonnull
     @Override
-    public CompoundTag save(@Nonnull CompoundTag compound) {
+    protected void saveAdditional(@Nonnull CompoundTag compound) {
         if (!meshStack.isEmpty()) {
             CompoundTag meshNBT = meshStack.save(new CompoundTag());
             compound.put(MESH_TAG, meshNBT);
@@ -128,7 +127,7 @@ public class SieveTile extends BlockEntity {
 
         compound.putInt(PROGRESS_TAG, progress);
 
-        return super.save(compound);
+        super.saveAdditional(compound);
     }
 
     @Override

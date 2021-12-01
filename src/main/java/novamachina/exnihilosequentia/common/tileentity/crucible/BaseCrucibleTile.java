@@ -70,15 +70,14 @@ public abstract class BaseCrucibleTile extends BlockEntity {
         super.load(compound);
     }
 
-    @Nonnull
     @Override
-    public CompoundTag save(CompoundTag compound) {
+    public void saveAdditional(CompoundTag compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put("tank", tank.writeToNBT(new CompoundTag()));
         compound.putInt("ticksSinceLast", ticksSinceLast);
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
         compound.put(CURRENT_ITEM_TAG, currentItem.save(new CompoundTag()));
-        return super.save(compound);
+        super.saveAdditional(compound);
     }
 
     @Nonnull

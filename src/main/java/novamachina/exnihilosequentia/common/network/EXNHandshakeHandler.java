@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.network;
 
 import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.network.HandshakeHandler;
 import net.minecraftforge.network.NetworkEvent;
 import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
