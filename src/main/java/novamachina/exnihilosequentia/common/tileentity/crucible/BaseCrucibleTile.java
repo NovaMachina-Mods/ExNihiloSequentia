@@ -71,13 +71,14 @@ public abstract class BaseCrucibleTile extends BlockEntity {
     }
 
     @Override
-    public void saveAdditional(CompoundTag compound) {
+    @Nonnull
+    public CompoundTag save(CompoundTag compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put("tank", tank.writeToNBT(new CompoundTag()));
         compound.putInt("ticksSinceLast", ticksSinceLast);
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
         compound.put(CURRENT_ITEM_TAG, currentItem.save(new CompoundTag()));
-        super.saveAdditional(compound);
+        return super.save(compound);
     }
 
     @Nonnull
@@ -187,6 +188,7 @@ public abstract class BaseCrucibleTile extends BlockEntity {
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         CompoundTag nbt = packet.getTag();
+        assert nbt != null;
         if (nbt.contains(CURRENT_ITEM_TAG)) {
             currentItem = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(CURRENT_ITEM_TAG)));
         } else {

@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
+import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -20,18 +21,14 @@ public class AbstractBarrelBlock extends BlockBarrel {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-        return new StoneBarrelTile(pos, state);
-    }
-
-    @Nullable
-    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level1, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
         if (level1.isClientSide) {
             return null;
         }
         return (level, blockPos, blockState, t) -> {
             if (t instanceof StoneBarrelTile tile) {
+                tile.tick();
+            } else if (t instanceof WoodBarrelTile tile) {
                 tile.tick();
             }
         };

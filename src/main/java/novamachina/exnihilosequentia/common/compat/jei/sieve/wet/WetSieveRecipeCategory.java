@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.sieve.wet;
 
+//TODO remove comment when jei is ported to 1.18
+/*
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import mezz.jei.api.constants.VanillaTypes;
@@ -27,8 +29,9 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 import java.util.List;
+ */
 
-public class WetSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
+public class WetSieveRecipeCategory { /* implements IRecipeCategory<JEISieveRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "wet_sieve");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
@@ -127,4 +130,5 @@ public class WetSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
             }
         });
     }
+*/
 }

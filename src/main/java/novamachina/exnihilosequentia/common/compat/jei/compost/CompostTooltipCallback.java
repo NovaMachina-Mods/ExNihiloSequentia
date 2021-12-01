@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
+//TODO remove comment when jei is ported to 1.18
+/*
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -9,9 +11,8 @@ import novamachina.exnihilosequentia.api.utility.Config;
 
 import java.util.List;
 
-
-
-public class CompostTooltipCallback implements ITooltipCallback<ItemStack> {
+*/
+public class CompostTooltipCallback { /*implements ITooltipCallback<ItemStack> {
 
     @Override
     public void onTooltip(int slotIndex, boolean input, ItemStack itemStack, List<Component> list) {
@@ -22,6 +23,5 @@ public class CompostTooltipCallback implements ITooltipCallback<ItemStack> {
                     .format("Amount: %d / %d", solidAmount, Config.getBarrelMaxSolidAmount())));
         }
     }
-
-
+*/
 }

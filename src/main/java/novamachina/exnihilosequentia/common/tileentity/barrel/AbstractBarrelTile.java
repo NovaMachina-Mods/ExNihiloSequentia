@@ -85,14 +85,15 @@ public abstract class AbstractBarrelTile extends BlockEntity {
         level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
     }
 
+    @Nonnull
     @Override
-    public void saveAdditional(CompoundTag compound) {
+    public CompoundTag save(CompoundTag compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put(TANK_TAG, tank.writeToNBT(new CompoundTag()));
         compound.putString(MODE_TAG, mode.getModeName());
         compound.put(MODE_INFO_TAG, mode.write());
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
-        super.saveAdditional(compound);
+        return super.save(compound);
     }
 
     @Override
@@ -115,9 +116,11 @@ public abstract class AbstractBarrelTile extends BlockEntity {
         super.load(compound);
     }
 
+    //TODO NBT = null :(
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         CompoundTag nbt = pkt.getTag();
+        assert nbt != null;
         if (nbt.contains(INVENTORY_TAG)) {
             inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
         }

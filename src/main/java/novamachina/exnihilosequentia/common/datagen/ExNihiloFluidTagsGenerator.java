@@ -16,6 +16,6 @@ public class ExNihiloFluidTagsGenerator extends AbstractFluidTagGenerator {
 
     @Override
     protected void addTags() {
-        this.tag(FluidTags.WATER).add(ExNihiloFluids.SEA_WATER.get(), ExNihiloFluids.SEA_WATER_FLOW.get());
+        //this.tag(FluidTags.WATER).add(ExNihiloFluids.SEA_WATER.get(), ExNihiloFluids.SEA_WATER_FLOW.get());
     }
 }

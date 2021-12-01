@@ -174,7 +174,7 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock, ITO
     @Override
     public BlockState updateShape(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull LevelAccessor worldIn, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
         if (Boolean.TRUE.equals(stateIn.getValue(WATERLOGGED))) {
-            worldIn.getFluidTicks().hasScheduledTick(currentPos, Fluids.WATER);
+            worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
         return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }

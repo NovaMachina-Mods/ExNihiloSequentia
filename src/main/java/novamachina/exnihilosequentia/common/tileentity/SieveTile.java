@@ -252,6 +252,7 @@ public class SieveTile extends BlockEntity {
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         CompoundTag nbt = packet.getTag();
+        assert nbt != null;
         if (nbt.contains(MESH_TAG)) {
             meshStack = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(MESH_TAG)));
             if (meshStack.getItem() instanceof MeshItem) {

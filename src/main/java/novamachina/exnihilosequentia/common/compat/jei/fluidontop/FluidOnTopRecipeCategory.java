@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidontop;
 
+//TODO remove comment when jei is ported to 1.18
+/*
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -14,8 +16,9 @@ import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 
 import java.util.Arrays;
+ */
 
-public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecipe> {
+public class FluidOnTopRecipeCategory { /*implements IRecipeCategory<FluidOnTopRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluidontop");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_on_top.png");
     private final IDrawableStatic background;
@@ -65,4 +68,5 @@ public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecip
         recipeLayout.getFluidStacks().set(1, recipe.getFluidOnTop());
         recipeLayout.getItemStacks().set(0, recipe.getResultItem());
     }
+*/
 }

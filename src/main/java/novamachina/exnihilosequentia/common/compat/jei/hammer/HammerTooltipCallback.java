@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.hammer;
 
+//TODO remove comment when jei is ported to 1.18
+/*
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -8,8 +10,9 @@ import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 import java.util.List;
+ */
 
-public class HammerTooltipCallback implements ITooltipCallback<ItemStack> {
+public class HammerTooltipCallback { /*implements ITooltipCallback<ItemStack> {
     private final HammerRecipe hammerRecipe;
 
     public HammerTooltipCallback(HammerRecipe hammerRecipe) {
@@ -24,4 +27,5 @@ public class HammerTooltipCallback implements ITooltipCallback<ItemStack> {
                     .forEach(stack -> tooltip.add(new TextComponent(String.format("%s", StringUtils.formatPercent(stack.getChance())))));
         }
     }
+*/
 }

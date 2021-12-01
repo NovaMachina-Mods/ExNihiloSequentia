@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
+//TODO remove comment when jei is ported to 1.18
+/*
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -28,8 +30,9 @@ import org.apache.logging.log4j.LogManager;
 
 import java.awt.*;
 import java.util.Arrays;
+ */
 
-public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
+public class HeatRecipeCategory { /*implements IRecipeCategory<HeatRecipe> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
     private final IDrawableStatic background;
@@ -112,4 +115,5 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(input).getItems()));
         }
     }
+*/
 }

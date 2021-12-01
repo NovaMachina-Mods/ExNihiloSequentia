@@ -1,9 +1,12 @@
 package novamachina.exnihilosequentia.common.init;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,7 +27,11 @@ import novamachina.exnihilosequentia.common.block.sieves.NetherSieveBlock;
 import novamachina.exnihilosequentia.common.block.sieves.WoodSieveBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import org.apache.logging.log4j.LogManager;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ExNihiloBlocks {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister
@@ -101,7 +108,13 @@ public class ExNihiloBlocks {
             .register(Blocks.WARPED_BARREL, NetherBarrelBlock::new);
     public static final RegistryObject<BaseBlock> STONE_BARREL = BLOCKS
             .register(Blocks.STONE_BARREL, () -> new AbstractBarrelBlock(new BlockBuilder().harvestLevel(ToolActions.PICKAXE_DIG)
-                    .properties(BlockBehaviour.Properties.of(Material.STONE).strength(0.75F).sound(SoundType.STONE))));
+                    .properties(BlockBehaviour.Properties.of(Material.STONE).strength(0.75F).sound(SoundType.STONE))) {
+                @Nullable
+                @Override
+                public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+                    return new StoneBarrelTile(pos, state);
+                }
+            });
     public static final RegistryObject<WoodSieveBlock> ACACIA_SIEVE = BLOCKS
             .register(Blocks.ACACIA_SIEVE, WoodSieveBlock::new);
     public static final RegistryObject<WoodSieveBlock> BIRCH_SIEVE = BLOCKS

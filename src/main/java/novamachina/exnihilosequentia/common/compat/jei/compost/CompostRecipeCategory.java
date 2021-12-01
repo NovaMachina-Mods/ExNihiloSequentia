@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
+//TODO remove comment when jei is ported to 1.18
+/*
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,8 +19,8 @@ import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
 
 
-
-public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
+*/
+public class CompostRecipeCategory { /*implements IRecipeCategory<CompostRecipe> {
 
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "compost");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
@@ -85,5 +87,5 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
         }
         recipeLayout.getItemStacks().addTooltipCallback(new CompostTooltipCallback());
     }
-
+*/
 }

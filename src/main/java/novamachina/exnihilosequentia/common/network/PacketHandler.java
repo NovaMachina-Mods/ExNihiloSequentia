@@ -29,15 +29,15 @@ public class PacketHandler {
                 .simpleChannel();
 
         //TODO
-        handshakeChannel.messageBuilder(EXNHandshakeMessages.C2SAcknowledge.class, 99)
+/*        handshakeChannel.messageBuilder(EXNHandshakeMessages.C2SAcknowledge.class, 99)
                 .loginIndex(EXNHandshakeMessages.LoginIndexedMessage::getLoginIndex, EXNHandshakeMessages.LoginIndexedMessage::setLoginIndex)
                 .encoder(EXNHandshakeMessages.C2SAcknowledge::encode)
                 .decoder(EXNHandshakeMessages.C2SAcknowledge::decode)
                 .consumer(HandshakeHandler.indexFirst((handler, msg, s) -> EXNHandshakeHandler.handleAcknowledge(msg, s)))
                 .add();
-
+*/
         //TODO
-        handshakeChannel.messageBuilder(EXNHandshakeMessages.S2COreList.class, 1)
+/*        handshakeChannel.messageBuilder(EXNHandshakeMessages.S2COreList.class, 1)
                 .loginIndex(EXNHandshakeMessages.LoginIndexedMessage::getLoginIndex, EXNHandshakeMessages.LoginIndexedMessage::setLoginIndex)
                 .encoder(EXNHandshakeMessages.S2COreList::encode)
                 .decoder(EXNHandshakeMessages.S2COreList::decode)
@@ -50,5 +50,6 @@ public class PacketHandler {
                 }))
                 .markAsLoginPacket()
                 .add();
+*/
     }
 }
