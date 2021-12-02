@@ -34,7 +34,9 @@ import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
@@ -695,5 +697,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 stringChance(0.001F), flintChance(0.003F), ironChance(0.005F), diamondChance(0.01F));
         createSieveRecipe(consumer, ItemTags.LEAVES, ExNihiloItems.SILKWORM.get(), "silkworm",
                 stringChance(0.025F), flintChance(0.05F), ironChance(0.1F), diamondChance(0.2F));
+        createSieveRecipe(consumer, Blocks.COARSE_DIRT, Items.DIRT, "dirt",
+                stringChance(0), stringChance(0.4f));
+        createSieveRecipe(consumer, Blocks.COARSE_DIRT, Items.DIRT, "gravel",
+                stringChance(0.4f));
     }
 }

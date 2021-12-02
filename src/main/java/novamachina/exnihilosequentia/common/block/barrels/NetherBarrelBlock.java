@@ -9,6 +9,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolActions;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -16,7 +17,7 @@ import javax.annotation.Nullable;
 public class NetherBarrelBlock extends AbstractBarrelBlock {
     public NetherBarrelBlock() {
         super(new BlockBuilder().harvestLevel(ToolActions.AXE_DIG)
-                .properties(BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F).sound(SoundType.STEM)));
+                .properties(BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F).sound(Config.getNetherBarrelSoundsEnabled() ? SoundType.STEM : SoundType.WOOD)));
     }
 
     @Nullable

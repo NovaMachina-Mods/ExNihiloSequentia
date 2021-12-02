@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.4,
+      "mesh": "string"
+    }
+  ],
+  "input": {
+    "item": "minecraft:coarse_dirt"
+  },
+  "result": {
+    "item": "minecraft:gravel"
+  }
+}

@@ -33,7 +33,7 @@ public class MeltableItemHandler extends ItemStackHandler {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return ExNihiloRegistries.CRUCIBLE_REGISTRY.isMeltable(stack.getItem(), type.getLevel());
+        return ExNihiloRegistries.CRUCIBLE_REGISTRY.isMeltableByItemStack(stack, type.getLevel());
     }
 
     @Override

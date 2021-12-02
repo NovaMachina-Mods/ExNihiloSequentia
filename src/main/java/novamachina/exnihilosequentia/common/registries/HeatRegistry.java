@@ -7,10 +7,6 @@ import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 public class HeatRegistry implements IHeatRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
@@ -23,7 +19,12 @@ public class HeatRegistry implements IHeatRegistry {
 
     @Override
     public int getHeatAmount(ForgeRegistryEntry<? extends ItemLike> entry) {
-        return recipeList.stream().filter(recipe -> Objects.equals(recipe.getInput().getRegistryName(), entry.getRegistryName())).findFirst().map(HeatRecipe::getAmount).orElse(0);
+        return recipeList
+                .stream()
+                .filter(recipe -> recipe.isMatch(entry))
+                .findFirst()
+                .map(HeatRecipe::getAmount)
+                .orElse(0);
     }
 
     @Override

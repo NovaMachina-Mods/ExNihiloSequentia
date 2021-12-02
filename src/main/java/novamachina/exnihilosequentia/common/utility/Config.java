@@ -50,6 +50,7 @@ public class Config {
     private static ForgeConfigSpec.BooleanValue flattenSieveRecipes;
     private static ForgeConfigSpec.IntValue sieveRange;
     private static ForgeConfigSpec.IntValue maxSieveClicks;
+    private static ForgeConfigSpec.BooleanValue netherSieveSoundsEnabled;
     // Crook
     private static ForgeConfigSpec.IntValue maxBonusStringCount;
     private static ForgeConfigSpec.IntValue minStringCount;
@@ -87,6 +88,7 @@ public class Config {
     private static ForgeConfigSpec.IntValue secondsToSpawn;
     private static ForgeConfigSpec.IntValue rainFillAmount;
     private static ForgeConfigSpec.BooleanValue showParticles;
+    private static ForgeConfigSpec.BooleanValue netherBarrelSoundsEnabled;
     private static ForgeConfigSpec.IntValue barrelRange;
     // Infested Leaves
     private static ForgeConfigSpec.IntValue secondsToTransformLeaves;
@@ -98,6 +100,7 @@ public class Config {
     private static ForgeConfigSpec.IntValue vanillaSimulateDropCount;
     private static ForgeConfigSpec.IntValue woodBarrelMaxTemp;
     private static ForgeConfigSpec.IntValue woodHeatRate;
+    private static ForgeConfigSpec.BooleanValue netherCrucibleSoundsEnabled;
 
     static {
         COMMON_BUILDER.comment("Pebble Configs").push(CATEGORY_PEBBLE);
@@ -141,6 +144,9 @@ public class Config {
                 .defineInRange("woodBarrelMaxTemp", 300, 0, Integer.MAX_VALUE);
         showParticles = COMMON_BUILDER.comment("Should Ex Nihilo show any Particle?")
                 .define("showParticles", true);
+        netherBarrelSoundsEnabled = COMMON_BUILDER.comment("Should nether barrels sound like nether wood? (Default: true)")
+                        .comment("If set to false, the blocks have same sounds as wooden barrels")
+                                .define("netherBarrelSoundsEnabled", true);
 
         COMMON_BUILDER.comment("Mob Spawn Configs").push(SUBCATEGORY_BARREL_MOB);
         secondsToSpawn = COMMON_BUILDER.comment("Number of seconds to spawn mobs (Default: 10)")
@@ -181,6 +187,9 @@ public class Config {
                 .defineInRange("ticksBetweenMelts", 20, 1, Integer.MAX_VALUE);
         crucibleNumberOfBuckets = COMMON_BUILDER.comment("Number of buckets the crucible will hold (Default: 4)")
                 .defineInRange("crucibleNumberOfBuckets", 4, 1, Integer.MAX_VALUE);
+        netherCrucibleSoundsEnabled = COMMON_BUILDER.comment("Should nether crucibles sound like nether wood? (Default: true)")
+                .comment("If set to false, the blocks have same sounds as wooden crucibles")
+                .define("netherCrucibleSoundsEnabled", true);
 
         COMMON_BUILDER.comment("Wooden Crucible Configs").push(SUBCATEGORY_CRUCIBLE_WOOD);
         woodHeatRate = COMMON_BUILDER
@@ -306,6 +315,9 @@ public class Config {
         maxSieveClicks = COMMON_BUILDER
                 .comment("The number of sieve clicks required to sieve a block. (Default: 10)")
                 .defineInRange("maxSieveClicks", 10, 1, 10);
+        netherSieveSoundsEnabled = COMMON_BUILDER.comment("Should nether sieves sound like nether wood? (Default: true)")
+                .comment("If set to false, the blocks have same sounds as wooden sieves")
+                .define("netherSieveSoundsEnabled", true);
     }
 
     private Config() {
@@ -324,9 +336,7 @@ public class Config {
     public static int getCrookIronDurability() { return crookIronValue.get(); }
     public static int getCrookDiamondDurability() { return crookDiamondValue.get(); }
     public static int getCrookBoneDurability() { return crookBoneValue.get(); }
-    public static int getVanillaSimulateDropCount() {
-        return vanillaSimulateDropCount.get();
-    }
+    public static int getVanillaSimulateDropCount() { return vanillaSimulateDropCount.get(); }
 
     // Hammer
     public static int getHammerWoodDurability() { return hammerWoodValue.get(); }
@@ -337,9 +347,7 @@ public class Config {
     public static int getHammerNetheriteDurability() { return hammerNetheriteValue.get(); }
 
     // Mesh
-    public static boolean enableMeshDurability() {
-        return enableMeshDurability.get();
-    }
+    public static boolean enableMeshDurability() { return enableMeshDurability.get(); }
     public static int getMeshStackSize() { return meshStackSize.get(); }
     public static int getMeshStringValue() { return meshStringValue.get(); }
     public static int getMeshFlintValue() { return meshFlintValue.get(); }
@@ -369,11 +377,13 @@ public class Config {
     public static boolean flattenSieveRecipes() { return flattenSieveRecipes.get(); }
     public static int getSieveRange() { return sieveRange.get(); }
     public static int getMaxSieveClicks() { return maxSieveClicks.get(); }
+    public static boolean getNetherSieveSoundsEnabled() { return netherSieveSoundsEnabled.get(); }
 
     // Crucible
     public static int getCrucibleNumberOfBuckets() { return crucibleNumberOfBuckets.get(); }
     public static int getTicksBetweenMelts() { return ticksBetweenMelts.get(); }
     public static int getWoodHeatRate() { return woodHeatRate.get(); }
+    public static boolean getNetherCrucibleSoundsEnabled() { return netherCrucibleSoundsEnabled.get(); }
 
     // Barrel
     public static int getBarrelMaxSolidAmount() { return barrelMaxSolidAmount.get(); }
@@ -385,6 +395,7 @@ public class Config {
     public static int getWoodBarrelMaxTemp() { return woodBarrelMaxTemp.get(); }
     public static boolean getShowParticles() { return showParticles.get(); }
     public static int getBarrelRange() { return barrelRange.get(); }
+    public static boolean getNetherBarrelSoundsEnabled() { return netherBarrelSoundsEnabled.get(); }
 
     // Infested Leaves
     public static int getMaxBonusStringCount() { return maxBonusStringCount.get(); }

@@ -10,9 +10,17 @@ public interface ICrucibleRegistry {
 
     CrucibleRecipe findRecipe(ItemLike item);
 
+    CrucibleRecipe findRecipeByItemStack(ItemStack itemStack);
+
+    CrucibleRecipe findRecipeByItem(Item item);
+
     List<CrucibleRecipe> getRecipeList();
 
     boolean isMeltable(ItemLike item, int level);
+
+    boolean isMeltableByItem(Item item, int level);
+
+    boolean isMeltableByItemStack(ItemStack item, int level);
 
     void setRecipes(List<CrucibleRecipe> recipes);
 }

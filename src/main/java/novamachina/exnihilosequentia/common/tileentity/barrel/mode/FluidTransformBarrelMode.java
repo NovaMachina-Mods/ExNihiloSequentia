@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import com.google.common.base.Preconditions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -86,15 +87,16 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerLevel) Objects.requireNonNull(barrelTile.getLevel()))
-            .sendParticles(ParticleTypes.EFFECT,
+        ServerLevel level = (ServerLevel) barrelTile.getLevel();
+        Preconditions.checkNotNull(level, "Level is null.");
+        level.sendParticles(ParticleTypes.EFFECT,
                 barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
                 1,
-                0.0,
-                0.0,
-                0.0,
+                0,
+                0,
+                0,
                 0.05);
     }
 

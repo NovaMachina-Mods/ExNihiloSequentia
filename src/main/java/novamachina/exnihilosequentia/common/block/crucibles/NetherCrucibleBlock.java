@@ -13,6 +13,7 @@ import net.minecraftforge.common.ToolActions;
 import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.crucible.FiredCrucibleTile;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -21,7 +22,7 @@ public class NetherCrucibleBlock extends CrucibleBaseBlock {
     public NetherCrucibleBlock() {
         super(new BlockBuilder().properties(
                 BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F)
-                        .sound(SoundType.STEM).noOcclusion()).harvestLevel(ToolActions.AXE_DIG));
+                        .sound(Config.getNetherCrucibleSoundsEnabled() ? SoundType.STEM : SoundType.WOOD).noOcclusion()).harvestLevel(ToolActions.AXE_DIG));
     }
 
     @Nullable

@@ -2,6 +2,8 @@ package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -41,7 +43,7 @@ public class SieveTile extends BlockEntity {
     private ItemStack meshStack = ItemStack.EMPTY;
     private ItemStack blockStack = ItemStack.EMPTY;
     private EnumMesh meshType = EnumMesh.NONE;
-    private int progress = 0;
+    private float progress = 0;
 
     private long lastSieveAction = 0;
     private UUID lastPlayer;
@@ -108,7 +110,7 @@ public class SieveTile extends BlockEntity {
             blockStack = ItemStack.EMPTY;
         }
 
-        progress = compound.getInt(PROGRESS_TAG);
+        progress = compound.getFloat(PROGRESS_TAG);
 
         super.load(compound);
     }
@@ -126,7 +128,7 @@ public class SieveTile extends BlockEntity {
             compound.put(BLOCK_TAG, blockNBT);
         }
 
-        compound.putInt(PROGRESS_TAG, progress);
+        compound.putFloat(PROGRESS_TAG, progress);
         //setChanged();
     }
 
@@ -152,6 +154,8 @@ public class SieveTile extends BlockEntity {
 
     public void activateSieve(Player player, boolean isWaterlogged) {
         logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
+        float fortune = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, meshStack);
+        float efficiency = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, meshStack);
 
         // 4 ticks is the same period of holding down right click
         assert level != null;
@@ -174,14 +178,14 @@ public class SieveTile extends BlockEntity {
         }
 
         if (isReadyToSieve()) {
-            progress += 1;
+            progress += 1 * (1+efficiency/5);
 
             if (progress >= Config.getMaxSieveClicks()) {
                 logger.debug("Sieve progress complete");
                 List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
                     .getDrops(((BlockItem) blockStack.getItem()).getBlock(), meshType, isWaterlogged);
                 drops.forEach((entry -> entry.getRolls().forEach(meshWithChance -> {
-                    if (random.nextFloat() <= meshWithChance.getChance()) {
+                    if (random.nextFloat() <= meshWithChance.getChance() * (1F + (fortune/3))) {
                         logger.debug("Spawning Item: " + entry.getDrop());
                         level.addFreshEntity(new ItemEntity(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 1.1F, worldPosition
                             .getZ() + 0.5F, entry.getDrop()));
@@ -228,7 +232,7 @@ public class SieveTile extends BlockEntity {
     }
 
     public float getProgress() {
-        return (float)progress / Config.getMaxSieveClicks();
+        return progress / Config.getMaxSieveClicks();
     }
 
     @Override
@@ -243,7 +247,7 @@ public class SieveTile extends BlockEntity {
             CompoundTag blockNbt = blockStack.save(new CompoundTag());
             nbt.put(BLOCK_TAG, blockNbt);
         }
-        nbt.putInt(PROGRESS_TAG, progress);
+        nbt.putFloat(PROGRESS_TAG, progress);
 
         return ClientboundBlockEntityDataPacket.create(this);
         //return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
@@ -267,7 +271,7 @@ public class SieveTile extends BlockEntity {
             } else {
                 blockStack = ItemStack.EMPTY;
             }
-            progress = nbt.getInt(PROGRESS_TAG);
+            progress = nbt.getFloat(PROGRESS_TAG);
         }
     }
 

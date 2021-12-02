@@ -19,8 +19,10 @@ import org.apache.logging.log4j.LogManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,141 +33,124 @@ public class SieveRegistry implements ISieveRegistry {
 
     private final List<SieveRecipe> recipeList = new ArrayList<>();
 
-    private List<SieveRecipe> getDrops(Ingredient input, EnumMesh meshType, boolean isWaterlogged) {
-        return recipeList.parallelStream()
-            .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
-            .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), input))
-            .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
-            .filter(recipe -> {
-                if(recipe.getDrop().getItem() instanceof OreItem ore) {
-                    return ore.getOre().isEnabled();
-                }
-                return true;
-            })
-            .filter(recipe -> !recipe.getRolls().isEmpty())
-            .collect(Collectors.toList());
+    private final Map<Boolean, Map<EnumMesh, Map<Block, Boolean>>> blockSiftableCache = new HashMap<>();
+    private final Map<Boolean, Map<EnumMesh, Map<Item, List<SieveRecipe>>>> itemDropsListCache = new HashMap<>();
+
+    private List<SieveRecipe> getDropsByIngredient(Ingredient input, EnumMesh meshType, boolean isWaterlogged) {
+        return Arrays.stream(input.getItems())
+                .map(ItemStack::getItem)
+                .flatMap(item -> getDrops(item, meshType, isWaterlogged).stream())
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<SieveRecipe> getDrops(ItemLike input, EnumMesh meshType, boolean isWaterlogged) {
-        return recipeList.parallelStream()
-            .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
-            .filter(sieveRecipe -> sieveRecipe.getInput().test(new ItemStack(input)))
-            .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
-            .filter(recipe -> {
-                if(recipe.getDrop().getItem() instanceof OreItem ore) {
-                    return ore.getOre().isEnabled();
-                }
-                return true;
-            })
-            .filter(recipe -> !recipe.getRolls().isEmpty())
-            .collect(Collectors.toList());
+        return itemDropsListCache
+                .computeIfAbsent(isWaterlogged, k -> new HashMap<>())
+                .computeIfAbsent(meshType, k -> new HashMap<>())
+                .computeIfAbsent(input.asItem(), k -> {
+                    final ItemStack itemStack = new ItemStack(k);
+                    return recipeList.stream()
+                            .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
+                            .filter(sieveRecipe -> sieveRecipe.getInput().test(itemStack))
+                            .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
+                            .filter(recipe -> !recipe.getRolls().isEmpty())
+                            .filter(recipe -> {
+                                if (recipe.getDrop().getItem() instanceof OreItem) {
+                                    final OreItem ore = (OreItem)recipe.getDrop().getItem();
+                                    return ore.getOre().isEnabled();
+                                }
+                                return true;
+                            })
+                            .collect(Collectors.toList());
+                });
     }
 
     @Override
     public boolean isBlockSiftable(Block block, EnumMesh mesh, boolean isWaterlogged) {
-        return recipeList.parallelStream().anyMatch(sieveRecipe ->{
-            if(sieveRecipe.getInput().test(new ItemStack(block)) && sieveRecipe.isWaterlogged() == isWaterlogged) {
-                for(MeshWithChance meshWithChance : sieveRecipe.getRolls()) {
-                    if(flattenRecipes) {
-                        if(meshWithChance.getMesh().getId() <= mesh.getId()) {
-                            return true;
-                        }
-                    } else {
-                        if(meshWithChance.getMesh().getId() == mesh.getId()) {
-                            return true;
-                        }
+        return blockSiftableCache
+                .computeIfAbsent(isWaterlogged, k -> new HashMap<>())
+                .computeIfAbsent(mesh, k -> new HashMap<>())
+                .computeIfAbsent(block, k -> {
+                    final ItemStack itemStack = new ItemStack(block);
+                    final int meshId = mesh.getId();
+                    return recipeList
+                            .stream()
+                            .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
+                            .filter(sieveRecipe -> sieveRecipe.getInput().test(itemStack))
+                            .anyMatch(sieveRecipe -> sieveRecipe
+                                    .getRolls()
+                                    .stream()
+                                    .anyMatch(meshWithChance -> {
+                                        final int meshWithChanceId = meshWithChance.getMesh().getId();
+                                        if (flattenRecipes)
+                                            return meshWithChanceId <= meshId;
+                                        else
+                                            return meshWithChanceId == meshId;
+                                    }));
+                });
+    }
+
+    private List<JEISieveRecipe> getRecipeList(boolean isWaterLogged) {
+        final Set<Ingredient> ingredients = new HashSet<>();
+        recipeList
+                .forEach(recipe -> {
+                    final Ingredient recipeIngredient = recipe.getInput();
+                    if (ingredients
+                            .stream()
+                            .noneMatch(ingredient ->
+                                    IngredientUtils.areIngredientsEqual(ingredient, recipeIngredient))) {
+                        ingredients.add(recipeIngredient);
                     }
-                }
-            }
-            return false;
-        });
+                });
+
+        return Arrays.stream(EnumMesh.values())
+                .filter(enumMesh -> enumMesh != EnumMesh.NONE)
+                .flatMap(enumMesh -> {
+                    final ItemStack mesh = new ItemStack(enumMesh.getRegistryObject().get());
+                    return ingredients
+                            .stream()
+                            .flatMap(ingredient -> {
+                                final List<SieveRecipe> drops = getDropsByIngredient(ingredient, enumMesh, isWaterLogged);
+                                if (drops.isEmpty())
+                                    return null;
+                                final List<List<ItemStack>> input = new ArrayList<>(Arrays.asList(
+                                        Collections.singletonList(mesh),
+                                        Arrays.asList(ingredient.getItems())
+                                ));
+                                return Lists
+                                        .partition(drops, 21)
+                                        .stream()
+                                        .map(results -> new JEISieveRecipe(input, results));
+                            });
+                })
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<JEISieveRecipe> getDryRecipeList() {
-        List<JEISieveRecipe> returnList = new ArrayList<>();
-
-        Set<Ingredient> inputs = new HashSet<>();
-        for(SieveRecipe recipe : recipeList) {
-            boolean insert = true;
-            for(Ingredient ingredient : inputs) {
-                if(IngredientUtils.areIngredientsEqual(ingredient, recipe.getInput())) {
-                    insert = false;
-                    break;
-                }
-            }
-            if(insert) {
-                inputs.add(recipe.getInput());
-            }
-        }
-
-        for(EnumMesh mesh : EnumMesh.values()) {
-            if(mesh != EnumMesh.NONE) {
-                for(Ingredient ingredient : inputs) {
-                    List<SieveRecipe> drops = getDrops(ingredient, mesh, false);
-                    List<List<SieveRecipe>> dropLists = Lists.partition(drops, 21);
-                    if(!drops.isEmpty()) {
-                        List<List<ItemStack>> inputList = new ArrayList<>();
-                        inputList.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
-                        inputList.add(Arrays.asList(ingredient.getItems()));
-                        for(List<SieveRecipe> dropList : dropLists) {
-                            returnList.add(new JEISieveRecipe(inputList, dropList));
-                        }
-                    }
-                }
-            }
-        }
-
-        return returnList;
+        return getRecipeList(false);
     }
 
     @Override
     public List<JEISieveRecipe> getWetRecipeList() {
-        List<JEISieveRecipe> returnList = new ArrayList<>();
-
-        Set<Ingredient> inputs = new HashSet<>();
-        for(SieveRecipe recipe : recipeList) {
-            boolean insert = true;
-            for(Ingredient ingredient : inputs) {
-                if(IngredientUtils.areIngredientsEqual(ingredient, recipe.getInput())) {
-                    insert = false;
-                    break;
-                }
-            }
-            if(insert) {
-                inputs.add(recipe.getInput());
-            }
-        }
-
-        for(EnumMesh mesh : EnumMesh.values()) {
-            if(mesh != EnumMesh.NONE) {
-                for(Ingredient ingredient : inputs) {
-                    List<SieveRecipe> drops = getDrops(ingredient, mesh, true);
-                    List<List<SieveRecipe>> dropLists = Lists.partition(drops, 21);
-                    if(!drops.isEmpty()) {
-                        List<List<ItemStack>> inputList = new ArrayList<>();
-                        inputList.add(Collections.singletonList(new ItemStack(mesh.getRegistryObject().get())));
-                        inputList.add(Arrays.asList(ingredient.getItems()));
-                        for(List<SieveRecipe> dropList : dropLists) {
-                            returnList.add(new JEISieveRecipe(inputList, dropList));
-                        }
-                    }
-                }
-            }
-        }
-
-        return returnList;
+        return getRecipeList(true);
     }
 
     @Override
     public void setRecipes(List<SieveRecipe> recipes) {
         logger.debug("Sieve Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
+
+        blockSiftableCache.clear();
+        itemDropsListCache.clear();
     }
 
     @Override
     public void clearRecipes() {
         recipeList.clear();
+
+        blockSiftableCache.clear();
+        itemDropsListCache.clear();
     }
 }

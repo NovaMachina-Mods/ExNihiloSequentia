@@ -8,36 +8,41 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CompostRegistry implements ICompostRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     public final List<CompostRecipe> recipeList = new ArrayList<>();
 
+    private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
+
     @Override
-    public boolean containsSolid(ItemLike item) {
-        for(CompostRecipe recipe : recipeList) {
-            if(recipe.getInput().test(new ItemStack(item))) {
-                return true;
-            }
-        }
-        return false;
+    public boolean containsSolid(IItemProvider item) {
+        return getSolidAmount(item) > 0;
     }
 
     @Override
-    public int getSolidAmount(ItemLike item) {
-        for(CompostRecipe recipe : recipeList) {
-            if(recipe.getInput().test(new ItemStack(item))) {
-                return recipe.getAmount();
-            }
-        }
-        return 0;
+    public int getSolidAmount(IItemProvider item) {
+        return itemSolidAmountCache
+                .computeIfAbsent(item.asItem(), k -> {
+                    final ItemStack itemStack = new ItemStack(item);
+                    return recipeList
+                            .stream()
+                            .filter(compostRecipe -> compostRecipe.getInput().test(itemStack))
+                            .findFirst()
+                            .map(CompostRecipe::getAmount)
+                            .orElse(0);
+                });
     }
 
     @Override
     public void setRecipes(List<CompostRecipe> recipes) {
         logger.debug("Compost Registry recipes: " + recipes.size());
         this.recipeList.addAll(recipes);
+
+        itemSolidAmountCache.clear();
     }
 
     @Override
@@ -48,5 +53,7 @@ public class CompostRegistry implements ICompostRegistry {
     @Override
     public void clearRecipes() {
         recipeList.clear();
+
+        itemSolidAmountCache.clear();
     }
 }
