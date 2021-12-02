@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.network;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.network.HandshakeHandler;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -26,16 +27,14 @@ public class PacketHandler {
                 .serverAcceptedVersions(s -> true)
                 .simpleChannel();
 
-        //TODO
-/*        handshakeChannel.messageBuilder(EXNHandshakeMessages.C2SAcknowledge.class, 99)
+        handshakeChannel.messageBuilder(EXNHandshakeMessages.C2SAcknowledge.class, 99)
                 .loginIndex(EXNHandshakeMessages.LoginIndexedMessage::getLoginIndex, EXNHandshakeMessages.LoginIndexedMessage::setLoginIndex)
                 .encoder(EXNHandshakeMessages.C2SAcknowledge::encode)
                 .decoder(EXNHandshakeMessages.C2SAcknowledge::decode)
                 .consumer(HandshakeHandler.indexFirst((handler, msg, s) -> EXNHandshakeHandler.handleAcknowledge(msg, s)))
                 .add();
-*/
-        //TODO
-/*        handshakeChannel.messageBuilder(EXNHandshakeMessages.S2COreList.class, 1)
+
+        handshakeChannel.messageBuilder(EXNHandshakeMessages.S2COreList.class, 1)
                 .loginIndex(EXNHandshakeMessages.LoginIndexedMessage::getLoginIndex, EXNHandshakeMessages.LoginIndexedMessage::setLoginIndex)
                 .encoder(EXNHandshakeMessages.S2COreList::encode)
                 .decoder(EXNHandshakeMessages.S2COreList::decode)
@@ -48,6 +47,5 @@ public class PacketHandler {
                 }))
                 .markAsLoginPacket()
                 .add();
-*/
     }
 }

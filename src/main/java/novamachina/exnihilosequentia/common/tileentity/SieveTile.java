@@ -127,7 +127,7 @@ public class SieveTile extends BlockEntity {
         }
 
         compound.putInt(PROGRESS_TAG, progress);
-        setChanged();
+        //setChanged();
     }
 
     @Override
