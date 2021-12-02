@@ -15,11 +15,11 @@ import net.minecraftforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.api.utility.Config;
+import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.api.utility.ExNihiloTags;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;

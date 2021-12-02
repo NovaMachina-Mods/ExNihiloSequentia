@@ -20,7 +20,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants.ModIds;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.api.utility.ExNihiloTags;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;

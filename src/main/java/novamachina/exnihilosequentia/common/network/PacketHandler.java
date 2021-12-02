@@ -1,11 +1,9 @@
 package novamachina.exnihilosequentia.common.network;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.HandshakeHandler;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

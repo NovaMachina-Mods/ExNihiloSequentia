@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.item.resources;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants.Items;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 
 public enum EnumResource implements IExtensibleEnum {
     ANCIENT_SPORE(Items.ANCIENT_SPORE),

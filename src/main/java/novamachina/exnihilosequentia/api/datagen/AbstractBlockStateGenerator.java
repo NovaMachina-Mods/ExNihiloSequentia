@@ -8,7 +8,7 @@ import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.Objects;
 

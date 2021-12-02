@@ -5,7 +5,7 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ExNihiloDataGenerators {

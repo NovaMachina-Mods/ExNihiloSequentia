@@ -16,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 
 */

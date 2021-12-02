@@ -5,8 +5,8 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.api.utility.Config;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumCrook implements IExtensibleEnum {
     WOOD(ExNihiloConstants.Items.WOOD_CROOK, Config.getCrookWoodDurability(), Tiers.WOOD),

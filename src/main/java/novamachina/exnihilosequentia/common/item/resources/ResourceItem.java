@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants.Items;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 

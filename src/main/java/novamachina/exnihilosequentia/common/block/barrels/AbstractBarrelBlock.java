@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 
@@ -26,9 +27,7 @@ public class AbstractBarrelBlock extends BlockBarrel {
             return null;
         }
         return (level, blockPos, blockState, t) -> {
-            if (t instanceof StoneBarrelTile tile) {
-                tile.tick();
-            } else if (t instanceof WoodBarrelTile tile) {
+            if (t instanceof AbstractBarrelTile tile) {
                 tile.tick();
             }
         };

@@ -4,7 +4,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.api.utility.Config;
+import novamachina.exnihilosequentia.common.utility.Config;
 
 import javax.annotation.Nonnull;
 

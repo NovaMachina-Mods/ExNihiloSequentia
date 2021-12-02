@@ -24,8 +24,8 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import java.awt.*;

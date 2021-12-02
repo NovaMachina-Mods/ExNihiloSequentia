@@ -28,8 +28,8 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import novamachina.exnihilosequentia.api.utility.Config;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.AbstractBarrelMode;
 import novamachina.exnihilosequentia.common.tileentity.barrel.mode.BarrelModeRegistry;
 
@@ -85,15 +85,15 @@ public abstract class AbstractBarrelTile extends BlockEntity {
         level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
     }
 
-    @Nonnull
     @Override
-    public CompoundTag save(CompoundTag compound) {
+    public void saveAdditional(@Nonnull CompoundTag compound) {
+        super.saveAdditional(compound);
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put(TANK_TAG, tank.writeToNBT(new CompoundTag()));
         compound.putString(MODE_TAG, mode.getModeName());
         compound.put(MODE_INFO_TAG, mode.write());
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
-        return super.save(compound);
+        setChanged();
     }
 
     @Override
@@ -120,18 +120,19 @@ public abstract class AbstractBarrelTile extends BlockEntity {
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         CompoundTag nbt = pkt.getTag();
-        assert nbt != null;
-        if (nbt.contains(INVENTORY_TAG)) {
-            inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
+        if (nbt != null) {
+            if (nbt.contains(INVENTORY_TAG)) {
+                inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
+            }
+            if (nbt.contains(TANK_TAG)) {
+                tank.readFromNBT(nbt.getCompound(TANK_TAG));
+            }
+            mode = BarrelModeRegistry.getModeFromName(nbt.getString(MODE_TAG));
+            if (nbt.contains(MODE_INFO_TAG)) {
+                mode.read(nbt.getCompound(MODE_INFO_TAG));
+            }
+            solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
         }
-        if (nbt.contains(TANK_TAG)) {
-            tank.readFromNBT(nbt.getCompound(TANK_TAG));
-        }
-        mode = BarrelModeRegistry.getModeFromName(nbt.getString(MODE_TAG));
-        if (nbt.contains(MODE_INFO_TAG)) {
-            mode.read(nbt.getCompound(MODE_INFO_TAG));
-        }
-        solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
     }
 
     @Nullable

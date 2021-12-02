@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
 import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants.*;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.*;
 
 public class ExNihiloLangGenerator extends AbstractLangGenerator {
     final String locale;

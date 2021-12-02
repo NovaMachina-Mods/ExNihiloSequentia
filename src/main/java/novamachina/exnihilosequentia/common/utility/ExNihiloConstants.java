@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.utility;
+package novamachina.exnihilosequentia.common.utility;
 
 public class ExNihiloConstants {
 

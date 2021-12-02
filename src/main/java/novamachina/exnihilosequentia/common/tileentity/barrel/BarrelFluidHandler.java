@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.tileentity.barrel;
 
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class BarrelFluidHandler extends FluidTank {
     private AbstractBarrelTile barrel;

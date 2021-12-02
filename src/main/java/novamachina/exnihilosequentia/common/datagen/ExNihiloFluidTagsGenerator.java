@@ -1,11 +1,9 @@
 package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.tags.FluidTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractFluidTagGenerator;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nullable;
 

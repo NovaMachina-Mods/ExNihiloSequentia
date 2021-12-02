@@ -4,7 +4,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.api.registry.IFluidOnTopRegistry;
-import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;

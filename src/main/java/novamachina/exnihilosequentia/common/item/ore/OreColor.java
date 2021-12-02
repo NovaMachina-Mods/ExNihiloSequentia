@@ -4,7 +4,7 @@ import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
+import java.awt.Color;
 
 public class OreColor implements ItemColor {
 

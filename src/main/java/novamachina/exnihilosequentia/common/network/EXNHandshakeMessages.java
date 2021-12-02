@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;

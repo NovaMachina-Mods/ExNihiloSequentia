@@ -25,8 +25,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.api.utility.Config;
-import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.TankUtil;
 import org.apache.logging.log4j.LogManager;
 
@@ -71,14 +71,14 @@ public abstract class BaseCrucibleTile extends BlockEntity {
     }
 
     @Override
-    @Nonnull
-    public CompoundTag save(CompoundTag compound) {
+    public void saveAdditional(@Nonnull CompoundTag compound) {
+        super.saveAdditional(compound);
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put("tank", tank.writeToNBT(new CompoundTag()));
         compound.putInt("ticksSinceLast", ticksSinceLast);
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
         compound.put(CURRENT_ITEM_TAG, currentItem.save(new CompoundTag()));
-        return super.save(compound);
+        setChanged();
     }
 
     @Nonnull
@@ -188,25 +188,26 @@ public abstract class BaseCrucibleTile extends BlockEntity {
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         CompoundTag nbt = packet.getTag();
-        assert nbt != null;
-        if (nbt.contains(CURRENT_ITEM_TAG)) {
-            currentItem = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(CURRENT_ITEM_TAG)));
-        } else {
-            currentItem = ItemStack.EMPTY;
-        }
+        if (nbt != null) {
+            if (nbt.contains(CURRENT_ITEM_TAG)) {
+                currentItem = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(CURRENT_ITEM_TAG)));
+            } else {
+                currentItem = ItemStack.EMPTY;
+            }
 
-        if (nbt.contains(BLOCK_TAG)) {
-            inventory.setStackInSlot(0, ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(BLOCK_TAG))));
-        } else {
-            inventory.setStackInSlot(0, ItemStack.EMPTY);
-        }
+            if (nbt.contains(BLOCK_TAG)) {
+                inventory.setStackInSlot(0, ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(BLOCK_TAG))));
+            } else {
+                inventory.setStackInSlot(0, ItemStack.EMPTY);
+            }
 
-        if (nbt.contains(FLUID_TAG)) {
-            tank.readFromNBT(nbt.getCompound(FLUID_TAG));
-        } else {
-            tank.setFluid(FluidStack.EMPTY);
+            if (nbt.contains(FLUID_TAG)) {
+                tank.readFromNBT(nbt.getCompound(FLUID_TAG));
+            } else {
+                tank.setFluid(FluidStack.EMPTY);
+            }
+            solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
         }
-        solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
     }
 
     public float getFluidProportion() {

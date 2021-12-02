@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.item.pebbles;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.api.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public enum EnumPebbleType implements IExtensibleEnum {
     STONE(ExNihiloConstants.Items.STONE_PEBBLE),

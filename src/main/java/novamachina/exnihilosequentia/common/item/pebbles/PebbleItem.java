@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.item.pebbles;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -16,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import novamachina.exnihilosequentia.api.utility.Config;
+import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.init.ExNihiloSounds;
 

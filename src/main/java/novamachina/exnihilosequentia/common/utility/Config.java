@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.utility;
+package novamachina.exnihilosequentia.common.utility;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;

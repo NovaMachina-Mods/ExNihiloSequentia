@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.api.utility.Config;
-import novamachina.exnihilosequentia.api.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.init.ExNihiloStats;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
@@ -115,6 +115,7 @@ public class SieveTile extends BlockEntity {
 
     @Override
     protected void saveAdditional(@Nonnull CompoundTag compound) {
+        super.saveAdditional(compound);
         if (!meshStack.isEmpty()) {
             CompoundTag meshNBT = meshStack.save(new CompoundTag());
             compound.put(MESH_TAG, meshNBT);
@@ -126,8 +127,7 @@ public class SieveTile extends BlockEntity {
         }
 
         compound.putInt(PROGRESS_TAG, progress);
-
-        super.saveAdditional(compound);
+        setChanged();
     }
 
     @Override
@@ -252,22 +252,23 @@ public class SieveTile extends BlockEntity {
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         CompoundTag nbt = packet.getTag();
-        assert nbt != null;
-        if (nbt.contains(MESH_TAG)) {
-            meshStack = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(MESH_TAG)));
-            if (meshStack.getItem() instanceof MeshItem) {
-                meshType = ((MeshItem) meshStack.getItem()).getMesh();
+        if (nbt != null) {
+            if (nbt.contains(MESH_TAG)) {
+                meshStack = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(MESH_TAG)));
+                if (meshStack.getItem() instanceof MeshItem) {
+                    meshType = ((MeshItem) meshStack.getItem()).getMesh();
+                }
+            } else {
+                meshStack = ItemStack.EMPTY;
             }
-        } else {
-            meshStack = ItemStack.EMPTY;
-        }
 
-        if (nbt.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(BLOCK_TAG)));
-        } else {
-            blockStack = ItemStack.EMPTY;
+            if (nbt.contains(BLOCK_TAG)) {
+                blockStack = ItemStack.of((CompoundTag) Objects.requireNonNull(nbt.get(BLOCK_TAG)));
+            } else {
+                blockStack = ItemStack.EMPTY;
+            }
+            progress = nbt.getInt(PROGRESS_TAG);
         }
-        progress = nbt.getInt(PROGRESS_TAG);
     }
 
     public EnumMesh getMesh() {
