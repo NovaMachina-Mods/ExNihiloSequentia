@@ -57,18 +57,18 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     private AbstractBarrelTileState lastSyncedState = null;
 
     static protected class AbstractBarrelTileState {
-        private final AbstractBarrelMode mode;
         private final Fluid fluid;
         private final int fluidAmount;
         private final Item solid;
         private final int solidAmount;
+        private final List<ITextComponent> wailaInfo;
 
         AbstractBarrelTileState (final AbstractBarrelTile abstractBarrelTile) {
-            mode = abstractBarrelTile.getMode();
             fluid = abstractBarrelTile.getFluid();
             fluidAmount = abstractBarrelTile.getFluidAmount();
             solid = abstractBarrelTile.inventory.getStackInSlot(0).getItem();
             solidAmount = abstractBarrelTile.getSolidAmount();
+            wailaInfo = abstractBarrelTile.getWailaInfo();
         }
 
         @Override
@@ -78,9 +78,9 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
             AbstractBarrelTileState that = (AbstractBarrelTileState) o;
             return fluidAmount == that.fluidAmount
                     && solidAmount == that.solidAmount
-                    && Objects.equals(mode, that.mode)
                     && Objects.equals(fluid, that.fluid)
-                    && Objects.equals(solid, that.solid);
+                    && Objects.equals(solid, that.solid)
+                    && Objects.equals(wailaInfo, that.wailaInfo);
         }
     }
 
