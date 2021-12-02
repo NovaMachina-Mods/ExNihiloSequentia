@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.registries;
 
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
@@ -19,12 +20,12 @@ public class CompostRegistry implements ICompostRegistry {
     private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
 
     @Override
-    public boolean containsSolid(IItemProvider item) {
+    public boolean containsSolid(ItemLike item) {
         return getSolidAmount(item) > 0;
     }
 
     @Override
-    public int getSolidAmount(IItemProvider item) {
+    public int getSolidAmount(ItemLike item) {
         return itemSolidAmountCache
                 .computeIfAbsent(item.asItem(), k -> {
                     final ItemStack itemStack = new ItemStack(item);

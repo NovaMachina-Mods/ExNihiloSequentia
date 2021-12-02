@@ -1,6 +1,10 @@
 package novamachina.exnihilosequentia.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -44,11 +48,11 @@ public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable {
     }
 
     @Override
-    public void playerDestroy(@Nonnull World world, PlayerEntity player, @Nonnull BlockPos pos, BlockState state, @Nullable TileEntity tileEntity, ItemStack itemStack) {
+    public void playerDestroy(Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
         if (itemStack.getItem() instanceof ShearsItem) {
             world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.1F,
                     pos.getZ() + 0.5F, new ItemStack(this)));
         }
-        super.playerDestroy(world, player, pos, state, tileEntity, itemStack);
+        super.playerDestroy(world, player, pos, state, blockEntity, itemStack);
     }
 }

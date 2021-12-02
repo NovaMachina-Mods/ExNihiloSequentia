@@ -1,11 +1,15 @@
 package novamachina.exnihilosequentia.common.registries;
 
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HeatRegistry implements IHeatRegistry {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
@@ -18,7 +22,7 @@ public class HeatRegistry implements IHeatRegistry {
     }
 
     @Override
-    public int getHeatAmount(ForgeRegistryEntry<? extends ItemLike> entry) {
+    public int getHeatAmount(BlockState entry) {
         return recipeList
                 .stream()
                 .filter(recipe -> recipe.isMatch(entry))

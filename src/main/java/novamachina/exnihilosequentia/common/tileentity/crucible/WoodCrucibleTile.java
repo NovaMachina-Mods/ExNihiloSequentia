@@ -81,7 +81,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     public int getHeat() {
         assert level != null;
         BlockState source = level.getBlockState(worldPosition.below());
-        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock());
+        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source.getBlock().defaultBlockState());
         if(source.getBlock() instanceof LiquidBlock) {
             int level = 8 - source.getValue(BlockStateProperties.LEVEL);
             double partial = (double)blockHeat / 8;

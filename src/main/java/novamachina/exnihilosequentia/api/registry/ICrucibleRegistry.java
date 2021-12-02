@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.api.registry;
 
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 

@@ -21,15 +21,15 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
 
     private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
 
-    private final Map<FluidStack, Map<IItemProvider, Fluid>> fluidResultCache = new HashMap<>();
+    private final Map<FluidStack, Map<ItemLike, Fluid>> fluidResultCache = new HashMap<>();
 
     @Override
-    public boolean isValidRecipe(Fluid fluidInTank, IItemProvider catalyst) {
+    public boolean isValidRecipe(Fluid fluidInTank, ItemLike catalyst) {
         return getResult(fluidInTank, catalyst) != Fluids.EMPTY;
     }
 
     @Override
-    public Fluid getResult(Fluid fluidInTank, IItemProvider catalyst) {
+    public Fluid getResult(Fluid fluidInTank, ItemLike catalyst) {
         final FluidStack fluidStack = new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME);
         return fluidResultCache
                 .computeIfAbsent(fluidStack, k -> new HashMap<>())

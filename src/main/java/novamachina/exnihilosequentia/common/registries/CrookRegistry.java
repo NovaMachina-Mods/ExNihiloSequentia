@@ -23,7 +23,7 @@ public class CrookRegistry implements ICrookRegistry {
 
     private final List<CrookRecipe> recipeList = new ArrayList<>();
 
-    private final Map<IItemProvider, List<CrookRecipe>> recipeListByItemCache = new HashMap<>();
+    private final Map<ItemLike, List<CrookRecipe>> recipeListByItemCache = new HashMap<>();
 
     @Override
     public boolean isCrookable(ItemLike block) {
