@@ -19,7 +19,6 @@ import novamachina.exnihilosequentia.common.item.ore.OreColor;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-//TODO
 @Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());

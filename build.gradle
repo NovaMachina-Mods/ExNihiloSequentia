@@ -56,14 +56,14 @@ dependencies {
             version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
     ])
 
-    //compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-    //runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
     //compileOnly fg.deobf("curse.maven:Jade-324717:${jade_version}:api")
     implementation fg.deobf("curse.maven:Jade-324717:${jade_version}")
 
-    //compileOnly fg.deobf("curse.maven:TOPtemp-245211:3430022")
-    //runtimeOnly fg.deobf("curse.maven:TOPtemp-245211:3430022")
+    compileOnly fg.deobf("curse.maven:TOPtemp-245211:3550084")
+    runtimeOnly fg.deobf("curse.maven:TOPtemp-245211:3550084")
 //    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
 //    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
 

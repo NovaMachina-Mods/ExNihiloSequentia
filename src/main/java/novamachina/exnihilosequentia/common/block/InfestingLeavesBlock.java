@@ -1,10 +1,12 @@
 package novamachina.exnihilosequentia.common.block;
 
-/*import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;*/
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -19,6 +21,7 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -87,13 +90,13 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
         return nearbyLeaves;
     }
 
-    /*@Override
+    @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData iProbeHitData) {
         InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
 
         assert infestingLeavesTile != null;
         iProbeInfo.text(new TranslatableComponent("waila.progress", StringUtils
                 .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
-    }*/
+    }
 
 }

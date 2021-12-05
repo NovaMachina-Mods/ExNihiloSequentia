@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.hammer;
 
-//TODO remove comment when jei is ported to 1.18
-/*
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -19,9 +17,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
- */
 
-public class HammerRecipeCategory { /*implements IRecipeCategory<HammerRecipe> {
+public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
@@ -92,5 +89,4 @@ public class HammerRecipeCategory { /*implements IRecipeCategory<HammerRecipe> {
         }
         recipeLayout.getItemStacks().addTooltipCallback(new HammerTooltipCallback(recipe));
     }
-*/
 }

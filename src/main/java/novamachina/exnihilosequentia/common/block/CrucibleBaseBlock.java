@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.block;
 
-/*import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;*/
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
@@ -26,7 +26,7 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider, En
         super(builder);
     }
 
-    /*@Override
+    @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData data) {
         BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
         assert crucibleTile != null;
@@ -41,7 +41,7 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider, En
         } else {
             probeInfo.text(new TranslatableComponent("waila.crucible.heat", crucibleTile.getHeat()));
         }
-    }*/
+    }
 
     /**
      * @deprecated Ask Mojang

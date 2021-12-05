@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluiditem;
 
-//TODO remove comment when jei is ported to 1.18
-/*
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -14,9 +12,8 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-*/
 
-public class FluidBlockRecipeCategory { /*implements IRecipeCategory<FluidItemRecipe> {
+public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluiditem");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_block_transform.png");
     private final IDrawableStatic background;
@@ -67,5 +64,4 @@ public class FluidBlockRecipeCategory { /*implements IRecipeCategory<FluidItemRe
         recipeLayout.getItemStacks().set(0, recipe.getInputs());
         recipeLayout.getItemStacks().set(1, recipe.getResultItem());
     }
-*/
 }

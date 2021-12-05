@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolActions;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 
 import javax.annotation.Nonnull;

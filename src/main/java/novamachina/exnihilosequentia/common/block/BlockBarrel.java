@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.block;
 
-/*import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;*/
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -29,14 +29,14 @@ import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class BlockBarrel extends BaseBlock {// implements ITOPInfoProvider {
+public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
     public BlockBarrel(BlockBuilder builder) {
         super(builder);
     }
 
-    /*@Override
+    @Override
     public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, Player playerEntity, Level world, BlockState blockState, IProbeHitData data) {
 
         AbstractBarrelTile barrelTile = (AbstractBarrelTile) world.getBlockEntity(data.getPos());
@@ -53,7 +53,7 @@ public class BlockBarrel extends BaseBlock {// implements ITOPInfoProvider {
         for (Component tooltip : info) {
             probeInfo.text(tooltip);
         }
-    }*/
+    }
 
     /**
      * @deprecated Ask Mojang

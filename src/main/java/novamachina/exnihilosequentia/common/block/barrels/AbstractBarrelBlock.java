@@ -1,6 +1,5 @@
 package novamachina.exnihilosequentia.common.block.barrels;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -9,8 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
-import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

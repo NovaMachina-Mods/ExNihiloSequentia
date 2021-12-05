@@ -16,7 +16,6 @@ import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 
-//TODO
 public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 

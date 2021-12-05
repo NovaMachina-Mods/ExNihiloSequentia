@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.crucible;
 
-//TODO remove comment when jei is ported to 1.18
-/*
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,8 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- */
-public class CrucibleRecipeCategory { /*implements IRecipeCategory<CrucibleRecipe> {
+public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
 
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
     private final IDrawableStatic background;
@@ -99,5 +96,4 @@ public class CrucibleRecipeCategory { /*implements IRecipeCategory<CrucibleRecip
             recipeLayout.getItemStacks().addTooltipCallback(new WoodCrucibleTooltipCallback());
         }
     }
-*/
 }

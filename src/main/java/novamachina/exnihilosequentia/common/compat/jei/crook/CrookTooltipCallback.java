@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.crook;
 
-//TODO remove comment when jei is ported to 1.18
-/*
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -11,8 +9,7 @@ import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 import java.util.List;
 
-*/
-public class CrookTooltipCallback { /*implements ITooltipCallback<ItemStack> {
+public class CrookTooltipCallback implements ITooltipCallback<ItemStack> {
     private final CrookRecipe crookRecipe;
 
     public CrookTooltipCallback(CrookRecipe crookRecipe) {
@@ -27,5 +24,4 @@ public class CrookTooltipCallback { /*implements ITooltipCallback<ItemStack> {
                     .forEach(stack -> tooltip.add(new TextComponent(String.format("%s", StringUtils.formatPercent(stack.getChance())))));
         }
     }
-*/
 }

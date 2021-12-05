@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidtransform;
 
-//TODO remove comment when jei is ported to 1.18
-/*
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,9 +15,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
- */
 
-public class FluidTransformCategory { /*implements IRecipeCategory<FluidTransformRecipe> {
+public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluidtransform");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_fluid_transform.png");
     private final IDrawableStatic background;
@@ -70,5 +67,4 @@ public class FluidTransformCategory { /*implements IRecipeCategory<FluidTransfor
         recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getCatalyst().getItems())));
         recipeLayout.getFluidStacks().set(1, recipe.getResult());
     }
-*/
 }

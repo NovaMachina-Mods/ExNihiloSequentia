@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.jei.crook;
 
-//TODO remove comment when jei is ported to 1.18
-/*
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,8 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-*/
-public class CrookRecipeCategory { /*implements IRecipeCategory<CrookRecipe> {
+public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
 
     public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crook");
     private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
@@ -90,5 +87,4 @@ public class CrookRecipeCategory { /*implements IRecipeCategory<CrookRecipe> {
         }
         recipeLayout.getItemStacks().addTooltipCallback(new CrookTooltipCallback(crookRecipe));
     }
-*/
 }
