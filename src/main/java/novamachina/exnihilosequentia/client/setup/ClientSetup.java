@@ -35,8 +35,9 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTED_LEAVES.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ExNihiloBlocks.INFESTING_LEAVES.get(), RenderType.cutout());
 
-        SieveRender.register();
-        BarrelRender.register();
+        SieveRender.register(ExNihiloTiles.SIEVE.get());
+        BarrelRender.register(ExNihiloTiles.BARREL_WOOD.get());
+        BarrelRender.register(ExNihiloTiles.BARREL_STONE.get());
         CrucibleRender.register(ExNihiloTiles.CRUCIBLE_FIRED.get());
         CrucibleRender.register(ExNihiloTiles.CRUCIBLE_WOOD.get());
     }

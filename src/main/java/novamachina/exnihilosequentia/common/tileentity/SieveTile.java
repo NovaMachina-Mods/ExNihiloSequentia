@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.Color;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -49,7 +50,11 @@ public class SieveTile extends TileEntity {
     private UUID lastPlayer;
 
     public SieveTile() {
-        super(ExNihiloTiles.SIEVE.get());
+        this(ExNihiloTiles.SIEVE.get());
+    }
+
+    public SieveTile(TileEntityType<? extends SieveTile> tileEntityType) {
+        super(tileEntityType);
     }
 
     public void insertMesh(ItemStack stack, PlayerEntity player) {

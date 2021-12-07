@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
@@ -25,10 +26,9 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
         super(rendererDispatcherIn);
     }
 
-    public static void register() {
+    public static void register(TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
         logger.debug("Register barrel renderer");
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_WOOD.get(), BarrelRender::new);
-        ClientRegistry.bindTileEntityRenderer(ExNihiloTiles.BARREL_STONE.get(), BarrelRender::new);
+        ClientRegistry.bindTileEntityRenderer(tileEntityType, BarrelRender::new);
     }
 
     @Override
