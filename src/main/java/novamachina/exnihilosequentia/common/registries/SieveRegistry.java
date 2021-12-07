@@ -37,10 +37,26 @@ public class SieveRegistry implements ISieveRegistry {
     private final Map<Boolean, Map<EnumMesh, Map<Item, List<SieveRecipe>>>> itemDropsListCache = new HashMap<>();
 
     private List<SieveRecipe> getDropsByIngredient(Ingredient input, EnumMesh meshType, boolean isWaterlogged) {
-        return Arrays.stream(input.getItems())
-                .map(ItemStack::getItem)
-                .flatMap(item -> getDrops(item, meshType, isWaterlogged).stream())
+        generateCache(input, meshType, isWaterlogged);
+        return recipeList.parallelStream()
+                .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
+                .filter(sieveRecipe -> IngredientUtils.areIngredientsEqual(sieveRecipe.getInput(), input))
+                .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
+                .filter(recipe -> {
+                    if(recipe.getDrop().getItem() instanceof OreItem) {
+                        OreItem ore = (OreItem)recipe.getDrop().getItem();
+                        return ore.getOre().isEnabled();
+                    }
+                    return true;
+                })
+                .filter(recipe -> !recipe.getRolls().isEmpty())
                 .collect(Collectors.toList());
+    }
+
+    private void generateCache(Ingredient input, EnumMesh meshType, boolean isWaterlogged) {
+        Arrays.stream(input.getItems())
+                .map(ItemStack::getItem)
+                .forEach(item -> getDrops(item, meshType, isWaterlogged));
     }
 
     @Override
