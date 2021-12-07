@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -37,6 +38,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class AbstractBarrelTile extends TileEntity implements ITickableTileEntity {
     public static final int MAX_SOLID_AMOUNT = Config.getBarrelMaxSolidAmount();
@@ -52,6 +54,35 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
     private AbstractBarrelMode mode;
     private int solidAmount;
+    private AbstractBarrelTileState lastSyncedState = null;
+
+    static protected class AbstractBarrelTileState {
+        private final Fluid fluid;
+        private final int fluidAmount;
+        private final Item solid;
+        private final int solidAmount;
+        private final List<ITextComponent> wailaInfo;
+
+        AbstractBarrelTileState (final AbstractBarrelTile abstractBarrelTile) {
+            fluid = abstractBarrelTile.getFluid();
+            fluidAmount = abstractBarrelTile.getFluidAmount();
+            solid = abstractBarrelTile.inventory.getStackInSlot(0).getItem();
+            solidAmount = abstractBarrelTile.getSolidAmount();
+            wailaInfo = abstractBarrelTile.getWailaInfo();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            AbstractBarrelTileState that = (AbstractBarrelTileState) o;
+            return fluidAmount == that.fluidAmount
+                    && solidAmount == that.solidAmount
+                    && Objects.equals(fluid, that.fluid)
+                    && Objects.equals(solid, that.solid)
+                    && Objects.equals(wailaInfo, that.wailaInfo);
+        }
+    }
 
     protected AbstractBarrelTile(TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
         super(tileEntityType);
@@ -76,14 +107,18 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         }
 
         if (mode.isEmptyMode() || mode.getModeName().equals(ExNihiloConstants.BarrelModes.FLUID)) {
-            BlockPos abovePos = worldPosition.offset(0, 1, 0);
-            if (getLevel().isRainingAt(abovePos)) {
-                FluidStack stack = new FluidStack(Fluids.WATER, Config.getRainFillAmount());
+            final BlockPos abovePos = worldPosition.offset(0, 1, 0);
+            if (level.isRainingAt(abovePos) && tank.getSpace() >= Config.getRainFillAmount()) {
+                final FluidStack stack = new FluidStack(Fluids.WATER, Config.getRainFillAmount());
                 tank.fill(stack, IFluidHandler.FluidAction.EXECUTE);
             }
         }
         mode.tick(this);
-        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+        final AbstractBarrelTileState currentState = new AbstractBarrelTileState(this);
+        if (!currentState.equals(lastSyncedState)) {
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+            lastSyncedState = currentState;
+        }
     }
 
     @Override

@@ -13,6 +13,8 @@ public class FiredCrucibleTooltipCallback implements ITooltipCallback<ItemStack>
     public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
         if (input) {
             CrucibleRecipe meltable = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(ingredient);
+            if (meltable == null)
+                return;
             tooltip.add(new StringTextComponent(String.format("Fluid Amount: %d mb", meltable.getAmount())));
         }
     }
