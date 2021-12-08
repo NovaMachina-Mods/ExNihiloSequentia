@@ -1,0 +1,23 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.15,
+      "mesh": "flint"
+    },
+    {
+      "chance": 0.25,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.4,
+      "mesh": "diamond"
+    }
+  ],
+  "input": {
+    "item": "exnihilosequentia:crushed_netherrack"
+  },
+  "result": {
+    "item": "exnihilosequentia:gold_piece"
+  }
+}

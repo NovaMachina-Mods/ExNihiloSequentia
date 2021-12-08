@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "iron"
+    }
+  ],
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "item": "exnihilosequentia:yellow_coral_larvae"
+  }
+}

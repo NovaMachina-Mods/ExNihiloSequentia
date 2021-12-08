@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:lead_piece"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:raw_lead"
+  }
+}

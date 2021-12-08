@@ -1,0 +1,7 @@
+{
+  "parent": "exnihilosequentia:block/mesh_base",
+  "textures": {
+    "texture": "exnihilosequentia:block/emerald_mesh",
+    "particle": "exnihilosequentia:block/emerald_mesh"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_netherite_mesh"
+    ]
+  },
+  "criteria": {
+    "has_emerald_mesh": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "exnihilosequentia:emerald_mesh"
+            ]
+          }
+        ]
+      }
+    },
+    "has_material": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/netherite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_netherite_mesh"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_emerald_mesh",
+      "has_material",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:hammer",
+  "results": [
+    {
+      "chance": 1.0,
+      "item": "minecraft:fire_coral",
+      "count": 1
+    }
+  ],
+  "input": {
+    "item": "minecraft:fire_coral_block"
+  }
+}

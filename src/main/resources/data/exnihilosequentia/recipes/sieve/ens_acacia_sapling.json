@@ -2,14 +2,14 @@
   "type": "exnihilosequentia:sieve",
   "rolls": [
     {
-      "chance": 0.4,
+      "chance": 0.05,
       "mesh": "string"
     }
   ],
   "input": {
-    "item": "minecraft:coarse_dirt"
+    "item": "minecraft:dirt"
   },
   "result": {
-    "item": "minecraft:dirt"
+    "item": "minecraft:acacia_sapling"
   }
 }

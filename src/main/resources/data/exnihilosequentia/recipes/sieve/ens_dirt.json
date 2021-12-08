@@ -2,6 +2,10 @@
   "type": "exnihilosequentia:sieve",
   "rolls": [
     {
+      "chance": 1.0,
+      "mesh": "string"
+    },
+    {
       "chance": 0.4,
       "mesh": "string"
     }
