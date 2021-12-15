@@ -34,7 +34,7 @@ import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.block.BaseBlock;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
@@ -147,19 +147,19 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
     protected void createFiredCrucibleRecipes(Consumer<IFinishedRecipe> consumer, Block block, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(block)).amount(amount).fluidResult(Fluids.LAVA)
-                .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(id));
+                .crucibleType(CrucibleTypeEnum.FIRED).build(consumer, crucibleLoc(id));
     }
     protected void createFiredCrucibleRecipes(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.LAVA)
-                .crucibleType(CrucilbeTypeEnum.FIRED).build(consumer, crucibleLoc(id));
+                .crucibleType(CrucibleTypeEnum.FIRED).build(consumer, crucibleLoc(id));
     }
     protected void createWaterCrucibleRecipes(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.WATER)
-                .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc(id));
+                .crucibleType(CrucibleTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
     protected void createWaterCrucibleRecipes(Consumer<IFinishedRecipe> consumer, Item item, int amount, String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.WATER)
-                .crucibleType(CrucilbeTypeEnum.WOOD).build(consumer, crucibleLoc(id));
+                .crucibleType(CrucibleTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
 
     protected void createFluidItemRecipes(Consumer<IFinishedRecipe> consumer, Fluid fluidInput, Item itemInput, Block blockOutput, String id) {

@@ -5,10 +5,13 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
-public class CrucibleFluidHandler extends FluidTank {
-    private BaseCrucibleTile crucible;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    public CrucibleFluidHandler(BaseCrucibleTile crucibleTile) {
+public class CrucibleFluidHandler extends FluidTank {
+    @Nullable private BaseCrucibleTile crucible;
+
+    public CrucibleFluidHandler(@Nonnull final BaseCrucibleTile crucibleTile) {
         this(BaseCrucibleTile.MAX_FLUID_AMOUNT);
         this.crucible = crucibleTile;
     }
@@ -19,7 +22,7 @@ public class CrucibleFluidHandler extends FluidTank {
 
     @Override
     public int fill(FluidStack resource, FluidAction action) {
-        if(!crucible.canAcceptFluidTemperature(resource)) {
+        if(crucible != null && !crucible.canAcceptFluidTemperature(resource)) {
             return 0;
         }
 

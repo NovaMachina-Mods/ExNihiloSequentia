@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.api.crafting.crucible;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 
 public class CrucibleRecipeBuilder extends ExNihiloFinishedRecipe<CrucibleRecipeBuilder> {
     private CrucibleRecipeBuilder() {
@@ -18,7 +18,7 @@ public class CrucibleRecipeBuilder extends ExNihiloFinishedRecipe<CrucibleRecipe
         return addWriter(jsonObj -> jsonObj.addProperty("amount", amount));
     }
 
-    public CrucibleRecipeBuilder crucibleType(CrucilbeTypeEnum type) {
+    public CrucibleRecipeBuilder crucibleType(CrucibleTypeEnum type) {
         return addWriter(jsonObj -> jsonObj.addProperty("crucibleType", type.getName()));
     }
 

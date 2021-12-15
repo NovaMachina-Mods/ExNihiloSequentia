@@ -4,12 +4,13 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class BarrelFluidHandler extends FluidTank {
-    private AbstractBarrelTile barrel;
+    @Nullable private AbstractBarrelTile barrel;
 
-    public BarrelFluidHandler(AbstractBarrelTile barrelTile) {
+    public BarrelFluidHandler(@Nonnull final AbstractBarrelTile barrelTile) {
         this(AbstractBarrelTile.MAX_FLUID_AMOUNT);
         this.barrel = barrelTile;
     }
@@ -20,7 +21,7 @@ public class BarrelFluidHandler extends FluidTank {
 
     @Override
     public int fill(FluidStack resource, FluidAction action) {
-        if(!barrel.canAcceptFluidTemperature(resource)) {
+        if(barrel == null || !barrel.canAcceptFluidTemperature(resource)) {
             return 0;
         }
 

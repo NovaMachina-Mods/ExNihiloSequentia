@@ -1,18 +1,20 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-public enum CrucilbeTypeEnum {
+import javax.annotation.Nonnull;
+
+public enum CrucibleTypeEnum {
     WOOD("wood", 0), FIRED("fired", 1);
 
-    private final String name;
+    @Nonnull private final String name;
     private final int level;
 
-    CrucilbeTypeEnum(String name, int level) {
+    CrucibleTypeEnum(@Nonnull final String name, final int level) {
         this.name = name;
         this.level = level;
     }
 
-    public static CrucilbeTypeEnum getTypeByName(String name) {
-        for (CrucilbeTypeEnum type : CrucilbeTypeEnum.values()) {
+    public static CrucibleTypeEnum getTypeByName(@Nonnull final String name) {
+        for (@Nonnull final CrucibleTypeEnum type : CrucibleTypeEnum.values()) {
             if (type.name.equals(name)) {
                 return type;
             }
@@ -21,6 +23,7 @@ public enum CrucilbeTypeEnum {
         return null;
     }
 
+    @Nonnull
     public String getName() {
         return name;
     }

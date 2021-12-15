@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CrucibleRecipe extends SerializableRecipe {
@@ -18,11 +18,11 @@ public class CrucibleRecipe extends SerializableRecipe {
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
     private static RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer;
     private int amount;
-    private CrucilbeTypeEnum crucibleType;
+    private CrucibleTypeEnum crucibleType;
     private Ingredient input;
     private FluidStack resultFluid;
 
-    public CrucibleRecipe(ResourceLocation id, Ingredient input, int amount, FluidStack fluid, CrucilbeTypeEnum crucibleType) {
+    public CrucibleRecipe(ResourceLocation id, Ingredient input, int amount, FluidStack fluid, CrucibleTypeEnum crucibleType) {
         super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
@@ -46,12 +46,12 @@ public class CrucibleRecipe extends SerializableRecipe {
         this.amount = amount;
     }
 
-    public CrucilbeTypeEnum getCrucibleType() {
+    public CrucibleTypeEnum getCrucibleType() {
         return crucibleType;
     }
 
     public void setCrucibleType(String crucibleType) {
-        this.crucibleType = CrucilbeTypeEnum.getTypeByName(crucibleType);
+        this.crucibleType = CrucibleTypeEnum.getTypeByName(crucibleType);
     }
 
     public Ingredient getInput() {
