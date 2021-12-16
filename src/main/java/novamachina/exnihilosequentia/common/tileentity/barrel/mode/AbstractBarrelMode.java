@@ -10,36 +10,46 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public abstract class AbstractBarrelMode {
-    private final String modeName;
+    @Nonnull private final String modeName;
 
-    protected AbstractBarrelMode(String name) {
+    protected AbstractBarrelMode(@Nonnull final String name) {
         this.modeName = name;
     }
 
+    @Nonnull
     public String getModeName() {
         return modeName;
     }
 
-    public abstract void tick(AbstractBarrelTile barrelTile);
+    public abstract void tick(@Nonnull final AbstractBarrelTile barrelTile);
 
-    public abstract ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler);
+    @Nonnull
+    public abstract ActionResultType onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
+                                                      @Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+                                                      @Nonnull final IFluidHandler fluidHandler,
+                                                      @Nonnull final IItemHandler itemHandler);
 
-    public abstract boolean canFillWithFluid(AbstractBarrelTile barrel);
+    public abstract boolean canFillWithFluid(@Nonnull final AbstractBarrelTile barrel);
 
     public abstract boolean isEmptyMode();
 
-    protected abstract boolean isTriggerItem(ItemStack stack);
+    protected abstract boolean isTriggerItem(@Nonnull final ItemStack stack);
 
-    public abstract void read(CompoundNBT nbt);
+    public abstract void read(@Nonnull final CompoundNBT nbt);
 
+    @Nonnull
     public abstract CompoundNBT write();
 
-    protected abstract void spawnParticle(AbstractBarrelTile barrelTile);
+    protected abstract void spawnParticle(@Nonnull final AbstractBarrelTile barrelTile);
 
-    public abstract List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile);
+    @Nonnull
+    public abstract List<ITextComponent> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile);
 
-    public abstract ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate);
+    @Nonnull
+    public abstract ItemStack handleInsert(@Nonnull final AbstractBarrelTile barrelTile, @Nonnull final ItemStack stack,
+                                           final boolean simulate);
 }

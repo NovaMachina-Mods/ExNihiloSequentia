@@ -11,10 +11,13 @@ import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
+import javax.annotation.Nonnull;
+
 public class SieveComponentProvider implements IComponentProvider {
     @Override
-    public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
-        SieveTile sieveTile = (SieveTile) accessor.getTileEntity();
+    public void appendBody(@Nonnull final List<ITextComponent> tooltip, @Nonnull final IDataAccessor accessor,
+                           @Nonnull final IPluginConfig config) {
+        @Nonnull final SieveTile sieveTile = (SieveTile) accessor.getTileEntity();
 
         if (!sieveTile.getBlockStack().isEmpty()) {
             tooltip.add(new TranslationTextComponent("waila.progress", StringUtils

@@ -5,6 +5,8 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -17,21 +19,37 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
 
-    public CrucibleBaseBlock(BlockBuilder builder) {
+    public CrucibleBaseBlock(@Nonnull final BlockBuilder builder) {
         super(builder);
     }
 
     @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo probeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData data) {
-        if(probeMode == ProbeMode.EXTENDED) {
-            BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
+    public void addProbeInfo(@Nonnull final ProbeMode probeMode, @Nonnull final IProbeInfo probeInfo,
+                             @Nonnull final PlayerEntity playerEntity, @Nonnull final World world,
+                             @Nonnull final BlockState blockState, final @Nonnull IProbeHitData data) {
+        if (probeMode == ProbeMode.EXTENDED) {
+            @Nullable final BaseCrucibleTile crucibleTile = (BaseCrucibleTile) world.getBlockEntity(data.getPos());
+            if (crucibleTile == null)
+                return;
             if (crucibleTile.getSolidAmount() > 0) {
-                probeInfo.text(new TranslationTextComponent("waila.crucible.solid", new TranslationTextComponent(crucibleTile.getCurrentItem().getItem().getDescriptionId()), crucibleTile.getSolidAmount()));
+                @Nullable final ItemStack itemStack = crucibleTile.getCurrentItem();
+                if (itemStack != null)
+                    probeInfo.text(new TranslationTextComponent("waila.crucible.solid",
+                            new TranslationTextComponent(itemStack.getItem().getDescriptionId()),
+                            crucibleTile.getSolidAmount()));
             }
             if (crucibleTile.getFluidAmount() > 0) {
-                probeInfo.text(new TranslationTextComponent("waila.crucible.fluid", new TranslationTextComponent(crucibleTile.getFluid().defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()), crucibleTile.getFluidAmount()));
+                @Nullable final Fluid fluid = crucibleTile.getFluid();
+                if (fluid != null)
+                    probeInfo.text(new TranslationTextComponent("waila.crucible.fluid",
+                            new TranslationTextComponent(
+                                    fluid.defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()),
+                            crucibleTile.getFluidAmount()));
             }
             if (crucibleTile.getHeat() == 0) {
                 probeInfo.text(new TranslationTextComponent("waila.crucible.no_heat"));
@@ -44,15 +62,17 @@ public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
     /**
      * @deprecated Ask Mojang
      */
+    @Nonnull
     @Deprecated
     @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos,
-                                             PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType use(@Nonnull final BlockState state, @Nonnull final World worldIn,
+                                @Nonnull final BlockPos pos, @Nonnull final PlayerEntity player,
+                                @Nonnull final Hand handIn, @Nonnull final BlockRayTraceResult hit) {
         if (worldIn.isClientSide()) {
             return ActionResultType.SUCCESS;
         }
 
-        BaseCrucibleTile tile = (BaseCrucibleTile) worldIn.getBlockEntity(pos);
+        @Nullable final BaseCrucibleTile tile = (BaseCrucibleTile) worldIn.getBlockEntity(pos);
 
         if (tile != null) {
             IFluidHandler fluidHandler = tile

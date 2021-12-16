@@ -9,6 +9,7 @@ import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleTile;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class WoodCrucibleBlock extends CrucibleBaseBlock {
@@ -17,7 +18,7 @@ public class WoodCrucibleBlock extends CrucibleBaseBlock {
         this(WoodCrucibleTile::new);
     }
 
-    public WoodCrucibleBlock(Supplier<TileEntity> tileEntitySupplier) {
+    public WoodCrucibleBlock(@Nonnull final Supplier<TileEntity> tileEntitySupplier) {
         super(new BlockBuilder().properties(
                         AbstractBlock.Properties.of(Material.WOOD).strength(.75F)
                                 .sound(SoundType.STONE).noOcclusion()).harvestLevel(ToolType.AXE, 0)

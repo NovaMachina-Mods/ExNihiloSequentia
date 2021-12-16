@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.block;
 
 import java.util.function.Supplier;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,10 +14,10 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
 public class BaseBlock extends Block {
 
-    private final Supplier<TileEntity> tileEntitySupplier;
-    private final ToolType toolType;
+    @Nullable private final Supplier<TileEntity> tileEntitySupplier;
+    @Nonnull private final ToolType toolType;
 
-    public BaseBlock(BlockBuilder builder) {
+    public BaseBlock(@Nonnull final BlockBuilder builder) {
         super(builder.getProperties());
         this.tileEntitySupplier = builder.getTileEntitySupplier();
         this.toolType = builder.getToolType();
@@ -24,7 +25,7 @@ public class BaseBlock extends Block {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(@Nonnull final BlockState state, @Nonnull final IBlockReader world) {
         if (tileEntitySupplier == null) {
             return null;
         } else {
@@ -34,17 +35,19 @@ public class BaseBlock extends Block {
 
     @Nullable
     @Override
-    public ToolType getHarvestTool(BlockState state) {
+    public ToolType getHarvestTool(@Nonnull final BlockState state) {
         return toolType;
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasTileEntity(@Nonnull final BlockState state) {
         return tileEntitySupplier != null;
     }
 
-    protected static Boolean never(BlockState p_235427_0_, IBlockReader p_235427_1_, BlockPos p_235427_2_, EntityType<?> p_235427_3_) {
-        return (boolean)false;
+    @SuppressWarnings("unused")
+    protected static Boolean never(@Nonnull final BlockState p_235427_0_, @Nonnull final IBlockReader p_235427_1_,
+                                   @Nonnull final BlockPos p_235427_2_,@Nonnull final EntityType<?> p_235427_3_) {
+        return false;
     }
 
 }

@@ -9,39 +9,48 @@ import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenHammerRecipe")
 public class ZenHammerRecipe {
 
-    private final HammerRecipe internal;
+    @Nonnull private final HammerRecipe internal;
 
-    private ZenHammerRecipe(ResourceLocation recipeId) {
+    private ZenHammerRecipe(@Nonnull final ResourceLocation recipeId) {
         this.internal = new HammerRecipe(recipeId, Ingredient.EMPTY, new ArrayList<>());
     }
 
     @ZenCodeType.Method
-    public static ZenHammerRecipe builder(ResourceLocation recipeId) {
+    @Nonnull
+    public static ZenHammerRecipe builder(@Nonnull final ResourceLocation recipeId) {
         return new ZenHammerRecipe(recipeId);
     }
 
     @ZenCodeType.Method
-    public ZenHammerRecipe addOutput(IItemStack output) {
+    @Nonnull
+    @SuppressWarnings("unused")
+    public ZenHammerRecipe addOutput(@Nonnull final IItemStack output) {
         internal.addOutput(output.getInternal());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenHammerRecipe addOutput(IItemStack output, float chance) {
+    @Nonnull
+    @SuppressWarnings("unused")
+    public ZenHammerRecipe addOutput(@Nonnull final IItemStack output, final float chance) {
         internal.addOutput(output.getInternal(), chance);
         return this;
     }
 
+    @Nonnull
     public HammerRecipe build() {
         return internal;
     }
 
     @ZenCodeType.Method
-    public ZenHammerRecipe setInput(IIngredient input) {
+    @Nonnull
+    public ZenHammerRecipe setInput(@Nonnull final IIngredient input) {
         internal.setInput(input.asVanillaIngredient());
         return this;
     }

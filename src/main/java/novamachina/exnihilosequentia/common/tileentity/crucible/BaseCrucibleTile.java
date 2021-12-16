@@ -132,10 +132,10 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
             return 0;
         }
         @Nonnull final BlockState source = level.getBlockState(worldPosition.below());
-        int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source);
+        final int blockHeat = ExNihiloRegistries.HEAT_REGISTRY.getHeatAmount(source);
         if(source.getBlock() instanceof FlowingFluidBlock) {
-            int level = 8 - source.getValue(BlockStateProperties.LEVEL);
-            double partial = (double)blockHeat / 8;
+            final int level = 8 - source.getValue(BlockStateProperties.LEVEL);
+            final double partial = (double)blockHeat / 8;
             return (int) Math.ceil(partial * level);
         }
         return blockHeat;
@@ -218,15 +218,15 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
     public SUpdateTileEntityPacket getUpdatePacket() {
         @Nonnull final CompoundNBT nbt = new CompoundNBT();
         if (!inventory.getStackInSlot(0).isEmpty()) {
-            CompoundNBT blockNbt = inventory.getStackInSlot(0).save(new CompoundNBT());
+            @Nonnull final CompoundNBT blockNbt = inventory.getStackInSlot(0).save(new CompoundNBT());
             nbt.put(BLOCK_TAG, blockNbt);
         }
         if (!currentItem.isEmpty()) {
-            CompoundNBT currentItemTag = currentItem.save(new CompoundNBT());
+            @Nonnull final CompoundNBT currentItemTag = currentItem.save(new CompoundNBT());
             nbt.put(CURRENT_ITEM_TAG, currentItemTag);
         }
         if (!tank.isEmpty()) {
-            CompoundNBT fluidNbt = tank.writeToNBT(new CompoundNBT());
+            @Nonnull final CompoundNBT fluidNbt = tank.writeToNBT(new CompoundNBT());
             nbt.put(FLUID_TAG, fluidNbt);
         }
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
@@ -301,7 +301,7 @@ public abstract class BaseCrucibleTile extends TileEntity implements ITickableTi
         return tank.getFluidAmount();
     }
 
-    @Nullable
+    @Nonnull
     public ItemStack getCurrentItem(){
         return currentItem;
     }

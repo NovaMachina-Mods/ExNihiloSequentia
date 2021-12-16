@@ -2,10 +2,11 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.tags.FluidTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -15,8 +16,13 @@ import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
-    public ExNihiloItemTagsGenerator(DataGenerator generator, BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper) {
+    public ExNihiloItemTagsGenerator(@Nonnull final DataGenerator generator,
+                                     @Nonnull final BlockTagsProvider blockTagsProvider,
+                                     @Nonnull final ExistingFileHelper existingFileHelper) {
         super(generator, blockTagsProvider, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
 
@@ -34,8 +40,11 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     private void registerCrooks() {
-        for (EnumCrook crook : EnumCrook.values()) {
-            tag(ExNihiloTags.CROOK).add(crook.getRegistryObject().get());
+        for (@Nonnull final EnumCrook crook : EnumCrook.values()) {
+            @Nullable final RegistryObject<Item> registryObject = crook.getRegistryObject();
+            if (registryObject == null)
+                continue;
+            tag(ExNihiloTags.CROOK).add(registryObject.get());
         }
     }
 
@@ -50,8 +59,11 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     private void registerHammers() {
-        for (EnumHammer hammer : EnumHammer.values()) {
-            tag(ExNihiloTags.HAMMER).add(hammer.getRegistryObject().get());
+        for (@Nonnull final EnumHammer hammer : EnumHammer.values()) {
+            @Nullable final RegistryObject<Item> registryObject = hammer.getRegistryObject();
+            if (registryObject == null)
+                continue;
+            tag(ExNihiloTags.HAMMER).add(registryObject.get());
         }
     }
 
@@ -65,15 +77,18 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     }
 
     private void registerOres() {
-        for (EnumOre ore : EnumOre.values()) {
+        for (@Nonnull final EnumOre ore : EnumOre.values()) {
             ExNihiloTags.OreTag tags = ExNihiloTags.getOreTags(ore);
             registerOre(ore, tags);
         }
     }
 
     private void registerSeeds() {
-        for (EnumSeed seed : EnumSeed.values()) {
-            tag(Tags.Items.SEEDS).add(seed.getRegistryObject().get());
+        for (@Nonnull final EnumSeed seed : EnumSeed.values()) {
+            @Nullable final RegistryObject<Item> registryObject = seed.getRegistryObject();
+            if (registryObject == null)
+                continue;
+            tag(Tags.Items.SEEDS).add(registryObject.get());
         }
     }
 

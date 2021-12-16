@@ -7,6 +7,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public interface ITOPInfoProvider {
-    void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data);
+    void addProbeInfo(@Nonnull final ProbeMode mode, @Nonnull final IProbeInfo probeInfo,
+                      @Nonnull final PlayerEntity player, @Nonnull final World world,
+                      @Nonnull final BlockState blockState, @Nonnull final IProbeHitData data);
 }

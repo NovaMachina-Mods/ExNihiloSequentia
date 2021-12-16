@@ -14,8 +14,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class CompatTOP {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     private static boolean registered;
 
     private CompatTOP() {
@@ -31,21 +34,26 @@ public class CompatTOP {
     }
 
     public static class GetTheOneProbe implements Function<ITheOneProbe, Void> {
-        private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+        @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
         @Override
-        public Void apply(ITheOneProbe iTheOneProbe) {
+        @Nullable
+        public Void apply(@Nonnull final ITheOneProbe iTheOneProbe) {
             logger.info("Enabled support for The One Probe");
             iTheOneProbe.registerProvider(new IProbeInfoProvider() {
                 @Override
-                public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
+                public void addProbeInfo(@Nonnull final ProbeMode probeMode, @Nonnull final IProbeInfo iProbeInfo,
+                                         @Nonnull final PlayerEntity playerEntity, @Nonnull final World world,
+                                         @Nonnull final BlockState blockState,
+                                         @Nonnull final IProbeHitData iProbeHitData) {
                     if (blockState.getBlock() instanceof ITOPInfoProvider) {
-                        ITOPInfoProvider provider = (ITOPInfoProvider) blockState.getBlock();
+                        @Nonnull final ITOPInfoProvider provider = (ITOPInfoProvider) blockState.getBlock();
                         provider.addProbeInfo(probeMode, iProbeInfo, playerEntity, world, blockState, iProbeHitData);
                     }
                 }
 
                 @Override
+                @Nonnull
                 public String getID() {
                     return ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":default";
                 }

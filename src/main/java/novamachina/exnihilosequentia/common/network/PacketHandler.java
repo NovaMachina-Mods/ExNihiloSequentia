@@ -8,13 +8,17 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class PacketHandler {
-    private static final Logger logger = LogManager.getLogger(PacketHandler.class);
-    private static SimpleChannel handshakeChannel;
+    @Nonnull private static final Logger logger = LogManager.getLogger(PacketHandler.class);
+    @Nullable private static SimpleChannel handshakeChannel;
 
     private PacketHandler() {
     }
 
+    @Nullable
     public static SimpleChannel getHandshakeChannel() {
         return handshakeChannel;
     }

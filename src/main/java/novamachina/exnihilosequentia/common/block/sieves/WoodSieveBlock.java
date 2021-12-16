@@ -9,6 +9,7 @@ import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class WoodSieveBlock extends BlockSieve {
@@ -16,7 +17,7 @@ public class WoodSieveBlock extends BlockSieve {
         this(SieveTile::new);
     }
 
-    public WoodSieveBlock(Supplier<TileEntity> tileEntitySupplier) {
+    public WoodSieveBlock(@Nonnull final Supplier<TileEntity> tileEntitySupplier) {
         super(new BlockBuilder().properties(
                         AbstractBlock.Properties.of(Material.WOOD).strength(0.7F)
                                 .sound(SoundType.SCAFFOLDING).noOcclusion().isRedstoneConductor((state, reader, pos) -> false)

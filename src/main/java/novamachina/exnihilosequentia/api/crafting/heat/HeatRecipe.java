@@ -11,32 +11,37 @@ import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public class HeatRecipe extends SerializableRecipe {
-    public static final IRecipeType<HeatRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
-    private static RegistryObject<RecipeSerializer<HeatRecipe>> serializer;
-    private int amount;
-    private Block input;
-    private StatePropertiesPredicate properties;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    public HeatRecipe(ResourceLocation id, Block input, int amount) {
+public class HeatRecipe extends SerializableRecipe {
+    @Nonnull public static final IRecipeType<HeatRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
+    @Nullable private static RegistryObject<RecipeSerializer<HeatRecipe>> serializer;
+    private int amount;
+    @Nullable private Block input;
+    @Nullable private StatePropertiesPredicate properties;
+
+    public HeatRecipe(@Nonnull final ResourceLocation id, @Nullable final Block input, final int amount) {
         super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
         this.properties = null;
     }
 
-    public HeatRecipe(ResourceLocation id, Block input, int amount, StatePropertiesPredicate properties) {
+    public HeatRecipe(@Nonnull final ResourceLocation id, @Nonnull final Block input, final int amount,
+                      @Nonnull final StatePropertiesPredicate properties) {
         super(null, RECIPE_TYPE, id);
         this.input = input;
         this.amount = amount;
         this.properties = properties;
     }
 
+    @Nullable
     public static RegistryObject<RecipeSerializer<HeatRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(RegistryObject<RecipeSerializer<HeatRecipe>> serializer) {
+    public static void setSerializer(@Nonnull final RegistryObject<RecipeSerializer<HeatRecipe>> serializer) {
         HeatRecipe.serializer = serializer;
     }
 
@@ -44,38 +49,48 @@ public class HeatRecipe extends SerializableRecipe {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(final int amount) {
         this.amount = amount;
     }
 
+    @Nullable
     public Block getInput() {
         return input;
     }
 
+    @Nullable
     public StatePropertiesPredicate getProperties() {
         return this.properties;
     }
 
-    public void setInput(Block input) {
+    public void setInput(@Nonnull final Block input) {
         this.input = input;
     }
 
-    public void setProperties(StatePropertiesPredicate properties) {
+    public void setProperties(@Nonnull final StatePropertiesPredicate properties) {
         this.properties = properties;
     }
 
-    public boolean isMatch(BlockState state) {
-        return state.getBlock().getRegistryName().equals(this.input.getRegistryName())
-                && (this.properties == null || this.properties.matches(state));
+    public boolean isMatch(@Nonnull final BlockState state) {
+        if (input == null)
+            return false;
+        @Nullable final ResourceLocation resourceLocation = state.getBlock().getRegistryName();
+        if (resourceLocation == null)
+            return false;
+        return resourceLocation.equals(input.getRegistryName()) && (properties == null || properties.matches(state));
     }
 
     @Override
+    @Nonnull
     public ItemStack getResultItem() {
         return ItemStack.EMPTY;
     }
 
     @Override
+    @Nullable
     protected RecipeSerializer<HeatRecipe> getENSerializer() {
+        if (serializer == null)
+            return null;
         return serializer.get();
     }
 }

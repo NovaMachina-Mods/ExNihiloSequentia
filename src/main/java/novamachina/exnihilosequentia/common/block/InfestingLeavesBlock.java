@@ -21,10 +21,13 @@ import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 // TODO: Add progressive render
 public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider {
 
-    private static final Random random = new Random();
+    @Nonnull private static final Random random = new Random();
 
     public InfestingLeavesBlock() {
         super(new BlockBuilder()
@@ -32,17 +35,17 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
                         SoundType.GRASS).noOcclusion().isValidSpawn(BaseBlock::never)).tileEntitySupplier(InfestingLeavesTile::new));
     }
 
-    public static void finishInfestingBlock(World world, BlockPos pos) {
+    public static void finishInfestingBlock(@Nonnull final World world, @Nonnull final BlockPos pos) {
         world.setBlockAndUpdate(pos, ExNihiloBlocks.INFESTED_LEAVES.get().defaultBlockState());
     }
 
-    public static void normalToInfesting(World world, BlockPos pos) {
+    public static void normalToInfesting(@Nonnull final World world, @Nonnull final BlockPos pos) {
         world.setBlockAndUpdate(pos, ExNihiloBlocks.INFESTING_LEAVES.get().defaultBlockState());
     }
 
-    public static void spread(World world, BlockPos pos) {
+    public static void spread(@Nonnull final World world, @Nonnull final BlockPos pos) {
         if (!world.isClientSide()) {
-            NonNullList<BlockPos> nearbyLeaves = getNearbyLeaves(world, pos);
+            @Nonnull final NonNullList<BlockPos> nearbyLeaves = getNearbyLeaves(world, pos);
 
             nearbyLeaves.forEach(leafPos -> {
                 if (random.nextDouble() <= Config.getSpreadChance()) {
@@ -52,8 +55,9 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
         }
     }
 
-    private static NonNullList<BlockPos> getNearbyLeaves(World world, BlockPos pos) {
-        NonNullList<BlockPos> nearbyLeaves = NonNullList.create();
+    @Nonnull
+    private static NonNullList<BlockPos> getNearbyLeaves(@Nonnull final World world, @Nonnull final BlockPos pos) {
+        @Nonnull final NonNullList<BlockPos> nearbyLeaves = NonNullList.create();
 
         BlockPos.betweenClosedStream(new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1),
                 new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1)).forEach(item -> {
@@ -66,12 +70,16 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider 
     }
 
     @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
+    public void addProbeInfo(@Nonnull final ProbeMode probeMode, @Nonnull final IProbeInfo iProbeInfo,
+                             @Nonnull final PlayerEntity playerEntity, @Nonnull final World world,
+                             @Nonnull final BlockState blockState, @Nonnull final IProbeHitData iProbeHitData) {
         if(probeMode == ProbeMode.EXTENDED) {
-            InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world.getBlockEntity(iProbeHitData.getPos());
+            @Nullable final InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) world
+                    .getBlockEntity(iProbeHitData.getPos());
 
-            iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
-                    .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
+            if (infestingLeavesTile != null)
+                iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
+                        .formatPercent((float) infestingLeavesTile.getProgress() / 100)));
         }
     }
 }

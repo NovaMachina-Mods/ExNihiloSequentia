@@ -7,10 +7,12 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ExNihiloFluidTagsGenerator extends FluidTagsProvider {
-    public ExNihiloFluidTagsGenerator(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
+    public ExNihiloFluidTagsGenerator(@Nonnull final DataGenerator generator,
+                                      @Nullable final ExistingFileHelper existingFileHelper) {
         super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
 

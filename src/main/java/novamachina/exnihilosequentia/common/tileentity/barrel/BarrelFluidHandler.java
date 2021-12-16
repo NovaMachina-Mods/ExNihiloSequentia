@@ -15,17 +15,17 @@ public class BarrelFluidHandler extends FluidTank {
         this.barrel = barrelTile;
     }
 
-    private BarrelFluidHandler(int bucketVolume) {
+    private BarrelFluidHandler(final int bucketVolume) {
         super(bucketVolume);
     }
 
     @Override
-    public int fill(FluidStack resource, FluidAction action) {
+    public int fill(@Nonnull final FluidStack resource, @Nonnull final FluidAction action) {
         if(barrel == null || !barrel.canAcceptFluidTemperature(resource)) {
             return 0;
         }
 
-        if (barrel.getMode() != null && !barrel.getMode().canFillWithFluid(barrel)) {
+        if (!barrel.getMode().canFillWithFluid(barrel)) {
             return 0;
         }
 

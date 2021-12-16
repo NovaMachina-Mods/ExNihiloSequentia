@@ -5,14 +5,18 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 
+import javax.annotation.Nonnull;
+
 public interface IFluidOnTopRegistry {
     void clearRecipes();
 
+    @Nonnull
     List<FluidOnTopRecipe> getRecipeList();
 
-    ItemStack getResult(Fluid fluidInTank, Fluid fluidOnTop);
+    @Nonnull
+    ItemStack getResult(@Nonnull final Fluid fluidInTank, @Nonnull final Fluid fluidOnTop);
 
-    boolean isValidRecipe(Fluid fluidInTank, Fluid fluidOnTop);
+    boolean isValidRecipe(@Nonnull final Fluid fluidInTank, @Nonnull final Fluid fluidOnTop);
 
-    void setRecipes(List<FluidOnTopRecipe> recipes);
+    void setRecipes(@Nonnull final List<FluidOnTopRecipe> recipes);
 }

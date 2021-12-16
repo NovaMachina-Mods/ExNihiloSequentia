@@ -11,6 +11,9 @@ import novamachina.exnihilosequentia.common.network.HandshakeMessages;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public enum EnumOre implements IExtensibleEnum {
     COPPER(Type.MODDED, ExNihiloConstants.Ore.COPPER, new Color("FF9933"), false, true),
     LEAD(Type.MODDED, ExNihiloConstants.Ore.LEAD, new Color("330066"), false, true),
@@ -24,17 +27,18 @@ public enum EnumOre implements IExtensibleEnum {
     IRON(Type.VANILLA, ExNihiloConstants.Ore.IRON, new Color("BF8040"), true, false),
     GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true, false);
 
-    private final Color color;
-    private final String oreName;
-    private RegistryObject<OreItem> chunkItem;
+    @Nonnull private final Color color;
+    @Nonnull private final String oreName;
+    @Nullable private RegistryObject<OreItem> chunkItem;
     private final boolean generateIngot;
-    private Item ingotItem;
-    private RegistryObject<OreItem> ingotRegistryItem;
+    @Nullable private Item ingotItem;
+    @Nullable private RegistryObject<OreItem> ingotRegistryItem;
     private boolean isEnabled;
-    private RegistryObject<OreItem> pieceItem;
+    @Nullable private RegistryObject<OreItem> pieceItem;
     private final Type type;
 
-    EnumOre(Type type, String oreName, Color color, boolean isEnabled, boolean generateIngot) {
+    EnumOre(@Nonnull final Type type, @Nonnull final String oreName, @Nonnull final Color color,
+            final boolean isEnabled, final boolean generateIngot) {
         this.type = type;
         this.oreName = oreName;
         this.color = color;
@@ -42,13 +46,15 @@ public enum EnumOre implements IExtensibleEnum {
         this.generateIngot = generateIngot;
     }
 
-    public static EnumOre create(String enumName, Type type, String oreName, Color color, boolean isEnabled, boolean generateIngot) {
+    public static EnumOre create(@Nonnull final String enumName, @Nonnull final Type type,
+                                 @Nonnull final String oreName, @Nonnull final Color color, final boolean isEnabled,
+                                 final boolean generateIngot) {
         throw new IllegalStateException("Enum not extended");
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static boolean updateEnabledOres(HandshakeMessages.S2COreList message) {
-        List<EnumOre> oreList = message.getOreList();
+    public static boolean updateEnabledOres(@Nonnull final HandshakeMessages.S2COreList message) {
+        @Nullable final List<EnumOre> oreList = message.getOreList();
         Arrays.stream(EnumOre.values()).forEach(EnumOre::disable);
         if (oreList != null) {
             for (EnumOre ore : oreList) {
@@ -59,54 +65,63 @@ public enum EnumOre implements IExtensibleEnum {
         return false;
     }
 
+    @Nullable
     public RegistryObject<OreItem> getChunkItem() {
         return chunkItem;
     }
 
-    public void setChunkItem(RegistryObject<OreItem> chunkItem) {
+    public void setChunkItem(@Nonnull final RegistryObject<OreItem> chunkItem) {
         this.chunkItem = chunkItem;
     }
 
+    @Nonnull
     public String getChunkName() {
         return "chunk_" + oreName;
     }
 
+    @Nonnull
     public Color getColor() {
         return color;
     }
 
+    @Nullable
     public Item getIngotItem() {
         return ingotItem;
     }
 
-    public void setIngotItem(Item ingotItem) {
+    public void setIngotItem(@Nonnull final Item ingotItem) {
         this.ingotItem = ingotItem;
     }
 
+    @Nonnull
     public String getIngotName() {
         return "ingot_" + oreName;
     }
 
+    @Nullable
     public RegistryObject<OreItem> getIngotRegistryItem() {
         return ingotRegistryItem;
     }
 
-    public void setIngotRegistryItem(RegistryObject<OreItem> ingotRegistryItem) {
+    public void setIngotRegistryItem(@Nonnull final RegistryObject<OreItem> ingotRegistryItem) {
         this.ingotRegistryItem = ingotRegistryItem;
     }
 
+    @Nonnull
     public String getOreName() {
         return oreName;
     }
 
+    @Nullable
     public RegistryObject<OreItem> getPieceItem() {
         return pieceItem;
     }
 
-    public void setPieceItem(RegistryObject<OreItem> pieceItem) {
+    public void setPieceItem(@Nonnull final RegistryObject<OreItem> pieceItem) {
         this.pieceItem = pieceItem;
     }
 
+    @Nonnull
     public String getPieceName() {
         return "piece_" + oreName;
     }
@@ -115,7 +130,7 @@ public enum EnumOre implements IExtensibleEnum {
         return isEnabled;
     }
 
-    public void setEnabled(boolean isEnabled) {
+    public void setEnabled(final boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
 
@@ -128,6 +143,7 @@ public enum EnumOre implements IExtensibleEnum {
     }
 
     @Override
+    @Nonnull
     public String toString() {
         return "EnumOre{" +
                 "name='" + oreName + '\'' +

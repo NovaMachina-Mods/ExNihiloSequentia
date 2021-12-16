@@ -48,12 +48,12 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     @Nonnull private static final String MODE_INFO_TAG = "modeInfo";
     @Nonnull private static final String SOLID_AMOUNT_TAG = "solidAmount";
     @Nonnull private static final String TANK_TAG = "tank";
-    @Nonnull private BarrelInventoryHandler inventory;
+    @Nonnull private final BarrelInventoryHandler inventory = new BarrelInventoryHandler(this);
     @Nonnull private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
-    @Nonnull private BarrelFluidHandler tank;
+    @Nonnull private final BarrelFluidHandler tank = new BarrelFluidHandler(this);
     @Nonnull private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
-    @Nonnull private AbstractBarrelMode mode;
-    private int solidAmount;
+    @Nullable private AbstractBarrelMode mode;
+    private int solidAmount = 0;
     @Nullable private AbstractBarrelTileState lastSyncedState = null;
 
     static protected class AbstractBarrelTileState {
@@ -84,12 +84,9 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         }
     }
 
-    protected AbstractBarrelTile(TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
+    protected AbstractBarrelTile(@Nonnull final TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
         super(tileEntityType);
         this.mode = BarrelModeRegistry.getModeFromName(ExNihiloConstants.BarrelModes.EMPTY);
-        inventory = new BarrelInventoryHandler(this);
-        tank = new BarrelFluidHandler(this);
-        solidAmount = 0;
     }
 
     @Nonnull
@@ -104,14 +101,14 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
 
     @Override
     public void tick() {
-        if (level == null || level.isClientSide()) {
+        if (level == null || level.isClientSide() || mode == null) {
             return;
         }
 
         if (mode.isEmptyMode() || mode.getModeName().equals(ExNihiloConstants.BarrelModes.FLUID)) {
             @Nonnull final BlockPos abovePos = worldPosition.offset(0, 1, 0);
             if (level.isRainingAt(abovePos) && tank.getSpace() >= Config.getRainFillAmount()) {
-                final FluidStack stack = new FluidStack(Fluids.WATER, Config.getRainFillAmount());
+                @Nonnull final FluidStack stack = new FluidStack(Fluids.WATER, Config.getRainFillAmount());
                 tank.fill(stack, IFluidHandler.FluidAction.EXECUTE);
             }
         }
@@ -128,7 +125,8 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     public CompoundNBT save(@Nonnull final CompoundNBT compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put(TANK_TAG, tank.writeToNBT(new CompoundNBT()));
-        compound.putString(MODE_TAG, mode.getModeName());
+        if (mode != null)
+            compound.putString(MODE_TAG, mode.getModeName());
         compound.put(MODE_INFO_TAG, mode.write());
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
         return super.save(compound);
@@ -145,7 +143,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         if (compound.contains(MODE_TAG)) {
             mode = BarrelModeRegistry.getModeFromName(compound.getString(MODE_TAG));
         }
-        if (compound.contains(MODE_INFO_TAG)) {
+        if (compound.contains(MODE_INFO_TAG) && mode != null) {
             mode.read(compound.getCompound(MODE_INFO_TAG));
         }
         if (compound.contains(SOLID_AMOUNT_TAG)) {
@@ -164,7 +162,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
             tank.readFromNBT(nbt.getCompound(TANK_TAG));
         }
         mode = BarrelModeRegistry.getModeFromName(nbt.getString(MODE_TAG));
-        if (nbt.contains(MODE_INFO_TAG)) {
+        if (nbt.contains(MODE_INFO_TAG) && mode != null) {
             mode.read(nbt.getCompound(MODE_INFO_TAG));
         }
         solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
@@ -176,17 +174,20 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         @Nonnull final CompoundNBT nbt = new CompoundNBT();
         nbt.put(INVENTORY_TAG, inventory.serializeNBT());
         nbt.put(TANK_TAG, tank.writeToNBT(new CompoundNBT()));
-        nbt.putString(MODE_TAG, mode.getModeName());
+        if (mode != null)
+            nbt.putString(MODE_TAG, mode.getModeName());
         nbt.put(MODE_INFO_TAG, mode.write());
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
         return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
     }
 
-    @Nonnull
+    @Nullable
     public ActionResultType onBlockActivated(@Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
                                              @Nonnull final IFluidHandler fluidHandler,
                                              @Nonnull final IItemHandler itemHandler) {
+        if (mode == null)
+            return null;
         return mode.onBlockActivated(this, player, handIn, fluidHandler, itemHandler);
     }
 
@@ -233,7 +234,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         }
     }
 
-    @Nonnull
+    @Nullable
     public AbstractBarrelMode getMode() {
         return mode;
     }
@@ -284,8 +285,10 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         }
     }
 
-    @Nonnull
+    @Nullable
     public List<ITextComponent> getWailaInfo() {
+        if (mode == null)
+            return null;
         return mode.getWailaInfo(this);
     }
 

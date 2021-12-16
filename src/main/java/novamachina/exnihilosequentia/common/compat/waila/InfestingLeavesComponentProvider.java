@@ -9,10 +9,13 @@ import net.minecraft.util.text.TranslationTextComponent;
 import novamachina.exnihilosequentia.common.tileentity.InfestingLeavesTile;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
+import javax.annotation.Nonnull;
+
 public class InfestingLeavesComponentProvider implements IComponentProvider {
     @Override
-    public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
-        InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) accessor.getTileEntity();
+    public void appendBody(@Nonnull final List<ITextComponent> tooltip, @Nonnull final IDataAccessor accessor,
+                           @Nonnull final IPluginConfig config) {
+        @Nonnull final InfestingLeavesTile infestingLeavesTile = (InfestingLeavesTile) accessor.getTileEntity();
 
         tooltip.add(new TranslationTextComponent("waila.progress", StringUtils
                 .formatPercent((float) infestingLeavesTile.getProgress() / 100)));

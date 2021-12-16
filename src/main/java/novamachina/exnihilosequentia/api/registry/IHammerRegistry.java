@@ -5,16 +5,21 @@ import net.minecraft.block.Block;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 
+import javax.annotation.Nonnull;
+
 public interface IHammerRegistry {
     void clearRecipes();
 
-    HammerRecipe findRecipe(Block block);
+    @Nonnull
+    HammerRecipe findRecipe(@Nonnull final Block block);
 
+    @Nonnull
     List<HammerRecipe> getRecipeList();
 
-    List<ItemStackWithChance> getResult(Block input);
+    @Nonnull
+    List<ItemStackWithChance> getResult(@Nonnull final Block input);
 
-    boolean isHammerable(Block block);
+    boolean isHammerable(@Nonnull final Block block);
 
-    void setRecipes(List<HammerRecipe> recipes);
+    void setRecipes(@Nonnull final List<HammerRecipe> recipes);
 }

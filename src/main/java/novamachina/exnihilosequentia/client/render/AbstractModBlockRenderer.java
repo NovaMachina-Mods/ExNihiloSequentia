@@ -14,16 +14,18 @@ import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public abstract class AbstractModBlockRenderer<T extends TileEntity> extends TileEntityRenderer<T> {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    protected AbstractModBlockRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
+    protected AbstractModBlockRenderer(@Nonnull final TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
-    protected void add(IVertexBuilder renderer, MatrixStack stack, VertexLocation vertexLocation, UVLocation uvLocation, Color color, int combinedLight) {
+    protected void add(@Nonnull final IVertexBuilder renderer, @Nonnull final MatrixStack stack,
+                       @Nonnull final VertexLocation vertexLocation, @Nonnull final UVLocation uvLocation,
+                       @Nonnull final Color color, final int combinedLight) {
         renderer.vertex(stack.last().pose(), vertexLocation.getX(), vertexLocation.getY(), vertexLocation.getZ())
                 .color(color.r, color.g, color.b, color.a)
                 .uv(uvLocation.getU(), uvLocation.getV())
@@ -33,10 +35,10 @@ public abstract class AbstractModBlockRenderer<T extends TileEntity> extends Til
     }
 
     //Added from ExCompressum, thanks to Blay09 for that piece of code :D
-    @Nullable
-    public static BlockState getStateFromItemStack(ItemStack itemStack) {
+    @Nonnull
+    public static BlockState getStateFromItemStack(@Nonnull final ItemStack itemStack) {
         if (itemStack.getItem() instanceof BlockItem) {
-            Block block = ((BlockItem) itemStack.getItem()).getBlock();
+            @Nonnull final Block block = ((BlockItem) itemStack.getItem()).getBlock();
             try {
                 return block.defaultBlockState();
             } catch (Exception e) {
@@ -47,14 +49,11 @@ public abstract class AbstractModBlockRenderer<T extends TileEntity> extends Til
         return Blocks.AIR.defaultBlockState();
     }
 
-    protected String resolveTexture(String path) {
-        switch (path) {
-            case "cactus": {
-                return "cactus_top";
-            }
-            default: {
-                return path;
-            }
+    @Nonnull
+    protected String resolveTexture(@Nonnull final String path) {
+        if ("cactus".equals(path)) {
+            return "cactus_top";
         }
+        return path;
     }
 }

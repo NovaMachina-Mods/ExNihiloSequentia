@@ -5,28 +5,36 @@ import net.minecraft.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 
+import javax.annotation.Nonnull;
+
 public class CrucibleRecipeBuilder extends ExNihiloFinishedRecipe<CrucibleRecipeBuilder> {
-    private CrucibleRecipeBuilder() {
+    private CrucibleRecipeBuilder() throws NullPointerException {
+        //noinspection ConstantConditions
         super(CrucibleRecipe.getStaticSerializer().get());
     }
 
+    @Nonnull
     public static CrucibleRecipeBuilder builder() {
         return new CrucibleRecipeBuilder();
     }
 
-    public CrucibleRecipeBuilder amount(int amount) {
+    @Nonnull
+    public CrucibleRecipeBuilder amount(final int amount) {
         return addWriter(jsonObj -> jsonObj.addProperty("amount", amount));
     }
 
-    public CrucibleRecipeBuilder crucibleType(CrucibleTypeEnum type) {
+    @Nonnull
+    public CrucibleRecipeBuilder crucibleType(@Nonnull final CrucibleTypeEnum type) {
         return addWriter(jsonObj -> jsonObj.addProperty("crucibleType", type.getName()));
     }
 
-    public CrucibleRecipeBuilder fluidResult(Fluid fluidResult) {
+    @Nonnull
+    public CrucibleRecipeBuilder fluidResult(@Nonnull final Fluid fluidResult) {
         return this.addFluid("fluidResult", fluidResult);
     }
 
-    public CrucibleRecipeBuilder input(Ingredient input) {
+    @Nonnull
+    public CrucibleRecipeBuilder input(@Nonnull final Ingredient input) {
         return this.addInput(input);
     }
 }

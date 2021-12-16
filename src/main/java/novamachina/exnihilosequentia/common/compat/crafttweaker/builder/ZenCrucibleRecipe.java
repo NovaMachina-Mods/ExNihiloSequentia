@@ -10,45 +10,54 @@ import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")
 public class ZenCrucibleRecipe {
 
-    private final CrucibleRecipe internal;
+    @Nonnull private final CrucibleRecipe internal;
 
-    private ZenCrucibleRecipe(ResourceLocation recipeId) {
+    private ZenCrucibleRecipe(@Nonnull final ResourceLocation recipeId) {
         this.internal = new CrucibleRecipe(recipeId, Ingredient.EMPTY, 0, FluidStack.EMPTY, CrucibleTypeEnum.WOOD);
     }
 
     @ZenCodeType.Method
-    public static ZenCrucibleRecipe builder(ResourceLocation recipeId) {
+    @Nonnull
+    public static ZenCrucibleRecipe builder(@Nonnull final ResourceLocation recipeId) {
         return new ZenCrucibleRecipe(recipeId);
     }
 
+    @Nonnull
     public CrucibleRecipe build() {
         return internal;
     }
 
     @ZenCodeType.Method
-    public ZenCrucibleRecipe setAmount(int amount) {
+    @Nonnull
+    public ZenCrucibleRecipe setAmount(final int amount) {
         internal.setAmount(amount);
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenCrucibleRecipe setCrucibleType(String crucibleType) {
+    @Nonnull
+    public ZenCrucibleRecipe setCrucibleType(@Nonnull final String crucibleType) {
         internal.setCrucibleType(crucibleType);
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenCrucibleRecipe setInput(IIngredient input) {
+    @Nonnull
+    public ZenCrucibleRecipe setInput(@Nonnull final IIngredient input) {
         internal.setInput(input.asVanillaIngredient());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenCrucibleRecipe setResultFluid(IFluidStack fluid) {
+    @Nonnull
+    @SuppressWarnings("unused")
+    public ZenCrucibleRecipe setResultFluid(@Nonnull final IFluidStack fluid) {
         internal.setResultFluid(fluid.getInternal());
         return this;
     }

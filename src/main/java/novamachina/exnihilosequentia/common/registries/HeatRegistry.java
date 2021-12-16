@@ -8,10 +8,12 @@ import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class HeatRegistry implements IHeatRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+import javax.annotation.Nonnull;
 
-    private final List<HeatRecipe> recipeList = new ArrayList<>();
+public class HeatRegistry implements IHeatRegistry {
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
+    @Nonnull private final List<HeatRecipe> recipeList = new ArrayList<>();
 
     @Override
     public void clearRecipes() {
@@ -19,7 +21,7 @@ public class HeatRegistry implements IHeatRegistry {
     }
 
     @Override
-    public int getHeatAmount(BlockState entry) {
+    public int getHeatAmount(@Nonnull final BlockState entry) {
         return recipeList
                 .stream()
                 .filter(recipe -> recipe.isMatch(entry))
@@ -29,13 +31,14 @@ public class HeatRegistry implements IHeatRegistry {
     }
 
     @Override
+    @Nonnull
     public List<HeatRecipe> getRecipeList() {
         return recipeList;
     }
 
     @Override
-    public void setRecipes(List<HeatRecipe> recipes) {
+    public void setRecipes(@Nonnull final List<HeatRecipe> recipes) {
         logger.debug("Heat Registry recipes: " + recipes.size());
-        this.recipeList.addAll(recipes);
+        recipeList.addAll(recipes);
     }
 }

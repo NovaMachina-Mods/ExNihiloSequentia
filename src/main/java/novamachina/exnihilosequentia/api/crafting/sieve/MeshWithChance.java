@@ -6,30 +6,34 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 
-public class MeshWithChance {
-    private static final String CHANCE_KEY = "chance";
-    private static final String MESH_KEY = "mesh";
-    private final float chance;
-    private final EnumMesh mesh;
+import javax.annotation.Nonnull;
 
-    public MeshWithChance(EnumMesh mesh, float chance) {
+public class MeshWithChance {
+    @Nonnull private static final String CHANCE_KEY = "chance";
+    @Nonnull private static final String MESH_KEY = "mesh";
+    private final float chance;
+    @Nonnull private final EnumMesh mesh;
+
+    public MeshWithChance(@Nonnull final EnumMesh mesh, final float chance) {
         this.mesh = mesh;
         this.chance = chance;
     }
 
-    public static MeshWithChance deserialize(JsonElement json) {
+    @Nonnull
+    public static MeshWithChance deserialize(@Nonnull final JsonElement json) {
         if (json.isJsonObject() && json.getAsJsonObject().has(MESH_KEY)) {
             final float chance = JSONUtils.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
-            final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
+            @Nonnull final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
             return new MeshWithChance(mesh, chance);
         } else {
-            final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
+            @Nonnull final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
             return new MeshWithChance(mesh, 1.0F);
         }
     }
 
-    public static MeshWithChance read(PacketBuffer buffer) {
-        final EnumMesh mesh = buffer.readEnum(EnumMesh.class);
+    @Nonnull
+    public static MeshWithChance read(@Nonnull final PacketBuffer buffer) {
+        @Nonnull final EnumMesh mesh = buffer.readEnum(EnumMesh.class);
         final float chance = buffer.readFloat();
         return new MeshWithChance(mesh, chance);
     }
@@ -38,18 +42,20 @@ public class MeshWithChance {
         return chance;
     }
 
+    @Nonnull
     public EnumMesh getMesh() {
         return mesh;
     }
 
+    @Nonnull
     public JsonElement serialize() {
-        JsonObject json = new JsonObject();
+        @Nonnull final JsonObject json = new JsonObject();
         json.addProperty(CHANCE_KEY, getChance());
         json.addProperty(MESH_KEY, getMesh().getName());
         return json;
     }
 
-    public void write(PacketBuffer buffer) {
+    public void write(@Nonnull final PacketBuffer buffer) {
         buffer.writeEnum(getMesh());
         buffer.writeFloat(getChance());
     }

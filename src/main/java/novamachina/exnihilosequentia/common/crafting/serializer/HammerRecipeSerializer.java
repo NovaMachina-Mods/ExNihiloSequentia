@@ -13,6 +13,8 @@ import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 
+import javax.annotation.Nonnull;
+
 public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -20,10 +22,11 @@ public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
     }
 
     @Override
-    public HammerRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
-        Ingredient input = Ingredient.fromNetwork(buffer);
-        int outputCount = buffer.readInt();
-        List<ItemStackWithChance> output = new ArrayList<>(outputCount);
+    @Nonnull
+    public HammerRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final PacketBuffer buffer) {
+        @Nonnull final Ingredient input = Ingredient.fromNetwork(buffer);
+        final int outputCount = buffer.readInt();
+        @Nonnull final List<ItemStackWithChance> output = new ArrayList<>(outputCount);
         for (int i = 0; i < outputCount; i++) {
             output.add(ItemStackWithChance.read(buffer));
         }
@@ -32,19 +35,20 @@ public class HammerRecipeSerializer extends RecipeSerializer<HammerRecipe> {
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, HammerRecipe recipe) {
+    public void toNetwork(@Nonnull final PacketBuffer buffer, @Nonnull final HammerRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getOutput().size());
-        for (ItemStackWithChance stack : recipe.getOutput()) {
+        for (@Nonnull final ItemStackWithChance stack : recipe.getOutput()) {
             stack.write(buffer);
         }
     }
 
     @Override
-    protected HammerRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        Ingredient input = Ingredient.fromJson(json.get("input"));
-        JsonArray results = json.getAsJsonArray("results");
-        List<ItemStackWithChance> output = new ArrayList<>(results.size());
+    @Nonnull
+    protected HammerRecipe readFromJson(@Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) {
+        @Nonnull final Ingredient input = Ingredient.fromJson(json.get("input"));
+        @Nonnull final JsonArray results = json.getAsJsonArray("results");
+        @Nonnull final List<ItemStackWithChance> output = new ArrayList<>(results.size());
         for (int i = 0; i < results.size(); i++) {
             output.add(ItemStackWithChance.deserialize(results.get(i)));
         }

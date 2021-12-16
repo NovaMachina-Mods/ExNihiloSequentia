@@ -9,33 +9,40 @@ import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenCrookRecipe")
 public class ZenCrookRecipe {
 
-    private final CrookRecipe internal;
+    @Nonnull private final CrookRecipe internal;
 
-    private ZenCrookRecipe(ResourceLocation recipeId) {
+    private ZenCrookRecipe(@Nonnull final ResourceLocation recipeId) {
         this.internal = new CrookRecipe(recipeId, Ingredient.EMPTY, new ArrayList<>());
     }
 
     @ZenCodeType.Method
-    public static ZenCrookRecipe builder(ResourceLocation recipeId) {
+    @Nonnull
+    public static ZenCrookRecipe builder(@Nonnull final ResourceLocation recipeId) {
         return new ZenCrookRecipe(recipeId);
     }
 
     @ZenCodeType.Method
-    public ZenCrookRecipe addDrop(IItemStack drop, float chance) {
+    @Nonnull
+    @SuppressWarnings("unused")
+    public ZenCrookRecipe addDrop(@Nonnull final IItemStack drop, final float chance) {
         internal.addOutput(drop.getInternal(), chance);
         return this;
     }
 
+    @Nonnull
     public CrookRecipe build() {
         return internal;
     }
 
     @ZenCodeType.Method
-    public ZenCrookRecipe setInput(IIngredient input) {
+    @Nonnull
+    public ZenCrookRecipe setInput(@Nonnull final IIngredient input) {
         internal.setInput(input.asVanillaIngredient());
         return this;
     }

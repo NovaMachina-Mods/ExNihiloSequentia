@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import net.minecraft.world.World;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import net.minecraft.entity.item.ItemEntity;
@@ -13,33 +14,40 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlockBarrelMode extends AbstractBarrelMode {
-    public BlockBarrelMode(String name) {
+    public BlockBarrelMode(@Nonnull final String name) {
         super(name);
     }
 
     @Override
-    public void tick(AbstractBarrelTile barrelTile) {
+    public void tick(@Nonnull final AbstractBarrelTile barrelTile) {
         // NOOP
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
-        barrelTile.getLevel()
-            .addFreshEntity(new ItemEntity(barrelTile.getLevel(), barrelTile.getBlockPos().getX() + 0.5F, barrelTile.getBlockPos()
-                .getY() + 0.5F,
-                barrelTile.getBlockPos().getZ() + 0.5F, new ItemStack(barrelTile.getInventory().getStackInSlot(0)
-                .getItem())));
+    @Nonnull
+    public ActionResultType onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
+                                             @Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+                                             @Nonnull final IFluidHandler fluidHandler,
+                                             @Nonnull final IItemHandler itemHandler) {
+        @Nullable final World world = barrelTile.getLevel();
+        if (world != null) {
+            world.addFreshEntity(new ItemEntity(barrelTile.getLevel(), barrelTile.getBlockPos().getX() + 0.5F,
+                    barrelTile.getBlockPos().getY() + 0.5F,barrelTile.getBlockPos().getZ() + 0.5F,
+                    new ItemStack(barrelTile.getInventory().getStackInSlot(0).getItem())));
+        }
         barrelTile.getInventory().setStackInSlot(0, ItemStack.EMPTY);
         barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
         return ActionResultType.SUCCESS;
     }
 
     @Override
-    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
+    public boolean canFillWithFluid(@Nonnull final AbstractBarrelTile barrel) {
         return false;
     }
 
@@ -49,36 +57,41 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected boolean isTriggerItem(ItemStack stack) {
+    protected boolean isTriggerItem(@Nonnull final ItemStack stack) {
         return false;
     }
 
     @Override
-    public void read(CompoundNBT nbt) {
+    public void read(@Nonnull final CompoundNBT nbt) {
         // NOOP
     }
 
     @Override
+    @Nonnull
     public CompoundNBT write() {
         return new CompoundNBT();
     }
 
     @Override
-    protected void spawnParticle(AbstractBarrelTile barrelTile) {
+    protected void spawnParticle(@Nonnull final AbstractBarrelTile barrelTile) {
         // NOOP
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
-        List<ITextComponent> info = new ArrayList<>();
+    @Nonnull
+    public List<ITextComponent> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile) {
+        @Nullable final List<ITextComponent> info = new ArrayList<>();
 
-        info.add(new TranslationTextComponent("waila.barrel.block", new TranslationTextComponent(barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
+        info.add(new TranslationTextComponent("waila.barrel.block",
+                new TranslationTextComponent(barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
 
         return info;
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
+    @Nonnull
+    public ItemStack handleInsert(@Nonnull final AbstractBarrelTile barrelTile, @Nonnull final ItemStack stack,
+                                  final boolean simulate) {
         return stack;
     }
 }

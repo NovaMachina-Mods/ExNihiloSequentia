@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.*;
@@ -21,6 +22,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class WitchWaterBlock extends FlowingFluidBlock {
 
     public WitchWaterBlock() {
@@ -34,7 +38,8 @@ public class WitchWaterBlock extends FlowingFluidBlock {
      */
     @Deprecated
     @Override
-    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+    public void entityInside(@Nonnull final BlockState state, @Nonnull final World worldIn, @Nonnull final BlockPos pos,
+                             @Nonnull final Entity entityIn) {
         if (worldIn.isClientSide() || !entityIn.isAlive()) {
             return;
         }
@@ -85,7 +90,9 @@ public class WitchWaterBlock extends FlowingFluidBlock {
         // TODO Cows
 
         if (entityIn instanceof AnimalEntity) {
-            entityIn.thunderHit((ServerWorld) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
+            @Nullable final LightningBoltEntity lightningBolt =  EntityType.LIGHTNING_BOLT.create(worldIn);
+            if (lightningBolt != null)
+                entityIn.thunderHit((ServerWorld) worldIn, lightningBolt);
         }
 
         if (entityIn instanceof PlayerEntity) {
@@ -96,15 +103,16 @@ public class WitchWaterBlock extends FlowingFluidBlock {
         }
     }
 
-    private void applyPotion(PlayerEntity entityIn, EffectInstance potionEffect) {
-        EffectInstance currentEffect = entityIn.getEffect(potionEffect.getEffect());
+    private void applyPotion(@Nonnull final PlayerEntity entityIn, @Nonnull final EffectInstance potionEffect) {
+        @Nullable final EffectInstance currentEffect = entityIn.getEffect(potionEffect.getEffect());
         if (currentEffect != null
                 && currentEffect.getDuration() <= potionEffect.getDuration() - 20) {
             entityIn.addEffect(potionEffect);
         }
     }
 
-    private void replaceMob(World world, LivingEntity toKill, LivingEntity toSpawn) {
+    private void replaceMob(@Nonnull final World world, @Nonnull final LivingEntity toKill,
+                            @Nonnull final LivingEntity toSpawn) {
         toSpawn.moveTo(toKill.getX(), toKill.getY(), toKill.getZ(),
                 toKill.yRot, toKill.xRot);
         toSpawn.yBodyRot = toKill.yBodyRot;
