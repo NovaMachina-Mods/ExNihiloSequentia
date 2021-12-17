@@ -15,7 +15,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
         this(ExNihiloTiles.CRUCIBLE_WOOD.get());
     }
 
-    public WoodCrucibleTile(TileEntityType<WoodCrucibleTile> tile) {
+    public WoodCrucibleTile(TileEntityType<? extends WoodCrucibleTile> tile) {
         super(tile);
     }
 

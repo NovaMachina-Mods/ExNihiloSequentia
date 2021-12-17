@@ -15,7 +15,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
         this(ExNihiloTiles.CRUCIBLE_FIRED.get());
     }
 
-    public FiredCrucibleTile(TileEntityType<FiredCrucibleTile> tile) {
+    public FiredCrucibleTile(TileEntityType<? extends FiredCrucibleTile> tile) {
         super(tile);
     }
 
