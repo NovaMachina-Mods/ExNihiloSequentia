@@ -1,9 +1,7 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -14,7 +12,11 @@ import novamachina.exnihilosequentia.common.utility.Config;
 public class FiredCrucibleTile extends BaseCrucibleTile {
 
     public FiredCrucibleTile() {
-        super(ExNihiloTiles.CRUCIBLE_FIRED.get());
+        this(ExNihiloTiles.CRUCIBLE_FIRED.get());
+    }
+
+    public FiredCrucibleTile(TileEntityType<? extends FiredCrucibleTile> tile) {
+        super(tile);
     }
 
     @Override
@@ -40,6 +42,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public void tick() {
+        assert level != null;
         if (level.isClientSide()) {
             return;
         }
