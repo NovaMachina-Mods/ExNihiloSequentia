@@ -1,26 +1,27 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.fluid.FlowingFluid;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
 public class WoodCrucibleTile extends BaseCrucibleTile {
 
     public WoodCrucibleTile() {
-        super(ExNihiloTiles.CRUCIBLE_WOOD.get());
+        this(ExNihiloTiles.CRUCIBLE_WOOD.get());
+    }
+
+    public WoodCrucibleTile(TileEntityType<? extends WoodCrucibleTile> tile) {
+        super(tile);
     }
 
     @Override
     public void tick() {
+        assert level != null;
         if (level.isClientSide()) {
             return;
         }
