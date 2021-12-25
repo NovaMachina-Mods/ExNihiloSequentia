@@ -14,7 +14,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +26,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SieveRegistry implements ISieveRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(SieveRegistry.class);
 
     private final boolean flattenRecipes = Config.flattenSieveRecipes();
 

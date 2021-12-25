@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -12,7 +11,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class BarrelModeRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(BarrelModeRegistry.class);
 
     private static final Map<String, Supplier<AbstractBarrelMode>> modeNameMap = new HashMap<>();
     private static final Map<TriggerType, ArrayList<Supplier<AbstractBarrelMode>>> modeMap = new EnumMap<>(TriggerType.class);

@@ -2,14 +2,13 @@ package novamachina.exnihilosequentia.common.registries;
 
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
+import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.api.registry.IFluidItemTransformRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FluidItemTransformRegistry implements IFluidItemTransformRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(FluidItemTransformRegistry.class);
 
     private final List<FluidItemRecipe> recipeList = new ArrayList<>();
 

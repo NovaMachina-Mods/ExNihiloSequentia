@@ -12,10 +12,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.InterModComms;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class CompatTOP {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(CompatTOP.class);
     private static boolean registered;
 
     private CompatTOP() {
@@ -31,7 +30,7 @@ public class CompatTOP {
     }
 
     public static class GetTheOneProbe implements Function<ITheOneProbe, Void> {
-        private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+        private static final ExNihiloLogger logger = new ExNihiloLogger(GetTheOneProbe.class);
 
         @Override
         public Void apply(ITheOneProbe iTheOneProbe) {

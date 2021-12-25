@@ -12,12 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nullable;
 
 public abstract class AbstractModBlockRenderer<T extends TileEntity> extends TileEntityRenderer<T> {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(AbstractModBlockRenderer.class);
 
     protected AbstractModBlockRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);

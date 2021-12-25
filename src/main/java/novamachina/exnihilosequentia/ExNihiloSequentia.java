@@ -18,12 +18,13 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 
 @Mod(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
 public class ExNihiloSequentia {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(ExNihiloSequentia.class);
 
     public ExNihiloSequentia() {
         logger.debug("Starting Ex Nihilo: Sequentia");

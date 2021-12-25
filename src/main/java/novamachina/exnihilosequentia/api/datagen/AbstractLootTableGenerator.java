@@ -23,11 +23,10 @@ import net.minecraft.loot.conditions.SurvivesExplosion;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public abstract class AbstractLootTableGenerator implements IDataProvider {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(AbstractLootTableGenerator.class);
     protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
     private final DataGenerator generator;
     private final String modId;

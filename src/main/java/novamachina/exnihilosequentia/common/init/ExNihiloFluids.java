@@ -10,7 +10,6 @@ import novamachina.exnihilosequentia.common.fluid.SeaWaterFluid;
 import novamachina.exnihilosequentia.common.fluid.WitchWaterFluid;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloFluids {
 
@@ -28,7 +27,7 @@ public class ExNihiloFluids {
     public static final RegistryObject<FlowingFluid> SEA_WATER_FLOW = FLUIDS
             .register(ExNihiloConstants.Fluids.SEA_WATER_FLOW,
                     () -> new SeaWaterFluid.Flowing(SeaWaterFluid.SEA_WATER_PROPS));
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(ExNihiloFluids.class);
 
     private ExNihiloFluids() {
 

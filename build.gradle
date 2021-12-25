@@ -4,7 +4,6 @@ buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url "https://plugins.gradle.org/m2/" }
-        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -22,7 +21,6 @@ apply plugin: 'net.minecraftforge.gradle'
 
 
 def ENV = System.getenv()
-String semver = "${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
 version = "${minecraft_release}-" + new Date().format("yyyyMMdd-HHmmss")
 group = "${artifact_group}.${artifact_basename}"
 archivesBaseName = "${artifact_basename}"
@@ -68,8 +66,8 @@ dependencies {
     compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
     runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
 
-    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
-    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_version}")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_version}")
 
     runtimeOnly fg.deobf("curse.maven:ctm-267602:3137659")
     runtimeOnly fg.deobf("curse.maven:jer-240630:3066754")

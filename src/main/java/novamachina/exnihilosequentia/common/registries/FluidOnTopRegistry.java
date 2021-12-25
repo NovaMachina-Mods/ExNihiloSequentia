@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FluidOnTopRegistry implements IFluidOnTopRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(FluidOnTopRegistry.class);
 
     private List<FluidOnTopRecipe> recipeList = new ArrayList<>();
 

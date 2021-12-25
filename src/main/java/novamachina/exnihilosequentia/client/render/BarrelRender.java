@@ -13,14 +13,12 @@ import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(BarrelRender.class);
 
     public BarrelRender(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);

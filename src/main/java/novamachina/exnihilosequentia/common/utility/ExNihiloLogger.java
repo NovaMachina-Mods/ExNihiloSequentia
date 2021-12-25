@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.utility;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ExNihiloLogger {
 
@@ -8,8 +9,8 @@ public class ExNihiloLogger {
     private static final String PREFIX = "[Ex Nihilo: Sequentia]:";
     private final Logger logger;
 
-    public ExNihiloLogger(Logger logger) {
-        this.logger = logger;
+    public ExNihiloLogger(Class<?> className) {
+        this.logger = LoggerFactory.getLogger(className);
     }
 
     public void debug(String msg) {

@@ -16,7 +16,6 @@ import novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleTile
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloTiles {
     private static final DeferredRegister<TileEntityType<?>> TILES =
@@ -51,7 +50,7 @@ public class ExNihiloTiles {
             .register(Blocks.BARREL_STONE, () -> TileEntityType.Builder
                     .of(StoneBarrelTile::new, ExNihiloBlocks.BARREL_STONE.get(), ExNihiloBlocks.BARREL_CRIMSON.get(),
                             ExNihiloBlocks.BARREL_WARPED.get()).build(null));
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(ExNihiloTiles.class);
 
     private ExNihiloTiles() {
     }

@@ -1,15 +1,14 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class InfestedLeavesTile extends TileEntity implements ITickableTileEntity {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(InfestedLeavesTile.class);
 
     private int progressWaitInterval = 0;
 

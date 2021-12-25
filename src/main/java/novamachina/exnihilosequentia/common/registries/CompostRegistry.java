@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.registry.ICompostRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CompostRegistry implements ICompostRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(CompostRegistry.class);
     public final List<CompostRecipe> recipeList = new ArrayList<>();
 
     private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();

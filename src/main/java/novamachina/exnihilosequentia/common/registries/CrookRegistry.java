@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.registry.ICrookRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +18,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class CrookRegistry implements ICrookRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(CrookRegistry.class);
 
     private final List<CrookRecipe> recipeList = new ArrayList<>();
 

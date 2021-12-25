@@ -15,10 +15,9 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(CrucibleRender.class);
 
     public CrucibleRender(TileEntityRendererDispatcher rendererDispatcher) {
         super(rendererDispatcher);

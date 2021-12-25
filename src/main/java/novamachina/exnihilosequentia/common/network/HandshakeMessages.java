@@ -8,10 +8,9 @@ import java.util.stream.Collectors;
 import net.minecraft.network.PacketBuffer;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class HandshakeMessages {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(HandshakeMessages.class);
 
     private HandshakeMessages() {
 

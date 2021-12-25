@@ -28,14 +28,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 public class SieveTile extends TileEntity {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(SieveTile.class);
     private static final String BLOCK_TAG = "block";
     private static final String PROGRESS_TAG = "progress";
     private static final String MESH_TAG = "mesh";

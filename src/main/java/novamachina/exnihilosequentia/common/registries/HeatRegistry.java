@@ -6,10 +6,9 @@ import net.minecraft.block.BlockState;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class HeatRegistry implements IHeatRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(HeatRegistry.class);
 
     private final List<HeatRecipe> recipeList = new ArrayList<>();
 

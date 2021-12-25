@@ -31,14 +31,13 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.TankUtil;
-import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
 public abstract class BaseCrucibleTile extends TileEntity implements ITickableTileEntity {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(BaseCrucibleTile.class);
     private static final String INVENTORY_TAG = "inventory";
     private static final String SOLID_AMOUNT_TAG = "solidAmount";
     private static final String CURRENT_ITEM_TAG = "currentItem";

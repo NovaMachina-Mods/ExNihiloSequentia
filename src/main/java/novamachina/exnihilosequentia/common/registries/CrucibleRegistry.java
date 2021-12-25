@@ -6,7 +6,6 @@ import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import net.minecraft.item.ItemStack;
 import novamachina.exnihilosequentia.api.registry.ICrucibleRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CrucibleRegistry implements ICrucibleRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(CrucibleRegistry.class);
 
     private final List<CrucibleRecipe> recipeList = new ArrayList<>();
 

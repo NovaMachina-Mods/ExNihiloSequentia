@@ -33,7 +33,6 @@ import novamachina.exnihilosequentia.common.item.tools.hammer.HammerBaseItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nullable;
 
@@ -131,7 +130,7 @@ public class ExNihiloItems {
             .register(ExNihiloConstants.Items.SEA_WATER_BUCKET,
                     () -> new BucketItem(ExNihiloFluids.SEA_WATER, tab.stacksTo(1)));
     private static final Map<EnumOre, RegistryObject<OreItem>> ingotMap = new EnumMap<>(EnumOre.class);
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(ExNihiloItems.class);
 
     static {
         for (EnumCrook crook : EnumCrook.values()) {

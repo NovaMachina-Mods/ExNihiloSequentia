@@ -10,7 +10,14 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.exnihilosequentia.common.block.*;
+import novamachina.exnihilosequentia.common.block.BaseBlock;
+import novamachina.exnihilosequentia.common.block.BaseFallingBlock;
+import novamachina.exnihilosequentia.common.block.BlockBarrel;
+import novamachina.exnihilosequentia.common.block.EndCakeBlock;
+import novamachina.exnihilosequentia.common.block.WitchWaterBlock;
+import novamachina.exnihilosequentia.common.block.SeaWaterBlock;
+import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
+import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import novamachina.exnihilosequentia.common.block.barrels.NetherBarrelBlock;
 import novamachina.exnihilosequentia.common.block.barrels.WoodBarrelBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.FiredCrucibleBlock;
@@ -24,7 +31,6 @@ import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloBlocks {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister
@@ -119,7 +125,7 @@ public class ExNihiloBlocks {
             .register(Blocks.SIEVE_CRIMSON, NetherSieveBlock::new);
     public static final RegistryObject<NetherSieveBlock> SIEVE_WARPED = BLOCKS
             .register(Blocks.SIEVE_WARPED, NetherSieveBlock::new);
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(ExNihiloBlocks.class);
 
     private ExNihiloBlocks() {
 

@@ -24,12 +24,11 @@ import novamachina.exnihilosequentia.common.crafting.serializer.HeatRecipeSerial
 import novamachina.exnihilosequentia.common.crafting.serializer.SieveRecipeSerializer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloSerializers {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
             .create(ForgeRegistries.RECIPE_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(ExNihiloSerializers.class);
 
     static {
         HammerRecipe.setSerializer(RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new));
