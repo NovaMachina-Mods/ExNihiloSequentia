@@ -34,13 +34,13 @@ public class WoodCrucibleBlock extends CrucibleBaseBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level1, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
-        if (level1.isClientSide) {
-            return null;
+        if (!level1.isClientSide) {
+            return (level, blockPos, blockState, t) -> {
+                if (t instanceof WoodCrucibleTile tile) {
+                    tile.tick();
+                }
+            };
         }
-        return (level, blockPos, blockState, t) -> {
-            if (t instanceof WoodCrucibleTile tile) {
-                tile.tick();
-            }
-        };
+        return null;
     }
 }

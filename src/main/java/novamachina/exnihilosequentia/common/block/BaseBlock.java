@@ -21,7 +21,6 @@ public class BaseBlock extends Block implements EntityBlock {
     public BaseBlock(BlockBuilder builder) {
         super(builder.getProperties());
         this.tileEntitySupplier = builder.getTileEntitySupplier();
-        ToolAction toolType = builder.getToolType();
     }
 
 

@@ -1,17 +1,16 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
-//TODO
-/*import com.blamejared.crafttweaker.api.annotations.ZenRegister;
-import com.blamejared.crafttweaker.api.item.IIngredient;
+import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenCompostRecipe")*/
+@ZenCodeType.Name("mods.exnihilosequentia.ZenCompostRecipe")
 public class ZenCompostRecipe {
-/*
+
     private final CompostRecipe internal;
 
     private ZenCompostRecipe(ResourceLocation recipeId) {
@@ -37,5 +36,5 @@ public class ZenCompostRecipe {
     public ZenCompostRecipe setInput(IIngredient input) {
         internal.setInput(input.asVanillaIngredient());
         return this;
-    }*/
+    }
 }

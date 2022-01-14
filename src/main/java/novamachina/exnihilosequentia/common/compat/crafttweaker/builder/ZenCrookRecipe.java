@@ -1,8 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
-//TODO
-/*import com.blamejared.crafttweaker.api.annotations.ZenRegister;
-import com.blamejared.crafttweaker.api.item.IIngredient;
+import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import java.util.ArrayList;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -11,9 +10,9 @@ import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenCrookRecipe")*/
+@ZenCodeType.Name("mods.exnihilosequentia.ZenCrookRecipe")
 public class ZenCrookRecipe {
-/*
+
     private final CrookRecipe internal;
 
     private ZenCrookRecipe(ResourceLocation recipeId) {
@@ -41,5 +40,4 @@ public class ZenCrookRecipe {
         return this;
     }
 
- */
 }

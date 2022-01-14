@@ -1,10 +1,9 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker;
 
-//TODO
-/*import com.blamejared.crafttweaker.api.CraftTweakerAPI;
-import com.blamejared.crafttweaker.api.annotations.ZenRegister;
-import com.blamejared.crafttweaker.api.managers.IRecipeManager;
-import com.blamejared.crafttweaker.impl.actions.recipes.ActionAddRecipe;
+import com.blamejared.crafttweaker.api.CraftTweakerAPI;
+import com.blamejared.crafttweaker.api.action.recipe.ActionAddRecipe;
+import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker.api.recipe.manager.base.IRecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
@@ -13,9 +12,9 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.HammerRecipes")*/
-public class HammerRecipeManager {// implements IRecipeManager {
-/*
+@ZenCodeType.Name("mods.exnihilosequentia.HammerRecipes")
+public class HammerRecipeManager implements IRecipeManager {
+
     @ZenCodeType.Method
     public ZenHammerRecipe create(String recipeId) {
         recipeId = fixRecipeName(recipeId);
@@ -30,5 +29,5 @@ public class HammerRecipeManager {// implements IRecipeManager {
         return HammerRecipe.RECIPE_TYPE;
     }
 
- */
+
 }

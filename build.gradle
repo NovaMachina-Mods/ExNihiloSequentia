@@ -62,13 +62,13 @@ dependencies {
     //compileOnly fg.deobf("curse.maven:Jade-324717:${jade_version}:api")
     implementation fg.deobf("curse.maven:Jade-324717:${jade_version}")
 
-    compileOnly fg.deobf("curse.maven:TOPtemp-245211:3550084")
-    runtimeOnly fg.deobf("curse.maven:TOPtemp-245211:3550084")
+    compileOnly fg.deobf("curse.maven:TOPtemp-245211:3586969")
+    runtimeOnly fg.deobf("curse.maven:TOPtemp-245211:3586969")
 //    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
 //    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
 
-//    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
-//    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+    //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
 }
 
 task replaceResources(type: Copy) {
@@ -112,7 +112,7 @@ minecraft {
         }
 
         server {
-            workingDirectory project.file('run')
+            workingDirectory project.file('runserver')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
@@ -154,7 +154,7 @@ curseforge {
         id = "${curseforge_project}"
         releaseType = 'release'
         mainArtifact jar
-        addGameVersion '1.18'
+        addGameVersion '1.18.1'
         changelog = file('changelog.html')
         changelogType = 'html'
     }

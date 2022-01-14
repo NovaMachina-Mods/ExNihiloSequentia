@@ -117,7 +117,6 @@ public class SieveTile extends BlockEntity {
 
     @Override
     protected void saveAdditional(@Nonnull CompoundTag compound) {
-        super.saveAdditional(compound);
         if (!meshStack.isEmpty()) {
             CompoundTag meshNBT = meshStack.save(new CompoundTag());
             compound.put(MESH_TAG, meshNBT);
@@ -129,7 +128,13 @@ public class SieveTile extends BlockEntity {
         }
 
         compound.putFloat(PROGRESS_TAG, progress);
-        //setChanged();
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        if (tag != null) {
+            load(tag);
+        }
     }
 
     @Override

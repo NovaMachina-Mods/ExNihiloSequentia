@@ -53,32 +53,47 @@ public abstract class BaseCrucibleTile extends BlockEntity {
 
     protected BaseCrucibleTile(BlockEntityType<? extends BaseCrucibleTile> tileEntityType, BlockPos pos, BlockState state) {
         super(tileEntityType, pos, state);
-        inventory = new MeltableItemHandler(getCrucibleType());
-        tank = new CrucibleFluidHandler(this);
+        inventory = new MeltableItemHandler(getCrucibleType()) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+            }
+        };
+        tank = new CrucibleFluidHandler(this) {
+            @Override
+            protected void onContentsChanged() {
+                setChanged();
+            }
+        };
         ticksSinceLast = 0;
         solidAmount = 0;
         currentItem = ItemStack.EMPTY;
     }
 
     @Override
-    public void load(CompoundTag compound) {
+    public void load(@Nonnull CompoundTag compound) {
+        super.load(compound);
         inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         tank.readFromNBT(compound.getCompound("tank"));
         this.ticksSinceLast = compound.getInt("ticksSinceLast");
         this.solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
         this.currentItem = ItemStack.of(compound.getCompound(CURRENT_ITEM_TAG));
-        super.load(compound);
     }
 
     @Override
     public void saveAdditional(@Nonnull CompoundTag compound) {
-        super.saveAdditional(compound);
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
         compound.put("tank", tank.writeToNBT(new CompoundTag()));
         compound.putInt("ticksSinceLast", ticksSinceLast);
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
         compound.put(CURRENT_ITEM_TAG, currentItem.save(new CompoundTag()));
-        setChanged();
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        if (tag != null) {
+            load(tag);
+        }
     }
 
     @Nonnull
@@ -120,7 +135,6 @@ public abstract class BaseCrucibleTile extends BlockEntity {
                 stack.shrink(1);
             }
             assert level != null;
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
             setChanged();
             return InteractionResult.SUCCESS;
         }
@@ -142,6 +156,7 @@ public abstract class BaseCrucibleTile extends BlockEntity {
                 stack.shrink(1);
             }
             setChanged();
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
@@ -207,6 +222,7 @@ public abstract class BaseCrucibleTile extends BlockEntity {
                 tank.setFluid(FluidStack.EMPTY);
             }
             solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
+            saveAdditional(nbt);
         }
     }
 

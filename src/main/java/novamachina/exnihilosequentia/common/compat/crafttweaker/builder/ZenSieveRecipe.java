@@ -1,8 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
-//TODO
-/*import com.blamejared.crafttweaker.api.annotations.ZenRegister;
-import com.blamejared.crafttweaker.api.item.IIngredient;
+import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import java.util.ArrayList;
 import net.minecraft.world.item.ItemStack;
@@ -12,9 +11,9 @@ import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenSieveRecipe")*/
+@ZenCodeType.Name("mods.exnihilosequentia.ZenSieveRecipe")
 public class ZenSieveRecipe {
-/*
+
     private final SieveRecipe internal;
 
     private ZenSieveRecipe(ResourceLocation recipeId) {
@@ -40,7 +39,7 @@ public class ZenSieveRecipe {
 
     @ZenCodeType.Method
     public ZenSieveRecipe addRoll(String mesh, float chance) {
-        internal.addRolls(mesh, chance);
+        internal.addRoll(mesh, chance);
         return this;
     }
 
@@ -54,5 +53,4 @@ public class ZenSieveRecipe {
         return this;
     }
 
- */
 }
