@@ -1,29 +1,32 @@
 package novamachina.exnihilosequentia.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 
-public abstract class AbstractModBlockRenderer<T extends TileEntity> extends TileEntityRenderer<T> {
+public abstract class AbstractModBlockRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    protected AbstractModBlockRenderer(@Nonnull final TileEntityRendererDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+    protected AbstractModBlockRenderer(@Nonnull final BlockEntityRendererProvider.Context rendererDispatcherIn) {
+        super();
+        //TODO do this properly
     }
 
-    protected void add(@Nonnull final IVertexBuilder renderer, @Nonnull final MatrixStack stack,
+    protected void add(@Nonnull final VertexConsumer renderer, @Nonnull final PoseStack stack,
                        @Nonnull final VertexLocation vertexLocation, @Nonnull final UVLocation uvLocation,
                        @Nonnull final Color color, final int combinedLight) {
         renderer.vertex(stack.last().pose(), vertexLocation.getX(), vertexLocation.getY(), vertexLocation.getZ())

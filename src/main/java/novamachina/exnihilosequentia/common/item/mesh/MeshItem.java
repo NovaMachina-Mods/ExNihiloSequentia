@@ -1,15 +1,17 @@
 package novamachina.exnihilosequentia.common.item.mesh;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class MeshItem extends Item {
 
@@ -32,7 +34,7 @@ public class MeshItem extends Item {
     }
 
     @Override
-    public int getBurnTime(@Nonnull final ItemStack itemStack, @Nullable final IRecipeType<?> recipeType) {
+    public int getBurnTime(@Nonnull final ItemStack itemStack, @Nullable final RecipeType<?> recipeType) {
         if (itemStack.getItem() == EnumMesh.STRING.getRegistryObject().get()) {
             return 200;
         } else return 0;

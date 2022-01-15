@@ -7,16 +7,16 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import net.minecraft.block.Block;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
@@ -24,7 +24,7 @@ import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements IFinishedRecipe {
+public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements FinishedRecipe {
     @Nullable protected JsonArray conditions = null;
     @Nullable protected JsonArray inputArray = null;
     protected int inputCount = 0;
@@ -56,7 +56,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     @Nonnull
-    public R addResult(@Nonnull final IItemProvider result) {
+    public R addResult(@Nonnull final ItemLike result) {
         return addResult(new ItemStack(result));
     }
 
@@ -68,7 +68,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         return (R) this;
     }
 
-    public void build(@Nonnull final Consumer<IFinishedRecipe> out, @Nonnull final ResourceLocation id)
+    public void build(@Nonnull final Consumer<FinishedRecipe> out, @Nonnull final ResourceLocation id)
             throws IllegalArgumentException {
         Preconditions.checkArgument(isComplete(), "This recipe is incomplete.");
         this.id = id;
@@ -96,7 +96,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
     @Override
     @Nonnull
-    public IRecipeSerializer<?> getType() {
+    public RecipeSerializer<?> getType() {
         return serializer;
     }
 
@@ -164,18 +164,18 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     @Nonnull
-    protected R addInput(@Nonnull final IItemProvider input) {
+    protected R addInput(@Nonnull final ItemLike input) {
         return addInput(new ItemStack(input));
     }
 
     @Nonnull
-    protected R addInput(@Nonnull final ITag.INamedTag<Item> tag) {
+    protected R addInput(@Nonnull final Tag.Named<Item> tag) {
         return addInput(Ingredient.of(tag));
     }
 
     @Nonnull
     @SuppressWarnings("unused")
-    protected R addInput(@Nonnull final String id, @Nonnull final IItemProvider block) {
+    protected R addInput(@Nonnull final String id, @Nonnull final ItemLike block) {
         return this.addItem(id, new ItemStack(block));
     }
 

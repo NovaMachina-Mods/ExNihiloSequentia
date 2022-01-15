@@ -2,20 +2,20 @@ package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
+public class HeatRecipeSerializer extends ExNihiloRecipeSerializer<HeatRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get());
@@ -24,7 +24,7 @@ public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
     private static final JsonParser PARSER = new JsonParser();
 
     @Override
-    public HeatRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final PacketBuffer buffer) {
+    public HeatRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
         // Packet structure is:
         // |--------------------------------------|
         // | Block Resource Location (UTF String) |
@@ -45,7 +45,7 @@ public class HeatRecipeSerializer extends RecipeSerializer<HeatRecipe> {
     }
 
     @Override
-    public void toNetwork(@Nonnull final PacketBuffer buffer, @Nonnull final HeatRecipe recipe) {
+    public void toNetwork(@Nonnull final FriendlyByteBuf buffer, @Nonnull final HeatRecipe recipe) {
         @Nullable final ResourceLocation resourceLocation = recipe.getInput().getRegistryName();
         if (resourceLocation == null)
             return;

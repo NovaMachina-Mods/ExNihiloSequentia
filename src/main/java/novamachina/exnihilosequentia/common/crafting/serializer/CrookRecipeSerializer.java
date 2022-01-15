@@ -5,21 +5,21 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
+public class CrookRecipeSerializer extends ExNihiloRecipeSerializer<CrookRecipe> {
     @Override
     @Nullable
     public ItemStack getIcon() {
@@ -31,7 +31,7 @@ public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
 
     @Override
     @Nonnull
-    public CrookRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final PacketBuffer buffer) {
+    public CrookRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
         final int outputCount = buffer.readInt();
         @Nonnull final List<ItemStackWithChance> output = new ArrayList<>(outputCount);
         for (int i = 0; i < outputCount; i++) {
@@ -42,7 +42,7 @@ public class CrookRecipeSerializer extends RecipeSerializer<CrookRecipe> {
     }
 
     @Override
-    public void toNetwork(@Nonnull final PacketBuffer buffer, @Nonnull final CrookRecipe recipe) {
+    public void toNetwork(@Nonnull final FriendlyByteBuf buffer, @Nonnull final CrookRecipe recipe) {
         buffer.writeInt(recipe.getOutput().size());
         for (@Nonnull final ItemStackWithChance stack : recipe.getOutput()) {
             stack.write(buffer);

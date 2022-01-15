@@ -8,9 +8,11 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -50,8 +52,8 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return "Compost";
+    public Component getTitle() {
+        return new TextComponent("Compost");
     }
 
     @Nonnull
@@ -72,7 +74,7 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
         recipeLayout.getItemStacks().init(0, true, 2, 20);
         recipeLayout.getItemStacks().set(0, new ItemStack(Blocks.DIRT));
 
-        @Nullable final IFocus<?> focus = recipeLayout.getFocus();
+        @Nullable final IFocus<?> focus = recipeLayout.getFocus(VanillaTypes.ITEM); //TODO??
 
         final int slotIndex = 1;
         if(recipe.getInputs().size() > 21) {

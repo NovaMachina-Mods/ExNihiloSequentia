@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.api.registry;
 
 import java.util.List;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 
 import javax.annotation.Nonnull;

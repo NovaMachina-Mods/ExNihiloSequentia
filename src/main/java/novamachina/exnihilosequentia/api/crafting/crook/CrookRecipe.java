@@ -3,13 +3,13 @@ package novamachina.exnihilosequentia.api.crafting.crook;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -17,8 +17,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CrookRecipe extends SerializableRecipe {
-    @Nonnull public static final IRecipeType<CrookRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
-    @Nullable private static RegistryObject<RecipeSerializer<CrookRecipe>> serializer;
+    @Nonnull public static final RecipeType<CrookRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
+    @Nullable private static RegistryObject<ExNihiloRecipeSerializer<CrookRecipe>> serializer;
     @Nonnull private Ingredient input;
     @Nonnull private final List<ItemStackWithChance> output;
 
@@ -30,11 +30,11 @@ public class CrookRecipe extends SerializableRecipe {
     }
 
     @Nullable
-    public static RegistryObject<RecipeSerializer<CrookRecipe>> getStaticSerializer() {
+    public static RegistryObject<ExNihiloRecipeSerializer<CrookRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(@Nonnull final RegistryObject<RecipeSerializer<CrookRecipe>> serializer) {
+    public static void setSerializer(@Nonnull final RegistryObject<ExNihiloRecipeSerializer<CrookRecipe>> serializer) {
         CrookRecipe.serializer = serializer;
     }
 
@@ -76,7 +76,7 @@ public class CrookRecipe extends SerializableRecipe {
 
     @Override
     @Nullable
-    protected RecipeSerializer<CrookRecipe> getENSerializer() {
+    protected ExNihiloRecipeSerializer<CrookRecipe> getENSerializer() {
         if (serializer == null)
             return null;
         return serializer.get();

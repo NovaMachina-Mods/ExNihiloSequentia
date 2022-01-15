@@ -8,8 +8,10 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -49,11 +51,11 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
 
     @Nonnull
     @Override
-    public String getTitle() {
+    public Component getTitle() {
         if(uid.equals(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucible_fired"))) {
-            return "Fired Crucible";
+            return new TextComponent("Fired Crucible");
         } else {
-            return "Crucible";
+            return new TextComponent("Crucible");
         }
     }
 
@@ -78,7 +80,7 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
         }
         recipeLayout.getFluidStacks().set(0, recipe.getResultFluid());
 
-        @Nullable final IFocus<?> focus = recipeLayout.getFocus();
+        @Nullable final IFocus<?> focus = recipeLayout.getFocus(VanillaTypes.ITEM);
 
         final int slotIndex = 1;
         for (int i = 0; i < recipe.getInputs().size(); i++) {

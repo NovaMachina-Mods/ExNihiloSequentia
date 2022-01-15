@@ -1,28 +1,31 @@
 package novamachina.exnihilosequentia.common.block.sieves;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 import javax.annotation.Nonnull;
-import java.util.function.Supplier;
+import javax.annotation.Nullable;
 
-public class NetherSieveBlock extends BlockSieve {
+public class NetherSieveBlock extends BlockSieve implements EntityBlock {
     public NetherSieveBlock() {
-        this(SieveTile::new);
+        super(new BlockBuilder().properties(
+                        BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F)
+                                .sound(Config.getNetherSieveSoundsEnabled() ? SoundType.STEM : SoundType.SCAFFOLDING).noOcclusion().isRedstoneConductor((state, reader, pos) -> false)
+                                .isSuffocating((state, reader, pos) -> false).isViewBlocking((state, reader, pos) -> false)));
     }
 
-    public NetherSieveBlock(@Nonnull final Supplier<TileEntity> tileEntitySupplier) {
-        super(new BlockBuilder().properties(
-                        AbstractBlock.Properties.of(Material.NETHER_WOOD).strength(1.0F)
-                                .sound(Config.getNetherSieveSoundsEnabled() ? SoundType.STEM : SoundType.SCAFFOLDING).noOcclusion().isRedstoneConductor((state, reader, pos) -> false)
-                                .isSuffocating((state, reader, pos) -> false).isViewBlocking((state, reader, pos) -> false))
-                .harvestLevel(ToolType.AXE, 0).tileEntitySupplier(tileEntitySupplier));
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new SieveTile(pos, state);
     }
 }

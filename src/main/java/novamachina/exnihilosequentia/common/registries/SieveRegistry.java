@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.registries;
 
 import com.google.common.collect.Lists;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.api.registry.ISieveRegistry;
 import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
@@ -10,10 +10,10 @@ import novamachina.exnihilosequentia.common.item.ore.OreItem;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.IngredientUtils;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
@@ -65,7 +65,7 @@ public class SieveRegistry implements ISieveRegistry {
 
     @Override
     @Nonnull
-    public List<SieveRecipe> getDrops(@Nonnull final IItemProvider input, @Nonnull final EnumMesh meshType,
+    public List<SieveRecipe> getDrops(@Nonnull final ItemLike input, @Nonnull final EnumMesh meshType,
                                       final boolean isWaterlogged) {
         return itemDropsListCache
                 .computeIfAbsent(isWaterlogged, k -> new HashMap<>())

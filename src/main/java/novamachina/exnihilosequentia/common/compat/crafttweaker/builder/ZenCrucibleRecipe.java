@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 
-import com.blamejared.crafttweaker.api.annotations.ZenRegister;
+import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.fluid.IFluidStack;
-import com.blamejared.crafttweaker.api.item.IIngredient;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;

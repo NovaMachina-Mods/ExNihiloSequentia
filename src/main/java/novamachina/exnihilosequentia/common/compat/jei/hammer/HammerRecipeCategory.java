@@ -10,8 +10,10 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -50,8 +52,8 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return "Hammer";
+    public Component getTitle() {
+        return new TextComponent("Hammer");
     }
 
     @Nonnull
@@ -72,7 +74,7 @@ public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
         recipeLayout.getItemStacks().init(0, true, 10, 38);
         recipeLayout.getItemStacks().set(0, new ArrayList<>(Arrays.asList(recipe.getInput().getItems())));
 
-        @Nullable final IFocus<?> focus = recipeLayout.getFocus();
+        @Nullable final IFocus<?> focus = recipeLayout.getFocus(VanillaTypes.ITEM);
 
         final int slotIndex = 1;
         for (int i = 0; i < recipe.getOutputsWithoutChance().size(); i++) {

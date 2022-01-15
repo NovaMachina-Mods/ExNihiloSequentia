@@ -7,12 +7,12 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -26,7 +26,7 @@ public class UseHammerModifier extends LootModifier {
 
     private final Random random = new Random();
 
-    public UseHammerModifier(@Nonnull final ILootCondition[] conditionsIn) {
+    public UseHammerModifier(@Nonnull final LootItemCondition[] conditionsIn) {
         super(conditionsIn);
     }
 
@@ -34,8 +34,8 @@ public class UseHammerModifier extends LootModifier {
     @Override
     public List<ItemStack> doApply(@Nonnull List<ItemStack> generatedLoot, @Nonnull final LootContext context) {
         logger.debug("Fired Hammer Modifier");
-        @Nullable final ItemStack tool = context.getParamOrNull(LootParameters.TOOL);
-        @Nullable final BlockState blockState = context.getParamOrNull(LootParameters.BLOCK_STATE);
+        @Nullable final ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
+        @Nullable final BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
         @Nonnull final List<ItemStack> newLoot = new ArrayList<>();
 
         if (tool != null && blockState != null && ExNihiloTags.HAMMER.contains(tool.getItem())
@@ -64,7 +64,7 @@ public class UseHammerModifier extends LootModifier {
         @Override
         @Nonnull
         public UseHammerModifier read(@Nonnull final ResourceLocation location, @Nonnull final JsonObject object,
-                                      @Nonnull final ILootCondition[] ailootcondition) {
+                                      @Nonnull final LootItemCondition[] ailootcondition) {
             return new UseHammerModifier(ailootcondition);
         }
 

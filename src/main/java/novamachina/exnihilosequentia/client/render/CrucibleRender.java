@@ -1,17 +1,18 @@
 package novamachina.exnihilosequentia.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -23,19 +24,18 @@ import javax.annotation.Nullable;
 public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public CrucibleRender(@Nonnull final TileEntityRendererDispatcher rendererDispatcher) {
+    public CrucibleRender(@Nonnull final BlockEntityRendererProvider.Context rendererDispatcher) {
         super(rendererDispatcher);
     }
 
-    public static void register(@Nonnull final TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
+    public static void register(@Nonnull final BlockEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         logger.debug("Register crucible renderer, Type" + tileTileEntityType);
-        ClientRegistry
-                .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
+        BlockEntityRenderers.register(tileTileEntityType, CrucibleRender::new);
     }
 
     @Override
     public void render(@Nonnull final BaseCrucibleTile tileEntity, final float partialTicks,
-                       @Nonnull final MatrixStack matrixStack, @Nonnull final IRenderTypeBuffer buffer,
+                       @Nonnull final PoseStack matrixStack, @Nonnull final MultiBufferSource buffer,
                        final int combinedLightIn, final int combinedOverlayIn) {
         @Nullable final ResourceLocation solidTexture = tileEntity.getSolidTexture();
         @Nullable final Fluid fluid = tileEntity.getFluid();
@@ -45,10 +45,10 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
                 fluid != null ? new Color(fluid.getAttributes().getColor()) : Color.INVALID_COLOR;
         @Nonnull final Color blockColor = getBlockColor(solidTexture, tileEntity);
         if (fluidTexture != null) {
-            @Nonnull final IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
+            @Nonnull final VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
             @Nonnull final TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             fluidTexture);
 
             // Subtract 0.005 to prevent texture fighting
@@ -74,10 +74,10 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             matrixStack.popPose();
         }
         if (solidTexture != null) {
-            @Nonnull final IVertexBuilder builder = buffer.getBuffer(RenderType.solid());
+            @Nonnull final VertexConsumer builder = buffer.getBuffer(RenderType.solid());
 
             @Nonnull final TextureAtlasSprite sprite = Minecraft.getInstance()
-                    .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(
                             new ResourceLocation(solidTexture.getNamespace(),
                                     "block/" + resolveTexture(solidTexture.getPath())));
 

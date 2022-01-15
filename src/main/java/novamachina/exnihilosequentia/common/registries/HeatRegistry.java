@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.registries;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.api.registry.IHeatRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;

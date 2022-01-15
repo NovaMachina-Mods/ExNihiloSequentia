@@ -1,11 +1,10 @@
 package novamachina.exnihilosequentia.common.compat.waila;
 
-import java.util.List;
+import mcp.mobius.waila.api.BlockAccessor;
 import mcp.mobius.waila.api.IComponentProvider;
-import mcp.mobius.waila.api.IDataAccessor;
-import mcp.mobius.waila.api.IPluginConfig;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import mcp.mobius.waila.api.ITooltip;
+import mcp.mobius.waila.api.config.IPluginConfig;
+import net.minecraft.network.chat.TranslatableComponent;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -15,17 +14,16 @@ import javax.annotation.Nonnull;
 
 public class SieveComponentProvider implements IComponentProvider {
     @Override
-    public void appendBody(@Nonnull final List<ITextComponent> tooltip, @Nonnull final IDataAccessor accessor,
-                           @Nonnull final IPluginConfig config) {
-        @Nonnull final SieveTile sieveTile = (SieveTile) accessor.getTileEntity();
+    public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig iPluginConfig) {
+        @Nonnull final SieveTile sieveTile = (SieveTile) accessor.getBlockEntity();
 
         if (!sieveTile.getBlockStack().isEmpty()) {
-            tooltip.add(new TranslationTextComponent("waila.progress", StringUtils
+            tooltip.add(new TranslatableComponent("waila.progress", StringUtils
                     .formatPercent(sieveTile.getProgress())));
-            tooltip.add(new TranslationTextComponent("waila.sieve.block", new TranslationTextComponent(sieveTile.getBlockStack().getDescriptionId())));
+            tooltip.add(new TranslatableComponent("waila.sieve.block", new TranslatableComponent(sieveTile.getBlockStack().getDescriptionId())));
         }
         if (sieveTile.getMesh() != EnumMesh.NONE) {
-            tooltip.add(new TranslationTextComponent("waila.sieve.mesh", new TranslationTextComponent("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName())));
+            tooltip.add(new TranslatableComponent("waila.sieve.mesh", new TranslatableComponent("item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "." + sieveTile.getMesh().getMeshName())));
         }
     }
 }

@@ -1,25 +1,24 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -40,7 +39,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractBarrelTile extends TileEntity implements ITickableTileEntity {
+public abstract class AbstractBarrelTile extends BlockEntity {
     public static final int MAX_SOLID_AMOUNT = Config.getBarrelMaxSolidAmount();
     public static final int MAX_FLUID_AMOUNT = Config.getBarrelNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
     @Nonnull private static final String INVENTORY_TAG = "inventory";
@@ -52,7 +51,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     @Nonnull private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
     @Nonnull private final BarrelFluidHandler tank = new BarrelFluidHandler(this);
     @Nonnull private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
-    @Nullable private AbstractBarrelMode mode;
+    @Nullable private static AbstractBarrelMode mode;
     private int solidAmount = 0;
     @Nullable private AbstractBarrelTileState lastSyncedState = null;
 
@@ -61,7 +60,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         private final int fluidAmount;
         @Nonnull private final Item solid;
         private final int solidAmount;
-        @Nonnull private final List<ITextComponent> wailaInfo;
+        @Nonnull private final List<Component> wailaInfo;
 
         AbstractBarrelTileState (@Nonnull final AbstractBarrelTile abstractBarrelTile) {
             fluid = abstractBarrelTile.getFluid();
@@ -84,8 +83,8 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         }
     }
 
-    protected AbstractBarrelTile(@Nonnull final TileEntityType<? extends AbstractBarrelTile> tileEntityType) {
-        super(tileEntityType);
+    protected AbstractBarrelTile(@Nonnull final BlockEntityType<? extends AbstractBarrelTile> tileEntityType, BlockPos pos, BlockState state) {
+        super(tileEntityType, pos, state);
         this.mode = BarrelModeRegistry.getModeFromName(ExNihiloConstants.BarrelModes.EMPTY);
     }
 
@@ -99,12 +98,7 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         return tank;
     }
 
-    @Override
-    public void tick() {
-        if (level == null || level.isClientSide() || mode == null) {
-            return;
-        }
-
+    public void tickServer() {
         if (mode.isEmptyMode() || mode.getModeName().equals(ExNihiloConstants.BarrelModes.FLUID)) {
             @Nonnull final BlockPos abovePos = worldPosition.offset(0, 1, 0);
             if (level.isRainingAt(abovePos) && tank.getSpace() >= Config.getRainFillAmount()) {
@@ -121,19 +115,17 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
     }
 
     @Override
-    @Nonnull
-    public CompoundNBT save(@Nonnull final CompoundNBT compound) {
+    public void saveAdditional(@Nonnull final CompoundTag compound) {
         compound.put(INVENTORY_TAG, inventory.serializeNBT());
-        compound.put(TANK_TAG, tank.writeToNBT(new CompoundNBT()));
+        compound.put(TANK_TAG, tank.writeToNBT(new CompoundTag()));
         if (mode != null)
             compound.putString(MODE_TAG, mode.getModeName());
         compound.put(MODE_INFO_TAG, mode.write());
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
-        return super.save(compound);
     }
 
     @Override
-    public void load(@Nonnull final BlockState state, @Nonnull final CompoundNBT compound) {
+    public void load(@Nonnull final CompoundTag compound) {
         if (compound.contains(INVENTORY_TAG)) {
             inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
         }
@@ -149,12 +141,12 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         if (compound.contains(SOLID_AMOUNT_TAG)) {
             this.solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
         }
-        super.load(state, compound);
+        super.load(compound);
     }
 
     @Override
-    public void onDataPacket(@Nonnull final NetworkManager net, @Nonnull final SUpdateTileEntityPacket pkt) {
-        @Nonnull final CompoundNBT nbt = pkt.getTag();
+    public void onDataPacket(@Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket pkt) {
+        @Nonnull final CompoundTag nbt = pkt.getTag();
         if (nbt.contains(INVENTORY_TAG)) {
             inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
         }
@@ -170,20 +162,21 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
 
     @Nonnull
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        @Nonnull final CompoundNBT nbt = new CompoundNBT();
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        @Nonnull final CompoundTag nbt = new CompoundTag();
         nbt.put(INVENTORY_TAG, inventory.serializeNBT());
-        nbt.put(TANK_TAG, tank.writeToNBT(new CompoundNBT()));
+        nbt.put(TANK_TAG, tank.writeToNBT(new CompoundTag()));
         if (mode != null)
             nbt.putString(MODE_TAG, mode.getModeName());
         nbt.put(MODE_INFO_TAG, mode.write());
         nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
 
-        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
+        return ClientboundBlockEntityDataPacket.create(this);
+        //return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
     @Nullable
-    public ActionResultType onBlockActivated(@Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+    public InteractionResult onBlockActivated(@Nonnull final Player player, @Nonnull final InteractionHand handIn,
                                              @Nonnull final IFluidHandler fluidHandler,
                                              @Nonnull final IItemHandler itemHandler) {
         if (mode == null)
@@ -281,12 +274,12 @@ public abstract class AbstractBarrelTile extends TileEntity implements ITickable
         @Nonnull final NonNullList<ItemStack> list = NonNullList.create();
         list.add(inventory.getStackInSlot(0));
         if (level != null) {
-            InventoryHelper.dropContents(level, worldPosition, list);
+            Containers.dropContents(level, worldPosition, list);
         }
     }
 
     @Nullable
-    public List<ITextComponent> getWailaInfo() {
+    public List<Component> getWailaInfo() {
         if (mode == null)
             return null;
         return mode.getWailaInfo(this);

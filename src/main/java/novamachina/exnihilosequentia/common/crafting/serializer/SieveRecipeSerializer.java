@@ -4,25 +4,25 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 
 import javax.annotation.Nonnull;
 
-public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
+public class SieveRecipeSerializer extends ExNihiloRecipeSerializer<SieveRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
     }
 
     @Override
-    public SieveRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final PacketBuffer buffer) {
+    public SieveRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
         @Nonnull final Ingredient input = Ingredient.fromNetwork(buffer);
         @Nonnull final ItemStack drop = buffer.readItem();
         @Nonnull final List<MeshWithChance> rolls = new ArrayList<>();
@@ -35,7 +35,7 @@ public class SieveRecipeSerializer extends RecipeSerializer<SieveRecipe> {
     }
 
     @Override
-    public void toNetwork(@Nonnull final PacketBuffer buffer, @Nonnull final SieveRecipe recipe) {
+    public void toNetwork(@Nonnull final FriendlyByteBuf buffer, @Nonnull final SieveRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeItem(recipe.getDrop());
         buffer.writeInt(recipe.getRolls().size());

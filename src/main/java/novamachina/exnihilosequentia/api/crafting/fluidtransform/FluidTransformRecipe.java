@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.api.crafting.fluidtransform;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.RegistryObject;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import net.minecraftforge.registries.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -14,9 +14,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FluidTransformRecipe extends SerializableRecipe {
-    @Nonnull public static final IRecipeType<FluidTransformRecipe> RECIPE_TYPE = IRecipeType
+    @Nonnull public static final RecipeType<FluidTransformRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
-    @Nullable private static RegistryObject<RecipeSerializer<FluidTransformRecipe>> serializer;
+    @Nullable private static RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> serializer;
     @Nonnull private Ingredient catalyst;
     @Nonnull private FluidStack fluidInTank;
     @Nonnull private FluidStack result;
@@ -30,11 +30,11 @@ public class FluidTransformRecipe extends SerializableRecipe {
     }
 
     @Nullable
-    public static RegistryObject<RecipeSerializer<FluidTransformRecipe>> getStaticSerializer() {
+    public static RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(@Nonnull final RegistryObject<RecipeSerializer<FluidTransformRecipe>> serializer) {
+    public static void setSerializer(@Nonnull final RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> serializer) {
         FluidTransformRecipe.serializer = serializer;
     }
 
@@ -73,7 +73,7 @@ public class FluidTransformRecipe extends SerializableRecipe {
 
     @Override
     @Nullable
-    protected RecipeSerializer<FluidTransformRecipe> getENSerializer() {
+    protected ExNihiloRecipeSerializer<FluidTransformRecipe> getENSerializer() {
         if (serializer == null)
             return null;
         return serializer.get();

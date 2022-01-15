@@ -2,12 +2,12 @@ package novamachina.exnihilosequentia.api.crafting.sieve;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -16,9 +16,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class SieveRecipe extends SerializableRecipe {
-    @Nonnull public static final IRecipeType<SieveRecipe> RECIPE_TYPE = IRecipeType
+    @Nonnull public static final RecipeType<SieveRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
-    @Nullable private static RegistryObject<RecipeSerializer<SieveRecipe>> serializer;
+    @Nullable private static RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> serializer;
     @Nonnull private ItemStack drop;
     @Nonnull private Ingredient input;
     private boolean isWaterlogged;
@@ -37,11 +37,11 @@ public class SieveRecipe extends SerializableRecipe {
     }
 
     @Nullable
-    public static RegistryObject<RecipeSerializer<SieveRecipe>> getStaticSerializer() {
+    public static RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(@Nonnull final RegistryObject<RecipeSerializer<SieveRecipe>> serializer) {
+    public static void setSerializer(@Nonnull final RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> serializer) {
         SieveRecipe.serializer = serializer;
     }
 
@@ -127,7 +127,7 @@ public class SieveRecipe extends SerializableRecipe {
 
     @Override
     @Nullable
-    protected RecipeSerializer<SieveRecipe> getENSerializer() {
+    protected ExNihiloRecipeSerializer<SieveRecipe> getENSerializer() {
         if (serializer == null)
             return null;
         return serializer.get();

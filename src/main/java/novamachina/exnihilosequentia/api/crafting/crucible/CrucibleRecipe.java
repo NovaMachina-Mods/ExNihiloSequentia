@@ -2,13 +2,13 @@ package novamachina.exnihilosequentia.api.crafting.crucible;
 
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.RegistryObject;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import net.minecraftforge.registries.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -17,9 +17,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CrucibleRecipe extends SerializableRecipe {
-    @Nonnull public static final IRecipeType<CrucibleRecipe> RECIPE_TYPE = IRecipeType
+    @Nonnull public static final RecipeType<CrucibleRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
-    @Nullable private static RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer;
+    @Nullable private static RegistryObject<ExNihiloRecipeSerializer<CrucibleRecipe>> serializer;
     private int amount;
     @Nullable private CrucibleTypeEnum crucibleType;
     @Nonnull private Ingredient input;
@@ -35,11 +35,11 @@ public class CrucibleRecipe extends SerializableRecipe {
     }
 
     @Nullable
-    public static RegistryObject<RecipeSerializer<CrucibleRecipe>> getStaticSerializer() {
+    public static RegistryObject<ExNihiloRecipeSerializer<CrucibleRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(@Nonnull final RegistryObject<RecipeSerializer<CrucibleRecipe>> serializer) {
+    public static void setSerializer(@Nonnull final RegistryObject<ExNihiloRecipeSerializer<CrucibleRecipe>> serializer) {
         CrucibleRecipe.serializer = serializer;
     }
 
@@ -91,7 +91,7 @@ public class CrucibleRecipe extends SerializableRecipe {
 
     @Override
     @Nullable
-    protected RecipeSerializer<CrucibleRecipe> getENSerializer() {
+    protected ExNihiloRecipeSerializer<CrucibleRecipe> getENSerializer() {
         if (serializer == null)
             return null;
         return serializer.get();

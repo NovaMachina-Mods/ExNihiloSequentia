@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.crafting.sieve;
 
 import com.google.gson.JsonArray;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 import javax.annotation.Nonnull;
@@ -29,7 +29,7 @@ public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilde
     }
 
     @Nonnull
-    public SieveRecipeBuilder drop(@Nonnull final IItemProvider drop) {
+    public SieveRecipeBuilder drop(@Nonnull final ItemLike drop) {
         return this.addResult(drop);
     }
 

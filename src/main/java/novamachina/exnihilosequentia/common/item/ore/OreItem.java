@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 import javax.annotation.Nonnull;
@@ -21,7 +21,7 @@ public class OreItem extends Item {
     }
 
     @Override
-    protected boolean allowdedIn(@Nonnull final ItemGroup group) {
+    protected boolean allowdedIn(@Nonnull final CreativeModeTab group) {
         if (group == ExNihiloInitialization.ITEM_GROUP) {
             return ore.isEnabled();
         }

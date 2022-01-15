@@ -2,13 +2,13 @@ package novamachina.exnihilosequentia.api.crafting.hammer;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -17,9 +17,9 @@ import javax.annotation.Nullable;
 
 public class HammerRecipe extends SerializableRecipe {
     @Nonnull public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), Ingredient.EMPTY, new ArrayList<>());
-    @Nonnull public static final IRecipeType<HammerRecipe> RECIPE_TYPE = IRecipeType
+    @Nonnull public static final RecipeType<HammerRecipe> RECIPE_TYPE = RecipeType
             .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":hammer");
-    @Nullable private static RegistryObject<RecipeSerializer<HammerRecipe>> serializer;
+    @Nullable private static RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> serializer;
     @Nonnull private Ingredient input;
     @Nonnull private final List<ItemStackWithChance> output;
 
@@ -31,11 +31,11 @@ public class HammerRecipe extends SerializableRecipe {
     }
 
     @Nullable
-    public static RegistryObject<RecipeSerializer<HammerRecipe>> getStaticSerializer() {
+    public static RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(@Nonnull final RegistryObject<RecipeSerializer<HammerRecipe>> serializer) {
+    public static void setSerializer(@Nonnull final RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> serializer) {
         HammerRecipe.serializer = serializer;
     }
 
@@ -76,7 +76,7 @@ public class HammerRecipe extends SerializableRecipe {
 
     @Override
     @Nullable
-    protected RecipeSerializer<HammerRecipe> getENSerializer() {
+    protected ExNihiloRecipeSerializer<HammerRecipe> getENSerializer() {
         if (serializer == null)
             return null;
         return serializer.get();

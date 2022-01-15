@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.datagen;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.data.DataGenerator;
 import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;

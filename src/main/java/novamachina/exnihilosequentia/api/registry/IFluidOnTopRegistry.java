@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.registry;
 
 import java.util.List;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 
 import javax.annotation.Nonnull;

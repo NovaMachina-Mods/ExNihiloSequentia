@@ -3,9 +3,9 @@ package novamachina.exnihilosequentia.common.network;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -13,10 +13,10 @@ import org.apache.logging.log4j.LogManager;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class HandshakeHandler {
+public class ExNihiloHandshakeHandler {
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private HandshakeHandler() {
+    private ExNihiloHandshakeHandler() {
     }
 
     public static void handleAcknowledge(@Nonnull final HandshakeMessages.C2SAcknowledge message,
@@ -59,7 +59,7 @@ public class HandshakeHandler {
             }
         } else {
             logger.debug("Failed to synchronize ore list from server.");
-            ctx.get().getNetworkManager().disconnect(new StringTextComponent(
+            ctx.get().getNetworkManager().disconnect(new TextComponent(
                     "Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));
         }
     }

@@ -1,13 +1,13 @@
 package novamachina.exnihilosequentia.api.crafting.heat;
 
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.RegistryObject;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -15,8 +15,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class HeatRecipe extends SerializableRecipe {
-    @Nonnull public static final IRecipeType<HeatRecipe> RECIPE_TYPE = IRecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
-    @Nullable private static RegistryObject<RecipeSerializer<HeatRecipe>> serializer;
+    @Nonnull public static final RecipeType<HeatRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
+    @Nullable private static RegistryObject<ExNihiloRecipeSerializer<HeatRecipe>> serializer;
     private int amount;
     @Nullable private Block input;
     @Nullable private StatePropertiesPredicate properties;
@@ -37,11 +37,11 @@ public class HeatRecipe extends SerializableRecipe {
     }
 
     @Nullable
-    public static RegistryObject<RecipeSerializer<HeatRecipe>> getStaticSerializer() {
+    public static RegistryObject<ExNihiloRecipeSerializer<HeatRecipe>> getStaticSerializer() {
         return serializer;
     }
 
-    public static void setSerializer(@Nonnull final RegistryObject<RecipeSerializer<HeatRecipe>> serializer) {
+    public static void setSerializer(@Nonnull final RegistryObject<ExNihiloRecipeSerializer<HeatRecipe>> serializer) {
         HeatRecipe.serializer = serializer;
     }
 
@@ -88,7 +88,7 @@ public class HeatRecipe extends SerializableRecipe {
 
     @Override
     @Nullable
-    protected RecipeSerializer<HeatRecipe> getENSerializer() {
+    protected ExNihiloRecipeSerializer<HeatRecipe> getENSerializer() {
         if (serializer == null)
             return null;
         return serializer.get();

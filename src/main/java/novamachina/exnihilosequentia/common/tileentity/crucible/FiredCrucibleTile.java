@@ -1,7 +1,9 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -14,12 +16,12 @@ import javax.annotation.Nullable;
 
 public class FiredCrucibleTile extends BaseCrucibleTile {
 
-    public FiredCrucibleTile() {
-        this(ExNihiloTiles.CRUCIBLE_FIRED.get());
+    public FiredCrucibleTile(BlockPos pos, BlockState state) {
+        this(ExNihiloTiles.CRUCIBLE_FIRED.get(), pos, state);
     }
 
-    public FiredCrucibleTile(TileEntityType<? extends FiredCrucibleTile> tile) {
-        super(tile);
+    public FiredCrucibleTile(BlockEntityType<? extends FiredCrucibleTile> tile, BlockPos pos, BlockState state) {
+        super(tile, pos, state);
     }
 
     @Override
@@ -44,11 +46,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
         return true;
     }
 
-    @Override
-    public void tick() {
-        if (level == null || level.isClientSide)
-            return;
-
+    public void tickServer() {
         inventory.setCrucibleHasRoom(tank.getFluidAmount() < MAX_FLUID_AMOUNT);
         ticksSinceLast++;
 

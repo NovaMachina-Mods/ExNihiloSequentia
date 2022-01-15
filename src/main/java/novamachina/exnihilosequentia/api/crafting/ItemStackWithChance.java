@@ -2,10 +2,10 @@ package novamachina.exnihilosequentia.api.crafting;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -26,8 +26,8 @@ public class ItemStackWithChance {
     @Nonnull
     public static ItemStackWithChance deserialize(@Nonnull final JsonElement json) {
         if (json.isJsonObject() && json.getAsJsonObject().has(BASE_KEY)) {
-            final float chance = JSONUtils.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
-            @Nonnull final String itemString = JSONUtils.getAsString(json.getAsJsonObject(), BASE_KEY);
+            final float chance = GsonHelper.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
+            @Nonnull final String itemString = GsonHelper.getAsString(json.getAsJsonObject(), BASE_KEY);
             int count = 1;
             if (json.getAsJsonObject().has(COUNT_KEY)) {
                 count = json.getAsJsonObject().get(COUNT_KEY).getAsInt();
@@ -35,14 +35,14 @@ public class ItemStackWithChance {
             return new ItemStackWithChance(new ItemStack(ForgeRegistries.ITEMS
                     .getValue(new ResourceLocation(itemString)), count), chance);
         } else {
-            @Nonnull final String itemString = JSONUtils.convertToString(json, BASE_KEY);
+            @Nonnull final String itemString = GsonHelper.convertToString(json, BASE_KEY);
             return new ItemStackWithChance(new ItemStack(ForgeRegistries.ITEMS
                     .getValue(new ResourceLocation(itemString))), 1.0F);
         }
     }
 
     @Nonnull
-    public static ItemStackWithChance read(@Nonnull final PacketBuffer buffer) {
+    public static ItemStackWithChance read(@Nonnull final FriendlyByteBuf buffer) {
         @Nonnull final ItemStack stack = buffer.readItem();
         final float chance = buffer.readFloat();
         return new ItemStackWithChance(stack, chance);
@@ -68,7 +68,7 @@ public class ItemStackWithChance {
         return json;
     }
 
-    public void write(@Nonnull final PacketBuffer buffer) {
+    public void write(@Nonnull final FriendlyByteBuf buffer) {
         buffer.writeItem(getStack());
         buffer.writeFloat(getChance());
     }

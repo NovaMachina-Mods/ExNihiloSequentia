@@ -1,17 +1,18 @@
 package novamachina.exnihilosequentia.common.tileentity;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.INBT;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.Color;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.Util;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
@@ -19,15 +20,15 @@ import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -38,7 +39,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class SieveTile extends TileEntity {
+public class SieveTile extends BlockEntity {
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     @Nonnull private static final String BLOCK_TAG = "block";
     @Nonnull private static final String PROGRESS_TAG = "progress";
@@ -53,15 +54,15 @@ public class SieveTile extends TileEntity {
     private long lastSieveAction = 0;
     private UUID lastPlayer;
 
-    public SieveTile() {
-        this(ExNihiloTiles.SIEVE.get());
+    public SieveTile(BlockPos pos, BlockState state) {
+        this(ExNihiloTiles.SIEVE.get(), pos, state);
     }
 
-    public SieveTile(TileEntityType<? extends SieveTile> tileEntityType) {
-        super(tileEntityType);
+    public SieveTile(BlockEntityType<? extends SieveTile> tileEntityType, BlockPos pos, BlockState state) {
+        super(tileEntityType, pos, state);
     }
 
-    public void insertMesh(@Nonnull final ItemStack stack, @Nonnull final PlayerEntity player) {
+    public void insertMesh(@Nonnull final ItemStack stack, @Nonnull final Player player) {
         logger.debug("Insert Mesh: " + stack);
         EnumMesh mesh = ((MeshItem) stack.getItem()).getMesh();
         if (meshStack.isEmpty()) {
@@ -103,11 +104,11 @@ public class SieveTile extends TileEntity {
     }
 
     @Override
-    public void load(@Nonnull final BlockState state, @Nonnull final CompoundNBT compound) {
+    public void load(@Nonnull final CompoundTag compound) {
         if (compound.contains(MESH_TAG)) {
-            @Nullable final INBT meshTag = compound.get(MESH_TAG);
+            @Nullable final Tag meshTag = compound.get(MESH_TAG);
             if (meshTag != null) {
-                meshStack = ItemStack.of((CompoundNBT) meshTag);
+                meshStack = ItemStack.of((CompoundTag) meshTag);
                 if (meshStack.getItem() instanceof MeshItem) {
                     meshType = ((MeshItem) meshStack.getItem()).getMesh();
                 }
@@ -119,9 +120,9 @@ public class SieveTile extends TileEntity {
         }
 
         if (compound.contains(BLOCK_TAG)) {
-            @Nullable final INBT blockTag = compound.get(BLOCK_TAG);
+            @Nullable final Tag blockTag = compound.get(BLOCK_TAG);
             if (blockTag != null) {
-                blockStack = ItemStack.of((CompoundNBT) blockTag);
+                blockStack = ItemStack.of((CompoundTag) blockTag);
             } else {
                 blockStack = ItemStack.EMPTY;
             }
@@ -131,25 +132,22 @@ public class SieveTile extends TileEntity {
 
         progress = compound.getFloat(PROGRESS_TAG);
 
-        super.load(state, compound);
+        super.load(compound);
     }
 
-    @Nonnull
     @Override
-    public CompoundNBT save(@Nonnull final CompoundNBT compound) {
+    public void saveAdditional(@Nonnull final CompoundTag compound) {
         if (!meshStack.isEmpty()) {
-            CompoundNBT meshNBT = meshStack.save(new CompoundNBT());
+            CompoundTag meshNBT = meshStack.save(new CompoundTag());
             compound.put(MESH_TAG, meshNBT);
         }
 
         if (!blockStack.isEmpty()) {
-            CompoundNBT blockNBT = blockStack.save(new CompoundNBT());
+            CompoundTag blockNBT = blockStack.save(new CompoundTag());
             compound.put(BLOCK_TAG, blockNBT);
         }
 
         compound.putFloat(PROGRESS_TAG, progress);
-
-        return super.save(compound);
     }
 
     @Override
@@ -161,7 +159,7 @@ public class SieveTile extends TileEntity {
         super.setRemoved();
     }
 
-    public void insertSiftableBlock(@Nonnull final ItemStack stack, @Nonnull final PlayerEntity player) {
+    public void insertSiftableBlock(@Nonnull final ItemStack stack, @Nonnull final Player player) {
         logger.debug("Insert Siftable Block: " + stack);
         if (!meshStack.isEmpty() && blockStack.isEmpty()) {
             blockStack = stack.copy();
@@ -172,7 +170,7 @@ public class SieveTile extends TileEntity {
         }
     }
 
-    public void activateSieve(@Nullable final PlayerEntity player, boolean isWaterlogged) {
+    public void activateSieve(@Nullable final Player player, boolean isWaterlogged) {
         logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
         float fortune = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, meshStack);
         float efficiency = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, meshStack);
@@ -182,7 +180,7 @@ public class SieveTile extends TileEntity {
             if (level.getLevelData().getGameTime() - lastSieveAction < 4) {
                 // Really good chance that they're using a macro
                 if (player != null && level.getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
-                    ITextComponent message = new StringTextComponent("Autoclicker Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
+                    Component message = new TextComponent("Autoclicker Bad").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(16711680)).withBold(true));
 
                     player.sendMessage(message, Util.NIL_UUID);
                 }
@@ -220,7 +218,7 @@ public class SieveTile extends TileEntity {
         logger.debug("Resetting sieve");
         if (Config.enableMeshDurability()) {
             logger.debug("Damaging mesh");
-            meshStack.hurtAndBreak(1, new FakePlayer((ServerWorld) level, new GameProfile(UUID
+            meshStack.hurtAndBreak(1, new FakePlayer((ServerLevel) level, new GameProfile(UUID
                 .randomUUID(), "Fake Player")), player -> logger.debug("Broken"));
         }
         blockStack = ItemStack.EMPTY;
@@ -255,29 +253,30 @@ public class SieveTile extends TileEntity {
 
     @Override
     @Nonnull
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        @Nonnull final CompoundNBT nbt = new CompoundNBT();
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        @Nonnull final CompoundTag nbt = new CompoundTag();
         if (!meshStack.isEmpty()) {
-            CompoundNBT meshNBT = meshStack.save(new CompoundNBT());
+            CompoundTag meshNBT = meshStack.save(new CompoundTag());
             nbt.put(MESH_TAG, meshNBT);
         }
 
         if (!blockStack.isEmpty()) {
-            CompoundNBT blockNbt = blockStack.save(new CompoundNBT());
+            CompoundTag blockNbt = blockStack.save(new CompoundTag());
             nbt.put(BLOCK_TAG, blockNbt);
         }
         nbt.putFloat(PROGRESS_TAG, progress);
 
-        return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
+        return ClientboundBlockEntityDataPacket.create(this);
+        // return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
-    public void onDataPacket(@Nonnull final NetworkManager net, @Nonnull final SUpdateTileEntityPacket packet) {
-        CompoundNBT nbt = packet.getTag();
+    public void onDataPacket(@Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket packet) {
+        CompoundTag nbt = packet.getTag();
         if (nbt.contains(MESH_TAG)) {
-            @Nullable final INBT meshTag = nbt.get(MESH_TAG);
+            @Nullable final Tag meshTag = nbt.get(MESH_TAG);
             if (meshTag != null) {
-                meshStack = ItemStack.of((CompoundNBT) meshTag);
+                meshStack = ItemStack.of((CompoundTag) meshTag);
                 if (meshStack.getItem() instanceof MeshItem) {
                     meshType = ((MeshItem) meshStack.getItem()).getMesh();
                 }
@@ -289,9 +288,9 @@ public class SieveTile extends TileEntity {
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            @Nullable final INBT blockTag = nbt.get(BLOCK_TAG);
+            @Nullable final Tag blockTag = nbt.get(BLOCK_TAG);
             if (blockTag != null) {
-                blockStack = ItemStack.of((CompoundNBT) blockTag);
+                blockStack = ItemStack.of((CompoundTag) blockTag);
             } else {
                 blockStack = ItemStack.EMPTY;
             }

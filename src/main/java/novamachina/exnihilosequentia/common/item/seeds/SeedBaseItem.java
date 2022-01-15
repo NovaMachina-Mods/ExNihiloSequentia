@@ -1,23 +1,28 @@
 package novamachina.exnihilosequentia.common.item.seeds;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoublePlantBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
 
 public class SeedBaseItem extends Item implements IPlantable {
 
@@ -31,28 +36,28 @@ public class SeedBaseItem extends Item implements IPlantable {
 
     @Override
     @Nullable
-    public BlockState getPlant(@Nonnull final IBlockReader world, @Nonnull final BlockPos pos) {
+    public BlockState getPlant(@Nonnull final BlockGetter world, @Nonnull final BlockPos pos) {
         return plant;
     }
 
     @Override
     @Nullable
-    public PlantType getPlantType(@Nonnull final IBlockReader world, @Nonnull final BlockPos pos) {
+    public PlantType getPlantType(@Nonnull final BlockGetter world, @Nonnull final BlockPos pos) {
         return type;
     }
 
     @Override
     @Nonnull
-    public ActionResultType useOn(@Nonnull final ItemUseContext context) {
+    public InteractionResult useOn(@Nonnull final UseOnContext context) {
         if (!context.getClickedFace().equals(Direction.UP)) {
-            return ActionResultType.PASS;
+            return InteractionResult.PASS;
         }
 
         @Nonnull final ItemStack item = context.getItemInHand();
-        @Nullable final PlayerEntity player = context.getPlayer();
+        @Nullable final Player player = context.getPlayer();
         @Nonnull final BlockPos pos = context.getClickedPos();
         @Nonnull final Direction direction = context.getClickedFace();
-        @Nonnull final World world = context.getLevel();
+        @Nonnull final Level world = context.getLevel();
         if (player != null && type != null && player.mayUseItemAt(pos, direction, item) && player
                 .mayUseItemAt(pos.offset(0, 1, 0), direction, item)) {
 
@@ -74,11 +79,11 @@ public class SeedBaseItem extends Item implements IPlantable {
                 if (!player.isCreative()) {
                     item.shrink(1);
                 }
-                world.playSound(player, player.blockPosition(), SoundEvents.GRASS_PLACE, SoundCategory.AMBIENT, 1f, 1f);
-                return ActionResultType.SUCCESS;
+                world.playSound(player, player.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.AMBIENT, 1f, 1f);
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 
     @Nonnull
@@ -87,7 +92,7 @@ public class SeedBaseItem extends Item implements IPlantable {
         return this;
     }
 
-    private boolean isBlockSpaceEmpty(@Nonnull final World world, @Nonnull final BlockPos pos,
+    private boolean isBlockSpaceEmpty(@Nonnull final Level world, @Nonnull final BlockPos pos,
                                       @Nonnull final PlantType type) {
         if (type == PlantType.WATER) {
             return world.getBlockState(pos.above()).getBlock() == Blocks.WATER;

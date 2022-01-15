@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.registry.IFluidTransformRegistry;
@@ -22,16 +22,16 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
 
     @Nonnull private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
 
-    @Nonnull private final Map<FluidStack, Map<IItemProvider, Fluid>> fluidResultCache = new HashMap<>();
+    @Nonnull private final Map<FluidStack, Map<ItemLike, Fluid>> fluidResultCache = new HashMap<>();
 
     @Override
-    public boolean isValidRecipe(@Nonnull final Fluid fluidInTank, @Nonnull final IItemProvider catalyst) {
+    public boolean isValidRecipe(@Nonnull final Fluid fluidInTank, @Nonnull final ItemLike catalyst) {
         return getResult(fluidInTank, catalyst) != Fluids.EMPTY;
     }
 
     @Override
     @Nonnull
-    public Fluid getResult(@Nonnull final Fluid fluidInTank, @Nonnull final IItemProvider catalyst) {
+    public Fluid getResult(@Nonnull final Fluid fluidInTank, @Nonnull final ItemLike catalyst) {
         final FluidStack fluidStack = new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME);
         return fluidResultCache
                 .computeIfAbsent(fluidStack, k -> new HashMap<>())

@@ -7,7 +7,9 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -43,8 +45,8 @@ public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return "Fluid Item Transformation";
+    public Component getTitle() {
+        return new TextComponent("Fluid Item Transformation");
     }
 
     @Nonnull

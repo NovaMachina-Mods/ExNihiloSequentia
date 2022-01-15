@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.crafting.heat;
 
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
-import net.minecraft.block.Block;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 import javax.annotation.Nonnull;

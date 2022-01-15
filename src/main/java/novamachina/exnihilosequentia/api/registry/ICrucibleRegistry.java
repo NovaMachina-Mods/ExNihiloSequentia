@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.api.registry;
 
 import java.util.List;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 
 import javax.annotation.Nonnull;
@@ -14,7 +14,7 @@ public interface ICrucibleRegistry {
 
     @Nonnull
     @SuppressWarnings("unused")
-    CrucibleRecipe findRecipe(@Nonnull final IItemProvider item);
+    CrucibleRecipe findRecipe(@Nonnull final ItemLike item);
 
     @Nullable
     CrucibleRecipe findRecipeByItemStack(@Nonnull final ItemStack itemStack);
@@ -26,7 +26,7 @@ public interface ICrucibleRegistry {
     List<CrucibleRecipe> getRecipeList();
 
     @SuppressWarnings("unused")
-    boolean isMeltable(@Nonnull final IItemProvider item, final int level);
+    boolean isMeltable(@Nonnull final ItemLike item, final int level);
 
     boolean isMeltableByItem(@Nonnull final Item item, final int level);
 

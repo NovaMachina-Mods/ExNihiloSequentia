@@ -1,7 +1,9 @@
 package novamachina.exnihilosequentia.common.tileentity.crucible;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -13,20 +15,15 @@ import javax.annotation.Nonnull;
 
 public class WoodCrucibleTile extends BaseCrucibleTile {
 
-    public WoodCrucibleTile() {
-        this(ExNihiloTiles.CRUCIBLE_WOOD.get());
+    public WoodCrucibleTile(BlockPos pos, BlockState state) {
+        this(ExNihiloTiles.CRUCIBLE_WOOD.get(), pos, state);
     }
 
-    public WoodCrucibleTile(TileEntityType<? extends WoodCrucibleTile> tile) {
-        super(tile);
+    public WoodCrucibleTile(BlockEntityType<? extends WoodCrucibleTile> tile, BlockPos pos, BlockState state) {
+        super(tile, pos, state);
     }
 
-    @Override
-    public void tick() {
-        if (level == null || level.isClientSide) {
-            return;
-        }
-
+    public void tickServer() {
         inventory.setCrucibleHasRoom(tank.getFluidAmount() < MAX_FLUID_AMOUNT);
         ticksSinceLast++;
 

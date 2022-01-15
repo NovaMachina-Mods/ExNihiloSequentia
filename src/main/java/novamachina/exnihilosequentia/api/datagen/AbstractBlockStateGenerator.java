@@ -1,9 +1,10 @@
 package novamachina.exnihilosequentia.api.datagen;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
@@ -12,8 +13,6 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import static net.minecraft.block.CakeBlock.BITES;
 
 public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     @Nonnull protected static final String PARTICLE_TAG = "particle";
@@ -70,11 +69,11 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         for (int i = 1; i < 7; i++) {
             VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
             @Nonnull final ConfiguredModel model = new ConfiguredModel(models().getExistingFile(exnihiloLoc("block/cake_slice" + i)));
-            partialBlockstate.with(BITES, i).addModels(model);
+            partialBlockstate.with(CakeBlock.BITES, i).addModels(model);
         }
         VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
         @Nonnull final ConfiguredModel model = new ConfiguredModel(models().getExistingFile(exnihiloLoc("block/cake_uneaten")));
-        partialBlockstate.with(BITES, 0).addModels(model);
+        partialBlockstate.with(CakeBlock.BITES, 0).addModels(model);
     }
 
     protected void createCrucible(@Nonnull final Block block, @Nonnull final ResourceLocation texture) {

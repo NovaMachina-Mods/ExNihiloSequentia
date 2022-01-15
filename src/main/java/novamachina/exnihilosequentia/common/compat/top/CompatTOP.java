@@ -6,9 +6,10 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.InterModComms;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -43,7 +44,7 @@ public class CompatTOP {
             iTheOneProbe.registerProvider(new IProbeInfoProvider() {
                 @Override
                 public void addProbeInfo(@Nonnull final ProbeMode probeMode, @Nonnull final IProbeInfo iProbeInfo,
-                                         @Nonnull final PlayerEntity playerEntity, @Nonnull final World world,
+                                         @Nonnull final Player playerEntity, @Nonnull final Level world,
                                          @Nonnull final BlockState blockState,
                                          @Nonnull final IProbeHitData iProbeHitData) {
                     if (blockState.getBlock() instanceof ITOPInfoProvider) {
@@ -54,8 +55,8 @@ public class CompatTOP {
 
                 @Override
                 @Nonnull
-                public String getID() {
-                    return ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":default";
+                public ResourceLocation getID() {
+                    return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":default");
                 }
             });
             return null;

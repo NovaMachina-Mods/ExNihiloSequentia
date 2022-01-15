@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.network;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.FMLHandshakeHandler;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.network.HandshakeHandler;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,16 +35,16 @@ public class PacketHandler {
                 .loginIndex(HandshakeMessages.LoginIndexedMessage::getLoginIndex, HandshakeMessages.LoginIndexedMessage::setLoginIndex)
                 .encoder(HandshakeMessages.C2SAcknowledge::encode)
                 .decoder(HandshakeMessages.C2SAcknowledge::decode)
-                .consumer(FMLHandshakeHandler.indexFirst((handler, msg, s) -> HandshakeHandler.handleAcknowledge(msg, s)))
+                .consumer(HandshakeHandler.indexFirst((handler, msg, s) -> ExNihiloHandshakeHandler.handleAcknowledge(msg, s)))
                 .add();
 
         handshakeChannel.messageBuilder(HandshakeMessages.S2COreList.class, 1)
                 .loginIndex(HandshakeMessages.LoginIndexedMessage::getLoginIndex, HandshakeMessages.LoginIndexedMessage::setLoginIndex)
                 .encoder(HandshakeMessages.S2COreList::encode)
                 .decoder(HandshakeMessages.S2COreList::decode)
-                .consumer(FMLHandshakeHandler.biConsumerFor((handler, msg, supplier) -> {
+                .consumer(HandshakeHandler.biConsumerFor((handler, msg, supplier) -> {
                     try {
-                        HandshakeHandler.handleOreList(msg, supplier);
+                        ExNihiloHandshakeHandler.handleOreList(msg, supplier);
                     } catch (InterruptedException e) {
                         logger.error(e.getMessage());
                     }

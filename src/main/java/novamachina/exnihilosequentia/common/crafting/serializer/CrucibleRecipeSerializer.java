@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.common.crafting.serializer;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
@@ -15,7 +15,7 @@ import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
+public class CrucibleRecipeSerializer extends ExNihiloRecipeSerializer<CrucibleRecipe> {
     @Override
     public ItemStack getIcon() {
         return new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get());
@@ -23,7 +23,7 @@ public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
 
     @Override
     @Nonnull
-    public CrucibleRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final PacketBuffer buffer) {
+    public CrucibleRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
         @Nonnull final Ingredient input = Ingredient.fromNetwork(buffer);
         final int amount = buffer.readInt();
         @Nonnull final FluidStack fluid = FluidStack.readFromPacket(buffer);
@@ -32,7 +32,7 @@ public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
     }
 
     @Override
-    public void toNetwork(@Nonnull final PacketBuffer buffer, @Nonnull final CrucibleRecipe recipe) {
+    public void toNetwork(@Nonnull final FriendlyByteBuf buffer, @Nonnull final CrucibleRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getAmount());
         recipe.getResultFluid().writeToPacket(buffer);

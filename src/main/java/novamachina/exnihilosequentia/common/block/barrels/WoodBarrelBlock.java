@@ -1,25 +1,43 @@
 package novamachina.exnihilosequentia.common.block.barrels;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 
 import javax.annotation.Nonnull;
-import java.util.function.Supplier;
+import javax.annotation.Nullable;
 
-public class WoodBarrelBlock extends BlockBarrel {
+public class WoodBarrelBlock extends BlockBarrel implements EntityBlock {
     public WoodBarrelBlock() {
-        this(WoodBarrelTile::new);
+        super(new BlockBuilder().properties(BlockBehaviour.Properties.of(Material.WOOD).strength(0.75F).sound(SoundType.WOOD)));
     }
 
-    public WoodBarrelBlock(@Nonnull final Supplier<TileEntity> tileEntitySupplier) {
-        super(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
-                .properties(AbstractBlock.Properties.of(Material.WOOD).strength(0.75F).sound(SoundType.WOOD))
-                .tileEntitySupplier(tileEntitySupplier));
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new WoodBarrelTile(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
+        if (!level.isClientSide) {
+            return (level1, blockPos, blockState, t) -> {
+                if (t instanceof WoodBarrelTile tile) {
+                    tile.tickServer();
+                }
+            };
+        }
+        return null;
     }
 }

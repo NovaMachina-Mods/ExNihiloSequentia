@@ -8,8 +8,10 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -50,8 +52,8 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return "Crook";
+    public Component getTitle() {
+        return new TextComponent("Crook");
     }
 
     @Nonnull
@@ -72,7 +74,7 @@ public class CrookRecipeCategory implements IRecipeCategory<CrookRecipe> {
         recipeLayout.getItemStacks().init(0, true, 10, 38);
         recipeLayout.getItemStacks().set(0, crookRecipe.getInputs());
 
-        @Nullable final IFocus<?> focus = recipeLayout.getFocus();
+        @Nullable final IFocus<?> focus = recipeLayout.getFocus(VanillaTypes.ITEM);
 
         final int slotIndex = 1;
         for (int i = 0; i < crookRecipe.getOutputsWithoutChance().size(); i++) {

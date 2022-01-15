@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 

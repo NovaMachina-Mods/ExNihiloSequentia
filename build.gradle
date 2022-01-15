@@ -4,7 +4,6 @@ buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url "https://plugins.gradle.org/m2/" }
-        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -20,9 +19,7 @@ plugins {
 }
 apply plugin: 'net.minecraftforge.gradle'
 
-
 def ENV = System.getenv()
-String semver = "${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
 version = "${minecraft_release}-" + new Date().format("yyyyMMdd-HHmmss")
 group = "${artifact_group}.${artifact_basename}"
 archivesBaseName = "${artifact_basename}"
@@ -35,7 +32,7 @@ sourceSets {
     }
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
@@ -62,17 +59,18 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
-    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
-    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
+    //compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
+    //runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
+    implementation fg.deobf("curse.maven:toptemp-245211:${top_version}")
 
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
-    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+    //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
 
     compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
     runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
 
-    runtimeOnly fg.deobf("curse.maven:ctm-267602:3137659")
-    runtimeOnly fg.deobf("curse.maven:jer-240630:3066754")
+    runtimeOnly fg.deobf("curse.maven:ctm-267602:3586556")
+    runtimeOnly fg.deobf("curse.maven:jer-240630:3580623")
 }
 
 task replaceResources(type: Copy) {

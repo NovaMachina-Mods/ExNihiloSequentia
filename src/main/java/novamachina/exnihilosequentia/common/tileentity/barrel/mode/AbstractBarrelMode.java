@@ -1,12 +1,12 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -28,8 +28,8 @@ public abstract class AbstractBarrelMode {
     public abstract void tick(@Nonnull final AbstractBarrelTile barrelTile);
 
     @Nonnull
-    public abstract ActionResultType onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
-                                                      @Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+    public abstract InteractionResult onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
+                                                      @Nonnull final Player player, @Nonnull final InteractionHand handIn,
                                                       @Nonnull final IFluidHandler fluidHandler,
                                                       @Nonnull final IItemHandler itemHandler);
 
@@ -39,15 +39,15 @@ public abstract class AbstractBarrelMode {
 
     protected abstract boolean isTriggerItem(@Nonnull final ItemStack stack);
 
-    public abstract void read(@Nonnull final CompoundNBT nbt);
+    public abstract void read(@Nonnull final CompoundTag nbt);
 
     @Nonnull
-    public abstract CompoundNBT write();
+    public abstract CompoundTag write();
 
     protected abstract void spawnParticle(@Nonnull final AbstractBarrelTile barrelTile);
 
     @Nonnull
-    public abstract List<ITextComponent> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile);
+    public abstract List<Component> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile);
 
     @Nonnull
     public abstract ItemStack handleInsert(@Nonnull final AbstractBarrelTile barrelTile, @Nonnull final ItemStack stack,

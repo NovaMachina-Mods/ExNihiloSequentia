@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.crafting.hammer;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 
@@ -22,22 +22,22 @@ public class HammerRecipeBuilder extends ExNihiloFinishedRecipe<HammerRecipeBuil
     }
 
     @Nonnull
-    public HammerRecipeBuilder addDrop(@Nonnull final IItemProvider drop) {
+    public HammerRecipeBuilder addDrop(@Nonnull final ItemLike drop) {
         return addDrop(drop, 1, 1.0F);
     }
 
     @Nonnull
-    public HammerRecipeBuilder addDrop(@Nonnull final IItemProvider drop, final int count) {
+    public HammerRecipeBuilder addDrop(@Nonnull final ItemLike drop, final int count) {
         return addDrop(drop, count, 1.0F);
     }
 
     @Nonnull
-    public HammerRecipeBuilder addDrop(@Nonnull final IItemProvider drop, final float chance) {
+    public HammerRecipeBuilder addDrop(@Nonnull final ItemLike drop, final float chance) {
         return addDrop(drop, 1, chance);
     }
 
     @Nonnull
-    public HammerRecipeBuilder addDrop(@Nonnull final IItemProvider drop, final int count, final float chance) {
+    public HammerRecipeBuilder addDrop(@Nonnull final ItemLike drop, final int count, final float chance) {
         return this.addResult(new ItemStackWithChance(new ItemStack(drop, count), chance));
     }
 
@@ -47,7 +47,7 @@ public class HammerRecipeBuilder extends ExNihiloFinishedRecipe<HammerRecipeBuil
     }
 
     @Nonnull
-    public HammerRecipeBuilder input(@Nonnull final IItemProvider input) {
+    public HammerRecipeBuilder input(@Nonnull final ItemLike input) {
         return this.input(Ingredient.of(input));
     }
 }

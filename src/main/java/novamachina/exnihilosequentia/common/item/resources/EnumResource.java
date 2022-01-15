@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.item.resources;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.IExtensibleEnum;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 
 import javax.annotation.Nonnull;

@@ -2,8 +2,8 @@ package novamachina.exnihilosequentia.api.crafting.sieve;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 
 import javax.annotation.Nonnull;
@@ -22,17 +22,17 @@ public class MeshWithChance {
     @Nonnull
     public static MeshWithChance deserialize(@Nonnull final JsonElement json) {
         if (json.isJsonObject() && json.getAsJsonObject().has(MESH_KEY)) {
-            final float chance = JSONUtils.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
-            @Nonnull final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
+            final float chance = GsonHelper.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
+            @Nonnull final EnumMesh mesh = EnumMesh.getMeshFromName(GsonHelper.getAsString(json.getAsJsonObject(), MESH_KEY));
             return new MeshWithChance(mesh, chance);
         } else {
-            @Nonnull final EnumMesh mesh = EnumMesh.getMeshFromName(JSONUtils.getAsString(json.getAsJsonObject(), MESH_KEY));
+            @Nonnull final EnumMesh mesh = EnumMesh.getMeshFromName(GsonHelper.getAsString(json.getAsJsonObject(), MESH_KEY));
             return new MeshWithChance(mesh, 1.0F);
         }
     }
 
     @Nonnull
-    public static MeshWithChance read(@Nonnull final PacketBuffer buffer) {
+    public static MeshWithChance read(@Nonnull final FriendlyByteBuf buffer) {
         @Nonnull final EnumMesh mesh = buffer.readEnum(EnumMesh.class);
         final float chance = buffer.readFloat();
         return new MeshWithChance(mesh, chance);
@@ -55,7 +55,7 @@ public class MeshWithChance {
         return json;
     }
 
-    public void write(@Nonnull final PacketBuffer buffer) {
+    public void write(@Nonnull final FriendlyByteBuf buffer) {
         buffer.writeEnum(getMesh());
         buffer.writeFloat(getChance());
     }

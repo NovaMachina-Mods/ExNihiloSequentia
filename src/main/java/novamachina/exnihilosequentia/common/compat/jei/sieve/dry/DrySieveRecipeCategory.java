@@ -12,11 +12,11 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -64,8 +64,8 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return "Sieve";
+    public Component getTitle() {
+        return new TextComponent("Sieve");
     }
 
     @Nonnull
@@ -89,7 +89,7 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
         recipeLayout.getItemStacks().init(1, true, 10, 2);
         recipeLayout.getItemStacks().set(1, recipe.getSieveables());
 
-        @Nullable final IFocus<?> focus = recipeLayout.getFocus();
+        @Nullable final IFocus<?> focus = recipeLayout.getFocus(VanillaTypes.ITEM);
 
         final int slotIndex = 2;
         for (int i = 0; i < recipe.getResults().size(); i++) {
@@ -114,7 +114,7 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
         recipeLayout.getItemStacks().addTooltipCallback(new ITooltipCallback<ItemStack>() {
             @OnlyIn(Dist.CLIENT)
             @Override
-            public void onTooltip(int slotIndex, boolean input, @Nonnull ItemStack ingredient, @Nonnull List<ITextComponent> tooltip) {
+            public void onTooltip(int slotIndex, boolean input, @Nonnull ItemStack ingredient, @Nonnull List<Component> tooltip) {
                 if (!input) {
                     @Nonnull final Multiset<String> condensedTooltips = HashMultiset.create();
                     @Nonnull final List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
@@ -129,9 +129,9 @@ public class DrySieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
                             condensedTooltips.add(StringUtils.formatPercent(meshWithChance.getChance()));
                         }
                     }
-                    tooltip.add(new TranslationTextComponent("jei.sieve.dropChance"));
+                    tooltip.add(new TranslatableComponent("jei.sieve.dropChance"));
                     for (@Nonnull final String line : condensedTooltips.elementSet()) {
-                        tooltip.add(new StringTextComponent(" * " + condensedTooltips.count(line) + "x " + line));
+                        tooltip.add(new TextComponent(" * " + condensedTooltips.count(line) + "x " + line));
                     }
                 }
             }

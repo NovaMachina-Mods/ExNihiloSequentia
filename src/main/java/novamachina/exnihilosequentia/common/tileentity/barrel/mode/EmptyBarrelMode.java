@@ -3,12 +3,12 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -29,8 +29,8 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
     @Override
     @Nonnull
-    public ActionResultType onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
-                                             @Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+    public InteractionResult onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
+                                             @Nonnull final Player player, @Nonnull final InteractionHand handIn,
                                              @Nonnull final IFluidHandler fluidHandler,
                                              @Nonnull final IItemHandler itemHandler) {
         if (!player.getItemInHand(handIn).isEmpty()) {
@@ -41,11 +41,11 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
                 if (mode.get().isTriggerItem(stack)) {
                     barrelTile.setMode(mode.get());
                     barrelTile.getMode().onBlockActivated(barrelTile, player, handIn, fluidHandler, itemHandler);
-                    return ActionResultType.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -64,14 +64,14 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void read(@Nonnull final CompoundNBT nbt) {
+    public void read(@Nonnull final CompoundTag nbt) {
         // NOOP
     }
 
     @Override
     @Nonnull
-    public CompoundNBT write() {
-        return new CompoundNBT();
+    public CompoundTag write() {
+        return new CompoundTag();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
     @Override
     @Nonnull
-    public List<ITextComponent> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile) {
+    public List<Component> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile) {
         return new ArrayList<>();
     }
 

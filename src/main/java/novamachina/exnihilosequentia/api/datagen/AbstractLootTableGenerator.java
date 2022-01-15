@@ -8,27 +8,27 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTableManager;
-import net.minecraft.loot.ValidationTracker;
-import net.minecraft.loot.conditions.SurvivesExplosion;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class AbstractLootTableGenerator implements IDataProvider {
+public abstract class AbstractLootTableGenerator implements DataProvider {
     @Nonnull private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     @Nonnull protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
@@ -41,15 +41,15 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
     }
 
     @Override
-    public void run(@Nonnull final DirectoryCache cache) {
+    public void run(@Nonnull final HashCache cache) {
         lootTables.clear();
         @Nonnull final Path outFolder = generator.getOutputFolder();
 
         createLootTables();
 
-        @Nonnull final ValidationTracker validator = new ValidationTracker(LootParameterSets.ALL_PARAMS,
+        @Nonnull final ValidationContext validator = new ValidationContext(LootContextParamSets.ALL_PARAMS,
                 function -> null, lootTables::get);
-        lootTables.forEach((name, table) -> LootTableManager.validate(validator, name, table));
+        lootTables.forEach((name, table) -> LootTables.validate(validator, name, table));
         @Nonnull final Multimap<String, String> problems = validator.getProblems();
         if (!problems.isEmpty()) {
             problems.forEach((name, table) -> logger.warn("Found validation problem in " + name + ": " + table));
@@ -59,7 +59,7 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
                 @Nonnull final Path out = getPath(outFolder, name);
 
                 try {
-                    IDataProvider.save(GSON, cache, LootTableManager.serialize(table), out);
+                    DataProvider.save(GSON, cache, LootTables.serialize(table), out);
                 } catch (IOException e) {
                     logger.error("Couldn't save loot table " + out);
                     logger.error(Arrays.toString(e.getStackTrace()));
@@ -76,7 +76,7 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
 
     @Nonnull
     protected LootPool.Builder createLootPoolBuilder() {
-        return LootPool.lootPool().when(SurvivesExplosion.survivesExplosion());
+        return LootPool.lootPool().when(ExplosionCondition.survivesExplosion());
     }
 
     protected abstract void createLootTables();
@@ -106,14 +106,14 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
     }
 
     private void register(@Nonnull final ResourceLocation registryName, @Nonnull final LootTable.Builder table) {
-        if (lootTables.put(toTableLoc(registryName), table.setParamSet(LootParameterSets.BLOCK).build()) != null) {
+        if (lootTables.put(toTableLoc(registryName), table.setParamSet(LootContextParamSets.BLOCK).build()) != null) {
             throw new IllegalStateException("Duplicate loot table: " + table);
         }
     }
 
     @Nonnull
-    private LootPool.Builder singleItem(@Nonnull final IItemProvider in) {
-        return createLootPoolBuilder().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(in));
+    private LootPool.Builder singleItem(@Nonnull final ItemLike in) {
+        return createLootPoolBuilder().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(in));
     }
 
     @Nonnull

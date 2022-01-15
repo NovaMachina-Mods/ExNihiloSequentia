@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.utility;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -59,9 +59,9 @@ public class Color {
     }
 
     @Nonnull
-    public static Color fromNBT(@Nonnull final CompoundNBT compoundNBT) {
+    public static Color fromNBT(@Nonnull final CompoundTag compoundNBT) {
         if (compoundNBT.contains(COLOR_TAG)) {
-            CompoundNBT colorTag = compoundNBT.getCompound(COLOR_TAG);
+            CompoundTag colorTag = compoundNBT.getCompound(COLOR_TAG);
             float a = colorTag.getFloat("colorA");
             float r = colorTag.getFloat("colorR");
             float b = colorTag.getFloat("colorB");
@@ -97,8 +97,8 @@ public class Color {
         return Objects.hash(r, g, b, a);
     }
 
-    public void putIntoNBT(@Nonnull final CompoundNBT compoundNBT) {
-        CompoundNBT colorTag = new CompoundNBT();
+    public void putIntoNBT(@Nonnull final CompoundTag compoundNBT) {
+        CompoundTag colorTag = new CompoundTag();
         colorTag.putFloat("colorA", a);
         colorTag.putFloat("colorR", r);
         colorTag.putFloat("colorB", b);

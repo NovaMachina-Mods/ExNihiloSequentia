@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.api.registry;
 
 import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
@@ -13,7 +13,7 @@ public interface ISieveRegistry {
     void clearRecipes();
 
     @Nonnull
-    List<SieveRecipe> getDrops(@Nonnull final IItemProvider input, @Nonnull final EnumMesh meshType,
+    List<SieveRecipe> getDrops(@Nonnull final ItemLike input, @Nonnull final EnumMesh meshType,
                                final boolean isWaterlogged);
 
     @Nonnull

@@ -1,17 +1,17 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
@@ -36,7 +36,7 @@ public class UseCrookModifier extends LootModifier {
 
     @Nonnull private final Random random = new Random();
 
-    public UseCrookModifier(@Nonnull final ILootCondition[] conditionsIn) {
+    public UseCrookModifier(@Nonnull final LootItemCondition[] conditionsIn) {
         super(conditionsIn);
     }
 
@@ -44,15 +44,15 @@ public class UseCrookModifier extends LootModifier {
     @Override
     public List<ItemStack> doApply(@Nonnull List<ItemStack> generatedLoot, @Nonnull final LootContext context) {
         logger.debug("Fired Crook Modifier");
-        @Nullable final ItemStack tool = context.getParamOrNull(LootParameters.TOOL);
-        @Nullable final BlockState blockState = context.getParamOrNull(LootParameters.BLOCK_STATE);
-        @Nullable final Vector3d origin = context.getParamOrNull(LootParameters.ORIGIN);
+        @Nullable final ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
+        @Nullable final BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
+        @Nullable final Vec3 origin = context.getParamOrNull(LootContextParams.ORIGIN);
         @Nonnull final List<ItemStack> newLoot = new ArrayList<>();
 
         if (tool != null && blockState != null && ExNihiloTags.CROOK.contains(tool.getItem())
                 && ExNihiloRegistries.CROOK_REGISTRY.isCrookable(blockState.getBlock())) {
             for (int i = 0; i < Config.getVanillaSimulateDropCount(); i++) {
-                @Nullable final ServerWorld serverWorld = context.getLevel().getServer().getLevel(
+                @Nullable final ServerLevel serverWorld = context.getLevel().getServer().getLevel(
                         context.getLevel().dimension());
                 if (origin != null && serverWorld != null) {
                     @Nonnull final BlockPos pos = new BlockPos(origin.x(), origin.y(), origin.z());
@@ -100,7 +100,7 @@ public class UseCrookModifier extends LootModifier {
         @Override
         @Nonnull
         public UseCrookModifier read(@Nonnull final ResourceLocation location, @Nonnull final JsonObject object,
-                                     @Nonnull final ILootCondition[] ailootcondition) {
+                                     @Nonnull final LootItemCondition[] ailootcondition) {
             return new UseCrookModifier(ailootcondition);
         }
 

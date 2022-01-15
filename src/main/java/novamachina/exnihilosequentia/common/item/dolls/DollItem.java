@@ -1,18 +1,18 @@
 package novamachina.exnihilosequentia.common.item.dolls;
 
 import java.util.List;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
@@ -28,10 +28,10 @@ public class DollItem extends Item {
     }
 
     @Override
-    public void appendHoverText(@Nonnull final ItemStack stack, @Nullable final World worldIn,
-                                @Nonnull final List<ITextComponent> tooltip, @Nonnull final ITooltipFlag flagIn) {
+    public void appendHoverText(@Nonnull final ItemStack stack, @Nullable final Level worldIn,
+                                @Nonnull final List<Component> tooltip, @Nonnull final TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent(type.getToolTip()));
+        tooltip.add(new TranslatableComponent(type.getToolTip()));
     }
 
     @Nonnull
@@ -49,7 +49,7 @@ public class DollItem extends Item {
         return Fluids.EMPTY;
     }
 
-    public boolean spawnMob(@Nonnull final World world, @Nonnull final BlockPos pos) {
+    public boolean spawnMob(@Nonnull final Level world, @Nonnull final BlockPos pos) {
         @Nonnull ResourceLocation spawneeResourceLocation = new ResourceLocation(type.getEntityModId(), type.getEntityName());
 
         if (ForgeRegistries.ENTITIES.containsKey(spawneeResourceLocation)) {

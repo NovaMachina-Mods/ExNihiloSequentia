@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.item.tools.hammer;
 
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemTier;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.common.IExtensibleEnum;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -12,19 +12,19 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public enum EnumHammer implements IExtensibleEnum {
-    WOOD(ExNihiloConstants.Items.HAMMER_WOOD, Config.getHammerWoodDurability(), ItemTier.WOOD),
-    STONE(ExNihiloConstants.Items.HAMMER_STONE, Config.getHammerStoneDurability(), ItemTier.STONE),
-    IRON(ExNihiloConstants.Items.HAMMER_IRON, Config.getHammerIronDurability(), ItemTier.IRON),
-    DIAMOND(ExNihiloConstants.Items.HAMMER_DIAMOND, Config.getHammerDiamondDurability(), ItemTier.DIAMOND),
-    NETHERITE(ExNihiloConstants.Items.HAMMER_NETHERITE, Config.getHammerNetheriteDurability(), ItemTier.NETHERITE),
-    GOLD(ExNihiloConstants.Items.HAMMER_GOLD, Config.getHammerGoldDurability(), ItemTier.GOLD);
+    WOOD(ExNihiloConstants.Items.HAMMER_WOOD, Config.getHammerWoodDurability(), Tiers.WOOD),
+    STONE(ExNihiloConstants.Items.HAMMER_STONE, Config.getHammerStoneDurability(), Tiers.STONE),
+    IRON(ExNihiloConstants.Items.HAMMER_IRON, Config.getHammerIronDurability(), Tiers.IRON),
+    DIAMOND(ExNihiloConstants.Items.HAMMER_DIAMOND, Config.getHammerDiamondDurability(), Tiers.DIAMOND),
+    NETHERITE(ExNihiloConstants.Items.HAMMER_NETHERITE, Config.getHammerNetheriteDurability(), Tiers.NETHERITE),
+    GOLD(ExNihiloConstants.Items.HAMMER_GOLD, Config.getHammerGoldDurability(), Tiers.GOLD);
 
     public final int maxDamage;
     @Nonnull public final String hammerName;
-    @Nonnull public final IItemTier tier;
+    @Nonnull public final Tier tier;
     @Nullable private RegistryObject<Item> registryObject;
 
-    EnumHammer(@Nonnull final String hammerName, final int maxDamage, @Nonnull final IItemTier tier) {
+    EnumHammer(@Nonnull final String hammerName, final int maxDamage, @Nonnull final Tier tier) {
         this.hammerName = hammerName;
         this.maxDamage = maxDamage;
         this.tier = tier;
@@ -32,7 +32,7 @@ public enum EnumHammer implements IExtensibleEnum {
 
     @Nonnull
     public static EnumHammer create(@Nonnull final String enumName, @Nonnull final String hammerName,
-                                    final int maxDamage, @Nonnull final IItemTier tier) {
+                                    final int maxDamage, @Nonnull final Tier tier) {
         throw new IllegalStateException("Enum not extended");
     }
 

@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.api.crafting.crucible;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 

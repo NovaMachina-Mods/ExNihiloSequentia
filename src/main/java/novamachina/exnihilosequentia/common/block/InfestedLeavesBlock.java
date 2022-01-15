@@ -1,41 +1,61 @@
 package novamachina.exnihilosequentia.common.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShearsItem;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.IForgeShearable;
-import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.InfestedLeavesTile;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable {
+public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable, EntityBlock {
 
     public InfestedLeavesBlock() {
-        super(new BlockBuilder().harvestLevel(ToolType.get("crook"), 0).properties(
-                AbstractBlock.Properties.of(Material.LEAVES).strength(0.2F).sound(
-                        SoundType.GRASS).noOcclusion()
-                        .isValidSpawn(BaseBlock::never)).tileEntitySupplier(InfestedLeavesTile::new));
+        super(new BlockBuilder().properties(
+                BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(
+                        SoundType.GRASS).noOcclusion().isValidSpawn(BaseBlock::never)));
     }
 
     @Override
-    public void playerDestroy(@Nonnull final World world, @Nonnull final PlayerEntity player,
+    public void playerDestroy(@Nonnull final Level world, @Nonnull final Player player,
                               @Nonnull final BlockPos pos, @Nonnull final BlockState state,
-                              @Nullable final TileEntity tileEntity, @Nonnull final ItemStack itemStack) {
+                              @Nullable final BlockEntity tileEntity, @Nonnull final ItemStack itemStack) {
         if (itemStack.getItem() instanceof ShearsItem) {
             world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.1F,
                     pos.getZ() + 0.5F, new ItemStack(this)));
         }
         super.playerDestroy(world, player, pos, state, tileEntity, itemStack);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new InfestedLeavesTile(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
+        if (!level.isClientSide) {
+            return (level1, blockPos, blockState, t) -> {
+                if (t instanceof InfestedLeavesTile tile) {
+                    tile.tickServer();
+                }
+            };
+        }
+        return null;
     }
 }

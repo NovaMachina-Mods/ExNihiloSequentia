@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.api.crafting.crook;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 
@@ -22,7 +22,7 @@ public class CrookRecipeBuilder extends ExNihiloFinishedRecipe<CrookRecipeBuilde
     }
 
     @Nonnull
-    public CrookRecipeBuilder addDrop(@Nonnull final IItemProvider drop, final float chance) {
+    public CrookRecipeBuilder addDrop(@Nonnull final ItemLike drop, final float chance) {
         return this.addResult(new ItemStackWithChance(new ItemStack(drop), chance));
     }
 
@@ -32,7 +32,7 @@ public class CrookRecipeBuilder extends ExNihiloFinishedRecipe<CrookRecipeBuilde
     }
 
     @Nonnull
-    public CrookRecipeBuilder input(@Nonnull final ITag.INamedTag<Item> tag) {
+    public CrookRecipeBuilder input(@Nonnull final Tag.Named<Item> tag) {
         return this.addInput(tag);
     }
 }

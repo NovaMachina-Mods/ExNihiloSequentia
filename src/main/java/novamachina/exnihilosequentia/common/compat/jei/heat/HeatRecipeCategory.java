@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -8,15 +8,16 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -43,7 +44,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     }
 
     @Override
-    public void draw(@Nonnull final HeatRecipe recipe, @Nonnull final MatrixStack matrixStack, final double mouseX,
+    public void draw(@Nonnull final HeatRecipe recipe, @Nonnull final PoseStack matrixStack, final double mouseX,
                      final double mouseY) {
         @Nonnull final Minecraft minecraft = Minecraft.getInstance();
         minecraft.font.draw(matrixStack, recipe.getAmount() + "X",
@@ -83,8 +84,8 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return "Crucible Heat Sources";
+    public net.minecraft.network.chat.Component getTitle() {
+        return new TextComponent("Crucible Heat Sources");
     }
 
     @Nonnull
@@ -119,12 +120,12 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
             if (fluid != null)
                 recipeLayout.getFluidStacks().set(0, new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
         } else {
-            @Nonnull IItemProvider input = recipe.getInput();
+            @Nonnull ItemLike input = recipe.getInput();
             if(input == Blocks.FIRE || input == Blocks.SOUL_FIRE) {
                 input = Items.FLINT_AND_STEEL;
             }
-			if (input instanceof FlowingFluidBlock) {
-				input = ((FlowingFluidBlock) input).getFluid().getBucket();
+			if (input instanceof LiquidBlock) {
+				input = ((LiquidBlock) input).getFluid().getBucket();
 			}
             recipeLayout.getItemStacks().init(0, true, 0, 16);
             recipeLayout.getItemStacks().set(0, Arrays.asList(Ingredient.of(input).getItems()));

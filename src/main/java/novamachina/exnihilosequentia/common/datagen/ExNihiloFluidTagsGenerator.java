@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.FluidTagsProvider;
+import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraft.tags.FluidTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;

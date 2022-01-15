@@ -3,10 +3,10 @@ package novamachina.exnihilosequentia.common.registries;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.registry.IFluidItemTransformRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -32,7 +32,7 @@ public class FluidItemTransformRegistry implements IFluidItemTransformRegistry {
 
     @Nonnull
     @Override
-    public IItemProvider getResult(@Nonnull final Fluid fluid, @Nonnull final Item input) {
+    public ItemLike getResult(@Nonnull final Fluid fluid, @Nonnull final Item input) {
         return itemResultCache
                 .computeIfAbsent(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME), k -> new HashMap<>())
                 .computeIfAbsent(input, k -> recipeList

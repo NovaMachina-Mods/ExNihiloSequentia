@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import net.minecraft.item.Item;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.api.registry.ICrucibleRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -36,7 +36,7 @@ public class CrucibleRegistry implements ICrucibleRegistry {
 
     @Nonnull
     @Override
-    public CrucibleRecipe findRecipe(@Nonnull final IItemProvider item) {
+    public CrucibleRecipe findRecipe(@Nonnull final ItemLike item) {
         return findRecipeByItem(item.asItem());
     }
 
@@ -65,7 +65,7 @@ public class CrucibleRegistry implements ICrucibleRegistry {
     }
 
     @Override
-    public boolean isMeltable(@Nonnull final IItemProvider item, final int level) {
+    public boolean isMeltable(@Nonnull final ItemLike item, final int level) {
         return isMeltableByItem(item.asItem(), level);
     }
 

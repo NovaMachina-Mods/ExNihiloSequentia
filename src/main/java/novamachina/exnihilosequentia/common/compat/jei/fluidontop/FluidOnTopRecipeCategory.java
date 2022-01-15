@@ -8,7 +8,9 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -46,8 +48,8 @@ public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecip
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return "Fluid On Top";
+    public Component getTitle() {
+        return new TextComponent("Fluid On Top");
     }
 
     @Nonnull

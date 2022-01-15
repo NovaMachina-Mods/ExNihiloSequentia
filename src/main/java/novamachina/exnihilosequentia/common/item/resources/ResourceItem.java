@@ -1,13 +1,13 @@
 package novamachina.exnihilosequentia.common.item.resources;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.InteractionResult;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
@@ -30,7 +30,7 @@ public class ResourceItem extends Item {
 
     @Override
     @Nonnull
-    public ActionResultType useOn(@Nonnull final ItemUseContext context) {
+    public InteractionResult useOn(@Nonnull final UseOnContext context) {
         final @Nonnull ItemStack item = context.getItemInHand();
         if (!context.getLevel().isClientSide() && item.getItem() instanceof ResourceItem) {
             final @Nonnull ResourceItem resourceItem = (ResourceItem) item.getItem();
@@ -40,7 +40,7 @@ public class ResourceItem extends Item {
                 context.getItemInHand().shrink(1);
                 InfestingLeavesBlock.normalToInfesting(context.getLevel(),
                         context.getClickedPos());
-                return ActionResultType.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
             if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) || resourceItem.getResourceName()
                     .equals(Items.GRASS_SEED)) {
@@ -50,17 +50,17 @@ public class ResourceItem extends Item {
                         Block.updateOrDestroy(state,
                                 Blocks.MYCELIUM.defaultBlockState(), context.getLevel(),
                                 context.getClickedPos(), 1);
-                        return ActionResultType.SUCCESS;
+                        return InteractionResult.SUCCESS;
                     } else if (resourceItem.getResourceName().equals(Items.GRASS_SEED) && state.getBlock().equals(Blocks.DIRT)) {
                         Block.updateOrDestroy(state,
                                 Blocks.GRASS_BLOCK.defaultBlockState(), context.getLevel(),
                                 context.getClickedPos(), 1);
-                        return ActionResultType.SUCCESS;
+                        return InteractionResult.SUCCESS;
                     }
                 }
-                return ActionResultType.FAIL;
+                return InteractionResult.FAIL;
             }
         }
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 }

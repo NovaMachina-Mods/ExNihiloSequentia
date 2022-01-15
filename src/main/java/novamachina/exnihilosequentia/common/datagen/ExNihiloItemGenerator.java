@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;

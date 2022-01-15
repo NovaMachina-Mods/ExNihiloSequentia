@@ -1,34 +1,34 @@
 package novamachina.exnihilosequentia.common.init;
 
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.dispenser.IDispenseItemBehavior;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
@@ -60,7 +60,7 @@ import static novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator.
 
 @Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloInitialization {
-    @Nonnull public static final ItemGroup ITEM_GROUP = new ItemGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
+    @Nonnull public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
         @Nonnull
         @Override
         public ItemStack makeIcon() {
@@ -113,7 +113,7 @@ public class ExNihiloInitialization {
 
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
-    public static void onServerStart(@Nonnull final FMLServerStartingEvent event) {
+    public static void onServerStart(@Nonnull final ServerStartingEvent event) {
         logger.debug("Fired FMLServerStartingEvent");
         registerOreCompat();
         overrideOres();
@@ -144,17 +144,17 @@ public class ExNihiloInitialization {
     }
 
     private static void registerDispenserFluids() {
-        @Nonnull final IDispenseItemBehavior idispenseitembehavior = new DefaultDispenseItemBehavior() {
+        @Nonnull final DispenseItemBehavior idispenseitembehavior = new DefaultDispenseItemBehavior() {
             @Nonnull private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
             @Nonnull
-            public ItemStack execute(@Nonnull final IBlockSource p_82487_1_, @Nonnull final ItemStack p_82487_2_) {
+            public ItemStack execute(@Nonnull final BlockSource p_82487_1_, @Nonnull final ItemStack p_82487_2_) {
                 @Nonnull final BucketItem bucketitem = (BucketItem)p_82487_2_.getItem();
                 @Nonnull final BlockPos blockpos = p_82487_1_.getPos().relative(p_82487_1_.getBlockState()
                         .getValue(DispenserBlock.FACING));
-                @Nullable final World world = p_82487_1_.getLevel();
-                if (bucketitem.emptyBucket(null, world, blockpos, null)) {
-                    bucketitem.checkExtraContent(world, p_82487_2_, blockpos);
+                @Nullable final Level world = p_82487_1_.getLevel();
+                if (bucketitem.emptyContents(null, world, blockpos, null)) {
+                    bucketitem.checkExtraContent(null, world, p_82487_2_, blockpos);
                     return new ItemStack(Items.BUCKET);
                 } else {
                     return this.defaultDispenseItemBehavior.dispense(p_82487_1_, p_82487_2_);
@@ -184,9 +184,9 @@ public class ExNihiloInitialization {
         createMCCompost(ExNihiloItems.COOKED_SILKWORM.get(), 0.3F);
     }
 
-    private static <R extends IRecipe<?>> List<R> filterRecipes(@Nonnull final Collection<IRecipe<?>> recipes,
+    private static <R extends Recipe<?>> List<R> filterRecipes(@Nonnull final Collection<Recipe<?>> recipes,
                                                                 @Nonnull final Class<R> recipeClass,
-                                                                @Nonnull final IRecipeType<R> recipeType) {
+                                                                @Nonnull final RecipeType<R> recipeType) {
         logger.debug("Filter Recipes, Class: " + recipeClass + ", Recipe Type: " + recipeType);
         return recipes.stream()
                 .filter(iRecipe -> iRecipe.getType() == recipeType)
@@ -196,7 +196,7 @@ public class ExNihiloInitialization {
 
     private static void loadRecipes(@Nonnull final RecipeManager manager) {
         logger.debug("Loading Recipes");
-        @Nonnull final Collection<IRecipe<?>> recipes = manager.getRecipes();
+        @Nonnull final Collection<Recipe<?>> recipes = manager.getRecipes();
         if (recipes.isEmpty()) {
             return;
         }

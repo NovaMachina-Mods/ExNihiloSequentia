@@ -3,22 +3,22 @@ package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -58,11 +58,11 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     @Nonnull
-    public ActionResultType onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
-                                             @Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+    public InteractionResult onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
+                                             @Nonnull final Player player, @Nonnull final InteractionHand handIn,
                                              @Nonnull final IFluidHandler fluidHandler,
                                              @Nonnull final IItemHandler itemHandler) {
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public void read(@Nonnull final CompoundNBT nbt) {
+    public void read(@Nonnull final CompoundTag nbt) {
         if (nbt.contains(CURRENT_PROGRESS_TAG)) {
             this.currentProgress = nbt.getInt(CURRENT_PROGRESS_TAG);
         } else {
@@ -101,8 +101,8 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     @Nonnull
-    public CompoundNBT write() {
-        @Nonnull final CompoundNBT nbt = new CompoundNBT();
+    public CompoundTag write() {
+        @Nonnull final CompoundTag nbt = new CompoundTag();
         nbt.putInt(CURRENT_PROGRESS_TAG, currentProgress);
         if (doll != null) {
             nbt.putString(DOLL_TYPE_TAG, doll.getDollType());
@@ -112,10 +112,10 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected void spawnParticle(@Nonnull final AbstractBarrelTile barrelTile) {
-        @Nullable final World world = barrelTile.getLevel();
-        if (!(world instanceof ServerWorld))
+        @Nullable final Level world = barrelTile.getLevel();
+        if (!(world instanceof ServerLevel))
             return;
-        ((ServerWorld) world)
+        ((ServerLevel) world)
             .sendParticles(ParticleTypes.LARGE_SMOKE,
                 barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
@@ -129,10 +129,10 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
     @Override
     @Nonnull
-    public List<ITextComponent> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile) {
-        @Nonnull final List<ITextComponent> info = new ArrayList<>();
+    public List<Component> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile) {
+        @Nonnull final List<Component> info = new ArrayList<>();
 
-        info.add(new TranslationTextComponent("waila.progress", StringUtils
+        info.add(new TranslatableComponent("waila.progress", StringUtils
             .formatPercent((float) currentProgress / (Config.getSecondsToSpawn() * 20))));
 
         return info;

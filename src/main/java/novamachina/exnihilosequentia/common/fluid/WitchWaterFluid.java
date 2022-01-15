@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.common.fluid;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -48,7 +48,7 @@ public abstract class WitchWaterFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        protected void createFluidStateDefinition(@Nonnull final StateContainer.Builder<Fluid, FluidState> builder) {
+        protected void createFluidStateDefinition(@Nonnull final StateDefinition.Builder<Fluid, FluidState> builder) {
             super.createFluidStateDefinition(builder);
             builder.add(LEVEL);
         }

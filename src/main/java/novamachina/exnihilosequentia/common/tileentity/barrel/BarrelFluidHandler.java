@@ -7,6 +7,8 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+
 public class BarrelFluidHandler extends FluidTank {
     @Nullable private AbstractBarrelTile barrel;
 

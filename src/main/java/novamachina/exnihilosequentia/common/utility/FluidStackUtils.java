@@ -3,9 +3,9 @@ package novamachina.exnihilosequentia.common.utility;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.util.JsonUtils;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
@@ -20,13 +20,13 @@ public class FluidStackUtils {
 
     @Nullable
     public static FluidStack jsonDeserializeFluidStack(@Nonnull final JsonObject jsonObject) {
-        @Nullable final Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(JSONUtils
+        @Nullable final Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(GsonHelper
                 .getAsString(jsonObject, "fluid")));
         if (fluid == null) {
             return null;
         }
         FluidStack fluidStack = new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME);
-        if (JSONUtils.isValidNode(jsonObject, "tag"))
+        if (GsonHelper.isValidNode(jsonObject, "tag"))
             fluidStack.setTag(JsonUtils.readNBT(jsonObject, "tag"));
         return fluidStack;
     }

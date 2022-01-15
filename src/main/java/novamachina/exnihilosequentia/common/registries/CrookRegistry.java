@@ -1,11 +1,11 @@
 package novamachina.exnihilosequentia.common.registries;
 
 import com.google.common.collect.Lists;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.registry.ICrookRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -24,16 +24,16 @@ public class CrookRegistry implements ICrookRegistry {
 
     @Nonnull private final List<CrookRecipe> recipeList = new ArrayList<>();
 
-    @Nonnull private final Map<IItemProvider, List<CrookRecipe>> recipeListByItemCache = new HashMap<>();
+    @Nonnull private final Map<ItemLike, List<CrookRecipe>> recipeListByItemCache = new HashMap<>();
 
     @Override
-    public boolean isCrookable(@Nonnull final IItemProvider block) {
+    public boolean isCrookable(@Nonnull final ItemLike block) {
         return !getDrops(block).isEmpty();
     }
 
     @Override
     @Nonnull
-    public List<CrookRecipe> getDrops(@Nonnull final IItemProvider block) {
+    public List<CrookRecipe> getDrops(@Nonnull final ItemLike block) {
         return recipeListByItemCache.computeIfAbsent(block, k -> {
             @Nonnull final ItemStack itemStack = new ItemStack(block);
             return recipeList

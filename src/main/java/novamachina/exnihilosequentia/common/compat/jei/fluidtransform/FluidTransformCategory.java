@@ -9,7 +9,9 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -47,8 +49,8 @@ public class FluidTransformCategory implements IRecipeCategory<FluidTransformRec
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return "Fluid Transform";
+    public Component getTitle() {
+        return new TextComponent("Fluid Transform");
     }
 
     @Nonnull

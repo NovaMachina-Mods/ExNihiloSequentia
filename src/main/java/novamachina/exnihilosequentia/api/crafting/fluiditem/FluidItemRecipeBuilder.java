@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.api.crafting.fluiditem;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
@@ -26,7 +26,7 @@ public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemReci
     }
 
     @Nonnull
-    public FluidItemRecipeBuilder input(@Nonnull final IItemProvider input) {
+    public FluidItemRecipeBuilder input(@Nonnull final ItemLike input) {
         return this.addInput(input);
     }
 
@@ -41,7 +41,7 @@ public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemReci
     }
 
     @Nonnull
-    public FluidItemRecipeBuilder result(@Nonnull final IItemProvider output) {
+    public FluidItemRecipeBuilder result(@Nonnull final ItemLike output) {
         return this.addResult(output);
     }
 }

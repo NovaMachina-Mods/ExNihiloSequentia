@@ -2,16 +2,16 @@ package novamachina.exnihilosequentia.api.crafting;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 
-public abstract class RecipeSerializer<R extends IRecipe<?>> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<R> {
+public abstract class ExNihiloRecipeSerializer<R extends Recipe<?>> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<R> {
     public abstract ItemStack getIcon();
 
     @Override
@@ -24,6 +24,6 @@ public abstract class RecipeSerializer<R extends IRecipe<?>> extends ForgeRegist
 
     @Nonnull
     protected ItemStack readOutput(@Nonnull final JsonElement outputObject) {
-        return ShapedRecipe.itemFromJson(outputObject.getAsJsonObject());
+        return ShapedRecipe.itemFromJson(outputObject.getAsJsonObject()).getDefaultInstance();
     }
 }
