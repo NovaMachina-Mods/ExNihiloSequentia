@@ -7,16 +7,22 @@ import novamachina.exnihilosequentia.api.compat.jei.JEISieveRecipe;
 import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 
+import javax.annotation.Nonnull;
+
 public interface ISieveRegistry {
     void clearRecipes();
 
-    List<SieveRecipe> getDrops(IItemProvider input, EnumMesh meshType, boolean isWaterlogged);
+    @Nonnull
+    List<SieveRecipe> getDrops(@Nonnull final IItemProvider input, @Nonnull final EnumMesh meshType,
+                               final boolean isWaterlogged);
 
+    @Nonnull
     List<JEISieveRecipe> getDryRecipeList();
 
+    @Nonnull
     List<JEISieveRecipe> getWetRecipeList();
 
-    boolean isBlockSiftable(Block block, EnumMesh mesh, boolean isWaterlogged);
+    boolean isBlockSiftable(@Nonnull final Block block, @Nonnull final EnumMesh mesh, final boolean isWaterlogged);
 
-    void setRecipes(List<SieveRecipe> recipes);
+    void setRecipes(@Nonnull final List<SieveRecipe> recipes);
 }

@@ -7,6 +7,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ExNihiloDataGenerators {
 
@@ -14,8 +16,8 @@ public class ExNihiloDataGenerators {
     }
 
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
+    public static void gatherData(@Nonnull final GatherDataEvent event) {
+        @Nonnull final DataGenerator generator = event.getGenerator();
 
         if (event.includeServer()) {
             // Recipes

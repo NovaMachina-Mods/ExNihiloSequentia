@@ -16,41 +16,47 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class SeedBaseItem extends Item implements IPlantable {
 
-    private final BlockState plant;
-    private PlantType type;
+    @Nonnull private final BlockState plant;
+    @Nullable private PlantType type;
 
-    public SeedBaseItem(BlockState plant) {
+    public SeedBaseItem(@Nonnull final BlockState plant) {
         super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
         this.plant = plant;
     }
 
     @Override
-    public BlockState getPlant(IBlockReader world, BlockPos pos) {
+    @Nullable
+    public BlockState getPlant(@Nonnull final IBlockReader world, @Nonnull final BlockPos pos) {
         return plant;
     }
 
     @Override
-    public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+    @Nullable
+    public PlantType getPlantType(@Nonnull final IBlockReader world, @Nonnull final BlockPos pos) {
         return type;
     }
 
     @Override
-    public ActionResultType useOn(ItemUseContext context) {
+    @Nonnull
+    public ActionResultType useOn(@Nonnull final ItemUseContext context) {
         if (!context.getClickedFace().equals(Direction.UP)) {
             return ActionResultType.PASS;
         }
 
-        ItemStack item = context.getItemInHand();
-        PlayerEntity player = context.getPlayer();
-        BlockPos pos = context.getClickedPos();
-        Direction direction = context.getClickedFace();
-        World world = context.getLevel();
-        if (player.mayUseItemAt(pos, direction, item) && player
+        @Nonnull final ItemStack item = context.getItemInHand();
+        @Nullable final PlayerEntity player = context.getPlayer();
+        @Nonnull final BlockPos pos = context.getClickedPos();
+        @Nonnull final Direction direction = context.getClickedFace();
+        @Nonnull final World world = context.getLevel();
+        if (player != null && type != null && player.mayUseItemAt(pos, direction, item) && player
                 .mayUseItemAt(pos.offset(0, 1, 0), direction, item)) {
 
-            BlockState soil;
+            @Nullable final BlockState soil;
             if (type == PlantType.WATER) {
                 soil = world.getBlockState(context.getClickedPos().offset(0, 1, 0));
             } else {
@@ -59,14 +65,11 @@ public class SeedBaseItem extends Item implements IPlantable {
 
             boolean canSustain = soil.getBlock().canSustainPlant(soil, world, pos, Direction.UP, this);
             boolean blockEmpty = isBlockSpaceEmpty(world, pos, type);
-            if (canSustain && blockEmpty && this.getPlant(world, pos) != null) {
-                world.setBlockAndUpdate(pos.offset(0, 1, 0),
-                        this.getPlant(world, pos));
-                if (this.getPlant(world, pos).getBlock() instanceof DoublePlantBlock) {
-                    world.setBlockAndUpdate(
-                            pos.above(2),
-                            this.getPlant(world, pos).setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
-                    );
+            @Nullable final BlockState plant = getPlant(world, pos);
+            if (canSustain && blockEmpty && plant != null) {
+                world.setBlockAndUpdate(pos.offset(0, 1, 0), plant);
+                if (plant.getBlock() instanceof DoublePlantBlock) {
+                    world.setBlockAndUpdate(pos.above(2), plant.setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
                 }
                 if (!player.isCreative()) {
                     item.shrink(1);
@@ -78,16 +81,18 @@ public class SeedBaseItem extends Item implements IPlantable {
         return ActionResultType.PASS;
     }
 
-    public SeedBaseItem setPlantType(PlantType type) {
+    @Nonnull
+    public SeedBaseItem setPlantType(@Nonnull final PlantType type) {
         this.type = type;
         return this;
     }
 
-    private boolean isBlockSpaceEmpty(World world, BlockPos pos, PlantType type) {
+    private boolean isBlockSpaceEmpty(@Nonnull final World world, @Nonnull final BlockPos pos,
+                                      @Nonnull final PlantType type) {
         if (type == PlantType.WATER) {
-            return world.getBlockState(pos.offset(0, 1, 0)).getBlock() == Blocks.WATER;
+            return world.getBlockState(pos.above()).getBlock() == Blocks.WATER;
         }
 
-        return world.isEmptyBlock(pos.offset(0, 1, 0));
+        return world.isEmptyBlock(pos.above());
     }
 }

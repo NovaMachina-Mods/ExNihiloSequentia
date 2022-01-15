@@ -4,6 +4,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -12,16 +14,18 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class BarrelModeRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private static final Map<String, Supplier<AbstractBarrelMode>> modeNameMap = new HashMap<>();
-    private static final Map<TriggerType, ArrayList<Supplier<AbstractBarrelMode>>> modeMap = new EnumMap<>(TriggerType.class);
+    @Nonnull private static final Map<String, Supplier<AbstractBarrelMode>> modeNameMap = new HashMap<>();
+    @Nonnull private static final Map<TriggerType, ArrayList<Supplier<AbstractBarrelMode>>> modeMap = new EnumMap<>(TriggerType.class);
 
-    public static AbstractBarrelMode getModeFromName(String barrelMode) {
+    @Nullable
+    public static AbstractBarrelMode getModeFromName(@Nonnull final String barrelMode) {
         return modeNameMap.getOrDefault(barrelMode, null).get();
     }
 
-    public static List<Supplier<AbstractBarrelMode>> getModes(TriggerType type) {
+    @Nonnull
+    public static List<Supplier<AbstractBarrelMode>> getModes(@Nonnull final TriggerType type) {
         logger.debug("Getting barrel mode, Trigger: " + type);
         return modeMap.get(type);
     }
@@ -36,9 +40,9 @@ public class BarrelModeRegistry {
         addMode(() -> new FluidTransformBarrelMode(ExNihiloConstants.BarrelModes.TRANSFORM), TriggerType.NONE);
     }
 
-    public static void addMode(Supplier<AbstractBarrelMode> mode, TriggerType type) {
-        logger.debug("Adding mode: " + mode.toString() + ", Trigger: " + type);
-        ArrayList<Supplier<AbstractBarrelMode>> list = modeMap.get(type);
+    public static void addMode(@Nonnull final Supplier<AbstractBarrelMode> mode, @Nonnull final TriggerType type) {
+        logger.debug("Adding mode: " + mode + ", Trigger: " + type);
+        @Nullable ArrayList<Supplier<AbstractBarrelMode>> list = modeMap.get(type);
         if (list == null) {
             list = new ArrayList<>();
         }

@@ -11,20 +11,26 @@ import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenCompo
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.CompostRecipes")
+@SuppressWarnings("unused")
 public class CompostRecipeManager implements IRecipeManager {
 
     @ZenCodeType.Method
-    public ZenCompostRecipe create(String recipeId) {
+    @Nonnull
+    public ZenCompostRecipe create(@Nonnull String recipeId) {
         recipeId = fixRecipeName(recipeId);
-        ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
-        ZenCompostRecipe recipe = ZenCompostRecipe.builder(resourceLocation);
+        @Nonnull final ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER,
+                recipeId);
+        @Nonnull final ZenCompostRecipe recipe = ZenCompostRecipe.builder(resourceLocation);
         CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
         return recipe;
     }
 
     @Override
+    @Nonnull
     public IRecipeType<CompostRecipe> getRecipeType() {
         return CompostRecipe.RECIPE_TYPE;
     }

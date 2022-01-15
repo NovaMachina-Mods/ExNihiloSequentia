@@ -6,22 +6,31 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public interface ICrucibleRegistry {
     void clearRecipes();
 
-    CrucibleRecipe findRecipe(IItemProvider item);
+    @Nonnull
+    @SuppressWarnings("unused")
+    CrucibleRecipe findRecipe(@Nonnull final IItemProvider item);
 
-    CrucibleRecipe findRecipeByItemStack(ItemStack itemStack);
+    @Nullable
+    CrucibleRecipe findRecipeByItemStack(@Nonnull final ItemStack itemStack);
 
-    CrucibleRecipe findRecipeByItem(Item item);
+    @Nonnull
+    CrucibleRecipe findRecipeByItem(@Nonnull final Item item);
 
+    @Nonnull
     List<CrucibleRecipe> getRecipeList();
 
-    boolean isMeltable(IItemProvider item, int level);
+    @SuppressWarnings("unused")
+    boolean isMeltable(@Nonnull final IItemProvider item, final int level);
 
-    boolean isMeltableByItem(Item item, int level);
+    boolean isMeltableByItem(@Nonnull final Item item, final int level);
 
-    boolean isMeltableByItemStack(ItemStack item, int level);
+    boolean isMeltableByItemStack(@Nonnull final ItemStack item, final int level);
 
-    void setRecipes(List<CrucibleRecipe> recipes);
+    void setRecipes(@Nonnull final List<CrucibleRecipe> recipes);
 }

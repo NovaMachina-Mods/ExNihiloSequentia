@@ -8,12 +8,15 @@ import net.minecraft.util.text.StringTextComponent;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 
+import javax.annotation.Nonnull;
+
 public class CompostTooltipCallback implements ITooltipCallback<ItemStack> {
 
     @Override
-    public void onTooltip(int slotIndex, boolean input, ItemStack itemStack, List<ITextComponent> list) {
+    public void onTooltip(final int slotIndex, final boolean input, @Nonnull final ItemStack itemStack,
+                          @Nonnull final List<ITextComponent> list) {
         if (input) {
-            int solidAmount = ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(itemStack.getItem());
+            final int solidAmount = ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(itemStack.getItem());
 
             list.add(new StringTextComponent(String
                     .format("Amount: %d / %d", solidAmount, Config.getBarrelMaxSolidAmount())));

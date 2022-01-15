@@ -11,20 +11,26 @@ import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenSeive
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.SieveRecipes")
+@SuppressWarnings("unused")
 public class SieveRecipeManager implements IRecipeManager {
 
     @ZenCodeType.Method
-    public ZenSeiveRecipe create(String recipeId) {
+    @Nonnull
+    public ZenSeiveRecipe create(@Nonnull String recipeId) {
         recipeId = fixRecipeName(recipeId);
-        ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
-        ZenSeiveRecipe recipe = ZenSeiveRecipe.builder(resourceLocation);
+        @Nonnull final ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER,
+                recipeId);
+        @Nonnull final ZenSeiveRecipe recipe = ZenSeiveRecipe.builder(resourceLocation);
         CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
         return recipe;
     }
 
     @Override
+    @Nonnull
     public IRecipeType<SieveRecipe> getRecipeType() {
         return SieveRecipe.RECIPE_TYPE;
     }

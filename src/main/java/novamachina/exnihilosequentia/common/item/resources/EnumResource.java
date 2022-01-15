@@ -5,6 +5,9 @@ import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public enum EnumResource implements IExtensibleEnum {
     ANCIENT_SPORE(Items.ANCIENT_SPORE),
     GRASS_SEED(Items.GRASS_SEED),
@@ -17,25 +20,28 @@ public enum EnumResource implements IExtensibleEnum {
     YELLOW_CORAL_SEED(Items.YELLOW_CORAL_SEED),
     BEEHIVE_FRAME(Items.BEEHIVE_FRAME);
 
-    private final String resourceName;
-    private RegistryObject<Item> registryObject;
+    @Nonnull private final String resourceName;
+    @Nullable private RegistryObject<Item> registryObject;
 
-    EnumResource(String resourceName) {
+    EnumResource(@Nonnull final String resourceName) {
         this.resourceName = resourceName;
     }
 
-    public static EnumResource create(String enumName, String resourceName) {
+    @Nonnull
+    public static EnumResource create(@Nonnull final String enumName, @Nonnull final String resourceName) {
         throw new IllegalStateException("Enum not extended");
     }
 
+    @Nullable
     public RegistryObject<Item> getRegistryObject() {
         return registryObject;
     }
 
-    public void setRegistryObject(RegistryObject<Item> registryObject) {
+    public void setRegistryObject(@Nonnull final RegistryObject<Item> registryObject) {
         this.registryObject = registryObject;
     }
 
+    @Nonnull
     public String getResourceName() {
         return resourceName;
     }

@@ -5,6 +5,9 @@ import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public enum EnumDoll implements IExtensibleEnum {
     BLAZE(ExNihiloConstants.ModIds.MINECRAFT, "blaze", "minecraft", "lava", 1, ExNihiloConstants.Tooltips.BLAZE),
     ENDERMAN(ExNihiloConstants.ModIds.MINECRAFT, "enderman", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 2, ExNihiloConstants.Tooltips.ENDERMAN),
@@ -13,15 +16,16 @@ public enum EnumDoll implements IExtensibleEnum {
     BEE(ExNihiloConstants.ModIds.MINECRAFT, "bee", ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Fluids.WITCH_WATER, 1, ExNihiloConstants.Tooltips.BEE);
 
 
-    private final String entityModId;
-    private final String entityName;
-    private final String fluidModId;
-    private final String fluidName;
-    private final String tooltip;
+    @Nonnull private final String entityModId;
+    @Nonnull private final String entityName;
+    @Nonnull private final String fluidModId;
+    @Nonnull private final String fluidName;
+    @Nonnull private final String tooltip;
     private final double yOffset;
-    private RegistryObject<Item> registryObject;
+    @Nullable private RegistryObject<Item> registryObject;
 
-    EnumDoll(String entityModId, String entityName, String fluidModId, String fluidName, double yOffset, String tooltip) {
+    EnumDoll(@Nonnull final String entityModId, @Nonnull final String entityName, @Nonnull final String fluidModId,
+             @Nonnull final String fluidName, double yOffset, @Nonnull final String tooltip) {
         this.entityModId = entityModId;
         this.entityName = entityName;
         this.fluidModId = fluidModId;
@@ -30,11 +34,17 @@ public enum EnumDoll implements IExtensibleEnum {
         this.tooltip = tooltip;
     }
 
-    public static EnumDoll create(String enumName, String entityModId, String entityName, String fluidModId, String fluidName, double yOffset, String tooltip) {
+    @Nonnull
+    @SuppressWarnings("unused")
+    public static EnumDoll create(@Nonnull final String enumName, @Nonnull final String entityModId,
+                                  @Nonnull final String entityName, @Nonnull final String fluidModId,
+                                  @Nonnull final String fluidName, final double yOffset,
+                                  @Nonnull final String tooltip) {
         throw new IllegalStateException("Enum not extended");
     }
 
-    public static EnumDoll getDollFromString(String dollType) {
+    @Nullable
+    public static EnumDoll getDollFromString(@Nonnull final String dollType) {
         for (EnumDoll doll : values()) {
             if (doll.name().equalsIgnoreCase(dollType)) {
                 return doll;
@@ -43,34 +53,41 @@ public enum EnumDoll implements IExtensibleEnum {
         return null;
     }
 
+    @Nonnull
     public String getDollName() {
         return "doll_" + entityName;
     }
 
+    @Nonnull
     public String getEntityModId() {
         return entityModId;
     }
 
+    @Nonnull
     public String getEntityName() {
         return entityName;
     }
 
+    @Nonnull
     public String getFluidModId() {
         return fluidModId;
     }
 
+    @Nonnull
     public String getFluidName() {
         return fluidName;
     }
 
+    @Nullable
     public RegistryObject<Item> getRegistryObject() {
         return registryObject;
     }
 
-    public void setRegistryObject(RegistryObject<Item> registryObject) {
+    public void setRegistryObject(@Nonnull final RegistryObject<Item> registryObject) {
         this.registryObject = registryObject;
     }
 
+    @Nonnull
     public String getToolTip() {
         return tooltip;
     }

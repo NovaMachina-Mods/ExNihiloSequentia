@@ -21,42 +21,48 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FluidTransformBarrelMode extends AbstractBarrelMode {
     private int currentProgress;
-    private IItemProvider catalyst;
+    @Nullable private IItemProvider catalyst;
 
     public FluidTransformBarrelMode(String name) {
         super(name);
         currentProgress = 0;
     }
 
-    public void setCatalyst(IItemProvider catalyst) {
+    public void setCatalyst(@Nonnull final IItemProvider catalyst) {
         this.catalyst = catalyst;
     }
 
     @Override
-    public void tick(AbstractBarrelTile barrelTile) {
-        Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
+    public void tick(@Nonnull final AbstractBarrelTile barrelTile) {
+        @Nonnull final Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
         currentProgress++;
         spawnParticle(barrelTile);
         if (currentProgress >= Config.getSecondsToFluidTransform() * 20) {
             currentProgress = 0;
-            Fluid newFluid = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getResult(fluidInTank, catalyst);
+            @Nonnull final Fluid newFluid = ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.getResult(fluidInTank, catalyst);
             barrelTile.getTank().setFluid(new FluidStack(newFluid, AbstractBarrelTile.MAX_FLUID_AMOUNT));
             barrelTile.setMode(ExNihiloConstants.BarrelModes.FLUID);
         }
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    @Nonnull
+    public ActionResultType onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
+                                             @Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+                                             @Nonnull final IFluidHandler fluidHandler,
+                                             @Nonnull final IItemHandler itemHandler) {
         return ActionResultType.PASS;
     }
 
     @Override
-    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
+    public boolean canFillWithFluid(@Nonnull final AbstractBarrelTile barrel) {
         return false;
     }
 
@@ -66,27 +72,28 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected boolean isTriggerItem(ItemStack stack) {
+    protected boolean isTriggerItem(@Nonnull final ItemStack stack) {
         return false;
     }
 
     @Override
-    public void read(CompoundNBT nbt) {
+    public void read(@Nonnull final CompoundNBT nbt) {
         currentProgress = nbt.getInt("currentProgress");
         catalyst = ItemStack.of(nbt).getItem();
     }
 
     @Override
+    @Nonnull
     public CompoundNBT write() {
-        CompoundNBT nbt = new CompoundNBT();
+        @Nonnull final CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("currentProgress", currentProgress);
         new ItemStack(catalyst).save(nbt);
         return nbt;
     }
 
     @Override
-    protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ServerWorld level = (ServerWorld) barrelTile.getLevel();
+    protected void spawnParticle(@Nonnull final AbstractBarrelTile barrelTile) throws NullPointerException  {
+        @Nullable final ServerWorld level = (ServerWorld) barrelTile.getLevel();
         Preconditions.checkNotNull(level, "Level is null.");
         level.sendParticles(ParticleTypes.EFFECT,
                 barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
@@ -99,9 +106,10 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
                 0.05);
     }
 
+    @Nonnull
     @Override
-    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
-        List<ITextComponent> info = new ArrayList<>();
+    public List<ITextComponent> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile) {
+        @Nullable final List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils
                 .formatPercent((float) currentProgress / (Config.getSecondsToFluidTransform() * 20))));
@@ -109,8 +117,10 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
         return info;
     }
 
+    @Nonnull
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
+    public ItemStack handleInsert(@Nonnull final AbstractBarrelTile barrelTile, @Nonnull final ItemStack stack,
+                                  final boolean simulate) {
         return stack;
     }
 }

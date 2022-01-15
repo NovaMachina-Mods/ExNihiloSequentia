@@ -8,27 +8,28 @@ import novamachina.exnihilosequentia.api.registry.ICompostRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CompostRegistry implements ICompostRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    public final List<CompostRecipe> recipeList = new ArrayList<>();
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull public final List<CompostRecipe> recipeList = new ArrayList<>();
 
-    private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
+    @Nonnull private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
 
     @Override
-    public boolean containsSolid(IItemProvider item) {
+    public boolean containsSolid(@Nonnull final IItemProvider item) {
         return getSolidAmount(item) > 0;
     }
 
     @Override
-    public int getSolidAmount(IItemProvider item) {
+    public int getSolidAmount(@Nonnull final IItemProvider item) {
         return itemSolidAmountCache
                 .computeIfAbsent(item.asItem(), k -> {
-                    final ItemStack itemStack = new ItemStack(item);
+                    @Nonnull final ItemStack itemStack = new ItemStack(item);
                     return recipeList
                             .stream()
                             .filter(compostRecipe -> compostRecipe.getInput().test(itemStack))
@@ -39,14 +40,15 @@ public class CompostRegistry implements ICompostRegistry {
     }
 
     @Override
-    public void setRecipes(List<CompostRecipe> recipes) {
+    public void setRecipes(@Nonnull final List<CompostRecipe> recipes) {
         logger.debug("Compost Registry recipes: " + recipes.size());
-        this.recipeList.addAll(recipes);
+        recipeList.addAll(recipes);
 
         itemSolidAmountCache.clear();
     }
 
     @Override
+    @Nonnull
     public List<CompostRecipe> getRecipeList() {
         return recipeList;
     }

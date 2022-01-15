@@ -7,10 +7,13 @@ import mcp.mobius.waila.api.IPluginConfig;
 import net.minecraft.util.text.ITextComponent;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
 
+import javax.annotation.Nonnull;
+
 public class BarrelComponentProvider implements IComponentProvider {
     @Override
-    public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
-        AbstractBarrelTile barrelTile = (AbstractBarrelTile) accessor.getTileEntity();
+    public void appendBody(@Nonnull final List<ITextComponent> tooltip, IDataAccessor accessor,
+                           @Nonnull final IPluginConfig config) {
+        @Nonnull final AbstractBarrelTile barrelTile = (AbstractBarrelTile) accessor.getTileEntity();
         tooltip.addAll(barrelTile.getWailaInfo());
     }
 }

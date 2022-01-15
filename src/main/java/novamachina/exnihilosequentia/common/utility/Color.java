@@ -1,13 +1,16 @@
 package novamachina.exnihilosequentia.common.utility;
 
-import java.util.Objects;
 import net.minecraft.nbt.CompoundNBT;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class Color {
 
-    public static final Color INVALID_COLOR = new Color(-1, -1, -1, -1);
-    public static final Color WHITE = new Color(1, 1, 1, 1);
-    private static final String COLOR_TAG = "color";
+    @Nonnull public static final Color INVALID_COLOR = new Color(-1, -1, -1, -1);
+    @Nonnull public static final Color WHITE = new Color(1, 1, 1, 1);
+    @Nonnull private static final String COLOR_TAG = "color";
     public final float a;
     public final float b;
     public final float g;
@@ -27,22 +30,20 @@ public class Color {
     public Color(int color, boolean ignoreAlpha) {
         if (ignoreAlpha) {
             this.a = 1.0f;
-            this.r = (float) (color >> 16 & 255) / 255.0F;
-            this.g = (float) (color >> 8 & 255) / 255.0F;
-            this.b = (float) (color & 255) / 255.0F;
         } else {
             this.a = (float) (color >> 24 & 255) / 255.0F;
-            this.r = (float) (color >> 16 & 255) / 255.0F;
-            this.g = (float) (color >> 8 & 255) / 255.0F;
-            this.b = (float) (color & 255) / 255.0F;
         }
+        this.r = (float) (color >> 16 & 255) / 255.0F;
+        this.g = (float) (color >> 8 & 255) / 255.0F;
+        this.b = (float) (color & 255) / 255.0F;
     }
 
-    public Color(String hex) {
+    public Color(@Nonnull final String hex) {
         this(Integer.parseInt(hex, 16));
     }
 
-    public static Color average(Color colorA, Color colorB, float percentage) {
+    @Nonnull
+    public static Color average(@Nonnull final Color colorA, @Nonnull final Color colorB, float percentage) {
         float opposite = 1 - percentage;
         //Gamma correction
 
@@ -57,7 +58,8 @@ public class Color {
         return new Color(averageR, averageG, averageB, averageA);
     }
 
-    public static Color fromNBT(CompoundNBT compoundNBT) {
+    @Nonnull
+    public static Color fromNBT(@Nonnull final CompoundNBT compoundNBT) {
         if (compoundNBT.contains(COLOR_TAG)) {
             CompoundNBT colorTag = compoundNBT.getCompound(COLOR_TAG);
             float a = colorTag.getFloat("colorA");
@@ -71,7 +73,7 @@ public class Color {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable final Object o) {
         if (this == o) {
             return true;
         }
@@ -85,17 +87,17 @@ public class Color {
                 Float.compare(color.a, a) == 0;
     }
 
+    @Nonnull
     public String getAsHexNoAlpha() {
         return Integer.toHexString(toIntNoAlpha());
     }
 
     @Override
     public int hashCode() {
-
         return Objects.hash(r, g, b, a);
     }
 
-    public void putIntoNBT(CompoundNBT compoundNBT) {
+    public void putIntoNBT(@Nonnull final CompoundNBT compoundNBT) {
         CompoundNBT colorTag = new CompoundNBT();
         colorTag.putFloat("colorA", a);
         colorTag.putFloat("colorR", r);
@@ -122,6 +124,7 @@ public class Color {
     }
 
     @Override
+    @Nonnull
     public String toString() {
         return "Color{" +
                 "r=" + r +

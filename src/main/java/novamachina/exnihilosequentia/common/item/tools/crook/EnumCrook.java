@@ -8,6 +8,9 @@ import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public enum EnumCrook implements IExtensibleEnum {
     WOOD(ExNihiloConstants.Items.CROOK_WOOD, Config.getCrookWoodDurability(), ItemTier.WOOD),
 
@@ -22,26 +25,29 @@ public enum EnumCrook implements IExtensibleEnum {
 
     BONE(ExNihiloConstants.Items.CROOK_BONE, Config.getCrookBoneDurability(), ItemTier.STONE);
 
-    public final String crookName;
-    public int maxDamage;
-    public final IItemTier tier;
-    private RegistryObject<Item> registryObject;
+    @Nonnull public final String crookName;
+    public final int maxDamage;
+    @Nonnull public final IItemTier tier;
+    @Nullable private RegistryObject<Item> registryObject;
 
-    EnumCrook(String crookName, int maxDamage, IItemTier tier) {
+    EnumCrook(@Nonnull final String crookName, final int maxDamage, @Nonnull final IItemTier tier) {
         this.crookName = crookName;
         this.maxDamage = maxDamage;
         this.tier = tier;
     }
 
-    public static EnumCrook create(String enumName, String crookName, int maxDamage, IItemTier tier) {
+    @Nonnull
+    public static EnumCrook create(@Nonnull final String enumName, @Nonnull final String crookName, final int maxDamage,
+                                   @Nonnull final IItemTier tier) {
         throw new IllegalStateException("Enum not extended");
     }
 
+    @Nullable
     public RegistryObject<Item> getRegistryObject() {
         return registryObject;
     }
 
-    public void setRegistryObject(RegistryObject<Item> registryObject) {
+    public void setRegistryObject(@Nonnull final RegistryObject<Item> registryObject) {
         this.registryObject = registryObject;
     }
 }

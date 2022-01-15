@@ -5,8 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
+import javax.annotation.Nonnull;
+
 public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder> {
-    private HeatRecipeBuilder() {
+    private HeatRecipeBuilder() throws NullPointerException {
+        //noinspection ConstantConditions
         super(HeatRecipe.getStaticSerializer().get());
     }
 
@@ -14,19 +17,23 @@ public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder>
         return new HeatRecipeBuilder();
     }
 
-    public HeatRecipeBuilder amount(int amount) {
+    @Nonnull
+    public HeatRecipeBuilder amount(final int amount) {
         return addWriter(jsonObj -> jsonObj.addProperty("amount", amount));
     }
 
-    public HeatRecipeBuilder input(Ingredient input) {
+    @Nonnull
+    public HeatRecipeBuilder input(@Nonnull final Ingredient input) {
         return this.addInput(input);
     }
 
-    public HeatRecipeBuilder input(Block block) {
+    @Nonnull
+    public HeatRecipeBuilder input(@Nonnull final Block block) {
         return this.addBlock(block);
     }
 
-    public HeatRecipeBuilder properties(StatePropertiesPredicate properties) {
+    @Nonnull
+    public HeatRecipeBuilder properties(@Nonnull final StatePropertiesPredicate properties) {
         return this.addWriter(jsonObj -> jsonObj.add("state", properties.serializeToJson()));
     }
 }

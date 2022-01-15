@@ -4,7 +4,7 @@ public class UVLocation {
     private final float u;
     private final float v;
 
-    public UVLocation(float u, float v) {
+    public UVLocation(final float u, final float v) {
         this.u = u;
         this.v = v;
     }

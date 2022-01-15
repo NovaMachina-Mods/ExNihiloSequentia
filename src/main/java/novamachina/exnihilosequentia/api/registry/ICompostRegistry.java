@@ -4,14 +4,16 @@ import java.util.List;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 
+import javax.annotation.Nonnull;
+
 public interface ICompostRegistry {
     void clearRecipes();
 
-    boolean containsSolid(IItemProvider item);
+    boolean containsSolid(@Nonnull final IItemProvider item);
 
-    List<CompostRecipe> getRecipeList();
+    @Nonnull List<CompostRecipe> getRecipeList();
 
-    int getSolidAmount(IItemProvider item);
+    int getSolidAmount(@Nonnull final IItemProvider item);
 
-    void setRecipes(List<CompostRecipe> recipes);
+    void setRecipes(@Nonnull final List<CompostRecipe> recipes);
 }

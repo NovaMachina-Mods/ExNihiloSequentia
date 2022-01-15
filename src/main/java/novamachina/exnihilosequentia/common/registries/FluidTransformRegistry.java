@@ -11,30 +11,32 @@ import novamachina.exnihilosequentia.api.registry.IFluidTransformRegistry;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FluidTransformRegistry implements IFluidTransformRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
+    @Nonnull private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
 
-    private final Map<FluidStack, Map<IItemProvider, Fluid>> fluidResultCache = new HashMap<>();
+    @Nonnull private final Map<FluidStack, Map<IItemProvider, Fluid>> fluidResultCache = new HashMap<>();
 
     @Override
-    public boolean isValidRecipe(Fluid fluidInTank, IItemProvider catalyst) {
+    public boolean isValidRecipe(@Nonnull final Fluid fluidInTank, @Nonnull final IItemProvider catalyst) {
         return getResult(fluidInTank, catalyst) != Fluids.EMPTY;
     }
 
     @Override
-    public Fluid getResult(Fluid fluidInTank, IItemProvider catalyst) {
+    @Nonnull
+    public Fluid getResult(@Nonnull final Fluid fluidInTank, @Nonnull final IItemProvider catalyst) {
         final FluidStack fluidStack = new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME);
         return fluidResultCache
                 .computeIfAbsent(fluidStack, k -> new HashMap<>())
                 .computeIfAbsent(catalyst.asItem(), k -> {
-                    final ItemStack itemStack = new ItemStack(catalyst);
+                    @Nonnull final ItemStack itemStack = new ItemStack(catalyst);
                     return recipeList
                             .stream()
                             .filter(fluidTransformRecipe -> fluidTransformRecipe.getFluidInTank().isFluidEqual(fluidStack))
@@ -47,12 +49,13 @@ public class FluidTransformRegistry implements IFluidTransformRegistry {
     }
 
     @Override
+    @Nonnull
     public List<FluidTransformRecipe> getRecipeList() {
         return recipeList;
     }
 
     @Override
-    public void setRecipes(List<FluidTransformRecipe> recipes) {
+    public void setRecipes(@Nonnull final List<FluidTransformRecipe> recipes) {
         logger.debug("Fluid Transform Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
 

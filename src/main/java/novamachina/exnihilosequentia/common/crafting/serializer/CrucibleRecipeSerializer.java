@@ -9,8 +9,11 @@ import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.RecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.tileentity.crucible.CrucilbeTypeEnum;
+import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
     @Override
@@ -19,16 +22,17 @@ public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
     }
 
     @Override
-    public CrucibleRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
-        Ingredient input = Ingredient.fromNetwork(buffer);
-        int amount = buffer.readInt();
-        FluidStack fluid = FluidStack.readFromPacket(buffer);
-        CrucilbeTypeEnum type = buffer.readEnum(CrucilbeTypeEnum.class);
+    @Nonnull
+    public CrucibleRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final PacketBuffer buffer) {
+        @Nonnull final Ingredient input = Ingredient.fromNetwork(buffer);
+        final int amount = buffer.readInt();
+        @Nonnull final FluidStack fluid = FluidStack.readFromPacket(buffer);
+        @Nonnull final CrucibleTypeEnum type = buffer.readEnum(CrucibleTypeEnum.class);
         return new CrucibleRecipe(recipeId, input, amount, fluid, type);
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, CrucibleRecipe recipe) {
+    public void toNetwork(@Nonnull final PacketBuffer buffer, @Nonnull final CrucibleRecipe recipe) {
         recipe.getInput().toNetwork(buffer);
         buffer.writeInt(recipe.getAmount());
         recipe.getResultFluid().writeToPacket(buffer);
@@ -36,11 +40,14 @@ public class CrucibleRecipeSerializer extends RecipeSerializer<CrucibleRecipe> {
     }
 
     @Override
-    protected CrucibleRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        Ingredient input = Ingredient.fromJson(json.get("input"));
-        int amount = json.get("amount").getAsInt();
-        FluidStack fluid = FluidStackUtils.jsonDeserializeFluidStack(json.get("fluidResult").getAsJsonObject());
-        CrucilbeTypeEnum typeEnum = CrucilbeTypeEnum.getTypeByName(json.get("crucibleType").getAsString());
+    @Nonnull
+    protected CrucibleRecipe readFromJson(@Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) {
+        @Nonnull final Ingredient input = Ingredient.fromJson(json.get("input"));
+        final int amount = json.get("amount").getAsInt();
+        @Nullable final FluidStack fluid = FluidStackUtils.jsonDeserializeFluidStack(
+                json.get("fluidResult").getAsJsonObject());
+        @Nullable final CrucibleTypeEnum typeEnum = CrucibleTypeEnum.getTypeByName(
+                json.get("crucibleType").getAsString());
         return new CrucibleRecipe(recipeId, input, amount, fluid, typeEnum);
     }
 }

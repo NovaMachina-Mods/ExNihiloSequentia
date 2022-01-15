@@ -12,26 +12,30 @@ import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 
+import javax.annotation.Nonnull;
+
 public class ResourceItem extends Item {
 
-    private final String resourceName;
+    @Nonnull private final String resourceName;
 
-    public ResourceItem(String name) {
+    public ResourceItem(@Nonnull final String name) {
         super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
         this.resourceName = name;
     }
 
+    @Nonnull
     public String getResourceName() {
         return resourceName;
     }
 
     @Override
-    public ActionResultType useOn(ItemUseContext context) {
-        ItemStack item = context.getItemInHand();
+    @Nonnull
+    public ActionResultType useOn(@Nonnull final ItemUseContext context) {
+        final @Nonnull ItemStack item = context.getItemInHand();
         if (!context.getLevel().isClientSide() && item.getItem() instanceof ResourceItem) {
-            ResourceItem resourceItem = (ResourceItem) item.getItem();
+            final @Nonnull ResourceItem resourceItem = (ResourceItem) item.getItem();
 
-            BlockState state = context.getLevel().getBlockState(context.getClickedPos());
+            final @Nonnull BlockState state = context.getLevel().getBlockState(context.getClickedPos());
             if (resourceItem.getResourceName().equals(Items.SILKWORM) && state.getBlock() instanceof LeavesBlock) {
                 context.getItemInHand().shrink(1);
                 InfestingLeavesBlock.normalToInfesting(context.getLevel(),

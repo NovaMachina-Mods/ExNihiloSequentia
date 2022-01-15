@@ -8,6 +8,9 @@ import net.minecraftforge.common.PlantType;
 import net.minecraftforge.fml.RegistryObject;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public enum EnumSeed implements IExtensibleEnum {
 
     SEED_OAK(ExNihiloConstants.Items.SEED_OAK, Blocks.OAK_SAPLING.defaultBlockState(), PlantType.PLAINS),
@@ -27,37 +30,44 @@ public enum EnumSeed implements IExtensibleEnum {
     SEED_FERN(ExNihiloConstants.Items.SEED_FERN, Blocks.FERN.defaultBlockState(), PlantType.PLAINS),
     SEED_LARGE_FERN(ExNihiloConstants.Items.SEED_LARGE_FERN, Blocks.LARGE_FERN.defaultBlockState(), PlantType.PLAINS);
 
-    private final BlockState defaultState;
-    private final PlantType plantType;
-    private final String seedName;
-    private RegistryObject<Item> registryObject;
+    @Nonnull private final BlockState defaultState;
+    @Nonnull private final PlantType plantType;
+    @Nonnull private final String seedName;
+    @Nullable private RegistryObject<Item> registryObject;
 
-    EnumSeed(String seedName, BlockState defaultState, PlantType plantType) {
+    EnumSeed(@Nonnull final String seedName, @Nonnull final BlockState defaultState,
+             @Nonnull final PlantType plantType) {
         this.seedName = seedName;
         this.defaultState = defaultState;
         this.plantType = plantType;
     }
 
-    public static EnumSeed create(String enumName, String seedName, BlockState defaultState, PlantType plantType) {
+    @Nonnull
+    public static EnumSeed create(@Nonnull final String enumName, @Nonnull final String seedName,
+                                  @Nonnull final BlockState defaultState, @Nonnull final PlantType plantType) {
         throw new IllegalStateException("Enum not extended");
     }
 
+    @Nonnull
     public BlockState getDefaultState() {
         return defaultState;
     }
 
+    @Nonnull
     public PlantType getPlantType() {
         return plantType;
     }
 
+    @Nullable
     public RegistryObject<Item> getRegistryObject() {
         return registryObject;
     }
 
-    public void setRegistryObject(RegistryObject<Item> registryObject) {
+    public void setRegistryObject(@Nonnull final RegistryObject<Item> registryObject) {
         this.registryObject = registryObject;
     }
 
+    @Nonnull
     public String getSeedName() {
         return "seed_" + seedName;
     }

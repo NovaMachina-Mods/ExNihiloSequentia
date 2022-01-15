@@ -10,42 +10,42 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.tileentity.SieveTile;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    public SieveRender(
-            TileEntityRendererDispatcher rendererDispatcherIn) {
+public class SieveRender extends AbstractModBlockRenderer<SieveTile> {
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
+    public SieveRender(@Nonnull final TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
-    public static void register(TileEntityType<? extends SieveTile> tileEntityType) {
+    public static void register(@Nonnull final TileEntityType<? extends SieveTile> tileEntityType) {
         logger.debug("Registering sieve renderer");
         ClientRegistry.bindTileEntityRenderer(tileEntityType, SieveRender::new);
     }
 
     @Override
-    public void render(SieveTile tileEntity, float partialTicks, MatrixStack matrixStack,
-                       IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
+    public void render(@Nonnull final SieveTile tileEntity, final float partialTicks,
+                       @Nonnull final MatrixStack matrixStack, @Nonnull final IRenderTypeBuffer buffer,
+                       final int combinedLight, final int combinedOverlay) {
 
-        ResourceLocation blockTexture = tileEntity.getTexture();
+        @Nullable final ResourceLocation blockTexture = tileEntity.getTexture();
         if (blockTexture != null) {
-            BlockState state = getStateFromItemStack(tileEntity.getBlockStack());
-            if (state != null) {
-                matrixStack.pushPose();
+            @Nonnull final BlockState state = getStateFromItemStack(tileEntity.getBlockStack());
+            matrixStack.pushPose();
 
-                matrixStack.translate(0.01, 0.819, 0.01);
-                matrixStack.scale(0.98F, 0.18F - tileEntity.getProgress() * 0.16F, 0.98F);
+            matrixStack.translate(0.01, 0.819, 0.01);
+            matrixStack.scale(0.98F, 0.18F - tileEntity.getProgress() * 0.16F, 0.98F);
 
-                BlockRendererDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-                blockRenderer.renderBlock(state, matrixStack, buffer, combinedLight, combinedOverlay, EmptyModelData.INSTANCE);
+            BlockRendererDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
+            blockRenderer.renderBlock(state, matrixStack, buffer, combinedLight, combinedOverlay, EmptyModelData.INSTANCE);
 
-                matrixStack.popPose();
-            }
+            matrixStack.popPose();
         }
     }
 }

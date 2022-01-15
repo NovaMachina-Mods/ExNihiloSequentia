@@ -9,39 +9,46 @@ import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenFluidTransformRecipe")
 public class ZenFluidTransformRecipe {
 
-    private final FluidTransformRecipe internal;
+    @Nonnull private final FluidTransformRecipe internal;
 
-    private ZenFluidTransformRecipe(ResourceLocation recipeId) {
+    private ZenFluidTransformRecipe(@Nonnull final ResourceLocation recipeId) {
         this.internal = new FluidTransformRecipe(recipeId, FluidStack.EMPTY, Ingredient.EMPTY, FluidStack.EMPTY);
     }
 
     @ZenCodeType.Method
-    public static ZenFluidTransformRecipe builder(ResourceLocation recipeId) {
+    @Nonnull
+    public static ZenFluidTransformRecipe builder(@Nonnull final ResourceLocation recipeId) {
         return new ZenFluidTransformRecipe(recipeId);
     }
 
+    @Nonnull
     public FluidTransformRecipe build() {
         return internal;
     }
 
     @ZenCodeType.Method
-    public ZenFluidTransformRecipe setCatalyst(IIngredient catalyst) {
+    @Nonnull
+    public ZenFluidTransformRecipe setCatalyst(@Nonnull final IIngredient catalyst) {
         internal.setCatalyst(catalyst.asVanillaIngredient());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenFluidTransformRecipe setFluidInTank(IFluidStack fluidInTank) {
+    @Nonnull
+    public ZenFluidTransformRecipe setFluidInTank(@Nonnull final IFluidStack fluidInTank) {
         internal.setFluidInTank(fluidInTank.getInternal());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenFluidTransformRecipe setResult(IFluidStack result) {
+    @Nonnull
+    public ZenFluidTransformRecipe setResult(@Nonnull final IFluidStack result) {
         internal.setResult(result.getInternal());
         return this;
     }

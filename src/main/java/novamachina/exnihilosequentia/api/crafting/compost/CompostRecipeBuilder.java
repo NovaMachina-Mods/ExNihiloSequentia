@@ -5,24 +5,30 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
+import javax.annotation.Nonnull;
+
 public class CompostRecipeBuilder extends ExNihiloFinishedRecipe<CompostRecipeBuilder> {
     private CompostRecipeBuilder() {
         super(CompostRecipe.getStaticSerializer().get());
     }
 
+    @Nonnull
     public static CompostRecipeBuilder builder() {
         return new CompostRecipeBuilder();
     }
 
-    public CompostRecipeBuilder amount(int amount) {
+    @Nonnull
+    public CompostRecipeBuilder amount(final int amount) {
         return addWriter(jsonObj -> jsonObj.addProperty("amount", amount));
     }
 
-    public CompostRecipeBuilder input(ITag.INamedTag<Item> tag) {
+    @Nonnull
+    public CompostRecipeBuilder input(@Nonnull final ITag.INamedTag<Item> tag) {
         return this.addInput(tag);
     }
 
-    public CompostRecipeBuilder input(IItemProvider input) {
+    @Nonnull
+    public CompostRecipeBuilder input(@Nonnull final IItemProvider input) {
         return this.addInput(input);
     }
 }

@@ -16,6 +16,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,16 +28,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SieveRegistry implements ISieveRegistry {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private final boolean flattenRecipes = Config.flattenSieveRecipes();
 
-    private final List<SieveRecipe> recipeList = new ArrayList<>();
+    @Nonnull private final List<SieveRecipe> recipeList = new ArrayList<>();
 
-    private final Map<Boolean, Map<EnumMesh, Map<Block, Boolean>>> blockSiftableCache = new HashMap<>();
-    private final Map<Boolean, Map<EnumMesh, Map<Item, List<SieveRecipe>>>> itemDropsListCache = new HashMap<>();
+    @Nonnull private final Map<Boolean, Map<EnumMesh, Map<Block, Boolean>>> blockSiftableCache = new HashMap<>();
+    @Nonnull private final Map<Boolean, Map<EnumMesh, Map<Item, List<SieveRecipe>>>> itemDropsListCache = new HashMap<>();
 
-    private List<SieveRecipe> getDropsByIngredient(Ingredient input, EnumMesh meshType, boolean isWaterlogged) {
+    @Nonnull
+    private List<SieveRecipe> getDropsByIngredient(@Nonnull final Ingredient input, @Nonnull final EnumMesh meshType,
+                                                   final boolean isWaterlogged) {
         generateCache(input, meshType, isWaterlogged);
         return recipeList.parallelStream()
                 .filter(sieveRecipe -> sieveRecipe.isWaterlogged() == isWaterlogged)
@@ -44,7 +47,7 @@ public class SieveRegistry implements ISieveRegistry {
                 .map(recipe -> recipe.filterByMesh(meshType, flattenRecipes))
                 .filter(recipe -> {
                     if(recipe.getDrop().getItem() instanceof OreItem) {
-                        OreItem ore = (OreItem)recipe.getDrop().getItem();
+                        @Nonnull final OreItem ore = (OreItem)recipe.getDrop().getItem();
                         return ore.getOre().isEnabled();
                     }
                     return true;
@@ -53,14 +56,17 @@ public class SieveRegistry implements ISieveRegistry {
                 .collect(Collectors.toList());
     }
 
-    private void generateCache(Ingredient input, EnumMesh meshType, boolean isWaterlogged) {
+    private void generateCache(@Nonnull final Ingredient input, @Nonnull final EnumMesh meshType,
+                               final boolean isWaterlogged) {
         Arrays.stream(input.getItems())
                 .map(ItemStack::getItem)
                 .forEach(item -> getDrops(item, meshType, isWaterlogged));
     }
 
     @Override
-    public List<SieveRecipe> getDrops(IItemProvider input, EnumMesh meshType, boolean isWaterlogged) {
+    @Nonnull
+    public List<SieveRecipe> getDrops(@Nonnull final IItemProvider input, @Nonnull final EnumMesh meshType,
+                                      final boolean isWaterlogged) {
         return itemDropsListCache
                 .computeIfAbsent(isWaterlogged, k -> new HashMap<>())
                 .computeIfAbsent(meshType, k -> new HashMap<>())
@@ -83,7 +89,8 @@ public class SieveRegistry implements ISieveRegistry {
     }
 
     @Override
-    public boolean isBlockSiftable(Block block, EnumMesh mesh, boolean isWaterlogged) {
+    public boolean isBlockSiftable(@Nonnull final Block block, @Nonnull final EnumMesh mesh,
+                                   final boolean isWaterlogged) {
         return blockSiftableCache
                 .computeIfAbsent(isWaterlogged, k -> new HashMap<>())
                 .computeIfAbsent(mesh, k -> new HashMap<>())
@@ -107,8 +114,9 @@ public class SieveRegistry implements ISieveRegistry {
                 });
     }
 
-    private List<JEISieveRecipe> getRecipeList(boolean isWaterLogged) {
-        final Set<Ingredient> ingredients = new HashSet<>();
+    @Nonnull
+    private List<JEISieveRecipe> getRecipeList(final boolean isWaterLogged) {
+        @Nonnull final Set<Ingredient> ingredients = new HashSet<>();
         recipeList
                 .forEach(recipe -> {
                     final Ingredient recipeIngredient = recipe.getInput();
@@ -144,17 +152,19 @@ public class SieveRegistry implements ISieveRegistry {
     }
 
     @Override
+    @Nonnull
     public List<JEISieveRecipe> getDryRecipeList() {
         return getRecipeList(false);
     }
 
     @Override
+    @Nonnull
     public List<JEISieveRecipe> getWetRecipeList() {
         return getRecipeList(true);
     }
 
     @Override
-    public void setRecipes(List<SieveRecipe> recipes) {
+    public void setRecipes(@Nonnull final List<SieveRecipe> recipes) {
         logger.debug("Sieve Registry recipes: " + recipes.size());
         recipeList.addAll(recipes);
 
