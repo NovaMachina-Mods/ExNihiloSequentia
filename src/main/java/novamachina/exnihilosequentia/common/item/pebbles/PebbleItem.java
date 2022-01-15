@@ -17,6 +17,8 @@ import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.init.ExNihiloSounds;
 import novamachina.exnihilosequentia.common.utility.Config;
 
+import javax.annotation.Nonnull;
+
 public class PebbleItem extends SnowballItem {
 
     public PebbleItem() {
@@ -24,15 +26,18 @@ public class PebbleItem extends SnowballItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
+    @Nonnull
+    public ActionResult<ItemStack> use(@Nonnull final World world, @Nonnull final PlayerEntity player,
+                                       @Nonnull final Hand hand) {
+        @Nonnull final ItemStack itemstack = player.getItemInHand(hand);
         //TODO Placeable like redstone?
-        world.playSound(null, player.getX(), player.getY(), player.getZ(), ExNihiloSounds.PEBBLE_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), ExNihiloSounds.PEBBLE_THROW,
+                SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
         if (!world.isClientSide) {
-            SnowballEntity snowballentity = new SnowballEntity(world, player){
+            @Nonnull final SnowballEntity snowballentity = new SnowballEntity(world, player){
                 @Override
                 public void onHitEntity(EntityRayTraceResult entityRayTraceResult) {
-                    Entity entity = entityRayTraceResult.getEntity();
+                    @Nonnull final Entity entity = entityRayTraceResult.getEntity();
                     entity.hurt(DamageSource.thrown(this, this.getOwner()), (float) Config.getPebbleDamage());
                 }
             };

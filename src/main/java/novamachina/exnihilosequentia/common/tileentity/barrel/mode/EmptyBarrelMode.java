@@ -12,26 +12,31 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
 public class EmptyBarrelMode extends AbstractBarrelMode {
-    public EmptyBarrelMode(String name) {
+    public EmptyBarrelMode(@Nonnull final String name) {
         super(name);
     }
 
     @Override
-    public void tick(AbstractBarrelTile barrelTile) {
+    public void tick(@Nonnull final AbstractBarrelTile barrelTile) {
         // NOOP
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    @Nonnull
+    public ActionResultType onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
+                                             @Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+                                             @Nonnull final IFluidHandler fluidHandler,
+                                             @Nonnull final IItemHandler itemHandler) {
         if (!player.getItemInHand(handIn).isEmpty()) {
 
-            ItemStack stack = player.getItemInHand(handIn);
-            List<Supplier<AbstractBarrelMode>> modes = BarrelModeRegistry.getModes(BarrelModeRegistry.TriggerType.ITEM);
+            @Nonnull final ItemStack stack = player.getItemInHand(handIn);
+            @Nonnull final List<Supplier<AbstractBarrelMode>> modes = BarrelModeRegistry.getModes(BarrelModeRegistry.TriggerType.ITEM);
             for (Supplier<AbstractBarrelMode> mode : modes) {
                 if (mode.get().isTriggerItem(stack)) {
                     barrelTile.setMode(mode.get());
@@ -44,7 +49,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
+    public boolean canFillWithFluid(@Nonnull final AbstractBarrelTile barrel) {
         return true;
     }
 
@@ -54,35 +59,39 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected boolean isTriggerItem(ItemStack stack) {
+    protected boolean isTriggerItem(@Nonnull final ItemStack stack) {
         return false;
     }
 
     @Override
-    public void read(CompoundNBT nbt) {
+    public void read(@Nonnull final CompoundNBT nbt) {
         // NOOP
     }
 
     @Override
+    @Nonnull
     public CompoundNBT write() {
         return new CompoundNBT();
     }
 
     @Override
-    protected void spawnParticle(AbstractBarrelTile barrelTile) {
+    protected void spawnParticle(@Nonnull final AbstractBarrelTile barrelTile) {
         // NOOP
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
+    @Nonnull
+    public List<ITextComponent> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile) {
         return new ArrayList<>();
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
+    @Nonnull
+    public ItemStack handleInsert(@Nonnull final AbstractBarrelTile barrelTile, @Nonnull final ItemStack stack,
+                                  final boolean simulate) {
         if(ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(stack.getItem())) {
             barrelTile.setMode(ExNihiloConstants.BarrelModes.COMPOST);
-            ItemStack returnStack = barrelTile.getMode().handleInsert(barrelTile, stack, simulate);
+            @Nonnull final ItemStack returnStack = barrelTile.getMode().handleInsert(barrelTile, stack, simulate);
             if(simulate) {
                 barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
             }

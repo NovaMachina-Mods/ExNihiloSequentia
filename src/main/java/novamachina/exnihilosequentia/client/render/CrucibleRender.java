@@ -17,38 +17,42 @@ import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    public CrucibleRender(TileEntityRendererDispatcher rendererDispatcher) {
+public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
+    public CrucibleRender(@Nonnull final TileEntityRendererDispatcher rendererDispatcher) {
         super(rendererDispatcher);
     }
 
-    public static void register(TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
+    public static void register(@Nonnull final TileEntityType<? extends BaseCrucibleTile> tileTileEntityType) {
         logger.debug("Register crucible renderer, Type" + tileTileEntityType);
         ClientRegistry
                 .bindTileEntityRenderer(tileTileEntityType, CrucibleRender::new);
     }
 
     @Override
-    public void render(BaseCrucibleTile tileEntity, float partialTicks, MatrixStack matrixStack,
-                       IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
-        ResourceLocation solidTexture = tileEntity.getSolidTexture();
-        Fluid fluid = tileEntity.getFluid();
-        ResourceLocation fluidTexture =
+    public void render(@Nonnull final BaseCrucibleTile tileEntity, final float partialTicks,
+                       @Nonnull final MatrixStack matrixStack, @Nonnull final IRenderTypeBuffer buffer,
+                       final int combinedLightIn, final int combinedOverlayIn) {
+        @Nullable final ResourceLocation solidTexture = tileEntity.getSolidTexture();
+        @Nullable final Fluid fluid = tileEntity.getFluid();
+        @Nullable final ResourceLocation fluidTexture =
                 fluid != null ? fluid.getAttributes().getStillTexture() : null;
-        Color fluidColor =
+        @Nonnull final Color fluidColor =
                 fluid != null ? new Color(fluid.getAttributes().getColor()) : Color.INVALID_COLOR;
-        Color blockColor = getBlockColor(solidTexture, tileEntity);
+        @Nonnull final Color blockColor = getBlockColor(solidTexture, tileEntity);
         if (fluidTexture != null) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
+            @Nonnull final IVertexBuilder builder = buffer.getBuffer(RenderType.translucent());
 
-            TextureAtlasSprite sprite = Minecraft.getInstance()
+            @Nonnull final TextureAtlasSprite sprite = Minecraft.getInstance()
                     .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
                             fluidTexture);
 
             // Subtract 0.005 to prevent texture fighting
-            float fillAmount = (0.75f * tileEntity.getFluidProportion()) - 0.005f;
+            final float fillAmount = (0.75f * tileEntity.getFluidProportion()) - 0.005f;
 
             matrixStack.pushPose();
             matrixStack.translate(.5, .5, .5);
@@ -70,15 +74,15 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
             matrixStack.popPose();
         }
         if (solidTexture != null) {
-            IVertexBuilder builder = buffer.getBuffer(RenderType.solid());
+            @Nonnull final IVertexBuilder builder = buffer.getBuffer(RenderType.solid());
 
-            TextureAtlasSprite sprite = Minecraft.getInstance()
+            @Nonnull final TextureAtlasSprite sprite = Minecraft.getInstance()
                     .getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(
                             new ResourceLocation(solidTexture.getNamespace(),
                                     "block/" + resolveTexture(solidTexture.getPath())));
 
             // Subtract 0.005 to prevent texture fighting
-            float fillAmount = (0.75f * Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.005f;
+            final float fillAmount = (0.75f * Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.005f;
 
             matrixStack.pushPose();
             matrixStack.translate(.5, .5, .5);
@@ -101,9 +105,10 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
         }
     }
 
+    @Nonnull
     private Color getBlockColor(ResourceLocation solidTexture,
                                 BaseCrucibleTile tileEntity) {
-        if (solidTexture != null && solidTexture.toString().contains("leaves")) {
+        if (solidTexture != null && solidTexture.toString().contains("leaves") && tileEntity.getLevel() != null) {
             return new Color(tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
         }
         return Color.WHITE;

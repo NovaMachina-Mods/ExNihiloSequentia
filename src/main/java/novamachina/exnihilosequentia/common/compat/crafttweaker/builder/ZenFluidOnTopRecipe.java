@@ -9,39 +9,46 @@ import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenFluidOnTopRecipe")
 public class ZenFluidOnTopRecipe {
 
-    private final FluidOnTopRecipe internal;
+    @Nonnull private final FluidOnTopRecipe internal;
 
-    private ZenFluidOnTopRecipe(ResourceLocation recipeId) {
+    private ZenFluidOnTopRecipe(@Nonnull final ResourceLocation recipeId) {
         this.internal = new FluidOnTopRecipe(recipeId, FluidStack.EMPTY, FluidStack.EMPTY, ItemStack.EMPTY);
     }
 
     @ZenCodeType.Method
-    public static ZenFluidOnTopRecipe builder(ResourceLocation recipeId) {
+    @Nonnull
+    public static ZenFluidOnTopRecipe builder(@Nonnull final ResourceLocation recipeId) {
         return new ZenFluidOnTopRecipe(recipeId);
     }
 
+    @Nonnull
     public FluidOnTopRecipe build() {
         return internal;
     }
 
     @ZenCodeType.Method
-    public ZenFluidOnTopRecipe setFluidInTank(IFluidStack fluidInTank) {
+    @Nonnull
+    public ZenFluidOnTopRecipe setFluidInTank(@Nonnull final IFluidStack fluidInTank) {
         internal.setFluidInTank(fluidInTank.getInternal());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenFluidOnTopRecipe setFluidOnTop(IFluidStack fluidOnTop) {
+    @Nonnull
+    public ZenFluidOnTopRecipe setFluidOnTop(@Nonnull final IFluidStack fluidOnTop) {
         internal.setFluidOnTop(fluidOnTop.getInternal());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenFluidOnTopRecipe setResult(IItemStack result) {
+    @Nonnull
+    public ZenFluidOnTopRecipe setResult(@Nonnull final IItemStack result) {
         internal.setResult(result.getInternal());
         return this;
     }

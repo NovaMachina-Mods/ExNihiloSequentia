@@ -6,9 +6,11 @@ import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
 
-    public ExNihiloLootTableGenerator(DataGenerator generator) {
+    public ExNihiloLootTableGenerator(@Nonnull final DataGenerator generator) {
         super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
     }
 

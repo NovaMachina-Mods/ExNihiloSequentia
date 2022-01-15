@@ -4,7 +4,9 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.INBT;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Util;
 import net.minecraft.util.text.Color;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -30,20 +32,22 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 public class SieveTile extends TileEntity {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    private static final String BLOCK_TAG = "block";
-    private static final String PROGRESS_TAG = "progress";
-    private static final String MESH_TAG = "mesh";
-    private final Random random = new Random();
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final String BLOCK_TAG = "block";
+    @Nonnull private static final String PROGRESS_TAG = "progress";
+    @Nonnull private static final String MESH_TAG = "mesh";
+    @Nonnull private final Random random = new Random();
 
-    private ItemStack meshStack = ItemStack.EMPTY;
-    private ItemStack blockStack = ItemStack.EMPTY;
-    private EnumMesh meshType = EnumMesh.NONE;
+    @Nonnull private ItemStack meshStack = ItemStack.EMPTY;
+    @Nonnull private ItemStack blockStack = ItemStack.EMPTY;
+    @Nonnull private EnumMesh meshType = EnumMesh.NONE;
     private float progress = 0;
 
     private long lastSieveAction = 0;
@@ -57,7 +61,7 @@ public class SieveTile extends TileEntity {
         super(tileEntityType);
     }
 
-    public void insertMesh(ItemStack stack, PlayerEntity player) {
+    public void insertMesh(@Nonnull final ItemStack stack, @Nonnull final PlayerEntity player) {
         logger.debug("Insert Mesh: " + stack);
         EnumMesh mesh = ((MeshItem) stack.getItem()).getMesh();
         if (meshStack.isEmpty()) {
@@ -77,9 +81,11 @@ public class SieveTile extends TileEntity {
     public void removeMesh(boolean rerenderSieve) {
         logger.debug("Remove mesh: Rerender Sieve: " + rerenderSieve);
         if (!meshStack.isEmpty()) {
-            level.addFreshEntity(
-                new ItemEntity(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F,
-                    meshStack.copy()));
+            if (level != null) {
+                level.addFreshEntity(
+                        new ItemEntity(level, worldPosition.getX() + 0.5F, worldPosition.getY() + 0.5F, worldPosition.getZ() + 0.5F,
+                                meshStack.copy()));
+            }
             meshStack = ItemStack.EMPTY;
             meshType = EnumMesh.NONE;
             if (rerenderSieve) {
@@ -90,25 +96,35 @@ public class SieveTile extends TileEntity {
 
     public void setSieveState() {
         logger.debug("Set Sieve State, Mesh: " + meshType);
-        BlockState state = getBlockState();
-        if (state.getBlock() instanceof BlockSieve) {
+        @Nonnull final BlockState state = getBlockState();
+        if (state.getBlock() instanceof BlockSieve && level != null) {
             level.setBlockAndUpdate(getBlockPos(), state.setValue(BlockSieve.MESH, meshType));
         }
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT compound) {
+    public void load(@Nonnull final BlockState state, @Nonnull final CompoundNBT compound) {
         if (compound.contains(MESH_TAG)) {
-            meshStack = ItemStack.of((CompoundNBT) compound.get(MESH_TAG));
-            if (meshStack.getItem() instanceof MeshItem) {
-                meshType = ((MeshItem) meshStack.getItem()).getMesh();
+            @Nullable final INBT meshTag = compound.get(MESH_TAG);
+            if (meshTag != null) {
+                meshStack = ItemStack.of((CompoundNBT) meshTag);
+                if (meshStack.getItem() instanceof MeshItem) {
+                    meshType = ((MeshItem) meshStack.getItem()).getMesh();
+                }
+            } else {
+                meshStack = ItemStack.EMPTY;
             }
         } else {
             meshStack = ItemStack.EMPTY;
         }
 
         if (compound.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.of((CompoundNBT) compound.get(BLOCK_TAG));
+            @Nullable final INBT blockTag = compound.get(BLOCK_TAG);
+            if (blockTag != null) {
+                blockStack = ItemStack.of((CompoundNBT) blockTag);
+            } else {
+                blockStack = ItemStack.EMPTY;
+            }
         } else {
             blockStack = ItemStack.EMPTY;
         }
@@ -118,8 +134,9 @@ public class SieveTile extends TileEntity {
         super.load(state, compound);
     }
 
+    @Nonnull
     @Override
-    public CompoundNBT save(CompoundNBT compound) {
+    public CompoundNBT save(@Nonnull final CompoundNBT compound) {
         if (!meshStack.isEmpty()) {
             CompoundNBT meshNBT = meshStack.save(new CompoundNBT());
             compound.put(MESH_TAG, meshNBT);
@@ -144,7 +161,7 @@ public class SieveTile extends TileEntity {
         super.setRemoved();
     }
 
-    public void insertSiftableBlock(ItemStack stack, PlayerEntity player) {
+    public void insertSiftableBlock(@Nonnull final ItemStack stack, @Nonnull final PlayerEntity player) {
         logger.debug("Insert Siftable Block: " + stack);
         if (!meshStack.isEmpty() && blockStack.isEmpty()) {
             blockStack = stack.copy();
@@ -155,23 +172,27 @@ public class SieveTile extends TileEntity {
         }
     }
 
-    public void activateSieve(PlayerEntity player, boolean isWaterlogged) {
+    public void activateSieve(@Nullable final PlayerEntity player, boolean isWaterlogged) {
         logger.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
         float fortune = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, meshStack);
         float efficiency = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, meshStack);
 
         // 4 ticks is the same period of holding down right click
-        if (getLevel().getLevelData().getGameTime() - lastSieveAction < 4) {
-            // Really good chance that they're using a macro
-            if (player != null && getLevel().getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
-                ITextComponent message = new StringTextComponent("Autoclicker Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
+        if (level != null) {
+            if (level.getLevelData().getGameTime() - lastSieveAction < 4) {
+                // Really good chance that they're using a macro
+                if (player != null && level.getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
+                    ITextComponent message = new StringTextComponent("Autoclicker Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
 
-                player.sendMessage(message, null);
+                    player.sendMessage(message, Util.NIL_UUID);
+                }
+                return;
             }
-            return;
         }
 
-        lastSieveAction = getLevel().getLevelData().getGameTime();
+        if (level != null) {
+            lastSieveAction = level.getLevelData().getGameTime();
+        }
         if (player != null) {
             lastPlayer = player.getUUID();
         }
@@ -215,6 +236,7 @@ public class SieveTile extends TileEntity {
         return !meshStack.isEmpty() && !blockStack.isEmpty();
     }
 
+    @Nullable
     public ResourceLocation getTexture() {
         if (!blockStack.isEmpty()) {
             return blockStack.getItem().getRegistryName();
@@ -222,6 +244,7 @@ public class SieveTile extends TileEntity {
         return null;
     }
 
+    @Nonnull
     public ItemStack getBlockStack() {
         return blockStack;
     }
@@ -231,8 +254,9 @@ public class SieveTile extends TileEntity {
     }
 
     @Override
+    @Nonnull
     public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbt = new CompoundNBT();
+        @Nonnull final CompoundNBT nbt = new CompoundNBT();
         if (!meshStack.isEmpty()) {
             CompoundNBT meshNBT = meshStack.save(new CompoundNBT());
             nbt.put(MESH_TAG, meshNBT);
@@ -248,25 +272,36 @@ public class SieveTile extends TileEntity {
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+    public void onDataPacket(@Nonnull final NetworkManager net, @Nonnull final SUpdateTileEntityPacket packet) {
         CompoundNBT nbt = packet.getTag();
         if (nbt.contains(MESH_TAG)) {
-            meshStack = ItemStack.of((CompoundNBT) nbt.get(MESH_TAG));
-            if (meshStack.getItem() instanceof MeshItem) {
-                meshType = ((MeshItem) meshStack.getItem()).getMesh();
+            @Nullable final INBT meshTag = nbt.get(MESH_TAG);
+            if (meshTag != null) {
+                meshStack = ItemStack.of((CompoundNBT) meshTag);
+                if (meshStack.getItem() instanceof MeshItem) {
+                    meshType = ((MeshItem) meshStack.getItem()).getMesh();
+                }
+            } else {
+                meshStack = ItemStack.EMPTY;
             }
         } else {
             meshStack = ItemStack.EMPTY;
         }
 
         if (nbt.contains(BLOCK_TAG)) {
-            blockStack = ItemStack.of((CompoundNBT) nbt.get(BLOCK_TAG));
+            @Nullable final INBT blockTag = nbt.get(BLOCK_TAG);
+            if (blockTag != null) {
+                blockStack = ItemStack.of((CompoundNBT) blockTag);
+            } else {
+                blockStack = ItemStack.EMPTY;
+            }
         } else {
             blockStack = ItemStack.EMPTY;
         }
         progress = nbt.getFloat(PROGRESS_TAG);
     }
 
+    @Nonnull
     public EnumMesh getMesh() {
         return meshType;
     }

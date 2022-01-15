@@ -7,22 +7,23 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+
+import javax.annotation.Nonnull;
 
 public abstract class RecipeSerializer<R extends IRecipe<?>> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<R> {
     public abstract ItemStack getIcon();
 
     @Override
-    public R fromJson(ResourceLocation recipeId, JsonObject json) {
-        if (CraftingHelper.processConditions(json, "conditions"))
-            return readFromJson(recipeId, json);
-        return null;
+    @Nonnull
+    public R fromJson(@Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) throws NullPointerException {
+        return readFromJson(recipeId, json);
     }
 
-    protected abstract R readFromJson(ResourceLocation recipeId, JsonObject json);
+    protected abstract R readFromJson(@Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json);
 
-    protected ItemStack readOutput(JsonElement outputObject) {
+    @Nonnull
+    protected ItemStack readOutput(@Nonnull final JsonElement outputObject) {
         return ShapedRecipe.itemFromJson(outputObject.getAsJsonObject());
     }
 }

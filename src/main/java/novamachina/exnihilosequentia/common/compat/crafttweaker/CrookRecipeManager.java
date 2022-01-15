@@ -11,20 +11,26 @@ import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenCrook
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.CrookRecipes")
+@SuppressWarnings("unused")
 public class CrookRecipeManager implements IRecipeManager {
 
     @ZenCodeType.Method
-    public ZenCrookRecipe create(String recipeId) {
+    @Nonnull
+    public ZenCrookRecipe create(@Nonnull String recipeId) {
         recipeId = fixRecipeName(recipeId);
-        ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
-        ZenCrookRecipe recipe = ZenCrookRecipe.builder(resourceLocation);
+        @Nonnull final ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER,
+                recipeId);
+        @Nonnull final ZenCrookRecipe recipe = ZenCrookRecipe.builder(resourceLocation);
         CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
         return recipe;
     }
 
     @Override
+    @Nonnull
     public IRecipeType<CrookRecipe> getRecipeType() {
         return CrookRecipe.RECIPE_TYPE;
     }

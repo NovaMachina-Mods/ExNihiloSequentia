@@ -9,6 +9,9 @@ import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class FiredCrucibleTile extends BaseCrucibleTile {
 
     public FiredCrucibleTile() {
@@ -20,15 +23,16 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
-    public CrucilbeTypeEnum getCrucibleType() {
-        return CrucilbeTypeEnum.FIRED;
+    @Nonnull
+    public CrucibleTypeEnum getCrucibleType() {
+        return CrucibleTypeEnum.FIRED;
     }
 
     @Override
     public int getSolidAmount() {
         if (!currentItem.isEmpty()) {
             final int itemCount = inventory.getStackInSlot(0).getCount();
-            final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+            @Nullable final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
             if (recipe != null)
                 return solidAmount + (itemCount * recipe.getAmount());
         }
@@ -36,16 +40,14 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
-    public boolean canAcceptFluidTemperature(FluidStack fluidStack) {
+    public boolean canAcceptFluidTemperature(@Nonnull FluidStack fluidStack) {
         return true;
     }
 
     @Override
     public void tick() {
-        assert level != null;
-        if (level.isClientSide()) {
+        if (level == null || level.isClientSide)
             return;
-        }
 
         inventory.setCrucibleHasRoom(tank.getFluidAmount() < MAX_FLUID_AMOUNT);
         ticksSinceLast++;
@@ -66,7 +68,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
                     }
 
-                    final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+                    @Nonnull final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
                     if (recipe != null)
                         solidAmount = recipe.getAmount();
                 } else {
@@ -77,7 +79,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(0)
                 .sameItem(currentItem)) {
                 while (heat > solidAmount && !inventory.getStackInSlot(0).isEmpty()) {
-                    final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+                    @Nonnull final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
                     if (recipe != null) {
                         solidAmount += recipe.getAmount();
                         inventory.getStackInSlot(0).shrink(1);
@@ -95,7 +97,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
 
             if (heat > 0 && ExNihiloRegistries.CRUCIBLE_REGISTRY
                 .isMeltableByItemStack(currentItem, getCrucibleType().getLevel())) {
-                final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+                @Nonnull final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
                 if (recipe != null) {
                     FluidStack fluidStack = new FluidStack(recipe.getResultFluid(), heat);
                     int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
@@ -103,7 +105,7 @@ public class FiredCrucibleTile extends BaseCrucibleTile {
                 }
             }
         }
-        final BaseCrucibleTileState currentState = new BaseCrucibleTileState(this);
+        @Nonnull final BaseCrucibleTileState currentState = new BaseCrucibleTileState(this);
         if (!currentState.equals(lastSyncedState)) {
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
             lastSyncedState = currentState;

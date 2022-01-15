@@ -1,5 +1,9 @@
 package novamachina.exnihilosequentia.common.tileentity.barrel.mode;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import net.minecraft.world.World;
 import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.dolls.DollItem;
 import novamachina.exnihilosequentia.common.tileentity.barrel.AbstractBarrelTile;
@@ -23,40 +27,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MobSpawnBarrelMode extends AbstractBarrelMode {
-    private static final String CURRENT_PROGRESS_TAG = "currentProgress";
-    private static final String DOLL_TYPE_TAG = "dollType";
+    @Nonnull private static final String CURRENT_PROGRESS_TAG = "currentProgress";
+    @Nonnull private static final String DOLL_TYPE_TAG = "dollType";
     private int currentProgress;
-    private DollItem doll;
+    @Nullable private DollItem doll;
 
-    public MobSpawnBarrelMode(String name) {
+    public MobSpawnBarrelMode(@Nonnull final String name) {
         super(name);
         currentProgress = 0;
         doll = null;
     }
 
-    public void setDoll(DollItem doll) {
+    public void setDoll(@Nullable final DollItem doll) {
         this.doll = doll;
     }
 
     @Override
-    public void tick(AbstractBarrelTile barrelTile) {
-        if (doll != null) {
-            currentProgress++;
-            spawnParticle(barrelTile);
-            if (currentProgress >= Config.getSecondsToSpawn() * 20 && doll.spawnMob(barrelTile.getLevel(), barrelTile.getBlockPos())) {
-                barrelTile.getTank().setFluid(FluidStack.EMPTY);
-                barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
-            }
+    public void tick(@Nonnull final AbstractBarrelTile barrelTile) {
+        if (doll == null) {
+            return;
+        }
+        currentProgress++;
+        spawnParticle(barrelTile);
+        if (currentProgress >= Config.getSecondsToSpawn() * 20
+                && doll.spawnMob(barrelTile.getLevel(), barrelTile.getBlockPos())) {
+            barrelTile.getTank().setFluid(FluidStack.EMPTY);
+            barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
         }
     }
 
     @Override
-    public ActionResultType onBlockActivated(AbstractBarrelTile barrelTile, PlayerEntity player, Hand handIn, IFluidHandler fluidHandler, IItemHandler itemHandler) {
+    @Nonnull
+    public ActionResultType onBlockActivated(@Nonnull final AbstractBarrelTile barrelTile,
+                                             @Nonnull final PlayerEntity player, @Nonnull final Hand handIn,
+                                             @Nonnull final IFluidHandler fluidHandler,
+                                             @Nonnull final IItemHandler itemHandler) {
         return ActionResultType.SUCCESS;
     }
 
     @Override
-    public boolean canFillWithFluid(AbstractBarrelTile barrel) {
+    public boolean canFillWithFluid(@Nonnull final AbstractBarrelTile barrel) {
         return false;
     }
 
@@ -66,35 +76,46 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    protected boolean isTriggerItem(ItemStack stack) {
+    protected boolean isTriggerItem(@Nonnull final ItemStack stack) {
         return false;
     }
 
     @Override
-    public void read(CompoundNBT nbt) {
+    public void read(@Nonnull final CompoundNBT nbt) {
         if (nbt.contains(CURRENT_PROGRESS_TAG)) {
             this.currentProgress = nbt.getInt(CURRENT_PROGRESS_TAG);
         } else {
             this.currentProgress = 0;
         }
         if (nbt.contains(DOLL_TYPE_TAG)) {
-            setDoll((DollItem) EnumDoll.getDollFromString(nbt.getString(DOLL_TYPE_TAG)).getRegistryObject().get());
+            @Nullable final EnumDoll enumDoll = EnumDoll.getDollFromString(nbt.getString(DOLL_TYPE_TAG));
+            if (enumDoll != null) {
+                doll = (DollItem) enumDoll.getRegistryObject().get();
+            } else {
+                doll = null;
+            }
         } else {
-            this.setDoll(null);
+            doll = null;
         }
     }
 
     @Override
+    @Nonnull
     public CompoundNBT write() {
-        CompoundNBT nbt = new CompoundNBT();
+        @Nonnull final CompoundNBT nbt = new CompoundNBT();
         nbt.putInt(CURRENT_PROGRESS_TAG, currentProgress);
-        nbt.putString(DOLL_TYPE_TAG, doll.getDollType());
+        if (doll != null) {
+            nbt.putString(DOLL_TYPE_TAG, doll.getDollType());
+        }
         return nbt;
     }
 
     @Override
-    protected void spawnParticle(AbstractBarrelTile barrelTile) {
-        ((ServerWorld) barrelTile.getLevel())
+    protected void spawnParticle(@Nonnull final AbstractBarrelTile barrelTile) {
+        @Nullable final World world = barrelTile.getLevel();
+        if (!(world instanceof ServerWorld))
+            return;
+        ((ServerWorld) world)
             .sendParticles(ParticleTypes.LARGE_SMOKE,
                 barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
                 barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
@@ -107,8 +128,9 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public List<ITextComponent> getWailaInfo(AbstractBarrelTile barrelTile) {
-        List<ITextComponent> info = new ArrayList<>();
+    @Nonnull
+    public List<ITextComponent> getWailaInfo(@Nonnull final AbstractBarrelTile barrelTile) {
+        @Nonnull final List<ITextComponent> info = new ArrayList<>();
 
         info.add(new TranslationTextComponent("waila.progress", StringUtils
             .formatPercent((float) currentProgress / (Config.getSecondsToSpawn() * 20))));
@@ -117,7 +139,9 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
 
     @Override
-    public ItemStack handleInsert(AbstractBarrelTile barrelTile, ItemStack stack, boolean simulate) {
+    @Nonnull
+    public ItemStack handleInsert(@Nonnull final AbstractBarrelTile barrelTile, @Nonnull final ItemStack stack,
+                                  boolean simulate) {
         return stack;
     }
 }

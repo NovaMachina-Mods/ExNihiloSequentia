@@ -8,14 +8,15 @@ import net.minecraft.item.crafting.IRecipeType;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.utility.Config;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class MeshItem extends Item {
 
-    private final EnumMesh mesh;
+    @Nonnull private final EnumMesh mesh;
 
 
-    public MeshItem(EnumMesh mesh) {
+    public MeshItem(@Nonnull final EnumMesh mesh) {
         super(Config.enableMeshDurability() ?
                 new Properties().tab(ExNihiloInitialization.ITEM_GROUP).durability(mesh.getMaxDamage())
                 : new Properties().tab(ExNihiloInitialization.ITEM_GROUP).stacksTo(Config.getMeshStackSize())
@@ -25,24 +26,25 @@ public class MeshItem extends Item {
 
     }
 
+    @Nonnull
     public EnumMesh getMesh() {
         return mesh;
     }
 
     @Override
-    public int getBurnTime(ItemStack itemStack, @Nullable IRecipeType<?> recipeType) {
+    public int getBurnTime(@Nonnull final ItemStack itemStack, @Nullable final IRecipeType<?> recipeType) {
         if (itemStack.getItem() == EnumMesh.STRING.getRegistryObject().get()) {
             return 200;
         } else return 0;
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+    public boolean isBookEnchantable(@Nonnull final ItemStack stack, @Nonnull final ItemStack book) {
         return true;
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+    public boolean canApplyAtEnchantingTable(@Nonnull final ItemStack stack, @Nonnull final Enchantment enchantment) {
         return enchantment == Enchantments.BLOCK_EFFICIENCY || enchantment == Enchantments.BLOCK_FORTUNE;
     }
 }

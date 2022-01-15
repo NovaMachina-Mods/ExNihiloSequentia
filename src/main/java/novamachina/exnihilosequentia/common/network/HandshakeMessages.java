@@ -10,28 +10,33 @@ import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class HandshakeMessages {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private HandshakeMessages() {
 
     }
 
     public static class S2COreList extends LoginIndexedMessage {
-        private List<EnumOre> oreList;
+        @Nullable private List<EnumOre> oreList;
 
         public S2COreList() {
             // NOOP
         }
 
+        @Nullable
         public List<EnumOre> getOreList() {
             return oreList;
         }
 
-        static S2COreList decode(PacketBuffer buffer) {
-            S2COreList message = new S2COreList();
+        @Nonnull
+        static S2COreList decode(@Nonnull final PacketBuffer buffer) {
+            @Nonnull final S2COreList message = new S2COreList();
             message.oreList = new ArrayList<>();
-            int count = buffer.readInt();
+            final int count = buffer.readInt();
             for (int i = 0; i < count; i++) {
                 EnumOre ore = buffer.readEnum(EnumOre.class);
                 message.oreList.add(ore);
@@ -40,11 +45,11 @@ public class HandshakeMessages {
             return message;
         }
 
-        void encode(PacketBuffer buffer) {
+        void encode(@Nonnull final PacketBuffer buffer) {
             oreList = Arrays.stream(EnumOre.values()).filter(EnumOre::isEnabled).collect(Collectors.toList());
             logger.debug("Writing ore list: " + oreList);
             buffer.writeInt(oreList.size());
-            for (EnumOre ore : oreList) {
+            for (@Nonnull final EnumOre ore : oreList) {
                 buffer.writeEnum(ore);
             }
         }
@@ -68,11 +73,12 @@ public class HandshakeMessages {
     }
 
     static class C2SAcknowledge extends LoginIndexedMessage {
-        static C2SAcknowledge decode(PacketBuffer buf) {
+        @Nonnull
+        static C2SAcknowledge decode(@Nonnull final PacketBuffer buf) {
             return new C2SAcknowledge();
         }
 
-        void encode(PacketBuffer buf) {
+        void encode(@Nonnull final PacketBuffer buf) {
             // NOOP
         }
     }

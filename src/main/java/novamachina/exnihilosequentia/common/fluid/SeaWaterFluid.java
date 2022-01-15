@@ -13,9 +13,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import net.minecraftforge.fluids.ForgeFlowingFluid.Properties;
 
+import javax.annotation.Nonnull;
+
 public abstract class SeaWaterFluid extends ForgeFlowingFluid {
 
-    public static final ForgeFlowingFluid.Properties SEA_WATER_PROPS =
+    @Nonnull public static final ForgeFlowingFluid.Properties SEA_WATER_PROPS =
             new ForgeFlowingFluid.Properties(
                     ExNihiloFluids.SEA_WATER, ExNihiloFluids.SEA_WATER_FLOW, FluidAttributes
                     .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water"),
@@ -24,29 +26,29 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
                     .bucket(ExNihiloItems.SEA_WATER_BUCKET)
                     .block(ExNihiloBlocks.SEA_WATER);
 
-    protected SeaWaterFluid(Properties properties) {
+    protected SeaWaterFluid(@Nonnull final Properties properties) {
         super(properties);
     }
 
     public static class Flowing extends SeaWaterFluid {
 
-        public Flowing(Properties properties) {
+        public Flowing(@Nonnull final Properties properties) {
             super(properties);
             registerDefaultState(getStateDefinition().any().setValue(LEVEL, 7));
         }
 
         @Override
-        public int getAmount(FluidState fluidState) {
+        public int getAmount(@Nonnull final FluidState fluidState) {
             return fluidState.getValue(LEVEL);
         }
 
         @Override
-        public boolean isSource(FluidState state) {
+        public boolean isSource(@Nonnull final FluidState state) {
             return false;
         }
 
         @Override
-        protected void createFluidStateDefinition(StateContainer.Builder<Fluid, FluidState> builder) {
+        protected void createFluidStateDefinition(@Nonnull final StateContainer.Builder<Fluid, FluidState> builder) {
             super.createFluidStateDefinition(builder);
             builder.add(LEVEL);
         }
@@ -54,17 +56,17 @@ public abstract class SeaWaterFluid extends ForgeFlowingFluid {
 
     public static class Source extends SeaWaterFluid {
 
-        public Source(Properties properties) {
+        public Source(@Nonnull final Properties properties) {
             super(properties);
         }
 
         @Override
-        public int getAmount(FluidState fluidState) {
+        public int getAmount(@Nonnull final FluidState fluidState) {
             return 8;
         }
 
         @Override
-        public boolean isSource(FluidState state) {
+        public boolean isSource(@Nonnull final FluidState state) {
             return true;
         }
     }

@@ -11,20 +11,25 @@ import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenFluid
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.FluidItemRecipes")
+@SuppressWarnings("unused")
 public class FluidItemRecipeManager implements IRecipeManager {
 
     @ZenCodeType.Method
-    public ZenFluidItemRecipe create(String recipeId) {
+    @Nonnull
+    public ZenFluidItemRecipe create(@Nonnull String recipeId) {
         recipeId = fixRecipeName(recipeId);
-        ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
-        ZenFluidItemRecipe recipe = ZenFluidItemRecipe.builder(resourceLocation);
+        @Nonnull final ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
+        @Nonnull final ZenFluidItemRecipe recipe = ZenFluidItemRecipe.builder(resourceLocation);
         CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
         return recipe;
     }
 
     @Override
+    @Nonnull
     public IRecipeType<FluidItemRecipe> getRecipeType() {
         return FluidItemRecipe.RECIPE_TYPE;
     }

@@ -27,70 +27,81 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class WetSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "wet_sieve");
-    private static final ResourceLocation texture = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
+    @Nonnull public static final ResourceLocation UID =
+            new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "wet_sieve");
+    @Nonnull private static final ResourceLocation texture =
+            new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "textures/gui/jei_mid.png");
 
-    private final IDrawableStatic background;
-    private final IDrawableStatic slotHighlight;
+    @Nonnull private final IDrawableStatic background;
+    @Nonnull private final IDrawableStatic slotHighlight;
 
-    public WetSieveRecipeCategory(IGuiHelper guiHelper) {
+    public WetSieveRecipeCategory(@Nonnull final IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(texture, 0, 0, 166, 58);
         this.slotHighlight = guiHelper.createDrawable(texture, 166, 0, 18, 18);
     }
 
+    @Nonnull
     @Override
     public IDrawable getBackground() {
         return background;
     }
 
+    @Nullable
     @Override
     public IDrawable getIcon() {
         return null;
     }
 
+    @Nonnull
     @Override
     public Class<? extends JEISieveRecipe> getRecipeClass() {
         return JEISieveRecipe.class;
     }
 
+    @Nonnull
     @Override
     public String getTitle() {
         return "Waterlogged Sieve";
     }
 
+    @Nonnull
     @Override
     public ResourceLocation getUid() {
         return UID;
     }
 
     @Override
-    public void setIngredients(JEISieveRecipe recipe, IIngredients ingredients) {
+    public void setIngredients(@Nonnull final JEISieveRecipe recipe, @Nonnull final IIngredients ingredients) {
         ingredients.setInputLists(VanillaTypes.ITEM, recipe.getInputs());
         ingredients.setOutputs(VanillaTypes.ITEM, recipe.getResults());
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, JEISieveRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(@Nonnull final IRecipeLayout recipeLayout, @Nonnull final JEISieveRecipe recipe,
+                          @Nonnull final IIngredients ingredients) {
         recipeLayout.getItemStacks().init(0, true, 10, 38);
         recipeLayout.getItemStacks().set(0, recipe.getMesh());
 
         recipeLayout.getItemStacks().init(1, true, 10, 2);
         recipeLayout.getItemStacks().set(1, recipe.getSieveables());
 
-        IFocus<?> focus = recipeLayout.getFocus();
+        @Nullable final IFocus<?> focus = recipeLayout.getFocus();
 
-        int slotIndex = 2;
+        final int slotIndex = 2;
         for (int i = 0; i < recipe.getResults().size(); i++) {
             final int slotX = 38 + (i % 7 * 18);
             final int slotY = 2 + i / 7 * 18;
 
-            ItemStack outputStack = recipe.getResults().get(i);
+            @Nonnull final ItemStack outputStack = recipe.getResults().get(i);
             recipeLayout.getItemStacks().init(slotIndex + i, false, slotX, slotY);
             recipeLayout.getItemStacks().set(slotIndex + i, outputStack);
 
             if (focus != null) {
-                ItemStack focusStack = (ItemStack) focus.getValue();
+                @Nonnull final ItemStack focusStack = (ItemStack) focus.getValue();
                 if (focus.getMode() == IFocus.Mode.OUTPUT
                         && !focusStack.isEmpty()
                         && focusStack.getItem() == outputStack.getItem()
@@ -102,23 +113,24 @@ public class WetSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
         recipeLayout.getItemStacks().addTooltipCallback(new ITooltipCallback<ItemStack>() {
             @OnlyIn(Dist.CLIENT)
             @Override
-            public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
+            public void onTooltip(final int slotIndex, final boolean input, @Nonnull final ItemStack ingredient,
+                                  @Nonnull final List<ITextComponent> tooltip) {
                 if (!input) {
-                    Multiset<String> condensedTooltips = HashMultiset.create();
-                    List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
+                    @Nonnull final Multiset<String> condensedTooltips = HashMultiset.create();
+                    @Nonnull final List<SieveRecipe> drops = ExNihiloRegistries.SIEVE_REGISTRY
                             .getDrops(recipe.getInputs().get(1).get(0).getItem(), ((MeshItem) recipe
                                     .getInputs().get(0).get(0).getItem()).getMesh(), true);
-                    for (SieveRecipe entry : drops) {
-                        ItemStack drop = entry.getDrop();
+                    for (@Nonnull final SieveRecipe entry : drops) {
+                        @Nonnull final ItemStack drop = entry.getDrop();
                         if (!drop.sameItem(ingredient)) {
                             continue;
                         }
-                        for (MeshWithChance meshWithChance : entry.getRolls()) {
+                        for (@Nonnull final MeshWithChance meshWithChance : entry.getRolls()) {
                             condensedTooltips.add(StringUtils.formatPercent(meshWithChance.getChance()));
                         }
                     }
                     tooltip.add(new TranslationTextComponent("jei.sieve.dropChance"));
-                    for (String line : condensedTooltips.elementSet()) {
+                    for (@Nonnull final String line : condensedTooltips.elementSet()) {
                         tooltip.add(new StringTextComponent(" * " + condensedTooltips.count(line) + "x " + line));
                     }
                 }

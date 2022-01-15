@@ -11,9 +11,11 @@ import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+
 public class InfestingLeavesTile extends TileEntity implements ITickableTileEntity {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    private static final String PROGRESS_TAG = "progress";
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final String PROGRESS_TAG = "progress";
 
     private int progress = 0;
     private int progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
@@ -29,38 +31,40 @@ public class InfestingLeavesTile extends TileEntity implements ITickableTileEnti
 
     @Override
     public void tick() {
-        if (!level.isClientSide()) {
-            progressWaitInterval--;
-            if (progressWaitInterval <= 0) {
-                progress++;
-                spreadCounter++;
+        if (level == null || level.isClientSide) {
+            return;
+        }
+        progressWaitInterval--;
+        if (progressWaitInterval <= 0) {
+            progress++;
+            spreadCounter++;
 
-                if (progress >= 100) {
-                    logger.debug("Finish insfesting leaves");
-                    InfestingLeavesBlock.finishInfestingBlock(level, worldPosition);
-                }
-
-                if (spreadCounter >= Config.getTicksBetweenSpreadAttempt()) {
-                    logger.debug("Spreading infested leaves");
-                    InfestingLeavesBlock.spread(level, worldPosition);
-                    spreadCounter = 0;
-                }
-                progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
-                level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), 2);
+            if (progress >= 100) {
+                logger.debug("Finish insfesting leaves");
+                InfestingLeavesBlock.finishInfestingBlock(level, worldPosition);
             }
+
+            if (spreadCounter >= Config.getTicksBetweenSpreadAttempt()) {
+                logger.debug("Spreading infested leaves");
+                InfestingLeavesBlock.spread(level, worldPosition);
+                spreadCounter = 0;
+            }
+            progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
+            level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), 2);
         }
     }
 
     @Override
+    @Nonnull
     public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbt = new CompoundNBT();
+        @Nonnull final CompoundNBT nbt = new CompoundNBT();
         nbt.putInt(PROGRESS_TAG, progress);
         return new SUpdateTileEntityPacket(getBlockPos(), -1, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        CompoundNBT nbt = pkt.getTag();
+    public void onDataPacket(@Nonnull final NetworkManager net, @Nonnull final SUpdateTileEntityPacket pkt) {
+        @Nonnull final CompoundNBT nbt = pkt.getTag();
         if (nbt.contains(PROGRESS_TAG)) {
             progress = nbt.getInt(PROGRESS_TAG);
         }

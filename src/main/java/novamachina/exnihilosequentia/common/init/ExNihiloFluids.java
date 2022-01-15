@@ -12,29 +12,31 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+
 public class ExNihiloFluids {
 
-    private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister
+    @Nonnull private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister
             .create(ForgeRegistries.FLUIDS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
-    public static final RegistryObject<FlowingFluid> WITCH_WATER = FLUIDS
+    @Nonnull public static final RegistryObject<FlowingFluid> WITCH_WATER = FLUIDS
             .register(ExNihiloConstants.Fluids.WITCH_WATER,
                     () -> new WitchWaterFluid.Source(WitchWaterFluid.WITCH_WATER_PROPS));
-    public static final RegistryObject<FlowingFluid> WITCH_WATER_FLOW = FLUIDS
+    @Nonnull public static final RegistryObject<FlowingFluid> WITCH_WATER_FLOW = FLUIDS
             .register(ExNihiloConstants.Fluids.WITCH_WATER_FLOW,
                     () -> new WitchWaterFluid.Flowing(WitchWaterFluid.WITCH_WATER_PROPS));
-    public static final RegistryObject<FlowingFluid> SEA_WATER = FLUIDS
+    @Nonnull public static final RegistryObject<FlowingFluid> SEA_WATER = FLUIDS
             .register(ExNihiloConstants.Fluids.SEA_WATER,
                     () -> new SeaWaterFluid.Source(SeaWaterFluid.SEA_WATER_PROPS));
-    public static final RegistryObject<FlowingFluid> SEA_WATER_FLOW = FLUIDS
+    @Nonnull public static final RegistryObject<FlowingFluid> SEA_WATER_FLOW = FLUIDS
             .register(ExNihiloConstants.Fluids.SEA_WATER_FLOW,
                     () -> new SeaWaterFluid.Flowing(SeaWaterFluid.SEA_WATER_PROPS));
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloFluids() {
 
     }
 
-    public static void init(IEventBus modEventBus) {
+    public static void init(@Nonnull final IEventBus modEventBus) {
         logger.debug("Register fluids");
         FLUIDS.register(modEventBus);
     }

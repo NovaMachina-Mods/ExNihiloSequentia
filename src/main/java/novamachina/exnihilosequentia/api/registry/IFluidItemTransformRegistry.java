@@ -6,14 +6,18 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 
+import javax.annotation.Nonnull;
+
 public interface IFluidItemTransformRegistry {
     void clearRecipes();
 
+    @Nonnull
     List<FluidItemRecipe> getRecipeList();
 
-    IItemProvider getResult(Fluid fluid, Item input);
+    @Nonnull
+    IItemProvider getResult(@Nonnull final Fluid fluid, @Nonnull final Item input);
 
-    boolean isValidRecipe(Fluid fluid, Item input);
+    boolean isValidRecipe(@Nonnull final Fluid fluid, @Nonnull final Item input);
 
-    void setRecipes(List<FluidItemRecipe> recipes);
+    void setRecipes(@Nonnull final List<FluidItemRecipe> recipes);
 }

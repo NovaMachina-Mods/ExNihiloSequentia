@@ -8,15 +8,18 @@ import net.minecraft.util.text.StringTextComponent;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
-public class CrookTooltipCallback implements ITooltipCallback<ItemStack> {
-    private final CrookRecipe crookRecipe;
+import javax.annotation.Nonnull;
 
-    public CrookTooltipCallback(CrookRecipe crookRecipe) {
+public class CrookTooltipCallback implements ITooltipCallback<ItemStack> {
+    @Nonnull private final CrookRecipe crookRecipe;
+
+    public CrookTooltipCallback(@Nonnull final CrookRecipe crookRecipe) {
         this.crookRecipe = crookRecipe;
     }
 
     @Override
-    public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<ITextComponent> tooltip) {
+    public void onTooltip(final int slotIndex, final boolean input, @Nonnull final ItemStack ingredient,
+                          @Nonnull final List<ITextComponent> tooltip) {
         if (!input) {
             crookRecipe.getOutput().stream()
                     .filter(stack -> ItemStack.isSame(ingredient, stack.getStack()))

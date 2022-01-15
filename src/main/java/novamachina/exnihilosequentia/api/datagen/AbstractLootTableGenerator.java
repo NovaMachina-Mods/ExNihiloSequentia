@@ -25,34 +25,38 @@ import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-public abstract class AbstractLootTableGenerator implements IDataProvider {
-    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
-    private final DataGenerator generator;
-    private final String modId;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    protected AbstractLootTableGenerator(DataGenerator generator, String modId) {
+public abstract class AbstractLootTableGenerator implements IDataProvider {
+    @Nonnull private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
+    @Nonnull private final DataGenerator generator;
+    @Nonnull private final String modId;
+
+    protected AbstractLootTableGenerator(@Nonnull final DataGenerator generator, @Nonnull final String modId) {
         this.generator = generator;
         this.modId = modId;
     }
 
     @Override
-    public void run(DirectoryCache cache) {
+    public void run(@Nonnull final DirectoryCache cache) {
         lootTables.clear();
-        Path outFolder = generator.getOutputFolder();
+        @Nonnull final Path outFolder = generator.getOutputFolder();
 
         createLootTables();
 
-        ValidationTracker validator = new ValidationTracker(LootParameterSets.ALL_PARAMS, function -> null, lootTables::get);
+        @Nonnull final ValidationTracker validator = new ValidationTracker(LootParameterSets.ALL_PARAMS,
+                function -> null, lootTables::get);
         lootTables.forEach((name, table) -> LootTableManager.validate(validator, name, table));
-        Multimap<String, String> problems = validator.getProblems();
+        @Nonnull final Multimap<String, String> problems = validator.getProblems();
         if (!problems.isEmpty()) {
             problems.forEach((name, table) -> logger.warn("Found validation problem in " + name + ": " + table));
             throw new IllegalStateException("Failed to validate loot tables, see logs");
         } else {
             lootTables.forEach((name, table) -> {
-                Path out = getPath(outFolder, name);
+                @Nonnull final Path out = getPath(outFolder, name);
 
                 try {
                     IDataProvider.save(GSON, cache, LootTableManager.serialize(table), out);
@@ -64,48 +68,56 @@ public abstract class AbstractLootTableGenerator implements IDataProvider {
         }
     }
 
+    @Nonnull
     @Override
     public String getName() {
         return "Loot Tables: " + modId;
     }
 
+    @Nonnull
     protected LootPool.Builder createLootPoolBuilder() {
         return LootPool.lootPool().when(SurvivesExplosion.survivesExplosion());
     }
 
     protected abstract void createLootTables();
 
-    protected void register(Block block, LootPool.Builder... pools) {
-        LootTable.Builder builder = LootTable.lootTable();
-        for (LootPool.Builder pool : pools) {
+    protected void register(@Nonnull final Block block, @Nonnull final LootPool.Builder... pools) {
+        @Nonnull final LootTable.Builder builder = LootTable.lootTable();
+        for (@Nonnull final LootPool.Builder pool : pools) {
             builder.withPool(pool);
         }
         register(block, builder);
     }
 
-    protected void registerSelfDrop(Block block) {
+    protected void registerSelfDrop(@Nonnull final Block block) {
         register(block, singleItem(block));
     }
 
-    private Path getPath(Path outFolder, ResourceLocation name) {
+    @Nonnull
+    private Path getPath(@Nonnull final Path outFolder, @Nonnull final ResourceLocation name) {
         return outFolder.resolve("data/" + name.getNamespace() + "/loot_tables/" + name.getPath() + ".json");
     }
 
-    private void register(Block block, LootTable.Builder table) {
-        register(block.getRegistryName(), table);
+    private void register(@Nonnull final Block block, @Nonnull final LootTable.Builder table) {
+        @Nullable final ResourceLocation resourceLocation = block.getRegistryName();
+        if (resourceLocation == null)
+            return;
+        register(resourceLocation, table);
     }
 
-    private void register(ResourceLocation registryName, LootTable.Builder table) {
+    private void register(@Nonnull final ResourceLocation registryName, @Nonnull final LootTable.Builder table) {
         if (lootTables.put(toTableLoc(registryName), table.setParamSet(LootParameterSets.BLOCK).build()) != null) {
             throw new IllegalStateException("Duplicate loot table: " + table);
         }
     }
 
-    private LootPool.Builder singleItem(IItemProvider in) {
+    @Nonnull
+    private LootPool.Builder singleItem(@Nonnull final IItemProvider in) {
         return createLootPoolBuilder().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(in));
     }
 
-    private ResourceLocation toTableLoc(ResourceLocation registryName) {
+    @Nonnull
+    private ResourceLocation toTableLoc(@Nonnull final ResourceLocation registryName) {
         return new ResourceLocation(registryName.getNamespace(), "blocks/" + registryName.getPath());
     }
 }

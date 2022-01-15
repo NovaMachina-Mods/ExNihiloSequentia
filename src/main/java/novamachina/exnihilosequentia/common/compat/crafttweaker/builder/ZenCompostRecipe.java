@@ -7,18 +7,21 @@ import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenCompostRecipe")
 public class ZenCompostRecipe {
 
-    private final CompostRecipe internal;
+    @Nonnull private final CompostRecipe internal;
 
-    private ZenCompostRecipe(ResourceLocation recipeId) {
+    private ZenCompostRecipe(@Nonnull final ResourceLocation recipeId) {
         this.internal = new CompostRecipe(recipeId, Ingredient.EMPTY, 0);
     }
 
     @ZenCodeType.Method
-    public static ZenCompostRecipe builder(ResourceLocation recipeId) {
+    @Nonnull
+    public static ZenCompostRecipe builder(@Nonnull final ResourceLocation recipeId) {
         return new ZenCompostRecipe(recipeId);
     }
 
@@ -27,13 +30,15 @@ public class ZenCompostRecipe {
     }
 
     @ZenCodeType.Method
-    public ZenCompostRecipe setAmount(int amount) {
+    @Nonnull
+    public ZenCompostRecipe setAmount(final int amount) {
         internal.setAmount(amount);
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenCompostRecipe setInput(IIngredient input) {
+    @Nonnull
+    public ZenCompostRecipe setInput(@Nonnull final IIngredient input) {
         internal.setInput(input.asVanillaIngredient());
         return this;
     }

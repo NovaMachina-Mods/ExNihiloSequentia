@@ -12,10 +12,12 @@ import novamachina.exnihilosequentia.common.block.crucibles.NetherCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.crucibles.WoodCrucibleBlock;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 @WailaPlugin(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
 public class PluginWaila implements IWailaPlugin {
     @Override
-    public void register(IRegistrar registrar) {
+    public void register(@Nonnull final IRegistrar registrar) {
         registrar.registerComponentProvider(new BarrelComponentProvider(), TooltipPosition.BODY, BlockBarrel.class);
         registrar.registerComponentProvider(new SieveComponentProvider(), TooltipPosition.BODY, BlockSieve.class);
         registrar.registerComponentProvider(new InfestingLeavesComponentProvider(), TooltipPosition.BODY, InfestingLeavesBlock.class);

@@ -6,6 +6,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import novamachina.exnihilosequentia.client.render.BarrelRender;
@@ -15,18 +16,22 @@ import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.ore.OreColor;
+import novamachina.exnihilosequentia.common.item.ore.OreItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 @Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ClientSetup() {
     }
 
-    public static void init(final FMLClientSetupEvent event) {
+    public static void init(@Nonnull final FMLClientSetupEvent event) {
         logger.debug("Initializing client renderers");
         registerSieveRenderLayer();
         registerCrucibleRenderLayer();
@@ -44,22 +49,25 @@ public class ClientSetup {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void onColorHandlerEvent(ColorHandlerEvent.Item event) {
+    public static void onColorHandlerEvent(@Nonnull final ColorHandlerEvent.Item event) {
         logger.debug("Fired ColorHandlerEvent.Item event");
 
-        for (EnumOre ore : EnumOre.values()) {
-            if(ore.getChunkItem().isPresent()) {
+        for (@Nonnull final EnumOre ore : EnumOre.values()) {
+            @Nullable final RegistryObject<OreItem> chunkRegistryObject = ore.getChunkItem();
+            if(chunkRegistryObject != null && chunkRegistryObject.isPresent()) {
                 event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
             } else {
                 logger.warn("Missing ore chunk");
             }
-            if(ore.getPieceItem().isPresent()) {
+            @Nullable final RegistryObject<OreItem> pieceRegistryObject = ore.getPieceItem();
+            if(pieceRegistryObject != null && pieceRegistryObject.isPresent()) {
                 event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
             } else {
                 logger.warn("Missing ore piece");
             }
             if (ore.shouldGenerateIngot()) {
-                if(ore.getIngotRegistryItem().isPresent()) {
+                @Nullable final RegistryObject<OreItem> ingotRegistryObject = ore.getIngotRegistryItem();
+                if (ingotRegistryObject != null && ingotRegistryObject.isPresent()) {
                     event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
                 } else {
                     logger.warn("Missing ore ingot");
