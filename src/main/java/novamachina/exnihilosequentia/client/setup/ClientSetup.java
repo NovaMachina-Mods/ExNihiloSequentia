@@ -28,17 +28,19 @@ public class ClientSetup {
 
     public static void init(final FMLClientSetupEvent event) {
         logger.debug("Initializing client renderers");
-        registerSieveRenderLayer();
-        registerCrucibleRenderLayer();
-        registerBarrelRenderLayer();
+        event.enqueueWork(() -> {
+            registerSieveRenderLayer();
+            registerCrucibleRenderLayer();
+            registerBarrelRenderLayer();
 
-        ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.INFESTED_LEAVES.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.INFESTING_LEAVES.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.INFESTED_LEAVES.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.INFESTING_LEAVES.get(), RenderType.cutout());
 
-        SieveRender.register();
-        BarrelRender.register();
-        CrucibleRender.register(ExNihiloTiles.CRUCIBLE_FIRED.get());
-        CrucibleRender.register(ExNihiloTiles.CRUCIBLE_WOOD.get());
+            SieveRender.register();
+            BarrelRender.register();
+            CrucibleRender.register(ExNihiloTiles.CRUCIBLE_FIRED.get());
+            CrucibleRender.register(ExNihiloTiles.CRUCIBLE_WOOD.get());
+        });
     }
 
     @OnlyIn(Dist.CLIENT)

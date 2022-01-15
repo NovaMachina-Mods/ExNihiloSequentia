@@ -34,9 +34,8 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
     @Override
     public void tick(AbstractBarrelTile barrelTile) {
-        if (barrelTile.getSolidAmount() >= AbstractBarrelTile.MAX_SOLID_AMOUNT && barrelTile.getInventory()
-                .getStackInSlot(0)
-                .isEmpty()) {
+        if (barrelTile.getSolidAmount() >= AbstractBarrelTile.MAX_SOLID_AMOUNT &&
+                barrelTile.getInventory().getStackInSlot(0).isEmpty()) {
             currentProgress++;
             spawnParticle(barrelTile);
             if (currentProgress >= Config.getSecondsToCompost() * 20) {

@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -19,8 +20,9 @@ import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.tileentity.crucible.BaseCrucibleTile;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider, EntityBlock {
+public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
 
     public CrucibleBaseBlock(BlockBuilder builder) {
         super(builder);

@@ -69,11 +69,6 @@ public abstract class AbstractBarrelTile extends BlockEntity {
     }
 
     public void tick() {
-        assert level != null;
-        if (level.isClientSide()) {
-            return;
-        }
-
         if (mode.isEmptyMode() || mode.getModeName().equals(ExNihiloConstants.BarrelModes.FLUID)) {
             BlockPos abovePos = worldPosition.offset(0, 1, 0);
             if (level.isRainingAt(abovePos)) {
@@ -82,6 +77,7 @@ public abstract class AbstractBarrelTile extends BlockEntity {
             }
         }
         mode.tick(this);
+        //level.setBlockAndUpdate(getBlockPos(), getBlockState());
         level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
     }
 

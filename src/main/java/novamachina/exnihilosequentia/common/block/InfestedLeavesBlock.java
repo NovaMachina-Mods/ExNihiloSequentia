@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -20,7 +21,7 @@ import novamachina.exnihilosequentia.common.tileentity.InfestedLeavesTile;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable {
+public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable, EntityBlock {
 
     public InfestedLeavesBlock() {
         super(new BlockBuilder().properties(

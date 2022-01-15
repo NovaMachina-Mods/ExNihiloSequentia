@@ -14,15 +14,10 @@ public class BlockBuilder {
     public static final BlockBehaviour.Properties DEFAULT =
             BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD);
     private BlockBehaviour.Properties properties = DEFAULT;
-    private Supplier<BlockEntity> tileEntitySupplier;
     private ToolAction toolType = ToolActions.PICKAXE_DIG;
 
     public BlockBehaviour.Properties getProperties() {
         return properties;
-    }
-
-    public Supplier<BlockEntity> getTileEntitySupplier() {
-        return tileEntitySupplier;
     }
 
     public ToolAction getToolType() {
@@ -36,11 +31,6 @@ public class BlockBuilder {
 
     public BlockBuilder properties(BlockBehaviour.Properties properties) {
         this.properties = properties;
-        return this;
-    }
-
-    public BlockBuilder tileEntitySupplier(Supplier<BlockEntity> supplier) {
-        this.tileEntitySupplier = supplier;
         return this;
     }
 

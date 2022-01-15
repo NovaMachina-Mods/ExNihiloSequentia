@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.block.barrels;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -13,7 +14,7 @@ import novamachina.exnihilosequentia.common.tileentity.barrel.WoodBarrelTile;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class WoodBarrelBlock extends AbstractBarrelBlock {
+public class WoodBarrelBlock extends AbstractBarrelBlock implements EntityBlock {
     public WoodBarrelBlock() {
         super(new BlockBuilder().harvestLevel(ToolActions.AXE_DIG)
                 .properties(BlockBehaviour.Properties.of(Material.WOOD).strength(0.75F).sound(SoundType.WOOD)));

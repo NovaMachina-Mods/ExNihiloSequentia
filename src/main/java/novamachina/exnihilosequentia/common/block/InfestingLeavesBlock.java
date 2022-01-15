@@ -8,6 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,7 +29,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 // TODO: Add progressive render
-public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider {
+public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider, EntityBlock {
 
     private static final Random random = new Random();
 

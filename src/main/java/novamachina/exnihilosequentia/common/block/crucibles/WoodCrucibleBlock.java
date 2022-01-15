@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.block.crucibles;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -17,7 +18,7 @@ import novamachina.exnihilosequentia.common.tileentity.crucible.WoodCrucibleTile
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class WoodCrucibleBlock extends CrucibleBaseBlock {
+public class WoodCrucibleBlock extends CrucibleBaseBlock implements EntityBlock {
 
     public WoodCrucibleBlock() {
         super(new BlockBuilder().properties(
