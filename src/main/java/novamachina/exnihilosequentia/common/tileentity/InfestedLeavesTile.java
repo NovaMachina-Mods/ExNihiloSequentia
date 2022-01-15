@@ -8,8 +8,10 @@ import net.minecraft.tileentity.TileEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+
 public class InfestedLeavesTile extends TileEntity implements ITickableTileEntity {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private int progressWaitInterval = 0;
 
@@ -19,14 +21,15 @@ public class InfestedLeavesTile extends TileEntity implements ITickableTileEntit
 
     @Override
     public void tick() {
-        if (!level.isClientSide()) {
-            progressWaitInterval++;
-            if (progressWaitInterval >= Config.getTicksBetweenSpreadAttempt()) {
-                logger.debug("Spreading infested leaves");
+        if (level == null || level.isClientSide) {
+            return;
+        }
+        progressWaitInterval++;
+        if (progressWaitInterval >= Config.getTicksBetweenSpreadAttempt()) {
+            logger.debug("Spreading infested leaves");
 
-                progressWaitInterval = 0;
-                InfestingLeavesBlock.spread(level, worldPosition);
-            }
+            progressWaitInterval = 0;
+            InfestingLeavesBlock.spread(level, worldPosition);
         }
     }
 }

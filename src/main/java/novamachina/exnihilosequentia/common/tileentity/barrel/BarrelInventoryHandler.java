@@ -4,22 +4,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class BarrelInventoryHandler extends ItemStackHandler {
 
-    private final AbstractBarrelTile barrel;
+    @Nonnull private final AbstractBarrelTile barrel;
 
-    public BarrelInventoryHandler(AbstractBarrelTile abstractBarrelTile) {
+    public BarrelInventoryHandler(@Nonnull final AbstractBarrelTile abstractBarrelTile) {
         this.barrel = abstractBarrelTile;
     }
 
     @Override
-    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+    @Nonnull
+    public ItemStack insertItem(int slot, @Nonnull final ItemStack stack, boolean simulate) {
         return barrel.getMode().handleInsert(barrel, stack, simulate);
     }
 
     @Override
+    @Nonnull
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        ItemStack returnStack = super.extractItem(slot, amount, simulate);
+        @Nonnull final ItemStack returnStack = super.extractItem(slot, amount, simulate);
         if(!simulate && returnStack != ItemStack.EMPTY ) {
             barrel.setMode(ExNihiloConstants.BarrelModes.EMPTY);
         }

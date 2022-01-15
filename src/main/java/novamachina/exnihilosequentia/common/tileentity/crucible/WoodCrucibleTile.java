@@ -9,6 +9,8 @@ import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
 import novamachina.exnihilosequentia.common.utility.Config;
 
+import javax.annotation.Nonnull;
+
 public class WoodCrucibleTile extends BaseCrucibleTile {
 
     public WoodCrucibleTile() {
@@ -21,8 +23,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
     @Override
     public void tick() {
-        assert level != null;
-        if (level.isClientSide()) {
+        if (level == null || level.isClientSide) {
             return;
         }
 
@@ -74,7 +75,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
 
             if (heat > 0 && ExNihiloRegistries.CRUCIBLE_REGISTRY
                 .isMeltableByItemStack(currentItem, getCrucibleType().getLevel())) {
-                final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+                @Nonnull final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
                 if (recipe != null) {
                     FluidStack fluidStack = new FluidStack(recipe.getResultFluid(), heat);
                     int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
@@ -82,7 +83,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
                 }
             }
         }
-        final BaseCrucibleTileState currentState = new BaseCrucibleTileState(this);
+        @Nonnull final BaseCrucibleTileState currentState = new BaseCrucibleTileState(this);
         if (!currentState.equals(lastSyncedState)) {
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
             lastSyncedState = currentState;
@@ -95,14 +96,15 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
-    public CrucilbeTypeEnum getCrucibleType() {
-        return CrucilbeTypeEnum.WOOD;
+    @Nonnull
+    public CrucibleTypeEnum getCrucibleType() {
+        return CrucibleTypeEnum.WOOD;
     }
 
     @Override
     public int getSolidAmount() {
         if(!currentItem.isEmpty()) {
-            final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
+            @Nonnull final CrucibleRecipe recipe = ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipeByItemStack(currentItem);
             if (recipe != null) {
                 int itemCount = inventory.getStackInSlot(0).getCount();
                 return solidAmount + (itemCount * recipe.getAmount());
@@ -112,7 +114,7 @@ public class WoodCrucibleTile extends BaseCrucibleTile {
     }
 
     @Override
-    public boolean canAcceptFluidTemperature(FluidStack fluidStack) {
+    public boolean canAcceptFluidTemperature(@Nonnull final FluidStack fluidStack) {
         return fluidStack.getFluid().getAttributes().getTemperature() <= Config.getWoodBarrelMaxTemp();
     }
 

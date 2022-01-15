@@ -21,28 +21,33 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements IFinishedRecipe {
-    protected JsonArray conditions = null;
-    protected JsonArray inputArray = null;
+    @Nullable protected JsonArray conditions = null;
+    @Nullable protected JsonArray inputArray = null;
     protected int inputCount = 0;
     protected int maxInputCount = 1;
     protected int maxOutputCount = 1;
-    protected JsonArray outputArray = null;
+    @Nullable protected JsonArray outputArray = null;
     protected int outputCount = 0;
-    private ResourceLocation id;
-    private final RecipeSerializer<?> serializer;
-    private final List<Consumer<JsonObject>> writerFunctions;
+    @Nullable private ResourceLocation id;
+    @Nonnull private final RecipeSerializer<?> serializer;
+    @Nonnull private final List<Consumer<JsonObject>> writerFunctions;
 
-    protected ExNihiloFinishedRecipe(RecipeSerializer<?> serializer) {
+    protected ExNihiloFinishedRecipe(@Nonnull final RecipeSerializer<?> serializer) {
         this.serializer = serializer;
         this.writerFunctions = new ArrayList<>();
     }
 
-    public R addFluid(String id, FluidStack fluidStack) {
+    @Nonnull
+    public R addFluid(@Nonnull final String id, @Nonnull final FluidStack fluidStack) {
         return addWriter(jsonObject -> jsonObject.add(id, FluidStackUtils.jsonSerializeFluidStack(fluidStack)));
     }
 
-    public R addResult(ItemStack itemStack) {
+    @Nonnull
+    public R addResult(@Nonnull final ItemStack itemStack) {
         if (outputArray != null) {
             return addMultiResult(serializeItemStack(itemStack));
         } else {
@@ -50,72 +55,93 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    public R addResult(IItemProvider result) {
+    @Nonnull
+    public R addResult(@Nonnull final IItemProvider result) {
         return addResult(new ItemStack(result));
     }
 
-    public R addWriter(Consumer<JsonObject> writer) {
+    @Nonnull
+    public R addWriter(@Nonnull final Consumer<JsonObject> writer) throws IllegalArgumentException {
         Preconditions.checkArgument(id == null, "This recipe has already been finalized.");
         this.writerFunctions.add(writer);
+        //noinspection unchecked
         return (R) this;
     }
 
-    public void build(Consumer<IFinishedRecipe> out, ResourceLocation id) {
+    public void build(@Nonnull final Consumer<IFinishedRecipe> out, @Nonnull final ResourceLocation id)
+            throws IllegalArgumentException {
         Preconditions.checkArgument(isComplete(), "This recipe is incomplete.");
         this.id = id;
         out.accept(this);
     }
 
     @Override
+    @Nullable
     public ResourceLocation getAdvancementId() {
         return null;
     }
 
     @Override
+    @Nullable
     public JsonObject serializeAdvancement() {
         return null;
     }
 
+    @Nonnull
     @Override
-    public ResourceLocation getId() {
+    public ResourceLocation getId() throws NullPointerException {
+        Preconditions.checkNotNull(id, "This recipe has no id");
         return id;
     }
 
     @Override
+    @Nonnull
     public IRecipeSerializer<?> getType() {
         return serializer;
     }
 
     @Override
-    public void serializeRecipeData(JsonObject json) {
-        for (Consumer<JsonObject> writer : this.writerFunctions) {
+    public void serializeRecipeData(@Nonnull final JsonObject json) {
+        for (@Nonnull final Consumer<JsonObject> writer : this.writerFunctions) {
             writer.accept(json);
         }
     }
 
-    public R setMultipleResults(int maxResultCount) {
+    @Nonnull
+    @SuppressWarnings("UnusedReturnValue")
+    public R setMultipleResults(final int maxResultCount) {
         this.outputArray = new JsonArray();
         this.maxOutputCount = maxResultCount;
         return addWriter(jsonObject -> jsonObject.add("results", outputArray));
     }
 
-    protected R addBlock(Block block) {
-        return addWriter(jsonObject -> jsonObject.addProperty("block", block.getRegistryName().toString()));
+    @Nonnull
+    protected R addBlock(@Nonnull final Block block) {
+        @Nullable final ResourceLocation resourceLocation = block.getRegistryName();
+        if (resourceLocation != null)
+            return addWriter(jsonObject -> jsonObject.addProperty("block", resourceLocation.toString()));
+        //noinspection unchecked
+        return (R) this;
     }
 
-    protected R addBoolean(String key, boolean value) {
+    @Nonnull
+    @SuppressWarnings("SameParameterValue")
+    protected R addBoolean(@Nonnull final String key, final boolean value) {
         return addWriter(jsonObject -> jsonObject.addProperty(key, value));
     }
 
-    protected R addFluid(Fluid fluid) {
+    @Nonnull
+    protected R addFluid(@Nonnull final Fluid fluid) {
         return this.addFluid("fluid", new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
     }
 
-    protected R addFluid(String id, Fluid fluid) {
+    @Nonnull
+    protected R addFluid(@Nonnull final String id, @Nonnull final Fluid fluid) {
         return this.addFluid(id, new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
     }
 
-    protected R addInput(ItemStack input) {
+    @Nonnull
+    protected R addInput(@Nonnull final ItemStack input) {
         if (inputArray != null) {
             return addMultiInput(serializeItemStack(input));
         } else {
@@ -123,11 +149,13 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    protected R addInput(Ingredient input) {
+    @Nonnull
+    protected R addInput(@Nonnull final Ingredient input) {
         return addInput("input", input);
     }
 
-    protected R addInput(String key, Ingredient input) {
+    @Nonnull
+    protected R addInput(@Nonnull final String key, @Nonnull final Ingredient input) {
         if (inputArray != null) {
             return addMultiInput(input.toJson());
         } else {
@@ -135,19 +163,24 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         }
     }
 
-    protected R addInput(IItemProvider input) {
+    @Nonnull
+    protected R addInput(@Nonnull final IItemProvider input) {
         return addInput(new ItemStack(input));
     }
 
-    protected R addInput(ITag.INamedTag<Item> tag) {
+    @Nonnull
+    protected R addInput(@Nonnull final ITag.INamedTag<Item> tag) {
         return addInput(Ingredient.of(tag));
     }
 
-    protected R addInput(String id, IItemProvider block) {
+    @Nonnull
+    @SuppressWarnings("unused")
+    protected R addInput(@Nonnull final String id, @Nonnull final IItemProvider block) {
         return this.addItem(id, new ItemStack(block));
     }
 
-    protected R addResult(ItemStackWithChance itemStack) {
+    @Nonnull
+    protected R addResult(@Nonnull final ItemStackWithChance itemStack) {
         if (outputArray != null) {
             return addMultiResult(itemStack.serialize());
         } else {
@@ -159,44 +192,59 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
         return true;
     }
 
-    private R addItem(String key, ItemStack itemStack) {
+    @Nonnull
+    private R addItem(@Nonnull final String key, @Nonnull final ItemStack itemStack) throws IllegalArgumentException {
         Preconditions.checkArgument(!itemStack.isEmpty(), "ItemStack cannot be empty.");
         return addWriter(jsonObj -> jsonObj.add(key, serializeItemStack(itemStack)));
     }
 
-    private R addItem(String key, Ingredient ingredient) {
+    @Nonnull
+    private R addItem(@Nonnull final String key, @Nonnull final Ingredient ingredient) {
         return addWriter(jsonObj -> jsonObj.add(key, ingredient.toJson()));
     }
 
-    private R addItem(String key, JsonElement obj) {
+    @Nonnull
+    @SuppressWarnings("SameParameterValue")
+    private R addItem(@Nonnull final String key, @Nonnull final JsonElement obj) {
         return addWriter(jsonObj -> jsonObj.add(key, obj));
     }
 
-    private R addMultiInput(JsonElement obj) {
+    @Nonnull
+    private R addMultiInput(@Nonnull final JsonElement obj) throws IllegalArgumentException {
         Preconditions.checkArgument(maxInputCount > 1, "This recipe does not support multiple inputs.");
         Preconditions
                 .checkArgument(inputCount < maxInputCount, "This recipe can only have " + maxInputCount + "inputs.");
-        inputArray.add(obj);
-        inputCount++;
+        if (inputArray != null) {
+            inputArray.add(obj);
+            inputCount++;
+        }
+        //noinspection unchecked
         return (R) this;
     }
 
-    private R addMultiResult(JsonElement obj) {
+    @Nonnull
+    private R addMultiResult(@Nonnull final JsonElement obj) throws IllegalArgumentException {
         Preconditions.checkArgument(maxOutputCount > 1, "This recipe does not support multiple results.");
         Preconditions
                 .checkArgument(outputCount < maxOutputCount, "This recipe can only have " + maxOutputCount + "results.");
-        outputArray.add(obj);
-        outputCount++;
+        if (outputArray != null) {
+            outputArray.add(obj);
+            outputCount++;
+        }
+        //noinspection unchecked
         return (R) this;
     }
 
-    private JsonObject serializeItemStack(ItemStack itemStack) {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("item", itemStack.getItem().getRegistryName().toString());
+    @Nonnull
+    private JsonObject serializeItemStack(@Nonnull final ItemStack itemStack) {
+        @Nonnull final JsonObject obj = new JsonObject();
+        @Nullable final ResourceLocation resourceLocation = itemStack.getItem().getRegistryName();
+        if (resourceLocation != null)
+            obj.addProperty("item", resourceLocation.toString());
         if (itemStack.getCount() > 1) {
             obj.addProperty("count", itemStack.getCount());
         }
-        if (itemStack.hasTag()) {
+        if (itemStack.hasTag() && itemStack.getTag() != null) {
             obj.addProperty("nbt", itemStack.getTag().toString());
         }
         return obj;

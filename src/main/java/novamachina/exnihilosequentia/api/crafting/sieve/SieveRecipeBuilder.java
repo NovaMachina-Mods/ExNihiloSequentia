@@ -5,32 +5,40 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
-public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilder> {
-    private final JsonArray meshArray = new JsonArray();
+import javax.annotation.Nonnull;
 
-    private SieveRecipeBuilder() {
+public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilder> {
+    @Nonnull private final JsonArray meshArray = new JsonArray();
+
+    private SieveRecipeBuilder() throws NullPointerException {
+        //noinspection ConstantConditions
         super(SieveRecipe.getStaticSerializer().get());
 
         addWriter(jsonObject -> jsonObject.add("rolls", meshArray));
     }
 
+    @Nonnull
     public static SieveRecipeBuilder builder() {
         return new SieveRecipeBuilder();
     }
 
-    public SieveRecipeBuilder addRoll(MeshWithChance mesh) {
+    @Nonnull
+    public SieveRecipeBuilder addRoll(@Nonnull final MeshWithChance mesh) {
         meshArray.add(mesh.serialize());
         return this;
     }
 
-    public SieveRecipeBuilder drop(IItemProvider drop) {
+    @Nonnull
+    public SieveRecipeBuilder drop(@Nonnull final IItemProvider drop) {
         return this.addResult(drop);
     }
 
-    public SieveRecipeBuilder input(Ingredient input) {
+    @Nonnull
+    public SieveRecipeBuilder input(@Nonnull final Ingredient input) {
         return this.addInput(input);
     }
 
+    @Nonnull
     public SieveRecipeBuilder isWaterlogged() {
         return this.addBoolean("waterlogged", true);
     }

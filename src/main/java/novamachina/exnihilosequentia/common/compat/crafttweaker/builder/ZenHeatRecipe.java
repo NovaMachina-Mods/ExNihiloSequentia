@@ -7,39 +7,46 @@ import net.minecraft.util.ResourceLocation;
 import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenHeatRecipe")
 public class ZenHeatRecipe {
 
-    private final HeatRecipe internal;
+    @Nonnull private final HeatRecipe internal;
 
-    private ZenHeatRecipe(ResourceLocation recipeId) {
+    private ZenHeatRecipe(@Nonnull final ResourceLocation recipeId) {
         this.internal = new HeatRecipe(recipeId, null, 0);
     }
 
     @ZenCodeType.Method
-    public static ZenHeatRecipe builder(ResourceLocation recipeId) {
+    @Nonnull
+    public static ZenHeatRecipe builder(@Nonnull final ResourceLocation recipeId) {
         return new ZenHeatRecipe(recipeId);
     }
 
+    @Nonnull
     public HeatRecipe build() {
         return internal;
     }
 
     @ZenCodeType.Method
-    public ZenHeatRecipe setAmount(int amount) {
+    @Nonnull
+    public ZenHeatRecipe setAmount(final int amount) {
         internal.setAmount(amount);
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenHeatRecipe setBlock(Block input) {
+    @Nonnull
+    public ZenHeatRecipe setBlock(@Nonnull final Block input) {
         internal.setInput(input);
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenHeatRecipe setProperties(StatePropertiesPredicate properties) {
+    @Nonnull
+    public ZenHeatRecipe setProperties(@Nonnull final StatePropertiesPredicate properties) {
         internal.setProperties(properties.toVanilla());
         return this;
     }

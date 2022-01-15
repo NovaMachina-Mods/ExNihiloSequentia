@@ -8,9 +8,12 @@ import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
+import javax.annotation.Nonnull;
+
 public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
 
-    public ExNihiloBlockStateGenerator(DataGenerator gen, ExistingFileHelper exFileHelper) {
+    public ExNihiloBlockStateGenerator(@Nonnull final DataGenerator gen,
+                                       @Nonnull final ExistingFileHelper exFileHelper) {
         super(gen, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, exFileHelper);
     }
 

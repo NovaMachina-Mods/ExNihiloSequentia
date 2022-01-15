@@ -10,6 +10,7 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.tileentity.barrel.StoneBarrelTile;
 import novamachina.exnihilosequentia.common.utility.Config;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class NetherBarrelBlock extends BlockBarrel {
@@ -17,7 +18,7 @@ public class NetherBarrelBlock extends BlockBarrel {
         this(StoneBarrelTile::new);
     }
 
-    public NetherBarrelBlock(Supplier<TileEntity> tileEntitySupplier) {
+    public NetherBarrelBlock(@Nonnull final Supplier<TileEntity> tileEntitySupplier) {
         super(new BlockBuilder().harvestLevel(ToolType.AXE, 0)
                 .properties(AbstractBlock.Properties.of(Material.NETHER_WOOD).strength(1.0F).sound(Config.getNetherBarrelSoundsEnabled() ? SoundType.STEM : SoundType.WOOD))
                 .tileEntitySupplier(tileEntitySupplier));

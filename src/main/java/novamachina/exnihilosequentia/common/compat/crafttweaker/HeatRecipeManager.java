@@ -11,20 +11,26 @@ import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenHeatR
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.HeatRecipes")
+@SuppressWarnings("unused")
 public class HeatRecipeManager implements IRecipeManager {
 
     @ZenCodeType.Method
-    public ZenHeatRecipe create(String recipeId) {
+    @Nonnull
+    public ZenHeatRecipe create(@Nonnull String recipeId) {
         recipeId = fixRecipeName(recipeId);
-        ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
-        ZenHeatRecipe recipe = ZenHeatRecipe.builder(resourceLocation);
+        @Nonnull final ResourceLocation resourceLocation = new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER,
+                recipeId);
+        @Nonnull final ZenHeatRecipe recipe = ZenHeatRecipe.builder(resourceLocation);
         CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
         return recipe;
     }
 
     @Override
+    @Nonnull
     public IRecipeType<HeatRecipe> getRecipeType() {
         return HeatRecipe.RECIPE_TYPE;
     }

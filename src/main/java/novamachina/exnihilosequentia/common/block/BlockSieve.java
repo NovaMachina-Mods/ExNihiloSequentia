@@ -4,7 +4,6 @@ import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +29,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolType;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
@@ -43,23 +41,28 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoProvider {
-    public static final EnumProperty<EnumMesh> MESH = EnumProperty.create("mesh", EnumMesh.class);
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull public static final EnumProperty<EnumMesh> MESH = EnumProperty.create("mesh", EnumMesh.class);
+    @Nonnull public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public BlockSieve(BlockBuilder builder) {
+    public BlockSieve(@Nonnull final BlockBuilder builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any().setValue(MESH, EnumMesh.NONE).setValue(WATERLOGGED, false));
     }
 
-    public void activateBlock(BlockState state, World worldIn, PlayerEntity player, BlockPos pos, Hand handIn) {
-        ItemStack stack = player.getItemInHand(handIn);
-        SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
+    public void activateBlock(@Nonnull final BlockState state,@Nonnull final  World worldIn,
+                              @Nonnull final PlayerEntity player, @Nonnull final BlockPos pos,
+                              @Nonnull final Hand handIn) {
+        @Nonnull final ItemStack stack = player.getItemInHand(handIn);
+        @Nullable final SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
 
+        if (sieveTile == null)
+            return;
         logger.debug("isReadyToSieve: " + sieveTile.isReadyToSieve());
         if (sieveTile.isReadyToSieve()) {
             sieveTile.activateSieve(player, state.getValue(WATERLOGGED));
@@ -75,9 +78,12 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     }
 
     @Override
-    public void addProbeInfo(ProbeMode probeMode, IProbeInfo iProbeInfo, PlayerEntity playerEntity, World world, BlockState blockState, IProbeHitData iProbeHitData) {
-        SieveTile sieveTile = (SieveTile) world.getBlockEntity(iProbeHitData.getPos());
-
+    public void addProbeInfo(@Nonnull final ProbeMode probeMode, @Nonnull final IProbeInfo iProbeInfo,
+                             @Nonnull final PlayerEntity playerEntity, @Nonnull final World world,
+                             @Nonnull final BlockState blockState, @Nonnull final IProbeHitData iProbeHitData) {
+        @Nullable final SieveTile sieveTile = (SieveTile) world.getBlockEntity(iProbeHitData.getPos());
+        if (sieveTile == null)
+            return;
         if (!sieveTile.getBlockStack().isEmpty()) {
             if(probeMode == ProbeMode.EXTENDED) {
                 iProbeInfo.text(new TranslationTextComponent("waila.progress", StringUtils
@@ -93,23 +99,27 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     /**
      * @deprecated Ask Mojang
      */
+    @Nonnull
     @Deprecated
     @Override
-    public FluidState getFluidState(BlockState state) {
+    public FluidState getFluidState(@Nonnull final BlockState state) {
         return Boolean.TRUE.equals(state.getValue(WATERLOGGED)) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+    @Nonnull
+    public BlockState getStateForPlacement(@Nonnull final BlockItemUseContext context) {
+        @Nonnull final FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
         return this.defaultBlockState().setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @Override
-    public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+    public void playerDestroy(@Nonnull final World worldIn, @Nonnull final PlayerEntity player,
+                              @Nonnull final BlockPos pos, @Nonnull final BlockState state,
+                              @Nullable final TileEntity te, @Nonnull final ItemStack stack) {
         super.playerDestroy(worldIn, player, pos, state, te, stack);
         if (!worldIn.isClientSide() && te instanceof SieveTile) {
-            SieveTile sieveTile = (SieveTile) te;
+            @Nonnull final SieveTile sieveTile = (SieveTile) te;
             sieveTile.removeMesh(false);
             if (!sieveTile.getBlockStack().isEmpty()) {
                 worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX() + 0.5F, pos.getY() + 1.1F, pos
@@ -121,22 +131,25 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     /**
      * @deprecated Ask Mojang
      */
+    @Nonnull
     @Deprecated
     @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
+    public ActionResultType use(@Nonnull final BlockState state, @Nonnull final World worldIn,
+                                @Nonnull final BlockPos pos, @Nonnull final PlayerEntity player,
+                                @Nonnull final Hand handIn, @Nonnull final BlockRayTraceResult hit) {
+        @Nullable final SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
         if (sieveTile == null) {
             return ActionResultType.PASS;
         }
         if (!worldIn.isClientSide()) {
             logger.debug("Sieve Activated");
-            ItemStack stack = player.getItemInHand(handIn);
+            @Nonnull final ItemStack stack = player.getItemInHand(handIn);
             if (player.isShiftKeyDown() && stack.isEmpty()) {
                 sieveTile.removeMesh(true);
             }
 
             for (BlockPos sievePos : getNearbySieves(worldIn, pos)) {
-                BlockState currentState = worldIn.getBlockState(sievePos);
+                @Nonnull final BlockState currentState = worldIn.getBlockState(sievePos);
                 activateBlock(currentState, worldIn, player, sievePos, handIn);
             }
 
@@ -149,20 +162,25 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     }
 
     @Override
-    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(@Nonnull final World worldIn, @Nonnull final BlockPos pos, @Nonnull final BlockState state,
+                            @Nullable final LivingEntity placer, @Nonnull final ItemStack stack) {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
         if (!worldIn.isClientSide()) {
-            SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
-            sieveTile.setSieveState();
+            @Nullable final SieveTile sieveTile = (SieveTile) worldIn.getBlockEntity(pos);
+            if (sieveTile != null)
+                sieveTile.setSieveState();
         }
     }
 
     /**
      * @deprecated Ask Mojang
      */
+    @Nonnull
     @Deprecated
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updateShape(@Nonnull final BlockState stateIn, @Nonnull final Direction facing,
+                                  @Nonnull final BlockState facingState, @Nonnull final IWorld worldIn,
+                                  @Nonnull final BlockPos currentPos, @Nonnull final BlockPos facingPos) {
         if (Boolean.TRUE.equals(stateIn.getValue(WATERLOGGED))) {
             worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
@@ -170,12 +188,13 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     }
 
     @Override
-    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(@Nonnull final Builder<Block, BlockState> builder) {
         builder.add(MESH, WATERLOGGED);
     }
 
-    private List<BlockPos> getNearbySieves(World world, BlockPos pos) {
-        NonNullList<BlockPos> nearbySieves = NonNullList.create();
+    @Nonnull
+    private List<BlockPos> getNearbySieves(@Nonnull final World world, @Nonnull final BlockPos pos) {
+        @Nonnull final NonNullList<BlockPos> nearbySieves = NonNullList.create();
 
         BlockPos
                 .betweenClosedStream(new BlockPos(pos.getX() - Config.getSieveRange(), pos.getY(), pos.getZ() - Config.getSieveRange()),
@@ -190,11 +209,13 @@ public class BlockSieve extends BaseBlock implements IWaterLoggable, ITOPInfoPro
     }
 
     @OnlyIn(Dist.CLIENT)
-    public float getShadeBrightness(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public float getShadeBrightness(@Nonnull final BlockState state, @Nonnull final IBlockReader worldIn,
+                                    @Nonnull final BlockPos pos) {
         return 1.0F;
     }
 
-    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+    public boolean propagatesSkylightDown(@Nonnull final BlockState state, @Nonnull final IBlockReader reader,
+                                          @Nonnull final BlockPos pos) {
         return true;
     }
 }

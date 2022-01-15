@@ -23,7 +23,7 @@ import javax.annotation.Nonnull;
 
 @Mod(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
 public class ExNihiloSequentia {
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     public ExNihiloSequentia() {
         logger.debug("Starting Ex Nihilo: Sequentia");

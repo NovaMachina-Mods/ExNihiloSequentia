@@ -7,32 +7,41 @@ import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
+import javax.annotation.Nonnull;
+
 public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemRecipeBuilder> {
-    private FluidItemRecipeBuilder() {
+    private FluidItemRecipeBuilder() throws NullPointerException {
+        //noinspection ConstantConditions
         super(FluidItemRecipe.getStaticSerializer().get());
     }
 
+    @Nonnull
     public static FluidItemRecipeBuilder builder() {
         return new FluidItemRecipeBuilder();
     }
 
-    public FluidItemRecipeBuilder fluidInBarrel(Fluid fluid) {
+    @Nonnull
+    public FluidItemRecipeBuilder fluidInBarrel(@Nonnull final Fluid fluid) {
         return this.addFluid(fluid);
     }
 
-    public FluidItemRecipeBuilder input(IItemProvider input) {
+    @Nonnull
+    public FluidItemRecipeBuilder input(@Nonnull final IItemProvider input) {
         return this.addInput(input);
     }
 
-    public FluidItemRecipeBuilder input(Ingredient input) {
+    @Nonnull
+    public FluidItemRecipeBuilder input(@Nonnull final Ingredient input) {
         return this.addInput(input);
     }
 
-    public FluidItemRecipeBuilder input(Tags.IOptionalNamedTag<Item> tag) {
+    @Nonnull
+    public FluidItemRecipeBuilder input(@Nonnull final Tags.IOptionalNamedTag<Item> tag) {
         return this.addInput(tag);
     }
 
-    public FluidItemRecipeBuilder result(IItemProvider output) {
+    @Nonnull
+    public FluidItemRecipeBuilder result(@Nonnull final IItemProvider output) {
         return this.addResult(output);
     }
 }

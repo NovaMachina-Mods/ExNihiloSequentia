@@ -11,6 +11,9 @@ import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class FluidItemRecipeSerializer extends RecipeSerializer<FluidItemRecipe> {
     @Override
     public ItemStack getIcon() {
@@ -18,25 +21,28 @@ public class FluidItemRecipeSerializer extends RecipeSerializer<FluidItemRecipe>
     }
 
     @Override
-    public FluidItemRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
-        FluidStack fluid = FluidStack.readFromPacket(buffer);
-        Ingredient input = Ingredient.fromNetwork(buffer);
-        ItemStack output = buffer.readItem();
+    @Nonnull
+    public FluidItemRecipe fromNetwork(@Nonnull final ResourceLocation recipeId, @Nonnull final PacketBuffer buffer) {
+        @Nonnull final FluidStack fluid = FluidStack.readFromPacket(buffer);
+        @Nonnull final Ingredient input = Ingredient.fromNetwork(buffer);
+        @Nonnull final ItemStack output = buffer.readItem();
         return new FluidItemRecipe(recipeId, fluid, input, output);
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer, FluidItemRecipe recipe) {
+    public void toNetwork(@Nonnull final PacketBuffer buffer, @Nonnull final FluidItemRecipe recipe) {
         recipe.getFluidInBarrel().writeToPacket(buffer);
         recipe.getInput().toNetwork(buffer);
         buffer.writeItem(recipe.getResultItem());
     }
 
     @Override
-    protected FluidItemRecipe readFromJson(ResourceLocation recipeId, JsonObject json) {
-        FluidStack fluid = FluidStackUtils.jsonDeserializeFluidStack(json.get("fluid").getAsJsonObject());
-        Ingredient input = Ingredient.fromJson(json.get("input"));
-        ItemStack result = readOutput(json.get("result"));
+    @Nonnull
+    protected FluidItemRecipe readFromJson(@Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) {
+        @Nullable final FluidStack fluid = FluidStackUtils.jsonDeserializeFluidStack(
+                json.get("fluid").getAsJsonObject());
+        @Nonnull final Ingredient input = Ingredient.fromJson(json.get("input"));
+        @Nonnull final ItemStack result = readOutput(json.get("result"));
         return new FluidItemRecipe(recipeId, fluid, input, result);
     }
 }

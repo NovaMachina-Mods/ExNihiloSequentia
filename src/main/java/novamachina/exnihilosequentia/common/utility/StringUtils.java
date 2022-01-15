@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.utility;
 
+import javax.annotation.Nonnull;
 import java.text.DecimalFormat;
 import java.text.Format;
 
@@ -9,7 +10,7 @@ public class StringUtils {
     private StringUtils() {
     }
 
-    public static String formatPercent(Float num) {
+    public static String formatPercent(@Nonnull final Float num) {
         return PERCENT_FORMAT.format(num);
     }
 }

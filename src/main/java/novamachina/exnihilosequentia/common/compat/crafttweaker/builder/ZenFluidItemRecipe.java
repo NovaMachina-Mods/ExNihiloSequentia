@@ -11,39 +11,47 @@ import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
+import javax.annotation.Nonnull;
+
 @ZenRegister
 @ZenCodeType.Name("mods.exnihilosequentia.ZenFluidItemRecipe")
 public class ZenFluidItemRecipe {
 
-    private final FluidItemRecipe internal;
+    @Nonnull private final FluidItemRecipe internal;
 
-    private ZenFluidItemRecipe(ResourceLocation recipeId) {
+    private ZenFluidItemRecipe(@Nonnull final ResourceLocation recipeId) {
         this.internal = new FluidItemRecipe(recipeId, FluidStack.EMPTY, Ingredient.EMPTY, ItemStack.EMPTY);
     }
 
     @ZenCodeType.Method
-    public static ZenFluidItemRecipe builder(ResourceLocation recipeId) {
+    @Nonnull
+    public static ZenFluidItemRecipe builder(@Nonnull final ResourceLocation recipeId) {
         return new ZenFluidItemRecipe(recipeId);
     }
 
+    @Nonnull
     public FluidItemRecipe build() {
         return internal;
     }
 
     @ZenCodeType.Method
-    public ZenFluidItemRecipe setFluidInTank(IFluidStack fluidInTank) {
+    @Nonnull
+    public ZenFluidItemRecipe setFluidInTank(@Nonnull final IFluidStack fluidInTank) {
         internal.setFluid(fluidInTank.getInternal());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenFluidItemRecipe setInputItem(IIngredient inputItem) {
+    @Nonnull
+    @SuppressWarnings("unused")
+    public ZenFluidItemRecipe setInputItem(@Nonnull final IIngredient inputItem) {
         internal.setInput(inputItem.asVanillaIngredient());
         return this;
     }
 
     @ZenCodeType.Method
-    public ZenFluidItemRecipe setResult(IItemStack result) {
+    @Nonnull
+    public ZenFluidItemRecipe setResult(@Nonnull final IItemStack result) {
         internal.setOutput(result.getInternal());
         return this;
     }

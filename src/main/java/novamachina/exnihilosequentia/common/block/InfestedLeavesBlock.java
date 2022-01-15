@@ -29,7 +29,9 @@ public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable {
     }
 
     @Override
-    public void playerDestroy(@Nonnull World world, PlayerEntity player, @Nonnull BlockPos pos, BlockState state, @Nullable TileEntity tileEntity, ItemStack itemStack) {
+    public void playerDestroy(@Nonnull final World world, @Nonnull final PlayerEntity player,
+                              @Nonnull final BlockPos pos, @Nonnull final BlockState state,
+                              @Nullable final TileEntity tileEntity, @Nonnull final ItemStack itemStack) {
         if (itemStack.getItem() instanceof ShearsItem) {
             world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5F, pos.getY() + 1.1F,
                     pos.getZ() + 0.5F, new ItemStack(this)));

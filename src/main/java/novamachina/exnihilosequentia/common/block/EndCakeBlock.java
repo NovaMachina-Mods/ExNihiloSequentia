@@ -15,6 +15,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class EndCakeBlock extends CakeBlock {
 
     public EndCakeBlock() {
@@ -25,16 +28,18 @@ public class EndCakeBlock extends CakeBlock {
     /**
      * @deprecated Ask Mojang
      */
+    @Nonnull
     @Deprecated
     @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos,
-                                             PlayerEntity player, Hand handIn, BlockRayTraceResult blockRayTraceResult) {
-        ItemStack itemStack = player.getItemInHand(handIn);
+    public ActionResultType use(@Nonnull final BlockState state, @Nonnull final World worldIn,
+                                @Nonnull final BlockPos pos, @Nonnull final PlayerEntity player,
+                                @Nonnull final Hand handIn, @Nonnull final BlockRayTraceResult blockRayTraceResult) {
+        @Nonnull final ItemStack itemStack = player.getItemInHand(handIn);
 
         if (itemStack.isEmpty()) {
             return eatCake(worldIn, pos, state, player);
         } else {
-            int bites = state.getValue(BITES);
+            final int bites = state.getValue(BITES);
 
             if (itemStack.getItem() == Items.ENDER_EYE && bites > 0) {
                 if (!worldIn.isClientSide()) {
@@ -47,13 +52,13 @@ public class EndCakeBlock extends CakeBlock {
         return ActionResultType.CONSUME;
     }
 
-    private ActionResultType eatCake(World worldIn, BlockPos pos, BlockState state,
-                                     PlayerEntity player) {
+    private ActionResultType eatCake(@Nonnull final World worldIn, @Nonnull final BlockPos pos,
+                                     @Nonnull final BlockState state, @Nonnull final PlayerEntity player) {
         if (!worldIn.isClientSide() && player.getVehicle() == null && player
                 .isCreative() && worldIn instanceof ServerWorld && !player.isPassenger()) {
-            RegistryKey<World> registrykey = worldIn
+            @Nonnull final RegistryKey<World> registrykey = worldIn
                     .dimension() == World.OVERWORLD ? World.END : World.OVERWORLD;
-            ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getLevel(registrykey);
+            @Nullable final ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getLevel(registrykey);
             if (serverworld == null) {
                 return ActionResultType.FAIL;
             }
@@ -76,9 +81,9 @@ public class EndCakeBlock extends CakeBlock {
 
             if (!worldIn.isClientSide() && player.getVehicle() == null && worldIn instanceof ServerWorld && !player
                     .isPassenger()) {
-                RegistryKey<World> registrykey = worldIn
+                @Nonnull final RegistryKey<World> registrykey = worldIn
                         .dimension() == World.END ? World.OVERWORLD : World.END;
-                ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getLevel(registrykey);
+                @Nullable final ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getLevel(registrykey);
                 if (serverworld == null) {
                     return ActionResultType.FAIL;
                 }

@@ -1,17 +1,11 @@
 package novamachina.exnihilosequentia.common.init;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BucketItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,7 +13,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -30,6 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -56,23 +50,33 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator.createMCCompost;
 
 @Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloInitialization {
-    public static final ItemGroup ITEM_GROUP = new ItemGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
+    @Nonnull public static final ItemGroup ITEM_GROUP = new ItemGroup(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA) {
+        @Nonnull
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
         }
     };
+
+    @SuppressWarnings("unused")
     @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
-    public static final GlobalLootModifierSerializer<?> hammerModifier = null;
+    @Nullable public static final GlobalLootModifierSerializer<?> hammerModifier = null;
 
+    @SuppressWarnings("unused")
     @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_crook")
-    public static final GlobalLootModifierSerializer<?> crookModifier = null;
+    @Nullable public static final GlobalLootModifierSerializer<?> crookModifier = null;
 
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloInitialization() {
     }
@@ -80,12 +84,12 @@ public class ExNihiloInitialization {
     // MinecraftForge.EVENT_BUS
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void clearRegistries(ClientPlayerNetworkEvent.LoggedOutEvent event) {
+    public static void clearRegistries(@Nonnull final ClientPlayerNetworkEvent.LoggedOutEvent event) {
         logger.debug("Fired LoggedOutEvent");
         ExNihiloRegistries.clearRegistries();
     }
 
-    public static void init(IEventBus modEventBus) {
+    public static void init(@Nonnull final IEventBus modEventBus) {
         logger.debug("Initializing modded items");
         ExNihiloBlocks.init(modEventBus);
         ExNihiloItems.init(modEventBus);
@@ -96,20 +100,20 @@ public class ExNihiloInitialization {
 
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
-    public static void loadClientRecipes(RecipesUpdatedEvent event) {
+    public static void loadClientRecipes(@Nonnull final RecipesUpdatedEvent event) {
         ExNihiloRegistries.clearRegistries();
         loadRecipes(event.getRecipeManager());
     }
 
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
-    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+    public static void onPlayerLogin(@Nonnull final PlayerEvent.PlayerLoggedInEvent event) {
         logger.debug("Fired PlayerLoggedInEvent");
     }
 
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
-    public static void onServerStart(FMLServerStartingEvent event) {
+    public static void onServerStart(@Nonnull final FMLServerStartingEvent event) {
         logger.debug("Fired FMLServerStartingEvent");
         registerOreCompat();
         overrideOres();
@@ -120,7 +124,7 @@ public class ExNihiloInitialization {
 
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
-    public static void registerTOP(InterModEnqueueEvent event) {
+    public static void registerTOP(@Nonnull final InterModEnqueueEvent event) {
         logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
         if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
             CompatTOP.register();
@@ -129,7 +133,7 @@ public class ExNihiloInitialization {
 
     // MinecraftForge.EVENT_BUS
     @SubscribeEvent
-    public static void setupNonTagBasedRegistries(FMLCommonSetupEvent event) {
+    public static void setupNonTagBasedRegistries(@Nonnull final FMLCommonSetupEvent event) {
         logger.debug("Fired FMLCommonSetupEvent");
         ExNihiloItems.fillOreIngots();
         BarrelModeRegistry.initialize();
@@ -140,14 +144,16 @@ public class ExNihiloInitialization {
     }
 
     private static void registerDispenserFluids() {
-        IDispenseItemBehavior idispenseitembehavior = new DefaultDispenseItemBehavior() {
-            private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+        @Nonnull final IDispenseItemBehavior idispenseitembehavior = new DefaultDispenseItemBehavior() {
+            @Nonnull private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
-            public ItemStack execute(IBlockSource p_82487_1_, ItemStack p_82487_2_) {
-                BucketItem bucketitem = (BucketItem)p_82487_2_.getItem();
-                BlockPos blockpos = p_82487_1_.getPos().relative(p_82487_1_.getBlockState().getValue(DispenserBlock.FACING));
-                World world = p_82487_1_.getLevel();
-                if (bucketitem.emptyBucket((PlayerEntity)null, world, blockpos, (BlockRayTraceResult)null)) {
+            @Nonnull
+            public ItemStack execute(@Nonnull final IBlockSource p_82487_1_, @Nonnull final ItemStack p_82487_2_) {
+                @Nonnull final BucketItem bucketitem = (BucketItem)p_82487_2_.getItem();
+                @Nonnull final BlockPos blockpos = p_82487_1_.getPos().relative(p_82487_1_.getBlockState()
+                        .getValue(DispenserBlock.FACING));
+                @Nullable final World world = p_82487_1_.getLevel();
+                if (bucketitem.emptyBucket(null, world, blockpos, null)) {
                     bucketitem.checkExtraContent(world, p_82487_2_, blockpos);
                     return new ItemStack(Items.BUCKET);
                 } else {
@@ -160,27 +166,37 @@ public class ExNihiloInitialization {
     }
 
     private static void registerVanillaCompost() {
-        for(EnumSeed seed : EnumSeed.values()) {
-            createMCCompost(seed.getRegistryObject().get().asItem(), 0.3F);
+        for (@Nonnull final EnumSeed seed : EnumSeed.values()) {
+            @Nullable final RegistryObject<Item> seedRegistryObject = seed.getRegistryObject();
+            if (seedRegistryObject != null) {
+                createMCCompost(seedRegistryObject.get().asItem(), 0.3F);
+            }
         }
-        createMCCompost(EnumResource.GRASS_SEED.getRegistryObject().get().asItem(), 0.3F);
-        createMCCompost(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
+        @Nullable final RegistryObject<Item> grassSeedRegistryObject = EnumResource.GRASS_SEED.getRegistryObject();
+        if (grassSeedRegistryObject != null) {
+            createMCCompost(grassSeedRegistryObject.get().asItem(), 0.3F);
+        }
+        @Nullable final RegistryObject<Item> ancientSporeRegistryObject = EnumResource.ANCIENT_SPORE.getRegistryObject();
+        if (ancientSporeRegistryObject != null) {
+            createMCCompost(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
+        }
 		createMCCompost(ExNihiloItems.SILKWORM.get(), 0.3F);
         createMCCompost(ExNihiloItems.COOKED_SILKWORM.get(), 0.3F);
     }
 
-    private static <R extends IRecipe<?>> List<R> filterRecipes(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType) {
+    private static <R extends IRecipe<?>> List<R> filterRecipes(@Nonnull final Collection<IRecipe<?>> recipes,
+                                                                @Nonnull final Class<R> recipeClass,
+                                                                @Nonnull final IRecipeType<R> recipeType) {
         logger.debug("Filter Recipes, Class: " + recipeClass + ", Recipe Type: " + recipeType);
         return recipes.stream()
                 .filter(iRecipe -> iRecipe.getType() == recipeType)
-                .flatMap(Stream::of)
                 .map(recipeClass::cast)
                 .collect(Collectors.toList());
     }
 
-    private static void loadRecipes(RecipeManager manager) {
+    private static void loadRecipes(@Nonnull final RecipeManager manager) {
         logger.debug("Loading Recipes");
-        Collection<IRecipe<?>> recipes = manager.getRecipes();
+        @Nonnull final Collection<IRecipe<?>> recipes = manager.getRecipes();
         if (recipes.isEmpty()) {
             return;
         }
