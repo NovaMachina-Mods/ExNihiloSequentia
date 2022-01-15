@@ -9,7 +9,8 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.71.4'    }
+        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.71.4'
+    }
 }
 plugins {
     id 'java'
@@ -22,7 +23,6 @@ apply plugin: 'net.minecraftforge.gradle'
 
 
 def ENV = System.getenv()
-String semver = "${version_major}.${version_api_major}.${version_api_minor}.${version_patch}"
 version = "${minecraft_release}-" + new Date().format("yyyyMMdd-HHmmss")
 group = "${artifact_group}.${artifact_basename}"
 archivesBaseName = "${artifact_basename}"
@@ -48,14 +48,14 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-    maven { url = "https://modmaven.dev"}
+    maven { url = "https://modmaven.dev" }
 }
 
 
 dependencies {
     minecraft([
-            group: "net.minecraftforge",
-            name: 'forge',
+            group  : "net.minecraftforge",
+            name   : 'forge',
             version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
     ])
 
@@ -178,12 +178,12 @@ afterEvaluate {
 jar {
     manifest {
         attributes([
-                "Specification-Title": "Ex Nihilo: Sequentia",
-                "Specification-Vendor": "NovaMachina",
-                "Specification-Version": version, // We are version 1 of ourselves
-                "Implementation-Title": project.name,
-                "Implementation-Version": version,
-                "Implementation-Vendor" :"NovaMachina",
+                "Specification-Title"     : "Ex Nihilo: Sequentia",
+                "Specification-Vendor"    : "NovaMachina",
+                "Specification-Version"   : version, // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : version,
+                "Implementation-Vendor"   : "NovaMachina",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -228,15 +228,15 @@ abstract class CreateVersionClass extends DefaultTask {
 
     @TaskAction
     void writeString() {
-        FileWriter fw;
-        fw = new FileWriter('update.json');
+        FileWriter fw
+        fw = new FileWriter('update.json')
         fw.write("{\n" +
                 "  \"homepage\": \"https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia\",\n" +
                 "  \"promos\": {\n" +
                 "    \"1.16-latest\": \"${fileVersion.get()}\",\n" +
                 "    \"1.16-recommended\": \"${fileVersion.get()}\"\n" +
                 "  }\n" +
-                "}\n");
-        fw.close();
+                "}\n")
+        fw.close()
     }
 }
