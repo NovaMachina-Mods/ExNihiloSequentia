@@ -52,8 +52,6 @@ public abstract class AbstractBarrelTile extends BlockEntity {
     private static final String SOLID_AMOUNT_TAG = "solidAmount";
     @Nonnull
     private static final String TANK_TAG = "tank";
-    @Nullable
-    private static AbstractBarrelMode mode;
     @Nonnull
     private final BarrelInventoryHandler inventory = new BarrelInventoryHandler(this);
     @Nonnull
@@ -64,6 +62,8 @@ public abstract class AbstractBarrelTile extends BlockEntity {
     private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
     @Nullable
     private AbstractBarrelTileState lastSyncedState = null;
+    @Nullable
+    private AbstractBarrelMode mode;
     private int solidAmount = 0;
 
     protected AbstractBarrelTile(@Nonnull final BlockEntityType<? extends AbstractBarrelTile> tileEntityType, BlockPos pos, BlockState state) {
@@ -135,7 +135,7 @@ public abstract class AbstractBarrelTile extends BlockEntity {
     }
 
     public void setMode(@Nonnull final AbstractBarrelMode mode) {
-        AbstractBarrelTile.mode = mode;
+        this.mode = mode;
     }
 
     public int getSolidAmount() {
@@ -166,12 +166,12 @@ public abstract class AbstractBarrelTile extends BlockEntity {
         //return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
-//    @Override
-//    public CompoundTag getUpdateTag() {
-//        @Nonnull final CompoundTag nbt = new CompoundTag();
-//        this.saveAdditional(nbt);
-//        return nbt;
-//    }
+    @Override
+    public CompoundTag getUpdateTag() {
+        @Nonnull final CompoundTag nbt = new CompoundTag();
+        this.saveAdditional(nbt);
+        return nbt;
+    }
 
     @Nullable
     public List<Component> getWailaInfo() {
@@ -189,7 +189,7 @@ public abstract class AbstractBarrelTile extends BlockEntity {
             tank.readFromNBT(compound.getCompound(TANK_TAG));
         }
         if (compound.contains(MODE_TAG)) {
-            mode = BarrelModeRegistry.getModeFromName(compound.getString(MODE_TAG));
+            this.setMode(BarrelModeRegistry.getModeFromName(compound.getString(MODE_TAG)));
         }
         if (compound.contains(MODE_INFO_TAG) && mode != null) {
             mode.read(compound.getCompound(MODE_INFO_TAG));
@@ -218,7 +218,7 @@ public abstract class AbstractBarrelTile extends BlockEntity {
         if (nbt.contains(TANK_TAG)) {
             tank.readFromNBT(nbt.getCompound(TANK_TAG));
         }
-        mode = BarrelModeRegistry.getModeFromName(nbt.getString(MODE_TAG));
+        this.setMode(BarrelModeRegistry.getModeFromName(nbt.getString(MODE_TAG)));
         if (nbt.contains(MODE_INFO_TAG) && mode != null) {
             mode.read(nbt.getCompound(MODE_INFO_TAG));
         }
@@ -241,6 +241,7 @@ public abstract class AbstractBarrelTile extends BlockEntity {
             compound.put(MODE_INFO_TAG, mode.write());
         }
         compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
+        compound.putString("timestamp", String.valueOf(System.currentTimeMillis()));
     }
 
     @Override
