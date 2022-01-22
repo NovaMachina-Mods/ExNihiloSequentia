@@ -4,11 +4,17 @@ buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url "https://plugins.gradle.org/m2/" }
+        maven {
+            name 'parchment'
+            url 'https://maven.parchmentmc.org'
+        }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.71.4'    }
+        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.71.4'
+        classpath 'org.parchmentmc:librarian:1.+'
+    }
 }
 plugins {
     id 'java'
@@ -18,6 +24,7 @@ plugins {
     id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 def ENV = System.getenv()
 version = "${minecraft_release}-" + new Date().format("yyyyMMdd-HHmmss")
@@ -45,14 +52,14 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-    maven { url = "https://modmaven.dev"}
+    maven { url = "https://modmaven.dev" }
 }
 
 
 dependencies {
     minecraft([
-            group: "net.minecraftforge",
-            name: 'forge',
+            group  : "net.minecraftforge",
+            name   : 'forge',
             version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
     ])
 
@@ -95,7 +102,7 @@ task createVersionFile(type: CreateVersionClass) {
 }
 
 minecraft {
-    mappings channel: 'official', version: "${minecraft_version}"
+    mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -176,12 +183,12 @@ afterEvaluate {
 jar {
     manifest {
         attributes([
-                "Specification-Title": "Ex Nihilo: Sequentia",
-                "Specification-Vendor": "NovaMachina",
-                "Specification-Version": version, // We are version 1 of ourselves
-                "Implementation-Title": project.name,
-                "Implementation-Version": version,
-                "Implementation-Vendor" :"NovaMachina",
+                "Specification-Title"     : "Ex Nihilo: Sequentia",
+                "Specification-Vendor"    : "NovaMachina",
+                "Specification-Version"   : version, // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : version,
+                "Implementation-Vendor"   : "NovaMachina",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -226,15 +233,15 @@ abstract class CreateVersionClass extends DefaultTask {
 
     @TaskAction
     void writeString() {
-        FileWriter fw;
-        fw = new FileWriter('update.json');
+        FileWriter fw
+        fw = new FileWriter('update.json')
         fw.write("{\n" +
                 "  \"homepage\": \"https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia\",\n" +
                 "  \"promos\": {\n" +
                 "    \"1.16-latest\": \"${fileVersion.get()}\",\n" +
                 "    \"1.16-recommended\": \"${fileVersion.get()}\"\n" +
                 "  }\n" +
-                "}\n");
-        fw.close();
+                "}\n")
+        fw.close()
     }
 }
