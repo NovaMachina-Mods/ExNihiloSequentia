@@ -171,6 +171,7 @@ public abstract class BaseCrucibleTile extends BlockEntity {
         //return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbt);
     }
 
+    @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
         @Nonnull final CompoundTag nbt = new CompoundTag();
