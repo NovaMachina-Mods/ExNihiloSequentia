@@ -3,9 +3,9 @@ package novamachina.exnihilosequentia.common.datagen;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.data.*;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
@@ -449,12 +449,11 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createHeatRecipes(consumer, Blocks.SOUL_FIRE, 4, "soul_fire");
 
         // Lit blocks
-        StatePropertiesPredicate lit = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true).build();
-        createHeatRecipes(consumer, Blocks.CAMPFIRE, 4, lit, "campfire");
-        createHeatRecipes(consumer, Blocks.SOUL_CAMPFIRE, 4, lit, "soul_campfire");
-        createHeatRecipes(consumer, Blocks.FURNACE, 3, lit, "furnace");
-        createHeatRecipes(consumer, Blocks.REDSTONE_TORCH, 1, lit, "redstone_torch");
-        createHeatRecipes(consumer, Blocks.REDSTONE_WALL_TORCH, 1, lit, "redstone_wall_torch");
+        createLitHeatRecipes(consumer, Blocks.CAMPFIRE, 4, "campfire");
+        createLitHeatRecipes(consumer, Blocks.SOUL_CAMPFIRE, 4, "soul_campfire");
+        createLitHeatRecipes(consumer, Blocks.FURNACE, 3, "furnace");
+        createLitHeatRecipes(consumer, Blocks.REDSTONE_TORCH, 1, "redstone_torch");
+        createLitHeatRecipes(consumer, Blocks.REDSTONE_WALL_TORCH, 1, "redstone_wall_torch");
     }
 
     private void registerIronOres(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final EnumOre ore) {

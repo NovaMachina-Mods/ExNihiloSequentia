@@ -13,6 +13,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
@@ -58,51 +59,91 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         return "Recipes: " + modId;
     }
 
+    /**
+     * @param id how should the compost recipe be named
+     * @return returns compost recipe as resource location
+     */
     @Nonnull
     protected ResourceLocation compostLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "compost/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param id how should the crook be named
+     * @return returns crook as resource location
+     */
     @Nonnull
     protected ResourceLocation crookLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "crook/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param id how should the crucible be named
+     * @return returns crucible as resource location
+     */
     @Nonnull
     protected ResourceLocation crucibleLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "crucible/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param id how should the fluid item to block recipe be named
+     * @return returns fluid item to block recipe as resource location
+     */
     @Nonnull
     protected ResourceLocation fluidItemLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "fluid_item/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param id how should the fluid on top recipe be named
+     * @return returns fluid on top recipe as resource location
+     */
     @Nonnull
     protected ResourceLocation fluidOnTopLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "fluid_on_top/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param id how should the fluid transformation recipe be named
+     * @return returns fluid transformation recipe as resource location
+     */
     @Nonnull
     protected ResourceLocation fluidTransformLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "fluid_transform/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param id how should the hammer be named
+     * @return returns hammer as resource location
+     */
     @Nonnull
     protected ResourceLocation hammerLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "hammer/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param id how should the heat recipe be named
+     * @return returns heat recipe as resource location
+     */
     @Nonnull
     protected ResourceLocation heatLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "heat/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param id how should the sieve recipe be named
+     * @return returns sieve recipe as resource location
+     */
     @Nonnull
     protected ResourceLocation sieveLoc(@Nonnull final String id) {
         return new ResourceLocation(modId, "sieve/" + prependRecipePrefix(id));
     }
 
+    /**
+     * @param ore get ore for adding piece to chunk recipe
+     * @param consumer get consumer
+     */
     protected void registerOre(@Nonnull final EnumOre ore, @Nonnull final Consumer<FinishedRecipe> consumer) {
         @Nullable final RegistryObject<OreItem> chunk = ore.getChunkItem();
         @Nullable final RegistryObject<OreItem> piece = ore.getPieceItem();
@@ -117,6 +158,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getChunkName())));
     }
 
+    /**
+     * @param ore get ore for adding chunk to ingot recipe (smelting)
+     * @param consumer get consumer
+     */
     @SuppressWarnings("unused")
     protected void registerSmelting(@Nonnull final EnumOre ore, @Nonnull final Consumer<FinishedRecipe> consumer) {
         @Nullable final RegistryObject<OreItem> chunk = ore.getChunkItem();
@@ -140,32 +185,72 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, new ResourceLocation(modId, prependRecipePrefix("blast_" + ore.getIngotName())));
     }
 
+    /**
+     * @param id adds "ens_" to any other method (most used in resource location methods)
+     * @return returns string for other method
+     */
     protected String prependRecipePrefix(@Nonnull final String id) {
         return "ens_" + id;
     }
 
+    /**
+     * @param location how should the sieve recipe be named
+     * @return returns save location
+     */
     protected ResourceLocation createSaveLocation(@Nonnull final ResourceLocation location) {
         return new ResourceLocation(location.getNamespace(), prependRecipePrefix(location.getPath()));
     }
-	
+
+    /**
+     * @param item adds item to minecraft's composter
+     * @param chance chance to successfully add item to composter
+     */
 	public static void createMCCompost(@Nonnull final ItemLike item, final float chance) {
         ComposterBlock.COMPOSTABLES.put(item, chance);
     }
 
+    /**
+     * @param item get item for compost recipe
+     * @param amount how much compost the inserted item should make
+     * @param consumer get consumer
+     * @param id name of the item to save to
+     */
     protected void createCompostRecipe(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final Item item,
-                                       final int amount, @Nonnull final String string) {
-        CompostRecipeBuilder.builder().input(item).amount(amount).build(consumer, compostLoc(string));
+                                       final int amount, @Nonnull final String id) {
+        CompostRecipeBuilder.builder().input(item).amount(amount).build(consumer, compostLoc(id));
     }
+
+    /**
+     * @param block get block for compost recipe
+     * @param amount how much compost the inserted item should make
+     * @param consumer get consumer
+     * @param id name of the item to save to
+     */
     @SuppressWarnings("SameParameterValue")
     protected void createCompostRecipe(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final Block block,
-                                       final int amount, @Nonnull final String string) {
-        CompostRecipeBuilder.builder().input(block).amount(amount).build(consumer, compostLoc(string));
+                                       final int amount, @Nonnull final String id) {
+        CompostRecipeBuilder.builder().input(block).amount(amount).build(consumer, compostLoc(id));
     }
+
+    /**
+     * @param item get item tag for compost recipe
+     * @param amount how much compost the inserted item should make
+     * @param consumer get consumer
+     * @param id name of the item to save to
+     */
     protected void createCompostRecipe(@Nonnull final Consumer<FinishedRecipe> consumer,
                                        @Nonnull final Tag.Named<Item> item, final int amount,
-                                       @Nonnull final String string) {
-        CompostRecipeBuilder.builder().input(item).amount(amount).build(consumer, compostLoc(string));
+                                       @Nonnull final String id) {
+        CompostRecipeBuilder.builder().input(item).amount(amount).build(consumer, compostLoc(id));
     }
+
+    /**
+     * @param itemInput get item or block tag for crooking
+     * @param itemDrop what item should drop by breaking with crook
+     * @param chance chance to drop item
+     * @param consumer get consumer
+     * @param id name of the item to save to
+     */
     @SuppressWarnings("SameParameterValue")
     protected void createCrookRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                       @Nonnull final Tag.Named<Item> itemInput,
@@ -174,17 +259,37 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
     }
 
+    /**
+     * @param itemInput get block for crooking
+     * @param itemDrop what item should drop by breaking with crook
+     * @param chance chance to drop item
+     * @param consumer get consumer
+     * @param id name of the item to save to
+     */
     protected void createCrookRecipes(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final Block itemInput,
                                       @Nonnull final ItemLike itemDrop, final float chance,
                                       @Nonnull final String id) {
         CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
     }
 
+    /**
+     * @param block get block to add to crucible
+     * @param amount amount for fluid to create
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
     protected void createFiredCrucibleRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                               @Nonnull final Block block, final int amount, @Nonnull final String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(block)).amount(amount).fluidResult(Fluids.LAVA)
                 .crucibleType(CrucibleTypeEnum.FIRED).build(consumer, crucibleLoc(id));
     }
+
+    /**
+     * @param item get item tag to add to crucible
+     * @param amount amount for fluid to create
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
     @SuppressWarnings("unused")
     protected void createFiredCrucibleRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                               @Nonnull final Tag.Named<Item> item, final int amount,
@@ -192,6 +297,13 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.LAVA)
                 .crucibleType(CrucibleTypeEnum.FIRED).build(consumer, crucibleLoc(id));
     }
+
+    /**
+     * @param item get item tag to add to crucible
+     * @param amount amount for fluid to create
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
     @SuppressWarnings("SameParameterValue")
     protected void createWaterCrucibleRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                               @Nonnull final Tag.Named<Item> item, final int amount,
@@ -199,6 +311,13 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.WATER)
                 .crucibleType(CrucibleTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
+
+    /**
+     * @param item get block to add to crucible
+     * @param amount amount for fluid to create
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
     @SuppressWarnings("unused")
     protected void createWaterCrucibleRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                               @Nonnull final Item item, final int amount, @Nonnull final String id) {
@@ -206,11 +325,26 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .crucibleType(CrucibleTypeEnum.WOOD).build(consumer, crucibleLoc(id));
     }
 
+    /**
+     * @param fluidInput get fluid to convert to block
+     * @param itemInput get item to convert fluid to block
+     * @param blockOutput get block that gets converted by fluid and item
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
     protected void createFluidItemRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                           @Nonnull final Fluid fluidInput, @Nonnull final Item itemInput,
                                           @Nonnull final Block blockOutput, @Nonnull final String id) {
         FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput).build(consumer, fluidItemLoc(id));
     }
+
+    /**
+     * @param fluidInput get fluid to convert to block
+     * @param itemInput get item tag to convert fluid to block
+     * @param blockOutput get block that gets converted by fluid and item
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
     protected void createFluidItemRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                           @Nonnull final Fluid fluidInput,
                                           @Nonnull final Tags.IOptionalNamedTag<Item> itemInput,
@@ -218,6 +352,13 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput).build(consumer, fluidItemLoc(id));
     }
 
+    /**
+     * @param fluidInTank get fluid in tank to convert to block
+     * @param fluidOnTop get fluid on top of tank to convert fluid to block
+     * @param blockOutput get block that gets converted by fluid and fluid on top
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
     protected void createFluidOnTopRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                            @Nonnull final Fluid fluidInTank, @Nonnull final Fluid fluidOnTop,
                                            @Nonnull final Block blockOutput, @Nonnull final String id) {
@@ -225,6 +366,13 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .build(consumer, fluidOnTopLoc(id));
     }
 
+    /**
+     * @param fluidInTank get fluid to convert to new fluid
+     * @param catalyst get item to convert fluid to new fluid
+     * @param fluidResult get new fluid that gets converted by fluid and item
+     * @param consumer get consumer
+     * @param id name of the fluid to save to
+     */
     protected void createFluidTransformRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                                @Nonnull final Fluid fluidInTank,
                                                @Nonnull final Tag.Named<Item> catalyst,
@@ -233,6 +381,13 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .result(fluidResult).build(consumer, fluidTransformLoc(id));
     }
 
+    /**
+     * @param fluidInTank get fluid to convert to block
+     * @param catalyst get item to convert fluid to block
+     * @param fluidResult get block that got converted by fluid and item
+     * @param consumer get consumer
+     * @param id name of the fluid to save to
+     */
     protected void createFluidTransformRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                                @Nonnull final Fluid fluidInTank, @Nonnull final Item catalyst,
                                                @Nonnull final Fluid fluidResult, @Nonnull final String id) {
@@ -240,49 +395,95 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .result(fluidResult).build(consumer, fluidTransformLoc(id));
     }
 
+    /**
+     * @param blockInput get block that should be broken by hammer
+     * @param blockOutput get block dropped after breaking input by hammer
+     * @param consumer get consumer
+     * @param id name of the output block to save to
+     */
     protected void createHammerRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                        @Nonnull final Block blockInput, @Nonnull final Block blockOutput,
                                        @Nonnull final String id) {
         HammerRecipeBuilder.builder().input(blockInput).addDrop(blockOutput).build(consumer, hammerLoc(id));
     }
 
+    /**
+     * @param block get block that should give heat to crucible above
+     * @param amount get amount of heat
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
     protected void createHeatRecipes(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final Block block,
-                                     final int amount, @Nonnull final String id) {
+                                        final int amount, @Nonnull final String id) {
         HeatRecipeBuilder.builder().input(block).amount(amount).build(consumer, heatLoc(id));
     }
 
-    protected void createHeatRecipes(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final Block block,
-                                     final int amount, @Nonnull final StatePropertiesPredicate properties,
-                                     @Nonnull final String id) {
-        HeatRecipeBuilder.builder().input(block).amount(amount).properties(properties).build(consumer, heatLoc(id));
+    /**
+     * @param block get block that should give heat to crucible above
+     * @param amount get amount of heat
+     * @param consumer get consumer
+     * @param id name of the block to save to
+     */
+    protected void createLitHeatRecipes(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final Block block,
+                                        final int amount, @Nonnull final String id) {
+        StatePropertiesPredicate lit = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true).build();
+        HeatRecipeBuilder.builder().input(block).amount(amount).properties(lit).build(consumer, heatLoc(id));
     }
 
+    /**
+     * @param input get item to smelt
+     * @param output get smelted output item
+     * @param xpSmelt get xp by smelting
+     * @param durationSmelt get duration by smelting
+     * @param xpBlast get xp by blasting
+     * @param durationBlast get duration by blasting
+     * @param condition get condition (no explanation yet)
+     * @param consumer get consumer
+     * @param id name of block to save to
+     */
     @SuppressWarnings("SameParameterValue")
     protected void createSmeltingRecipe(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final Item input,
                                         @Nonnull final Item output, final float xpSmelt, final int durationSmelt,
                                         final float xpBlast, final int durationBlast, @Nonnull final String condition,
-                                        @Nonnull final ResourceLocation rl) {
+                                        @Nonnull final ResourceLocation id) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(input), output, xpSmelt, durationSmelt)
                 .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-                .save(consumer, createSaveLocation(rl));
+                .save(consumer, createSaveLocation(id));
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(input), output, xpBlast, durationBlast)
                 .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-                .save(consumer, createSaveLocation(new ResourceLocation(rl + "_blast")));
+                .save(consumer, createSaveLocation(new ResourceLocation(id + "_blast")));
     }
 
+    /**
+     * @param input get item to smelt
+     * @param output get smelted output item
+     * @param xpCampfire get xp by campfire
+     * @param durationCampfire get duration by campfire
+     * @param xpSmoker get xp by smoker
+     * @param durationSmoker get duration by smoker
+     * @param condition get condition (no explanation yet)
+     * @param consumer get consumer
+     * @param id name of block to save to
+     */
     @SuppressWarnings("SameParameterValue")
     protected void createCookingRecipe(@Nonnull final Consumer<FinishedRecipe> consumer, @Nonnull final Item input,
                                        @Nonnull final Item output, final float xpCampfire, final int durationCampfire,
                                        final float xpSmoker, final int durationSmoker, @Nonnull final String condition,
-                                       @Nonnull final ResourceLocation rl) {
+                                       @Nonnull final ResourceLocation id) {
         SimpleCookingRecipeBuilder.cooking(Ingredient.of(input), output, xpCampfire, durationCampfire, RecipeSerializer.CAMPFIRE_COOKING_RECIPE)
                 .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-                .save(consumer, createSaveLocation(new ResourceLocation(rl + "_from_campfire")));
+                .save(consumer, createSaveLocation(new ResourceLocation(id + "_from_campfire")));
         SimpleCookingRecipeBuilder.cooking(Ingredient.of(input), output, xpSmoker, durationSmoker, RecipeSerializer.SMOKING_RECIPE)
                 .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-                .save(consumer, createSaveLocation(new ResourceLocation(rl + "_from_smoker")));
+                .save(consumer, createSaveLocation(new ResourceLocation(id + "_from_smoker")));
     }
 
+    /**
+     * @param barrel get barrel to create to
+     * @param block get block to make barrel
+     * @param slab get slab to make barrel
+     * @param consumer get consumer
+     */
     @SuppressWarnings("SameParameterValue")
     protected void createBarrel(@Nonnull final Consumer<FinishedRecipe> consumer,
                                 @Nonnull final RegistryObject<BaseBlock> barrel,
@@ -299,6 +500,12 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(barrel.getId()));
     }
 
+    /**
+     * @param barrel get barrel to create to
+     * @param block get block to make barrel
+     * @param slab get slab to make barrel
+     * @param consumer get consumer
+     */
     protected void createBarrel(@Nonnull final Consumer<FinishedRecipe> consumer,
                                 @Nonnull final RegistryObject<BaseBlock> barrel, @Nonnull final Item block,
                                 @Nonnull final Item slab) {
@@ -314,6 +521,12 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(barrel.getId()));
     }
 
+    /**
+     * @param crucible get crucible to create to
+     * @param block get block to make crucible
+     * @param slab get slab to make crucible
+     * @param consumer get consumer
+     */
     protected void createCrucible(@Nonnull final Consumer<FinishedRecipe> consumer,
                                   @Nonnull final RegistryObject<BaseBlock> crucible, @Nonnull final Item block,
                                   @Nonnull final Item slab) {
@@ -329,6 +542,12 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(crucible.getId()));
     }
 
+    /**
+     * @param crucible get crucible to create to
+     * @param block get block to make crucible
+     * @param slab get slab to make crucible
+     * @param consumer get consumer
+     */
     @SuppressWarnings("unused")
     protected void createCrucible(@Nonnull final Consumer<FinishedRecipe> consumer,
                                   @Nonnull final RegistryObject<BaseBlock> crucible,
@@ -345,6 +564,12 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(crucible.getId()));
     }
 
+    /**
+     * @param sieve get sieve to create to
+     * @param block get block to make sieve
+     * @param slab get slab to make sieve
+     * @param consumer get consumer
+     */
     protected void createSieve(@Nonnull final Consumer<FinishedRecipe> consumer,
                                @Nonnull final RegistryObject<?> sieve, @Nonnull final Item block,
                                @Nonnull final Item slab) {
@@ -359,21 +584,31 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(sieve.getId()));
     }
 
-    protected void createCrook(@Nonnull final Item result, @Nonnull final Item input,
+    /**
+     * @param crook get crook to create to
+     * @param input get item to create crook
+     * @param consumer get consumer
+     */
+    protected void createCrook(@Nonnull final Item crook, @Nonnull final Item input,
                                @Nonnull final Consumer<FinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(result)
+        ShapedRecipeBuilder.shaped(crook)
                 .pattern("xx")
                 .pattern(" x")
                 .pattern(" x")
                 .define('x', input)
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-                .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(crook.getRegistryName())));
     }
 
-    protected void createCrook(@Nonnull final Item result, @Nonnull final Tag.Named<Item> input,
+    /**
+     * @param crook get crook to create to
+     * @param input get item tag to create crook
+     * @param consumer get consumer
+     */
+    protected void createCrook(@Nonnull final Item crook, @Nonnull final Tag.Named<Item> input,
                                @Nonnull final Consumer<FinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(result)
+        ShapedRecipeBuilder.shaped(crook)
                 .pattern("xx")
                 .pattern(" x")
                 .pattern(" x")
@@ -381,12 +616,17 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
                 .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.TriggerInstance
                         .hasItems(ItemPredicate.Builder.item().of(input).build()))
-                .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(crook.getRegistryName())));
     }
 
-    protected void createHammer(@Nonnull final Item output, @Nonnull final Tag.Named<Item> input,
+    /**
+     * @param hammer get crook to create to
+     * @param input get item tag to create crook
+     * @param consumer get consumer
+     */
+    protected void createHammer(@Nonnull final Item hammer, @Nonnull final Tag.Named<Item> input,
                                 @Nonnull final Consumer<FinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(output)
+        ShapedRecipeBuilder.shaped(hammer)
                 .pattern(" x ")
                 .pattern(" -x")
                 .pattern("-  ")
@@ -395,9 +635,14 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance
                         .hasItems(ItemPredicate.Builder.item().of(Tags.Items.RODS).build()))
                 .unlockedBy(MATERIAL_CONDITION, has(input))
-                .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(hammer.getRegistryName())));
     }
 
+    /**
+     * @param result get block to create to
+     * @param input get pebble to create block
+     * @param consumer get consumer
+     */
     protected void createPebbleBlock(@Nonnull final Block result, @Nonnull final Item input,
                                      @Nonnull final Consumer<FinishedRecipe> consumer) {
         @Nullable final ResourceLocation resourceLocation = result.getRegistryName();
@@ -412,29 +657,41 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
                 .save(consumer, createSaveLocation(resourceLocation));
     }
 
-    protected void createMesh(@Nonnull final Item output, @Nonnull final Item inputMesh,
+    /**
+     * @param outputMesh get mesh to create to
+     * @param inputMesh get mesh to create output mesh
+     * @param inputItem get item tag to create output mesh
+     * @param consumer get consumer
+     */
+    protected void createMesh(@Nonnull final Item outputMesh, @Nonnull final Item inputMesh,
                               @Nonnull final Tags.IOptionalNamedTag<Item> inputItem,
                               @Nonnull final Consumer<FinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(output)
+        ShapedRecipeBuilder.shaped(outputMesh)
                 .pattern("i i")
                 .pattern("imi")
                 .pattern("i i")
                 .define('i', inputItem)
                 .define('m', inputMesh)
                 .unlockedBy("has_mesh", InventoryChangeTrigger.TriggerInstance.hasItems(inputMesh))
-                .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(outputMesh.getRegistryName())));
     }
 
+    /**
+     * @param outputMesh get mesh to create to
+     * @param inputMesh get mesh to create output mesh
+     * @param inputItem get item to create output mesh
+     * @param consumer get consumer
+     */
     @SuppressWarnings("SameParameterValue")
-    protected void createMesh(@Nonnull final Item output, @Nonnull final Item inputMesh,@Nonnull final Item inputItem,
+    protected void createMesh(@Nonnull final Item outputMesh, @Nonnull final Item inputMesh,@Nonnull final Item inputItem,
                               @Nonnull final Consumer<FinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(output)
+        ShapedRecipeBuilder.shaped(outputMesh)
                 .pattern("i i")
                 .pattern("imi")
                 .pattern("i i")
                 .define('i', inputItem)
                 .define('m', inputMesh)
                 .unlockedBy("has_mesh", InventoryChangeTrigger.TriggerInstance.hasItems(inputMesh))
-                .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
+                .save(consumer, createSaveLocation(Objects.requireNonNull(outputMesh.getRegistryName())));
     }
 }
