@@ -3,25 +3,20 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
-trigger:
-  branches:
-    include:
-      - 1.16-dev
 pr:
   branches:
     include:
-      - 1.16-dev
-      - 1.16
+      - 1.18
 
 pool: Bisect Pool
 
 steps:
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    javaHomeOption: 'Path'
-    jdkVersionOption: '1.8'
-    jdkDirectory: '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.272.b10-0.fc31.x86_64'
-    jdkArchitectureOption: 'x64'
-    tasks: 'build'
+  - task: Gradle@2
+    inputs:
+      workingDirectory: ''
+      gradleWrapperFile: 'gradlew'
+      javaHomeOption: 'Path'
+      jdkVersionOption: '1.17'
+      jdkDirectory: '/usr/lib/jvm/java-17'
+      jdkArchitectureOption: 'x64'
+      tasks: 'build'

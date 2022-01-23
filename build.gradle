@@ -27,9 +27,10 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 def ENV = System.getenv()
-version = "${minecraft_release}-" + new Date().format("yyyyMMdd-HHmmss")
-group = "${artifact_group}.${artifact_basename}"
-archivesBaseName = "${artifact_basename}"
+version = new Date().format("yyyyMMdd-HHmmss")
+group = "${artifact_group}"
+archivesBaseName = "${artifact_basename}-${minecraft_version}"
+def artifactVersion = "${archivesBaseName}-${version}"
 
 sourceSets {
     main {
@@ -163,12 +164,7 @@ curseforge {
         id = "${curseforge_project}"
         releaseType = 'release'
         mainArtifact jar
-        addGameVersion '1.16'
-        addGameVersion '1.16.1'
-        addGameVersion '1.16.2'
-        addGameVersion '1.16.3'
-        addGameVersion '1.16.4'
-        addGameVersion '1.16.5'
+        addGameVersion '1.18'
         changelog = file('changelog.html')
         changelogType = 'html'
     }
@@ -185,9 +181,9 @@ jar {
         attributes([
                 "Specification-Title"     : "Ex Nihilo: Sequentia",
                 "Specification-Vendor"    : "NovaMachina",
-                "Specification-Version"   : version, // We are version 1 of ourselves
+                "Specification-Version"   : artifactVersion, // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : version,
+                "Implementation-Version"  : artifactVersion,
                 "Implementation-Vendor"   : "NovaMachina",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
@@ -203,8 +199,8 @@ jar.finalizedBy('reobfJar')
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = "${artifact_group}"
-            artifactId = "${artifact_basename}"
+            groupId = group
+            artifactId = archivesBaseName
             version = "${version}"
             artifact jar
         }
@@ -238,8 +234,8 @@ abstract class CreateVersionClass extends DefaultTask {
         fw.write("{\n" +
                 "  \"homepage\": \"https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia\",\n" +
                 "  \"promos\": {\n" +
-                "    \"1.16-latest\": \"${fileVersion.get()}\",\n" +
-                "    \"1.16-recommended\": \"${fileVersion.get()}\"\n" +
+                "    \"1.18-latest\": \"${fileVersion.get()}\",\n" +
+                "    \"1.18-recommended\": \"${fileVersion.get()}\"\n" +
                 "  }\n" +
                 "}\n")
         fw.close()
