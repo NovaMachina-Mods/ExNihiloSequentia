@@ -2,12 +2,16 @@ package novamachina.exnihilosequentia.common.utility;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+import com.google.common.collect.Lists;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 
 @Mod.EventBusSubscriber
 public class Config {
@@ -57,6 +61,8 @@ public class Config {
     @Nonnull private static final ForgeConfigSpec.IntValue minStringCount;
     @Nonnull private static final ForgeConfigSpec.IntValue secondsToCompost;
     @Nonnull private static final ForgeConfigSpec.IntValue secondsToFluidTransform;
+    // Hammer
+    @Nonnull private static ForgeConfigSpec.ConfigValue<List<? extends String>> effectiveBlocksOn;
     // Durability Hammer
     @Nonnull private static final ForgeConfigSpec.IntValue hammerWoodValue;
     @Nonnull private static final ForgeConfigSpec.IntValue hammerStoneValue;
@@ -154,6 +160,18 @@ public class Config {
         vanillaSimulateDropCount = COMMON_BUILDER
                 .comment("Number of times the crook will \"break\" a leaf block to get drops (Default: 3)")
                 .defineInRange("vanillaDropSimulateCount", 3, 1, Integer.MAX_VALUE);
+        COMMON_BUILDER.pop();
+
+        //hammerConfigs
+        COMMON_BUILDER.comment("Hammer Configs").push(SUBCATEGORY_HAMMERS);
+        effectiveBlocksOn = COMMON_BUILDER
+                .comment("List of blocks hammer is effective at")
+                .defineList("effectiveBlocksOn", Lists.newArrayList(Arrays.asList(mcString("stone"), mcString("diorite"), mcString("andesite"), mcString("granite"),
+                            mcString("netherrack"), mcString("end_stone"), mcString("cobblestone"), exnString("crushed_diorite"), exnString("crushed_andesite"),
+                            exnString("crushed_granite"), exnString("crushed_netherrack"), exnString("crushed_end_stone"), mcString("gravel"), mcString("sand"),
+                            mcString("tube_coral_block"), mcString("brain_coral_block"), mcString("bubble_coral_block"), mcString("fire_coral_block"), mcString("horn_coral_block"),
+                            mcString("tube_coral"), mcString("brain_coral"), mcString("bubble_coral"), mcString("fire_coral"), mcString("horn_coral"))),
+                        s -> s instanceof String && ResourceLocation.tryParse((String) s) != null);
         COMMON_BUILDER.pop();
 
         //crucibleConfigs
@@ -335,6 +353,8 @@ public class Config {
 
     public static int getHammerNetheriteDurability() { return hammerNetheriteValue.get(); }
 
+    public static List<? extends String> getEffectiveBlocksOn() { return effectiveBlocksOn.get(); }
+
     // Mesh
     public static boolean enableMeshDurability() { return enableMeshDurability.get(); }
 
@@ -436,5 +456,13 @@ public class Config {
 
         configData.load();
         spec.setConfig(configData);
+    }
+
+    private static String exnString(String path) {
+        return "exnihilosequentia:" + path;
+    }
+
+    private static String mcString(String path) {
+        return "minecraft:" + path;
     }
 }
