@@ -51,7 +51,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 repositories {
     maven { url = 'https://files.minecraftforge.net/maven' }
     maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
-    maven { url = "https://maven.tterrag.com/" } // TOP
+    maven { url = "https://maven.k-4u.nl" } // TOP
     maven { url = "https://maven.blamejared.com" } // CraftTweaker
     maven {
         url = "https://cursemaven.com"

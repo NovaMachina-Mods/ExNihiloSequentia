@@ -14,8 +14,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 
 public class ExNihiloBlockTagsGenerator extends BlockTagsProvider {
-    public ExNihiloBlockTagsGenerator(DataGenerator p_126511_, @Nullable ExistingFileHelper existingFileHelper) {
-        super(p_126511_, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
+    public ExNihiloBlockTagsGenerator(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
+        super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
 
     @Override

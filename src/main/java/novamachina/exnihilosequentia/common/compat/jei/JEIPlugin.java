@@ -48,7 +48,7 @@ import javax.annotation.Nullable;
 public class JEIPlugin implements IModPlugin {
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     @Nonnull private static final ResourceLocation CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLES);
-    @Nonnull private static final ResourceLocation FIRED_CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.CRUCIBLE_FIRED);
+    @Nonnull private static final ResourceLocation FIRED_CRUCIBLES = new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ExNihiloConstants.Blocks.FIRED_CRUCIBLE);
 
     @Nonnull
     @Override
@@ -69,7 +69,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new FluidBlockRecipeCategory(guiHelper));
         registration.addRecipeCategories(new CompostRecipeCategory(guiHelper));
         registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.CRUCIBLES));
-        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.CRUCIBLE_FIRED));
+        registration.addRecipeCategories(new CrucibleRecipeCategory(guiHelper, ExNihiloConstants.Blocks.FIRED_CRUCIBLE));
         registration.addRecipeCategories(new HeatRecipeCategory(guiHelper));
     }
 

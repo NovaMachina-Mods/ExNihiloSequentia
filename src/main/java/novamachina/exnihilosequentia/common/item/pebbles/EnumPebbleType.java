@@ -9,12 +9,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public enum EnumPebbleType implements IExtensibleEnum {
-    STONE(ExNihiloConstants.Items.PEBBLE_STONE),
-    GRANITE(ExNihiloConstants.Items.PEBBLE_GRANITE),
-    DIORITE(ExNihiloConstants.Items.PEBBLE_DIORITE),
-    ANDESITE(ExNihiloConstants.Items.PEBBLE_ANDESITE),
-    BASALT(ExNihiloConstants.Items.PEBBLE_BASALT),
-    BLACKSTONE(ExNihiloConstants.Items.PEBBLE_BLACKSTONE);
+    STONE(ExNihiloConstants.Items.STONE_PEBBLE),
+    GRANITE(ExNihiloConstants.Items.GRANITE_PEBBLE),
+    DIORITE(ExNihiloConstants.Items.DIORITE_PEBBLE),
+    ANDESITE(ExNihiloConstants.Items.ANDESITE_PEBBLE),
+    BASALT(ExNihiloConstants.Items.BASALT_PEBBLE),
+    BLACKSTONE(ExNihiloConstants.Items.BLACKSTONE_PEBBLE);
 
     @Nonnull private final String type;
     @Nullable private RegistryObject<Item> registryObject;

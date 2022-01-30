@@ -22,15 +22,26 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         super(gen, modId, exFileHelper);
     }
 
+    /**
+     * like forgeLoc just for EXN
+     * @param string name of item/block/fluid using exnihilo's RL
+     * @return returns item/block/fluid's RL
+     */
     @Nonnull
     protected ResourceLocation exnihiloLoc(@Nonnull final String string) {
         return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, string);
     }
 
+    /**
+     * @param block create simple item block state out of a block
+     */
     protected void basicBlock(@Nonnull final Block block) {
         simpleItemBlock(block, cubeAll(block));
     }
 
+    /**
+     * @param fluid creates fluid model out of fluid
+     */
     protected void registerFluid(@Nonnull final Fluid fluid) {
         @Nonnull final ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
         @Nullable final ResourceLocation resourceLocation = fluid.getRegistryName();
@@ -42,16 +53,24 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
         }
     }
 
+    /**
+     * @param block create simple item block state out of a block
+     * @param modelFile needs model of block (what should the block look like?)
+     */
     protected void simpleItemBlock(@Nonnull final Block block, @Nonnull final ModelFile modelFile) {
         simpleBlock(block, modelFile);
         simpleBlockItem(block, modelFile);
     }
 
+    /**
+     * @param block need block to return registry name
+     * @return returns registry name as string
+     */
     @Nullable
-    protected String getRegistryName(@Nonnull final Block b) {
-        @Nullable final ResourceLocation resourceLocation = b.getRegistryName();
+    protected String getRegistryName(@Nonnull final Block block) {
+        @Nullable final ResourceLocation resourceLocation = block.getRegistryName();
         if (resourceLocation != null)
-            return b.getRegistryName().toString();
+            return block.getRegistryName().toString();
         return null;
     }
 

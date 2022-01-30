@@ -12,12 +12,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public enum EnumHammer implements IExtensibleEnum {
-    WOOD(ExNihiloConstants.Items.HAMMER_WOOD, Config.getHammerWoodDurability(), Tiers.WOOD),
-    STONE(ExNihiloConstants.Items.HAMMER_STONE, Config.getHammerStoneDurability(), Tiers.STONE),
-    IRON(ExNihiloConstants.Items.HAMMER_IRON, Config.getHammerIronDurability(), Tiers.IRON),
-    DIAMOND(ExNihiloConstants.Items.HAMMER_DIAMOND, Config.getHammerDiamondDurability(), Tiers.DIAMOND),
-    NETHERITE(ExNihiloConstants.Items.HAMMER_NETHERITE, Config.getHammerNetheriteDurability(), Tiers.NETHERITE),
-    GOLD(ExNihiloConstants.Items.HAMMER_GOLD, Config.getHammerGoldDurability(), Tiers.GOLD);
+    WOOD(ExNihiloConstants.Items.WOODEN_HAMMER, Config.getHammerWoodDurability(), Tiers.WOOD),
+    STONE(ExNihiloConstants.Items.STONE_HAMMER, Config.getHammerStoneDurability(), Tiers.STONE),
+    IRON(ExNihiloConstants.Items.IRON_HAMMER, Config.getHammerIronDurability(), Tiers.IRON),
+    DIAMOND(ExNihiloConstants.Items.DIAMOND_HAMMER, Config.getHammerDiamondDurability(), Tiers.DIAMOND),
+    NETHERITE(ExNihiloConstants.Items.NETHERITE_HAMMER, Config.getHammerNetheriteDurability(), Tiers.NETHERITE),
+    GOLD(ExNihiloConstants.Items.GOLD_HAMMER, Config.getHammerGoldDurability(), Tiers.GOLD);
 
     public final int maxDamage;
     @Nonnull public final String hammerName;

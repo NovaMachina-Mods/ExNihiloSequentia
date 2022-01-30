@@ -64,60 +64,60 @@ public class ExNihiloBlocks {
     @Nonnull public static final RegistryObject<BaseBlock> INFESTED_LEAVES = BLOCKS
             .register(Blocks.INFESTED_LEAVES, InfestedLeavesBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_UNFIRED = BLOCKS
-            .register(Blocks.CRUCIBLE_UNFIRED, UnfiredCrucibleBlock::new);
+            .register(Blocks.UNFIRED_CRUCIBLE, UnfiredCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_FIRED = BLOCKS
-            .register(Blocks.CRUCIBLE_FIRED, FiredCrucibleBlock::new);
+            .register(Blocks.FIRED_CRUCIBLE, FiredCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_ACACIA = BLOCKS
-            .register(Blocks.CRUCIBLE_ACACIA, WoodCrucibleBlock::new);
+            .register(Blocks.ACACIA_CRUCIBLE, WoodCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_BIRCH = BLOCKS
-            .register(Blocks.CRUCIBLE_BIRCH, WoodCrucibleBlock::new);
+            .register(Blocks.BIRCH_CRUCIBLE, WoodCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_DARK_OAK = BLOCKS
-            .register(Blocks.CRUCIBLE_DARK_OAK, WoodCrucibleBlock::new);
+            .register(Blocks.DARK_OAK_CRUCIBLE, WoodCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_JUNGLE = BLOCKS
-            .register(Blocks.CRUCIBLE_JUNGLE, WoodCrucibleBlock::new);
+            .register(Blocks.JUNGLE_CRUCIBLE, WoodCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_OAK = BLOCKS
-            .register(Blocks.CRUCIBLE_OAK, WoodCrucibleBlock::new);
+            .register(Blocks.OAK_CRUCIBLE, WoodCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_SPRUCE = BLOCKS
-            .register(Blocks.CRUCIBLE_SPRUCE, WoodCrucibleBlock::new);
+            .register(Blocks.SPRUCE_CRUCIBLE, WoodCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_CRIMSON = BLOCKS
-            .register(Blocks.CRUCIBLE_CRIMSON, NetherCrucibleBlock::new);
+            .register(Blocks.CRIMSON_CRUCIBLE, NetherCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> CRUCIBLE_WARPED = BLOCKS
-            .register(Blocks.CRUCIBLE_WARPED, NetherCrucibleBlock::new);
+            .register(Blocks.WARPED_CRUCIBLE, NetherCrucibleBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_ACACIA = BLOCKS
-            .register(Blocks.BARREL_ACACIA, WoodBarrelBlock::new);
+            .register(Blocks.ACACIA_BARREL, WoodBarrelBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_BIRCH = BLOCKS
-            .register(Blocks.BARREL_BIRCH, WoodBarrelBlock::new);
+            .register(Blocks.BIRCH_BARREL, WoodBarrelBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_DARK_OAK = BLOCKS
-            .register(Blocks.BARREL_DARK_OAK, WoodBarrelBlock::new);
+            .register(Blocks.DARK_OAK_BARREL, WoodBarrelBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_JUNGLE = BLOCKS
-            .register(Blocks.BARREL_JUNGLE, WoodBarrelBlock::new);
+            .register(Blocks.JUNGLE_BARREL, WoodBarrelBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_OAK = BLOCKS
-            .register(Blocks.BARREL_OAK, WoodBarrelBlock::new);
+            .register(Blocks.OAK_BARREL, WoodBarrelBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_SPRUCE = BLOCKS
-            .register(Blocks.BARREL_SPRUCE, WoodBarrelBlock::new);
+            .register(Blocks.SPRUCE_BARREL, WoodBarrelBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_CRIMSON = BLOCKS
-            .register(Blocks.BARREL_CRIMSON, NetherBarrelBlock::new);
+            .register(Blocks.CRIMSON_BARREL, NetherBarrelBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_WARPED = BLOCKS
-            .register(Blocks.BARREL_WARPED, NetherBarrelBlock::new);
+            .register(Blocks.WARPED_BARREL, NetherBarrelBlock::new);
     @Nonnull public static final RegistryObject<BaseBlock> BARREL_STONE = BLOCKS
-            .register(Blocks.BARREL_STONE, () -> new BlockBarrel(new BlockBuilder()
+            .register(Blocks.STONE_BARREL, () -> new BlockBarrel(new BlockBuilder()
                     .properties(BlockBehaviour.Properties.of(Material.STONE).strength(0.75F).sound(SoundType.STONE))));
     @Nonnull public static final RegistryObject<WoodSieveBlock> SIEVE_ACACIA = BLOCKS
-            .register(Blocks.SIEVE_ACACIA, WoodSieveBlock::new);
+            .register(Blocks.ACACIA_SIEVE, WoodSieveBlock::new);
     @Nonnull public static final RegistryObject<WoodSieveBlock> SIEVE_BIRCH = BLOCKS
-            .register(Blocks.SIEVE_BIRCH, WoodSieveBlock::new);
+            .register(Blocks.BIRCH_SIEVE, WoodSieveBlock::new);
     @Nonnull public static final RegistryObject<WoodSieveBlock> SIEVE_DARK_OAK = BLOCKS
-            .register(Blocks.SIEVE_DARK_OAK, WoodSieveBlock::new);
+            .register(Blocks.DARK_OAK_SIEVE, WoodSieveBlock::new);
     @Nonnull public static final RegistryObject<WoodSieveBlock> SIEVE_JUNGLE = BLOCKS
-            .register(Blocks.SIEVE_JUNGLE, WoodSieveBlock::new);
+            .register(Blocks.JUNGLE_SIEVE, WoodSieveBlock::new);
     @Nonnull public static final RegistryObject<WoodSieveBlock> SIEVE_OAK = BLOCKS
-            .register(Blocks.SIEVE_OAK, WoodSieveBlock::new);
+            .register(Blocks.OAK_SIEVE, WoodSieveBlock::new);
     @Nonnull public static final RegistryObject<WoodSieveBlock> SIEVE_SPRUCE = BLOCKS
-            .register(Blocks.SIEVE_SPRUCE, WoodSieveBlock::new);
+            .register(Blocks.SPRUCE_SIEVE, WoodSieveBlock::new);
     @Nonnull public static final RegistryObject<NetherSieveBlock> SIEVE_CRIMSON = BLOCKS
-            .register(Blocks.SIEVE_CRIMSON, NetherSieveBlock::new);
+            .register(Blocks.CRIMSON_SIEVE, NetherSieveBlock::new);
     @Nonnull public static final RegistryObject<NetherSieveBlock> SIEVE_WARPED = BLOCKS
-            .register(Blocks.SIEVE_WARPED, NetherSieveBlock::new);
+            .register(Blocks.WARPED_SIEVE, NetherSieveBlock::new);
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
     private ExNihiloBlocks() {

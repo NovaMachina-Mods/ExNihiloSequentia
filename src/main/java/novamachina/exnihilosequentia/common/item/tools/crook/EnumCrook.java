@@ -12,18 +12,18 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public enum EnumCrook implements IExtensibleEnum {
-    WOOD(ExNihiloConstants.Items.CROOK_WOOD, Config.getCrookWoodDurability(), Tiers.WOOD),
+    WOOD(ExNihiloConstants.Items.WOODEN_CROOK, Config.getCrookWoodDurability(), Tiers.WOOD),
 
-    STONE(ExNihiloConstants.Items.CROOK_STONE, Config.getCrookStoneDurability(), Tiers.STONE),
-    ANDESITE(ExNihiloConstants.Items.CROOK_ANDESITE, Config.getCrookAndesiteDurability(), Tiers.STONE),
-    GRANITE(ExNihiloConstants.Items.CROOK_GRANITE, Config.getCrookGraniteDurability(), Tiers.STONE),
-    DIORITE(ExNihiloConstants.Items.CROOK_DIORITE, Config.getCrookDioriteDurability(), Tiers.STONE),
+    STONE(ExNihiloConstants.Items.STONE_CROOK, Config.getCrookStoneDurability(), Tiers.STONE),
+    ANDESITE(ExNihiloConstants.Items.ANDESITE_CROOK, Config.getCrookAndesiteDurability(), Tiers.STONE),
+    GRANITE(ExNihiloConstants.Items.GRANITE_CROOK, Config.getCrookGraniteDurability(), Tiers.STONE),
+    DIORITE(ExNihiloConstants.Items.DIORITE_CROOK, Config.getCrookDioriteDurability(), Tiers.STONE),
 
-    GOLD(ExNihiloConstants.Items.CROOK_GOLD, Config.getCrookGoldDurability(), Tiers.IRON),
-    IRON(ExNihiloConstants.Items.CROOK_IRON, Config.getCrookIronDurability(), Tiers.IRON),
-    DIAMOND(ExNihiloConstants.Items.CROOK_DIAMOND, Config.getCrookDiamondDurability(), Tiers.DIAMOND),
+    GOLD(ExNihiloConstants.Items.GOLD_CROOK, Config.getCrookGoldDurability(), Tiers.IRON),
+    IRON(ExNihiloConstants.Items.IRON_CROOK, Config.getCrookIronDurability(), Tiers.IRON),
+    DIAMOND(ExNihiloConstants.Items.DIAMOND_CROOK, Config.getCrookDiamondDurability(), Tiers.DIAMOND),
 
-    BONE(ExNihiloConstants.Items.CROOK_BONE, Config.getCrookBoneDurability(), Tiers.STONE);
+    BONE(ExNihiloConstants.Items.BONE_CROOK, Config.getCrookBoneDurability(), Tiers.STONE);
 
     @Nonnull public final String crookName;
     public final int maxDamage;

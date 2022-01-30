@@ -38,6 +38,8 @@ public class ExNihiloDataGenerators {
             generator.addProvider(new ExNihiloItemGenerator(generator, event.getExistingFileHelper()));
             // Ores
             generator.addProvider(new ExNihiloOreItemGenerator(generator, event.getExistingFileHelper()));
+            // Lang
+            generator.addProvider(new ExNihiloLangGenerator(generator, "en_us"));
         }
     }
 }

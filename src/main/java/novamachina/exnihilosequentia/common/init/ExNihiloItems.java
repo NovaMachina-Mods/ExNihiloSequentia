@@ -66,60 +66,60 @@ public class ExNihiloItems {
             .register(Blocks.INFESTING_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTING_LEAVES.get(), tab));
     @Nonnull public static final RegistryObject<Item> INFESTED_LEAVES = ITEMS
             .register(Blocks.INFESTED_LEAVES, () -> new BlockItem(ExNihiloBlocks.INFESTED_LEAVES.get(), tab));
-    @Nonnull public static final RegistryObject<Item> SIEVE_ACACIA = ITEMS.register(Blocks.SIEVE_ACACIA,
+    @Nonnull public static final RegistryObject<Item> SIEVE_ACACIA = ITEMS.register(Blocks.ACACIA_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_ACACIA.get()));
-    @Nonnull public static final RegistryObject<Item> SIEVE_BIRCH = ITEMS.register(Blocks.SIEVE_BIRCH,
+    @Nonnull public static final RegistryObject<Item> SIEVE_BIRCH = ITEMS.register(Blocks.BIRCH_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_BIRCH.get()));
-    @Nonnull public static final RegistryObject<Item> SIEVE_DARK_OAK = ITEMS.register(Blocks.SIEVE_DARK_OAK,
+    @Nonnull public static final RegistryObject<Item> SIEVE_DARK_OAK = ITEMS.register(Blocks.DARK_OAK_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_DARK_OAK.get()));
-    @Nonnull public static final RegistryObject<Item> SIEVE_JUNGLE = ITEMS.register(Blocks.SIEVE_JUNGLE,
+    @Nonnull public static final RegistryObject<Item> SIEVE_JUNGLE = ITEMS.register(Blocks.JUNGLE_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_JUNGLE.get()));
-    @Nonnull public static final RegistryObject<Item> SIEVE_OAK = ITEMS.register(Blocks.SIEVE_OAK,
+    @Nonnull public static final RegistryObject<Item> SIEVE_OAK = ITEMS.register(Blocks.OAK_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_OAK.get()));
-    @Nonnull public static final RegistryObject<Item> SIEVE_SPRUCE = ITEMS.register(Blocks.SIEVE_SPRUCE,
+    @Nonnull public static final RegistryObject<Item> SIEVE_SPRUCE = ITEMS.register(Blocks.SPRUCE_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_SPRUCE.get()));
-    @Nonnull public static final RegistryObject<Item> SIEVE_CRIMSON = ITEMS.register(Blocks.SIEVE_CRIMSON,
+    @Nonnull public static final RegistryObject<Item> SIEVE_CRIMSON = ITEMS.register(Blocks.CRIMSON_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_CRIMSON.get()));
-    @Nonnull public static final RegistryObject<Item> SIEVE_WARPED = ITEMS.register(Blocks.SIEVE_WARPED,
+    @Nonnull public static final RegistryObject<Item> SIEVE_WARPED = ITEMS.register(Blocks.WARPED_SIEVE,
             () -> createBurnableItem(ExNihiloBlocks.SIEVE_WARPED.get()));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_UNFIRED = ITEMS
-            .register(Blocks.CRUCIBLE_UNFIRED, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), tab));
+            .register(Blocks.UNFIRED_CRUCIBLE, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), tab));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_FIRED = ITEMS
-            .register(Blocks.CRUCIBLE_FIRED, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_FIRED.get(), tab));
+            .register(Blocks.FIRED_CRUCIBLE, () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_FIRED.get(), tab));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_ACACIA = ITEMS
-            .register(Blocks.CRUCIBLE_ACACIA, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_ACACIA.get()));
+            .register(Blocks.ACACIA_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_ACACIA.get()));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_BIRCH = ITEMS
-            .register(Blocks.CRUCIBLE_BIRCH, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_BIRCH.get()));
+            .register(Blocks.BIRCH_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_BIRCH.get()));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_DARK_OAK = ITEMS
-            .register(Blocks.CRUCIBLE_DARK_OAK, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get()));
+            .register(Blocks.DARK_OAK_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get()));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_JUNGLE = ITEMS
-            .register(Blocks.CRUCIBLE_JUNGLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_JUNGLE.get()));
+            .register(Blocks.JUNGLE_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_JUNGLE.get()));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_OAK = ITEMS
-            .register(Blocks.CRUCIBLE_OAK, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_OAK.get()));
+            .register(Blocks.OAK_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_OAK.get()));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_SPRUCE = ITEMS
-            .register(Blocks.CRUCIBLE_SPRUCE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_SPRUCE.get()));
+            .register(Blocks.SPRUCE_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_SPRUCE.get()));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_CRIMSON = ITEMS
-            .register(Blocks.CRUCIBLE_CRIMSON, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()));
+            .register(Blocks.CRIMSON_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()));
     @Nonnull public static final RegistryObject<Item> CRUCIBLE_WARPED = ITEMS
-            .register(Blocks.CRUCIBLE_WARPED, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_WARPED.get()));
+            .register(Blocks.WARPED_CRUCIBLE, () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_WARPED.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_ACACIA = ITEMS
-            .register(Blocks.BARREL_ACACIA, () -> createBurnableItem(ExNihiloBlocks.BARREL_ACACIA.get()));
+            .register(Blocks.ACACIA_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_ACACIA.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_BIRCH = ITEMS
-            .register(Blocks.BARREL_BIRCH, () -> createBurnableItem(ExNihiloBlocks.BARREL_BIRCH.get()));
+            .register(Blocks.BIRCH_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_BIRCH.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_DARK_OAK = ITEMS
-            .register(Blocks.BARREL_DARK_OAK, () -> createBurnableItem(ExNihiloBlocks.BARREL_DARK_OAK.get()));
+            .register(Blocks.DARK_OAK_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_DARK_OAK.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_JUNGLE = ITEMS
-            .register(Blocks.BARREL_JUNGLE, () -> createBurnableItem(ExNihiloBlocks.BARREL_JUNGLE.get()));
+            .register(Blocks.JUNGLE_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_JUNGLE.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_OAK = ITEMS
-            .register(Blocks.BARREL_OAK, () -> createBurnableItem(ExNihiloBlocks.BARREL_OAK.get()));
+            .register(Blocks.OAK_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_OAK.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_SPRUCE = ITEMS
-            .register(Blocks.BARREL_SPRUCE, () -> createBurnableItem(ExNihiloBlocks.BARREL_SPRUCE.get()));
+            .register(Blocks.SPRUCE_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_SPRUCE.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_CRIMSON = ITEMS
-            .register(Blocks.BARREL_CRIMSON, () -> createBurnableItem(ExNihiloBlocks.BARREL_CRIMSON.get()));
+            .register(Blocks.CRIMSON_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_CRIMSON.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_WARPED = ITEMS
-            .register(Blocks.BARREL_WARPED, () -> createBurnableItem(ExNihiloBlocks.BARREL_WARPED.get()));
+            .register(Blocks.WARPED_BARREL, () -> createBurnableItem(ExNihiloBlocks.BARREL_WARPED.get()));
     @Nonnull public static final RegistryObject<Item> BARREL_STONE = ITEMS
-            .register(Blocks.BARREL_STONE, () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(), tab));
+            .register(Blocks.STONE_BARREL, () -> new BlockItem(ExNihiloBlocks.BARREL_STONE.get(), tab));
     // Begin Items Only
     @Nonnull public static final RegistryObject<Item> COOKED_SILKWORM = ITEMS
             .register(ExNihiloConstants.Items.COOKED_SILKWORM, CookedSilkwormItem::new);
