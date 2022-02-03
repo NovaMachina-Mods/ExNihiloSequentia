@@ -22,6 +22,6 @@ steps:
     gradleWrapperFile: 'gradlew'
     javaHomeOption: 'Path'
     jdkVersionOption: '1.8'
-    jdkDirectory: '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.272.b10-0.fc31.x86_64'
+    jdkDirectory: '/usr/lib/jvm/java-1.8.0'
     jdkArchitectureOption: 'x64'
     tasks: 'build'
