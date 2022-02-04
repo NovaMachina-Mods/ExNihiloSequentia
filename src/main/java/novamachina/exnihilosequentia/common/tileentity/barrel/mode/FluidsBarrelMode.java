@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoader;
@@ -196,13 +197,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Override
     protected boolean isTriggerItem(@Nonnull final ItemStack stack) {
-        if (ModList.get().isLoaded("ceramics")) {
-            ResourceLocation bucket = stack.getItem().getRegistryName();
-            if (bucket.equals(new ResourceLocation("ceramics", "clay_bucket"))) {
-                return true;
-            }
-        }
-        return stack.getItem() instanceof BucketItem ||
+        return stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent() ||
                ItemStack.isSame(stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
     }
 
