@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:blackstone_pebble"
+    }
+  },
+  "result": {
+    "item": "minecraft:blackstone"
+  }
+}

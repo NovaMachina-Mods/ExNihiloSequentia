@@ -9,8 +9,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public enum EnumResource implements IExtensibleEnum {
-    ANCIENT_SPORE(Items.ANCIENT_SPORE),
-    GRASS_SEED(Items.GRASS_SEED),
+    ANCIENT_SPORES(Items.ANCIENT_SPORES),
+    GRASS_SEEDS(Items.GRASS_SEEDS),
     PORCELAIN_CLAY(Items.PORCELAIN_CLAY),
     CRAFTING_DOLL(Items.CRAFTING_DOLL),
     BLUE_CORAL_SEED(Items.BLUE_CORAL_SEED),

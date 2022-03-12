@@ -55,7 +55,7 @@ public enum EnumDoll implements IExtensibleEnum {
 
     @Nonnull
     public String getDollName() {
-        return "doll_" + entityName;
+        return entityName + "_doll";
     }
 
     @Nonnull

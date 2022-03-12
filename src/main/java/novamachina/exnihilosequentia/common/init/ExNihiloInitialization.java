@@ -172,13 +172,13 @@ public class ExNihiloInitialization {
                 createMCCompost(seedRegistryObject.get().asItem(), 0.3F);
             }
         }
-        @Nullable final RegistryObject<Item> grassSeedRegistryObject = EnumResource.GRASS_SEED.getRegistryObject();
+        @Nullable final RegistryObject<Item> grassSeedRegistryObject = EnumResource.GRASS_SEEDS.getRegistryObject();
         if (grassSeedRegistryObject != null) {
             createMCCompost(grassSeedRegistryObject.get().asItem(), 0.3F);
         }
-        @Nullable final RegistryObject<Item> ancientSporeRegistryObject = EnumResource.ANCIENT_SPORE.getRegistryObject();
+        @Nullable final RegistryObject<Item> ancientSporeRegistryObject = EnumResource.ANCIENT_SPORES.getRegistryObject();
         if (ancientSporeRegistryObject != null) {
-            createMCCompost(EnumResource.ANCIENT_SPORE.getRegistryObject().get().asItem(), 0.3F);
+            createMCCompost(EnumResource.ANCIENT_SPORES.getRegistryObject().get().asItem(), 0.3F);
         }
 		createMCCompost(ExNihiloItems.SILKWORM.get(), 0.3F);
         createMCCompost(ExNihiloItems.COOKED_SILKWORM.get(), 0.3F);

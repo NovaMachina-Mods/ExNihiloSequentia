@@ -3,26 +3,18 @@ package novamachina.exnihilosequentia.client.setup;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.client.render.BarrelRender;
 import novamachina.exnihilosequentia.client.render.CrucibleRender;
 import novamachina.exnihilosequentia.client.render.SieveRender;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloTiles;
-import novamachina.exnihilosequentia.common.item.ore.EnumOre;
-import novamachina.exnihilosequentia.common.item.ore.OreColor;
-import novamachina.exnihilosequentia.common.item.ore.OreItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
@@ -45,35 +37,6 @@ public class ClientSetup {
         BarrelRender.register(ExNihiloTiles.BARREL_STONE.get());
         CrucibleRender.register(ExNihiloTiles.CRUCIBLE_FIRED.get());
         CrucibleRender.register(ExNihiloTiles.CRUCIBLE_WOOD.get());
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public static void onColorHandlerEvent(@Nonnull final ColorHandlerEvent.Item event) {
-        logger.debug("Fired ColorHandlerEvent.Item event");
-
-        for (@Nonnull final EnumOre ore : EnumOre.values()) {
-            @Nullable final RegistryObject<OreItem> chunkRegistryObject = ore.getChunkItem();
-            if(chunkRegistryObject != null && chunkRegistryObject.isPresent()) {
-                event.getItemColors().register(new OreColor(), ore.getChunkItem().get());
-            } else {
-                logger.warn("Missing ore chunk");
-            }
-            @Nullable final RegistryObject<OreItem> pieceRegistryObject = ore.getPieceItem();
-            if(pieceRegistryObject != null && pieceRegistryObject.isPresent()) {
-                event.getItemColors().register(new OreColor(), ore.getPieceItem().get());
-            } else {
-                logger.warn("Missing ore piece");
-            }
-            if (ore.shouldGenerateIngot()) {
-                @Nullable final RegistryObject<OreItem> ingotRegistryObject = ore.getIngotRegistryItem();
-                if (ingotRegistryObject != null && ingotRegistryObject.isPresent()) {
-                    event.getItemColors().register(new OreColor(), ore.getIngotRegistryItem().get());
-                } else {
-                    logger.warn("Missing ore ingot");
-                }
-            }
-        }
     }
 
     private static void registerBarrelRenderLayer() {

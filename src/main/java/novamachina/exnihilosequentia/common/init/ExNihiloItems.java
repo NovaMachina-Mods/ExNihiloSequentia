@@ -20,7 +20,7 @@ import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.mesh.MeshItem;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.ore.OreItem;
-import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
+import novamachina.exnihilosequentia.common.item.pebbles.EnumPebble;
 import novamachina.exnihilosequentia.common.item.pebbles.PebbleItem;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.resources.ResourceItem;
@@ -127,10 +127,10 @@ public class ExNihiloItems {
             .register(ExNihiloConstants.Items.SILKWORM, () -> new ResourceItem(ExNihiloConstants.Items.SILKWORM));
     @Nonnull public static final RegistryObject<BucketItem> WITCH_WATER_BUCKET = ITEMS
             .register(ExNihiloConstants.Items.WITCH_WATER_BUCKET,
-                    () -> new BucketItem(ExNihiloFluids.WITCH_WATER, tab.stacksTo(1)));
+                    () -> new BucketItem(ExNihiloFluids.WITCH_WATER_STILL, tab.stacksTo(1)));
     @Nonnull public static final RegistryObject<BucketItem> SEA_WATER_BUCKET = ITEMS
             .register(ExNihiloConstants.Items.SEA_WATER_BUCKET,
-                    () -> new BucketItem(ExNihiloFluids.SEA_WATER, tab.stacksTo(1)));
+                    () -> new BucketItem(ExNihiloFluids.SEA_WATER_STILL, tab.stacksTo(1)));
     @Nonnull private static final Map<EnumOre, RegistryObject<OreItem>> ingotMap = new EnumMap<>(EnumOre.class);
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
@@ -146,7 +146,9 @@ public class ExNihiloItems {
         }
 
         for (EnumOre ore : EnumOre.values()) {
-            ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
+            if (!ore.isVanilla()) {
+                ore.setChunkItem(ITEMS.register(ore.getChunkName(), () -> new OreItem(ore)));
+            }
             ore.setPieceItem(ITEMS.register(ore.getPieceName(), () -> new OreItem(ore)));
             if (ore.shouldGenerateIngot()) {
                 RegistryObject<OreItem> item = ITEMS.register(ore.getIngotName(), () -> new OreItem(ore));
@@ -165,8 +167,8 @@ public class ExNihiloItems {
                     () -> new ResourceItem(resource.getResourceName())));
         }
 
-        for (EnumPebbleType type : EnumPebbleType.values()) {
-            type.setRegistryObject(ITEMS.register(type.getType(), PebbleItem::new));
+        for (EnumPebble type : EnumPebble.values()) {
+            type.setRegistryObject(ITEMS.register(type.getName(), PebbleItem::new));
         }
 
         for (EnumMesh mesh : EnumMesh.values()) {

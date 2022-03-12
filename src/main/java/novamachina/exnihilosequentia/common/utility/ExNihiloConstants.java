@@ -24,49 +24,62 @@ public class ExNihiloConstants {
 
     public static class Blocks {
 
-        @Nonnull public static final String STONE_BARREL = "stone_barrel";
-        @Nonnull public static final String BARRELS = "barrels";
-        @Nonnull public static final String ACACIA_BARREL = "acacia_barrel";
-        @Nonnull public static final String BIRCH_BARREL = "birch_barrel";
-        @Nonnull public static final String DARK_OAK_BARREL = "dark_oak_barrel";
-        @Nonnull public static final String JUNGLE_BARREL = "jungle_barrel";
-        @Nonnull public static final String OAK_BARREL = "oak_barrel";
-        @Nonnull public static final String SPRUCE_BARREL = "spruce_barrel";
-        @Nonnull public static final String CRIMSON_BARREL = "crimson_barrel";
-        @Nonnull public static final String WARPED_BARREL = "warped_barrel";
-        @Nonnull public static final String FIRED_CRUCIBLE = "fired_crucible";
-        @Nonnull public static final String UNFIRED_CRUCIBLE = "unfired_crucible";
-        @Nonnull public static final String CRUCIBLES = "crucibles";
-        @Nonnull public static final String ACACIA_CRUCIBLE = "acacia_crucible";
-        @Nonnull public static final String BIRCH_CRUCIBLE = "birch_crucible";
-        @Nonnull public static final String DARK_OAK_CRUCIBLE = "dark_oak_crucible";
-        @Nonnull public static final String JUNGLE_CRUCIBLE = "jungle_crucible";
-        @Nonnull public static final String OAK_CRUCIBLE = "oak_crucible";
-        @Nonnull public static final String SPRUCE_CRUCIBLE = "spruce_crucible";
-        @Nonnull public static final String CRIMSON_CRUCIBLE = "crimson_crucible";
-        @Nonnull public static final String WARPED_CRUCIBLE = "warped_crucible";
-        @Nonnull public static final String CRUSHED_ANDESITE = "crushed_andesite";
-        @Nonnull public static final String CRUSHED_DIORITE = "crushed_diorite";
-        @Nonnull public static final String CRUSHED_END_STONE = "crushed_end_stone";
-        @Nonnull public static final String CRUSHED_GRANITE = "crushed_granite";
-        @Nonnull public static final String CRUSHED_NETHERRACK = "crushed_netherrack";
+        @Nonnull public static final String STONE_BARREL = createBarrelName(STONE_TAG);
+        @Nonnull public static final String ACACIA_BARREL = createBarrelName("acacia");
+        @Nonnull public static final String BIRCH_BARREL = createBarrelName("birch");
+        @Nonnull public static final String DARK_OAK_BARREL = createBarrelName("dark_oak");
+        @Nonnull public static final String JUNGLE_BARREL = createBarrelName("jungle");
+        @Nonnull public static final String OAK_BARREL = createBarrelName("oak");
+        @Nonnull public static final String SPRUCE_BARREL = createBarrelName("spruce");
+        @Nonnull public static final String CRIMSON_BARREL = createBarrelName("crimson");
+        @Nonnull public static final String WARPED_BARREL = createBarrelName("warped");
+        @Nonnull public static final String FIRED_CRUCIBLE = createCrucibleName("fired");
+        @Nonnull public static final String UNFIRED_CRUCIBLE = createCrucibleName("unfired");
+        @Nonnull public static final String ACACIA_CRUCIBLE = createCrucibleName("acacia");
+        @Nonnull public static final String BIRCH_CRUCIBLE = createCrucibleName("birch");
+        @Nonnull public static final String DARK_OAK_CRUCIBLE = createCrucibleName("dark_oak");
+        @Nonnull public static final String JUNGLE_CRUCIBLE = createCrucibleName("jungle");
+        @Nonnull public static final String OAK_CRUCIBLE = createCrucibleName("oak");
+        @Nonnull public static final String SPRUCE_CRUCIBLE = createCrucibleName("spruce");
+        @Nonnull public static final String CRIMSON_CRUCIBLE = createCrucibleName("crimson");
+        @Nonnull public static final String WARPED_CRUCIBLE = createCrucibleName("warped");
+        @Nonnull public static final String CRUSHED_ANDESITE = createCrushedName("andesite");
+        @Nonnull public static final String CRUSHED_DIORITE = createCrushedName("diorite");
+        @Nonnull public static final String CRUSHED_END_STONE = createCrushedName("end_stone");
+        @Nonnull public static final String CRUSHED_GRANITE = createCrushedName("granite");
+        @Nonnull public static final String CRUSHED_NETHERRACK = createCrushedName("netherrack");
         @Nonnull public static final String DUST = "dust";
         @Nonnull public static final String END_CAKE = "end_cake";
         @Nonnull public static final String INFESTED_LEAVES = "infested_leaves";
         @Nonnull public static final String INFESTING_LEAVES = "infesting_leaves";
         @Nonnull public static final String SEA_WATER = "sea_water";
-        @Nonnull public static final String SIEVES = "sieves";
-        @Nonnull public static final String ACACIA_SIEVE = "acacia_sieve";
-        @Nonnull public static final String BIRCH_SIEVE = "birch_sieve";
-        @Nonnull public static final String DARK_OAK_SIEVE = "dark_oak_sieve";
-        @Nonnull public static final String JUNGLE_SIEVE = "jungle_sieve";
-        @Nonnull public static final String OAK_SIEVE = "oak_sieve";
-        @Nonnull public static final String SPRUCE_SIEVE = "spruce_sieve";
-        @Nonnull public static final String CRIMSON_SIEVE = "crimson_sieve";
-        @Nonnull public static final String WARPED_SIEVE = "warped_sieve";
+        @Nonnull public static final String ACACIA_SIEVE = createSieveName("acacia");
+        @Nonnull public static final String BIRCH_SIEVE = createSieveName("birch");
+        @Nonnull public static final String DARK_OAK_SIEVE = createSieveName("dark_oak");
+        @Nonnull public static final String JUNGLE_SIEVE = createSieveName("jungle");
+        @Nonnull public static final String OAK_SIEVE = createSieveName("oak");
+        @Nonnull public static final String SPRUCE_SIEVE = createSieveName("spruce");
+        @Nonnull public static final String CRIMSON_SIEVE = createSieveName("crimson");
+        @Nonnull public static final String WARPED_SIEVE = createSieveName("warped");
         @Nonnull public static final String WITCH_WATER = "witch_water";
 
         private Blocks() {
+        }
+
+        @Nonnull
+        private static String createCrushedName(@Nonnull final String name) { return "crushed_" + name; }
+
+        @Nonnull
+        private static String createBarrelName(@Nonnull final String name) { return name + "_barrel"; }
+
+        @Nonnull
+        private static String createCrucibleName(@Nonnull final String name) {
+            return name + "_crucible";
+        }
+
+        @Nonnull
+        private static String createSieveName(@Nonnull final String name) {
+            return name + "_sieve";
         }
     }
 
@@ -83,11 +96,11 @@ public class ExNihiloConstants {
 
     public static class Items {
 
-        @Nonnull public static final String ANCIENT_SPORE = "ancient_spores";
+        @Nonnull public static final String ANCIENT_SPORES = "ancient_spores";
         @Nonnull public static final String BEEHIVE_FRAME = "beehive_frame";
-        @Nonnull public static final String BLUE_CORAL_SEED = "seed_blue_coral";
+        @Nonnull public static final String BLUE_CORAL_SEED = "blue_coral_seed";
         @Nonnull public static final String COOKED_SILKWORM = "cooked_silkworm";
-        @Nonnull public static final String CRAFTING_DOLL = "doll_crafting";
+        @Nonnull public static final String CRAFTING_DOLL = "crafting_doll";
         @Nonnull public static final String ANDESITE_CROOK = createCrookName("andesite");
         @Nonnull public static final String BLAZE_CROOK = createCrookName("blaze");
         @Nonnull public static final String BONE_CROOK = createCrookName("bone");
@@ -103,7 +116,7 @@ public class ExNihiloConstants {
         @Nonnull public static final String PURPUR_CROOK = createCrookName("purpur");
         @Nonnull public static final String STONE_CROOK = createCrookName(STONE_TAG);
         @Nonnull public static final String WOODEN_CROOK = createCrookName("wooden");
-        @Nonnull public static final String GRASS_SEED = "grass_seeds";
+        @Nonnull public static final String GRASS_SEEDS = "grass_seeds";
         @Nonnull public static final String DIAMOND_HAMMER = createHammerName("diamond");
         @Nonnull public static final String GOLD_HAMMER = createHammerName("gold");
         @Nonnull public static final String IRON_HAMMER = createHammerName("iron");
@@ -121,24 +134,10 @@ public class ExNihiloConstants {
         @Nonnull public static final String PURPLE_CORAL_SEED = "purple_coral_seed";
         @Nonnull public static final String RED_CORAL_SEED = "red_coral_seed";
         @Nonnull public static final String SEA_WATER_BUCKET = "sea_water_bucket";
-        @Nonnull public static final String SEED_ACACIA = "acacia";
-        @Nonnull public static final String SEED_BAMBOO = "bamboo";
-        @Nonnull public static final String SEED_BIRCH = "birch";
-        @Nonnull public static final String SEED_CACTUS = "cactus";
-        @Nonnull public static final String SEED_CARROT = "carrot";
-        @Nonnull public static final String SEED_DARK_OAK = "darkoak";
-        @Nonnull public static final String SEED_JUNGLE = "jungle";
-        @Nonnull public static final String SEED_KELP = "kelp";
-        @Nonnull public static final String SEED_OAK = "oak";
-        @Nonnull public static final String SEED_PICKLE = "pickle";
-        @Nonnull public static final String SEED_POTATO = "potato";
-        @Nonnull public static final String SEED_SPRUCE = "spruce";
-        @Nonnull public static final String SEED_SUGARCANE = "sugarcane";
-        @Nonnull public static final String SEED_SWEET_BERRY = "berry";
         @Nonnull public static final String SILKWORM = "silkworm";
         @Nonnull public static final String WITCH_WATER_BUCKET = "witch_water_bucket";
         @Nonnull public static final String YELLOW_CORAL_SEED = "yellow_coral_seed";
-        @Nonnull public static final String SEED_FERN = "fern";
+        @Nonnull public static final String FERN_SEED = "fern";
         @Nonnull public static final String SEED_LARGE_FERN = "large_fern";
 
         private Items() {
@@ -146,17 +145,17 @@ public class ExNihiloConstants {
 
         @Nonnull
         private static String createCrookName(@Nonnull final String name) {
-            return "crook_" + name;
+            return name + "_crook";
         }
 
         @Nonnull
         private static String createHammerName(@Nonnull final String name) {
-            return "hammer_" + name;
+            return name + "_hammer";
         }
 
         @Nonnull
         private static String createPebbleName(@Nonnull final String name) {
-            return "pebble_" + name;
+            return name + "_pebble";
         }
     }
 
@@ -168,8 +167,6 @@ public class ExNihiloConstants {
         @Nonnull public static final String IMMERSIVE_ENGINEERING = "immersiveengineering";
         @Nonnull public static final String JEI = "jei";
         @Nonnull public static final String MINECRAFT = "minecraft";
-        @Nonnull public static final String SILENT_MECHANISM = "silent_mechanism";
-        @Nonnull public static final String THERMAL_EXPANSION = "thermalexpansion";
         @Nonnull public static final String TOP = "theoneprobe";
 
         private ModIds() {
@@ -179,7 +176,6 @@ public class ExNihiloConstants {
     public static class Ore {
 
         @Nonnull public static final String ALUMINUM = "aluminum";
-        @Nonnull public static final String BISMUTH = "bismuth";
         @Nonnull public static final String COPPER = "copper";
         @Nonnull public static final String GOLD = "gold";
         @Nonnull public static final String IRON = "iron";
@@ -193,6 +189,17 @@ public class ExNihiloConstants {
 
         private Ore() {
         }
+    }
+
+    public static class BlockEntities {
+
+        @Nonnull public static final String FIRED_CRUCIBLES = "fired_crucibles";
+        @Nonnull public static final String SIEVES = "sieves";
+        @Nonnull public static final String FIRED_BARRELS = "fired_barrels";
+        @Nonnull public static final String BARRELS = "barrels";
+        @Nonnull public static final String CRUCIBLES = "crucibles";
+
+        private BlockEntities(){}
     }
 
     public static class Tooltips {

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xex",
+    " x ",
+    "x x"
+  ],
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:porcelain_clay"
+    },
+    "e": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:crafting_doll",
+    "count": 4
+  }
+}

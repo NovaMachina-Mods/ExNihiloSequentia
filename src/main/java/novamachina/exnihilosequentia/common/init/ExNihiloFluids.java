@@ -18,13 +18,13 @@ public class ExNihiloFluids {
 
     @Nonnull private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister
             .create(ForgeRegistries.FLUIDS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
-    @Nonnull public static final RegistryObject<FlowingFluid> WITCH_WATER = FLUIDS
+    @Nonnull public static final RegistryObject<FlowingFluid> WITCH_WATER_STILL = FLUIDS
             .register(ExNihiloConstants.Fluids.WITCH_WATER_STILL,
                     () -> new WitchWaterFluid.Source(WitchWaterFluid.WITCH_WATER_PROPS));
     @Nonnull public static final RegistryObject<FlowingFluid> WITCH_WATER_FLOW = FLUIDS
             .register(ExNihiloConstants.Fluids.WITCH_WATER_FLOW,
                     () -> new WitchWaterFluid.Flowing(WitchWaterFluid.WITCH_WATER_PROPS));
-    @Nonnull public static final RegistryObject<FlowingFluid> SEA_WATER = FLUIDS
+    @Nonnull public static final RegistryObject<FlowingFluid> SEA_WATER_STILL = FLUIDS
             .register(ExNihiloConstants.Fluids.SEA_WATER_STILL,
                     () -> new SeaWaterFluid.Source(SeaWaterFluid.SEA_WATER_PROPS));
     @Nonnull public static final RegistryObject<FlowingFluid> SEA_WATER_FLOW = FLUIDS

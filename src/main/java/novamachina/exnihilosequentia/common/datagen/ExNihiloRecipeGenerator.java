@@ -27,7 +27,7 @@ import novamachina.exnihilosequentia.common.item.dolls.EnumDoll;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
 import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.item.ore.OreItem;
-import novamachina.exnihilosequentia.common.item.pebbles.EnumPebbleType;
+import novamachina.exnihilosequentia.common.item.pebbles.EnumPebble;
 import novamachina.exnihilosequentia.common.item.resources.EnumResource;
 import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
 import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
@@ -37,6 +37,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -56,8 +57,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     @Nonnull private static final String PORCELAIN_CLAY_CONDITION = "has_porcelain_clay";
     @Nonnull private static final Fluid water = Fluids.WATER;
     @Nonnull private static final Fluid lava = Fluids.LAVA;
-    @Nonnull private static final Fluid witchwater = ExNihiloFluids.WITCH_WATER.get();
-    @Nonnull private static final Fluid seawater = ExNihiloFluids.SEA_WATER.get();
+    @Nonnull private static final Fluid witchwater = ExNihiloFluids.WITCH_WATER_STILL.get();
+    @Nonnull private static final Fluid seawater = ExNihiloFluids.SEA_WATER_STILL.get();
 
     public ExNihiloRecipeGenerator(@Nonnull final DataGenerator generator) {
         super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
@@ -88,6 +89,26 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         saplingMap.put(Blocks.SPRUCE_LEAVES, Items.SPRUCE_SAPLING);
 
         return saplingMap;
+    }
+
+    private HashSet<Item> getSeedsSet() {
+        @Nonnull final HashSet<Item> seedsSet = new HashSet<>();
+        seedsSet.add(Items.ACACIA_SAPLING);
+        seedsSet.add(Items.BIRCH_SAPLING);
+        seedsSet.add(Items.DARK_OAK_SAPLING);
+        seedsSet.add(Items.JUNGLE_SAPLING);
+        seedsSet.add(Items.OAK_SAPLING);
+        seedsSet.add(Items.SPRUCE_SAPLING);
+        seedsSet.add(Items.CACTUS);
+        seedsSet.add(Items.SUGAR_CANE);
+        seedsSet.add(Items.CARROT);
+        seedsSet.add(Items.POTATO);
+        seedsSet.add(Items.SWEET_BERRIES);
+        seedsSet.add(Items.KELP);
+        seedsSet.add(Items.SEA_PICKLE);
+        seedsSet.add(Items.BAMBOO);
+
+        return seedsSet;
     }
 
     private void registerBarrels(@Nonnull final Consumer<FinishedRecipe> consumer) {
@@ -142,10 +163,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         createCompostRecipe(consumer, Items.TWISTING_VINES, 100, "twisting_vine");
         createCompostRecipe(consumer, Items.TALL_GRASS, 100, "tall_grass");
         createCompostRecipe(consumer, Items.SUGAR_CANE, 80, "sugar_cane");
-        @Nullable final RegistryObject<Item> grassSeedRegistryObject = EnumResource.GRASS_SEED.getRegistryObject();
+        @Nullable final RegistryObject<Item> grassSeedRegistryObject = EnumResource.GRASS_SEEDS.getRegistryObject();
         if (grassSeedRegistryObject != null)
             createCompostRecipe(consumer, grassSeedRegistryObject.get(), 100, "grass_seed");
-        @Nullable final RegistryObject<Item> ancientSporeRegistryObject = EnumResource.ANCIENT_SPORE.getRegistryObject();
+        @Nullable final RegistryObject<Item> ancientSporeRegistryObject = EnumResource.ANCIENT_SPORES.getRegistryObject();
         if (ancientSporeRegistryObject != null)
             createCompostRecipe(consumer, ancientSporeRegistryObject.get(), 100, "ancient_spore");
         createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
@@ -159,7 +180,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
 
     private void registerCrooks(@Nonnull final Consumer<FinishedRecipe> consumer) {
         @Nullable final RegistryObject<Item> andesiteCrook = EnumCrook.ANDESITE.getRegistryObject();
-        @Nullable final RegistryObject<Item> andesitePebble = EnumPebbleType.ANDESITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> andesitePebble = EnumPebble.ANDESITE.getRegistryObject();
         if (andesiteCrook != null && andesitePebble != null)
             createCrook(andesiteCrook.get(), andesitePebble.get(), consumer);
 
@@ -172,7 +193,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             createCrook(diamondCrook.get(), Tags.Items.GEMS_DIAMOND, consumer);
 
         @Nullable final RegistryObject<Item> dioriteCrook = EnumCrook.DIORITE.getRegistryObject();
-        @Nullable final RegistryObject<Item> dioritePebble = EnumPebbleType.DIORITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> dioritePebble = EnumPebble.DIORITE.getRegistryObject();
         if (dioriteCrook != null && dioritePebble != null)
             createCrook(dioriteCrook.get(), dioritePebble.get(), consumer);
 
@@ -181,7 +202,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             createCrook(EnumCrook.GOLD.getRegistryObject().get(), Tags.Items.NUGGETS_GOLD, consumer);
 
         @Nullable final RegistryObject<Item> graniteCrook = EnumCrook.GRANITE.getRegistryObject();
-        @Nullable final RegistryObject<Item> granitePebble = EnumPebbleType.GRANITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> granitePebble = EnumPebble.GRANITE.getRegistryObject();
         if (graniteCrook != null && granitePebble != null)
             createCrook(graniteCrook.get(), granitePebble.get(), consumer);
 
@@ -190,9 +211,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             createCrook(ironCrook.get(), Tags.Items.NUGGETS_IRON, consumer);
 
         @Nullable final RegistryObject<Item> stoneCrook = EnumCrook.STONE.getRegistryObject();
-        @Nullable final RegistryObject<Item> stonePebble = EnumPebbleType.STONE.getRegistryObject();
+        @Nullable final RegistryObject<Item> stonePebble = EnumPebble.STONE.getRegistryObject();
         if (stoneCrook != null && stonePebble != null)
-            createCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebbleType.STONE.getRegistryObject().get(), consumer);
+            createCrook(EnumCrook.STONE.getRegistryObject().get(), EnumPebble.STONE.getRegistryObject().get(), consumer);
 
         @Nullable final RegistryObject<Item> woodCrook = EnumCrook.WOOD.getRegistryObject();
         if (woodCrook != null)
@@ -348,7 +369,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         if (yellowCoralSeed != null)
             createFluidItemRecipes(consumer, seawater, yellowCoralSeed.get(), Blocks.HORN_CORAL_BLOCK, "horn_coral");
 
-        @Nullable final RegistryObject<Item> ancientSpore = EnumResource.ANCIENT_SPORE.getRegistryObject();
+        @Nullable final RegistryObject<Item> ancientSpore = EnumResource.ANCIENT_SPORES.getRegistryObject();
         if (ancientSpore != null)
             createFluidItemRecipes(consumer, witchwater, ancientSpore.get(), Blocks.BROWN_MUSHROOM_BLOCK, "brown_mushroom");
 
@@ -594,7 +615,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         .hasItems(ItemPredicate.Builder.item().of(ExNihiloTags.CLAY).build()))
                 .save(consumer, createSaveLocation(EnumResource.PORCELAIN_CLAY.getRegistryObject().getId()));
 
-        @Nullable final RegistryObject<Item> blackstonePebble = EnumPebbleType.BLACKSTONE.getRegistryObject();
+        @Nullable final RegistryObject<Item> blackstonePebble = EnumPebble.BLACKSTONE.getRegistryObject();
         @Nullable final RegistryObject<OreItem> goldChunk = EnumOre.GOLD.getChunkItem();
         @Nullable final ResourceLocation gildedBlackstoneResourceLocation = Blocks.GILDED_BLACKSTONE.getRegistryName();
         if (blackstonePebble != null && goldChunk != null && gildedBlackstoneResourceLocation != null)
@@ -640,8 +661,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                         ingotItem = ingotRegistryItem.get();
                     }
                 }
-                createSmeltingRecipe(consumer, oreChunk.get(), ingotItem,0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
-                        new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
+                if (ingotItem != null) {
+                    createSmeltingRecipe(consumer, oreChunk.get(), ingotItem, 0.7F, 200, 0.7F, 100, CHUNK_CONDITION,
+                            new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, ore.getIngotName()));
+                }
             }
             if (ore.isVanilla()) {
                 if (ore == EnumOre.IRON && oreChunk != null) {
@@ -659,22 +682,22 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerPebbleBlocks(@Nonnull final Consumer<FinishedRecipe> consumer) {
-        @Nullable final RegistryObject<Item> andesitePebble = EnumPebbleType.ANDESITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> andesitePebble = EnumPebble.ANDESITE.getRegistryObject();
         if (andesitePebble != null)
             createPebbleBlock(Blocks.ANDESITE, andesitePebble.get(), consumer);
-        @Nullable final RegistryObject<Item> stonePebble = EnumPebbleType.STONE.getRegistryObject();
+        @Nullable final RegistryObject<Item> stonePebble = EnumPebble.STONE.getRegistryObject();
         if (stonePebble != null)
             createPebbleBlock(Blocks.COBBLESTONE, stonePebble.get(), consumer);
-        @Nullable final RegistryObject<Item> dioritePebble = EnumPebbleType.DIORITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> dioritePebble = EnumPebble.DIORITE.getRegistryObject();
         if (dioritePebble != null)
             createPebbleBlock(Blocks.DIORITE, dioritePebble.get(), consumer);
-        @Nullable final RegistryObject<Item> granitePebble = EnumPebbleType.GRANITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> granitePebble = EnumPebble.GRANITE.getRegistryObject();
         if (granitePebble != null)
             createPebbleBlock(Blocks.GRANITE, granitePebble.get(), consumer);
-        @Nullable final RegistryObject<Item> basaltPebble = EnumPebbleType.BASALT.getRegistryObject();
+        @Nullable final RegistryObject<Item> basaltPebble = EnumPebble.BASALT.getRegistryObject();
         if (basaltPebble != null)
             createPebbleBlock(Blocks.BASALT, basaltPebble.get(), consumer);
-        @Nullable final RegistryObject<Item> blackstonePebble = EnumPebbleType.BLACKSTONE.getRegistryObject();
+        @Nullable final RegistryObject<Item> blackstonePebble = EnumPebble.BLACKSTONE.getRegistryObject();
         if (blackstonePebble != null)
             createPebbleBlock(Blocks.BLACKSTONE, blackstonePebble.get(), consumer);
     }
@@ -691,7 +714,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
 
     private void registerSieveRecipes(@Nonnull final Consumer<FinishedRecipe> consumer) {
-        @Nullable final RegistryObject<Item> stonePebble = EnumPebbleType.STONE.getRegistryObject();
+        @Nullable final RegistryObject<Item> stonePebble = EnumPebble.STONE.getRegistryObject();
         if (stonePebble != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                     .addResult(stonePebble.get())
@@ -702,35 +725,35 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                     .build(consumer, sieveLoc("pebble_stone"));
-        @Nullable final RegistryObject<Item> andesitePebble = EnumPebbleType.ANDESITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> andesitePebble = EnumPebble.ANDESITE.getRegistryObject();
         if (andesitePebble != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                     .addResult(andesitePebble.get())
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                     .build(consumer, sieveLoc("pebble_andesite"));
-        @Nullable final RegistryObject<Item> dioritePebble = EnumPebbleType.DIORITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> dioritePebble = EnumPebble.DIORITE.getRegistryObject();
         if (dioritePebble != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                     .addResult(dioritePebble.get())
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                     .build(consumer, sieveLoc("pebble_diorite"));
-        @Nullable final RegistryObject<Item> granitePebble = EnumPebbleType.GRANITE.getRegistryObject();
+        @Nullable final RegistryObject<Item> granitePebble = EnumPebble.GRANITE.getRegistryObject();
         if (granitePebble != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                     .addResult(granitePebble.get())
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                     .build(consumer, sieveLoc("pebble_granite"));
-        @Nullable final RegistryObject<Item> basaltPebble = EnumPebbleType.BASALT.getRegistryObject();
+        @Nullable final RegistryObject<Item> basaltPebble = EnumPebble.BASALT.getRegistryObject();
         if (basaltPebble != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                     .addResult(basaltPebble.get())
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.5F))
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.1F))
                     .build(consumer, sieveLoc("pebble_basalt"));
-        @Nullable final RegistryObject<Item> blackstonePebble = EnumPebbleType.BLACKSTONE.getRegistryObject();
+        @Nullable final RegistryObject<Item> blackstonePebble = EnumPebble.BLACKSTONE.getRegistryObject();
         if (blackstonePebble != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                     .addResult(blackstonePebble.get())
@@ -753,16 +776,16 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addResult(Items.BEETROOT_SEEDS)
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.35F))
                 .build(consumer, sieveLoc("seed_beetroot"));
-        @Nullable final RegistryObject<Item> ancientSpore = EnumResource.ANCIENT_SPORE.getRegistryObject();
+        @Nullable final RegistryObject<Item> ancientSpore = EnumResource.ANCIENT_SPORES.getRegistryObject();
         if (ancientSpore != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
                     .addResult(ancientSpore.get())
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
                     .build(consumer, sieveLoc("ancient_spore"));
-        @Nullable final RegistryObject<Item> grassSeed = EnumResource.GRASS_SEED.getRegistryObject();
+        @Nullable final RegistryObject<Item> grassSeed = EnumResource.GRASS_SEEDS.getRegistryObject();
         if (grassSeed != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                    .addResult(EnumResource.GRASS_SEED.getRegistryObject().get())
+                    .addResult(EnumResource.GRASS_SEEDS.getRegistryObject().get())
                     .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
                     .build(consumer, sieveLoc("seed_grass"));
         SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
@@ -852,14 +875,9 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
 
         for (EnumOre ore : EnumOre.values()) {
             switch (ore) {
-                case IRON:
-                    registerIronOres(consumer, ore);
-                    break;
-                case GOLD:
-                    registerGoldOres(consumer, ore);
-                    break;
-                default:
-                    registerDefaultOres(consumer, ore);
+                case IRON -> registerIronOres(consumer, ore);
+                case GOLD -> registerGoldOres(consumer, ore);
+                default -> registerDefaultOres(consumer, ore);
             }
         }
 
@@ -867,24 +885,16 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
             @Nullable final RegistryObject<Item> registryObject = seed.getRegistryObject();
             if (registryObject == null)
                 continue;
-            if (seed != EnumSeed.SEED_PICKLE && seed != EnumSeed.SEED_KELP) {
-                SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
-                        .addResult(registryObject.get())
-                        .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
-                        .build(consumer, sieveLoc(seed.getSeedName()));
-            } else {
-                SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
-                        .addResult(registryObject.get())
-                        .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
-                        .isWaterlogged()
-                        .build(consumer, sieveLoc(seed.getSeedName()));
-            }
+            SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.DIRT))
+                    .addResult(registryObject.get())
+                    .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+                    .build(consumer, sieveLoc(seed.getSeedName()));
         }
 
         getLeavesSaplings().forEach((input, drop) -> {
             @Nullable final ResourceLocation resourceLocation = input.getRegistryName();
             if (resourceLocation != null) {
-                if (Objects.equals(input.getRegistryName(), new ResourceLocation("jungle_leaves"))) {
+                if (Objects.equals(resourceLocation, Items.JUNGLE_LEAVES.getRegistryName())) {
                     SieveRecipeBuilder.builder().input(Ingredient.of(input))
                             .addResult(drop)
                             .addRoll(new MeshWithChance(EnumMesh.STRING, 0.025F))
@@ -903,6 +913,25 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 }
             }
         });
+
+        getSeedsSet().forEach((drop) -> {
+            @Nullable final ResourceLocation dropLocation = drop.getRegistryName();
+            if (dropLocation != null) {
+                if (dropLocation != Items.SEA_PICKLE.getRegistryName() || dropLocation != Items.KELP.getRegistryName()) {
+                    SieveRecipeBuilder.builder().input(Ingredient.of(Items.DIRT))
+                            .addResult(drop)
+                            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+                            .build(consumer, sieveLoc(dropLocation.getPath()));
+                } else {
+                    SieveRecipeBuilder.builder().input(Ingredient.of(Tags.Items.SAND))
+                            .addResult(drop)
+                            .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
+                            .isWaterlogged()
+                            .build(consumer, sieveLoc(dropLocation.getPath()));
+                }
+            }
+        });
+
         SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.LEAVES))
                 .addResult(Items.APPLE)
                 .addRoll(new MeshWithChance(EnumMesh.STRING, 0.05F))
@@ -923,42 +952,42 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 .addRoll(new MeshWithChance(EnumMesh.FLINT, 0.05F))
                 .addRoll(new MeshWithChance(EnumMesh.IRON, 0.1F))
                 .addRoll(new MeshWithChance(EnumMesh.DIAMOND, 0.2F))
-                .build(consumer, sieveLoc("silkworm"));
+                .build(consumer, sieveLoc(ExNihiloItems.SILKWORM.getId().getPath()));
         @Nullable final RegistryObject<Item> blueCoralSeed = EnumResource.BLUE_CORAL_SEED.getRegistryObject();
         if (blueCoralSeed != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.SAND))
                     .addResult(blueCoralSeed.get())
                     .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
                     .isWaterlogged()
-                    .build(consumer, sieveLoc("seed_blue_coral"));
+                    .build(consumer, sieveLoc(blueCoralSeed.getId().getPath()));
         @Nullable final RegistryObject<Item> purpleCoralSeed = EnumResource.PURPLE_CORAL_SEED.getRegistryObject();
         if (purpleCoralSeed != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.SAND))
                     .addResult(purpleCoralSeed.get())
                     .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
                     .isWaterlogged()
-                    .build(consumer, sieveLoc("seed_purple_coral"));
+                    .build(consumer, sieveLoc(purpleCoralSeed.getId().getPath()));
         @Nullable final RegistryObject<Item> pinkCoralSeed = EnumResource.PINK_CORAL_SEED.getRegistryObject();
         if (pinkCoralSeed != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.SAND))
                     .addResult(pinkCoralSeed.get())
                     .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
                     .isWaterlogged()
-                    .build(consumer, sieveLoc("seed_pink_coral"));
+                    .build(consumer, sieveLoc(pinkCoralSeed.getId().getPath()));
         @Nullable final RegistryObject<Item> yellowCoralSeed = EnumResource.YELLOW_CORAL_SEED.getRegistryObject();
         if (yellowCoralSeed != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.SAND))
                     .addResult(yellowCoralSeed.get())
                     .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
                     .isWaterlogged()
-                    .build(consumer, sieveLoc("seed_yellow_coral"));
+                    .build(consumer, sieveLoc(yellowCoralSeed.getId().getPath()));
         @Nullable final RegistryObject<Item> redCoralSeed = EnumResource.RED_CORAL_SEED.getRegistryObject();
         if (redCoralSeed != null)
             SieveRecipeBuilder.builder().input(Ingredient.of(ItemTags.SAND))
                     .addResult(redCoralSeed.get())
                     .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))
                     .isWaterlogged()
-                    .build(consumer, sieveLoc("seed_red_coral"));
+                    .build(consumer, sieveLoc(redCoralSeed.getId().getPath()));
         SieveRecipeBuilder.builder().input(Ingredient.of(Blocks.SAND))
                 .addResult(Items.SEAGRASS)
                 .addRoll(new MeshWithChance(EnumMesh.IRON, 0.05F))

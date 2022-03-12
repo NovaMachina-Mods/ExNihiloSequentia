@@ -8,26 +8,24 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.network.HandshakeMessages;
-import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public enum EnumOre implements IExtensibleEnum {
-    COPPER(Type.MODDED, ExNihiloConstants.Ore.COPPER, new Color("FF9933"), false, true),
-    LEAD(Type.MODDED, ExNihiloConstants.Ore.LEAD, new Color("330066"), false, true),
-    NICKEL(Type.MODDED, ExNihiloConstants.Ore.NICKEL, new Color("FFFFCC"), false, true),
-    SILVER(Type.MODDED, ExNihiloConstants.Ore.SILVER, new Color("C2FAFF"), false, true),
-    TIN(Type.MODDED, ExNihiloConstants.Ore.TIN, new Color("F5FEFF"), false, true),
-    ALUMINUM(Type.MODDED, ExNihiloConstants.Ore.ALUMINUM, new Color("BFBFBF"), false, true),
-    PLATINUM(Type.MODDED, ExNihiloConstants.Ore.PLATINUM, new Color("00FFF7"), false, true),
-    URANIUM(Type.MODDED, ExNihiloConstants.Ore.URANIUM, new Color("4E5B43"), false, true),
-    ZINC(Type.MODDED, ExNihiloConstants.Ore.ZINC, new Color("A59C74"), false, true),
-    IRON(Type.VANILLA, ExNihiloConstants.Ore.IRON, new Color("BF8040"), true, false),
-    GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, new Color("FFFF00"), true, false);
+    LEAD(Type.MODDED, ExNihiloConstants.Ore.LEAD, false, true),
+    NICKEL(Type.MODDED, ExNihiloConstants.Ore.NICKEL, false, true),
+    SILVER(Type.MODDED, ExNihiloConstants.Ore.SILVER, false, true),
+    TIN(Type.MODDED, ExNihiloConstants.Ore.TIN, false, true),
+    ALUMINUM(Type.MODDED, ExNihiloConstants.Ore.ALUMINUM, false, true),
+    PLATINUM(Type.MODDED, ExNihiloConstants.Ore.PLATINUM, false, true),
+    URANIUM(Type.MODDED, ExNihiloConstants.Ore.URANIUM, false, true),
+    ZINC(Type.MODDED, ExNihiloConstants.Ore.ZINC, false, true),
+    COPPER(Type.VANILLA, ExNihiloConstants.Ore.COPPER, true, false),
+    IRON(Type.VANILLA, ExNihiloConstants.Ore.IRON, true, false),
+    GOLD(Type.VANILLA, ExNihiloConstants.Ore.GOLD, true, false);
 
-    @Nonnull private final Color color;
     @Nonnull private final String oreName;
     @Nullable private RegistryObject<OreItem> chunkItem;
     private final boolean generateIngot;
@@ -37,17 +35,17 @@ public enum EnumOre implements IExtensibleEnum {
     @Nullable private RegistryObject<OreItem> pieceItem;
     private final Type type;
 
-    EnumOre(@Nonnull final Type type, @Nonnull final String oreName, @Nonnull final Color color,
+    EnumOre(@Nonnull final Type type, @Nonnull final String oreName,
             final boolean isEnabled, final boolean generateIngot) {
         this.type = type;
         this.oreName = oreName;
-        this.color = color;
         this.isEnabled = isEnabled;
         this.generateIngot = generateIngot;
     }
 
+    @SuppressWarnings("unused")
     public static EnumOre create(@Nonnull final String enumName, @Nonnull final Type type,
-                                 @Nonnull final String oreName, @Nonnull final Color color, final boolean isEnabled,
+                                 @Nonnull final String oreName, final boolean isEnabled,
                                  final boolean generateIngot) {
         throw new IllegalStateException("Enum not extended");
     }
@@ -76,12 +74,7 @@ public enum EnumOre implements IExtensibleEnum {
 
     @Nonnull
     public String getChunkName() {
-        return "chunk_" + oreName;
-    }
-
-    @Nonnull
-    public Color getColor() {
-        return color;
+        return "raw_" + oreName;
     }
 
     @Nullable
@@ -95,7 +88,7 @@ public enum EnumOre implements IExtensibleEnum {
 
     @Nonnull
     public String getIngotName() {
-        return "ingot_" + oreName;
+        return oreName + "_ingot";
     }
 
     @Nullable
@@ -123,7 +116,7 @@ public enum EnumOre implements IExtensibleEnum {
 
     @Nonnull
     public String getPieceName() {
-        return "piece_" + oreName;
+        return oreName + "_piece";
     }
 
     public boolean isEnabled() {
@@ -147,7 +140,6 @@ public enum EnumOre implements IExtensibleEnum {
     public String toString() {
         return "EnumOre{" +
                 "name='" + oreName + '\'' +
-                ", color=" + color +
                 ", isEnabled=" + isEnabled +
                 ", type=" + type +
                 '}';

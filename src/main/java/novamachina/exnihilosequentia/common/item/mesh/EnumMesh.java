@@ -46,13 +46,11 @@ public enum EnumMesh implements StringRepresentable, IExtensibleEnum {
 
     @Nonnull
     public String getMeshName() {
-        return "mesh_" + name;
+        return name + "_mesh";
     }
 
     @Nonnull
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     @Nonnull
     public RegistryObject<Item> getRegistryObject() {

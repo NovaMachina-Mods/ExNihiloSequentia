@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_item",
+  "fluid": {
+    "fluid": "exnihilosequentia:sea_water_still"
+  },
+  "input": {
+    "item": "exnihilosequentia:red_coral_seed"
+  },
+  "result": {
+    "item": "minecraft:fire_coral_block"
+  }
+}

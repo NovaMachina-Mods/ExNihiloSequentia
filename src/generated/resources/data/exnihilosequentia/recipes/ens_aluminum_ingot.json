@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "exnihilosequentia:raw_aluminum"
+  },
+  "result": "exnihilosequentia:aluminum_ingot",
+  "experience": 0.7,
+  "cookingtime": 200
+}

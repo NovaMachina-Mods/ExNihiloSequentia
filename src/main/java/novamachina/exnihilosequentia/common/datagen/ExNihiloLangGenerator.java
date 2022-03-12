@@ -2,12 +2,18 @@ package novamachina.exnihilosequentia.common.datagen;
 
 import net.minecraft.data.DataGenerator;
 import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
+import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
+import novamachina.exnihilosequentia.common.item.ore.EnumOre;
+import novamachina.exnihilosequentia.common.item.pebbles.EnumPebble;
+import novamachina.exnihilosequentia.common.item.resources.EnumResource;
+import novamachina.exnihilosequentia.common.item.seeds.EnumSeed;
+import novamachina.exnihilosequentia.common.item.tools.crook.EnumCrook;
+import novamachina.exnihilosequentia.common.item.tools.hammer.EnumHammer;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Fluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Tooltips;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Ore;
 
 public class ExNihiloLangGenerator extends AbstractLangGenerator {
     final String locale;
@@ -21,16 +27,16 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         // CreativeTab
         add("itemGroup." + ModIds.EX_NIHILO_SEQUENTIA, "Ex Nihilo: Sequentia");
         // Blocks
-        addBlockEN();
+        addBlock();
         // Items
-        addItemEN();
+        addItem();
         // Compats
-        addCompatEN();
+        addCompat();
         // Miscs
-        addMiscEN();
+        addMisc();
     }
 
-    private void addCompatEN() {
+    private void addCompat() {
         final String WAILA_LANG = "waila.";
         // JEI
         add("jei.sieve.dropChance", "Drop Chance");
@@ -50,10 +56,12 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         add("top.barrel.mode", "Mode: %s");
     }
 
-    private void addMiscEN() {
+    private void addMisc() {
         // Fluids
         addFluid(Fluids.WITCH_WATER_STILL, "Witch Water");
         addFluid(Fluids.SEA_WATER_STILL, "Sea Water");
+        addFluid(Fluids.WITCH_WATER_FLOW, "Flowing Witch Water");
+        addFluid(Fluids.SEA_WATER_FLOW, "Flowing Sea Water");
         // Tooltips
         add(Tooltips.BEE, "Add to a barrel of witch water to spawn a Bee");
         add(Tooltips.BLAZE, "Add to a barrel of lava to spawn a Blaze");
@@ -64,30 +72,31 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         add("throwing.pebble", "Flying Pebble");
     }
 
-    private void addItemEN() {
+    private void addItem() {
         // Crooks
-        addItem(Items.ANDESITE_CROOK, "Andesite Crook");
-        addItem(Items.BONE_CROOK, "Bone Crook");
-        addItem(Items.BLAZE_CROOK, "Blaze Crook");
-        addItem(Items.CLAY_CROOK, "Clay Crook");
-        addItem(Items.UNCOOKED_CLAY_CROOK, "Uncooked Clay Crook");
-        addItem(Items.DIAMOND_CROOK, "Diamond Crook");
-        addItem(Items.DIORITE_CROOK, "Diorite Crook");
-        addItem(Items.GOLD_CROOK, "Gold Crook");
-        addItem(Items.GRANITE_CROOK, "Granite Crook");
-        addItem(Items.IRON_CROOK, "Iron Crook");
-        addItem(Items.NETHERRACK_CROOK, "Netherrack Crook");
-        addItem(Items.PRISMARINE_CROOK, "Prismarine Crook");
-        addItem(Items.PURPUR_CROOK, "Purpur Crook");
-        addItem(Items.STONE_CROOK, "Stone Crook");
-        addItem(Items.WOODEN_CROOK, "Wooden Crook");
+        for (EnumCrook crook : EnumCrook.values()) {
+            addItemAutoName(crook.crookName);
+        }
         // Hammers
-        addItem(Items.DIAMOND_HAMMER, "Diamond Hammer");
-        addItem(Items.GOLD_HAMMER, "Gold Hammer");
-        addItem(Items.IRON_HAMMER, "Iron Hammer");
-        addItem(Items.NETHERITE_HAMMER, "Netherite Hammer");
-        addItem(Items.STONE_HAMMER, "Stone Hammer");
-        addItem(Items.WOODEN_HAMMER, "Wooden Hammer");
+        for (EnumHammer hammer : EnumHammer.values()) {
+            addItemAutoName(hammer.hammerName);
+        }
+        // Chunks
+        for (EnumOre ore : EnumOre.values()) {
+            if (ore.isVanilla()) {
+                addPieceAutoName(ore.getOreName());
+            } else {
+                addOreAutoName(ore.getOreName());
+            }
+        }
+        // Pebbles
+        for (EnumPebble pebble : EnumPebble.values()) {
+            addItemAutoName(pebble.getName());
+        }
+        // Meshes
+        for (EnumMesh mesh : EnumMesh.values()) {
+            addMeshAutoName(mesh.getName());
+        }
         // Dolls
         addItem(Items.CRAFTING_DOLL, "Procelain Doll");
         addItem("bee_doll", "Buzzing Doll");
@@ -95,72 +104,23 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         addItem("enderman_doll", "Creeping Doll");
         addItem("guardian_doll", "Protecting Doll");
         addItem("shulker_doll", "Floating Doll");
-        // Chunks
-        addChunk(Ore.ALUMINUM, "Raw Aluminum");
-        addChunk(Ore.BISMUTH, "Raw Bismuth");
-        addChunk(Ore.LEAD, "Raw Lead");
-        addChunk(Ore.NICKEL, "Raw Nickel");
-        addChunk(Ore.PLATINUM, "Raw Platinum");
-        addChunk(Ore.SILVER, "Raw Silver");
-        addChunk(Ore.TIN, "Raw Tin");
-        addChunk(Ore.URANIUM, "Raw Uranium");
-        addChunk(Ore.ZINC, "Raw Zinc");
-        // Pieces
-        addPiece(Ore.ALUMINUM, "Aluminum Piece");
-        addPiece(Ore.BISMUTH, "Bismuth Piece");
-        addPiece(Ore.COPPER, "Copper Piece");
-        addPiece(Ore.GOLD, "Gold Piece");
-        addPiece(Ore.IRON, "Iron Piece");
-        addPiece(Ore.LEAD, "Lead Piece");
-        addPiece(Ore.NICKEL, "Nickel Piece");
-        addPiece(Ore.PLATINUM, "Platinum Piece");
-        addPiece(Ore.SILVER, "Silver Piece");
-        addPiece(Ore.TIN, "Tin Piece");
-        addPiece(Ore.URANIUM, "Uranium Piece");
-        addPiece(Ore.ZINC, "Zinc Piece");
-        // Ingots
-        addIngot(Ore.ALUMINUM, "Aluminum Ingot");
-        addIngot(Ore.BISMUTH, "Bismuth Ingot");
-        addIngot(Ore.LEAD, "Lead Ingot");
-        addIngot(Ore.NICKEL, "Nickel Ingot");
-        addIngot(Ore.PLATINUM, "Platinum Ingot");
-        addIngot(Ore.SILVER, "Silver Ingot");
-        addIngot(Ore.TIN, "Tin Ingot");
-        addIngot(Ore.URANIUM, "Uranium Ingot");
-        addIngot(Ore.ZINC, "Zinc Ingot");
         // Seeds
-        addItem(Items.ANCIENT_SPORE, "Ancient Spores");
-        //TODO reenable?
-        //addItem(Items.BLUE_CORAL_LARVAE, "Tube Coral Larvae");
-        addItem(Items.GRASS_SEED, "Grass Seeds");
-        //addItem(Items.PINK_CORAL_LARVAE, "Brain Coral Larvae");
-        //addItem(Items.PURPLE_CORAL_LARVAE, "Bubble Coral Larvae");
-        //addItem(Items.RED_CORAL_LARVAE, "Fire Coral Larvae");
-        //addItem(Items.YELLOW_CORAL_LARVAE, "Horn Coral Larvae");
+        for (EnumSeed seeds : EnumSeed.values()) {
+            addItemAutoName(seeds.getSeedName());
+        }
         // Miscs
         addItem(Items.SILKWORM, "Silkworm");
         addItem(Items.COOKED_SILKWORM, "Cooked Silkworm");
         addItem(Items.SEA_WATER_BUCKET, "Sea Water Bucket");
         addItem(Items.WITCH_WATER_BUCKET, "Witch Water Bucket");
-        addItem(Items.PORCELAIN_CLAY, "Procelain Clay");
-        addItem(Items.BEEHIVE_FRAME, "Beehive Frame");
-        // Pebbles
-        addItem(Items.ANDESITE_PEBBLE, "Andesite Pebble");
-        addItem(Items.BASALT_PEBBLE, "Basalt Pebble");
-        addItem(Items.BLACKSTONE_PEBBLE, "Blackstone Pebble");
-        addItem(Items.DIORITE_PEBBLE, "Diorite Pebble");
-        addItem(Items.GRANITE_PEBBLE, "Granite Pebble");
-        addItem(Items.STONE_PEBBLE, "Stone Pebble");
-        // Meshes
-        addMesh("string", "String Mesh");
-        addMesh("flint", "Flint Mesh");
-        addMesh("iron", "Iron Mesh");
-        addMesh("diamond", "Diamond Mesh");
-        addMesh("emerald", "Emerald Mesh");
-        addMesh("netherite", "Netherite Mesh");
+        for (EnumResource miscs : EnumResource.values()) {
+            if (!miscs.getResourceName().equals(Items.CRAFTING_DOLL)) {
+                addItemAutoName(miscs.getResourceName());
+            }
+        }
     }
 
-    private void addBlockEN() {
+    private void addBlock() {
         // Normal Blocks
         addBlock(Blocks.DUST, "Dust");
         addBlock(Blocks.CRUSHED_ANDESITE, "Crushed Andesite");
@@ -203,7 +163,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
         addBlock(Blocks.WARPED_CRUCIBLE, "Warped Crucible");
         // Miscs
         addBlock(Blocks.END_CAKE, "End Cake");
-        addBlock(Fluids.SEA_WATER_STILL, "Sea Water");
-        addBlock(Fluids.WITCH_WATER_STILL, "Witch Water");
+        addBlock(Blocks.SEA_WATER, "Sea Water");
+        addBlock(Blocks.WITCH_WATER, "Witch Water");
     }
 }

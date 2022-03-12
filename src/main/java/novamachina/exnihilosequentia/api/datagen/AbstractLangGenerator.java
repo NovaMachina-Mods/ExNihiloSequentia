@@ -2,7 +2,12 @@ package novamachina.exnihilosequentia.api.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
+import novamachina.exnihilosequentia.common.item.ore.EnumOre;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
+
+import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public class AbstractLangGenerator extends LanguageProvider {
     final String ITEM_LANG = "item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ".";
@@ -14,6 +19,10 @@ public class AbstractLangGenerator extends LanguageProvider {
     @Override
     protected void addTranslations() {}
 
+    private String properNaming(String item) {
+        return StringUtils.capitalize(item.replace("_", " "));
+    }
+
     /**
      * @param item need item to be used in lang file
      * @param name set name of item that is shown ingame
@@ -23,36 +32,42 @@ public class AbstractLangGenerator extends LanguageProvider {
     }
 
     /**
-     * @param item need item to be used in lang file
-     * @param name set name of item that is shown ingame
+     * @param item need item to be used in lang file, auto names it + capitalize it fully
      */
-    protected void addChunk(String item, String name) {
+    protected void addItemAutoName(String item) {
+        add(ITEM_LANG + item, properNaming(item));
+    }
+
+    /**
+     * @param item need item to be used in lang file, auto names it + capitalize it fully
+     */
+    protected void addChunkAutoName(String item) {
         final String CHUNK_LANG = ITEM_LANG + "raw_";
-        add(CHUNK_LANG + item, name);
+        add(CHUNK_LANG + item, properNaming("raw_" + item));
     }
 
     /**
-     * @param item need item to be used in lang file
-     * @param name set name of item that is shown ingame
+     * @param item need item to be used in lang file, auto names it + capitalize it fully
      */
-    protected void addPiece(String item, String name) {
-        add(ITEM_LANG + item + "_piece", name);
+    protected void addPieceAutoName(String item) {
+        add(ITEM_LANG + item + "_piece", properNaming(item + "_piece"));
     }
 
     /**
-     * @param item need item to be used in lang file
-     * @param name set name of item that is shown ingame
+     * @param item need item to be used in lang file, auto names it + capitalize it fully
      */
-    protected void addIngot(String item, String name) {
-        add(ITEM_LANG + item + "_ingot", name);
+    protected void addIngotAutoName(String item) {
+        add(ITEM_LANG + item + "_ingot", properNaming(item + "_ingot"));
     }
 
     /**
-     * @param mesh need mesh to be used in lang file
-     * @param name set name of mesh that is shown ingame
+     * @param mesh need mesh to be used in lang file, auto names it + capitalize it fully
      */
-    protected void addMesh(String mesh, String name) {
-        add(ITEM_LANG + mesh + "_mesh", name);
+    protected void addMeshAutoName(String mesh) {
+        if (Objects.equals(mesh, "none")) {
+            return;
+        }
+        add(ITEM_LANG + mesh + "_mesh", properNaming(mesh + "_mesh"));
     }
 
     /**
@@ -71,6 +86,23 @@ public class AbstractLangGenerator extends LanguageProvider {
     protected void addBlock(String block, String name) {
         final String BLOCK_LANG = "block." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ".";
         add(BLOCK_LANG + block, name);
+    }
+
+    /**
+     * @param block need block to be used in lang file, auto names it + capitalize it fully
+     */
+    protected void addBlockAutoName(String block) {
+        final String BLOCK_LANG = "block." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ".";
+        add(BLOCK_LANG + block, properNaming(block));
+    }
+
+    /**
+     * @param oreName need ore to be used in lang file, auto names it + capitalize it fully
+     */
+    protected void addOreAutoName(String oreName) {
+        addChunkAutoName(oreName);
+        addPieceAutoName(oreName);
+        addIngotAutoName(oreName);
     }
 
 }

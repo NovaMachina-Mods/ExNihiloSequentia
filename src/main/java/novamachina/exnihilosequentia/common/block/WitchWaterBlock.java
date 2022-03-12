@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.block;
 
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -35,10 +37,13 @@ import net.minecraft.world.entity.monster.Witch;
 import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.entity.monster.ZombieVillager;
 
+import java.util.Objects;
+import java.util.Optional;
+
 public class WitchWaterBlock extends LiquidBlock {
 
     public WitchWaterBlock() {
-        super(ExNihiloFluids.WITCH_WATER,
+        super(ExNihiloFluids.WITCH_WATER_STILL,
                 BlockBehaviour.Properties.of(Material.WATER).noCollission()
                         .strength(100.0F).noDrops());
     }
@@ -46,6 +51,7 @@ public class WitchWaterBlock extends LiquidBlock {
     /**
      * @deprecated Ask Mojang
      */
+    @SuppressWarnings("deprecation")
     @Deprecated
     @Override
     public void entityInside(@Nonnull final BlockState state, @Nonnull final Level worldIn, @Nonnull final BlockPos pos,
@@ -60,8 +66,10 @@ public class WitchWaterBlock extends LiquidBlock {
         }
 
         if (entityIn instanceof Creeper && !((Creeper) entityIn).isPowered()) {
-            entityIn.thunderHit((ServerLevel) worldIn, EntityType.LIGHTNING_BOLT.create(worldIn));
-            ((Creeper) entityIn).setHealth(((Creeper) entityIn).getMaxHealth());
+            if (EntityType.LIGHTNING_BOLT.create(worldIn) != null) {
+                entityIn.thunderHit((ServerLevel) worldIn, Objects.requireNonNull(EntityType.LIGHTNING_BOLT.create(worldIn)));
+                ((Creeper) entityIn).setHealth(((Creeper) entityIn).getMaxHealth());
+            }
         }
 
         // TODO Slime
@@ -75,8 +83,7 @@ public class WitchWaterBlock extends LiquidBlock {
             replaceMob(worldIn, (Squid) entityIn, new Ghast(EntityType.GHAST, worldIn));
         }
 
-        if (entityIn instanceof Villager) {
-            Villager villagerEntity = (Villager) entityIn;
+        if (entityIn instanceof Villager villagerEntity) {
             VillagerProfession profession = villagerEntity.getVillagerData().getProfession();
 
             if (profession == VillagerProfession.CLERIC) {
@@ -130,5 +137,11 @@ public class WitchWaterBlock extends LiquidBlock {
 
         toKill.remove(Entity.RemovalReason.DISCARDED);
         world.addFreshEntity(toSpawn);
+    }
+
+    @Nonnull
+    @Override
+    public Optional<SoundEvent> getPickupSound() {
+        return Optional.of(SoundEvents.BUCKET_FILL);
     }
 }

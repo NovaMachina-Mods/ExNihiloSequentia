@@ -57,8 +57,8 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
     }
 
     private void registerFluids() {
-        registerFluid(ExNihiloFluids.WITCH_WATER.get());
-        registerFluid(ExNihiloFluids.SEA_WATER.get());
+        registerFluid(ExNihiloFluids.WITCH_WATER_STILL.get());
+        registerFluid(ExNihiloFluids.SEA_WATER_STILL.get());
     }
 
     private void registerSieves() {

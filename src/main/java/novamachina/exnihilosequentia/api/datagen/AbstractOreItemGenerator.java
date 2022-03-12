@@ -19,14 +19,14 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
         super(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, existingFileHelper);
     }
 
-    protected void registerChunk(@Nonnull final EnumOre ore) {
+    protected void registerRaw(@Nonnull final EnumOre ore) {
         @Nullable final RegistryObject<OreItem> chunkRegistryObject = ore.getChunkItem();
         if (chunkRegistryObject == null)
             return;
         @Nullable final ResourceLocation chunkResourceLocation = chunkRegistryObject.get().getRegistryName();
         if (chunkResourceLocation == null)
             return;
-        withExistingParent(chunkResourceLocation.getPath(), exnihiloLoc("item/chunk_ore"));
+        withExistingParent(chunkResourceLocation.getPath(), exnihiloLoc("item/raw_ore"));
     }
 
     protected void registerIngot(@Nonnull final EnumOre ore) {
@@ -43,7 +43,7 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
         }
         if (resourceLocation == null)
             return;
-        withExistingParent(resourceLocation.getPath(), exnihiloLoc("item/ingot_ore"));
+        withExistingParent(resourceLocation.getPath(), exnihiloLoc("item/ore_ingot"));
     }
 
     protected void registerPiece(@Nonnull final EnumOre ore) {
@@ -53,7 +53,7 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
         @Nullable final ResourceLocation pieceResourceLocation = pieceRegistryObject.get().getRegistryName();
         if (pieceResourceLocation == null)
             return;
-        withExistingParent(pieceResourceLocation.getPath(), exnihiloLoc("item/piece_ore"));
+        withExistingParent(pieceResourceLocation.getPath(), exnihiloLoc("item/ore_piece"));
     }
 
     @Nonnull

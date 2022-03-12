@@ -32,8 +32,7 @@ public class ResourceItem extends Item {
     @Nonnull
     public InteractionResult useOn(@Nonnull final UseOnContext context) {
         final @Nonnull ItemStack item = context.getItemInHand();
-        if (!context.getLevel().isClientSide() && item.getItem() instanceof ResourceItem) {
-            final @Nonnull ResourceItem resourceItem = (ResourceItem) item.getItem();
+        if (!context.getLevel().isClientSide() && item.getItem() instanceof final @Nonnull ResourceItem resourceItem) {
 
             final @Nonnull BlockState state = context.getLevel().getBlockState(context.getClickedPos());
             if (resourceItem.getResourceName().equals(Items.SILKWORM) && state.getBlock() instanceof LeavesBlock) {
@@ -42,16 +41,16 @@ public class ResourceItem extends Item {
                         context.getClickedPos());
                 return InteractionResult.SUCCESS;
             }
-            if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) || resourceItem.getResourceName()
-                    .equals(Items.GRASS_SEED)) {
+            if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORES) || resourceItem.getResourceName()
+                    .equals(Items.GRASS_SEEDS)) {
                 if(state.getBlock().equals(Blocks.DIRT)) {
                     context.getItemInHand().shrink(1);
-                    if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORE) && state.getBlock().equals(Blocks.DIRT)) {
+                    if (resourceItem.getResourceName().equals(Items.ANCIENT_SPORES) && state.getBlock().equals(Blocks.DIRT)) {
                         Block.updateOrDestroy(state,
                                 Blocks.MYCELIUM.defaultBlockState(), context.getLevel(),
                                 context.getClickedPos(), 1);
                         return InteractionResult.SUCCESS;
-                    } else if (resourceItem.getResourceName().equals(Items.GRASS_SEED) && state.getBlock().equals(Blocks.DIRT)) {
+                    } else if (resourceItem.getResourceName().equals(Items.GRASS_SEEDS) && state.getBlock().equals(Blocks.DIRT)) {
                         Block.updateOrDestroy(state,
                                 Blocks.GRASS_BLOCK.defaultBlockState(), context.getLevel(),
                                 context.getClickedPos(), 1);
