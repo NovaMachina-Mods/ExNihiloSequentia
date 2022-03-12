@@ -82,9 +82,11 @@ public class UseCrookModifier extends LootModifier {
                 newLoot.add(new ItemStack(Items.STRING, random
                         .nextInt(Config.getMaxBonusStringCount()) + Config.getMinStringCount()));
                 if (random.nextDouble() <= 0.8) {
-                    newLoot
-                            .add(new ItemStack(ExNihiloItems.SILKWORM.get()));
+                    newLoot.add(new ItemStack(ExNihiloItems.SILKWORM.get()));
                 }
+            }
+            if (newLoot.isEmpty()) {
+                return new ArrayList<>();
             }
         }
         if (!newLoot.isEmpty()) {
