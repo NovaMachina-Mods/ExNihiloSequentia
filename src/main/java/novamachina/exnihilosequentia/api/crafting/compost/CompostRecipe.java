@@ -9,14 +9,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CompostRecipe extends SerializableRecipe {
-    @Nonnull public static final RecipeType<CompostRecipe> RECIPE_TYPE = RecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
+    public static RecipeType<CompostRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<CompostRecipe>> serializer;
     private int amount;
     @Nonnull private Ingredient input;

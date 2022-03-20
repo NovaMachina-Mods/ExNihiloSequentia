@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 
 public class FluidOnTopRecipeBuilder extends ExNihiloFinishedRecipe<FluidOnTopRecipeBuilder> {
     private FluidOnTopRecipeBuilder() throws NullPointerException {
-        //noinspection ConstantConditions
         super(FluidOnTopRecipe.getStaticSerializer().get());
     }
 

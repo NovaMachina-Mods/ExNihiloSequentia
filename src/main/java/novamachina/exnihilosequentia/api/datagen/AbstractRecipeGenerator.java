@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
@@ -19,7 +20,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.Tags;
@@ -239,7 +239,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      * @param id name of the item to save to
      */
     protected void createCompostRecipe(@Nonnull final Consumer<FinishedRecipe> consumer,
-                                       @Nonnull final Tag.Named<Item> item, final int amount,
+                                       @Nonnull final TagKey<Item> item, final int amount,
                                        @Nonnull final String id) {
         CompostRecipeBuilder.builder().input(item).amount(amount).build(consumer, compostLoc(id));
     }
@@ -253,7 +253,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      */
     @SuppressWarnings("SameParameterValue")
     protected void createCrookRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
-                                      @Nonnull final Tag.Named<Item> itemInput,
+                                      @Nonnull final TagKey<Item> itemInput,
                                       @Nonnull final ItemLike itemDrop, final float chance,
                                       @Nonnull final String id) {
         CrookRecipeBuilder.builder().input(itemInput).addDrop(itemDrop, chance).build(consumer, crookLoc(id));
@@ -292,7 +292,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      */
     @SuppressWarnings("unused")
     protected void createFiredCrucibleRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
-                                              @Nonnull final Tag.Named<Item> item, final int amount,
+                                              @Nonnull final TagKey<Item> item, final int amount,
                                               @Nonnull final String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.LAVA)
                 .crucibleType(CrucibleTypeEnum.FIRED).build(consumer, crucibleLoc(id));
@@ -306,7 +306,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      */
     @SuppressWarnings("SameParameterValue")
     protected void createWaterCrucibleRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
-                                              @Nonnull final Tag.Named<Item> item, final int amount,
+                                              @Nonnull final TagKey<Item> item, final int amount,
                                               @Nonnull final String id) {
         CrucibleRecipeBuilder.builder().input(Ingredient.of(item)).amount(amount).fluidResult(Fluids.WATER)
                 .crucibleType(CrucibleTypeEnum.WOOD).build(consumer, crucibleLoc(id));
@@ -347,7 +347,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      */
     protected void createFluidItemRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                           @Nonnull final Fluid fluidInput,
-                                          @Nonnull final Tags.IOptionalNamedTag<Item> itemInput,
+                                          @Nonnull final TagKey<Item> itemInput,
                                           @Nonnull final Block blockOutput, @Nonnull final String id) {
         FluidItemRecipeBuilder.builder().fluidInBarrel(fluidInput).input(itemInput).result(blockOutput).build(consumer, fluidItemLoc(id));
     }
@@ -375,7 +375,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      */
     protected void createFluidTransformRecipes(@Nonnull final Consumer<FinishedRecipe> consumer,
                                                @Nonnull final Fluid fluidInTank,
-                                               @Nonnull final Tag.Named<Item> catalyst,
+                                               @Nonnull final TagKey<Item> catalyst,
                                                @Nonnull final Fluid fluidResult, @Nonnull final String id) {
         FluidTransformRecipeBuilder.builder().fluidInTank(fluidInTank).catalyst(Ingredient.of(catalyst))
                 .result(fluidResult).build(consumer, fluidTransformLoc(id));
@@ -487,7 +487,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     @SuppressWarnings("SameParameterValue")
     protected void createBarrel(@Nonnull final Consumer<FinishedRecipe> consumer,
                                 @Nonnull final RegistryObject<BaseBlock> barrel,
-                                @Nonnull final Tags.IOptionalNamedTag<Item> block, @Nonnull final Item slab) {
+                                @Nonnull final TagKey<Item> block, @Nonnull final Item slab) {
         ShapedRecipeBuilder.shaped(barrel.get())
                 .pattern("x x")
                 .pattern("x x")
@@ -551,7 +551,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     @SuppressWarnings("unused")
     protected void createCrucible(@Nonnull final Consumer<FinishedRecipe> consumer,
                                   @Nonnull final RegistryObject<BaseBlock> crucible,
-                                  @Nonnull final Tag.Named<Item> block, @Nonnull final Tag.Named<Item> slab) {
+                                  @Nonnull final TagKey<Item> block, @Nonnull final TagKey<Item> slab) {
         ShapedRecipeBuilder.shaped(crucible.get())
                 .pattern("c c")
                 .pattern("clc")
@@ -606,7 +606,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      * @param input get item tag to create crook
      * @param consumer get consumer
      */
-    protected void createCrook(@Nonnull final Item crook, @Nonnull final Tag.Named<Item> input,
+    protected void createCrook(@Nonnull final Item crook, @Nonnull final TagKey<Item> input,
                                @Nonnull final Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(crook)
                 .pattern("xx")
@@ -624,7 +624,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      * @param input get item tag to create crook
      * @param consumer get consumer
      */
-    protected void createHammer(@Nonnull final Item hammer, @Nonnull final Tag.Named<Item> input,
+    protected void createHammer(@Nonnull final Item hammer, @Nonnull final TagKey<Item> input,
                                 @Nonnull final Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(hammer)
                 .pattern(" x ")
@@ -664,7 +664,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
      * @param consumer get consumer
      */
     protected void createMesh(@Nonnull final Item outputMesh, @Nonnull final Item inputMesh,
-                              @Nonnull final Tags.IOptionalNamedTag<Item> inputItem,
+                              @Nonnull final TagKey<Item> inputItem,
                               @Nonnull final Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(outputMesh)
                 .pattern("i i")

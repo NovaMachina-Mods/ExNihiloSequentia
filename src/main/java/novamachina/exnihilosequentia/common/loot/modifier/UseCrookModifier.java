@@ -49,7 +49,7 @@ public class UseCrookModifier extends LootModifier {
         @Nullable final Vec3 origin = context.getParamOrNull(LootContextParams.ORIGIN);
         @Nonnull final List<ItemStack> newLoot = new ArrayList<>();
 
-        if (tool != null && blockState != null && ExNihiloTags.CROOK.contains(tool.getItem())
+        if (tool != null && blockState != null && tool.getItem().getDefaultInstance().is(ExNihiloTags.CROOK)
                 && ExNihiloRegistries.CROOK_REGISTRY.isCrookable(blockState.getBlock())) {
             for (int i = 0; i < Config.getVanillaSimulateDropCount(); i++) {
                 @Nullable final ServerLevel serverWorld = context.getLevel().getServer().getLevel(

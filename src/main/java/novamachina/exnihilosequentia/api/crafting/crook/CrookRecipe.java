@@ -11,13 +11,12 @@ import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CrookRecipe extends SerializableRecipe {
-    @Nonnull public static final RecipeType<CrookRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
+    public static RecipeType<CrookRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<CrookRecipe>> serializer;
     @Nonnull private Ingredient input;
     @Nonnull private final List<ItemStackWithChance> output;
@@ -29,7 +28,6 @@ public class CrookRecipe extends SerializableRecipe {
         this.output = output;
     }
 
-    @Nullable
     public static RegistryObject<ExNihiloRecipeSerializer<CrookRecipe>> getStaticSerializer() {
         return serializer;
     }

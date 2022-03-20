@@ -9,7 +9,6 @@ import javax.annotation.Nonnull;
 
 public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder> {
     private HeatRecipeBuilder() throws NullPointerException {
-        //noinspection ConstantConditions
         super(HeatRecipe.getStaticSerializer().get());
     }
 

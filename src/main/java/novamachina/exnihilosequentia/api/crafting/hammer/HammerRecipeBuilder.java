@@ -11,7 +11,6 @@ import javax.annotation.Nonnull;
 public class HammerRecipeBuilder extends ExNihiloFinishedRecipe<HammerRecipeBuilder> {
 
     private HammerRecipeBuilder() throws NullPointerException {
-        //noinspection ConstantConditions
         super(HammerRecipe.getStaticSerializer().get());
         setMultipleResults(Integer.MAX_VALUE);
     }

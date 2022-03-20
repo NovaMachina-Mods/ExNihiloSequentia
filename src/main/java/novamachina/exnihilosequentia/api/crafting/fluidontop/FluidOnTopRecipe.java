@@ -8,7 +8,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -17,8 +16,7 @@ import javax.annotation.Nullable;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
     @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    @Nonnull public static final RecipeType<FluidOnTopRecipe> RECIPE_TYPE = RecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
+    public static RecipeType<FluidOnTopRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<FluidOnTopRecipe>> serializer;
     @Nonnull private FluidStack fluidInTank;
     @Nonnull private FluidStack fluidOnTop;
@@ -32,7 +30,6 @@ public class FluidOnTopRecipe extends SerializableRecipe {
         this.result = result;
     }
 
-    @Nullable
     public static RegistryObject<ExNihiloRecipeSerializer<FluidOnTopRecipe>> getStaticSerializer() {
         return serializer;
     }

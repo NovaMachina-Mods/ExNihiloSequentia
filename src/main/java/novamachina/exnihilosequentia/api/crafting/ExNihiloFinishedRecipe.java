@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.level.material.Fluid;
@@ -14,7 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -169,7 +169,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
     }
 
     @Nonnull
-    protected R addInput(@Nonnull final Tag.Named<Item> tag) {
+    protected R addInput(@Nonnull final TagKey<Item> tag) {
         return addInput(Ingredient.of(tag));
     }
 

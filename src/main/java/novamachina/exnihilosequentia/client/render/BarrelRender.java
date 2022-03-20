@@ -131,8 +131,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelTile> {
     private Color getBlockColor(@Nullable final ResourceLocation solidTexture,
                                 @Nonnull final AbstractBarrelTile tileEntity) {
         if (solidTexture != null && solidTexture.toString().contains("leaves") && tileEntity.getLevel() != null) {
-            return new Color(
-                    tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
+            return new Color(tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).value().getFoliageColor());
         }
         return Color.WHITE;
     }

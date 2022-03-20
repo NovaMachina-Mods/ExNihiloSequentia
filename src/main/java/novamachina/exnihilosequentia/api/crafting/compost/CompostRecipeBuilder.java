@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.api.crafting.compost;
 
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
@@ -23,7 +23,7 @@ public class CompostRecipeBuilder extends ExNihiloFinishedRecipe<CompostRecipeBu
     }
 
     @Nonnull
-    public CompostRecipeBuilder input(@Nonnull final Tag.Named<Item> tag) {
+    public CompostRecipeBuilder input(@Nonnull final TagKey<Item> tag) {
         return this.addInput(tag);
     }
 

@@ -108,7 +108,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleTile> {
     private Color getBlockColor(ResourceLocation solidTexture,
                                 BaseCrucibleTile tileEntity) {
         if (solidTexture != null && solidTexture.toString().contains("leaves") && tileEntity.getLevel() != null) {
-            return new Color(tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).getFoliageColor());
+            return new Color(tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).value().getFoliageColor());
         }
         return Color.WHITE;
     }

@@ -30,6 +30,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.ExNihiloRegistries;
+import novamachina.exnihilosequentia.api.ExNihiloTags;
 import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
@@ -91,6 +92,7 @@ public class ExNihiloInitialization {
 
     public static void init(@Nonnull final IEventBus modEventBus) {
         logger.debug("Initializing modded items");
+        ExNihiloTags.init();
         ExNihiloBlocks.init(modEventBus);
         ExNihiloItems.init(modEventBus);
         ExNihiloTiles.init(modEventBus);

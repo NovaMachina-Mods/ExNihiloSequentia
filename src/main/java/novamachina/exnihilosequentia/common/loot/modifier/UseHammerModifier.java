@@ -38,7 +38,7 @@ public class UseHammerModifier extends LootModifier {
         @Nullable final BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
         @Nonnull final List<ItemStack> newLoot = new ArrayList<>();
 
-        if (tool != null && blockState != null && ExNihiloTags.HAMMER.contains(tool.getItem())
+        if (tool != null && blockState != null && tool.getItem().getDefaultInstance().is(ExNihiloTags.HAMMER)
                 && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {
             @Nonnull final List<ItemStackWithChance> list = ExNihiloRegistries.HAMMER_REGISTRY
                     .getResult(blockState.getBlock());

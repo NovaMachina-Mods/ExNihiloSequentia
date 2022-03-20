@@ -9,7 +9,6 @@ import javax.annotation.Nonnull;
 
 public class CrucibleRecipeBuilder extends ExNihiloFinishedRecipe<CrucibleRecipeBuilder> {
     private CrucibleRecipeBuilder() throws NullPointerException {
-        //noinspection ConstantConditions
         super(CrucibleRecipe.getStaticSerializer().get());
     }
 

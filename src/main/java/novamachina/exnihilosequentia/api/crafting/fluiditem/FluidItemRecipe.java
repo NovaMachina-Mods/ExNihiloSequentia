@@ -12,14 +12,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FluidItemRecipe extends SerializableRecipe {
-    @Nonnull public static final RecipeType<FluidItemRecipe> RECIPE_TYPE = RecipeType.register(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
+    public static RecipeType<FluidItemRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<FluidItemRecipe>> serializer;
     @Nonnull private FluidStack fluid;
     @Nonnull private Ingredient input;
@@ -33,7 +31,6 @@ public class FluidItemRecipe extends SerializableRecipe {
         this.output = output;
     }
 
-    @Nullable
     public static RegistryObject<ExNihiloRecipeSerializer<FluidItemRecipe>> getStaticSerializer() {
         return serializer;
     }

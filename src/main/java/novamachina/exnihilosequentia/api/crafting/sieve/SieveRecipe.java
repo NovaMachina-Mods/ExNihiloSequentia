@@ -10,14 +10,12 @@ import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.EnumMesh;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class SieveRecipe extends SerializableRecipe {
-    @Nonnull public static final RecipeType<SieveRecipe> RECIPE_TYPE = RecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
+    public static RecipeType<SieveRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> serializer;
     @Nonnull private ItemStack drop;
     @Nonnull private Ingredient input;
@@ -36,7 +34,6 @@ public class SieveRecipe extends SerializableRecipe {
         this.isWaterlogged = isWaterlogged;
     }
 
-    @Nullable
     public static RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> getStaticSerializer() {
         return serializer;
     }

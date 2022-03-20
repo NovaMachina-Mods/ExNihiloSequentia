@@ -11,14 +11,12 @@ import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.tileentity.crucible.CrucibleTypeEnum;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CrucibleRecipe extends SerializableRecipe {
-    @Nonnull public static final RecipeType<CrucibleRecipe> RECIPE_TYPE = RecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
+    public static RecipeType<CrucibleRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<CrucibleRecipe>> serializer;
     private int amount;
     @Nullable private CrucibleTypeEnum crucibleType;
@@ -34,7 +32,6 @@ public class CrucibleRecipe extends SerializableRecipe {
         this.crucibleType = crucibleType;
     }
 
-    @Nullable
     public static RegistryObject<ExNihiloRecipeSerializer<CrucibleRecipe>> getStaticSerializer() {
         return serializer;
     }

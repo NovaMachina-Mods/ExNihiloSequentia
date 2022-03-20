@@ -28,7 +28,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 wrapper {
     //Define wrapper values here so as to not have to always do so when updating gradlew.properties
-    gradleVersion = '7.3.3'
+    gradleVersion = '7.4'
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -41,7 +41,7 @@ def artifactVersion = "${archivesBaseName}-${version}"
 sourceSets {
     main {
         resources {
-            srcDir 'generated/resources'
+            srcDir 'src/generated/resources'
         }
     }
 }
@@ -75,14 +75,14 @@ dependencies {
     //runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
     implementation fg.deobf("curse.maven:toptemp-245211:${top_version}")
 
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
-    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_release}.1:${crafttweaker_version}")
+    //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_release}.1:${crafttweaker_version}")
 
     compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
     runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
 
-    runtimeOnly fg.deobf("curse.maven:ctm-267602:3586556")
-    runtimeOnly fg.deobf("curse.maven:jer-240630:3580623")
+    //runtimeOnly fg.deobf("curse.maven:ctm-267602:3586556")
+    //runtimeOnly fg.deobf("curse.maven:jer-240630:3580623")
 }
 
 task replaceResources(type: Copy) {
@@ -108,9 +108,9 @@ task createVersionFile(type: CreateVersionClass) {
 
 minecraft {
     mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/at.cfg')
 
     runs {
         client {
@@ -174,7 +174,7 @@ curseforge {
         id = "${curseforge_project}"
         releaseType = 'release'
         mainArtifact jar
-        addGameVersion '1.18'
+        addGameVersion '1.18.2'
         changelog = file('changelog.html')
         changelogType = 'html'
     }
@@ -244,8 +244,8 @@ abstract class CreateVersionClass extends DefaultTask {
         fw.write("{\n" +
                 "  \"homepage\": \"https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia\",\n" +
                 "  \"promos\": {\n" +
-                "    \"1.18-latest\": \"${fileVersion.get()}\",\n" +
-                "    \"1.18-recommended\": \"${fileVersion.get()}\"\n" +
+                "    \"1.18.2-latest\": \"${fileVersion.get()}\",\n" +
+                "    \"1.18.2-recommended\": \"${fileVersion.get()}\"\n" +
                 "  }\n" +
                 "}\n")
         fw.close()

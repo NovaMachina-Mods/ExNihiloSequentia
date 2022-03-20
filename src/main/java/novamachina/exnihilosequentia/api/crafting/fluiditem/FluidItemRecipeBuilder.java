@@ -1,17 +1,16 @@
 package novamachina.exnihilosequentia.api.crafting.fluiditem;
 
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.Tags;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloFinishedRecipe;
 
 import javax.annotation.Nonnull;
 
 public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemRecipeBuilder> {
     private FluidItemRecipeBuilder() throws NullPointerException {
-        //noinspection ConstantConditions
         super(FluidItemRecipe.getStaticSerializer().get());
     }
 
@@ -36,7 +35,7 @@ public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemReci
     }
 
     @Nonnull
-    public FluidItemRecipeBuilder input(@Nonnull final Tags.IOptionalNamedTag<Item> tag) {
+    public FluidItemRecipeBuilder input(@Nonnull final TagKey<Item> tag) {
         return this.addInput(tag);
     }
 

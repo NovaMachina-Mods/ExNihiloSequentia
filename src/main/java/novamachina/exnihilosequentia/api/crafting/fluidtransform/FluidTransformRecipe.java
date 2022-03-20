@@ -8,14 +8,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FluidTransformRecipe extends SerializableRecipe {
-    @Nonnull public static final RecipeType<FluidTransformRecipe> RECIPE_TYPE = RecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
+    public static RecipeType<FluidTransformRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> serializer;
     @Nonnull private Ingredient catalyst;
     @Nonnull private FluidStack fluidInTank;
@@ -29,7 +27,6 @@ public class FluidTransformRecipe extends SerializableRecipe {
         this.result = result;
     }
 
-    @Nullable
     public static RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> getStaticSerializer() {
         return serializer;
     }

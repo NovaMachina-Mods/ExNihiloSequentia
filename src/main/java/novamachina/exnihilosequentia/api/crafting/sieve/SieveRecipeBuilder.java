@@ -11,7 +11,6 @@ public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilde
     @Nonnull private final JsonArray meshArray = new JsonArray();
 
     private SieveRecipeBuilder() throws NullPointerException {
-        //noinspection ConstantConditions
         super(SieveRecipe.getStaticSerializer().get());
 
         addWriter(jsonObject -> jsonObject.add("rolls", meshArray));

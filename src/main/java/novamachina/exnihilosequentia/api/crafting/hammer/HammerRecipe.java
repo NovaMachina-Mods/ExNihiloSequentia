@@ -10,15 +10,13 @@ import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class HammerRecipe extends SerializableRecipe {
     @Nonnull public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"), Ingredient.EMPTY, new ArrayList<>());
-    @Nonnull public static final RecipeType<HammerRecipe> RECIPE_TYPE = RecipeType
-            .register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":hammer");
+    public static RecipeType<HammerRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> serializer;
     @Nonnull private Ingredient input;
     @Nonnull private final List<ItemStackWithChance> output;
@@ -30,7 +28,6 @@ public class HammerRecipe extends SerializableRecipe {
         this.output = output;
     }
 
-    @Nullable
     public static RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> getStaticSerializer() {
         return serializer;
     }

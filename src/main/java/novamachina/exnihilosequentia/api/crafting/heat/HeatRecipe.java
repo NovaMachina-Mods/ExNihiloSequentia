@@ -9,13 +9,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.api.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class HeatRecipe extends SerializableRecipe {
-    @Nonnull public static final RecipeType<HeatRecipe> RECIPE_TYPE = RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
+    public static RecipeType<HeatRecipe> RECIPE_TYPE;
     @Nullable private static RegistryObject<ExNihiloRecipeSerializer<HeatRecipe>> serializer;
     private int amount;
     @Nullable private Block input;
@@ -36,7 +35,6 @@ public class HeatRecipe extends SerializableRecipe {
         this.properties = properties;
     }
 
-    @Nullable
     public static RegistryObject<ExNihiloRecipeSerializer<HeatRecipe>> getStaticSerializer() {
         return serializer;
     }
