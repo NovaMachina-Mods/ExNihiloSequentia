@@ -1,0 +1,28 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "${loader_version}" #mandatory
+license = "Creative Commons"
+issueTrackerURL = "https://github.com/NovaMachina-Mods/ExNihiloSequentia-Thermal/issues" #optional
+[[mods]] #mandatory
+modId = "exnihilothermal" #mandatory
+version = "${version}" #mandatory
+displayName = "Ex Nihilo: Sequentia - Thermal Expansion Addon" #mandatory
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia-thermal-expansion-addon/" #optional
+logoFile = "logo-thermal.png" #optional
+credits = "" #optional
+authors = "NovaMachina" #optional
+# The description text for the mod (multi line!) (#mandatory)
+description = '''
+    An addon for Ex Nihilo: Sequentia that adds support for Thermal Expansion.
+    '''
+[[dependencies.exnihilothermal]]
+modId = "exnihilosequentia"
+mandatory = true
+versionRange = "${minecraft_version_range}"
+ordering = "BEFORE"
+side = "BOTH"
+[[dependencies.exnihilothermal]]
+modId = "thermal"
+mandatory = true
+versionRange = "[1.1.6, )"
+ordering = "AFTER"
+side = "BOTH"

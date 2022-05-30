@@ -5,7 +5,8 @@ import net.minecraft.world.level.block.FallingBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 
 public class BaseFallingBlock extends FallingBlock {
-    public BaseFallingBlock(@Nonnull final BlockBuilder builder) {
-        super(builder.getProperties());
-    }
+
+  public BaseFallingBlock(@Nonnull final BlockBuilder builder) {
+    super(builder.getProperties());
+  }
 }

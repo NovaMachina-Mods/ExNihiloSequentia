@@ -1,0 +1,9 @@
+{
+  "item.exnihilothermal.doll_basalz": "Crushing Doll",
+  "item.exnihilothermal.doll_blitz": "Breezing Doll",
+  "item.exnihilothermal.doll_blizz": "Freezing Doll",
+  "item.exnihilothermal.dust_obsidian": "Obsidian Dust",
+  "tooltip.doll.basalz": "Add to a barrel of lava to spawn a Basalz",
+  "tooltip.doll.blitz": "Add to a barrel of lava to spawn a Blitz",
+  "tooltip.doll.blizz": "Add to a barrel of water to spawn a Blizz"
+}

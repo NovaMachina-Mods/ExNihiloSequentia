@@ -1,0 +1,23 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.01,
+      "mesh": "flint"
+    },
+    {
+      "chance": 0.02,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.4,
+      "mesh": "diamond"
+    }
+  ],
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "item": "mekanism:salt"
+  }
+}

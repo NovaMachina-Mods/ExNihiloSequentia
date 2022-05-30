@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "exnihilosequentia:items/tools/hammer/stone_hammer"
+  }
+}

@@ -1,67 +1,65 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import net.minecraftforge.fluids.FluidAttributes;
-import net.minecraftforge.fluids.FluidStack;
-import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
-import novamachina.exnihilosequentia.api.registry.IFluidItemTransformRegistry;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
-
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nonnull;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidStack;
+import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
-public class FluidItemTransformRegistry implements IFluidItemTransformRegistry {
-    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+public class FluidItemTransformRegistry {
 
-    @Nonnull private final List<FluidItemRecipe> recipeList = new ArrayList<>();
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    @Nonnull private final Item empty = ItemStack.EMPTY.getItem();
-    @Nonnull private final Map<FluidStack, Map<Item, Item>> itemResultCache = new HashMap<>();
+  @Nonnull
+  private final List<FluidItemRecipe> recipeList = new ArrayList<>();
 
-    @Override
-    public boolean isValidRecipe(@Nonnull final Fluid fluid, @Nonnull final Item input) {
-        return getResult(fluid, input) != empty;
-    }
+  @Nonnull
+  private final Item empty = ItemStack.EMPTY.getItem();
+  @Nonnull
+  private final Map<FluidStack, Map<Item, Item>> itemResultCache = new HashMap<>();
 
-    @Nonnull
-    @Override
-    public ItemLike getResult(@Nonnull final Fluid fluid, @Nonnull final Item input) {
-        return itemResultCache
-                .computeIfAbsent(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME), k -> new HashMap<>())
-                .computeIfAbsent(input, k -> recipeList
-                        .stream()
-                        .filter(fluidItemRecipe -> fluidItemRecipe.validInputs(fluid, input))
-                        .findFirst()
-                        .map(FluidItemRecipe::getResultItem)
-                        .map(ItemStack::getItem)
-                        .orElse(empty));
-    }
+  public boolean isValidRecipe(@Nonnull final Fluid fluid, @Nonnull final Item input) {
+    return getResult(fluid, input) != empty;
+  }
 
-    @Override
-    @Nonnull
-    public List<FluidItemRecipe> getRecipeList() {
-        return recipeList;
-    }
+  @Nonnull
+  public ItemLike getResult(@Nonnull final Fluid fluid, @Nonnull final Item input) {
+    return itemResultCache
+        .computeIfAbsent(new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME), k -> new HashMap<>())
+        .computeIfAbsent(input, k -> recipeList
+            .stream()
+            .filter(fluidItemRecipe -> fluidItemRecipe.validInputs(fluid, input))
+            .findFirst()
+            .map(FluidItemRecipe::getResultItem)
+            .map(ItemStack::getItem)
+            .orElse(empty));
+  }
 
-    @Override
-    public void setRecipes(@Nonnull final List<FluidItemRecipe> recipes) {
-        logger.debug("Fluid Item Transform Registry recipes: " + recipes.size());
-        recipeList.addAll(recipes);
+  @Nonnull
+  public List<FluidItemRecipe> getRecipeList() {
+    return recipeList;
+  }
 
-        itemResultCache.clear();
-    }
+  public void setRecipes(@Nonnull final List<FluidItemRecipe> recipes) {
+    logger.debug("Fluid Item Transform Registry recipes: " + recipes.size());
+    recipeList.addAll(recipes);
 
-    @Override
-    public void clearRecipes() {
-        recipeList.clear();
+    itemResultCache.clear();
+  }
 
-        itemResultCache.clear();
-    }
+  public void clearRecipes() {
+    recipeList.clear();
+
+    itemResultCache.clear();
+  }
 }

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ctc",
+    "sms",
+    "cbc"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:blaze_powder"
+    },
+    "s": {
+      "tag": "forge:dusts/glowstone"
+    },
+    "t": {
+      "tag": "forge:dusts/redstone"
+    },
+    "b": {
+      "tag": "forge:crops/nether_wart"
+    },
+    "m": {
+      "item": "exnihilosequentia:crafting_doll"
+    }
+  },
+  "result": {
+    "item": "exnihilosequentia:blaze_doll"
+  }
+}

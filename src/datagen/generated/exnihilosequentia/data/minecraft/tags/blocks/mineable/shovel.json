@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "exnihilosequentia:crushed_andesite",
+    "exnihilosequentia:crushed_diorite",
+    "exnihilosequentia:crushed_end_stone",
+    "exnihilosequentia:crushed_granite",
+    "exnihilosequentia:crushed_netherrack",
+    "exnihilosequentia:dust",
+    "exnihilosequentia:unfired_crucible"
+  ]
+}

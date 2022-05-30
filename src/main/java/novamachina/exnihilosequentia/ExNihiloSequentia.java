@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia;
 
+import javax.annotation.Nonnull;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,37 +20,41 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-import javax.annotation.Nonnull;
-
 @Mod(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
 public class ExNihiloSequentia {
-    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    public ExNihiloSequentia() {
-        logger.debug("Starting Ex Nihilo: Sequentia");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
-        Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "-common.toml"));
-        ExNihiloInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::setupNonTagBasedRegistries);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ExNihiloInitialization::registerTOP);
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+
+  public ExNihiloSequentia() {
+    logger.debug("Starting Ex Nihilo: Sequentia");
+    ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+    Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get()
+        .resolve(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "-common.toml"));
+    ExNihiloInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
+    FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+    FMLJavaModLoadingContext.get().getModEventBus()
+        .addListener(ExNihiloInitialization::setupNonTagBasedRegistries);
+    FMLJavaModLoadingContext.get().getModEventBus()
+        .addListener(ExNihiloInitialization::registerTOP);
+  }
+
+  @EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)
+  public static class EventHandlers {
+
+    private EventHandlers() {
     }
 
-    @EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)
-    public static class EventHandlers {
-        private EventHandlers() {
-        }
-
-        @SubscribeEvent
-        public static void registerModifierSerializers(
-            @Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-            logger.debug("Registering Loot Modifiers");
-            event.getRegistry()
-                .register(new UseHammerModifier.Serializer()
-                    .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_hammer"));
-            event.getRegistry()
-                    .register(new UseCrookModifier.Serializer()
-                            .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_crook"));
-        }
+    @SubscribeEvent
+    public static void registerModifierSerializers(
+        @Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
+      logger.debug("Registering Loot Modifiers");
+      event.getRegistry()
+          .register(new UseHammerModifier.Serializer()
+              .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_hammer"));
+      event.getRegistry()
+          .register(new UseCrookModifier.Serializer()
+              .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_crook"));
     }
+  }
 }

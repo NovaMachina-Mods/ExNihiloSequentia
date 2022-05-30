@@ -1,62 +1,59 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import net.minecraft.world.item.Item;
-import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
-import novamachina.exnihilosequentia.api.registry.ICompostRegistry;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
-
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nonnull;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.apache.logging.log4j.LogManager;
 
-public class CompostRegistry implements ICompostRegistry {
-    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-    @Nonnull public final List<CompostRecipe> recipeList = new ArrayList<>();
+public class CompostRegistry {
 
-    @Nonnull private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull
+  public final List<CompostRecipe> recipeList = new ArrayList<>();
 
-    @Override
-    public boolean containsSolid(@Nonnull final ItemLike item) {
-        return getSolidAmount(item) > 0;
-    }
+  @Nonnull
+  private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
 
-    @Override
-    public int getSolidAmount(@Nonnull final ItemLike item) {
-        return itemSolidAmountCache
-                .computeIfAbsent(item.asItem(), k -> {
-                    @Nonnull final ItemStack itemStack = new ItemStack(item);
-                    return recipeList
-                            .stream()
-                            .filter(compostRecipe -> compostRecipe.getInput().test(itemStack))
-                            .findFirst()
-                            .map(CompostRecipe::getAmount)
-                            .orElse(0);
-                });
-    }
+  public boolean containsSolid(@Nonnull final ItemLike item) {
+    return getSolidAmount(item) > 0;
+  }
 
-    @Override
-    public void setRecipes(@Nonnull final List<CompostRecipe> recipes) {
-        logger.debug("Compost Registry recipes: " + recipes.size());
-        recipeList.addAll(recipes);
+  public int getSolidAmount(@Nonnull final ItemLike item) {
+    return itemSolidAmountCache
+        .computeIfAbsent(item.asItem(), k -> {
+          @Nonnull final ItemStack itemStack = new ItemStack(item);
+          return recipeList
+              .stream()
+              .filter(compostRecipe -> compostRecipe.getInput().test(itemStack))
+              .findFirst()
+              .map(CompostRecipe::getAmount)
+              .orElse(0);
+        });
+  }
 
-        itemSolidAmountCache.clear();
-    }
+  public void setRecipes(@Nonnull final List<CompostRecipe> recipes) {
+    logger.debug("Compost Registry recipes: " + recipes.size());
+    recipeList.addAll(recipes);
 
-    @Override
-    @Nonnull
-    public List<CompostRecipe> getRecipeList() {
-        return recipeList;
-    }
+    itemSolidAmountCache.clear();
+  }
 
-    @Override
-    public void clearRecipes() {
-        recipeList.clear();
+  @Nonnull
+  public List<CompostRecipe> getRecipeList() {
+    return recipeList;
+  }
 
-        itemSolidAmountCache.clear();
-    }
+  public void clearRecipes() {
+    recipeList.clear();
+
+    itemSolidAmountCache.clear();
+  }
 }

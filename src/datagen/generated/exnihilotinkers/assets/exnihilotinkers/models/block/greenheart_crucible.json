@@ -1,0 +1,10 @@
+{
+  "parent": "exnihilosequentia:block/crucible",
+  "textures": {
+    "particle": "tconstruct:block/wood/greenheart/log",
+    "top": "tconstruct:block/wood/greenheart/log",
+    "bottom": "tconstruct:block/wood/greenheart/log",
+    "side": "tconstruct:block/wood/greenheart/log",
+    "inside": "tconstruct:block/wood/greenheart/log"
+  }
+}

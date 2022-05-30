@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_unfired_crucible"
+    ]
+  },
+  "criteria": {
+    "has_porcelain_clay": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "exnihilosequentia:porcelain_clay"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_unfired_crucible"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_porcelain_clay",
+      "has_the_recipe"
+    ]
+  ]
+}

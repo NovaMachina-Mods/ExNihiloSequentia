@@ -1,0 +1,7 @@
+{
+  "parent": "exnihilosequentia:block/barrel",
+  "textures": {
+    "texture": "tconstruct:block/wood/greenheart/planks",
+    "particle": "tconstruct:block/wood/greenheart/planks"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "head": "exnihilotinkers:item/tool/hammer/head",
+    "broken_head": "exnihilotinkers:item/tool/hammer/broken_head",
+    "handle": "exnihilotinkers:item/tool/hammer/handle",
+    "binding": "exnihilotinkers:item/tool/hammer/binding"
+  },
+  "modifier_roots": [
+    "exnihilotinkers:item/tool/hammer/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "head",
+      "index": 0,
+      "broken": "broken_head"
+    },
+    {
+      "name": "binding",
+      "index": 2
+    }
+  ]
+}

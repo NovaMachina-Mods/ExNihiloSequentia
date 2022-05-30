@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:hammer",
+  "results": [
+    {
+      "chance": 1.0,
+      "item": "exnihilothermal:obsidian_dust",
+      "count": 4
+    }
+  ],
+  "input": {
+    "tag": "forge:obsidian"
+  }
+}

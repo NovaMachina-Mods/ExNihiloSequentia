@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "exnihilosequentia:chunk_platinum"
-  },
-  "result": "exnihilosequentia:ingot_platinum",
-  "experience": 0.7,
-  "cookingtime": 100
-}

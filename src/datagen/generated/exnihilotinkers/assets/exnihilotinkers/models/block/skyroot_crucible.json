@@ -1,0 +1,10 @@
+{
+  "parent": "exnihilosequentia:block/crucible",
+  "textures": {
+    "particle": "tconstruct:block/wood/skyroot/log",
+    "top": "tconstruct:block/wood/skyroot/log",
+    "bottom": "tconstruct:block/wood/skyroot/log",
+    "side": "tconstruct:block/wood/skyroot/log",
+    "inside": "tconstruct:block/wood/skyroot/log"
+  }
+}

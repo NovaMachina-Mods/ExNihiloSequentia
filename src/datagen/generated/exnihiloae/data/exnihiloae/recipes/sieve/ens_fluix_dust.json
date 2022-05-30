@@ -1,0 +1,19 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.03,
+      "mesh": "diamond"
+    },
+    {
+      "chance": 0.06,
+      "mesh": "emerald"
+    }
+  ],
+  "input": {
+    "item": "exnihilosequentia:dust"
+  },
+  "result": {
+    "item": "ae2:fluix_dust"
+  }
+}

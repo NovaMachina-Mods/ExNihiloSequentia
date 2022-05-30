@@ -1,0 +1,28 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "${loader_version}" #mandatory
+license = "Creative Commons"
+issueTrackerURL = "https://github.com/NovaMachina-Mods/ExNihiloSequentia-AE2/issues" #optional
+[[mods]] #mandatory
+modId = "exnihiloae" #mandatory
+version = "${version}" #mandatory
+displayName = "Ex Nihilo: Sequentia - AE2 Addon" #mandatory
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia-ae2-addon/" #optional
+logoFile = "logo-ae2.png" #optional
+credits = "" #optional
+authors = "NovaMachina" #optional
+# The description text for the mod (multi line!) (#mandatory)
+description = '''
+    An addon for Ex Nihilo: Sequentia that adds support for Applied Energistics 2.
+    '''
+[[dependencies.exnihiloae]]
+modId = "exnihilosequentia"
+mandatory = true
+versionRange = "${minecraft_version_range}"
+ordering = "AFTER"
+side = "BOTH"
+[[dependencies.exnihiloae]]
+modId = "ae2"
+mandatory = true
+versionRange = "[11.0.0-alpha.3, )"
+ordering = "AFTER"
+side = "BOTH"

@@ -1,0 +1,7 @@
+{
+  "parent": "exnihilosequentia:block/sieve_base",
+  "textures": {
+    "texture": "tconstruct:block/wood/bloodshroom/stripped_log",
+    "particle": "tconstruct:block/wood/bloodshroom/stripped_log"
+  }
+}

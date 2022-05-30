@@ -1,249 +1,1223 @@
-import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+import mekanism.MergeJars
 
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url "https://plugins.gradle.org/m2/" }
+        maven {
+            name 'thiakil'
+            url "https://maven.thiakil.com"
+        }
+        maven {
+            name "forge"
+            url "https://maven.minecraftforge.net/"
+        }
         maven {
             name 'parchment'
             url 'https://maven.parchmentmc.org'
         }
-        mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'gradle.plugin.se.bjurr.gitchangelog', name: 'git-changelog-gradle-plugin', version: '1.71.4'
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
+
 plugins {
+    id 'org.ajoberstar.grgit' version '4.1.1'
+    id "com.matthewprenger.cursegradle" version '1.4.0'
     id 'java'
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id "org.sonarqube" version "3.3"
+    id "com.diffplug.spotless" version "6.6.1"
 }
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
+sonarqube {
+    properties {
+        property "sonar.projectKey", "NovaMachina_ExNihiloSequentia-Refactor_AYBXupFg1O4gA4Qa8bQI"
+    }
+}
+
+spotless {
+    ratchetFrom 'origin/1.18'
+    format 'misc', {
+        target '*.gradle', '*.md', '.gitignore'
+
+        trimTrailingWhitespace()
+        indentWithSpaces(2)
+        endWithNewline()
+    }
+//    java {
+//        removeUnusedImports()
+//        googleJavaFormat()
+//    }
+}
+
 wrapper {
-    //Define wrapper values here so as to not have to always do so when updating gradlew.properties
-    gradleVersion = '7.3.3'
+    gradleVersion = '7.4.2'
     distributionType = Wrapper.DistributionType.ALL
 }
 
-def ENV = System.getenv()
-version = new Date().format("yyyyMMdd-HHmmss")
-group = "${artifact_group}"
-archivesBaseName = "${artifact_basename}-${minecraft_version}"
-def artifactVersion = "${archivesBaseName}-${version}"
+defaultTasks 'build'
+
+idea {
+    module {
+        // For some reason this is necessary for IDEA 2014 workspaces to recognize assets
+        inheritOutputDirs = true
+        // Exclude directories from being managed
+        for (String excludeDirName in ["run", "out", "logs", "gradle"]) {
+            excludeDirs.add(new File(projectDir, excludeDirName))
+        }
+    }
+}
 
 sourceSets {
+    api {
+        //The API has no resources
+        resources.srcDirs = []
+    }
     main {
         resources {
-            srcDir 'generated/resources'
+            include '**/**'
+            // copy everything
+            // Add the generated main module resources
+            srcDirs += 'src/datagen/generated/exnihilosequentia'
+            // But exclude the cache of the generated data from what gets built
+            exclude '.cache'
+        }
+        compileClasspath += api.output
+        runtimeClasspath += api.output
+    }
+    thermal {
+        resources {
+            srcDirs += 'src/datagen/generated/exnihilothermal'
+            exclude '.cache'
+        }
+        compileClasspath += api.output
+        compileClasspath += main.output
+    }
+    ae {
+        resources {
+            srcDirs += 'src/datagen/generated/exnihiloae'
+            exclude '.cache'
+        }
+        compileClasspath += api.output
+        compileClasspath += main.output
+    }
+    mekanism {
+        resources {
+            srcDirs += 'src/datagen/generated/exnihilomekanism'
+            exclude '.cache'
+        }
+        compileClasspath += api.output
+        compileClasspath += main.output
+    }
+    tinkers {
+        resources {
+            srcDirs += 'src/datagen/generated/exnihilotinkers'
+            exclude '.cache'
+        }
+        compileClasspath += api.output
+        compileClasspath += main.output
+    }
+    test {
+        // The test module has no resources
+        resources.srcDirs = []
+        compileClasspath += api.output + main.output + thermal.output + ae.output + mekanism.output + tinkers.output
+        runtimeClasspath += api.output + main.output + thermal.output + ae.output + mekanism.output + tinkers.output
+    }
+    //Data gen modules for the different modules
+    datagenmain {
+        setupDataGenSourceSet(datagenmain, null, 'main')
+    }
+    datagenthermal {
+        setupDataGenSourceSet(datagenthermal, thermal, 'thermal')
+    }
+    datagenae {
+        setupDataGenSourceSet(datagenae, ae, 'ae')
+    }
+    datagenmekanism {
+        setupDataGenSourceSet(datagenmekanism, mekanism, 'mekanism')
+    }
+    datagentinkers {
+        setupDataGenSourceSet(datagentinkers, tinkers, 'tinkers')
+    }
+}
+
+// This method sets up a source set in datagen/$name and adds the api, main Ex Nihilo module and an optional
+// base module to the dependencies of the data generators source set that we are setting up
+def setupDataGenSourceSet(SourceSet datagenSourceSet, SourceSet baseSourceSet, String name) {
+    datagenSourceSet.java.srcDirs = ['src/datagen/' + name + '/java']
+    datagenSourceSet.compileClasspath += project.sourceSets.api.output
+    datagenSourceSet.compileClasspath += project.sourceSets.main.output
+    if (baseSourceSet == null) {
+        datagenSourceSet.resources.srcDirs = ['src/datagen/' + name + '/resources']
+    } else {
+        // Data gen SourceSets outside of the main one have no resources
+        datagenSourceSet.resources.srcDirs = []
+        // Only case it is null is when we are doing datagenmain so other cases also add access to the stuff
+        // in datagenmain so we can add helper classes
+        datagenSourceSet.compileClasspath += project.sourceSets.datagenmain.output
+        datagenSourceSet.compileClasspath += baseSourceSet.output
+    }
+}
+
+configurations {
+    // Make sure all our sub source set stuff extends the proper base methods so that
+    // they can see all the dependencies we have in dependencies including Forge
+    extendConfigurations(implementation, apiImplementation, testImplementation, datagenmainImplementation)
+    extendConfigurations(compileOnly, apiCompileOnly, testCompileOnly, datagenmainCompileOnly)
+    extendConfigurations(runtimeOnly, apiRuntimeOnly, datagenmainRuntimeOnly)
+    // Extend configurations for alternate modules. First by making the implementation, compileOnly, runtimeOnly equivalents
+    // for those modules extend the main ones, and then by making the corresponding ones for datagen for the module extend those.
+    // This way if we add a dependency/integration in a submodule instead of the main module of Ex Nihilo, the datagen of the corresponding
+    // module will be able to properly access the dependency
+    for (def name : ["thermal", "ae", "mekanism", "tinkers"]) {
+        maybeCreate("datagen" + name + "Implementation").extendsFrom(maybeCreate(name + "Implementation").extendsFrom(implementation))
+        maybeCreate("datagen" + name + "CompileOnly").extendsFrom(maybeCreate(name + "CompileOnly").extendsFrom(compileOnly))
+        maybeCreate("datagen" + name + "RuntimeOnly").extendsFrom(maybeCreate(name + "RuntimeOnly").extendsFrom(runtimeOnly))
+    }
+}
+
+static void extendConfigurations(Configuration base, Configuration... configurations) {
+    for (def configuration : configurations) {
+        configuration.extendsFrom(base)
+    }
+}
+
+group = "novamachina."
+version = "${minecraft_version}-" + new Date().format("yyyyMMdd-HHmmss")
+//        "${mod_version}." + (System.env.BUILD_NUMBER ?: "homebaked")
+archivesBaseName = "${artifact_basename}"
+
+ext {
+    versionProperties = ["version"                : version,
+                         "mc_version"             : minecraft_version_range,
+                         "forge_version"          : forge_version_range,
+                         "loader_version"         : "[" + forge_major + ",)",
+                         "crafttweaker_version"   : crafttweaker_version_range,
+                         "jei_version"            : jei_version_range,
+                         "minecraft_version_range": minecraft_version_range,]
+    jsonPatterns = ["**/*.json", "**/*.mcmeta"]
+}
+
+def mainReplaceResources = createReplaceResourcesTask("main", sourceSets.main)
+def thermalReplaceResources = createReplaceResourcesTask("thermal", sourceSets.thermal)
+def aeReplaceResources = createReplaceResourcesTask("ae", sourceSets.ae)
+def mekanismReplaceResources = createReplaceResourcesTask("mekanism", sourceSets.mekanism)
+def tinkersReplaceResources = createReplaceResourcesTask("tinkers", sourceSets.tinkers)
+
+def createReplaceResourcesTask(String output, SourceSet sourceSet) {
+    return tasks.register("${output}ReplaceResources", Copy) {
+        it.outputs.upToDateWhen { false }
+        def modsToml = copySpec {
+            from(sourceSet.resources) {
+                include "META-INF/mods.toml"
+                expand versionProperties
+            }
+        }
+        // Copy it into the build dir
+        it.with modsToml
+        it.into "$buildDir/resources/${output}/"
+        // If IntelliJ's output dir exists, copy it there as well
+        if (new File("$rootDir/out/production/ExNihiloSequentia.${output}/").exists()) {
+            // Note: This copies it into the correct place, but it still doesn't have the IntelliJ
+            // run work by default because of incorrect MOD_CLASSES getting generated.
+            // probably related to us setting inheritOutputDirs
+            copy {
+                with modsToml
+                into "$rootDir/out/production/ExNihiloSequentia.${output}/"
+            }
+        }
+        // If Eclipse's output dir exists, copy it there as well
+        if (new File("$rootDir/bin/${output}/").exists()) {
+            copy {
+                with modsToml
+                into "$rootDir/bin/${output}/"
+            }
         }
     }
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-repositories {
-    maven { url = 'https://files.minecraftforge.net/maven' }
-    maven { url = "https://dvs1.progwml6.com/files/maven" } // JEI
-    maven { url = "https://maven.tterrag.com/" } // TOP
-    maven { url = "https://maven.blamejared.com" } // CraftTweaker
-    maven {
-        url = "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven { url = "https://modmaven.dev" }
-}
-
-
-dependencies {
-    minecraft([
-            group  : "net.minecraftforge",
-            name   : 'forge',
-            version: "${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
-    ])
-
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
-
-    //compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}:api")
-    //runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_release}:${minecraft_release}-${top_version}")
-    implementation fg.deobf("curse.maven:toptemp-245211:${top_version}")
-
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
-    //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
-
-    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
-    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
-
-    runtimeOnly fg.deobf("curse.maven:ctm-267602:3586556")
-    runtimeOnly fg.deobf("curse.maven:jer-240630:3580623")
-}
-
-task replaceResources(type: Copy) {
-    outputs.upToDateWhen { false }
-    from(sourceSets.main.resources.srcDirs) {
-        include 'META-INF/mods.toml'
-        expand 'version': version, 'mc_version': minecraft_version_range, 'forge_version': forge_version_range
-    }
-    into "$buildDir/resources/main"
-}
-
-processResources {
-    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'META-INF/mods.toml'
-    }
-    finalizedBy replaceResources
-}
-
-task createVersionFile(type: CreateVersionClass) {
-    fileVersion = version
-}
-
 minecraft {
-    mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    mappings channel: "${mappings_channel}", version: "${mappings_version}"
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformers.from(file('src/main/resources/META-INF/accesstransformer.cfg'))
 
     runs {
         client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
+            workingDirectory file("run")
+            // This fixes Mixin application problems from other mods because their refMaps are SRG-based, but we're in a MCP env
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            // The below if statements are to add args to your gradle.properties file in user home
+            // (DO NOT add them directly to the gradle.properties file for this project)
+            // Setting the below properties allows use of your normal Minecraft account in the
+            // dev environment including having your skin load. Each property also has a comment
+            // explaining what information to set the value to/format it expects
+            // One thing to note is because of the caching that goes on, after changing these
+            // variables, you need to refresh the project and rerun genIntellijRuns/genEclipseRuns
+            if (project.hasProperty('mc_uuid')) {
+                // Your uuid without any dashes in the middle
+                args '--uuid', project.getProperty('mc_uuid')
+            }
+            if (project.hasProperty('mc_username')) {
+                // Your username/display name, this is the name that shows up in chat
+                // Note: This is not your email, even if you have a Mojang account
+                args '--username', project.getProperty('mc_username')
+            }
+            if (project.hasProperty('mc_accessToken')) {
+                // Your access token, you can find it in your '.minecraft/launcher_accounts.json' file
+                args '--accessToken', project.getProperty('mc_accessToken')
+            }
+            if (project.hasProperty('forge_force_ansi')) {
+                // Force ansi if declared as a gradle variable, as the auto detection doesn't detect IntelliJ properly
+                // or eclipse's plugin that adds support for ansi escape in console
+                jvmArg('-Dterminal.ansi=' + project.getProperty('forge_force_ansi'))
+            }
 
             mods {
-                exnihilosequentia {
-                    source sourceSets.main
+                exnihilosequentia.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
+                    exnihilothermal.source((SourceSet) sourceSets.thermal)
+                }
+                if (project.hasProperty('ae2_version')) {
+                    exnihiloae.source((SourceSet) sourceSets.ae)
+                }
+                if (project.hasProperty('mekanism_version')) {
+                    exnihilomekanism.source((SourceSet) sourceSets.mekanism)
+                }
+                if (project.hasProperty('mantle_version') && project.hasProperty('tinkers_version')) {
+                    exnihilotinkers.source((SourceSet) sourceSets.tinkers)
                 }
             }
         }
 
         server {
-            workingDirectory project.file('runserver')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
+            workingDirectory file("runserver")
+            // This fixes Mixin application problems from other mods because their refMaps are SRG-based, but we're in a MCP env
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            if (project.hasProperty('forge_force_ansi')) {
+                // Force ansi if declared as a gradle variable, as the auto detection doesn't detect IntelliJ properly
+                // or eclipse's plugin that adds support for ansi escape in console
+                jvmArg('-Dterminal.ansi=' + project.getProperty('forge_force_ansi'))
+            }
 
             mods {
-                exnihilosequentia {
-                    source sourceSets.main
+                exnihilosequentia.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
+                    exnihilothermal.source((SourceSet) sourceSets.thermal)
+                }
+                if (project.hasProperty('ae2_version')) {
+                    exnihiloae.source((SourceSet) sourceSets.ae)
+                }
+                if (project.hasProperty('mekanism_version')) {
+                    exnihilomekanism.source((SourceSet) sourceSets.mekanism)
+                }
+                if (project.hasProperty('mantle_version') && project.hasProperty('tinkers_version')) {
+                    exnihilotinkers.source((SourceSet) sourceSets.tinkers)
                 }
             }
         }
 
         data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'exnihilosequentia', '--all', '--output', file('generated/resources/'), '--existing', file('src/main/resources')
+            workingDirectory file("run")
+            environment 'target', 'fmluserdevdata'
+            // This fixes Mixin application problems from other mods because their refMaps are SRG-based, but we're in a MCP env
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            if (project.hasProperty('forge_force_ansi')) {
+                // Force ansi if declared as a gradle variable, as the auto detection doesn't detect IntelliJ properly
+                // or eclipse's plugin that adds support for ansi escape in console
+                jvmArg('-Dterminal.ansi=' + project.getProperty('forge_force_ansi'))
+            }
+
+            args '--all', '--output', file('src/datagen/generated/'),
+                    '--mod', 'exnihilosequentia',
+                    '--existing', file('src/main/resources/'),
+                    '--mod', 'exnihilothermal',
+                    '--existing', file('src/thermal/resources/'),
+                    '--mod', 'exnihiloae',
+                    '--existing', file('src/ae/resources/'),
+                    '--mod', 'exnihilomekanism',
+                    '--existing', file('src/mekanism/resources/'),
+                    '--mod', 'exnihilotinkers',
+                    '--existing', file('src/tinkers/resources/')
 
             mods {
-                exnihilosequentia {
-                    source sourceSets.main
+                exnihilosequentia.sources((SourceSet[]) [sourceSets.main, sourceSets.api, sourceSets.datagenmain])
+                if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
+                    exnihilothermal.sources((SourceSet[]) [sourceSets.thermal, sourceSets.datagenthermal])
+                }
+                if (project.hasProperty('ae2_version')) {
+                    exnihiloae.sources((SourceSet[]) [sourceSets.ae, sourceSets.datagenae])
+                }
+                if (project.hasProperty('mekanism_version')) {
+                    exnihilomekanism.sources((SourceSet[]) [sourceSets.mekanism, sourceSets.datagenmekanism])
+                }
+                if (project.hasProperty('mantle_version') && project.hasProperty('tinkers_version')) {
+                    exnihilotinkers.sources((SourceSet[]) [sourceSets.tinkers, sourceSets.datagentinkers])
                 }
             }
         }
     }
 }
 
-task makeChangelog(type: GitChangelogTask) {
-    file = file('changelog.html')
-    untaggedName = "Current Release ${version}"
-    fromCommit = "1be698f061a24f615c2a770d1190c995259ecbcd"
-    toRef = 'HEAD'
-    templateContent = file('changelog.mustache').getText('UTF-8')
-    fromRepo = file(".")
-}
+repositories {
+    maven {
+        name 'thiakil'
+        url 'https://maven.thiakil.com'
+        content {
+            includeGroup 'de.oceanlabs.mcp'
+            includeGroup 'net.minecraft'//custom mappings
+        }
+    }
+    maven {
+        name 'prog'
+        url 'https://dvs1.progwml6.com/files/maven'
+        content {
+            includeGroup 'mezz.jei'
+            includeGroup 'slimeknights.mantle'
+            includeGroup 'slimeknights.tconstruct'
+        }
+    }
+    maven {
+        name 'CraftTweaker'
+        url "https://maven.blamejared.com"
+        content {
+            includeGroup 'com.blamejared.crafttweaker'
+            includeGroup 'org.openzen.zencode'
+        }
+    }
+    maven {
+        name 'k-4u'
+        url 'https://maven.k-4u.nl/'
+        content {
+            includeGroup 'mcjty.theoneprobe'
+        }
+    }
+    maven {
+        name 'CurseMaven'
+        url 'https://www.cursemaven.com'
+        content {
+            includeGroup 'curse.maven'
+        }
+    }
+    maven {
+        name 'Modmaven'
+        url 'https://modmaven.dev/'
+        content {
+            includeGroup 'appeng'
+            includeGroup 'mekanism'
+        }
+    }
+    maven {
+        name 'CoFH'
+        url 'https://nexus.covers1624.net/repository/cofh-releases/'
+        content {
+            includeGroup 'com.teamcofh'
+        }
+    }
 
-curseforge {
-    apiKey = ENV.CURSEFORGE_KEY ?: '0'
-
-    project {
-        id = "${curseforge_project}"
-        releaseType = 'release'
-        mainArtifact jar
-        addGameVersion '1.18'
-        changelog = file('changelog.html')
-        changelogType = 'html'
+    whenObjectAdded {
+// ForgeGradle adds these in an afterEvaluate, so we need to catch them as they're added and exclude mod artifacts/groups
+        if (it instanceof MavenArtifactRepository) {
+            def url = it.url.toString()
+            if (url == 'https://maven.minecraftforge.net/' || url == 'https://libraries.minecraft.net/' || url == 'https://repo.maven.apache.org/maven2/') {
+                try {
+                    it.content {
+                        excludeGroup 'curse.maven'
+                        excludeGroup 'mezz.jei'
+                        excludeGroup 'mcjty.theoneprobe'
+                        excludeGroup 'appeng'
+                        excludeGroup 'com.blamejared.crafttweaker'
+                        excludeGroup 'com.teamcofh'
+                        excludeGroup 'slimeknights.tconstruct'
+                        excludeGroup 'slimeknights.mantle'
+                    }
+                    println("Adding exclusions to ${it.url}")
+                } catch (Exception ignored) {
+                    //oh well
+                }
+            }
+        }
     }
 }
 
-afterEvaluate {
-    tasks.curseforge400012.dependsOn createVersionFile
-    tasks.jar.dependsOn replaceResources
-    tasks.curseforge400012.dependsOn makeChangelog
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junit_version}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junit_version}"
+    //We use https://github.com/quicktheories/QuickTheories to allow for implementing property based testing
+    testImplementation "org.quicktheories:quicktheories:${quicktheories_version}"
+
+    compileOnly "org.jetbrains:annotations:${jb_annotations}"
+
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+
+    compileOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraft_release}-${top_version}:api") {
+        transitive = false
+    }
+    runtimeOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraft_release}-${top_version}") {
+        transitive = false
+    }
+
+    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+
+    implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+
+    if (project.hasProperty('ae2_version')) {
+        implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
+            transitive = false
+        }
+    }
+
+    if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
+        implementation fg.deobf("com.teamcofh:cofh_core:${minecraft_version}-${cofh_core_version}")
+        implementation fg.deobf("com.teamcofh:thermal_foundation:${minecraft_version}-${thermal_foundation_version}")
+    }
+
+    if (project.hasProperty('mekanism_version')) {
+        implementation fg.deobf("mekanism:Mekanism:${minecraft_version}-${mekanism_version}")
+    }
+
+    if (project.hasProperty('mantle_version') && project.hasProperty('tinkers_version')) {
+        implementation fg.deobf("slimeknights.mantle:Mantle:${minecraft_version}-${mantle_version}")
+        implementation fg.deobf("slimeknights.tconstruct:TConstruct:${minecraft_version}-${tinkers_version}")
+    }
+
+    //Dependencies for data generators for mod compat reference
+    if (project.hasProperty('ae2_version')) {
+        datagenaeImplementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
+            transitive = false
+        }
+    }
+
+    if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
+        datagenthermalImplementation fg.deobf("com.teamcofh:thermal_foundation:${minecraft_version}-${thermal_foundation_version}")
+    }
+
+    if (project.hasProperty('mekanism_version')) {
+        datagenmekanismImplementation fg.deobf("mekanism:Mekanism:${minecraft_version}-${mekanism_version}")
+    }
+
+    if (project.hasProperty('mantle_version') && project.hasProperty('tinkers_version')) {
+        datagentinkersImplementation fg.deobf("slimeknights.tconstruct:TConstruct:${minecraft_version}-${tinkers_version}")
+    }
+}
+
+if (project.hasProperty('UPDATE_MAPPINGS')) {
+    // If the project has the update mappings property, configure it to be able to target all our extra sourceSets as well
+    // so that whenever we need to update mappings it is quick and easy to do so.
+    // Note: This needs to be below the dependencies and minecraft blocks so that it can properly read the mappings value
+    // and also read and find the minecraft dep
+    def extraSourceSets = [
+            sourceSets.api,
+            sourceSets.thermal,
+            sourceSets.ae,
+            sourceSets.mekanism,
+            sourceSets.tinkers,
+            sourceSets.test,
+            sourceSets.datagenmain,
+            sourceSets.datagenthermal,
+            sourceSets.datagenae,
+            sourceSets.datagenmekanism,
+            sourceSets.datagentinkers
+    ]
+    Set<File> allExtraDirs = new HashSet<>()
+    for (def sourceSet : extraSourceSets) {
+        allExtraDirs.addAll(sourceSet.java.srcDirs)
+    }
+    extractRangeMap {
+        sources.from(allExtraDirs)
+    }
+    applyRangeMap {
+        sources.from(allExtraDirs)
+    }
+    allExtraDirs.each { extractMappedNew.addTarget it }
+}
+
+// Set the various variables/settings for the different process resources tasks
+processResources {
+    setupProcessResources(processResources, mainReplaceResources, 'main')
+}
+processThermalResources {
+    setupProcessResources(processThermalResources, thermalReplaceResources, 'thermal')
+}
+processAeResources {
+    setupProcessResources(processAeResources, aeReplaceResources, 'ae2')
+}
+processMekanismResources {
+    setupProcessResources(processMekanismResources, mekanismReplaceResources, 'mekanism')
+}
+processTinkersResources {
+    setupProcessResources(processTinkersResources, tinkersReplaceResources, 'tinkers')
+}
+processDatagenmainResources {
+    dependsOn(compileJava)
+}
+
+def setupProcessResources(ProcessResources process, TaskProvider<Task> replaceResources, String logoTitle) {
+    process.duplicatesStrategy(DuplicatesStrategy.FAIL)
+    process.exclude('META-INF/mods.toml')
+    process.from("${projectDir}") { include "logo-${logoTitle}.png" }
+    process.configure { finalizedBy(replaceResources) }
+    process.doLast {
+        fileTree(dir: process.getOutputs().getFiles().getAsPath(), includes: jsonPatterns).each {
+            File file -> file.setText(JsonOutput.toJson(new JsonSlurper().parse(file)))
+        }
+    }
+}
+
+// Make the various classes tasks depend on the corresponding replaceResources tasks in addition to the default processResources tasks they depend on
+classes.configure {
+    dependsOn(mainReplaceResources)
+}
+thermalClasses.configure {
+    dependsOn(thermalReplaceResources)
+}
+aeClasses.configure {
+    dependsOn(aeReplaceResources)
+}
+mekanismClasses.configure {
+    dependsOn(mekanismReplaceResources)
+}
+tinkersClasses.configure {
+    dependsOn(tinkersReplaceResources)
+}
+
+def getManifestAttributes(String title) {
+    return [
+            "Specification-Title"     : title,
+            "Specification-Vendor"    : "NovaMachina",
+            "Specification-Version"   : "${archivesBaseName}-${version}",
+            "Implementation-Title"    : title,
+            "Implementation-Version"  : "${archivesBaseName}-${version}",
+            "Implementation-Vendor"   : "NovaMachina",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+    ]
 }
 
 jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "Ex Nihilo: Sequentia",
-                "Specification-Vendor"    : "NovaMachina",
-                "Specification-Version"   : artifactVersion, // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : artifactVersion,
-                "Implementation-Vendor"   : "NovaMachina",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    from([sourceSets.api.output, sourceSets.main.output])
+    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequenta"))
+    afterEvaluate { finalizedBy reobfJar }
+}
+
+task sourcesJar(type: Jar, dependsOn: [classes, apiClasses, thermalClasses, aeClasses, mekanismClasses, tinkersClasses]) {
+    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    archiveClassifier.set("sources")
+    from(sourceSets.api.allJava, sourceSets.main.allJava, sourceSets.thermal.allJava, sourceSets.ae.allJava, sourceSets.mekanism.allJava, sourceSets.tinkers.allJava)
+    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia"))
+}
+
+task apiJar(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    archiveClassifier.set("api")
+    from sourceSets.api.output
+    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia"))
+    afterEvaluate { finalizedBy reobfApiJar }
+}
+
+task thermalJar(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    archiveFileName.set("ExNihiloThermal-${project.version}.jar")
+    from sourceSets.thermal.output
+    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia - Thermal Addon"))
+    afterEvaluate { finalizedBy reobfThermalJar }
+}
+
+task aeJar(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    archiveFileName.set("ExNihiloAE-${project.version}.jar")
+    from sourceSets.ae.output
+    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia - AE2 Addon"))
+    afterEvaluate { finalizedBy reobfAeJar }
+}
+
+task mekanismJar(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    archiveFileName.set("ExNihiloMekanism-${project.version}.jar")
+    from sourceSets.mekanism.output
+    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia - Mekanism Addon"))
+    afterEvaluate { finalizedBy reobfMekanismJar }
+}
+
+task tinkersJar(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    archiveFileName.set("ExNihiloTinkers-${project.version}.jar")
+    from sourceSets.tinkers.output
+    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia - Tinkers Addon"))
+    afterEvaluate { finalizedBy reobfTinkersJar }
+}
+
+task allJar(type: Jar, dependsOn: [classes, apiClasses, thermalClasses, aeClasses, mekanismClasses, tinkersClasses]) {
+    mustRunAfter(clean)
+    afterEvaluate { finalizedBy reobfAllJar }
+    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    archiveClassifier.set("all")
+    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia All"))
+    // Start by generating the merged data
+    MergeJars.merge(project, sourceSets.main, sourceSets.thermal, sourceSets.ae, sourceSets.mekanism, sourceSets.tinkers)
+    // Then copy all the files except for ones we are going to include from the merged
+    from(sourceSets.api.output)
+    List<String> baseExcludeData = MergeJars.getGeneralPathsToExclude(project)
+    Closure excludeFromMain = MergeJars.createExcludeClosure(baseExcludeData)
+    from(sourceSets.main.output, excludeFromMain)
+    Closure excludeFromAll = MergeJars.createExcludeClosure(baseExcludeData, 'logo.png', 'pack.mcmeta')
+    from(sourceSets.thermal.output, excludeFromAll)
+    from(sourceSets.ae.output, excludeFromAll)
+    from(sourceSets.mekanism.output, excludeFromAll)
+    from(sourceSets.tinkers.output, excludeFromAll)
+    // And finally copy over the generated files
+    MergeJars.getGeneratedClosures(versionProperties).each { closure -> from("$buildDir/generated", closure) }
+}
+
+clean {
+    //TODO: Try to come up with a slightly better solution to this that deletes more,
+    // for example make it calculate the current hash and only leave that or only do
+    // this if clean build is being ran. We also ideally would have it remove some of
+    // the data from our generated folder, but for now this will do given jenkins runs
+    // a clean build because we need to make sure it doesn't fail
+    def filteredDelete = new HashSet<>()
+    for (def toDelete : getDelete()) {
+        for (def f : file(toDelete).listFiles()) {
+            if (f.getName() != "fg_cache") {
+                if (f.getName() == "generated") {
+                    for (def generated : file(f).listFiles()) {
+                        if (generated.getName() != "data" && generated.getName() != "META-INF") {
+                            filteredDelete.add(generated)
+                        }
+                    }
+                } else {
+                    filteredDelete.add(f)
+                }
+            }
+        }
+    }
+    setDelete(filteredDelete)
+}
+
+tasks.withType(JavaCompile).configureEach({
+    it.options.encoding = 'UTF-8'
+})
+
+compileJava {
+    options.getGeneratedSourceOutputDirectory().set(file("src/datagen/main/resources/"))
+}
+
+artifacts {
+    archives apiJar
+    archives jar
+    archives thermalJar
+    archives aeJar
+    archives mekanismJar
+    archives tinkersJar
+    archives allJar
+    archives sourcesJar
+}
+
+reobf {
+    apiJar { classpath.from(sourceSets.api.compileClasspath) }
+    jar { classpath.from(sourceSets.main.compileClasspath) }
+    thermalJar { classpath.from(sourceSets.thermal.compileClasspath) }
+    aeJar { classpath.from(sourceSets.ae.compileClasspath) }
+    mekanismJar { classpath.from(sourceSets.mekanism.compileClasspath) }
+    tinkersJar { classpath.from(sourceSets.tinkers.compileClasspath) }
+    allJar {}
+}
+
+// Minimize/optimize all png files, requires optipng on the PATH
+// Credits: BrainStone
+void minimizePNGFile(File file) {
+    long size = file.length()
+    exec {
+        executable "optipng"
+        args "-q", "-o7", "-zm1-9", "-strip", "all", file
+    }
+    long newSize = file.length()
+    if (newSize < size) {
+        System.out.format("Reduced File size of %s from %d bytes to %d bytes (reduced by %.2f%%)\n",
+                file, size, newSize, ((double) (size - newSize)) / ((double) size) * 100.0)
     }
 }
 
-// Example configuration to allow publishing using the maven-publish task
-// This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar')
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
+task optimizePng {
+    def pngPatterns = ["**/*.png"]
+    doLast {
+        // Ensure the logo is minimized (we add this file to each jar)
+        minimizePNGFile(file("${projectDir}/logo.png"))
+        // Minimize any PNGs in the source sets
+        def sourceSets = [sourceSets.main, sourceSets.thermal, sourceSets.ae, sourceSets.mekanism, sourceSets.tinkers]
+        for (def sourceSet : sourceSets) {
+            for (dir in sourceSet.resources.srcDirs) {
+                fileTree(dir: dir, includes: pngPatterns).each { minimizePNGFile(it) }
+            }
+        }
+    }
+}
+
+tasks.withType(GenerateModuleMetadata) {
+    // Disable Gradle 7 module metadata generation as it does not play nicely with FG
+    enabled = false
+}
 
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = group
-            artifactId = archivesBaseName
-            version = "${version}"
-            artifact jar
+    publications { PublicationContainer publicationContainer ->
+        publicationContainer.register("main", MavenPublication) { MavenPublication publication ->
+            publication.from((SoftwareComponent) components.java)
+            publication.groupId = project.group + "exnihilosequentia"
+            publication.version = project.version
+            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: project.archivesBaseName
+            publication.artifacts = [jar]
+            publication.pom {
+                name.set("Ex Nihilo: Sequentia")
+                packaging = 'jar'
+                description.set('Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.')
+                url.set('https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia')
+                scm {
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia.git')
+                }
+                issueManagement {
+                    system.set('github')
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues')
+                }
+                licenses {
+                    license {
+                        name.set('Creative Commons')
+                        distribution.set('repo')
+                    }
+                }
+                withXml {
+                    NodeList dependencies = asNode().dependencies
+                    NodeList allDeps = dependencies.'*'
+
+                    // Remove forge deps
+                    allDeps.<Node> findAll() { Node el ->
+                        el.artifactId.text() == 'forge' && el.groupId.text() == 'net.minecraftforge'
+                    }.forEach() { Node el ->
+                        el.parent().remove(el)
+                    }
+                    //remove ForgeGradle's mapped suffix from versions & set as optional so anyone else doesn't inherit them
+                    allDeps.<Node> findAll() { Node el ->
+                        el.version.text().contains('_mapped_')
+                    }.each { Node el ->
+                        el.version.each { Node version ->
+                            def versionText = version.text()
+                            version.setValue(versionText.substring(0, versionText.indexOf('_mapped_')))
+                        }
+                        el.appendNode('optional', true)
+                    }
+                }
+            }
+        }
+        publicationContainer.register("api", MavenPublication) { MavenPublication publication ->
+            publication.from((SoftwareComponent) components.java)
+            publication.groupId = project.group + "exnihilosequentia"
+            publication.version = project.version
+            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: project.archivesBaseName
+            publication.artifacts = [apiJar]
+            publication.pom {
+                name.set("Ex Nihilo: Sequentia")
+                packaging = 'jar'
+                description.set('Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.')
+                url.set('https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia')
+                scm {
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia.git')
+                }
+                issueManagement {
+                    system.set('github')
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues')
+                }
+                licenses {
+                    license {
+                        name.set('Creative Commons')
+                        distribution.set('repo')
+                    }
+                }
+                withXml {
+                    NodeList dependencies = asNode().dependencies
+                    NodeList allDeps = dependencies.'*'
+
+                    // Remove forge deps
+                    allDeps.<Node> findAll() { Node el ->
+                        el.artifactId.text() == 'forge' && el.groupId.text() == 'net.minecraftforge'
+                    }.forEach() { Node el ->
+                        el.parent().remove(el)
+                    }
+                    //remove ForgeGradle's mapped suffix from versions & set as optional so anyone else doesn't inherit them
+                    allDeps.<Node> findAll() { Node el ->
+                        el.version.text().contains('_mapped_')
+                    }.each { Node el ->
+                        el.version.each { Node version ->
+                            def versionText = version.text()
+                            version.setValue(versionText.substring(0, versionText.indexOf('_mapped_')))
+                        }
+                        el.appendNode('optional', true)
+                    }
+                }
+            }
+        }
+        publicationContainer.register("thermal", MavenPublication) { MavenPublication publication ->
+            publication.from((SoftwareComponent) components.java)
+            publication.groupId = project.group + "exnihilothermal"
+            publication.version = project.version
+            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: "ExNihiloThermal"
+            publication.artifacts = [thermalJar]
+            publication.pom {
+                name.set("Ex Nihilo: Sequentia")
+                packaging = 'jar'
+                description.set('Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.')
+                url.set('https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia')
+                scm {
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia.git')
+                }
+                issueManagement {
+                    system.set('github')
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues')
+                }
+                licenses {
+                    license {
+                        name.set('Creative Commons')
+                        distribution.set('repo')
+                    }
+                }
+                withXml {
+                    NodeList dependencies = asNode().dependencies
+                    NodeList allDeps = dependencies.'*'
+
+                    // Remove forge deps
+                    allDeps.<Node> findAll() { Node el ->
+                        el.artifactId.text() == 'forge' && el.groupId.text() == 'net.minecraftforge'
+                    }.forEach() { Node el ->
+                        el.parent().remove(el)
+                    }
+                    //remove ForgeGradle's mapped suffix from versions & set as optional so anyone else doesn't inherit them
+                    allDeps.<Node> findAll() { Node el ->
+                        el.version.text().contains('_mapped_')
+                    }.each { Node el ->
+                        el.version.each { Node version ->
+                            def versionText = version.text()
+                            version.setValue(versionText.substring(0, versionText.indexOf('_mapped_')))
+                        }
+                        el.appendNode('optional', true)
+                    }
+                }
+            }
+        }
+        publicationContainer.register("ae", MavenPublication) { MavenPublication publication ->
+            publication.from((SoftwareComponent) components.java)
+            publication.groupId = project.group + "exnihiloae"
+            publication.version = project.version
+            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: "ExNihiloAE"
+            publication.artifacts = [aeJar]
+            publication.pom {
+                name.set("Ex Nihilo: Sequentia")
+                packaging = 'jar'
+                description.set('Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.')
+                url.set('https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia')
+                scm {
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia.git')
+                }
+                issueManagement {
+                    system.set('github')
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues')
+                }
+                licenses {
+                    license {
+                        name.set('Creative Commons')
+                        distribution.set('repo')
+                    }
+                }
+                withXml {
+                    NodeList dependencies = asNode().dependencies
+                    NodeList allDeps = dependencies.'*'
+
+                    // Remove forge deps
+                    allDeps.<Node> findAll() { Node el ->
+                        el.artifactId.text() == 'forge' && el.groupId.text() == 'net.minecraftforge'
+                    }.forEach() { Node el ->
+                        el.parent().remove(el)
+                    }
+                    //remove ForgeGradle's mapped suffix from versions & set as optional so anyone else doesn't inherit them
+                    allDeps.<Node> findAll() { Node el ->
+                        el.version.text().contains('_mapped_')
+                    }.each { Node el ->
+                        el.version.each { Node version ->
+                            def versionText = version.text()
+                            version.setValue(versionText.substring(0, versionText.indexOf('_mapped_')))
+                        }
+                        el.appendNode('optional', true)
+                    }
+                }
+            }
+        }
+        publicationContainer.register("mekanism", MavenPublication) { MavenPublication publication ->
+            publication.from((SoftwareComponent) components.java)
+            publication.groupId = project.group + "exnihilomekanism"
+            publication.version = project.version
+            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: "ExNihiloMekanism"
+            publication.artifacts = [mekanismJar]
+            publication.pom {
+                name.set("Ex Nihilo: Sequentia")
+                packaging = 'jar'
+                description.set('Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.')
+                url.set('https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia')
+                scm {
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia.git')
+                }
+                issueManagement {
+                    system.set('github')
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues')
+                }
+                licenses {
+                    license {
+                        name.set('Creative Commons')
+                        distribution.set('repo')
+                    }
+                }
+                withXml {
+                    NodeList dependencies = asNode().dependencies
+                    NodeList allDeps = dependencies.'*'
+
+                    // Remove forge deps
+                    allDeps.<Node> findAll() { Node el ->
+                        el.artifactId.text() == 'forge' && el.groupId.text() == 'net.minecraftforge'
+                    }.forEach() { Node el ->
+                        el.parent().remove(el)
+                    }
+                    //remove ForgeGradle's mapped suffix from versions & set as optional so anyone else doesn't inherit them
+                    allDeps.<Node> findAll() { Node el ->
+                        el.version.text().contains('_mapped_')
+                    }.each { Node el ->
+                        el.version.each { Node version ->
+                            def versionText = version.text()
+                            version.setValue(versionText.substring(0, versionText.indexOf('_mapped_')))
+                        }
+                        el.appendNode('optional', true)
+                    }
+                }
+            }
+        }
+        publicationContainer.register("tinkers", MavenPublication) { MavenPublication publication ->
+            publication.from((SoftwareComponent) components.java)
+            publication.groupId = project.group + "exnihilotinkers"
+            publication.version = project.version
+            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: "ExNihiloTinkers"
+            publication.artifacts = [tinkersJar]
+            publication.pom {
+                name.set("Ex Nihilo: Sequentia")
+                packaging = 'jar'
+                description.set('Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.')
+                url.set('https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia')
+                scm {
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia.git')
+                }
+                issueManagement {
+                    system.set('github')
+                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues')
+                }
+                licenses {
+                    license {
+                        name.set('Creative Commons')
+                        distribution.set('repo')
+                    }
+                }
+                withXml {
+                    NodeList dependencies = asNode().dependencies
+                    NodeList allDeps = dependencies.'*'
+
+                    // Remove forge deps
+                    allDeps.<Node> findAll() { Node el ->
+                        el.artifactId.text() == 'forge' && el.groupId.text() == 'net.minecraftforge'
+                    }.forEach() { Node el ->
+                        el.parent().remove(el)
+                    }
+                    //remove ForgeGradle's mapped suffix from versions & set as optional so anyone else doesn't inherit them
+                    allDeps.<Node> findAll() { Node el ->
+                        el.version.text().contains('_mapped_')
+                    }.each { Node el ->
+                        el.version.each { Node version ->
+                            def versionText = version.text()
+                            version.setValue(versionText.substring(0, versionText.indexOf('_mapped_')))
+                        }
+                        el.appendNode('optional', true)
+                    }
+                }
+            }
         }
     }
     repositories {
-//        maven {
-//            url "file:///${project.projectDir}/mcmodsrepo"
-//        }
         maven {
-            credentials {
-                username = ENV.NEXUS_USERNAME
-                password = ENV.NEXUS_PASSWORD
-            }
             url = "https://repo.jacob-williams.me/repository/maven-releases/"
+            credentials {
+//                    username = System.getenv("NEXUS_USERNAME")
+//                    password = System.getenv("NEXUS_PASSWORD")
+                username = "jacob"
+                password = "j24e220712"
+            }
         }
     }
 }
 
-abstract class CreateVersionClass extends DefaultTask {
-    CreateVersionClass() {
-        this.fileVersion = getFileVersion()
-    }
+tasks.curseforge.dependsOn jar, thermalJar, apiJar, aeJar, mekanismJar, tinkersJar
 
-    @Input
-    abstract Property<String> getFileVersion()
+if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKey')) {
+    println "Enabling Curseforge config"
+    curseforge {
+        options {
+            debug = true
+        }
+        apiKey = System.getenv("CURSEFORGE_KEY") ?: project.findProperty("curseforgeKey")
 
-    @TaskAction
-    void writeString() {
-        FileWriter fw
-        fw = new FileWriter('update.json')
-        fw.write("{\n" +
-                "  \"homepage\": \"https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia\",\n" +
-                "  \"promos\": {\n" +
-                "    \"1.18-latest\": \"${fileVersion.get()}\",\n" +
-                "    \"1.18-recommended\": \"${fileVersion.get()}\"\n" +
-                "  }\n" +
-                "}\n")
-        fw.close()
+        def resolvedChangelog = null
+
+        // closure to generate the changelog once, and only when needed by CurseGradle
+        def changeLogResolver = { ->
+            if (resolvedChangelog != null) {
+                return resolvedChangelog
+            }
+            def generatedChangelog = "Unable to generate changelog :("
+            def currentCommit = System.getenv("GIT_COMMIT")
+            def prevCommit = System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: System.getenv("GIT_PREVIOUS_COMMIT")
+
+            if (currentCommit != null && prevCommit != null) {
+                generatedChangelog = ""
+                grgit.log {
+                    range(prevCommit, currentCommit)
+                }.reverse().each { commit ->
+                    // Use full message rather than short message to get any new lines, and trim it so that any trailing new lines
+                    // get removed so that we don't end up with extra spaces
+                    String message = commit.fullMessage.trim()
+                    if (!message.startsWith("Merge branch") && !message.startsWith("Merge pull request")) {
+                        //Ignore Merges and PR Merges
+                        message = message.replaceAll("#(\\d+)", { match ->// turn issues/prs into links (github currently supports prs being linked as issues)
+                            return "<a href=\"https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues/${match[1]}\">${match[0]}</a>"
+                        }).replaceAll("\\n", "<br>&emsp;")
+// convert new lines that are part of a commit message into actual new lines and a tab
+                        if (generatedChangelog != "") {
+                            // If this isn't the first commit prepend an extra newline
+                            generatedChangelog += "<br>"
+                        }
+                        generatedChangelog += "<a href=\"https://github.com/NovaMachina-Mods/ExNihiloSequentia/commit/${commit.id}\">${commit.getAbbreviatedId()}</a> - ${message}"
+                    }
+                }
+                println "Changelog generated"
+            }
+
+            def releaseNotesFile = project.file("docs/release_${version}.html")
+            if (releaseNotesFile.exists()) {
+                // Add any version specific changelog stuff
+                def releaseNotes = releaseNotesFile.getText()
+                generatedChangelog = "$releaseNotes<br> $generatedChangelog"
+            }
+
+            if (curse_release_type == "alpha") {
+                // Add a warning at the top about what an alpha build means
+                generatedChangelog = "Warning: Ex Nihilo: Sequentia is currently in alpha, and is not recommended for widespread use in modpacks. There are likely to be game breaking bugs, " +
+                        "and updating from one alpha to the next may cause various Ex Nihilo: Sequentia blocks to disappear/void their contents. While we will try to not have this happen/keep " +
+                        "it to a minimum make sure to make backups. <br> $generatedChangelog"
+            }
+            resolvedChangelog = generatedChangelog
+            return generatedChangelog
+        }
+
+        //Main
+        project {
+            id = '400012'
+            changelogType = "html"
+            changelog = changeLogResolver
+            // A file can also be set using: changelog = file('changelog.txt')
+            releaseType = "${curse_release_type}"
+            mainArtifact(jar) {
+                relations {
+                    optionalDependency "jade"
+                    optionalDependency "jei"
+                    optionalDependency "the-one-probe"
+                }
+            }
+            addArtifact apiJar
+            addGameVersion "${minecraft_version}"
+        }
+
+//        //Thermal
+//        project {
+//            id = '445226'
+//            changelogType = "html"
+//            changelog = changeLogResolver
+//            releaseType = "${curse_release_type}"
+//            mainArtifact(thermalJar) {
+//                relations {
+//                    requiredDependency "exnihilosequentia"
+//                    requiredDependency "thermal"
+//                }
+//            }
+//            addGameVersion "${minecraft_version}"
+//        }
+//
+//        //AE2
+//        project {
+//            id = '428204'
+//            changelogType = "html"
+//            changelog = changeLogResolver
+//            releaseType = "${curse_release_type}"
+//            mainArtifact(aeJar) {
+//                relations {
+//                    requiredDependency "exnihilosequentia"
+//                    requiredDependency "appliedenergistics2"
+//                }
+//            }
+//            addGameVersion "${minecraft_version}"
+//        }
+//
+//        //Mekanism
+//        project {
+//            id = '430787'
+//            changelogType = "html"
+//            changelog = changeLogResolver
+//            releaseType = "${curse_release_type}"
+//            mainArtifact(aeJar) {
+//                relations {
+//                    requiredDependency "exnihilosequentia"
+//                    requiredDependency "mekanism"
+//                }
+//            }
+//            addGameVersion "${minecraft_version}"
+//        }
+//
+//        //Tinkers
+//        project {
+//            id = '480856'
+//            changelogType = "html"
+//            changelog = changeLogResolver
+//            releaseType = "${curse_release_type}"
+//            mainArtifact(tinkersJar) {
+//                relations {
+//                    requiredDependency "exnihilosequentia"
+//                    requiredDependency "mantle"
+//                    requiredDependency "tconstruct"
+//                }
+//            }
+//            addGameVersion "${minecraft_version}"
+//        }
     }
 }

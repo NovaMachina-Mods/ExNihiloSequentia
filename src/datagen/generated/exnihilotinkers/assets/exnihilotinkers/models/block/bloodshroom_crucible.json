@@ -1,0 +1,10 @@
+{
+  "parent": "exnihilosequentia:block/crucible",
+  "textures": {
+    "particle": "tconstruct:block/wood/bloodshroom/log",
+    "top": "tconstruct:block/wood/bloodshroom/log",
+    "bottom": "tconstruct:block/wood/bloodshroom/log",
+    "side": "tconstruct:block/wood/bloodshroom/log",
+    "inside": "tconstruct:block/wood/bloodshroom/log"
+  }
+}

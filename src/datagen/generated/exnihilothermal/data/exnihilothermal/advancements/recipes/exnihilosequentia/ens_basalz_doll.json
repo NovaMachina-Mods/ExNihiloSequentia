@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilothermal:ens_basalz_doll"
+    ]
+  },
+  "criteria": {
+    "has_doll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "exnihilosequentia:crafting_doll"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilothermal:ens_basalz_doll"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_doll",
+      "has_the_recipe"
+    ]
+  ]
+}

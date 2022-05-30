@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_item",
+  "fluid": {
+    "fluid": "minecraft:lava"
+  },
+  "input": {
+    "item": "ae2:sky_dust"
+  },
+  "result": {
+    "item": "ae2:sky_stone_block"
+  }
+}

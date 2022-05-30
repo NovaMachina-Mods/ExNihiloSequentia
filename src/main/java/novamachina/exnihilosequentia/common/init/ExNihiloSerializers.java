@@ -1,18 +1,20 @@
 package novamachina.exnihilosequentia.common.init;
 
+import javax.annotation.Nonnull;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.exnihilosequentia.api.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.api.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.api.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluiditem.FluidItemRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.api.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.api.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.api.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.api.crafting.sieve.SieveRecipe;
+import net.minecraftforge.registries.RegistryObject;
+import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
+import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
+import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
+import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
+import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
+import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
+import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.crafting.serializer.CompostRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.serializer.CrookRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.serializer.CrucibleRecipeSerializer;
@@ -22,34 +24,43 @@ import novamachina.exnihilosequentia.common.crafting.serializer.FluidTransformRe
 import novamachina.exnihilosequentia.common.crafting.serializer.HammerRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.serializer.HeatRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.serializer.SieveRecipeSerializer;
+import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-import javax.annotation.Nonnull;
-
 public class ExNihiloSerializers {
-    @Nonnull public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
-            .create(ForgeRegistries.RECIPE_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
-    @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    static {
-        HammerRecipe.setSerializer(RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new));
-        CrookRecipe.setSerializer(RECIPE_SERIALIZERS.register("crook", CrookRecipeSerializer::new));
-        CompostRecipe.setSerializer(RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new));
-        FluidItemRecipe.setSerializer(RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new));
-        FluidOnTopRecipe.setSerializer(RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new));
-        FluidTransformRecipe.setSerializer(RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new));
-        CrucibleRecipe.setSerializer(RECIPE_SERIALIZERS.register("crucible", CrucibleRecipeSerializer::new));
-        HeatRecipe.setSerializer(RECIPE_SERIALIZERS.register("heat", HeatRecipeSerializer::new));
-        SieveRecipe.setSerializer(RECIPE_SERIALIZERS.register("sieve", SieveRecipeSerializer::new));
-    }
+  @Nonnull
+  public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
+      .create(ForgeRegistries.RECIPE_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-    private ExNihiloSerializers() {
-    }
+  public static final RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> HAMMER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<CrookRecipe>> CROOK_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("crook", CrookRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<CompostRecipe>> COMPOST_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<FluidItemRecipe>> FLUID_ITEM_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<FluidOnTopRecipe>> FLUID_ON_TOP_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> FLUID_TRANSFORM_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<CrucibleRecipe>> CRUCIBLE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("crucible", CrucibleRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<HeatRecipe>> HEAT_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("heat", HeatRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> SIEVE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("sieve", SieveRecipeSerializer::new);
 
-    public static void init(IEventBus modEventBus) {
-        logger.debug("Register recipe serializers");
-        RECIPE_SERIALIZERS.register(modEventBus);
-    }
+  private ExNihiloSerializers() {
+  }
+
+  public static void init(IEventBus modEventBus) {
+    logger.debug("Register recipe serializers");
+    RECIPE_SERIALIZERS.register(modEventBus);
+    HammerRecipe.setSerializer(HAMMER_RECIPE_SERIALIZER);
+    CrookRecipe.setSerializer(CROOK_RECIPE_SERIALIZER);
+    CompostRecipe.setSerializer(COMPOST_RECIPE_SERIALIZER);
+    FluidItemRecipe.setSerializer(FLUID_ITEM_RECIPE_SERIALIZER);
+    FluidOnTopRecipe.setSerializer(FLUID_ON_TOP_RECIPE_SERIALIZER);
+    FluidTransformRecipe.setSerializer(FLUID_TRANSFORM_RECIPE_SERIALIZER);
+    CrucibleRecipe.setSerializer(CRUCIBLE_RECIPE_SERIALIZER);
+    HeatRecipe.setSerializer(HEAT_RECIPE_SERIALIZER);
+    SieveRecipe.setSerializer(SIEVE_RECIPE_SERIALIZER);
+  }
 }

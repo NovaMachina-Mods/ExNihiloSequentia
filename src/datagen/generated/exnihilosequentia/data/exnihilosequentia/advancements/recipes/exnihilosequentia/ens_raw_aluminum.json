@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_raw_aluminum"
+    ]
+  },
+  "criteria": {
+    "has_piece": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "exnihilosequentia:aluminum_pieces"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_raw_aluminum"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_piece",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,21 +1,20 @@
 modLoader = "javafml" #mandatory
-loaderVersion = "[32,)" #mandatory
+loaderVersion = "${loader_version}" #mandatory
 license = "Creative Commons"
 issueTrackerURL = "https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues" #optional
 [[mods]] #mandatory
 modId = "exnihilosequentia" #mandatory
 version = "${version}" #mandatory
 displayName = "Ex Nihilo: Sequentia" #mandatory
-updateJSONURL = "https://repo.jacob-williams.me/repository/data/exnihilosequentia/1.18/update.json" #optional
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia" #optional
-#logoFile="" #optional
+logoFile = "logo-main.png" #optional
 credits = "Thanks to McJty for tutorials and those that created the Ex Nihilo series" #optional
 authors = "NovaMachina" #optional
 description = """
-Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.
+    Ex Nihilo: Sequentia is a port to 1.16 of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.
 
-This mod allows you to create resources from absolutely nothing. Well...I guess you need some trees to start.
-"""
+    This mod allows you to create resources from absolutely nothing. Well...I guess you need some trees to start.
+    """
 [[dependencies.exnihilosequentia]] #optional
 modId = "forge" #mandatory
 mandatory = true #mandatory
@@ -27,4 +26,16 @@ modId = "minecraft"
 mandatory = true
 versionRange = "${mc_version}"
 ordering = "NONE"
+side = "BOTH"
+[[dependencies.mekanism]]
+modId = "crafttweaker"
+mandatory = false
+versionRange = "${crafttweaker_version}"
+ordering = "AFTER"
+side = "BOTH"
+[[dependencies.mekanism]]
+modId = "jei"
+mandatory = false
+versionRange = "${jei_version}"
+ordering = "AFTER"
 side = "BOTH"
