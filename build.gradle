@@ -73,8 +73,8 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:ctm-267602:3137659")
     runtimeOnly fg.deobf("curse.maven:jer-240630:3066754")
-    runtimeOnly fg.deobf("curse.maven:mantle-267602:3631982")
-    runtimeOnly fg.deobf("curse.maven:ceramics-250617:3347049")
+//    runtimeOnly fg.deobf("curse.maven:mantle-267602:3631982")
+//    runtimeOnly fg.deobf("curse.maven:ceramics-250617:3347049")
 }
 
 task replaceResources(type: Copy) {
