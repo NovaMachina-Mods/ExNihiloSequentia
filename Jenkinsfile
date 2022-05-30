@@ -81,7 +81,7 @@ pipeline {
         }
         stage('Deploy Packages') {
             when {
-                branch '1.18.X'
+                branch '1.18'
             }
             parallel {
 //                 stage('AE') {
