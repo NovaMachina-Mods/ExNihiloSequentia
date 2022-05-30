@@ -109,11 +109,11 @@ pipeline {
                     }
                 }
                 stage('Main') {
-                    when {
-                        expression {
-                            env.DEPLOY_MAIN == 'true'
-                        }
-                    }
+//                     when {
+//                         expression {
+//                             env.DEPLOY_MAIN == 'true'
+//                         }
+//                     }
                     steps {
                         withGradle {
                             sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
