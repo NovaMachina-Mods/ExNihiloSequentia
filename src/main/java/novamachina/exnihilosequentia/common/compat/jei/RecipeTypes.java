@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei;
 
 import mezz.jei.api.recipe.RecipeType;
+import novamachina.exnihilosequentia.common.compat.jei.crucible.JEICrucibleRecipe;
 import novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
 import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
@@ -21,16 +22,16 @@ public class RecipeTypes {
           ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "compost", CompostRecipe.class);
   public static final RecipeType<CrookRecipe> CROOK =
       RecipeType.create(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crook", CrookRecipe.class);
-  public static final RecipeType<CrucibleRecipe> CRUCIBLE =
+  public static final RecipeType<JEICrucibleRecipe> CRUCIBLE =
       RecipeType.create(
           ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
           ExNihiloConstants.Blocks.CRUCIBLES,
-          CrucibleRecipe.class);
-  public static final RecipeType<CrucibleRecipe> FIRED_CRUCIBLE =
+          JEICrucibleRecipe.class);
+  public static final RecipeType<JEICrucibleRecipe> FIRED_CRUCIBLE =
       RecipeType.create(
           ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
           Blocks.FIRED_CRUCIBLE,
-          CrucibleRecipe.class);
+          JEICrucibleRecipe.class);
   public static final RecipeType<FluidItemRecipe> FLUID_ITEM =
       RecipeType.create(
           ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "fluiditem", FluidItemRecipe.class);

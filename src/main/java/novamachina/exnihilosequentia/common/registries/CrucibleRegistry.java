@@ -1,14 +1,18 @@
 package novamachina.exnihilosequentia.common.registries;
 
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import novamachina.exnihilosequentia.common.compat.jei.crucible.JEICrucibleRecipe;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -22,8 +26,22 @@ public class CrucibleRegistry {
   @Nonnull private final Map<Item, CrucibleRecipe> recipeByItemCache = new HashMap<>();
 
   @Nonnull
-  public List<CrucibleRecipe> getRecipeList() {
-    return recipeList;
+  public List<JEICrucibleRecipe> getRecipeList() {
+    return recipeList
+        .stream()
+        .flatMap(crucibleRecipe -> {
+          if (crucibleRecipe.getInputs().size() <= 21) {
+            return Stream.of(new JEICrucibleRecipe(crucibleRecipe.getAmount(), crucibleRecipe.getCrucibleType(), crucibleRecipe.getInputs(), crucibleRecipe.getResultFluid()));
+          }
+          @Nonnull final List<List<ItemStack>> partitions = Lists.partition(
+              crucibleRecipe.getInputs(),
+              21);
+          return partitions.stream().map(partition -> {
+            return new JEICrucibleRecipe(crucibleRecipe.getAmount(),
+                crucibleRecipe.getCrucibleType(), partition, crucibleRecipe.getResultFluid());
+          });
+        })
+        .collect(Collectors.toList());
   }
 
   public void setRecipes(@Nonnull final List<CrucibleRecipe> recipes) {

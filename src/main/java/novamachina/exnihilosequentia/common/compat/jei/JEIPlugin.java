@@ -15,6 +15,7 @@ import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnu
 import novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipeCategory;
+import novamachina.exnihilosequentia.common.compat.jei.crucible.JEICrucibleRecipe;
 import novamachina.exnihilosequentia.common.compat.jei.fluiditem.FluidBlockRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
@@ -289,7 +290,7 @@ public class JEIPlugin implements IModPlugin {
 
   private void registerFiredCrucible(@Nonnull final IRecipeRegistration registration) {
     @Nonnull
-    final List<CrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList();
+    final List<JEICrucibleRecipe> recipes = ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList();
     registration.addRecipes(RecipeTypes.FIRED_CRUCIBLE, recipes);
     logger.info("Fired Crucible Recipes Loaded: " + recipes.size());
   }
@@ -342,7 +343,7 @@ public class JEIPlugin implements IModPlugin {
 
   private void registerWoodCrucible(@Nonnull final IRecipeRegistration registration) {
     @Nonnull
-    final List<CrucibleRecipe> recipes =
+    final List<JEICrucibleRecipe> recipes =
         ExNihiloRegistries.CRUCIBLE_REGISTRY.getRecipeList().stream()
             .filter(recipe -> recipe.getCrucibleType() == CrucibleTypeEnum.WOOD)
             .collect(Collectors.toList());

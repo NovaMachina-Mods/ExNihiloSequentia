@@ -1,6 +1,5 @@
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
-import mekanism.MergeJars
 
 buildscript {
     repositories {
@@ -670,28 +669,6 @@ task tinkersJar(type: Jar) {
     afterEvaluate { finalizedBy reobfTinkersJar }
 }
 
-task allJar(type: Jar, dependsOn: [classes, apiClasses, thermalClasses, aeClasses, mekanismClasses, tinkersClasses]) {
-    mustRunAfter(clean)
-    afterEvaluate { finalizedBy reobfAllJar }
-    duplicatesStrategy(DuplicatesStrategy.FAIL)
-    archiveClassifier.set("all")
-    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia All"))
-    // Start by generating the merged data
-    MergeJars.merge(project, sourceSets.main, sourceSets.thermal, sourceSets.ae, sourceSets.mekanism, sourceSets.tinkers)
-    // Then copy all the files except for ones we are going to include from the merged
-    from(sourceSets.api.output)
-    List<String> baseExcludeData = MergeJars.getGeneralPathsToExclude(project)
-    Closure excludeFromMain = MergeJars.createExcludeClosure(baseExcludeData)
-    from(sourceSets.main.output, excludeFromMain)
-    Closure excludeFromAll = MergeJars.createExcludeClosure(baseExcludeData, 'logo.png', 'pack.mcmeta')
-    from(sourceSets.thermal.output, excludeFromAll)
-    from(sourceSets.ae.output, excludeFromAll)
-    from(sourceSets.mekanism.output, excludeFromAll)
-    from(sourceSets.tinkers.output, excludeFromAll)
-    // And finally copy over the generated files
-    MergeJars.getGeneratedClosures(versionProperties).each { closure -> from("$buildDir/generated", closure) }
-}
-
 clean {
     //TODO: Try to come up with a slightly better solution to this that deletes more,
     // for example make it calculate the current hash and only leave that or only do
@@ -732,7 +709,6 @@ artifacts {
     archives aeJar
     archives mekanismJar
     archives tinkersJar
-    archives allJar
     archives sourcesJar
 }
 
@@ -743,7 +719,6 @@ reobf {
     aeJar { classpath.from(sourceSets.ae.compileClasspath) }
     mekanismJar { classpath.from(sourceSets.mekanism.compileClasspath) }
     tinkersJar { classpath.from(sourceSets.tinkers.compileClasspath) }
-    allJar {}
 }
 
 // Minimize/optimize all png files, requires optipng on the PATH

@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
+public class CrucibleRecipeCategory implements IRecipeCategory<JEICrucibleRecipe> {
 
   @Nonnull
   private static final ResourceLocation texture =
@@ -49,8 +49,8 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
 
   @Nonnull
   @Override
-  public Class<? extends CrucibleRecipe> getRecipeClass() {
-    return CrucibleRecipe.class;
+  public Class<? extends JEICrucibleRecipe> getRecipeClass() {
+    return JEICrucibleRecipe.class;
   }
 
   @Nonnull
@@ -71,7 +71,7 @@ public class CrucibleRecipeCategory implements IRecipeCategory<CrucibleRecipe> {
   }
 
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, CrucibleRecipe recipe, IFocusGroup focuses) {
+  public void setRecipe(IRecipeLayoutBuilder builder, JEICrucibleRecipe recipe, IFocusGroup focuses) {
     IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 3, 21);
     if (recipe.getResultFluid().getAmount() != 1000) {
       recipe.getResultFluid().setAmount(1000);
