@@ -180,12 +180,6 @@ public class SieveTile extends TileEntity {
         // 4 ticks is the same period of holding down right click
         if (level != null) {
             if (level.getLevelData().getGameTime() - lastSieveAction < 4) {
-                // Really good chance that they're using a macro
-                if (player != null && level.getLevelData().getGameTime() - lastSieveAction == 0 && lastPlayer.equals(player.getUUID())) {
-                    ITextComponent message = new StringTextComponent("Autoclicker Bad").setStyle(Style.EMPTY.withColor(Color.fromRgb(16711680)).withBold(true));
-
-                    player.sendMessage(message, Util.NIL_UUID);
-                }
                 return;
             }
         }
