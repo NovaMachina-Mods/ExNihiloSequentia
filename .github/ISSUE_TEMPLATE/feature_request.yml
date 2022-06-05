@@ -1,0 +1,36 @@
+name: Feature Request
+description: Suggest an idea for this project
+title: "[Request] <title>"
+labels:
+  - suggestion
+assignees:
+  - NovaMachina
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing suggestion for this?
+      description: Please search to see if a suggestion already exists for feature you are requesting.
+      options:
+        - label: I have searched the existing suggestions
+          required: true
+  - type: textarea
+    attributes:
+      label: Feature Description
+      description: A consise description of what you're requesting.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Provided Benefit
+      description: A description of the benefit that your feature will add.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: |
+        Links? References? Anything that will give us more context abou the feature you are requesting.
+
+        Tip: You can attach images or files by clicking this area to hihglight it and then dragging files in.
+    validations:
+      required: false
