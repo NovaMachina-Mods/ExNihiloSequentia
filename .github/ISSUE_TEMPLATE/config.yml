@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Discord"
+    url: https://discord.gg/CJyAkuw/
+    about: Active Discord for updates and discussion
+  - name: "Wiki"
+    url: https://ex-nihilo-sequentia.readthedocs.io/
+    about: "Wiki for Ex Nihilo: Sequentia"
+  - name: "Discussion Board"
+    url: https://github.com/NovaMachina-Mods/ExNihiloSequentia/discussions
+    about: Dissucssions, Q&A, Requests, etc.
+  - name: "Issue Board"
+    url: https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues
+    about: All issues and feature requests end up here
