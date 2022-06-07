@@ -85,11 +85,11 @@ pipeline {
             }
             parallel {
                 stage('AE') {
-                    when {
-                        expression {
-                            env.DEPLOY_AE == 'true'
-                        }
-                    }
+//                     when {
+//                         expression {
+//                             env.DEPLOY_AE == 'true'
+//                         }
+//                     }
                     steps {
                         withGradle {
                             sh './gradlew curseforge428204 publishAePublicationToMavenRepository'
