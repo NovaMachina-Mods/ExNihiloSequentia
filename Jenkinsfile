@@ -84,18 +84,18 @@ pipeline {
                 branch '1.18'
             }
             parallel {
-//                 stage('AE') {
-//                     when {
-//                         expression {
-//                             env.DEPLOY_AE == 'true'
-//                         }
-//                     }
-//                     steps {
-//                         withGradle {
-//                             sh './gradlew curseforge428204 publishAePublicationToMavenRepository'
-//                         }
-//                     }
-//                 }
+                stage('AE') {
+                    when {
+                        expression {
+                            env.DEPLOY_AE == 'true'
+                        }
+                    }
+                    steps {
+                        withGradle {
+                            sh './gradlew curseforge428204 publishAePublicationToMavenRepository'
+                        }
+                    }
+                }
                 stage('API') {
                     when {
                         expression {

@@ -1144,20 +1144,20 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
 //            addGameVersion "${minecraft_version}"
 //        }
 //
-//        //AE2
-//        project {
-//            id = '428204'
-//            changelogType = "html"
-//            changelog = changeLogResolver
-//            releaseType = "${curse_release_type}"
-//            mainArtifact(aeJar) {
-//                relations {
-//                    requiredDependency "exnihilosequentia"
-//                    requiredDependency "appliedenergistics2"
-//                }
-//            }
-//            addGameVersion "${minecraft_version}"
-//        }
+        //AE2
+        project {
+            id = '428204'
+            changelogType = "html"
+            changelog = changeLogResolver
+            releaseType = "${curse_release_type}"
+            mainArtifact(aeJar) {
+                relations {
+                    requiredDependency "exnihilosequentia"
+                    requiredDependency "appliedenergistics2"
+                }
+            }
+            addGameVersion "${minecraft_version}"
+        }
 //
 //        //Mekanism
 //        project {
