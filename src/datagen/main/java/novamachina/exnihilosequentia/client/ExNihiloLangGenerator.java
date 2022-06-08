@@ -13,7 +13,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Tooltips;
 public class ExNihiloLangGenerator extends AbstractLangGenerator {
 
   public ExNihiloLangGenerator(DataGenerator gen, String locale) {
-    super(gen, locale);
+    super(gen, ModIds.EX_NIHILO_SEQUENTIA, locale);
   }
 
   @Override

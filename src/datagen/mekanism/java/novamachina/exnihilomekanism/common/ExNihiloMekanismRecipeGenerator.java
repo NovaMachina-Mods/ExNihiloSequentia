@@ -2,12 +2,19 @@ package novamachina.exnihilomekanism.common;
 
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
+import mekanism.common.registration.impl.ItemRegistryObject;
 import mekanism.common.registries.MekanismItems;
+import mekanism.common.resource.PrimaryResource;
+import mekanism.common.resource.ResourceType;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilomekanism.common.init.ExNihiloMekanismItems;
 import novamachina.exnihilomekanism.common.utility.ExNihiloMekanismConstants;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
@@ -27,6 +34,16 @@ public class ExNihiloMekanismRecipeGenerator extends AbstractRecipeGenerator {
     createSmelting(ExNihiloMekanismItems.OSMIUM, consumer);
     createOre(ExNihiloMekanismItems.OSMIUM, consumer);
     registerSieve(consumer);
+
+    ItemRegistryObject<Item> rawOsmium = MekanismItems.PROCESSED_RESOURCES.get(ResourceType.RAW, PrimaryResource.OSMIUM);
+    ShapedRecipeBuilder.shaped(rawOsmium.get())
+        .pattern("xx")
+        .pattern("xx")
+        .define('x', ExNihiloMekanismItems.OSMIUM.getPieceItem())
+        .group(ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM)
+        .unlockedBy("has_piece", InventoryChangeTrigger.TriggerInstance.hasItems(ExNihiloMekanismItems.OSMIUM.getPieceItem()))
+        .save(consumer,
+            new ResourceLocation(ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM, prependRecipePrefix(rawOsmium.get().getRegistryName().getPath())));
   }
 
   private void registerSieve(Consumer<FinishedRecipe> consumer) {

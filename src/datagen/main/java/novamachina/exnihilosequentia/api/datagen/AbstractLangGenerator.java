@@ -8,10 +8,11 @@ import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 public class AbstractLangGenerator extends LanguageProvider {
 
-  final String ITEM_LANG = "item." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ".";
+  final String ITEM_LANG;
 
-  public AbstractLangGenerator(DataGenerator gen, String locale) {
-    super(gen, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, locale);
+  public AbstractLangGenerator(DataGenerator gen, String modid, String locale) {
+    super(gen, modid, locale);
+    this.ITEM_LANG = "item." + modid + ".";;
   }
 
   @Override

@@ -34,7 +34,7 @@ public class ExNihiloMekanismInitialization {
 
   private static void enableOres() {
     ExNihiloItems.TIN.setEnabled(true);
-//    ExNihiloItems.COPPER.setEnabled(true);
+    ExNihiloItems.COPPER.setEnabled(true);
     ExNihiloItems.URANIUM.setEnabled(true);
     ExNihiloItems.LEAD.setEnabled(true);
   }

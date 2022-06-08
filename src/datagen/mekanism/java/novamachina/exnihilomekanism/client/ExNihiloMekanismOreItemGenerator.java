@@ -16,6 +16,6 @@ public class ExNihiloMekanismOreItemGenerator extends AbstractOreItemGenerator {
   @Override
   protected void registerModels() {
     registerRaw(ExNihiloMekanismItems.OSMIUM);
-//        registerPiece(ExNihiloMekanismItems.OSMIUM);
+        registerPiece(ExNihiloMekanismItems.OSMIUM);
   }
 }
