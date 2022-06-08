@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import novamachina.exnihilothermal.client.ExNihiloThermalItemGenerator;
+import novamachina.exnihilothermal.client.ExNihiloThermalLangGenerator;
 import novamachina.exnihilothermal.common.ExNihiloThermalRecipeGenerator;
 import novamachina.exnihilothermal.common.ExNihiloThermalTagGenerator;
 import novamachina.exnihilothermal.common.utility.ExNihiloThermalConstants;
@@ -26,6 +27,8 @@ public class ExNihiloThermalDataGenerators {
       // Items
       generator.addProvider(new ExNihiloThermalItemGenerator(generator,
           ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL, event.getExistingFileHelper()));
+      // Lang
+      generator.addProvider(new ExNihiloThermalLangGenerator(generator, "en_us"));
     }
   }
 }

@@ -1125,25 +1125,25 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
                     optionalDependency "the-one-probe"
                 }
             }
-            addArtifact apiJar
+//            addArtifact apiJar
             addGameVersion "${minecraft_version}"
         }
 
-//        //Thermal
-//        project {
-//            id = '445226'
-//            changelogType = "html"
-//            changelog = changeLogResolver
-//            releaseType = "${curse_release_type}"
-//            mainArtifact(thermalJar) {
-//                relations {
-//                    requiredDependency "exnihilosequentia"
-//                    requiredDependency "thermal"
-//                }
-//            }
-//            addGameVersion "${minecraft_version}"
-//        }
-//
+        //Thermal
+        project {
+            id = '445226'
+            changelogType = "html"
+            changelog = changeLogResolver
+            releaseType = "${curse_release_type}"
+            mainArtifact(thermalJar) {
+                relations {
+                    requiredDependency "ex-nihilo-sequentia"
+                    requiredDependency "thermal-foundation"
+                }
+            }
+            addGameVersion "${minecraft_version}"
+        }
+
         //AE2
         project {
             id = '428204'

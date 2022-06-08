@@ -1,0 +1,23 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "flint"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.15,
+      "mesh": "diamond"
+    }
+  ],
+  "input": {
+    "tag": "forge:gravel"
+  },
+  "result": {
+    "item": "thermal:apatite"
+  }
+}

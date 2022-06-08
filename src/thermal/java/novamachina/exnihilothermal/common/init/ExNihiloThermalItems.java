@@ -30,9 +30,9 @@ public class ExNihiloThermalItems {
       ExNihiloThermalConstants.Items.DOLL_BLIZZ,
       () -> new DollItem(ExNihiloThermalConstants.ModIds.THERMAL, "blizz",
           ExNihiloConstants.ModIds.MINECRAFT, "water", 1.0D, "tooltip.doll.blizz"));
-  public static final RegistryObject<ResourceItem> DUST_OBSIDIAN = ITEMS.register(
-      ExNihiloThermalConstants.Items.DUST_OBSIDIAN,
-      () -> new ResourceItem(ExNihiloThermalConstants.Items.DUST_OBSIDIAN));
+//  public static final RegistryObject<ResourceItem> DUST_OBSIDIAN = ITEMS.register(
+//      ExNihiloThermalConstants.Items.DUST_OBSIDIAN,
+//      () -> new ResourceItem(ExNihiloThermalConstants.Items.DUST_OBSIDIAN));
   @Nonnull
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 

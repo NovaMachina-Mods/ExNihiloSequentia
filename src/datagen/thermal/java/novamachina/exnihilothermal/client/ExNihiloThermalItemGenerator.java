@@ -15,7 +15,7 @@ public class ExNihiloThermalItemGenerator extends AbstractItemGenerator {
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
   private static final String ITEMS_TAG = "items/";
-  private static final String ITEM_HANDHELD_TAG = "item/handheld";
+  private static final String ITEM_GENERATED = "item/generated";
   private static final String LAYER_0_TAG = "layer0";
 
   public ExNihiloThermalItemGenerator(DataGenerator generator, String modId,
@@ -25,24 +25,24 @@ public class ExNihiloThermalItemGenerator extends AbstractItemGenerator {
 
   @Override
   protected void registerModels() {
-//    singleTexture(ExNihiloThermalItems.BASALZ_DOLL.get().getRegistryName().toString(),
-//        new ResourceLocation(ITEM_HANDHELD_TAG), LAYER_0_TAG,
-//        new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
-//            ITEMS_TAG + ExNihiloThermalItems.BASALZ_DOLL.get().getDollName()));
-//
-//    singleTexture(ExNihiloThermalItems.BLITZ_DOLL.get().getRegistryName().toString(),
-//        new ResourceLocation(ITEM_HANDHELD_TAG), LAYER_0_TAG,
-//        new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
-//            ITEMS_TAG + ExNihiloThermalItems.BLITZ_DOLL.get().getDollName()));
-//
-//    singleTexture(ExNihiloThermalItems.BLIZZ_DOLL.get().getRegistryName().toString(),
-//        new ResourceLocation(ITEM_HANDHELD_TAG), LAYER_0_TAG,
-//        new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
-//            ITEMS_TAG + ExNihiloThermalItems.BLIZZ_DOLL.get().getDollName()));
-//
+    singleTexture(ExNihiloThermalItems.BASALZ_DOLL.get().getRegistryName().toString(),
+        new ResourceLocation(ITEM_GENERATED), LAYER_0_TAG,
+        new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
+            ITEMS_TAG + ExNihiloThermalItems.BASALZ_DOLL.get().getDollName()));
+
+    singleTexture(ExNihiloThermalItems.BLITZ_DOLL.get().getRegistryName().toString(),
+        new ResourceLocation(ITEM_GENERATED), LAYER_0_TAG,
+        new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
+            ITEMS_TAG + ExNihiloThermalItems.BLITZ_DOLL.get().getDollName()));
+
+    singleTexture(ExNihiloThermalItems.BLIZZ_DOLL.get().getRegistryName().toString(),
+        new ResourceLocation(ITEM_GENERATED), LAYER_0_TAG,
+        new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
+            ITEMS_TAG + ExNihiloThermalItems.BLIZZ_DOLL.get().getDollName()));
+
 //    singleTexture((ExNihiloThermalItems.DUST_OBSIDIAN.get()).getRegistryName().getPath(),
-//        new ResourceLocation("item/handheld"), "layer0",
-//        new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+//        new ResourceLocation(ITEM_GENERATED), "layer0",
+//        new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
 //            "items/" + ExNihiloThermalItems.DUST_OBSIDIAN.get().getResourceName()));
   }
 }
