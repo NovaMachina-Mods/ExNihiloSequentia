@@ -121,11 +121,11 @@ pipeline {
                     }
                 }
                 stage('Mekanism') {
-                    when {
-                        expression {
-                            env.DEPLOY_MEKANISM == 'true'
-                        }
-                    }
+//                     when {
+//                         expression {
+//                             env.DEPLOY_MEKANISM == 'true'
+//                         }
+//                     }
                     steps {
                         withGradle {
                             sh './gradlew curseforge430787 publishMekanismPublicationToMavenRepository'

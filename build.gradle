@@ -1165,7 +1165,7 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
             changelogType = "html"
             changelog = changeLogResolver
             releaseType = "${curse_release_type}"
-            mainArtifact(aeJar) {
+            mainArtifact(mekanismJar) {
                 relations {
                     requiredDependency "ex-nihilo-sequentia"
                     requiredDependency "mekanism"
