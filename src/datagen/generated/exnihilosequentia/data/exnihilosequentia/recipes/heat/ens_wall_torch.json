@@ -1,5 +1,5 @@
 {
   "type": "exnihilosequentia:heat",
-  "block": "minecraft:wall_torch",
-  "amount": 1
+  "amount": 1,
+  "block": "minecraft:wall_torch"
 }

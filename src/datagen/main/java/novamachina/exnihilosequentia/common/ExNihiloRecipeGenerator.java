@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
@@ -578,7 +579,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
   }
 
   private void registerMisc(@Nonnull final Consumer<FinishedRecipe> consumer) {
-    @Nullable final ResourceLocation beehive = Blocks.BEEHIVE.getRegistryName();
+    @Nullable final ResourceLocation beehive = ForgeRegistries.BLOCKS.getKey(Blocks.BEEHIVE);
     if (beehive != null) {
       ShapedRecipeBuilder.shaped(Blocks.BEEHIVE)
           .pattern("xxx")
@@ -708,7 +709,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     @Nullable final RegistryObject<PebbleItem> blackstonePebble = ExNihiloItems.PEBBLE_BLACKSTONE;
     @Nullable
     final ResourceLocation gildedBlackstoneResourceLocation =
-        Blocks.GILDED_BLACKSTONE.getRegistryName();
+        ForgeRegistries.BLOCKS.getKey(Blocks.GILDED_BLACKSTONE);
     if (ExNihiloItems.GOLD.getRawOreItem() != null && gildedBlackstoneResourceLocation != null) {
       ShapedRecipeBuilder.shaped(Blocks.GILDED_BLACKSTONE)
           .pattern("xxx")
@@ -723,7 +724,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     }
     @Nullable
     final ResourceLocation cryingObsidianResourceLocation =
-        Blocks.CRYING_OBSIDIAN.getRegistryName();
+        ForgeRegistries.BLOCKS.getKey(Blocks.CRYING_OBSIDIAN);
     if (cryingObsidianResourceLocation != null) {
       ShapedRecipeBuilder.shaped(Blocks.CRYING_OBSIDIAN)
           .pattern(" o ")
@@ -736,7 +737,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
           .save(consumer, createSaveLocation(cryingObsidianResourceLocation));
     }
     @Nullable
-    final ResourceLocation ancientDebrisResourceLocation = Blocks.ANCIENT_DEBRIS.getRegistryName();
+    final ResourceLocation ancientDebrisResourceLocation = ForgeRegistries.BLOCKS.getKey(Blocks.ANCIENT_DEBRIS);
     if (ancientDebrisResourceLocation != null) {
       ShapelessRecipeBuilder.shapeless(Blocks.ANCIENT_DEBRIS)
           .requires(Items.NETHERITE_SCRAP)
@@ -760,7 +761,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .unlockedBy(
             "has_nugget",
             InventoryChangeTrigger.TriggerInstance.hasItems(ExNihiloItems.NUGGET_COPPER.get()))
-        .save(consumer, createSaveLocation(Items.COPPER_INGOT.getRegistryName()));
+        .save(consumer, createSaveLocation(ForgeRegistries.ITEMS.getKey(Items.COPPER_INGOT)));
   }
 
   private void registerOres(@Nonnull final Consumer<FinishedRecipe> consumer) {
@@ -1036,10 +1037,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     getLeavesSaplings()
         .forEach(
             (input, drop) -> {
-              @Nullable final ResourceLocation resourceLocation = input.getRegistryName();
+              @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(input);
               if (resourceLocation != null) {
                 if (Objects.equals(
-                    input.getRegistryName(), new ResourceLocation("jungle_leaves"))) {
+                    ForgeRegistries.BLOCKS.getKey(input), new ResourceLocation("jungle_leaves"))) {
                   SieveRecipeBuilder.builder()
                       .input(Ingredient.of(input))
                       .addResult(drop)

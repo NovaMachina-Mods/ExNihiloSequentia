@@ -15,6 +15,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEntity;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -43,7 +44,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
       final int combinedLightIn,
       final int combinedOverlayIn) {
     @Nullable final ResourceLocation inventoryTexture = tileEntity.getSolidTexture();
-    @Nullable final ResourceLocation solidTexture = Blocks.OAK_LEAVES.getRegistryName();
+    @Nullable final ResourceLocation solidTexture = ForgeRegistries.BLOCKS.getKey(Blocks.OAK_LEAVES);
     Fluid fluid = tileEntity.getFluid();
     @Nullable
     final ResourceLocation fluidTexture =

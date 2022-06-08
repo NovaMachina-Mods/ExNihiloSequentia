@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ctc",
-    "sms",
-    "cbc"
-  ],
   "key": {
+    "b": {
+      "tag": "minecraft:fishes"
+    },
     "c": {
       "tag": "forge:gems/prismarine"
+    },
+    "m": {
+      "item": "exnihilosequentia:crafting_doll"
     },
     "s": {
       "tag": "forge:dusts/glowstone"
     },
     "t": {
       "tag": "forge:dusts/redstone"
-    },
-    "b": {
-      "tag": "minecraft:fishes"
-    },
-    "m": {
-      "item": "exnihilosequentia:crafting_doll"
     }
   },
+  "pattern": [
+    "ctc",
+    "sms",
+    "cbc"
+  ],
   "result": {
     "item": "exnihilosequentia:guardian_doll"
   }

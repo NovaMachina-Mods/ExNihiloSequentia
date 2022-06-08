@@ -6,6 +6,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.CrookBaseItem;
@@ -27,7 +28,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
   }
 
   private void registerCrook(CrookBaseItem crook) {
-    @Nullable final ResourceLocation resourceLocation = crook.getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(crook);
     if (resourceLocation == null) {
       return;
     }
@@ -84,7 +85,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
   }
 
   private void registerHammer(HammerBaseItem hammer) {
-    @Nullable final ResourceLocation resourceLocation = hammer.getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(hammer);
     if (resourceLocation == null) {
       return;
     }
@@ -96,7 +97,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
   }
 
   private void registerMesh(MeshItem mesh) {
-    @Nullable final ResourceLocation resourceLocation = mesh.getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(mesh);
     if (resourceLocation == null) {
       return;
     }
@@ -132,7 +133,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
   }
 
   private void registerResource(ItemLike item) {
-    @Nullable final ResourceLocation resourceLocation = item.asItem().getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(item.asItem());
     if (resourceLocation == null) {
       return;
     }

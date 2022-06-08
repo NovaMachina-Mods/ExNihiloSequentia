@@ -4,12 +4,11 @@ import java.security.SecureRandom;
 import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
+//import mcjty.theoneprobe.api.IProbeHitData;
+//import mcjty.theoneprobe.api.IProbeInfo;
+//import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
@@ -23,13 +22,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.blockentity.InfestingLeavesEntity;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+//import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 // TODO: Add progressive render
-public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider, EntityBlock {
+public class InfestingLeavesBlock extends BaseBlock implements EntityBlock { //, ITOPInfoProvider, EntityBlock {
 
   @Nonnull private static final Random random = new SecureRandom();
 
@@ -83,27 +82,27 @@ public class InfestingLeavesBlock extends BaseBlock implements ITOPInfoProvider,
     return nearbyLeaves;
   }
 
-  @Override
-  public void addProbeInfo(
-      @Nonnull final ProbeMode probeMode,
-      @Nonnull final IProbeInfo iProbeInfo,
-      @Nonnull final Player playerEntity,
-      @Nonnull final Level world,
-      @Nonnull final BlockState blockState,
-      @Nonnull final IProbeHitData iProbeHitData) {
-    if (probeMode == ProbeMode.EXTENDED) {
-      @Nullable
-      final InfestingLeavesEntity infestingLeavesEntity =
-          (InfestingLeavesEntity) world.getBlockEntity(iProbeHitData.getPos());
-
-      if (infestingLeavesEntity != null) {
-        iProbeInfo.text(
-            new TranslatableComponent(
-                "waila.progress",
-                StringUtils.formatPercent((float) infestingLeavesEntity.getProgress() / 100)));
-      }
-    }
-  }
+//  @Override
+//  public void addProbeInfo(
+//      @Nonnull final ProbeMode probeMode,
+//      @Nonnull final IProbeInfo iProbeInfo,
+//      @Nonnull final Player playerEntity,
+//      @Nonnull final Level world,
+//      @Nonnull final BlockState blockState,
+//      @Nonnull final IProbeHitData iProbeHitData) {
+//    if (probeMode == ProbeMode.EXTENDED) {
+//      @Nullable
+//      final InfestingLeavesEntity infestingLeavesEntity =
+//          (InfestingLeavesEntity) world.getBlockEntity(iProbeHitData.getPos());
+//
+//      if (infestingLeavesEntity != null) {
+//        iProbeInfo.text(
+//            new TranslatableComponent(
+//                "waila.progress",
+//                StringUtils.formatPercent((float) infestingLeavesEntity.getProgress() / 100)));
+//      }
+//    }
+//  }
 
   @org.jetbrains.annotations.Nullable
   @Override

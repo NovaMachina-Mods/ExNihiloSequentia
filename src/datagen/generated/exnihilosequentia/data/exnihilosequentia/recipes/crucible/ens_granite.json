@@ -1,11 +1,11 @@
 {
   "type": "exnihilosequentia:crucible",
-  "input": {
-    "item": "minecraft:granite"
-  },
   "amount": 250,
+  "crucibleType": "fired",
   "fluidResult": {
     "fluid": "minecraft:lava"
   },
-  "crucibleType": "fired"
+  "input": {
+    "item": "minecraft:granite"
+  }
 }

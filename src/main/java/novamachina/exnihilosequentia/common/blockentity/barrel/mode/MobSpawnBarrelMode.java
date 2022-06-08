@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -104,7 +103,8 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     @Nonnull final CompoundTag nbt = new CompoundTag();
     nbt.putInt(CURRENT_PROGRESS_TAG, currentProgress);
     if (doll != null) {
-      nbt.putString(DOLL_TYPE_TAG, doll.getRegistryName().toString());
+      String name = ForgeRegistries.ITEMS.getKey(doll).toString();
+      nbt.putString(DOLL_TYPE_TAG, name);
     }
     return nbt;
   }
@@ -132,7 +132,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
   public List<Component> getWailaInfo(@Nonnull final AbstractBarrelEntity barrelTile) {
     @Nonnull final List<Component> info = new ArrayList<>();
 
-    info.add(new TranslatableComponent("waila.progress", StringUtils
+    info.add(Component.translatable("waila.progress", StringUtils
         .formatPercent((float) currentProgress / (Config.getSecondsToSpawn() * 20))));
 
     return info;

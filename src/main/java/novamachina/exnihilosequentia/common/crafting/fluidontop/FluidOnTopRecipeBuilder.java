@@ -4,12 +4,13 @@ import javax.annotation.Nonnull;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
 public class FluidOnTopRecipeBuilder extends ExNihiloFinishedRecipe<FluidOnTopRecipeBuilder> {
 
   private FluidOnTopRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions
-    super(FluidOnTopRecipe.getStaticSerializer().get());
+    super(ExNihiloSerializers.FLUID_ON_TOP_RECIPE_SERIALIZER.get());
   }
 
   @Nonnull

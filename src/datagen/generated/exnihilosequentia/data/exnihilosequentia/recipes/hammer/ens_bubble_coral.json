@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:bubble_coral_block"
+  },
   "results": [
     {
       "chance": 1.0,
-      "item": "minecraft:bubble_coral",
-      "count": 1
+      "count": 1,
+      "item": "minecraft:bubble_coral"
     }
-  ],
-  "input": {
-    "item": "minecraft:bubble_coral_block"
-  }
+  ]
 }

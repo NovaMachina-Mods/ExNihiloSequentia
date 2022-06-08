@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.block.BaseBlock;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
@@ -144,7 +145,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         .group(this.modId)
         .unlockedBy("has_piece", InventoryChangeTrigger.TriggerInstance.hasItems(piece))
         .save(consumer,
-            new ResourceLocation(modId, prependRecipePrefix(rawOre.getRegistryName().getPath())));
+            new ResourceLocation(modId, prependRecipePrefix(ForgeRegistries.ITEMS.getKey(rawOre).getPath())));
   }
 
   protected void createSmelting(@Nonnull final Ore ore,
@@ -421,7 +422,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         .define('x', input)
         .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
         .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(input))
-        .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
+        .save(consumer, createSaveLocation(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(result))));
   }
 
   protected void createCrook(@Nonnull final Item result, @Nonnull final TagKey<Item> input,
@@ -434,7 +435,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         .group(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
         .unlockedBy(PEBBLE_CONDITION, InventoryChangeTrigger.TriggerInstance
             .hasItems(ItemPredicate.Builder.item().of(input).build()))
-        .save(consumer, createSaveLocation(Objects.requireNonNull(result.getRegistryName())));
+        .save(consumer, createSaveLocation(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(result))));
   }
 
   protected void createHammer(@Nonnull final Item output, @Nonnull final TagKey<Item> input,
@@ -448,7 +449,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance
             .hasItems(ItemPredicate.Builder.item().of(Tags.Items.RODS).build()))
         .unlockedBy(MATERIAL_CONDITION, has(input))
-        .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
+        .save(consumer, createSaveLocation(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output))));
   }
 
   protected void createHammer(@Nonnull final Item output, @Nonnull final Item input,
@@ -462,12 +463,12 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance
             .hasItems(ItemPredicate.Builder.item().of(Tags.Items.RODS).build()))
         .unlockedBy(MATERIAL_CONDITION, has(input))
-        .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
+        .save(consumer, createSaveLocation(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output))));
   }
 
   protected void createPebbleBlock(@Nonnull final Block result, @Nonnull final Item input,
       @Nonnull final Consumer<FinishedRecipe> consumer) {
-    @Nullable final ResourceLocation resourceLocation = result.getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(result);
     if (resourceLocation == null) {
       return;
     }
@@ -490,7 +491,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         .define('i', inputItem)
         .define('m', inputMesh)
         .unlockedBy("has_mesh", InventoryChangeTrigger.TriggerInstance.hasItems(inputMesh))
-        .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
+        .save(consumer, createSaveLocation(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output))));
   }
 
   @SuppressWarnings("SameParameterValue")
@@ -504,11 +505,11 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
         .define('i', inputItem)
         .define('m', inputMesh)
         .unlockedBy("has_mesh", InventoryChangeTrigger.TriggerInstance.hasItems(inputMesh))
-        .save(consumer, createSaveLocation(Objects.requireNonNull(output.getRegistryName())));
+        .save(consumer, createSaveLocation(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output))));
   }
 
   protected void createSeeds(SeedBaseItem seed, @Nonnull final Consumer<FinishedRecipe> consumer) {
-    ResourceLocation resourceLocation = seed.getRegistryName();
+    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed);
     if (resourceLocation == null) {
       return;
     }
@@ -519,7 +520,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
   }
 
   protected void createWaterSeeds(SeedBaseItem seed, Consumer<FinishedRecipe> consumer) {
-    ResourceLocation resourceLocation = seed.getRegistryName();
+    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed);
     if (resourceLocation == null) {
       return;
     }

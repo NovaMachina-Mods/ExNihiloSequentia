@@ -1,5 +1,11 @@
 {
   "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "minecraft:acacia_leaves"
+  },
+  "result": {
+    "item": "minecraft:acacia_sapling"
+  },
   "rolls": [
     {
       "chance": 0.05,
@@ -17,11 +23,5 @@
       "chance": 0.2,
       "mesh": "diamond"
     }
-  ],
-  "input": {
-    "item": "minecraft:acacia_leaves"
-  },
-  "result": {
-    "item": "minecraft:acacia_sapling"
-  }
+  ]
 }

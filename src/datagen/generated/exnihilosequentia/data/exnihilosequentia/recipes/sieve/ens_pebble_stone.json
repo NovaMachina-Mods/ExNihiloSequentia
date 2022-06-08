@@ -1,5 +1,11 @@
 {
   "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "item": "exnihilosequentia:stone_pebble"
+  },
   "rolls": [
     {
       "chance": 1.0,
@@ -25,11 +31,5 @@
       "chance": 0.1,
       "mesh": "string"
     }
-  ],
-  "input": {
-    "item": "minecraft:dirt"
-  },
-  "result": {
-    "item": "exnihilosequentia:stone_pebble"
-  }
+  ]
 }

@@ -35,7 +35,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.registries.ObjectHolder;
 import novamachina.exnihilosequentia.common.blockentity.barrel.mode.BarrelModeRegistry;
-import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
+//import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
+import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
@@ -67,16 +68,6 @@ public class ExNihiloInitialization {
         }
       };
 
-  @SuppressWarnings("unused")
-  @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_hammer")
-  @Nullable
-  public static final GlobalLootModifierSerializer<?> hammerModifier = null;
-
-  @SuppressWarnings("unused")
-  @ObjectHolder(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":use_crook")
-  @Nullable
-  public static final GlobalLootModifierSerializer<?> crookModifier = null;
-
   @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
   private ExNihiloInitialization() {}
@@ -96,6 +87,9 @@ public class ExNihiloInitialization {
     ExNihiloBlockEntities.init(modEventBus);
     ExNihiloFluids.init(modEventBus);
     ExNihiloSerializers.init(modEventBus);
+    ExNihiloLootModifiers.init(modEventBus);
+    ExNihiloRecipeTypes.init(modEventBus);
+    ExNihiloSounds.init(modEventBus);
   }
 
   // MinecraftForge.EVENT_BUS
@@ -127,7 +121,7 @@ public class ExNihiloInitialization {
   public static void registerTOP(@Nonnull final InterModEnqueueEvent event) {
     logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
     if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
-      CompatTOP.register();
+//      CompatTOP.register();
     }
   }
 
@@ -219,23 +213,23 @@ public class ExNihiloInitialization {
     }
 
     ExNihiloRegistries.HAMMER_REGISTRY.setRecipes(
-        filterRecipes(recipes, HammerRecipe.class, HammerRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, HammerRecipe.class, ExNihiloRecipeTypes.HAMMER_RECIPE_TYPE.get()));
     ExNihiloRegistries.CROOK_REGISTRY.setRecipes(
-        filterRecipes(recipes, CrookRecipe.class, CrookRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, CrookRecipe.class, ExNihiloRecipeTypes.CROOK_RECIPE_TYPE.get()));
     ExNihiloRegistries.COMPOST_REGISTRY.setRecipes(
-        filterRecipes(recipes, CompostRecipe.class, CompostRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, CompostRecipe.class, ExNihiloRecipeTypes.COMPOST_RECIPE_TYPE.get()));
     ExNihiloRegistries.FLUID_BLOCK_REGISTRY.setRecipes(
-        filterRecipes(recipes, FluidItemRecipe.class, FluidItemRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, FluidItemRecipe.class, ExNihiloRecipeTypes.FLUID_ITEM_RECIPE_TYPE.get()));
     ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.setRecipes(
-        filterRecipes(recipes, FluidOnTopRecipe.class, FluidOnTopRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, FluidOnTopRecipe.class, ExNihiloRecipeTypes.FLUID_ON_TOP_RECIPE_TYPE.get()));
     ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.setRecipes(
-        filterRecipes(recipes, FluidTransformRecipe.class, FluidTransformRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, FluidTransformRecipe.class, ExNihiloRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE.get()));
     ExNihiloRegistries.CRUCIBLE_REGISTRY.setRecipes(
-        filterRecipes(recipes, CrucibleRecipe.class, CrucibleRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, CrucibleRecipe.class, ExNihiloRecipeTypes.CRUCIBLE_RECIPE_TYPE.get()));
     ExNihiloRegistries.HEAT_REGISTRY.setRecipes(
-        filterRecipes(recipes, HeatRecipe.class, HeatRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, HeatRecipe.class, ExNihiloRecipeTypes.HEAT_RECIPE_TYPE.get()));
     ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(
-        filterRecipes(recipes, SieveRecipe.class, SieveRecipe.RECIPE_TYPE));
+        filterRecipes(recipes, SieveRecipe.class, ExNihiloRecipeTypes.SIEVE_RECIPE_TYPE.get()));
   }
 
   private static void overrideOres() {

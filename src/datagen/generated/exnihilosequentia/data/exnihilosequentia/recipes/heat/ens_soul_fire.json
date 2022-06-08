@@ -1,5 +1,5 @@
 {
   "type": "exnihilosequentia:heat",
-  "block": "minecraft:soul_fire",
-  "amount": 4
+  "amount": 4,
+  "block": "minecraft:soul_fire"
 }

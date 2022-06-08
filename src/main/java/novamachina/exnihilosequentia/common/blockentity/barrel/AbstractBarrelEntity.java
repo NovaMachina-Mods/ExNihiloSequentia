@@ -33,6 +33,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.blockentity.IFluidContainer;
 import novamachina.exnihilosequentia.common.blockentity.barrel.mode.AbstractBarrelMode;
 import novamachina.exnihilosequentia.common.blockentity.barrel.mode.BarrelModeRegistry;
@@ -155,7 +156,7 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
   @Nullable
   public ResourceLocation getSolidTexture() {
     if (!inventory.getStackInSlot(0).isEmpty()) {
-      return inventory.getStackInSlot(0).getItem().getRegistryName();
+      return ForgeRegistries.ITEMS.getKey(inventory.getStackInSlot(0).getItem());
     }
     return null;
   }

@@ -15,7 +15,6 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -29,6 +28,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
@@ -72,15 +72,6 @@ public class SieveEntity extends BlockEntity {
     // 4 ticks is the same period of holding down right click
     if (level != null && level.getLevelData().getGameTime() - lastSieveAction < 4) {
       // Really good chance that they're using a macro
-      if (player != null
-          && level.getLevelData().getGameTime() - lastSieveAction == 0
-          && lastPlayer.equals(player.getUUID())) {
-        Component message =
-            new TextComponent("Autoclicker Bad")
-                .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(16711680)).withBold(true));
-
-        player.sendMessage(message, Util.NIL_UUID);
-      }
       return;
     }
 
@@ -139,7 +130,7 @@ public class SieveEntity extends BlockEntity {
   @Nullable
   public ResourceLocation getTexture() {
     if (!blockStack.isEmpty()) {
-      return blockStack.getItem().getRegistryName();
+      return ForgeRegistries.ITEMS.getKey(blockStack.getItem());
     }
     return null;
   }

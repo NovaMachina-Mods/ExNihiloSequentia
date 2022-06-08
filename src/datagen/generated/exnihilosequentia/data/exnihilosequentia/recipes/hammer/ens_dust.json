@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:sand"
+  },
   "results": [
     {
       "chance": 1.0,
-      "item": "exnihilosequentia:dust",
-      "count": 1
+      "count": 1,
+      "item": "exnihilosequentia:dust"
     }
-  ],
-  "input": {
-    "item": "minecraft:sand"
-  }
+  ]
 }

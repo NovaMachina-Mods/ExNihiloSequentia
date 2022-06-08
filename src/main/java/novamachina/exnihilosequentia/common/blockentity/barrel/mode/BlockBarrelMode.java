@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -83,8 +82,8 @@ public class BlockBarrelMode extends AbstractBarrelMode {
   public List<Component> getWailaInfo(@Nonnull final AbstractBarrelEntity barrelTile) {
     @Nullable final List<Component> info = new ArrayList<>();
 
-    info.add(new TranslatableComponent("waila.barrel.block",
-        new TranslatableComponent(barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
+    info.add(Component.translatable("waila.barrel.block",
+        Component.translatable(barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
 
     return info;
   }

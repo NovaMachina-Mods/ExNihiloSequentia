@@ -1,10 +1,10 @@
 {
   "parent": "exnihilosequentia:block/crucible",
   "textures": {
-    "particle": "minecraft:block/birch_log",
-    "top": "minecraft:block/birch_log",
     "bottom": "minecraft:block/birch_log",
+    "inside": "minecraft:block/birch_log",
+    "particle": "minecraft:block/birch_log",
     "side": "minecraft:block/birch_log",
-    "inside": "minecraft:block/birch_log"
+    "top": "minecraft:block/birch_log"
   }
 }

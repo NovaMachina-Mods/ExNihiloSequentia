@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -48,7 +47,7 @@ public class DollItem extends Item {
   public void appendHoverText(@Nonnull final ItemStack stack, @Nullable final Level worldIn,
       @Nonnull final List<Component> tooltip, @Nonnull final TooltipFlag flagIn) {
     super.appendHoverText(stack, worldIn, tooltip, flagIn);
-    tooltip.add(new TranslatableComponent(this.tooltip));
+    tooltip.add(Component.translatable(this.tooltip));
   }
 
   @Nonnull

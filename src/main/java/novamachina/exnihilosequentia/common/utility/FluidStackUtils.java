@@ -38,8 +38,8 @@ public class FluidStackUtils {
       return JsonNull.INSTANCE;
     }
     JsonObject jsonObject = new JsonObject();
-    if (fluidStack.getFluid().getRegistryName() != null) {
-      jsonObject.addProperty("fluid", fluidStack.getFluid().getRegistryName().toString());
+    if (ForgeRegistries.FLUIDS.getKey(fluidStack.getFluid()) != null) {
+      jsonObject.addProperty("fluid", ForgeRegistries.FLUIDS.getKey(fluidStack.getFluid()).toString());
     }
     if (fluidStack.hasTag()) {
       jsonObject.addProperty("tag", fluidStack.getTag().toString());

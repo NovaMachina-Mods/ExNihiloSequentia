@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ctc",
-    "sms",
-    "cbc"
-  ],
   "key": {
+    "b": {
+      "tag": "forge:crops/nether_wart"
+    },
     "c": {
       "tag": "forge:dyes/black"
+    },
+    "m": {
+      "item": "exnihilosequentia:crafting_doll"
     },
     "s": {
       "tag": "forge:dusts/glowstone"
     },
     "t": {
       "tag": "forge:dusts/redstone"
-    },
-    "b": {
-      "tag": "forge:crops/nether_wart"
-    },
-    "m": {
-      "item": "exnihilosequentia:crafting_doll"
     }
   },
+  "pattern": [
+    "ctc",
+    "sms",
+    "cbc"
+  ],
   "result": {
     "item": "exnihilosequentia:enderman_doll"
   }

@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:andesite"
+  },
   "results": [
     {
       "chance": 1.0,
-      "item": "exnihilosequentia:crushed_andesite",
-      "count": 1
+      "count": 1,
+      "item": "exnihilosequentia:crushed_andesite"
     }
-  ],
-  "input": {
-    "item": "minecraft:andesite"
-  }
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "type": "exnihilosequentia:compost",
+  "amount": 200,
   "input": {
     "tag": "forge:meat_uncooked"
-  },
-  "amount": 200
+  }
 }

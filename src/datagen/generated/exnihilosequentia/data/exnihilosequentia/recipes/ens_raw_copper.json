@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "exnihilosequentia",
-  "pattern": [
-    "xx",
-    "xx"
-  ],
   "key": {
     "x": {
       "item": "exnihilosequentia:copper_pieces"
     }
   },
+  "pattern": [
+    "xx",
+    "xx"
+  ],
   "result": {
     "item": "minecraft:raw_copper"
   }

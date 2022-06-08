@@ -1,7 +1,7 @@
 {
   "parent": "exnihilosequentia:block/sieve_base",
   "textures": {
-    "texture": "minecraft:block/stripped_crimson_stem",
-    "particle": "minecraft:block/stripped_crimson_stem"
+    "particle": "minecraft:block/stripped_crimson_stem",
+    "texture": "minecraft:block/stripped_crimson_stem"
   }
 }

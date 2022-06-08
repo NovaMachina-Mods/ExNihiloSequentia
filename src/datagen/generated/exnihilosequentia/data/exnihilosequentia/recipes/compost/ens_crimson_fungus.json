@@ -1,7 +1,7 @@
 {
   "type": "exnihilosequentia:compost",
+  "amount": 100,
   "input": {
     "item": "minecraft:crimson_fungus"
-  },
-  "amount": 100
+  }
 }

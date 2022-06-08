@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -26,7 +27,7 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
     if (rawRegistryObject == null) {
       return;
     }
-    @Nullable final ResourceLocation rawResourceLocation = rawRegistryObject.getRegistryName();
+    @Nullable final ResourceLocation rawResourceLocation = ForgeRegistries.ITEMS.getKey(rawRegistryObject);
     if (rawResourceLocation == null) {
       return;
     }
@@ -38,11 +39,11 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
     @Nullable final ResourceLocation resourceLocation;
     @Nullable final Item ingotItem = ore.getIngotItem();
     if (ingotItem != null) {
-      resourceLocation = ingotItem.getRegistryName();
+      resourceLocation = ForgeRegistries.ITEMS.getKey(ingotItem);
     } else {
       @Nullable final Item ingotRegistryObject = ore.getIngotItem();
       if (ingotRegistryObject != null) {
-        resourceLocation = ingotRegistryObject.getRegistryName();
+        resourceLocation = ForgeRegistries.ITEMS.getKey(ingotRegistryObject);
       } else {
         return;
       }
@@ -59,7 +60,7 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
     if (pieceRegistryObject == null) {
       return;
     }
-    @Nullable final ResourceLocation pieceResourceLocation = pieceRegistryObject.getRegistryName();
+    @Nullable final ResourceLocation pieceResourceLocation = ForgeRegistries.ITEMS.getKey(pieceRegistryObject);
     if (pieceResourceLocation == null) {
       return;
     }

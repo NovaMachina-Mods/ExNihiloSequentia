@@ -48,7 +48,7 @@ public class HeatRecipeSerializer extends ExNihiloRecipeSerializer<HeatRecipe> {
 
   @Override
   public void toNetwork(@Nonnull final FriendlyByteBuf buffer, @Nonnull final HeatRecipe recipe) {
-    @Nullable final ResourceLocation resourceLocation = recipe.getInput().getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(recipe.getInput());
     if (resourceLocation == null) {
       return;
     }

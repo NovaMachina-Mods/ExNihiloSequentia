@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -45,7 +44,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
         currentProgress = 0;
         barrelTile.getInventory()
             .setStackInSlot(0,
-                new ItemStack(ForgeRegistries.BLOCKS.getValue(Blocks.DIRT.getRegistryName())));
+                new ItemStack(ForgeRegistries.BLOCKS.getValue(ForgeRegistries.BLOCKS.getKey(Blocks.DIRT))));
         barrelTile.removeSolid(barrelTile.getSolidAmount());
         barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
       }
@@ -119,10 +118,10 @@ public class CompostBarrelMode extends AbstractBarrelMode {
   public List<Component> getWailaInfo(@Nonnull final AbstractBarrelEntity barrelTile) {
     @Nonnull final List<Component> info = new ArrayList<>();
     if (currentProgress <= 0) {
-      info.add(new TranslatableComponent("waila.barrel.compost", barrelTile
+      info.add(Component.translatable("waila.barrel.compost", barrelTile
           .getSolidAmount(), AbstractBarrelEntity.MAX_SOLID_AMOUNT));
     } else {
-      info.add(new TranslatableComponent("waila.progress", StringUtils
+      info.add(Component.translatable("waila.progress", StringUtils
           .formatPercent((float) currentProgress / (Config.getSecondsToCompost() * 20))));
     }
     return info;

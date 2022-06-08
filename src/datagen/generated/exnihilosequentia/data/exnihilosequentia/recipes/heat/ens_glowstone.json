@@ -1,5 +1,5 @@
 {
   "type": "exnihilosequentia:heat",
-  "block": "minecraft:glowstone",
-  "amount": 2
+  "amount": 2,
+  "block": "minecraft:glowstone"
 }

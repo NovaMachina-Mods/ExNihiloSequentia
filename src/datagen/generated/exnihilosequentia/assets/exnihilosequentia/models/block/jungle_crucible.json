@@ -1,10 +1,10 @@
 {
   "parent": "exnihilosequentia:block/crucible",
   "textures": {
-    "particle": "minecraft:block/jungle_log",
-    "top": "minecraft:block/jungle_log",
     "bottom": "minecraft:block/jungle_log",
+    "inside": "minecraft:block/jungle_log",
+    "particle": "minecraft:block/jungle_log",
     "side": "minecraft:block/jungle_log",
-    "inside": "minecraft:block/jungle_log"
+    "top": "minecraft:block/jungle_log"
   }
 }

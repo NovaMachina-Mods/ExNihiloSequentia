@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:crook",
+  "input": {
+    "item": "exnihilosequentia:infested_leaves"
+  },
   "results": [
     {
       "chance": 0.5,
-      "item": "minecraft:string",
-      "count": 1
+      "count": 1,
+      "item": "minecraft:string"
     }
-  ],
-  "input": {
-    "item": "exnihilosequentia:infested_leaves"
-  }
+  ]
 }

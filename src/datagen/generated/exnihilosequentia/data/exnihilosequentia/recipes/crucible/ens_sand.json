@@ -1,11 +1,11 @@
 {
   "type": "exnihilosequentia:crucible",
-  "input": {
-    "item": "minecraft:sand"
-  },
   "amount": 100,
+  "crucibleType": "fired",
   "fluidResult": {
     "fluid": "minecraft:lava"
   },
-  "crucibleType": "fired"
+  "input": {
+    "item": "minecraft:sand"
+  }
 }

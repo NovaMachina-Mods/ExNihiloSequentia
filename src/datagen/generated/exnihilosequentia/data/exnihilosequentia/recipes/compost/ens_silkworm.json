@@ -1,7 +1,7 @@
 {
   "type": "exnihilosequentia:compost",
+  "amount": 40,
   "input": {
     "item": "exnihilosequentia:silkworm"
-  },
-  "amount": 40
+  }
 }

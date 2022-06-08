@@ -1,7 +1,7 @@
 {
   "type": "exnihilosequentia:compost",
+  "amount": 125,
   "input": {
     "tag": "minecraft:saplings"
-  },
-  "amount": 125
+  }
 }

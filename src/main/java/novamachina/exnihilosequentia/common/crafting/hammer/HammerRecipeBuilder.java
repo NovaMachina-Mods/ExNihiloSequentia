@@ -6,12 +6,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
 public class HammerRecipeBuilder extends ExNihiloFinishedRecipe<HammerRecipeBuilder> {
 
   private HammerRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions
-    super(HammerRecipe.getStaticSerializer().get());
+    super(ExNihiloSerializers.HAMMER_RECIPE_SERIALIZER.get());
     setMultipleResults(Integer.MAX_VALUE);
   }
 

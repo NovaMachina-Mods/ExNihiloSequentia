@@ -18,17 +18,17 @@ public class ExNihiloThermalDataGenerators {
   public static void gatherData(GatherDataEvent event) {
     DataGenerator generator = event.getGenerator();
     if (event.includeServer()) {
-      generator.addProvider(new ExNihiloThermalRecipeGenerator(generator));
-      generator.addProvider(new ExNihiloThermalTagGenerator(generator,
+      generator.addProvider(true, new ExNihiloThermalRecipeGenerator(generator));
+      generator.addProvider(true, new ExNihiloThermalTagGenerator(generator,
           new BlockTagsProvider(generator, ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
               event.getExistingFileHelper()), event.getExistingFileHelper()));
     }
     if (event.includeClient()) {
       // Items
-      generator.addProvider(new ExNihiloThermalItemGenerator(generator,
+      generator.addProvider(true, new ExNihiloThermalItemGenerator(generator,
           ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL, event.getExistingFileHelper()));
       // Lang
-      generator.addProvider(new ExNihiloThermalLangGenerator(generator, "en_us"));
+      generator.addProvider(true, new ExNihiloThermalLangGenerator(generator, "en_us"));
     }
   }
 }

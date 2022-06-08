@@ -3,14 +3,13 @@ package novamachina.exnihilosequentia.common.block;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
+//import mcjty.theoneprobe.api.IProbeHitData;
+//import mcjty.theoneprobe.api.IProbeInfo;
+//import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,9 +26,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEntity;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+//import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 
-public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
+public class BlockBarrel extends BaseBlock{ // implements ITOPInfoProvider {
 
   @Nonnull
   protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
@@ -38,30 +37,30 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
     super(builder);
   }
 
-  @Override
-  public void addProbeInfo(@Nonnull final ProbeMode probeMode, @Nonnull final IProbeInfo probeInfo,
-      @Nonnull final Player playerEntity, @Nonnull final Level world,
-      @Nonnull final BlockState blockState, @Nonnull final IProbeHitData data) {
-
-    @Nullable final AbstractBarrelEntity barrelTile = (AbstractBarrelEntity) world.getBlockEntity(
-        data.getPos());
-    if (barrelTile == null) {
-      return;
-    }
-    if (probeMode == ProbeMode.EXTENDED) {
-      probeInfo
-          .text(new TranslatableComponent("top.barrel.mode",
-              barrelTile.getMode().getModeName().toUpperCase()).withStyle(style -> {
-            style.withColor(TextColor.fromLegacyFormat(ChatFormatting.GREEN));
-            return style;
-          }));
-    }
-
-    @Nonnull final List<Component> info = barrelTile.getWailaInfo();
-    for (Component tooltip : info) {
-      probeInfo.text(tooltip);
-    }
-  }
+//  @Override
+//  public void addProbeInfo(@Nonnull final ProbeMode probeMode, @Nonnull final IProbeInfo probeInfo,
+//      @Nonnull final Player playerEntity, @Nonnull final Level world,
+//      @Nonnull final BlockState blockState, @Nonnull final IProbeHitData data) {
+//
+//    @Nullable final AbstractBarrelEntity barrelTile = (AbstractBarrelEntity) world.getBlockEntity(
+//        data.getPos());
+//    if (barrelTile == null) {
+//      return;
+//    }
+//    if (probeMode == ProbeMode.EXTENDED) {
+//      probeInfo
+//          .text(new TranslatableComponent("top.barrel.mode",
+//              barrelTile.getMode().getModeName().toUpperCase()).withStyle(style -> {
+//            style.withColor(TextColor.fromLegacyFormat(ChatFormatting.GREEN));
+//            return style;
+//          }));
+//    }
+//
+//    @Nonnull final List<Component> info = barrelTile.getWailaInfo();
+//    for (Component tooltip : info) {
+//      probeInfo.text(tooltip);
+//    }
+//  }
 
   /**
    * @deprecated Ask Mojang

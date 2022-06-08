@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -115,7 +114,7 @@ public class FluidTransformBarrelMode extends AbstractBarrelMode {
   public List<Component> getWailaInfo(@Nonnull final AbstractBarrelEntity barrelTile) {
     @Nullable final List<Component> info = new ArrayList<>();
 
-    info.add(new TranslatableComponent("waila.progress", StringUtils
+    info.add(Component.translatable("waila.progress", StringUtils
         .formatPercent((float) currentProgress / (Config.getSecondsToFluidTransform() * 20))));
 
     return info;

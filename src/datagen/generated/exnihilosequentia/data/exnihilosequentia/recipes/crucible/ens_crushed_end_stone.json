@@ -1,11 +1,11 @@
 {
   "type": "exnihilosequentia:crucible",
-  "input": {
-    "item": "exnihilosequentia:crushed_end_stone"
-  },
   "amount": 200,
+  "crucibleType": "fired",
   "fluidResult": {
     "fluid": "minecraft:lava"
   },
-  "crucibleType": "fired"
+  "input": {
+    "item": "exnihilosequentia:crushed_end_stone"
+  }
 }

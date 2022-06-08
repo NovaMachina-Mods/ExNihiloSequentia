@@ -1,11 +1,11 @@
 {
   "type": "exnihilosequentia:crucible",
-  "input": {
-    "tag": "minecraft:saplings"
-  },
   "amount": 250,
+  "crucibleType": "wood",
   "fluidResult": {
     "fluid": "minecraft:water"
   },
-  "crucibleType": "wood"
+  "input": {
+    "tag": "minecraft:saplings"
+  }
 }

@@ -37,7 +37,7 @@ public class PebbleItem extends SnowballItem {
         player.getX(),
         player.getY(),
         player.getZ(),
-        ExNihiloSounds.PEBBLE_THROW,
+        ExNihiloSounds.PEBBLE_THROW.get(),
         SoundSource.NEUTRAL,
         0.5F,
         0.4F / (new SecureRandom().nextFloat() * 0.4F + 0.8F));

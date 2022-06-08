@@ -1,7 +1,7 @@
 {
   "type": "exnihilosequentia:heat",
-  "block": "minecraft:furnace",
   "amount": 3,
+  "block": "minecraft:furnace",
   "state": {
     "lit": "true"
   }

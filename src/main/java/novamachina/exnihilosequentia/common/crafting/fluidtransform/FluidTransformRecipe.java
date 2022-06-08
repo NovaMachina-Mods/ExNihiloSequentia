@@ -10,13 +10,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidTransformRecipe extends SerializableRecipe {
 
-  public static RecipeType<FluidTransformRecipe> RECIPE_TYPE;
-  @Nullable
-  private static RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> serializer;
   @Nonnull
   private Ingredient catalyst;
   @Nonnull
@@ -27,20 +26,10 @@ public class FluidTransformRecipe extends SerializableRecipe {
   public FluidTransformRecipe(@Nonnull final ResourceLocation id,
       @Nonnull final FluidStack fluidInTank,
       @Nonnull final Ingredient catalyst, @Nonnull final FluidStack result) {
-    super(null, RECIPE_TYPE, id);
+    super(null, ExNihiloRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE.get(), id);
     this.fluidInTank = fluidInTank;
     this.catalyst = catalyst;
     this.result = result;
-  }
-
-  @Nullable
-  public static RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> getStaticSerializer() {
-    return serializer;
-  }
-
-  public static void setSerializer(
-      @Nonnull final RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> serializer) {
-    FluidTransformRecipe.serializer = serializer;
   }
 
   @Nonnull
@@ -79,9 +68,6 @@ public class FluidTransformRecipe extends SerializableRecipe {
   @Override
   @Nullable
   protected ExNihiloRecipeSerializer<FluidTransformRecipe> getENSerializer() {
-    if (serializer == null) {
-      return null;
-    }
-    return serializer.get();
+    return ExNihiloSerializers.FLUID_TRANSFORM_RECIPE_SERIALIZER.get();
   }
 }

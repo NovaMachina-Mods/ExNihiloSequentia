@@ -16,7 +16,7 @@ public class OreItem extends Item {
   }
 
   @Override
-  protected boolean allowdedIn(@Nonnull final CreativeModeTab group) {
+  protected boolean allowedIn(@Nonnull final CreativeModeTab group) {
     if (group == ExNihiloInitialization.ITEM_GROUP) {
       return ore.isEnabled();
     }

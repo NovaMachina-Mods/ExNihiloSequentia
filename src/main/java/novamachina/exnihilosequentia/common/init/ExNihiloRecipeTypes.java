@@ -2,10 +2,10 @@ package novamachina.exnihilosequentia.common.init;
 
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
@@ -16,36 +16,58 @@ import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ExNihiloRecipeTypes {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-  private ExNihiloRecipeTypes() {}
+  private static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(
+      ForgeRegistries.RECIPE_TYPES, ModIds.EX_NIHILO_SEQUENTIA);
+  public static final RegistryObject<RecipeType<CompostRecipe>> COMPOST_RECIPE_TYPE = RECIPE_TYPES.register(
+      "compost",
+      () -> new RecipeType<CompostRecipe>() {
+      });
+  public static final RegistryObject<RecipeType<CrookRecipe>> CROOK_RECIPE_TYPE = RECIPE_TYPES.register(
+      "crook",
+      () -> new RecipeType<CrookRecipe>() {
+      });
+  public static final RegistryObject<RecipeType<CrucibleRecipe>> CRUCIBLE_RECIPE_TYPE = RECIPE_TYPES.register(
+      "crucible",
+      () -> new RecipeType<CrucibleRecipe>() {
+      });
+  public static final RegistryObject<RecipeType<FluidItemRecipe>> FLUID_ITEM_RECIPE_TYPE = RECIPE_TYPES.register(
+      "fluid_item",
+      () -> new RecipeType<FluidItemRecipe>() {
+      });
+  public static final RegistryObject<RecipeType<FluidOnTopRecipe>> FLUID_ON_TOP_RECIPE_TYPE = RECIPE_TYPES.register(
+      "fluid_on_top",
+      () -> new RecipeType<FluidOnTopRecipe>() {
+      });
+  public static final RegistryObject<RecipeType<FluidTransformRecipe>> FLUID_TRANSFORM_RECIPE_TYPE = RECIPE_TYPES.register(
+      "fluid_transform",
+      () -> new RecipeType<FluidTransformRecipe>() {
+      });
+  public static final RegistryObject<RecipeType<HammerRecipe>> HAMMER_RECIPE_TYPE = RECIPE_TYPES.register(
+      "hammer",
+      () -> new RecipeType<HammerRecipe>() {
+      });
+  public static final RegistryObject<RecipeType<HeatRecipe>> HEAT_RECIPE_TYPE = RECIPE_TYPES.register(
+      "heat",
+      () -> new RecipeType<HeatRecipe>() {
+      });
+  public static final RegistryObject<RecipeType<SieveRecipe>> SIEVE_RECIPE_TYPE = RECIPE_TYPES.register(
+      "sieve",
+      () -> new RecipeType<SieveRecipe>() {
+      });
 
-  @SubscribeEvent
-  public static void registerRecipeType(RegistryEvent.Register<Block> event) {
-    logger.debug("Registering RecipeTypes");
-    CompostRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":compost");
-    CrookRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crook");
-    CrucibleRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":crucible");
-    FluidItemRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_item");
-    FluidOnTopRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_on_top");
-    FluidTransformRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":fluid_transform");
-    HammerRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":hammer");
-    HeatRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":heat");
-    SieveRecipe.RECIPE_TYPE =
-        RecipeType.register(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ":sieve");
+  private ExNihiloRecipeTypes() {
+  }
+
+  public static void init(IEventBus modEventBus) {
+    RECIPE_TYPES.register(modEventBus);
   }
 }

@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "-": {
+      "tag": "forge:rods"
+    },
+    "x": {
+      "tag": "forge:cobblestone"
+    }
+  },
   "pattern": [
     " x ",
     " -x",
     "-  "
   ],
-  "key": {
-    "x": {
-      "tag": "forge:cobblestone"
-    },
-    "-": {
-      "tag": "forge:rods"
-    }
-  },
   "result": {
     "item": "exnihilosequentia:stone_hammer"
   }

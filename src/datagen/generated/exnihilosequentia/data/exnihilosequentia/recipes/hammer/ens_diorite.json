@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:diorite"
+  },
   "results": [
     {
       "chance": 1.0,
-      "item": "exnihilosequentia:crushed_diorite",
-      "count": 1
+      "count": 1,
+      "item": "exnihilosequentia:crushed_diorite"
     }
-  ],
-  "input": {
-    "item": "minecraft:diorite"
-  }
+  ]
 }

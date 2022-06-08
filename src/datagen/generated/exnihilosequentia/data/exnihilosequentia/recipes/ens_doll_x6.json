@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "e": {
+      "tag": "forge:gems/emerald"
+    },
+    "x": {
+      "item": "exnihilosequentia:porcelain_clay"
+    }
+  },
   "pattern": [
     "xex",
     " x ",
     "x x"
   ],
-  "key": {
-    "x": {
-      "item": "exnihilosequentia:porcelain_clay"
-    },
-    "e": {
-      "tag": "forge:gems/emerald"
-    }
-  },
   "result": {
-    "item": "exnihilosequentia:crafting_doll",
-    "count": 6
+    "count": 6,
+    "item": "exnihilosequentia:crafting_doll"
   }
 }

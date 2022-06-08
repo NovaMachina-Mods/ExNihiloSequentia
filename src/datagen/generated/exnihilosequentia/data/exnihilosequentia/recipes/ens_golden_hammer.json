@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "-": {
+      "tag": "forge:rods"
+    },
+    "x": {
+      "tag": "forge:ingots/gold"
+    }
+  },
   "pattern": [
     " x ",
     " -x",
     "-  "
   ],
-  "key": {
-    "x": {
-      "tag": "forge:ingots/gold"
-    },
-    "-": {
-      "tag": "forge:rods"
-    }
-  },
   "result": {
     "item": "exnihilosequentia:golden_hammer"
   }

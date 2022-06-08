@@ -28,12 +28,12 @@ public class EXNTinkersDataGenerators {
 
     if (event.includeServer()) {
       // Recipes
-      generator.addProvider(new EXNTinkersRecipes(generator));
+      generator.addProvider(true, new EXNTinkersRecipes(generator));
       // Tags
-      generator.addProvider(new EXNTinkersItemTags(generator, new BlockTagsProvider(generator,
+      generator.addProvider(true, new EXNTinkersItemTags(generator, new BlockTagsProvider(generator,
           EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS, fileHelper), fileHelper));
       // LootTables
-      generator.addProvider(new EXNTinkersLootTables(generator));
+      generator.addProvider(true, new EXNTinkersLootTables(generator));
       //TODO reanable when tinkers available for 1.18.2
       //Tinkers Tool Recipe
       //generator.addProvider(new EXNTinkersToolRecipes(generator));
@@ -44,9 +44,9 @@ public class EXNTinkersDataGenerators {
     }
     if (event.includeClient()) {
       // BlockStates
-      generator.addProvider(new EXNTinkersBlockStates(generator, fileHelper));
+      generator.addProvider(true, new EXNTinkersBlockStates(generator, fileHelper));
       // Items
-      generator.addProvider(new EXNTinkersOreItems(generator, fileHelper));
+      generator.addProvider(true, new EXNTinkersOreItems(generator, fileHelper));
       //TODO reanable when tinkers available for 1.18.2
       //TinkerMaterialSpriteProvider materialSprites = new TinkerMaterialSpriteProvider();
       //generator.addProvider(new MaterialPartTextureGenerator(generator, fileHelper, new EXNTinkersPartSprites(), materialSprites));

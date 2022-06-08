@@ -10,17 +10,16 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
 
-  public static RecipeType<FluidOnTopRecipe> RECIPE_TYPE;
   @Nonnull
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  @Nullable
-  private static RegistryObject<ExNihiloRecipeSerializer<FluidOnTopRecipe>> serializer;
   @Nonnull
   private FluidStack fluidInTank;
   @Nonnull
@@ -30,20 +29,10 @@ public class FluidOnTopRecipe extends SerializableRecipe {
 
   public FluidOnTopRecipe(@Nonnull final ResourceLocation id, @Nonnull final FluidStack fluidInTank,
       @Nonnull final FluidStack fluidOnTop, @Nonnull final ItemStack result) {
-    super(result, RECIPE_TYPE, id);
+    super(result, ExNihiloRecipeTypes.FLUID_ON_TOP_RECIPE_TYPE.get(), id);
     this.fluidInTank = fluidInTank;
     this.fluidOnTop = fluidOnTop;
     this.result = result;
-  }
-
-  @Nullable
-  public static RegistryObject<ExNihiloRecipeSerializer<FluidOnTopRecipe>> getStaticSerializer() {
-    return serializer;
-  }
-
-  public static void setSerializer(
-      @Nonnull final RegistryObject<ExNihiloRecipeSerializer<FluidOnTopRecipe>> serializer) {
-    FluidOnTopRecipe.serializer = serializer;
   }
 
   @Nonnull
@@ -82,9 +71,6 @@ public class FluidOnTopRecipe extends SerializableRecipe {
   @Override
   @Nullable
   protected ExNihiloRecipeSerializer<FluidOnTopRecipe> getENSerializer() {
-    if (serializer == null) {
-      return null;
-    }
-    return serializer.get();
+    return ExNihiloSerializers.FLUID_ON_TOP_RECIPE_SERIALIZER.get();
   }
 }

@@ -6,51 +6,51 @@
       }
     },
     {
-      "when": {
-        "mesh": "string"
-      },
       "apply": {
         "model": "exnihilosequentia:block/string_mesh"
+      },
+      "when": {
+        "mesh": "string"
       }
     },
     {
-      "when": {
-        "mesh": "flint"
-      },
       "apply": {
         "model": "exnihilosequentia:block/flint_mesh"
+      },
+      "when": {
+        "mesh": "flint"
       }
     },
     {
-      "when": {
-        "mesh": "iron"
-      },
       "apply": {
         "model": "exnihilosequentia:block/iron_mesh"
+      },
+      "when": {
+        "mesh": "iron"
       }
     },
     {
-      "when": {
-        "mesh": "diamond"
-      },
       "apply": {
         "model": "exnihilosequentia:block/diamond_mesh"
+      },
+      "when": {
+        "mesh": "diamond"
       }
     },
     {
-      "when": {
-        "mesh": "emerald"
-      },
       "apply": {
         "model": "exnihilosequentia:block/emerald_mesh"
+      },
+      "when": {
+        "mesh": "emerald"
       }
     },
     {
-      "when": {
-        "mesh": "netherite"
-      },
       "apply": {
         "model": "exnihilosequentia:block/netherite_mesh"
+      },
+      "when": {
+        "mesh": "netherite"
       }
     }
   ]

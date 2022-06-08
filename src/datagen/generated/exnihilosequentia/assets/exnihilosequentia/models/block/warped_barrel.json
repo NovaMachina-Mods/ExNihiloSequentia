@@ -1,7 +1,7 @@
 {
   "parent": "exnihilosequentia:block/barrel",
   "textures": {
-    "texture": "minecraft:block/warped_planks",
-    "particle": "minecraft:block/warped_planks"
+    "particle": "minecraft:block/warped_planks",
+    "texture": "minecraft:block/warped_planks"
   }
 }

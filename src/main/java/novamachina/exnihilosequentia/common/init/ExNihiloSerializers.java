@@ -53,14 +53,5 @@ public class ExNihiloSerializers {
   public static void init(IEventBus modEventBus) {
     logger.debug("Register recipe serializers");
     RECIPE_SERIALIZERS.register(modEventBus);
-    HammerRecipe.setSerializer(HAMMER_RECIPE_SERIALIZER);
-    CrookRecipe.setSerializer(CROOK_RECIPE_SERIALIZER);
-    CompostRecipe.setSerializer(COMPOST_RECIPE_SERIALIZER);
-    FluidItemRecipe.setSerializer(FLUID_ITEM_RECIPE_SERIALIZER);
-    FluidOnTopRecipe.setSerializer(FLUID_ON_TOP_RECIPE_SERIALIZER);
-    FluidTransformRecipe.setSerializer(FLUID_TRANSFORM_RECIPE_SERIALIZER);
-    CrucibleRecipe.setSerializer(CRUCIBLE_RECIPE_SERIALIZER);
-    HeatRecipe.setSerializer(HEAT_RECIPE_SERIALIZER);
-    SieveRecipe.setSerializer(SIEVE_RECIPE_SERIALIZER);
   }
 }

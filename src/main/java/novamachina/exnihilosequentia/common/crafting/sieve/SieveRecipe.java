@@ -11,14 +11,13 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class SieveRecipe extends SerializableRecipe {
 
-  public static RecipeType<SieveRecipe> RECIPE_TYPE;
-  @Nullable
-  private static RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> serializer;
   @Nonnull
   private final ResourceLocation recipeId;
   @Nonnull
@@ -32,22 +31,12 @@ public class SieveRecipe extends SerializableRecipe {
   public SieveRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
       @Nonnull final ItemStack drop, @Nonnull final List<MeshWithChance> rolls,
       boolean isWaterlogged) {
-    super(drop, RECIPE_TYPE, id);
+    super(drop, ExNihiloRecipeTypes.SIEVE_RECIPE_TYPE.get(), id);
     this.recipeId = id;
     this.input = input;
     this.drop = drop;
     this.rolls = rolls;
     this.isWaterlogged = isWaterlogged;
-  }
-
-  @Nullable
-  public static RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> getStaticSerializer() {
-    return serializer;
-  }
-
-  public static void setSerializer(
-      @Nonnull final RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> serializer) {
-    SieveRecipe.serializer = serializer;
   }
 
   public void addRoll(@Nonnull final String meshString, final float chance) {
@@ -133,9 +122,6 @@ public class SieveRecipe extends SerializableRecipe {
   @Override
   @Nullable
   protected ExNihiloRecipeSerializer<SieveRecipe> getENSerializer() {
-    if (serializer == null) {
-      return null;
-    }
-    return serializer.get();
+    return ExNihiloSerializers.SIEVE_RECIPE_SERIALIZER.get();
   }
 }

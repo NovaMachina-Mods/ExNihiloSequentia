@@ -1,5 +1,5 @@
 {
   "type": "exnihilosequentia:heat",
-  "block": "minecraft:lava",
-  "amount": 3
+  "amount": 3,
+  "block": "minecraft:lava"
 }

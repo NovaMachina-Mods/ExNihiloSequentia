@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
 public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements
@@ -125,7 +126,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
   @Nonnull
   protected R addBlock(@Nonnull final Block block) {
-    @Nullable final ResourceLocation resourceLocation = block.getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(block);
     if (resourceLocation != null) {
       return addWriter(jsonObject -> jsonObject.addProperty("block", resourceLocation.toString()));
     }
@@ -251,7 +252,7 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
   @Nonnull
   private JsonObject serializeItemStack(@Nonnull final ItemStack itemStack) {
     @Nonnull final JsonObject obj = new JsonObject();
-    @Nullable final ResourceLocation resourceLocation = itemStack.getItem().getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(itemStack.getItem());
     if (resourceLocation != null) {
       obj.addProperty("item", resourceLocation.toString());
     }

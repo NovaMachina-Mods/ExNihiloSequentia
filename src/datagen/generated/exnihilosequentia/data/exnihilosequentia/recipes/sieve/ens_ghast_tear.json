@@ -1,15 +1,15 @@
 {
   "type": "exnihilosequentia:sieve",
-  "rolls": [
-    {
-      "chance": 0.02,
-      "mesh": "diamond"
-    }
-  ],
   "input": {
     "item": "minecraft:soul_sand"
   },
   "result": {
     "item": "minecraft:ghast_tear"
-  }
+  },
+  "rolls": [
+    {
+      "chance": 0.02,
+      "mesh": "diamond"
+    }
+  ]
 }

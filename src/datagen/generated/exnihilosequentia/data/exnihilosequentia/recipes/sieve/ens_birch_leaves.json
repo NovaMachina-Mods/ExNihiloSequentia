@@ -1,5 +1,11 @@
 {
   "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "minecraft:birch_leaves"
+  },
+  "result": {
+    "item": "minecraft:birch_sapling"
+  },
   "rolls": [
     {
       "chance": 0.05,
@@ -17,11 +23,5 @@
       "chance": 0.2,
       "mesh": "diamond"
     }
-  ],
-  "input": {
-    "item": "minecraft:birch_leaves"
-  },
-  "result": {
-    "item": "minecraft:birch_sapling"
-  }
+  ]
 }

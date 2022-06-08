@@ -8,12 +8,13 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
 public class CrookRecipeBuilder extends ExNihiloFinishedRecipe<CrookRecipeBuilder> {
 
   private CrookRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions
-    super(CrookRecipe.getStaticSerializer().get());
+    super(ExNihiloSerializers.CROOK_RECIPE_SERIALIZER.get());
     setMultipleResults(Integer.MAX_VALUE);
   }
 

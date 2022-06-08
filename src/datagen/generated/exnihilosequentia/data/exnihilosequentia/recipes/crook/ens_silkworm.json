@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:crook",
+  "input": {
+    "item": "exnihilosequentia:infested_leaves"
+  },
   "results": [
     {
       "chance": 0.2,
-      "item": "exnihilosequentia:silkworm",
-      "count": 1
+      "count": 1,
+      "item": "exnihilosequentia:silkworm"
     }
-  ],
-  "input": {
-    "item": "exnihilosequentia:infested_leaves"
-  }
+  ]
 }

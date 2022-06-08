@@ -11,31 +11,20 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CompostRecipe extends SerializableRecipe {
-
-  public static RecipeType<CompostRecipe> RECIPE_TYPE;
-  @Nullable
-  private static RegistryObject<ExNihiloRecipeSerializer<CompostRecipe>> serializer;
   private int amount;
   @Nonnull
   private Ingredient input;
 
   public CompostRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
       final int amount) {
-    super(null, RECIPE_TYPE, id);
+    super(null, ExNihiloRecipeTypes.COMPOST_RECIPE_TYPE.get(), id);
     this.input = input;
     this.amount = amount;
-  }
-
-  public static RegistryObject<ExNihiloRecipeSerializer<CompostRecipe>> getStaticSerializer() {
-    return serializer;
-  }
-
-  public static void setSerializer(
-      @Nonnull final RegistryObject<ExNihiloRecipeSerializer<CompostRecipe>> serializer) {
-    CompostRecipe.serializer = serializer;
   }
 
   public int getAmount() {
@@ -69,9 +58,6 @@ public class CompostRecipe extends SerializableRecipe {
   @Override
   @Nullable
   protected ExNihiloRecipeSerializer<CompostRecipe> getENSerializer() {
-    if (serializer != null) {
-      return serializer.get();
-    }
-    return null;
+    return ExNihiloSerializers.COMPOST_RECIPE_SERIALIZER.get();
   }
 }

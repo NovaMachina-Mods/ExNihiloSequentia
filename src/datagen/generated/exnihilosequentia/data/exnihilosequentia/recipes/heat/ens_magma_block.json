@@ -1,5 +1,5 @@
 {
   "type": "exnihilosequentia:heat",
-  "block": "minecraft:magma_block",
-  "amount": 2
+  "amount": 2,
+  "block": "minecraft:magma_block"
 }

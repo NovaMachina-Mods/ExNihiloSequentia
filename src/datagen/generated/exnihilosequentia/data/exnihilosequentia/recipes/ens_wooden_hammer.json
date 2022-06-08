@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "-": {
+      "tag": "forge:rods"
+    },
+    "x": {
+      "tag": "minecraft:planks"
+    }
+  },
   "pattern": [
     " x ",
     " -x",
     "-  "
   ],
-  "key": {
-    "x": {
-      "tag": "minecraft:planks"
-    },
-    "-": {
-      "tag": "forge:rods"
-    }
-  },
   "result": {
     "item": "exnihilosequentia:wooden_hammer"
   }

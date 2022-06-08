@@ -38,7 +38,7 @@ public class WitchWaterBlock extends LiquidBlock {
   public WitchWaterBlock() {
     super(ExNihiloFluids.WITCH_WATER,
         BlockBehaviour.Properties.of(Material.WATER).noCollission()
-            .strength(100.0F).noDrops());
+            .strength(100.0F).noLootTable());
   }
 
   /**

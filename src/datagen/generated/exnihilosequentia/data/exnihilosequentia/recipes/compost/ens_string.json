@@ -1,7 +1,7 @@
 {
   "type": "exnihilosequentia:compost",
+  "amount": 40,
   "input": {
     "tag": "forge:string"
-  },
-  "amount": 40
+  }
 }

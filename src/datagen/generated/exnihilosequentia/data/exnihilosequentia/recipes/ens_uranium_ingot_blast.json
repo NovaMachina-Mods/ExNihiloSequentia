@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.7,
   "ingredient": {
     "item": "exnihilosequentia:raw_uranium"
   },
-  "result": "exnihilosequentia:uranium_ingot",
-  "experience": 0.7,
-  "cookingtime": 100
+  "result": "exnihilosequentia:uranium_ingot"
 }

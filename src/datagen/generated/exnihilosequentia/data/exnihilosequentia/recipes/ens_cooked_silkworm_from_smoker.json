@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smoking",
+  "cookingtime": 100,
+  "experience": 0.1,
   "ingredient": {
     "item": "exnihilosequentia:silkworm"
   },
-  "result": "exnihilosequentia:cooked_silkworm",
-  "experience": 0.1,
-  "cookingtime": 100
+  "result": "exnihilosequentia:cooked_silkworm"
 }

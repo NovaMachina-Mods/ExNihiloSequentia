@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:cobblestone"
+  },
   "results": [
     {
       "chance": 1.0,
-      "item": "minecraft:gravel",
-      "count": 1
+      "count": 1,
+      "item": "minecraft:gravel"
     }
-  ],
-  "input": {
-    "item": "minecraft:cobblestone"
-  }
+  ]
 }

@@ -4,13 +4,14 @@ import javax.annotation.Nonnull;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
 public class FluidTransformRecipeBuilder extends
     ExNihiloFinishedRecipe<FluidTransformRecipeBuilder> {
 
   public FluidTransformRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions
-    super(FluidTransformRecipe.getStaticSerializer().get());
+    super(ExNihiloSerializers.FLUID_TRANSFORM_RECIPE_SERIALIZER.get());
   }
 
   @Nonnull

@@ -1,5 +1,11 @@
 {
   "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "exnihilosequentia:dust"
+  },
+  "result": {
+    "item": "minecraft:redstone"
+  },
   "rolls": [
     {
       "chance": 0.125,
@@ -9,11 +15,5 @@
       "chance": 0.25,
       "mesh": "diamond"
     }
-  ],
-  "input": {
-    "item": "exnihilosequentia:dust"
-  },
-  "result": {
-    "item": "minecraft:redstone"
-  }
+  ]
 }

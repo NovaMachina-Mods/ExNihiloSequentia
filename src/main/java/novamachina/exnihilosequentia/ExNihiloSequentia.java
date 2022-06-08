@@ -1,9 +1,6 @@
 package novamachina.exnihilosequentia;
 
 import javax.annotation.Nonnull;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -13,8 +10,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
-import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -45,16 +40,16 @@ public class ExNihiloSequentia {
     private EventHandlers() {
     }
 
-    @SubscribeEvent
-    public static void registerModifierSerializers(
-        @Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-      logger.debug("Registering Loot Modifiers");
-      event.getRegistry()
-          .register(new UseHammerModifier.Serializer()
-              .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_hammer"));
-      event.getRegistry()
-          .register(new UseCrookModifier.Serializer()
-              .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_crook"));
-    }
+//    @SubscribeEvent
+//    public static void registerModifierSerializers(
+//        @Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
+//      logger.debug("Registering Loot Modifiers");
+//      event.getRegistry()
+//          .register(new UseHammerModifier.Serializer()
+//              .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_hammer"));
+//      event.getRegistry()
+//          .register(new UseCrookModifier.Serializer()
+//              .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_crook"));
+//    }
   }
 }

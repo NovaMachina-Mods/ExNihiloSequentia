@@ -65,7 +65,7 @@ public class ItemStackWithChance {
   public JsonElement serialize() {
     @Nonnull final JsonObject json = new JsonObject();
     json.addProperty(CHANCE_KEY, getChance());
-    @Nullable final ResourceLocation resourceLocation = getStack().getItem().getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(getStack().getItem());
     if (resourceLocation != null) {
       json.addProperty(BASE_KEY, resourceLocation.toString());
     }

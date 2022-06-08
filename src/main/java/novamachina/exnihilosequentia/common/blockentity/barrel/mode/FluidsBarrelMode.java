@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -231,7 +230,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
           .getDescriptionId();
     }
 
-    info.add(new TranslatableComponent("waila.barrel.fluidAmount", new TranslatableComponent(key),
+    info.add(Component.translatable("waila.barrel.fluidAmount", Component.translatable(key),
         barrelTile.getFluidAmount()));
 
     return info;

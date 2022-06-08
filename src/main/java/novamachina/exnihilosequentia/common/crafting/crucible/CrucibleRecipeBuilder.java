@@ -5,12 +5,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
 public class CrucibleRecipeBuilder extends ExNihiloFinishedRecipe<CrucibleRecipeBuilder> {
 
   private CrucibleRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions
-    super(CrucibleRecipe.getStaticSerializer().get());
+    super(ExNihiloSerializers.CRUCIBLE_RECIPE_SERIALIZER.get());
   }
 
   @Nonnull

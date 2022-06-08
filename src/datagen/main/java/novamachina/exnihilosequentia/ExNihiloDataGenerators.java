@@ -29,28 +29,28 @@ public class ExNihiloDataGenerators {
 
     if (event.includeServer()) {
       // Recipes
-      generator.addProvider(new ExNihiloRecipeGenerator(generator));
+      generator.addProvider(true, new ExNihiloRecipeGenerator(generator));
       // LootTable
-      generator.addProvider(new ExNihiloLootTableGenerator(generator));
+      generator.addProvider(true, new ExNihiloLootTableGenerator(generator));
       // Tags
-      generator.addProvider(new ExNihiloItemTagsGenerator(generator,
+      generator.addProvider(true, new ExNihiloItemTagsGenerator(generator,
           new BlockTagsProvider(generator, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
               event.getExistingFileHelper()), event.getExistingFileHelper()));
-      generator.addProvider(
+      generator.addProvider(true,
           new ExNihiloFluidTagsGenerator(generator, event.getExistingFileHelper()));
-      generator.addProvider(
+      generator.addProvider(true,
           new ExNihiloBlockTagsGenerator(generator, event.getExistingFileHelper()));
     }
     if (event.includeClient()) {
       // BlockStates
-      generator.addProvider(
+      generator.addProvider(true,
           new ExNihiloBlockStateGenerator(generator, event.getExistingFileHelper()));
       // Items
-      generator.addProvider(new ExNihiloItemGenerator(generator, event.getExistingFileHelper()));
+      generator.addProvider(true, new ExNihiloItemGenerator(generator, event.getExistingFileHelper()));
       // Ores
-      generator.addProvider(new ExNihiloOreItemGenerator(generator, event.getExistingFileHelper()));
+      generator.addProvider(true, new ExNihiloOreItemGenerator(generator, event.getExistingFileHelper()));
       // Lang
-      generator.addProvider(new ExNihiloLangGenerator(generator, "en_us"));
+      generator.addProvider(true, new ExNihiloLangGenerator(generator, "en_us"));
     }
   }
 }

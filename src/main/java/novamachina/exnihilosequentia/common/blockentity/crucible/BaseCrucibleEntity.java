@@ -31,6 +31,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.blockentity.IFluidContainer;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
@@ -156,10 +157,10 @@ public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidCo
   @Nullable
   public ResourceLocation getSolidTexture() {
     if (!inventory.getStackInSlot(0).isEmpty()) {
-      return inventory.getStackInSlot(0).getItem().getRegistryName();
+      return ForgeRegistries.ITEMS.getKey(inventory.getStackInSlot(0).getItem());
     }
     if (!currentItem.isEmpty()) {
-      return currentItem.getItem().getRegistryName();
+      return ForgeRegistries.ITEMS.getKey(currentItem.getItem());
     }
     return null;
   }

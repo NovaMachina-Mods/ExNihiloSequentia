@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:end_stone"
+  },
   "results": [
     {
       "chance": 1.0,
-      "item": "exnihilosequentia:crushed_end_stone",
-      "count": 1
+      "count": 1,
+      "item": "exnihilosequentia:crushed_end_stone"
     }
-  ],
-  "input": {
-    "item": "minecraft:end_stone"
-  }
+  ]
 }

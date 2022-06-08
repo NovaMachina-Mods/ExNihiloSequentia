@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
+import org.jetbrains.annotations.NotNull;
 
 public class UseHammerModifier extends LootModifier {
 
@@ -33,12 +35,12 @@ public class UseHammerModifier extends LootModifier {
 
   @Nonnull
   @Override
-  public List<ItemStack> doApply(
-      @Nonnull List<ItemStack> generatedLoot, @Nonnull final LootContext context) {
+  public ObjectArrayList<ItemStack> doApply(
+      @Nonnull ObjectArrayList<ItemStack> generatedLoot, @Nonnull final LootContext context) {
     logger.debug("Fired Hammer Modifier");
     @Nullable final ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
     @Nullable final BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
-    @Nonnull final List<ItemStack> newLoot = new ArrayList<>();
+    @Nonnull final ObjectArrayList<ItemStack> newLoot = new ObjectArrayList<>();
 
     if (tool != null
         && blockState != null

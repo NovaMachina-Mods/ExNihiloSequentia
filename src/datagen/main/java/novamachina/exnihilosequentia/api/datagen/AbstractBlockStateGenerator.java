@@ -14,6 +14,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -40,7 +41,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
 
   protected void registerFluid(@Nonnull final Fluid fluid) {
     @Nonnull final ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
-    @Nullable final ResourceLocation resourceLocation = fluid.getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.FLUIDS.getKey(fluid);
     if (resourceLocation != null) {
       @Nonnull final ModelFile model = models().getBuilder("block/" + resourceLocation.getPath())
           .texture(PARTICLE_TAG, stillTexture);
@@ -56,9 +57,9 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
 
   @Nullable
   protected String getRegistryName(@Nonnull final Block b) {
-    @Nullable final ResourceLocation resourceLocation = b.getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(b);
     if (resourceLocation != null) {
-      return b.getRegistryName().toString();
+      return resourceLocation.toString();
     }
     return null;
   }

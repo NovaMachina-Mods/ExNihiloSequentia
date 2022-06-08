@@ -12,15 +12,14 @@ import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
+import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
 public class HammerRecipe extends SerializableRecipe {
 
   @Nonnull
   public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"),
       Ingredient.EMPTY, new ArrayList<>());
-  public static RecipeType<HammerRecipe> RECIPE_TYPE;
-  @Nullable
-  private static RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> serializer;
   @Nonnull
   private final List<ItemStackWithChance> output;
   @Nonnull
@@ -28,19 +27,9 @@ public class HammerRecipe extends SerializableRecipe {
 
   public HammerRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
       @Nonnull final List<ItemStackWithChance> output) {
-    super(ItemStack.EMPTY, RECIPE_TYPE, id);
+    super(ItemStack.EMPTY, ExNihiloRecipeTypes.HAMMER_RECIPE_TYPE.get(), id);
     this.input = input;
     this.output = output;
-  }
-
-  @Nullable
-  public static RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> getStaticSerializer() {
-    return serializer;
-  }
-
-  public static void setSerializer(
-      @Nonnull final RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> serializer) {
-    HammerRecipe.serializer = serializer;
   }
 
   public void addOutput(@Nonnull final ItemStack output) {
@@ -81,9 +70,6 @@ public class HammerRecipe extends SerializableRecipe {
   @Override
   @Nullable
   protected ExNihiloRecipeSerializer<HammerRecipe> getENSerializer() {
-    if (serializer == null) {
-      return null;
-    }
-    return serializer.get();
+    return ExNihiloSerializers.HAMMER_RECIPE_SERIALIZER.get();
   }
 }

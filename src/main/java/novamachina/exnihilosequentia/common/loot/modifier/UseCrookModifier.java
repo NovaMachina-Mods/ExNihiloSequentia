@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.gson.JsonObject;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
@@ -20,6 +20,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
@@ -43,13 +44,13 @@ public class UseCrookModifier extends LootModifier {
 
   @Nonnull
   @Override
-  public List<ItemStack> doApply(
-      @Nonnull List<ItemStack> generatedLoot, @Nonnull final LootContext context) {
+  public ObjectArrayList<ItemStack> doApply(
+      @Nonnull ObjectArrayList<ItemStack> generatedLoot, @Nonnull final LootContext context) {
     logger.debug("Fired Crook Modifier");
     @Nullable final ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
     @Nullable final BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
     @Nullable final Vec3 origin = context.getParamOrNull(LootContextParams.ORIGIN);
-    @Nonnull final List<ItemStack> newLoot = new ArrayList<>();
+    @Nonnull final ObjectArrayList<ItemStack> newLoot = new ObjectArrayList<>();
 
     if (tool != null
         && blockState != null
@@ -108,11 +109,11 @@ public class UseCrookModifier extends LootModifier {
               .filter(
                   drop -> {
                     @Nullable
-                    final ResourceLocation resourceLocation = drop.getItem().getRegistryName();
+                    final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(drop.getItem());
                     if (resourceLocation == null) {
                       return false;
                     }
-                    return !resourceLocation.equals(blockState.getBlock().getRegistryName());
+                    return !resourceLocation.equals(ForgeRegistries.BLOCKS.getKey(blockState.getBlock()));
                   })
               .toList());
     }

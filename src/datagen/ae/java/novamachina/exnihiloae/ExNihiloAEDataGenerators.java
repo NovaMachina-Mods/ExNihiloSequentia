@@ -20,13 +20,13 @@ public class ExNihiloAEDataGenerators {
 
     if (event.includeServer()) {
       // Recipes
-      generator.addProvider(new ExNihiloAERecipes(generator));
+      generator.addProvider(true, new ExNihiloAERecipes(generator));
       // LootTable
-      generator.addProvider(new ExNihiloAELootTables(generator));
+      generator.addProvider(true, new ExNihiloAELootTables(generator));
     }
     if (event.includeClient()) {
       // BlockStates
-      generator.addProvider(new ExNihiloAEBlockStates(generator, event.getExistingFileHelper()));
+      generator.addProvider(true, new ExNihiloAEBlockStates(generator, event.getExistingFileHelper()));
     }
   }
 }

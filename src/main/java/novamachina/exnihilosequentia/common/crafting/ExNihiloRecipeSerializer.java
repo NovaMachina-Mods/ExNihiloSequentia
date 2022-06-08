@@ -8,10 +8,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public abstract class ExNihiloRecipeSerializer<R extends Recipe<?>> extends
-    ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<R> {
+public abstract class ExNihiloRecipeSerializer<R extends Recipe<?>> implements
+    RecipeSerializer<R> {
 
   public abstract ItemStack getIcon();
 

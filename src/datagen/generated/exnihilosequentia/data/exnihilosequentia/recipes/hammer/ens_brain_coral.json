@@ -1,13 +1,13 @@
 {
   "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:brain_coral_block"
+  },
   "results": [
     {
       "chance": 1.0,
-      "item": "minecraft:brain_coral",
-      "count": 1
+      "count": 1,
+      "item": "minecraft:brain_coral"
     }
-  ],
-  "input": {
-    "item": "minecraft:brain_coral_block"
-  }
+  ]
 }

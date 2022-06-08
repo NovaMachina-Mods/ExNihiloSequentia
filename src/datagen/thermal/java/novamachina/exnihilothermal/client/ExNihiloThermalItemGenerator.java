@@ -3,6 +3,7 @@ package novamachina.exnihilothermal.client;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -25,17 +26,17 @@ public class ExNihiloThermalItemGenerator extends AbstractItemGenerator {
 
   @Override
   protected void registerModels() {
-    singleTexture(ExNihiloThermalItems.BASALZ_DOLL.get().getRegistryName().toString(),
+    singleTexture(ForgeRegistries.ITEMS.getKey(ExNihiloThermalItems.BASALZ_DOLL.get()).toString(),
         new ResourceLocation(ITEM_GENERATED), LAYER_0_TAG,
         new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
             ITEMS_TAG + ExNihiloThermalItems.BASALZ_DOLL.get().getDollName()));
 
-    singleTexture(ExNihiloThermalItems.BLITZ_DOLL.get().getRegistryName().toString(),
+    singleTexture(ForgeRegistries.ITEMS.getKey(ExNihiloThermalItems.BLITZ_DOLL.get()).toString(),
         new ResourceLocation(ITEM_GENERATED), LAYER_0_TAG,
         new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
             ITEMS_TAG + ExNihiloThermalItems.BLITZ_DOLL.get().getDollName()));
 
-    singleTexture(ExNihiloThermalItems.BLIZZ_DOLL.get().getRegistryName().toString(),
+    singleTexture(ForgeRegistries.ITEMS.getKey(ExNihiloThermalItems.BLIZZ_DOLL.get()).toString(),
         new ResourceLocation(ITEM_GENERATED), LAYER_0_TAG,
         new ResourceLocation(ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
             ITEMS_TAG + ExNihiloThermalItems.BLIZZ_DOLL.get().getDollName()));

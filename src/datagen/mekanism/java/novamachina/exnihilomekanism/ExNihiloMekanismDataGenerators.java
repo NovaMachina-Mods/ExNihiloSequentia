@@ -23,20 +23,20 @@ public class ExNihiloMekanismDataGenerators {
 
     if (event.includeServer()) {
       // Recipes
-      generator.addProvider(new ExNihiloMekanismRecipeGenerator(generator));
+      generator.addProvider(true, new ExNihiloMekanismRecipeGenerator(generator));
       // Tags
       generator
-          .addProvider(new ExNihiloMekanismItemTagGenerator(generator,
+          .addProvider(true, new ExNihiloMekanismItemTagGenerator(generator,
               new BlockTagsProvider(generator, ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM,
                   event
                       .getExistingFileHelper()), event.getExistingFileHelper()));
     }
     if (event.includeClient()) {
       // Items
-      generator.addProvider(
+      generator.addProvider(true,
           new ExNihiloMekanismOreItemGenerator(generator, event.getExistingFileHelper()));
     }
     // Lang
-    generator.addProvider(new ExNihiloMekanismLangGenerator(generator, "en_us"));
+    generator.addProvider(true, new ExNihiloMekanismLangGenerator(generator, "en_us"));
   }
 }

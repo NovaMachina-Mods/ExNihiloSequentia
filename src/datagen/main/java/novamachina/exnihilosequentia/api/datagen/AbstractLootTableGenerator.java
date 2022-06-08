@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -24,6 +24,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
 
@@ -48,7 +49,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
   }
 
   @Override
-  public void run(@Nonnull final HashCache cache) {
+  public void run(@Nonnull final CachedOutput cache) {
     lootTables.clear();
     @Nonnull final Path outFolder = generator.getOutputFolder();
 
@@ -68,7 +69,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
         @Nonnull final Path out = getPath(outFolder, name);
 
         try {
-          DataProvider.save(GSON, cache, LootTables.serialize(table), out);
+          DataProvider.saveStable(cache, LootTables.serialize(table), out);
         } catch (IOException e) {
           logger.error("Couldn't save loot table " + out);
           logger.error(Arrays.toString(e.getStackTrace()));
@@ -109,7 +110,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
   }
 
   private void register(@Nonnull final Block block, @Nonnull final LootTable.Builder table) {
-    @Nullable final ResourceLocation resourceLocation = block.getRegistryName();
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(block);
     if (resourceLocation == null) {
       return;
     }

@@ -1,11 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "exnihilosequentia",
-  "pattern": [
-    "c c",
-    "clc",
-    "s s"
-  ],
   "key": {
     "c": {
       "item": "minecraft:warped_stem"
@@ -17,6 +12,11 @@
       "tag": "forge:rods/wooden"
     }
   },
+  "pattern": [
+    "c c",
+    "clc",
+    "s s"
+  ],
   "result": {
     "item": "exnihilosequentia:warped_crucible"
   }

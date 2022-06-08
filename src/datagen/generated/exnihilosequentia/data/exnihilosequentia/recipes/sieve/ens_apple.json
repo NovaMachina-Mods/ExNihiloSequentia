@@ -1,5 +1,11 @@
 {
   "type": "exnihilosequentia:sieve",
+  "input": {
+    "tag": "minecraft:leaves"
+  },
+  "result": {
+    "item": "minecraft:apple"
+  },
   "rolls": [
     {
       "chance": 0.05,
@@ -17,11 +23,5 @@
       "chance": 0.2,
       "mesh": "diamond"
     }
-  ],
-  "input": {
-    "tag": "minecraft:leaves"
-  },
-  "result": {
-    "item": "minecraft:apple"
-  }
+  ]
 }

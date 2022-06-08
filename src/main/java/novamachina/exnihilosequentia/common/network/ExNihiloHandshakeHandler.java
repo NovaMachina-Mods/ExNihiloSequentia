@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
@@ -60,7 +60,7 @@ public class ExNihiloHandshakeHandler {
       }
     } else {
       logger.debug("Failed to synchronize ore list from server.");
-      ctx.get().getNetworkManager().disconnect(new TextComponent(
+      ctx.get().getNetworkManager().disconnect(Component.literal(
           "Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));
     }
   }
