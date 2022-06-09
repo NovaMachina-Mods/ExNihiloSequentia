@@ -195,5 +195,7 @@
   "waila.crucible.solid": "Solid(%s): %s",
   "waila.progress": "Progress: %s",
   "waila.sieve.block": "Sifting: %s",
-  "waila.sieve.mesh": "Mesh: %s"
+  "waila.sieve.mesh": "Mesh: %s",
+
+  "config.jade.plugin_exnihilosequentia.barrel": "Barrel"
 }

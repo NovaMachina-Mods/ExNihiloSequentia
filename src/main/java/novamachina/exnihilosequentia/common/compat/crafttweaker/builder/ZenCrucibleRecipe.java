@@ -1,19 +1,19 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //
-//import com.blamejared.crafttweaker.api.annotation.ZenRegister;
-//import com.blamejared.crafttweaker.api.fluid.IFluidStack;
-//import com.blamejared.crafttweaker.api.ingredient.IIngredient;
-//import javax.annotation.Nonnull;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.crafting.Ingredient;
-//import net.minecraftforge.fluids.FluidStack;
-//import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
-//import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
-//import org.openzen.zencode.java.ZenCodeType;
+// import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+// import com.blamejared.crafttweaker.api.fluid.IFluidStack;
+// import com.blamejared.crafttweaker.api.ingredient.IIngredient;
+// import javax.annotation.Nonnull;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.crafting.Ingredient;
+// import net.minecraftforge.fluids.FluidStack;
+// import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
+// import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
+// import org.openzen.zencode.java.ZenCodeType;
 //
-//@ZenRegister
-//@ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")
-//public class ZenCrucibleRecipe {
+// @ZenRegister
+// @ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")
+// public class ZenCrucibleRecipe {
 //
 //  @Nonnull
 //  private final CrucibleRecipe internal;
@@ -62,4 +62,4 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //    internal.setResultFluid(fluid.getInternal());
 //    return this;
 //  }
-//}
+// }

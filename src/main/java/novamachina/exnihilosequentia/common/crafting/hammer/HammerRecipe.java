@@ -7,8 +7,6 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
@@ -18,14 +16,15 @@ import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 public class HammerRecipe extends SerializableRecipe {
 
   @Nonnull
-  public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"),
-      Ingredient.EMPTY, new ArrayList<>());
-  @Nonnull
-  private final List<ItemStackWithChance> output;
-  @Nonnull
-  private Ingredient input;
+  public static final HammerRecipe EMPTY =
+      new HammerRecipe(new ResourceLocation("empty"), Ingredient.EMPTY, new ArrayList<>());
 
-  public HammerRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
+  @Nonnull private final List<ItemStackWithChance> output;
+  @Nonnull private Ingredient input;
+
+  public HammerRecipe(
+      @Nonnull final ResourceLocation id,
+      @Nonnull final Ingredient input,
       @Nonnull final List<ItemStackWithChance> output) {
     super(ItemStack.EMPTY, ExNihiloRecipeTypes.HAMMER_RECIPE_TYPE.get(), id);
     this.input = input;

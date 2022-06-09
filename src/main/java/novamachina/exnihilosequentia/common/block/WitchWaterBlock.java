@@ -36,9 +36,9 @@ import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 public class WitchWaterBlock extends LiquidBlock {
 
   public WitchWaterBlock() {
-    super(ExNihiloFluids.WITCH_WATER,
-        BlockBehaviour.Properties.of(Material.WATER).noCollission()
-            .strength(100.0F).noLootTable());
+    super(
+        ExNihiloFluids.WITCH_WATER,
+        BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable());
   }
 
   /**
@@ -46,7 +46,9 @@ public class WitchWaterBlock extends LiquidBlock {
    */
   @Deprecated
   @Override
-  public void entityInside(@Nonnull final BlockState state, @Nonnull final Level worldIn,
+  public void entityInside(
+      @Nonnull final BlockState state,
+      @Nonnull final Level worldIn,
       @Nonnull final BlockPos pos,
       @Nonnull final Entity entityIn) {
     if (worldIn.isClientSide() || !entityIn.isAlive()) {
@@ -54,8 +56,8 @@ public class WitchWaterBlock extends LiquidBlock {
     }
 
     if (entityIn instanceof Skeleton) {
-      replaceMob(worldIn, (Skeleton) entityIn,
-          new WitherSkeleton(EntityType.WITHER_SKELETON, worldIn));
+      replaceMob(
+          worldIn, (Skeleton) entityIn, new WitherSkeleton(EntityType.WITHER_SKELETON, worldIn));
     }
 
     if (entityIn instanceof Creeper && !((Creeper) entityIn).isPowered()) {
@@ -66,8 +68,7 @@ public class WitchWaterBlock extends LiquidBlock {
     // TODO Slime
 
     if (entityIn instanceof Spider && !(entityIn instanceof CaveSpider)) {
-      replaceMob(worldIn, (Spider) entityIn,
-          new CaveSpider(EntityType.CAVE_SPIDER, worldIn));
+      replaceMob(worldIn, (Spider) entityIn, new CaveSpider(EntityType.CAVE_SPIDER, worldIn));
     }
 
     if (entityIn instanceof Squid) {
@@ -81,13 +82,12 @@ public class WitchWaterBlock extends LiquidBlock {
       if (profession == VillagerProfession.CLERIC) {
         replaceMob(worldIn, villagerEntity, new Witch(EntityType.WITCH, worldIn));
       } else if (profession == VillagerProfession.BUTCHER) {
-        replaceMob(worldIn, villagerEntity,
-            new Vindicator(EntityType.VINDICATOR, worldIn));
+        replaceMob(worldIn, villagerEntity, new Vindicator(EntityType.VINDICATOR, worldIn));
       } else if (profession == VillagerProfession.LIBRARIAN) {
         replaceMob(worldIn, villagerEntity, new Evoker(EntityType.EVOKER, worldIn));
       } else {
-        ZombieVillager zombieVillagerEntity = new ZombieVillager(
-            EntityType.ZOMBIE_VILLAGER, worldIn);
+        ZombieVillager zombieVillagerEntity =
+            new ZombieVillager(EntityType.ZOMBIE_VILLAGER, worldIn);
         zombieVillagerEntity.setVillagerData(villagerEntity.getVillagerData());
         zombieVillagerEntity.setGossips(
             villagerEntity.getGossips().store(NbtOps.INSTANCE).getValue());
@@ -114,19 +114,19 @@ public class WitchWaterBlock extends LiquidBlock {
     }
   }
 
-  private void applyPotion(@Nonnull final Player entityIn,
-      @Nonnull final MobEffectInstance potionEffect) {
+  private void applyPotion(
+      @Nonnull final Player entityIn, @Nonnull final MobEffectInstance potionEffect) {
     @Nullable final MobEffectInstance currentEffect = entityIn.getEffect(potionEffect.getEffect());
-    if (currentEffect != null
-        && currentEffect.getDuration() <= potionEffect.getDuration() - 20) {
+    if (currentEffect != null && currentEffect.getDuration() <= potionEffect.getDuration() - 20) {
       entityIn.addEffect(potionEffect);
     }
   }
 
-  private void replaceMob(@Nonnull final Level world, @Nonnull final LivingEntity toKill,
+  private void replaceMob(
+      @Nonnull final Level world,
+      @Nonnull final LivingEntity toKill,
       @Nonnull final LivingEntity toSpawn) {
-    toSpawn.moveTo(toKill.getX(), toKill.getY(), toKill.getZ(),
-        toKill.getYRot(), toKill.getXRot());
+    toSpawn.moveTo(toKill.getX(), toKill.getY(), toKill.getZ(), toKill.getYRot(), toKill.getXRot());
     toSpawn.yBodyRot = toKill.yBodyRot;
     toSpawn.setHealth(toSpawn.getMaxHealth() * toKill.getHealth() / toKill.getMaxHealth());
 

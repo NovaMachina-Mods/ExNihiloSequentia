@@ -15,13 +15,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class FluidStackUtils {
 
-  private FluidStackUtils() {
-  }
+  private FluidStackUtils() {}
 
   @Nullable
   public static FluidStack jsonDeserializeFluidStack(@Nonnull final JsonObject jsonObject) {
-    @Nullable final Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(GsonHelper
-        .getAsString(jsonObject, "fluid")));
+    @Nullable
+    final Fluid fluid =
+        ForgeRegistries.FLUIDS.getValue(
+            new ResourceLocation(GsonHelper.getAsString(jsonObject, "fluid")));
     if (fluid == null) {
       return null;
     }
@@ -39,7 +40,8 @@ public class FluidStackUtils {
     }
     JsonObject jsonObject = new JsonObject();
     if (ForgeRegistries.FLUIDS.getKey(fluidStack.getFluid()) != null) {
-      jsonObject.addProperty("fluid", ForgeRegistries.FLUIDS.getKey(fluidStack.getFluid()).toString());
+      jsonObject.addProperty(
+          "fluid", ForgeRegistries.FLUIDS.getKey(fluidStack.getFluid()).toString());
     }
     if (fluidStack.hasTag()) {
       jsonObject.addProperty("tag", fluidStack.getTag().toString());

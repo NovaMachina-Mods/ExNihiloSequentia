@@ -32,23 +32,37 @@ import org.apache.logging.log4j.LogManager;
 public class ExNihiloSerializers {
 
   @Nonnull
-  public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
-      .create(ForgeRegistries.RECIPE_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
+      DeferredRegister.create(
+          ForgeRegistries.RECIPE_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
 
-  public static final RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> HAMMER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new);
-  public static final RegistryObject<ExNihiloRecipeSerializer<CrookRecipe>> CROOK_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("crook", CrookRecipeSerializer::new);
-  public static final RegistryObject<ExNihiloRecipeSerializer<CompostRecipe>> COMPOST_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new);
-  public static final RegistryObject<ExNihiloRecipeSerializer<FluidItemRecipe>> FLUID_ITEM_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new);
-  public static final RegistryObject<ExNihiloRecipeSerializer<FluidOnTopRecipe>> FLUID_ON_TOP_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new);
-  public static final RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>> FLUID_TRANSFORM_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new);
-  public static final RegistryObject<ExNihiloRecipeSerializer<CrucibleRecipe>> CRUCIBLE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("crucible", CrucibleRecipeSerializer::new);
-  public static final RegistryObject<ExNihiloRecipeSerializer<HeatRecipe>> HEAT_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("heat", HeatRecipeSerializer::new);
-  public static final RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>> SIEVE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("sieve", SieveRecipeSerializer::new);
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-  private ExNihiloSerializers() {
-  }
+  public static final RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>>
+      HAMMER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<CrookRecipe>>
+      CROOK_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("crook", CrookRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<CompostRecipe>>
+      COMPOST_RECIPE_SERIALIZER =
+          RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<FluidItemRecipe>>
+      FLUID_ITEM_RECIPE_SERIALIZER =
+          RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<FluidOnTopRecipe>>
+      FLUID_ON_TOP_RECIPE_SERIALIZER =
+          RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<FluidTransformRecipe>>
+      FLUID_TRANSFORM_RECIPE_SERIALIZER =
+          RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<CrucibleRecipe>>
+      CRUCIBLE_RECIPE_SERIALIZER =
+          RECIPE_SERIALIZERS.register("crucible", CrucibleRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<HeatRecipe>> HEAT_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register("heat", HeatRecipeSerializer::new);
+  public static final RegistryObject<ExNihiloRecipeSerializer<SieveRecipe>>
+      SIEVE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("sieve", SieveRecipeSerializer::new);
+
+  private ExNihiloSerializers() {}
 
   public static void init(IEventBus modEventBus) {
     logger.debug("Register recipe serializers");

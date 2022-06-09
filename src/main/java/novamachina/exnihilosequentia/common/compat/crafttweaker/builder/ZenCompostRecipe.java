@@ -1,16 +1,16 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //
-//import com.blamejared.crafttweaker.api.annotation.ZenRegister;
-//import com.blamejared.crafttweaker.api.ingredient.IIngredient;
-//import javax.annotation.Nonnull;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.crafting.Ingredient;
-//import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
-//import org.openzen.zencode.java.ZenCodeType;
+// import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+// import com.blamejared.crafttweaker.api.ingredient.IIngredient;
+// import javax.annotation.Nonnull;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.crafting.Ingredient;
+// import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
+// import org.openzen.zencode.java.ZenCodeType;
 //
-//@ZenRegister
-//@ZenCodeType.Name("mods.exnihilosequentia.ZenCompostRecipe")
-//public class ZenCompostRecipe {
+// @ZenRegister
+// @ZenCodeType.Name("mods.exnihilosequentia.ZenCompostRecipe")
+// public class ZenCompostRecipe {
 //
 //  @Nonnull
 //  private final CompostRecipe internal;
@@ -42,4 +42,4 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //    internal.setInput(input.asVanillaIngredient());
 //    return this;
 //  }
-//}
+// }

@@ -1,24 +1,24 @@
 package novamachina.exnihilosequentia.common.compat.jei.crucible;
 //
-//import javax.annotation.Nonnull;
-//import javax.annotation.Nullable;
-//import mezz.jei.api.forge.ForgeTypes;
-//import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-//import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
-//import mezz.jei.api.gui.drawable.IDrawable;
-//import mezz.jei.api.gui.drawable.IDrawableStatic;
-//import mezz.jei.api.helpers.IGuiHelper;
-//import mezz.jei.api.recipe.IFocusGroup;
-//import mezz.jei.api.recipe.RecipeIngredientRole;
-//import mezz.jei.api.recipe.category.IRecipeCategory;
-//import net.minecraft.network.chat.Component;
-//import net.minecraft.network.chat.TextComponent;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.ItemStack;
-//import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import javax.annotation.Nonnull;
+// import javax.annotation.Nullable;
+// import mezz.jei.api.forge.ForgeTypes;
+// import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+// import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
+// import mezz.jei.api.gui.drawable.IDrawable;
+// import mezz.jei.api.gui.drawable.IDrawableStatic;
+// import mezz.jei.api.helpers.IGuiHelper;
+// import mezz.jei.api.recipe.IFocusGroup;
+// import mezz.jei.api.recipe.RecipeIngredientRole;
+// import mezz.jei.api.recipe.category.IRecipeCategory;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TextComponent;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.ItemStack;
+// import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 //
-//public class CrucibleRecipeCategory implements IRecipeCategory<JEICrucibleRecipe> {
+// public class CrucibleRecipeCategory implements IRecipeCategory<JEICrucibleRecipe> {
 //
 //  @Nonnull
 //  private static final ResourceLocation texture =
@@ -71,7 +71,8 @@ package novamachina.exnihilosequentia.common.compat.jei.crucible;
 //  }
 //
 //  @Override
-//  public void setRecipe(IRecipeLayoutBuilder builder, JEICrucibleRecipe recipe, IFocusGroup focuses) {
+//  public void setRecipe(IRecipeLayoutBuilder builder, JEICrucibleRecipe recipe, IFocusGroup
+// focuses) {
 //    IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 3, 21);
 //    if (recipe.getResultFluid().getAmount() != 1000) {
 //      recipe.getResultFluid().setAmount(1000);
@@ -94,4 +95,4 @@ package novamachina.exnihilosequentia.common.compat.jei.crucible;
 //      }
 //    }
 //  }
-//}
+// }

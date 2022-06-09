@@ -48,8 +48,7 @@ public class PebbleItem extends SnowballItem {
             @Override
             public void onHitEntity(EntityHitResult entityRayTraceResult) {
               @Nonnull final Entity entity = entityRayTraceResult.getEntity();
-              entity.hurt(
-                  DamageSource.thrown(this, this.getOwner()), Config.getPebbleDamage());
+              entity.hurt(DamageSource.thrown(this, this.getOwner()), Config.getPebbleDamage());
             }
           };
       snowball.setItem(itemstack);

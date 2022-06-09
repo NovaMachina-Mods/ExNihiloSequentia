@@ -12,14 +12,13 @@ import novamachina.exnihilotinkers.common.EXNTinkersItemTags;
 import novamachina.exnihilotinkers.common.EXNTinkersLootTables;
 import novamachina.exnihilotinkers.common.EXNTinkersRecipes;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
-//import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
-//import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
+// import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
+// import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EXNTinkersDataGenerators {
 
-  private EXNTinkersDataGenerators() {
-  }
+  private EXNTinkersDataGenerators() {}
 
   @SubscribeEvent
   public static void gatherData(GatherDataEvent event) {
@@ -30,26 +29,32 @@ public class EXNTinkersDataGenerators {
       // Recipes
       generator.addProvider(true, new EXNTinkersRecipes(generator));
       // Tags
-      generator.addProvider(true, new EXNTinkersItemTags(generator, new BlockTagsProvider(generator,
-          EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS, fileHelper), fileHelper));
+      generator.addProvider(
+          true,
+          new EXNTinkersItemTags(
+              generator,
+              new BlockTagsProvider(
+                  generator, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS, fileHelper),
+              fileHelper));
       // LootTables
       generator.addProvider(true, new EXNTinkersLootTables(generator));
-      //TODO reanable when tinkers available for 1.18.2
-      //Tinkers Tool Recipe
-      //generator.addProvider(new EXNTinkersToolRecipes(generator));
-      ////Tinkers Tool Definition
-      //generator.addProvider(new EXNTinkersToolDefinitions(generator));
-      ////Tinkers Station Slot Layout
-      //generator.addProvider(new EXNTinkersStationSlotLayout(generator));
+      // TODO reanable when tinkers available for 1.18.2
+      // Tinkers Tool Recipe
+      // generator.addProvider(new EXNTinkersToolRecipes(generator));
+      //// Tinkers Tool Definition
+      // generator.addProvider(new EXNTinkersToolDefinitions(generator));
+      //// Tinkers Station Slot Layout
+      // generator.addProvider(new EXNTinkersStationSlotLayout(generator));
     }
     if (event.includeClient()) {
       // BlockStates
       generator.addProvider(true, new EXNTinkersBlockStates(generator, fileHelper));
       // Items
       generator.addProvider(true, new EXNTinkersOreItems(generator, fileHelper));
-      //TODO reanable when tinkers available for 1.18.2
-      //TinkerMaterialSpriteProvider materialSprites = new TinkerMaterialSpriteProvider();
-      //generator.addProvider(new MaterialPartTextureGenerator(generator, fileHelper, new EXNTinkersPartSprites(), materialSprites));
+      // TODO reanable when tinkers available for 1.18.2
+      // TinkerMaterialSpriteProvider materialSprites = new TinkerMaterialSpriteProvider();
+      // generator.addProvider(new MaterialPartTextureGenerator(generator, fileHelper, new
+      // EXNTinkersPartSprites(), materialSprites));
     }
   }
 }

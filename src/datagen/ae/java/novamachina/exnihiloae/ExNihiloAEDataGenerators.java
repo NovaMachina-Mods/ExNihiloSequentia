@@ -11,8 +11,7 @@ import novamachina.exnihiloae.common.ExNihiloAERecipes;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ExNihiloAEDataGenerators {
 
-  private ExNihiloAEDataGenerators() {
-  }
+  private ExNihiloAEDataGenerators() {}
 
   @SubscribeEvent
   public static void gatherData(GatherDataEvent event) {
@@ -26,7 +25,8 @@ public class ExNihiloAEDataGenerators {
     }
     if (event.includeClient()) {
       // BlockStates
-      generator.addProvider(true, new ExNihiloAEBlockStates(generator, event.getExistingFileHelper()));
+      generator.addProvider(
+          true, new ExNihiloAEBlockStates(generator, event.getExistingFileHelper()));
     }
   }
 }

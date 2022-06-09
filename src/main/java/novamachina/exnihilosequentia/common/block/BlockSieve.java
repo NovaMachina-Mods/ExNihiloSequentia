@@ -3,12 +3,13 @@ package novamachina.exnihilosequentia.common.block;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-//import mcjty.theoneprobe.api.IProbeHitData;
-//import mcjty.theoneprobe.api.IProbeInfo;
-//import mcjty.theoneprobe.api.ProbeMode;
+ import mcjty.theoneprobe.api.IProbeHitData;
+ import mcjty.theoneprobe.api.IProbeInfo;
+ import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,7 +36,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import novamachina.exnihilosequentia.common.blockentity.SieveEntity;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
-//import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.item.MeshItem;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
@@ -45,7 +46,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 import org.apache.logging.log4j.LogManager;
 
-public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock { //, ITOPInfoProvider {
+public class BlockSieve extends BaseBlock
+    implements SimpleWaterloggedBlock , ITOPInfoProvider {
 
   @Nonnull
   public static final EnumProperty<MeshType> MESH = EnumProperty.create("mesh", MeshType.class);
@@ -88,48 +90,50 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock { //
     worldIn.sendBlockUpdated(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
   }
 
-//  @Override
-//  public void addProbeInfo(
-//      @Nonnull final ProbeMode probeMode,
-//      @Nonnull final IProbeInfo iProbeInfo,
-//      @Nonnull final Player playerEntity,
-//      @Nonnull final Level world,
-//      @Nonnull final BlockState blockState,
-//      @Nonnull final IProbeHitData iProbeHitData) {
-//    @Nullable
-//    final SieveEntity sieveEntity = (SieveEntity) world.getBlockEntity(iProbeHitData.getPos());
-//    if (sieveEntity == null) {
-//      return;
-//    }
-//    if (!sieveEntity.getBlockStack().isEmpty()) {
-//      if (probeMode == ProbeMode.EXTENDED) {
-//        iProbeInfo.text(
-//            new TranslatableComponent(
-//                "waila.progress", StringUtils.formatPercent(sieveEntity.getProgress())));
-//      }
-//      iProbeInfo.text(
-//          new TranslatableComponent(
-//              "waila.sieve.block",
-//              new TranslatableComponent(sieveEntity.getBlockStack().getDescriptionId())));
-//    }
-//    if (sieveEntity.getMeshType() != MeshType.NONE) {
-//      iProbeInfo.text(
-//          new TranslatableComponent(
-//              "waila.sieve.mesh",
-//              new TranslatableComponent(
-//                  "item."
-//                      + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA
-//                      + "."
-//                      + sieveEntity.getMeshType().getMeshName())));
-//    }
-//  }
+    @Override
+    public void addProbeInfo(
+        @Nonnull final ProbeMode probeMode,
+        @Nonnull final IProbeInfo iProbeInfo,
+        @Nonnull final Player playerEntity,
+        @Nonnull final Level world,
+        @Nonnull final BlockState blockState,
+        @Nonnull final IProbeHitData iProbeHitData) {
+      @Nullable
+      final SieveEntity sieveEntity = (SieveEntity) world.getBlockEntity(iProbeHitData.getPos());
+      if (sieveEntity == null) {
+        return;
+      }
+      if (!sieveEntity.getBlockStack().isEmpty()) {
+        if (probeMode == ProbeMode.EXTENDED) {
+          iProbeInfo.text(
+              Component.translatable(
+                  "waila.progress", StringUtils.formatPercent(sieveEntity.getProgress())));
+        }
+        iProbeInfo.text(
+            Component.translatable(
+                "waila.sieve.block",
+                Component.translatable(sieveEntity.getBlockStack().getDescriptionId())));
+      }
+      if (sieveEntity.getMeshType() != MeshType.NONE) {
+        iProbeInfo.text(
+            Component.translatable(
+                "waila.sieve.mesh",
+                Component.translatable(
+                    "item."
+                        + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA
+                        + "."
+                        + sieveEntity.getMeshType().getMeshName())));
+      }
+    }
 
   @Override
   protected void createBlockStateDefinition(@Nonnull final Builder<Block, BlockState> builder) {
     builder.add(MESH, WATERLOGGED);
   }
 
-  /** @deprecated Ask Mojang */
+  /**
+   * @deprecated Ask Mojang
+   */
   @Nonnull
   @Deprecated(forRemoval = false)
   @Override
@@ -163,11 +167,10 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock { //
   }
 
   /**
-   *
    * @deprecated Ask Mojang
    */
   @OnlyIn(Dist.CLIENT)
-  @Deprecated (forRemoval = false)
+  @Deprecated(forRemoval = false)
   @Override
   public float getShadeBrightness(
       @Nonnull final BlockState state,
@@ -231,7 +234,9 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock { //
     }
   }
 
-  /** @deprecated Ask Mojang */
+  /**
+   * @deprecated Ask Mojang
+   */
   @Nonnull
   @Deprecated(forRemoval = false)
   @Override
@@ -248,7 +253,9 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock { //
     return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
   }
 
-  /** @deprecated Ask Mojang */
+  /**
+   * @deprecated Ask Mojang
+   */
   @Nonnull
   @Deprecated(forRemoval = false)
   @Override

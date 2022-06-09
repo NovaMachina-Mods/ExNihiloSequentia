@@ -737,7 +737,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
           .save(consumer, createSaveLocation(cryingObsidianResourceLocation));
     }
     @Nullable
-    final ResourceLocation ancientDebrisResourceLocation = ForgeRegistries.BLOCKS.getKey(Blocks.ANCIENT_DEBRIS);
+    final ResourceLocation ancientDebrisResourceLocation =
+        ForgeRegistries.BLOCKS.getKey(Blocks.ANCIENT_DEBRIS);
     if (ancientDebrisResourceLocation != null) {
       ShapelessRecipeBuilder.shapeless(Blocks.ANCIENT_DEBRIS)
           .requires(Items.NETHERITE_SCRAP)
@@ -1037,7 +1038,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     getLeavesSaplings()
         .forEach(
             (input, drop) -> {
-              @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(input);
+              @Nullable
+              final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(input);
               if (resourceLocation != null) {
                 if (Objects.equals(
                     ForgeRegistries.BLOCKS.getKey(input), new ResourceLocation("jungle_leaves"))) {

@@ -1,16 +1,16 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //
-//import com.blamejared.crafttweaker.api.annotation.ZenRegister;
-//import javax.annotation.Nonnull;
-//import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.level.block.Block;
-//import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
-//import org.openzen.zencode.java.ZenCodeType;
+// import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+// import javax.annotation.Nonnull;
+// import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.level.block.Block;
+// import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
+// import org.openzen.zencode.java.ZenCodeType;
 //
-//@ZenRegister
-//@ZenCodeType.Name("mods.exnihilosequentia.ZenHeatRecipe")
-//public class ZenHeatRecipe {
+// @ZenRegister
+// @ZenCodeType.Name("mods.exnihilosequentia.ZenHeatRecipe")
+// public class ZenHeatRecipe {
 //
 //  @Nonnull
 //  private final HeatRecipe internal;
@@ -50,4 +50,4 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //    internal.setProperties(properties);
 //    return this;
 //  }
-//}
+// }

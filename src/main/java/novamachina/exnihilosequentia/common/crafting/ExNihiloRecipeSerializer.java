@@ -9,8 +9,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 
-public abstract class ExNihiloRecipeSerializer<R extends Recipe<?>> implements
-    RecipeSerializer<R> {
+public abstract class ExNihiloRecipeSerializer<R extends Recipe<?>> implements RecipeSerializer<R> {
 
   public abstract ItemStack getIcon();
 
@@ -21,8 +20,8 @@ public abstract class ExNihiloRecipeSerializer<R extends Recipe<?>> implements
     return readFromJson(recipeId, json);
   }
 
-  protected abstract R readFromJson(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final JsonObject json);
+  protected abstract R readFromJson(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json);
 
   @Nonnull
   protected ItemStack readOutput(@Nonnull final JsonElement outputObject) {

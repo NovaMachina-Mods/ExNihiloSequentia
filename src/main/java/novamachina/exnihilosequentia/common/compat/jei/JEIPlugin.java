@@ -1,51 +1,52 @@
 package novamachina.exnihilosequentia.common.compat.jei;
 //
-//import java.util.List;
-//import java.util.stream.Collectors;
-//import javax.annotation.Nonnull;
-//import mezz.jei.api.IModPlugin;
-//import mezz.jei.api.JeiPlugin;
-//import mezz.jei.api.helpers.IGuiHelper;
-//import mezz.jei.api.registration.IRecipeCatalystRegistration;
-//import mezz.jei.api.registration.IRecipeCategoryRegistration;
-//import mezz.jei.api.registration.IRecipeRegistration;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.ItemStack;
-//import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
-//import novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipeCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.crucible.JEICrucibleRecipe;
-//import novamachina.exnihilosequentia.common.compat.jei.fluiditem.FluidBlockRecipeCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopRecipeCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipeCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipeCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
-//import novamachina.exnihilosequentia.common.compat.jei.sieve.DrySieveRecipeCategory;
-//import novamachina.exnihilosequentia.common.compat.jei.sieve.WetSieveRecipeCategory;
-//import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
-//import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
-//import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
-//import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
-//import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
-//import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
-//import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
-//import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
-//import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-//import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-//import novamachina.exnihilosequentia.common.item.CrookBaseItem;
-//import novamachina.exnihilosequentia.common.item.HammerBaseItem;
-//import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-//import org.apache.logging.log4j.LogManager;
+// import java.util.List;
+// import java.util.stream.Collectors;
+// import javax.annotation.Nonnull;
+// import mezz.jei.api.IModPlugin;
+// import mezz.jei.api.JeiPlugin;
+// import mezz.jei.api.helpers.IGuiHelper;
+// import mezz.jei.api.registration.IRecipeCatalystRegistration;
+// import mezz.jei.api.registration.IRecipeCategoryRegistration;
+// import mezz.jei.api.registration.IRecipeRegistration;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.ItemStack;
+// import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
+// import novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.crucible.CrucibleRecipeCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.crucible.JEICrucibleRecipe;
+// import novamachina.exnihilosequentia.common.compat.jei.fluiditem.FluidBlockRecipeCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.fluidontop.FluidOnTopRecipeCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.fluidtransform.FluidTransformCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.hammer.HammerRecipeCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.heat.HeatRecipeCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
+// import novamachina.exnihilosequentia.common.compat.jei.sieve.DrySieveRecipeCategory;
+// import novamachina.exnihilosequentia.common.compat.jei.sieve.WetSieveRecipeCategory;
+// import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
+// import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
+// import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
+// import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
+// import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
+// import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
+// import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
+// import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
+// import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+// import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+// import novamachina.exnihilosequentia.common.item.CrookBaseItem;
+// import novamachina.exnihilosequentia.common.item.HammerBaseItem;
+// import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+// import org.apache.logging.log4j.LogManager;
 //
-//@JeiPlugin
-//@SuppressWarnings("unused")
-//public class JEIPlugin implements IModPlugin {
+// @JeiPlugin
+// @SuppressWarnings("unused")
+// public class JEIPlugin implements IModPlugin {
 //
-//  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+//  @Nonnull private static final ExNihiloLogger logger = new
+// ExNihiloLogger(LogManager.getLogger());
 //
 //  @Nonnull
 //  private static final ResourceLocation CRUCIBLES =
@@ -139,7 +140,8 @@ package novamachina.exnihilosequentia.common.compat.jei;
 //        RecipeTypes.CRUCIBLE,
 //        RecipeTypes.HEAT);
 //    registration.addRecipeCatalyst(
-//        new ItemStack(ExNihiloBlocks.CRUCIBLE_BIRCH.get()), RecipeTypes.CRUCIBLE, RecipeTypes.HEAT);
+//        new ItemStack(ExNihiloBlocks.CRUCIBLE_BIRCH.get()), RecipeTypes.CRUCIBLE,
+// RecipeTypes.HEAT);
 //    registration.addRecipeCatalyst(
 //        new ItemStack(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get()),
 //        RecipeTypes.CRUCIBLE,
@@ -304,7 +306,8 @@ package novamachina.exnihilosequentia.common.compat.jei;
 //
 //  private void registerFluidOnTop(@Nonnull final IRecipeRegistration registration) {
 //    @Nonnull
-//    final List<FluidOnTopRecipe> recipes = ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.getRecipeList();
+//    final List<FluidOnTopRecipe> recipes =
+// ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.getRecipeList();
 //    registration.addRecipes(RecipeTypes.FLUID_ON_TOP, recipes);
 //    logger.info("Fluid On Top Recipes Loaded: " + recipes.size());
 //  }
@@ -318,7 +321,8 @@ package novamachina.exnihilosequentia.common.compat.jei;
 //  }
 //
 //  private void registerHammer(@Nonnull final IRecipeRegistration registration) {
-//    @Nonnull final List<HammerRecipe> recipes = ExNihiloRegistries.HAMMER_REGISTRY.getRecipeList();
+//    @Nonnull final List<HammerRecipe> recipes =
+// ExNihiloRegistries.HAMMER_REGISTRY.getRecipeList();
 //    registration.addRecipes(RecipeTypes.HAMMER, recipes);
 //    logger.info("Hammer Recipes Loaded: " + recipes.size());
 //  }
@@ -350,4 +354,4 @@ package novamachina.exnihilosequentia.common.compat.jei;
 //    registration.addRecipes(RecipeTypes.CRUCIBLE, recipes);
 //    logger.info("Wooden Crucible Recipes Loaded: " + recipes.size());
 //  }
-//}
+// }

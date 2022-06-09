@@ -30,15 +30,20 @@ public class BlockBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public InteractionResult onBlockActivated(@Nonnull final AbstractBarrelEntity barrelTile,
-      @Nonnull final Player player, @Nonnull final InteractionHand handIn,
+  public InteractionResult onBlockActivated(
+      @Nonnull final AbstractBarrelEntity barrelTile,
+      @Nonnull final Player player,
+      @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
       @Nonnull final IItemHandler itemHandler) {
     @Nullable final Level world = barrelTile.getLevel();
     if (world != null) {
       world.addFreshEntity(
-          new ItemEntity(barrelTile.getLevel(), barrelTile.getBlockPos().getX() + 0.5F,
-              barrelTile.getBlockPos().getY() + 0.5F, barrelTile.getBlockPos().getZ() + 0.5F,
+          new ItemEntity(
+              barrelTile.getLevel(),
+              barrelTile.getBlockPos().getX() + 0.5F,
+              barrelTile.getBlockPos().getY() + 0.5F,
+              barrelTile.getBlockPos().getZ() + 0.5F,
               new ItemStack(barrelTile.getInventory().getStackInSlot(0).getItem())));
     }
     barrelTile.getInventory().setStackInSlot(0, ItemStack.EMPTY);
@@ -82,15 +87,19 @@ public class BlockBarrelMode extends AbstractBarrelMode {
   public List<Component> getWailaInfo(@Nonnull final AbstractBarrelEntity barrelTile) {
     @Nullable final List<Component> info = new ArrayList<>();
 
-    info.add(Component.translatable("waila.barrel.block",
-        Component.translatable(barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
+    info.add(
+        Component.translatable(
+            "waila.barrel.block",
+            Component.translatable(
+                barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
 
     return info;
   }
 
   @Override
   @Nonnull
-  public ItemStack handleInsert(@Nonnull final AbstractBarrelEntity barrelTile,
+  public ItemStack handleInsert(
+      @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemStack stack,
       final boolean simulate) {
     return stack;

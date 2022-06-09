@@ -37,8 +37,8 @@ public class HammerRecipeBuilder extends ExNihiloFinishedRecipe<HammerRecipeBuil
   }
 
   @Nonnull
-  public HammerRecipeBuilder addDrop(@Nonnull final ItemLike drop, final int count,
-      final float chance) {
+  public HammerRecipeBuilder addDrop(
+      @Nonnull final ItemLike drop, final int count, final float chance) {
     return this.addResult(new ItemStackWithChance(new ItemStack(drop, count), chance));
   }
 

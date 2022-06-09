@@ -109,11 +109,13 @@ public class UseCrookModifier extends LootModifier {
               .filter(
                   drop -> {
                     @Nullable
-                    final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(drop.getItem());
+                    final ResourceLocation resourceLocation =
+                        ForgeRegistries.ITEMS.getKey(drop.getItem());
                     if (resourceLocation == null) {
                       return false;
                     }
-                    return !resourceLocation.equals(ForgeRegistries.BLOCKS.getKey(blockState.getBlock()));
+                    return !resourceLocation.equals(
+                        ForgeRegistries.BLOCKS.getKey(blockState.getBlock()));
                   })
               .toList());
     }

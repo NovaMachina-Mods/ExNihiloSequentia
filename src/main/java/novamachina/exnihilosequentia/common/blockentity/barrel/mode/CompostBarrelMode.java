@@ -35,16 +35,17 @@ public class CompostBarrelMode extends AbstractBarrelMode {
   @Override
   public void tick(@Nonnull final AbstractBarrelEntity barrelTile) {
     if (barrelTile.getSolidAmount() >= AbstractBarrelEntity.MAX_SOLID_AMOUNT
-        && barrelTile.getInventory()
-        .getStackInSlot(0)
-        .isEmpty()) {
+        && barrelTile.getInventory().getStackInSlot(0).isEmpty()) {
       currentProgress++;
       spawnParticle(barrelTile);
       if (currentProgress >= Config.getSecondsToCompost() * 20) {
         currentProgress = 0;
-        barrelTile.getInventory()
-            .setStackInSlot(0,
-                new ItemStack(ForgeRegistries.BLOCKS.getValue(ForgeRegistries.BLOCKS.getKey(Blocks.DIRT))));
+        barrelTile
+            .getInventory()
+            .setStackInSlot(
+                0,
+                new ItemStack(
+                    ForgeRegistries.BLOCKS.getValue(ForgeRegistries.BLOCKS.getKey(Blocks.DIRT))));
         barrelTile.removeSolid(barrelTile.getSolidAmount());
         barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
       }
@@ -53,14 +54,17 @@ public class CompostBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public InteractionResult onBlockActivated(@Nonnull final AbstractBarrelEntity barrelTile,
-      @Nonnull final Player player, @Nonnull final InteractionHand handIn,
+  public InteractionResult onBlockActivated(
+      @Nonnull final AbstractBarrelEntity barrelTile,
+      @Nonnull final Player player,
+      @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
       @Nonnull final IItemHandler itemHandler) {
     if (ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(player.getItemInHand(handIn).getItem())
-        && barrelTile
-        .addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(
-            player.getItemInHand(handIn).getItem()), false)) {
+        && barrelTile.addSolid(
+            ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(
+                player.getItemInHand(handIn).getItem()),
+            false)) {
       player.getItemInHand(handIn).shrink(1);
     }
 
@@ -101,7 +105,8 @@ public class CompostBarrelMode extends AbstractBarrelMode {
     if (Config.getShowParticles()) {
       @Nullable final ServerLevel level = (ServerLevel) barrelTile.getLevel();
       Preconditions.checkNotNull(level, "Level is null.");
-      level.sendParticles(ParticleTypes.ASH,
+      level.sendParticles(
+          ParticleTypes.ASH,
           barrelTile.getBlockPos().getX() + (.2d + (.8d - .2d) * level.random.nextDouble()),
           barrelTile.getBlockPos().getY() + 1.2d,
           barrelTile.getBlockPos().getZ() + (.2d + (.8d - .2d) * level.random.nextDouble()),
@@ -118,22 +123,29 @@ public class CompostBarrelMode extends AbstractBarrelMode {
   public List<Component> getWailaInfo(@Nonnull final AbstractBarrelEntity barrelTile) {
     @Nonnull final List<Component> info = new ArrayList<>();
     if (currentProgress <= 0) {
-      info.add(Component.translatable("waila.barrel.compost", barrelTile
-          .getSolidAmount(), AbstractBarrelEntity.MAX_SOLID_AMOUNT));
+      info.add(
+          Component.translatable(
+              "waila.barrel.compost",
+              barrelTile.getSolidAmount(),
+              AbstractBarrelEntity.MAX_SOLID_AMOUNT));
     } else {
-      info.add(Component.translatable("waila.progress", StringUtils
-          .formatPercent((float) currentProgress / (Config.getSecondsToCompost() * 20))));
+      info.add(
+          Component.translatable(
+              "waila.progress",
+              StringUtils.formatPercent(
+                  (float) currentProgress / (Config.getSecondsToCompost() * 20))));
     }
     return info;
   }
 
   @Override
   @Nonnull
-  public ItemStack handleInsert(@Nonnull final AbstractBarrelEntity barrelTile,
+  public ItemStack handleInsert(
+      @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemStack stack,
       final boolean simulate) {
-    if (barrelTile.addSolid(ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(stack.getItem()),
-        simulate)) {
+    if (barrelTile.addSolid(
+        ExNihiloRegistries.COMPOST_REGISTRY.getSolidAmount(stack.getItem()), simulate)) {
       @Nonnull final ItemStack returnStack = stack.copy();
       returnStack.shrink(1);
       return returnStack;

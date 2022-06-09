@@ -3,7 +3,6 @@ package novamachina.exnihilosequentia.common.loot.modifier;
 import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
@@ -21,7 +20,6 @@ import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
-import org.jetbrains.annotations.NotNull;
 
 public class UseHammerModifier extends LootModifier {
 

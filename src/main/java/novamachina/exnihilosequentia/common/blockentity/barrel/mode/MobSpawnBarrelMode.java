@@ -26,13 +26,10 @@ import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
-  @Nonnull
-  private static final String CURRENT_PROGRESS_TAG = "currentProgress";
-  @Nonnull
-  private static final String DOLL_TYPE_TAG = "dollType";
+  @Nonnull private static final String CURRENT_PROGRESS_TAG = "currentProgress";
+  @Nonnull private static final String DOLL_TYPE_TAG = "dollType";
   private int currentProgress;
-  @Nullable
-  private DollItem doll;
+  @Nullable private DollItem doll;
 
   public MobSpawnBarrelMode(@Nonnull final String name) {
     super(name);
@@ -60,8 +57,10 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public InteractionResult onBlockActivated(@Nonnull final AbstractBarrelEntity barrelTile,
-      @Nonnull final Player player, @Nonnull final InteractionHand handIn,
+  public InteractionResult onBlockActivated(
+      @Nonnull final AbstractBarrelEntity barrelTile,
+      @Nonnull final Player player,
+      @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
       @Nonnull final IItemHandler itemHandler) {
     return InteractionResult.SUCCESS;
@@ -90,8 +89,9 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
       this.currentProgress = 0;
     }
     if (nbt.contains(DOLL_TYPE_TAG)) {
-      doll = (DollItem) ForgeRegistries.ITEMS.getValue(
-          new ResourceLocation(nbt.getString(DOLL_TYPE_TAG)));
+      doll =
+          (DollItem)
+              ForgeRegistries.ITEMS.getValue(new ResourceLocation(nbt.getString(DOLL_TYPE_TAG)));
     } else {
       doll = null;
     }
@@ -116,7 +116,8 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
       return;
     }
     ((ServerLevel) world)
-        .sendParticles(ParticleTypes.LARGE_SMOKE,
+        .sendParticles(
+            ParticleTypes.LARGE_SMOKE,
             barrelTile.getBlockPos().getX() + barrelTile.getLevel().random.nextDouble(),
             barrelTile.getBlockPos().getY() + barrelTile.getLevel().random.nextDouble(),
             barrelTile.getBlockPos().getZ() + barrelTile.getLevel().random.nextDouble(),
@@ -132,15 +133,19 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
   public List<Component> getWailaInfo(@Nonnull final AbstractBarrelEntity barrelTile) {
     @Nonnull final List<Component> info = new ArrayList<>();
 
-    info.add(Component.translatable("waila.progress", StringUtils
-        .formatPercent((float) currentProgress / (Config.getSecondsToSpawn() * 20))));
+    info.add(
+        Component.translatable(
+            "waila.progress",
+            StringUtils.formatPercent(
+                (float) currentProgress / (Config.getSecondsToSpawn() * 20))));
 
     return info;
   }
 
   @Override
   @Nonnull
-  public ItemStack handleInsert(@Nonnull final AbstractBarrelEntity barrelTile,
+  public ItemStack handleInsert(
+      @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemStack stack,
       boolean simulate) {
     return stack;

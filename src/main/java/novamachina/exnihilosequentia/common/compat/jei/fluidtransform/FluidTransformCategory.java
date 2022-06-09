@@ -1,22 +1,22 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidtransform;
 //
-//import javax.annotation.Nonnull;
-//import javax.annotation.Nullable;
-//import mezz.jei.api.forge.ForgeTypes;
-//import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-//import mezz.jei.api.gui.drawable.IDrawable;
-//import mezz.jei.api.gui.drawable.IDrawableStatic;
-//import mezz.jei.api.helpers.IGuiHelper;
-//import mezz.jei.api.recipe.IFocusGroup;
-//import mezz.jei.api.recipe.RecipeIngredientRole;
-//import mezz.jei.api.recipe.category.IRecipeCategory;
-//import net.minecraft.network.chat.Component;
-//import net.minecraft.network.chat.TextComponent;
-//import net.minecraft.resources.ResourceLocation;
-//import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import javax.annotation.Nonnull;
+// import javax.annotation.Nullable;
+// import mezz.jei.api.forge.ForgeTypes;
+// import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+// import mezz.jei.api.gui.drawable.IDrawable;
+// import mezz.jei.api.gui.drawable.IDrawableStatic;
+// import mezz.jei.api.helpers.IGuiHelper;
+// import mezz.jei.api.recipe.IFocusGroup;
+// import mezz.jei.api.recipe.RecipeIngredientRole;
+// import mezz.jei.api.recipe.category.IRecipeCategory;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TextComponent;
+// import net.minecraft.resources.ResourceLocation;
+// import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 //
-//public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
+// public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
 //
 //  @Nonnull
 //  public static final ResourceLocation UID =
@@ -74,4 +74,4 @@ package novamachina.exnihilosequentia.common.compat.jei.fluidtransform;
 //        .addSlot(RecipeIngredientRole.OUTPUT, 102, 10)
 //        .addIngredient(ForgeTypes.FLUID_STACK, recipe.getResult());
 //  }
-//}
+// }

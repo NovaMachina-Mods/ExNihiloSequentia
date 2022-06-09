@@ -14,32 +14,35 @@ import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloHandshakeHandler {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
-  private ExNihiloHandshakeHandler() {
-  }
+  private ExNihiloHandshakeHandler() {}
 
-  public static void handleAcknowledge(@Nonnull final HandshakeMessages.C2SAcknowledge message,
+  public static void handleAcknowledge(
+      @Nonnull final HandshakeMessages.C2SAcknowledge message,
       @Nonnull final Supplier<NetworkEvent.Context> ctx) {
     logger.debug("Received acknowledgement from client. " + message);
     ctx.get().setPacketHandled(true);
   }
 
-  public static void handleOreList(@Nonnull final HandshakeMessages.S2COreList msg,
-      @Nonnull final Supplier<NetworkEvent.Context> ctx) throws InterruptedException {
+  public static void handleOreList(
+      @Nonnull final HandshakeMessages.S2COreList msg,
+      @Nonnull final Supplier<NetworkEvent.Context> ctx)
+      throws InterruptedException {
     logger.debug("Recieved ore data from server");
 
     @Nonnull final AtomicBoolean updatedOreList = new AtomicBoolean(false);
     @Nonnull final CountDownLatch block = new CountDownLatch(1);
-    ctx.get().enqueueWork(() -> {
-      updatedOreList.set(true);
+    ctx.get()
+        .enqueueWork(
+            () -> {
+              updatedOreList.set(true);
 
-      if (!Ore.updateEnabledOres(msg)) {
-        updatedOreList.set(false);
-      }
-      block.countDown();
-    });
+              if (!Ore.updateEnabledOres(msg)) {
+                updatedOreList.set(false);
+              }
+              block.countDown();
+            });
 
     try {
       block.await();
@@ -60,8 +63,11 @@ public class ExNihiloHandshakeHandler {
       }
     } else {
       logger.debug("Failed to synchronize ore list from server.");
-      ctx.get().getNetworkManager().disconnect(Component.literal(
-          "Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));
+      ctx.get()
+          .getNetworkManager()
+          .disconnect(
+              Component.literal(
+                  "Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));
     }
   }
 }

@@ -45,32 +45,25 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
   public static final int MAX_FLUID_AMOUNT =
       Config.getBarrelNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
   public static final int MAX_SOLID_AMOUNT = Config.getBarrelMaxSolidAmount();
-  @Nonnull
-  private static final String INVENTORY_TAG = "inventory";
-  @Nonnull
-  private static final String MODE_INFO_TAG = "modeInfo";
-  @Nonnull
-  private static final String MODE_TAG = "barrelMode";
-  @Nonnull
-  private static final String SOLID_AMOUNT_TAG = "solidAmount";
-  @Nonnull
-  private static final String TANK_TAG = "tank";
-  @Nonnull
-  private final BarrelInventoryHandler inventory = new BarrelInventoryHandler(this);
+  @Nonnull private static final String INVENTORY_TAG = "inventory";
+  @Nonnull private static final String MODE_INFO_TAG = "modeInfo";
+  @Nonnull private static final String MODE_TAG = "barrelMode";
+  @Nonnull private static final String SOLID_AMOUNT_TAG = "solidAmount";
+  @Nonnull private static final String TANK_TAG = "tank";
+  @Nonnull private final BarrelInventoryHandler inventory = new BarrelInventoryHandler(this);
+
   @Nonnull
   private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
-  @Nonnull
-  private final BarrelFluidHandler tank = new BarrelFluidHandler(this);
-  @Nonnull
-  private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
-  @Nullable
-  private AbstractBarrelTileState lastSyncedState = null;
-  @Nullable
-  private AbstractBarrelMode mode;
+
+  @Nonnull private final BarrelFluidHandler tank = new BarrelFluidHandler(this);
+  @Nonnull private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
+  @Nullable private AbstractBarrelTileState lastSyncedState = null;
+  @Nullable private AbstractBarrelMode mode;
   private int solidAmount = 0;
 
   protected AbstractBarrelEntity(
-      @Nonnull final BlockEntityType<? extends AbstractBarrelEntity> tileEntityType, BlockPos pos,
+      @Nonnull final BlockEntityType<? extends AbstractBarrelEntity> tileEntityType,
+      BlockPos pos,
       BlockState state) {
     super(tileEntityType, pos, state);
     this.mode = BarrelModeRegistry.getModeFromName(ExNihiloConstants.BarrelModes.EMPTY);
@@ -96,8 +89,8 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
 
   @Nonnull
   @Override
-  public <T> LazyOptional<T> getCapability(@Nonnull final Capability<T> cap,
-      @Nullable final Direction side) {
+  public <T> LazyOptional<T> getCapability(
+      @Nonnull final Capability<T> cap, @Nullable final Direction side) {
     if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
       return inventoryHolder.cast();
     }
@@ -209,7 +202,8 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
   }
 
   @Nullable
-  public InteractionResult onBlockActivated(@Nonnull final Player player,
+  public InteractionResult onBlockActivated(
+      @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
       @Nonnull final IItemHandler itemHandler) {
@@ -220,8 +214,8 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
   }
 
   @Override
-  public void onDataPacket(@Nonnull final Connection net,
-      @Nonnull final ClientboundBlockEntityDataPacket pkt) {
+  public void onDataPacket(
+      @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket pkt) {
     @Nonnull final CompoundTag nbt = pkt.getTag();
     if (nbt.contains(INVENTORY_TAG)) {
       inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
@@ -286,14 +280,11 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
 
   protected static class AbstractBarrelTileState {
 
-    @Nullable
-    private final Fluid fluid;
+    @Nullable private final Fluid fluid;
     private final int fluidAmount;
-    @Nonnull
-    private final Item solid;
+    @Nonnull private final Item solid;
     private final int solidAmount;
-    @Nonnull
-    private final List<Component> wailaInfo;
+    @Nonnull private final List<Component> wailaInfo;
 
     AbstractBarrelTileState(@Nonnull final AbstractBarrelEntity abstractBarrelEntity) {
       fluid = abstractBarrelEntity.getFluid();

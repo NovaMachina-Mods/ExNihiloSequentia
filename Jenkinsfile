@@ -79,84 +79,84 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Packages') {
-            when {
-                branch '1.18'
-            }
-            parallel {
-                stage('AE') {
-                    when {
-                        expression {
-                            env.DEPLOY_AE == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew curseforge428204 publishAePublicationToMavenRepository'
-                        }
-                    }
-                }
-                stage('API') {
-                    when {
-                        expression {
-                            env.DEPLOY_API == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew publishApiPublicationToMavenRepository'
-                        }
-                    }
-                }
-                stage('Main') {
-                    when {
-                        expression {
-                            env.DEPLOY_MAIN == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
-                        }
-                    }
-                }
-                stage('Mekanism') {
-                    when {
-                        expression {
-                            env.DEPLOY_MEKANISM == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew curseforge430787 publishMekanismPublicationToMavenRepository'
-                        }
-                    }
-                }
-                stage('Thermal') {
-                    when {
-                        expression {
-                            env.DEPLOY_THERMAL == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew curseforge445226 publishThermalPublicationToMavenRepository'
-                        }
-                    }
-                }
-//                 stage('Tinkers') {
+//         stage('Deploy Packages') {
+//             when {
+//                 branch '1.19'
+//             }
+//             parallel {
+//                 stage('AE') {
 //                     when {
 //                         expression {
-//                             env.DEPLOY_TINKERS == 'true'
+//                             env.DEPLOY_AE == 'true'
 //                         }
 //                     }
 //                     steps {
 //                         withGradle {
-//                             sh './gradlew curseforge480856 publishTinkersPublicationToMavenRepository'
+//                             sh './gradlew curseforge428204 publishAePublicationToMavenRepository'
 //                         }
 //                     }
 //                 }
-            }
+//                 stage('API') {
+//                     when {
+//                         expression {
+//                             env.DEPLOY_API == 'true'
+//                         }
+//                     }
+//                     steps {
+//                         withGradle {
+//                             sh './gradlew publishApiPublicationToMavenRepository'
+//                         }
+//                     }
+//                 }
+//                 stage('Main') {
+//                     when {
+//                         expression {
+//                             env.DEPLOY_MAIN == 'true'
+//                         }
+//                     }
+//                     steps {
+//                         withGradle {
+//                             sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
+//                         }
+//                     }
+//                 }
+//                 stage('Mekanism') {
+//                     when {
+//                         expression {
+//                             env.DEPLOY_MEKANISM == 'true'
+//                         }
+//                     }
+//                     steps {
+//                         withGradle {
+//                             sh './gradlew curseforge430787 publishMekanismPublicationToMavenRepository'
+//                         }
+//                     }
+//                 }
+//                 stage('Thermal') {
+//                     when {
+//                         expression {
+//                             env.DEPLOY_THERMAL == 'true'
+//                         }
+//                     }
+//                     steps {
+//                         withGradle {
+//                             sh './gradlew curseforge445226 publishThermalPublicationToMavenRepository'
+//                         }
+//                     }
+//                 }
+// //                 stage('Tinkers') {
+// //                     when {
+// //                         expression {
+// //                             env.DEPLOY_TINKERS == 'true'
+// //                         }
+// //                     }
+// //                     steps {
+// //                         withGradle {
+// //                             sh './gradlew curseforge480856 publishTinkersPublicationToMavenRepository'
+// //                         }
+// //                     }
+// //                 }
+//             }
         }
     }
 }

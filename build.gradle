@@ -7,22 +7,12 @@ buildscript {
             name 'thiakil'
             url "https://maven.thiakil.com"
         }
-        maven {
-            name "forge"
-            url "https://maven.minecraftforge.net/"
-        }
-        maven {
-            name 'parchment'
-            url 'https://maven.parchmentmc.org'
-        }
-    }
-    dependencies {
-        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 
 plugins {
     id 'net.minecraftforge.gradle' version '5.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.ajoberstar.grgit' version '4.1.1'
     id "com.matthewprenger.cursegradle" version '1.4.0'
     id 'java'
@@ -51,10 +41,10 @@ spotless {
         indentWithSpaces(2)
         endWithNewline()
     }
-//    java {
-//        removeUnusedImports()
-//        googleJavaFormat()
-//    }
+    java {
+        removeUnusedImports()
+        googleJavaFormat()
+    }
 }
 
 wrapper {
@@ -190,7 +180,7 @@ static void extendConfigurations(Configuration base, Configuration... configurat
 }
 
 group = "novamachina."
-version = "${minecraft_version}-" + new Date().format("yyyyMMdd-HHmmss")
+version = "${minecraft_version}-" + new Date().format("yyyy.MM.dd-HH.mm.ss") + (project.property('curse_release_type') != 'release' ? "-${project.property('curse_release_type')}" : '')
 //        "${mod_version}." + (System.env.BUILD_NUMBER ?: "homebaked")
 archivesBaseName = "${artifact_basename}"
 
@@ -487,20 +477,28 @@ dependencies {
 
     compileOnly "org.jetbrains:annotations:${jb_annotations}"
 
-//    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+    if(project.hasProperty('jei_version')) {
+        compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+        runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+    }
 
-//    compileOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraft_release}-${top_version}:api") {
-//        transitive = false
-//    }
-//    runtimeOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraft_release}-${top_version}") {
-//        transitive = false
-//    }
+    if(project.hasProperty('top_version')) {
+        compileOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraft_release}-${top_version}:api") {
+            transitive = false
+        }
+        runtimeOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraft_release}-${top_version}") {
+            transitive = false
+        }
+    }
 
-//    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
-//    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+    if(project.hasProperty('jade_id') && project.hasProperty('jade_api_id')) {
+        compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
+        runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+    }
 
-//    implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+    if(project.hasProperty('crafttweaker_version')) {
+        implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+    }
 
     if (project.hasProperty('ae2_version')) {
         implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
@@ -1082,6 +1080,10 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
     curseforge {
         apiKey = System.getenv("CURSEFORGE_KEY") ?: project.findProperty("curseforgeKey")
 
+        options {
+            debug = true
+        }
+
         def resolvedChangelog = null
 
         // closure to generate the changelog once, and only when needed by CurseGradle
@@ -1127,8 +1129,14 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
             if (curse_release_type == "alpha") {
                 // Add a warning at the top about what an alpha build means
                 generatedChangelog = "Warning: Ex Nihilo: Sequentia is currently in alpha, and is not recommended for widespread use in modpacks. There are likely to be game breaking bugs, " +
-                        "and updating from one alpha to the next may cause various Ex Nihilo: Sequentia blocks to disappear/void their contents. While we will try to not have this happen/keep " +
-                        "it to a minimum make sure to make backups. <br> $generatedChangelog"
+                        "and updating from one alpha to the next may cause various Ex Nihilo: Sequentia blocks and items to disappear/void their contents. While we will try to not have this " +
+                        "happen/keep it to a minimum make sure to make backups. <br> $generatedChangelog"
+            }
+            if (curse_release_type == "beta") {
+                // Add a warning at the top about what an beta build means
+                generatedChangelog = "Warning: Ex Nihilo: Sequentia is currently in beta, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
+                        "and updating from one beta to the next may cause various Ex Nihilo: Sequentia blocks and items to disappear/void their contents. " +
+                        "While this is unlikely to happen in a beta, make sure to make backups. <br> $generatedChangelog"
             }
             resolvedChangelog = generatedChangelog
             return generatedChangelog

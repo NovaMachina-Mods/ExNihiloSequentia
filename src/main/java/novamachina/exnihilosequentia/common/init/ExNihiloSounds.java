@@ -11,14 +11,17 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public class ExNihiloSounds {
 
-  private static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(
-      ForgeRegistries.SOUND_EVENTS, ModIds.EX_NIHILO_SEQUENTIA);
-  public static final RegistryObject<SoundEvent> PEBBLE_THROW = SOUND_EVENTS.register(
-      "pebble_throw", () -> new SoundEvent(new ResourceLocation(
-          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "pebble_throw")));
+  private static final DeferredRegister<SoundEvent> SOUND_EVENTS =
+      DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ModIds.EX_NIHILO_SEQUENTIA);
+  public static final RegistryObject<SoundEvent> PEBBLE_THROW =
+      SOUND_EVENTS.register(
+          "pebble_throw",
+          () ->
+              new SoundEvent(
+                  new ResourceLocation(
+                      ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "pebble_throw")));
 
-  private ExNihiloSounds() {
-  }
+  private ExNihiloSounds() {}
 
   public static void init(IEventBus modEventBus) {
     SOUND_EVENTS.register(modEventBus);

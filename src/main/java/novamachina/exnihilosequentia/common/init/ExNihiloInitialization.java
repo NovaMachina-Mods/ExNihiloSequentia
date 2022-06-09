@@ -24,7 +24,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,10 +32,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.registries.ObjectHolder;
 import novamachina.exnihilosequentia.common.blockentity.barrel.mode.BarrelModeRegistry;
-//import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
@@ -121,7 +118,7 @@ public class ExNihiloInitialization {
   public static void registerTOP(@Nonnull final InterModEnqueueEvent event) {
     logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
     if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
-//      CompatTOP.register();
+            CompatTOP.register();
     }
   }
 
@@ -219,13 +216,19 @@ public class ExNihiloInitialization {
     ExNihiloRegistries.COMPOST_REGISTRY.setRecipes(
         filterRecipes(recipes, CompostRecipe.class, ExNihiloRecipeTypes.COMPOST_RECIPE_TYPE.get()));
     ExNihiloRegistries.FLUID_BLOCK_REGISTRY.setRecipes(
-        filterRecipes(recipes, FluidItemRecipe.class, ExNihiloRecipeTypes.FLUID_ITEM_RECIPE_TYPE.get()));
+        filterRecipes(
+            recipes, FluidItemRecipe.class, ExNihiloRecipeTypes.FLUID_ITEM_RECIPE_TYPE.get()));
     ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.setRecipes(
-        filterRecipes(recipes, FluidOnTopRecipe.class, ExNihiloRecipeTypes.FLUID_ON_TOP_RECIPE_TYPE.get()));
+        filterRecipes(
+            recipes, FluidOnTopRecipe.class, ExNihiloRecipeTypes.FLUID_ON_TOP_RECIPE_TYPE.get()));
     ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.setRecipes(
-        filterRecipes(recipes, FluidTransformRecipe.class, ExNihiloRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE.get()));
+        filterRecipes(
+            recipes,
+            FluidTransformRecipe.class,
+            ExNihiloRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE.get()));
     ExNihiloRegistries.CRUCIBLE_REGISTRY.setRecipes(
-        filterRecipes(recipes, CrucibleRecipe.class, ExNihiloRecipeTypes.CRUCIBLE_RECIPE_TYPE.get()));
+        filterRecipes(
+            recipes, CrucibleRecipe.class, ExNihiloRecipeTypes.CRUCIBLE_RECIPE_TYPE.get()));
     ExNihiloRegistries.HEAT_REGISTRY.setRecipes(
         filterRecipes(recipes, HeatRecipe.class, ExNihiloRecipeTypes.HEAT_RECIPE_TYPE.get()));
     ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(

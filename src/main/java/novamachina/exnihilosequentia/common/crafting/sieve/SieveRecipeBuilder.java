@@ -9,8 +9,7 @@ import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
 public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilder> {
 
-  @Nonnull
-  private final JsonArray meshArray = new JsonArray();
+  @Nonnull private final JsonArray meshArray = new JsonArray();
 
   private SieveRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions

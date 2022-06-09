@@ -1,19 +1,19 @@
 package novamachina.exnihilosequentia.common.compat.jei.sieve;
 //
-//import javax.annotation.Nonnull;
-//import mezz.jei.api.constants.VanillaTypes;
-//import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-//import mezz.jei.api.gui.drawable.IDrawable;
-//import mezz.jei.api.gui.drawable.IDrawableStatic;
-//import mezz.jei.api.helpers.IGuiHelper;
-//import mezz.jei.api.recipe.IFocusGroup;
-//import mezz.jei.api.recipe.RecipeIngredientRole;
-//import mezz.jei.api.recipe.category.IRecipeCategory;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.ItemStack;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import javax.annotation.Nonnull;
+// import mezz.jei.api.constants.VanillaTypes;
+// import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+// import mezz.jei.api.gui.drawable.IDrawable;
+// import mezz.jei.api.gui.drawable.IDrawableStatic;
+// import mezz.jei.api.helpers.IGuiHelper;
+// import mezz.jei.api.recipe.IFocusGroup;
+// import mezz.jei.api.recipe.RecipeIngredientRole;
+// import mezz.jei.api.recipe.category.IRecipeCategory;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.ItemStack;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 //
-//public abstract class AbstractSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
+// public abstract class AbstractSieveRecipeCategory implements IRecipeCategory<JEISieveRecipe> {
 //
 //  @Nonnull
 //  private static final ResourceLocation texture =
@@ -23,7 +23,8 @@ package novamachina.exnihilosequentia.common.compat.jei.sieve;
 //  @Nonnull private final IDrawableStatic background;
 //  private final boolean isWaterlogged;
 //
-//  protected AbstractSieveRecipeCategory(@Nonnull final IGuiHelper guiHelper, boolean isWaterlogged) {
+//  protected AbstractSieveRecipeCategory(@Nonnull final IGuiHelper guiHelper, boolean
+// isWaterlogged) {
 //    this.background = guiHelper.createDrawable(texture, 0, 0, 166, 58);
 //    this.isWaterlogged = isWaterlogged;
 //  }
@@ -44,7 +45,8 @@ package novamachina.exnihilosequentia.common.compat.jei.sieve;
 //  }
 //
 //  @Override
-//  public void setRecipe(IRecipeLayoutBuilder builder, JEISieveRecipe recipe, IFocusGroup focuses) {
+//  public void setRecipe(IRecipeLayoutBuilder builder, JEISieveRecipe recipe, IFocusGroup focuses)
+// {
 //    builder.addSlot(RecipeIngredientRole.INPUT, 11, 39).addItemStack(recipe.getMesh());
 //    builder
 //        .addSlot(RecipeIngredientRole.INPUT, 11, 3)
@@ -61,4 +63,4 @@ package novamachina.exnihilosequentia.common.compat.jei.sieve;
 //          .addTooltipCallback(new SieveTooltipCallback(recipe, this.isWaterlogged));
 //    }
 //  }
-//}
+// }

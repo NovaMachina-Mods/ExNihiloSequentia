@@ -19,21 +19,20 @@ import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 public class DollItem extends Item {
 
-  @Nonnull
-  private final String entityModId;
-  @Nonnull
-  private final String entityName;
-  @Nonnull
-  private final String fluidModId;
-  @Nonnull
-  private final String fluidName;
-  @Nonnull
-  private final String tooltip;
+  @Nonnull private final String entityModId;
+  @Nonnull private final String entityName;
+  @Nonnull private final String fluidModId;
+  @Nonnull private final String fluidName;
+  @Nonnull private final String tooltip;
   private final double yOffset;
 
-  public DollItem(@Nonnull final String entityModId, @Nonnull final String entityName,
+  public DollItem(
+      @Nonnull final String entityModId,
+      @Nonnull final String entityName,
       @Nonnull final String fluidModId,
-      @Nonnull final String fluidName, double yOffset, @Nonnull final String tooltip) {
+      @Nonnull final String fluidName,
+      double yOffset,
+      @Nonnull final String tooltip) {
     super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
     this.entityModId = entityModId;
     this.entityName = entityName;
@@ -44,8 +43,11 @@ public class DollItem extends Item {
   }
 
   @Override
-  public void appendHoverText(@Nonnull final ItemStack stack, @Nullable final Level worldIn,
-      @Nonnull final List<Component> tooltip, @Nonnull final TooltipFlag flagIn) {
+  public void appendHoverText(
+      @Nonnull final ItemStack stack,
+      @Nullable final Level worldIn,
+      @Nonnull final List<Component> tooltip,
+      @Nonnull final TooltipFlag flagIn) {
     super.appendHoverText(stack, worldIn, tooltip, flagIn);
     tooltip.add(Component.translatable(this.tooltip));
   }
@@ -61,8 +63,8 @@ public class DollItem extends Item {
   }
 
   public Fluid getSpawnFluid() {
-    @Nonnull final ResourceLocation fluidLocation = new ResourceLocation(this.fluidModId,
-        this.fluidName);
+    @Nonnull
+    final ResourceLocation fluidLocation = new ResourceLocation(this.fluidModId, this.fluidName);
 
     if (ForgeRegistries.FLUIDS.containsKey(fluidLocation)) {
 
@@ -72,12 +74,13 @@ public class DollItem extends Item {
   }
 
   public boolean spawnMob(@Nonnull final Level world, @Nonnull final BlockPos pos) {
-    @Nonnull ResourceLocation spawneeResourceLocation = new ResourceLocation(this.entityModId,
-        this.entityName);
+    @Nonnull
+    ResourceLocation spawneeResourceLocation =
+        new ResourceLocation(this.entityModId, this.entityName);
 
     if (ForgeRegistries.ENTITIES.containsKey(spawneeResourceLocation)) {
-      @Nullable final EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(
-          spawneeResourceLocation);
+      @Nullable
+      final EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(spawneeResourceLocation);
       if (entityType != null) {
         @Nullable final Entity spawnee = entityType.create(world);
         if (spawnee != null) {

@@ -1,25 +1,25 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 //
-//import javax.annotation.Nonnull;
-//import javax.annotation.Nullable;
-//import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-//import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
-//import mezz.jei.api.gui.drawable.IDrawable;
-//import mezz.jei.api.gui.drawable.IDrawableStatic;
-//import mezz.jei.api.helpers.IGuiHelper;
-//import mezz.jei.api.recipe.IFocusGroup;
-//import mezz.jei.api.recipe.RecipeIngredientRole;
-//import mezz.jei.api.recipe.RecipeType;
-//import mezz.jei.api.recipe.category.IRecipeCategory;
-//import net.minecraft.network.chat.Component;
-//import net.minecraft.network.chat.TextComponent;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.ItemStack;
-//import net.minecraft.world.level.block.Blocks;
-//import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import javax.annotation.Nonnull;
+// import javax.annotation.Nullable;
+// import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+// import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
+// import mezz.jei.api.gui.drawable.IDrawable;
+// import mezz.jei.api.gui.drawable.IDrawableStatic;
+// import mezz.jei.api.helpers.IGuiHelper;
+// import mezz.jei.api.recipe.IFocusGroup;
+// import mezz.jei.api.recipe.RecipeIngredientRole;
+// import mezz.jei.api.recipe.RecipeType;
+// import mezz.jei.api.recipe.category.IRecipeCategory;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TextComponent;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.ItemStack;
+// import net.minecraft.world.level.block.Blocks;
+// import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 //
-//public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
+// public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
 //
 //  @Nonnull
 //  public static final ResourceLocation UID =
@@ -91,4 +91,4 @@ package novamachina.exnihilosequentia.common.compat.jei.compost;
 //  public Class<? extends CompostRecipe> getRecipeClass() {
 //    return CompostRecipe.class;
 //  }
-//}
+// }

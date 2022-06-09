@@ -31,19 +31,16 @@ import org.apache.logging.log4j.LogManager;
 public abstract class AbstractLootTableGenerator implements DataProvider {
 
   @Nonnull
-  private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping()
-      .create();
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  @Nonnull
-  protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
-  @Nonnull
-  private final DataGenerator generator;
-  @Nonnull
-  private final String modId;
+  private static final Gson GSON =
+      (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
 
-  protected AbstractLootTableGenerator(@Nonnull final DataGenerator generator,
-      @Nonnull final String modId) {
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
+  @Nonnull private final DataGenerator generator;
+  @Nonnull private final String modId;
+
+  protected AbstractLootTableGenerator(
+      @Nonnull final DataGenerator generator, @Nonnull final String modId) {
     this.generator = generator;
     this.modId = modId;
   }
@@ -55,9 +52,9 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
 
     createLootTables();
 
-    @Nonnull final ValidationContext validator = new ValidationContext(
-        LootContextParamSets.ALL_PARAMS,
-        function -> null, lootTables::get);
+    @Nonnull
+    final ValidationContext validator =
+        new ValidationContext(LootContextParamSets.ALL_PARAMS, function -> null, lootTables::get);
     lootTables.forEach((name, table) -> LootTables.validate(validator, name, table));
     @Nonnull final Multimap<String, String> problems = validator.getProblems();
     if (!problems.isEmpty()) {
@@ -65,16 +62,17 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
           (name, table) -> logger.warn("Found validation problem in " + name + ": " + table));
       throw new IllegalStateException("Failed to validate loot tables, see logs");
     } else {
-      lootTables.forEach((name, table) -> {
-        @Nonnull final Path out = getPath(outFolder, name);
+      lootTables.forEach(
+          (name, table) -> {
+            @Nonnull final Path out = getPath(outFolder, name);
 
-        try {
-          DataProvider.saveStable(cache, LootTables.serialize(table), out);
-        } catch (IOException e) {
-          logger.error("Couldn't save loot table " + out);
-          logger.error(Arrays.toString(e.getStackTrace()));
-        }
-      });
+            try {
+              DataProvider.saveStable(cache, LootTables.serialize(table), out);
+            } catch (IOException e) {
+              logger.error("Couldn't save loot table " + out);
+              logger.error(Arrays.toString(e.getStackTrace()));
+            }
+          });
     }
   }
 
@@ -117,17 +115,19 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
     register(resourceLocation, table);
   }
 
-  private void register(@Nonnull final ResourceLocation registryName,
-      @Nonnull final LootTable.Builder table) {
-    if (lootTables.put(toTableLoc(registryName),
-        table.setParamSet(LootContextParamSets.BLOCK).build()) != null) {
+  private void register(
+      @Nonnull final ResourceLocation registryName, @Nonnull final LootTable.Builder table) {
+    if (lootTables.put(
+            toTableLoc(registryName), table.setParamSet(LootContextParamSets.BLOCK).build())
+        != null) {
       throw new IllegalStateException("Duplicate loot table: " + table);
     }
   }
 
   @Nonnull
   private LootPool.Builder singleItem(@Nonnull final ItemLike in) {
-    return createLootPoolBuilder().setRolls(ConstantValue.exactly(1))
+    return createLootPoolBuilder()
+        .setRolls(ConstantValue.exactly(1))
         .add(LootItem.lootTableItem(in));
   }
 

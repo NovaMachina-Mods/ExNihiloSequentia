@@ -1,50 +1,52 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 //
-//import com.mojang.blaze3d.vertex.PoseStack;
-//import java.awt.Color;
-//import javax.annotation.Nonnull;
-//import javax.annotation.Nullable;
-//import mezz.jei.api.forge.ForgeTypes;
-//import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-//import mezz.jei.api.gui.drawable.IDrawable;
-//import mezz.jei.api.gui.drawable.IDrawableStatic;
-//import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
-//import mezz.jei.api.helpers.IGuiHelper;
-//import mezz.jei.api.recipe.IFocusGroup;
-//import mezz.jei.api.recipe.RecipeIngredientRole;
-//import mezz.jei.api.recipe.category.IRecipeCategory;
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.network.chat.Component;
-//import net.minecraft.network.chat.TextComponent;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.Items;
-//import net.minecraft.world.item.crafting.Ingredient;
-//import net.minecraft.world.level.ItemLike;
-//import net.minecraft.world.level.block.Block;
-//import net.minecraft.world.level.block.Blocks;
-//import net.minecraft.world.level.block.LiquidBlock;
-//import net.minecraft.world.level.material.Fluid;
-//import net.minecraftforge.fluids.FluidStack;
-//import net.minecraftforge.registries.ForgeRegistries;
-//import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-//import org.apache.logging.log4j.LogManager;
+// import com.mojang.blaze3d.vertex.PoseStack;
+// import java.awt.Color;
+// import javax.annotation.Nonnull;
+// import javax.annotation.Nullable;
+// import mezz.jei.api.forge.ForgeTypes;
+// import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+// import mezz.jei.api.gui.drawable.IDrawable;
+// import mezz.jei.api.gui.drawable.IDrawableStatic;
+// import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+// import mezz.jei.api.helpers.IGuiHelper;
+// import mezz.jei.api.recipe.IFocusGroup;
+// import mezz.jei.api.recipe.RecipeIngredientRole;
+// import mezz.jei.api.recipe.category.IRecipeCategory;
+// import net.minecraft.client.Minecraft;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TextComponent;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.Items;
+// import net.minecraft.world.item.crafting.Ingredient;
+// import net.minecraft.world.level.ItemLike;
+// import net.minecraft.world.level.block.Block;
+// import net.minecraft.world.level.block.Blocks;
+// import net.minecraft.world.level.block.LiquidBlock;
+// import net.minecraft.world.level.material.Fluid;
+// import net.minecraftforge.fluids.FluidStack;
+// import net.minecraftforge.registries.ForgeRegistries;
+// import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+// import org.apache.logging.log4j.LogManager;
 //
-//public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
+// public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
 //
 //  @Nonnull
 //  public static final ResourceLocation UID =
 //      new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
 //
-//  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+//  @Nonnull private static final ExNihiloLogger logger = new
+// ExNihiloLogger(LogManager.getLogger());
 //  @Nonnull private final IDrawableStatic background;
 //
 //  public HeatRecipeCategory(@Nonnull final IGuiHelper guiHelper) {
 //    background =
 //        guiHelper
 //            .drawableBuilder(
-//                new ResourceLocation(ExNihiloConstants.ModIds.JEI, "textures/gui/gui_vanilla.png"),
+//                new ResourceLocation(ExNihiloConstants.ModIds.JEI,
+// "textures/gui/gui_vanilla.png"),
 //                0,
 //                134,
 //                18,
@@ -111,7 +113,8 @@ package novamachina.exnihilosequentia.common.compat.jei.heat;
 //      return;
 //    }
 //    if (ForgeRegistries.FLUIDS.containsKey(recipeInput.getRegistryName())) {
-//      @Nullable final Fluid fluid = ForgeRegistries.FLUIDS.getValue(recipeInput.getRegistryName());
+//      @Nullable final Fluid fluid =
+// ForgeRegistries.FLUIDS.getValue(recipeInput.getRegistryName());
 //      if (fluid != null) {
 //        builder
 //            .addSlot(RecipeIngredientRole.INPUT, 1, 17)
@@ -128,4 +131,4 @@ package novamachina.exnihilosequentia.common.compat.jei.heat;
 //      builder.addSlot(RecipeIngredientRole.INPUT, 1, 17).addIngredients(Ingredient.of(input));
 //    }
 //  }
-//}
+// }

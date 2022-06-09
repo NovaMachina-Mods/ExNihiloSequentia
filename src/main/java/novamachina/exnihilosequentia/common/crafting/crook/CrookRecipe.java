@@ -8,24 +8,24 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CrookRecipe extends SerializableRecipe {
-  @Nonnull
-  private final List<ItemStackWithChance> output;
-  @Nonnull
-  private Ingredient input;
+  @Nonnull private final List<ItemStackWithChance> output;
+  @Nonnull private Ingredient input;
 
-  public CrookRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
+  public CrookRecipe(
+      @Nonnull final ResourceLocation id,
+      @Nonnull final Ingredient input,
       @Nonnull final List<ItemStackWithChance> output) {
-    super(output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack(), ExNihiloRecipeTypes.CROOK_RECIPE_TYPE.get(), id);
+    super(
+        output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack(),
+        ExNihiloRecipeTypes.CROOK_RECIPE_TYPE.get(),
+        id);
     this.input = input;
     this.output = output;
   }

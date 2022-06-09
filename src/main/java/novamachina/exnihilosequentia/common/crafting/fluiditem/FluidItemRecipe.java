@@ -8,27 +8,24 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class FluidItemRecipe extends SerializableRecipe {
 
-  @Nonnull
-  private FluidStack fluid;
-  @Nonnull
-  private Ingredient input;
-  @Nonnull
-  private ItemStack output;
+  @Nonnull private FluidStack fluid;
+  @Nonnull private Ingredient input;
+  @Nonnull private ItemStack output;
 
-  public FluidItemRecipe(@Nonnull final ResourceLocation id, @Nonnull final FluidStack fluid,
-      @Nonnull final Ingredient input, @Nonnull final ItemStack output) {
+  public FluidItemRecipe(
+      @Nonnull final ResourceLocation id,
+      @Nonnull final FluidStack fluid,
+      @Nonnull final Ingredient input,
+      @Nonnull final ItemStack output) {
     super(output, ExNihiloRecipeTypes.FLUID_ITEM_RECIPE_TYPE.get(), id);
     this.fluid = fluid;
     this.input = input;

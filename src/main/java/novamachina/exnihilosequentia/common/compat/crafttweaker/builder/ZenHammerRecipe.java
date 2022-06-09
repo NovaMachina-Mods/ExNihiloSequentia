@@ -1,18 +1,18 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //
-//import com.blamejared.crafttweaker.api.annotation.ZenRegister;
-//import com.blamejared.crafttweaker.api.ingredient.IIngredient;
-//import com.blamejared.crafttweaker.api.item.IItemStack;
-//import java.util.ArrayList;
-//import javax.annotation.Nonnull;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.crafting.Ingredient;
-//import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
-//import org.openzen.zencode.java.ZenCodeType;
+// import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+// import com.blamejared.crafttweaker.api.ingredient.IIngredient;
+// import com.blamejared.crafttweaker.api.item.IItemStack;
+// import java.util.ArrayList;
+// import javax.annotation.Nonnull;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.crafting.Ingredient;
+// import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
+// import org.openzen.zencode.java.ZenCodeType;
 //
-//@ZenRegister
-//@ZenCodeType.Name("mods.exnihilosequentia.ZenHammerRecipe")
-//public class ZenHammerRecipe {
+// @ZenRegister
+// @ZenCodeType.Name("mods.exnihilosequentia.ZenHammerRecipe")
+// public class ZenHammerRecipe {
 //
 //  @Nonnull
 //  private final HammerRecipe internal;
@@ -54,4 +54,4 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //    internal.setInput(input.asVanillaIngredient());
 //    return this;
 //  }
-//}
+// }

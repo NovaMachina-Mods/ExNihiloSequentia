@@ -7,29 +7,25 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class SieveRecipe extends SerializableRecipe {
 
-  @Nonnull
-  private final ResourceLocation recipeId;
-  @Nonnull
-  private final List<MeshWithChance> rolls;
-  @Nonnull
-  private ItemStack drop;
-  @Nonnull
-  private Ingredient input;
+  @Nonnull private final ResourceLocation recipeId;
+  @Nonnull private final List<MeshWithChance> rolls;
+  @Nonnull private ItemStack drop;
+  @Nonnull private Ingredient input;
   private boolean isWaterlogged;
 
-  public SieveRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
-      @Nonnull final ItemStack drop, @Nonnull final List<MeshWithChance> rolls,
+  public SieveRecipe(
+      @Nonnull final ResourceLocation id,
+      @Nonnull final Ingredient input,
+      @Nonnull final ItemStack drop,
+      @Nonnull final List<MeshWithChance> rolls,
       boolean isWaterlogged) {
     super(drop, ExNihiloRecipeTypes.SIEVE_RECIPE_TYPE.get(), id);
     this.recipeId = id;
@@ -110,13 +106,18 @@ public class SieveRecipe extends SerializableRecipe {
   @Override
   @Nonnull
   public String toString() {
-    return "SieveRecipe{" +
-        "input=" + input +
-        ", drop=" + drop +
-        ", rolls=" + rolls +
-        ", isWaterlogged=" + isWaterlogged +
-        ", recipeId=" + recipeId +
-        '}';
+    return "SieveRecipe{"
+        + "input="
+        + input
+        + ", drop="
+        + drop
+        + ", rolls="
+        + rolls
+        + ", isWaterlogged="
+        + isWaterlogged
+        + ", recipeId="
+        + recipeId
+        + '}';
   }
 
   @Override

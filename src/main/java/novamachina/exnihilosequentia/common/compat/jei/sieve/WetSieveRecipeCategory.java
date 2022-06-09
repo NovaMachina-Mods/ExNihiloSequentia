@@ -1,14 +1,14 @@
 package novamachina.exnihilosequentia.common.compat.jei.sieve;
 //
-//import javax.annotation.Nonnull;
-//import mezz.jei.api.helpers.IGuiHelper;
-//import net.minecraft.network.chat.Component;
-//import net.minecraft.network.chat.TextComponent;
-//import net.minecraft.resources.ResourceLocation;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-//import org.jetbrains.annotations.NotNull;
+// import javax.annotation.Nonnull;
+// import mezz.jei.api.helpers.IGuiHelper;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TextComponent;
+// import net.minecraft.resources.ResourceLocation;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import org.jetbrains.annotations.NotNull;
 //
-//public class WetSieveRecipeCategory extends AbstractSieveRecipeCategory {
+// public class WetSieveRecipeCategory extends AbstractSieveRecipeCategory {
 //
 //  @Nonnull
 //  public static final ResourceLocation UID =
@@ -29,4 +29,4 @@ package novamachina.exnihilosequentia.common.compat.jei.sieve;
 //  public ResourceLocation getUid() {
 //    return UID;
 //  }
-//}
+// }

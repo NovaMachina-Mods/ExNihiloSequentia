@@ -1,20 +1,20 @@
 package novamachina.exnihilosequentia.common.compat.jei;
 //
-//import mezz.jei.api.recipe.RecipeType;
-//import novamachina.exnihilosequentia.common.compat.jei.crucible.JEICrucibleRecipe;
-//import novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
-//import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
-//import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
-//import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
-//import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
-//import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
-//import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
-//import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
-//import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
+// import mezz.jei.api.recipe.RecipeType;
+// import novamachina.exnihilosequentia.common.compat.jei.crucible.JEICrucibleRecipe;
+// import novamachina.exnihilosequentia.common.compat.jei.sieve.JEISieveRecipe;
+// import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
+// import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
+// import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
+// import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
+// import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
+// import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
+// import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
+// import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 //
-//public class RecipeTypes {
+// public class RecipeTypes {
 //  private RecipeTypes() {}
 //
 //  public static final RecipeType<CompostRecipe> COMPOST =
@@ -44,7 +44,8 @@ package novamachina.exnihilosequentia.common.compat.jei;
 //          "fluidtransform",
 //          FluidTransformRecipe.class);
 //  public static final RecipeType<HammerRecipe> HAMMER =
-//      RecipeType.create(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer", HammerRecipe.class);
+//      RecipeType.create(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer",
+// HammerRecipe.class);
 //  public static final RecipeType<HeatRecipe> HEAT =
 //      RecipeType.create(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat", HeatRecipe.class);
 //  public static final RecipeType<JEISieveRecipe> DRY_SIEVE =
@@ -53,4 +54,4 @@ package novamachina.exnihilosequentia.common.compat.jei;
 //  public static final RecipeType<JEISieveRecipe> WET_SIEVE =
 //      RecipeType.create(
 //          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "wet_sieve", JEISieveRecipe.class);
-//}
+// }

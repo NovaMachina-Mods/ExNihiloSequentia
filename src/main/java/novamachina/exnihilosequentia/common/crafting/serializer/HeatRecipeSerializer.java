@@ -24,8 +24,8 @@ public class HeatRecipeSerializer extends ExNihiloRecipeSerializer<HeatRecipe> {
   }
 
   @Override
-  public HeatRecipe fromNetwork(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final FriendlyByteBuf buffer) {
+  public HeatRecipe fromNetwork(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
     // Packet structure is:
     // |--------------------------------------|
     // | Block Resource Location (UTF String) |
@@ -33,14 +33,16 @@ public class HeatRecipeSerializer extends ExNihiloRecipeSerializer<HeatRecipe> {
     // | Flag: has properties (boolean)       |
     // | [OPTIONAL] Properties (UTF JSON)     |
     // |--------------------------------------|
-    @Nullable final Block input = ForgeRegistries.BLOCKS.getValue(
-        new ResourceLocation(buffer.readUtf()));
+    @Nullable
+    final Block input = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(buffer.readUtf()));
     final int amount = buffer.readInt();
 
-    final boolean hasProperties = buffer.readBoolean(); // flag showing whether recipe depends on block state
+    final boolean hasProperties =
+        buffer.readBoolean(); // flag showing whether recipe depends on block state
     if (hasProperties) {
-      @Nonnull final StatePropertiesPredicate properties = StatePropertiesPredicate.fromJson(
-          PARSER.parse(buffer.readUtf()));
+      @Nonnull
+      final StatePropertiesPredicate properties =
+          StatePropertiesPredicate.fromJson(PARSER.parse(buffer.readUtf()));
       return new HeatRecipe(recipeId, input, amount, properties);
     }
     return new HeatRecipe(recipeId, input, amount);
@@ -48,7 +50,8 @@ public class HeatRecipeSerializer extends ExNihiloRecipeSerializer<HeatRecipe> {
 
   @Override
   public void toNetwork(@Nonnull final FriendlyByteBuf buffer, @Nonnull final HeatRecipe recipe) {
-    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(recipe.getInput());
+    @Nullable
+    final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(recipe.getInput());
     if (resourceLocation == null) {
       return;
     }
@@ -67,14 +70,15 @@ public class HeatRecipeSerializer extends ExNihiloRecipeSerializer<HeatRecipe> {
 
   @Override
   @Nonnull
-  protected HeatRecipe readFromJson(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final JsonObject json) {
-    @Nullable final Block input = ForgeRegistries.BLOCKS.getValue(
-        new ResourceLocation(json.get("block").getAsString()));
+  protected HeatRecipe readFromJson(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) {
+    @Nullable
+    final Block input =
+        ForgeRegistries.BLOCKS.getValue(new ResourceLocation(json.get("block").getAsString()));
     final int amount = json.get("amount").getAsInt();
     if (json.has("state")) {
-      return new HeatRecipe(recipeId, input, amount,
-          StatePropertiesPredicate.fromJson(json.get("state")));
+      return new HeatRecipe(
+          recipeId, input, amount, StatePropertiesPredicate.fromJson(json.get("state")));
     }
     return new HeatRecipe(recipeId, input, amount);
   }

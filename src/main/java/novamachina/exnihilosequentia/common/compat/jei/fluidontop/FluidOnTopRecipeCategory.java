@@ -1,22 +1,22 @@
 package novamachina.exnihilosequentia.common.compat.jei.fluidontop;
 //
-//import javax.annotation.Nonnull;
-//import javax.annotation.Nullable;
-//import mezz.jei.api.forge.ForgeTypes;
-//import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-//import mezz.jei.api.gui.drawable.IDrawable;
-//import mezz.jei.api.gui.drawable.IDrawableStatic;
-//import mezz.jei.api.helpers.IGuiHelper;
-//import mezz.jei.api.recipe.IFocusGroup;
-//import mezz.jei.api.recipe.RecipeIngredientRole;
-//import mezz.jei.api.recipe.category.IRecipeCategory;
-//import net.minecraft.network.chat.Component;
-//import net.minecraft.network.chat.TextComponent;
-//import net.minecraft.resources.ResourceLocation;
-//import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
-//import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+// import javax.annotation.Nonnull;
+// import javax.annotation.Nullable;
+// import mezz.jei.api.forge.ForgeTypes;
+// import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+// import mezz.jei.api.gui.drawable.IDrawable;
+// import mezz.jei.api.gui.drawable.IDrawableStatic;
+// import mezz.jei.api.helpers.IGuiHelper;
+// import mezz.jei.api.recipe.IFocusGroup;
+// import mezz.jei.api.recipe.RecipeIngredientRole;
+// import mezz.jei.api.recipe.category.IRecipeCategory;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TextComponent;
+// import net.minecraft.resources.ResourceLocation;
+// import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
+// import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 //
-//public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecipe> {
+// public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecipe> {
 //
 //  @Nonnull
 //  public static final ResourceLocation UID =
@@ -74,4 +74,4 @@ package novamachina.exnihilosequentia.common.compat.jei.fluidontop;
 //        .addIngredient(ForgeTypes.FLUID_STACK, recipe.getFluidOnTop());
 //    builder.addSlot(RecipeIngredientRole.OUTPUT, 102, 37).addItemStack(recipe.getResultItem());
 //  }
-//}
+// }

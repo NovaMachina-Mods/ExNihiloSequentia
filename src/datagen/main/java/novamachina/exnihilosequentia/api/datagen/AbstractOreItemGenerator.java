@@ -17,7 +17,9 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
   private static final String ITEM_GENERATED_TAG = "item/generated";
   private static final String LAYER_0_TAG = "layer0";
 
-  protected AbstractOreItemGenerator(@Nonnull final DataGenerator generator, String modid,
+  protected AbstractOreItemGenerator(
+      @Nonnull final DataGenerator generator,
+      String modid,
       @Nonnull final ExistingFileHelper existingFileHelper) {
     super(generator, modid, existingFileHelper);
   }
@@ -27,12 +29,16 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
     if (rawRegistryObject == null) {
       return;
     }
-    @Nullable final ResourceLocation rawResourceLocation = ForgeRegistries.ITEMS.getKey(rawRegistryObject);
+    @Nullable
+    final ResourceLocation rawResourceLocation = ForgeRegistries.ITEMS.getKey(rawRegistryObject);
     if (rawResourceLocation == null) {
       return;
     }
-    singleTexture(rawResourceLocation.getPath(), new ResourceLocation(ITEM_GENERATED_TAG),
-        LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + rawResourceLocation.getPath()));
+    singleTexture(
+        rawResourceLocation.getPath(),
+        new ResourceLocation(ITEM_GENERATED_TAG),
+        LAYER_0_TAG,
+        new ResourceLocation(modid, ITEMS_TAG + rawResourceLocation.getPath()));
   }
 
   protected void registerIngot(@Nonnull final Ore ore) {
@@ -51,8 +57,11 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
     if (resourceLocation == null) {
       return;
     }
-    singleTexture(resourceLocation.getPath(), new ResourceLocation(ITEM_GENERATED_TAG),
-        LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + resourceLocation.getPath()));
+    singleTexture(
+        resourceLocation.getPath(),
+        new ResourceLocation(ITEM_GENERATED_TAG),
+        LAYER_0_TAG,
+        new ResourceLocation(modid, ITEMS_TAG + resourceLocation.getPath()));
   }
 
   protected void registerPiece(@Nonnull final Ore ore) {
@@ -60,12 +69,17 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
     if (pieceRegistryObject == null) {
       return;
     }
-    @Nullable final ResourceLocation pieceResourceLocation = ForgeRegistries.ITEMS.getKey(pieceRegistryObject);
+    @Nullable
+    final ResourceLocation pieceResourceLocation =
+        ForgeRegistries.ITEMS.getKey(pieceRegistryObject);
     if (pieceResourceLocation == null) {
       return;
     }
-    singleTexture(pieceResourceLocation.getPath(), new ResourceLocation(ITEM_GENERATED_TAG),
-        LAYER_0_TAG, new ResourceLocation(modid, ITEMS_TAG + pieceResourceLocation.getPath()));
+    singleTexture(
+        pieceResourceLocation.getPath(),
+        new ResourceLocation(ITEM_GENERATED_TAG),
+        LAYER_0_TAG,
+        new ResourceLocation(modid, ITEMS_TAG + pieceResourceLocation.getPath()));
   }
 
   @Nonnull

@@ -44,7 +44,8 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
       final int combinedLightIn,
       final int combinedOverlayIn) {
     @Nullable final ResourceLocation inventoryTexture = tileEntity.getSolidTexture();
-    @Nullable final ResourceLocation solidTexture = ForgeRegistries.BLOCKS.getKey(Blocks.OAK_LEAVES);
+    @Nullable
+    final ResourceLocation solidTexture = ForgeRegistries.BLOCKS.getKey(Blocks.OAK_LEAVES);
     Fluid fluid = tileEntity.getFluid();
     @Nullable
     final ResourceLocation fluidTexture =

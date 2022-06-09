@@ -24,25 +24,19 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
-public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>> implements
-    FinishedRecipe {
+public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>>
+    implements FinishedRecipe {
 
-  @Nonnull
-  private final RecipeSerializer<?> serializer;
-  @Nonnull
-  private final List<Consumer<JsonObject>> writerFunctions;
-  @Nullable
-  protected JsonArray conditions = null;
-  @Nullable
-  protected JsonArray inputArray = null;
+  @Nonnull private final RecipeSerializer<?> serializer;
+  @Nonnull private final List<Consumer<JsonObject>> writerFunctions;
+  @Nullable protected JsonArray conditions = null;
+  @Nullable protected JsonArray inputArray = null;
   protected int inputCount = 0;
   protected int maxInputCount = 1;
   protected int maxOutputCount = 1;
-  @Nullable
-  protected JsonArray outputArray = null;
+  @Nullable protected JsonArray outputArray = null;
   protected int outputCount = 0;
-  @Nullable
-  private ResourceLocation id;
+  @Nullable private ResourceLocation id;
 
   protected ExNihiloFinishedRecipe(@Nonnull final RecipeSerializer<?> serializer) {
     this.serializer = serializer;
@@ -223,9 +217,8 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
   @Nonnull
   private R addMultiInput(@Nonnull final JsonElement obj) throws IllegalArgumentException {
     Preconditions.checkArgument(maxInputCount > 1, "This recipe does not support multiple inputs.");
-    Preconditions
-        .checkArgument(inputCount < maxInputCount,
-            "This recipe can only have " + maxInputCount + "inputs.");
+    Preconditions.checkArgument(
+        inputCount < maxInputCount, "This recipe can only have " + maxInputCount + "inputs.");
     if (inputArray != null) {
       inputArray.add(obj);
       inputCount++;
@@ -236,11 +229,10 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
   @Nonnull
   private R addMultiResult(@Nonnull final JsonElement obj) throws IllegalArgumentException {
-    Preconditions.checkArgument(maxOutputCount > 1,
-        "This recipe does not support multiple results.");
-    Preconditions
-        .checkArgument(outputCount < maxOutputCount,
-            "This recipe can only have " + maxOutputCount + "results.");
+    Preconditions.checkArgument(
+        maxOutputCount > 1, "This recipe does not support multiple results.");
+    Preconditions.checkArgument(
+        outputCount < maxOutputCount, "This recipe can only have " + maxOutputCount + "results.");
     if (outputArray != null) {
       outputArray.add(obj);
       outputCount++;
@@ -252,7 +244,8 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
   @Nonnull
   private JsonObject serializeItemStack(@Nonnull final ItemStack itemStack) {
     @Nonnull final JsonObject obj = new JsonObject();
-    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(itemStack.getItem());
+    @Nullable
+    final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(itemStack.getItem());
     if (resourceLocation != null) {
       obj.addProperty("item", resourceLocation.toString());
     }

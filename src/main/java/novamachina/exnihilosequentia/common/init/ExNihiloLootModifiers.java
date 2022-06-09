@@ -11,12 +11,13 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloLootModifiers {
   private static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIERS =
-      DeferredRegister.create(Keys.LOOT_MODIFIER_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+      DeferredRegister.create(
+          Keys.LOOT_MODIFIER_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
 
-  public static final RegistryObject<GlobalLootModifierSerializer<?>> hammerModifier = LOOT_MODIFIERS.register("use_hammer",
-      UseHammerModifier.Serializer::new);
-  public static final RegistryObject<GlobalLootModifierSerializer<?>> crookModifier = LOOT_MODIFIERS.register("use_crook",
-      UseCrookModifier.Serializer::new);
+  public static final RegistryObject<GlobalLootModifierSerializer<?>> hammerModifier =
+      LOOT_MODIFIERS.register("use_hammer", UseHammerModifier.Serializer::new);
+  public static final RegistryObject<GlobalLootModifierSerializer<?>> crookModifier =
+      LOOT_MODIFIERS.register("use_crook", UseCrookModifier.Serializer::new);
 
   public static void init(IEventBus modEventBus) {
     LOOT_MODIFIERS.register(modEventBus);

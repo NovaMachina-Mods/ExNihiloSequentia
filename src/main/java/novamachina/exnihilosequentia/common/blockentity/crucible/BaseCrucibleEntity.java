@@ -321,6 +321,7 @@ public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidCo
       lastSyncedState = currentState;
     }
   }
+
   protected void tickCrucible() {
     int heat = getHeat();
     if (heat <= 0) {
@@ -345,7 +346,7 @@ public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidCo
 
     if (heat > 0
         && ExNihiloRegistries.CRUCIBLE_REGISTRY.isMeltableByItemStack(
-        currentItem, getCrucibleType().getLevel())) {
+            currentItem, getCrucibleType().getLevel())) {
       processSolid(heat);
     }
   }
@@ -405,6 +406,5 @@ public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidCo
     public int hashCode() {
       return Objects.hash(fluid, fluidAmount, solid, solidAmount, heat);
     }
-
   }
 }

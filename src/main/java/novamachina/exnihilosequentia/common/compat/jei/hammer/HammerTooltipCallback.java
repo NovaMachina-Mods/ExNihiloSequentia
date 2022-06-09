@@ -1,19 +1,19 @@
 package novamachina.exnihilosequentia.common.compat.jei.hammer;
 //
-//import java.util.List;
-//import java.util.Optional;
-//import javax.annotation.Nonnull;
-//import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
-//import mezz.jei.api.gui.ingredient.IRecipeSlotView;
-//import mezz.jei.api.ingredients.ITypedIngredient;
-//import mezz.jei.api.recipe.RecipeIngredientRole;
-//import net.minecraft.network.chat.Component;
-//import net.minecraft.network.chat.TextComponent;
-//import net.minecraft.world.item.ItemStack;
-//import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
-//import novamachina.exnihilosequentia.common.utility.StringUtils;
+// import java.util.List;
+// import java.util.Optional;
+// import javax.annotation.Nonnull;
+// import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
+// import mezz.jei.api.gui.ingredient.IRecipeSlotView;
+// import mezz.jei.api.ingredients.ITypedIngredient;
+// import mezz.jei.api.recipe.RecipeIngredientRole;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TextComponent;
+// import net.minecraft.world.item.ItemStack;
+// import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
+// import novamachina.exnihilosequentia.common.utility.StringUtils;
 //
-//public class HammerTooltipCallback implements IRecipeSlotTooltipCallback {
+// public class HammerTooltipCallback implements IRecipeSlotTooltipCallback {
 //
 //  @Nonnull private final HammerRecipe hammerRecipe;
 //
@@ -40,4 +40,4 @@ package novamachina.exnihilosequentia.common.compat.jei.hammer;
 //                                      "%s", StringUtils.formatPercent(stack.getChance()))))));
 //    }
 //  }
-//}
+// }

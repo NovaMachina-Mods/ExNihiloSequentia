@@ -58,7 +58,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
   }
 
   @SuppressWarnings("UnusedReturnValue")
-  private boolean doMobSpawn(@Nonnull final AbstractBarrelEntity barrelTile,
+  private boolean doMobSpawn(
+      @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn) {
     if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
@@ -81,8 +82,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     return false;
   }
 
-  private boolean fluidTransform(@Nonnull final AbstractBarrelEntity barrelTile,
-      @Nonnull final ItemLike catalyst) {
+  private boolean fluidTransform(
+      @Nonnull final AbstractBarrelEntity barrelTile, @Nonnull final ItemLike catalyst) {
     @Nullable final Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
     if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, catalyst)) {
@@ -103,14 +104,17 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       return false;
     }
 
-    @Nonnull final Fluid fluidOnTop = world.getFluidState(barrelTile.getBlockPos().offset(0, 1, 0))
-        .getType();
+    @Nonnull
+    final Fluid fluidOnTop =
+        world.getFluidState(barrelTile.getBlockPos().offset(0, 1, 0)).getType();
     @Nonnull final Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
     if (ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.isValidRecipe(fluidInTank, fluidOnTop)) {
       barrelTile.getTank().setFluid(FluidStack.EMPTY);
-      barrelTile.getInventory().setStackInSlot(0, ExNihiloRegistries.FLUID_ON_TOP_REGISTRY
-          .getResult(fluidInTank, fluidOnTop));
+      barrelTile
+          .getInventory()
+          .setStackInSlot(
+              0, ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.getResult(fluidInTank, fluidOnTop));
       barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
       return true;
     }
@@ -119,8 +123,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public InteractionResult onBlockActivated(@Nonnull final AbstractBarrelEntity barrelTile,
-      @Nonnull final Player player, @Nonnull final InteractionHand handIn,
+  public InteractionResult onBlockActivated(
+      @Nonnull final AbstractBarrelEntity barrelTile,
+      @Nonnull final Player player,
+      @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
       @Nonnull final IItemHandler itemHandler) {
     @Nonnull final ItemStack stack = player.getItemInHand(handIn);
@@ -164,8 +170,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     return InteractionResult.SUCCESS;
   }
 
-  private boolean fluidBlockTransform(@Nonnull final AbstractBarrelEntity barrelTile,
-      @Nonnull final Player player, @Nonnull final InteractionHand handIn) {
+  private boolean fluidBlockTransform(
+      @Nonnull final AbstractBarrelEntity barrelTile,
+      @Nonnull final Player player,
+      @Nonnull final InteractionHand handIn) {
     if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
       return false;
     }
@@ -173,9 +181,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     @Nonnull final Item input = player.getItemInHand(handIn).getItem();
     if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
       barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
-      barrelTile.getInventory()
-          .setStackInSlot(0,
-              new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
+      barrelTile
+          .getInventory()
+          .setStackInSlot(
+              0, new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
       if (!player.isCreative()) {
         player.getItemInHand(handIn).shrink(1);
       }
@@ -197,8 +206,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   @Override
   protected boolean isTriggerItem(@Nonnull final ItemStack stack) {
-    return stack.getItem() instanceof BucketItem ||
-        ItemStack.isSame(stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
+    return stack.getItem() instanceof BucketItem
+        || ItemStack.isSame(
+            stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
   }
 
   @Override
@@ -226,19 +236,26 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     if (barrelTile.getFluid() == null) {
       key = Fluids.EMPTY.defaultFluidState().createLegacyBlock().getBlock().getDescriptionId();
     } else {
-      key = barrelTile.getFluid().defaultFluidState().createLegacyBlock().getBlock()
-          .getDescriptionId();
+      key =
+          barrelTile
+              .getFluid()
+              .defaultFluidState()
+              .createLegacyBlock()
+              .getBlock()
+              .getDescriptionId();
     }
 
-    info.add(Component.translatable("waila.barrel.fluidAmount", Component.translatable(key),
-        barrelTile.getFluidAmount()));
+    info.add(
+        Component.translatable(
+            "waila.barrel.fluidAmount", Component.translatable(key), barrelTile.getFluidAmount()));
 
     return info;
   }
 
   @Override
   @Nonnull
-  public ItemStack handleInsert(@Nonnull final AbstractBarrelEntity barrelTile,
+  public ItemStack handleInsert(
+      @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemStack stack,
       final boolean simulate) {
     if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
@@ -249,11 +266,13 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     @Nonnull final Item input = stack.getItem();
     if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
       if (!simulate) {
-        barrelTile.getTank()
+        barrelTile
+            .getTank()
             .drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
-        barrelTile.getInventory()
-            .setStackInSlot(0,
-                new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
+        barrelTile
+            .getInventory()
+            .setStackInSlot(
+                0, new ItemStack(ExNihiloRegistries.FLUID_BLOCK_REGISTRY.getResult(fluid, input)));
         barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
       }
       returnStack.shrink(1);

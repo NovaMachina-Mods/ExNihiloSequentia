@@ -12,15 +12,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemStackWithChance {
 
-  @Nonnull
-  private static final String BASE_KEY = "item";
-  @Nonnull
-  private static final String CHANCE_KEY = "chance";
-  @Nonnull
-  private static final String COUNT_KEY = "count";
+  @Nonnull private static final String BASE_KEY = "item";
+  @Nonnull private static final String CHANCE_KEY = "chance";
+  @Nonnull private static final String COUNT_KEY = "count";
   private final float chance;
-  @Nonnull
-  private final ItemStack itemStack;
+  @Nonnull private final ItemStack itemStack;
 
   public ItemStackWithChance(@Nonnull final ItemStack itemStack, final float chance) {
     this.itemStack = itemStack;
@@ -36,12 +32,13 @@ public class ItemStackWithChance {
       if (json.getAsJsonObject().has(COUNT_KEY)) {
         count = json.getAsJsonObject().get(COUNT_KEY).getAsInt();
       }
-      return new ItemStackWithChance(new ItemStack(ForgeRegistries.ITEMS
-          .getValue(new ResourceLocation(itemString)), count), chance);
+      return new ItemStackWithChance(
+          new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemString)), count),
+          chance);
     } else {
       @Nonnull final String itemString = GsonHelper.convertToString(json, BASE_KEY);
-      return new ItemStackWithChance(new ItemStack(ForgeRegistries.ITEMS
-          .getValue(new ResourceLocation(itemString))), 1.0F);
+      return new ItemStackWithChance(
+          new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemString))), 1.0F);
     }
   }
 
@@ -65,7 +62,8 @@ public class ItemStackWithChance {
   public JsonElement serialize() {
     @Nonnull final JsonObject json = new JsonObject();
     json.addProperty(CHANCE_KEY, getChance());
-    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(getStack().getItem());
+    @Nullable
+    final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(getStack().getItem());
     if (resourceLocation != null) {
       json.addProperty(BASE_KEY, resourceLocation.toString());
     }

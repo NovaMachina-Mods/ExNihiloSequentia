@@ -1,25 +1,25 @@
 package novamachina.exnihilosequentia.common.compat.jei.sieve;
 //
-//import com.google.common.collect.HashMultiset;
-//import com.google.common.collect.Multiset;
-//import java.util.List;
-//import java.util.Optional;
-//import javax.annotation.Nonnull;
-//import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
-//import mezz.jei.api.gui.ingredient.IRecipeSlotView;
-//import mezz.jei.api.ingredients.ITypedIngredient;
-//import mezz.jei.api.recipe.RecipeIngredientRole;
-//import net.minecraft.network.chat.Component;
-//import net.minecraft.network.chat.TextComponent;
-//import net.minecraft.network.chat.TranslatableComponent;
-//import net.minecraft.world.item.ItemStack;
-//import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
-//import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
-//import novamachina.exnihilosequentia.common.item.MeshItem;
-//import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
-//import novamachina.exnihilosequentia.common.utility.StringUtils;
+// import com.google.common.collect.HashMultiset;
+// import com.google.common.collect.Multiset;
+// import java.util.List;
+// import java.util.Optional;
+// import javax.annotation.Nonnull;
+// import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
+// import mezz.jei.api.gui.ingredient.IRecipeSlotView;
+// import mezz.jei.api.ingredients.ITypedIngredient;
+// import mezz.jei.api.recipe.RecipeIngredientRole;
+// import net.minecraft.network.chat.Component;
+// import net.minecraft.network.chat.TextComponent;
+// import net.minecraft.network.chat.TranslatableComponent;
+// import net.minecraft.world.item.ItemStack;
+// import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
+// import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
+// import novamachina.exnihilosequentia.common.item.MeshItem;
+// import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
+// import novamachina.exnihilosequentia.common.utility.StringUtils;
 //
-//public class SieveTooltipCallback implements IRecipeSlotTooltipCallback {
+// public class SieveTooltipCallback implements IRecipeSlotTooltipCallback {
 //
 //  private final JEISieveRecipe recipe;
 //  private final boolean isWaterlogged;
@@ -55,4 +55,4 @@ package novamachina.exnihilosequentia.common.compat.jei.sieve;
 //      }
 //    }
 //  }
-//}
+// }

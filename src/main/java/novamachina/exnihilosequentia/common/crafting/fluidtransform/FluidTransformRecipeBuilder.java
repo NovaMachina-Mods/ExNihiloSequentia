@@ -6,8 +6,8 @@ import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
-public class FluidTransformRecipeBuilder extends
-    ExNihiloFinishedRecipe<FluidTransformRecipeBuilder> {
+public class FluidTransformRecipeBuilder
+    extends ExNihiloFinishedRecipe<FluidTransformRecipeBuilder> {
 
   public FluidTransformRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions

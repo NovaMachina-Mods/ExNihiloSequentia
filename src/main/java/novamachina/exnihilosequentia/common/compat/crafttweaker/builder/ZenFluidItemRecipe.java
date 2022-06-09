@@ -1,20 +1,20 @@
 package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //
-//import com.blamejared.crafttweaker.api.annotation.ZenRegister;
-//import com.blamejared.crafttweaker.api.fluid.IFluidStack;
-//import com.blamejared.crafttweaker.api.ingredient.IIngredient;
-//import com.blamejared.crafttweaker.api.item.IItemStack;
-//import javax.annotation.Nonnull;
-//import net.minecraft.resources.ResourceLocation;
-//import net.minecraft.world.item.ItemStack;
-//import net.minecraft.world.item.crafting.Ingredient;
-//import net.minecraftforge.fluids.FluidStack;
-//import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
-//import org.openzen.zencode.java.ZenCodeType;
+// import com.blamejared.crafttweaker.api.annotation.ZenRegister;
+// import com.blamejared.crafttweaker.api.fluid.IFluidStack;
+// import com.blamejared.crafttweaker.api.ingredient.IIngredient;
+// import com.blamejared.crafttweaker.api.item.IItemStack;
+// import javax.annotation.Nonnull;
+// import net.minecraft.resources.ResourceLocation;
+// import net.minecraft.world.item.ItemStack;
+// import net.minecraft.world.item.crafting.Ingredient;
+// import net.minecraftforge.fluids.FluidStack;
+// import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
+// import org.openzen.zencode.java.ZenCodeType;
 //
-//@ZenRegister
-//@ZenCodeType.Name("mods.exnihilosequentia.ZenFluidItemRecipe")
-//public class ZenFluidItemRecipe {
+// @ZenRegister
+// @ZenCodeType.Name("mods.exnihilosequentia.ZenFluidItemRecipe")
+// public class ZenFluidItemRecipe {
 //
 //  @Nonnull
 //  private final FluidItemRecipe internal;
@@ -56,4 +56,4 @@ package novamachina.exnihilosequentia.common.compat.crafttweaker.builder;
 //    internal.setOutput(result.getInternal());
 //    return this;
 //  }
-//}
+// }

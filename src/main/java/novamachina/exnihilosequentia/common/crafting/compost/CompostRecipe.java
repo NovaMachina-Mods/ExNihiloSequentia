@@ -7,21 +7,17 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class CompostRecipe extends SerializableRecipe {
   private int amount;
-  @Nonnull
-  private Ingredient input;
+  @Nonnull private Ingredient input;
 
-  public CompostRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
-      final int amount) {
+  public CompostRecipe(
+      @Nonnull final ResourceLocation id, @Nonnull final Ingredient input, final int amount) {
     super(null, ExNihiloRecipeTypes.COMPOST_RECIPE_TYPE.get(), id);
     this.input = input;
     this.amount = amount;

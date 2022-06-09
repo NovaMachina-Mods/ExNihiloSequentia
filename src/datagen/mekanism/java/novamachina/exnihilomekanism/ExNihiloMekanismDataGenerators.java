@@ -14,8 +14,7 @@ import novamachina.exnihilomekanism.common.utility.ExNihiloMekanismConstants;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ExNihiloMekanismDataGenerators {
 
-  private ExNihiloMekanismDataGenerators() {
-  }
+  private ExNihiloMekanismDataGenerators() {}
 
   @SubscribeEvent
   public static void gatherData(GatherDataEvent event) {
@@ -25,16 +24,20 @@ public class ExNihiloMekanismDataGenerators {
       // Recipes
       generator.addProvider(true, new ExNihiloMekanismRecipeGenerator(generator));
       // Tags
-      generator
-          .addProvider(true, new ExNihiloMekanismItemTagGenerator(generator,
-              new BlockTagsProvider(generator, ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM,
-                  event
-                      .getExistingFileHelper()), event.getExistingFileHelper()));
+      generator.addProvider(
+          true,
+          new ExNihiloMekanismItemTagGenerator(
+              generator,
+              new BlockTagsProvider(
+                  generator,
+                  ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM,
+                  event.getExistingFileHelper()),
+              event.getExistingFileHelper()));
     }
     if (event.includeClient()) {
       // Items
-      generator.addProvider(true,
-          new ExNihiloMekanismOreItemGenerator(generator, event.getExistingFileHelper()));
+      generator.addProvider(
+          true, new ExNihiloMekanismOreItemGenerator(generator, event.getExistingFileHelper()));
     }
     // Lang
     generator.addProvider(true, new ExNihiloMekanismLangGenerator(generator, "en_us"));
