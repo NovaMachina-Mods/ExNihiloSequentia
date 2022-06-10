@@ -9,6 +9,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Fluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Tooltips;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 public class ExNihiloLangGenerator extends AbstractLangGenerator {
 
@@ -64,6 +65,15 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
     add(Tooltips.SHULKER, "Add to a barrel of witch water to spawn a Shulker");
     add(ModIds.EX_NIHILO_SEQUENTIA + ".subtitle.pebbleThrow", "Pebble flies");
     add("throwing.pebble", "Flying Pebble");
+
+    addJadeEntry("barrel");
+    addJadeEntry("crucible");
+    addJadeEntry("sieve");
+    addJadeEntry("infesting_leaves");
+  }
+
+  private void addJadeEntry(String id) {
+    add("config.jade.plugin_" + ModIds.EX_NIHILO_SEQUENTIA + "." + id, StringUtils.capitalize(id));
   }
 
   private void addItem() {

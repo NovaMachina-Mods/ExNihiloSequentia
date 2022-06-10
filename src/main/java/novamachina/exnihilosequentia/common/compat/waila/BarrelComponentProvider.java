@@ -21,7 +21,7 @@ import snownee.jade.api.config.IPluginConfig;
   @Override
   public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor,
       IPluginConfig iPluginConfig) {
-    CompoundTag tag = blockAccessor.getServerData();
+    CompoundTag tag = blockAccessor.getServerData().getCompound("Barrel");
     int count = tag.getInt("count");
     for(int i = 0; i < count; i++) {
       iTooltip.add(Component.literal(tag.getString("info" + i)));

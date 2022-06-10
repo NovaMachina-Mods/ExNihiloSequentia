@@ -37,6 +37,10 @@
   "block.exnihilosequentia.warped_crucible": "Warped Crucible",
   "block.exnihilosequentia.warped_sieve": "Warped Sieve",
   "block.exnihilosequentia.witch_water": "Witch Water",
+  "config.jade.plugin_exnihilosequentia.barrel": "Barrel",
+  "config.jade.plugin_exnihilosequentia.crucible": "Crucible",
+  "config.jade.plugin_exnihilosequentia.infesting_leaves": "Infesting_leaves",
+  "config.jade.plugin_exnihilosequentia.sieve": "Sieve",
   "exnihilosequentia.subtitle.pebbleThrow": "Pebble flies",
   "fluid.exnihilosequentia.sea_water": "Sea Water",
   "fluid.exnihilosequentia.sea_water_flow": "Flowing Sea Water",
@@ -195,7 +199,5 @@
   "waila.crucible.solid": "Solid(%s): %s",
   "waila.progress": "Progress: %s",
   "waila.sieve.block": "Sifting: %s",
-  "waila.sieve.mesh": "Mesh: %s",
-
-  "config.jade.plugin_exnihilosequentia.barrel": "Barrel"
+  "waila.sieve.mesh": "Mesh: %s"
 }
