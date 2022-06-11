@@ -43,7 +43,8 @@ spotless {
     }
     java {
         removeUnusedImports()
-        googleJavaFormat()
+        trimTrailingWhitespace()
+//        googleJavaFormat()
     }
 }
 

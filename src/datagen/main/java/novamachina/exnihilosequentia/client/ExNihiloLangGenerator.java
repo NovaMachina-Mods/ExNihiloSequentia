@@ -73,7 +73,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
   }
 
   private void addJadeEntry(String id) {
-    add("config.jade.plugin_" + ModIds.EX_NIHILO_SEQUENTIA + "." + id, StringUtils.capitalize(id));
+    add("config.jade.plugin_" + ModIds.EX_NIHILO_SEQUENTIA + "." + id, properNaming(id));
   }
 
   private void addItem() {

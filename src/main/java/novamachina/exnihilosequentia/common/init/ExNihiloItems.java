@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.PlantType;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,6 +24,7 @@ import novamachina.exnihilosequentia.common.item.MeshItem;
 import novamachina.exnihilosequentia.common.item.PebbleItem;
 import novamachina.exnihilosequentia.common.item.ResourceItem;
 import novamachina.exnihilosequentia.common.item.SeedBaseItem;
+import novamachina.exnihilosequentia.common.item.SilkwormItem;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.Color;
@@ -45,7 +47,7 @@ public class ExNihiloItems {
   public static final RegistryObject<Item> SILKWORM =
       ITEMS.register(
           ExNihiloConstants.Items.SILKWORM,
-          () -> new ResourceItem(ExNihiloConstants.Items.SILKWORM));
+          () -> new SilkwormItem(ExNihiloConstants.Items.SILKWORM));
 
   public static final Ore IRON =
       new Ore(ExNihiloConstants.Ore.IRON, true, false, false, new Color("BF8040"), ITEMS);
@@ -163,7 +165,7 @@ public class ExNihiloItems {
   public static final RegistryObject<ResourceItem> MYCELIUM_SPORE =
       ITEMS.register(
           ExNihiloConstants.Items.MYCELIUM_SPORE,
-          () -> new ResourceItem(ExNihiloConstants.Items.MYCELIUM_SPORE));
+          () -> new ResourceItem(ExNihiloConstants.Items.MYCELIUM_SPORE, Blocks.DIRT, Blocks.MYCELIUM));
   //  public static final RegistryObject<ResourceItem> CRIMSON_NYLIUM_SPORE = ITEMS
   //      .register(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
   //          () -> new ResourceItem(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE));
@@ -174,7 +176,7 @@ public class ExNihiloItems {
   public static final RegistryObject<ResourceItem> GRASS_SEED =
       ITEMS.register(
           ExNihiloConstants.Items.GRASS_SEED,
-          () -> new ResourceItem(ExNihiloConstants.Items.GRASS_SEED));
+          () -> new ResourceItem(ExNihiloConstants.Items.GRASS_SEED, Blocks.DIRT, Blocks.GRASS_BLOCK));
 
   @Nonnull
   public static final RegistryObject<ResourceItem> PORCELAIN_CLAY =
