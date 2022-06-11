@@ -128,7 +128,7 @@ public class ExNihiloConstants {
     public static final String UNCOOKED_CLAY_CROOK = createCrookName("uncooked_clay");
     public static final String DIAMOND_CROOK = createCrookName("diamond");
     public static final String DIORITE_CROOK = createCrookName("diorite");
-    public static final String GOLD_CROOK = createCrookName("gold");
+    public static final String GOLD_CROOK = createCrookName("golden");
     public static final String GRANITE_CROOK = createCrookName("granite");
     public static final String IRON_CROOK = createCrookName("iron");
     public static final String NETHERRACK_CROOK = createCrookName("netherrack");

@@ -1,15 +1,6 @@
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
-buildscript {
-    repositories {
-        maven {
-            name 'thiakil'
-            url "https://maven.thiakil.com"
-        }
-    }
-}
-
 plugins {
     id 'net.minecraftforge.gradle' version '5.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
