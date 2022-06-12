@@ -1,5 +1,5 @@
 "project_id" : "521396"
-"api_token" : "a3a3a0af44bdb90b38a73497fb08d870a6b4a11ca5227fd947be6a56b3bf1e10b00ebf918ab11572"
+"api_key_env" : CROWDIN_API_KEY
 "base_path" : "."
 files: [
  {
