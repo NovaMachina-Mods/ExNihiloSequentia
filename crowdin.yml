@@ -1,5 +1,3 @@
-project_id: 521396
-api_token_env: CROWDIN_API_KEY
 base_path: .
 files:
   - source: /src/datagen/generated/exnihilosequentia/assets/exnihilosequentia/lang/en_us.json
