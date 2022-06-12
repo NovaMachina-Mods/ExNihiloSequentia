@@ -2,8 +2,8 @@ project_id : 521396
 api_key_env : CROWDIN_API_KEY
 base_path : .
 files:
-  -source" : /src/datagen/generated/exnihilosequentia/assets/exnihilosequentia/lang/en_us.json
-   translation" : /src/main/resources/assets/exnihilosequentia/lang/%locale_with_underscore%.json
+  -source : /src/datagen/generated/exnihilosequentia/assets/exnihilosequentia/lang/en_us.json
+   translation : /src/main/resources/assets/exnihilosequentia/lang/%locale_with_underscore%.json
    language_mapping:
      locale_with_underscore:
        fr: fr_fr
