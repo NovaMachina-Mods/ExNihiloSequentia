@@ -1,0 +1,12 @@
+"project_id" : "521396"
+"api_token" : "a3a3a0af44bdb90b38a73497fb08d870a6b4a11ca5227fd947be6a56b3bf1e10b00ebf918ab11572"
+"base_path" : "."
+files: [
+ {
+  "source" : "/src/datagen/generated/exnihilosequentia/assets/exnihilosequentia/lang/en_us.json",
+  "translation" : "/src/main/resources/assets/exnihilosequentia/lang/%locale_with_underscore%.json",
+  language_mapping:
+    locale_with_underscore:
+      fr: fr_fr
+ }
+]
