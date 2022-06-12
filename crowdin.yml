@@ -1,3 +1,5 @@
+project_id: 521396
+api_token_env: CROWDIN_API_KEY
 base_path: .
 files:
   - source: /src/datagen/generated/exnihilosequentia/assets/exnihilosequentia/lang/en_us.json
@@ -22,26 +24,26 @@ files:
         ru: ru_ru
         sv-SE: sv_se
   - source: /src/datagen/generated/exnihiloae/assets/exnihiloae/lang/en_us.json
-  translation: /src/ae/resources/assets/exnihiloae/lang/%locale_with_underscore%.json
-  language_mapping:
-    locale_with_underscore:
-      de-AT: de_at
-      de-CH: de_ch
-      de: de_de
-      es-AR: es_ar
-      es-CL: es_cl
-      es-ES: es_es
-      es-MX: es_mx
-      es-UY: es_uy
-      es-VE: es_ve
-      fr-CA: fr_ca
-      fr: fr_fr
-      hu: hu_hu
-      nds: nds_de
-      nl-BE: nl_be
-      nl: nl_nl
-      ru: ru_ru
-      sv-SE: sv_se
+    translation: /src/ae/resources/assets/exnihiloae/lang/%locale_with_underscore%.json
+    language_mapping:
+      locale_with_underscore:
+        de-AT: de_at
+        de-CH: de_ch
+        de: de_de
+        es-AR: es_ar
+        es-CL: es_cl
+        es-ES: es_es
+        es-MX: es_mx
+        es-UY: es_uy
+        es-VE: es_ve
+        fr-CA: fr_ca
+        fr: fr_fr
+        hu: hu_hu
+        nds: nds_de
+        nl-BE: nl_be
+        nl: nl_nl
+        ru: ru_ru
+        sv-SE: sv_se
   - source: /src/datagen/generated/exnihilomekanism/assets/exnihilomekanism/lang/en_us.json
     translation: /src/mekanism/resources/assets/exnihilomekanism/lang/%locale_with_underscore%.json
     language_mapping:
