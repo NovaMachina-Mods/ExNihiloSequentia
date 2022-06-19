@@ -36,7 +36,10 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
       }
       tag(tags.getIngotTag()).add(ingot);
       tag(Tags.Items.INGOTS).addTag(tags.getIngotTag());
-
+      final Item piece = ore.getPieceItem();
+      if(piece != null) {
+        tag(ExNihiloTags.PIECE).add(piece);
+      }
     }
     @Nullable final Item chunk = ore.getRawOreItem();
     if (chunk == null) {
