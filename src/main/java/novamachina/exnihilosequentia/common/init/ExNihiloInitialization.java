@@ -83,6 +83,7 @@ public class ExNihiloInitialization {
     ExNihiloItems.init(modEventBus);
     ExNihiloBlockEntities.init(modEventBus);
     ExNihiloFluids.init(modEventBus);
+    ExNihiloFluidTypes.init(modEventBus);
     ExNihiloSerializers.init(modEventBus);
     ExNihiloLootModifiers.init(modEventBus);
     ExNihiloRecipeTypes.init(modEventBus);

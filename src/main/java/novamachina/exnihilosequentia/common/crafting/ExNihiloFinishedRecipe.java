@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
@@ -136,12 +136,12 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
 
   @Nonnull
   protected R addFluid(@Nonnull final Fluid fluid) {
-    return this.addFluid("fluid", new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
+    return this.addFluid("fluid", new FluidStack(fluid, FluidType.BUCKET_VOLUME));
   }
 
   @Nonnull
   protected R addFluid(@Nonnull final String id, @Nonnull final Fluid fluid) {
-    return this.addFluid(id, new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME));
+    return this.addFluid(id, new FluidStack(fluid, FluidType.BUCKET_VOLUME));
   }
 
   @Nonnull

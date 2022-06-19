@@ -75,6 +75,6 @@ public class WoodCrucibleEntity extends BaseCrucibleEntity {
 
   @Override
   public boolean canAcceptFluidTemperature(@Nonnull final FluidStack fluidStack) {
-    return fluidStack.getFluid().getAttributes().getTemperature() <= Config.getWoodBarrelMaxTemp();
+    return fluidStack.getFluid().getFluidType().getTemperature() <= Config.getWoodBarrelMaxTemp();
   }
 }

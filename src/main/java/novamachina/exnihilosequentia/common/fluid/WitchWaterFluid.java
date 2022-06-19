@@ -1,28 +1,21 @@
 package novamachina.exnihilosequentia.common.fluid;
 
 import javax.annotation.Nonnull;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloFluidTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public abstract class WitchWaterFluid extends ForgeFlowingFluid {
 
   @Nonnull
   public static final ForgeFlowingFluid.Properties WITCH_WATER_PROPS =
-      new ForgeFlowingFluid.Properties(
-          ExNihiloFluids.WITCH_WATER, ExNihiloFluids.WITCH_WATER_FLOW, FluidAttributes
-          .builder(new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-                  "block/witch_water"),
-              new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-                  "block/witch_water_flow"))
-          .color(0x3F1080FF))
+      new ForgeFlowingFluid.Properties(ExNihiloFluidTypes.WITCH_WATER_FLUID_TYPE,
+          ExNihiloFluids.WITCH_WATER, ExNihiloFluids.WITCH_WATER_FLOW)
           .bucket(ExNihiloItems.WITCH_WATER_BUCKET)
           .block(ExNihiloBlocks.WITCH_WATER);
 

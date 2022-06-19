@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -180,7 +180,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     @Nonnull final Fluid fluid = barrelTile.getTank().getFluid().getFluid();
     @Nonnull final Item input = player.getItemInHand(handIn).getItem();
     if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
-      barrelTile.getTank().drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+      barrelTile.getTank().drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
       barrelTile
           .getInventory()
           .setStackInSlot(
@@ -268,7 +268,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       if (!simulate) {
         barrelTile
             .getTank()
-            .drain(FluidAttributes.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+            .drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
         barrelTile
             .getInventory()
             .setStackInSlot(

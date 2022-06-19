@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -32,7 +32,7 @@ public class FluidTransformRegistry {
 
   @Nonnull
   public Fluid getResult(@Nonnull final Fluid fluidInTank, @Nonnull final ItemLike catalyst) {
-    final FluidStack fluidStack = new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME);
+    final FluidStack fluidStack = new FluidStack(fluidInTank, FluidType.BUCKET_VOLUME);
     return fluidResultCache
         .computeIfAbsent(fluidStack, k -> new HashMap<>())
         .computeIfAbsent(catalyst.asItem(), k -> {

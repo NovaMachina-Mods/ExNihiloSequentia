@@ -24,8 +24,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -43,7 +43,7 @@ import org.apache.logging.log4j.LogManager;
 public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidContainer {
 
   protected static final int MAX_FLUID_AMOUNT =
-      Config.getCrucibleNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
+      Config.getCrucibleNumberOfBuckets() * FluidType.BUCKET_VOLUME;
   @Nonnull private static final String BLOCK_TAG = "block";
   @Nonnull private static final String CURRENT_ITEM_TAG = "currentItem";
   @Nonnull private static final String FLUID_TAG = "fluid";
