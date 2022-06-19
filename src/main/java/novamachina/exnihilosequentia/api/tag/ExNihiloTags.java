@@ -25,6 +25,8 @@ public class ExNihiloTags {
   @Nonnull public static final TagKey<Item> BARREL = ItemTags.create(modLoc("barrels"));
   @Nonnull public static final TagKey<Item> SIEVE = ItemTags.create(modLoc("sieves"));
 
+  @Nonnull public static final TagKey<Item> PIECE = ItemTags.create(modLoc("pieces"));
+
   @Nonnull
   public static final TagKey<Block> MINEABLE_WITH_CROOK =
       BlockTags.create(modLoc("mineable/crook"));
