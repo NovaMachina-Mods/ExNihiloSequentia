@@ -64,7 +64,7 @@ public class AbstractLangGenerator extends LanguageProvider {
    * @param name set name of fluid that is shown ingame
    */
   protected void addFluid(String fluid, String name) {
-    final String FLUID_LANG = "fluid." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ".";
+    final String FLUID_LANG = "fluid_type." + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + ".";
     add(FLUID_LANG + fluid, name);
   }
 

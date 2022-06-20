@@ -8,6 +8,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class WitchWaterFluidType extends FluidType {
 
+  public static final ResourceLocation STILL = new ResourceLocation(
+      ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witch_water");
+  private static final ResourceLocation FLOW = new ResourceLocation(
+      ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witch_water_flow");
+
   public WitchWaterFluidType(Properties properties) {
     super(properties);
   }
@@ -15,13 +20,6 @@ public class WitchWaterFluidType extends FluidType {
   @Override
   public void initializeClient(Consumer<IFluidTypeRenderProperties> consumer) {
     consumer.accept(new IFluidTypeRenderProperties() {
-      private static final ResourceLocation STILL = new ResourceLocation(
-          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-          "block/witch_water");
-      private static final ResourceLocation FLOW = new ResourceLocation(
-          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-          "block/witch_water_flow");
-
       @Override
       public ResourceLocation getStillTexture() {
         return STILL;

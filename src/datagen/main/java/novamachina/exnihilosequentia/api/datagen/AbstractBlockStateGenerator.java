@@ -40,8 +40,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     simpleItemBlock(block, cubeAll(block));
   }
 
-  protected void registerFluid(@Nonnull final Fluid fluid) {
-    @Nonnull final ResourceLocation stillTexture = RenderProperties.get(fluid).getStillTexture();
+  protected void registerFluid(@Nonnull final Fluid fluid, ResourceLocation stillTexture) {
     @Nullable final ResourceLocation resourceLocation = ForgeRegistries.FLUIDS.getKey(fluid);
     if (resourceLocation != null) {
       @Nonnull

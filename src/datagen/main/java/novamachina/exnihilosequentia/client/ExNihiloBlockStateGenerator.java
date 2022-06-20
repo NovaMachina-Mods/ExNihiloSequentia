@@ -5,6 +5,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractBlockStateGenerator;
+import novamachina.exnihilosequentia.common.fluid.SeaWaterFluidType;
+import novamachina.exnihilosequentia.common.fluid.WitchWaterFluidType;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -76,8 +78,8 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
   }
 
   private void registerFluids() {
-    registerFluid(ExNihiloFluids.WITCH_WATER.get());
-    registerFluid(ExNihiloFluids.SEA_WATER.get());
+    registerFluid(ExNihiloFluids.WITCH_WATER.get(), WitchWaterFluidType.STILL);
+    registerFluid(ExNihiloFluids.SEA_WATER.get(), SeaWaterFluidType.STILL);
   }
 
   private void registerSieves() {

@@ -8,6 +8,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class SeaWaterFluidType extends FluidType {
 
+  public static final ResourceLocation STILL = new ResourceLocation(
+      ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water");
+  private static final ResourceLocation FLOW = new ResourceLocation(
+      ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water_flow");
+
   public SeaWaterFluidType(Properties properties) {
     super(properties);
   }
@@ -15,13 +20,6 @@ public class SeaWaterFluidType extends FluidType {
   @Override
   public void initializeClient(Consumer<IFluidTypeRenderProperties> consumer) {
     consumer.accept(new IFluidTypeRenderProperties() {
-      private static final ResourceLocation STILL = new ResourceLocation(
-          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-          "block/sea_water");
-      private static final ResourceLocation FLOW = new ResourceLocation(
-          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-          "block/sea_water_flow");
-
       @Override
       public ResourceLocation getStillTexture() {
         return STILL;
