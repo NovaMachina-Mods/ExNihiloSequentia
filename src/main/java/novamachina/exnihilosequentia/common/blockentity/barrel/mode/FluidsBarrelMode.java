@@ -206,7 +206,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   @Override
   protected boolean isTriggerItem(@Nonnull final ItemStack stack) {
-    return stack.getItem() instanceof BucketItem
+    return FluidUtil.getFluidContained(stack).map(FluidStack::getAmount).orElse(0) >= FluidType.BUCKET_VOLUME
         || ItemStack.isSame(
             stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
   }
