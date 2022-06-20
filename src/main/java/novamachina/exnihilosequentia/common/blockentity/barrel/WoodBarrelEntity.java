@@ -21,6 +21,6 @@ public class WoodBarrelEntity extends AbstractBarrelEntity {
 
   @Override
   public boolean canAcceptFluidTemperature(@Nonnull final FluidStack resource) {
-    return resource.getFluid().getAttributes().getTemperature() <= Config.getWoodBarrelMaxTemp();
+    return resource.getFluid().getFluidType().getTemperature() <= Config.getWoodBarrelMaxTemp();
   }
 }

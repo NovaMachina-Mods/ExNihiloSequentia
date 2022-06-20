@@ -1,28 +1,21 @@
 package novamachina.exnihilosequentia.common.fluid;
 
 import javax.annotation.Nonnull;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloFluidTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public abstract class SeaWaterFluid extends ForgeFlowingFluid {
 
   @Nonnull
   public static final ForgeFlowingFluid.Properties SEA_WATER_PROPS =
-      new ForgeFlowingFluid.Properties(
-          ExNihiloFluids.SEA_WATER, ExNihiloFluids.SEA_WATER_FLOW, FluidAttributes
-          .builder(
-              new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/sea_water"),
-              new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-                  "block/sea_water_flow"))
-          .color(0x3F1080FF))
+      new ForgeFlowingFluid.Properties(ExNihiloFluidTypes.SEA_WATER_FLUID_TYPE,
+          ExNihiloFluids.SEA_WATER, ExNihiloFluids.SEA_WATER_FLOW)
           .bucket(ExNihiloItems.SEA_WATER_BUCKET)
           .block(ExNihiloBlocks.SEA_WATER);
 

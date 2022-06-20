@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -34,9 +34,9 @@ public class FluidOnTopRegistry {
   @Nonnull
   private Item getResultItem(@Nonnull final Fluid fluidInTank, @Nonnull final Fluid fluidOnTop) {
     return itemResultCache
-        .computeIfAbsent(new FluidStack(fluidInTank, FluidAttributes.BUCKET_VOLUME),
+        .computeIfAbsent(new FluidStack(fluidInTank, FluidType.BUCKET_VOLUME),
             k -> new HashMap<>())
-        .computeIfAbsent(new FluidStack(fluidOnTop, FluidAttributes.BUCKET_VOLUME), k -> recipeList
+        .computeIfAbsent(new FluidStack(fluidOnTop, FluidType.BUCKET_VOLUME), k -> recipeList
             .stream()
             .filter(fluidOnTopRecipe -> fluidOnTopRecipe.validInputs(fluidInTank, fluidOnTop))
             .findFirst()

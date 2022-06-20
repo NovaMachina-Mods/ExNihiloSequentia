@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.util.JsonUtils;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -26,7 +26,7 @@ public class FluidStackUtils {
     if (fluid == null) {
       return null;
     }
-    FluidStack fluidStack = new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME);
+    FluidStack fluidStack = new FluidStack(fluid, FluidType.BUCKET_VOLUME);
     if (GsonHelper.isValidNode(jsonObject, "tag")) {
       fluidStack.setTag(JsonUtils.readNBT(jsonObject, "tag"));
     }

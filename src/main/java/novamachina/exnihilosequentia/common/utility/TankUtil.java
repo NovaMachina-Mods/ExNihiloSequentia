@@ -8,7 +8,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -27,7 +27,7 @@ public class TankUtil {
       @Nonnull final Player player,
       @Nonnull final IFluidHandler tank) {
     int waterAmount = 333;
-    if (tank.getFluidInTank(0).getAmount() % FluidAttributes.BUCKET_VOLUME == 666) {
+    if (tank.getFluidInTank(0).getAmount() % FluidType.BUCKET_VOLUME == 666) {
       waterAmount = 334;
     }
     if (player.getMainHandItem().getItem() == Items.POTION
@@ -56,7 +56,7 @@ public class TankUtil {
       @Nonnull final Player player,
       @Nonnull final IFluidHandler tank) {
     int waterAmount = 333;
-    if (tank.getFluidInTank(0).getAmount() % FluidAttributes.BUCKET_VOLUME == 334) {
+    if (tank.getFluidInTank(0).getAmount() % FluidType.BUCKET_VOLUME == 334) {
       waterAmount = 334;
     }
     if (player.getMainHandItem().getItem() == Items.GLASS_BOTTLE

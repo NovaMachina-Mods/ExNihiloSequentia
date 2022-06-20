@@ -25,8 +25,8 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -43,7 +43,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 public abstract class AbstractBarrelEntity extends BlockEntity implements IFluidContainer {
 
   public static final int MAX_FLUID_AMOUNT =
-      Config.getBarrelNumberOfBuckets() * FluidAttributes.BUCKET_VOLUME;
+      Config.getBarrelNumberOfBuckets() * FluidType.BUCKET_VOLUME;
   public static final int MAX_SOLID_AMOUNT = Config.getBarrelMaxSolidAmount();
   @Nonnull private static final String INVENTORY_TAG = "inventory";
   @Nonnull private static final String MODE_INFO_TAG = "modeInfo";

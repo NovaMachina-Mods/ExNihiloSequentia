@@ -8,6 +8,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.client.RenderProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -39,8 +40,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     simpleItemBlock(block, cubeAll(block));
   }
 
-  protected void registerFluid(@Nonnull final Fluid fluid) {
-    @Nonnull final ResourceLocation stillTexture = fluid.getAttributes().getStillTexture();
+  protected void registerFluid(@Nonnull final Fluid fluid, ResourceLocation stillTexture) {
     @Nullable final ResourceLocation resourceLocation = ForgeRegistries.FLUIDS.getKey(fluid);
     if (resourceLocation != null) {
       @Nonnull
