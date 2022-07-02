@@ -1,12 +1,19 @@
 package novamachina.exnihilotinkers.tinkers;
 
-//import static novamachina.exnihilotinkers.common.init.tconstruct.EXNTinkersTinkerItems.crookHead;
-//import static slimeknights.tconstruct.tools.TinkerToolParts.toolHandle;
-//import static slimeknights.tconstruct.tools.TinkerToolParts.toolBinding;
-//import static slimeknights.tconstruct.tools.TinkerToolParts.hammerHead;
+import net.minecraft.data.DataGenerator;
+import novamachina.exnihilotinkers.common.tinkers.ToolDefinitions;
+import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
+import slimeknights.tconstruct.library.data.tinkering.AbstractToolDefinitionDataProvider;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-//TODO reanable when tinkers available for 1.18.2
-public class EXNTinkersToolDefinitions { /*extends AbstractToolDefinitionDataProvider {
+import javax.annotation.Nonnull;
+
+import static novamachina.exnihilotinkers.common.init.tconstruct.EXNTinkersTinkerItems.crookHead;
+import static slimeknights.tconstruct.tools.TinkerToolParts.toolHandle;
+import static slimeknights.tconstruct.tools.TinkerToolParts.toolBinding;
+import static slimeknights.tconstruct.tools.TinkerToolParts.hammerHead;
+
+public class EXNTinkersToolDefinitions extends AbstractToolDefinitionDataProvider {
     public EXNTinkersToolDefinitions(DataGenerator generator) {
         super(generator, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
     }
@@ -34,6 +41,6 @@ public class EXNTinkersToolDefinitions { /*extends AbstractToolDefinitionDataPro
                 .stat(ToolStats.ATTACK_SPEED, 1.2F)
                 .smallToolStartingSlots()
                 .build();
-    }*/
+    }
 
 }

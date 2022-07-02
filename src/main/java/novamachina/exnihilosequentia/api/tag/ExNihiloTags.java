@@ -35,6 +35,16 @@ public class ExNihiloTags {
   public static final TagKey<Block> MINEABLE_WITH_HAMMER =
       BlockTags.create(modLoc("mineable/hammer"));
 
+  @Nonnull
+  public static final TagKey<Block> SIEVES =
+      BlockTags.create(modLoc("sieves"));
+  @Nonnull
+  public static final TagKey<Block> CRUCIBLES =
+      BlockTags.create(modLoc("crucibles"));
+  @Nonnull
+  public static final TagKey<Block> BARRELS =
+      BlockTags.create(modLoc("barrels"));
+
   @Nonnull public static final OreTag IRON = new OreTag(ExNihiloItems.IRON);
   @Nonnull public static final OreTag GOLD = new OreTag(ExNihiloItems.GOLD);
   @Nonnull public static final OreTag COPPER = new OreTag(ExNihiloItems.COPPER);

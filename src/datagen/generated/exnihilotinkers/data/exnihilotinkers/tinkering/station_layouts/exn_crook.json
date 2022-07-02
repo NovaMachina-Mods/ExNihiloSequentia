@@ -1,0 +1,28 @@
+{
+  "translation_key": "item.exnihilotinkers.exn_crook",
+  "icon": {
+    "item": "exnihilotinkers:exn_crook",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
+  },
+  "sortIndex": 6,
+  "input_slots": [
+    {
+      "icon": "exnihilotinkers:crook_head",
+      "translation_key": "item.exnihilotinkers.crook_head",
+      "x": 44,
+      "y": 28,
+      "filter": {
+        "item": "exnihilotinkers:crook_head"
+      }
+    },
+    {
+      "icon": "tconstruct:tool_handle",
+      "translation_key": "item.tconstruct.tool_handle",
+      "x": 22,
+      "y": 52,
+      "filter": {
+        "item": "tconstruct:tool_handle"
+      }
+    }
+  ]
+}

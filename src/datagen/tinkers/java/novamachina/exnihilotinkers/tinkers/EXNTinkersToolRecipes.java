@@ -1,7 +1,16 @@
 package novamachina.exnihilotinkers.tinkers;
 
-//TODO reanable when tinkers available for 1.18.2
-public class EXNTinkersToolRecipes { /*extends ToolsRecipeProvider implements IRecipeHelper {
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.recipes.FinishedRecipe;
+import novamachina.exnihilotinkers.common.init.tconstruct.EXNTinkersTinkerItems;
+import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
+import slimeknights.tconstruct.library.data.recipe.IRecipeHelper;
+import slimeknights.tconstruct.tools.data.ToolsRecipeProvider;
+
+import javax.annotation.Nonnull;
+import java.util.function.Consumer;
+
+public class EXNTinkersToolRecipes extends ToolsRecipeProvider implements IRecipeHelper {
     public EXNTinkersToolRecipes(DataGenerator generator) {
         super(generator);
     }
@@ -36,6 +45,6 @@ public class EXNTinkersToolRecipes { /*extends ToolsRecipeProvider implements IR
         String castFolder = "smeltery/parts/";
 
         partRecipes(consumer, EXNTinkersTinkerItems.crookHead, EXNTinkersTinkerItems.crookHeadCast, 3, partFolder, castFolder);
-    }*/
+    }
 
 }

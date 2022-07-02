@@ -1,29 +1,8 @@
 {
   "replace": false,
   "values": [
-    "exnihilosequentia:acacia_barrel",
-    "exnihilosequentia:birch_barrel",
-    "exnihilosequentia:crimson_barrel",
-    "exnihilosequentia:dark_oak_barrel",
-    "exnihilosequentia:jungle_barrel",
-    "exnihilosequentia:oak_barrel",
-    "exnihilosequentia:spruce_barrel",
-    "exnihilosequentia:warped_barrel",
-    "exnihilosequentia:acacia_crucible",
-    "exnihilosequentia:birch_crucible",
-    "exnihilosequentia:crimson_crucible",
-    "exnihilosequentia:dark_oak_crucible",
-    "exnihilosequentia:jungle_crucible",
-    "exnihilosequentia:oak_crucible",
-    "exnihilosequentia:spruce_crucible",
-    "exnihilosequentia:warped_crucible",
-    "exnihilosequentia:acacia_sieve",
-    "exnihilosequentia:birch_sieve",
-    "exnihilosequentia:crimson_sieve",
-    "exnihilosequentia:dark_oak_sieve",
-    "exnihilosequentia:jungle_sieve",
-    "exnihilosequentia:oak_sieve",
-    "exnihilosequentia:spruce_sieve",
-    "exnihilosequentia:warped_sieve"
+    "#exnihilosequentia:barrels",
+    "#exnihilosequentia:crucibles",
+    "#exnihilosequentia:sieves"
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "x x",
+    "x x",
+    "x-x"
+  ],
+  "key": {
+    "x": {
+      "item": "tconstruct:greenheart_planks"
+    },
+    "-": {
+      "item": "tconstruct:greenheart_planks_slab"
+    }
+  },
+  "result": {
+    "item": "exnihilotinkers:greenheart_barrel"
+  }
+}

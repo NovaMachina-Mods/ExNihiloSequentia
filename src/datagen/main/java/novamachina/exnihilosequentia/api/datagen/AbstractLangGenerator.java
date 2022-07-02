@@ -18,7 +18,7 @@ public class AbstractLangGenerator extends LanguageProvider {
   @Override
   protected void addTranslations() {}
 
-  private String properNaming(String item) {
+  protected String properNaming(String item) {
     return StringUtils.capitalize(item.replace("_", " "));
   }
 

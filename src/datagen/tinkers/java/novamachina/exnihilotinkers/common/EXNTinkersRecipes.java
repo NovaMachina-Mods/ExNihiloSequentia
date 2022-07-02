@@ -5,8 +5,27 @@ import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
+import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipeBuilder;
+import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
+import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
+import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
+import novamachina.exnihilosequentia.common.item.mesh.MeshType;
+import novamachina.exnihilotinkers.common.init.EXNTinkersBlocks;
+import novamachina.exnihilotinkers.common.init.EXNTinkersItems;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
+import slimeknights.mantle.recipe.ingredient.FluidIngredient;
+import slimeknights.tconstruct.fluids.TinkerFluids;
+import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
+import slimeknights.tconstruct.shared.TinkerCommons;
+import slimeknights.tconstruct.shared.block.SlimeType;
+import slimeknights.tconstruct.world.TinkerWorld;
 
 public class EXNTinkersRecipes extends AbstractRecipeGenerator {
 
@@ -19,16 +38,15 @@ public class EXNTinkersRecipes extends AbstractRecipeGenerator {
         "tinkers/casting_" + id);
   }
 
-  //TODO reanable when tinkers available for 1.18.2
   @Override
   protected void buildCraftingRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
-    //createOre(EXNTinkersItems.COBALT, TinkerWorld.rawCobalt.get(), consumer);
-    //registerSieve(consumer);
-    //registerFluidItem(consumer);
-    //registerTConstructAdditions(consumer);
-    //registerBlockRecipes(consumer);
+    createOre(EXNTinkersItems.COBALT, TinkerWorld.rawCobalt.get(), consumer);
+    registerSieve(consumer);
+    registerFluidItem(consumer);
+    registerTConstructAdditions(consumer);
+    registerBlockRecipes(consumer);
   }
-/*
+
     private void registerBlockRecipes(Consumer<FinishedRecipe> consumer) {
         //barrels
         createBarrel(consumer, EXNTinkersBlocks.BARREL_SKYROOT, TinkerWorld.skyroot.get().asItem(), TinkerWorld.skyroot.getSlab().asItem());
@@ -180,5 +198,5 @@ public class EXNTinkersRecipes extends AbstractRecipeGenerator {
                 .input(Ingredient.of(TinkerWorld.slimeDirt.get(input)))
                 .drop(TinkerWorld.slimeSapling.get(output))
                 .addRoll(new MeshWithChance(MeshType.STRING, 0.25F));
-    }*/
+    }
 }
