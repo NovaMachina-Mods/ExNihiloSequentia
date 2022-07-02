@@ -41,7 +41,6 @@ public class EXNTinkersToolDefinitions extends AbstractToolDefinitionDataProvide
                 .build();
         define(ToolDefinitions.exnHammer)
                 .part(hammerHead)
-                .part(toolBinding)
                 .part(toolHandle)
                 .stat(ToolStats.ATTACK_DAMAGE, 0.5F)
                 .stat(ToolStats.ATTACK_SPEED, 1.2F)
