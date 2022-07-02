@@ -1,7 +1,25 @@
 package novamachina.exnihilotinkers.common.init.tconstruct;
 
-//TODO reanable when tinkers available for 1.18.2
-public class EXNTinkersTinkerItems { /*extends TinkerModule {
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilotinkers.common.tinkers.ToolDefinitions;
+import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
+import org.apache.logging.log4j.LogManager;
+import slimeknights.mantle.registration.object.ItemObject;
+import slimeknights.tconstruct.common.TinkerModule;
+import slimeknights.tconstruct.common.registration.CastItemObject;
+import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
+import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.part.ToolPartItem;
+import slimeknights.tconstruct.smeltery.TinkerSmeltery;
+import slimeknights.tconstruct.tools.TinkerToolParts;
+import slimeknights.tconstruct.tools.TinkerTools;
+import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
+
+import java.util.function.Supplier;
+
+public class EXNTinkersTinkerItems extends TinkerModule {
     private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
     public static final ItemDeferredRegisterExtension ITEMS = new ItemDeferredRegisterExtension(EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
     private static final Item.Properties PART_PROPERTIES = new Item.Properties().tab(TinkerToolParts.TAB_TOOL_PARTS);
@@ -16,6 +34,6 @@ public class EXNTinkersTinkerItems { /*extends TinkerModule {
     public static void init(IEventBus modEventBus) {
         logger.debug("Register Ex Nihilo Tools to Tinkers");
         ITEMS.register(modEventBus);
-    }*/
+    }
 
 }

@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.25,
+      "mesh": "string"
+    }
+  ],
+  "input": {
+    "item": "tconstruct:ender_slime_dirt"
+  },
+  "result": {
+    "item": "tconstruct:ender_slime_grass_seeds"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "plp",
+    "s s"
+  ],
+  "key": {
+    "p": {
+      "item": "tconstruct:skyroot_planks"
+    },
+    "l": {
+      "item": "tconstruct:skyroot_planks_slab"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilotinkers:skyroot_sieve"
+  }
+}

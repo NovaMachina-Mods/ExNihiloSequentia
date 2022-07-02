@@ -1,0 +1,28 @@
+{
+  "translation_key": "item.exnihilotinkers.exn_hammer",
+  "icon": {
+    "item": "exnihilotinkers:exn_hammer",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
+  },
+  "sortIndex": 6,
+  "input_slots": [
+    {
+      "icon": "tconstruct:hammer_head",
+      "translation_key": "item.tconstruct.hammer_head",
+      "x": 49,
+      "y": 24,
+      "filter": {
+        "item": "tconstruct:hammer_head"
+      }
+    },
+    {
+      "icon": "tconstruct:tool_handle",
+      "translation_key": "item.tconstruct.tool_handle",
+      "x": 17,
+      "y": 56,
+      "filter": {
+        "item": "tconstruct:tool_handle"
+      }
+    }
+  ]
+}

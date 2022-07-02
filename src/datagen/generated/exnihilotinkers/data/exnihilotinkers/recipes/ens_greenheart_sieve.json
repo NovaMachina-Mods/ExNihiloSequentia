@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "plp",
+    "s s"
+  ],
+  "key": {
+    "p": {
+      "item": "tconstruct:greenheart_planks"
+    },
+    "l": {
+      "item": "tconstruct:greenheart_planks_slab"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "exnihilotinkers:greenheart_sieve"
+  }
+}

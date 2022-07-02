@@ -1,0 +1,23 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "rolls": [
+    {
+      "chance": 0.75,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.5,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.25,
+      "mesh": "string"
+    }
+  ],
+  "input": {
+    "item": "tconstruct:ichor_slime_dirt"
+  },
+  "result": {
+    "item": "tconstruct:blood_slime_ball"
+  }
+}

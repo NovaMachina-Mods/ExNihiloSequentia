@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilotinkers.common.init.tconstruct.EXNTinkersTinkerItems;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConfig;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
 import org.apache.logging.log4j.LogManager;
@@ -25,8 +26,7 @@ public class EXNTinkersInit {
     EXNTinkersBlockEntites.init(eventBus);
     EXNTinkersBlocks.init(eventBus);
     EXNTinkersItems.init(eventBus);
-    //TODO reanable when tinkers available for 1.18.2
-    //EXNTinkersTinkerItems.init(eventBus);
+    EXNTinkersTinkerItems.init(eventBus);
   }
 
   @SubscribeEvent

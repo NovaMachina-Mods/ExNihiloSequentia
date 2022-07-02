@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "pattern": [
+    "x x",
+    "x x",
+    "x-x"
+  ],
+  "key": {
+    "x": {
+      "item": "tconstruct:bloodshroom_planks"
+    },
+    "-": {
+      "item": "tconstruct:bloodshroom_planks_slab"
+    }
+  },
+  "result": {
+    "item": "exnihilotinkers:bloodshroom_barrel"
+  }
+}
