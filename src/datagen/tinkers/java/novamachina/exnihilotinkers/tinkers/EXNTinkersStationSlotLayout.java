@@ -22,8 +22,8 @@ public class EXNTinkersStationSlotLayout extends StationSlotLayoutProvider {
                 .build();
         defineModifiable(EXNTinkersTinkerItems.exnHammer)
                 .sortIndex(SORT_HARVEST)
-                .addInputItem(TinkerToolParts.hammerHead, 49, 24)
-                .addInputItem(TinkerToolParts.toolHandle, 17, 56)
+                .addInputItem(TinkerToolParts.hammerHead, 44, 28)
+                .addInputItem(TinkerToolParts.toolHandle, 22, 52)
                 .build();
     }
 

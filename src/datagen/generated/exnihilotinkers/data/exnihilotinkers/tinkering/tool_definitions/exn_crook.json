@@ -20,9 +20,6 @@
     "upgrades": 3,
     "abilities": 1
   },
-  "actions": [
-    "shears_dig"
-  ],
   "harvest": {
     "logic": {
       "type": "tconstruct:effective_tag",
