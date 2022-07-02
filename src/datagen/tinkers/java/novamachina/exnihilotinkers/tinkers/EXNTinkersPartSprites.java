@@ -21,7 +21,7 @@ public class EXNTinkersPartSprites extends AbstractPartSpriteProvider {
         addHead("crook_head");
 
         buildTool("crook").addBreakableHead("head").addHandle("handle");
-        buildTool("hammer").addBreakableHead("head").addHandle("handle").addBinding("binding");
+        buildTool("hammer").addBreakableHead("head").addHandle("handle");
     }
 
 }

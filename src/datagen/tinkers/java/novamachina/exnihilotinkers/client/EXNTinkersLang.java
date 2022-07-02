@@ -4,6 +4,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
 import novamachina.exnihilotinkers.common.init.EXNTinkersBlocks;
 import novamachina.exnihilotinkers.common.init.EXNTinkersItems;
 import novamachina.exnihilotinkers.common.init.tconstruct.EXNTinkersTinkerItems;
@@ -12,6 +13,10 @@ import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
 public class EXNTinkersLang extends AbstractLangGenerator {
     public EXNTinkersLang(DataGenerator gen, String locale) {
         super(gen, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS, locale);
+    }
+
+    private String properNaming(String item) {
+        return StringUtils.capitalize(item.replace("_", " "));
     }
 
     @Override
