@@ -2,7 +2,9 @@ package novamachina.exnihilotinkers.common.init.tconstruct;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
+import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilotinkers.common.tinkers.EXNTinkersSpecialModifiableItem;
 import novamachina.exnihilotinkers.common.tinkers.ToolDefinitions;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
 import org.apache.logging.log4j.LogManager;
@@ -26,8 +28,8 @@ public class EXNTinkersTinkerItems extends TinkerModule {
     private static final Item.Properties SMELTERY_PROPERTIES = new Item.Properties().tab(TinkerSmeltery.TAB_SMELTERY);
     private static final Supplier<Item.Properties> TOOL = () -> new Item.Properties().tab(TinkerTools.TAB_TOOLS);
 
-    public static final ItemObject<ModifiableItem> exnCrook = ITEMS.register("exn_crook", () -> new ModifiableItem(TOOL.get(), ToolDefinitions.exnCrook));
-    public static final ItemObject<ModifiableItem> exnHammer = ITEMS.register("exn_hammer", () -> new ModifiableItem(TOOL.get(), ToolDefinitions.exnHammer));
+    public static final ItemObject<EXNTinkersSpecialModifiableItem> exnCrook = ITEMS.register("exn_crook", () -> new EXNTinkersSpecialModifiableItem(TOOL.get(), ToolDefinitions.exnCrook, ExNihiloTags.MINEABLE_WITH_CROOK));
+    public static final ItemObject<EXNTinkersSpecialModifiableItem> exnHammer = ITEMS.register("exn_hammer", () -> new EXNTinkersSpecialModifiableItem(TOOL.get(), ToolDefinitions.exnHammer, ExNihiloTags.MINEABLE_WITH_HAMMER));
     public static final ItemObject<ToolPartItem> crookHead = ITEMS.register("crook_head", () -> new ToolPartItem(PART_PROPERTIES, HeadMaterialStats.ID));
     public static final CastItemObject crookHeadCast = ITEMS.registerCast("crook_head", SMELTERY_PROPERTIES);
 

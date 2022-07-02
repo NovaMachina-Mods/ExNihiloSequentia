@@ -7,5 +7,4 @@ public class ToolDefinitions {
 
   public static final ToolDefinition exnCrook= ToolDefinition.builder(EXNTinkersTinkerItems.exnCrook).meleeHarvest().build();
   public static final ToolDefinition exnHammer = ToolDefinition.builder(EXNTinkersTinkerItems.exnHammer).meleeHarvest().build();
-
 }
