@@ -43,7 +43,7 @@ sonarqube {
 }
 
 spotless {
-    //ratchetFrom 'origin/1.18'
+    ratchetFrom 'origin/1.18'
     format 'misc', {
         target '*.gradle', '*.md', '.gitignore'
 
