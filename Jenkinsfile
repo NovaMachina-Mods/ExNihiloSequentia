@@ -1,28 +1,7 @@
 pipeline {
     agent {
-      kubernetes {
-        yaml '''
-      apiVersion: v1
-      kind: Pod
-      spec:
-        containers:
-        - name: gradle
-          image: openjdk:17.0.2-jdk
-          command:
-          - sleep
-          args:
-          - 99d
-          volumeMounts:
-          - name: gradle-cache
-            mountPath: /home/jenkins/.gradle
-        restartPolicy: Never
-        volumes:
-        - name: gradle-cache
-          persistentVolumeClaim:
-            claimName: gradle-repo-storage'''
-      }
+      label 'master'
     }
-
     environment {
         NEXUS_USERNAME = credentials('MavenUser')
         NEXUS_PASSWORD = credentials('MavenPassword')
