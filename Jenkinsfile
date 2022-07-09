@@ -161,18 +161,18 @@ pipeline {
                         }
                     }
                 }
-//                 stage('Tinkers') {
-//                     when {
-//                         expression {
-//                             env.DEPLOY_TINKERS == 'true'
-//                         }
-//                     }
-//                     steps {
-//                         withGradle {
-//                             sh './gradlew curseforge480856 publishTinkersPublicationToMavenRepository'
-//                         }
-//                     }
-//                 }
+                 stage('Tinkers') {
+                     when {
+                         expression {
+                             env.DEPLOY_TINKERS == 'true'
+                         }
+                     }
+                     steps {
+                         withGradle {
+                             sh './gradlew curseforge480856 publishTinkersPublicationToMavenRepository'
+                         }
+                     }
+                 }
             }
         }
     }
