@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'master'
+    }
     environment {
         NEXUS_USERNAME = credentials('MavenUser')
         NEXUS_PASSWORD = credentials('MavenPassword')
