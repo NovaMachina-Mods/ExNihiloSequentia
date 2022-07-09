@@ -27,6 +27,7 @@ public class EXNTinkersItemTags extends AbstractItemTagGenerator {
     this.tag(TinkerTags.Items.MODIFIABLE).add(EXNTinkersTinkerItems.exnHammer.asItem(), EXNTinkersTinkerItems.exnCrook.asItem());
     this.tag(TinkerTags.Items.HARVEST).add(EXNTinkersTinkerItems.exnCrook.get());
     this.tag(TinkerTags.Items.HARVEST_PRIMARY).add(EXNTinkersTinkerItems.exnCrook.get(), EXNTinkersTinkerItems.exnHammer.get());
+    this.tag(TinkerTags.Items.MELEE).add(EXNTinkersTinkerItems.exnCrook.get(), EXNTinkersTinkerItems.exnHammer.get());
     this.tag(TinkerTags.Items.STONE_HARVEST).add(EXNTinkersTinkerItems.exnHammer.get());
     this.tag(TinkerTags.Items.MELEE_OR_HARVEST).add(EXNTinkersTinkerItems.exnHammer.get());
     this.tag(TinkerTags.Items.DURABILITY).add(EXNTinkersTinkerItems.exnCrook.get(), EXNTinkersTinkerItems.exnHammer.get());

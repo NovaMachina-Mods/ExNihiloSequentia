@@ -1,0 +1,11 @@
+{
+  "tool": "exnihilotinkers:exn_hammer",
+  "text": [
+    { "text": "The Ex Nihilo Hammer is a crushing tool, effective on stones, sand and gravel. It crushes blocks down to dust." }
+  ],
+  "properties": [
+    "0.5 Attack Damage",
+    "1.2 Attack Speed",
+    "220% Durability"
+  ]
+}

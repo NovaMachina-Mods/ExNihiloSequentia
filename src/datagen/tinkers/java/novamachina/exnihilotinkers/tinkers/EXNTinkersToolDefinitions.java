@@ -36,7 +36,6 @@ public class EXNTinkersToolDefinitions extends AbstractToolDefinitionDataProvide
                 .stat(ToolStats.ATTACK_SPEED, 3F)
                 .multiplier(ToolStats.DURABILITY, 1.4F)
                 .smallToolStartingSlots()
-                .action(ToolActions.SHEARS_DIG)
                 .effective(ExNihiloTags.MINEABLE_WITH_CROOK)
                 .build();
         define(ToolDefinitions.exnHammer)
@@ -46,7 +45,6 @@ public class EXNTinkersToolDefinitions extends AbstractToolDefinitionDataProvide
                 .stat(ToolStats.ATTACK_SPEED, 1.2F)
                 .multiplier(ToolStats.DURABILITY, 2.2F)
                 .smallToolStartingSlots()
-                .action(ToolActions.PICKAXE_DIG)
                 .effective(ExNihiloTags.MINEABLE_WITH_HAMMER)
                 .build();
     }
