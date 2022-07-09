@@ -164,11 +164,11 @@ pipeline {
                     }
                 }
                  stage('Tinkers') {
-                     when {
-                         expression {
-                             env.DEPLOY_TINKERS == 'true'
-                         }
-                     }
+//                      when {
+//                          expression {
+//                              env.DEPLOY_TINKERS == 'true'
+//                          }
+//                      }
                      steps {
                          withGradle {
                              sh './gradlew curseforge480856 publishTinkersPublicationToMavenRepository'
