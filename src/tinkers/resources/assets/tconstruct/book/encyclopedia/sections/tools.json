@@ -44,6 +44,16 @@
     "type": "tconstruct:tool",
     "data": "tools/small/flint_and_brick.json"
   },
+  {
+    "name": "exn_hammer",
+    "type": "tconstruct:tool",
+    "data": "tools/large/exn_hammer.json"
+  },
+  {
+    "name": "exn_crook",
+    "type": "tconstruct:tool",
+    "data": "tools/large/exn_crook.json"
+  },
 
   {
     "name": "group_large",
@@ -79,15 +89,5 @@
     "name": "vein_hammer",
     "type": "tconstruct:tool",
     "data": "tools/large/vein_hammer.json"
-  },
-  {
-    "name": "exn_hammer",
-    "type": "tconstruct:tool",
-    "data": "tools/large/exn_hammer.json"
-  },
-  {
-    "name": "exn_crook",
-    "type": "tconstruct:tool",
-    "data": "tools/large/exn_crook.json"
   }
 ]

@@ -4,8 +4,7 @@
     { "text": "The Crook is a precision leaf cutting tool, breaking leaves and harvesting silkworms, strings and saplings." }
   ],
   "properties": [
-    "0.0 Attack Damage",
-    "3.0 Attack Speed",
-    "140% Durability"
+    "Leaves-go-away Tool",
+    "Might drop more than one item"
   ]
 }
