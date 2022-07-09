@@ -7,7 +7,7 @@ modId = "exnihilotinkers" #mandatory
 version = "${version}" #mandatory
 displayName = "Ex Nihilo: Sequentia - Tinkers Addon" #mandatory
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia-tinkers-addon/" #optional
-logoFile = "" #optional
+logoFile = "logo-tinkers.png" #optional
 credits = "" #optional
 authors = "NovaMachina" #optional
 # The description text for the mod (multi line!) (#mandatory)

@@ -37,7 +37,7 @@ public class EXNTinkersLang extends AbstractLangGenerator {
         add(ITEM_STRING + EXNTinkersTinkerItems.crookHeadCast.asItem(), properNaming(EXNTinkersTinkerItems.crookHeadCast.asItem().getRegistryName().getPath().replace("_cast", "_gold_cast")));
         add(ITEM_STRING + EXNTinkersTinkerItems.crookHeadCast.getRedSand().asItem(), properNaming(EXNTinkersTinkerItems.crookHeadCast.getRedSand().asItem().getRegistryName().getPath()));
         add(ITEM_STRING + EXNTinkersTinkerItems.crookHeadCast.getSand().asItem(), properNaming(EXNTinkersTinkerItems.crookHeadCast.getSand().asItem().getRegistryName().getPath()));
-        add(ITEM_STRING + EXNTinkersTinkerItems.exnCrook.asItem() + ".description", "Crooking leaves is fun and silky");
-        add(ITEM_STRING + EXNTinkersTinkerItems.exnHammer.asItem() + ".description", "CRUSH THE STONE DOWN TO DUST");
+        add(ITEM_STRING + EXNTinkersTinkerItems.exnCrook.asItem() + ".description", "The Crook is a precision leaf cutting tool, breaking leaves and harvesting silkworms, strings and saplings.");
+        add(ITEM_STRING + EXNTinkersTinkerItems.exnHammer.asItem() + ".description", "The Ex Nihilo Hammer is a crushing tool, effective on stones, sand and gravel. It crushes blocks down to dust.");
     }
 }
