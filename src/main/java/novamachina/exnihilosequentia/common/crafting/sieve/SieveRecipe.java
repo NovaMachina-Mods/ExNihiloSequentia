@@ -51,7 +51,7 @@ public class SieveRecipe extends SerializableRecipe {
   }
 
   public void addRoll(@Nonnull final String meshString, final float chance) {
-    @Nonnull final MeshType mesh = MeshType.valueOf(meshString);
+    @Nonnull final MeshType mesh = MeshType.valueOf(meshString.toUpperCase());
     addRoll(mesh, chance);
   }
 
