@@ -135,7 +135,7 @@ pipeline {
                     }
                     steps {
                         withGradle {
-//                             sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
+                            sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
                         }
                     }
                 }
@@ -164,11 +164,11 @@ pipeline {
                     }
                 }
                  stage('Tinkers') {
-//                      when {
-//                          expression {
-//                              env.DEPLOY_TINKERS == 'true'
-//                          }
-//                      }
+                     when {
+                         expression {
+                             env.DEPLOY_TINKERS == 'true'
+                         }
+                     }
                      steps {
                          withGradle {
                              sh './gradlew curseforge480856 publishTinkersPublicationToMavenRepository'

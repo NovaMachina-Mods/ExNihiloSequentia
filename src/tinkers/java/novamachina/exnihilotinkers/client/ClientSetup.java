@@ -68,6 +68,7 @@ public class ClientSetup {
     registerOreColors(EXNTinkersItems.COBALT, event);
   }
 
+  @OnlyIn(Dist.CLIENT)
   private static void registerOreColors(Ore ore, ColorHandlerEvent.Item event) {
     @Nullable final OreItem chunkRegistryObject = ore.getRawOreItem();
     if (chunkRegistryObject != null) {
