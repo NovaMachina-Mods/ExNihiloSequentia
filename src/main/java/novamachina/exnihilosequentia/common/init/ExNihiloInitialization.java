@@ -72,7 +72,7 @@ public class ExNihiloInitialization {
   // MinecraftForge.EVENT_BUS
   @OnlyIn(Dist.CLIENT)
   @SubscribeEvent
-  public static void clearRegistries(@Nonnull final ClientPlayerNetworkEvent.LoggedOutEvent event) {
+  public static void clearRegistries(@Nonnull final ClientPlayerNetworkEvent.LoggingOut event) {
     logger.debug("Fired LoggedOutEvent");
     ExNihiloRegistries.clearRegistries();
   }

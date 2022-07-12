@@ -485,7 +485,7 @@ dependencies {
 
     if(project.hasProperty('jade_id') && project.hasProperty('jade_api_id')) {
         compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
-        runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+//        runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
     }
 
     if(project.hasProperty('crafttweaker_version')) {
