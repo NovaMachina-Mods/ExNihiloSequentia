@@ -66,11 +66,11 @@ body:
     validations:
       required: false
   - type: textarea
-      attributes:
+    attributes:
         label: Log File
         description: |
           Upload your log file with this issue. You can upload it here or using PasteBin, GitHub Gist, or mclo.gs.
 
           Tip: You can attach log files by clicking this area to hihglight it and then dragging files in.
-      validations:
-        required: true
+    validations:
+      required: true
