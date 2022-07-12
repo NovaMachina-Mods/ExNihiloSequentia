@@ -428,6 +428,19 @@ repositories {
             includeGroup 'com.teamcofh'
         }
     }
+    maven {
+        url 'https://maven.architectury.dev'
+        content {
+            includeGroup 'dev.architectury'
+        }
+    }
+
+    maven {
+        url 'https://maven.saps.dev/minecraft'
+        content {
+            includeGroup 'dev.latvian.mods'
+        }
+    }
 
     whenObjectAdded {
 // ForgeGradle adds these in an afterEvaluate, so we need to catch them as they're added and exclude mod artifacts/groups
@@ -444,6 +457,8 @@ repositories {
                         excludeGroup 'com.teamcofh'
                         excludeGroup 'slimeknights.tconstruct'
                         excludeGroup 'slimeknights.mantle'
+                        excludeGroup 'dev.architectury'
+                        excludeGroup 'dev.latvian.mods'
                     }
                     println("Adding exclusions to ${it.url}")
                 } catch (Exception ignored) {
@@ -482,6 +497,12 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
 
     implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+
+    if (project.hasProperty('kubejs_version') && project.hasProperty('rhino_version') && project.hasProperty('architectury_version')) {
+        implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+        implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+        implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
+    }
 
     if (project.hasProperty('ae2_version')) {
         implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
