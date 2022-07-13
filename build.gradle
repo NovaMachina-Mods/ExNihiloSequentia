@@ -19,6 +19,7 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.parchmentmc:librarian:1.+'
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.8.0"
     }
 }
 
@@ -30,7 +31,6 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id "org.sonarqube" version "3.3"
-    id "com.diffplug.spotless" version "6.6.1"
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -42,19 +42,22 @@ sonarqube {
     }
 }
 
-spotless {
-    ratchetFrom 'origin/1.18'
-    format 'misc', {
-        target '*.gradle', '*.md', '.gitignore'
+if(!System.getenv('CI')) {
+    apply plugin: 'com.diffplug.spotless'
+    spotless {
+        ratchetFrom 'origin/1.18'
+        format 'misc', {
+            target '*.gradle', '*.md', '.gitignore'
 
-        trimTrailingWhitespace()
-        indentWithSpaces(2)
-        endWithNewline()
-    }
+            trimTrailingWhitespace()
+            indentWithSpaces(2)
+            endWithNewline()
+        }
 //    java {
 //        removeUnusedImports()
 //        googleJavaFormat()
 //    }
+    }
 }
 
 wrapper {
@@ -63,6 +66,14 @@ wrapper {
 }
 
 defaultTasks 'build'
+
+task installLocalGitHook(type: Copy) {
+    from new File(rootProject.rootDir, 'scripts/pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks')}
+    fileMode 0775
+}
+
+build.dependsOn installLocalGitHook
 
 idea {
     module {
