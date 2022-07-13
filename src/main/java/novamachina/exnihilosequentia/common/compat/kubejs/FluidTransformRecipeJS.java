@@ -9,8 +9,8 @@ public class FluidTransformRecipeJS extends BaseRecipeJS {
 
   @Override
   public void create(ListJS args) {
-    this.fluidInTank((FluidStackJS) args.get(0));
-    this.result((FluidStackJS) args.get(1));
+    this.fluidInTank(FluidStackJS.of(args.get(0)));
+    this.result(FluidStackJS.of(args.get(1)));
     this.catalyst(this.parseIngredientItem(args.get(2)));
   }
 

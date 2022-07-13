@@ -8,8 +8,8 @@ public class FluidOnTopRecipeJS extends BaseRecipeJS {
 
   @Override
   public void create(ListJS args) {
-    this.fluidInTank((FluidStackJS) args.get(0));
-    this.fluidOnTop((FluidStackJS) args.get(1));
+    this.fluidInTank(FluidStackJS.of(args.get(0)));
+    this.fluidOnTop(FluidStackJS.of(args.get(1)));
     this.outputItems.add(this.parseResultItem(args.get(2)));
   }
 

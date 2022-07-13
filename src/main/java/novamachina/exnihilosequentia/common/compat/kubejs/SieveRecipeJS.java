@@ -19,6 +19,9 @@ public class SieveRecipeJS extends BaseRecipeJS {
     if (!isValidMesh(mesh)) {
       throw new RecipeExceptionJS("Mesh type must be " + MeshType.printList());
     }
+    if (chance < 0.0F || chance > 1.0F) {
+      throw new RecipeExceptionJS("Chance must be in range of 0.0 - 1.0");
+    }
     if (this.json.has("rolls")) {
       JsonObject object = new JsonObject();
       object.addProperty("chance", chance);

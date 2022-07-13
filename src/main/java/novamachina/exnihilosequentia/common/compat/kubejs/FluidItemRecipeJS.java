@@ -10,7 +10,7 @@ public class FluidItemRecipeJS extends BaseRecipeJS {
   public void create(ListJS args) {
     this.inputItems.add(this.parseIngredientItem(args.get(0)));
     this.outputItems.add(this.parseResultItem(args.get(1)));
-    this.fluid((FluidStackJS) args.get(2));
+    this.fluid(FluidStackJS.of(args.get(2)));
   }
 
   private void fluid(FluidStackJS fluidStack) {

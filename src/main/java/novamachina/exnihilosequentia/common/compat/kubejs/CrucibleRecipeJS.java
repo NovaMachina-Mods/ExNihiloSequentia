@@ -14,7 +14,7 @@ public class CrucibleRecipeJS extends BaseRecipeJS {
     this.inputItems.add(this.parseIngredientItem(args.get(0)));
     this.crucibleType(args.get(1));
     this.amount(((Number) args.get(2)).intValue());
-    this.fluidResult((FluidStackJS) args.get(3));
+    this.fluidResult(FluidStackJS.of(args.get(3)));
   }
 
   private void fluidResult(FluidStackJS fluidStack) {
