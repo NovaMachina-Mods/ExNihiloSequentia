@@ -4,14 +4,14 @@ import com.google.gson.JsonArray;
 import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.util.ListJS;
 
-public class HammerRecipeJS extends BaseRecipeJS {
+public class SimpleChanceRecipeJS extends BaseRecipeJS {
 
   @Override
   public void create(ListJS args) {
     this.inputItems.add(this.parseIngredientItem(args.get(0)));
   }
 
-  public HammerRecipeJS addResult(ItemStackJS item, int count, float chance) {
+  public SimpleChanceRecipeJS addDrop(ItemStackJS item, int count, float chance) {
     DropWithChanceJS drop = new DropWithChanceJS(chance, count, item);
 
     if (this.json.has("results")) {
