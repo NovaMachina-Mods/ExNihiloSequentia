@@ -18,20 +18,4 @@ public class FluidItemRecipeJS extends BaseRecipeJS {
     object.addProperty("fluid", fluidStack.getId());
     this.json.add("fluid", object);
   }
-
-  @Override
-  public void deserialize() {
-    this.inputItems.add(this.parseIngredientItem(this.json.get("input")));
-    this.outputItems.add(this.parseResultItem(this.json.get("result")));
-  }
-
-  @Override
-  public void serialize() {
-    if(this.serializeInputs) {
-      this.json.add("input", this.inputItems.get(0).toJson());
-    }
-    if(this.serializeOutputs) {
-      this.json.add("result", this.outputItems.get(0).toJson());
-    }
-  }
 }
