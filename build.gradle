@@ -19,6 +19,7 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.parchmentmc:librarian:1.+'
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.8.0"
     }
 }
 
@@ -30,7 +31,6 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id "org.sonarqube" version "3.3"
-    id "com.diffplug.spotless" version "6.6.1"
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -42,19 +42,22 @@ sonarqube {
     }
 }
 
-spotless {
-    ratchetFrom 'origin/1.18'
-    format 'misc', {
-        target '*.gradle', '*.md', '.gitignore'
+if(!System.getenv('CI')) {
+    apply plugin: 'com.diffplug.spotless'
+    spotless {
+        ratchetFrom 'origin/1.18'
+        format 'misc', {
+            target '*.gradle', '*.md', '.gitignore'
 
-        trimTrailingWhitespace()
-        indentWithSpaces(2)
-        endWithNewline()
-    }
+            trimTrailingWhitespace()
+            indentWithSpaces(2)
+            endWithNewline()
+        }
 //    java {
 //        removeUnusedImports()
 //        googleJavaFormat()
 //    }
+    }
 }
 
 wrapper {
@@ -63,6 +66,14 @@ wrapper {
 }
 
 defaultTasks 'build'
+
+task installLocalGitHook(type: Copy) {
+    from new File(rootProject.rootDir, 'scripts/pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks')}
+    fileMode 0775
+}
+
+build.dependsOn installLocalGitHook
 
 idea {
     module {
@@ -428,6 +439,19 @@ repositories {
             includeGroup 'com.teamcofh'
         }
     }
+    maven {
+        url 'https://maven.architectury.dev'
+        content {
+            includeGroup 'dev.architectury'
+        }
+    }
+
+    maven {
+        url 'https://maven.saps.dev/minecraft'
+        content {
+            includeGroup 'dev.latvian.mods'
+        }
+    }
 
     whenObjectAdded {
 // ForgeGradle adds these in an afterEvaluate, so we need to catch them as they're added and exclude mod artifacts/groups
@@ -444,6 +468,8 @@ repositories {
                         excludeGroup 'com.teamcofh'
                         excludeGroup 'slimeknights.tconstruct'
                         excludeGroup 'slimeknights.mantle'
+                        excludeGroup 'dev.architectury'
+                        excludeGroup 'dev.latvian.mods'
                     }
                     println("Adding exclusions to ${it.url}")
                 } catch (Exception ignored) {
@@ -482,6 +508,12 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
 
     implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+
+    if (project.hasProperty('kubejs_version') && project.hasProperty('rhino_version') && project.hasProperty('architectury_version')) {
+        implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+        implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+        implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
+    }
 
     if (project.hasProperty('ae2_version')) {
         implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
