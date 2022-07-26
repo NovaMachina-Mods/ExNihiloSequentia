@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "exnihilosequentia",
+},
+  "ingredients": [
+        {
+            "item": "minecraft:bone_meal"
+        },
+        {
+            "item": "minecraft:gravel"
+        },
+        {
+            "item": "minecraft:amethyst_shard"
+        }
+    ],
+  "result": {
+    "item": "minecraft:calcite"
+  }
+}
