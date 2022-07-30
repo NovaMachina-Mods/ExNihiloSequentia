@@ -16,7 +16,7 @@ public class EXNTinkersBlockEntites {
 
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
   private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-      DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES,
+      DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,
           EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
 
   public static void init(IEventBus eventBus) {

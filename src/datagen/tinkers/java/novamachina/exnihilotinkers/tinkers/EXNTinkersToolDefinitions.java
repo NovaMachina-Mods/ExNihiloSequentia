@@ -24,7 +24,9 @@ public class EXNTinkersToolDefinitions { /*extends AbstractToolDefinitionDataPro
                 .part(toolHandle)
                 .stat(ToolStats.ATTACK_DAMAGE, -2F)
                 .stat(ToolStats.ATTACK_SPEED, 3F)
+                .multiplier(ToolStats.DURABILITY, 1.4F)
                 .smallToolStartingSlots()
+                .effective(ExNihiloTags.MINEABLE_WITH_CROOK)
                 .build();
         define(ToolDefinitions.exnHammer)
                 .part(hammerHead)
@@ -32,7 +34,9 @@ public class EXNTinkersToolDefinitions { /*extends AbstractToolDefinitionDataPro
                 .part(toolHandle)
                 .stat(ToolStats.ATTACK_DAMAGE, 0.5F)
                 .stat(ToolStats.ATTACK_SPEED, 1.2F)
+                .multiplier(ToolStats.DURABILITY, 2.2F)
                 .smallToolStartingSlots()
+                .effective(ExNihiloTags.MINEABLE_WITH_HAMMER)
                 .build();
     }*/
 

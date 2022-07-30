@@ -38,7 +38,7 @@ public class PacketHandler {
             HandshakeMessages.LoginIndexedMessage::setLoginIndex)
         .encoder(HandshakeMessages.C2SAcknowledge::encode)
         .decoder(HandshakeMessages.C2SAcknowledge::decode)
-        .consumer(
+        .consumerNetworkThread(
             HandshakeHandler.indexFirst(
                 (handler, msg, s) -> ExNihiloHandshakeHandler.handleAcknowledge(msg, s)))
         .add();
@@ -50,7 +50,7 @@ public class PacketHandler {
             HandshakeMessages.LoginIndexedMessage::setLoginIndex)
         .encoder(HandshakeMessages.S2COreList::encode)
         .decoder(HandshakeMessages.S2COreList::decode)
-        .consumer(
+        .consumerNetworkThread(
             HandshakeHandler.biConsumerFor(
                 (handler, msg, supplier) -> {
                   try {

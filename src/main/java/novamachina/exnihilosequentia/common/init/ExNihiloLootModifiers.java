@@ -13,7 +13,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 public class ExNihiloLootModifiers {
   private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS =
       DeferredRegister.create(
-          Keys.LOOT_MODIFIER_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+          Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
 
   public static final RegistryObject<Codec<? extends UseHammerModifier>> hammerModifier =
       LOOT_MODIFIERS.register("use_hammer", UseHammerModifier.CODEC);

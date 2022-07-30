@@ -17,7 +17,7 @@ import org.apache.logging.log4j.LogManager;
 public class EXNTinkersBlocks {
 
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(
+  public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(
       ForgeRegistries.BLOCKS, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS
   );
   public static final RegistryObject<BlockSieve> SIEVE_BLOODSHROOM = BLOCKS.register(
