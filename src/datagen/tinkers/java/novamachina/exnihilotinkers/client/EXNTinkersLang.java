@@ -4,7 +4,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
-import novamachina.exnihilosequentia.common.utility.StringUtils;
 import novamachina.exnihilotinkers.common.init.EXNTinkersBlocks;
 import novamachina.exnihilotinkers.common.init.EXNTinkersItems;
 import novamachina.exnihilotinkers.common.init.tconstruct.EXNTinkersTinkerItems;
