@@ -4,8 +4,7 @@
   "textures": {
     "head": "exnihilotinkers:item/tool/crook/head",
     "broken_head": "exnihilotinkers:item/tool/crook/broken_head",
-    "handle": "exnihilotinkers:item/tool/crook/handle",
-    "binding": "exnihilotinkers:item/tool/crook/binding"
+    "handle": "exnihilotinkers:item/tool/crook/handle"
   },
   "modifier_roots": [
     "exnihilotinkers:item/tool/crook/modifiers/"
@@ -19,10 +18,6 @@
       "name": "head",
       "index": 0,
       "broken": "broken_head"
-    },
-    {
-      "name": "binding",
-      "index": 2
     }
   ]
 }

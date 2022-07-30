@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:table_casting_material",
+  "cast": {
+    "tag": "exnihilotinkers:casts/single_use/crook_head"
+  },
+  "cast_consumed": true,
+  "item_cost": 3,
+  "result": "exnihilotinkers:crook_head"
+}

@@ -1,7 +1,11 @@
 package novamachina.exnihilotinkers.tinkers;
 
-//TODO reanable when tinkers available for 1.18.2
-public class EXNTinkersPartSprites { /*extends AbstractPartSpriteProvider {
+import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
+import slimeknights.tconstruct.library.client.data.material.AbstractPartSpriteProvider;
+
+import javax.annotation.Nonnull;
+
+public class EXNTinkersPartSprites extends AbstractPartSpriteProvider {
     public EXNTinkersPartSprites() {
         super(EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
     }
@@ -17,7 +21,7 @@ public class EXNTinkersPartSprites { /*extends AbstractPartSpriteProvider {
         addHead("crook_head");
 
         buildTool("crook").addBreakableHead("head").addHandle("handle");
-        buildTool("hammer").addBreakableHead("head").addHandle("handle").addBinding("binding");
-    }*/
+        buildTool("hammer").addBreakableHead("head").addHandle("handle");
+    }
 
 }

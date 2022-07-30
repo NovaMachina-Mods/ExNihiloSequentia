@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 public class EXNTinkersItems {
 
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
+  public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
       ForgeRegistries.ITEMS, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
   public static final Ore COBALT = new Ore("cobalt", true, false, false, new Color("2376DD"),
       ITEMS);

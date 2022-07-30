@@ -4,8 +4,7 @@
   "textures": {
     "head": "exnihilotinkers:item/tool/hammer/head",
     "broken_head": "exnihilotinkers:item/tool/hammer/broken_head",
-    "handle": "exnihilotinkers:item/tool/hammer/handle",
-    "binding": "exnihilotinkers:item/tool/hammer/binding"
+    "handle": "exnihilotinkers:item/tool/hammer/handle"
   },
   "modifier_roots": [
     "exnihilotinkers:item/tool/hammer/modifiers/"
@@ -19,10 +18,6 @@
       "name": "head",
       "index": 0,
       "broken": "broken_head"
-    },
-    {
-      "name": "binding",
-      "index": 2
     }
   ]
 }

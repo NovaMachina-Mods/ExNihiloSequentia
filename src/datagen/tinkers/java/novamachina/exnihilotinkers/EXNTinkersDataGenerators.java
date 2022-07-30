@@ -7,13 +7,19 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import novamachina.exnihilotinkers.client.EXNTinkersBlockStates;
+import novamachina.exnihilotinkers.client.EXNTinkersLang;
 import novamachina.exnihilotinkers.client.EXNTinkersOreItems;
+import novamachina.exnihilotinkers.common.EXNTinkersBlockTags;
 import novamachina.exnihilotinkers.common.EXNTinkersItemTags;
 import novamachina.exnihilotinkers.common.EXNTinkersLootTables;
 import novamachina.exnihilotinkers.common.EXNTinkersRecipes;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
-//import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
-//import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
+import novamachina.exnihilotinkers.tinkers.EXNTinkersPartSprites;
+import novamachina.exnihilotinkers.tinkers.EXNTinkersStationSlotLayout;
+import novamachina.exnihilotinkers.tinkers.EXNTinkersToolDefinitions;
+import novamachina.exnihilotinkers.tinkers.EXNTinkersToolRecipes;
+import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
+import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EXNTinkersDataGenerators {
@@ -30,26 +36,27 @@ public class EXNTinkersDataGenerators {
       // Recipes
       generator.addProvider(new EXNTinkersRecipes(generator));
       // Tags
-      generator.addProvider(new EXNTinkersItemTags(generator, new BlockTagsProvider(generator,
-          EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS, fileHelper), fileHelper));
+      BlockTagsProvider blockTags = new EXNTinkersBlockTags(generator, fileHelper);
+      generator.addProvider(blockTags);
+      generator.addProvider(new EXNTinkersItemTags(generator, blockTags, fileHelper));
       // LootTables
       generator.addProvider(new EXNTinkersLootTables(generator));
-      //TODO reanable when tinkers available for 1.18.2
       //Tinkers Tool Recipe
-      //generator.addProvider(new EXNTinkersToolRecipes(generator));
-      ////Tinkers Tool Definition
-      //generator.addProvider(new EXNTinkersToolDefinitions(generator));
-      ////Tinkers Station Slot Layout
-      //generator.addProvider(new EXNTinkersStationSlotLayout(generator));
+      generator.addProvider(new EXNTinkersToolRecipes(generator));
+      //Tinkers Tool Definition
+      generator.addProvider(new EXNTinkersToolDefinitions(generator));
+      //Tinkers Station Slot Layout
+      generator.addProvider(new EXNTinkersStationSlotLayout(generator));
     }
     if (event.includeClient()) {
       // BlockStates
       generator.addProvider(new EXNTinkersBlockStates(generator, fileHelper));
+      // Lang
+      generator.addProvider(new EXNTinkersLang(generator, "en_us"));
       // Items
       generator.addProvider(new EXNTinkersOreItems(generator, fileHelper));
-      //TODO reanable when tinkers available for 1.18.2
-      //TinkerMaterialSpriteProvider materialSprites = new TinkerMaterialSpriteProvider();
-      //generator.addProvider(new MaterialPartTextureGenerator(generator, fileHelper, new EXNTinkersPartSprites(), materialSprites));
+      TinkerMaterialSpriteProvider materialSprites = new TinkerMaterialSpriteProvider();
+      generator.addProvider(new MaterialPartTextureGenerator(generator, fileHelper, new EXNTinkersPartSprites(), materialSprites));
     }
   }
 }

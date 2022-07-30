@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "exnihilotinkers:ens_bloodshroom_barrel"
+    ]
+  },
+  "criteria": {
+    "has_walls": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tconstruct:bloodshroom_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_base": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tconstruct:bloodshroom_planks_slab"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "exnihilotinkers:ens_bloodshroom_barrel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_walls",
+      "has_base",
+      "has_the_recipe"
+    ]
+  ]
+}
