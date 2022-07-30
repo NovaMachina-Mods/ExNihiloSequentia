@@ -23,7 +23,7 @@ public class ExNihiloBlockEntities {
 
   @Nonnull
   private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-      DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES,
+      DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,
           ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
   @Nonnull
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());  @Nonnull

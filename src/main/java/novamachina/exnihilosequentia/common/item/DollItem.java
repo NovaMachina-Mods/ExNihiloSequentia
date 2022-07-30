@@ -78,9 +78,9 @@ public class DollItem extends Item {
     ResourceLocation spawneeResourceLocation =
         new ResourceLocation(this.entityModId, this.entityName);
 
-    if (ForgeRegistries.ENTITIES.containsKey(spawneeResourceLocation)) {
+    if (ForgeRegistries.ENTITY_TYPES.containsKey(spawneeResourceLocation)) {
       @Nullable
-      final EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(spawneeResourceLocation);
+      final EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(spawneeResourceLocation);
       if (entityType != null) {
         @Nullable final Entity spawnee = entityType.create(world);
         if (spawnee != null) {

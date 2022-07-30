@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.fluid;
 
 import java.util.function.Consumer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.IFluidTypeRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidType;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -18,8 +18,8 @@ public class SeaWaterFluidType extends FluidType {
   }
 
   @Override
-  public void initializeClient(Consumer<IFluidTypeRenderProperties> consumer) {
-    consumer.accept(new IFluidTypeRenderProperties() {
+  public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+    consumer.accept(new IClientFluidTypeExtensions() {
       @Override
       public ResourceLocation getStillTexture() {
         return STILL;

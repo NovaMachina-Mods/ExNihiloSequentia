@@ -5,13 +5,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.EmptyModelData;
+import net.minecraftforge.client.model.data.ModelData;
 import novamachina.exnihilosequentia.common.blockentity.SieveEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.apache.logging.log4j.LogManager;
@@ -49,7 +50,7 @@ public class SieveRender extends AbstractModBlockRenderer<SieveEntity> {
 
       BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
       blockRenderer.renderSingleBlock(
-          state, matrixStack, buffer, combinedLight, combinedOverlay, EmptyModelData.INSTANCE);
+          state, matrixStack, buffer, combinedLight, combinedOverlay, ModelData.EMPTY, RenderType.cutoutMipped());
 
       matrixStack.popPose();
     }

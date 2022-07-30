@@ -15,7 +15,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.RenderProperties;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEntity;
 import novamachina.exnihilosequentia.common.utility.Color;
@@ -50,10 +50,10 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
     Fluid fluid = tileEntity.getFluid();
     @Nullable
     final ResourceLocation fluidTexture =
-        fluid != null ? RenderProperties.get(fluid).getStillTexture() : null;
+        fluid != null ? IClientFluidTypeExtensions.of(fluid).getStillTexture() : null;
     @Nullable
     final Color fluidColor =
-        fluid != null ? new Color(RenderProperties.get(fluid).getColorTint()) : Color.INVALID_COLOR;
+        fluid != null ? new Color(IClientFluidTypeExtensions.of(fluid).getTintColor()) : Color.INVALID_COLOR;
     renderFluid(
         tileEntity,
         matrixStack,

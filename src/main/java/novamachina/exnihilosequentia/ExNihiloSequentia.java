@@ -21,13 +21,15 @@ public class ExNihiloSequentia {
   @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
   public ExNihiloSequentia() {
-    logger.debug("Starting Ex Nihilo: Sequentia");
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
     Config.loadConfig(
         Config.COMMON_CONFIG,
         FMLPaths.CONFIGDIR
             .get()
             .resolve(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "-common.toml"));
+
+    logger.debug("Starting Ex Nihilo: Sequentia");
+
     ExNihiloInitialization.init(FMLJavaModLoadingContext.get().getModEventBus());
     FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
     FMLJavaModLoadingContext.get()

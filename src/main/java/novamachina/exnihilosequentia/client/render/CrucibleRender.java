@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.RenderProperties;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import novamachina.exnihilosequentia.common.blockentity.crucible.BaseCrucibleEntity;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -46,10 +46,10 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
     @Nullable final Fluid fluid = tileEntity.getFluid();
     @Nullable
     final ResourceLocation fluidTexture =
-        fluid != null ? RenderProperties.get(fluid).getStillTexture() : null;
+        fluid != null ? IClientFluidTypeExtensions.of(fluid).getStillTexture() : null;
     @Nonnull
     final Color fluidColor =
-        fluid != null ? new Color(RenderProperties.get(fluid).getColorTint()) : Color.INVALID_COLOR;
+        fluid != null ? new Color(IClientFluidTypeExtensions.of(fluid).getTintColor()) : Color.INVALID_COLOR;
     @Nonnull final Color blockColor = getBlockColor(solidTexture, tileEntity);
     renderFluid(
         tileEntity,

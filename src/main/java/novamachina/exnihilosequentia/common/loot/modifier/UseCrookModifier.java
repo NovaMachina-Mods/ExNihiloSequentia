@@ -1,10 +1,13 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
-import com.google.gson.JsonObject;
+import com.google.common.base.Suppliers;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
@@ -18,7 +21,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
@@ -33,6 +36,8 @@ import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 
 public class UseCrookModifier extends LootModifier {
+  public static final Supplier<Codec<UseCrookModifier>> CODEC = Suppliers.memoize(() ->
+      RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, UseCrookModifier::new)));
 
   @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
 
@@ -121,21 +126,8 @@ public class UseCrookModifier extends LootModifier {
     }
   }
 
-  public static class Serializer extends GlobalLootModifierSerializer<UseCrookModifier> {
-
-    @Override
-    @Nonnull
-    public UseCrookModifier read(
-        @Nonnull final ResourceLocation location,
-        @Nonnull final JsonObject object,
-        @Nonnull final LootItemCondition[] ailootcondition) {
-      return new UseCrookModifier(ailootcondition);
-    }
-
-    @Override
-    @Nonnull
-    public JsonObject write(@Nonnull final UseCrookModifier instance) {
-      return makeConditions(instance.conditions);
-    }
+  @Override
+  public Codec<? extends IGlobalLootModifier> codec() {
+    return CODEC.get();
   }
 }
