@@ -24,7 +24,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "NovaMachina-Mods_ExNihiloSequentia_AYGoA_nsnvMbtB54W0q1"
+        property "sonar.projectKey", "Ex-Nihilo-Sequentia"
     }
 }
 
