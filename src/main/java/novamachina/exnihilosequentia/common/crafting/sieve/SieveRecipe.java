@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -103,6 +105,11 @@ public class SieveRecipe extends SerializableRecipe {
   @Nonnull
   public ItemStack getResultItem() {
     return drop.copy();
+  }
+
+  @Override
+  public NonNullList<Ingredient> getIngredients() {
+    return NonNullList.of(Ingredient.EMPTY, input);
   }
 
   @Nonnull

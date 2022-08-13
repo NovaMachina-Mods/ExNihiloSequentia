@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -70,6 +72,11 @@ public class HammerRecipe extends SerializableRecipe {
     List<ItemStack> returnList = new ArrayList<>();
     output.forEach(stack -> returnList.add(stack.getStack()));
     return returnList;
+  }
+
+  @Override
+  public NonNullList<Ingredient> getIngredients() {
+    return NonNullList.of(Ingredient.EMPTY, input);
   }
 
   @Override

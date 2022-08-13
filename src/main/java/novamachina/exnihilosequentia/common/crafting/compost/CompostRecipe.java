@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -58,6 +60,11 @@ public class CompostRecipe extends SerializableRecipe {
   @Nonnull
   public List<ItemStack> getInputs() {
     return Arrays.asList(input.getItems());
+  }
+
+  @Override
+  public NonNullList<Ingredient> getIngredients() {
+    return NonNullList.of(Ingredient.EMPTY, input);
   }
 
   @Override
