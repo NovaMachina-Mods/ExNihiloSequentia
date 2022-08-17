@@ -8,6 +8,7 @@ pipeline {
         CURSEFORGE_KEY = credentials('CurseForgeAPIKey')
         DISCORD_WEBHOOK_URL = credentials('discord-webhook-url')
         DISCORD_PREFIX = "Job: Ex Nihilo Branch: ${BRANCH_NAME} Build: #${BUILD_NUMBER}"
+        SONARQUBE_TOKEN = credentials('ex-nihilo-sonarqube-token')
     }
     options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
