@@ -38,6 +38,11 @@ public class SieveRecipeJS extends BaseRecipeJS {
     return this;
   }
 
+  public SieveRecipeJS setWaterlogged() {
+    this.json.addProperty("waterlogged", true);
+    return this;
+  }
+
   private boolean isValidMesh(String mesh) {
     for (MeshType type : MeshType.values()) {
       if (type.name().toLowerCase(Locale.ROOT).equals(mesh.toLowerCase(Locale.ROOT))) {
