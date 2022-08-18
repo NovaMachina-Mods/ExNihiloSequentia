@@ -157,15 +157,18 @@ public class JEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(
         new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()),
         RecipeTypes.FIRED_CRUCIBLE,
-        RecipeTypes.CRUCIBLE);
+        RecipeTypes.CRUCIBLE,
+        RecipeTypes.HEAT);
     registration.addRecipeCatalyst(
         new ItemStack(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()),
         RecipeTypes.FIRED_CRUCIBLE,
-        RecipeTypes.CRUCIBLE);
+        RecipeTypes.CRUCIBLE,
+        RecipeTypes.HEAT);
     registration.addRecipeCatalyst(
         new ItemStack(ExNihiloBlocks.CRUCIBLE_WARPED.get()),
         RecipeTypes.FIRED_CRUCIBLE,
-        RecipeTypes.CRUCIBLE);
+        RecipeTypes.CRUCIBLE,
+        RecipeTypes.HEAT);
   }
 
   private void registerBarrels(@Nonnull final IRecipeCatalystRegistration registration) {
