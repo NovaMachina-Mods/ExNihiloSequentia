@@ -72,15 +72,6 @@ public class SieveEntity extends BlockEntity {
     // 4 ticks is the same period of holding down right click
     if (level != null && level.getLevelData().getGameTime() - lastSieveAction < 4) {
       // Really good chance that they're using a macro
-      if (player != null
-          && level.getLevelData().getGameTime() - lastSieveAction == 0
-          && lastPlayer.equals(player.getUUID())) {
-        Component message =
-            new TextComponent("Autoclicker Bad")
-                .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(16711680)).withBold(true));
-
-        player.sendMessage(message, Util.NIL_UUID);
-      }
       return;
     }
 
