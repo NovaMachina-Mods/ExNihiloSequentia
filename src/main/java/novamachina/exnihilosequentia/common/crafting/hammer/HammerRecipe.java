@@ -1,11 +1,5 @@
 package novamachina.exnihilosequentia.common.crafting.hammer;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -13,9 +7,14 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.crafting.SingleItemInputRecipe;
 
-public class HammerRecipe extends SerializableRecipe {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class HammerRecipe extends SingleItemInputRecipe {
 
   @Nonnull
   public static final HammerRecipe EMPTY = new HammerRecipe(new ResourceLocation("empty"),
@@ -25,13 +24,10 @@ public class HammerRecipe extends SerializableRecipe {
   private static RegistryObject<ExNihiloRecipeSerializer<HammerRecipe>> serializer;
   @Nonnull
   private final List<ItemStackWithChance> output;
-  @Nonnull
-  private Ingredient input;
 
   public HammerRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
       @Nonnull final List<ItemStackWithChance> output) {
-    super(ItemStack.EMPTY, RECIPE_TYPE, id);
-    this.input = input;
+    super(ItemStack.EMPTY, input, RECIPE_TYPE, id);
     this.output = output;
   }
 
@@ -54,15 +50,6 @@ public class HammerRecipe extends SerializableRecipe {
   }
 
   @Nonnull
-  public Ingredient getInput() {
-    return input;
-  }
-
-  public void setInput(@Nonnull final Ingredient input) {
-    this.input = input;
-  }
-
-  @Nonnull
   public List<ItemStackWithChance> getOutput() {
     return output;
   }
@@ -72,11 +59,6 @@ public class HammerRecipe extends SerializableRecipe {
     List<ItemStack> returnList = new ArrayList<>();
     output.forEach(stack -> returnList.add(stack.getStack()));
     return returnList;
-  }
-
-  @Override
-  public NonNullList<Ingredient> getIngredients() {
-    return NonNullList.of(Ingredient.EMPTY, input);
   }
 
   @Override

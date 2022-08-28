@@ -1,11 +1,5 @@
 package novamachina.exnihilosequentia.common.crafting.crucible;
 
-import java.util.Arrays;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,10 +8,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.crafting.SingleItemInputRecipe;
 
-public class CrucibleRecipe extends SerializableRecipe {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class CrucibleRecipe extends SingleItemInputRecipe {
 
   public static RecipeType<CrucibleRecipe> RECIPE_TYPE;
   @Nullable
@@ -26,15 +22,12 @@ public class CrucibleRecipe extends SerializableRecipe {
   @Nullable
   private CrucibleTypeEnum crucibleType;
   @Nonnull
-  private Ingredient input;
-  @Nonnull
   private FluidStack resultFluid;
 
   public CrucibleRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
       final int amount,
       @Nonnull final FluidStack fluid, @Nonnull final CrucibleTypeEnum crucibleType) {
-    super(null, RECIPE_TYPE, id);
-    this.input = input;
+    super(null, input, RECIPE_TYPE, id);
     this.amount = amount;
     this.resultFluid = fluid;
     this.crucibleType = crucibleType;
@@ -65,25 +58,6 @@ public class CrucibleRecipe extends SerializableRecipe {
 
   public void setCrucibleType(@Nonnull final String crucibleType) {
     this.crucibleType = CrucibleTypeEnum.getTypeByName(crucibleType);
-  }
-
-  @Nonnull
-  public Ingredient getInput() {
-    return input;
-  }
-
-  public void setInput(@Nonnull final Ingredient input) {
-    this.input = input;
-  }
-
-  @Nonnull
-  public List<ItemStack> getInputs() {
-    return Arrays.asList(input.getItems());
-  }
-
-  @Override
-  public NonNullList<Ingredient> getIngredients() {
-    return NonNullList.of(Ingredient.EMPTY, input);
   }
 
   @Override
