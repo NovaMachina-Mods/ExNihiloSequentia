@@ -227,8 +227,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     if (barrelTile.getFluid() == null) {
       key = Fluids.EMPTY.defaultFluidState().createLegacyBlock().getBlock().getDescriptionId();
     } else {
-      key = barrelTile.getFluid().defaultFluidState().createLegacyBlock().getBlock()
-          .getDescriptionId();
+      key = barrelTile.getFluid().getAttributes().getTranslationKey();
     }
 
     info.add(new TranslatableComponent("waila.barrel.fluidAmount", new TranslatableComponent(key),
