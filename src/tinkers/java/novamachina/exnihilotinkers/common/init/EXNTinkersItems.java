@@ -1,5 +1,6 @@
 package novamachina.exnihilotinkers.common.init;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -11,12 +12,11 @@ import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
-import org.apache.logging.log4j.LogManager;
 
 public class EXNTinkersItems {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
       ForgeRegistries.ITEMS, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
   public static final Ore COBALT = new Ore("cobalt", true, false, false, new Color("2376DD"),
       ITEMS);

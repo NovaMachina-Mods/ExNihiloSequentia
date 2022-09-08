@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.blockentity;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -11,12 +12,11 @@ import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class InfestingLeavesEntity extends BlockEntity {
 
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
   @Nonnull
   private static final String PROGRESS_TAG = "progress";
 

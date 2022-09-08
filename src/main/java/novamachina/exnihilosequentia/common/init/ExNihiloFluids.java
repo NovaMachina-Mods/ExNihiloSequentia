@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.init;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
@@ -11,7 +12,6 @@ import novamachina.exnihilosequentia.common.fluid.SeaWaterFluid;
 import novamachina.exnihilosequentia.common.fluid.WitchWaterFluid;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloFluids {
 
@@ -35,7 +35,7 @@ public class ExNihiloFluids {
       .register(ExNihiloConstants.Fluids.SEA_WATER_FLOW,
           () -> new SeaWaterFluid.Flowing(SeaWaterFluid.SEA_WATER_PROPS));
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private ExNihiloFluids() {
 

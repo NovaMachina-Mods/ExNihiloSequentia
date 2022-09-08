@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.common.base.Suppliers;
+import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -21,14 +22,13 @@ import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class UseHammerModifier extends LootModifier {
 
   public static final Supplier<Codec<UseHammerModifier>> CODEC = Suppliers.memoize(() ->
       RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, UseHammerModifier::new)));
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private final Random random = new SecureRandom();
 
@@ -49,8 +49,7 @@ public class UseHammerModifier extends LootModifier {
         && blockState != null
         && tool.getItem().getDefaultInstance().is(ExNihiloTags.HAMMER)
         && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {
-      @Nonnull
-      final List<ItemStackWithChance> list =
+      @Nonnull final List<ItemStackWithChance> list =
           ExNihiloRegistries.HAMMER_REGISTRY.getResult(blockState.getBlock());
       for (@Nonnull final ItemStackWithChance stackWithChance : list) {
         if (random.nextFloat() <= stackWithChance.getChance()

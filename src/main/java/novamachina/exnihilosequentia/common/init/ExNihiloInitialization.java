@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.init;
 
+import com.mojang.logging.LogUtils;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +49,6 @@ import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 @Mod.EventBusSubscriber(
     modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
@@ -65,9 +65,11 @@ public class ExNihiloInitialization {
         }
       };
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private ExNihiloInitialization() {}
+  private ExNihiloInitialization() {
+  }
 
   // MinecraftForge.EVENT_BUS
   @OnlyIn(Dist.CLIENT)
@@ -119,7 +121,7 @@ public class ExNihiloInitialization {
   public static void registerTOP(@Nonnull final InterModEnqueueEvent event) {
     logger.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
     if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
-            CompatTOP.register();
+      CompatTOP.register();
     }
   }
 
@@ -135,8 +137,7 @@ public class ExNihiloInitialization {
   }
 
   private static void registerDispenserFluids() {
-    @Nonnull
-    final DispenseItemBehavior idispenseitembehavior =
+    @Nonnull final DispenseItemBehavior idispenseitembehavior =
         new DefaultDispenseItemBehavior() {
           @Nonnull
           private final DefaultDispenseItemBehavior defaultDispenseItemBehavior =
@@ -147,8 +148,7 @@ public class ExNihiloInitialization {
           public ItemStack execute(
               @Nonnull final BlockSource pSource, @Nonnull final ItemStack pStack) {
             @Nonnull final BucketItem bucketitem = (BucketItem) pStack.getItem();
-            @Nonnull
-            final BlockPos blockpos =
+            @Nonnull final BlockPos blockpos =
                 pSource.getPos().relative(pSource.getBlockState().getValue(DispenserBlock.FACING));
             @Nullable final Level world = pSource.getLevel();
             if (bucketitem.emptyContents(null, world, blockpos, null)) {

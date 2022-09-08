@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.network;
 
+import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntSupplier;
@@ -8,12 +9,11 @@ import javax.annotation.Nullable;
 import net.minecraft.network.FriendlyByteBuf;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class HandshakeMessages {
 
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private HandshakeMessages() {
 

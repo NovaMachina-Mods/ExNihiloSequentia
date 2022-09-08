@@ -1,5 +1,6 @@
 package novamachina.exnihilothermal.common.init;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -8,7 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilothermal.common.utility.ExNihiloThermalConstants;
-import org.apache.logging.log4j.LogManager;
 
 @Mod.EventBusSubscriber(
     modid = ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 )
 public class ExNihiloThermalInitialization {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private ExNihiloThermalInitialization() {
   }

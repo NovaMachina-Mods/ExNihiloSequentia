@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.init;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -30,7 +31,6 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloBlocks {
 
@@ -172,7 +172,7 @@ public class ExNihiloBlocks {
   public static final RegistryObject<NetherSieveBlock> SIEVE_WARPED = BLOCKS
       .register(Blocks.WARPED_SIEVE, NetherSieveBlock::new);
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private ExNihiloBlocks() {
 

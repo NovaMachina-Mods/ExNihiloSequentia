@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.blockentity.barrel.mode;
 
+import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -10,12 +11,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class BarrelModeRegistry {
 
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   @Nonnull
   private static final Map<String, Supplier<AbstractBarrelMode>> modeNameMap = new HashMap<>();

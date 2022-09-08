@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.init;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,7 +18,6 @@ import novamachina.exnihilosequentia.common.blockentity.crucible.WoodCrucibleEnt
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloBlockEntities {
 
@@ -26,14 +26,21 @@ public class ExNihiloBlockEntities {
       DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,
           ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private ExNihiloBlockEntities() {
+  }  @Nonnull
   public static final RegistryObject<BlockEntityType<FiredCrucibleEntity>> FIRED_CURICLBE_ENTITY = BLOCK_ENTITIES
       .register(Blocks.FIRED_CRUCIBLE, () -> BlockEntityType.Builder
           .of(FiredCrucibleEntity::new, ExNihiloBlocks.CRUCIBLE_FIRED.get(),
               ExNihiloBlocks.CRUCIBLE_CRIMSON.get(),
               ExNihiloBlocks.CRUCIBLE_WARPED.get()).build(null));
-  private ExNihiloBlockEntities() {
-  }  @Nonnull
+
+  public static void init(IEventBus eventBus) {
+    logger.debug("Register Block Entities");
+    BLOCK_ENTITIES.register(eventBus);
+  }
+
+  @Nonnull
   public static final RegistryObject<BlockEntityType<WoodCrucibleEntity>> WOODEN_CRUCIBLE_ENTITY = BLOCK_ENTITIES
       .register(Blocks.CRUCIBLES, () -> BlockEntityType.Builder
           .of(WoodCrucibleEntity::new, ExNihiloBlocks.CRUCIBLE_ACACIA.get(),
@@ -41,10 +48,9 @@ public class ExNihiloBlockEntities {
               ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
               ExNihiloBlocks.CRUCIBLE_OAK.get(), ExNihiloBlocks.CRUCIBLE_SPRUCE.get()).build(null));
 
-  public static void init(IEventBus eventBus) {
-    logger.debug("Register Block Entities");
-    BLOCK_ENTITIES.register(eventBus);
-  }  @Nonnull
+
+
+  @Nonnull
   public static final RegistryObject<BlockEntityType<SieveEntity>> SIEVE_ENTITY = BLOCK_ENTITIES
       .register(Blocks.SIEVES, () -> BlockEntityType.Builder
           .of(SieveEntity::new, ExNihiloBlocks.SIEVE_ACACIA.get(), ExNihiloBlocks.SIEVE_BIRCH.get(),
@@ -72,9 +78,6 @@ public class ExNihiloBlockEntities {
           .of(StoneBarrelEntity::new, ExNihiloBlocks.BARREL_STONE.get(),
               ExNihiloBlocks.BARREL_CRIMSON.get(),
               ExNihiloBlocks.BARREL_WARPED.get()).build(null));
-
-
-
 
 
 }

@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -13,12 +14,11 @@ import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 @Mod(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
 public class ExNihiloSequentia {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public ExNihiloSequentia() {
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);

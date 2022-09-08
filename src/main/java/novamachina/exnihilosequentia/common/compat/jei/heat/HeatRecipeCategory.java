@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.compat.jei.heat;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.logging.LogUtils;
 import java.awt.Color;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,7 +30,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
 
@@ -39,7 +39,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
 
   @Nonnull
   private static final ExNihiloLogger logger = new
-      ExNihiloLogger(LogManager.getLogger());
+      ExNihiloLogger(LogUtils.getLogger());
   @Nonnull
   private final IDrawableStatic background;
 

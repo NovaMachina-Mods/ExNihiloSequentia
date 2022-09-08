@@ -20,8 +20,6 @@ public class Config {
   @Nonnull
   private static final String CATEGORY_CRUCIBLE = "crucible";
   @Nonnull
-  private static final String CATEGORY_DEBUG = "debug";
-  @Nonnull
   private static final String CATEGORY_INFESTED_LEAVES = "infested_leaves";
   @Nonnull
   private static final String CATEGORY_ORE = "ore";
@@ -47,9 +45,6 @@ public class Config {
   private static final String SUBCATEGORY_HAMMERS = "hammer";
   @Nonnull
   private static final String SUBCATEGORY_MESHES = "mesh";
-  // Debugging
-  @Nonnull
-  private static final ForgeConfigSpec.BooleanValue enableDebugLogging;
   // Pebble
   @Nonnull
   private static final ForgeConfigSpec.IntValue pebbleDamage;
@@ -339,12 +334,6 @@ public class Config {
         .define("enableGold", true);
     COMMON_BUILDER.pop();
 
-    //debugConfigs
-    COMMON_BUILDER.comment("Debug Configs").push(CATEGORY_DEBUG);
-    enableDebugLogging = COMMON_BUILDER.comment("Enable extra logging? (Default: false)")
-        .define("enableDebugLogging", false);
-    COMMON_BUILDER.pop();
-
     //durabilityConfigs
     COMMON_BUILDER.comment("Durability Configs").push(CATEGORY_DURABILITY);
     COMMON_BUILDER.comment("Durability of Hammers").push(SUBCATEGORY_HAMMERS);
@@ -510,11 +499,6 @@ public class Config {
 
   public static int getMeshNetheriteValue() {
     return meshNetheriteValue.get();
-  }
-
-  // Debug
-  public static boolean enableDebugLogging() {
-    return enableDebugLogging.get();
   }
 
   // Ore

@@ -1,5 +1,6 @@
 package novamachina.exnihilomekanism.common.init;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -8,7 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 import novamachina.exnihilomekanism.common.utility.ExNihiloMekanismConstants;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 @Mod.EventBusSubscriber(
     modid = ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM,
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 )
 public class ExNihiloMekanismInitialization {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private ExNihiloMekanismInitialization() {
   }

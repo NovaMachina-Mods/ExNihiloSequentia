@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.crafting.fluidontop;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
@@ -11,14 +12,17 @@ import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  @Nonnull private FluidStack fluidInTank;
-  @Nonnull private FluidStack fluidOnTop;
-  @Nonnull private ItemStack result;
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull
+  private FluidStack fluidInTank;
+  @Nonnull
+  private FluidStack fluidOnTop;
+  @Nonnull
+  private ItemStack result;
 
   public FluidOnTopRecipe(
       @Nonnull final ResourceLocation id,

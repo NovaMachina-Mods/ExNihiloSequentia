@@ -1,5 +1,6 @@
 package novamachina.exnihilotinkers.client;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,12 +13,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilotinkers.common.init.EXNTinkersBlockEntites;
 import novamachina.exnihilotinkers.common.init.EXNTinkersBlocks;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
-import org.apache.logging.log4j.LogManager;
 
 @Mod.EventBusSubscriber(modid = EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private ClientSetup() {
   }

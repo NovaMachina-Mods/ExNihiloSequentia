@@ -1,5 +1,6 @@
 package novamachina.exnihilotinkers.common.init;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -10,11 +11,10 @@ import novamachina.exnihilotinkers.common.blockentity.TinkersBarrelEntity;
 import novamachina.exnihilotinkers.common.blockentity.TinkersCrucibleEntity;
 import novamachina.exnihilotinkers.common.blockentity.TinkersSieveEntity;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
-import org.apache.logging.log4j.LogManager;
 
 public class EXNTinkersBlockEntites {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
   private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
       DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,
           EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
@@ -22,7 +22,9 @@ public class EXNTinkersBlockEntites {
   public static void init(IEventBus eventBus) {
     logger.debug("Register Block Entities");
     BLOCK_ENTITIES.register(eventBus);
-  }  public static final RegistryObject<BlockEntityType<TinkersSieveEntity>> TINKERS_SIEVES = BLOCK_ENTITIES.register(
+  }
+
+  public static final RegistryObject<BlockEntityType<TinkersSieveEntity>> TINKERS_SIEVES = BLOCK_ENTITIES.register(
       "tinkers_sieves", () -> BlockEntityType.Builder.of(TinkersSieveEntity::new,
               EXNTinkersBlocks.SIEVE_BLOODSHROOM.get(),
               EXNTinkersBlocks.SIEVE_GREENHEART.get(), EXNTinkersBlocks.SIEVE_SKYROOT.get())

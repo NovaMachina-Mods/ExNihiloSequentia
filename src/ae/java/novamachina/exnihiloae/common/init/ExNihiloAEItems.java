@@ -1,5 +1,6 @@
 package novamachina.exnihiloae.common.init;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -9,11 +10,10 @@ import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihiloae.common.utility.ExNihiloAEConstants;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloAEItems {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
   private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
       ForgeRegistries.ITEMS, ExNihiloAEConstants.ModIds.EX_NIHILO_AE);
   public static final RegistryObject<Item> CRUSHED_SKYSTONE = ITEMS

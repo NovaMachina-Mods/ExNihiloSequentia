@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.registries;
 
 import com.google.common.collect.Lists;
+import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,12 +26,11 @@ import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.IngredientUtils;
-import org.apache.logging.log4j.LogManager;
 
 public class SieveRegistry {
 
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private final boolean flattenRecipes = Config.flattenSieveRecipes();
 

@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.utility;
 
 import javax.annotation.Nonnull;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 public class ExNihiloLogger {
 
@@ -17,9 +17,7 @@ public class ExNihiloLogger {
   }
 
   public void debug(@Nonnull final String msg) {
-    if (Config.enableDebugLogging()) {
-      logger.info(LOGGING_PATTERN, PREFIX, msg);
-    }
+      logger.debug(LOGGING_PATTERN, PREFIX, msg);
   }
 
   public void error(@Nonnull final String msg) {

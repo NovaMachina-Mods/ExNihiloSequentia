@@ -3,6 +3,7 @@ package novamachina.exnihilosequentia.api.datagen;
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mojang.logging.LogUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -26,7 +27,6 @@ import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public abstract class AbstractLootTableGenerator implements DataProvider {
 
@@ -34,10 +34,14 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
   private static final Gson GSON =
       (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  @Nonnull protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
-  @Nonnull private final DataGenerator generator;
-  @Nonnull private final String modId;
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull
+  protected final Map<ResourceLocation, LootTable> lootTables = new HashMap<>();
+  @Nonnull
+  private final DataGenerator generator;
+  @Nonnull
+  private final String modId;
 
   protected AbstractLootTableGenerator(
       @Nonnull final DataGenerator generator, @Nonnull final String modId) {
@@ -52,8 +56,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
 
     createLootTables();
 
-    @Nonnull
-    final ValidationContext validator =
+    @Nonnull final ValidationContext validator =
         new ValidationContext(LootContextParamSets.ALL_PARAMS, function -> null, lootTables::get);
     lootTables.forEach((name, table) -> LootTables.validate(validator, name, table));
     @Nonnull final Multimap<String, String> problems = validator.getProblems();
@@ -118,7 +121,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
   private void register(
       @Nonnull final ResourceLocation registryName, @Nonnull final LootTable.Builder table) {
     if (lootTables.put(
-            toTableLoc(registryName), table.setParamSet(LootContextParamSets.BLOCK).build())
+        toTableLoc(registryName), table.setParamSet(LootContextParamSets.BLOCK).build())
         != null) {
       throw new IllegalStateException("Duplicate loot table: " + table);
     }

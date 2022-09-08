@@ -1,5 +1,6 @@
 package novamachina.exnihilotinkers.common.init;
 
+import com.mojang.logging.LogUtils;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -8,7 +9,6 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConfig;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
-import org.apache.logging.log4j.LogManager;
 
 @Mod.EventBusSubscriber(
     modid = EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS,
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 )
 public class EXNTinkersInit {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private EXNTinkersInit() {
   }

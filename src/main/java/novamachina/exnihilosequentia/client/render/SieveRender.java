@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
@@ -15,11 +16,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import novamachina.exnihilosequentia.common.blockentity.SieveEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class SieveRender extends AbstractModBlockRenderer<SieveEntity> {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public SieveRender(@Nonnull final BlockEntityRendererProvider.Context rendererDispatcherIn) {
     super();
@@ -50,7 +51,8 @@ public class SieveRender extends AbstractModBlockRenderer<SieveEntity> {
 
       BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
       blockRenderer.renderSingleBlock(
-          state, matrixStack, buffer, combinedLight, combinedOverlay, ModelData.EMPTY, RenderType.cutoutMipped());
+          state, matrixStack, buffer, combinedLight, combinedOverlay, ModelData.EMPTY,
+          RenderType.cutoutMipped());
 
       matrixStack.popPose();
     }

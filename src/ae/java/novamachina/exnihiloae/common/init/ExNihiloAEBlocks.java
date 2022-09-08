@@ -1,5 +1,6 @@
 package novamachina.exnihiloae.common.init;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -12,7 +13,6 @@ import novamachina.exnihiloae.common.utility.ExNihiloAEConstants;
 import novamachina.exnihilosequentia.common.block.BaseFallingBlock;
 import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloAEBlocks {
 
@@ -23,7 +23,7 @@ public class ExNihiloAEBlocks {
           () -> new BaseFallingBlock(new BlockBuilder()
               .properties(BlockBehaviour.Properties.of(Material.SAND).strength(0.7F)
                   .sound(SoundType.GRAVEL))));
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private ExNihiloAEBlocks() {
   }

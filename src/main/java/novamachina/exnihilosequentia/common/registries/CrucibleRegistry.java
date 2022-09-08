@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.registries;
 
 import com.google.common.collect.Lists;
+import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,15 +16,17 @@ import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.common.compat.jei.crucible.JEICrucibleRecipe;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class CrucibleRegistry {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  @Nonnull private final List<CrucibleRecipe> recipeList = new ArrayList<>();
+  @Nonnull
+  private final List<CrucibleRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull private final Map<Item, CrucibleRecipe> recipeByItemCache = new HashMap<>();
+  @Nonnull
+  private final Map<Item, CrucibleRecipe> recipeByItemCache = new HashMap<>();
 
   @Nonnull
   public List<JEICrucibleRecipe> getRecipeList() {
@@ -31,7 +34,9 @@ public class CrucibleRegistry {
         .stream()
         .flatMap(crucibleRecipe -> {
           if (crucibleRecipe.getInputs().size() <= 21) {
-            return Stream.of(new JEICrucibleRecipe(crucibleRecipe.getAmount(), crucibleRecipe.getCrucibleType(), crucibleRecipe.getInputs(), crucibleRecipe.getResultFluid()));
+            return Stream.of(
+                new JEICrucibleRecipe(crucibleRecipe.getAmount(), crucibleRecipe.getCrucibleType(),
+                    crucibleRecipe.getInputs(), crucibleRecipe.getResultFluid()));
           }
           @Nonnull final List<List<ItemStack>> partitions = Lists.partition(
               crucibleRecipe.getInputs(),

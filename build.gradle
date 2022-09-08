@@ -8,7 +8,7 @@ buildscript {
 }
 
 plugins {
-    id 'net.minecraftforge.gradle' version '5.+'
+    id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.ajoberstar.grgit' version '4.1.1'
     id "com.matthewprenger.cursegradle" version '1.4.0'
@@ -24,7 +24,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "NovaMachina-Mods_ExNihiloSequentia_AYJwMe16kf6704OXoPeu"
+        property "sonar.projectKey", System.getenv("SONARQUBE_TOKEN")
     }
 }
 
@@ -48,7 +48,7 @@ if(!System.getenv('CI')) {
 }
 
 wrapper {
-    gradleVersion = '7.4.2'
+    gradleVersion = '7.5'
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -242,7 +242,10 @@ def createReplaceResourcesTask(String output, SourceSet sourceSet) {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+
 minecraft {
+//    mappings channel: 'official', version: '1.19.2'
     mappings channel: "${mappings_channel}", version: "${mappings_version}"
 
     accessTransformers.from(file('src/main/resources/META-INF/accesstransformer.cfg'))

@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
@@ -18,11 +19,11 @@ import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import novamachina.exnihilosequentia.common.blockentity.crucible.BaseCrucibleEntity;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity> {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public CrucibleRender(@Nonnull final BlockEntityRendererProvider.Context rendererDispatcher) {
     super();
@@ -44,12 +45,11 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
       final int combinedOverlayIn) {
     @Nullable final ResourceLocation solidTexture = tileEntity.getSolidTexture();
     @Nullable final Fluid fluid = tileEntity.getFluid();
-    @Nullable
-    final ResourceLocation fluidTexture =
+    @Nullable final ResourceLocation fluidTexture =
         fluid != null ? IClientFluidTypeExtensions.of(fluid).getStillTexture() : null;
-    @Nonnull
-    final Color fluidColor =
-        fluid != null ? new Color(IClientFluidTypeExtensions.of(fluid).getTintColor()) : Color.INVALID_COLOR;
+    @Nonnull final Color fluidColor =
+        fluid != null ? new Color(IClientFluidTypeExtensions.of(fluid).getTintColor())
+            : Color.INVALID_COLOR;
     @Nonnull final Color blockColor = getBlockColor(solidTexture, tileEntity);
     renderFluid(
         tileEntity,
@@ -62,8 +62,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
     if (solidTexture != null) {
       @Nonnull final VertexConsumer builder = buffer.getBuffer(RenderType.solid());
 
-      @Nonnull
-      final TextureAtlasSprite sprite =
+      @Nonnull final TextureAtlasSprite sprite =
           Minecraft.getInstance()
               .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
               .apply(

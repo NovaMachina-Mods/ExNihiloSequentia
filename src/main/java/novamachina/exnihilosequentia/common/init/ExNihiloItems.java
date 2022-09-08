@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.init;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.world.item.BlockItem;
@@ -11,7 +12,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.PlantType;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,7 +31,6 @@ import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloItems {
 
@@ -165,7 +164,8 @@ public class ExNihiloItems {
   public static final RegistryObject<ResourceItem> MYCELIUM_SPORE =
       ITEMS.register(
           ExNihiloConstants.Items.MYCELIUM_SPORE,
-          () -> new ResourceItem(ExNihiloConstants.Items.MYCELIUM_SPORE, Blocks.DIRT, Blocks.MYCELIUM));
+          () -> new ResourceItem(ExNihiloConstants.Items.MYCELIUM_SPORE, Blocks.DIRT,
+              Blocks.MYCELIUM));
   //  public static final RegistryObject<ResourceItem> CRIMSON_NYLIUM_SPORE = ITEMS
   //      .register(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
   //          () -> new ResourceItem(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE));
@@ -176,7 +176,8 @@ public class ExNihiloItems {
   public static final RegistryObject<ResourceItem> GRASS_SEED =
       ITEMS.register(
           ExNihiloConstants.Items.GRASS_SEED,
-          () -> new ResourceItem(ExNihiloConstants.Items.GRASS_SEED, Blocks.DIRT, Blocks.GRASS_BLOCK));
+          () -> new ResourceItem(ExNihiloConstants.Items.GRASS_SEED, Blocks.DIRT,
+              Blocks.GRASS_BLOCK));
 
   @Nonnull
   public static final RegistryObject<ResourceItem> PORCELAIN_CLAY =
@@ -543,7 +544,8 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.WOODEN_HAMMER,
           () -> new HammerBaseItem(Tiers.WOOD, Config.getHammerWoodDurability()));
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
   // Begin Block Items
   @Nonnull
   private static final Item.Properties tab =
@@ -776,7 +778,8 @@ public class ExNihiloItems {
           ExNihiloConstants.Items.SEA_WATER_BUCKET,
           () -> new BucketItem(ExNihiloFluids.SEA_WATER, tab.stacksTo(1)));
 
-  private ExNihiloItems() {}
+  private ExNihiloItems() {
+  }
 
   private static BlockItem createBurnableItem(@Nonnull final Block block) {
     return new BlockItem(block, tab) {

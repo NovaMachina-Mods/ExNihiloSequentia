@@ -1,5 +1,6 @@
 package novamachina.exnihilothermal.common.init;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -11,7 +12,6 @@ import novamachina.exnihilosequentia.common.item.ResourceItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilothermal.common.utility.ExNihiloThermalConstants;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloThermalItems {
 
@@ -30,11 +30,11 @@ public class ExNihiloThermalItems {
       ExNihiloThermalConstants.Items.DOLL_BLIZZ,
       () -> new DollItem(ExNihiloThermalConstants.ModIds.THERMAL, "blizz",
           ExNihiloConstants.ModIds.MINECRAFT, "water", 1.0D, "tooltip.doll.blizz"));
-//  public static final RegistryObject<ResourceItem> DUST_OBSIDIAN = ITEMS.register(
-//      ExNihiloThermalConstants.Items.DUST_OBSIDIAN,
-//      () -> new ResourceItem(ExNihiloThermalConstants.Items.DUST_OBSIDIAN));
+    public static final RegistryObject<ResourceItem> DUST_OBSIDIAN = ITEMS.register(
+      ExNihiloThermalConstants.Items.DUST_OBSIDIAN,
+      () -> new ResourceItem(ExNihiloThermalConstants.Items.DUST_OBSIDIAN));
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public static void init(@Nonnull final IEventBus modEventBus) {
     logger.debug("Register items");

@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.blockentity.crucible;
 
+import com.mojang.logging.LogUtils;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nonnull;
@@ -38,28 +39,38 @@ import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.TankUtil;
-import org.apache.logging.log4j.LogManager;
 
 public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidContainer {
 
   protected static final int MAX_FLUID_AMOUNT =
       Config.getCrucibleNumberOfBuckets() * FluidType.BUCKET_VOLUME;
-  @Nonnull private static final String BLOCK_TAG = "block";
-  @Nonnull private static final String CURRENT_ITEM_TAG = "currentItem";
-  @Nonnull private static final String FLUID_TAG = "fluid";
-  @Nonnull private static final String INVENTORY_TAG = "inventory";
-  @Nonnull private static final String SOLID_AMOUNT_TAG = "solidAmount";
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  @Nonnull protected ItemStack currentItem;
-  @Nonnull protected MeltableItemHandler inventory;
+  @Nonnull
+  private static final String BLOCK_TAG = "block";
+  @Nonnull
+  private static final String CURRENT_ITEM_TAG = "currentItem";
+  @Nonnull
+  private static final String FLUID_TAG = "fluid";
+  @Nonnull
+  private static final String INVENTORY_TAG = "inventory";
+  @Nonnull
+  private static final String SOLID_AMOUNT_TAG = "solidAmount";
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull
+  protected ItemStack currentItem;
+  @Nonnull
+  protected MeltableItemHandler inventory;
 
   @Nonnull
   private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
 
-  @Nullable protected BaseCrucibleTileState lastSyncedState = null;
+  @Nullable
+  protected BaseCrucibleTileState lastSyncedState = null;
   protected int solidAmount;
-  @Nonnull protected CrucibleFluidHandler tank;
-  @Nonnull private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
+  @Nonnull
+  protected CrucibleFluidHandler tank;
+  @Nonnull
+  private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
   protected int ticksSinceLast;
 
   protected BaseCrucibleEntity(
@@ -346,7 +357,7 @@ public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidCo
 
     if (heat > 0
         && ExNihiloRegistries.CRUCIBLE_REGISTRY.isMeltableByItemStack(
-            currentItem, getCrucibleType().getLevel())) {
+        currentItem, getCrucibleType().getLevel())) {
       processSolid(heat);
     }
   }
@@ -372,10 +383,12 @@ public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidCo
 
   protected static class BaseCrucibleTileState {
 
-    @Nullable private final Fluid fluid;
+    @Nullable
+    private final Fluid fluid;
     private final int fluidAmount;
     private final int heat;
-    @Nonnull private final Item solid;
+    @Nonnull
+    private final Item solid;
     private final int solidAmount;
 
     BaseCrucibleTileState(@Nonnull final BaseCrucibleEntity baseCrucibleEntity) {

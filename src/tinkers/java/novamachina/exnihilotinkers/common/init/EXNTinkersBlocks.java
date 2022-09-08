@@ -1,5 +1,6 @@
 package novamachina.exnihilotinkers.common.init;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,11 +13,9 @@ import novamachina.exnihilotinkers.common.block.TinkersBarrelBlock;
 import novamachina.exnihilotinkers.common.block.TinkersCrucibleBlock;
 import novamachina.exnihilotinkers.common.block.TinkersSieveBlock;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
-import org.apache.logging.log4j.LogManager;
 
 public class EXNTinkersBlocks {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
   public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(
       ForgeRegistries.BLOCKS, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS
   );
@@ -38,6 +37,7 @@ public class EXNTinkersBlocks {
       "greenheart_crucible", TinkersCrucibleBlock::new);
   public static final RegistryObject<BaseBlock> CRUCIBLE_SKYROOT = BLOCKS.register(
       "skyroot_crucible", TinkersCrucibleBlock::new);
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public static void init(IEventBus modEventBus) {
     logger.debug("Register blocks");

@@ -1,26 +1,26 @@
 package novamachina.exnihilosequentia.common.compat.top;
 
- import java.util.function.Function;
- import javax.annotation.Nonnull;
- import javax.annotation.Nullable;
- import mcjty.theoneprobe.api.IProbeHitData;
- import mcjty.theoneprobe.api.IProbeInfo;
- import mcjty.theoneprobe.api.IProbeInfoProvider;
- import mcjty.theoneprobe.api.ITheOneProbe;
- import mcjty.theoneprobe.api.ProbeMode;
- import net.minecraft.resources.ResourceLocation;
- import net.minecraft.world.entity.player.Player;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.block.state.BlockState;
- import net.minecraftforge.fml.InterModComms;
- import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
- import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
- import org.apache.logging.log4j.LogManager;
+import com.mojang.logging.LogUtils;
+import java.util.function.Function;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ITheOneProbe;
+import mcjty.theoneprobe.api.ProbeMode;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fml.InterModComms;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
- public class CompatTOP {
+public class CompatTOP {
 
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
   private static boolean registered;
 
   private CompatTOP() {
@@ -38,7 +38,7 @@ package novamachina.exnihilosequentia.common.compat.top;
   public static class GetTheOneProbe implements Function<ITheOneProbe, Void> {
 
     @Nonnull
-    private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+    private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
     @Override
     @Nullable
@@ -67,4 +67,4 @@ package novamachina.exnihilosequentia.common.compat.top;
       return null;
     }
   }
- }
+}

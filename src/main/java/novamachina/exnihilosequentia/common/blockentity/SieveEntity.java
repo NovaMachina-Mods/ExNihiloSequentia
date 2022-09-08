@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.common.blockentity;
 
 import com.mojang.authlib.GameProfile;
+import com.mojang.logging.LogUtils;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
@@ -33,20 +34,27 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class SieveEntity extends BlockEntity {
 
-  @Nonnull private static final String BLOCK_TAG = "block";
-  @Nonnull private static final String MESH_TAG = "mesh";
-  @Nonnull private static final String PROGRESS_TAG = "progress";
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
-  @Nonnull private final Random random = new SecureRandom();
-  @Nonnull private ItemStack blockStack = ItemStack.EMPTY;
+  @Nonnull
+  private static final String BLOCK_TAG = "block";
+  @Nonnull
+  private static final String MESH_TAG = "mesh";
+  @Nonnull
+  private static final String PROGRESS_TAG = "progress";
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull
+  private final Random random = new SecureRandom();
+  @Nonnull
+  private ItemStack blockStack = ItemStack.EMPTY;
   private UUID lastPlayer;
   private long lastSieveAction = 0;
-  @Nonnull private ItemStack meshStack = ItemStack.EMPTY;
-  @Nonnull private MeshType meshType = MeshType.NONE;
+  @Nonnull
+  private ItemStack meshStack = ItemStack.EMPTY;
+  @Nonnull
+  private MeshType meshType = MeshType.NONE;
   private float progress = 0;
 
   public SieveEntity(BlockPos pos, BlockState state) {

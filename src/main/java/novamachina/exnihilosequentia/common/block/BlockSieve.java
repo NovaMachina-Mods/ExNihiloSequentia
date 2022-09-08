@@ -1,11 +1,12 @@
 package novamachina.exnihilosequentia.common.block;
 
+import com.mojang.logging.LogUtils;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
- import mcjty.theoneprobe.api.IProbeHitData;
- import mcjty.theoneprobe.api.IProbeInfo;
- import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -44,16 +45,17 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
-import org.apache.logging.log4j.LogManager;
 
 public class BlockSieve extends BaseBlock
-    implements SimpleWaterloggedBlock , ITOPInfoProvider {
+    implements SimpleWaterloggedBlock, ITOPInfoProvider {
 
   @Nonnull
   public static final EnumProperty<MeshType> MESH = EnumProperty.create("mesh", MeshType.class);
 
-  @Nonnull public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  @Nonnull
+  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  @Nonnull
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public BlockSieve(@Nonnull final BlockBuilder builder) {
     super(builder);
@@ -81,7 +83,7 @@ public class BlockSieve extends BaseBlock
       logger.debug(
           "Is Block Siftable: "
               + ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(
-                  blockItem.getBlock(), sieveEntity.getMeshType(), state.getValue(WATERLOGGED)));
+              blockItem.getBlock(), sieveEntity.getMeshType(), state.getValue(WATERLOGGED)));
       if (ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(
           blockItem.getBlock(), sieveEntity.getMeshType(), state.getValue(WATERLOGGED))) {
         sieveEntity.insertSiftableBlock(stack, player);
@@ -90,41 +92,41 @@ public class BlockSieve extends BaseBlock
     worldIn.sendBlockUpdated(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
   }
 
-    @Override
-    public void addProbeInfo(
-        @Nonnull final ProbeMode probeMode,
-        @Nonnull final IProbeInfo iProbeInfo,
-        @Nonnull final Player playerEntity,
-        @Nonnull final Level world,
-        @Nonnull final BlockState blockState,
-        @Nonnull final IProbeHitData iProbeHitData) {
-      @Nullable
-      final SieveEntity sieveEntity = (SieveEntity) world.getBlockEntity(iProbeHitData.getPos());
-      if (sieveEntity == null) {
-        return;
-      }
-      if (!sieveEntity.getBlockStack().isEmpty()) {
-        if (probeMode == ProbeMode.EXTENDED) {
-          iProbeInfo.text(
-              Component.translatable(
-                  "waila.progress", StringUtils.formatPercent(sieveEntity.getProgress())));
-        }
-        iProbeInfo.text(
-            Component.translatable(
-                "waila.sieve.block",
-                Component.translatable(sieveEntity.getBlockStack().getDescriptionId())));
-      }
-      if (sieveEntity.getMeshType() != MeshType.NONE) {
-        iProbeInfo.text(
-            Component.translatable(
-                "waila.sieve.mesh",
-                Component.translatable(
-                    "item."
-                        + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA
-                        + "."
-                        + sieveEntity.getMeshType().getMeshName())));
-      }
+  @Override
+  public void addProbeInfo(
+      @Nonnull final ProbeMode probeMode,
+      @Nonnull final IProbeInfo iProbeInfo,
+      @Nonnull final Player playerEntity,
+      @Nonnull final Level world,
+      @Nonnull final BlockState blockState,
+      @Nonnull final IProbeHitData iProbeHitData) {
+    @Nullable final SieveEntity sieveEntity = (SieveEntity) world.getBlockEntity(
+        iProbeHitData.getPos());
+    if (sieveEntity == null) {
+      return;
     }
+    if (!sieveEntity.getBlockStack().isEmpty()) {
+      if (probeMode == ProbeMode.EXTENDED) {
+        iProbeInfo.text(
+            Component.translatable(
+                "waila.progress", StringUtils.formatPercent(sieveEntity.getProgress())));
+      }
+      iProbeInfo.text(
+          Component.translatable(
+              "waila.sieve.block",
+              Component.translatable(sieveEntity.getBlockStack().getDescriptionId())));
+    }
+    if (sieveEntity.getMeshType() != MeshType.NONE) {
+      iProbeInfo.text(
+          Component.translatable(
+              "waila.sieve.mesh",
+              Component.translatable(
+                  "item."
+                      + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA
+                      + "."
+                      + sieveEntity.getMeshType().getMeshName())));
+    }
+  }
 
   @Override
   protected void createBlockStateDefinition(@Nonnull final Builder<Block, BlockState> builder) {
@@ -182,8 +184,8 @@ public class BlockSieve extends BaseBlock
   @Override
   @Nonnull
   public BlockState getStateForPlacement(@Nonnull final BlockPlaceContext context) {
-    @Nonnull
-    final FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+    @Nonnull final FluidState fluidState = context.getLevel()
+        .getFluidState(context.getClickedPos());
     return this.defaultBlockState().setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
   }
 

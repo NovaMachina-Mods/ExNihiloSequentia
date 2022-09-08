@@ -1,5 +1,6 @@
 package novamachina.exnihilomekanism.common.init;
 
+import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -9,7 +10,6 @@ import novamachina.exnihilomekanism.common.utility.ExNihiloMekanismConstants;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import org.apache.logging.log4j.LogManager;
 
 public class ExNihiloMekanismItems {
 
@@ -18,7 +18,7 @@ public class ExNihiloMekanismItems {
   public static final Ore OSMIUM = new Ore(ExNihiloMekanismConstants.Ore.OSMIUM, true, false, false,
       new Color("BBDDFF"), ITEMS);
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public static void init(IEventBus modEventBus) {
     logger.debug("Register items");

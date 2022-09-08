@@ -1,14 +1,14 @@
 package novamachina.exnihilosequentia.common.utility;
 
+import com.mojang.logging.LogUtils;
 import java.util.Arrays;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.apache.logging.log4j.LogManager;
 
 public class IngredientUtils {
 
   @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogManager.getLogger());
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private IngredientUtils() {
   }
