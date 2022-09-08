@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
 import dev.latvian.mods.kubejs.recipe.RecipeExceptionJS;
-import dev.latvian.mods.kubejs.util.ListJS;
 import java.util.Locale;
 import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
 

@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.kubejs;
 
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 
 public class CompostRecipeJS extends BaseRecipeJS {
 

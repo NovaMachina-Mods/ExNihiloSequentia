@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.item.ingredient.IngredientJS;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 
 public class FluidTransformRecipeJS extends BaseRecipeJS {
 

@@ -3,7 +3,6 @@ package novamachina.exnihilosequentia.common.compat.kubejs;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 
 public class FluidOnTopRecipeJS extends BaseRecipeJS {
 

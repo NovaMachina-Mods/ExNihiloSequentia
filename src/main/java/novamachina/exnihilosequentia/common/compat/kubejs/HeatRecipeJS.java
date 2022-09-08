@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.common.compat.kubejs;
 
 import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 import dev.latvian.mods.kubejs.util.MapJS;
 import java.util.Map;
 
