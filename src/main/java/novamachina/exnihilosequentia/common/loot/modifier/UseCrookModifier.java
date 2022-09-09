@@ -37,14 +37,15 @@ import org.jetbrains.annotations.NotNull;
 
 public class UseCrookModifier extends LootModifier {
 
-  public static final Supplier<Codec<UseCrookModifier>> CODEC = Suppliers.memoize(() ->
-      RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, UseCrookModifier::new)));
+  public static final Supplier<Codec<UseCrookModifier>> CODEC =
+      Suppliers.memoize(
+          () ->
+              RecordCodecBuilder.create(
+                  inst -> codecStart(inst).apply(inst, UseCrookModifier::new)));
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  @Nonnull
-  private final Random random = new SecureRandom();
+  @Nonnull private final Random random = new SecureRandom();
 
   public UseCrookModifier(@Nonnull final LootItemCondition[] conditionsIn) {
     super(conditionsIn);
@@ -68,7 +69,8 @@ public class UseCrookModifier extends LootModifier {
         getVanillaDrops(context, blockState, origin, newLoot);
       }
 
-      for (@Nonnull final CrookRecipe recipe :
+      for (@Nonnull
+      final CrookRecipe recipe :
           ExNihiloRegistries.CROOK_REGISTRY.getDrops(blockState.getBlock())) {
         getCrookBlockDrops(newLoot, recipe);
       }
@@ -105,7 +107,8 @@ public class UseCrookModifier extends LootModifier {
       @NotNull BlockState blockState,
       @org.jetbrains.annotations.Nullable Vec3 origin,
       @NotNull List<ItemStack> newLoot) {
-    @Nullable final ServerLevel serverWorld =
+    @Nullable
+    final ServerLevel serverWorld =
         context.getLevel().getServer().getLevel(context.getLevel().dimension());
     if (origin != null && serverWorld != null) {
       @Nonnull final BlockPos pos = new BlockPos(origin.x(), origin.y(), origin.z());
@@ -114,7 +117,8 @@ public class UseCrookModifier extends LootModifier {
           items.stream()
               .filter(
                   drop -> {
-                    @Nullable final ResourceLocation resourceLocation =
+                    @Nullable
+                    final ResourceLocation resourceLocation =
                         ForgeRegistries.ITEMS.getKey(drop.getItem());
                     if (resourceLocation == null) {
                       return false;

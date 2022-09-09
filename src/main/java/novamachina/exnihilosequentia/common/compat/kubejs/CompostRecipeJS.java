@@ -21,7 +21,7 @@ public class CompostRecipeJS extends BaseRecipeJS {
 
   @Override
   public void serialize() {
-    if(this.serializeInputs) {
+    if (this.serializeInputs) {
       this.json.add("input", this.inputItems.get(0).toJson());
     }
   }

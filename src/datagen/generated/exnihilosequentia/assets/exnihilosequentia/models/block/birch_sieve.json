@@ -1,7 +1,7 @@
 {
   "parent": "exnihilosequentia:block/sieve_base",
   "textures": {
-    "particle": "minecraft:block/stripped_birch_log",
-    "texture": "minecraft:block/stripped_birch_log"
+    "particle": "minecraft:block/birch_planks",
+    "texture": "exnihilosequentia:block/birch_sieve"
   }
 }

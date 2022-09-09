@@ -25,8 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AbstractModBlockRenderer<T extends BlockEntity>
     implements BlockEntityRenderer<T> {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   protected AbstractModBlockRenderer() {
     super();
@@ -86,7 +85,8 @@ public abstract class AbstractModBlockRenderer<T extends BlockEntity>
     if (fluidTexture != null) {
       @Nonnull final VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
-      @Nonnull final TextureAtlasSprite sprite =
+      @Nonnull
+      final TextureAtlasSprite sprite =
           Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidTexture);
 
       // Subtract 0.005 to prevent texture fighting

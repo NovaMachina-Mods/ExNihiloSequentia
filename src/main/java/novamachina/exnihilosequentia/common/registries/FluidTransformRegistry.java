@@ -17,14 +17,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class FluidTransformRegistry {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  @Nonnull
-  private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
+  @Nonnull private final List<FluidTransformRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull
-  private final Map<FluidStack, Map<ItemLike, Fluid>> fluidResultCache = new HashMap<>();
+  @Nonnull private final Map<FluidStack, Map<ItemLike, Fluid>> fluidResultCache = new HashMap<>();
 
   public boolean isValidRecipe(@Nonnull final Fluid fluidInTank, @Nonnull final ItemLike catalyst) {
     return getResult(fluidInTank, catalyst) != Fluids.EMPTY;
@@ -35,18 +32,21 @@ public class FluidTransformRegistry {
     final FluidStack fluidStack = new FluidStack(fluidInTank, FluidType.BUCKET_VOLUME);
     return fluidResultCache
         .computeIfAbsent(fluidStack, k -> new HashMap<>())
-        .computeIfAbsent(catalyst.asItem(), k -> {
-          @Nonnull final ItemStack itemStack = new ItemStack(catalyst);
-          return recipeList
-              .stream()
-              .filter(fluidTransformRecipe -> fluidTransformRecipe.getFluidInTank()
-                  .isFluidEqual(fluidStack))
-              .filter(fluidTransformRecipe -> fluidTransformRecipe.getCatalyst().test(itemStack))
-              .findFirst()
-              .map(FluidTransformRecipe::getResult)
-              .map(FluidStack::getFluid)
-              .orElse(Fluids.EMPTY);
-        });
+        .computeIfAbsent(
+            catalyst.asItem(),
+            k -> {
+              @Nonnull final ItemStack itemStack = new ItemStack(catalyst);
+              return recipeList.stream()
+                  .filter(
+                      fluidTransformRecipe ->
+                          fluidTransformRecipe.getFluidInTank().isFluidEqual(fluidStack))
+                  .filter(
+                      fluidTransformRecipe -> fluidTransformRecipe.getCatalyst().test(itemStack))
+                  .findFirst()
+                  .map(FluidTransformRecipe::getResult)
+                  .map(FluidStack::getFluid)
+                  .orElse(Fluids.EMPTY);
+            });
   }
 
   @Nonnull

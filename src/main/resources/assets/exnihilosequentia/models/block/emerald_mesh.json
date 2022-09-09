@@ -1,6 +1,6 @@
 {
   "parent": "exnihilosequentia:block/mesh_base",
   "textures": {
-    "texture": "minecraft:block/lime_wool"
+    "texture": "exnihilosequentia:block/emerald_mesh"
   }
 }

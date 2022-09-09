@@ -14,7 +14,7 @@ public class HeatRecipeJS extends BaseRecipeJS {
     this.properties(MapJS.of(args.get(2)));
   }
 
-  private void properties(Map<?,?> jsonObject) {
+  private void properties(Map<?, ?> jsonObject) {
     this.json.add("state", MapJS.json(jsonObject));
   }
 
@@ -26,14 +26,9 @@ public class HeatRecipeJS extends BaseRecipeJS {
     this.json.addProperty("amount", amount);
   }
 
+  @Override
+  public void deserialize() {}
 
   @Override
-  public void deserialize() {
-
-  }
-
-  @Override
-  public void serialize() {
-
-  }
+  public void serialize() {}
 }

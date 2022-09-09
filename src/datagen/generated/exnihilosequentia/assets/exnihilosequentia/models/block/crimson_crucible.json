@@ -1,10 +1,7 @@
 {
-  "parent": "exnihilosequentia:block/crucible",
+  "parent": "exnihilosequentia:block/crucible_base",
   "textures": {
-    "bottom": "minecraft:block/crimson_stem",
-    "inside": "minecraft:block/crimson_stem",
-    "particle": "minecraft:block/crimson_stem",
-    "side": "minecraft:block/crimson_stem",
-    "top": "minecraft:block/crimson_stem"
+    "particle": "minecraft:block/crimson_planks",
+    "texture": "exnihilosequentia:block/crimson_crucible"
   }
 }

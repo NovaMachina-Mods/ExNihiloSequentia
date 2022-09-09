@@ -1,7 +1,7 @@
 {
   "parent": "exnihilosequentia:block/sieve_base",
   "textures": {
-    "particle": "minecraft:block/stripped_jungle_log",
-    "texture": "minecraft:block/stripped_jungle_log"
+    "particle": "minecraft:block/jungle_planks",
+    "texture": "exnihilosequentia:block/jungle_sieve"
   }
 }

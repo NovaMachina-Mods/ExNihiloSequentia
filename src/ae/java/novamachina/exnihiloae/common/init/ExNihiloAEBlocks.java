@@ -16,17 +16,21 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class ExNihiloAEBlocks {
 
-  private static final DeferredRegister<Block> BLOCKS = DeferredRegister
-      .create(ForgeRegistries.BLOCKS, ExNihiloAEConstants.ModIds.EX_NIHILO_AE);
-  public static final RegistryObject<BaseFallingBlock> CRUSHED_SKYSTONE = BLOCKS
-      .register(ExNihiloAEConstants.Blocks.CRUSHED_SKYSTONE,
-          () -> new BaseFallingBlock(new BlockBuilder()
-              .properties(BlockBehaviour.Properties.of(Material.SAND).strength(0.7F)
-                  .sound(SoundType.GRAVEL))));
+  private static final DeferredRegister<Block> BLOCKS =
+      DeferredRegister.create(ForgeRegistries.BLOCKS, ExNihiloAEConstants.ModIds.EX_NIHILO_AE);
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_SKYSTONE =
+      BLOCKS.register(
+          ExNihiloAEConstants.Blocks.CRUSHED_SKYSTONE,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private ExNihiloAEBlocks() {
-  }
+  private ExNihiloAEBlocks() {}
 
   public static void init(IEventBus modEventBus) {
     logger.debug("Register blocks");

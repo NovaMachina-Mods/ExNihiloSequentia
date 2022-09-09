@@ -12,13 +12,10 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class PacketHandler {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
-  @Nullable
-  private static SimpleChannel handshakeChannel;
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nullable private static SimpleChannel handshakeChannel;
 
-  private PacketHandler() {
-  }
+  private PacketHandler() {}
 
   @Nullable
   public static SimpleChannel getHandshakeChannel() {

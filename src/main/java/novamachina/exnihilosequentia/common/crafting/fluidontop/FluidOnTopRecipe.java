@@ -15,14 +15,10 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class FluidOnTopRecipe extends SerializableRecipe {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
-  @Nonnull
-  private FluidStack fluidInTank;
-  @Nonnull
-  private FluidStack fluidOnTop;
-  @Nonnull
-  private ItemStack result;
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private FluidStack fluidInTank;
+  @Nonnull private FluidStack fluidOnTop;
+  @Nonnull private ItemStack result;
 
   public FluidOnTopRecipe(
       @Nonnull final ResourceLocation id,

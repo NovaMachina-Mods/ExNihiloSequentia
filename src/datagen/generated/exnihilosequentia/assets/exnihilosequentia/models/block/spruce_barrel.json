@@ -1,7 +1,7 @@
 {
-  "parent": "exnihilosequentia:block/barrel",
+  "parent": "exnihilosequentia:block/barrel_base",
   "textures": {
     "particle": "minecraft:block/spruce_planks",
-    "texture": "minecraft:block/spruce_planks"
+    "texture": "exnihilosequentia:block/spruce_barrel"
   }
 }

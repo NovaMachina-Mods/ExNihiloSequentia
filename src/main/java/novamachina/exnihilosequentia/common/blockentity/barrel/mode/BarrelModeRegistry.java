@@ -14,14 +14,14 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class BarrelModeRegistry {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   @Nonnull
   private static final Map<String, Supplier<AbstractBarrelMode>> modeNameMap = new HashMap<>();
+
   @Nonnull
-  private static final Map<TriggerType, ArrayList<Supplier<AbstractBarrelMode>>> modeMap = new EnumMap<>(
-      TriggerType.class);
+  private static final Map<TriggerType, ArrayList<Supplier<AbstractBarrelMode>>> modeMap =
+      new EnumMap<>(TriggerType.class);
 
   @Nullable
   public static AbstractBarrelMode getModeFromName(@Nonnull final String barrelMode) {
@@ -41,12 +41,13 @@ public class BarrelModeRegistry {
     addMode(() -> new FluidsBarrelMode(ExNihiloConstants.BarrelModes.FLUID), TriggerType.ITEM);
     addMode(() -> new BlockBarrelMode(ExNihiloConstants.BarrelModes.BLOCK), TriggerType.NONE);
     addMode(() -> new MobSpawnBarrelMode(ExNihiloConstants.BarrelModes.MOB), TriggerType.NONE);
-    addMode(() -> new FluidTransformBarrelMode(ExNihiloConstants.BarrelModes.TRANSFORM),
+    addMode(
+        () -> new FluidTransformBarrelMode(ExNihiloConstants.BarrelModes.TRANSFORM),
         TriggerType.NONE);
   }
 
-  public static void addMode(@Nonnull final Supplier<AbstractBarrelMode> mode,
-      @Nonnull final TriggerType type) {
+  public static void addMode(
+      @Nonnull final Supplier<AbstractBarrelMode> mode, @Nonnull final TriggerType type) {
     logger.debug("Adding mode: " + mode + ", Trigger: " + type);
     @Nullable ArrayList<Supplier<AbstractBarrelMode>> list = modeMap.get(type);
     if (list == null) {
@@ -58,6 +59,8 @@ public class BarrelModeRegistry {
   }
 
   public enum TriggerType {
-    ITEM, FLUID, NONE
+    ITEM,
+    FLUID,
+    NONE
   }
 }

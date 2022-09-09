@@ -5,19 +5,16 @@ import org.slf4j.Logger;
 
 public class ExNihiloLogger {
 
-  @Nonnull
-  private static final String LOGGING_PATTERN = "{} {}";
-  @Nonnull
-  private static final String PREFIX = "[Ex Nihilo: Sequentia]:";
-  @Nonnull
-  private final Logger logger;
+  @Nonnull private static final String LOGGING_PATTERN = "{} {}";
+  @Nonnull private static final String PREFIX = "[Ex Nihilo: Sequentia]:";
+  @Nonnull private final Logger logger;
 
   public ExNihiloLogger(@Nonnull final Logger logger) {
     this.logger = logger;
   }
 
   public void debug(@Nonnull final String msg) {
-      logger.debug(LOGGING_PATTERN, PREFIX, msg);
+    logger.debug(LOGGING_PATTERN, PREFIX, msg);
   }
 
   public void error(@Nonnull final String msg) {

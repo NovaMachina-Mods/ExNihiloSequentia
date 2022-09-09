@@ -7,14 +7,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class IngredientUtils {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private IngredientUtils() {
-  }
+  private IngredientUtils() {}
 
-  public static boolean areIngredientsEqual(@Nonnull final Ingredient i1,
-      @Nonnull final Ingredient i2) {
+  public static boolean areIngredientsEqual(
+      @Nonnull final Ingredient i1, @Nonnull final Ingredient i2) {
     @Nonnull final String item1;
     @Nonnull final String item2;
     try {

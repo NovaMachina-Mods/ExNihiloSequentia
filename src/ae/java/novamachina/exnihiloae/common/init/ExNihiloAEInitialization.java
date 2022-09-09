@@ -8,8 +8,7 @@ public class ExNihiloAEInitialization {
 
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private ExNihiloAEInitialization() {
-  }
+  private ExNihiloAEInitialization() {}
 
   public static void init(IEventBus modEventBus) {
     logger.debug("Initializing modded items");

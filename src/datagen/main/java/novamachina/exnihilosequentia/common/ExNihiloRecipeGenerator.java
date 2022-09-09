@@ -40,9 +40,9 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
 
+  public static final String GRAVEL = "gravel";
   @Nonnull private static final String COBBLESTONE = "cobblestone";
   @Nonnull private static final String DOLL_CONDITION = "has_doll";
-  public static final String GRAVEL = "gravel";
   @Nonnull private static final String GRAVEL_SUFFIX = "_gravel";
   @Nonnull private static final String LEAVES = "leaves";
   @Nonnull private static final String MATERIAL_CONDITION = "has_material";
@@ -160,42 +160,43 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
   }
 
   private void registerCrooks(@Nonnull final Consumer<FinishedRecipe> consumer) {
-
     createCrook(ExNihiloItems.CROOK_ANDESITE.get(), ExNihiloItems.PEBBLE_ANDESITE.get(), consumer);
-    //    createCrook(ExNihiloItems.CROOK_BASALT.get(), ExNihiloItems.PEBBLE_BASALT.get(),
-    // consumer);
-    //    createCrook(ExNihiloItems.CROOK_BLACKSTONE.get(), ExNihiloItems.PEBBLE_BLACKSTONE.get(),
-    // consumer);
+    createCrook(ExNihiloItems.CROOK_BASALT.get(), ExNihiloItems.PEBBLE_BASALT.get(), consumer);
+    createCrook(
+        ExNihiloItems.CROOK_BLACKSTONE.get(), ExNihiloItems.PEBBLE_BLACKSTONE.get(), consumer);
     createCrook(ExNihiloItems.CROOK_BONE.get(), Tags.Items.BONES, consumer);
-    //    createCrook(ExNihiloItems.CROOK_CALCITE.get(), ExNihiloItems.PEBBLE_CALCITE.get(),
-    // consumer);
-    //    createCrook(ExNihiloItems.CROOK_COPPER.get(), ExNihiloTags.NUGGET_COPPER, consumer);
+    createCrook(ExNihiloItems.CROOK_CALCITE.get(), ExNihiloItems.PEBBLE_CALCITE.get(), consumer);
+    createCrook(ExNihiloItems.CROOK_COPPER.get(), ExNihiloTags.NUGGET_COPPER, consumer);
     //    createCrook(ExNihiloItems.CROOK_CRIMSON_FUNGUS.get(), Items.CRIMSON_PLANKS, consumer);
-    //    createCrook(ExNihiloItems.CROOK_DEEPSLATE.get(), ExNihiloItems.PEBBLE_DEEPSLATE.get(),
-    // consumer);
+    createCrook(
+        ExNihiloItems.CROOK_DEEPSLATE.get(), ExNihiloItems.PEBBLE_DEEPSLATE.get(), consumer);
     createCrook(ExNihiloItems.CROOK_DIAMOND.get(), Tags.Items.GEMS_DIAMOND, consumer);
     createCrook(ExNihiloItems.CROOK_DIORITE.get(), ExNihiloItems.PEBBLE_DIORITE.get(), consumer);
-    //    createCrook(ExNihiloItems.CROOK_DRIPSTONE.get(), ExNihiloItems.PEBBLE_DRIPSTONE.get(),
-    // consumer);
+    createCrook(
+        ExNihiloItems.CROOK_DRIPSTONE.get(), ExNihiloItems.PEBBLE_DRIPSTONE.get(), consumer);
     createCrook(ExNihiloItems.CROOK_GOLD.get(), Tags.Items.NUGGETS_GOLD, consumer);
     createCrook(ExNihiloItems.CROOK_GRANITE.get(), ExNihiloItems.PEBBLE_GRANITE.get(), consumer);
     createCrook(ExNihiloItems.CROOK_IRON.get(), Tags.Items.NUGGETS_IRON, consumer);
-    //    createCrook(ExNihiloItems.CROOK_NETHER_BRICK.get(), Items.NETHER_BRICKS, consumer);
-    //    UpgradeRecipeBuilder
-    //        .smithing(Ingredient.of(ExNihiloItems.CROOK_DIAMOND.get()), Ingredient
-    //            .of(Tags.Items.INGOTS_NETHERITE), ExNihiloItems.CROOK_NETHERITE.get())
-    //        .unlocks("has_diamond_crook", InventoryChangeTrigger.TriggerInstance
-    //            .hasItems(ExNihiloItems.CROOK_DIAMOND.get()))
-    //        .unlocks(MATERIAL_CONDITION, has(Tags.Items.INGOTS_NETHERITE))
-    //        .save(consumer, createSaveLocation(new ResourceLocation(
-    //            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-    //            ExNihiloConstants.Items.NETHERITE_CROOK)));
-    //    createCrook(ExNihiloItems.CROOK_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
-    //    createCrook(ExNihiloItems.CROOK_RED_NETHER_BRICK.get(), Items.RED_NETHER_BRICKS,
-    // consumer);
+    createCrook(ExNihiloItems.CROOK_NETHER_BRICK.get(), Items.NETHER_BRICKS, consumer);
+    UpgradeRecipeBuilder.smithing(
+            Ingredient.of(ExNihiloItems.CROOK_DIAMOND.get()),
+            Ingredient.of(Tags.Items.INGOTS_NETHERITE),
+            ExNihiloItems.CROOK_NETHERITE.get())
+        .unlocks(
+            "has_diamond_crook",
+            InventoryChangeTrigger.TriggerInstance.hasItems(ExNihiloItems.CROOK_DIAMOND.get()))
+        .unlocks(MATERIAL_CONDITION, has(Tags.Items.INGOTS_NETHERITE))
+        .save(
+            consumer,
+            createSaveLocation(
+                new ResourceLocation(
+                    ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+                    ExNihiloConstants.Items.NETHERITE_CROOK)));
+    createCrook(ExNihiloItems.CROOK_RED_NETHER_BRICK.get(), Items.RED_NETHER_BRICKS, consumer);
+    createCrook(ExNihiloItems.CROOK_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
     createCrook(ExNihiloItems.CROOK_STONE.get(), ExNihiloItems.PEBBLE_STONE.get(), consumer);
-    //    createCrook(ExNihiloItems.CROOK_TERRACOTTA.get(), Items.TERRACOTTA, consumer);
-    //    createCrook(ExNihiloItems.CROOK_TUFF.get(), ExNihiloItems.PEBBLE_TUFF.get(), consumer);
+    createCrook(ExNihiloItems.CROOK_TERRACOTTA.get(), Items.TERRACOTTA, consumer);
+    createCrook(ExNihiloItems.CROOK_TUFF.get(), ExNihiloItems.PEBBLE_TUFF.get(), consumer);
     //    createCrook(ExNihiloItems.CROOK_WARPED_FUNGUS.get(), Items.WARPED_PLANKS, consumer);
     createCrook(ExNihiloItems.CROOK_WOOD.get(), Tags.Items.RODS_WOODEN, consumer);
   }
@@ -447,20 +448,20 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
   }
 
   private void registerHammers(@Nonnull final Consumer<FinishedRecipe> consumer) {
-    //    createHammer(ExNihiloItems.HAMMER_ANDESITE.get(), Items.ANDESITE, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_BASALT.get(), Items.BASALT, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_BLACKSTONE.get(), Items.BLACKSTONE, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_CALCITE.get(), Items.CALCITE, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_COPPER.get(), Tags.Items.INGOTS_COPPER, consumer);
+    createHammer(ExNihiloItems.HAMMER_ANDESITE.get(), Items.ANDESITE, consumer);
+    createHammer(ExNihiloItems.HAMMER_BASALT.get(), Items.BASALT, consumer);
+    createHammer(ExNihiloItems.HAMMER_BLACKSTONE.get(), Items.BLACKSTONE, consumer);
+    createHammer(ExNihiloItems.HAMMER_CALCITE.get(), Items.CALCITE, consumer);
+    createHammer(ExNihiloItems.HAMMER_COPPER.get(), Tags.Items.INGOTS_COPPER, consumer);
     //    createHammer(ExNihiloItems.HAMMER_CRIMSON_FUNGUS.get(), Items.CRIMSON_PLANKS, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_DEEPSLATE.get(), Items.DEEPSLATE, consumer);
+    createHammer(ExNihiloItems.HAMMER_DEEPSLATE.get(), Items.DEEPSLATE, consumer);
     createHammer(ExNihiloItems.HAMMER_DIAMOND.get(), Tags.Items.GEMS_DIAMOND, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_DIORITE.get(), Items.DIORITE, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_DRIPSTONE.get(), Items.DRIPSTONE_BLOCK, consumer);
+    createHammer(ExNihiloItems.HAMMER_DIORITE.get(), Items.DIORITE, consumer);
+    createHammer(ExNihiloItems.HAMMER_DRIPSTONE.get(), Items.DRIPSTONE_BLOCK, consumer);
     createHammer(ExNihiloItems.HAMMER_GOLD.get(), Tags.Items.INGOTS_GOLD, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_GRANITE.get(), Items.GRANITE, consumer);
+    createHammer(ExNihiloItems.HAMMER_GRANITE.get(), Items.GRANITE, consumer);
     createHammer(ExNihiloItems.HAMMER_IRON.get(), Tags.Items.INGOTS_IRON, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_NETHER_BRICK.get(), Items.NETHER_BRICKS, consumer);
+    createHammer(ExNihiloItems.HAMMER_NETHER_BRICK.get(), Items.NETHER_BRICKS, consumer);
     UpgradeRecipeBuilder.smithing(
             Ingredient.of(ExNihiloItems.HAMMER_DIAMOND.get()),
             Ingredient.of(Tags.Items.INGOTS_NETHERITE),
@@ -475,12 +476,11 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 new ResourceLocation(
                     ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
                     ExNihiloConstants.Items.NETHERITE_HAMMER)));
-    //    createHammer(ExNihiloItems.HAMMER_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get(), Items.RED_NETHER_BRICKS,
-    // consumer);
+    createHammer(ExNihiloItems.HAMMER_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
+    createHammer(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get(), Items.RED_NETHER_BRICKS, consumer);
     createHammer(ExNihiloItems.HAMMER_STONE.get(), Tags.Items.COBBLESTONE, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_TERRACOTTA.get(), Items.TERRACOTTA, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_TUFF.get(), Items.TUFF, consumer);
+    createHammer(ExNihiloItems.HAMMER_TERRACOTTA.get(), Items.TERRACOTTA, consumer);
+    createHammer(ExNihiloItems.HAMMER_TUFF.get(), Items.TUFF, consumer);
     //    createHammer(ExNihiloItems.HAMMER_WARPED_FUNGUS.get(), Items.WARPED_PLANKS, consumer);
     createHammer(ExNihiloItems.HAMMER_WOOD.get(), ItemTags.PLANKS, consumer);
   }
@@ -748,6 +748,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
           .save(consumer, createSaveLocation(ancientDebrisResourceLocation));
     }
 
+    // TODO: Add nugget Recipes
     ShapelessRecipeBuilder.shapeless(ExNihiloItems.NUGGET_COPPER.get(), 9)
         .requires(Tags.Items.INGOTS_COPPER)
         .unlockedBy(
@@ -816,15 +817,18 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createPebbleBlock(Blocks.BASALT, ExNihiloItems.PEBBLE_BASALT.get(), consumer);
     createPebbleBlock(Blocks.BLACKSTONE, ExNihiloItems.PEBBLE_BLACKSTONE.get(), consumer);
     createPebbleBlock(Blocks.COBBLESTONE, ExNihiloItems.PEBBLE_STONE.get(), consumer);
+    createPebbleBlock(Blocks.CALCITE, ExNihiloItems.PEBBLE_CALCITE.get(), consumer);
+    createPebbleBlock(Blocks.DEEPSLATE, ExNihiloItems.PEBBLE_DEEPSLATE.get(), consumer);
     createPebbleBlock(Blocks.DIORITE, ExNihiloItems.PEBBLE_DIORITE.get(), consumer);
+    createPebbleBlock(Blocks.DRIPSTONE_BLOCK, ExNihiloItems.PEBBLE_DRIPSTONE.get(), consumer);
+    createPebbleBlock(Blocks.END_STONE, ExNihiloItems.PEBBLE_END_STONE.get(), consumer);
     createPebbleBlock(Blocks.GRANITE, ExNihiloItems.PEBBLE_GRANITE.get(), consumer);
-    //    createPebbleBlock(Blocks.DEEPSLATE, ExNihiloItems.PEBBLE_DEEPSLATE.get(), consumer);
-    //    createPebbleBlock(Blocks.END_STONE, ExNihiloItems.PEBBLE_END_STONE.get(), consumer);
-    //    createPebbleBlock(Blocks.NETHERRACK, ExNihiloItems.PEBBLE_NETHERRACK.get(), consumer);
-    //    createPebbleBlock(Blocks.TUFF, ExNihiloItems.PEBBLE_TUFF.get(), consumer);
+    createPebbleBlock(Blocks.NETHERRACK, ExNihiloItems.PEBBLE_NETHERRACK.get(), consumer);
+    createPebbleBlock(Blocks.TUFF, ExNihiloItems.PEBBLE_TUFF.get(), consumer);
   }
 
   private void registerSieveRecipes(@Nonnull final Consumer<FinishedRecipe> consumer) {
+    // TODO: Add all pebble drops
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(Blocks.DIRT))
         .addResult(ExNihiloItems.PEBBLE_STONE.get())

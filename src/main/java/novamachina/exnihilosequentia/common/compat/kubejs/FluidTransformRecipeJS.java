@@ -31,12 +31,8 @@ public class FluidTransformRecipeJS extends BaseRecipeJS {
   }
 
   @Override
-  public void deserialize() {
-
-  }
+  public void deserialize() {}
 
   @Override
-  public void serialize() {
-
-  }
+  public void serialize() {}
 }

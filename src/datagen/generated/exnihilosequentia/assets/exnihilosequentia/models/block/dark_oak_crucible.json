@@ -1,10 +1,7 @@
 {
-  "parent": "exnihilosequentia:block/crucible",
+  "parent": "exnihilosequentia:block/crucible_base",
   "textures": {
-    "bottom": "minecraft:block/dark_oak_log",
-    "inside": "minecraft:block/dark_oak_log",
-    "particle": "minecraft:block/dark_oak_log",
-    "side": "minecraft:block/dark_oak_log",
-    "top": "minecraft:block/dark_oak_log"
+    "particle": "minecraft:block/dark_oak_planks",
+    "texture": "exnihilosequentia:block/dark_oak_crucible"
   }
 }

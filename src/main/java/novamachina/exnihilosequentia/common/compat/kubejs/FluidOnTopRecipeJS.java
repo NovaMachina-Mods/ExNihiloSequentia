@@ -32,7 +32,7 @@ public class FluidOnTopRecipeJS extends BaseRecipeJS {
 
   @Override
   public void serialize() {
-    if(this.serializeOutputs) {
+    if (this.serializeOutputs) {
       this.json.add("result", this.outputItems.get(0).toJson());
     }
   }

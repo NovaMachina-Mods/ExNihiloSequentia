@@ -10,19 +10,16 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class HeatRegistry {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  @Nonnull
-  private final List<HeatRecipe> recipeList = new ArrayList<>();
+  @Nonnull private final List<HeatRecipe> recipeList = new ArrayList<>();
 
   public void clearRecipes() {
     recipeList.clear();
   }
 
   public int getHeatAmount(@Nonnull final BlockState entry) {
-    return recipeList
-        .stream()
+    return recipeList.stream()
         .filter(recipe -> recipe.isMatch(entry))
         .findFirst()
         .map(HeatRecipe::getAmount)

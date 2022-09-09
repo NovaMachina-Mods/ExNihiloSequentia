@@ -15,10 +15,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class InfestingLeavesEntity extends BlockEntity {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
-  @Nonnull
-  private static final String PROGRESS_TAG = "progress";
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final String PROGRESS_TAG = "progress";
 
   private int progress = 0;
   private int progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
@@ -52,8 +50,8 @@ public class InfestingLeavesEntity extends BlockEntity {
         spreadCounter = 0;
       }
       progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
-      level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition),
-          level.getBlockState(worldPosition), 2);
+      level.sendBlockUpdated(
+          worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), 2);
     }
   }
 
@@ -71,8 +69,8 @@ public class InfestingLeavesEntity extends BlockEntity {
   }
 
   @Override
-  public void onDataPacket(@Nonnull final Connection net,
-      @Nonnull final ClientboundBlockEntityDataPacket pkt) {
+  public void onDataPacket(
+      @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket pkt) {
     @Nonnull final CompoundTag nbt = pkt.getTag();
     if (nbt.contains(PROGRESS_TAG)) {
       progress = nbt.getInt(PROGRESS_TAG);

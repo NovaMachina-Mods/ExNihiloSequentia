@@ -14,14 +14,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class HammerRegistry {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  @Nonnull
-  private static final List<HammerRecipe> recipeList = new ArrayList<>();
+  @Nonnull private static final List<HammerRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull
-  private final Map<Block, HammerRecipe> recipeByBlockCache = new HashMap<>();
+  @Nonnull private final Map<Block, HammerRecipe> recipeByBlockCache = new HashMap<>();
 
   @Nonnull
   public List<ItemStackWithChance> getResult(@Nonnull final Block input) {
@@ -36,14 +33,15 @@ public class HammerRegistry {
 
   @Nonnull
   public HammerRecipe findRecipe(@Nonnull final Block block) {
-    return recipeByBlockCache.computeIfAbsent(block, k -> {
-      @Nonnull final ItemStack itemStack = new ItemStack(block);
-      return recipeList
-          .stream()
-          .filter(recipe -> recipe.getInput().test(itemStack))
-          .findFirst()
-          .orElse(HammerRecipe.EMPTY);
-    });
+    return recipeByBlockCache.computeIfAbsent(
+        block,
+        k -> {
+          @Nonnull final ItemStack itemStack = new ItemStack(block);
+          return recipeList.stream()
+              .filter(recipe -> recipe.getInput().test(itemStack))
+              .findFirst()
+              .orElse(HammerRecipe.EMPTY);
+        });
   }
 
   public void setRecipes(@Nonnull final List<HammerRecipe> recipes) {

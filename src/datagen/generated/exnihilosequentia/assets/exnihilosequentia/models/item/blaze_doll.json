@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "exnihilosequentia:item/overlap_gui",
   "textures": {
     "layer0": "exnihilosequentia:items/blaze_doll"
   }

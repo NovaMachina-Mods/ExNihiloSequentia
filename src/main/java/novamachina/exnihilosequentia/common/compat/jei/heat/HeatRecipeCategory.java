@@ -37,18 +37,14 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
   public static final ResourceLocation UID =
       new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat");
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new
-      ExNihiloLogger(LogUtils.getLogger());
-  @Nonnull
-  private final IDrawableStatic background;
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private final IDrawableStatic background;
 
   public HeatRecipeCategory(@Nonnull final IGuiHelper guiHelper) {
     background =
         guiHelper
             .drawableBuilder(
-                new ResourceLocation(ExNihiloConstants.ModIds.JEI,
-                    "textures/gui/gui_vanilla.png"),
+                new ResourceLocation(ExNihiloConstants.ModIds.JEI, "textures/gui/gui_vanilla.png"),
                 0,
                 134,
                 18,
@@ -109,8 +105,7 @@ public class HeatRecipeCategory implements IRecipeCategory<HeatRecipe> {
     }
     ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(recipeInput);
     if (ForgeRegistries.FLUIDS.containsKey(blockId)) {
-      @Nullable final Fluid fluid =
-          ForgeRegistries.FLUIDS.getValue(blockId);
+      @Nullable final Fluid fluid = ForgeRegistries.FLUIDS.getValue(blockId);
       if (fluid != null) {
         builder
             .addSlot(RecipeIngredientRole.INPUT, 1, 17)

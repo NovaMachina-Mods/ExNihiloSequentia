@@ -12,14 +12,12 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 @Mod.EventBusSubscriber(
     modid = ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM,
-    bus = Mod.EventBusSubscriber.Bus.FORGE
-)
+    bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloMekanismInitialization {
 
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private ExNihiloMekanismInitialization() {
-  }
+  private ExNihiloMekanismInitialization() {}
 
   @SubscribeEvent
   public static void onServerStart(ServerStartingEvent event) {

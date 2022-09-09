@@ -22,10 +22,10 @@ public abstract class BaseRecipeJS extends RecipeJS {
 
   @Override
   public void serialize() {
-    if(this.serializeInputs) {
+    if (this.serializeInputs) {
       this.json.add("input", this.inputItems.get(0).toJson());
     }
-    if(this.serializeOutputs) {
+    if (this.serializeOutputs) {
       this.json.add("result", this.outputItems.get(0).toJson());
     }
   }

@@ -42,7 +42,7 @@ if(!System.getenv('CI')) {
         java {
             removeUnusedImports()
             trimTrailingWhitespace()
-            //        googleJavaFormat()
+            googleJavaFormat()
         }
     }
 }

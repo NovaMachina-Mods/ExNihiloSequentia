@@ -18,6 +18,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
 
@@ -33,6 +34,10 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
   @Nonnull
   protected ResourceLocation exnihiloLoc(@Nonnull final String string) {
     return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, string);
+  }
+
+  protected ResourceLocation vanillaLoc(@Nonnull final String string) {
+    return new ResourceLocation(ModIds.MINECRAFT, string);
   }
 
   protected void basicBlock(@Nonnull final Block block) {
@@ -67,14 +72,17 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
     return null;
   }
 
-  protected void createBarrel(@Nonnull final Block block, @Nonnull final ResourceLocation texture) {
+  protected void createBarrel(
+      @Nonnull final Block block,
+      @Nonnull final ResourceLocation texture,
+      @Nonnull final ResourceLocation particle) {
     @Nonnull
     final ConfiguredModel model =
         new ConfiguredModel(
             models()
-                .withExistingParent(getRegistryName(block), exnihiloLoc("block/barrel"))
+                .withExistingParent(getRegistryName(block), exnihiloLoc("block/barrel_base"))
                 .texture("texture", texture)
-                .texture(PARTICLE_TAG, texture));
+                .texture(PARTICLE_TAG, particle));
 
     simpleItemBlock(block, model.model);
   }
@@ -97,29 +105,31 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
   }
 
   protected void createCrucible(
-      @Nonnull final Block block, @Nonnull final ResourceLocation texture) {
+      @Nonnull final Block block,
+      @Nonnull final ResourceLocation texture,
+      @Nonnull final ResourceLocation particle) {
     @Nonnull
     final ConfiguredModel model =
         new ConfiguredModel(
             models()
-                .withExistingParent(getRegistryName(block), exnihiloLoc("block/crucible"))
-                .texture(PARTICLE_TAG, texture)
-                .texture("top", texture)
-                .texture("bottom", texture)
-                .texture("side", texture)
-                .texture("inside", texture));
+                .withExistingParent(getRegistryName(block), exnihiloLoc("block/crucible_base"))
+                .texture(PARTICLE_TAG, particle)
+                .texture("texture", texture));
 
     simpleItemBlock(block, model.model);
   }
 
-  protected void createSieve(@Nonnull final Block block, @Nonnull final ResourceLocation texture) {
+  protected void createSieve(
+      @Nonnull final Block block,
+      @Nonnull final ResourceLocation texture,
+      @Nonnull final ResourceLocation particle) {
     @Nonnull
     final ConfiguredModel model =
         new ConfiguredModel(
             models()
                 .withExistingParent(getRegistryName(block), exnihiloLoc("block/sieve_base"))
                 .texture("texture", texture)
-                .texture(PARTICLE_TAG, texture));
+                .texture(PARTICLE_TAG, particle));
     @Nonnull final MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
     @Nonnull
     MultiPartBlockStateBuilder.PartBuilder partBuilder =

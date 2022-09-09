@@ -14,24 +14,21 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class CompostRegistry {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
-  @Nonnull
-  public final List<CompostRecipe> recipeList = new ArrayList<>();
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull public final List<CompostRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull
-  private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
+  @Nonnull private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
 
   public boolean containsSolid(@Nonnull final ItemLike item) {
     return getSolidAmount(item) > 0;
   }
 
   public int getSolidAmount(@Nonnull final ItemLike item) {
-    return itemSolidAmountCache
-        .computeIfAbsent(item.asItem(), k -> {
+    return itemSolidAmountCache.computeIfAbsent(
+        item.asItem(),
+        k -> {
           @Nonnull final ItemStack itemStack = new ItemStack(item);
-          return recipeList
-              .stream()
+          return recipeList.stream()
               .filter(compostRecipe -> compostRecipe.getInput().test(itemStack))
               .findFirst()
               .map(CompostRecipe::getAmount)

@@ -6,10 +6,13 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.common.item.CrookBaseItem;
+import novamachina.exnihilosequentia.common.item.HammerBaseItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
@@ -49,54 +52,15 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
   }
 
   private void registerCrooks() {
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_ANDESITE.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_BASALT.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_BLACKSTONE.get());
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_BONE.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_CALCITE.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_COPPER.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_CRIMSON_FUNGUS.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_DEEPSLATE.get());
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_DIAMOND.get());
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_DIORITE.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_DRIPSTONE.get());
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_GRANITE.get());
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_GOLD.get());
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_IRON.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_NETHER_BRICK.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_NETHERITE.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_PRISMARINE.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_RED_NETHER_BRICK.get());
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_STONE.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_TERRACOTTA.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_TUFF.get());
-    //    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_WARPED_FUNGUS.get());
-    tag(ExNihiloTags.CROOK).add(ExNihiloItems.CROOK_WOOD.get());
+    for (RegistryObject<CrookBaseItem> crook : ExNihiloItems.CROOKS) {
+      tag(ExNihiloTags.CROOK).add(crook.get());
+    }
   }
 
   private void registerHammers() {
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_ANDESITE.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_BASALT.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_BLACKSTONE.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_CALCITE.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_COPPER.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_CRIMSON_FUNGUS.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_DEEPSLATE.get());
-    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_DIAMOND.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_DIORITE.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_DRIPSTONE.get());
-    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_GOLD.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_GRANITE.get());
-    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_IRON.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_NETHER_BRICK.get());
-    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_NETHERITE.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_PRISMARINE.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get());
-    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_STONE.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_TERRACOTTA.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_TUFF.get());
-    //    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_WARPED_FUNGUS.get());
-    tag(ExNihiloTags.HAMMER).add(ExNihiloItems.HAMMER_WOOD.get());
+    for (RegistryObject<HammerBaseItem> hammer : ExNihiloItems.HAMMERS) {
+      tag(ExNihiloTags.HAMMER).add(hammer.get());
+    }
   }
 
   private void registerMeats() {
@@ -106,6 +70,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
   private void registerMisc() {
     tag(ExNihiloTags.CLAY).add(Items.CLAY_BALL);
+    // TODO: Add nuggets
     tag(ExNihiloTags.NUGGET_COPPER).add(ExNihiloItems.NUGGET_COPPER.get());
   }
 

@@ -25,8 +25,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class UseHammerModifier extends LootModifier {
 
-  public static final Supplier<Codec<UseHammerModifier>> CODEC = Suppliers.memoize(() ->
-      RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, UseHammerModifier::new)));
+  public static final Supplier<Codec<UseHammerModifier>> CODEC =
+      Suppliers.memoize(
+          () ->
+              RecordCodecBuilder.create(
+                  inst -> codecStart(inst).apply(inst, UseHammerModifier::new)));
 
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
@@ -49,7 +52,8 @@ public class UseHammerModifier extends LootModifier {
         && blockState != null
         && tool.getItem().getDefaultInstance().is(ExNihiloTags.HAMMER)
         && ExNihiloRegistries.HAMMER_REGISTRY.isHammerable(blockState.getBlock())) {
-      @Nonnull final List<ItemStackWithChance> list =
+      @Nonnull
+      final List<ItemStackWithChance> list =
           ExNihiloRegistries.HAMMER_REGISTRY.getResult(blockState.getBlock());
       for (@Nonnull final ItemStackWithChance stackWithChance : list) {
         if (random.nextFloat() <= stackWithChance.getChance()

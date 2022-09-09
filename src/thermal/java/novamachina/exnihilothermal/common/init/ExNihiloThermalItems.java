@@ -16,25 +16,48 @@ import novamachina.exnihilothermal.common.utility.ExNihiloThermalConstants;
 public class ExNihiloThermalItems {
 
   @Nonnull
-  private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
-      ForgeRegistries.ITEMS, ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL);
-  public static final RegistryObject<DollItem> BASALZ_DOLL = ITEMS.register(
-      ExNihiloThermalConstants.Items.DOLL_BASALZ,
-      () -> new DollItem(ExNihiloThermalConstants.ModIds.THERMAL, "basalz",
-          ExNihiloConstants.ModIds.MINECRAFT, "lava", 1.0D, "tooltip.doll.basalz"));
-  public static final RegistryObject<DollItem> BLITZ_DOLL = ITEMS.register(
-      ExNihiloThermalConstants.Items.DOLL_BLITZ,
-      () -> new DollItem(ExNihiloThermalConstants.ModIds.THERMAL, "blitz",
-          ExNihiloConstants.ModIds.MINECRAFT, "lava", 1.0D, "tooltip.doll.blitz"));
-  public static final RegistryObject<DollItem> BLIZZ_DOLL = ITEMS.register(
-      ExNihiloThermalConstants.Items.DOLL_BLIZZ,
-      () -> new DollItem(ExNihiloThermalConstants.ModIds.THERMAL, "blizz",
-          ExNihiloConstants.ModIds.MINECRAFT, "water", 1.0D, "tooltip.doll.blizz"));
-    public static final RegistryObject<ResourceItem> DUST_OBSIDIAN = ITEMS.register(
-      ExNihiloThermalConstants.Items.DUST_OBSIDIAN,
-      () -> new ResourceItem(ExNihiloThermalConstants.Items.DUST_OBSIDIAN));
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private static final DeferredRegister<Item> ITEMS =
+      DeferredRegister.create(
+          ForgeRegistries.ITEMS, ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL);
+
+  public static final RegistryObject<DollItem> BASALZ_DOLL =
+      ITEMS.register(
+          ExNihiloThermalConstants.Items.DOLL_BASALZ,
+          () ->
+              new DollItem(
+                  ExNihiloThermalConstants.ModIds.THERMAL,
+                  "basalz",
+                  ExNihiloConstants.ModIds.MINECRAFT,
+                  "lava",
+                  1.0D,
+                  "tooltip.doll.basalz"));
+  public static final RegistryObject<DollItem> BLITZ_DOLL =
+      ITEMS.register(
+          ExNihiloThermalConstants.Items.DOLL_BLITZ,
+          () ->
+              new DollItem(
+                  ExNihiloThermalConstants.ModIds.THERMAL,
+                  "blitz",
+                  ExNihiloConstants.ModIds.MINECRAFT,
+                  "lava",
+                  1.0D,
+                  "tooltip.doll.blitz"));
+  public static final RegistryObject<DollItem> BLIZZ_DOLL =
+      ITEMS.register(
+          ExNihiloThermalConstants.Items.DOLL_BLIZZ,
+          () ->
+              new DollItem(
+                  ExNihiloThermalConstants.ModIds.THERMAL,
+                  "blizz",
+                  ExNihiloConstants.ModIds.MINECRAFT,
+                  "water",
+                  1.0D,
+                  "tooltip.doll.blizz"));
+  public static final RegistryObject<ResourceItem> DUST_OBSIDIAN =
+      ITEMS.register(
+          ExNihiloThermalConstants.Items.DUST_OBSIDIAN,
+          () -> new ResourceItem(ExNihiloThermalConstants.Items.DUST_OBSIDIAN));
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public static void init(@Nonnull final IEventBus modEventBus) {
     logger.debug("Register items");

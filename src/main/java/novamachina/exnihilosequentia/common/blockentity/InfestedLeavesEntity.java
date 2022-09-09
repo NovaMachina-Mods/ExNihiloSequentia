@@ -12,8 +12,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class InfestedLeavesEntity extends BlockEntity {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   private int progressWaitInterval = 0;
 

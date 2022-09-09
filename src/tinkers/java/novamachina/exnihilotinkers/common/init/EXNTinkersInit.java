@@ -12,21 +12,19 @@ import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
 
 @Mod.EventBusSubscriber(
     modid = EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS,
-    bus = Mod.EventBusSubscriber.Bus.FORGE
-)
+    bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EXNTinkersInit {
 
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private EXNTinkersInit() {
-  }
+  private EXNTinkersInit() {}
 
   public static void init(IEventBus eventBus) {
     EXNTinkersBlockEntites.init(eventBus);
     EXNTinkersBlocks.init(eventBus);
     EXNTinkersItems.init(eventBus);
-    //TODO reanable when tinkers available for 1.18.2
-    //EXNTinkersTinkerItems.init(eventBus);
+    // TODO reanable when tinkers available for 1.18.2
+    // EXNTinkersTinkerItems.init(eventBus);
   }
 
   @SubscribeEvent

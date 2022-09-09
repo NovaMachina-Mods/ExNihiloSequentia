@@ -24,8 +24,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity> {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public BarrelRender(@Nonnull final BlockEntityRendererProvider.Context rendererDispatcherIn) {
     super();
@@ -46,13 +45,16 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
       final int combinedLightIn,
       final int combinedOverlayIn) {
     @Nullable final ResourceLocation inventoryTexture = tileEntity.getSolidTexture();
-    @Nullable final ResourceLocation solidTexture = ForgeRegistries.BLOCKS.getKey(
-        Blocks.OAK_LEAVES);
+    @Nullable
+    final ResourceLocation solidTexture = ForgeRegistries.BLOCKS.getKey(Blocks.OAK_LEAVES);
     Fluid fluid = tileEntity.getFluid();
-    @Nullable final ResourceLocation fluidTexture =
+    @Nullable
+    final ResourceLocation fluidTexture =
         fluid != null ? IClientFluidTypeExtensions.of(fluid).getStillTexture() : null;
-    @Nullable final Color fluidColor =
-        fluid != null ? new Color(IClientFluidTypeExtensions.of(fluid).getTintColor())
+    @Nullable
+    final Color fluidColor =
+        fluid != null
+            ? new Color(IClientFluidTypeExtensions.of(fluid).getTintColor())
             : Color.INVALID_COLOR;
     renderFluid(
         tileEntity,
@@ -65,7 +67,8 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
     if (inventoryTexture != null) {
       @Nonnull final VertexConsumer builder = buffer.getBuffer(RenderType.solid());
 
-      @Nonnull final TextureAtlasSprite sprite =
+      @Nonnull
+      final TextureAtlasSprite sprite =
           Minecraft.getInstance()
               .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
               .apply(
@@ -115,7 +118,8 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
       @Nonnull final VertexConsumer builder = buffer.getBuffer(RenderType.translucent());
 
       if (solidTexture != null) {
-        @Nonnull final TextureAtlasSprite sprite =
+        @Nonnull
+        final TextureAtlasSprite sprite =
             Minecraft.getInstance()
                 .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
                 .apply(

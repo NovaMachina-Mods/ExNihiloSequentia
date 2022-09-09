@@ -16,16 +16,12 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class FluidOnTopRegistry {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  @Nonnull
-  private final List<FluidOnTopRecipe> recipeList = new ArrayList<>();
+  @Nonnull private final List<FluidOnTopRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull
-  private final Item empty = ItemStack.EMPTY.getItem();
-  @Nonnull
-  private final Map<FluidStack, Map<FluidStack, Item>> itemResultCache = new HashMap<>();
+  @Nonnull private final Item empty = ItemStack.EMPTY.getItem();
+  @Nonnull private final Map<FluidStack, Map<FluidStack, Item>> itemResultCache = new HashMap<>();
 
   public boolean isValidRecipe(@Nonnull final Fluid fluidInTank, @Nonnull final Fluid fluidOnTop) {
     return getResultItem(fluidInTank, fluidOnTop) != empty;
@@ -34,15 +30,17 @@ public class FluidOnTopRegistry {
   @Nonnull
   private Item getResultItem(@Nonnull final Fluid fluidInTank, @Nonnull final Fluid fluidOnTop) {
     return itemResultCache
-        .computeIfAbsent(new FluidStack(fluidInTank, FluidType.BUCKET_VOLUME),
-            k -> new HashMap<>())
-        .computeIfAbsent(new FluidStack(fluidOnTop, FluidType.BUCKET_VOLUME), k -> recipeList
-            .stream()
-            .filter(fluidOnTopRecipe -> fluidOnTopRecipe.validInputs(fluidInTank, fluidOnTop))
-            .findFirst()
-            .map(FluidOnTopRecipe::getResultItem)
-            .map(ItemStack::getItem)
-            .orElse(empty));
+        .computeIfAbsent(new FluidStack(fluidInTank, FluidType.BUCKET_VOLUME), k -> new HashMap<>())
+        .computeIfAbsent(
+            new FluidStack(fluidOnTop, FluidType.BUCKET_VOLUME),
+            k ->
+                recipeList.stream()
+                    .filter(
+                        fluidOnTopRecipe -> fluidOnTopRecipe.validInputs(fluidInTank, fluidOnTop))
+                    .findFirst()
+                    .map(FluidOnTopRecipe::getResultItem)
+                    .map(ItemStack::getItem)
+                    .orElse(empty));
   }
 
   @Nonnull

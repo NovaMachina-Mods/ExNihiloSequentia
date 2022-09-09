@@ -13,12 +13,12 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class ExNihiloMekanismItems {
 
-  private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
-      ForgeRegistries.ITEMS, ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM);
-  public static final Ore OSMIUM = new Ore(ExNihiloMekanismConstants.Ore.OSMIUM, true, false, false,
-      new Color("BBDDFF"), ITEMS);
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private static final DeferredRegister<Item> ITEMS =
+      DeferredRegister.create(
+          ForgeRegistries.ITEMS, ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM);
+  public static final Ore OSMIUM =
+      new Ore(ExNihiloMekanismConstants.Ore.OSMIUM, true, false, false, new Color("BBDDFF"), ITEMS);
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public static void init(IEventBus modEventBus) {
     logger.debug("Register items");

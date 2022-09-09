@@ -16,30 +16,36 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 public class ExNihiloFluids {
 
   @Nonnull
-  private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister
-      .create(ForgeRegistries.FLUIDS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+  private static final DeferredRegister<Fluid> FLUIDS =
+      DeferredRegister.create(ForgeRegistries.FLUIDS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+
   @Nonnull
-  public static final RegistryObject<FlowingFluid> WITCH_WATER = FLUIDS
-      .register(ExNihiloConstants.Fluids.WITCH_WATER,
+  public static final RegistryObject<FlowingFluid> WITCH_WATER =
+      FLUIDS.register(
+          ExNihiloConstants.Fluids.WITCH_WATER,
           () -> new WitchWaterFluid.Source(WitchWaterFluid.WITCH_WATER_PROPS));
+
   @Nonnull
-  public static final RegistryObject<FlowingFluid> WITCH_WATER_FLOW = FLUIDS
-      .register(ExNihiloConstants.Fluids.WITCH_WATER_FLOW,
+  public static final RegistryObject<FlowingFluid> WITCH_WATER_FLOW =
+      FLUIDS.register(
+          ExNihiloConstants.Fluids.WITCH_WATER_FLOW,
           () -> new WitchWaterFluid.Flowing(WitchWaterFluid.WITCH_WATER_PROPS));
+
   @Nonnull
-  public static final RegistryObject<FlowingFluid> SEA_WATER = FLUIDS
-      .register(ExNihiloConstants.Fluids.SEA_WATER,
+  public static final RegistryObject<FlowingFluid> SEA_WATER =
+      FLUIDS.register(
+          ExNihiloConstants.Fluids.SEA_WATER,
           () -> new SeaWaterFluid.Source(SeaWaterFluid.SEA_WATER_PROPS));
+
   @Nonnull
-  public static final RegistryObject<FlowingFluid> SEA_WATER_FLOW = FLUIDS
-      .register(ExNihiloConstants.Fluids.SEA_WATER_FLOW,
+  public static final RegistryObject<FlowingFluid> SEA_WATER_FLOW =
+      FLUIDS.register(
+          ExNihiloConstants.Fluids.SEA_WATER_FLOW,
           () -> new SeaWaterFluid.Flowing(SeaWaterFluid.SEA_WATER_PROPS));
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private ExNihiloFluids() {
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  }
+  private ExNihiloFluids() {}
 
   public static void init(@Nonnull final IEventBus modEventBus) {
     logger.debug("Register fluids");

@@ -7,11 +7,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.CrookBaseItem;
 import novamachina.exnihilosequentia.common.item.HammerBaseItem;
 import novamachina.exnihilosequentia.common.item.MeshItem;
+import novamachina.exnihilosequentia.common.item.PebbleItem;
+import novamachina.exnihilosequentia.common.item.ResourceItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloItemGenerator extends AbstractItemGenerator {
@@ -40,48 +43,31 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
   }
 
   private void registerCrooks() {
-    registerCrook(ExNihiloItems.CROOK_WOOD.get());
-    registerCrook(ExNihiloItems.CROOK_STONE.get());
-    registerCrook(ExNihiloItems.CROOK_ANDESITE.get());
-    registerCrook(ExNihiloItems.CROOK_GRANITE.get());
-    registerCrook(ExNihiloItems.CROOK_DIORITE.get());
-    registerCrook(ExNihiloItems.CROOK_GOLD.get());
-    registerCrook(ExNihiloItems.CROOK_IRON.get());
-    registerCrook(ExNihiloItems.CROOK_DIAMOND.get());
-    registerCrook(ExNihiloItems.CROOK_BONE.get());
+    for (RegistryObject<CrookBaseItem> crook : ExNihiloItems.CROOKS) {
+      registerCrook(crook.get());
+    }
   }
 
   private void registerDolls() {
     registerResource(ExNihiloItems.BEE_DOLL.get());
-    registerResource(ExNihiloItems.BLAZE_DOLL.get());
+    //    registerResource(ExNihiloItems.BLAZE_DOLL.get());
     registerResource(ExNihiloItems.ENDERMAN_DOLL.get());
     registerResource(ExNihiloItems.GUARDIAN_DOLL.get());
     registerResource(ExNihiloItems.SHULKER_DOLL.get());
+
+    singleTexture(
+        ForgeRegistries.ITEMS.getKey(ExNihiloItems.BLAZE_DOLL.get()).getPath(),
+        new ResourceLocation("exnihilosequentia:item/overlap_gui"),
+        LAYER_0_TAG,
+        new ResourceLocation(
+            modid,
+            ITEMS_TAG + ForgeRegistries.ITEMS.getKey(ExNihiloItems.BLAZE_DOLL.get()).getPath()));
   }
 
   private void registerHammers() {
-    //    registerHammer(ExNihiloItems.HAMMER_ANDESITE.get());
-    //    registerHammer(ExNihiloItems.HAMMER_BASALT.get());
-    //    registerHammer(ExNihiloItems.HAMMER_BLACKSTONE.get());
-    //    registerHammer(ExNihiloItems.HAMMER_CALCITE.get());
-    //    registerHammer(ExNihiloItems.HAMMER_COPPER.get());
-    //    registerHammer(ExNihiloItems.HAMMER_CRIMSON_FUNGUS.get());
-    //    registerHammer(ExNihiloItems.HAMMER_DEEPSLATE.get());
-    registerHammer(ExNihiloItems.HAMMER_DIAMOND.get());
-    //    registerHammer(ExNihiloItems.HAMMER_DIORITE.get());
-    //    registerHammer(ExNihiloItems.HAMMER_DRIPSTONE.get());
-    registerHammer(ExNihiloItems.HAMMER_GOLD.get());
-    //    registerHammer(ExNihiloItems.HAMMER_GRANITE.get());
-    registerHammer(ExNihiloItems.HAMMER_IRON.get());
-    //    registerHammer(ExNihiloItems.HAMMER_NETHER_BRICK.get());
-    registerHammer(ExNihiloItems.HAMMER_NETHERITE.get());
-    //    registerHammer(ExNihiloItems.HAMMER_PRISMARINE.get());
-    //    registerHammer(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get());
-    registerHammer(ExNihiloItems.HAMMER_STONE.get());
-    //    registerHammer(ExNihiloItems.HAMMER_TERRACOTTA.get());
-    //    registerHammer(ExNihiloItems.HAMMER_TUFF.get());
-    //    registerHammer(ExNihiloItems.HAMMER_WARPED_FUNGUS.get());
-    registerHammer(ExNihiloItems.HAMMER_WOOD.get());
+    for (RegistryObject<HammerBaseItem> hammer : ExNihiloItems.HAMMERS) {
+      registerHammer(hammer.get());
+    }
   }
 
   private void registerHammer(HammerBaseItem hammer) {
@@ -117,11 +103,13 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
   @Override
   protected void registerModels() {
+    for (RegistryObject<ResourceItem> resourceItem : ExNihiloItems.RESOURCE_ITEMS) {
+      registerResource(resourceItem.get());
+    }
     registerResource(ExNihiloItems.SILKWORM.get());
     registerResource(ExNihiloItems.COOKED_SILKWORM.get());
     registerResource(ExNihiloItems.WITCH_WATER_BUCKET.get());
     registerResource(ExNihiloItems.SEA_WATER_BUCKET.get());
-    registerResource(ExNihiloItems.NUGGET_COPPER.get());
 
     registerCrooks();
     registerHammers();
@@ -146,16 +134,9 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
   }
 
   private void registerPebbles() {
-    registerResource(ExNihiloItems.PEBBLE_ANDESITE.get());
-    registerResource(ExNihiloItems.PEBBLE_BASALT.get());
-    registerResource(ExNihiloItems.PEBBLE_BLACKSTONE.get());
-    //    registerResource(ExNihiloItems.PEBBLE_DEEPSLATE.get());
-    registerResource(ExNihiloItems.PEBBLE_DIORITE.get());
-    //    registerResource(ExNihiloItems.PEBBLE_END_STONE.get());
-    registerResource(ExNihiloItems.PEBBLE_GRANITE.get());
-    //    registerResource(ExNihiloItems.PEBBLE_NETHERRACK.get());
-    registerResource(ExNihiloItems.PEBBLE_STONE.get());
-    //    registerResource(ExNihiloItems.PEBBLE_TUFF.get());
+    for (RegistryObject<PebbleItem> pebble : ExNihiloItems.PEBBLES) {
+      registerResource(pebble.get());
+    }
   }
 
   private void registerResources() {

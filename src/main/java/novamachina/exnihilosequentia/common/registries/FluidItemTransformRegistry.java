@@ -17,16 +17,12 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class FluidItemTransformRegistry {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  @Nonnull
-  private final List<FluidItemRecipe> recipeList = new ArrayList<>();
+  @Nonnull private final List<FluidItemRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull
-  private final Item empty = ItemStack.EMPTY.getItem();
-  @Nonnull
-  private final Map<FluidStack, Map<Item, Item>> itemResultCache = new HashMap<>();
+  @Nonnull private final Item empty = ItemStack.EMPTY.getItem();
+  @Nonnull private final Map<FluidStack, Map<Item, Item>> itemResultCache = new HashMap<>();
 
   public boolean isValidRecipe(@Nonnull final Fluid fluid, @Nonnull final Item input) {
     return getResult(fluid, input) != empty;
@@ -36,13 +32,15 @@ public class FluidItemTransformRegistry {
   public ItemLike getResult(@Nonnull final Fluid fluid, @Nonnull final Item input) {
     return itemResultCache
         .computeIfAbsent(new FluidStack(fluid, FluidType.BUCKET_VOLUME), k -> new HashMap<>())
-        .computeIfAbsent(input, k -> recipeList
-            .stream()
-            .filter(fluidItemRecipe -> fluidItemRecipe.validInputs(fluid, input))
-            .findFirst()
-            .map(FluidItemRecipe::getResultItem)
-            .map(ItemStack::getItem)
-            .orElse(empty));
+        .computeIfAbsent(
+            input,
+            k ->
+                recipeList.stream()
+                    .filter(fluidItemRecipe -> fluidItemRecipe.validInputs(fluid, input))
+                    .findFirst()
+                    .map(FluidItemRecipe::getResultItem)
+                    .map(ItemStack::getItem)
+                    .orElse(empty));
   }
 
   @Nonnull

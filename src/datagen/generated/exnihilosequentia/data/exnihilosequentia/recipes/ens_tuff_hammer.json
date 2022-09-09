@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "-": {
+      "tag": "forge:rods"
+    },
+    "x": {
+      "item": "minecraft:tuff"
+    }
+  },
+  "pattern": [
+    " x ",
+    " -x",
+    "-  "
+  ],
+  "result": {
+    "item": "exnihilosequentia:tuff_hammer"
+  }
+}

@@ -19,14 +19,11 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class CrookRegistry {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  @Nonnull
-  private final List<CrookRecipe> recipeList = new ArrayList<>();
+  @Nonnull private final List<CrookRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull
-  private final Map<ItemLike, List<CrookRecipe>> recipeListByItemCache = new HashMap<>();
+  @Nonnull private final Map<ItemLike, List<CrookRecipe>> recipeListByItemCache = new HashMap<>();
 
   public boolean isCrookable(@Nonnull final ItemLike block) {
     return !getDrops(block).isEmpty();
@@ -34,13 +31,14 @@ public class CrookRegistry {
 
   @Nonnull
   public List<CrookRecipe> getDrops(@Nonnull final ItemLike block) {
-    return recipeListByItemCache.computeIfAbsent(block, k -> {
-      @Nonnull final ItemStack itemStack = new ItemStack(block);
-      return recipeList
-          .stream()
-          .filter(crookRecipe -> crookRecipe.getInput().test(itemStack))
-          .collect(Collectors.toList());
-    });
+    return recipeListByItemCache.computeIfAbsent(
+        block,
+        k -> {
+          @Nonnull final ItemStack itemStack = new ItemStack(block);
+          return recipeList.stream()
+              .filter(crookRecipe -> crookRecipe.getInput().test(itemStack))
+              .collect(Collectors.toList());
+        });
   }
 
   public void setRecipes(@Nonnull final List<CrookRecipe> recipes) {
@@ -52,24 +50,25 @@ public class CrookRegistry {
 
   @Nonnull
   public List<CrookRecipe> getRecipeList() {
-    return recipeList
-        .stream()
-        .flatMap(crookRecipe -> {
-          if (crookRecipe.getOutput().size() <= 21) {
-            return Stream.of(crookRecipe);
-          }
-          @Nonnull final List<List<ItemStackWithChance>> partitions = Lists.partition(
-              crookRecipe.getOutput(),
-              21);
-          return IntStream
-              .range(0, partitions.size())
-              .mapToObj(i -> {
-                final ResourceLocation crookRecipeId = crookRecipe.getId();
-                final ResourceLocation newId = new ResourceLocation(crookRecipeId.getNamespace(),
-                    crookRecipeId.getPath() + i);
-                return new CrookRecipe(newId, crookRecipe.getInput(), partitions.get(i));
-              });
-        })
+    return recipeList.stream()
+        .flatMap(
+            crookRecipe -> {
+              if (crookRecipe.getOutput().size() <= 21) {
+                return Stream.of(crookRecipe);
+              }
+              @Nonnull
+              final List<List<ItemStackWithChance>> partitions =
+                  Lists.partition(crookRecipe.getOutput(), 21);
+              return IntStream.range(0, partitions.size())
+                  .mapToObj(
+                      i -> {
+                        final ResourceLocation crookRecipeId = crookRecipe.getId();
+                        final ResourceLocation newId =
+                            new ResourceLocation(
+                                crookRecipeId.getNamespace(), crookRecipeId.getPath() + i);
+                        return new CrookRecipe(newId, crookRecipe.getInput(), partitions.get(i));
+                      });
+            })
         .collect(Collectors.toList());
   }
 

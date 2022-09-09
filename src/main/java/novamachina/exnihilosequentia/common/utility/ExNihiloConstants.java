@@ -7,8 +7,7 @@ public class ExNihiloConstants {
 
   private static final String STONE_TAG = "stone";
 
-  private ExNihiloConstants() {
-  }
+  private ExNihiloConstants() {}
 
   public static class BarrelModes {
 
@@ -19,8 +18,7 @@ public class ExNihiloConstants {
     public static final String MOB = "mob";
     public static final String TRANSFORM = "transform";
 
-    private BarrelModes() {
-    }
+    private BarrelModes() {}
   }
 
   public static class Blocks {
@@ -68,8 +66,7 @@ public class ExNihiloConstants {
     public static final String SPRUCE_SIEVE = addBlockToList("spruce_sieve");
     public static final String WARPED_SIEVE = addBlockToList("warped_sieve");
 
-    private Blocks() {
-    }
+    private Blocks() {}
 
     private static String addBlockToList(final String name) {
       blocksList.add(name);
@@ -84,8 +81,7 @@ public class ExNihiloConstants {
     public static final String WITCH_WATER = "witch_water";
     public static final String WITCH_WATER_FLOW = "witch_water_flow";
 
-    private Fluids() {
-    }
+    private Fluids() {}
   }
 
   public static class Items {
@@ -102,7 +98,15 @@ public class ExNihiloConstants {
     public static final String NETHERITE_MESH = "netherite_mesh";
     public static final String SHULKER_DOLL = "shulker_doll";
     public static final String STRING_MESH = "string_mesh";
-    public static List<String> resourceList = new ArrayList<>();
+    public static final List<String> resourceList = new ArrayList<>();
+    public static final String ALUMINUM_NUGGET = createResourceName("aluminum_nugget");
+    public static final String LEAD_NUGGET = createResourceName("lead_nugget");
+    public static final String NICKEL_NUGGET = createResourceName("nickel_nugget");
+    public static final String PLATINUM_NUGGET = createResourceName("platinum_nugget");
+    public static final String SILVER_NUGGET = createResourceName("silver_nugget");
+    public static final String TIN_NUGGET = createResourceName("tin_nugget");
+    public static final String URANIUM_NUGGET = createResourceName("uranium_nugget");
+    public static final String ZINC_NUGGET = createResourceName("zinc_nugget");
     public static final String COPPER_NUGGET = createResourceName("copper_nugget");
     public static final String CALCITE_PEBBLE = createPebbleName("calcite");
     public static final String DRIPSTONE_PEBBLE = createPebbleName("dripstone");
@@ -199,8 +203,7 @@ public class ExNihiloConstants {
     public static final String SEED_SWEET_BERRY = createSeedName("sweet_berry");
     public static List<String> seedList = new ArrayList<>();
 
-    private Items() {
-    }
+    private Items() {}
 
     private static String createCrookName(final String name) {
       String crookName = name + "_crook";
@@ -244,12 +247,10 @@ public class ExNihiloConstants {
     public static final String THERMAL_EXPANSION = "thermalexpansion";
     public static final String TOP = "theoneprobe";
 
-    private ModIds() {
-    }
+    private ModIds() {}
   }
 
   public static class Ore {
-
 
     public static final String ALUMINUM = "aluminum";
 
@@ -275,12 +276,10 @@ public class ExNihiloConstants {
 
     public static final String ZINC = "zinc";
 
-    private Ore() {
-    }
+    private Ore() {}
   }
 
   public static class Tooltips {
-
 
     public static final String BEE = "tooltip.doll.bee";
 
@@ -292,7 +291,6 @@ public class ExNihiloConstants {
 
     public static final String SHULKER = "tooltip.doll.shulker";
 
-    private Tooltips() {
-    }
+    private Tooltips() {}
   }
 }

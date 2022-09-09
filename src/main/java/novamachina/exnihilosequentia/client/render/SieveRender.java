@@ -19,8 +19,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class SieveRender extends AbstractModBlockRenderer<SieveEntity> {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public SieveRender(@Nonnull final BlockEntityRendererProvider.Context rendererDispatcherIn) {
     super();
@@ -51,7 +50,12 @@ public class SieveRender extends AbstractModBlockRenderer<SieveEntity> {
 
       BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
       blockRenderer.renderSingleBlock(
-          state, matrixStack, buffer, combinedLight, combinedOverlay, ModelData.EMPTY,
+          state,
+          matrixStack,
+          buffer,
+          combinedLight,
+          combinedOverlay,
+          ModelData.EMPTY,
           RenderType.cutoutMipped());
 
       matrixStack.popPose();

@@ -12,14 +12,12 @@ import novamachina.exnihilothermal.common.utility.ExNihiloThermalConstants;
 
 @Mod.EventBusSubscriber(
     modid = ExNihiloThermalConstants.ModIds.EX_NIHILO_THERMAL,
-    bus = Mod.EventBusSubscriber.Bus.FORGE
-)
+    bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ExNihiloThermalInitialization {
 
   private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private ExNihiloThermalInitialization() {
-  }
+  private ExNihiloThermalInitialization() {}
 
   @SubscribeEvent
   public static void onServerStart(ServerStartingEvent event) {
@@ -33,7 +31,7 @@ public class ExNihiloThermalInitialization {
   }
 
   private static void enableOres() {
-//    ExNihiloItems.COPPER.setEnabled(true);
+    //    ExNihiloItems.COPPER.setEnabled(true);
     ExNihiloItems.SILVER.setEnabled(true);
     ExNihiloItems.TIN.setEnabled(true);
     ExNihiloItems.LEAD.setEnabled(true);

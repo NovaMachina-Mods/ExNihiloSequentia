@@ -25,8 +25,8 @@ public class EXNTinkers {
     if (!pathString.exists()) {
       pathString.mkdir();
     }
-    EXNTinkersConfig.loadConfig(EXNTinkersConfig.COMMON_CONFIG,
-        path.resolve("exntinkers-common.toml"));
+    EXNTinkersConfig.loadConfig(
+        EXNTinkersConfig.COMMON_CONFIG, path.resolve("exntinkers-common.toml"));
     EXNTinkersInit.init(FMLJavaModLoadingContext.get().getModEventBus());
     FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
   }

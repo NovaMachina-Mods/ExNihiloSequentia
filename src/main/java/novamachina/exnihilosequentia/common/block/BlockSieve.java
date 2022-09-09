@@ -46,16 +46,13 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
-public class BlockSieve extends BaseBlock
-    implements SimpleWaterloggedBlock, ITOPInfoProvider {
+public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock, ITOPInfoProvider {
 
   @Nonnull
   public static final EnumProperty<MeshType> MESH = EnumProperty.create("mesh", MeshType.class);
 
-  @Nonnull
-  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public BlockSieve(@Nonnull final BlockBuilder builder) {
     super(builder);
@@ -83,7 +80,7 @@ public class BlockSieve extends BaseBlock
       logger.debug(
           "Is Block Siftable: "
               + ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(
-              blockItem.getBlock(), sieveEntity.getMeshType(), state.getValue(WATERLOGGED)));
+                  blockItem.getBlock(), sieveEntity.getMeshType(), state.getValue(WATERLOGGED)));
       if (ExNihiloRegistries.SIEVE_REGISTRY.isBlockSiftable(
           blockItem.getBlock(), sieveEntity.getMeshType(), state.getValue(WATERLOGGED))) {
         sieveEntity.insertSiftableBlock(stack, player);
@@ -100,8 +97,8 @@ public class BlockSieve extends BaseBlock
       @Nonnull final Level world,
       @Nonnull final BlockState blockState,
       @Nonnull final IProbeHitData iProbeHitData) {
-    @Nullable final SieveEntity sieveEntity = (SieveEntity) world.getBlockEntity(
-        iProbeHitData.getPos());
+    @Nullable
+    final SieveEntity sieveEntity = (SieveEntity) world.getBlockEntity(iProbeHitData.getPos());
     if (sieveEntity == null) {
       return;
     }
@@ -184,8 +181,8 @@ public class BlockSieve extends BaseBlock
   @Override
   @Nonnull
   public BlockState getStateForPlacement(@Nonnull final BlockPlaceContext context) {
-    @Nonnull final FluidState fluidState = context.getLevel()
-        .getFluidState(context.getClickedPos());
+    @Nonnull
+    final FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
     return this.defaultBlockState().setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
   }
 

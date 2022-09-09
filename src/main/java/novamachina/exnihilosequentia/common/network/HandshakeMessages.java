@@ -12,17 +12,13 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class HandshakeMessages {
 
-  @Nonnull
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  private HandshakeMessages() {
-
-  }
+  private HandshakeMessages() {}
 
   public static class S2COreList extends LoginIndexedMessage {
 
-    @Nullable
-    private List<String> oreList;
+    @Nullable private List<String> oreList;
 
     public S2COreList() {
       // NOOP
