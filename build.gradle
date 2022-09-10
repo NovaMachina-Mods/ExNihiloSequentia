@@ -74,10 +74,6 @@ idea {
 }
 
 sourceSets {
-    api {
-        //The API has no resources
-        resources.srcDirs = []
-    }
     main {
         resources {
             include '**/**'
@@ -87,15 +83,12 @@ sourceSets {
             // But exclude the cache of the generated data from what gets built
             exclude '.cache'
         }
-        compileClasspath += api.output
-        runtimeClasspath += api.output
     }
     thermal {
         resources {
             srcDirs += 'src/datagen/generated/exnihilothermal'
             exclude '.cache'
         }
-        compileClasspath += api.output
         compileClasspath += main.output
     }
     ae {
@@ -103,7 +96,6 @@ sourceSets {
             srcDirs += 'src/datagen/generated/exnihiloae'
             exclude '.cache'
         }
-        compileClasspath += api.output
         compileClasspath += main.output
     }
     mekanism {
@@ -111,7 +103,6 @@ sourceSets {
             srcDirs += 'src/datagen/generated/exnihilomekanism'
             exclude '.cache'
         }
-        compileClasspath += api.output
         compileClasspath += main.output
     }
     tinkers {
@@ -119,14 +110,13 @@ sourceSets {
             srcDirs += 'src/datagen/generated/exnihilotinkers'
             exclude '.cache'
         }
-        compileClasspath += api.output
         compileClasspath += main.output
     }
     test {
         // The test module has no resources
         resources.srcDirs = []
-        compileClasspath += api.output + main.output + thermal.output + ae.output + mekanism.output + tinkers.output
-        runtimeClasspath += api.output + main.output + thermal.output + ae.output + mekanism.output + tinkers.output
+        compileClasspath += main.output + thermal.output + ae.output + mekanism.output + tinkers.output
+        runtimeClasspath += main.output + thermal.output + ae.output + mekanism.output + tinkers.output
     }
     //Data gen modules for the different modules
     datagenmain {
@@ -150,7 +140,6 @@ sourceSets {
 // base module to the dependencies of the data generators source set that we are setting up
 def setupDataGenSourceSet(SourceSet datagenSourceSet, SourceSet baseSourceSet, String name) {
     datagenSourceSet.java.srcDirs = ['src/datagen/' + name + '/java']
-    datagenSourceSet.compileClasspath += project.sourceSets.api.output
     datagenSourceSet.compileClasspath += project.sourceSets.main.output
     if (baseSourceSet == null) {
         datagenSourceSet.resources.srcDirs = ['src/datagen/' + name + '/resources']
@@ -167,9 +156,9 @@ def setupDataGenSourceSet(SourceSet datagenSourceSet, SourceSet baseSourceSet, S
 configurations {
     // Make sure all our sub source set stuff extends the proper base methods so that
     // they can see all the dependencies we have in dependencies including Forge
-    extendConfigurations(implementation, apiImplementation, testImplementation, datagenmainImplementation)
-    extendConfigurations(compileOnly, apiCompileOnly, testCompileOnly, datagenmainCompileOnly)
-    extendConfigurations(runtimeOnly, apiRuntimeOnly, datagenmainRuntimeOnly)
+    extendConfigurations(implementation, testImplementation, datagenmainImplementation)
+    extendConfigurations(compileOnly, testCompileOnly, datagenmainCompileOnly)
+    extendConfigurations(runtimeOnly, datagenmainRuntimeOnly)
     // Extend configurations for alternate modules. First by making the implementation, compileOnly, runtimeOnly equivalents
     // for those modules extend the main ones, and then by making the corresponding ones for datagen for the module extend those.
     // This way if we add a dependency/integration in a submodule instead of the main module of Ex Nihilo, the datagen of the corresponding
@@ -188,7 +177,7 @@ static void extendConfigurations(Configuration base, Configuration... configurat
 }
 
 group = "novamachina."
-version = "${base_version}." + (System.env.BUILD_NUMBER ?: "homebaked") + (project.property('curse_release_type') != 'release' ? "-${project.property('curse_release_type')}" : '')
+version = "${minecraft_version}-${base_version}." + (System.env.BUILD_NUMBER ?: "homebaked") + (project.property('curse_release_type') != 'release' ? "-${project.property('curse_release_type')}" : '')
 archivesBaseName = "${artifact_basename}"
 
 ext {
@@ -287,7 +276,7 @@ minecraft {
             }
 
             mods {
-                exnihilosequentia.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                exnihilosequentia.sources((SourceSet[]) [sourceSets.main])
                 if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
                     exnihilothermal.source((SourceSet) sourceSets.thermal)
                 }
@@ -319,7 +308,7 @@ minecraft {
             }
 
             mods {
-                exnihilosequentia.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                exnihilosequentia.sources((SourceSet[]) [sourceSets.main])
                 if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
                     exnihilothermal.source((SourceSet) sourceSets.thermal)
                 }
@@ -342,7 +331,7 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', 'exnihilosequentia'
 
             mods {
-                exnihilosequentia.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                exnihilosequentia.sources((SourceSet[]) [sourceSets.main])
             }
         }
 
@@ -374,7 +363,7 @@ minecraft {
                     '--existing', file('src/tinkers/resources/')
 
             mods {
-                exnihilosequentia.sources((SourceSet[]) [sourceSets.main, sourceSets.api, sourceSets.datagenmain])
+                exnihilosequentia.sources((SourceSet[]) [sourceSets.main, sourceSets.datagenmain])
                 if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
                     exnihilothermal.sources((SourceSet[]) [sourceSets.thermal, sourceSets.datagenthermal])
                 }
@@ -576,7 +565,6 @@ if (project.hasProperty('UPDATE_MAPPINGS')) {
     // Note: This needs to be below the dependencies and minecraft blocks so that it can properly read the mappings value
     // and also read and find the minecraft dep
     def extraSourceSets = [
-            sourceSets.api,
             sourceSets.thermal,
             sourceSets.ae,
             sourceSets.mekanism,
@@ -664,24 +652,16 @@ def getManifestAttributes(String title) {
 
 jar {
     duplicatesStrategy(DuplicatesStrategy.FAIL)
-    from([sourceSets.api.output, sourceSets.main.output])
+    from([sourceSets.main.output])
     manifest.attributes(getManifestAttributes("Ex Nihilo: Sequenta"))
     afterEvaluate { finalizedBy reobfJar }
 }
 
-task sourcesJar(type: Jar, dependsOn: [classes, apiClasses, thermalClasses, aeClasses, mekanismClasses, tinkersClasses]) {
+task sourcesJar(type: Jar, dependsOn: [classes, thermalClasses, aeClasses, mekanismClasses, tinkersClasses]) {
     duplicatesStrategy(DuplicatesStrategy.FAIL)
     archiveClassifier.set("sources")
-    from(sourceSets.api.allJava, sourceSets.main.allJava, sourceSets.thermal.allJava, sourceSets.ae.allJava, sourceSets.mekanism.allJava, sourceSets.tinkers.allJava)
+    from(sourceSets.main.allJava, sourceSets.thermal.allJava, sourceSets.ae.allJava, sourceSets.mekanism.allJava, sourceSets.tinkers.allJava)
     manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia"))
-}
-
-task apiJar(type: Jar) {
-    duplicatesStrategy(DuplicatesStrategy.FAIL)
-    archiveClassifier.set("api")
-    from sourceSets.api.output
-    manifest.attributes(getManifestAttributes("Ex Nihilo: Sequentia"))
-    afterEvaluate { finalizedBy reobfApiJar }
 }
 
 task thermalJar(type: Jar) {
@@ -750,7 +730,6 @@ compileJava {
 }
 
 artifacts {
-    archives apiJar
     archives jar
     archives thermalJar
     archives aeJar
@@ -760,7 +739,6 @@ artifacts {
 }
 
 reobf {
-    apiJar { classpath.from(sourceSets.api.compileClasspath) }
     jar { classpath.from(sourceSets.main.compileClasspath) }
     thermalJar { classpath.from(sourceSets.thermal.compileClasspath) }
     aeJar { classpath.from(sourceSets.ae.compileClasspath) }
@@ -811,53 +789,6 @@ publishing {
             publication.version = project.version
             publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: project.archivesBaseName
             publication.artifacts = [jar]
-            publication.pom {
-                name.set("Ex Nihilo: Sequentia")
-                packaging = 'jar'
-                description.set('Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.')
-                url.set('https://www.curseforge.com/minecraft/mc-mods/ex-nihilo-sequentia')
-                scm {
-                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia.git')
-                }
-                issueManagement {
-                    system.set('github')
-                    url.set('https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues')
-                }
-                licenses {
-                    license {
-                        name.set('Creative Commons')
-                        distribution.set('repo')
-                    }
-                }
-                withXml {
-                    NodeList dependencies = asNode().dependencies
-                    NodeList allDeps = dependencies.'*'
-
-                    // Remove forge deps
-                    allDeps.<Node> findAll() { Node el ->
-                        el.artifactId.text() == 'forge' && el.groupId.text() == 'net.minecraftforge'
-                    }.forEach() { Node el ->
-                        el.parent().remove(el)
-                    }
-                    //remove ForgeGradle's mapped suffix from versions & set as optional so anyone else doesn't inherit them
-                    allDeps.<Node> findAll() { Node el ->
-                        el.version.text().contains('_mapped_')
-                    }.each { Node el ->
-                        el.version.each { Node version ->
-                            def versionText = version.text()
-                            version.setValue(versionText.substring(0, versionText.indexOf('_mapped_')))
-                        }
-                        el.appendNode('optional', true)
-                    }
-                }
-            }
-        }
-        publicationContainer.register("api", MavenPublication) { MavenPublication publication ->
-            publication.from((SoftwareComponent) components.java)
-            publication.groupId = project.group + "exnihilosequentia"
-            publication.version = project.version
-            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: project.archivesBaseName
-            publication.artifacts = [apiJar]
             publication.pom {
                 name.set("Ex Nihilo: Sequentia")
                 packaging = 'jar'
@@ -1103,7 +1034,7 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-tasks.curseforge.dependsOn jar, thermalJar, apiJar, aeJar, mekanismJar, tinkersJar
+tasks.curseforge.dependsOn jar, thermalJar, aeJar, mekanismJar, tinkersJar
 
 if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKey')) {
     println "Enabling Curseforge config"
@@ -1186,7 +1117,6 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
                     optionalDependency "the-one-probe"
                 }
             }
-//            addArtifact apiJar
             addGameVersion "${minecraft_version}"
         }
 
