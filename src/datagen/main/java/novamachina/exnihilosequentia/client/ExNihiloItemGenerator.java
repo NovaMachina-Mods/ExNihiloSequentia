@@ -123,7 +123,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
   }
 
   private void registerNuggets() {
-    for(RegistryObject<Item> nugget : ExNihiloItems.NUGGETS) {
+    for (RegistryObject<Item> nugget : ExNihiloItems.NUGGETS) {
       registerNugget(nugget.get());
     }
   }

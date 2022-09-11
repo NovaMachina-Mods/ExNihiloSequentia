@@ -30,7 +30,6 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class ExNihiloItems {
@@ -50,38 +49,46 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.SILKWORM,
           () -> new SilkwormItem(ExNihiloConstants.Items.SILKWORM));
-  public static final Ore IRON = createOre(ExNihiloConstants.Ore.IRON,
-      Optional.of(net.minecraft.world.item.Items.RAW_IRON), Optional.of(
-          net.minecraft.world.item.Items.IRON_INGOT), Optional.of(
-          net.minecraft.world.item.Items.IRON_NUGGET));
-  public static final Ore GOLD = createOre(ExNihiloConstants.Ore.GOLD,
-      Optional.of(net.minecraft.world.item.Items.RAW_GOLD), Optional.of(
-          net.minecraft.world.item.Items.GOLD_INGOT), Optional.of(
-          net.minecraft.world.item.Items.GOLD_NUGGET));
-  public static final Ore COPPER = createOre(ExNihiloConstants.Ore.COPPER,
-      Optional.of(net.minecraft.world.item.Items.RAW_COPPER), Optional.of(
-          net.minecraft.world.item.Items.COPPER_INGOT), Optional.empty());
-  public static final Ore LEAD = createOre(ExNihiloConstants.Ore.LEAD, Optional.empty(), Optional.empty(),
-      Optional.empty());
-  public static final Ore NICKEL = createOre(ExNihiloConstants.Ore.NICKEL, Optional.empty(), Optional.empty(),
-      Optional.empty());
-  public static final Ore SILVER = createOre(ExNihiloConstants.Ore.SILVER, Optional.empty(), Optional.empty(),
-      Optional.empty());
-  public static final Ore TIN = createOre(ExNihiloConstants.Ore.TIN, Optional.empty(), Optional.empty(),
-      Optional.empty());
+  public static final Ore IRON =
+      createOre(
+          ExNihiloConstants.Ore.IRON,
+          Optional.of(net.minecraft.world.item.Items.RAW_IRON),
+          Optional.of(net.minecraft.world.item.Items.IRON_INGOT),
+          Optional.of(net.minecraft.world.item.Items.IRON_NUGGET));
+  public static final Ore GOLD =
+      createOre(
+          ExNihiloConstants.Ore.GOLD,
+          Optional.of(net.minecraft.world.item.Items.RAW_GOLD),
+          Optional.of(net.minecraft.world.item.Items.GOLD_INGOT),
+          Optional.of(net.minecraft.world.item.Items.GOLD_NUGGET));
+  public static final Ore COPPER =
+      createOre(
+          ExNihiloConstants.Ore.COPPER,
+          Optional.of(net.minecraft.world.item.Items.RAW_COPPER),
+          Optional.of(net.minecraft.world.item.Items.COPPER_INGOT),
+          Optional.empty());
+  public static final Ore LEAD =
+      createOre(ExNihiloConstants.Ore.LEAD, Optional.empty(), Optional.empty(), Optional.empty());
+  public static final Ore NICKEL =
+      createOre(ExNihiloConstants.Ore.NICKEL, Optional.empty(), Optional.empty(), Optional.empty());
+  public static final Ore SILVER =
+      createOre(ExNihiloConstants.Ore.SILVER, Optional.empty(), Optional.empty(), Optional.empty());
+  public static final Ore TIN =
+      createOre(ExNihiloConstants.Ore.TIN, Optional.empty(), Optional.empty(), Optional.empty());
   public static final Ore ALUMINUM =
-      createOre(ExNihiloConstants.Ore.ALUMINUM, Optional.empty(), Optional.empty(),
-          Optional.empty());
+      createOre(
+          ExNihiloConstants.Ore.ALUMINUM, Optional.empty(), Optional.empty(), Optional.empty());
   public static final Ore PLATINUM =
-      createOre(ExNihiloConstants.Ore.PLATINUM, Optional.empty(), Optional.empty(),
-          Optional.empty());
-  public static final Ore URANIUM = createOre(ExNihiloConstants.Ore.URANIUM, Optional.empty(), Optional.empty(),
-      Optional.empty());
-  public static final Ore ZINC = createOre(ExNihiloConstants.Ore.ZINC, Optional.empty(), Optional.empty(),
-      Optional.empty());
+      createOre(
+          ExNihiloConstants.Ore.PLATINUM, Optional.empty(), Optional.empty(), Optional.empty());
+  public static final Ore URANIUM =
+      createOre(
+          ExNihiloConstants.Ore.URANIUM, Optional.empty(), Optional.empty(), Optional.empty());
+  public static final Ore ZINC =
+      createOre(ExNihiloConstants.Ore.ZINC, Optional.empty(), Optional.empty(), Optional.empty());
   //  public static final RegistryObject<ResourceItem> NUGGET_ALUMINUM =
   // registerResourceItem(Items.ALUMINUM_NUGGET);
-//  public static final RegistryObject<Item> NUGGET_COPPER = createNugget(Items.COPPER_NUGGET);
+  //  public static final RegistryObject<Item> NUGGET_COPPER = createNugget(Items.COPPER_NUGGET);
   //  public static final RegistryObject<ResourceItem> NUGGET_LEAD =
   // registerResourceItem(ExNihiloConstants.Items.LEAD_NUGGET);
   //  public static final RegistryObject<ResourceItem> NUGGET_NICKEL =
@@ -650,18 +657,19 @@ public class ExNihiloItems {
           ExNihiloConstants.Items.SEA_WATER_BUCKET,
           () -> new BucketItem(ExNihiloFluids.SEA_WATER, tab.stacksTo(1)));
 
-  private ExNihiloItems() {
-  }
+  private ExNihiloItems() {}
 
   private static RegistryObject<Item> createNugget(String id) {
-    RegistryObject<Item> nugget = ITEMS.register(
-        ExNihiloConstants.Items.COPPER_NUGGET,
-        () -> new Item(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
+    RegistryObject<Item> nugget =
+        ITEMS.register(
+            ExNihiloConstants.Items.COPPER_NUGGET,
+            () -> new Item(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
     NUGGETS.add(nugget);
     return nugget;
   }
 
-  private static Ore createOre(String id, Optional<Item> rawItem, Optional<Item> ingotItem, Optional<Item> nuggetItem) {
+  private static Ore createOre(
+      String id, Optional<Item> rawItem, Optional<Item> ingotItem, Optional<Item> nuggetItem) {
     Ore ore = new Ore(id, true, rawItem, ingotItem, nuggetItem, ITEMS);
     ORES.add(ore);
     return ore;

@@ -707,7 +707,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .save(consumer, createSaveLocation(ExNihiloItems.PORCELAIN_CLAY.getId()));
 
     @Nullable final RegistryObject<PebbleItem> blackstonePebble = ExNihiloItems.PEBBLE_BLACKSTONE;
-    @Nullable final ResourceLocation gildedBlackstoneResourceLocation =
+    @Nullable
+    final ResourceLocation gildedBlackstoneResourceLocation =
         ForgeRegistries.BLOCKS.getKey(Blocks.GILDED_BLACKSTONE);
     if (ExNihiloItems.GOLD.getRawOreItem() != null && gildedBlackstoneResourceLocation != null) {
       ShapedRecipeBuilder.shaped(Blocks.GILDED_BLACKSTONE)
@@ -716,12 +717,11 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
           .pattern("xxx")
           .define('x', blackstonePebble.get())
           .define('g', Tags.Items.RAW_MATERIALS_GOLD)
-          .unlockedBy(
-              "has_gold",
-              InventoryChangeTrigger.TriggerInstance.hasItems(Items.RAW_GOLD))
+          .unlockedBy("has_gold", InventoryChangeTrigger.TriggerInstance.hasItems(Items.RAW_GOLD))
           .save(consumer, createSaveLocation(gildedBlackstoneResourceLocation));
     }
-    @Nullable final ResourceLocation cryingObsidianResourceLocation =
+    @Nullable
+    final ResourceLocation cryingObsidianResourceLocation =
         ForgeRegistries.BLOCKS.getKey(Blocks.CRYING_OBSIDIAN);
     if (cryingObsidianResourceLocation != null) {
       ShapedRecipeBuilder.shaped(Blocks.CRYING_OBSIDIAN)
@@ -734,7 +734,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
               "has_obsidian", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.OBSIDIAN))
           .save(consumer, createSaveLocation(cryingObsidianResourceLocation));
     }
-    @Nullable final ResourceLocation ancientDebrisResourceLocation =
+    @Nullable
+    final ResourceLocation ancientDebrisResourceLocation =
         ForgeRegistries.BLOCKS.getKey(Blocks.ANCIENT_DEBRIS);
     if (ancientDebrisResourceLocation != null) {
       ShapelessRecipeBuilder.shapeless(Blocks.ANCIENT_DEBRIS)

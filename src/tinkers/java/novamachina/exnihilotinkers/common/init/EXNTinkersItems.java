@@ -17,7 +17,8 @@ public class EXNTinkersItems {
 
   public static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(ForgeRegistries.ITEMS, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
-  public static final Ore COBALT = new Ore("cobalt", true, Optional.empty(), Optional.empty(), Optional.empty(), ITEMS);
+  public static final Ore COBALT =
+      new Ore("cobalt", true, Optional.empty(), Optional.empty(), Optional.empty(), ITEMS);
   public static final RegistryObject<Item> SIEVE_BLOODSHROOM =
       ITEMS.register(
           "bloodshroom_sieve",

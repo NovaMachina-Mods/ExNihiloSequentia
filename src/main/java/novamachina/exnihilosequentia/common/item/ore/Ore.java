@@ -37,8 +37,7 @@ public class Ore {
     Ore.enabledMap.put(name, enabled);
     if (optionalIngotItem.isEmpty()) {
       ingotItem = Either.left(registry.register(this.getIngotName(), () -> new OreItem(this)));
-    }
-    else {
+    } else {
       ingotItem = Either.right(optionalIngotItem.get());
     }
     if (optionalRawItem.isEmpty()) {
@@ -47,7 +46,7 @@ public class Ore {
       rawOreItem = Either.right(optionalRawItem.get());
     }
     pieceItem = registry.register(this.getPieceName(), () -> new OreItem(this));
-    if(optionalNuggetItem.isEmpty()) {
+    if (optionalNuggetItem.isEmpty()) {
       nuggetItem = Either.left(registry.register(this.getNuggetName(), () -> new OreItem(this)));
     } else {
       nuggetItem = Either.right(optionalNuggetItem.get());

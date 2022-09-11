@@ -8,22 +8,22 @@ import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilomekanism.common.init.ExNihiloMekanismItems;
 import novamachina.exnihilomekanism.common.utility.ExNihiloMekanismConstants;
 import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
-import novamachina.exnihilosequentia.api.datagen.AbstractOreItemGenerator;
 
 public class ExNihiloMekanismOreItemGenerator extends AbstractItemGenerator {
 
   private static final String ITEM_GENERATED_TAG = "item/generated";
   private static final String LAYER_0_TAG = "layer0";
 
-
-  public ExNihiloMekanismOreItemGenerator(DataGenerator generator,
-      ExistingFileHelper existingFileHelper) {
+  public ExNihiloMekanismOreItemGenerator(
+      DataGenerator generator, ExistingFileHelper existingFileHelper) {
     super(generator, ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM, existingFileHelper);
   }
 
   @Override
   protected void registerModels() {
-    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(ExNihiloMekanismItems.OSMIUM_PIECES.get());
+    @Nullable
+    final ResourceLocation resourceLocation =
+        ForgeRegistries.ITEMS.getKey(ExNihiloMekanismItems.OSMIUM_PIECES.get());
     if (resourceLocation == null) {
       return;
     }

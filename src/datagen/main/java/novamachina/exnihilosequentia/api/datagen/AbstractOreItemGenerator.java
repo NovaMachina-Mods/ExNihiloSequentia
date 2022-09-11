@@ -31,7 +31,8 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
     Either<RegistryObject<OreItem>, Item> rawEither = ore.getRawOreItem();
     if (rawEither.left().isPresent()) {
       @Nullable final Item rawRegistryObject = rawEither.left().get().get();
-      @Nullable final ResourceLocation rawResourceLocation = ForgeRegistries.ITEMS.getKey(rawRegistryObject);
+      @Nullable
+      final ResourceLocation rawResourceLocation = ForgeRegistries.ITEMS.getKey(rawRegistryObject);
       if (rawResourceLocation == null) {
         return;
       }
@@ -61,7 +62,8 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
     if (pieceRegistryObject == null) {
       return;
     }
-    @Nullable final ResourceLocation pieceResourceLocation =
+    @Nullable
+    final ResourceLocation pieceResourceLocation =
         ForgeRegistries.ITEMS.getKey(pieceRegistryObject);
     if (pieceResourceLocation == null) {
       return;

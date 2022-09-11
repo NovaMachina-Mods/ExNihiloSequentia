@@ -2,7 +2,6 @@ package novamachina.exnihilomekanism.common;
 
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
-import mekanism.common.registration.impl.ItemRegistryObject;
 import mekanism.common.registries.MekanismItems;
 import mekanism.common.resource.PrimaryResource;
 import mekanism.common.resource.ResourceType;
@@ -22,7 +21,6 @@ import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.jetbrains.annotations.NotNull;
 
 public class ExNihiloMekanismRecipeGenerator extends AbstractRecipeGenerator {
@@ -39,7 +37,8 @@ public class ExNihiloMekanismRecipeGenerator extends AbstractRecipeGenerator {
 
   private void registerCrafting(Consumer<FinishedRecipe> consumer) {
     Item item = ExNihiloMekanismItems.OSMIUM_PIECES.get();
-    ShapedRecipeBuilder.shaped(MekanismItems.PROCESSED_RESOURCES.get(ResourceType.RAW, PrimaryResource.OSMIUM))
+    ShapedRecipeBuilder.shaped(
+            MekanismItems.PROCESSED_RESOURCES.get(ResourceType.RAW, PrimaryResource.OSMIUM))
         .pattern("xx")
         .pattern("xx")
         .define('x', item)
@@ -47,7 +46,8 @@ public class ExNihiloMekanismRecipeGenerator extends AbstractRecipeGenerator {
         .save(
             consumer,
             new ResourceLocation(
-                ModIds.EX_NIHILO_MEKANISM, prependRecipePrefix(ForgeRegistries.ITEMS.getKey(item).getPath())));
+                ModIds.EX_NIHILO_MEKANISM,
+                prependRecipePrefix(ForgeRegistries.ITEMS.getKey(item).getPath())));
   }
 
   private void registerSieve(Consumer<FinishedRecipe> consumer) {

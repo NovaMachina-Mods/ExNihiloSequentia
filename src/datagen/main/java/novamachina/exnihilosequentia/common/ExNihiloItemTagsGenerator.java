@@ -44,11 +44,11 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
   }
 
   private void registerNuggets() {
-    for(RegistryObject<Item> nugget : ExNihiloItems.NUGGETS) {
+    for (RegistryObject<Item> nugget : ExNihiloItems.NUGGETS) {
       tag(Tags.Items.NUGGETS).add(nugget.get());
     }
     // TODO: Add nuggets
-//    tag(ExNihiloTags.NUGGET_COPPER).add(ExNihiloItems.COPPER.getNuggetItem());
+    //    tag(ExNihiloTags.NUGGET_COPPER).add(ExNihiloItems.COPPER.getNuggetItem());
   }
 
   private void registerCooked() {

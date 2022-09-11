@@ -3,13 +3,11 @@ package novamachina.exnihilosequentia.client;
 import net.minecraft.data.DataGenerator;
 import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
-import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Fluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Tooltips;
-import novamachina.exnihilosequentia.common.utility.StringUtils;
 
 public class ExNihiloLangGenerator extends AbstractLangGenerator {
 
@@ -78,16 +76,16 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
 
   private void addItem() {
     // Ores
-    //TODO
-//    for (String key : Ore.getOreMap().keySet()) {
-//      if (Boolean.TRUE.equals(Ore.getOreMap().get(key))) {
-//        addOreAutoName(key);
-//      } else if (key.equals("iron") || key.equals("gold") || key.equals("copper")) {
-//        addPieceAutoName(key);
-//      } else {
-//        addOreNoIngotAutoName(key);
-//      }
-//    }
+    // TODO
+    //    for (String key : Ore.getOreMap().keySet()) {
+    //      if (Boolean.TRUE.equals(Ore.getOreMap().get(key))) {
+    //        addOreAutoName(key);
+    //      } else if (key.equals("iron") || key.equals("gold") || key.equals("copper")) {
+    //        addPieceAutoName(key);
+    //      } else {
+    //        addOreNoIngotAutoName(key);
+    //      }
+    //    }
     // Meshes
     for (MeshType mesh : MeshType.values()) {
       addMeshAutoName(mesh.getMeshName());

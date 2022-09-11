@@ -6,7 +6,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.Tags.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
@@ -18,8 +17,10 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
 
-  protected AbstractItemTagGenerator(@Nonnull final DataGenerator generator,
-      @Nonnull final BlockTagsProvider blockTagsProvider, @Nonnull final String modId,
+  protected AbstractItemTagGenerator(
+      @Nonnull final DataGenerator generator,
+      @Nonnull final BlockTagsProvider blockTagsProvider,
+      @Nonnull final String modId,
       @Nonnull final ExistingFileHelper existingFileHelper) {
     super(generator, blockTagsProvider, modId, existingFileHelper);
   }
@@ -48,7 +49,5 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
     tag(ExNihiloTags.PIECE).add(ore.getPieceItem());
   }
 
-  private void registerIngot(@NotNull Ore ore, @NotNull ExNihiloTags.OreTag tags) {
-
-  }
+  private void registerIngot(@NotNull Ore ore, @NotNull ExNihiloTags.OreTag tags) {}
 }

@@ -10,9 +10,14 @@ import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 
 public class ExNihiloMekanismItemTagGenerator extends AbstractItemTagGenerator {
 
-  public ExNihiloMekanismItemTagGenerator(DataGenerator generator,
-      BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper) {
-    super(generator, blockTagsProvider, ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM,
+  public ExNihiloMekanismItemTagGenerator(
+      DataGenerator generator,
+      BlockTagsProvider blockTagsProvider,
+      ExistingFileHelper existingFileHelper) {
+    super(
+        generator,
+        blockTagsProvider,
+        ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM,
         existingFileHelper);
   }
 
