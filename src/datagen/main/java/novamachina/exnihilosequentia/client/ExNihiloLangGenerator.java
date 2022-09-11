@@ -78,15 +78,16 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
 
   private void addItem() {
     // Ores
-    for (String key : Ore.getOreMap().keySet()) {
-      if (Boolean.TRUE.equals(Ore.getOreMap().get(key))) {
-        addOreAutoName(key);
-      } else if (key.equals("iron") || key.equals("gold") || key.equals("copper")) {
-        addPieceAutoName(key);
-      } else {
-        addOreNoIngotAutoName(key);
-      }
-    }
+    //TODO
+//    for (String key : Ore.getOreMap().keySet()) {
+//      if (Boolean.TRUE.equals(Ore.getOreMap().get(key))) {
+//        addOreAutoName(key);
+//      } else if (key.equals("iron") || key.equals("gold") || key.equals("copper")) {
+//        addPieceAutoName(key);
+//      } else {
+//        addOreNoIngotAutoName(key);
+//      }
+//    }
     // Meshes
     for (MeshType mesh : MeshType.values()) {
       addMeshAutoName(mesh.getMeshName());

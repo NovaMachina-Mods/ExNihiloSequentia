@@ -17,10 +17,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilomekanism.common.init.ExNihiloMekanismItems;
 import novamachina.exnihilomekanism.common.utility.ExNihiloMekanismConstants;
+import novamachina.exnihilomekanism.common.utility.ExNihiloMekanismConstants.ModIds;
 import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.jetbrains.annotations.NotNull;
 
 public class ExNihiloMekanismRecipeGenerator extends AbstractRecipeGenerator {
@@ -31,30 +33,25 @@ public class ExNihiloMekanismRecipeGenerator extends AbstractRecipeGenerator {
 
   @Override
   protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
-    createSmelting(ExNihiloMekanismItems.OSMIUM, consumer);
-    createOre(ExNihiloMekanismItems.OSMIUM, consumer);
+    registerCrafting(consumer);
     registerSieve(consumer);
+  }
 
-    ItemRegistryObject<Item> rawOsmium =
-        MekanismItems.PROCESSED_RESOURCES.get(ResourceType.RAW, PrimaryResource.OSMIUM);
-    ShapedRecipeBuilder.shaped(rawOsmium.get())
+  private void registerCrafting(Consumer<FinishedRecipe> consumer) {
+    Item item = ExNihiloMekanismItems.OSMIUM_PIECES.get();
+    ShapedRecipeBuilder.shaped(MekanismItems.PROCESSED_RESOURCES.get(ResourceType.RAW, PrimaryResource.OSMIUM))
         .pattern("xx")
         .pattern("xx")
-        .define('x', ExNihiloMekanismItems.OSMIUM.getPieceItem())
-        .group(ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM)
-        .unlockedBy(
-            "has_piece",
-            InventoryChangeTrigger.TriggerInstance.hasItems(
-                ExNihiloMekanismItems.OSMIUM.getPieceItem()))
+        .define('x', item)
+        .unlockedBy("has_piece", InventoryChangeTrigger.TriggerInstance.hasItems(item))
         .save(
             consumer,
             new ResourceLocation(
-                ExNihiloMekanismConstants.ModIds.EX_NIHILO_MEKANISM,
-                prependRecipePrefix(ForgeRegistries.ITEMS.getKey(rawOsmium.get()).getPath())));
+                ModIds.EX_NIHILO_MEKANISM, prependRecipePrefix(ForgeRegistries.ITEMS.getKey(item).getPath())));
   }
 
   private void registerSieve(Consumer<FinishedRecipe> consumer) {
-    @Nullable final Item osmiumPiece = ExNihiloMekanismItems.OSMIUM.getPieceItem();
+    @Nullable final Item osmiumPiece = ExNihiloMekanismItems.OSMIUM_PIECES.get();
     if (osmiumPiece == null) {
       return;
     }
@@ -63,7 +60,7 @@ public class ExNihiloMekanismRecipeGenerator extends AbstractRecipeGenerator {
         .drop(osmiumPiece)
         .addRoll(new MeshWithChance(MeshType.IRON, 0.05F))
         .addRoll(new MeshWithChance(MeshType.DIAMOND, 0.1F))
-        .build(consumer, sieveLoc(ExNihiloMekanismItems.OSMIUM.getPieceName()));
+        .build(consumer, sieveLoc("osmium_pieces"));
 
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(Blocks.GRAVEL))

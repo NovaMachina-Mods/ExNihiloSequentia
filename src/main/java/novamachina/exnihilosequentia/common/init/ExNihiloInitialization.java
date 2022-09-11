@@ -164,22 +164,22 @@ public class ExNihiloInitialization {
   }
 
   private static void registerVanillaCompost() {
-    createMCCompost(ExNihiloItems.SEED_OAK.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_SPRUCE.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_BIRCH.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_JUNGLE.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_ACACIA.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_DARK_OAK.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_CACTUS.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_SUGARCANE.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_CARROT.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_POTATO.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_SWEET_BERRY.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_KELP.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_PICKLE.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_BAMBOO.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_FERN.get().asItem());
-    createMCCompost(ExNihiloItems.SEED_LARGE_FERN.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_OAK.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_SPRUCE.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_BIRCH.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_JUNGLE.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_ACACIA.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_DARK_OAK.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_CACTUS.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_SUGARCANE.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_CARROT.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_POTATO.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_SWEET_BERRY.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_KELP.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_PICKLE.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_BAMBOO.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_FERN.get().asItem());
+    //    createMCCompost(ExNihiloItems.SEED_LARGE_FERN.get().asItem());
     createMCCompost(ExNihiloItems.GRASS_SEED.get().asItem());
     createMCCompost(ExNihiloItems.MYCELIUM_SPORE.get().asItem());
     //    createMCCompost(ExNihiloItems.CRIMSON_NYLIUM_SPORE.get().asItem());

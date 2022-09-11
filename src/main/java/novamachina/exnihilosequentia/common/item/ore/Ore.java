@@ -1,9 +1,11 @@
 package novamachina.exnihilosequentia.common.item.ore;
 
+import com.mojang.datafixers.util.Either;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.world.item.Item;
@@ -13,37 +15,47 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.item.OreItem;
 import novamachina.exnihilosequentia.common.network.HandshakeMessages;
-import novamachina.exnihilosequentia.common.utility.Color;
 import org.jetbrains.annotations.NotNull;
 
 public class Ore {
 
   private static Map<String, Boolean> enabledMap = new HashMap<>();
-  private static Map<String, Boolean> oreMap = new HashMap<>();
   @Nonnull private final String name;
+  @Nullable private Either<RegistryObject<OreItem>, Item> ingotItem;
+  @Nullable private Either<RegistryObject<OreItem>, Item> rawOreItem;
   @Nullable private final RegistryObject<OreItem> pieceItem;
-  private final Color color;
-  @Nullable private RegistryObject<OreItem> rawOreItem;
-  @Nullable private RegistryObject<Item> ingotItem;
+  @Nullable private Either<RegistryObject<OreItem>, Item> nuggetItem;
 
   public Ore(
       @Nonnull String name,
       boolean enabled,
-      boolean generateRaw,
-      boolean generateIngot,
-      Color color,
+      Optional<Item> optionalRawItem,
+      Optional<Item> optionalIngotItem,
+      Optional<Item> optionalNuggetItem,
       DeferredRegister<Item> registry) {
     this.name = name;
-    this.color = color;
-    Ore.oreMap.put(name, generateIngot);
     Ore.enabledMap.put(name, enabled);
-    if (generateRaw) {
-      rawOreItem = registry.register(this.getRawOreName(), () -> new OreItem(this));
+    if (optionalIngotItem.isEmpty()) {
+      ingotItem = Either.left(registry.register(this.getIngotName(), () -> new OreItem(this)));
+    }
+    else {
+      ingotItem = Either.right(optionalIngotItem.get());
+    }
+    if (optionalRawItem.isEmpty()) {
+      rawOreItem = Either.left(registry.register(this.getRawOreName(), () -> new OreItem(this)));
+    } else {
+      rawOreItem = Either.right(optionalRawItem.get());
     }
     pieceItem = registry.register(this.getPieceName(), () -> new OreItem(this));
-    if (generateIngot) {
-      ingotItem = registry.register(this.getIngotName(), () -> new OreItem(this));
+    if(optionalNuggetItem.isEmpty()) {
+      nuggetItem = Either.left(registry.register(this.getNuggetName(), () -> new OreItem(this)));
+    } else {
+      nuggetItem = Either.right(optionalNuggetItem.get());
     }
+  }
+
+  private String getNuggetName() {
+    return String.format("%s_nugget", this.name);
   }
 
   @OnlyIn(Dist.CLIENT)
@@ -69,20 +81,14 @@ public class Ore {
     return enabledOres;
   }
 
-  public static Map<String, Boolean> getOreMap() {
-    return oreMap;
-  }
-
-  public Color getColor() {
-    return color;
+  @Nullable
+  public Either<RegistryObject<OreItem>, Item> getIngotItem() {
+    return ingotItem;
   }
 
   @Nullable
-  public Item getIngotItem() {
-    if (ingotItem == null) {
-      return null;
-    }
-    return ingotItem.get();
+  public Either<RegistryObject<OreItem>, Item> getNuggetItem() {
+    return nuggetItem;
   }
 
   public String getIngotName() {
@@ -104,12 +110,8 @@ public class Ore {
   }
 
   @Nullable
-  public OreItem getRawOreItem() {
-    if (rawOreItem != null) {
-      return rawOreItem.get();
-    } else {
-      return null;
-    }
+  public Either<RegistryObject<OreItem>, Item> getRawOreItem() {
+    return rawOreItem;
   }
 
   public String getRawOreName() {

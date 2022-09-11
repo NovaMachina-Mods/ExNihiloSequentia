@@ -140,10 +140,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createCompostRecipe(consumer, Items.SUGAR_CANE, 80, "sugar_cane");
     createCompostRecipe(consumer, ExNihiloItems.GRASS_SEED.get(), 100, "grass_seed");
     createCompostRecipe(consumer, ExNihiloItems.MYCELIUM_SPORE.get(), 100, "mycelium_spore");
-    //    createCompostRecipe(consumer, ExNihiloItems.CRIMSON_NYLIUM_SPORE.get(), 100,
-    // "crimson_nylium_spore");
-    //    createCompostRecipe(consumer, ExNihiloItems.WARPED_NYLIUM_SPORE.get(), 100,
-    // "warped_nylium_spore");
+    createCompostRecipe(
+        consumer, ExNihiloItems.CRIMSON_NYLIUM_SPORE.get(), 100, "crimson_nylium_spore");
+    createCompostRecipe(
+        consumer, ExNihiloItems.WARPED_NYLIUM_SPORE.get(), 100, "warped_nylium_spore");
     createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
   }
 
@@ -707,8 +707,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .save(consumer, createSaveLocation(ExNihiloItems.PORCELAIN_CLAY.getId()));
 
     @Nullable final RegistryObject<PebbleItem> blackstonePebble = ExNihiloItems.PEBBLE_BLACKSTONE;
-    @Nullable
-    final ResourceLocation gildedBlackstoneResourceLocation =
+    @Nullable final ResourceLocation gildedBlackstoneResourceLocation =
         ForgeRegistries.BLOCKS.getKey(Blocks.GILDED_BLACKSTONE);
     if (ExNihiloItems.GOLD.getRawOreItem() != null && gildedBlackstoneResourceLocation != null) {
       ShapedRecipeBuilder.shaped(Blocks.GILDED_BLACKSTONE)
@@ -716,14 +715,13 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
           .pattern("xgx")
           .pattern("xxx")
           .define('x', blackstonePebble.get())
-          .define('g', ExNihiloItems.GOLD.getRawOreItem())
+          .define('g', Tags.Items.RAW_MATERIALS_GOLD)
           .unlockedBy(
               "has_gold",
-              InventoryChangeTrigger.TriggerInstance.hasItems(ExNihiloItems.GOLD.getRawOreItem()))
+              InventoryChangeTrigger.TriggerInstance.hasItems(Items.RAW_GOLD))
           .save(consumer, createSaveLocation(gildedBlackstoneResourceLocation));
     }
-    @Nullable
-    final ResourceLocation cryingObsidianResourceLocation =
+    @Nullable final ResourceLocation cryingObsidianResourceLocation =
         ForgeRegistries.BLOCKS.getKey(Blocks.CRYING_OBSIDIAN);
     if (cryingObsidianResourceLocation != null) {
       ShapedRecipeBuilder.shaped(Blocks.CRYING_OBSIDIAN)
@@ -736,8 +734,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
               "has_obsidian", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.OBSIDIAN))
           .save(consumer, createSaveLocation(cryingObsidianResourceLocation));
     }
-    @Nullable
-    final ResourceLocation ancientDebrisResourceLocation =
+    @Nullable final ResourceLocation ancientDebrisResourceLocation =
         ForgeRegistries.BLOCKS.getKey(Blocks.ANCIENT_DEBRIS);
     if (ancientDebrisResourceLocation != null) {
       ShapelessRecipeBuilder.shapeless(Blocks.ANCIENT_DEBRIS)
@@ -747,29 +744,12 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
               "has_scrap", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHERITE_SCRAP))
           .save(consumer, createSaveLocation(ancientDebrisResourceLocation));
     }
-
-    // TODO: Add nugget Recipes
-    ShapelessRecipeBuilder.shapeless(ExNihiloItems.NUGGET_COPPER.get(), 9)
-        .requires(Tags.Items.INGOTS_COPPER)
-        .unlockedBy(
-            "has_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
-        .save(consumer, createSaveLocation(ExNihiloItems.NUGGET_COPPER.getId()));
-
-    ShapedRecipeBuilder.shaped(Items.COPPER_INGOT)
-        .pattern("ccc")
-        .pattern("ccc")
-        .pattern("ccc")
-        .define('c', ExNihiloTags.NUGGET_COPPER)
-        .unlockedBy(
-            "has_nugget",
-            InventoryChangeTrigger.TriggerInstance.hasItems(ExNihiloItems.NUGGET_COPPER.get()))
-        .save(consumer, createSaveLocation(ForgeRegistries.ITEMS.getKey(Items.COPPER_INGOT)));
   }
 
   private void registerOres(@Nonnull final Consumer<FinishedRecipe> consumer) {
-    createOre(ExNihiloItems.IRON, Items.RAW_IRON, consumer);
-    createOre(ExNihiloItems.GOLD, Items.RAW_GOLD, consumer);
-    createOre(ExNihiloItems.COPPER, Items.RAW_COPPER, consumer);
+    createOre(ExNihiloItems.IRON, consumer);
+    createOre(ExNihiloItems.GOLD, consumer);
+    createOre(ExNihiloItems.COPPER, consumer);
     createOreRecipes(
         ExNihiloItems.LEAD,
         new ResourceLocation(
@@ -894,14 +874,16 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .addResult(ExNihiloItems.MYCELIUM_SPORE.get())
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
         .build(consumer, sieveLoc("mycelium_spore"));
-    //    SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.CRUSHED_NETHERRACK.get()))
-    //        .addResult(ExNihiloItems.CRIMSON_NYLIUM_SPORE.get())
-    //        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
-    //        .build(consumer, sieveLoc("crimson_nylium_spore"));
-    //    SieveRecipeBuilder.builder().input(Ingredient.of(ExNihiloBlocks.CRUSHED_NETHERRACK.get()))
-    //        .addResult(ExNihiloItems.WARPED_NYLIUM_SPORE.get())
-    //        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
-    //        .build(consumer, sieveLoc("warped_nylium_spore"));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(ExNihiloBlocks.CRUSHED_NETHERRACK.get()))
+        .addResult(ExNihiloItems.CRIMSON_NYLIUM_SPORE.get())
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
+        .build(consumer, sieveLoc("crimson_nylium_spore"));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(ExNihiloBlocks.CRUSHED_NETHERRACK.get()))
+        .addResult(ExNihiloItems.WARPED_NYLIUM_SPORE.get())
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
+        .build(consumer, sieveLoc("warped_nylium_spore"));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(Blocks.DIRT))
         .addResult(ExNihiloItems.GRASS_SEED.get())
@@ -1022,22 +1004,22 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     registerDefaultOres(consumer, ExNihiloItems.URANIUM);
     registerDefaultOres(consumer, ExNihiloItems.ZINC);
 
-    createSeeds(ExNihiloItems.SEED_OAK.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_SPRUCE.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_BIRCH.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_JUNGLE.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_ACACIA.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_DARK_OAK.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_CACTUS.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_SUGARCANE.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_CARROT.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_POTATO.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_SWEET_BERRY.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_BAMBOO.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_FERN.get(), consumer);
-    createSeeds(ExNihiloItems.SEED_LARGE_FERN.get(), consumer);
-    createWaterSeeds(ExNihiloItems.SEED_KELP.get(), consumer);
-    createWaterSeeds(ExNihiloItems.SEED_PICKLE.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_OAK.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_SPRUCE.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_BIRCH.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_JUNGLE.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_ACACIA.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_DARK_OAK.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_CACTUS.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_SUGARCANE.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_CARROT.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_POTATO.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_SWEET_BERRY.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_BAMBOO.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_FERN.get(), consumer);
+    //    createSeeds(ExNihiloItems.SEED_LARGE_FERN.get(), consumer);
+    //    createWaterSeeds(ExNihiloItems.SEED_KELP.get(), consumer);
+    //    createWaterSeeds(ExNihiloItems.SEED_PICKLE.get(), consumer);
 
     getLeavesSaplings()
         .forEach(

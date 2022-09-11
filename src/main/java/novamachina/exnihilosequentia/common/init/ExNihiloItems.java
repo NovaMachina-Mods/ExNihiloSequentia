@@ -3,6 +3,7 @@ package novamachina.exnihilosequentia.common.init;
 import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.world.item.BlockItem;
@@ -13,7 +14,6 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.PlantType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,21 +25,22 @@ import novamachina.exnihilosequentia.common.item.HammerBaseItem;
 import novamachina.exnihilosequentia.common.item.MeshItem;
 import novamachina.exnihilosequentia.common.item.PebbleItem;
 import novamachina.exnihilosequentia.common.item.ResourceItem;
-import novamachina.exnihilosequentia.common.item.SeedBaseItem;
 import novamachina.exnihilosequentia.common.item.SilkwormItem;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
-import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
 public class ExNihiloItems {
 
   public static final List<RegistryObject<CrookBaseItem>> CROOKS = new ArrayList<>();
+  public static final List<RegistryObject<Item>> NUGGETS = new ArrayList<>();
   public static final List<RegistryObject<PebbleItem>> PEBBLES = new ArrayList<>();
   public static final List<RegistryObject<HammerBaseItem>> HAMMERS = new ArrayList<>();
   public static final List<RegistryObject<ResourceItem>> RESOURCE_ITEMS = new ArrayList<>();
+  public static final List<Ore> ORES = new ArrayList<>();
   private static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(ForgeRegistries.ITEMS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
   // Begin Items Only
@@ -49,32 +50,38 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.SILKWORM,
           () -> new SilkwormItem(ExNihiloConstants.Items.SILKWORM));
-  public static final Ore IRON =
-      new Ore(ExNihiloConstants.Ore.IRON, true, false, false, new Color("BF8040"), ITEMS);
-  public static final Ore GOLD =
-      new Ore(ExNihiloConstants.Ore.GOLD, true, false, false, new Color("FFFF00"), ITEMS);
-  public static final Ore COPPER =
-      new Ore(ExNihiloConstants.Ore.COPPER, true, false, false, new Color("FF9933"), ITEMS);
-  public static final Ore LEAD =
-      new Ore(ExNihiloConstants.Ore.LEAD, true, true, true, new Color("330066"), ITEMS);
-  public static final Ore NICKEL =
-      new Ore(ExNihiloConstants.Ore.NICKEL, true, true, true, new Color("FFFFCC"), ITEMS);
-  public static final Ore SILVER =
-      new Ore(ExNihiloConstants.Ore.SILVER, true, true, true, new Color("C2FAFF"), ITEMS);
-  public static final Ore TIN =
-      new Ore(ExNihiloConstants.Ore.TIN, true, true, true, new Color("F5FEFF"), ITEMS);
+  public static final Ore IRON = createOre(ExNihiloConstants.Ore.IRON,
+      Optional.of(net.minecraft.world.item.Items.RAW_IRON), Optional.of(
+          net.minecraft.world.item.Items.IRON_INGOT), Optional.of(
+          net.minecraft.world.item.Items.IRON_NUGGET));
+  public static final Ore GOLD = createOre(ExNihiloConstants.Ore.GOLD,
+      Optional.of(net.minecraft.world.item.Items.RAW_GOLD), Optional.of(
+          net.minecraft.world.item.Items.GOLD_INGOT), Optional.of(
+          net.minecraft.world.item.Items.GOLD_NUGGET));
+  public static final Ore COPPER = createOre(ExNihiloConstants.Ore.COPPER,
+      Optional.of(net.minecraft.world.item.Items.RAW_COPPER), Optional.of(
+          net.minecraft.world.item.Items.COPPER_INGOT), Optional.empty());
+  public static final Ore LEAD = createOre(ExNihiloConstants.Ore.LEAD, Optional.empty(), Optional.empty(),
+      Optional.empty());
+  public static final Ore NICKEL = createOre(ExNihiloConstants.Ore.NICKEL, Optional.empty(), Optional.empty(),
+      Optional.empty());
+  public static final Ore SILVER = createOre(ExNihiloConstants.Ore.SILVER, Optional.empty(), Optional.empty(),
+      Optional.empty());
+  public static final Ore TIN = createOre(ExNihiloConstants.Ore.TIN, Optional.empty(), Optional.empty(),
+      Optional.empty());
   public static final Ore ALUMINUM =
-      new Ore(ExNihiloConstants.Ore.ALUMINUM, true, true, true, new Color("BFBFBF"), ITEMS);
+      createOre(ExNihiloConstants.Ore.ALUMINUM, Optional.empty(), Optional.empty(),
+          Optional.empty());
   public static final Ore PLATINUM =
-      new Ore(ExNihiloConstants.Ore.PLATINUM, true, true, true, new Color("00FFF7"), ITEMS);
-  public static final Ore URANIUM =
-      new Ore(ExNihiloConstants.Ore.URANIUM, true, true, true, new Color("4E5B43"), ITEMS);
-  public static final Ore ZINC =
-      new Ore(ExNihiloConstants.Ore.ZINC, true, true, true, new Color("A59C74"), ITEMS);
+      createOre(ExNihiloConstants.Ore.PLATINUM, Optional.empty(), Optional.empty(),
+          Optional.empty());
+  public static final Ore URANIUM = createOre(ExNihiloConstants.Ore.URANIUM, Optional.empty(), Optional.empty(),
+      Optional.empty());
+  public static final Ore ZINC = createOre(ExNihiloConstants.Ore.ZINC, Optional.empty(), Optional.empty(),
+      Optional.empty());
   //  public static final RegistryObject<ResourceItem> NUGGET_ALUMINUM =
   // registerResourceItem(Items.ALUMINUM_NUGGET);
-  public static final RegistryObject<ResourceItem> NUGGET_COPPER =
-      registerResourceItem(ExNihiloConstants.Items.COPPER_NUGGET);
+//  public static final RegistryObject<Item> NUGGET_COPPER = createNugget(Items.COPPER_NUGGET);
   //  public static final RegistryObject<ResourceItem> NUGGET_LEAD =
   // registerResourceItem(ExNihiloConstants.Items.LEAD_NUGGET);
   //  public static final RegistryObject<ResourceItem> NUGGET_NICKEL =
@@ -174,12 +181,14 @@ public class ExNihiloItems {
           () ->
               new ResourceItem(
                   ExNihiloConstants.Items.MYCELIUM_SPORE, Blocks.DIRT, Blocks.MYCELIUM));
-  //  public static final RegistryObject<ResourceItem> CRIMSON_NYLIUM_SPORE = ITEMS
-  //      .register(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
-  //          () -> new ResourceItem(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE));
-  //  public static final RegistryObject<ResourceItem> WARPED_NYLIUM_SPORE = ITEMS
-  //      .register(ExNihiloConstants.Items.WARPED_NYLIUM_SPORE,
-  //          () -> new ResourceItem(ExNihiloConstants.Items.WARPED_NYLIUM_SPORE));
+  public static final RegistryObject<ResourceItem> CRIMSON_NYLIUM_SPORE =
+      ITEMS.register(
+          ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
+          () -> new ResourceItem(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE));
+  public static final RegistryObject<ResourceItem> WARPED_NYLIUM_SPORE =
+      ITEMS.register(
+          ExNihiloConstants.Items.WARPED_NYLIUM_SPORE,
+          () -> new ResourceItem(ExNihiloConstants.Items.WARPED_NYLIUM_SPORE));
   public static final RegistryObject<ResourceItem> GRASS_SEED =
       ITEMS.register(
           ExNihiloConstants.Items.GRASS_SEED,
@@ -218,70 +227,72 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.BEEHIVE_FRAME,
           () -> new ResourceItem(ExNihiloConstants.Items.BEEHIVE_FRAME));
-  public static final RegistryObject<SeedBaseItem> SEED_OAK =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_OAK,
-          () -> new SeedBaseItem(Blocks.OAK_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_SPRUCE =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_SPRUCE,
-          () -> new SeedBaseItem(Blocks.SPRUCE_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_BIRCH =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_BIRCH,
-          () -> new SeedBaseItem(Blocks.BIRCH_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_JUNGLE =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_JUNGLE,
-          () -> new SeedBaseItem(Blocks.JUNGLE_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_ACACIA =
-      ITEMS.register(
-          ExNihiloConstants.Items.ACACIA_SEED,
-          () -> new SeedBaseItem(Blocks.ACACIA_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_DARK_OAK =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_DARK_OAK,
-          () -> new SeedBaseItem(Blocks.DARK_OAK_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_CACTUS =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_CACTUS,
-          () -> new SeedBaseItem(Blocks.CACTUS.defaultBlockState(), PlantType.DESERT));
-  public static final RegistryObject<SeedBaseItem> SEED_SUGARCANE =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_SUGARCANE,
-          () -> new SeedBaseItem(Blocks.SUGAR_CANE.defaultBlockState(), PlantType.BEACH));
-  public static final RegistryObject<SeedBaseItem> SEED_CARROT =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_CARROT,
-          () -> new SeedBaseItem(Blocks.CARROTS.defaultBlockState(), PlantType.CROP));
-  public static final RegistryObject<SeedBaseItem> SEED_POTATO =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_POTATO,
-          () -> new SeedBaseItem(Blocks.POTATOES.defaultBlockState(), PlantType.CROP));
-  public static final RegistryObject<SeedBaseItem> SEED_SWEET_BERRY =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_SWEET_BERRY,
-          () -> new SeedBaseItem(Blocks.SWEET_BERRY_BUSH.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_KELP =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_KELP,
-          () -> new SeedBaseItem(Blocks.KELP_PLANT.defaultBlockState(), PlantType.WATER));
-  public static final RegistryObject<SeedBaseItem> SEED_PICKLE =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_PICKLE,
-          () -> new SeedBaseItem(Blocks.SEA_PICKLE.defaultBlockState(), PlantType.WATER));
-  public static final RegistryObject<SeedBaseItem> SEED_BAMBOO =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_BAMBOO,
-          () -> new SeedBaseItem(Blocks.BAMBOO_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_FERN =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_FERN,
-          () -> new SeedBaseItem(Blocks.FERN.defaultBlockState(), PlantType.PLAINS));
-  public static final RegistryObject<SeedBaseItem> SEED_LARGE_FERN =
-      ITEMS.register(
-          ExNihiloConstants.Items.SEED_LARGE_FERN,
-          () -> new SeedBaseItem(Blocks.LARGE_FERN.defaultBlockState(), PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_OAK =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_OAK,
+  //          () -> new SeedBaseItem(Blocks.OAK_SAPLING.defaultBlockState(), PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_SPRUCE =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_SPRUCE,
+  //          () -> new SeedBaseItem(Blocks.SPRUCE_SAPLING.defaultBlockState(), PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_BIRCH =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_BIRCH,
+  //          () -> new SeedBaseItem(Blocks.BIRCH_SAPLING.defaultBlockState(), PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_JUNGLE =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_JUNGLE,
+  //          () -> new SeedBaseItem(Blocks.JUNGLE_SAPLING.defaultBlockState(), PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_ACACIA =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.ACACIA_SEED,
+  //          () -> new SeedBaseItem(Blocks.ACACIA_SAPLING.defaultBlockState(), PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_DARK_OAK =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_DARK_OAK,
+  //          () -> new SeedBaseItem(Blocks.DARK_OAK_SAPLING.defaultBlockState(),
+  // PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_CACTUS =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_CACTUS,
+  //          () -> new SeedBaseItem(Blocks.CACTUS.defaultBlockState(), PlantType.DESERT));
+  //  public static final RegistryObject<SeedBaseItem> SEED_SUGARCANE =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_SUGARCANE,
+  //          () -> new SeedBaseItem(Blocks.SUGAR_CANE.defaultBlockState(), PlantType.BEACH));
+  //  public static final RegistryObject<SeedBaseItem> SEED_CARROT =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_CARROT,
+  //          () -> new SeedBaseItem(Blocks.CARROTS.defaultBlockState(), PlantType.CROP));
+  //  public static final RegistryObject<SeedBaseItem> SEED_POTATO =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_POTATO,
+  //          () -> new SeedBaseItem(Blocks.POTATOES.defaultBlockState(), PlantType.CROP));
+  //  public static final RegistryObject<SeedBaseItem> SEED_SWEET_BERRY =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_SWEET_BERRY,
+  //          () -> new SeedBaseItem(Blocks.SWEET_BERRY_BUSH.defaultBlockState(),
+  // PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_KELP =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_KELP,
+  //          () -> new SeedBaseItem(Blocks.KELP_PLANT.defaultBlockState(), PlantType.WATER));
+  //  public static final RegistryObject<SeedBaseItem> SEED_PICKLE =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_PICKLE,
+  //          () -> new SeedBaseItem(Blocks.SEA_PICKLE.defaultBlockState(), PlantType.WATER));
+  //  public static final RegistryObject<SeedBaseItem> SEED_BAMBOO =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_BAMBOO,
+  //          () -> new SeedBaseItem(Blocks.BAMBOO_SAPLING.defaultBlockState(), PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_FERN =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_FERN,
+  //          () -> new SeedBaseItem(Blocks.FERN.defaultBlockState(), PlantType.PLAINS));
+  //  public static final RegistryObject<SeedBaseItem> SEED_LARGE_FERN =
+  //      ITEMS.register(
+  //          ExNihiloConstants.Items.SEED_LARGE_FERN,
+  //          () -> new SeedBaseItem(Blocks.LARGE_FERN.defaultBlockState(), PlantType.PLAINS));
   public static final RegistryObject<MeshItem> MESH_STRING =
       ITEMS.register(
           ExNihiloConstants.Items.STRING_MESH,
@@ -639,7 +650,22 @@ public class ExNihiloItems {
           ExNihiloConstants.Items.SEA_WATER_BUCKET,
           () -> new BucketItem(ExNihiloFluids.SEA_WATER, tab.stacksTo(1)));
 
-  private ExNihiloItems() {}
+  private ExNihiloItems() {
+  }
+
+  private static RegistryObject<Item> createNugget(String id) {
+    RegistryObject<Item> nugget = ITEMS.register(
+        ExNihiloConstants.Items.COPPER_NUGGET,
+        () -> new Item(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
+    NUGGETS.add(nugget);
+    return nugget;
+  }
+
+  private static Ore createOre(String id, Optional<Item> rawItem, Optional<Item> ingotItem, Optional<Item> nuggetItem) {
+    Ore ore = new Ore(id, true, rawItem, ingotItem, nuggetItem, ITEMS);
+    ORES.add(ore);
+    return ore;
+  }
 
   private static RegistryObject<HammerBaseItem> registerHammer(
       String id, Tiers tier, int durability) {

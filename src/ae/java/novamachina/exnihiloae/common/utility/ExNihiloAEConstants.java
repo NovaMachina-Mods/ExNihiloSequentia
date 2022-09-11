@@ -6,15 +6,13 @@ public class ExNihiloAEConstants {
 
     public static final String EX_NIHILO_AE = "exnihiloae";
 
-    private ModIds() {
-    }
+    private ModIds() {}
   }
 
   public class Blocks {
 
-    public static final String CRUSHED_SKYSTONE = "crushed_skystone";
+    public static final String CRUSHED_SKYSTONE = "crushed_sky_stone";
 
-    private Blocks() {
-    }
+    private Blocks() {}
   }
 }

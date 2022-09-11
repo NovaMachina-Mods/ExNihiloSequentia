@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/raw_aluminum"
+    "layer0": "exnihilosequentia:items/ore/raw/raw_aluminum"
   }
 }

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chunk": {
+    "has_nugget": {
       "conditions": {
         "items": [
           {
             "items": [
-              "exnihilosequentia:raw_lead"
+              "exnihilosequentia:lead_nugget"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_chunk",
+      "has_nugget",
       "has_the_recipe"
     ]
   ],

@@ -88,7 +88,7 @@ public class ExNihiloConstants {
 
     public static final String BEE_DOLL = "bee_doll";
     public static final String BLAZE_DOLL = "blaze_doll";
-    public static final String CRAFTING_DOLL = "crafting_doll";
+    public static final String CRAFTING_DOLL = "porcelain_doll";
     public static final String DIAMOND_MESH = "diamond_mesh";
     public static final String EMERALD_MESH = "emerald_mesh";
     public static final String ENDERMAN_DOLL = "enderman_doll";

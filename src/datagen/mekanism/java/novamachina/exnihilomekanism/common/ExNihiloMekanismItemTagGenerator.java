@@ -18,7 +18,6 @@ public class ExNihiloMekanismItemTagGenerator extends AbstractItemTagGenerator {
 
   @Override
   protected void addTags() {
-    registerOre(ExNihiloMekanismItems.OSMIUM,
-        new ExNihiloTags.OreTag(ExNihiloMekanismItems.OSMIUM));
+    tag(ExNihiloTags.PIECE).add(ExNihiloMekanismItems.OSMIUM_PIECES.get());
   }
 }

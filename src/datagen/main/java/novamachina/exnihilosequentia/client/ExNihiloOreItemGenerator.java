@@ -18,27 +18,20 @@ public class ExNihiloOreItemGenerator extends AbstractOreItemGenerator {
 
   @Override
   protected void registerModels() {
-    registerOre(ExNihiloItems.IRON);
-    registerOre(ExNihiloItems.GOLD);
-    registerOre(ExNihiloItems.COPPER);
-    registerOre(ExNihiloItems.LEAD);
-    registerOre(ExNihiloItems.NICKEL);
-    registerOre(ExNihiloItems.SILVER);
-    registerOre(ExNihiloItems.TIN);
-    registerOre(ExNihiloItems.ALUMINUM);
-    registerOre(ExNihiloItems.PLATINUM);
-    registerOre(ExNihiloItems.URANIUM);
-    registerOre(ExNihiloItems.ZINC);
+    for (Ore ore : ExNihiloItems.ORES) {
+      registerOre(ore);
+    }
   }
 
   private void registerOre(Ore ore) {
     String oreName = ore.getOreName();
     if (!(oreName.equals("iron") || oreName.equals("gold") || oreName.equals("copper"))) {
       registerRaw(ore);
-    }
-    registerPiece(ore);
-    if (ore.getIngotItem() != null) {
       registerIngot(ore);
     }
+    if (!(oreName.equals("iron") || oreName.equals("gold"))) {
+      registerNugget(ore);
+    }
+    registerPiece(ore);
   }
 }

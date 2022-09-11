@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/silver_pieces"
+    "layer0": "exnihilosequentia:items/ore/piece/silver_pieces"
   }
 }

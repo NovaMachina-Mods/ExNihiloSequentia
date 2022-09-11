@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilomekanism:items/osmium_pieces"
+    "layer0": "exnihilomekanism:items/ore/piece/osmium_pieces"
   }
 }

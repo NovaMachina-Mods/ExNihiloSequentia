@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -118,6 +119,13 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
     registerPebbles();
     registerMeshes();
     registerDolls();
+    registerNuggets();
+  }
+
+  private void registerNuggets() {
+    for(RegistryObject<Item> nugget : ExNihiloItems.NUGGETS) {
+      registerNugget(nugget.get());
+    }
   }
 
   private void registerResource(ItemLike item) {
@@ -133,6 +141,19 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
         new ResourceLocation(modid, ITEMS_TAG + resourceLocation.getPath()));
   }
 
+  private void registerNugget(ItemLike item) {
+    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(item.asItem());
+    if (resourceLocation == null) {
+      return;
+    }
+
+    singleTexture(
+        resourceLocation.getPath(),
+        new ResourceLocation(ITEM_GENERATED_TAG),
+        LAYER_0_TAG,
+        new ResourceLocation(modid, ITEMS_TAG + "ore/nugget/" + resourceLocation.getPath()));
+  }
+
   private void registerPebbles() {
     for (RegistryObject<PebbleItem> pebble : ExNihiloItems.PEBBLES) {
       registerResource(pebble.get());
@@ -141,8 +162,8 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
   private void registerResources() {
     registerResource(ExNihiloItems.MYCELIUM_SPORE.get());
-    //    registerResource(ExNihiloItems.CRIMSON_NYLIUM_SPORE.get());
-    //    registerResource(ExNihiloItems.WARPED_NYLIUM_SPORE.get());
+    registerResource(ExNihiloItems.CRIMSON_NYLIUM_SPORE.get());
+    registerResource(ExNihiloItems.WARPED_NYLIUM_SPORE.get());
     registerResource(ExNihiloItems.GRASS_SEED.get());
     registerResource(ExNihiloItems.PORCELAIN_CLAY.get());
     registerResource(ExNihiloItems.CRAFTING_DOLL.get());
@@ -155,21 +176,21 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
   }
 
   private void registerSeeds() {
-    registerResource(ExNihiloItems.SEED_OAK.get());
-    registerResource(ExNihiloItems.SEED_SPRUCE.get());
-    registerResource(ExNihiloItems.SEED_BIRCH.get());
-    registerResource(ExNihiloItems.SEED_JUNGLE.get());
-    registerResource(ExNihiloItems.SEED_ACACIA.get());
-    registerResource(ExNihiloItems.SEED_DARK_OAK.get());
-    registerResource(ExNihiloItems.SEED_CACTUS.get());
-    registerResource(ExNihiloItems.SEED_SUGARCANE.get());
-    registerResource(ExNihiloItems.SEED_CARROT.get());
-    registerResource(ExNihiloItems.SEED_POTATO.get());
-    registerResource(ExNihiloItems.SEED_SWEET_BERRY.get());
-    registerResource(ExNihiloItems.SEED_KELP.get());
-    registerResource(ExNihiloItems.SEED_PICKLE.get());
-    registerResource(ExNihiloItems.SEED_BAMBOO.get());
-    registerResource(ExNihiloItems.SEED_FERN.get());
-    registerResource(ExNihiloItems.SEED_LARGE_FERN.get());
+    //    registerResource(ExNihiloItems.SEED_OAK.get());
+    //    registerResource(ExNihiloItems.SEED_SPRUCE.get());
+    //    registerResource(ExNihiloItems.SEED_BIRCH.get());
+    //    registerResource(ExNihiloItems.SEED_JUNGLE.get());
+    //    registerResource(ExNihiloItems.SEED_ACACIA.get());
+    //    registerResource(ExNihiloItems.SEED_DARK_OAK.get());
+    //    registerResource(ExNihiloItems.SEED_CACTUS.get());
+    //    registerResource(ExNihiloItems.SEED_SUGARCANE.get());
+    //    registerResource(ExNihiloItems.SEED_CARROT.get());
+    //    registerResource(ExNihiloItems.SEED_POTATO.get());
+    //    registerResource(ExNihiloItems.SEED_SWEET_BERRY.get());
+    //    registerResource(ExNihiloItems.SEED_KELP.get());
+    //    registerResource(ExNihiloItems.SEED_PICKLE.get());
+    //    registerResource(ExNihiloItems.SEED_BAMBOO.get());
+    //    registerResource(ExNihiloItems.SEED_FERN.get());
+    //    registerResource(ExNihiloItems.SEED_LARGE_FERN.get());
   }
 }

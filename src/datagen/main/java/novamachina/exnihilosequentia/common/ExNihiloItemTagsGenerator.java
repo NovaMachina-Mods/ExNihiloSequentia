@@ -3,6 +3,7 @@ package novamachina.exnihilosequentia.common;
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -35,10 +36,19 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     registerMeats();
     registerHammers();
     registerCrooks();
+    registerNuggets();
     registerMisc();
     registerWoodenBarrel();
     registerWoodenCrucible();
     registerWoodenSieve();
+  }
+
+  private void registerNuggets() {
+    for(RegistryObject<Item> nugget : ExNihiloItems.NUGGETS) {
+      tag(Tags.Items.NUGGETS).add(nugget.get());
+    }
+    // TODO: Add nuggets
+//    tag(ExNihiloTags.NUGGET_COPPER).add(ExNihiloItems.COPPER.getNuggetItem());
   }
 
   private void registerCooked() {
@@ -70,8 +80,6 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
 
   private void registerMisc() {
     tag(ExNihiloTags.CLAY).add(Items.CLAY_BALL);
-    // TODO: Add nuggets
-    tag(ExNihiloTags.NUGGET_COPPER).add(ExNihiloItems.NUGGET_COPPER.get());
   }
 
   private void registerOres() {
@@ -89,22 +97,22 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
   }
 
   private void registerSeeds() {
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_OAK.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_SPRUCE.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_BIRCH.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_JUNGLE.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_ACACIA.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_DARK_OAK.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_CACTUS.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_SUGARCANE.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_CARROT.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_POTATO.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_SWEET_BERRY.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_KELP.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_PICKLE.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_BAMBOO.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_FERN.get());
-    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_LARGE_FERN.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_OAK.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_SPRUCE.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_BIRCH.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_JUNGLE.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_ACACIA.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_DARK_OAK.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_CACTUS.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_SUGARCANE.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_CARROT.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_POTATO.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_SWEET_BERRY.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_KELP.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_PICKLE.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_BAMBOO.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_FERN.get());
+    //    tag(Tags.Items.SEEDS).add(ExNihiloItems.SEED_LARGE_FERN.get());
   }
 
   private void registerUncooked() {

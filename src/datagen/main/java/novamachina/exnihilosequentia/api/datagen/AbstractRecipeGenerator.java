@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.api.datagen;
 
+import com.mojang.datafixers.util.Either;
 import java.util.Objects;
 import java.util.function.Consumer;
 import javax.annotation.Nonnull;
@@ -11,6 +12,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -40,16 +42,22 @@ import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.common.item.OreItem;
 import novamachina.exnihilosequentia.common.item.SeedBaseItem;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
-  @Nonnull public static final String PEBBLE_CONDITION = "has_pebble";
-  @Nonnull protected static final String CHUNK_CONDITION = "has_chunk";
-  @Nonnull private static final String MATERIAL_CONDITION = "has_material";
-  @Nonnull private final String modId;
+  @Nonnull
+  public static final String PEBBLE_CONDITION = "has_pebble";
+  @Nonnull
+  protected static final String CHUNK_CONDITION = "has_chunk";
+  @Nonnull
+  private static final String MATERIAL_CONDITION = "has_material";
+  @Nonnull
+  private final String modId;
 
   protected AbstractRecipeGenerator(
       @Nonnull final DataGenerator generator, @Nonnull final String modId) {
@@ -115,35 +123,57 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
   protected void createOreRecipes(
       Ore ore, ResourceLocation registryId, Consumer<FinishedRecipe> consumer) {
     createOre(ore, consumer);
-    createSmeltingRecipe(
-        consumer,
-        ore.getRawOreItem(),
-        ore.getIngotItem(),
-        0.7F,
-        200,
-        0.7F,
-        100,
-        CHUNK_CONDITION,
-        registryId);
-  }
-
-  protected void createOre(
-      @Nonnull final Ore ore, @Nonnull final Consumer<FinishedRecipe> consumer) {
-    @Nullable final Item rawOre = ore.getRawOreItem();
-    if (rawOre == null) {
-      return;
+    if(ore.getRawOreItem().left().isPresent() && ore.getIngotItem().left().isPresent()) {
+      createSmeltingRecipe(
+          consumer,
+          ore.getRawOreItem().left().get().get(),
+          ore.getIngotItem().left().get().get(),
+          0.7F,
+          200,
+          0.7F,
+          100,
+          CHUNK_CONDITION,
+          registryId);
     }
-    createOre(ore, rawOre, consumer);
   }
 
   protected void createOre(
       @Nonnull final Ore ore,
-      @Nonnull Item rawOre,
       @Nonnull final Consumer<FinishedRecipe> consumer) {
-    @Nullable final Item piece = ore.getPieceItem();
-    if (piece == null) {
-      return;
+    createRawRecipe(ore, consumer);
+    createNuggetRecipes(ore, consumer);
+  }
+
+  private void createNuggetRecipes(Ore ore, Consumer<FinishedRecipe> consumer) {
+    if(ore.getNuggetItem().left().isPresent()) {
+      Either<RegistryObject<OreItem>, Item> eitherIngot = ore.getIngotItem();
+      @Nullable Item ingot = eitherIngot.left().isPresent() ? eitherIngot.left().get().get() : eitherIngot.right().get();
+      Item nugget = ore.getNuggetItem().left().get().get();
+
+      ShapedRecipeBuilder.shaped(ingot)
+          .pattern("xxx")
+          .pattern("xxx")
+          .pattern("xxx")
+          .define('x', nugget)
+          .group(this.modId)
+          .unlockedBy("has_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(nugget))
+          .save(
+              consumer,
+              new ResourceLocation(
+                  modId, prependRecipePrefix(ForgeRegistries.ITEMS.getKey(ingot).getPath() + "_from_nugget")));
+
+      ShapelessRecipeBuilder.shapeless(nugget, 9)
+        .requires(ingot)
+        .unlockedBy(
+            "has_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(ingot))
+        .save(consumer, createSaveLocation(ForgeRegistries.ITEMS.getKey(nugget)));
     }
+  }
+
+  private void createRawRecipe(@NotNull Ore ore, @NotNull Consumer<FinishedRecipe> consumer) {
+    @Nullable final Item piece = ore.getPieceItem();
+    Either<RegistryObject<OreItem>, Item> rawEither = ore.getRawOreItem();
+    @Nullable Item rawOre = rawEither.left().isPresent() ? rawEither.left().get().get() : rawEither.right().get();
     ShapedRecipeBuilder.shaped(rawOre)
         .pattern("xx")
         .pattern("xx")
@@ -158,21 +188,18 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
   protected void createSmelting(
       @Nonnull final Ore ore, @Nonnull final Consumer<FinishedRecipe> consumer) {
-    @Nullable final Item chunk = ore.getRawOreItem();
-    if (chunk == null) {
-      return;
-    }
-    @Nullable Item ingot = ore.getIngotItem();
-    if (ingot == null) {
-      return;
-    }
-    SimpleCookingRecipeBuilder.smelting(Ingredient.of(chunk), ingot, 0.7F, 200)
+    Either<RegistryObject<OreItem>, Item> rawEither = ore.getRawOreItem();
+    @Nullable final Item raw = rawEither.left().isPresent() ? rawEither.left().get().get() : rawEither.right().get();
+
+    Either<RegistryObject<OreItem>, Item> ingotEither = ore.getIngotItem();
+    @Nullable Item ingot = ingotEither.left().isPresent() ? ingotEither.left().get().get() : ingotEither.right().get();
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw), ingot, 0.7F, 200)
         .unlockedBy(
-            CHUNK_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(ore.getRawOreItem()))
+            CHUNK_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(raw))
         .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotName())));
-    SimpleCookingRecipeBuilder.blasting(Ingredient.of(chunk), ingot, 0.7F, 100)
+    SimpleCookingRecipeBuilder.blasting(Ingredient.of(raw), ingot, 0.7F, 100)
         .unlockedBy(
-            CHUNK_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(ore.getRawOreItem()))
+            CHUNK_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(raw))
         .save(
             consumer,
             new ResourceLocation(modId, prependRecipePrefix("blast_" + ore.getIngotName())));

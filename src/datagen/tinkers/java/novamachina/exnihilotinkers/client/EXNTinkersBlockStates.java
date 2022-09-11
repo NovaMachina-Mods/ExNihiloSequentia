@@ -4,7 +4,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.datagen.AbstractBlockStateGenerator;
-import novamachina.exnihilotinkers.common.init.EXNTinkersBlocks;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
 
 public class EXNTinkersBlockStates extends AbstractBlockStateGenerator {
@@ -18,21 +17,24 @@ public class EXNTinkersBlockStates extends AbstractBlockStateGenerator {
   }
 
   private void registerBarrels() {
-    createBarrel(EXNTinkersBlocks.BARREL_BLOODSHROOM.get(), tinkersLoc("bloodshroom/planks"));
-    createBarrel(EXNTinkersBlocks.BARREL_GREENHEART.get(), tinkersLoc("greenheart/planks"));
-    createBarrel(EXNTinkersBlocks.BARREL_SKYROOT.get(), tinkersLoc("skyroot/planks"));
+    //    createBarrel(EXNTinkersBlocks.BARREL_BLOODSHROOM.get(), tinkersLoc("bloodshroom/planks"));
+    //    createBarrel(EXNTinkersBlocks.BARREL_GREENHEART.get(), tinkersLoc("greenheart/planks"));
+    //    createBarrel(EXNTinkersBlocks.BARREL_SKYROOT.get(), tinkersLoc("skyroot/planks"));
   }
 
   private void registerSieves() {
-    createSieve(EXNTinkersBlocks.SIEVE_BLOODSHROOM.get(), tinkersLoc("bloodshroom/stripped_log"));
-    createSieve(EXNTinkersBlocks.SIEVE_GREENHEART.get(), tinkersLoc("greenheart/stripped_log"));
-    createSieve(EXNTinkersBlocks.SIEVE_SKYROOT.get(), tinkersLoc("skyroot/stripped_log"));
+    //    createSieve(EXNTinkersBlocks.SIEVE_BLOODSHROOM.get(),
+    // tinkersLoc("bloodshroom/stripped_log"));
+    //    createSieve(EXNTinkersBlocks.SIEVE_GREENHEART.get(),
+    // tinkersLoc("greenheart/stripped_log"));
+    //    createSieve(EXNTinkersBlocks.SIEVE_SKYROOT.get(), tinkersLoc("skyroot/stripped_log"));
   }
 
   private void registerCrucibles() {
-    createCrucible(EXNTinkersBlocks.CRUCIBLE_BLOODSHROOM.get(), tinkersLoc("bloodshroom/log"));
-    createCrucible(EXNTinkersBlocks.CRUCIBLE_GREENHEART.get(), tinkersLoc("greenheart/log"));
-    createCrucible(EXNTinkersBlocks.CRUCIBLE_SKYROOT.get(), tinkersLoc("skyroot/log"));
+    //    createCrucible(EXNTinkersBlocks.CRUCIBLE_BLOODSHROOM.get(),
+    // tinkersLoc("bloodshroom/log"));
+    //    createCrucible(EXNTinkersBlocks.CRUCIBLE_GREENHEART.get(), tinkersLoc("greenheart/log"));
+    //    createCrucible(EXNTinkersBlocks.CRUCIBLE_SKYROOT.get(), tinkersLoc("skyroot/log"));
   }
 
   @Override

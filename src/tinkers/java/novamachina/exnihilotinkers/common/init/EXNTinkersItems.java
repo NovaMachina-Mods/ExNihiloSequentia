@@ -1,6 +1,7 @@
 package novamachina.exnihilotinkers.common.init;
 
 import com.mojang.logging.LogUtils;
+import java.util.Optional;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -9,17 +10,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
-import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilotinkers.common.utility.EXNTinkersConstants;
 
 public class EXNTinkersItems {
 
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
   public static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(ForgeRegistries.ITEMS, EXNTinkersConstants.ModIds.EX_NIHILO_TINKERS);
-  public static final Ore COBALT =
-      new Ore("cobalt", true, false, false, new Color("2376DD"), ITEMS);
+  public static final Ore COBALT = new Ore("cobalt", true, Optional.empty(), Optional.empty(), Optional.empty(), ITEMS);
   public static final RegistryObject<Item> SIEVE_BLOODSHROOM =
       ITEMS.register(
           "bloodshroom_sieve",
@@ -83,6 +81,7 @@ public class EXNTinkersItems {
               new BlockItem(
                   EXNTinkersBlocks.CRUCIBLE_SKYROOT.get(),
                   new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
+  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   public static void init(IEventBus modEventBus) {
     logger.debug("Register items");
