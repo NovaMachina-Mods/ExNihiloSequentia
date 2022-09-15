@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/diorite_pebble"
+    "layer0": "exnihilosequentia:item/diorite_pebble"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/shulker_doll"
+    "layer0": "exnihilosequentia:item/shulker_doll"
   }
 }

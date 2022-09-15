@@ -16,7 +16,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public abstract class AbstractOreItemGenerator extends ItemModelProvider {
 
-  private static final String ITEMS_TAG = "items/ore";
+  private static final String ITEMS_TAG = "item/ore";
   private static final String ITEM_GENERATED_TAG = "item/generated";
   private static final String LAYER_0_TAG = "layer0";
 

@@ -20,7 +20,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class ExNihiloItemGenerator extends AbstractItemGenerator {
 
-  private static final String ITEMS_TAG = "items/";
+  private static final String ITEMS_TAG = "item/";
   private static final String ITEM_HANDHELD_TAG = "item/handheld";
   private static final String ITEM_GENERATED_TAG = "item/generated";
   private static final String LAYER_0_TAG = "layer0";
@@ -40,7 +40,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
         resourceLocation.getPath(),
         new ResourceLocation(ITEM_HANDHELD_TAG),
         LAYER_0_TAG,
-        new ResourceLocation(modid, "items/tools/crook/" + resourceLocation.getPath()));
+        new ResourceLocation(modid, "item/tools/crook/" + resourceLocation.getPath()));
   }
 
   private void registerCrooks() {
@@ -80,7 +80,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
         resourceLocation.getPath(),
         new ResourceLocation(ITEM_HANDHELD_TAG),
         LAYER_0_TAG,
-        new ResourceLocation(modid, "items/tools/hammer/" + resourceLocation.getPath()));
+        new ResourceLocation(modid, "item/tools/hammer/" + resourceLocation.getPath()));
   }
 
   private void registerMesh(MeshItem mesh) {
@@ -111,6 +111,7 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
     registerResource(ExNihiloItems.COOKED_SILKWORM.get());
     registerResource(ExNihiloItems.WITCH_WATER_BUCKET.get());
     registerResource(ExNihiloItems.SEA_WATER_BUCKET.get());
+    registerResource(ExNihiloItems.END_CAKE.get());
 
     registerCrooks();
     registerHammers();
@@ -167,11 +168,11 @@ public class ExNihiloItemGenerator extends AbstractItemGenerator {
     registerResource(ExNihiloItems.GRASS_SEED.get());
     registerResource(ExNihiloItems.PORCELAIN_CLAY.get());
     registerResource(ExNihiloItems.CRAFTING_DOLL.get());
-    registerResource(ExNihiloItems.BLUE_CORAL_SEED.get());
-    registerResource(ExNihiloItems.PINK_CORAL_SEED.get());
-    registerResource(ExNihiloItems.PURPLE_CORAL_SEED.get());
-    registerResource(ExNihiloItems.RED_CORAL_SEED.get());
-    registerResource(ExNihiloItems.YELLOW_CORAL_SEED.get());
+    registerResource(ExNihiloItems.TUBE_CORAL_LARVA.get());
+    registerResource(ExNihiloItems.BRAIN_CORAL_LARVA.get());
+    registerResource(ExNihiloItems.BUBBLE_CORAL_LARVA.get());
+    registerResource(ExNihiloItems.FIRE_CORAL_LARVA.get());
+    registerResource(ExNihiloItems.HORN_CORAL_LARVA.get());
     registerResource(ExNihiloItems.BEEHIVE_FRAME.get());
   }
 

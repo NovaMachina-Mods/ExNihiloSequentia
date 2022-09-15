@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/porcelain_clay"
+    "layer0": "exnihilosequentia:item/porcelain_clay"
   }
 }

@@ -95,4 +95,13 @@ public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
 
     return InteractionResult.SUCCESS;
   }
+
+  @Override
+  public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+    super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
+    if (!pPlayer.isCreative()) {
+      AbstractBarrelEntity barrelEntity = (AbstractBarrelEntity) pLevel.getBlockEntity(pPos);
+      barrelEntity.dropInventory();
+    }
+  }
 }

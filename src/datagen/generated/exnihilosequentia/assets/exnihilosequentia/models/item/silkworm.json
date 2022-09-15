@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/silkworm"
+    "layer0": "exnihilosequentia:item/silkworm"
   }
 }

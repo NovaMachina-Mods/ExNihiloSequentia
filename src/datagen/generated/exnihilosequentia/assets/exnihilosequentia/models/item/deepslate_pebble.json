@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/deepslate_pebble"
+    "layer0": "exnihilosequentia:item/deepslate_pebble"
   }
 }

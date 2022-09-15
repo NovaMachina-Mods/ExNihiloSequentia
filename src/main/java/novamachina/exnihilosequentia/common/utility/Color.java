@@ -7,12 +7,9 @@ import net.minecraft.nbt.CompoundTag;
 
 public class Color {
 
-  @Nonnull
-  public static final Color INVALID_COLOR = new Color(-1, -1, -1, -1);
-  @Nonnull
-  public static final Color WHITE = new Color(1, 1, 1, 1);
-  @Nonnull
-  private static final String COLOR_TAG = "color";
+  @Nonnull public static final Color INVALID_COLOR = new Color(-1, -1, -1, -1);
+  @Nonnull public static final Color WHITE = new Color(255, 255, 255, 255);
+  @Nonnull private static final String COLOR_TAG = "color";
   public final float a;
   public final float b;
   public final float g;
@@ -45,17 +42,20 @@ public class Color {
   }
 
   @Nonnull
-  public static Color average(@Nonnull final Color colorA, @Nonnull final Color colorB,
-      float percentage) {
+  public static Color average(
+      @Nonnull final Color colorA, @Nonnull final Color colorB, float percentage) {
     float opposite = 1 - percentage;
-    //Gamma correction
+    // Gamma correction
 
-    float averageR = (float) Math
-        .sqrt((colorA.r * colorA.r) * (opposite) + (colorB.r * colorB.r) * (percentage));
-    float averageG = (float) Math
-        .sqrt((colorA.g * colorA.g) * (opposite) + (colorB.r * colorB.g) * (percentage));
-    float averageB = (float) Math
-        .sqrt((colorA.b * colorA.b) * (opposite) + (colorB.r * colorB.b) * (percentage));
+    float averageR =
+        (float)
+            Math.sqrt((colorA.r * colorA.r) * (opposite) + (colorB.r * colorB.r) * (percentage));
+    float averageG =
+        (float)
+            Math.sqrt((colorA.g * colorA.g) * (opposite) + (colorB.r * colorB.g) * (percentage));
+    float averageB =
+        (float)
+            Math.sqrt((colorA.b * colorA.b) * (opposite) + (colorB.r * colorB.b) * (percentage));
     float averageA = colorA.a * opposite + colorB.a * percentage;
 
     return new Color(averageR, averageG, averageB, averageA);
@@ -84,10 +84,10 @@ public class Color {
       return false;
     }
     Color color = (Color) o;
-    return Float.compare(color.r, r) == 0 &&
-        Float.compare(color.g, g) == 0 &&
-        Float.compare(color.b, b) == 0 &&
-        Float.compare(color.a, a) == 0;
+    return Float.compare(color.r, r) == 0
+        && Float.compare(color.g, g) == 0
+        && Float.compare(color.b, b) == 0
+        && Float.compare(color.a, a) == 0;
   }
 
   @Nonnull
@@ -129,11 +129,6 @@ public class Color {
   @Override
   @Nonnull
   public String toString() {
-    return "Color{" +
-        "r=" + r +
-        ", g=" + g +
-        ", b=" + b +
-        ", a=" + a +
-        '}';
+    return "Color{" + "r=" + r + ", g=" + g + ", b=" + b + ", a=" + a + '}';
   }
 }

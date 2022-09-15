@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/warped_nylium_spores"
+    "layer0": "exnihilosequentia:item/warped_nylium_spores"
   }
 }

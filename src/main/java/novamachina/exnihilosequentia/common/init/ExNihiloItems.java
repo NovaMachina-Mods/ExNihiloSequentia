@@ -210,26 +210,26 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.CRAFTING_DOLL,
           () -> new ResourceItem(ExNihiloConstants.Items.CRAFTING_DOLL));
-  public static final RegistryObject<ResourceItem> BLUE_CORAL_SEED =
+  public static final RegistryObject<ResourceItem> TUBE_CORAL_LARVA =
       ITEMS.register(
-          ExNihiloConstants.Items.BLUE_CORAL_SEED,
-          () -> new ResourceItem(ExNihiloConstants.Items.BLUE_CORAL_SEED));
-  public static final RegistryObject<ResourceItem> PINK_CORAL_SEED =
+          ExNihiloConstants.Items.TUBE_CORAL_LARVA,
+          () -> new ResourceItem(ExNihiloConstants.Items.TUBE_CORAL_LARVA));
+  public static final RegistryObject<ResourceItem> BRAIN_CORAL_LARVA =
       ITEMS.register(
-          ExNihiloConstants.Items.PINK_CORAL_SEED,
-          () -> new ResourceItem(ExNihiloConstants.Items.PINK_CORAL_SEED));
-  public static final RegistryObject<ResourceItem> PURPLE_CORAL_SEED =
+          ExNihiloConstants.Items.BRAIN_CORAL_LARVA,
+          () -> new ResourceItem(ExNihiloConstants.Items.BRAIN_CORAL_LARVA));
+  public static final RegistryObject<ResourceItem> BUBBLE_CORAL_LARVA =
       ITEMS.register(
-          ExNihiloConstants.Items.PURPLE_CORAL_SEED,
-          () -> new ResourceItem(ExNihiloConstants.Items.PURPLE_CORAL_SEED));
-  public static final RegistryObject<ResourceItem> RED_CORAL_SEED =
+          ExNihiloConstants.Items.BUBBLE_CORAL_LARVA,
+          () -> new ResourceItem(ExNihiloConstants.Items.BUBBLE_CORAL_LARVA));
+  public static final RegistryObject<ResourceItem> FIRE_CORAL_LARVA =
       ITEMS.register(
-          ExNihiloConstants.Items.RED_CORAL_SEED,
-          () -> new ResourceItem(ExNihiloConstants.Items.RED_CORAL_SEED));
-  public static final RegistryObject<ResourceItem> YELLOW_CORAL_SEED =
+          ExNihiloConstants.Items.FIRE_CORAL_LARVA,
+          () -> new ResourceItem(ExNihiloConstants.Items.FIRE_CORAL_LARVA));
+  public static final RegistryObject<ResourceItem> HORN_CORAL_LARVA =
       ITEMS.register(
-          ExNihiloConstants.Items.YELLOW_CORAL_SEED,
-          () -> new ResourceItem(ExNihiloConstants.Items.YELLOW_CORAL_SEED));
+          ExNihiloConstants.Items.HORN_CORAL_LARVA,
+          () -> new ResourceItem(ExNihiloConstants.Items.HORN_CORAL_LARVA));
   public static final RegistryObject<ResourceItem> BEEHIVE_FRAME =
       ITEMS.register(
           ExNihiloConstants.Items.BEEHIVE_FRAME,

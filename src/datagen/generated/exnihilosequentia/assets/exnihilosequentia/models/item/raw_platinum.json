@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/ore/raw/raw_platinum"
+    "layer0": "exnihilosequentia:item/ore/raw/raw_platinum"
   }
 }

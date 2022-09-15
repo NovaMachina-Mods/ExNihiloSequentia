@@ -31,6 +31,6 @@ public class ExNihiloMekanismOreItemGenerator extends AbstractItemGenerator {
         resourceLocation.getPath(),
         new ResourceLocation(ITEM_GENERATED_TAG),
         LAYER_0_TAG,
-        new ResourceLocation(modid, "items/ore/piece/" + resourceLocation.getPath()));
+        new ResourceLocation(modid, "item/ore/piece/" + resourceLocation.getPath()));
   }
 }

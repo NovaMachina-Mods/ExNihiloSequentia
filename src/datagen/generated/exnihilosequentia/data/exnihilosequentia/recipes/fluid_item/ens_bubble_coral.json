@@ -4,7 +4,7 @@
     "fluid": "exnihilosequentia:sea_water"
   },
   "input": {
-    "item": "exnihilosequentia:purple_coral_larvae"
+    "item": "exnihilosequentia:bubble_coral_larva"
   },
   "result": {
     "item": "minecraft:bubble_coral_block"

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:item/ore/piece/tin_pieces"
+    "layer0": "exnihilosequentia:item/fire_coral_larva"
   }
 }

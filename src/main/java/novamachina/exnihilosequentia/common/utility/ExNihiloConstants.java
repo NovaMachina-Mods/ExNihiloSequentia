@@ -179,11 +179,11 @@ public class ExNihiloConstants {
     public static final String MYCELIUM_SPORE = createResourceName("mycelium_spores");
     public static final String BEEHIVE_FRAME = createResourceName("beehive_frame");
     public static final String COOKED_SILKWORM = createResourceName("cooked_silkworm");
-    public static final String BLUE_CORAL_SEED = createResourceName("blue_coral_larvae");
-    public static final String PINK_CORAL_SEED = createResourceName("pink_coral_larvae");
-    public static final String PURPLE_CORAL_SEED = createResourceName("purple_coral_larvae");
-    public static final String RED_CORAL_SEED = createResourceName("red_coral_larvae");
-    public static final String YELLOW_CORAL_SEED = createResourceName("yellow_coral_larvae");
+    public static final String TUBE_CORAL_LARVA = createResourceName("tube_coral_larva");
+    public static final String BRAIN_CORAL_LARVA = createResourceName("brain_coral_larva");
+    public static final String BUBBLE_CORAL_LARVA = createResourceName("bubble_coral_larva");
+    public static final String FIRE_CORAL_LARVA = createResourceName("fire_coral_larva");
+    public static final String HORN_CORAL_LARVA = createResourceName("horn_coral_larva");
     public static final String GRASS_SEED = createSeedName("grass");
     public static final String ACACIA_SEED = createSeedName("acacia");
     public static final String SEED_BAMBOO = createSeedName("bamboo");

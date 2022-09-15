@@ -348,31 +348,31 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createFluidItemRecipes(
         consumer,
         seawater,
-        ExNihiloItems.BLUE_CORAL_SEED.get(),
+        ExNihiloItems.TUBE_CORAL_LARVA.get(),
         Blocks.TUBE_CORAL_BLOCK,
         "tube_coral");
     createFluidItemRecipes(
         consumer,
         seawater,
-        ExNihiloItems.RED_CORAL_SEED.get(),
+        ExNihiloItems.FIRE_CORAL_LARVA.get(),
         Blocks.FIRE_CORAL_BLOCK,
         "fire_coral");
     createFluidItemRecipes(
         consumer,
         seawater,
-        ExNihiloItems.PINK_CORAL_SEED.get(),
+        ExNihiloItems.BRAIN_CORAL_LARVA.get(),
         Blocks.BRAIN_CORAL_BLOCK,
         "brain_coral");
     createFluidItemRecipes(
         consumer,
         seawater,
-        ExNihiloItems.PURPLE_CORAL_SEED.get(),
+        ExNihiloItems.BUBBLE_CORAL_LARVA.get(),
         Blocks.BUBBLE_CORAL_BLOCK,
         "bubble_coral");
     createFluidItemRecipes(
         consumer,
         seawater,
-        ExNihiloItems.YELLOW_CORAL_SEED.get(),
+        ExNihiloItems.HORN_CORAL_LARVA.get(),
         Blocks.HORN_CORAL_BLOCK,
         "horn_coral");
     createFluidItemRecipes(
@@ -1077,31 +1077,31 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .build(consumer, sieveLoc(SILKWORM));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(ItemTags.SAND))
-        .addResult(ExNihiloItems.BLUE_CORAL_SEED.get())
+        .addResult(ExNihiloItems.TUBE_CORAL_LARVA.get())
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_IRON.get().getType(), 0.05F))
         .isWaterlogged()
         .build(consumer, sieveLoc("seed_blue_coral"));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(ItemTags.SAND))
-        .addResult(ExNihiloItems.PURPLE_CORAL_SEED.get())
+        .addResult(ExNihiloItems.BUBBLE_CORAL_LARVA.get())
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_IRON.get().getType(), 0.05F))
         .isWaterlogged()
         .build(consumer, sieveLoc("seed_purple_coral"));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(ItemTags.SAND))
-        .addResult(ExNihiloItems.PINK_CORAL_SEED.get())
+        .addResult(ExNihiloItems.BRAIN_CORAL_LARVA.get())
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_IRON.get().getType(), 0.05F))
         .isWaterlogged()
         .build(consumer, sieveLoc("seed_pink_coral"));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(ItemTags.SAND))
-        .addResult(ExNihiloItems.YELLOW_CORAL_SEED.get())
+        .addResult(ExNihiloItems.HORN_CORAL_LARVA.get())
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_IRON.get().getType(), 0.05F))
         .isWaterlogged()
         .build(consumer, sieveLoc("seed_yellow_coral"));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(ItemTags.SAND))
-        .addResult(ExNihiloItems.RED_CORAL_SEED.get())
+        .addResult(ExNihiloItems.FIRE_CORAL_LARVA.get())
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_IRON.get().getType(), 0.05F))
         .isWaterlogged()
         .build(consumer, sieveLoc("seed_red_coral"));

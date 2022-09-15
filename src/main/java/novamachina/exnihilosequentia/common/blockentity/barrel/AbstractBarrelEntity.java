@@ -24,13 +24,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -91,10 +90,10 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
   @Override
   public <T> LazyOptional<T> getCapability(
       @Nonnull final Capability<T> cap, @Nullable final Direction side) {
-    if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+    if (cap == ForgeCapabilities.ITEM_HANDLER) {
       return inventoryHolder.cast();
     }
-    if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+    if (cap == ForgeCapabilities.FLUID_HANDLER) {
       return tankHolder.cast();
     }
     return super.getCapability(cap, side);
@@ -239,6 +238,7 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
 
   @Override
   public void saveAdditional(@Nonnull final CompoundTag compound) {
+    super.saveAdditional(compound);
     compound.put(INVENTORY_TAG, inventory.serializeNBT());
     compound.put(TANK_TAG, tank.writeToNBT(new CompoundTag()));
     if (mode != null) {
@@ -248,9 +248,7 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
     compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
   }
 
-  @Override
-  public void setRemoved() {
-    super.setRemoved();
+  public void dropInventory() {
     @Nonnull final NonNullList<ItemStack> list = NonNullList.create();
     list.add(inventory.getStackInSlot(0));
     if (level != null) {
@@ -273,8 +271,9 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
     mode.tick(this);
     @Nonnull final AbstractBarrelTileState currentState = new AbstractBarrelTileState(this);
     if (!currentState.equals(lastSyncedState)) {
-      level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
       lastSyncedState = currentState;
+      level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+      this.setChanged();
     }
   }
 

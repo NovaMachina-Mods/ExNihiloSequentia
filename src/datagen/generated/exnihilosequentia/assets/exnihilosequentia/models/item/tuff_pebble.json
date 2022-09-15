@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:items/tuff_pebble"
+    "layer0": "exnihilosequentia:item/tuff_pebble"
   }
 }
