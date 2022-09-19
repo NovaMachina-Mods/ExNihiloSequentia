@@ -94,6 +94,7 @@ public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {
     registerOre(ExNihiloItems.PLATINUM, ExNihiloTags.PLATINUM);
     registerOre(ExNihiloItems.URANIUM, ExNihiloTags.URANIUM);
     registerOre(ExNihiloItems.ZINC, ExNihiloTags.ZINC);
+    tag(ExNihiloTags.NUGGET_COPPER).add(ExNihiloItems.COPPER.getNuggetItem().left().get().get());
   }
 
   private void registerSeeds() {

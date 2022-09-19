@@ -2,7 +2,9 @@ package novamachina.exnihilosequentia.client;
 
 import net.minecraft.data.DataGenerator;
 import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
+import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
+import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Fluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
@@ -77,6 +79,9 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
   private void addItem() {
     // Ores
     // TODO
+    for (Ore ore : ExNihiloItems.ORES) {
+      addOreAutoName(ore);
+    }
     //    for (String key : Ore.getOreMap().keySet()) {
     //      if (Boolean.TRUE.equals(Ore.getOreMap().get(key))) {
     //        addOreAutoName(key);

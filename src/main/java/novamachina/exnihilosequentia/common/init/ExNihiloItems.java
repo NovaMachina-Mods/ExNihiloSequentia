@@ -659,14 +659,14 @@ public class ExNihiloItems {
 
   private ExNihiloItems() {}
 
-  private static RegistryObject<Item> createNugget(String id) {
-    RegistryObject<Item> nugget =
-        ITEMS.register(
-            ExNihiloConstants.Items.COPPER_NUGGET,
-            () -> new Item(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
-    NUGGETS.add(nugget);
-    return nugget;
-  }
+  //  private static RegistryObject<Item> createNugget(String id) {
+  //    RegistryObject<Item> nugget =
+  //        ITEMS.register(
+  //            ExNihiloConstants.Items.COPPER_NUGGET,
+  //            () -> new Item(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
+  //    NUGGETS.add(nugget);
+  //    return nugget;
+  //  }
 
   private static Ore createOre(
       String id, Optional<Item> rawItem, Optional<Item> ingotItem, Optional<Item> nuggetItem) {
