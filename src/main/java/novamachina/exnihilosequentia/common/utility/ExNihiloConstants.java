@@ -102,8 +102,8 @@ public class ExNihiloConstants {
     public static final String NETHERITE_MESH = "netherite_mesh";
     public static final String SHULKER_DOLL = "shulker_doll";
     public static final String STRING_MESH = "string_mesh";
-    public static final String NETHERITE_HAMMER = createHammerName("netherite");
     public static List<String> resourceList = new ArrayList<>();
+    public static final String NETHERITE_HAMMER = createHammerName("netherite");
     public static final String COPPER_NUGGET = createResourceName("copper_nugget");
     public static final String CRIMSON_NYLIUM_SPORE = createResourceName("crimson_nylium_spores");
     public static final String WARPED_NYLIUM_SPORE = createResourceName("warped_nylium_spores");
