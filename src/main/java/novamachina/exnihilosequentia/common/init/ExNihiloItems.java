@@ -136,40 +136,17 @@ public class ExNihiloItems {
       ITEMS.register(ExNihiloConstants.Items.BASALT_PEBBLE, PebbleItem::new);
   public static final RegistryObject<PebbleItem> PEBBLE_BLACKSTONE =
       ITEMS.register(ExNihiloConstants.Items.BLACKSTONE_PEBBLE, PebbleItem::new);
-  //  public static final RegistryObject<PebbleItem> PEBBLE_CALCITE = ITEMS.register(
-  //      ExNihiloConstants.Items.CALCITE_PEBBLE,
-  //      PebbleItem::new);
-  //  public static final RegistryObject<PebbleItem> PEBBLE_DEEPSLATE = ITEMS.register(
-  //      ExNihiloConstants.Items.DEEPSLATE_PEBBLE,
-  //      PebbleItem::new);
   public static final RegistryObject<PebbleItem> PEBBLE_DIORITE =
       ITEMS.register(ExNihiloConstants.Items.DIORITE_PEBBLE, PebbleItem::new);
-  //  public static final RegistryObject<PebbleItem> PEBBLE_DRIPSTONE = ITEMS.register(
-  //      ExNihiloConstants.Items.DRIPSTONE_PEBBLE,
-  //      PebbleItem::new);
-  //  public static final RegistryObject<PebbleItem> PEBBLE_END_STONE = ITEMS.register(
-  //      ExNihiloConstants.Items.END_STONE_PEBBLE,
-  //      PebbleItem::new);
   public static final RegistryObject<PebbleItem> PEBBLE_GRANITE =
       ITEMS.register(ExNihiloConstants.Items.GRANITE_PEBBLE, PebbleItem::new);
-  //  public static final RegistryObject<PebbleItem> PEBBLE_NETHERRACK = ITEMS.register(
-  //      ExNihiloConstants.Items.NETHERRACK_PEBBLE,
-  //      PebbleItem::new);
   public static final RegistryObject<PebbleItem> PEBBLE_STONE =
       ITEMS.register(ExNihiloConstants.Items.STONE_PEBBLE, PebbleItem::new);
-  //  public static final RegistryObject<PebbleItem> PEBBLE_TUFF = ITEMS.register(
-  //      ExNihiloConstants.Items.TUFF_PEBBLE, PebbleItem::new);
   @Nonnull
   public static final RegistryObject<ResourceItem> MYCELIUM_SPORE =
       ITEMS.register(
           ExNihiloConstants.Items.MYCELIUM_SPORE,
           () -> new ResourceItem(ExNihiloConstants.Items.MYCELIUM_SPORE));
-  //  public static final RegistryObject<ResourceItem> CRIMSON_NYLIUM_SPORE = ITEMS
-  //      .register(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
-  //          () -> new ResourceItem(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE));
-  //  public static final RegistryObject<ResourceItem> WARPED_NYLIUM_SPORE = ITEMS
-  //      .register(ExNihiloConstants.Items.WARPED_NYLIUM_SPORE,
-  //          () -> new ResourceItem(ExNihiloConstants.Items.WARPED_NYLIUM_SPORE));
   @Nonnull
   public static final RegistryObject<ResourceItem> GRASS_SEED =
       ITEMS.register(
@@ -380,28 +357,10 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.ANDISITE_CROOK,
           () -> new CrookBaseItem(Tiers.STONE, Config.getCrookAndesiteDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_BASALT = ITEMS.register(
-  //      ExNihiloConstants.Items.BASALT_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookAndesiteDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_BLACKSTONE = ITEMS.register(
-  //      ExNihiloConstants.Items.BLACKSTONE_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookAndesiteDurability()));
   public static final RegistryObject<CrookBaseItem> CROOK_BONE =
       ITEMS.register(
           ExNihiloConstants.Items.BONE_CROOK,
           () -> new CrookBaseItem(Tiers.STONE, Config.getCrookBoneDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_CALCITE = ITEMS.register(
-  //      ExNihiloConstants.Items.CALCITE_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookAndesiteDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_COPPER = ITEMS.register(
-  //      ExNihiloConstants.Items.COPPER_CROOK,
-  //      () -> new CrookBaseItem(Tiers.IRON, Config.getCrookIronDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_CRIMSON_FUNGUS = ITEMS.register(
-  //      ExNihiloConstants.Items.CRIMSON_FUNGUS_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookWoodDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_DEEPSLATE = ITEMS.register(
-  //      ExNihiloConstants.Items.DEEPSLATE_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookStoneDurability()));
   public static final RegistryObject<CrookBaseItem> CROOK_DIAMOND =
       ITEMS.register(
           ExNihiloConstants.Items.DIAMOND_CROOK,
@@ -410,9 +369,6 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.DIORITE_CROOK,
           () -> new CrookBaseItem(Tiers.STONE, Config.getCrookDioriteDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_DRIPSTONE = ITEMS.register(
-  //      ExNihiloConstants.Items.DRIPSTONE_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookDioriteDurability()));
   public static final RegistryObject<CrookBaseItem> CROOK_GOLD =
       ITEMS.register(
           ExNihiloConstants.Items.GOLD_CROOK,
@@ -425,118 +381,35 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.IRON_CROOK,
           () -> new CrookBaseItem(Tiers.IRON, Config.getCrookIronDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_NETHER_BRICK = ITEMS.register(
-  //      ExNihiloConstants.Items.NETHER_BRICK_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookStoneDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_NETHERITE = ITEMS.register(
-  //      ExNihiloConstants.Items.NETHERITE_CROOK,
-  //      () -> new CrookBaseItem(Tiers.NETHERITE, Config.getCrookNetheriteDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_PRISMARINE = ITEMS.register(
-  //      ExNihiloConstants.Items.PRISMARINE_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookStoneDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_RED_NETHER_BRICK = ITEMS.register(
-  //      ExNihiloConstants.Items.RED_NETHER_BRICK_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookStoneDurability()));
   public static final RegistryObject<CrookBaseItem> CROOK_STONE =
       ITEMS.register(
           ExNihiloConstants.Items.STONE_CROOK,
           () -> new CrookBaseItem(Tiers.STONE, Config.getCrookStoneDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_TERRACOTTA = ITEMS.register(
-  //      ExNihiloConstants.Items.TERRACOTTA_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookStoneDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_TUFF = ITEMS.register(
-  //      ExNihiloConstants.Items.TUFF_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookStoneDurability()));
-  //  public static final RegistryObject<CrookBaseItem> CROOK_WARPED_FUNGUS = ITEMS.register(
-  //      ExNihiloConstants.Items.WARPED_FUNGUS_CROOK,
-  //      () -> new CrookBaseItem(Tiers.STONE, Config.getCrookStoneDurability()));
   public static final RegistryObject<CrookBaseItem> CROOK_WOOD =
       ITEMS.register(
           ExNihiloConstants.Items.WOODEN_CROOK,
           () -> new CrookBaseItem(Tiers.WOOD, Config.getCrookWoodDurability()));
 
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_ANDESITE =
-  //      ITEMS.register(ExNihiloConstants.Items.ANDESITE_HAMMER, () -> new
-  // HammerBaseItem(Tiers.STONE,
-  //          Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_BASALT =
-  //      ITEMS.register(ExNihiloConstants.Items.BASALT_HAMMER, () -> new
-  // HammerBaseItem(Tiers.STONE,
-  //          Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_BLACKSTONE =
-  //      ITEMS.register(ExNihiloConstants.Items.BLACKSTONE_HAMMER,
-  //          () -> new HammerBaseItem(Tiers.STONE,
-  //              Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_CALCITE =
-  //      ITEMS.register(ExNihiloConstants.Items.CALCITE_HAMMER, () -> new
-  // HammerBaseItem(Tiers.STONE,
-  //          Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_COPPER =
-  //      ITEMS.register(ExNihiloConstants.Items.COPPER_HAMMER, () -> new HammerBaseItem(Tiers.IRON,
-  //          Config.getHammerIronDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_CRIMSON_FUNGUS =
-  //      ITEMS.register(ExNihiloConstants.Items.CRIMSON_FUNGUS_HAMMER,
-  //          () -> new HammerBaseItem(Tiers.WOOD,
-  //              Config.getHammerWoodDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_DEEPSLATE =
-  //      ITEMS.register(ExNihiloConstants.Items.DEEPSLATE_HAMMER, () -> new
-  // HammerBaseItem(Tiers.STONE,
-  //          Config.getHammerStoneDurability()));
   public static final RegistryObject<HammerBaseItem> HAMMER_DIAMOND =
       ITEMS.register(
           ExNihiloConstants.Items.DIAMOND_HAMMER,
           () -> new HammerBaseItem(Tiers.DIAMOND, Config.getHammerDiamondDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_DIORITE =
-  //      ITEMS.register(ExNihiloConstants.Items.DIORITE_HAMMER, () -> new
-  // HammerBaseItem(Tiers.STONE,
-  //          Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_DRIPSTONE =
-  //      ITEMS.register(ExNihiloConstants.Items.DRIPSTONE_HAMMER, () -> new
-  // HammerBaseItem(Tiers.STONE,
-  //          Config.getHammerStoneDurability()));
   public static final RegistryObject<HammerBaseItem> HAMMER_GOLD =
       ITEMS.register(
           ExNihiloConstants.Items.GOLD_HAMMER,
           () -> new HammerBaseItem(Tiers.GOLD, Config.getHammerGoldDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_GRANITE =
-  //      ITEMS.register(ExNihiloConstants.Items.GRANITE_HAMMER, () -> new
-  // HammerBaseItem(Tiers.STONE,
-  //          Config.getHammerStoneDurability()));
   public static final RegistryObject<HammerBaseItem> HAMMER_IRON =
       ITEMS.register(
           ExNihiloConstants.Items.IRON_HAMMER,
           () -> new HammerBaseItem(Tiers.IRON, Config.getHammerIronDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_NETHER_BRICK =
-  //      ITEMS.register(ExNihiloConstants.Items.NETHER_BRICK_HAMMER,
-  //          () -> new HammerBaseItem(Tiers.STONE,
-  //              Config.getHammerStoneDurability()));
   public static final RegistryObject<HammerBaseItem> HAMMER_NETHERITE =
       ITEMS.register(
           ExNihiloConstants.Items.NETHERITE_HAMMER,
           () -> new HammerBaseItem(Tiers.NETHERITE, Config.getHammerNetheriteDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_PRISMARINE =
-  //      ITEMS.register(ExNihiloConstants.Items.PRISMARINE_HAMMER,
-  //          () -> new HammerBaseItem(Tiers.STONE,
-  //              Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_RED_NETHER_BRICK =
-  //      ITEMS.register(ExNihiloConstants.Items.RED_NETHER_BRICK_HAMMER,
-  //          () -> new HammerBaseItem(Tiers.STONE,
-  //              Config.getHammerStoneDurability()));
   public static final RegistryObject<HammerBaseItem> HAMMER_STONE =
       ITEMS.register(
           ExNihiloConstants.Items.STONE_HAMMER,
           () -> new HammerBaseItem(Tiers.STONE, Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_TERRACOTTA =
-  //      ITEMS.register(ExNihiloConstants.Items.TERRACOTTA_HAMMER,
-  //          () -> new HammerBaseItem(Tiers.STONE,
-  //              Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_TUFF =
-  //      ITEMS.register(ExNihiloConstants.Items.TUFF_HAMMER, () -> new HammerBaseItem(Tiers.STONE,
-  //          Config.getHammerStoneDurability()));
-  //  public static final RegistryObject<HammerBaseItem> HAMMER_WARPED_FUNGUS =
-  //      ITEMS.register(ExNihiloConstants.Items.WARPED_FUNGUS_HAMMER,
-  //          () -> new HammerBaseItem(Tiers.WOOD,
-  //              Config.getHammerWoodDurability()));
   public static final RegistryObject<HammerBaseItem> HAMMER_WOOD =
       ITEMS.register(
           ExNihiloConstants.Items.WOODEN_HAMMER,
