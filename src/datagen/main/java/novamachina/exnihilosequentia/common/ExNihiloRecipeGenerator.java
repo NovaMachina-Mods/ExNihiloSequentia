@@ -852,6 +852,42 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .build(consumer, sieveLoc("pebble_blackstone"));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(Blocks.DIRT))
+        .addResult(ExNihiloItems.PEBBLE_CALCITE.get())
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.5F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.1F))
+        .build(consumer, sieveLoc("pebble_calcite"));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(Blocks.DIRT))
+        .addResult(ExNihiloItems.PEBBLE_DEEPSLATE.get())
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.5F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.1F))
+        .build(consumer, sieveLoc("pebble_deepslate"));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(Blocks.DIRT))
+        .addResult(ExNihiloItems.PEBBLE_DRIPSTONE.get())
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.5F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.1F))
+        .build(consumer, sieveLoc("pebble_dripstone"));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(ExNihiloBlocks.CRUSHED_END_STONE.get()))
+        .addResult(ExNihiloItems.PEBBLE_END_STONE.get())
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.5F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.1F))
+        .build(consumer, sieveLoc("pebble_end_stone"));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(ExNihiloBlocks.CRUSHED_NETHERRACK.get()))
+        .addResult(ExNihiloItems.PEBBLE_NETHERRACK.get())
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.5F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.1F))
+        .build(consumer, sieveLoc("pebble_netherrack"));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(Blocks.DIRT))
+        .addResult(ExNihiloItems.PEBBLE_TUFF.get())
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.5F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.1F))
+        .build(consumer, sieveLoc("pebble_tuff"));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(Blocks.DIRT))
         .addResult(Items.WHEAT_SEEDS)
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.7F))
         .build(consumer, sieveLoc("seed_wheat"));

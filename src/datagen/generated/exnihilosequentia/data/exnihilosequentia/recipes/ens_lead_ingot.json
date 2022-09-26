@@ -1,17 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "exnihilosequentia",
-  "key": {
-    "x": {
-      "item": "exnihilosequentia:lead_nugget"
-    }
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "exnihilosequentia:raw_lead"
   },
-  "pattern": [
-    "xxx",
-    "xxx",
-    "xxx"
-  ],
-  "result": {
-    "item": "exnihilosequentia:lead_ingot"
-  }
+  "result": "exnihilosequentia:lead_ingot"
 }
