@@ -1042,7 +1042,7 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
         apiKey = System.getenv("CURSEFORGE_KEY") ?: project.findProperty("curseforgeKey")
 
         options {
-            debug = true
+//            debug = true
         }
 
         def resolvedChangelog = null
