@@ -116,18 +116,6 @@ pipeline {
                         }
                     }
                 }
-                stage('API') {
-                    when {
-                        expression {
-                            env.DEPLOY_API == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-//                             sh './gradlew publishApiPublicationToMavenRepository'
-                        }
-                    }
-                }
                 stage('Main') {
                     when {
                         expression {
@@ -136,7 +124,7 @@ pipeline {
                     }
                     steps {
                         withGradle {
-//                             sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
+                            sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
                         }
                     }
                 }
