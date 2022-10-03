@@ -3,10 +3,10 @@ package novamachina.exnihilosequentia.common.blockentity.crucible;
 import javax.annotation.Nonnull;
 
 public enum CrucibleTypeEnum {
-  WOOD("wood", 0), FIRED("fired", 1);
+  WOOD("wood", 0),
+  FIRED("fired", 1);
 
-  @Nonnull
-  private final String name;
+  @Nonnull private final String name;
   private final int level;
 
   CrucibleTypeEnum(@Nonnull final String name, final int level) {
@@ -20,7 +20,7 @@ public enum CrucibleTypeEnum {
         return type;
       }
     }
-    //TODO this one needs to be changed due to crash with mekanism pipes and fired crucibles
+    // TODO this one needs to be changed due to crash with mekanism pipes and fired crucibles
     return null;
   }
 
