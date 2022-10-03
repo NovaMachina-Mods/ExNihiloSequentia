@@ -1,0 +1,19 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "exnihiloae:crushed_sky_stone"
+  },
+  "result": {
+    "item": "ae2:certus_quartz_crystal"
+  },
+  "rolls": [
+    {
+      "chance": 0.7,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.8,
+      "mesh": "diamond"
+    }
+  ]
+}

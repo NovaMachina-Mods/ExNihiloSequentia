@@ -105,14 +105,14 @@ pipeline {
             }
             parallel {
                 stage('AE') {
-                    when {
-                        expression {
-                            env.DEPLOY_AE == 'true'
-                        }
-                    }
+//                     when {
+//                         expression {
+//                             env.DEPLOY_AE == 'true'
+//                         }
+//                     }
                     steps {
                         withGradle {
-//                             sh './gradlew curseforge428204 publishAePublicationToMavenRepository'
+                            sh './gradlew curseforge428204 publishAePublicationToMavenRepository'
                         }
                     }
                 }
@@ -129,14 +129,14 @@ pipeline {
                     }
                 }
                 stage('Mekanism') {
-                    when {
-                        expression {
-                            env.DEPLOY_MEKANISM == 'true'
-                        }
-                    }
+//                     when {
+//                         expression {
+//                             env.DEPLOY_MEKANISM == 'true'
+//                         }
+//                     }
                     steps {
                         withGradle {
-//                             sh './gradlew curseforge430787 publishMekanismPublicationToMavenRepository'
+                            sh './gradlew curseforge430787 publishMekanismPublicationToMavenRepository'
                         }
                     }
                 }
