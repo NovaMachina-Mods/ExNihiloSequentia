@@ -62,10 +62,6 @@ pipeline {
                                  git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/generated/exnihiloae',
                         returnStatus: true
                     ) == 0
-                    env.DEPLOY_API = sh (
-                        script: 'git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/api',
-                        returnStatus: true
-                    ) == 0
                     env.DEPLOY_MAIN = sh (
                         script: 'git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/main || \
                                  git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/main || \
@@ -91,7 +87,6 @@ pipeline {
                         returnStatus: true
                     ) == 0
                     echo "Should deploy AE: ${DEPLOY_AE}"
-                    echo "Should deploy API: ${DEPLOY_API}"
                     echo "Should deploy MAIN: ${DEPLOY_MAIN}"
                     echo "Should deploy MEKANSIM: ${DEPLOY_MEKANISM}"
                     echo "Should deploy THERMAL: ${DEPLOY_THERMAL}"
@@ -116,24 +111,12 @@ pipeline {
                         }
                     }
                 }
-                stage('API') {
-                    when {
-                        expression {
-                            env.DEPLOY_API == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew publishApiPublicationToMavenRepository'
-                        }
-                    }
-                }
                 stage('Main') {
-                    when {
-                        expression {
-                            env.DEPLOY_MAIN == 'true'
-                        }
-                    }
+//                     when {
+//                         expression {
+//                             env.DEPLOY_MAIN == 'true'
+//                         }
+//                     }
                     steps {
                         withGradle {
                             sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
