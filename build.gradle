@@ -31,7 +31,7 @@ sonarqube {
 if(!System.getenv('CI')) {
     apply plugin: 'com.diffplug.spotless'
     spotless {
-        ratchetFrom 'origin/1.19'
+        //ratchetFrom 'origin/1.19'
         format 'misc', {
             target '*.gradle', '*.md', '.gitignore'
 
