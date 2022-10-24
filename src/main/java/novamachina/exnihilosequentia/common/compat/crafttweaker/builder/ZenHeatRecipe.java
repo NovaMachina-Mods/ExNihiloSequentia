@@ -35,10 +35,7 @@ public class ZenHeatRecipe {
 
     /**
      * Sets the amount of heat that the given block should generate.
-     *
      * @param amount The amount of heat.
-     *
-     * @docParam amount 20
      */
 
  @ZenCodeType.Method
@@ -50,10 +47,7 @@ public class ZenHeatRecipe {
 
     /**
      * Sets the block that should be modified to generate heat.
-     *
      * @param input Sets the block.
-     *
-     * @docParam input <item:minecraft:bedrock>
      */
 
  @ZenCodeType.Method
@@ -65,10 +59,7 @@ public class ZenHeatRecipe {
 
     /**
      * (Optional) Sets the state that should be used to generate heat.
-     *
      * @param properties Sets special properties.
-     *
-     *
      */
 
  @ZenCodeType.Method

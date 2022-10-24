@@ -31,7 +31,7 @@ sonarqube {
 if(!System.getenv('CI')) {
     apply plugin: 'com.diffplug.spotless'
     spotless {
-        //ratchetFrom 'origin/1.19'
+        ratchetFrom 'origin/1.19'
         format 'misc', {
             target '*.gradle', '*.md', '.gitignore'
 
@@ -511,6 +511,9 @@ dependencies {
 
     if(project.hasProperty('crafttweaker_version')) {
         implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+        annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10'
+        annotationProcessor "net.minecraftforge:forge:${minecraft_version}-${forge_major}.${forge_minor}.${forge_patch}"
+        annotationProcessor "com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}"
     }
 
     if (project.hasProperty('kubejs_version') && project.hasProperty('rhino_version') && project.hasProperty('architectury_version')) {
@@ -726,6 +729,7 @@ tasks.withType(JavaCompile).configureEach({
 })
 
 compileJava {
+    options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
     options.getGeneratedSourceOutputDirectory().set(file("src/datagen/main/resources/"))
 }
 

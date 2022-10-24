@@ -7,11 +7,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
-public class FluidTransformRecipe extends SerializableRecipe {
+public class FluidTransformRecipe extends SingleItemSerializableRecipe {
 
   @Nonnull private Ingredient catalyst;
   @Nonnull private FluidStack fluidInTank;
@@ -22,7 +22,7 @@ public class FluidTransformRecipe extends SerializableRecipe {
       @Nonnull final FluidStack fluidInTank,
       @Nonnull final Ingredient catalyst,
       @Nonnull final FluidStack result) {
-    super(null, ExNihiloRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE.get(), id);
+    super(null, catalyst, ExNihiloRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE.get(), id);
     this.fluidInTank = fluidInTank;
     this.catalyst = catalyst;
     this.result = result;

@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.crafting.fluiditem;
 
-import java.util.Arrays;
-import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
@@ -11,14 +9,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
-public class FluidItemRecipe extends SerializableRecipe {
+public class FluidItemRecipe extends SingleItemSerializableRecipe {
 
   @Nonnull private FluidStack fluid;
-  @Nonnull private Ingredient input;
   @Nonnull private ItemStack output;
 
   public FluidItemRecipe(
@@ -26,29 +23,14 @@ public class FluidItemRecipe extends SerializableRecipe {
       @Nonnull final FluidStack fluid,
       @Nonnull final Ingredient input,
       @Nonnull final ItemStack output) {
-    super(output, ExNihiloRecipeTypes.FLUID_ITEM_RECIPE_TYPE.get(), id);
+    super(output, input, ExNihiloRecipeTypes.FLUID_ITEM_RECIPE_TYPE.get(), id);
     this.fluid = fluid;
-    this.input = input;
     this.output = output;
   }
 
   @Nonnull
   public FluidStack getFluidInBarrel() {
     return fluid;
-  }
-
-  @Nonnull
-  public Ingredient getInput() {
-    return input;
-  }
-
-  public void setInput(@Nonnull final Ingredient input) {
-    this.input = input;
-  }
-
-  @Nonnull
-  public List<ItemStack> getInputs() {
-    return Arrays.asList(input.getItems());
   }
 
   @Override
