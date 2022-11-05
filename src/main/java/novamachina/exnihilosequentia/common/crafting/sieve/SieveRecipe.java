@@ -1,20 +1,20 @@
 package novamachina.exnihilosequentia.common.crafting.sieve;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.crafting.SingleItemInputRecipe;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
-public class SieveRecipe extends SerializableRecipe {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SieveRecipe extends SingleItemInputRecipe {
 
   public static RecipeType<SieveRecipe> RECIPE_TYPE;
   @Nullable
@@ -25,16 +25,13 @@ public class SieveRecipe extends SerializableRecipe {
   private final List<MeshWithChance> rolls;
   @Nonnull
   private ItemStack drop;
-  @Nonnull
-  private Ingredient input;
   private boolean isWaterlogged;
 
   public SieveRecipe(@Nonnull final ResourceLocation id, @Nonnull final Ingredient input,
       @Nonnull final ItemStack drop, @Nonnull final List<MeshWithChance> rolls,
       boolean isWaterlogged) {
-    super(drop, RECIPE_TYPE, id);
+    super(drop, input, RECIPE_TYPE, id);
     this.recipeId = id;
-    this.input = input;
     this.drop = drop;
     this.rolls = rolls;
     this.isWaterlogged = isWaterlogged;
@@ -83,15 +80,6 @@ public class SieveRecipe extends SerializableRecipe {
 
   public void setDrop(@Nonnull final ItemStack drop) {
     this.drop = drop;
-  }
-
-  @Nonnull
-  public Ingredient getInput() {
-    return input;
-  }
-
-  public void setInput(@Nonnull final Ingredient input) {
-    this.input = input;
   }
 
   @Nonnull
