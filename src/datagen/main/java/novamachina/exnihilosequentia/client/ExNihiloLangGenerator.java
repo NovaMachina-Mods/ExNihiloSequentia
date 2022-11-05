@@ -4,6 +4,7 @@ import net.minecraft.data.DataGenerator;
 import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Fluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
@@ -64,6 +65,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
     add(Tooltips.SHULKER, "Add to a barrel of witch water to spawn a Shulker");
     add(ModIds.EX_NIHILO_SEQUENTIA + ".subtitle.pebbleThrow", "Pebble flies");
     add("throwing.pebble", "Flying Pebble");
+    add("stat." + ModIds.EX_NIHILO_SEQUENTIA + ".sieved", "Times sieved");
   }
 
   private void addItem() {
