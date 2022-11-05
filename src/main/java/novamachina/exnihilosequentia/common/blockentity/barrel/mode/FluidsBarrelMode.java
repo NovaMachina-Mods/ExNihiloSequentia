@@ -10,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -49,7 +48,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         return;
       }
       @Nullable final Level world = barrelTile.getLevel();
-      if (world != null) {
+      if (world != null && checkFluidAmount(barrelTile)) {
         @Nonnull final BlockPos blockPosBelow = barrelTile.getBlockPos().offset(0, -1, 0);
         @Nonnull final Block blockBelow = world.getBlockState(blockPosBelow).getBlock();
         fluidTransform(barrelTile, blockBelow);
@@ -62,14 +61,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn) {
-    if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
-      return false;
-    }
 
     @Nonnull final Item item = player.getItemInHand(handIn).getItem();
 
-    if (item instanceof DollItem) {
-      @Nonnull final DollItem doll = (DollItem) item;
+    if (item instanceof @Nonnull final DollItem doll) {
       @Nullable final Fluid barrelFluid = barrelTile.getFluid();
       if (barrelFluid != null && barrelFluid.isSame(doll.getSpawnFluid())) {
         barrelTile.setMode(ExNihiloConstants.BarrelModes.MOB);
@@ -95,10 +90,6 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
   }
 
   private boolean fluidOnTop(AbstractBarrelEntity barrelTile) {
-    if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
-      return false;
-    }
-
     @Nullable final Level world = barrelTile.getLevel();
     if (world == null) {
       return false;
@@ -156,17 +147,18 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       return InteractionResult.SUCCESS;
     }
 
-    if (fluidBlockTransform(barrelTile, player, handIn)) {
-      return InteractionResult.SUCCESS;
+    if (checkFluidAmount(barrelTile)) {
+      if (fluidBlockTransform(barrelTile, player, handIn)) {
+        return InteractionResult.SUCCESS;
+      }
+
+      @Nonnull final ItemLike catalyst = player.getItemInHand(handIn).getItem();
+      if (fluidTransform(barrelTile, catalyst)) {
+        player.getItemInHand(handIn).shrink(1);
+      }
+
+      doMobSpawn(barrelTile, player, handIn);
     }
-
-    @Nonnull final ItemLike catalyst = player.getItemInHand(handIn).getItem();
-    if (fluidTransform(barrelTile, catalyst)) {
-      player.getItemInHand(handIn).shrink(1);
-    }
-
-    doMobSpawn(barrelTile, player, handIn);
-
     return InteractionResult.SUCCESS;
   }
 
@@ -174,9 +166,6 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn) {
-    if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
-      return false;
-    }
     @Nonnull final Fluid fluid = barrelTile.getTank().getFluid().getFluid();
     @Nonnull final Item input = player.getItemInHand(handIn).getItem();
     if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
@@ -192,6 +181,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       return true;
     }
     return false;
+  }
+
+  private boolean checkFluidAmount(AbstractBarrelEntity barrelEntity) {
+    return barrelEntity.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT;
   }
 
   @Override
@@ -258,7 +251,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemStack stack,
       final boolean simulate) {
-    if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
+    if (checkFluidAmount(barrelTile)) {
       return stack.copy();
     }
     @Nonnull final ItemStack returnStack = stack.copy();
@@ -279,8 +272,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       return returnStack;
     }
 
-    if (input instanceof DollItem) {
-      @Nonnull final DollItem doll = (DollItem) input;
+    if (input instanceof @Nonnull final DollItem doll) {
       @Nullable final Fluid barrelFluid = barrelTile.getFluid();
       if (barrelFluid != null && barrelFluid.isSame(doll.getSpawnFluid())) {
         if (!simulate) {
