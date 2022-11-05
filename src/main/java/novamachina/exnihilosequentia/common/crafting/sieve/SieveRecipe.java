@@ -8,17 +8,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 
-public class SieveRecipe extends SerializableRecipe {
+public class SieveRecipe extends SingleItemSerializableRecipe {
 
   @Nonnull private final ResourceLocation recipeId;
   @Nonnull private final List<MeshWithChance> rolls;
   @Nonnull private ItemStack drop;
-  @Nonnull private Ingredient input;
   private boolean isWaterlogged;
 
   public SieveRecipe(
@@ -27,9 +26,8 @@ public class SieveRecipe extends SerializableRecipe {
       @Nonnull final ItemStack drop,
       @Nonnull final List<MeshWithChance> rolls,
       boolean isWaterlogged) {
-    super(drop, ExNihiloRecipeTypes.SIEVE_RECIPE_TYPE.get(), id);
+    super(drop, input, ExNihiloRecipeTypes.SIEVE_RECIPE_TYPE.get(), id);
     this.recipeId = id;
-    this.input = input;
     this.drop = drop;
     this.rolls = rolls;
     this.isWaterlogged = isWaterlogged;
@@ -68,15 +66,6 @@ public class SieveRecipe extends SerializableRecipe {
 
   public void setDrop(@Nonnull final ItemStack drop) {
     this.drop = drop;
-  }
-
-  @Nonnull
-  public Ingredient getInput() {
-    return input;
-  }
-
-  public void setInput(@Nonnull final Ingredient input) {
-    this.input = input;
   }
 
   @Nonnull
