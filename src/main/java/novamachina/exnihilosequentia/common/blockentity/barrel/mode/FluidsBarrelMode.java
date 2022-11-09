@@ -62,10 +62,12 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
   private boolean doMobSpawn(@Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn) {
+    if (checkFluidAmount(barrelTile)) {
+      return false;
+    }
     @Nonnull final Item item = player.getItemInHand(handIn).getItem();
 
-    if (item instanceof DollItem) {
-      @Nonnull final DollItem doll = (DollItem) item;
+    if (item instanceof @Nonnull final DollItem doll) {
       @Nullable final Fluid barrelFluid = barrelTile.getFluid();
       if (barrelFluid != null && barrelFluid.isSame(doll.getSpawnFluid())) {
         barrelTile.setMode(ExNihiloConstants.BarrelModes.MOB);
@@ -95,7 +97,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   private boolean fluidOnTop(AbstractBarrelEntity barrelTile) {
     @Nullable final Level world = barrelTile.getLevel();
-    if (world == null) {
+    if (world == null || checkFluidAmount(barrelTile)) {
       return false;
     }
 
@@ -146,18 +148,16 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       return InteractionResult.SUCCESS;
     }
 
-    if (checkFluidAmount(barrelTile)) {
-      if (fluidBlockTransform(barrelTile, player, handIn)) {
-        return InteractionResult.SUCCESS;
-      }
-
-      @Nonnull final ItemLike catalyst = player.getItemInHand(handIn).getItem();
-      if (fluidTransform(barrelTile, catalyst)) {
-        player.getItemInHand(handIn).shrink(1);
-      }
-
-      doMobSpawn(barrelTile, player, handIn);
+    if (fluidBlockTransform(barrelTile, player, handIn)) {
+      return InteractionResult.SUCCESS;
     }
+
+    @Nonnull final ItemLike catalyst = player.getItemInHand(handIn).getItem();
+    if (fluidTransform(barrelTile, catalyst)) {
+      player.getItemInHand(handIn).shrink(1);
+    }
+
+    doMobSpawn(barrelTile, player, handIn);
 
     return InteractionResult.SUCCESS;
   }
