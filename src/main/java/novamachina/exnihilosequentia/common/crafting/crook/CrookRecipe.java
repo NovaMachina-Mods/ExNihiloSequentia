@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.crafting.crook;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -10,13 +9,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
 import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
 
-public class CrookRecipe extends SerializableRecipe {
+public class CrookRecipe extends SingleItemSerializableRecipe {
   @Nonnull private final List<ItemStackWithChance> output;
-  @Nonnull private Ingredient input;
 
   public CrookRecipe(
       @Nonnull final ResourceLocation id,
@@ -24,28 +22,14 @@ public class CrookRecipe extends SerializableRecipe {
       @Nonnull final List<ItemStackWithChance> output) {
     super(
         output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack(),
+        input,
         ExNihiloRecipeTypes.CROOK_RECIPE_TYPE.get(),
         id);
-    this.input = input;
     this.output = output;
   }
 
   public void addOutput(@Nonnull final ItemStack item, final float chance) {
     output.add(new ItemStackWithChance(item, chance));
-  }
-
-  @Nonnull
-  public Ingredient getInput() {
-    return input;
-  }
-
-  public void setInput(@Nonnull final Ingredient input) {
-    this.input = input;
-  }
-
-  @Nonnull
-  public List<ItemStack> getInputs() {
-    return Arrays.asList(input.getItems());
   }
 
   @Nonnull
