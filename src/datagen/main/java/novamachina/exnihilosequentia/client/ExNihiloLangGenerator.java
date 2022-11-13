@@ -65,6 +65,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
     add(Tooltips.SHULKER, "Add to a barrel of witch water to spawn a Shulker");
     add(ModIds.EX_NIHILO_SEQUENTIA + ".subtitle.pebbleThrow", "Pebble flies");
     add("throwing.pebble", "Flying Pebble");
+    add("stat." + ModIds.EX_NIHILO_SEQUENTIA + ".sieved", "Times Sieved");
 
     addJadeEntry("barrel");
     addJadeEntry("crucible");
