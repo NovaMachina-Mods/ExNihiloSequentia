@@ -62,14 +62,12 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
   private boolean doMobSpawn(@Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn) {
-    if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
+    if (checkFluidAmount(barrelTile)) {
       return false;
     }
-
     @Nonnull final Item item = player.getItemInHand(handIn).getItem();
 
-    if (item instanceof DollItem) {
-      @Nonnull final DollItem doll = (DollItem) item;
+    if (item instanceof @Nonnull final DollItem doll) {
       @Nullable final Fluid barrelFluid = barrelTile.getFluid();
       if (barrelFluid != null && barrelFluid.isSame(doll.getSpawnFluid())) {
         barrelTile.setMode(ExNihiloConstants.BarrelModes.MOB);
@@ -84,6 +82,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   private boolean fluidTransform(@Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemLike catalyst) {
+    if (checkFluidAmount(barrelTile)) {
+      return false;
+    }
     @Nullable final Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
     if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, catalyst)) {
@@ -95,12 +96,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
   }
 
   private boolean fluidOnTop(AbstractBarrelEntity barrelTile) {
-    if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
-      return false;
-    }
-
     @Nullable final Level world = barrelTile.getLevel();
-    if (world == null) {
+    if (world == null || checkFluidAmount(barrelTile)) {
       return false;
     }
 
@@ -167,9 +164,6 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   private boolean fluidBlockTransform(@Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final Player player, @Nonnull final InteractionHand handIn) {
-    if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
-      return false;
-    }
     @Nonnull final Fluid fluid = barrelTile.getTank().getFluid().getFluid();
     @Nonnull final Item input = player.getItemInHand(handIn).getItem();
     if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
@@ -184,6 +178,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       return true;
     }
     return false;
+  }
+
+  private boolean checkFluidAmount(AbstractBarrelEntity barrelEntity) {
+    return barrelEntity.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT;
   }
 
   @Override
@@ -227,8 +225,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     if (barrelTile.getFluid() == null) {
       key = Fluids.EMPTY.defaultFluidState().createLegacyBlock().getBlock().getDescriptionId();
     } else {
-      key = barrelTile.getFluid().defaultFluidState().createLegacyBlock().getBlock()
-          .getDescriptionId();
+      key = barrelTile.getFluid().getAttributes().getTranslationKey();
     }
 
     info.add(new TranslatableComponent("waila.barrel.fluidAmount", new TranslatableComponent(key),
@@ -242,7 +239,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
   public ItemStack handleInsert(@Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemStack stack,
       final boolean simulate) {
-    if (barrelTile.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT) {
+    if (checkFluidAmount(barrelTile)) {
       return stack.copy();
     }
     @Nonnull final ItemStack returnStack = stack.copy();

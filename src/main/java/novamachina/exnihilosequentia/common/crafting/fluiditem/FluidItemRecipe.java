@@ -1,9 +1,5 @@
 package novamachina.exnihilosequentia.common.crafting.fluiditem;
 
-import java.util.Arrays;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -13,10 +9,12 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.common.crafting.SingleItemInputRecipe;
 
-public class FluidItemRecipe extends SerializableRecipe {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class FluidItemRecipe extends SingleItemInputRecipe {
 
   public static RecipeType<FluidItemRecipe> RECIPE_TYPE;
   @Nullable
@@ -24,15 +22,12 @@ public class FluidItemRecipe extends SerializableRecipe {
   @Nonnull
   private FluidStack fluid;
   @Nonnull
-  private Ingredient input;
-  @Nonnull
   private ItemStack output;
 
   public FluidItemRecipe(@Nonnull final ResourceLocation id, @Nonnull final FluidStack fluid,
       @Nonnull final Ingredient input, @Nonnull final ItemStack output) {
-    super(output, RECIPE_TYPE, id);
+    super(output, input, RECIPE_TYPE, id);
     this.fluid = fluid;
-    this.input = input;
     this.output = output;
   }
 
@@ -49,20 +44,6 @@ public class FluidItemRecipe extends SerializableRecipe {
   @Nonnull
   public FluidStack getFluidInBarrel() {
     return fluid;
-  }
-
-  @Nonnull
-  public Ingredient getInput() {
-    return input;
-  }
-
-  public void setInput(@Nonnull final Ingredient input) {
-    this.input = input;
-  }
-
-  @Nonnull
-  public List<ItemStack> getInputs() {
-    return Arrays.asList(input.getItems());
   }
 
   @Override
