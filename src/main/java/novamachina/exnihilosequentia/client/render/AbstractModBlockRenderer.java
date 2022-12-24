@@ -3,7 +3,6 @@ package novamachina.exnihilosequentia.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.logging.LogUtils;
-import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -21,6 +20,8 @@ import novamachina.exnihilosequentia.common.blockentity.IFluidContainer;
 import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public abstract class AbstractModBlockRenderer<T extends BlockEntity>
     implements BlockEntityRenderer<T> {
@@ -47,23 +48,42 @@ public abstract class AbstractModBlockRenderer<T extends BlockEntity>
   }
 
   protected void add(
-      @Nonnull final VertexConsumer renderer,
-      @Nonnull final PoseStack stack,
-      @Nonnull final VertexLocation vertexLocation,
-      @Nonnull final UVLocation uvLocation,
-      @Nonnull final Color color,
-      final int combinedLight) {
+          @Nonnull final VertexConsumer renderer,
+          @Nonnull final PoseStack stack,
+          @Nonnull final VertexLocation vertexLocation,
+          @Nonnull final UVLocation uvLocation,
+          @Nonnull final Color color,
+          final int combinedLight) {
     renderer
-        .vertex(
-            stack.last().pose(),
-            vertexLocation.getX(),
-            vertexLocation.getY(),
-            vertexLocation.getZ())
-        .color(color.r, color.g, color.b, color.a)
-        .uv(uvLocation.getU(), uvLocation.getV())
-        .uv2(combinedLight)
-        .normal(1, 0, 0)
-        .endVertex();
+            .vertex(
+                    stack.last().pose(),
+                    vertexLocation.getX(),
+                    vertexLocation.getY(),
+                    vertexLocation.getZ())
+            .color(color.r, color.g, color.b, color.a)
+            .uv(uvLocation.getU(), uvLocation.getV())
+            .uv2(combinedLight)
+            .normal(1, 0, 0)
+            .endVertex();
+  }
+
+  protected void add(
+          @Nonnull final VertexConsumer renderer,
+          @Nonnull final PoseStack stack,
+          @Nonnull final VertexLocation vertexLocation,
+          @Nonnull final UVLocation uvLocation,
+          final int combinedLight) {
+    renderer
+            .vertex(
+                    stack.last().pose(),
+                    vertexLocation.getX(),
+                    vertexLocation.getY(),
+                    vertexLocation.getZ())
+            .color(255, 255, 255, 255)
+            .uv(uvLocation.getU(), uvLocation.getV())
+            .uv2(combinedLight)
+            .normal(1, 0, 0)
+            .endVertex();
   }
 
   @Nonnull

@@ -5,6 +5,7 @@ import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
@@ -53,7 +54,7 @@ public class SieveRender extends AbstractModBlockRenderer<SieveEntity> {
           state,
           matrixStack,
           buffer,
-          combinedLight,
+          LightTexture.FULL_BLOCK,
           combinedOverlay,
           ModelData.EMPTY,
           RenderType.cutoutMipped());

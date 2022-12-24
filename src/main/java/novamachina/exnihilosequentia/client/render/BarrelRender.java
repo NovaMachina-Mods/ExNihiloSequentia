@@ -6,13 +6,19 @@ import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.network.protocol.game.ClientboundLightUpdatePacketData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
@@ -60,7 +66,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
         tileEntity,
         matrixStack,
         buffer,
-        combinedLightIn,
+            (LightTexture.FULL_BRIGHT*3)/4,
         fluidTexture,
         fluidColor,
         new UVLocation(0.0625f, 0.9375f));
@@ -77,6 +83,11 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
 
       // Subtract 0.005 to prevent texture fighting
       final float fillAmount = 1.0f - 0.005f;
+      int light = combinedLightIn;
+      if (combinedLightIn == 0) {
+        //TODO needs check with current brightness of block, now set to full_block
+        light = LightTexture.FULL_BLOCK;
+      }
 
       matrixStack.pushPose();
       matrixStack.translate(.5, .5, .5);
@@ -87,29 +98,25 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
           matrixStack,
           new VertexLocation(0.0625f, fillAmount, 0.9375f),
           new UVLocation(sprite.getU0(), sprite.getV1()),
-          Color.WHITE,
-          combinedLightIn);
+              light);
       add(
           builder,
           matrixStack,
           new VertexLocation(0.9375f, fillAmount, 0.9375f),
           new UVLocation(sprite.getU1(), sprite.getV1()),
-          Color.WHITE,
-          combinedLightIn);
+              light);
       add(
           builder,
           matrixStack,
           new VertexLocation(0.9375f, fillAmount, 0.0625f),
           new UVLocation(sprite.getU1(), sprite.getV0()),
-          Color.WHITE,
-          combinedLightIn);
+              light);
       add(
           builder,
           matrixStack,
           new VertexLocation(0.0625f, fillAmount, 0.0625f),
           new UVLocation(sprite.getU0(), sprite.getV0()),
-          Color.WHITE,
-          combinedLightIn);
+              light);
 
       matrixStack.popPose();
     }
@@ -141,28 +148,28 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
             new VertexLocation(0.0625f, 0.25f + fillAmount, 0.9375f),
             new UVLocation(sprite.getU0(), sprite.getV1()),
             color,
-            combinedLightIn);
+                LightTexture.FULL_BRIGHT);
         add(
             builder,
             matrixStack,
             new VertexLocation(0.9375f, 0.25f + fillAmount, 0.9375f),
             new UVLocation(sprite.getU1(), sprite.getV1()),
             color,
-            combinedLightIn);
+                LightTexture.FULL_BRIGHT);
         add(
             builder,
             matrixStack,
             new VertexLocation(0.9375f, 0.25f + fillAmount, 0.0625f),
             new UVLocation(sprite.getU1(), sprite.getV0()),
             color,
-            combinedLightIn);
+                LightTexture.FULL_BRIGHT);
         add(
             builder,
             matrixStack,
             new VertexLocation(0.0625f, 0.25f + fillAmount, 0.0625f),
             new UVLocation(sprite.getU0(), sprite.getV0()),
             color,
-            combinedLightIn);
+                LightTexture.FULL_BRIGHT);
       }
 
       matrixStack.popPose();

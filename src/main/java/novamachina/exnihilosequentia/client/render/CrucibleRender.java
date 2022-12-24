@@ -52,7 +52,6 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
         fluid != null
             ? new Color(IClientFluidTypeExtensions.of(fluid).getTintColor())
             : Color.INVALID_COLOR;
-    @Nonnull final Color blockColor = getBlockColor(solidTexture, tileEntity);
     renderFluid(
         tileEntity,
         matrixStack,
@@ -85,42 +84,27 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
           matrixStack,
           new VertexLocation(0, 0.25f + fillAmount, 1),
           new UVLocation(sprite.getU0(), sprite.getV1()),
-          blockColor,
           combinedLightIn);
       add(
           builder,
           matrixStack,
           new VertexLocation(1, 0.25f + fillAmount, 1),
           new UVLocation(sprite.getU1(), sprite.getV1()),
-          blockColor,
           combinedLightIn);
       add(
           builder,
           matrixStack,
           new VertexLocation(1, 0.25f + fillAmount, 0),
           new UVLocation(sprite.getU1(), sprite.getV0()),
-          blockColor,
           combinedLightIn);
       add(
           builder,
           matrixStack,
           new VertexLocation(0, 0.25f + fillAmount, 0),
           new UVLocation(sprite.getU0(), sprite.getV0()),
-          blockColor,
           combinedLightIn);
 
       matrixStack.popPose();
     }
-  }
-
-  @Nonnull
-  private Color getBlockColor(ResourceLocation solidTexture, BaseCrucibleEntity tileEntity) {
-    if (solidTexture != null
-        && solidTexture.toString().contains("leaves")
-        && tileEntity.getLevel() != null) {
-      return new Color(
-          tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).value().getFoliageColor());
-    }
-    return Color.WHITE;
   }
 }
