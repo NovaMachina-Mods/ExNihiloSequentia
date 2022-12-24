@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -48,7 +49,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         return;
       }
       @Nullable final Level world = barrelTile.getLevel();
-      if (world != null && checkFluidAmount(barrelTile)) {
+      if (world != null) {
         @Nonnull final BlockPos blockPosBelow = barrelTile.getBlockPos().offset(0, -1, 0);
         @Nonnull final Block blockBelow = world.getBlockState(blockPosBelow).getBlock();
         fluidTransform(barrelTile, blockBelow);
@@ -61,6 +62,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn) {
+    if (checkFluidAmount(barrelTile)) {
+      return false;
+    }
 
     @Nonnull final Item item = player.getItemInHand(handIn).getItem();
 
@@ -79,6 +83,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   private boolean fluidTransform(
       @Nonnull final AbstractBarrelEntity barrelTile, @Nonnull final ItemLike catalyst) {
+    if (checkFluidAmount(barrelTile)) {
+      return false;
+    }
     @Nullable final Fluid fluidInTank = barrelTile.getTank().getFluid().getFluid();
 
     if (ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.isValidRecipe(fluidInTank, catalyst)) {
@@ -90,6 +97,10 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
   }
 
   private boolean fluidOnTop(AbstractBarrelEntity barrelTile) {
+    if (checkFluidAmount(barrelTile)) {
+      return false;
+    }
+
     @Nullable final Level world = barrelTile.getLevel();
     if (world == null) {
       return false;
@@ -147,18 +158,17 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       return InteractionResult.SUCCESS;
     }
 
-    if (checkFluidAmount(barrelTile)) {
-      if (fluidBlockTransform(barrelTile, player, handIn)) {
-        return InteractionResult.SUCCESS;
-      }
-
-      @Nonnull final ItemLike catalyst = player.getItemInHand(handIn).getItem();
-      if (fluidTransform(barrelTile, catalyst)) {
-        player.getItemInHand(handIn).shrink(1);
-      }
-
-      doMobSpawn(barrelTile, player, handIn);
+    if (fluidBlockTransform(barrelTile, player, handIn)) {
+      return InteractionResult.SUCCESS;
     }
+
+    @Nonnull final ItemLike catalyst = player.getItemInHand(handIn).getItem();
+    if (fluidTransform(barrelTile, catalyst)) {
+      player.getItemInHand(handIn).shrink(1);
+    }
+
+    doMobSpawn(barrelTile, player, handIn);
+
     return InteractionResult.SUCCESS;
   }
 
@@ -166,6 +176,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn) {
+    if (checkFluidAmount(barrelTile)) {
+      return false;
+    }
     @Nonnull final Fluid fluid = barrelTile.getTank().getFluid().getFluid();
     @Nonnull final Item input = player.getItemInHand(handIn).getItem();
     if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
@@ -181,10 +194,6 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       return true;
     }
     return false;
-  }
-
-  private boolean checkFluidAmount(AbstractBarrelEntity barrelEntity) {
-    return barrelEntity.getFluidAmount() < AbstractBarrelEntity.MAX_FLUID_AMOUNT;
   }
 
   @Override
@@ -227,14 +236,12 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     @Nonnull final String key;
     if (barrelTile.getFluid() == null) {
-      key = Fluids.EMPTY.defaultFluidState().createLegacyBlock().getBlock().getDescriptionId();
+      key = Fluids.EMPTY.getFluidType().getDescriptionId();
     } else {
       key =
           barrelTile
               .getFluid()
-              .defaultFluidState()
-              .createLegacyBlock()
-              .getBlock()
+              .getFluidType()
               .getDescriptionId();
     }
 
@@ -283,5 +290,9 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       }
     }
     return returnStack;
+  }
+
+  private boolean checkFluidAmount(AbstractBarrelEntity barrelEntity) {
+    return barrelEntity.getFluidAmount() < FluidType.BUCKET_VOLUME;
   }
 }

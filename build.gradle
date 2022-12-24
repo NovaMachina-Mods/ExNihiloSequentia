@@ -1025,7 +1025,7 @@ publishing {
     }
     repositories {
         maven {
-            url = "https://repo.jacob-williams.me/repository/maven-releases/"
+            url = "https://repo.jacob-williams.me/repository/internal/"
             credentials {
                     username = System.getenv("NEXUS_USERNAME")
                     password = System.getenv("NEXUS_PASSWORD")
