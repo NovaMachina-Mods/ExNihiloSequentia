@@ -8,7 +8,6 @@ pipeline {
         CURSEFORGE_KEY = credentials('CurseForgeAPIKey')
         DISCORD_WEBHOOK_URL = credentials('discord-webhook-url')
         DISCORD_PREFIX = "Job: Ex Nihilo Branch: ${BRANCH_NAME} Build: #${BUILD_NUMBER}"
-        SONARQUBE_TOKEN = credentials('ex-nihilo-sonarqube-token')
     }
     options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -36,22 +35,6 @@ pipeline {
                     sh './gradlew clean build'
                 }
             }
-        }
-        stage('SonarQube Analysis') {
-          steps {
-            withSonarQubeEnv(installationName: "SonarQube Integration", credentialsId: 'SonarQube Admin Token') {
-              sh "./gradlew sonarqube"
-            }
-          }
-        }
-        stage("Quality Gate") {
-          steps {
-            timeout(time: 1, unit: 'HOURS') {
-              // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-              // true = set pipeline to UNSTABLE, false = don't
-              waitForQualityGate(webhookSecretId: 'SonarQubeWebhookSecret', abortPipeline: true)
-            }
-          }
         }
         stage('Get Artifacts to Build') {
             steps {

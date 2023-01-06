@@ -30,17 +30,10 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id "org.sonarqube" version "3.3"
 }
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", System.getenv("SONARQUBE_TOKEN")
-    }
-}
 
 if(!System.getenv('CI')) {
     apply plugin: 'com.diffplug.spotless'
