@@ -49,5 +49,11 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
     tag(ExNihiloTags.PIECE).add(ore.getPieceItem());
   }
 
-  private void registerIngot(@NotNull Ore ore, @NotNull ExNihiloTags.OreTag tags) {}
+  private void registerIngot(@NotNull Ore ore, @NotNull ExNihiloTags.OreTag tags) {
+    Either<RegistryObject<OreItem>, Item> either = ore.getRawOreItem();
+    if (either.left().isPresent()) {
+      tag(tags.getIngotTag()).add(either.left().get().get());
+      tag(Items.INGOTS).addTag(tags.getIngotTag());
+    }
+  }
 }
