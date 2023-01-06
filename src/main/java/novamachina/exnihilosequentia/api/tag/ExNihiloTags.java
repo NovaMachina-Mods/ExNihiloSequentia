@@ -55,8 +55,13 @@ public class ExNihiloTags {
   }
 
   @Nonnull
-  public static ResourceLocation getOre(@Nonnull final String ore) {
-    return forgeLoc("ores/" + ore);
+  public static ResourceLocation getRawMaterial(@Nonnull final String ore) {
+    return forgeLoc("raw_materials/" + ore);
+  }
+
+  @Nonnull
+  public static ResourceLocation getNugget(@Nonnull final String ore) {
+    return forgeLoc("nuggets/" + ore);
   }
 
   @Nonnull
@@ -72,11 +77,13 @@ public class ExNihiloTags {
   public static class OreTag {
 
     @Nonnull private final TagKey<Item> ingot;
-    @Nonnull private final TagKey<Item> ore;
+    @Nonnull private final TagKey<Item> rawMaterial;
+    @Nonnull private final TagKey<Item> nugget;
 
     public OreTag(@Nonnull Ore ore) {
       this.ingot = ItemTags.create(getIngot(ore.getOreName()));
-      this.ore = ItemTags.create(getOre(ore.getOreName()));
+      this.rawMaterial = ItemTags.create(getRawMaterial(ore.getOreName()));
+      this.nugget = ItemTags.create(getNugget(ore.getOreName()));
     }
 
     @Nonnull
@@ -85,8 +92,12 @@ public class ExNihiloTags {
     }
 
     @Nonnull
-    public TagKey<Item> getOreTag() {
-      return ore;
+    public TagKey<Item> getRawMaterialTag() {
+      return rawMaterial;
+    }
+
+    public TagKey<Item> getNuggetTag() {
+      return nugget;
     }
   }
 }

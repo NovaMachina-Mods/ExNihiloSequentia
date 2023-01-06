@@ -35,13 +35,14 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
     registerIngot(ore, tags);
     registerPiece(ore);
     registerRaw(ore, tags);
+    registerNugget(ore, tags);
   }
 
   private void registerRaw(Ore ore, OreTag tags) {
     Either<RegistryObject<OreItem>, Item> either = ore.getRawOreItem();
     if (either.left().isPresent()) {
-      tag(tags.getOreTag()).add(either.left().get().get());
-      tag(Items.ORES).addTag(tags.getOreTag());
+      tag(tags.getRawMaterialTag()).add(either.left().get().get());
+      tag(Items.RAW_MATERIALS).addTag(tags.getRawMaterialTag());
     }
   }
 
@@ -50,10 +51,18 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
   }
 
   private void registerIngot(@NotNull Ore ore, @NotNull ExNihiloTags.OreTag tags) {
-    Either<RegistryObject<OreItem>, Item> either = ore.getRawOreItem();
+    Either<RegistryObject<OreItem>, Item> either = ore.getIngotItem();
     if (either.left().isPresent()) {
       tag(tags.getIngotTag()).add(either.left().get().get());
       tag(Items.INGOTS).addTag(tags.getIngotTag());
+    }
+  }
+
+  private void registerNugget(@NotNull Ore ore, @NotNull ExNihiloTags.OreTag tags) {
+    Either<RegistryObject<OreItem>, Item> either = ore.getNuggetItem();
+    if (either.left().isPresent()) {
+      tag(tags.getNuggetTag()).add(either.left().get().get());
+      tag(Items.NUGGETS).addTag(tags.getNuggetTag());
     }
   }
 }
