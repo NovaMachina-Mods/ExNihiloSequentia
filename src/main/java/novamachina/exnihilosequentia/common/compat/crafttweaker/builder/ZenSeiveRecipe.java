@@ -65,7 +65,7 @@ ArrayList<>(),
  @Nonnull
  @SuppressWarnings("unused")
  public ZenSeiveRecipe addRoll(@Nonnull final String mesh, final float chance) {
-   internal.addRoll(mesh, chance);
+   internal.addRoll(mesh.toUpperCase(), chance);
    return this;
  }
 
