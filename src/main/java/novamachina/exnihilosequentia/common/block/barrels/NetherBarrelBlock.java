@@ -22,7 +22,7 @@ public class NetherBarrelBlock extends BlockBarrel implements EntityBlock {
   public NetherBarrelBlock() {
     super(new BlockBuilder()
         .properties(BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F)
-            .sound(Config.getNetherBarrelSoundsEnabled() ? SoundType.STEM : SoundType.WOOD)));
+            .sound(Config.getNetherBarrelSoundsEnabled() ? SoundType.STEM : SoundType.WOOD).noOcclusion()));
   }
 
   @Nullable

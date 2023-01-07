@@ -20,7 +20,7 @@ public class WoodBarrelBlock extends BlockBarrel implements EntityBlock {
 
   public WoodBarrelBlock() {
     super(new BlockBuilder().properties(
-        BlockBehaviour.Properties.of(Material.WOOD).strength(0.75F).sound(SoundType.WOOD)));
+        BlockBehaviour.Properties.of(Material.WOOD).strength(0.75F).sound(SoundType.WOOD).noOcclusion()));
   }
 
   @Nullable

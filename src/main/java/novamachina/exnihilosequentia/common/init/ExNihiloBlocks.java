@@ -212,7 +212,7 @@ public class ExNihiloBlocks {
                       .properties(
                           BlockBehaviour.Properties.of(Material.STONE)
                               .strength(0.75F)
-                              .sound(SoundType.STONE))));
+                              .sound(SoundType.STONE).noOcclusion())));
 
   @Nonnull
   public static final RegistryObject<WoodSieveBlock> SIEVE_ACACIA =
