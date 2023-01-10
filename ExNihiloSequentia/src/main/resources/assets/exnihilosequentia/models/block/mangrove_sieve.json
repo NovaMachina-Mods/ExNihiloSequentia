@@ -1,0 +1,7 @@
+{
+  "parent": "exnihilosequentia:block/sieve_base",
+  "textures": {
+    "texture": "exnihilosequentia:block/mangrove_sieve",
+    "particle": "minecraft:block/mangrove_planks"
+  }
+}

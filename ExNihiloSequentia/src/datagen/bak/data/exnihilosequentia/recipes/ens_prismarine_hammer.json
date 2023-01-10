@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "-": {
+      "tag": "forge:rods"
+    },
+    "x": {
+      "tag": "forge:gems/prismarine"
+    }
+  },
+  "pattern": [
+    " x ",
+    " -x",
+    "-  "
+  ],
+  "result": {
+    "item": "exnihilosequentia:prismarine_hammer"
+  }
+}

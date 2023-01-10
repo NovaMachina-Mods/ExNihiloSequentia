@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "key": {
+    "-": {
+      "item": "minecraft:jungle_slab"
+    },
+    "x": {
+      "item": "minecraft:jungle_planks"
+    }
+  },
+  "pattern": [
+    "x x",
+    "x x",
+    "x-x"
+  ],
+  "result": {
+    "item": "exnihilosequentia:jungle_barrel"
+  }
+}

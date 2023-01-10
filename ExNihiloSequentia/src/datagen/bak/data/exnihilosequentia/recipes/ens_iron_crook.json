@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "exnihilosequentia",
+  "key": {
+    "x": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "pattern": [
+    "xx",
+    " x",
+    " x"
+  ],
+  "result": {
+    "item": "exnihilosequentia:iron_crook"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "l": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "p": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "p p",
+    "plp",
+    "s s"
+  ],
+  "result": {
+    "item": "exnihilosequentia:dark_oak_sieve"
+  }
+}

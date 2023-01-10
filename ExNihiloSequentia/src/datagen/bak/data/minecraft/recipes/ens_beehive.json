@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "f": {
+      "item": "exnihilosequentia:beehive_frame"
+    },
+    "x": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "fff",
+    "xxx"
+  ],
+  "result": {
+    "item": "minecraft:beehive"
+  }
+}

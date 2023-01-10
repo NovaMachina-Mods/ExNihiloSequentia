@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:bubble_coral"
+  },
+  "results": [
+    {
+      "chance": 1.0,
+      "count": 1,
+      "item": "minecraft:bubble_coral_fan"
+    }
+  ]
+}

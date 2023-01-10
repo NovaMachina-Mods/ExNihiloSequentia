@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "exnihilosequentia:raw_tin"
+  },
+  "result": "exnihilosequentia:tin_ingot"
+}

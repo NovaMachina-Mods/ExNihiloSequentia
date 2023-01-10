@@ -1,0 +1,7 @@
+{
+  "parent": "exnihilosequentia:block/crucible_base",
+  "textures": {
+    "particle": "minecraft:block/oak_planks",
+    "texture": "exnihilosequentia:block/oak_crucible"
+  }
+}

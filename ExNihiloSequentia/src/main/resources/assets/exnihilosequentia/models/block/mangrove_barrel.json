@@ -1,0 +1,7 @@
+{
+  "parent": "exnihilosequentia:block/barrel_base",
+  "textures": {
+    "texture": "exnihilosequentia:block/mangrove_barrel",
+    "particle": "minecraft:block/mangrove_planks"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "exnihilosequentia:block/jungle_sieve"
+      }
+    },
+    {
+      "apply": {
+        "model": "exnihilosequentia:block/string_mesh"
+      },
+      "when": {
+        "mesh": "string"
+      }
+    },
+    {
+      "apply": {
+        "model": "exnihilosequentia:block/flint_mesh"
+      },
+      "when": {
+        "mesh": "flint"
+      }
+    },
+    {
+      "apply": {
+        "model": "exnihilosequentia:block/iron_mesh"
+      },
+      "when": {
+        "mesh": "iron"
+      }
+    },
+    {
+      "apply": {
+        "model": "exnihilosequentia:block/diamond_mesh"
+      },
+      "when": {
+        "mesh": "diamond"
+      }
+    },
+    {
+      "apply": {
+        "model": "exnihilosequentia:block/emerald_mesh"
+      },
+      "when": {
+        "mesh": "emerald"
+      }
+    },
+    {
+      "apply": {
+        "model": "exnihilosequentia:block/netherite_mesh"
+      },
+      "when": {
+        "mesh": "netherite"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "exnihilosequentia:beehive_frame"
+    },
+    "c": {
+      "tag": "forge:dyes/yellow"
+    },
+    "m": {
+      "item": "exnihilosequentia:porcelain_doll"
+    },
+    "s": {
+      "tag": "forge:dusts/glowstone"
+    },
+    "t": {
+      "tag": "minecraft:flowers"
+    }
+  },
+  "pattern": [
+    "ctc",
+    "sms",
+    "cbc"
+  ],
+  "result": {
+    "item": "exnihilosequentia:bee_doll"
+  }
+}

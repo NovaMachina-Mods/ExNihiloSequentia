@@ -1,0 +1,19 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "exnihilosequentia:crushed_end_stone"
+  },
+  "result": {
+    "item": "exnihilosequentia:end_stone_pebble"
+  },
+  "rolls": [
+    {
+      "chance": 0.5,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "string"
+    }
+  ]
+}

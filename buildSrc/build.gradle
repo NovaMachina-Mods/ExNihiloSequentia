@@ -1,0 +1,29 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+repositories {
+    gradlePluginPortal()
+    maven {
+        name = "forge"
+        url = uri("https://maven.minecraftforge.net/")
+    }
+    maven {
+        name = "parchment"
+        url = uri("https://maven.parchmentmc.org")
+    }
+    maven {
+        name = "thiakil"
+        url = uri("https://maven.thiakil.com")
+    }
+}
+
+dependencies {
+    implementation("net.minecraftforge.gradle:ForgeGradle:5.1.+")
+    implementation("org.parchmentmc:librarian:1.+")
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:6.8.0")
+    implementation("org.ajoberstar.grgit:grgit-gradle:4.1.1")
+    implementation("gradle.plugin.com.matthewprenger:CurseGradle:1.4.0")
+    implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3")
+    implementation("com.modrinth.minotaur:Minotaur:2.+")
+}

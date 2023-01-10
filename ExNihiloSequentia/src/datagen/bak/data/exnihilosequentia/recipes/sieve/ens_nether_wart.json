@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "minecraft:soul_sand"
+  },
+  "result": {
+    "item": "minecraft:nether_wart"
+  },
+  "rolls": [
+    {
+      "chance": 0.1,
+      "mesh": "string"
+    }
+  ]
+}

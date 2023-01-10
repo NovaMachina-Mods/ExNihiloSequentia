@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "g": {
+      "tag": "forge:raw_materials/gold"
+    },
+    "x": {
+      "item": "exnihilosequentia:blackstone_pebble"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xgx",
+    "xxx"
+  ],
+  "result": {
+    "item": "minecraft:gilded_blackstone"
+  }
+}

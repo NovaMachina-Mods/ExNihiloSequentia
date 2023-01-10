@@ -1,0 +1,27 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "minecraft:dark_oak_leaves"
+  },
+  "result": {
+    "item": "minecraft:dark_oak_sapling"
+  },
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "flint"
+    },
+    {
+      "chance": 0.15,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.2,
+      "mesh": "diamond"
+    }
+  ]
+}

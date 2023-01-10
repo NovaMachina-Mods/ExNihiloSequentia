@@ -6,3 +6,9 @@ pluginManagement {
         maven { url = 'https://maven.thiakil.com' }
     }
 }
+
+rootProject.name = 'NovaMachina Mods'
+
+include 'ExNihiloSequentia'
+
+include 'workspace'

@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "exnihilosequentia:crushed_netherrack"
+  },
+  "result": {
+    "item": "exnihilosequentia:crimson_nylium_spores"
+  },
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "string"
+    }
+  ]
+}

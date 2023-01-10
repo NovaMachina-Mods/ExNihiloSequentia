@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "exnihilosequentia:item/tools/crook/red_nether_brick_crook"
+  }
+}

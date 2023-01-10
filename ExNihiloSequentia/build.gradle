@@ -1,0 +1,112 @@
+plugins {
+    id 'mc-mod'
+}
+
+group = "novamachina.exnihilosequentia"
+version = "${minecraftVersion}-${base_version}." + (System.env.BUILD_NUMBER ?: "homebaked") + (project.property('curse_release_type') != 'release' ? "-${project.property('curse_release_type')}" : '')
+archivesBaseName = "${artifact_basename}"
+
+ext {
+    versionProperties["crafttweaker_version"] = crafttweaker_version_range
+    versionProperties["jei_version"] = jei_version_range
+}
+
+repositories {
+    maven {
+        name 'prog'
+        url 'https://dvs1.progwml6.com/files/maven'
+        content {
+            includeGroup 'mezz.jei'
+        }
+    }
+    maven {
+        name 'CraftTweaker'
+        url "https://maven.blamejared.com"
+        content {
+            includeGroup 'com.blamejared.crafttweaker'
+            includeGroup 'org.openzen.zencode'
+        }
+    }
+    maven {
+        name 'k-4u'
+        url 'https://maven.k-4u.nl/'
+        content {
+            includeGroup 'mcjty.theoneprobe'
+        }
+    }
+    maven {
+        name 'CurseMaven'
+        url 'https://www.cursemaven.com'
+        content {
+            includeGroup 'curse.maven'
+        }
+    }
+    maven {
+        url 'https://maven.architectury.dev'
+        content {
+            includeGroup 'dev.architectury'
+        }
+    }
+    maven {
+        url 'https://maven.saps.dev/minecraft'
+        content {
+            includeGroup 'dev.latvian.mods'
+        }
+    }
+
+    whenObjectAdded {
+// ForgeGradle adds these in an afterEvaluate, so we need to catch them as they're added and exclude mod artifacts/groups
+        if (it instanceof MavenArtifactRepository) {
+            def url = it.url.toString()
+            if (url == 'https://maven.minecraftforge.net/' || url == 'https://libraries.minecraft.net/' || url == 'https://repo.maven.apache.org/maven2/') {
+                try {
+                    it.content {
+                        excludeGroup 'curse.maven'
+                        excludeGroup 'mezz.jei'
+                        excludeGroup 'mcjty.theoneprobe'
+                        excludeGroup 'com.blamejared.crafttweaker'
+                        excludeGroup 'dev.architectury'
+                        excludeGroup 'dev.latvian.mods'
+                    }
+                    println("Adding exclusions to ${it.url}")
+                } catch (Exception ignored) {
+                    //oh well
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    if(project.hasProperty('jei_version')) {
+        compileOnly fg.deobf("mezz.jei:jei-${minecraftVersion}-forge-api:${jei_version}")
+        implementation fg.deobf("mezz.jei:jei-${minecraftVersion}-forge:${jei_version}")
+    }
+
+    if(project.hasProperty('top_version')) {
+        compileOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraft_release}-${top_version}:api") {
+            transitive = false
+        }
+        runtimeOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraft_release}-${top_version}") {
+            transitive = false
+        }
+    }
+
+    if(project.hasProperty('jade_id') && project.hasProperty('jade_api_id')) {
+        compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
+//        runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+    }
+
+    if(project.hasProperty('crafttweaker_version')) {
+        implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraftVersion}:${crafttweaker_version}")
+        annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10'
+        annotationProcessor "net.minecraftforge:forge:${minecraftVersion}-${forgeMajor}.${forgeMinor}.${forgePatch}"
+        annotationProcessor "com.blamejared.crafttweaker:CraftTweaker-forge-${minecraftVersion}:${crafttweaker_version}"
+    }
+
+    if (project.hasProperty('kubejs_version') && project.hasProperty('rhino_version') && project.hasProperty('architectury_version')) {
+        implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+        implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+        implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
+    }
+}

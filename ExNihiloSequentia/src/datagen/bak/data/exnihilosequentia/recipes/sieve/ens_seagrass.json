@@ -1,0 +1,16 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "item": "minecraft:seagrass"
+  },
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "iron"
+    }
+  ],
+  "waterlogged": true
+}

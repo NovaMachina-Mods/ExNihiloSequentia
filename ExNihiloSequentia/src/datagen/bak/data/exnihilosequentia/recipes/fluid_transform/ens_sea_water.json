@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_transform",
+  "catalyst": {
+    "tag": "forge:sand"
+  },
+  "fluidInTank": {
+    "fluid": "minecraft:water"
+  },
+  "result": {
+    "fluid": "exnihilosequentia:sea_water"
+  }
+}

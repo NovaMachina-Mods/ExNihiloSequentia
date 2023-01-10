@@ -1,0 +1,19 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "minecraft:coarse_dirt"
+  },
+  "result": {
+    "item": "minecraft:dirt"
+  },
+  "rolls": [
+    {
+      "chance": 1.0,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.4,
+      "mesh": "string"
+    }
+  ]
+}

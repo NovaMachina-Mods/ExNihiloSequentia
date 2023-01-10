@@ -1,0 +1,11 @@
+{
+  "pebble_throw": {
+    "category": "neutral",
+    "subtitle": "exnihilosequentia.subtitle.pebbleThrow",
+    "sounds": [
+      {
+        "name": "exnihilosequentia:pebble_throw"
+      }
+    ]
+  }
+}
