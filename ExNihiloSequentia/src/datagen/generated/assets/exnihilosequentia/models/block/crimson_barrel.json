@@ -1,0 +1,7 @@
+{
+  "parent": "exnihilosequentia:block/barrel_base",
+  "textures": {
+    "particle": "minecraft:block/crimson_planks",
+    "texture": "exnihilosequentia:block/crimson_barrel"
+  }
+}

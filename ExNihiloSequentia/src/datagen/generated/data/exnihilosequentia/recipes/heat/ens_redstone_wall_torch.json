@@ -1,0 +1,8 @@
+{
+  "type": "exnihilosequentia:heat",
+  "amount": 1,
+  "block": "minecraft:redstone_wall_torch",
+  "state": {
+    "lit": "true"
+  }
+}

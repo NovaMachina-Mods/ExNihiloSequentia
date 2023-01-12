@@ -1,0 +1,60 @@
+plugins {
+    id 'mc-mod'
+}
+
+group = "novamachina.exnihiloae"
+archivesBaseName = "${artifact_basename}"
+
+minecraft {
+    runs {
+        data {
+            args '--existing', file("${project(':ExNihiloSequentia').projectDir}/src/main/resources/")
+        }
+    }
+}
+
+repositories {
+    maven {
+        name 'Modmaven'
+        url 'https://modmaven.dev/'
+        content {
+            includeGroup 'appeng'
+        }
+    }
+
+    whenObjectAdded {
+// ForgeGradle adds these in an afterEvaluate, so we need to catch them as they're added and exclude mod artifacts/groups
+        if (it instanceof MavenArtifactRepository) {
+            def url = it.url.toString()
+            if (url == 'https://maven.minecraftforge.net/' || url == 'https://libraries.minecraft.net/' || url == 'https://repo.maven.apache.org/maven2/') {
+                try {
+                    it.content {
+                        excludeGroup 'appeng'
+                    }
+                    println("Adding exclusions to ${it.url}")
+                } catch (Exception ignored) {
+                    //oh well
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fg.deobf(project(':ExNihiloSequentia')) {
+        transitive = false
+    }
+    datagenImplementation(project(':ExNihiloSequentia')) {
+        transitive = false
+    }
+    datagenImplementation project(path: ":ExNihiloSequentia", configuration: 'datagenDist')
+
+    if (project.hasProperty('ae2_version')) {
+        implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
+            transitive = false
+        }
+        datagenImplementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
+            transitive = false
+        }
+    }
+}

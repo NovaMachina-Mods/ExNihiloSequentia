@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sieve",
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "item": "minecraft:cocoa_beans"
+  },
+  "rolls": [
+    {
+      "chance": 0.03,
+      "mesh": "string"
+    }
+  ]
+}

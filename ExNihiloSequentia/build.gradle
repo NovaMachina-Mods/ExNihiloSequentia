@@ -3,7 +3,6 @@ plugins {
 }
 
 group = "novamachina.exnihilosequentia"
-version = "${minecraftVersion}-${base_version}." + (System.env.BUILD_NUMBER ?: "homebaked") + (project.property('curse_release_type') != 'release' ? "-${project.property('curse_release_type')}" : '')
 archivesBaseName = "${artifact_basename}"
 
 ext {
@@ -109,4 +108,20 @@ dependencies {
         implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
         implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
     }
+}
+
+configurations {
+    datagenDist {
+        canBeConsumed = true
+        canBeResolved = false
+    }
+}
+
+task datagenJar(type: Jar) {
+    archiveBaseName = "datagen"
+    from([sourceSets.datagen.output])
+}
+
+artifacts {
+    datagenDist datagenJar
 }

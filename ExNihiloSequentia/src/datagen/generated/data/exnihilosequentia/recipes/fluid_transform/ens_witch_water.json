@@ -1,0 +1,12 @@
+{
+  "type": "exnihilosequentia:fluid_transform",
+  "catalyst": {
+    "item": "minecraft:mycelium"
+  },
+  "fluidInTank": {
+    "fluid": "minecraft:water"
+  },
+  "result": {
+    "fluid": "exnihilosequentia:witch_water"
+  }
+}

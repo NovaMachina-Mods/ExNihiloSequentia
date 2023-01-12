@@ -24,6 +24,8 @@ idea {
     }
 }
 
+version = "${minecraftVersion}-${base_version}." + (System.env.BUILD_NUMBER ?: "homebaked") + (project.property('curse_release_type') != 'release' ? "-${project.property('curse_release_type')}" : '')
+
 sourceSets {
     main {
         resources {
@@ -65,11 +67,6 @@ ext {
 }
 
 def replaceResources = tasks.register("replaceResources", Copy) {
-
-    println versionProperties
-    //For whatever reason this will not get set in the ext block
-    versionProperties["version"] = version
-
     it.outputs.upToDateWhen { false }
     def modsToml = copySpec {
         from(sourceSets.main.resources) {
@@ -160,7 +157,7 @@ minecraft {
 
             args '--all',
                     '--output', file('src/datagen/generated/'),
-                    '--mod', project.name,
+                    '--mod', project.name.toLowerCase(),
                     '--existing', file('src/main/resources/')
 
             mods.create(project.name).sources((SourceSet []) [sourceSets.main, sourceSets.datagen])
@@ -209,6 +206,7 @@ def getManifestAttributes(String title) {
 }
 
 jar {
+    archiveBaseName = archivesBaseName
     duplicatesStrategy(DuplicatesStrategy.FAIL)
     from([sourceSets.main.output])
     manifest.attributes(getManifestAttributes(projectFullName))

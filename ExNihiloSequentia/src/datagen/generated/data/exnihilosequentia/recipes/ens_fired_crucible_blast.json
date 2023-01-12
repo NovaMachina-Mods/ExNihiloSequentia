@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "exnihilosequentia:unfired_crucible"
+  },
+  "result": "exnihilosequentia:fired_crucible"
+}
