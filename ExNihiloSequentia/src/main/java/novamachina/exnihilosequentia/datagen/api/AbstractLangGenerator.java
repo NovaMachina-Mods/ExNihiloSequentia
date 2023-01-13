@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.datagen;
+package novamachina.exnihilosequentia.datagen.api;
 
 import java.util.Objects;
 import net.minecraft.data.DataGenerator;

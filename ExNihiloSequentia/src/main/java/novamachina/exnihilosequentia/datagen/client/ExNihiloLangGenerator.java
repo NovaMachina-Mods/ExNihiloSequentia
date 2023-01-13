@@ -1,7 +1,7 @@
-package novamachina.exnihilosequentia.client;
+package novamachina.exnihilosequentia.datagen.client;
 
 import net.minecraft.data.DataGenerator;
-import novamachina.exnihilosequentia.api.datagen.AbstractLangGenerator;
+import novamachina.exnihilosequentia.datagen.api.AbstractLangGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.item.ore.Ore;

@@ -109,19 +109,3 @@ dependencies {
         implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
     }
 }
-
-configurations {
-    datagenDist {
-        canBeConsumed = true
-        canBeResolved = false
-    }
-}
-
-task datagenJar(type: Jar) {
-    archiveBaseName = "datagen"
-    from([sourceSets.datagen.output])
-}
-
-artifacts {
-    datagenDist datagenJar
-}

@@ -41,19 +41,15 @@ repositories {
 }
 
 dependencies {
-    implementation fg.deobf(project(':ExNihiloSequentia')) {
+    implementation(project(':ExNihiloSequentia')) {
         transitive = false
     }
-    datagenImplementation(project(':ExNihiloSequentia')) {
-        transitive = false
-    }
-    datagenImplementation project(path: ":ExNihiloSequentia", configuration: 'datagenDist')
 
     if (project.hasProperty('ae2_version')) {
         implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
             transitive = false
         }
-        datagenImplementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
+        implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}") {
             transitive = false
         }
     }

@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.datagen;
+package novamachina.exnihilosequentia.datagen.api;
 
 import static net.minecraft.world.level.block.CakeBlock.BITES;
 

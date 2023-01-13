@@ -14,16 +14,6 @@ plugins {
     id 'com.modrinth.minotaur'
 }
 
-idea {
-    module {
-        inheritOutputDirs = true
-
-        for (String excludeDirName in ["run", "out", "logs", "gradle"]) {
-            excludeDirs.add(new File(projectDir, excludeDirName))
-        }
-    }
-}
-
 version = "${minecraftVersion}-${base_version}." + (System.env.BUILD_NUMBER ?: "homebaked") + (project.property('curse_release_type') != 'release' ? "-${project.property('curse_release_type')}" : '')
 
 sourceSets {
@@ -40,21 +30,6 @@ sourceSets {
         compileClasspath += main.output
         runtimeClasspath += main.output
     }
-
-    datagen {
-        java.srcDirs = ['src/datagen/java']
-        resources.srcDirs = ['src/datagen/resources']
-        compileClasspath += project.sourceSets.main.output
-    }
-}
-
-configurations {
-    testImplementation.extendsFrom(implementation)
-    datagenImplementation.extendsFrom(implementation)
-    testCompileOnly.extendsFrom(compileOnly)
-    datagenCompileOnly.extendsFrom(compileOnly)
-    datagenRuntimeOnly.extendsFrom(runtimeOnly)
-
 }
 
 ext {
@@ -160,7 +135,7 @@ minecraft {
                     '--mod', project.name.toLowerCase(),
                     '--existing', file('src/main/resources/')
 
-            mods.create(project.name).sources((SourceSet []) [sourceSets.main, sourceSets.datagen])
+            mods.create(project.name).source(sourceSets.main)
         }
     }
 }

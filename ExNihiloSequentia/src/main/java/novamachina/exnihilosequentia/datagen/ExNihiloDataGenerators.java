@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia;
+package novamachina.exnihilosequentia.datagen;
 
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
@@ -6,15 +6,15 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import novamachina.exnihilosequentia.client.ExNihiloBlockStateGenerator;
-import novamachina.exnihilosequentia.client.ExNihiloItemGenerator;
-import novamachina.exnihilosequentia.client.ExNihiloLangGenerator;
-import novamachina.exnihilosequentia.client.ExNihiloOreItemGenerator;
-import novamachina.exnihilosequentia.common.ExNihiloBlockTagsGenerator;
-import novamachina.exnihilosequentia.common.ExNihiloFluidTagsGenerator;
-import novamachina.exnihilosequentia.common.ExNihiloItemTagsGenerator;
-import novamachina.exnihilosequentia.common.ExNihiloLootTableGenerator;
-import novamachina.exnihilosequentia.common.ExNihiloRecipeGenerator;
+import novamachina.exnihilosequentia.datagen.client.ExNihiloBlockStateGenerator;
+import novamachina.exnihilosequentia.datagen.client.ExNihiloItemGenerator;
+import novamachina.exnihilosequentia.datagen.client.ExNihiloLangGenerator;
+import novamachina.exnihilosequentia.datagen.client.ExNihiloOreItemGenerator;
+import novamachina.exnihilosequentia.datagen.common.ExNihiloBlockTagsGenerator;
+import novamachina.exnihilosequentia.datagen.common.ExNihiloFluidTagsGenerator;
+import novamachina.exnihilosequentia.datagen.common.ExNihiloItemTagsGenerator;
+import novamachina.exnihilosequentia.datagen.common.ExNihiloLootTableGenerator;
+import novamachina.exnihilosequentia.datagen.common.ExNihiloRecipeGenerator;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

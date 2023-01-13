@@ -1,4 +1,4 @@
-package novamachina.exnihiloae.client;
+package novamachina.exnihiloae.datagen.client;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;

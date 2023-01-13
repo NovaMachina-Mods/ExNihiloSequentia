@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.datagen;
+package novamachina.exnihilosequentia.datagen.api;
 
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;

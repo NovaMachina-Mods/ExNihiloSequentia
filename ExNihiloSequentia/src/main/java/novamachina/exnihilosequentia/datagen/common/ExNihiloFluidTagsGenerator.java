@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.common;
+package novamachina.exnihilosequentia.datagen.common;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

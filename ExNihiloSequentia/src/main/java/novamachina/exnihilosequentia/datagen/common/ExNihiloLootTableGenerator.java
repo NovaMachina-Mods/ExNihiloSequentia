@@ -1,8 +1,8 @@
-package novamachina.exnihilosequentia.common;
+package novamachina.exnihilosequentia.datagen.common;
 
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
-import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
+import novamachina.exnihilosequentia.datagen.api.AbstractLootTableGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 

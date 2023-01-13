@@ -105,10 +105,10 @@ minecraft {
 
             mods {
                 ExNihiloSequentia {
-                    sources((SourceSet []) [project(':ExNihiloSequentia').sourceSets.main, project(':ExNihiloSequentia').sourceSets.datagen])
+                    source project(':ExNihiloSequentia').sourceSets.main
                 }
                 ExNihiloAE {
-                    sources((SourceSet []) [project(':ExNihiloAE').sourceSets.main, project(':ExNihiloAE').sourceSets.datagen])
+                    source project(':ExNihiloAE').sourceSets.main
                 }
             }
         }

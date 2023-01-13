@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.common;
+package novamachina.exnihilosequentia.datagen.common;
 
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
@@ -8,7 +8,7 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.api.datagen.AbstractItemTagGenerator;
+import novamachina.exnihilosequentia.datagen.api.AbstractItemTagGenerator;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;

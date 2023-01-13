@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.datagen;
+package novamachina.exnihilosequentia.datagen.api;
 
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;

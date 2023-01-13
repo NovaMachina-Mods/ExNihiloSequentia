@@ -1,4 +1,4 @@
-package novamachina.exnihiloae.common;
+package novamachina.exnihiloae.datagen.common;
 
 // import appeng.core.definitions.AEBlocks;
 // import appeng.core.definitions.AEItems;
@@ -11,13 +11,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluids;
 import novamachina.exnihiloae.common.init.ExNihiloAEBlocks;
 import novamachina.exnihiloae.common.utility.ExNihiloAEConstants;
-import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
 import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
+import novamachina.exnihilosequentia.datagen.api.AbstractRecipeGenerator;
 
 public class ExNihiloAERecipes extends AbstractRecipeGenerator {
 

@@ -1,9 +1,9 @@
-package novamachina.exnihiloae.common;
+package novamachina.exnihiloae.datagen.common;
 
 import net.minecraft.data.DataGenerator;
 import novamachina.exnihiloae.common.init.ExNihiloAEBlocks;
 import novamachina.exnihiloae.common.utility.ExNihiloAEConstants;
-import novamachina.exnihilosequentia.api.datagen.AbstractLootTableGenerator;
+import novamachina.exnihilosequentia.datagen.api.AbstractLootTableGenerator;
 
 public class ExNihiloAELootTables extends AbstractLootTableGenerator {
 

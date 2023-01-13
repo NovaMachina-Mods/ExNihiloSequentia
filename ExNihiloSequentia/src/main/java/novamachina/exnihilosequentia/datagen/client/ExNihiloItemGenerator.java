@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.client;
+package novamachina.exnihilosequentia.datagen.client;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.api.datagen.AbstractItemGenerator;
+import novamachina.exnihilosequentia.datagen.api.AbstractItemGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.CrookBaseItem;
 import novamachina.exnihilosequentia.common.item.HammerBaseItem;

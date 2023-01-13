@@ -1,9 +1,9 @@
-package novamachina.exnihilosequentia.client;
+package novamachina.exnihilosequentia.datagen.client;
 
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import novamachina.exnihilosequentia.api.datagen.AbstractBlockStateGenerator;
+import novamachina.exnihilosequentia.datagen.api.AbstractBlockStateGenerator;
 import novamachina.exnihilosequentia.common.fluid.SeaWaterFluidType;
 import novamachina.exnihilosequentia.common.fluid.WitchWaterFluidType;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;

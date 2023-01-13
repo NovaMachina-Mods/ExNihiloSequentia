@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.common;
+package novamachina.exnihilosequentia.datagen.common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.api.datagen.AbstractRecipeGenerator;
+import novamachina.exnihilosequentia.datagen.api.AbstractRecipeGenerator;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;

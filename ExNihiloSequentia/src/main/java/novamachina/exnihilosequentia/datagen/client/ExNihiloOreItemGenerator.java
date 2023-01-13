@@ -1,9 +1,9 @@
-package novamachina.exnihilosequentia.client;
+package novamachina.exnihilosequentia.datagen.client;
 
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import novamachina.exnihilosequentia.api.datagen.AbstractOreItemGenerator;
+import novamachina.exnihilosequentia.datagen.api.AbstractOreItemGenerator;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;

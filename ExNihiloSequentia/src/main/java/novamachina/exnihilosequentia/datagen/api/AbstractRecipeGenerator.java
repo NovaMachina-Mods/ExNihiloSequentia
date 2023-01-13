@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.api.datagen;
+package novamachina.exnihilosequentia.datagen.api;
 
 import com.mojang.datafixers.util.Either;
 import java.util.Objects;
