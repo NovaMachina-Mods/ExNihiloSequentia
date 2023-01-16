@@ -11,5 +11,6 @@ rootProject.name = 'NovaMachina Mods'
 
 include 'ExNihiloSequentia'
 include 'ExNihiloAE'
+include 'ExNihiloMekanism'
 
 include 'workspace'

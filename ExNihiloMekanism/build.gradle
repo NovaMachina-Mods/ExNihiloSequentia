@@ -1,0 +1,52 @@
+plugins {
+    id 'mc-mod'
+}
+
+group = "novamachina.exnihilomekanism"
+archivesBaseName = "${artifact_basename}"
+
+minecraft {
+    runs {
+        data {
+            args '--existing', file("${project(':ExNihiloSequentia').projectDir}/src/main/resources/")
+        }
+    }
+}
+
+repositories {
+    maven {
+        name 'Modmaven'
+        url 'https://modmaven.dev/'
+        content {
+            includeGroup 'appeng'
+            includeGroup 'mekanism'
+        }
+    }
+
+    whenObjectAdded {
+// ForgeGradle adds these in an afterEvaluate, so we need to catch them as they're added and exclude mod artifacts/groups
+        if (it instanceof MavenArtifactRepository) {
+            def url = it.url.toString()
+            if (url == 'https://maven.minecraftforge.net/' || url == 'https://libraries.minecraft.net/' || url == 'https://repo.maven.apache.org/maven2/') {
+                try {
+                    it.content {
+                        excludeGroup 'mekanism'
+                    }
+                    println("Adding exclusions to ${it.url}")
+                } catch (Exception ignored) {
+                    //oh well
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation(project(':ExNihiloSequentia')) {
+        transitive = false
+    }
+
+    if (project.hasProperty('mekanism_version')) {
+        implementation fg.deobf("mekanism:Mekanism:${minecraftVersion}-${mekanism_version}")
+    }
+}

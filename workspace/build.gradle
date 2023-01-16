@@ -65,6 +65,9 @@ minecraft {
                 ExNihiloAE {
                     source project(':ExNihiloAE').sourceSets.main
                 }
+                ExNihiloMekanism {
+                    source project(':ExNihiloMekanism').sourceSets.main
+                }
             }
         }
 
@@ -86,6 +89,9 @@ minecraft {
                 }
                 ExNihiloAE {
                     source project(':ExNihiloAE').sourceSets.main
+                }
+                ExNihiloMekanism {
+                    source project(':ExNihiloMekanism').sourceSets.main
                 }
             }
         }
@@ -110,6 +116,9 @@ minecraft {
                 ExNihiloAE {
                     source project(':ExNihiloAE').sourceSets.main
                 }
+                ExNihiloMekanism {
+                    source project(':ExNihiloMekanism').sourceSets.main
+                }
             }
         }
     }
@@ -124,6 +133,7 @@ dependencies {
 
     implementation project(':ExNihiloSequentia')
     implementation project(':ExNihiloAE')
+    implementation project(':ExNihiloMekanism')
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
