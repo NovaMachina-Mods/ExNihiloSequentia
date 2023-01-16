@@ -1,0 +1,11 @@
+{
+  "loader": "tconstruct:material",
+  "parent": "forge:item/default",
+  "textures": {
+    "texture": "exnihilotinkers:item/tool/crook/head"
+  },
+  "offset": [
+    -4,
+    3
+  ]
+}

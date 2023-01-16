@@ -13,5 +13,6 @@ include 'ExNihiloSequentia'
 include 'ExNihiloAE'
 include 'ExNihiloMekanism'
 include 'ExNihiloThermal'
+//include 'ExNihiloTinkers'
 
 include 'workspace'

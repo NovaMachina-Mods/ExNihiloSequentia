@@ -1,0 +1,60 @@
+plugins {
+    id 'mc-mod'
+}
+
+group = "novamachina.exnihilotinkers"
+archivesBaseName = "${artifact_basename}"
+
+minecraft {
+    runs {
+        data {
+            args '--existing', file("${project(':ExNihiloSequentia').projectDir}/src/main/resources/")
+        }
+    }
+}
+
+repositories {
+    maven {
+        name 'CoFH'
+        url 'https://nexus.covers1624.net/repository/cofh-releases/'
+        content {
+            includeGroup 'com.teamcofh'
+        }
+    }
+
+    whenObjectAdded {
+// ForgeGradle adds these in an afterEvaluate, so we need to catch them as they're added and exclude mod artifacts/groups
+        if (it instanceof MavenArtifactRepository) {
+            def url = it.url.toString()
+            if (url == 'https://maven.minecraftforge.net/' || url == 'https://libraries.minecraft.net/' || url == 'https://repo.maven.apache.org/maven2/') {
+                try {
+                    it.content {
+                        excludeGroup 'com.teamcofh'
+                    }
+                    println("Adding exclusions to ${it.url}")
+                } catch (Exception ignored) {
+                    //oh well
+                }
+            }
+        }
+    }
+}
+
+configurations {
+    all {
+        exclude group: 'mezz.jei', module: 'jei-1.19.2-common'
+        exclude group: 'mezz.jei', module: 'jei-1.19.2-forge'
+    }
+}
+
+dependencies {
+    implementation(project(':ExNihiloSequentia')) {
+        transitive = false
+    }
+
+    if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
+        implementation fg.deobf("com.teamcofh:cofh_core:${minecraftVersion}-${cofh_core_version}")
+        implementation fg.deobf("com.teamcofh:thermal_foundation:${minecraftVersion}-${thermal_foundation_version}")
+        implementation fg.deobf("com.teamcofh:thermal_core:${minecraftVersion}-${thermal_core_version}")
+    }
+}
