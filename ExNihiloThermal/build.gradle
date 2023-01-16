@@ -2,7 +2,7 @@ plugins {
     id 'mc-mod'
 }
 
-group = "novamachina.exnihiloae"
+group = "novamachina.exnihilothermal"
 archivesBaseName = "${artifact_basename}"
 
 minecraft {
@@ -15,10 +15,10 @@ minecraft {
 
 repositories {
     maven {
-        name 'Modmaven'
-        url 'https://modmaven.dev/'
+        name 'CoFH'
+        url 'https://nexus.covers1624.net/repository/cofh-releases/'
         content {
-            includeGroup 'appeng'
+            includeGroup 'com.teamcofh'
         }
     }
 
@@ -29,7 +29,7 @@ repositories {
             if (url == 'https://maven.minecraftforge.net/' || url == 'https://libraries.minecraft.net/' || url == 'https://repo.maven.apache.org/maven2/') {
                 try {
                     it.content {
-                        excludeGroup 'appeng'
+                        excludeGroup 'com.teamcofh'
                     }
                     println("Adding exclusions to ${it.url}")
                 } catch (Exception ignored) {
@@ -40,12 +40,21 @@ repositories {
     }
 }
 
+configurations {
+    all {
+        exclude group: 'mezz.jei', module: 'jei-1.19.2-common'
+        exclude group: 'mezz.jei', module: 'jei-1.19.2-forge'
+    }
+}
+
 dependencies {
     implementation(project(':ExNihiloSequentia')) {
         transitive = false
     }
 
-    if (project.hasProperty('ae2_version')) {
-        implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}")
+    if (project.hasProperty('thermal_foundation_version') && project.hasProperty('cofh_core_version')) {
+        implementation fg.deobf("com.teamcofh:cofh_core:${minecraftVersion}-${cofh_core_version}")
+        implementation fg.deobf("com.teamcofh:thermal_foundation:${minecraftVersion}-${thermal_foundation_version}")
+        implementation fg.deobf("com.teamcofh:thermal_core:${minecraftVersion}-${thermal_core_version}")
     }
 }
