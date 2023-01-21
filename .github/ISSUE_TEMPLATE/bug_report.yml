@@ -40,7 +40,6 @@ body:
     attributes:
       label: Minecraft Version
       options:
-        - 1.16.X
         - 1.18.2
         - 1.19.X
     validations:
@@ -54,7 +53,7 @@ body:
   - type: input
     attributes:
       label: "Ex Nihilo: Sequentia Version"
-      placeholder: 20220101-111111
+      placeholder: 4.0.0.0
     validations:
       required: true
   - type: textarea

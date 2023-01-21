@@ -7,10 +7,10 @@ pipeline {
         NEXUS_PASSWORD = credentials('MavenPassword')
         CURSEFORGE_KEY = credentials('CurseForgeAPIKey')
         DISCORD_WEBHOOK_URL = credentials('discord-webhook-url')
-        DISCORD_PREFIX = "Job: Ex Nihilo Branch: ${BRANCH_NAME} Build: #${BUILD_NUMBER}"
+        DISCORD_PREFIX = "Job: ExNihiloSequentia Branch: ${BRANCH_NAME} Build: #${BUILD_NUMBER}"
     }
     options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
+        buildDiscarder(logRotator(numToKeepStr: '5'))
     }
     stages {
         stage('Notify Start') {
@@ -36,116 +36,30 @@ pipeline {
                 }
             }
         }
-        stage('Get Artifacts to Build') {
+        stage('Should Deploy Artifact') {
             steps {
                 script {
-                    env.DEPLOY_AE = sh (
-                        script: 'git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/ae || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/ae || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/generated/exnihiloae',
-                        returnStatus: true
-                    ) == 0
-                    env.DEPLOY_API = sh (
-                        script: 'git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/api',
-                        returnStatus: true
-                    ) == 0
-                    env.DEPLOY_MAIN = sh (
+                    env.SHOULD_DEPLOY = sh (
                         script: 'git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/main || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/main || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/generated/exnihilosequentia',
+                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen',
                         returnStatus: true
                     ) == 0
-                    env.DEPLOY_MEKANISM = sh (
-                        script: 'git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/mekanism || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/mekanism || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/generated/exnihilomekanism',
-                        returnStatus: true
-                    ) == 0
-                    env.DEPLOY_THERMAL = sh (
-                        script: 'git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/thermal || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/thermal || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/generated/exnihilothermal',
-                        returnStatus: true
-                    ) == 0
-                    env.DEPLOY_TINKERS = sh (
-                        script: 'git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/tinkers || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/tinkers || \
-                                 git diff --stat --name-only ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT} | grep -q src/datagen/generated/exnihilotinkers',
-                        returnStatus: true
-                    ) == 0
-                    echo "Should deploy AE: ${DEPLOY_AE}"
-                    echo "Should deploy API: ${DEPLOY_API}"
-                    echo "Should deploy MAIN: ${DEPLOY_MAIN}"
-                    echo "Should deploy MEKANSIM: ${DEPLOY_MEKANISM}"
-                    echo "Should deploy THERMAL: ${DEPLOY_THERMAL}"
-                    echo "Should deploy TINKERS: ${DEPLOY_TINKERS}"
+                    echo "Should deploy artifact: ${SHOULD_DEPLOY}"
                 }
             }
         }
         stage('Deploy Packages') {
             when {
-                branch '1.19'
+                allOf {
+                    branch '1.19';
+                    expression {
+                        env.SHOULD_DEPLOY == 'true'
+                    }
+                }
             }
-            parallel {
-                stage('AE') {
-                    when {
-                        expression {
-                            env.DEPLOY_AE == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew curseforge428204 publishAePublicationToMavenRepository'
-                        }
-                    }
-                }
-                stage('Main') {
-                    when {
-                        expression {
-                            env.DEPLOY_MAIN == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew curseforge400012 publishMainPublicationToMavenRepository'
-                        }
-                    }
-                }
-                stage('Mekanism') {
-                    when {
-                        expression {
-                            env.DEPLOY_MEKANISM == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-                            sh './gradlew curseforge430787 publishMekanismPublicationToMavenRepository'
-                        }
-                    }
-                }
-                stage('Thermal') {
-                    when {
-                        expression {
-                            env.DEPLOY_THERMAL == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-//                             sh './gradlew curseforge445226 publishThermalPublicationToMavenRepository'
-                        }
-                    }
-                }
-                stage('Tinkers') {
-                    when {
-                        expression {
-                            env.DEPLOY_TINKERS == 'true'
-                        }
-                    }
-                    steps {
-                        withGradle {
-//                             sh './gradlew curseforge480856 publishTinkersPublicationToMavenRepository'
-                        }
-                    }
+            steps {
+                withGradle {
+                    sh './gradlew publishCurseForge publishMainPublicationToMavenRepository'
                 }
             }
         }
