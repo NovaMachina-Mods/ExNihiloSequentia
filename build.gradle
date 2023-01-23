@@ -475,3 +475,43 @@ task publishCurseForge(type: TaskPublishCurseForge) {
     mainFile.addOptional("jei")
     mainFile.addOptional("the-one-probe")
 }
+
+if(rootProject.name != project.name) {
+    task updateToolingProperties(type: WriteProperties) {
+        outputFile("gradle.properties")
+
+        doFirst {
+            def currentProps = getProps(file("gradle.properties"))
+            def rootProps = getProps(file("$rootDir/gradle.properties"))
+
+            rootProps.forEach((key, value) -> {
+                if (currentProps.containsKey(key)) {
+                    currentProps.put(key, value)
+                }
+            })
+
+            properties(currentProps)
+        }
+
+        comment('''This file may have been edited by a Gradle Task.
+
+A note on the 'modVersion' property
+Version pattern: MAJORMOD.MAJORAPI.MINOR.PATCH (Only MAJORMOD.MAJORAPI.MINOR are declared here)
+Update MAJORMOD when mod objects (items, blocks, block entities) are removed or fundamental mechanics are changed
+Update MAJORAPI when any part of the mod's public-facing API is change (reordering enums, changing method signatures, or removal of public methods)
+Update MINOR when mod objects (items, blocks, block entities) or non-fundamental mechanics are added, or elements of the API are deprecated (but not removed)
+PATCH will automatically be appended to the version and handled by Jenkins''')
+    }
+}
+
+Map<String, Object> getProps(File propFile) {
+    Map<String, Object> mappedProps = new HashMap<>()
+    Properties props = new Properties()
+    if (propFile.canRead()) {
+        props.load(new FileInputStream(propFile))
+        props.forEach((key, value) -> {
+            mappedProps.put(key as String, value)
+        })
+    }
+    return mappedProps
+}
