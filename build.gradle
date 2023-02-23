@@ -324,11 +324,11 @@ publishing {
     }
     repositories {
         maven {
-            url = "https://repo.jacob-williams.me/repository/internal"
+            name = "cloudsmith"
+            url = "https://maven.cloudsmith.io/novamachina-mods/ex-nihilo-sequentia/"
             credentials {
-                username = System.getenv("NEXUS_USERNAME")
-                password = System.getenv("NEXUS_PASSWORD")
-            }
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
         }
     }
 }

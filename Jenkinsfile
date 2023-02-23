@@ -3,8 +3,8 @@ pipeline {
       label 'master'
     }
     environment {
-        NEXUS_USERNAME = credentials('MavenUser')
-        NEXUS_PASSWORD = credentials('MavenPassword')
+        MAVEN_USERNAME = credentials('cloudsmith-username')
+        MAVEN_PASSWORD = credentials('cloudsmith-password')
         CURSEFORGE_KEY = credentials('CurseForgeAPIKey')
         DISCORD_WEBHOOK_URL = credentials('discord-webhook-url')
         DISCORD_PREFIX = "Job: ExNihiloSequentia Branch: ${BRANCH_NAME} Build: #${BUILD_NUMBER}"
@@ -59,7 +59,8 @@ pipeline {
             }
             steps {
                 withGradle {
-                    sh './gradlew publishCurseForge publishMainPublicationToMavenRepository'
+//                     sh './gradlew publishCurseForge publishMainPublicationToMavenRepository'
+                    sh './gradlew publishMainPublicationToMavenRepository'
                 }
             }
         }
