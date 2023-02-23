@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-      label 'master'
-    }
+    agent any
     environment {
         MAVEN_USERNAME = credentials('cloudsmith-username')
         MAVEN_PASSWORD = credentials('cloudsmith-password')
