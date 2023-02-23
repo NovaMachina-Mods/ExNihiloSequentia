@@ -50,6 +50,6 @@ object Build : BuildType({
 })
 
 object BuildSecondaryBranches : BuildType({
-    templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_Publish"), AbsoluteId("NovaMachinaMods_ExcludeDefaultBranch"))
+    templates(AbsoluteId("NovaMachinaMods_ExcludeDefaultBranch"), AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_Publish"))
     name = "Build Secondary Branches"
 })
