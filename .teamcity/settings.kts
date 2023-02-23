@@ -28,6 +28,7 @@ version = "2022.10"
 project {
 
     buildType(Build)
+    buildType(BuildSecondaryBranches)
 
     params {
         text("git_main_branch", "1.19", label = "Git Main Branch", description = "The git main or default branch to use in VCS operations.", display = ParameterDisplay.HIDDEN, allowEmpty = false)
@@ -46,4 +47,9 @@ project {
 object Build : BuildType({
     templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_Publish"))
     name = "Build"
+})
+
+object BuildSecondaryBranches : BuildType({
+    templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_Publish"))
+    name = "Build Secondary Branches"
 })
