@@ -27,6 +27,8 @@ version = "2022.10"
 
 project {
 
+    buildType(Build)
+
     params {
         text("git_main_branch", "1.19", label = "Git Main Branch", description = "The git main or default branch to use in VCS operations.", display = ParameterDisplay.HIDDEN, allowEmpty = false)
         text("github_repository_name", "ExNihiloSequentia", label = "The github repository name. Used to connect to it in VCS Roots.", description = "This is the repository slug on github. So for example `ExNihiloSequentia` or `ExNihiloMekanism`. It is interpolated into the global VCS Roots.", display = ParameterDisplay.HIDDEN, allowEmpty = false)
@@ -40,3 +42,8 @@ project {
         }
     }
 }
+
+object Build : BuildType({
+    templates(AbsoluteId("NovaMachinaMods_BuildMainBranches"))
+    name = "Build"
+})
