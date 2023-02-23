@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
+import jetbrains.buildServer.configs.kotlin.projectFeatures.githubIssues
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 /*
@@ -30,6 +31,14 @@ version = "2022.10"
 project {
 
     buildType(Build)
+
+    features {
+        githubIssues {
+            id = "PROJECT_EXT_3"
+            displayName = "NovaMachina-Mods/ExNihiloSequentia"
+            repositoryURL = "https://github.com/NovaMachina-Mods/ExNihiloSequentia"
+        }
+    }
 }
 
 object Build : BuildType({
