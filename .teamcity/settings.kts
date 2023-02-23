@@ -44,6 +44,6 @@ project {
 }
 
 object Build : BuildType({
-    templates(AbsoluteId("NovaMachinaMods_BuildMainBranches"))
+    templates(AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_DiscordNotify"))
     name = "Build"
 })
