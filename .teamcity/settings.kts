@@ -60,6 +60,10 @@ object Build : BuildType({
 
     allowExternalStatus = true
 
+    params {
+        text("notify_discord", "true", label = "Notify Discord", description = "Should notify Discord of build status", display = ParameterDisplay.HIDDEN, allowEmpty = false)
+    }
+
     vcs {
         root(DslContext.settingsRoot)
     }
@@ -79,6 +83,10 @@ object Build : BuildType({
 object BuildPullRequests : BuildType({
     templates(AbsoluteId("NovaMachinaMods_BuildPullRequests"), AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"))
     name = "Build Pull Requests"
+
+    params {
+        text("notify_discord", "false", label = "Notify Discord", description = "Should notify Discord of build status", display = ParameterDisplay.HIDDEN, allowEmpty = false)
+    }
 
     vcs {
         root(DslContext.settingsRoot)
@@ -122,6 +130,10 @@ object BuildPullRequests : BuildType({
 object BuildSecondaryBranches : BuildType({
     templates(AbsoluteId("NovaMachinaMods_ExcludeDefaultBranch"), AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"))
     name = "Build Secondary Branches"
+
+    params {
+        text("notify_discord", "false", label = "Notify Discord", description = "Should notify Discord of build status", display = ParameterDisplay.HIDDEN, allowEmpty = false)
+    }
 
     vcs {
         root(DslContext.settingsRoot)
