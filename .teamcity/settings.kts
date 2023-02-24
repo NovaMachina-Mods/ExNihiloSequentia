@@ -60,7 +60,7 @@ object Build : BuildType({
 })
 
 object BuildPullRequests : BuildType({
-    templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"))
+    templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_BuildPullRequests"))
     name = "Build Pull Requests"
 
     vcs {
