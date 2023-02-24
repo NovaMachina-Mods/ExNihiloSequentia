@@ -35,9 +35,9 @@ project {
     buildType(BuildSecondaryBranches)
 
     params {
-        text("docker_gradle_version", "7.6", label = "Docker Gradle Version", description = "Version of gradle to use in docker", display = ParameterDisplay.HIDDEN, allowEmpty = false)
         text("docker_jdk_version", "17", label = "Docker Java Version", description = "Version of Java to use in docker", display = ParameterDisplay.HIDDEN, allowEmpty = false)
         text("git_main_branch", "1.19", label = "Git Main Branch", description = "The git main or default branch to use in VCS operations.", display = ParameterDisplay.HIDDEN, allowEmpty = false)
+        text("docker_gradle_version", "7.6", label = "Docker Gradle Version", description = "Version of gradle to use in docker", display = ParameterDisplay.HIDDEN, allowEmpty = false)
         text("github_repository_name", "ExNihiloSequentia", label = "The github repository name. Used to connect to it in VCS Roots.", description = "This is the repository slug on github. So for example `ExNihiloSequentia` or `ExNihiloMekanism`. It is interpolated into the global VCS Roots.", display = ParameterDisplay.HIDDEN, allowEmpty = false)
     }
 
@@ -92,7 +92,9 @@ object BuildPullRequests : BuildType({
             id = "BUILD_EXT_2"
             vcsRootExtId = "${DslContext.settingsRoot.id}"
             provider = github {
-                authType = vcsRoot()
+                authType = token {
+                    token = "credentialsJSON:4cf444c6-a208-41d9-a86a-0ef855551934"
+                }
                 filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
             }
         }
