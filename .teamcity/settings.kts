@@ -56,6 +56,8 @@ object Build : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+    
+    disableSettings("RUNNER_3")
 })
 
 object BuildSecondaryBranches : BuildType({
