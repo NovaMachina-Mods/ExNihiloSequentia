@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
+import jetbrains.buildServer.configs.kotlin.buildFeatures.dockerSupport
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.projectFeatures.githubIssues
@@ -61,6 +62,15 @@ object Build : BuildType({
         root(DslContext.settingsRoot)
 
         branchFilter = "+:%git_main_branch%"
+    }
+
+    features {
+        dockerSupport {
+            id = "DockerSupport"
+            loginToRegistry = on {
+                dockerRegistryId = "PROJECT_EXT_4"
+            }
+        }
     }
     
     disableSettings("RUNNER_3")
