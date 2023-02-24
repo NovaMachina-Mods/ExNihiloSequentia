@@ -60,14 +60,25 @@ object Build : BuildType({
 })
 
 object BuildPullRequests : BuildType({
-    templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_Publish"))
+    templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"))
     name = "Build Pull Requests"
 
     vcs {
         root(DslContext.settingsRoot)
     }
-    
-    disableSettings("RUNNER_3")
+
+    steps {
+        gradle {
+            name = "Publish"
+            id = "RUNNER_3"
+            enabled = false
+            tasks = "publishCurseForge publishMainPublicationToMavenRepository"
+            buildFile = "build.gradle"
+            dockerImage = "gradle:7.6-jdk17"
+            dockerRunParameters = "-u root -v /home/buildagent/.gradle:/home/gradle/.gradle"
+        }
+        stepsOrder = arrayListOf("RUNNER_4", "RUNNER_7", "RUNNER_8", "RUNNER_3", "RUNNER_1", "RUNNER_5", "RUNNER_2")
+    }
 })
 
 object BuildSecondaryBranches : BuildType({
