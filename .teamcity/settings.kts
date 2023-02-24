@@ -4,6 +4,8 @@ import jetbrains.buildServer.configs.kotlin.buildFeatures.dockerSupport
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.projectFeatures.githubIssues
+import jetbrains.buildServer.configs.kotlin.triggers.VcsTrigger
+import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -93,6 +95,14 @@ object BuildPullRequests : BuildType({
             dockerRunParameters = "-u root -v /home/buildagent/.gradle:/home/gradle/.gradle"
         }
         stepsOrder = arrayListOf("RUNNER_7", "RUNNER_8", "RUNNER_4", "RUNNER_3", "RUNNER_1", "RUNNER_5", "RUNNER_2")
+    }
+
+    triggers {
+        vcs {
+            id = "TRIGGER_2"
+            quietPeriodMode = VcsTrigger.QuietPeriodMode.USE_CUSTOM
+            quietPeriod = 120
+        }
     }
 
     features {
