@@ -1,4 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
+import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.projectFeatures.githubIssues
 
@@ -82,6 +84,17 @@ object BuildPullRequests : BuildType({
             dockerRunParameters = "-u root -v /home/buildagent/.gradle:/home/gradle/.gradle"
         }
         stepsOrder = arrayListOf("RUNNER_7", "RUNNER_8", "RUNNER_4", "RUNNER_3", "RUNNER_1", "RUNNER_5", "RUNNER_2")
+    }
+
+    features {
+        pullRequests {
+            id = "BUILD_EXT_2"
+            vcsRootExtId = "${DslContext.settingsRoot.id}"
+            provider = github {
+                authType = vcsRoot()
+                filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
+            }
+        }
     }
 })
 
