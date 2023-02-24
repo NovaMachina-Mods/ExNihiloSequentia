@@ -47,6 +47,10 @@ project {
 object Build : BuildType({
     templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_Publish"))
     name = "Build"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
 })
 
 object BuildSecondaryBranches : BuildType({
