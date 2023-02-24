@@ -28,6 +28,7 @@ version = "2022.10"
 
 project {
 
+    buildType(BuildPullRequests)
     buildType(Build)
     buildType(BuildSecondaryBranches)
 
@@ -53,6 +54,17 @@ object Build : BuildType({
         root(DslContext.settingsRoot)
 
         branchFilter = "+:%git_main_branch%"
+    }
+    
+    disableSettings("RUNNER_3")
+})
+
+object BuildPullRequests : BuildType({
+    templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_Publish"))
+    name = "Build Pull Requests"
+
+    vcs {
+        root(DslContext.settingsRoot)
     }
     
     disableSettings("RUNNER_3")
