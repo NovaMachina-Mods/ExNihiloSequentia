@@ -55,6 +55,8 @@ object Build : BuildType({
 
     vcs {
         root(DslContext.settingsRoot)
+
+        branchFilter = "+:%git_main_branch%"
     }
     
     disableSettings("RUNNER_3")
