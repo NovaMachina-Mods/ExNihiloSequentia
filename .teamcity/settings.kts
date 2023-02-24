@@ -51,6 +51,8 @@ object Build : BuildType({
     name = "Build"
     description = "Builds and Publishes the main branches of the project."
 
+    allowExternalStatus = true
+
     vcs {
         root(DslContext.settingsRoot)
 
