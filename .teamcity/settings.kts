@@ -49,10 +49,6 @@ object Build : BuildType({
     templates(AbsoluteId("NovaMachinaMods_DiscordNotify"), AbsoluteId("NovaMachinaMods_BuildMainBranches"), AbsoluteId("NovaMachinaMods_Publish"))
     name = "Build"
 
-    params {
-        param("git_main_repo", "ExNihiloSequentia")
-    }
-
     vcs {
         root(DslContext.settingsRoot)
 
