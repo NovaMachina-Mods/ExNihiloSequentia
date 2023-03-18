@@ -20,9 +20,21 @@ steps:
       --header 'Content-Type: application/json' \
       --data '{"embeds": [{"title": "Build started for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 3224808}]}'
 - task: Gradle@3
+  name: CleanWorkspace
+  displayName: Clean Gradle Workspace
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx6144m'
     javaHomeOption: 'JDKVersion'
     tasks: 'clean'
+
+- task: Gradle@3
+  name: BuildProject
+  displayName: Build Project
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx6144m'
+    javaHomeOption: 'JDKVersion'
+    tasks: 'build'
