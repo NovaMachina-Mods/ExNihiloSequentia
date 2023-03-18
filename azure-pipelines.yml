@@ -6,8 +6,7 @@
 trigger:
 - 1.19
 
-pool:
-  vmImage: ubuntu-latest
+pool: Self-hosted Agents
 
 steps:
 - task: CmdLine@2
