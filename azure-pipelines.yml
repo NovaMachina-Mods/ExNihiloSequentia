@@ -15,6 +15,18 @@ pr:
 pool: Self-hosted Agents
 
 steps:
+- task: CmdLine@2
+  name: NotifyDiscordStart
+  displayName: Notify Discord of Run Start
+  env:
+    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
+  condition: ne(variables['Build.Reason'], 'Pull Request')
+  inputs:
+    script: |
+      curl --location $DISCORD_WEBHOOK_URL \
+      --header 'Content-Type: application/json' \
+      --data '{"embeds": [{"title": "Build started for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 3224808}]}'
+        
 - task: Gradle@3
   name: CleanWorkspace
   displayName: Clean Gradle Workspace
@@ -34,3 +46,26 @@ steps:
     gradleOptions: '-Xmx6144m'
     javaHomeOption: 'JDKVersion'
     tasks: 'build'
+
+- task: CmdLine@2
+  name: NotifyDiscordSuccess
+  displayName: Notify Discord of Succeded Build
+  env:
+    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
+  condition: eq(variables['Agent.JobStatus'], 'Succeeded')
+  inputs:
+    script: |
+      curl --location $DISCORD_WEBHOOK_URL \
+      --header 'Content-Type: application/json' \
+      --data '{"embeds": [{"title": "Build Succeeded for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 3470945}]}'
+- task: CmdLine@2
+  name: NotifyDiscordFailure
+  displayName: Notify Discord of Failed Build
+  env:
+    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
+  condition: eq(variables['Agent.JobStatus'], 'Failed')
+  inputs:
+    script: |
+      curl --location $DISCORD_WEBHOOK_URL \
+      --header 'Content-Type: application/json' \
+      --data '{"embeds": [{"title": "Build Failed for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 16071463}]}'
