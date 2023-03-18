@@ -8,6 +8,9 @@ trigger:
 
 pool: Self-hosted Agents
 
+variables:
+- name: DISCORD_WEBHOOK_URL
+
 steps:
 - task: CmdLine@2
   inputs:
