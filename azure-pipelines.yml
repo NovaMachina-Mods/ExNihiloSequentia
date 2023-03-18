@@ -5,8 +5,9 @@
 
 trigger:
   branches:
-    exclude:
+    include:
       - 1.19
+      - azure-pipelines
 pr:
   branches:
     include:
