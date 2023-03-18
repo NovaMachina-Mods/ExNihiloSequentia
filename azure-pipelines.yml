@@ -8,14 +8,13 @@ trigger:
 
 pool: Self-hosted Agents
 
-variables:
-- name: DISCORD_WEBHOOK_URL
-
 steps:
 - task: CmdLine@2
+  env:
+    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
   inputs:
     script: |
-      curl --location $(DISCORD_WEBHOOK_URL) \
+      curl --location $DISCORD_WEBHOOK_URL \
       --header 'Content-Type: application/json' \
       --data '{"embeds": [{"title": "Build started for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 3224808}]}'
 # - task: Gradle@2
