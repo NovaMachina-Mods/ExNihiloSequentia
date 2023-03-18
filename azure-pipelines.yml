@@ -4,21 +4,17 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- 1.19
+  branches:
+    exclude:
+      - 1.19
+pr:
+  branches:
+    include:
+      - 1.19
 
 pool: Self-hosted Agents
 
 steps:
-- task: CmdLine@2
-  name: NotifyDiscordStart
-  displayName: Notify Discord of Run Start
-  env:
-    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
-  inputs:
-    script: |
-      curl --location $DISCORD_WEBHOOK_URL \
-      --header 'Content-Type: application/json' \
-      --data '{"embeds": [{"title": "Build started for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 3224808}]}'
 - task: Gradle@3
   name: CleanWorkspace
   displayName: Clean Gradle Workspace
