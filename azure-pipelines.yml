@@ -10,6 +10,8 @@ pool: Self-hosted Agents
 
 steps:
 - task: CmdLine@2
+  name: NotifyDiscordStart
+  displayName: Notify Discord of Run Start
   env:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
   inputs:
@@ -17,14 +19,10 @@ steps:
       curl --location $DISCORD_WEBHOOK_URL \
       --header 'Content-Type: application/json' \
       --data '{"embeds": [{"title": "Build started for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 3224808}]}'
-# - task: Gradle@2
-#   inputs:
-#     workingDirectory: ''
-#     gradleWrapperFile: 'gradlew'
-#     gradleOptions: '-Xmx3072m'
-#     javaHomeOption: 'JDKVersion'
-#     jdkVersionOption: '1.8'
-#     jdkArchitectureOption: 'x64'
-#     publishJUnitResults: true
-#     testResultsFiles: '**/TEST-*.xml'
-#     tasks: 'build'
+- task: Gradle@3
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx6144m'
+    javaHomeOption: 'JDKVersion'
+    tasks: 'clean'
