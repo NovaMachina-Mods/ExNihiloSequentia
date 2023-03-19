@@ -21,7 +21,7 @@ steps:
   displayName: Notify Discord of Run Start
   env:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
-  condition: ne(variables['Build.Reason'], 'Pull Request')
+  condition: ne(variables['Build.Reason'], 'PullRequest')
   inputs:
     script: |
       curl --location $DISCORD_WEBHOOK_URL \
@@ -53,7 +53,7 @@ steps:
   displayName: Notify Discord of Succeded Build
   env:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
-  condition: and(ne(variables['Build.Reason'], 'Pull Request'), eq(variables['Agent.JobStatus'], 'Succeeded'))
+  condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.JobStatus'], 'Succeeded'))
   inputs:
     script: |
       curl --location $DISCORD_WEBHOOK_URL \
@@ -64,7 +64,7 @@ steps:
   displayName: Notify Discord of Failed Build
   env:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
-  condition: and(ne(variables['Build.Reason'], 'Pull Request'), eq(variables['Agent.JobStatus'], 'Failed'))
+  condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.JobStatus'], 'Failed'))
   inputs:
     script: |
       curl --location $DISCORD_WEBHOOK_URL \
