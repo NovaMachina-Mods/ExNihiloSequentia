@@ -7,7 +7,6 @@ trigger:
   branches:
     include:
       - 1.19
-      - azure-pipelines
 pr:
   branches:
     include:
@@ -16,17 +15,15 @@ pr:
 pool: Self-hosted Agents
 
 steps:
-- task: CmdLine@2
+- task: Bash@3
   name: NotifyDiscordStart
   displayName: Notify Discord of Run Start
   env:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
   condition: ne(variables['Build.Reason'], 'PullRequest')
   inputs:
-    script: |
-      curl --location $DISCORD_WEBHOOK_URL \
-      --header 'Content-Type: application/json' \
-      --data '{"embeds": [{"title": "Build started for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 3224808}]}'
+    filePath: 'scripts/discord-notify'
+    arguments: 'started 3224808'
 
 - task: Gradle@3
   name: CleanWorkspace
@@ -48,17 +45,33 @@ steps:
     javaHomeOption: 'JDKVersion'
     tasks: 'build'
 
-- task: CmdLine@2
+- task: Bash@3
+  name: ShouldDeploy
+  displayName: Should Deploy Project
+  condition: eq(variables['Build.SourceBranchName']. '1.19')
+  inputs:
+    script: |
+      echo "##vso[task.setVariable variable=shouldDeploy;]true"
+
+- task: Bash@3
   name: NotifyDiscordSuccess
-  displayName: Notify Discord of Succeded Build
+  displayName: Notify Discord of Deployment
+  condition: eq($(shouldDeploy), true)
+  env:
+    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
+  inputs:
+    filePath: 'scripts/discord-notify'
+    arguments: 'DEPLOYED 3470945'
+
+- task: Bash@3
+  name: NotifyDiscordSuccess
+  displayName: Notify Discord of Succeeded Build
   env:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
   condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.JobStatus'], 'Succeeded'))
   inputs:
-    script: |
-      curl --location $DISCORD_WEBHOOK_URL \
-      --header 'Content-Type: application/json' \
-      --data '{"embeds": [{"title": "Build Succeeded for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 3470945}]}'
+    filePath: 'scripts/discord-notify'
+    arguments: 'Succeeded 3470945'
 - task: CmdLine@2
   name: NotifyDiscordFailure
   displayName: Notify Discord of Failed Build
@@ -66,7 +79,5 @@ steps:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
   condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.JobStatus'], 'Failed'))
   inputs:
-    script: |
-      curl --location $DISCORD_WEBHOOK_URL \
-      --header 'Content-Type: application/json' \
-      --data '{"embeds": [{"title": "Build Failed for $(Build.Repository.Name)", "description": "Pipeline run $(Build.BuildNumber)", "color": 16071463}]}'
+    filePath: 'scripts/discord-notify'
+    arguments: 'Failed 16071463'
