@@ -49,20 +49,32 @@ steps:
 - task: Bash@3
   name: ShouldDeploy
   displayName: Should Deploy Project
-  condition: eq(variables['Build.SourceBranchName'], 'merge')
+  condition: eq(variables['Build.SourceBranchName'], '1.19')
   inputs:
     targetType: 'inline'
     script: 'echo "##vso[task.setVariable variable=shouldDeploy;]true"'
 
-- task: Bash@3
-  name: NotifyDiscordDeploy
-  displayName: Notify Discord of Deployment
+- task: Gradle@3
+  name: CloudSmithDeploy
+  displayName: Deploy to CloudSmith
   condition: eq(variables['shouldDeploy'], true)
-  env:
-    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
   inputs:
-    filePath: 'scripts/discord-notify'
-    arguments: 'DEPLOYED 3470945 $(Build.Repository.Name) $(Build.BuildNumber)'
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx6144m'
+    javaHomeOption: 'JDKVersion'
+    tasks: 'publishMainPublicationToMavenRepository'
+
+- task: Gradle@3
+  name: CurseForgeDeploy
+  displayName: Deploy to CurseForge
+  condition: eq(variables['shouldDeploy'], true)
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx6144m'
+    javaHomeOption: 'JDKVersion'
+    tasks: 'publishCurseForge'
 
 - task: Bash@3
   name: NotifyDiscordSuccess
