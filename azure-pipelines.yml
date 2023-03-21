@@ -48,13 +48,13 @@ steps:
 - task: Bash@3
   name: ShouldDeploy
   displayName: Should Deploy Project
-  condition: eq(variables['Build.SourceBranchName']. '1.19')
+  condition: eq(variables['Build.SourceBranchName'], '1.19')
   inputs:
     script: |
       echo "##vso[task.setVariable variable=shouldDeploy;]true"
 
 - task: Bash@3
-  name: NotifyDiscordSuccess
+  name: NotifyDiscordDeploy
   displayName: Notify Discord of Deployment
   condition: eq($(shouldDeploy), true)
   env:
