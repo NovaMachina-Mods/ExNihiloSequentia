@@ -4,6 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
+  batch: true
   branches:
     include:
       - 1.19
@@ -56,7 +57,7 @@ steps:
 - task: Bash@3
   name: NotifyDiscordDeploy
   displayName: Notify Discord of Deployment
-  condition: eq($(shouldDeploy), true)
+  condition: eq(variables['shouldDeploy'], true)
   env:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
   inputs:
