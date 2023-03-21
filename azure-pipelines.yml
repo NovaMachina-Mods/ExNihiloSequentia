@@ -51,8 +51,8 @@ steps:
   displayName: Should Deploy Project
   condition: eq(variables['Build.SourceBranchName'], 'merge')
   inputs:
-    script: |
-      echo "##vso[task.setVariable variable=shouldDeploy;]true"
+    targetType: 'inline'
+    script: 'echo "##vso[task.setVariable variable=shouldDeploy;]true"'
 
 - task: Bash@3
   name: NotifyDiscordDeploy
