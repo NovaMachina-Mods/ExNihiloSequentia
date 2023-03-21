@@ -2,8 +2,8 @@
 RUN_RESULT=$1
 COLOR=$2
 DISCORD_WEBHOOK=$DISCORD_WEBHOOK_URL
-REPOSITORY_NAME=$(Build.Repository.Name)
-BUILD_NUMBER=$(Build.BuildNumber)
+REPOSITORY_NAME=$3
+BUILD_NUMBER=$4
 
 if [[ -z $RUN_RESULT ]]; then
   printf "Missing run result\n"

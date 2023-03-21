@@ -24,7 +24,7 @@ steps:
   condition: ne(variables['Build.Reason'], 'PullRequest')
   inputs:
     filePath: 'scripts/discord-notify'
-    arguments: 'started 3224808'
+    arguments: 'started 3224808 $(Build.Repository.Name) $(Build.BuildNumber)'
 
 - task: Gradle@3
   name: CleanWorkspace
@@ -62,7 +62,7 @@ steps:
     DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
   inputs:
     filePath: 'scripts/discord-notify'
-    arguments: 'DEPLOYED 3470945'
+    arguments: 'DEPLOYED 3470945 $(Build.Repository.Name) $(Build.BuildNumber)'
 
 - task: Bash@3
   name: NotifyDiscordSuccess
@@ -72,7 +72,7 @@ steps:
   condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.JobStatus'], 'Succeeded'))
   inputs:
     filePath: 'scripts/discord-notify'
-    arguments: 'Succeeded 3470945'
+    arguments: 'Succeeded 3470945 $(Build.Repository.Name) $(Build.BuildNumber)'
 - task: CmdLine@2
   name: NotifyDiscordFailure
   displayName: Notify Discord of Failed Build
@@ -81,4 +81,4 @@ steps:
   condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.JobStatus'], 'Failed'))
   inputs:
     filePath: 'scripts/discord-notify'
-    arguments: 'Failed 16071463'
+    arguments: 'Failed 16071463 $(Build.Repository.Name) $(Build.BuildNumber)'
