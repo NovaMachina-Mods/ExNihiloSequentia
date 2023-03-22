@@ -23,7 +23,7 @@ plugins {
 if(!System.getenv('CI')) {
     apply plugin: 'com.diffplug.spotless'
     spotless {
-        ratchetFrom 'origin/1.19'
+        //ratchetFrom 'origin/1.19'
         format 'misc', {
             target '*.gradle', '*.md', '.gitignore'
 
@@ -155,19 +155,21 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven {
-        name 'prog'
-        url 'https://dvs1.progwml6.com/files/maven'
-        content {
-            includeGroup 'mezz.jei'
-        }
-    }
+    //moved from progwml6 to blamejared's repo (for future updates)
+    //maven {
+    //    name 'prog'
+    //    url 'https://dvs1.progwml6.com/files/maven'
+    //    content {
+    //        includeGroup 'mezz.jei'
+    //    }
+    //}
     maven {
         name 'CraftTweaker'
         url "https://maven.blamejared.com"
         content {
             includeGroup 'com.blamejared.crafttweaker'
             includeGroup 'org.openzen.zencode'
+            includeGroup 'mezz.jei'
         }
     }
     maven {
@@ -243,6 +245,7 @@ dependencies {
     implementation fg.deobf("dev.latvian.mods:kubejs-forge:${property("kubejsVersion")}")
     implementation fg.deobf("dev.latvian.mods:rhino-forge:${property("rhinoVersion")}")
     implementation fg.deobf("dev.architectury:architectury-forge:${property("architecturyVersion")}")
+    runtimeOnly fg.deobf("curse.maven:sd-223852:3884263")
 }
 
 String projectProperName = property("projectProperName")
