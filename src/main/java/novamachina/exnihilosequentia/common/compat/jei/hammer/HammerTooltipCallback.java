@@ -22,7 +22,7 @@ import novamachina.exnihilosequentia.common.utility.StringUtils;
 
   @Override
   public void onTooltip(IRecipeSlotView recipeSlotView, List<Component> tooltip) {
-    if (recipeSlotView.getRole() == RecipeIngredientRole.INPUT) {
+    if (recipeSlotView.getRole() == RecipeIngredientRole.OUTPUT) {
       Optional<ITypedIngredient<?>> optional = recipeSlotView.getDisplayedIngredient();
       optional.ifPresent(
           iTypedIngredient ->
