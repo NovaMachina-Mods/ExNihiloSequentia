@@ -245,7 +245,6 @@ dependencies {
     implementation fg.deobf("dev.latvian.mods:kubejs-forge:${property("kubejsVersion")}")
     implementation fg.deobf("dev.latvian.mods:rhino-forge:${property("rhinoVersion")}")
     implementation fg.deobf("dev.architectury:architectury-forge:${property("architecturyVersion")}")
-    runtimeOnly fg.deobf("curse.maven:sd-223852:3884263")
 }
 
 String projectProperName = property("projectProperName")
