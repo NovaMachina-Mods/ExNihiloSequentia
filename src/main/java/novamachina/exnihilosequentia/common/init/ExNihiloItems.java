@@ -32,6 +32,7 @@ import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
+@SuppressWarnings("unused")
 public class ExNihiloItems {
 
   public static final List<RegistryObject<CrookBaseItem>> CROOKS = new ArrayList<>();
@@ -86,23 +87,6 @@ public class ExNihiloItems {
           ExNihiloConstants.Ore.URANIUM, Optional.empty(), Optional.empty(), Optional.empty());
   public static final Ore ZINC =
       createOre(ExNihiloConstants.Ore.ZINC, Optional.empty(), Optional.empty(), Optional.empty());
-  //  public static final RegistryObject<ResourceItem> NUGGET_ALUMINUM =
-  // registerResourceItem(Items.ALUMINUM_NUGGET);
-  //  public static final RegistryObject<Item> NUGGET_COPPER = createNugget(Items.COPPER_NUGGET);
-  //  public static final RegistryObject<ResourceItem> NUGGET_LEAD =
-  // registerResourceItem(ExNihiloConstants.Items.LEAD_NUGGET);
-  //  public static final RegistryObject<ResourceItem> NUGGET_NICKEL =
-  // registerResourceItem(ExNihiloConstants.Items.NICKEL_NUGGET);
-  //  public static final RegistryObject<ResourceItem> NUGGET_PLATINUM =
-  // registerResourceItem(ExNihiloConstants.Items.PLATINUM_NUGGET);
-  //  public static final RegistryObject<ResourceItem> NUGGET_SILVER =
-  // registerResourceItem(ExNihiloConstants.Items.SILVER_NUGGET);
-  //  public static final RegistryObject<ResourceItem> NUGGET_TIN =
-  // registerResourceItem(ExNihiloConstants.Items.TIN_NUGGET);
-  //  public static final RegistryObject<ResourceItem> NUGGET_URANIUM =
-  // registerResourceItem(ExNihiloConstants.Items.URANIUM_NUGGET);
-  //  public static final RegistryObject<ResourceItem> NUGGET_ZINC =
-  // registerResourceItem(ExNihiloConstants.Items.ZINC_NUGGET);
   public static final RegistryObject<DollItem> BLAZE_DOLL =
       ITEMS.register(
           ExNihiloConstants.Items.BLAZE_DOLL,
@@ -234,72 +218,6 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Items.BEEHIVE_FRAME,
           () -> new ResourceItem(ExNihiloConstants.Items.BEEHIVE_FRAME));
-  //  public static final RegistryObject<SeedBaseItem> SEED_OAK =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_OAK,
-  //          () -> new SeedBaseItem(Blocks.OAK_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_SPRUCE =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_SPRUCE,
-  //          () -> new SeedBaseItem(Blocks.SPRUCE_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_BIRCH =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_BIRCH,
-  //          () -> new SeedBaseItem(Blocks.BIRCH_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_JUNGLE =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_JUNGLE,
-  //          () -> new SeedBaseItem(Blocks.JUNGLE_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_ACACIA =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.ACACIA_SEED,
-  //          () -> new SeedBaseItem(Blocks.ACACIA_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_DARK_OAK =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_DARK_OAK,
-  //          () -> new SeedBaseItem(Blocks.DARK_OAK_SAPLING.defaultBlockState(),
-  // PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_CACTUS =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_CACTUS,
-  //          () -> new SeedBaseItem(Blocks.CACTUS.defaultBlockState(), PlantType.DESERT));
-  //  public static final RegistryObject<SeedBaseItem> SEED_SUGARCANE =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_SUGARCANE,
-  //          () -> new SeedBaseItem(Blocks.SUGAR_CANE.defaultBlockState(), PlantType.BEACH));
-  //  public static final RegistryObject<SeedBaseItem> SEED_CARROT =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_CARROT,
-  //          () -> new SeedBaseItem(Blocks.CARROTS.defaultBlockState(), PlantType.CROP));
-  //  public static final RegistryObject<SeedBaseItem> SEED_POTATO =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_POTATO,
-  //          () -> new SeedBaseItem(Blocks.POTATOES.defaultBlockState(), PlantType.CROP));
-  //  public static final RegistryObject<SeedBaseItem> SEED_SWEET_BERRY =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_SWEET_BERRY,
-  //          () -> new SeedBaseItem(Blocks.SWEET_BERRY_BUSH.defaultBlockState(),
-  // PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_KELP =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_KELP,
-  //          () -> new SeedBaseItem(Blocks.KELP_PLANT.defaultBlockState(), PlantType.WATER));
-  //  public static final RegistryObject<SeedBaseItem> SEED_PICKLE =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_PICKLE,
-  //          () -> new SeedBaseItem(Blocks.SEA_PICKLE.defaultBlockState(), PlantType.WATER));
-  //  public static final RegistryObject<SeedBaseItem> SEED_BAMBOO =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_BAMBOO,
-  //          () -> new SeedBaseItem(Blocks.BAMBOO_SAPLING.defaultBlockState(), PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_FERN =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_FERN,
-  //          () -> new SeedBaseItem(Blocks.FERN.defaultBlockState(), PlantType.PLAINS));
-  //  public static final RegistryObject<SeedBaseItem> SEED_LARGE_FERN =
-  //      ITEMS.register(
-  //          ExNihiloConstants.Items.SEED_LARGE_FERN,
-  //          () -> new SeedBaseItem(Blocks.LARGE_FERN.defaultBlockState(), PlantType.PLAINS));
   public static final RegistryObject<MeshItem> MESH_STRING =
       ITEMS.register(
           ExNihiloConstants.Items.STRING_MESH,
@@ -658,15 +576,6 @@ public class ExNihiloItems {
           () -> new BucketItem(ExNihiloFluids.SEA_WATER, tab.stacksTo(1)));
 
   private ExNihiloItems() {}
-
-  //  private static RegistryObject<Item> createNugget(String id) {
-  //    RegistryObject<Item> nugget =
-  //        ITEMS.register(
-  //            ExNihiloConstants.Items.COPPER_NUGGET,
-  //            () -> new Item(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)));
-  //    NUGGETS.add(nugget);
-  //    return nugget;
-  //  }
 
   private static Ore createOre(
       String id, Optional<Item> rawItem, Optional<Item> ingotItem, Optional<Item> nuggetItem) {
