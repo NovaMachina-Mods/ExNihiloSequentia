@@ -1058,6 +1058,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createWaterSeeds(Items.KELP, consumer);
     createWaterSeeds(Items.SEA_PICKLE, consumer);
 
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(ExNihiloBlocks.CRUSHED_END_STONE.get()))
+        .addResult(Items.CHORUS_FLOWER)
+            .addRoll(new MeshWithChance(ExNihiloItems.MESH_DIAMOND.get().getType(), 0.01f))
+            .addRoll(new MeshWithChance(ExNihiloItems.MESH_EMERALD.get().getType(), 0.02f))
+            .addRoll(new MeshWithChance(ExNihiloItems.MESH_NETHERITE.get().getType(), 0.05f))
+            .build(consumer, sieveLoc("chorus_flower"));
+
     getLeavesSaplings()
         .forEach(
             (input, drop) -> {
