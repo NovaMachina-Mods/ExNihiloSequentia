@@ -1,0 +1,63 @@
+#! /bin/bash
+
+MINECRAFT_VERSION=$(awk '/minecraftVersion=/{split($0,a,"="); print a[2]}' ../gradle.properties)
+MOD_VERSION=$(awk '/modVersion=/{split($0,a,"="); print a[2]}' ../gradle.properties)
+LAST_MOD_VERSION=$(awk '/lastModVersion=/{split($0,a,"="); print a[2]}' ../version.properties)
+LAST_BUILD_NUMBER=$(awk '/lastBuildNumber=/{split($0,a,"="); print a[2]}' ../version.properties)
+CURRENT_BRANCH=$(git branch --show-current)
+MINECRAFT_RELEASE=""
+
+function setVariable() {
+  printf "Setting %s\n" "$1"
+  sed -i -e "s/$1=.*/$1=$2/g" ../"$3"
+}
+
+function checkVariables() {
+  if [[ -z $MINECRAFT_VERSION ]]; then
+    printf "Missing MINECRAFT_VERSION\n"
+    exit 1
+  else
+    IFS='.' read -ra my_array <<< "$MINECRAFT_VERSION"
+    MINECRAFT_RELEASE="${my_array[0]}.${my_array[1]}"
+  fi
+
+  if [[ -z $MOD_VERSION ]]; then
+    printf "Missing MOD_VERSION\n"
+    exit 1
+  fi
+
+  if [[ -z $LAST_MOD_VERSION ]]; then
+    printf "Missing LAST_MOD_VERSION...setting...\n"
+    setVariable "lastModVersion" "$MOD_VERSION" "version.properties"
+  fi
+
+  if [[ -z $LAST_BUILD_NUMBER ]]; then
+    printf "Missing LAST_BUILD_NUMBER...setting...\n"
+    setVariable "lastBuildNumber" "0" "version.properties"
+  fi
+
+  if [[ -z $CURRENT_BRANCH ]]; then
+      printf "Failed to get CURRENT_BRANCH\n"
+      exit 1
+    fi
+}
+
+function updateLast() {
+  if [ "$MOD_VERSION" = "$LAST_MOD_VERSION" ]; then
+      newBuildNumber=0
+      if [[ -n $LAST_BUILD_NUMBER ]]; then
+        newBuildNumber=$((LAST_BUILD_NUMBER + 1))
+      fi
+      setVariable "lastBuildNumber" "$newBuildNumber" "version.properties"
+    fi
+
+  if [ "$MOD_VERSION" != "$LAST_MOD_VERSION" ]; then
+    setVariable "lastModVersion" "$MOD_VERSION" "version.properties"
+    setVariable "lastBuildNumber" "0" "version.properties"
+  fi
+}
+
+checkVariables
+if [ "$CURRENT_BRANCH" = "$MINECRAFT_RELEASE" ]; then
+  updateLast
+fi
