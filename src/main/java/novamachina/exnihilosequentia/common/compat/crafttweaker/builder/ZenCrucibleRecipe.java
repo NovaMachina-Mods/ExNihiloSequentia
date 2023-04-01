@@ -14,7 +14,7 @@ import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenCrucibleRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.CrucibleRecipe")
 @Document("mods/ExNihiloSequentia/Crucible")
 public class ZenCrucibleRecipe {
 
@@ -26,7 +26,17 @@ public class ZenCrucibleRecipe {
        CrucibleTypeEnum.WOOD);
  }
 
- @ZenCodeType.Method
+    /**
+     * Create a recipe name for the new recipe
+     * @param recipeId name of recipe
+     */
+    @ZenCodeType.Method
+    @Nonnull
+    public ZenCrucibleRecipe create(String recipeId) {
+        //this is just for creating docs for crafttweaker
+        return this;
+    }
+
  @Nonnull
  public static ZenCrucibleRecipe builder(@Nonnull final ResourceLocation recipeId) {
    return new ZenCrucibleRecipe(recipeId);
