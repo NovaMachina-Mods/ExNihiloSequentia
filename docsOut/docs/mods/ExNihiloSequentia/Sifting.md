@@ -72,9 +72,9 @@ Return Type: [SieveRecipe](/mods/ExNihiloSequentia/Sifting)
 SieveRecipe.setInput(input as IIngredient) as SieveRecipe
 ```
 
-| Parameter |                        Type                        | Description  |
-|-----------|----------------------------------------------------|--------------|
-| input     | [IIngredient](/vanilla/api/ingredient/IIngredient) | sifted block |
+| Parameter |                        Type                        |       Description       |
+|-----------|----------------------------------------------------|-------------------------|
+| input     | [IIngredient](/vanilla/api/ingredient/IIngredient) | sifted block / item tag |
 
 
 :::
