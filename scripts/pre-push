@@ -1,7 +1,0 @@
-#/bin/sh
-echo "*****Running Version Update******"
-./scripts/update-latest-version
-git add .
-git commit -m "Updated version.properties"
-echo "*****Done running Version Update******"
-exit $status

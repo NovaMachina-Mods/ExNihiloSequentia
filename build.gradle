@@ -46,7 +46,7 @@ if(project.tasks.findByName("wrapper") == null) {
     }
 }
 String modVersion = property("modVersion")
-String basicVersion = "${modVersion}." + (System.env.BUILD_NUMBER ?: "homebaked") + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
+String basicVersion = "${modVersion}." + (System.env.PATCH_NUMBER ?: "homebaked") + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
 version = "${property("minecraftVersion")}-${basicVersion}"
 group = "novamachina.${project.name.toLowerCase()}"
 archivesBaseName = property("artifactBasename")
@@ -515,4 +515,11 @@ Map<String, Object> getProps(File propFile) {
         })
     }
     return mappedProps
+}
+
+task modifyPipeline(type: Copy) {
+    from 'azure-pipelines-template.yml'
+    rename '.*', 'azure-pipelines.yml'
+    destinationDir projectDir
+    expand ("modVersion": project.property("modVersion"))
 }

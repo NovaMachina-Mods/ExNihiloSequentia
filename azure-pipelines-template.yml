@@ -13,9 +13,9 @@ pool: Self-hosted Agents
 name: 'Set dynamically below in a task'
 
 variables:
-  version.ModVersion: '4.2.0'
-  version.Patch: $[counter(variables['version.ModVersion'], 0)]
-  versionNumber: '$(version.ModVersion).$(version.Patch)'
+  version.ModVersion: '${modVersion}'
+  version.Patch: \$[counter(variables['version.ModVersion'], 0)]
+  versionNumber: '\$(version.ModVersion).\$(version.Patch)'
 
 steps:
 - task: Bash@3
@@ -24,19 +24,19 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      buildName="$(Build.SourceBranchName)-$(versionNumber)"
-      printf "Setting the name of the build to %s\n" "$buildName"
-      echo "##vso[build.updatebuildnumber]$buildName"
+      buildName="\$(Build.SourceBranchName)-\$(versionNumber)"
+      printf "Setting the name of the build to %s\\n" "\$buildName"
+      echo "##vso[build.updatebuildnumber]\$buildName"
 
 - task: Bash@3
   name: NotifyDiscordStart
   displayName: Notify Discord of Run Start
   env:
-    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
+    DISCORD_WEBHOOK_URL: \$(Discord.Webhook.Url)
   condition: ne(variables['Build.Reason'], 'PullRequest')
   inputs:
     filePath: 'scripts/discord-notify'
-    arguments: 'started 3224808 $(Build.Repository.Name) $(Build.BuildNumber)'
+    arguments: 'started 3224808 \$(Build.Repository.Name) \$(Build.BuildNumber)'
 
 - task: Gradle@3
   name: CleanWorkspace
@@ -53,7 +53,7 @@ steps:
   displayName: Build Project
   env:
     CI: true
-    PATCH_NUMBER: $(version.Patch)
+    PATCH_NUMBER: \$(version.Patch)
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
@@ -75,7 +75,7 @@ steps:
   condition: eq(variables['shouldDeploy'], true)
   env:
     CI: true
-    PATCH_NUMBER: $(version.Patch)
+    PATCH_NUMBER: \$(version.Patch)
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
@@ -89,7 +89,7 @@ steps:
   condition: eq(variables['shouldDeploy'], true)
   env:
     CI: true
-    PATCH_NUMBER: $(version.Patch)
+    PATCH_NUMBER: \$(version.Patch)
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
@@ -101,17 +101,17 @@ steps:
   name: NotifyDiscordSuccess
   displayName: Notify Discord of Succeeded Build
   env:
-    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
+    DISCORD_WEBHOOK_URL: \$(Discord.Webhook.Url)
   condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.JobStatus'], 'Succeeded'))
   inputs:
     filePath: 'scripts/discord-notify'
-    arguments: 'Succeeded 3470945 $(Build.Repository.Name) $(Build.BuildNumber)'
+    arguments: 'Succeeded 3470945 \$(Build.Repository.Name) \$(Build.BuildNumber)'
 - task: CmdLine@2
   name: NotifyDiscordFailure
   displayName: Notify Discord of Failed Build
   env:
-    DISCORD_WEBHOOK_URL: $(Discord.Webhook.Url)
+    DISCORD_WEBHOOK_URL: \$(Discord.Webhook.Url)
   condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.JobStatus'], 'Failed'))
   inputs:
     filePath: 'scripts/discord-notify'
-    arguments: 'Failed 16071463 $(Build.Repository.Name) $(Build.BuildNumber)'
+    arguments: 'Failed 16071463 \$(Build.Repository.Name) \$(Build.BuildNumber)'
