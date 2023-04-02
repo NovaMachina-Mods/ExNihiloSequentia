@@ -10,6 +10,7 @@ echo "*****Updating Pipeline Variables*****"
 ./gradlew modifyPipeline
 pipelineStatus=$?
 if [ $pipelineStatus != 0 ]; then
+  echo "Committing change"
   git add .
   git commit -m "Update pipeline variables"
 else

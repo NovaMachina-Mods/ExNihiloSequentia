@@ -25,8 +25,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      printf "Setting the name of the build to %s\n" "$versionNumber"
-      echo "##vso[build.updatebuildnumber]$versionNumber"
+      printf "Setting the name of the build to %s\n" "$(versionNumber)"
+      echo "##vso[build.updatebuildnumber]$(versionNumber)"
 
 - task: Bash@3
   name: NotifyDiscordStart
