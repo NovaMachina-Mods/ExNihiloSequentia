@@ -14,8 +14,9 @@ name: 'Set dynamically below in a task'
 
 variables:
   version.ModVersion: '4.2.0'
-  version.Patch: $[counter(variables['version.ModVersion'], 0)]
-  versionNumber: '$(version.ModVersion).$(version.Patch)'
+  version.Prefix: '$(Build.SourceBranchName)-$(version.ModVersion)'
+  version.Patch: $[counter(variables['version.Prefix'], 0)]
+  versionNumber: '$(version.Prefix).$(version.Patch)'
 
 steps:
 - task: Bash@3
@@ -24,9 +25,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      buildName="$(Build.SourceBranchName)-$(versionNumber)"
-      printf "Setting the name of the build to %s\n" "$buildName"
-      echo "##vso[build.updatebuildnumber]$buildName"
+      printf "Setting the name of the build to %s\n" "$versionNumber"
+      echo "##vso[build.updatebuildnumber]$versionNumber"
 
 - task: Bash@3
   name: NotifyDiscordStart
