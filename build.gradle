@@ -69,8 +69,14 @@ ext {
 defaultTasks 'build'
 
 task installLocalGitHook(type: Copy) {
+    String hooksDir = '.git/hooks'
+    if(file('.git').isFile()) {
+        String fileContents = new File('.git').text
+        hooksDir = "${fileContents.split(": ")[1].dropRight(1)}/hooks"
+    }
+
     from new File(rootProject.rootDir, 'scripts/pre-commit')
-    into { new File(rootProject.rootDir, '.git/hooks')}
+    into { new File(hooksDir)}
     fileMode 0775
 }
 
