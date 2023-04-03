@@ -76,6 +76,8 @@ steps:
   env:
     CI: true
     PATCH_NUMBER: $(version.Patch)
+    MAVEN_USERNAME: $(Maven.Username)
+    MAVEN_PASSWORD: $(Maven.APIKey)
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
@@ -90,6 +92,7 @@ steps:
   env:
     CI: true
     PATCH_NUMBER: $(version.Patch)
+    CURSEFORGE_KEY: $(CurseForge.APIKey)
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
