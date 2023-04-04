@@ -46,7 +46,7 @@ if(project.tasks.findByName("wrapper") == null) {
     }
 }
 String modVersion = property("modVersion")
-String basicVersion = "${modVersion}." + (System.env.BUILD_NUMBER ?: "homebaked") + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
+String basicVersion = "${modVersion}." + (System.env.PATCH_NUMBER ?: "homebaked") + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
 version = "${property("minecraftVersion")}-${basicVersion}"
 group = "novamachina.${project.name.toLowerCase()}"
 archivesBaseName = property("artifactBasename")
@@ -69,8 +69,14 @@ ext {
 defaultTasks 'build'
 
 task installLocalGitHook(type: Copy) {
+    String hooksDir = '.git/hooks'
+    if(file('.git').isFile()) {
+        String fileContents = new File('.git').text
+        hooksDir = "${fileContents.split(": ")[1].dropRight(1)}/hooks"
+    }
+
     from new File(rootProject.rootDir, 'scripts/pre-commit')
-    into { new File(rootProject.rootDir, '.git/hooks')}
+    into { new File(hooksDir)}
     fileMode 0775
 }
 
@@ -515,4 +521,11 @@ Map<String, Object> getProps(File propFile) {
         })
     }
     return mappedProps
+}
+
+task modifyPipeline(type: Copy) {
+    from 'azure-pipelines-template.yml'
+    rename '.*', 'azure-pipelines.yml'
+    destinationDir projectDir
+    expand ("modVersion": project.property("modVersion"))
 }
