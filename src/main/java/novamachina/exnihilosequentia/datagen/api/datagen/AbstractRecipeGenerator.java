@@ -15,6 +15,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -43,7 +44,6 @@ import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.common.init.ExNihiloItems;
 import novamachina.exnihilosequentia.common.item.OreItem;
-import novamachina.exnihilosequentia.common.item.SeedBaseItem;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.jetbrains.annotations.NotNull;
@@ -676,25 +676,30 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
             createSaveLocation(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output))));
   }
 
-  protected void createSeeds(SeedBaseItem seed, @Nonnull final Consumer<FinishedRecipe> consumer) {
-    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed);
-    if (resourceLocation == null) {
-      return;
-    }
-    SieveRecipeBuilder.builder()
-        .input(Ingredient.of(Blocks.DIRT))
-        .addResult(seed)
-        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
-        .build(consumer, sieveLoc(resourceLocation.getPath()));
+  protected void createSeeds(ItemLike seed, @Nonnull final Consumer<FinishedRecipe> consumer) {
+    createSeeds(seed, consumer, Blocks.DIRT);
   }
 
-  protected void createWaterSeeds(SeedBaseItem seed, Consumer<FinishedRecipe> consumer) {
-    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed);
+  protected void createSeeds(ItemLike seed, @Nonnull final Consumer<FinishedRecipe> consumer, Block inputBlock) {
+    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed.asItem());
     if (resourceLocation == null) {
       return;
     }
     SieveRecipeBuilder.builder()
-        .input(Ingredient.of(Blocks.SAND))
+            .input(Ingredient.of(inputBlock))
+            .addResult(seed)
+            .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
+            .build(consumer, sieveLoc(resourceLocation.getPath()));
+
+  }
+
+  protected void createWaterSeeds(ItemLike seed, Consumer<FinishedRecipe> consumer) {
+    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed.asItem());
+    if (resourceLocation == null) {
+      return;
+    }
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(ItemTags.SAND))
         .addResult(seed)
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
         .isWaterlogged()

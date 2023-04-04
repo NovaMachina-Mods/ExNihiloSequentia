@@ -4,12 +4,12 @@
     "tag": "minecraft:sand"
   },
   "result": {
-    "item": "minecraft:seagrass"
+    "item": "minecraft:sea_pickle"
   },
   "rolls": [
     {
       "chance": 0.05,
-      "mesh": "iron"
+      "mesh": "string"
     }
   ],
   "waterlogged": true

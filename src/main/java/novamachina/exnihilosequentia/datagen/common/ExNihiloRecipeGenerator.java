@@ -1044,22 +1044,30 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     registerDefaultOres(consumer, ExNihiloItems.URANIUM);
     registerDefaultOres(consumer, ExNihiloItems.ZINC);
 
-    //    createSeeds(ExNihiloItems.SEED_OAK.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_SPRUCE.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_BIRCH.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_JUNGLE.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_ACACIA.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_DARK_OAK.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_CACTUS.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_SUGARCANE.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_CARROT.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_POTATO.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_SWEET_BERRY.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_BAMBOO.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_FERN.get(), consumer);
-    //    createSeeds(ExNihiloItems.SEED_LARGE_FERN.get(), consumer);
-    //    createWaterSeeds(ExNihiloItems.SEED_KELP.get(), consumer);
-    //    createWaterSeeds(ExNihiloItems.SEED_PICKLE.get(), consumer);
+    createSeeds(Items.DARK_OAK_SAPLING, consumer);
+    createSeeds(Items.SPRUCE_SAPLING, consumer);
+    createSeeds(Items.BIRCH_SAPLING, consumer);
+    createSeeds(Items.JUNGLE_SAPLING, consumer);
+    createSeeds(Items.ACACIA_SAPLING, consumer);
+    createSeeds(Items.OAK_SAPLING, consumer);
+    createSeeds(Items.CARROT, consumer);
+    createSeeds(Items.POTATO, consumer);
+    createSeeds(Items.SWEET_BERRIES, consumer);
+    createSeeds(Items.BAMBOO, consumer);
+    createSeeds(Items.FERN, consumer);
+    createSeeds(Items.LARGE_FERN, consumer);
+    createSeeds(Items.CACTUS, consumer, Blocks.SAND);
+    createSeeds(Items.SUGAR_CANE, consumer, Blocks.SAND);
+    createWaterSeeds(Items.KELP, consumer);
+    createWaterSeeds(Items.SEA_PICKLE, consumer);
+
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(ExNihiloBlocks.CRUSHED_END_STONE.get()))
+        .addResult(Items.CHORUS_FLOWER)
+            .addRoll(new MeshWithChance(ExNihiloItems.MESH_DIAMOND.get().getType(), 0.01f))
+            .addRoll(new MeshWithChance(ExNihiloItems.MESH_EMERALD.get().getType(), 0.02f))
+            .addRoll(new MeshWithChance(ExNihiloItems.MESH_NETHERITE.get().getType(), 0.05f))
+            .build(consumer, sieveLoc("chorus_flower"));
 
     getLeavesSaplings()
         .forEach(
@@ -1145,7 +1153,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .isWaterlogged()
         .build(consumer, sieveLoc("seed_red_coral"));
     SieveRecipeBuilder.builder()
-        .input(Ingredient.of(Blocks.SAND))
+        .input(Ingredient.of(ItemTags.SAND))
         .addResult(Items.SEAGRASS)
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_IRON.get().getType(), 0.05F))
         .isWaterlogged()
