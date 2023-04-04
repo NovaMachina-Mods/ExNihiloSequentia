@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:hammer",
+  "input": {
+    "item": "minecraft:dripstone_block"
+  },
+  "results": [
+    {
+      "chance": 1.0,
+      "count": 2,
+      "item": "minecraft:pointed_dripstone"
+    }
+  ]
+}

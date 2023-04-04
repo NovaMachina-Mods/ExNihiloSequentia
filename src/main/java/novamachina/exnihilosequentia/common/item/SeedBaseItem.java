@@ -21,6 +21,8 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
+//TODO can be cleaned now
+
 public class SeedBaseItem extends Item implements IPlantable {
 
   @Nonnull
