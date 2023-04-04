@@ -28,6 +28,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
+import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -434,6 +435,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createHammerRecipes(consumer, Blocks.GRANITE, ExNihiloBlocks.CRUSHED_GRANITE.get(), "granite");
     createHammerRecipes(
         consumer, Blocks.END_STONE, ExNihiloBlocks.CRUSHED_END_STONE.get(), "end_stone");
+    HammerRecipeBuilder.builder().input(Blocks.DRIPSTONE_BLOCK).addDrop(Blocks.POINTED_DRIPSTONE, 2)
+            .build(consumer, hammerLoc("pointed_dripstone"));
 
     createHammerRecipes(consumer, Blocks.TUBE_CORAL_BLOCK, Blocks.TUBE_CORAL, "tube_coral");
     createHammerRecipes(consumer, Blocks.BRAIN_CORAL_BLOCK, Blocks.BRAIN_CORAL, "brain_coral");

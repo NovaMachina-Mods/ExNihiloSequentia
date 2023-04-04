@@ -161,19 +161,21 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven {
-        name 'prog'
-        url 'https://dvs1.progwml6.com/files/maven'
-        content {
-            includeGroup 'mezz.jei'
-        }
-    }
+    //moved from progwml6 to blamejared's repo (for future updates)
+    //maven {
+    //    name 'prog'
+    //    url 'https://dvs1.progwml6.com/files/maven'
+    //    content {
+    //        includeGroup 'mezz.jei'
+    //    }
+    //}
     maven {
         name 'CraftTweaker'
         url "https://maven.blamejared.com"
         content {
             includeGroup 'com.blamejared.crafttweaker'
             includeGroup 'org.openzen.zencode'
+            includeGroup 'mezz.jei'
         }
     }
     maven {
