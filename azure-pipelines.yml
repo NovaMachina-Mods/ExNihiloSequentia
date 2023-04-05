@@ -14,7 +14,7 @@ name: 'Set dynamically below in a task'
 
 variables:
   version.ModVersion: '4.2.0'
-  version.Prefix: '$(Build.SourceBranchName)-$(version.ModVersion)'
+  version.Prefix: '${{Build.SourceBranchName}}-${{version.ModVersion}}'
   version.Patch: $[counter(variables['version.Prefix'], 0)]
   versionNumber: '$(version.Prefix).$(version.Patch)'
 
@@ -110,7 +110,7 @@ steps:
   inputs:
     filePath: 'scripts/discord-notify'
     arguments: 'Succeeded 3470945 $(Build.Repository.Name) $(Build.BuildNumber)'
-- task: CmdLine@2
+- task: Bash@3
   name: NotifyDiscordFailure
   displayName: Notify Discord of Failed Build
   env:
