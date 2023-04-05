@@ -15,7 +15,7 @@ name: 'Set dynamically below in a task'
 
 variables:
   branchName: $[variables['Build.SourceBranchName']]
-  version.ModVersion: '4.2.0'
+  version.ModVersion: '4.2.1'
   version.Prefix: $[format('{0}-{1}', variables['branchName'], variables['version.ModVersion'])]
   version.Patch: $[counter(variables['version.Prefix'], 0)]
   versionNumber: '$(version.Prefix).$(version.Patch)'
