@@ -69,9 +69,12 @@ ext {
 defaultTasks 'build'
 
 task installLocalGitHook(type: Copy) {
+    group = "management"
+    description = "Installs git hooks into their proper location"
+
     String hooksDir = '.git/hooks'
     if(file("${projectDir}/.git").isFile()) {
-        String fileContents = new File('.git').text
+        String fileContents = new File(projectDir, '.git').text
         hooksDir = "${fileContents.split(": ")[1].dropRight(1)}/hooks"
     }
 
@@ -471,6 +474,9 @@ String changeLogResolver = { ->
 }
 
 task publishCurseForge(type: TaskPublishCurseForge) {
+    group = "publishing"
+    description = "Publishes project to CurseForge"
+
     apiToken = System.getenv("CURSEFORGE_KEY")
     String projectId = project.property("curseForgeId")
 
@@ -487,6 +493,13 @@ task publishCurseForge(type: TaskPublishCurseForge) {
 
 if(rootProject.name != project.name) {
     task updateToolingProperties(type: WriteProperties) {
+        group = "management"
+        description = "Updates tooling properties for all sub-projects"
+
+        outputs.upToDateWhen {
+            false
+        }
+
         outputFile("gradle.properties")
 
         doFirst {
@@ -526,6 +539,9 @@ Map<String, Object> getProps(File propFile) {
 }
 
 task modifyPipeline(type: Copy) {
+    group = "management"
+    description = "Modifies build pipeline with selected variables"
+
     from 'azure-pipelines-template.yml'
     rename '.*', 'azure-pipelines.yml'
     destinationDir projectDir
