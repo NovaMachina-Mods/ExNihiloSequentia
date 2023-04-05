@@ -7,10 +7,10 @@ echo "*****Done running Linter******"
 echo "*****Updating Pipeline Variables*****"
 ./gradlew modifyPipeline
 pipelineStatus=$?
-if [ $pipelineStatus != 0 ]; then
+if [ $pipelineStatus = 0 ]; then
   echo "Committing change"
   git add .
-  git commit -m "Update pipeline variables"
+  git commit --no-verify -m "Update pipeline variables"
 else
   status=$pipelineStatus
 fi
