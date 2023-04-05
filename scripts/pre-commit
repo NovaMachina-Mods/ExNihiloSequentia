@@ -3,6 +3,7 @@ echo "*****Running Linter******"
 git stash -q --keep-index
 ./gradlew spotlessApply
 status=$?
+git stash pop -q
 echo "*****Done running Linter******"
 echo "*****Updating Pipeline Variables*****"
 ./gradlew modifyPipeline
@@ -15,6 +16,5 @@ else
   status=$pipelineStatus
 fi
 echo "*****Done Updating Pipeline Variables*****"
-git stash pop -q
 
 exit $status
