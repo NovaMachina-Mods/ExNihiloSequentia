@@ -3,6 +3,7 @@ trigger:
   branches:
     include:
       - 1.19
+      - pipeline-work
 pr:
   branches:
     include:
