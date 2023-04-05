@@ -85,7 +85,7 @@ steps:
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx6144m'
     javaHomeOption: 'JDKVersion'
-    tasks: 'publishMainPublicationToMavenRepository'
+    tasks: 'publishMainPublicationToCloudsmithRepository'
 
 - task: Gradle@3
   name: CurseForgeDeploy
