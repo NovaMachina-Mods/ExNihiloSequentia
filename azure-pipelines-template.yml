@@ -14,9 +14,9 @@ pool: Self-hosted Agents
 name: 'Set dynamically below in a task'
 
 variables:
-  branchName: \$[variables['Build.SourceBranchName']]
+  version.branchName: \$[variables['Build.SourceBranchName']]
   version.ModVersion: '${modVersion}'
-  version.Prefix: \$[format('{0}-{1}, variables['variables.branchName'], variables['version.ModVersion'])]
+  version.Prefix: \$[format('{0}-{1}, variables['version.branchName'], variables['version.ModVersion'])]
   version.Patch: \$[counter(variables['version.Prefix'], 0)]
   versionNumber: '\$(version.Prefix).\$(version.Patch)'
 
