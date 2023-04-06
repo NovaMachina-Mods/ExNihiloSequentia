@@ -15,7 +15,7 @@ import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenFluidItemRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.FluidItemRecipe")
 @Document("mods/ExNihiloSequentia/Fluid_To_Item")
 public class ZenFluidItemRecipe {
 
@@ -27,7 +27,17 @@ public class ZenFluidItemRecipe {
        ItemStack.EMPTY);
  }
 
- @ZenCodeType.Method
+    /**
+     * Create a recipe name for the new recipe
+     * @param recipeId name of recipe
+     */
+    @ZenCodeType.Method
+    @Nonnull
+    public ZenFluidItemRecipe create(String recipeId) {
+        //this is just for creating docs for crafttweaker
+        return this;
+    }
+
  @Nonnull
  public static ZenFluidItemRecipe builder(@Nonnull final ResourceLocation recipeId) {
    return new ZenFluidItemRecipe(recipeId);

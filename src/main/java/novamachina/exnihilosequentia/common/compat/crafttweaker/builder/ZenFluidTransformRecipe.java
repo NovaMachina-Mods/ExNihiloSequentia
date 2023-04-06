@@ -13,7 +13,7 @@ import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransfo
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenFluidTransformRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.FluidTransformRecipe")
 @Document("mods/ExNihiloSequentia/Fluid_Transform")
 public class ZenFluidTransformRecipe {
 
@@ -25,7 +25,17 @@ public class ZenFluidTransformRecipe {
        FluidStack.EMPTY);
  }
 
- @ZenCodeType.Method
+    /**
+     * Create a recipe name for the new recipe
+     * @param recipeId name of recipe
+     */
+    @ZenCodeType.Method
+    @Nonnull
+    public ZenFluidTransformRecipe create(String recipeId) {
+        //this is just for creating docs for crafttweaker
+        return this;
+    }
+
  @Nonnull
  public static ZenFluidTransformRecipe builder(@Nonnull final ResourceLocation recipeId) {
    return new ZenFluidTransformRecipe(recipeId);

@@ -14,23 +14,33 @@ import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenSieveRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.SieveRecipe")
 @Document("mods/ExNihiloSequentia/Sifting")
-public class ZenSeiveRecipe {
+public class ZenSieveRecipe {
 
  @Nonnull
  private final SieveRecipe internal;
 
- private ZenSeiveRecipe(@Nonnull final ResourceLocation recipeId) {
+ private ZenSieveRecipe(@Nonnull final ResourceLocation recipeId) {
    this.internal = new SieveRecipe(recipeId, Ingredient.EMPTY, ItemStack.EMPTY, new
 ArrayList<>(),
        false);
  }
 
+    /**
+     * Create a recipe name for the new recipe
+     * @param recipeId name of recipe
+     */
  @ZenCodeType.Method
  @Nonnull
- public static ZenSeiveRecipe builder(@Nonnull final ResourceLocation recipeId) {
-   return new ZenSeiveRecipe(recipeId);
+ public ZenSieveRecipe create(String recipeId) {
+     //this is just for creating docs for crafttweaker
+     return this;
+ }
+
+ @Nonnull
+ public static ZenSieveRecipe builder(@Nonnull final ResourceLocation recipeId) {
+   return new ZenSieveRecipe(recipeId);
  }
 
     /**
@@ -40,18 +50,18 @@ ArrayList<>(),
  @ZenCodeType.Method
  @Nonnull
  @SuppressWarnings("unused")
- public ZenSeiveRecipe addDrop(@Nonnull final IItemStack drop) {
+ public ZenSieveRecipe addDrop(@Nonnull final IItemStack drop) {
    internal.setDrop(drop.getInternal());
    return this;
  }
 
     /**
      * Sets the input that should be sifted
-     * @param input sifted block
+     * @param input sifted block / item tag
      */
  @ZenCodeType.Method
  @Nonnull
- public ZenSeiveRecipe setInput(@Nonnull final IIngredient input) {
+ public ZenSieveRecipe setInput(@Nonnull final IIngredient input) {
    internal.setInput(input.asVanillaIngredient());
    return this;
  }
@@ -64,7 +74,7 @@ ArrayList<>(),
  @ZenCodeType.Method
  @Nonnull
  @SuppressWarnings("unused")
- public ZenSeiveRecipe addRoll(@Nonnull final String mesh, final float chance) {
+ public ZenSieveRecipe addRoll(@Nonnull final String mesh, final float chance) {
    internal.addRoll(mesh.toUpperCase(), chance);
    return this;
  }
@@ -81,7 +91,7 @@ ArrayList<>(),
  @ZenCodeType.Method
  @Nonnull
  @SuppressWarnings("unused")
- public ZenSeiveRecipe setWaterlogged() {
+ public ZenSieveRecipe setWaterlogged() {
    internal.setWaterlogged();
    return this;
  }

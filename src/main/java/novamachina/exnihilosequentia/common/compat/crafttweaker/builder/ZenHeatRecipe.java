@@ -11,7 +11,7 @@ import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenHeatRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.HeatRecipe")
 @Document("mods/ExNihiloSequentia/Heat")
 public class ZenHeatRecipe {
 
@@ -22,7 +22,17 @@ public class ZenHeatRecipe {
    this.internal = new HeatRecipe(recipeId, null, 0);
  }
 
- @ZenCodeType.Method
+    /**
+     * Create a recipe name for the new recipe
+     * @param recipeId name of recipe
+     */
+    @ZenCodeType.Method
+    @Nonnull
+    public ZenHeatRecipe create(String recipeId) {
+        //this is just for creating docs for crafttweaker
+        return this;
+    }
+
  @Nonnull
  public static ZenHeatRecipe builder(@Nonnull final ResourceLocation recipeId) {
    return new ZenHeatRecipe(recipeId);

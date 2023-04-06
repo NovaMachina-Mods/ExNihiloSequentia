@@ -13,7 +13,7 @@ import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenCrookRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.CrookRecipe")
 @Document("mods/ExNihiloSequentia/Crooking")
 public class ZenCrookRecipe {
 
@@ -24,7 +24,17 @@ public class ZenCrookRecipe {
    this.internal = new CrookRecipe(recipeId, Ingredient.EMPTY, new ArrayList<>());
  }
 
- @ZenCodeType.Method
+    /**
+     * Create a recipe name for the new recipe
+     * @param recipeId name of recipe
+     */
+    @ZenCodeType.Method
+    @Nonnull
+    public ZenCrookRecipe create(String recipeId) {
+        //this is just for creating docs for crafttweaker
+        return this;
+    }
+
  @Nonnull
  public static ZenCrookRecipe builder(@Nonnull final ResourceLocation recipeId) {
    return new ZenCrookRecipe(recipeId);
