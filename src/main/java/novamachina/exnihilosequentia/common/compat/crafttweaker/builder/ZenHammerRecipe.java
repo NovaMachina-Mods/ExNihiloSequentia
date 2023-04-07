@@ -13,7 +13,7 @@ import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenHammerRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.HammerRecipe")
 @Document("mods/ExNihiloSequentia/Hammering")
 public class ZenHammerRecipe {
 
@@ -24,7 +24,17 @@ public class ZenHammerRecipe {
    this.internal = new HammerRecipe(recipeId, Ingredient.EMPTY, new ArrayList<>());
  }
 
- @ZenCodeType.Method
+    /**
+     * Create a recipe name for the new recipe
+     * @param recipeId name of recipe
+     */
+    @ZenCodeType.Method
+    @Nonnull
+    public ZenHammerRecipe create(String recipeId) {
+        //this is just for creating docs for crafttweaker
+        return this;
+    }
+
  @Nonnull
  public static ZenHammerRecipe builder(@Nonnull final ResourceLocation recipeId) {
    return new ZenHammerRecipe(recipeId);

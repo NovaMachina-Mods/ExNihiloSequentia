@@ -13,7 +13,7 @@ import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.exnihilosequentia.ZenFluidOnTopRecipe")
+@ZenCodeType.Name("mods.exnihilosequentia.FluidOnTopRecipe")
 @Document("mods/ExNihiloSequentia/Fluid_On_Top")
 public class ZenFluidOnTopRecipe {
 
@@ -25,7 +25,17 @@ public class ZenFluidOnTopRecipe {
        ItemStack.EMPTY);
  }
 
- @ZenCodeType.Method
+    /**
+     * Create a recipe name for the new recipe
+     * @param recipeId name of recipe
+     */
+    @ZenCodeType.Method
+    @Nonnull
+    public ZenFluidOnTopRecipe create(String recipeId) {
+        //this is just for creating docs for crafttweaker
+        return this;
+    }
+
  @Nonnull
  public static ZenFluidOnTopRecipe builder(@Nonnull final ResourceLocation recipeId) {
    return new ZenFluidOnTopRecipe(recipeId);
