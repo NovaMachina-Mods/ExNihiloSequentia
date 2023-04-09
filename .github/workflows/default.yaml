@@ -39,7 +39,7 @@ jobs:
     steps:
       - name: Notify Discord of Run Start
         if: github.event_name != 'pull_request'
-        run: ./scripts/discord-notify started 3224808 ${{ github.event.repository.name }} ${{ github.run_number }}
+        run: ${PWD}/scripts/discord-notify started 3224808 ${{ github.event.repository.name }} ${{ github.run_number }}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Java
@@ -54,10 +54,10 @@ jobs:
           arguments: build
       - name: Notify Discord of Succeeded Build
         if: (github.event_name != 'pull_request') && success()
-        run: ./scripts/discord-notify Succeeded 3470945 ${{ github.event.repository.name }} ${{ github.run_number }}
+        run: ${PWD}/scripts/discord-notify Succeeded 3470945 ${{ github.event.repository.name }} ${{ github.run_number }}
       - name: Notify Discord of Failed Build
         if: (github.event_name != 'pull_request') && failure()
-        run: ./scripts/discord-notify Failed 16071463 ${{ github.event.repository.name }} ${{ github.run_number }}
+        run: ${PWD}/scripts/discord-notify Failed 16071463 ${{ github.event.repository.name }} ${{ github.run_number }}
   deploy:
     name: Deploy Project
     runs-on: ubuntu-latest
