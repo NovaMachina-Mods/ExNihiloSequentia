@@ -96,6 +96,7 @@ jobs:
       - name: Create Tag
         uses: actions/github-script@v6
         with:
+          debug: true
           script: |
             const tagValue = `v${{ needs.calculate-version.outputs.branchName }}-${{ needs.calculate-version.outputs.semVer }}`
             const tag = await github.rest.git.createTag({
