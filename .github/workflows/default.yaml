@@ -85,7 +85,7 @@ jobs:
           arguments: publishCurseForge
   tag-latest-version:
     name: Tag Latest Released Version
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     needs: [calculate-version, build, deploy]
     if: needs.calculate-version.outputs.branchName == '1.19'
     steps:
