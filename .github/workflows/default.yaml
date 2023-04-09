@@ -100,11 +100,11 @@ jobs:
           script: |
             const tagValue = `v${{ needs.calculate-version.outputs.branchName }}-${{ needs.calculate-version.outputs.semVer }}`
             const tag = await github.rest.git.createTag({
-              owner: ${{ github.event.repository.owner.login }},
-              repo: ${{ github.event.repository.name }},
+              owner: "${{ github.event.repository.owner.login }}",
+              repo: "${{ github.event.repository.name }}",
               tag: `${tagValue}`,
-              message: `Tagging release: ${tagValue}`
-              object: ${{ github.sha }},
+              message: `Tagging release: ${tagValue}`,
+              object: "${{ github.sha }}",
               type: 'commit',
               tagger: {
                 name: "Jacob Williams",
@@ -112,8 +112,8 @@ jobs:
               }
             })
             github.rest.git.createRef({
-              owner: ${{ github.event.repository.owner.login }},
-              repo: ${{ github.event.repository.name }},
+              owner: "${{ github.event.repository.owner.login }}",
+              repo: "${{ github.event.repository.name }}",
               ref: `refs/tags/${tag.tag}`,
               sha: tag.sha
             })
