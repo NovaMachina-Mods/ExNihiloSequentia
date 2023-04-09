@@ -37,11 +37,11 @@ jobs:
       SEMVER: ${{ needs.calculate-version.outputs.semVer }}
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Notify Discord of Run Start
         if: github.event_name != 'pull_request'
         run: ${PWD}/scripts/discord-notify started 3224808 ${{ github.event.repository.name }} ${{ github.run_number }}
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -64,6 +64,8 @@ jobs:
     needs: [calculate-version, build]
     if: needs.calculate-version.outputs.branchName == '1.19'
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Deploy to CloudSmith
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
@@ -87,6 +89,8 @@ jobs:
     needs: [calculate-version, build, deploy]
     if: needs.calculate-version.outputs.branchName == '1.19'
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Create Tag
         uses: actions/github-script@v6
         with:
