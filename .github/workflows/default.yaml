@@ -67,6 +67,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Deploy to CloudSmith
+        # Disabled deploy to CloudSmith
+        if: false
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
@@ -97,7 +99,7 @@ jobs:
           script: |
             const tagValue = `v${{ needs.calculate-version.outputs.branchName }}-${{ needs.calculate-version.outputs.semVer }}`
             const tag = await github.rest.git.createTag({
-              owner: ${{ github.event.repository.owner }},
+              owner: ${{ github.event.repository.owner.login }},
               repo: ${{ github.event.repository.name }},
               tag: `${tagValue}`,
               message: `Tagging release: ${tagValue}`
@@ -109,7 +111,7 @@ jobs:
               }
             })
             github.rest.git.createRef({
-              owner: ${{ github.event.repository.owner }},
+              owner: ${{ github.event.repository.owner.login }},
               repo: ${{ github.event.repository.name }},
               ref: `refs/tags/${tag.tag}`,
               sha: tag.sha
