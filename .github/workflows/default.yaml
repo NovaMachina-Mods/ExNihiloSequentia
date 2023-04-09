@@ -111,6 +111,7 @@ jobs:
                 email: 'jacob.t.williams@outlook.com'
               }
             })
+            console.log(tag)
             github.rest.git.createRef({
               owner: "${{ github.event.repository.owner.login }}",
               repo: "${{ github.event.repository.name }}",
