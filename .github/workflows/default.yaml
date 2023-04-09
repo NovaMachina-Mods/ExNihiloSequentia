@@ -35,7 +35,7 @@ jobs:
     env:
       BRANCH_NAME: ${{ needs.calculate-version.outputs.branchName }}
       SEMVER: ${{ needs.calculate-version.outputs.semVer }}
-      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
