@@ -94,26 +94,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Create Tag
-        uses: actions/github-script@v6
+        uses: mathieudutour/github-tag-action@v6.1
         with:
-          debug: true
-          script: |
-            const tagValue = `v${{ needs.calculate-version.outputs.branchName }}-${{ needs.calculate-version.outputs.semVer }}`
-            const response = await github.rest.git.createTag({
-              owner: "${{ github.event.repository.owner.login }}",
-              repo: "${{ github.event.repository.name }}",
-              tag: `${tagValue}`,
-              message: `Tagging release: ${tagValue}`,
-              object: "${{ github.sha }}",
-              type: 'commit',
-              tagger: {
-                name: "Jacob Williams",
-                email: 'jacob.t.williams@outlook.com'
-              }
-            })
-            github.rest.git.createRef({
-              owner: "${{ github.event.repository.owner.login }}",
-              repo: "${{ github.event.repository.name }}",
-              ref: `refs/tags/${response.data.tag}`,
-              sha: response.data.sha
-            })
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: ${{ needs.calculate-version.outputs.semVer }}
+          create_annotated_tag: true
