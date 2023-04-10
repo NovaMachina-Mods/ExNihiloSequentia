@@ -537,13 +537,3 @@ Map<String, Object> getProps(File propFile) {
     }
     return mappedProps
 }
-
-task modifyPipeline(type: Copy) {
-    group = "management"
-    description = "Modifies build pipeline with selected variables"
-
-    from 'azure-pipelines-template.yml'
-    rename '.*', 'azure-pipelines.yml'
-    destinationDir projectDir
-    expand ("modVersion": project.property("modVersion"))
-}

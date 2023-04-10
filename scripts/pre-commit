@@ -5,15 +5,5 @@ git stash -q --keep-index
 status=$?
 git stash pop -q
 echo "*****Done running Linter******"
-echo "*****Updating Pipeline Variables*****"
-./gradlew modifyPipeline
-pipelineStatus=$?
-if [ $pipelineStatus = 0 ]; then
-  echo "Committing change"
-  git add .
-else
-  status=$pipelineStatus
-fi
-echo "*****Done Updating Pipeline Variables*****"
 
 exit $status
