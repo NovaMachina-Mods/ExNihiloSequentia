@@ -43,7 +43,7 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBED: '[    {
+          DISCORD_EMBEDS: '[    {
             "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
             "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
             "fields": [
@@ -58,6 +58,8 @@ jobs:
             "timestamp": "${{github.event.head_commit.timestamp}}",
             "footer":{"text": "${{github.event.head_commit.timestamp}}"}
             }    ]'
+        with:
+          args: Build Started
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -73,7 +75,7 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBED: '[    {
+          DISCORD_EMBEDS: '[    {
             "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
             "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
             "fields": [
@@ -88,12 +90,14 @@ jobs:
             "timestamp": "${{github.event.head_commit.timestamp}}",
             "footer":{"text": "${{github.event.head_commit.timestamp}}"}
             }    ]'
+        with:
+          args: Build Succeeded
       - name: Notify Discord of Failed Build
         if: (github.event_name != 'pull_request') && failure()
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBED: '[    {
+          DISCORD_EMBEDS: '[    {
             "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
             "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
             "fields": [
@@ -108,6 +112,8 @@ jobs:
             "timestamp": "${{github.event.head_commit.timestamp}}",
             "footer":{"text": "${{github.event.head_commit.timestamp}}"}
             }    ]'
+        with:
+          args: Build Failed
   deploy:
     name: Deploy Project
     runs-on: ubuntu-latest
