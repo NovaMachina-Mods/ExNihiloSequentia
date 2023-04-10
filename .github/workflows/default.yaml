@@ -35,13 +35,31 @@ jobs:
     env:
       BRANCH_NAME: ${{ needs.calculate-version.outputs.branchName }}
       SEMVER: ${{ needs.calculate-version.outputs.semVer }}
-      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Notify Discord of Run Start
         if: github.event_name != 'pull_request'
-        run: ${PWD}/scripts/discord-notify started 3224808 ${{ github.event.repository.name }} ${{ github.run_number }}
+        uses: "Ilshidur/action-discord@0.3.2"
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBED: '[    {
+            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
+            "fields": [
+            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
+            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
+            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
+            { "name": "Job", "value": "${{github.job}}", "inline": true },
+            { "name": "Commit Message", "value": "[${{ env.SHA }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
+            { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
+            ],
+            "color":1127128,
+            "timestamp": "${{github.event.head_commit.timestamp}}",
+            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
+            }    ]'
+        with:
+          args: Build Started
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -54,10 +72,48 @@ jobs:
           arguments: build
       - name: Notify Discord of Succeeded Build
         if: (github.event_name != 'pull_request') && success()
-        run: ${PWD}/scripts/discord-notify Succeeded 3470945 ${{ github.event.repository.name }} ${{ github.run_number }}
+        uses: "Ilshidur/action-discord@0.3.2"
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBED: '[    {
+            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
+            "fields": [
+            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
+            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
+            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
+            { "name": "Job", "value": "${{github.job}}", "inline": true },
+            { "name": "Commit Message", "value": "[${{ env.SHA }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
+            { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
+            ],
+            "color":1127128,
+            "timestamp": "${{github.event.head_commit.timestamp}}",
+            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
+            }    ]'
+        with:
+          args: Build Succeeded
       - name: Notify Discord of Failed Build
         if: (github.event_name != 'pull_request') && failure()
-        run: ${PWD}/scripts/discord-notify Failed 16071463 ${{ github.event.repository.name }} ${{ github.run_number }}
+        uses: "Ilshidur/action-discord@0.3.2"
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBED: '[    {
+            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
+            "fields": [
+            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
+            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
+            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
+            { "name": "Job", "value": "${{github.job}}", "inline": true },
+            { "name": "Commit Message", "value": "[${{ env.SHA }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
+            { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
+            ],
+            "color":1127128,
+            "timestamp": "${{github.event.head_commit.timestamp}}",
+            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
+            }    ]'
+        with:
+          args: Build Failed
   deploy:
     name: Deploy Project
     runs-on: ubuntu-latest
