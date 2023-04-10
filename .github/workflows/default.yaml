@@ -8,12 +8,13 @@ on:
       - "1.19"
 
 jobs:
-  calculate-version:
-    name: Calculate Version
+  initialize-pipeline:
+    name: Initialize Pipeline
     runs-on: ubuntu-latest
     outputs:
       branchName: ${{ steps.gitversion.outputs.branchName }}
       semVer: ${{ steps.gitversion.outputs.semVer }}
+      short-sha: ${{steps.short-sha.outputs.sha}}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,13 +29,16 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.10.2
         with:
           useConfigFile: true
+      - uses: benjlevesque/short-sha@v2.1
+        id: short-sha
   build:
     name: Build Project
     runs-on: ubuntu-latest
-    needs: calculate-version
+    needs: initialize-pipeline
     env:
-      BRANCH_NAME: ${{ needs.calculate-version.outputs.branchName }}
-      SEMVER: ${{ needs.calculate-version.outputs.semVer }}
+      BRANCH_NAME: ${{ needs.initialize-pipeline.outputs.branchName }}
+      SEMVER: ${{ needs.initialize-pipeline.outputs.semVer }}
+      SHA: ${{ needs.initialize-pipeline.outputs.short-sha }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -54,12 +58,12 @@ jobs:
             { "name": "Commit Message", "value": "[${{ env.SHA }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
             { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
             ],
-            "color":1127128,
+            "color":3224808,
             "timestamp": "${{github.event.head_commit.timestamp}}",
             "footer":{"text": "${{github.event.head_commit.timestamp}}"}
             }    ]'
         with:
-          args: Build Started
+          args: Build Started for $SEMVER
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -82,16 +86,14 @@ jobs:
             { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
             { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
             { "name": "Event", "value": "${{github.event_name}}", "inline": true },
-            { "name": "Job", "value": "${{github.job}}", "inline": true },
-            { "name": "Commit Message", "value": "[${{ env.SHA }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
-            { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
+            { "name": "Job", "value": "${{github.job}}", "inline": true }
             ],
-            "color":1127128,
+            "color":3470945,
             "timestamp": "${{github.event.head_commit.timestamp}}",
             "footer":{"text": "${{github.event.head_commit.timestamp}}"}
             }    ]'
         with:
-          args: Build Succeeded
+          args: Build Succeeded for $SEMVER
       - name: Notify Discord of Failed Build
         if: (github.event_name != 'pull_request') && failure()
         uses: "Ilshidur/action-discord@0.3.2"
@@ -105,23 +107,41 @@ jobs:
             { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
             { "name": "Event", "value": "${{github.event_name}}", "inline": true },
             { "name": "Job", "value": "${{github.job}}", "inline": true },
-            { "name": "Commit Message", "value": "[${{ env.SHA }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
-            { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
+            { "name": "Pipeline URL", "value": "${{ github.action.url }}, "inline": true }
             ],
-            "color":1127128,
+            "color":16071463,
             "timestamp": "${{github.event.head_commit.timestamp}}",
             "footer":{"text": "${{github.event.head_commit.timestamp}}"}
             }    ]'
         with:
-          args: Build Failed
+          args: Build Failed for $SEMVER
   deploy:
     name: Deploy Project
     runs-on: ubuntu-latest
-    needs: [calculate-version, build]
-    if: needs.calculate-version.outputs.branchName == '1.19'
+    needs: [initialize-pipeline, build]
+    if: needs.initialize-pipeline.outputs.branchName == '1.19'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Notify Discord of Deploy Start
+        uses: "Ilshidur/action-discord@0.3.2"
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '[    {
+            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
+            "fields": [
+            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
+            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
+            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
+            { "name": "Job", "value": "${{github.job}}", "inline": true },
+            ],
+            "color":3224808,
+            "timestamp": "${{github.event.head_commit.timestamp}}",
+            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
+            }    ]'
+        with:
+          args: Deploy Started for $SEMVER
       - name: Deploy to CloudSmith
         # Disabled deploy to CloudSmith
         if: false
@@ -141,11 +161,52 @@ jobs:
         with:
           gradle-version: wrapper
           arguments: publishCurseForge
+      - name: Notify Discord of Succeeded Build
+        if: success()
+        uses: "Ilshidur/action-discord@0.3.2"
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '[    {
+            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
+            "fields": [
+            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
+            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
+            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
+            { "name": "Job", "value": "${{github.job}}", "inline": true }
+            ],
+            "color":3470945,
+            "timestamp": "${{github.event.head_commit.timestamp}}",
+            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
+            }    ]'
+        with:
+          args: Deploy Succeeded for $SEMVER
+      - name: Notify Discord of Failed Build
+        if: failure()
+        uses: "Ilshidur/action-discord@0.3.2"
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '[    {
+            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
+            "fields": [
+            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
+            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
+            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
+            { "name": "Job", "value": "${{github.job}}", "inline": true },
+            { "name": "Pipeline URL", "value": "${{ github.action.url }}, "inline": true }
+            ],
+            "color":16071463,
+            "timestamp": "${{github.event.head_commit.timestamp}}",
+            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
+            }    ]'
+        with:
+          args: Deploy Failed for $SEMVER
   tag-latest-version:
     name: Tag Latest Released Version
     runs-on: ubuntu-latest
-    needs: [calculate-version, build, deploy]
-    if: needs.calculate-version.outputs.branchName == '1.19'
+    needs: [initialize-pipeline, build, deploy]
+    if: needs.initialize-pipeline.outputs.branchName == '1.19'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -153,5 +214,5 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: ${{ needs.calculate-version.outputs.semVer }}
+          custom_tag: ${{ needs.initialize-pipeline.outputs.semVer }}
           create_annotated_tag: true
