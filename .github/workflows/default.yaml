@@ -47,21 +47,6 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[    {
-            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
-            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
-            "fields": [
-            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
-            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
-            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
-            { "name": "Job", "value": "${{github.job}}", "inline": true },
-            { "name": "Commit Message", "value": "[${{ env.SHA }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
-            { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
-            ],
-            "color":3224808,
-            "timestamp": "${{github.event.head_commit.timestamp}}",
-            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
-            }    ]'
         with:
           args: Build Started for {{SEMVER}}
       - name: Setup Java
@@ -79,19 +64,6 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[    {
-            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
-            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
-            "fields": [
-            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
-            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
-            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
-            { "name": "Job", "value": "${{github.job}}", "inline": true }
-            ],
-            "color":3470945,
-            "timestamp": "${{github.event.head_commit.timestamp}}",
-            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
-            }    ]'
         with:
           args: Build Succeeded for {{SEMVER}}
       - name: Notify Discord of Failed Build
@@ -99,20 +71,6 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[    {
-            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
-            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
-            "fields": [
-            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
-            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
-            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
-            { "name": "Job", "value": "${{github.job}}", "inline": true },
-            { "name": "Pipeline URL", "value": "${{ github.server_url }}/${{github.repository}}/actions/runs/${{github.run_id}}", "inline": true }
-            ],
-            "color":16071463,
-            "timestamp": "${{github.event.head_commit.timestamp}}",
-            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
-            }    ]'
         with:
           args: Build Failed for {{SEMVER}}
   deploy:
@@ -131,19 +89,6 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[    {
-            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
-            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
-            "fields": [
-            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
-            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
-            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
-            { "name": "Job", "value": "${{github.job}}", "inline": true }
-            ],
-            "color":3224808,
-            "timestamp": "${{github.event.head_commit.timestamp}}",
-            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
-            }    ]'
         with:
           args: Deploy Started for {{SEMVER}}
       - name: Deploy to CloudSmith
@@ -166,19 +111,6 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[    {
-            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
-            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
-            "fields": [
-            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
-            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
-            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
-            { "name": "Job", "value": "${{github.job}}", "inline": true }
-            ],
-            "color":3470945,
-            "timestamp": "${{github.event.head_commit.timestamp}}",
-            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
-            }    ]'
         with:
           args: Deploy Succeeded for {{SEMVER}}
       - name: Notify Discord of Failed Build
@@ -186,20 +118,6 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[    {
-            "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
-            "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
-            "fields": [
-            { "name": "Repository", "value": "[${{github.event.repository.name}}](${{github.event.repository.clone_url}})", "inline": true },
-            { "name": "Branch", "value": "[${{github.ref_name}}](https://github.com/${{github.repository}}/tree/${{github.ref_name}})", "inline": true },
-            { "name": "Event", "value": "${{github.event_name}}", "inline": true },
-            { "name": "Job", "value": "${{github.job}}", "inline": true },
-            { "name": "Pipeline URL", "value": "${{ github.server_url }}/${{github.repository}}/actions/runs/${{github.run_id}}", "inline": true }
-            ],
-            "color":16071463,
-            "timestamp": "${{github.event.head_commit.timestamp}}",
-            "footer":{"text": "${{github.event.head_commit.timestamp}}"}
-            }    ]'
         with:
           args: Deploy Failed for {{SEMVER}}
   tag-latest-version:
