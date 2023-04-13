@@ -45,8 +45,8 @@ if(project.tasks.findByName("wrapper") == null) {
         distributionType = Wrapper.DistributionType.ALL
     }
 }
-String modVersion = property("modVersion")
-String basicVersion = "${modVersion}." + (System.env.PATCH_NUMBER ?: "homebaked") + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
+String modVersion = System.env.SEMVER ?: property("modVersion")
+String basicVersion = "${modVersion}" + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
 version = "${property("minecraftVersion")}-${basicVersion}"
 group = "novamachina.${project.name.toLowerCase()}"
 archivesBaseName = property("artifactBasename")
@@ -55,14 +55,14 @@ String minecraftRelease = getMinecraftRelease()
 String forgeMajor = getForgeMajor()
 
 ext {
-    modsTomlProperties = ["version"                : "${modVersion}",
-                         "mc_version"             : "[${minecraftRelease},)",
-                         "forge_version"          : "[${property("forgeVersion")},)",
-                         "loader_version"         : "[${forgeMajor},)",
-                         "git_url" : "${property("gitUrl")}",
-                         "curseforge_url" : "${property("curseForgeUrl")}",
-                         "crafttweaker_version"   : "[${property("crafttweakerVersion")},)",
-                         "jei_version"            : "[${property("jeiVersion")},)",]
+    modsTomlProperties = ["version"                 : "${modVersion}",
+                         "mc_version"               : "[${minecraftRelease},)",
+                         "forge_version"            : "[${property("forgeVersion")},)",
+                         "loader_version"           : "[${forgeMajor},)",
+                         "git_url"                  : "${property("gitUrl")}",
+                         "curseforge_url"           : "${property("curseForgeUrl")}",
+                         "crafttweaker_version"     : "[${property("crafttweakerVersion")},)",
+                         "jei_version"              : "[${property("jeiVersion")},)",]
     jsonPatterns = ["**/*.json", "**/*.mcmeta"]
 }
 
@@ -518,11 +518,12 @@ if(rootProject.name != project.name) {
         comment('''This file may have been edited by a Gradle Task.
 
 A note on the 'modVersion' property
-Version pattern: MAJORMOD.MAJORAPI.MINOR.PATCH (Only MAJORMOD.MAJORAPI.MINOR are declared here)
-Update MAJORMOD when mod objects (items, blocks, block entities) are removed or fundamental mechanics are changed
-Update MAJORAPI when any part of the mod's public-facing API is change (reordering enums, changing method signatures, or removal of public methods)
+Version pattern: MAJOR.MINOR.PATCH
+Update MAJORMOD when mod objects (items, blocks, block entities) are removed, fundamental mechanics are changed, or backwards compatibility is broken.
 Update MINOR when mod objects (items, blocks, block entities) or non-fundamental mechanics are added, or elements of the API are deprecated (but not removed)
-PATCH will automatically be appended to the version and handled by Jenkins''')
+PATCH will automatically be created by GitVersion
+
+The value in gradle.properties is only used in local development''')
     }
 }
 
