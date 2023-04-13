@@ -147,8 +147,6 @@ jobs:
         with:
           args: Deploy Started for {{SEMVER}}
       - name: Deploy to CloudSmith
-        # Disabled deploy to CloudSmith
-        if: false
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
@@ -157,8 +155,6 @@ jobs:
           gradle-version: wrapper
           arguments: publishMainPublicationToCloudsmithRepository
       - name: Deploy to CurseForge
-        # Disabled deploy to CurseForge
-        if: false
         env:
           CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_APIKEY }}
         uses: gradle/gradle-build-action@v2
