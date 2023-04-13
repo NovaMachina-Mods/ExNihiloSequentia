@@ -48,7 +48,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: Build Started for {{SEMVER}}
+          args: Build Started for ${{github.event.repository.name}} {{SEMVER}}
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -65,14 +65,14 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: Build Succeeded for {{SEMVER}}
+          args: Build Succeeded for ${{github.event.repository.name}} {{SEMVER}}
       - name: Notify Discord of Failed Build
         if: (github.event_name != 'pull_request') && failure()
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: Build Failed for {{SEMVER}}
+          args: Build Failed for ${{github.event.repository.name}} {{SEMVER}}
   deploy:
     name: Deploy Project
     runs-on: ubuntu-latest
@@ -90,7 +90,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: Deploy Started for {{SEMVER}}
+          args: Deploy Started for ${{github.event.repository.name}} {{SEMVER}}
       - name: Deploy to CloudSmith
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
@@ -112,14 +112,14 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: Deploy Succeeded for {{SEMVER}}
+          args: Deploy Succeeded for ${{github.event.repository.name}} {{SEMVER}}
       - name: Notify Discord of Failed Build
         if: failure()
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: Deploy Failed for {{SEMVER}}
+          args: Deploy Failed for ${{github.event.repository.name}} {{SEMVER}}
   tag-latest-version:
     name: Tag Latest Released Version
     runs-on: ubuntu-latest
