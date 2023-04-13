@@ -2,9 +2,9 @@ package novamachina.exnihilosequentia.common.registries;
 
 import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -18,7 +18,7 @@ public class HammerRegistry {
 
   @Nonnull private static final List<HammerRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull private final Map<Block, HammerRecipe> recipeByBlockCache = new HashMap<>();
+  @Nonnull private final Map<Block, HammerRecipe> recipeByBlockCache = new ConcurrentHashMap<>();
 
   @Nonnull
   public List<ItemStackWithChance> getResult(@Nonnull final Block input) {
