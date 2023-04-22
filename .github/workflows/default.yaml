@@ -73,6 +73,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           args: Build Failed for ${{github.event.repository.name}} {{SEMVER}}
+          main-branch-name: '1.19'
       - name: Set Commit Variables for Changelog
         uses: nrwl/nx-set-shas@v3
       - run: |
