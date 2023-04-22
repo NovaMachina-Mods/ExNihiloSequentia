@@ -73,11 +73,24 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           args: Build Failed for ${{github.event.repository.name}} {{SEMVER}}
+      - name: Set Commit Variables for Changelog
+        uses: nrwl/nx-set-shas@v3
+      - run: |
+          echo "BASE: ${{ env.NX_BASE }}"
+          echo "HEAD: ${{ env.NX_HEAD }}"
+      - name: Build Project
+        uses: gradle/gradle-build-action@v2
+        env:
+          GIT_COMMIT: ${{ env.NX_HEAD }}
+          GIT_PREVIOUS_SUCCESSFUL_COMMIT: ${{ env.NX_BASE }}
+        with:
+          gradle-version: wrapper
+          arguments: printChangeLog
   deploy:
     name: Deploy Project
     runs-on: ubuntu-latest
     needs: [initialize-pipeline, build]
-    if: needs.initialize-pipeline.outputs.branchName == '1.19'
+    if: false && needs.initialize-pipeline.outputs.branchName == '1.19'
     env:
       BRANCH_NAME: ${{ needs.initialize-pipeline.outputs.branchName }}
       SEMVER: ${{ needs.initialize-pipeline.outputs.semVer }}
@@ -124,7 +137,7 @@ jobs:
     name: Tag Latest Released Version
     runs-on: ubuntu-latest
     needs: [initialize-pipeline, build, deploy]
-    if: needs.initialize-pipeline.outputs.branchName == '1.19'
+    if: false && needs.initialize-pipeline.outputs.branchName == '1.19'
     steps:
       - name: Checkout
         uses: actions/checkout@v3

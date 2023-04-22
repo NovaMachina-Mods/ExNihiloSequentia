@@ -18,6 +18,7 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'net.darkhax.curseforgegradle' version '1.0.11'
     id 'org.ajoberstar.grgit' version '4.1.1'
+    id 'org.barfuin.gradle.taskinfo' version '2.1.0'
 }
 
 if(!System.getenv('CI')) {
@@ -276,7 +277,7 @@ jar {
 // This is the preferred method to reobfuscate your jar file
 //jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
- publish.dependsOn('reobfJar')
+publish.dependsOn('reobfJar')
 
 tasks.withType(GenerateModuleMetadata) {
     // Disable Gradle 7 module metadata generation as it does not play nicely with FG
@@ -338,8 +339,10 @@ publishing {
             name = "cloudsmith"
             url = "https://maven.cloudsmith.io/novamachina-mods/ex-nihilo-sequentia/"
             credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
+//                username = System.getenv("MAVEN_USERNAME")
+                username = 'jacob-williams'
+//                password = System.getenv("MAVEN_PASSWORD")
+                password = '132a9075bdffa3b7b6918f74f620e74c7047b0b9'
             }
         }
     }
@@ -401,7 +404,7 @@ classes {
 
 compileJava {
     options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
-    options.getGeneratedSourceOutputDirectory().set(file("src/datagen/main/resources/"))
+    options.getGeneratedSourceOutputDirectory().set(file("src/main/resources/"))
 }
 
 String getMinecraftRelease() {
@@ -418,7 +421,7 @@ String getForgeMajor() {
 
 String resolvedChangelog = null
 
-String changeLogResolver = { ->
+def changeLogResolver = { ->
     if(resolvedChangelog != null) {
         return resolvedChangelog
     }
@@ -473,6 +476,12 @@ String changeLogResolver = { ->
     return generatedChangelog
 }
 
+task printChangeLog {
+    println "****START CHANGELOG****"
+    println changeLogResolver.call()
+    println "****END CHANGELOG****"
+}
+
 task publishCurseForge(type: TaskPublishCurseForge) {
     group = "publishing"
     description = "Publishes project to CurseForge"
@@ -483,7 +492,7 @@ task publishCurseForge(type: TaskPublishCurseForge) {
     UploadArtifact mainFile = upload(projectId, jar)
     mainFile.releaseType = project.property("releaseType")
     mainFile.changelogType = 'html'
-    mainFile.changelog = changeLogResolver
+    mainFile.changelog = changeLogResolver.call()
     mainFile.addModLoader("Forge")
     mainFile.addGameVersion(project.property("minecraftVersion"))
     mainFile.addOptional("jade")
@@ -538,3 +547,6 @@ Map<String, Object> getProps(File propFile) {
     }
     return mappedProps
 }
+
+//publishCurseForge.dependsOn('reobfJar')
+//publishMainPublicationToCloudsmithRepository.dependsOn('reobfJar')
