@@ -1,0 +1,8 @@
+#! /bin/bash
+
+if [ -e "last-success-sha" ]; then
+  cat last-success-sha
+  GIT_PREVIOUS_SUCCESSFUL_COMMIT=$(cat last-success-sha)
+else
+  echo "No last-success-sha"
+fi
