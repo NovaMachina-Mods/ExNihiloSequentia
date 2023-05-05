@@ -546,7 +546,7 @@ Map<String, Object> getProps(File propFile) {
 task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
     file = new File ("changelog.html")
     untaggedName = "Current release ${project.version}"
-    fromCommit = (System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: changelogStartCommit)
+    fromCommit = (System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: "98997aab")
     toRef =  "HEAD"
     gitHubIssuePattern = "nonada123";
     templateContent = """
