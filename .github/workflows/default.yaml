@@ -76,7 +76,9 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: last-success-sha
-          key: ${{ runner.os }}-last-success-sha
+          key: last-success-sha-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            last-success-sha-${{ runner.os }}
       - name: Write Last Successful Build SHA to Env Var
         run: ${GITHUB_WORKSPACE}/scripts/restore-last-build-sha
       - name: Deploy to CurseForge
@@ -111,7 +113,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: last-success-sha
-          key: ${{ runner.os }}-last-success-sha
+          key: last-success-sha-${{ runner.os }}-${{ github.run_id }}
       - name: Notify Discord of Failed Build
         if: false && failure()
         uses: "Ilshidur/action-discord@0.3.2"
