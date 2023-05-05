@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     name: Build Project
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -78,7 +79,7 @@ jobs:
       - name: Write Last Successful Build SHA to Env Var
         run: |
           [ -e "last-success-sha" ] && cat last-success-sha
-          [ -e "last-success-sha" ] && GIT_PREVIOUS_SUCCESSFUL_COMMIT=$(cat last-success-sha)
+#          [ -e "last-success-sha" ] && GIT_PREVIOUS_SUCCESSFUL_COMMIT=$(cat last-success-sha)
       - name: Deploy to CurseForge
         if: false
         env:
@@ -115,7 +116,7 @@ jobs:
           path: last-success-sha
           key: ${{ runner.os }}-last-success-sha
       - name: Notify Discord of Failed Build
-        if: failure()
+        if: false && failure()
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
