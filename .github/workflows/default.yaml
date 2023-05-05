@@ -54,6 +54,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Notify Discord of Deploy
         if: false
         uses: "Ilshidur/action-discord@0.3.2"
