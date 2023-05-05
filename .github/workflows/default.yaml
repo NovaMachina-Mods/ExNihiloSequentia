@@ -77,7 +77,7 @@ jobs:
           path: last-success-sha
           key: ${{ runner.os }}-last-success-sha
       - name: Write Last Successful Build SHA to Env Var
-        run: scripts/restore-last-build-sah
+        run: ${GITHUB_WORKSPACE}/scripts/restore-last-build-sah
       - name: Deploy to CurseForge
         if: false
         env:
@@ -103,7 +103,7 @@ jobs:
           cat changelog.html
       - name: Write Last Successful Build SHA to file
         if: success()
-        run: scripts/save-last-build-sah
+        run: ${GITHUB_WORKSPACE}/scripts/save-last-build-sah
       - name: Write Last Successful Build SHA to Cache
         if: success()
         id: last-success-sha-save
