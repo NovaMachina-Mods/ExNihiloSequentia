@@ -19,6 +19,7 @@ plugins {
     id 'net.darkhax.curseforgegradle' version '1.0.11'
     id 'org.ajoberstar.grgit' version '4.1.1'
     id 'org.barfuin.gradle.taskinfo' version '2.1.0'
+    id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.79.0"
 }
 
 if(!System.getenv('CI')) {
@@ -46,26 +47,26 @@ if(project.tasks.findByName("wrapper") == null) {
         distributionType = Wrapper.DistributionType.ALL
     }
 }
-String modVersion = System.env.SEMVER ?: property("modVersion")
-String basicVersion = "${modVersion}" + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
-version = "${property("minecraftVersion")}-${basicVersion}"
+
+ext {
+    modsTomlProperties = ["version"                 : "${property("modVersion")}",
+                          "mc_version"               : "[${minecraftRelease},)",
+                          "forge_version"            : "[${property("forgeVersion")},)",
+                          "loader_version"           : "[${forgeMajor},)",
+                          "git_url"                  : "${property("gitUrl")}",
+                          "curseforge_url"           : "${property("curseForgeUrl")}",
+                          "crafttweaker_version"     : "[${property("crafttweakerVersion")},)",
+                          "jei_version"              : "[${property("jeiVersion")},)",]
+    jsonPatterns = ["**/*.json", "**/*.mcmeta"]
+}
+
+String basicVersion = "${property("modVersion")}." + (System.getenv("GITHUB_RUN_NUMBER") ?: "homebaked")
+version = "${property("minecraftVersion")}-${basicVersion}" + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
 group = "novamachina.${project.name.toLowerCase()}"
 archivesBaseName = property("artifactBasename")
 
 String minecraftRelease = getMinecraftRelease()
 String forgeMajor = getForgeMajor()
-
-ext {
-    modsTomlProperties = ["version"                 : "${modVersion}",
-                         "mc_version"               : "[${minecraftRelease},)",
-                         "forge_version"            : "[${property("forgeVersion")},)",
-                         "loader_version"           : "[${forgeMajor},)",
-                         "git_url"                  : "${property("gitUrl")}",
-                         "curseforge_url"           : "${property("curseForgeUrl")}",
-                         "crafttweaker_version"     : "[${property("crafttweakerVersion")},)",
-                         "jei_version"              : "[${property("jeiVersion")},)",]
-    jsonPatterns = ["**/*.json", "**/*.mcmeta"]
-}
 
 defaultTasks 'build'
 
@@ -339,10 +340,8 @@ publishing {
             name = "cloudsmith"
             url = "https://maven.cloudsmith.io/novamachina-mods/ex-nihilo-sequentia/"
             credentials {
-//                username = System.getenv("MAVEN_USERNAME")
-                username = 'jacob-williams'
-//                password = System.getenv("MAVEN_PASSWORD")
-                password = '132a9075bdffa3b7b6918f74f620e74c7047b0b9'
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
             }
         }
     }
@@ -426,8 +425,8 @@ def changeLogResolver = { ->
         return resolvedChangelog
     }
     String generatedChangelog = "Unable to generate changelog :("
-    String currentCommit = System.getenv("GIT_COMMIT")
-    String prevCommit = System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: System.getenv("GIT_PREVIOUS_COMMIT")
+    String currentCommit = System.getenv("GITHUB_SHA")
+    String prevCommit = property('changelogStartCommit')
 
     if (currentCommit != null && prevCommit != null) {
         generatedChangelog = ""
@@ -476,12 +475,6 @@ def changeLogResolver = { ->
     return generatedChangelog
 }
 
-task printChangeLog {
-    println "****START CHANGELOG****"
-    println changeLogResolver.call()
-    println "****END CHANGELOG****"
-}
-
 task publishCurseForge(type: TaskPublishCurseForge) {
     group = "publishing"
     description = "Publishes project to CurseForge"
@@ -499,6 +492,8 @@ task publishCurseForge(type: TaskPublishCurseForge) {
     mainFile.addOptional("jei")
     mainFile.addOptional("the-one-probe")
 }
+
+publishCurseForge.dependsOn('reobfJar')
 
 if(rootProject.name != project.name) {
     task updateToolingProperties(type: WriteProperties) {
@@ -548,5 +543,27 @@ Map<String, Object> getProps(File propFile) {
     return mappedProps
 }
 
-//publishCurseForge.dependsOn('reobfJar')
-//publishMainPublicationToCloudsmithRepository.dependsOn('reobfJar')
+task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+    file = new File ("changelog.html")
+    untaggedName = "Current release ${project.version}"
+    fromCommit = System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT")
+    toRef =  "HEAD"
+    gitHubIssuePattern = "nonada123";
+    templateContent = """
+{{#tags}}
+    <h3>{{name}}</h3>
+    <ul>
+        {{#commits}}
+            <li>
+                <a href="https://github.com/NovaMachina-Mods/ExNihiloSequentia/commit/{{hashFull}}">{{{messageTitle}}}</a> - {{{authorName}}}
+                <ul>
+                    {{#messageBodyItems}}
+                        <li>{{.}}</li>
+                    {{/messageBodyItems}}
+                </ul>
+            </li>
+        {{/commits}}
+    </ul>
+{{/tags}}
+"""
+}

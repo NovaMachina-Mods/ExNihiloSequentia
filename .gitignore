@@ -6,3 +6,4 @@ run
 runserver
 **/.cache
 bin
+changelog.html
