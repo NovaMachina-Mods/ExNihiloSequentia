@@ -426,7 +426,7 @@ def changeLogResolver = { ->
     }
     String generatedChangelog = "Unable to generate changelog :("
     String currentCommit = System.getenv("GITHUB_SHA")
-    String prevCommit = property('changelogStartCommit')
+    String prevCommit = "${property('changelogStartCommit')}"
 
     if (currentCommit != null && prevCommit != null) {
         generatedChangelog = ""
