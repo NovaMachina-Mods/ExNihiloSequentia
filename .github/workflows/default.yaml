@@ -77,8 +77,8 @@ jobs:
           key: ${{ runner.os }}-last-success-sha
       - name: Write Last Successful Build SHA to Env Var
         run: |
-          cat last-success-sha
-          GIT_PREVIOUS_SUCCESSFUL_COMMIT=$(cat last-success-sha)
+          [ -e "last-success-sha" ] && cat last-success-sha
+          [ -e "last-success-sha" ] && GIT_PREVIOUS_SUCCESSFUL_COMMIT=$(cat last-success-sha)
       - name: Deploy to CurseForge
         if: false
         env:
@@ -105,7 +105,7 @@ jobs:
       - name: Write Last Successful Build SHA to file
         if: success()
         run: |
-          echo $GIT_PREVIOUS_SUCCESSFUL_COMMIT > last-success-sha
+          echo $GITHUB_SHA > last-success-sha
           cat last-success-sha
       - name: Write Last Successful Build SHA to Cache
         if: success()
