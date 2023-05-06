@@ -1,0 +1,12 @@
+<ul>
+    {{#commits}}
+    <li>
+        <a href="https://github.com/NovaMachina-Mods/ExNihiloSequentia/commit/{{hashFull}}">{{{messageTitle}}}</a> - {{{authorName}}}
+        <ul>
+            {{#messageBodyItems}}
+                <li>{{.}}</li>
+            {{/messageBodyItems}}
+        </ul>
+    </li>
+    {{/commits}}
+</ul>
