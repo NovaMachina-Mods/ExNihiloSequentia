@@ -51,14 +51,16 @@ if(project.tasks.findByName("wrapper") == null) {
 }
 
 ext {
-    modsTomlProperties = ["version"                 : "${property("modVersion")}",
-                          "mc_version"               : "[${minecraftRelease},)",
-                          "forge_version"            : "[${property("forgeVersion")},)",
-                          "loader_version"           : "[${forgeMajor},)",
-                          "git_url"                  : "${property("gitUrl")}",
-                          "curseforge_url"           : "${property("curseForgeUrl")}",
-                          "crafttweaker_version"     : "[${property("crafttweakerVersion")},)",
-                          "jei_version"              : "[${property("jeiVersion")},)",]
+    modsTomlProperties = [
+            "version" : "${property("modVersion")}",
+            "mc_version" : "[${minecraftRelease},)",
+            "forge_version" : "[${property("forgeVersion")},)",
+            "loader_version" : "[${forgeMajor},)",
+            "git_url" : "${property("gitUrl")}",
+            "curseforge_url" : "${property("curseForgeUrl")}",
+            "crafttweaker_version" : "[${property("crafttweakerVersion")},)",
+            "jei_version" : "[${property("jeiVersion")},)"
+    ]
     jsonPatterns = ["**/*.json", "**/*.mcmeta"]
 }
 
@@ -430,7 +432,7 @@ task publishCurseForge(type: TaskPublishCurseForge) {
     UploadArtifact mainFile = upload(projectId, jar)
     mainFile.releaseType = project.property("releaseType")
     mainFile.changelogType = 'html'
-    mainFile.changelog = file('changelog.html')
+    mainFile.changelog = (file('changelog.html').exists() ? file('changelog.html').text : "No changelog was specified.")
     mainFile.addModLoader("Forge")
     mainFile.addGameVersion(project.property("minecraftVersion"))
     mainFile.addOptional("jade")
@@ -448,7 +450,7 @@ modrinth {
     versionType = "${project.property("releaseType")}"
     gameVersions = ["${project.property("minecraftVersion")}"]
     loaders = ["forge"]
-    changelog = file('changelog.md').text
+    changelog = (file('changelog.md').exists() ? file('changelog.md').text : DEFAULT_CHANGELOG)
     dependencies {
         optional.project "jade"
         optional.project "jei"
@@ -525,6 +527,7 @@ task makeChangelogHtml(type: GitChangelogTask) {
         if (releaseType == "alpha" || releaseType == "beta") {
             changeLogText = attachPreReleaseWarning(changeLogText, ChangeLogType.HTML)
         }
+        changeLogText = attachReleaseNotes(changeLogText, ChangeLogType.HTML)
         file('changelog.html').setText(changeLogText)
     }
 }
@@ -542,6 +545,7 @@ task makeChangelogMd(type: GitChangelogTask) {
         if (releaseType == "alpha" || releaseType == "beta") {
             changeLogText = attachPreReleaseWarning(changeLogText, ChangeLogType.MARKDOWN)
         }
+        changeLogText = attachReleaseNotes(changeLogText, ChangeLogType.MARKDOWN)
         file('changelog.md').setText(changeLogText)
     }
 }
@@ -551,15 +555,34 @@ enum ChangeLogType {
     MARKDOWN
 }
 
+String attachReleaseNotes(String changeLogText, ChangeLogType type) {
+    if (type == ChangeLogType.HTML) {
+        def releaseNotesFile = project.file("docs/release_${modVersion}.html")
+        if (releaseNotesFile.exists()) {
+            def releaseNotes = releaseNotesFile.getText()
+            changeLogText = "$releaseNotes\n<br />\n$changeLogText"
+        }
+    } else if (type == ChangeLogType.MARKDOWN) {
+        def releaseNotesFile = project.file("docs/release_${modVersion}.md")
+        if (releaseNotesFile.exists()) {
+            def releaseNotes = releaseNotesFile.getText()
+            changeLogText = "$releaseNotes\n\n$changeLogText"
+        }
+    } else {
+        println("Could not attach release notes warning to changelog")
+    }
+    return changeLogText
+}
+
 String attachPreReleaseWarning(String changeLogText, ChangeLogType type) {
     if (type == ChangeLogType.HTML) {
-        changeLogText = "<strong>Warning: ${projectProperName} is currently in a pre-release, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
+        changeLogText = "<strong>Warning: ${projectProperName} is currently in a pre-release state, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
         "and updating from one pre-release to the next may cause various ${projectProperName} blocks and items to disappear/void their contents. " +
         "While this is unlikely to happen, make sure to make backups.</strong>\n<br />\n$changeLogText"
     } else if (type == ChangeLogType.MARKDOWN) {
-        changeLogText = "**Warning: ${projectProperName} is currently in a pre-release, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
+        changeLogText = "**Warning: ${projectProperName} is currently in a pre-release state, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
         "and updating from one pre-release to the next may cause various ${projectProperName} blocks and items to disappear/void their contents. " +
-        "While this is unlikely to happen, make sure to make backups.**\n$changeLogText"
+        "While this is unlikely to happen, make sure to make backups.**\n\n$changeLogText"
     } else {
         println("Could not attach pre-release warning to changelog")
     }
