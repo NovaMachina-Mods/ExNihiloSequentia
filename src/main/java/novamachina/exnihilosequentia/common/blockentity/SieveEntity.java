@@ -13,7 +13,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -25,7 +24,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
@@ -34,6 +32,7 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.jetbrains.annotations.NotNull;
 
 public class SieveEntity extends BlockEntity {
 
@@ -43,7 +42,6 @@ public class SieveEntity extends BlockEntity {
   @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
   @Nonnull private final Random random = new SecureRandom();
   @Nonnull private ItemStack blockStack = ItemStack.EMPTY;
-  private UUID lastPlayer;
   private long lastSieveAction = 0;
   @Nonnull private ItemStack meshStack = ItemStack.EMPTY;
   @Nonnull private MeshType meshType = MeshType.NONE;
@@ -73,9 +71,6 @@ public class SieveEntity extends BlockEntity {
 
     if (level != null) {
       lastSieveAction = level.getLevelData().getGameTime();
-    }
-    if (player != null) {
-      lastPlayer = player.getUUID();
     }
 
     if (isReadyToSieve()) {
@@ -130,7 +125,7 @@ public class SieveEntity extends BlockEntity {
   }
 
   @Override
-  public CompoundTag getUpdateTag() {
+  public @NotNull CompoundTag getUpdateTag() {
     @Nonnull final CompoundTag nbt = new CompoundTag();
     if (!meshStack.isEmpty()) {
       CompoundTag meshNBT = meshStack.save(new CompoundTag());
@@ -183,8 +178,8 @@ public class SieveEntity extends BlockEntity {
       @Nullable final Tag meshTag = compound.get(MESH_TAG);
       if (meshTag != null) {
         meshStack = ItemStack.of((CompoundTag) meshTag);
-        if (meshStack.getItem() instanceof MeshItem) {
-          meshType = ((MeshItem) meshStack.getItem()).getType();
+        if (meshStack.getItem() instanceof MeshItem meshItem) {
+          meshType = meshItem.getType();
         }
       } else {
         meshStack = ItemStack.EMPTY;
@@ -217,8 +212,8 @@ public class SieveEntity extends BlockEntity {
       @Nullable final Tag meshTag = nbt.get(MESH_TAG);
       if (meshTag != null) {
         meshStack = ItemStack.of((CompoundTag) meshTag);
-        if (meshStack.getItem() instanceof MeshItem) {
-          meshType = ((MeshItem) meshStack.getItem()).getType();
+        if (meshStack.getItem() instanceof MeshItem meshItem) {
+          meshType = meshItem.getType();
         }
       } else {
         meshStack = ItemStack.EMPTY;
