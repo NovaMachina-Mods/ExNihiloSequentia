@@ -123,14 +123,6 @@ public class SieveEntity extends BlockEntity {
     return progress / Config.getMaxSieveClicks();
   }
 
-  @Nullable
-  public ResourceLocation getTexture() {
-    if (!blockStack.isEmpty()) {
-      return ForgeRegistries.ITEMS.getKey(blockStack.getItem());
-    }
-    return null;
-  }
-
   @Override
   @Nonnull
   public ClientboundBlockEntityDataPacket getUpdatePacket() {
