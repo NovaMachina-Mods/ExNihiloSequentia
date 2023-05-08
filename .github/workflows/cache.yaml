@@ -1,0 +1,21 @@
+name: Pull Cache
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: "17"
+    - name: Restore Last Successful Build SHA from Cache
+      id: last-success-sha-restore
+      uses: actions/cache/restore@v3
+      with:
+        path: last-success-sha
+        key: last-success-sha-${{ runner.os }}-${{ github.run_id }}
+        restore-keys: |
+          last-success-sha-${{ runner.os }}
