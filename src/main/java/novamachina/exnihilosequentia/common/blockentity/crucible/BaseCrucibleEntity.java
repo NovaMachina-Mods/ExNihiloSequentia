@@ -1,6 +1,10 @@
 package novamachina.exnihilosequentia.common.blockentity.crucible;
 
 import com.mojang.logging.LogUtils;
+import java.util.Objects;
+import java.util.Optional;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -33,11 +37,6 @@ import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.TankUtil;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Objects;
-import java.util.Optional;
 
 public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidContainer {
 
