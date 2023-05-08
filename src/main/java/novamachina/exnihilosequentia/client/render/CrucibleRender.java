@@ -1,24 +1,23 @@
 package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.data.ModelData;
+import novamachina.exnihilosequentia.client.util.LiquidBlockVertexConsumer;
 import novamachina.exnihilosequentia.common.blockentity.crucible.BaseCrucibleEntity;
-import novamachina.exnihilosequentia.common.utility.Color;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.jetbrains.annotations.NotNull;
 
 public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity> {
 
@@ -42,85 +41,70 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
       @Nonnull final MultiBufferSource buffer,
       final int combinedLightIn,
       final int combinedOverlayIn) {
-    @Nullable final ResourceLocation solidTexture = tileEntity.getSolidTexture();
-    @Nullable final Fluid fluid = tileEntity.getFluid();
-    @Nullable
-    final ResourceLocation fluidTexture =
-        fluid != null ? IClientFluidTypeExtensions.of(fluid).getStillTexture() : null;
-    @Nonnull
-    final Color fluidColor =
-        fluid != null
-            ? new Color(IClientFluidTypeExtensions.of(fluid).getTintColor())
-            : Color.INVALID_COLOR;
-    @Nonnull final Color blockColor = getBlockColor(solidTexture, tileEntity);
-    renderFluid(
-        tileEntity,
-        matrixStack,
-        buffer,
-        combinedLightIn,
-        fluidTexture,
-        fluidColor,
-        new UVLocation(0, 1));
-    if (solidTexture != null) {
-      @Nonnull final VertexConsumer builder = buffer.getBuffer(RenderType.solid());
+    renderFluid(matrixStack, buffer, tileEntity);
+    renderSolid(tileEntity, matrixStack, buffer, combinedLightIn, combinedOverlayIn);
+  }
 
-      @Nonnull
-      final TextureAtlasSprite sprite =
-          Minecraft.getInstance()
-              .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
-              .apply(
-                  new ResourceLocation(
-                      solidTexture.getNamespace(),
-                      "block/" + resolveTexture(solidTexture.getPath())));
-
-      // Subtract 0.005 to prevent texture fighting
-      final float fillAmount = (0.75f * Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.005f;
-
+  private void renderFluid(
+      @NotNull PoseStack matrixStack,
+      @NotNull MultiBufferSource buffer,
+      BaseCrucibleEntity tileEntity) {
+    if (tileEntity.getFluidAmount() > 0) {
+      BlockState state = tileEntity.getFluid().defaultFluidState().createLegacyBlock();
       matrixStack.pushPose();
-      matrixStack.translate(.5, .5, .5);
-      matrixStack.translate(-.5, -.5, -.5);
 
-      add(
-          builder,
-          matrixStack,
-          new VertexLocation(0, 0.25f + fillAmount, 1),
-          new UVLocation(sprite.getU0(), sprite.getV1()),
-          blockColor,
-          combinedLightIn);
-      add(
-          builder,
-          matrixStack,
-          new VertexLocation(1, 0.25f + fillAmount, 1),
-          new UVLocation(sprite.getU1(), sprite.getV1()),
-          blockColor,
-          combinedLightIn);
-      add(
-          builder,
-          matrixStack,
-          new VertexLocation(1, 0.25f + fillAmount, 0),
-          new UVLocation(sprite.getU1(), sprite.getV0()),
-          blockColor,
-          combinedLightIn);
-      add(
-          builder,
-          matrixStack,
-          new VertexLocation(0, 0.25f + fillAmount, 0),
-          new UVLocation(sprite.getU0(), sprite.getV0()),
-          blockColor,
-          combinedLightIn);
+      final float fillAmount = (Math.min(tileEntity.getFluidProportion(), 1.0F));
 
+      matrixStack.translate(0.125, 0.1875, 0.125);
+      matrixStack.scale(0.75F, fillAmount, 0.75F);
+
+      BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
+      blockRenderer.renderLiquid(
+          tileEntity.getBlockPos(),
+          tileEntity.getLevel(),
+          new LiquidBlockVertexConsumer(
+              buffer.getBuffer(
+                  ItemBlockRenderTypes.getRenderLayer(tileEntity.getFluid().defaultFluidState())),
+              matrixStack,
+              tileEntity.getBlockPos()),
+          state,
+          tileEntity.getFluid().defaultFluidState());
       matrixStack.popPose();
     }
   }
 
-  @Nonnull
-  private Color getBlockColor(ResourceLocation solidTexture, BaseCrucibleEntity tileEntity) {
-    if (solidTexture != null
-        && solidTexture.toString().contains("leaves")
-        && tileEntity.getLevel() != null) {
-      return new Color(
-          tileEntity.getLevel().getBiome(tileEntity.getBlockPos()).value().getFoliageColor());
+  private void renderSolid(
+      @NotNull BaseCrucibleEntity tileEntity,
+      @NotNull PoseStack matrixStack,
+      @NotNull MultiBufferSource buffer,
+      int combinedLightIn,
+      int combinedOverlayIn) {
+    if (tileEntity.getSolidAmount() > 0) {
+      BlockState state = null;
+      if (tileEntity.getCurrentItem().getItem() instanceof BlockItem blockItem) {
+        state = blockItem.getBlock().defaultBlockState();
+      }
+      matrixStack.pushPose();
+
+      final float fillAmount = (Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.1875F;
+
+      matrixStack.translate(0.125, 0.1875, 0.125);
+      matrixStack.scale(0.75F, fillAmount, 0.75F);
+
+      BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
+      if (state != null) {
+        blockRenderer.renderSingleBlock(
+            state,
+            matrixStack,
+            buffer,
+            combinedLightIn,
+            combinedOverlayIn,
+            ModelData.EMPTY,
+            RenderType.cutoutMipped());
+      } else {
+        logger.warn("BlockState was null");
+      }
+      matrixStack.popPose();
     }
-    return Color.WHITE;
   }
 }

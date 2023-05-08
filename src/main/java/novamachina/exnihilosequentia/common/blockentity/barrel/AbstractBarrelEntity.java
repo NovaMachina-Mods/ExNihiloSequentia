@@ -11,7 +11,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -32,7 +31,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.blockentity.IFluidContainer;
 import novamachina.exnihilosequentia.common.blockentity.barrel.mode.AbstractBarrelMode;
 import novamachina.exnihilosequentia.common.blockentity.barrel.mode.BarrelModeRegistry;
@@ -145,12 +143,8 @@ public abstract class AbstractBarrelEntity extends BlockEntity implements IFluid
     return (float) solidAmount / MAX_SOLID_AMOUNT;
   }
 
-  @Nullable
-  public ResourceLocation getSolidTexture() {
-    if (!inventory.getStackInSlot(0).isEmpty()) {
-      return ForgeRegistries.ITEMS.getKey(inventory.getStackInSlot(0).getItem());
-    }
-    return null;
+  public ItemStack getInventoryBlock() {
+    return inventory.getStackInSlot(0);
   }
 
   @Nonnull

@@ -11,7 +11,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +31,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.blockentity.IFluidContainer;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
@@ -154,17 +152,6 @@ public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidCo
     return 0;
   }
 
-  @Nullable
-  public ResourceLocation getSolidTexture() {
-    if (!inventory.getStackInSlot(0).isEmpty()) {
-      return ForgeRegistries.ITEMS.getKey(inventory.getStackInSlot(0).getItem());
-    }
-    if (!currentItem.isEmpty()) {
-      return ForgeRegistries.ITEMS.getKey(currentItem.getItem());
-    }
-    return null;
-  }
-
   @Override
   @Nonnull
   public ClientboundBlockEntityDataPacket getUpdatePacket() {
@@ -251,6 +238,7 @@ public abstract class BaseCrucibleEntity extends BlockEntity implements IFluidCo
         stack.shrink(1);
       }
       setChanged();
+      tickCrucible();
       return InteractionResult.SUCCESS;
     }
     return InteractionResult.SUCCESS;
