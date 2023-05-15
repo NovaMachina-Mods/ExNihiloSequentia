@@ -1,7 +1,5 @@
 package novamachina.exnihilosequentia.common.compat.kubejs;
 
-import com.google.gson.JsonElement;
-import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.item.ingredient.IngredientJS;
 import dev.latvian.mods.kubejs.recipe.IngredientMatch;
 import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
