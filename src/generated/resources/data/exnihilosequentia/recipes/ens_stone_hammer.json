@@ -5,7 +5,7 @@
       "tag": "forge:rods"
     },
     "x": {
-      "tag": "forge:cobblestone"
+      "item": "minecraft:cobblestone"
     }
   },
   "pattern": [

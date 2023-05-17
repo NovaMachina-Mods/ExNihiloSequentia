@@ -515,7 +515,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                     ExNihiloConstants.Items.NETHERITE_HAMMER)));
     createHammer(ExNihiloItems.HAMMER_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
     createHammer(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get(), Items.RED_NETHER_BRICKS, consumer);
-    createHammer(ExNihiloItems.HAMMER_STONE.get(), Tags.Items.COBBLESTONE, consumer);
+    createHammer(ExNihiloItems.HAMMER_STONE.get(), Items.COBBLESTONE, consumer);
     createHammer(ExNihiloItems.HAMMER_TERRACOTTA.get(), Items.TERRACOTTA, consumer);
     createHammer(ExNihiloItems.HAMMER_TUFF.get(), Items.TUFF, consumer);
     //    createHammer(ExNihiloItems.HAMMER_WARPED_FUNGUS.get(), Items.WARPED_PLANKS, consumer);
