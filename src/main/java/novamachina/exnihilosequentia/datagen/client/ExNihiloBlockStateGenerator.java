@@ -53,6 +53,10 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         exnihiloLoc("block/jungle_barrel"),
         vanillaLoc("block/jungle_planks"));
     createBarrel(
+        ExNihiloBlocks.BARREL_MANGROVE.get(),
+        exnihiloLoc("block/mangrove_barrel"),
+        vanillaLoc("block/mangrove_planks"));
+    createBarrel(
         ExNihiloBlocks.BARREL_OAK.get(),
         exnihiloLoc("block/oak_barrel"),
         vanillaLoc("block/oak_planks"));
@@ -96,6 +100,10 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         exnihiloLoc("block/jungle_crucible"),
         vanillaLoc("block/jungle_planks"));
     createCrucible(
+        ExNihiloBlocks.CRUCIBLE_MANGROVE.get(),
+        exnihiloLoc("block/mangrove_crucible"),
+        vanillaLoc("block/mangrove_planks"));
+    createCrucible(
         ExNihiloBlocks.CRUCIBLE_OAK.get(),
         exnihiloLoc("block/oak_crucible"),
         vanillaLoc("block/oak_planks"));
@@ -136,6 +144,10 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         exnihiloLoc("block/jungle_sieve"),
         vanillaLoc("block/jungle_planks"));
     createSieve(
+        ExNihiloBlocks.SIEVE_MANGROVE.get(),
+        exnihiloLoc("block/mangrove_sieve"),
+        vanillaLoc("block/mangrove_planks"));
+    createSieve(
         ExNihiloBlocks.SIEVE_OAK.get(),
         exnihiloLoc("block/oak_sieve"),
         vanillaLoc("block/oak_planks"));
@@ -155,9 +167,15 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
 
   private void registerSimpleBlocks() {
     basicBlock(ExNihiloBlocks.CRUSHED_ANDESITE.get());
+    basicBlock(ExNihiloBlocks.CRUSHED_BASALT.get());
+    basicBlock(ExNihiloBlocks.CRUSHED_BLACKSTONE.get());
+    basicBlock(ExNihiloBlocks.CRUSHED_CALCITE.get());
+    basicBlock(ExNihiloBlocks.CRUSHED_DEEPSLATE.get());
     basicBlock(ExNihiloBlocks.CRUSHED_DIORITE.get());
+    basicBlock(ExNihiloBlocks.CRUSHED_DRIPSTONE.get());
     basicBlock(ExNihiloBlocks.CRUSHED_GRANITE.get());
     basicBlock(ExNihiloBlocks.CRUSHED_NETHERRACK.get());
+    basicBlock(ExNihiloBlocks.CRUSHED_TUFF.get());
     basicBlock(ExNihiloBlocks.CRUSHED_END_STONE.get());
     basicBlock(ExNihiloBlocks.DUST.get());
     basicBlock(ExNihiloBlocks.INFESTED_LEAVES.get());

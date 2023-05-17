@@ -23,15 +23,16 @@ public class ExNihiloConstants {
 
   public static class Blocks {
 
+    public static List<String> blocksList = new ArrayList<>();
     public static final String BARRELS = "barrels";
     public static final String CRUCIBLES = "crucibles";
     public static final String SIEVES = "sieves";
-    public static List<String> blocksList = new ArrayList<>();
     public static final String ACACIA_BARREL = addBlockToList("acacia_barrel");
     public static final String BIRCH_BARREL = addBlockToList("birch_barrel");
     public static final String CRIMSON_BARREL = addBlockToList("crimson_barrel");
     public static final String DARK_OAK_BARREL = addBlockToList("dark_oak_barrel");
     public static final String JUNGLE_BARREL = addBlockToList("jungle_barrel");
+    public static final String MANGROVE_BARREL = addBlockToList("mangrove_barrel");
     public static final String OAK_BARREL = addBlockToList("oak_barrel");
     public static final String SPRUCE_BARREL = addBlockToList("spruce_barrel");
     public static final String STONE_BARREL = addBlockToList("stone_barrel");
@@ -42,15 +43,22 @@ public class ExNihiloConstants {
     public static final String DARK_OAK_CRUCIBLE = addBlockToList("dark_oak_crucible");
     public static final String FIRED_CRUCIBLE = addBlockToList("fired_crucible");
     public static final String JUNGLE_CRUCIBLE = addBlockToList("jungle_crucible");
+    public static final String MANGROVE_CRUCIBLE = addBlockToList("mangrove_crucible");
     public static final String OAK_CRUCIBLE = addBlockToList("oak_crucible");
     public static final String SPRUCE_CRUCIBLE = addBlockToList("spruce_crucible");
     public static final String UNFIRED_CRUCIBLE = addBlockToList("unfired_crucible");
     public static final String WARPED_CRUCIBLE = addBlockToList("warped_crucible");
     public static final String CRUSHED_ANDESITE = addBlockToList("crushed_andesite");
+    public static final String CRUSHED_BASALT = addBlockToList("crushed_basalt");
+    public static final String CRUSHED_BLACKSTONE = addBlockToList("crushed_blackstone");
+    public static final String CRUSHED_CALCITE = addBlockToList("crushed_calcite");
+    public static final String CRUSHED_DEEPSLATE = addBlockToList("crushed_deepslate");
     public static final String CRUSHED_DIORITE = addBlockToList("crushed_diorite");
+    public static final String CRUSHED_DRIPSTONE = addBlockToList("crushed_dripstone");
     public static final String CRUSHED_END_STONE = addBlockToList("crushed_end_stone");
     public static final String CRUSHED_GRANITE = addBlockToList("crushed_granite");
     public static final String CRUSHED_NETHERRACK = addBlockToList("crushed_netherrack");
+    public static final String CRUSHED_TUFF = addBlockToList("crushed_tuff");
     public static final String DUST = addBlockToList("dust");
     public static final String END_CAKE = addBlockToList("end_cake");
     public static final String INFESTED_LEAVES = addBlockToList("infested_leaves");
@@ -62,6 +70,7 @@ public class ExNihiloConstants {
     public static final String CRIMSON_SIEVE = addBlockToList("crimson_sieve");
     public static final String DARK_OAK_SIEVE = addBlockToList("dark_oak_sieve");
     public static final String JUNGLE_SIEVE = addBlockToList("jungle_sieve");
+    public static final String MANGROVE_SIEVE = addBlockToList("mangrove_sieve");
     public static final String OAK_SIEVE = addBlockToList("oak_sieve");
     public static final String SPRUCE_SIEVE = addBlockToList("spruce_sieve");
     public static final String WARPED_SIEVE = addBlockToList("warped_sieve");
@@ -99,15 +108,6 @@ public class ExNihiloConstants {
     public static final String SHULKER_DOLL = "shulker_doll";
     public static final String STRING_MESH = "string_mesh";
     public static final List<String> resourceList = new ArrayList<>();
-    //    public static final String ALUMINUM_NUGGET = createResourceName("aluminum_nugget");
-    //    public static final String LEAD_NUGGET = createResourceName("lead_nugget");
-    //    public static final String NICKEL_NUGGET = createResourceName("nickel_nugget");
-    //    public static final String PLATINUM_NUGGET = createResourceName("platinum_nugget");
-    //    public static final String SILVER_NUGGET = createResourceName("silver_nugget");
-    //    public static final String TIN_NUGGET = createResourceName("tin_nugget");
-    //    public static final String URANIUM_NUGGET = createResourceName("uranium_nugget");
-    //    public static final String ZINC_NUGGET = createResourceName("zinc_nugget");
-    //    public static final String COPPER_NUGGET = createResourceName("copper_nugget");
     public static final String CALCITE_PEBBLE = createPebbleName("calcite");
     public static final String DRIPSTONE_PEBBLE = createPebbleName("dripstone");
     public static final String CRIMSON_NYLIUM_SPORE = createResourceName("crimson_nylium_spores");

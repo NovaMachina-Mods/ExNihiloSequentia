@@ -143,6 +143,10 @@ public class JEIPlugin implements IModPlugin {
         RecipeTypes.CRUCIBLE,
         RecipeTypes.HEAT);
     registration.addRecipeCatalyst(
+        new ItemStack(ExNihiloBlocks.CRUCIBLE_MANGROVE.get()),
+        RecipeTypes.CRUCIBLE,
+        RecipeTypes.HEAT);
+    registration.addRecipeCatalyst(
         new ItemStack(ExNihiloBlocks.CRUCIBLE_OAK.get()), RecipeTypes.CRUCIBLE, RecipeTypes.HEAT);
     registration.addRecipeCatalyst(
         new ItemStack(ExNihiloBlocks.CRUCIBLE_SPRUCE.get()),
@@ -186,6 +190,12 @@ public class JEIPlugin implements IModPlugin {
         RecipeTypes.COMPOST);
     registration.addRecipeCatalyst(
         new ItemStack(ExNihiloBlocks.BARREL_JUNGLE.get()),
+        RecipeTypes.FLUID_ON_TOP,
+        RecipeTypes.FLUID_TRANSFORM,
+        RecipeTypes.FLUID_ITEM,
+        RecipeTypes.COMPOST);
+    registration.addRecipeCatalyst(
+        new ItemStack(ExNihiloBlocks.BARREL_MANGROVE.get()),
         RecipeTypes.FLUID_ON_TOP,
         RecipeTypes.FLUID_TRANSFORM,
         RecipeTypes.FLUID_ITEM,
@@ -237,6 +247,10 @@ public class JEIPlugin implements IModPlugin {
         RecipeTypes.WET_SIEVE);
     registration.addRecipeCatalyst(
         new ItemStack(ExNihiloBlocks.SIEVE_JUNGLE.get()),
+        RecipeTypes.DRY_SIEVE,
+        RecipeTypes.WET_SIEVE);
+    registration.addRecipeCatalyst(
+        new ItemStack(ExNihiloBlocks.SIEVE_MANGROVE.get()),
         RecipeTypes.DRY_SIEVE,
         RecipeTypes.WET_SIEVE);
     registration.addRecipeCatalyst(

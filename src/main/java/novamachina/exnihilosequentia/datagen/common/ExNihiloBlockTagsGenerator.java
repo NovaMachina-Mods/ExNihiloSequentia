@@ -46,6 +46,7 @@ public class ExNihiloBlockTagsGenerator extends BlockTagsProvider {
             ExNihiloBlocks.BARREL_CRIMSON.get(),
             ExNihiloBlocks.BARREL_DARK_OAK.get(),
             ExNihiloBlocks.BARREL_JUNGLE.get(),
+            ExNihiloBlocks.BARREL_MANGROVE.get(),
             ExNihiloBlocks.BARREL_OAK.get(),
             ExNihiloBlocks.BARREL_SPRUCE.get(),
             ExNihiloBlocks.BARREL_WARPED.get(),
@@ -54,6 +55,7 @@ public class ExNihiloBlockTagsGenerator extends BlockTagsProvider {
             ExNihiloBlocks.CRUCIBLE_CRIMSON.get(),
             ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(),
             ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
+            ExNihiloBlocks.CRUCIBLE_MANGROVE.get(),
             ExNihiloBlocks.CRUCIBLE_OAK.get(),
             ExNihiloBlocks.CRUCIBLE_SPRUCE.get(),
             ExNihiloBlocks.CRUCIBLE_WARPED.get(),
@@ -62,16 +64,23 @@ public class ExNihiloBlockTagsGenerator extends BlockTagsProvider {
             ExNihiloBlocks.SIEVE_CRIMSON.get(),
             ExNihiloBlocks.SIEVE_DARK_OAK.get(),
             ExNihiloBlocks.SIEVE_JUNGLE.get(),
+            ExNihiloBlocks.SIEVE_MANGROVE.get(),
             ExNihiloBlocks.SIEVE_OAK.get(),
             ExNihiloBlocks.SIEVE_SPRUCE.get(),
             ExNihiloBlocks.SIEVE_WARPED.get());
     tag(BlockTags.MINEABLE_WITH_SHOVEL)
         .add(
             ExNihiloBlocks.CRUSHED_ANDESITE.get(),
+            ExNihiloBlocks.CRUSHED_BASALT.get(),
+            ExNihiloBlocks.CRUSHED_BLACKSTONE.get(),
+            ExNihiloBlocks.CRUSHED_CALCITE.get(),
+            ExNihiloBlocks.CRUSHED_DEEPSLATE.get(),
             ExNihiloBlocks.CRUSHED_DIORITE.get(),
+            ExNihiloBlocks.CRUSHED_DRIPSTONE.get(),
             ExNihiloBlocks.CRUSHED_END_STONE.get(),
             ExNihiloBlocks.CRUSHED_GRANITE.get(),
             ExNihiloBlocks.CRUSHED_NETHERRACK.get(),
+            ExNihiloBlocks.CRUSHED_TUFF.get(),
             ExNihiloBlocks.DUST.get(),
             ExNihiloBlocks.CRUCIBLE_UNFIRED.get());
   }

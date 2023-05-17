@@ -426,26 +426,54 @@ public class ExNihiloItems {
   public static final RegistryObject<BlockItem> DUST =
       ITEMS.register(
           ExNihiloConstants.Blocks.DUST, () -> new BlockItem(ExNihiloBlocks.DUST.get(), tab));
-  public static final RegistryObject<BlockItem> CRUSHED_NETHERRACK =
-      ITEMS.register(
-          ExNihiloConstants.Blocks.CRUSHED_NETHERRACK,
-          () -> new BlockItem(ExNihiloBlocks.CRUSHED_NETHERRACK.get(), tab));
-  public static final RegistryObject<BlockItem> CRUSHED_END_STONE =
-      ITEMS.register(
-          ExNihiloConstants.Blocks.CRUSHED_END_STONE,
-          () -> new BlockItem(ExNihiloBlocks.CRUSHED_END_STONE.get(), tab));
   public static final RegistryObject<BlockItem> CRUSHED_ANDESITE =
       ITEMS.register(
           ExNihiloConstants.Blocks.CRUSHED_ANDESITE,
           () -> new BlockItem(ExNihiloBlocks.CRUSHED_ANDESITE.get(), tab));
+  public static final RegistryObject<BlockItem> CRUSHED_BASALT =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.CRUSHED_BASALT,
+          () -> new BlockItem(ExNihiloBlocks.CRUSHED_BASALT.get(), tab));
+
+  public static final RegistryObject<BlockItem> CRUSHED_BLACKSTONE =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.CRUSHED_BLACKSTONE,
+          () -> new BlockItem(ExNihiloBlocks.CRUSHED_BLACKSTONE.get(), tab));
+  public static final RegistryObject<BlockItem> CRUSHED_CALCITE =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.CRUSHED_CALCITE,
+          () -> new BlockItem(ExNihiloBlocks.CRUSHED_CALCITE.get(), tab));
+
+  public static final RegistryObject<BlockItem> CRUSHED_DEEPSLATE =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.CRUSHED_DEEPSLATE,
+          () -> new BlockItem(ExNihiloBlocks.CRUSHED_DEEPSLATE.get(), tab));
   public static final RegistryObject<BlockItem> CRUSHED_DIORITE =
       ITEMS.register(
           ExNihiloConstants.Blocks.CRUSHED_DIORITE,
           () -> new BlockItem(ExNihiloBlocks.CRUSHED_DIORITE.get(), tab));
+
+  public static final RegistryObject<BlockItem> CRUSHED_DRIPSTONE =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.CRUSHED_DRIPSTONE,
+          () -> new BlockItem(ExNihiloBlocks.CRUSHED_DRIPSTONE.get(), tab));
+  public static final RegistryObject<BlockItem> CRUSHED_END_STONE =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.CRUSHED_END_STONE,
+          () -> new BlockItem(ExNihiloBlocks.CRUSHED_END_STONE.get(), tab));
   public static final RegistryObject<BlockItem> CRUSHED_GRANITE =
       ITEMS.register(
           ExNihiloConstants.Blocks.CRUSHED_GRANITE,
           () -> new BlockItem(ExNihiloBlocks.CRUSHED_GRANITE.get(), tab));
+  public static final RegistryObject<BlockItem> CRUSHED_NETHERRACK =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.CRUSHED_NETHERRACK,
+          () -> new BlockItem(ExNihiloBlocks.CRUSHED_NETHERRACK.get(), tab));
+
+  public static final RegistryObject<BlockItem> CRUSHED_TUFF =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.CRUSHED_TUFF,
+          () -> new BlockItem(ExNihiloBlocks.CRUSHED_TUFF.get(), tab));
   public static final RegistryObject<BlockItem> END_CAKE =
       ITEMS.register(
           ExNihiloConstants.Blocks.END_CAKE,
@@ -474,6 +502,10 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Blocks.JUNGLE_SIEVE,
           () -> createBurnableItem(ExNihiloBlocks.SIEVE_JUNGLE.get()));
+  public static final RegistryObject<BlockItem> SIEVE_MANGROVE =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.MANGROVE_SIEVE,
+          () -> createBurnableItem(ExNihiloBlocks.SIEVE_MANGROVE.get()));
   public static final RegistryObject<BlockItem> SIEVE_OAK =
       ITEMS.register(
           ExNihiloConstants.Blocks.OAK_SIEVE,
@@ -514,6 +546,10 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Blocks.JUNGLE_CRUCIBLE,
           () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_JUNGLE.get()));
+  public static final RegistryObject<BlockItem> CRUCIBLE_MANGROVE =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.MANGROVE_CRUCIBLE,
+          () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_MANGROVE.get()));
   public static final RegistryObject<BlockItem> CRUCIBLE_OAK =
       ITEMS.register(
           ExNihiloConstants.Blocks.OAK_CRUCIBLE,
@@ -546,6 +582,10 @@ public class ExNihiloItems {
       ITEMS.register(
           ExNihiloConstants.Blocks.JUNGLE_BARREL,
           () -> createBurnableItem(ExNihiloBlocks.BARREL_JUNGLE.get()));
+  public static final RegistryObject<BlockItem> BARREL_MANGROVE =
+      ITEMS.register(
+          ExNihiloConstants.Blocks.MANGROVE_BARREL,
+          () -> createBurnableItem(ExNihiloBlocks.BARREL_MANGROVE.get()));
   public static final RegistryObject<BlockItem> BARREL_OAK =
       ITEMS.register(
           ExNihiloConstants.Blocks.OAK_BARREL,

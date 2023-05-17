@@ -50,6 +50,8 @@ public class ClientSetup {
         ExNihiloBlocks.BARREL_DARK_OAK.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
         ExNihiloBlocks.BARREL_JUNGLE.get(), RenderType.cutoutMipped());
+    ItemBlockRenderTypes.setRenderLayer(
+        ExNihiloBlocks.BARREL_MANGROVE.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.BARREL_OAK.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
         ExNihiloBlocks.BARREL_SPRUCE.get(), RenderType.cutoutMipped());
@@ -70,6 +72,8 @@ public class ClientSetup {
         ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
         ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), RenderType.cutoutMipped());
+    ItemBlockRenderTypes.setRenderLayer(
+        ExNihiloBlocks.CRUCIBLE_MANGROVE.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
         ExNihiloBlocks.CRUCIBLE_OAK.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
@@ -93,6 +97,8 @@ public class ClientSetup {
         ExNihiloBlocks.SIEVE_DARK_OAK.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
         ExNihiloBlocks.SIEVE_JUNGLE.get(), RenderType.cutoutMipped());
+    ItemBlockRenderTypes.setRenderLayer(
+        ExNihiloBlocks.SIEVE_MANGROVE.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.SIEVE_OAK.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
         ExNihiloBlocks.SIEVE_SPRUCE.get(), RenderType.cutoutMipped());

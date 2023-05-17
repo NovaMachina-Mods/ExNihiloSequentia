@@ -1,0 +1,11 @@
+{
+  "type": "exnihilosequentia:crucible",
+  "amount": 250,
+  "crucibleType": "fired",
+  "fluidResult": {
+    "fluid": "minecraft:lava"
+  },
+  "input": {
+    "item": "minecraft:calcite"
+  }
+}

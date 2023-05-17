@@ -51,33 +51,57 @@ public class ExNihiloBlocks {
                               .sound(SoundType.WOOL))));
 
   @Nonnull
-  public static final RegistryObject<BaseFallingBlock> CRUSHED_NETHERRACK =
-      BLOCKS.register(
-          ExNihiloConstants.Blocks.CRUSHED_NETHERRACK,
-          () ->
-              new BaseFallingBlock(
-                  new BlockBuilder()
-                      .properties(
-                          BlockBehaviour.Properties.of(Material.SAND)
-                              .strength(0.7F)
-                              .sound(SoundType.GRAVEL))));
-
-  @Nonnull
-  public static final RegistryObject<BaseFallingBlock> CRUSHED_END_STONE =
-      BLOCKS.register(
-          ExNihiloConstants.Blocks.CRUSHED_END_STONE,
-          () ->
-              new BaseFallingBlock(
-                  new BlockBuilder()
-                      .properties(
-                          BlockBehaviour.Properties.of(Material.SAND)
-                              .strength(0.7F)
-                              .sound(SoundType.GRAVEL))));
-
-  @Nonnull
   public static final RegistryObject<BaseFallingBlock> CRUSHED_ANDESITE =
       BLOCKS.register(
           ExNihiloConstants.Blocks.CRUSHED_ANDESITE,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
+
+  @Nonnull
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_BASALT =
+      BLOCKS.register(
+          ExNihiloConstants.Blocks.CRUSHED_BASALT,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
+
+  @Nonnull
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_BLACKSTONE =
+      BLOCKS.register(
+          ExNihiloConstants.Blocks.CRUSHED_BLACKSTONE,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
+
+  @Nonnull
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_CALCITE =
+      BLOCKS.register(
+          ExNihiloConstants.Blocks.CRUSHED_CALCITE,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
+
+  @Nonnull
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_DEEPSLATE =
+      BLOCKS.register(
+          ExNihiloConstants.Blocks.CRUSHED_DEEPSLATE,
           () ->
               new BaseFallingBlock(
                   new BlockBuilder()
@@ -99,9 +123,57 @@ public class ExNihiloBlocks {
                               .sound(SoundType.GRAVEL))));
 
   @Nonnull
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_DRIPSTONE =
+      BLOCKS.register(
+          ExNihiloConstants.Blocks.CRUSHED_DRIPSTONE,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
+
+  @Nonnull
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_END_STONE =
+      BLOCKS.register(
+          ExNihiloConstants.Blocks.CRUSHED_END_STONE,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
+
+  @Nonnull
   public static final RegistryObject<BaseFallingBlock> CRUSHED_GRANITE =
       BLOCKS.register(
           ExNihiloConstants.Blocks.CRUSHED_GRANITE,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
+
+  @Nonnull
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_NETHERRACK =
+      BLOCKS.register(
+          ExNihiloConstants.Blocks.CRUSHED_NETHERRACK,
+          () ->
+              new BaseFallingBlock(
+                  new BlockBuilder()
+                      .properties(
+                          BlockBehaviour.Properties.of(Material.SAND)
+                              .strength(0.7F)
+                              .sound(SoundType.GRAVEL))));
+
+  @Nonnull
+  public static final RegistryObject<BaseFallingBlock> CRUSHED_TUFF =
+      BLOCKS.register(
+          ExNihiloConstants.Blocks.CRUSHED_TUFF,
           () ->
               new BaseFallingBlock(
                   new BlockBuilder()
@@ -155,6 +227,10 @@ public class ExNihiloBlocks {
       BLOCKS.register(Blocks.JUNGLE_CRUCIBLE, WoodCrucibleBlock::new);
 
   @Nonnull
+  public static final RegistryObject<BaseBlock> CRUCIBLE_MANGROVE =
+      BLOCKS.register(Blocks.MANGROVE_CRUCIBLE, WoodCrucibleBlock::new);
+
+  @Nonnull
   public static final RegistryObject<BaseBlock> CRUCIBLE_OAK =
       BLOCKS.register(Blocks.OAK_CRUCIBLE, WoodCrucibleBlock::new);
 
@@ -187,6 +263,10 @@ public class ExNihiloBlocks {
       BLOCKS.register(Blocks.JUNGLE_BARREL, WoodBarrelBlock::new);
 
   @Nonnull
+  public static final RegistryObject<BaseBlock> BARREL_MANGROVE =
+      BLOCKS.register(Blocks.MANGROVE_BARREL, WoodBarrelBlock::new);
+
+  @Nonnull
   public static final RegistryObject<BaseBlock> BARREL_OAK =
       BLOCKS.register(Blocks.OAK_BARREL, WoodBarrelBlock::new);
 
@@ -212,7 +292,8 @@ public class ExNihiloBlocks {
                       .properties(
                           BlockBehaviour.Properties.of(Material.STONE)
                               .strength(0.75F)
-                              .sound(SoundType.STONE).noOcclusion())));
+                              .sound(SoundType.STONE)
+                              .noOcclusion())));
 
   @Nonnull
   public static final RegistryObject<WoodSieveBlock> SIEVE_ACACIA =
@@ -229,6 +310,10 @@ public class ExNihiloBlocks {
   @Nonnull
   public static final RegistryObject<WoodSieveBlock> SIEVE_JUNGLE =
       BLOCKS.register(Blocks.JUNGLE_SIEVE, WoodSieveBlock::new);
+
+  @Nonnull
+  public static final RegistryObject<WoodSieveBlock> SIEVE_MANGROVE =
+      BLOCKS.register(Blocks.MANGROVE_SIEVE, WoodSieveBlock::new);
 
   @Nonnull
   public static final RegistryObject<WoodSieveBlock> SIEVE_OAK =

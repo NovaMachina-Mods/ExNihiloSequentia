@@ -58,6 +58,7 @@ public class ExNihiloBlockEntities {
                       ExNihiloBlocks.CRUCIBLE_BIRCH.get(),
                       ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(),
                       ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
+                      ExNihiloBlocks.CRUCIBLE_MANGROVE.get(),
                       ExNihiloBlocks.CRUCIBLE_OAK.get(),
                       ExNihiloBlocks.CRUCIBLE_SPRUCE.get())
                   .build(null));
@@ -73,6 +74,7 @@ public class ExNihiloBlockEntities {
                       ExNihiloBlocks.SIEVE_BIRCH.get(),
                       ExNihiloBlocks.SIEVE_DARK_OAK.get(),
                       ExNihiloBlocks.SIEVE_JUNGLE.get(),
+                      ExNihiloBlocks.SIEVE_MANGROVE.get(),
                       ExNihiloBlocks.SIEVE_OAK.get(),
                       ExNihiloBlocks.SIEVE_SPRUCE.get(),
                       ExNihiloBlocks.SIEVE_CRIMSON.get(),

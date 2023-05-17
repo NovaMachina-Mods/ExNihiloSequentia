@@ -93,6 +93,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createBarrel(
         consumer, ExNihiloBlocks.BARREL_DARK_OAK, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
     createBarrel(consumer, ExNihiloBlocks.BARREL_JUNGLE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
+    createBarrel(
+        consumer, ExNihiloBlocks.BARREL_MANGROVE, Items.MANGROVE_PLANKS, Items.MANGROVE_SLAB);
     createBarrel(consumer, ExNihiloBlocks.BARREL_OAK, Items.OAK_PLANKS, Items.OAK_SLAB);
     createBarrel(consumer, ExNihiloBlocks.BARREL_SPRUCE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
     createBarrel(consumer, ExNihiloBlocks.BARREL_CRIMSON, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
@@ -204,21 +206,39 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
 
   private void registerCrucibleRecipes(@Nonnull final Consumer<FinishedRecipe> consumer) {
     createFiredCrucibleRecipes(consumer, Blocks.COBBLESTONE, 250, COBBLESTONE);
-    createFiredCrucibleRecipes(consumer, Blocks.DIORITE, 250, "diorite");
     createFiredCrucibleRecipes(consumer, Blocks.ANDESITE, 250, "andesite");
+    createFiredCrucibleRecipes(consumer, Blocks.BASALT, 250, "basalt");
+    createFiredCrucibleRecipes(consumer, Blocks.BLACKSTONE, 250, "blackstone");
+    createFiredCrucibleRecipes(consumer, Blocks.CALCITE, 250, "calcite");
+    createFiredCrucibleRecipes(consumer, Blocks.DEEPSLATE, 250, "deepslate");
+    createFiredCrucibleRecipes(consumer, Blocks.DIORITE, 250, "diorite");
+    createFiredCrucibleRecipes(consumer, Blocks.DRIPSTONE_BLOCK, 250, "dripstone");
+    createFiredCrucibleRecipes(consumer, Blocks.END_STONE, 250, "end_stone");
     createFiredCrucibleRecipes(consumer, Blocks.GRANITE, 250, "granite");
+    createFiredCrucibleRecipes(consumer, Blocks.TUFF, 250, "tuff");
     createFiredCrucibleRecipes(consumer, Blocks.STONE, 250, "stone");
     createFiredCrucibleRecipes(consumer, Blocks.GRAVEL, 200, GRAVEL);
     createFiredCrucibleRecipes(
         consumer, ExNihiloBlocks.CRUSHED_ANDESITE.get(), 200, "crushed_andesite");
     createFiredCrucibleRecipes(
+        consumer, ExNihiloBlocks.CRUSHED_BASALT.get(), 200, "crushed_basalt");
+    createFiredCrucibleRecipes(
+        consumer, ExNihiloBlocks.CRUSHED_BLACKSTONE.get(), 200, "crushed_blackstone");
+    createFiredCrucibleRecipes(
+        consumer, ExNihiloBlocks.CRUSHED_CALCITE.get(), 200, "crushed_calcite");
+    createFiredCrucibleRecipes(
+        consumer, ExNihiloBlocks.CRUSHED_DEEPSLATE.get(), 200, "crushed_deepslate");
+    createFiredCrucibleRecipes(
         consumer, ExNihiloBlocks.CRUSHED_DIORITE.get(), 200, "crushed_diorite");
+    createFiredCrucibleRecipes(
+        consumer, ExNihiloBlocks.CRUSHED_DRIPSTONE.get(), 200, "crushed_dripstone");
     createFiredCrucibleRecipes(
         consumer, ExNihiloBlocks.CRUSHED_END_STONE.get(), 200, "crushed_end_stone");
     createFiredCrucibleRecipes(
         consumer, ExNihiloBlocks.CRUSHED_GRANITE.get(), 200, "crushed_granite");
     createFiredCrucibleRecipes(
         consumer, ExNihiloBlocks.CRUSHED_NETHERRACK.get(), 200, "crushed_netherrack");
+    createFiredCrucibleRecipes(consumer, ExNihiloBlocks.CRUSHED_TUFF.get(), 200, "crushed_tuff");
     createFiredCrucibleRecipes(consumer, Blocks.SAND, 100, "sand");
     createFiredCrucibleRecipes(consumer, ExNihiloBlocks.DUST.get(), 50, "dust");
     createFiredCrucibleRecipes(consumer, Blocks.NETHERRACK, 1000, NETHERRACK);
@@ -234,6 +254,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createCrucible(
         consumer, ExNihiloBlocks.CRUCIBLE_DARK_OAK, Items.DARK_OAK_LOG, Items.DARK_OAK_SLAB);
     createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_JUNGLE, Items.JUNGLE_LOG, Items.JUNGLE_SLAB);
+    createCrucible(
+        consumer, ExNihiloBlocks.CRUCIBLE_MANGROVE, Items.MANGROVE_LOG, Items.MANGROVE_SLAB);
     createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_OAK, Items.OAK_LOG, Items.OAK_SLAB);
     createCrucible(consumer, ExNihiloBlocks.CRUCIBLE_SPRUCE, Items.SPRUCE_LOG, Items.SPRUCE_SLAB);
     createCrucible(
@@ -339,6 +361,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
   private void registerFluidItemRecipes(@Nonnull final Consumer<FinishedRecipe> consumer) {
     createFluidItemRecipes(
         consumer, water, ExNihiloBlocks.DUST.get().asItem(), Blocks.CLAY, "clay");
+    createFluidItemRecipes(consumer, water, Blocks.DIRT.asItem(), Blocks.MUD, "mud");
     createFluidItemRecipes(
         consumer, lava, Tags.Items.DUSTS_REDSTONE, Blocks.NETHERRACK, NETHERRACK);
     createFluidItemRecipes(
@@ -428,15 +451,26 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createHammerRecipes(consumer, Blocks.GRAVEL, Blocks.SAND, "sand");
     createHammerRecipes(consumer, Blocks.SAND, ExNihiloBlocks.DUST.get(), "dust");
     createHammerRecipes(
-        consumer, Blocks.NETHERRACK, ExNihiloBlocks.CRUSHED_NETHERRACK.get(), NETHERRACK);
-    createHammerRecipes(
         consumer, Blocks.ANDESITE, ExNihiloBlocks.CRUSHED_ANDESITE.get(), "andesite");
+    createHammerRecipes(consumer, Blocks.BASALT, ExNihiloBlocks.CRUSHED_BASALT.get(), "basalt");
+    createHammerRecipes(
+        consumer, Blocks.BLACKSTONE, ExNihiloBlocks.CRUSHED_BLACKSTONE.get(), "blackstone");
+    createHammerRecipes(consumer, Blocks.CALCITE, ExNihiloBlocks.CRUSHED_CALCITE.get(), "calcite");
+    createHammerRecipes(
+        consumer, Blocks.DEEPSLATE, ExNihiloBlocks.CRUSHED_DEEPSLATE.get(), "deepslate");
     createHammerRecipes(consumer, Blocks.DIORITE, ExNihiloBlocks.CRUSHED_DIORITE.get(), "diorite");
-    createHammerRecipes(consumer, Blocks.GRANITE, ExNihiloBlocks.CRUSHED_GRANITE.get(), "granite");
+    createHammerRecipes(
+        consumer, Blocks.DRIPSTONE_BLOCK, ExNihiloBlocks.CRUSHED_DRIPSTONE.get(), "dripstone");
     createHammerRecipes(
         consumer, Blocks.END_STONE, ExNihiloBlocks.CRUSHED_END_STONE.get(), "end_stone");
-    HammerRecipeBuilder.builder().input(Blocks.DRIPSTONE_BLOCK).addDrop(Blocks.POINTED_DRIPSTONE, 2)
-            .build(consumer, hammerLoc("pointed_dripstone"));
+    createHammerRecipes(consumer, Blocks.GRANITE, ExNihiloBlocks.CRUSHED_GRANITE.get(), "granite");
+    createHammerRecipes(
+        consumer, Blocks.NETHERRACK, ExNihiloBlocks.CRUSHED_NETHERRACK.get(), NETHERRACK);
+    createHammerRecipes(consumer, Blocks.TUFF, ExNihiloBlocks.CRUSHED_TUFF.get(), "tuff");
+    HammerRecipeBuilder.builder()
+        .input(Blocks.DRIPSTONE_BLOCK)
+        .addDrop(Blocks.POINTED_DRIPSTONE, 2)
+        .build(consumer, hammerLoc("pointed_dripstone"));
 
     createHammerRecipes(consumer, Blocks.TUBE_CORAL_BLOCK, Blocks.TUBE_CORAL, "tube_coral");
     createHammerRecipes(consumer, Blocks.BRAIN_CORAL_BLOCK, Blocks.BRAIN_CORAL, "brain_coral");
@@ -574,6 +608,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 ExNihiloBlocks.SIEVE_ACACIA.get(),
                 ExNihiloBlocks.SIEVE_BIRCH.get(),
                 ExNihiloBlocks.SIEVE_JUNGLE.get(),
+                ExNihiloBlocks.SIEVE_MANGROVE.get(),
                 ExNihiloBlocks.SIEVE_DARK_OAK.get(),
                 ExNihiloBlocks.SIEVE_SPRUCE.get(),
                 ExNihiloBlocks.SIEVE_CRIMSON.get(),
@@ -930,6 +965,12 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
         .build(consumer, sieveLoc("seed_grass"));
     SieveRecipeBuilder.builder()
+        .input(Ingredient.of(Blocks.MUD))
+        .addResult(Items.MANGROVE_PROPAGULE)
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.03F))
+        .isWaterlogged()
+        .build(consumer, sieveLoc("mangrove_propagule"));
+    SieveRecipeBuilder.builder()
         .input(Ingredient.of(Blocks.SAND))
         .addResult(Items.COCOA_BEANS)
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.03F))
@@ -1064,10 +1105,10 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(ExNihiloBlocks.CRUSHED_END_STONE.get()))
         .addResult(Items.CHORUS_FLOWER)
-            .addRoll(new MeshWithChance(ExNihiloItems.MESH_DIAMOND.get().getType(), 0.01f))
-            .addRoll(new MeshWithChance(ExNihiloItems.MESH_EMERALD.get().getType(), 0.02f))
-            .addRoll(new MeshWithChance(ExNihiloItems.MESH_NETHERITE.get().getType(), 0.05f))
-            .build(consumer, sieveLoc("chorus_flower"));
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_DIAMOND.get().getType(), 0.01f))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_EMERALD.get().getType(), 0.02f))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_NETHERITE.get().getType(), 0.05f))
+        .build(consumer, sieveLoc("chorus_flower"));
 
     getLeavesSaplings()
         .forEach(
@@ -1177,6 +1218,8 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createSieve(
         consumer, ExNihiloBlocks.SIEVE_DARK_OAK, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
     createSieve(consumer, ExNihiloBlocks.SIEVE_JUNGLE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
+    createSieve(
+        consumer, ExNihiloBlocks.SIEVE_MANGROVE, Items.MANGROVE_PLANKS, Items.MANGROVE_SLAB);
     createSieve(consumer, ExNihiloBlocks.SIEVE_OAK, Items.OAK_PLANKS, Items.OAK_SLAB);
     createSieve(consumer, ExNihiloBlocks.SIEVE_SPRUCE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
     createSieve(consumer, ExNihiloBlocks.SIEVE_CRIMSON, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);

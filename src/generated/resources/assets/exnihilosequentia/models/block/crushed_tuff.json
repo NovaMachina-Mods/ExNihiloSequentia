@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "exnihilosequentia:block/crushed_netherrack"
+    "all": "exnihilosequentia:block/crushed_tuff"
   }
 }
