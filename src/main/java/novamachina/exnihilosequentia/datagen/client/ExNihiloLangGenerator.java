@@ -88,7 +88,7 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
       addMeshAutoName(mesh.getMeshName());
     }
     // Dolls
-    addItem(Items.CRAFTING_DOLL, "Procelain Doll");
+    addItem(Items.CRAFTING_DOLL, "Porcelain Doll");
     addItem(Items.BEE_DOLL, "Buzzing Doll");
     addItem(Items.BLAZE_DOLL, "Blazing Doll");
     addItem(Items.ENDERMAN_DOLL, "Creeping Doll");
