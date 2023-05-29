@@ -175,11 +175,19 @@ public class ExNihiloItems {
   public static final RegistryObject<ResourceItem> CRIMSON_NYLIUM_SPORE =
       ITEMS.register(
           ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
-          () -> new ResourceItem(ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE));
+          () ->
+              new ResourceItem(
+                  ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
+                  Blocks.NETHERRACK,
+                  Blocks.CRIMSON_NYLIUM));
   public static final RegistryObject<ResourceItem> WARPED_NYLIUM_SPORE =
       ITEMS.register(
           ExNihiloConstants.Items.WARPED_NYLIUM_SPORE,
-          () -> new ResourceItem(ExNihiloConstants.Items.WARPED_NYLIUM_SPORE));
+          () ->
+              new ResourceItem(
+                  ExNihiloConstants.Items.WARPED_NYLIUM_SPORE,
+                  Blocks.NETHERRACK,
+                  Blocks.WARPED_NYLIUM));
   public static final RegistryObject<ResourceItem> GRASS_SEED =
       ITEMS.register(
           ExNihiloConstants.Items.GRASS_SEED,
@@ -517,11 +525,11 @@ public class ExNihiloItems {
   public static final RegistryObject<BlockItem> SIEVE_CRIMSON =
       ITEMS.register(
           ExNihiloConstants.Blocks.CRIMSON_SIEVE,
-          () -> createBurnableItem(ExNihiloBlocks.SIEVE_CRIMSON.get()));
+          () -> new BlockItem(ExNihiloBlocks.SIEVE_CRIMSON.get(), tab));
   public static final RegistryObject<BlockItem> SIEVE_WARPED =
       ITEMS.register(
           ExNihiloConstants.Blocks.WARPED_SIEVE,
-          () -> createBurnableItem(ExNihiloBlocks.SIEVE_WARPED.get()));
+          () -> new BlockItem(ExNihiloBlocks.SIEVE_WARPED.get(), tab));
   public static final RegistryObject<BlockItem> CRUCIBLE_UNFIRED =
       ITEMS.register(
           ExNihiloConstants.Blocks.UNFIRED_CRUCIBLE,
@@ -561,11 +569,11 @@ public class ExNihiloItems {
   public static final RegistryObject<BlockItem> CRUCIBLE_CRIMSON =
       ITEMS.register(
           ExNihiloConstants.Blocks.CRIMSON_CRUCIBLE,
-          () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()));
+          () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), tab));
   public static final RegistryObject<BlockItem> CRUCIBLE_WARPED =
       ITEMS.register(
           ExNihiloConstants.Blocks.WARPED_CRUCIBLE,
-          () -> createBurnableItem(ExNihiloBlocks.CRUCIBLE_WARPED.get()));
+          () -> new BlockItem(ExNihiloBlocks.CRUCIBLE_WARPED.get(), tab));
   public static final RegistryObject<BlockItem> BARREL_ACACIA =
       ITEMS.register(
           ExNihiloConstants.Blocks.ACACIA_BARREL,
@@ -597,11 +605,11 @@ public class ExNihiloItems {
   public static final RegistryObject<BlockItem> BARREL_CRIMSON =
       ITEMS.register(
           ExNihiloConstants.Blocks.CRIMSON_BARREL,
-          () -> createBurnableItem(ExNihiloBlocks.BARREL_CRIMSON.get()));
+          () -> new BlockItem(ExNihiloBlocks.BARREL_CRIMSON.get(), tab));
   public static final RegistryObject<BlockItem> BARREL_WARPED =
       ITEMS.register(
           ExNihiloConstants.Blocks.WARPED_BARREL,
-          () -> createBurnableItem(ExNihiloBlocks.BARREL_WARPED.get()));
+          () -> new BlockItem(ExNihiloBlocks.BARREL_WARPED.get(), tab));
   public static final RegistryObject<BlockItem> BARREL_STONE =
       ITEMS.register(
           ExNihiloConstants.Blocks.STONE_BARREL,
