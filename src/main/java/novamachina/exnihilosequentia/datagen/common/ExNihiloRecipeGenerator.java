@@ -28,7 +28,6 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
-import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
@@ -424,6 +423,12 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         Blocks.BROWN_MUSHROOM_BLOCK.asItem(),
         Blocks.RED_MUSHROOM_BLOCK,
         "red_mushroom");
+    createFluidItemRecipes(
+        consumer,
+        water,
+        ExNihiloBlocks.CRUSHED_DRIPSTONE.get().asItem(),
+        Blocks.POINTED_DRIPSTONE,
+        "pointed_dripstone");
   }
 
   private void registerFluidOnTopRecipes(@Nonnull final Consumer<FinishedRecipe> consumer) {
@@ -480,10 +485,6 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createHammerRecipes(
         consumer, Blocks.NETHERRACK, ExNihiloBlocks.CRUSHED_NETHERRACK.get(), NETHERRACK);
     createHammerRecipes(consumer, Blocks.TUFF, ExNihiloBlocks.CRUSHED_TUFF.get(), "tuff");
-    HammerRecipeBuilder.builder()
-        .input(Blocks.DRIPSTONE_BLOCK)
-        .addDrop(Blocks.POINTED_DRIPSTONE, 2)
-        .build(consumer, hammerLoc("pointed_dripstone"));
 
     createHammerRecipes(consumer, Blocks.TUBE_CORAL_BLOCK, Blocks.TUBE_CORAL, "tube_coral");
     createHammerRecipes(consumer, Blocks.BRAIN_CORAL_BLOCK, Blocks.BRAIN_CORAL, "brain_coral");
