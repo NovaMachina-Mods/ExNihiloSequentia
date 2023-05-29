@@ -19,7 +19,6 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'net.darkhax.curseforgegradle' version '1.0.11'
     id 'com.modrinth.minotaur' version "2.+"
-    id 'org.barfuin.gradle.taskinfo' version '2.1.0'
     id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.79.0"
 }
 
@@ -226,7 +225,7 @@ repositories {
                         excludeGroup 'dev.architectury'
                         excludeGroup 'dev.latvian.mods'
                     }
-                    logger.info("Adding exclusions to ${it.url}")
+                    println("Adding exclusions to ${it.url}")
                 } catch (Exception ignored) {
                     //oh well
                 }

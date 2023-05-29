@@ -16,7 +16,7 @@ Ex Nihilo: Sequentia is on the NovaMachina Mods [discord server](https://discord
 
 # Translating
 
-If you would like to help translate Ex Nihilo: Sequentia, you can do so through [Crowdin](https://crowdin.com/project/ex-nihilo-sequentia).
+If you would like to help translate Ex Nihilo: Sequentia, please create a pull request with your translation.
 
 # License
 
