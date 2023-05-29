@@ -208,7 +208,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                     ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
                     ExNihiloConstants.Items.NETHERITE_CROOK)));
     createCrook(ExNihiloItems.CROOK_RED_NETHER_BRICK.get(), Items.RED_NETHER_BRICKS, consumer);
-    createCrook(ExNihiloItems.CROOK_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
+    //    createCrook(ExNihiloItems.CROOK_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
     createCrook(ExNihiloItems.CROOK_STONE.get(), ExNihiloItems.PEBBLE_STONE.get(), consumer);
     createCrook(ExNihiloItems.CROOK_TERRACOTTA.get(), Items.TERRACOTTA, consumer);
     createCrook(ExNihiloItems.CROOK_TUFF.get(), ExNihiloItems.PEBBLE_TUFF.get(), consumer);
@@ -527,7 +527,7 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
                 new ResourceLocation(
                     ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
                     ExNihiloConstants.Items.NETHERITE_HAMMER)));
-    createHammer(ExNihiloItems.HAMMER_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
+    //    createHammer(ExNihiloItems.HAMMER_PRISMARINE.get(), Tags.Items.GEMS_PRISMARINE, consumer);
     createHammer(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get(), Items.RED_NETHER_BRICKS, consumer);
     createHammer(ExNihiloItems.HAMMER_STONE.get(), Items.COBBLESTONE, consumer);
     createHammer(ExNihiloItems.HAMMER_TERRACOTTA.get(), Items.TERRACOTTA, consumer);

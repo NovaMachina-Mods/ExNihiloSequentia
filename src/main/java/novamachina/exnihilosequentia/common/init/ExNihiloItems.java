@@ -324,9 +324,10 @@ public class ExNihiloItems {
           ExNihiloConstants.Items.NETHERITE_CROOK,
           Tiers.NETHERITE,
           Config.getCrookNetheriteDurability());
-  public static final RegistryObject<CrookBaseItem> CROOK_PRISMARINE =
-      registerCrook(
-          ExNihiloConstants.Items.PRISMARINE_CROOK, Tiers.STONE, Config.getCrookStoneDurability());
+  //  public static final RegistryObject<CrookBaseItem> CROOK_PRISMARINE =
+  //      registerCrook(
+  //          ExNihiloConstants.Items.PRISMARINE_CROOK, Tiers.STONE,
+  // Config.getCrookStoneDurability());
   public static final RegistryObject<CrookBaseItem> CROOK_RED_NETHER_BRICK =
       registerCrook(
           ExNihiloConstants.Items.RED_NETHER_BRICK_CROOK,
@@ -400,11 +401,11 @@ public class ExNihiloItems {
           ExNihiloConstants.Items.NETHERITE_HAMMER,
           Tiers.NETHERITE,
           Config.getHammerNetheriteDurability());
-  public static final RegistryObject<HammerBaseItem> HAMMER_PRISMARINE =
-      registerHammer(
-          ExNihiloConstants.Items.PRISMARINE_HAMMER,
-          Tiers.STONE,
-          Config.getHammerStoneDurability());
+  //  public static final RegistryObject<HammerBaseItem> HAMMER_PRISMARINE =
+  //      registerHammer(
+  //          ExNihiloConstants.Items.PRISMARINE_HAMMER,
+  //          Tiers.STONE,
+  //          Config.getHammerStoneDurability());
   public static final RegistryObject<HammerBaseItem> HAMMER_RED_NETHER_BRICK =
       registerHammer(
           ExNihiloConstants.Items.RED_NETHER_BRICK_HAMMER,

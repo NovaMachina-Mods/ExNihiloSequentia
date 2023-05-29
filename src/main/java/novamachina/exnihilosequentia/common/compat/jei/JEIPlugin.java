@@ -103,7 +103,7 @@ public class JEIPlugin implements IModPlugin {
     registerHammerCatalyst(ExNihiloItems.HAMMER_IRON.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_NETHER_BRICK.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_NETHERITE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_PRISMARINE.get(), registration);
+    //    registerHammerCatalyst(ExNihiloItems.HAMMER_PRISMARINE.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_STONE.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_TERRACOTTA.get(), registration);
