@@ -15,5 +15,6 @@
       "chance": 0.04,
       "mesh": "diamond"
     }
-  ]
+  ],
+  "waterlogged": true
 }

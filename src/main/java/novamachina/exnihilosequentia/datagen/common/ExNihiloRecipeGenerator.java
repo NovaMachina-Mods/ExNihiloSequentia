@@ -148,6 +148,19 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
     createCompostRecipe(
         consumer, ExNihiloItems.WARPED_NYLIUM_SPORE.get(), 100, "warped_nylium_spore");
     createCompostRecipe(consumer, Items.SWEET_BERRIES, 100, "sweet_berries");
+    createCompostRecipe(consumer, Items.SPORE_BLOSSOM, 100, "spore_blossom");
+    createCompostRecipe(consumer, Items.KELP, 100, "kelp");
+    createCompostRecipe(consumer, Items.MANGROVE_ROOTS, 100, "mangrove_roots");
+    createCompostRecipe(consumer, Items.CRIMSON_ROOTS, 100, "crimson_roots");
+    createCompostRecipe(consumer, Items.WARPED_ROOTS, 100, "warped_roots");
+    createCompostRecipe(consumer, Items.HANGING_ROOTS, 100, "hanging_roots");
+    createCompostRecipe(consumer, Items.BIG_DRIPLEAF, 100, "big_dripleaf");
+    createCompostRecipe(consumer, Items.SMALL_DRIPLEAF, 100, "small_dripleaf");
+    createCompostRecipe(consumer, Items.FERN, 100, "small_fern");
+    createCompostRecipe(consumer, Items.LARGE_FERN, 100, "large_fern");
+    createCompostRecipe(consumer, Items.SEAGRASS, 100, "sea_grass");
+    createCompostRecipe(consumer, Items.BAMBOO, 100, "bamboo");
+    createCompostRecipe(consumer, Items.GLOW_BERRIES, 100, "glow_berries");
   }
 
   private void registerCrookRecipes(@Nonnull final Consumer<FinishedRecipe> consumer) {
@@ -980,11 +993,13 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .addResult(Items.PRISMARINE_SHARD)
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_IRON.get().getType(), 0.02F))
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_DIAMOND.get().getType(), 0.04F))
+        .isWaterlogged()
         .build(consumer, sieveLoc("prismarine_shard"));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(Blocks.SAND))
         .addResult(Items.PRISMARINE_CRYSTALS)
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_DIAMOND.get().getType(), 0.01F))
+        .isWaterlogged()
         .build(consumer, sieveLoc("prismarine_crystals"));
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(Blocks.GRAVEL))
@@ -1210,6 +1225,14 @@ public class ExNihiloRecipeGenerator extends AbstractRecipeGenerator {
         .addResult(Items.GRAVEL)
         .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.4F))
         .build(consumer, sieveLoc(GRAVEL));
+    SieveRecipeBuilder.builder()
+        .input(Ingredient.of(Blocks.GRAVEL))
+        .addResult(Items.AMETHYST_SHARD)
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_FLINT.get().getType(), 0.1F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_IRON.get().getType(), 0.15F))
+        .addRoll(new MeshWithChance(ExNihiloItems.MESH_DIAMOND.get().getType(), 0.2F))
+        .build(consumer, sieveLoc("amethyst_shard"));
   }
 
   private void registerSieves(@Nonnull final Consumer<FinishedRecipe> consumer) {

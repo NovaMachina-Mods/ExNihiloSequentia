@@ -19,9 +19,13 @@ import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 public class WoodCrucibleBlock extends CrucibleBaseBlock implements EntityBlock {
 
   public WoodCrucibleBlock() {
-    super(new BlockBuilder().properties(
-        BlockBehaviour.Properties.of(Material.WOOD).strength(.75F)
-            .sound(SoundType.STONE).noOcclusion()));
+    super(
+        new BlockBuilder()
+            .properties(
+                BlockBehaviour.Properties.of(Material.WOOD)
+                    .strength(.75F)
+                    .sound(SoundType.WOOD)
+                    .noOcclusion()));
   }
 
   @Nullable
@@ -32,8 +36,8 @@ public class WoodCrucibleBlock extends CrucibleBaseBlock implements EntityBlock 
 
   @Nullable
   @Override
-  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level,
-      @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+      @Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
     if (!level.isClientSide) {
       return (level1, blockPos, blockState, t) -> {
         if (t instanceof WoodCrucibleEntity tile) {

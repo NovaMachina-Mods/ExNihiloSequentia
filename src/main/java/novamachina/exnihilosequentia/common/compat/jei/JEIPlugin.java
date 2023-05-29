@@ -89,27 +89,25 @@ public class JEIPlugin implements IModPlugin {
       registerCrookCatalyst(crook.get(), registration);
     }
 
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_ANDESITE.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_BASALT.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_BLACKSTONE.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_CALCITE.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_COPPER.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_CRIMSON_FUNGUS.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_DEEPSLATE.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_ANDESITE.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_BASALT.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_BLACKSTONE.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_CALCITE.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_COPPER.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_DEEPSLATE.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_DIAMOND.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_DIORITE.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_DRIPSTONE.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_DIORITE.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_DRIPSTONE.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_GOLD.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_GRANITE.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_GRANITE.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_IRON.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_NETHER_BRICK.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_NETHER_BRICK.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_NETHERITE.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_PRISMARINE.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_PRISMARINE.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_STONE.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_TERRACOTTA.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_TUFF.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_WARPED_FUNGUS.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_TERRACOTTA.get(), registration);
+    registerHammerCatalyst(ExNihiloItems.HAMMER_TUFF.get(), registration);
     registerHammerCatalyst(ExNihiloItems.HAMMER_WOOD.get(), registration);
 
     registerCrucibles(registration);
