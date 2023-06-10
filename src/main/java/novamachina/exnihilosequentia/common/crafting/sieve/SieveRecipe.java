@@ -7,11 +7,14 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
+import org.jetbrains.annotations.NotNull;
 
 public class SieveRecipe extends SingleItemSerializableRecipe {
 
@@ -26,7 +29,7 @@ public class SieveRecipe extends SingleItemSerializableRecipe {
       @Nonnull final ItemStack drop,
       @Nonnull final List<MeshWithChance> rolls,
       boolean isWaterlogged) {
-    super(drop, input, ExNihiloRecipeTypes.SIEVE_RECIPE_TYPE.get(), id);
+    super(drop, input, EXNRecipeTypes.SIEVE_RECIPE_TYPE, id);
     this.recipeId = id;
     this.drop = drop;
     this.rolls = rolls;
@@ -110,8 +113,12 @@ public class SieveRecipe extends SingleItemSerializableRecipe {
   }
 
   @Override
-  @Nullable
-  protected ExNihiloRecipeSerializer<SieveRecipe> getENSerializer() {
-    return ExNihiloSerializers.SIEVE_RECIPE_SERIALIZER.get();
+  public @NotNull ItemStack getToastSymbol() {
+    return EXNBlocks.OAK_SIEVE.itemStack();
+  }
+
+  @Override
+  public RecipeSerializer<?> getSerializer() {
+    return EXNRecipeSerializers.SIEVE_RECIPE_SERIALIZER;
   }
 }

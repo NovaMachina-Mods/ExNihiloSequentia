@@ -8,11 +8,11 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags.OreTag;
 import novamachina.exnihilosequentia.common.item.OreItem;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
+import novamachina.novacore.world.item.ItemDefinition;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
@@ -39,9 +39,9 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
   }
 
   private void registerRaw(Ore ore, OreTag tags) {
-    Either<RegistryObject<OreItem>, Item> either = ore.getRawOreItem();
+    Either<ItemDefinition<OreItem>, Item> either = ore.getRawOreItem();
     if (either.left().isPresent()) {
-      tag(tags.getRawMaterialTag()).add(either.left().get().get());
+      tag(tags.getRawMaterialTag()).add(either.left().get().asItem());
       tag(Items.RAW_MATERIALS).addTag(tags.getRawMaterialTag());
     }
   }
@@ -51,17 +51,17 @@ public abstract class AbstractItemTagGenerator extends ItemTagsProvider {
   }
 
   private void registerIngot(@NotNull Ore ore, @NotNull ExNihiloTags.OreTag tags) {
-    Either<RegistryObject<OreItem>, Item> either = ore.getIngotItem();
+    Either<ItemDefinition<OreItem>, Item> either = ore.getIngotItem();
     if (either.left().isPresent()) {
-      tag(tags.getIngotTag()).add(either.left().get().get());
+      tag(tags.getIngotTag()).add(either.left().get().asItem());
       tag(Items.INGOTS).addTag(tags.getIngotTag());
     }
   }
 
   private void registerNugget(@NotNull Ore ore, @NotNull ExNihiloTags.OreTag tags) {
-    Either<RegistryObject<OreItem>, Item> either = ore.getNuggetItem();
+    Either<ItemDefinition<OreItem>, Item> either = ore.getNuggetItem();
     if (either.left().isPresent()) {
-      tag(tags.getNuggetTag()).add(either.left().get().get());
+      tag(tags.getNuggetTag()).add(either.left().get().asItem());
       tag(Items.NUGGETS).addTag(tags.getNuggetTag());
     }
   }

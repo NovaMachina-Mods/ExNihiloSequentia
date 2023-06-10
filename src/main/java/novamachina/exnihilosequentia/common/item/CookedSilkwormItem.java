@@ -2,7 +2,7 @@ package novamachina.exnihilosequentia.common.item;
 
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 
 public class CookedSilkwormItem extends Item {
 

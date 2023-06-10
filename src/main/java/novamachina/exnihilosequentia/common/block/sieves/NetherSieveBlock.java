@@ -11,23 +11,25 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.blockentity.SieveEntity;
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 public class NetherSieveBlock extends BlockSieve implements EntityBlock {
 
   public NetherSieveBlock() {
-    super(new BlockBuilder().properties(
-        BlockBehaviour.Properties.of(Material.NETHER_WOOD).strength(1.0F)
+    super(
+        BlockBehaviour.Properties.of(Material.NETHER_WOOD)
+            .strength(1.0F)
             .sound(Config.getNetherSieveSoundsEnabled() ? SoundType.STEM : SoundType.SCAFFOLDING)
-            .noOcclusion().isRedstoneConductor((state, reader, pos) -> false)
+            .noOcclusion()
+            .isRedstoneConductor((state, reader, pos) -> false)
             .isSuffocating((state, reader, pos) -> false)
-            .isViewBlocking((state, reader, pos) -> false)));
+            .isViewBlocking((state, reader, pos) -> false));
   }
 
   @Nullable
   @Override
   public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-    return new SieveEntity(pos, state);
+    return new SieveEntity(EXNBlockEntityTypes.SIEVE_ENTITY.getType(), pos, state);
   }
 }

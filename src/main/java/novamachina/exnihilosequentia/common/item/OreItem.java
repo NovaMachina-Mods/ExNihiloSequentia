@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.common.item;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 
 public class OreItem extends Item {
@@ -25,5 +25,33 @@ public class OreItem extends Item {
 
   public Ore getOre() {
     return ore;
+  }
+
+  public static class PieceOreItem extends OreItem {
+
+    public PieceOreItem(Ore ore) {
+      super(ore);
+    }
+  }
+
+  public static class RawOreItem extends OreItem {
+
+    public RawOreItem(Ore ore) {
+      super(ore);
+    }
+  }
+
+  public static class IngotOreItem extends OreItem {
+
+    public IngotOreItem(Ore ore) {
+      super(ore);
+    }
+  }
+
+  public static class NuggetOreItem extends OreItem {
+
+    public NuggetOreItem(Ore ore) {
+      super(ore);
+    }
   }
 }

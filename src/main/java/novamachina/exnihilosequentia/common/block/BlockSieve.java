@@ -36,7 +36,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import novamachina.exnihilosequentia.common.blockentity.SieveEntity;
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import novamachina.exnihilosequentia.common.item.MeshItem;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
@@ -46,7 +45,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
-public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock, ITOPInfoProvider {
+public class BlockSieve extends Block implements SimpleWaterloggedBlock, ITOPInfoProvider {
 
   @Nonnull
   public static final EnumProperty<MeshType> MESH = EnumProperty.create("mesh", MeshType.class);
@@ -54,8 +53,8 @@ public class BlockSieve extends BaseBlock implements SimpleWaterloggedBlock, ITO
   @Nonnull public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
   @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
-  public BlockSieve(@Nonnull final BlockBuilder builder) {
-    super(builder);
+  public BlockSieve(Properties properties) {
+    super(properties);
     this.registerDefaultState(
         this.stateDefinition.any().setValue(MESH, MeshType.NONE).setValue(WATERLOGGED, false));
   }

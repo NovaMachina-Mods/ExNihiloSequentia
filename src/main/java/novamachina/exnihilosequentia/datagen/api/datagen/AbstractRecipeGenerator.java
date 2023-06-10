@@ -28,9 +28,9 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.common.block.BaseBlock;
+import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
+import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipeBuilder;
@@ -42,10 +42,12 @@ import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.common.item.OreItem;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.novacore.world.level.block.BlockDefinition;
+import novamachina.novacore.world.item.ItemDefinition;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
@@ -122,8 +124,8 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     if (ore.getRawOreItem().left().isPresent() && ore.getIngotItem().left().isPresent()) {
       createSmeltingRecipe(
           consumer,
-          ore.getRawOreItem().left().get().get(),
-          ore.getIngotItem().left().get().get(),
+          ore.getRawOreItem().left().get().asItem(),
+          ore.getIngotItem().left().get().asItem(),
           0.7F,
           200,
           0.7F,
@@ -141,13 +143,13 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
   private void createNuggetRecipes(Ore ore, Consumer<FinishedRecipe> consumer) {
     if (ore.getNuggetItem().left().isPresent()) {
-      Either<RegistryObject<OreItem>, Item> eitherIngot = ore.getIngotItem();
+      Either<ItemDefinition<OreItem>, Item> eitherIngot = ore.getIngotItem();
       @Nullable
       Item ingot =
           eitherIngot.left().isPresent()
-              ? eitherIngot.left().get().get()
+              ? eitherIngot.left().get().asItem()
               : eitherIngot.right().get();
-      Item nugget = ore.getNuggetItem().left().get().get();
+      Item nugget = ore.getNuggetItem().left().get().asItem();
 
       ShapedRecipeBuilder.shaped(ingot)
           .pattern("xxx")
@@ -172,10 +174,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
   private void createRawRecipe(@NotNull Ore ore, @NotNull Consumer<FinishedRecipe> consumer) {
     @Nullable final Item piece = ore.getPieceItem();
-    Either<RegistryObject<OreItem>, Item> rawEither = ore.getRawOreItem();
+    Either<ItemDefinition<OreItem>, Item> rawEither = ore.getRawOreItem();
     @Nullable
     Item rawOre =
-        rawEither.left().isPresent() ? rawEither.left().get().get() : rawEither.right().get();
+        rawEither.left().isPresent() ? rawEither.left().get().asItem() : rawEither.right().get();
     ShapedRecipeBuilder.shaped(rawOre)
         .pattern("xx")
         .pattern("xx")
@@ -190,23 +192,23 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
   protected void createSmelting(
       @Nonnull final Ore ore, @Nonnull final Consumer<FinishedRecipe> consumer) {
-    Either<RegistryObject<OreItem>, Item> rawEither = ore.getRawOreItem();
+    Either<ItemDefinition<OreItem>, Item> rawEither = ore.getRawOreItem();
     @Nullable
     final Item raw =
-        rawEither.left().isPresent() ? rawEither.left().get().get() : rawEither.right().get();
+        rawEither.left().isPresent() ? rawEither.left().get().asItem() : rawEither.right().get();
 
-    Either<RegistryObject<OreItem>, Item> ingotEither = ore.getIngotItem();
+    Either<ItemDefinition<OreItem>, Item> ingotEither = ore.getIngotItem();
     @Nullable
     Item ingot =
-        ingotEither.left().isPresent() ? ingotEither.left().get().get() : ingotEither.right().get();
+        ingotEither.left().isPresent() ? ingotEither.left().get().asItem() : ingotEither.right().get();
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw), ingot, 0.7F, 200)
         .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(raw))
-        .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotName())));
+        .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotId())));
     SimpleCookingRecipeBuilder.blasting(Ingredient.of(raw), ingot, 0.7F, 100)
         .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(raw))
         .save(
             consumer,
-            new ResourceLocation(modId, prependRecipePrefix("blast_" + ore.getIngotName())));
+            new ResourceLocation(modId, prependRecipePrefix("blast_" + ore.getIngotId())));
   }
 
   protected String prependRecipePrefix(@Nonnull final String id) {
@@ -466,10 +468,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
   @SuppressWarnings("SameParameterValue")
   protected void createBarrel(
       @Nonnull final Consumer<FinishedRecipe> consumer,
-      @Nonnull final RegistryObject<BaseBlock> barrel,
+      @Nonnull final BlockDefinition<BlockBarrel> barrel,
       @Nonnull final TagKey<Item> block,
       @Nonnull final Item slab) {
-    ShapedRecipeBuilder.shaped(barrel.get())
+    ShapedRecipeBuilder.shaped(barrel.block())
         .pattern("x x")
         .pattern("x x")
         .pattern("x-x")
@@ -483,10 +485,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
   protected void createBarrel(
       @Nonnull final Consumer<FinishedRecipe> consumer,
-      @Nonnull final RegistryObject<BaseBlock> barrel,
+      @Nonnull final BlockDefinition<BlockBarrel> barrel,
       @Nonnull final Item block,
       @Nonnull final Item slab) {
-    ShapedRecipeBuilder.shaped(barrel.get())
+    ShapedRecipeBuilder.shaped(barrel.block())
         .pattern("x x")
         .pattern("x x")
         .pattern("x-x")
@@ -500,10 +502,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
   protected void createCrucible(
       @Nonnull final Consumer<FinishedRecipe> consumer,
-      @Nonnull final RegistryObject<BaseBlock> crucible,
+      @Nonnull final BlockDefinition<CrucibleBaseBlock> crucible,
       @Nonnull final Item block,
       @Nonnull final Item slab) {
-    ShapedRecipeBuilder.shaped(crucible.get())
+    ShapedRecipeBuilder.shaped(crucible.block())
         .pattern("c c")
         .pattern("clc")
         .pattern("s s")
@@ -518,10 +520,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
   @SuppressWarnings("unused")
   protected void createCrucible(
       @Nonnull final Consumer<FinishedRecipe> consumer,
-      @Nonnull final RegistryObject<BaseBlock> crucible,
+      @Nonnull final BlockDefinition<CrucibleBaseBlock> crucible,
       @Nonnull final TagKey<Item> block,
       @Nonnull final TagKey<Item> slab) {
-    ShapedRecipeBuilder.shaped(crucible.get())
+    ShapedRecipeBuilder.shaped(crucible.block())
         .pattern("c c")
         .pattern("clc")
         .pattern("s s")
@@ -535,10 +537,10 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
 
   protected void createSieve(
       @Nonnull final Consumer<FinishedRecipe> consumer,
-      @Nonnull final RegistryObject<?> sieve,
+      @Nonnull final BlockDefinition<BlockSieve> sieve,
       @Nonnull final Item block,
       @Nonnull final Item slab) {
-    ShapedRecipeBuilder.shaped((BlockSieve) sieve.get())
+    ShapedRecipeBuilder.shaped(sieve)
         .pattern("p p")
         .pattern("plp")
         .pattern("s s")
@@ -688,7 +690,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     SieveRecipeBuilder.builder()
             .input(Ingredient.of(inputBlock))
             .addResult(seed)
-            .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
+            .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.05F))
             .build(consumer, sieveLoc(resourceLocation.getPath()));
 
   }
@@ -701,7 +703,7 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     SieveRecipeBuilder.builder()
         .input(Ingredient.of(ItemTags.SAND))
         .addResult(seed)
-        .addRoll(new MeshWithChance(ExNihiloItems.MESH_STRING.get().getType(), 0.05F))
+        .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.05F))
         .isWaterlogged()
         .build(consumer, sieveLoc(resourceLocation.getPath()));
   }

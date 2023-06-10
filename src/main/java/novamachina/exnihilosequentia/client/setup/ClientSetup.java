@@ -10,8 +10,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import novamachina.exnihilosequentia.client.render.BarrelRender;
 import novamachina.exnihilosequentia.client.render.CrucibleRender;
 import novamachina.exnihilosequentia.client.render.SieveRender;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
@@ -31,80 +31,80 @@ public class ClientSetup {
     registerCrucibleRenderLayer();
     registerBarrelRenderLayer();
 
-    ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.INFESTED_LEAVES.get(), RenderType.cutout());
-    ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.INFESTING_LEAVES.get(), RenderType.cutout());
+    ItemBlockRenderTypes.setRenderLayer(EXNBlocks.INFESTED_LEAVES.block(), RenderType.cutout());
+    ItemBlockRenderTypes.setRenderLayer(EXNBlocks.INFESTING_LEAVES.block(), RenderType.cutout());
 
-    SieveRender.register(ExNihiloBlockEntities.SIEVE_ENTITY.get());
-    BarrelRender.register(ExNihiloBlockEntities.WOODEN_BARREL_ENTITY.get());
-    BarrelRender.register(ExNihiloBlockEntities.STONE_BARREL_ENTITY.get());
-    CrucibleRender.register(ExNihiloBlockEntities.FIRED_CURICLBE_ENTITY.get());
-    CrucibleRender.register(ExNihiloBlockEntities.WOODEN_CRUCIBLE_ENTITY.get());
+    SieveRender.register(EXNBlockEntityTypes.SIEVE_ENTITY.getType());
+    BarrelRender.register(EXNBlockEntityTypes.WOODEN_BARREL_ENTITY.getType());
+    BarrelRender.register(EXNBlockEntityTypes.STONE_BARREL_ENTITY.getType());
+    CrucibleRender.register(EXNBlockEntityTypes.FIRED_CRUCIBLE_ENTITY.getType());
+    CrucibleRender.register(EXNBlockEntityTypes.WOODEN_CRUCIBLE_ENTITY.getType());
   }
 
   private static void registerBarrelRenderLayer() {
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_ACACIA.get(), RenderType.cutoutMipped());
+        EXNBlocks.ACACIA_BARREL.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_BIRCH.get(), RenderType.cutoutMipped());
+        EXNBlocks.BIRCH_BARREL.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_DARK_OAK.get(), RenderType.cutoutMipped());
+        EXNBlocks.DARK_OAK_BARREL.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_JUNGLE.get(), RenderType.cutoutMipped());
+        EXNBlocks.JUNGLE_BARREL.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_MANGROVE.get(), RenderType.cutoutMipped());
-    ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.BARREL_OAK.get(), RenderType.cutoutMipped());
+        EXNBlocks.MANGROVE_BARREL.block(), RenderType.cutoutMipped());
+    ItemBlockRenderTypes.setRenderLayer(EXNBlocks.OAK_BARREL.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_SPRUCE.get(), RenderType.cutoutMipped());
+        EXNBlocks.SPRUCE_BARREL.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_CRIMSON.get(), RenderType.cutoutMipped());
+        EXNBlocks.CRIMSON_BARREL.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_WARPED.get(), RenderType.cutoutMipped());
+        EXNBlocks.WARPED_BARREL.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.BARREL_STONE.get(), RenderType.cutoutMipped());
+        EXNBlocks.STONE_BARREL.block(), RenderType.cutoutMipped());
   }
 
   private static void registerCrucibleRenderLayer() {
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_ACACIA.get(), RenderType.cutoutMipped());
+        EXNBlocks.ACACIA_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_BIRCH.get(), RenderType.cutoutMipped());
+        EXNBlocks.BIRCH_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(), RenderType.cutoutMipped());
+        EXNBlocks.DARK_OAK_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_JUNGLE.get(), RenderType.cutoutMipped());
+        EXNBlocks.JUNGLE_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_MANGROVE.get(), RenderType.cutoutMipped());
+        EXNBlocks.MANGROVE_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_OAK.get(), RenderType.cutoutMipped());
+        EXNBlocks.OAK_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_SPRUCE.get(), RenderType.cutoutMipped());
+        EXNBlocks.SPRUCE_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_CRIMSON.get(), RenderType.cutoutMipped());
+        EXNBlocks.CRIMSON_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_WARPED.get(), RenderType.cutoutMipped());
+        EXNBlocks.WARPED_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_UNFIRED.get(), RenderType.cutoutMipped());
+        EXNBlocks.UNFIRED_CRUCIBLE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.CRUCIBLE_FIRED.get(), RenderType.cutoutMipped());
+        EXNBlocks.FIRED_CRUCIBLE.block(), RenderType.cutoutMipped());
   }
 
   private static void registerSieveRenderLayer() {
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.SIEVE_ACACIA.get(), RenderType.cutoutMipped());
+        EXNBlocks.ACACIA_SIEVE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.SIEVE_BIRCH.get(), RenderType.cutoutMipped());
+        EXNBlocks.BIRCH_SIEVE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.SIEVE_DARK_OAK.get(), RenderType.cutoutMipped());
+        EXNBlocks.DARK_OAK_SIEVE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.SIEVE_JUNGLE.get(), RenderType.cutoutMipped());
+        EXNBlocks.JUNGLE_SIEVE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.SIEVE_MANGROVE.get(), RenderType.cutoutMipped());
-    ItemBlockRenderTypes.setRenderLayer(ExNihiloBlocks.SIEVE_OAK.get(), RenderType.cutoutMipped());
+        EXNBlocks.MANGROVE_SIEVE.block(), RenderType.cutoutMipped());
+    ItemBlockRenderTypes.setRenderLayer(EXNBlocks.OAK_SIEVE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.SIEVE_SPRUCE.get(), RenderType.cutoutMipped());
+        EXNBlocks.SPRUCE_SIEVE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.SIEVE_CRIMSON.get(), RenderType.cutoutMipped());
+        EXNBlocks.CRIMSON_SIEVE.block(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(
-        ExNihiloBlocks.SIEVE_WARPED.get(), RenderType.cutoutMipped());
+        EXNBlocks.WARPED_SIEVE.block(), RenderType.cutoutMipped());
   }
 }

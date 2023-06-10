@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
+import novamachina.novacore.world.item.crafting.RecipeSerializerDefinition;
 
 public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>>
     implements FinishedRecipe {
@@ -38,8 +39,8 @@ public abstract class ExNihiloFinishedRecipe<R extends ExNihiloFinishedRecipe<R>
   protected int outputCount = 0;
   @Nullable private ResourceLocation id;
 
-  protected ExNihiloFinishedRecipe(@Nonnull final RecipeSerializer<?> serializer) {
-    this.serializer = serializer;
+  protected ExNihiloFinishedRecipe(@Nonnull final RecipeSerializerDefinition<?> serializer) {
+    this.serializer = serializer.getRecipeSerializer();
     this.writerFunctions = new ArrayList<>();
   }
 

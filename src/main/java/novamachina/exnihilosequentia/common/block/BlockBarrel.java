@@ -14,6 +14,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -21,13 +22,12 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEntity;
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 
-public class BlockBarrel extends BaseBlock implements ITOPInfoProvider {
+public class BlockBarrel extends Block implements ITOPInfoProvider {
 
-  public BlockBarrel(@Nonnull final BlockBuilder builder) {
-    super(builder);
+  public BlockBarrel(Properties properties) {
+    super(properties);
   }
 
   @Override

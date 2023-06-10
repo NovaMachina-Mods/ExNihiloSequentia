@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
+import novamachina.novacore.world.item.crafting.SerializableRecipe;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

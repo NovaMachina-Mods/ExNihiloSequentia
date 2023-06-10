@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 
 //TODO can be cleaned now
 

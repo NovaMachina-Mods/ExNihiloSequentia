@@ -10,24 +10,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.RegistryObject;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.item.CrookBaseItem;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 
-public class CrookRecipeSerializer extends ExNihiloRecipeSerializer<CrookRecipe> {
-
-  @Override
-  @Nullable
-  public ItemStack getIcon() {
-    @Nullable final RegistryObject<CrookBaseItem> woodCrook = ExNihiloItems.CROOK_WOOD;
-    if (woodCrook != null) {
-      return new ItemStack(woodCrook.get());
-    }
-    return null;
-  }
+public class CrookRecipeSerializer extends NovaRecipeSerializer<CrookRecipe> {
 
   @Override
   @Nonnull

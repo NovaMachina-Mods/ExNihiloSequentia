@@ -14,26 +14,28 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.blockentity.crucible.FiredCrucibleEntity;
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 
 public class FiredCrucibleBlock extends CrucibleBaseBlock implements EntityBlock {
 
   public FiredCrucibleBlock() {
-    super(new BlockBuilder().properties(
-        BlockBehaviour.Properties.of(Material.STONE).strength(1.5F)
-            .sound(SoundType.STONE).noOcclusion()));
+    super(
+        BlockBehaviour.Properties.of(Material.STONE)
+            .strength(1.5F)
+            .sound(SoundType.STONE)
+            .noOcclusion());
   }
 
   @Nullable
   @Override
   public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-    return new FiredCrucibleEntity(pos, state);
+    return new FiredCrucibleEntity(EXNBlockEntityTypes.FIRED_CRUCIBLE_ENTITY.getType(), pos, state);
   }
 
   @Nullable
   @Override
-  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level,
-      @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+      @Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
     if (!level.isClientSide) {
       return (level1, blockPos, blockState, t) -> {
         if (t instanceof FiredCrucibleEntity tile) {

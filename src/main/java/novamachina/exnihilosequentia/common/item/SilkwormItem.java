@@ -2,16 +2,17 @@ package novamachina.exnihilosequentia.common.item;
 
 import javax.annotation.Nonnull;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import org.jetbrains.annotations.NotNull;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 
-public class SilkwormItem extends ResourceItem {
+public class SilkwormItem extends Item {
 
-  public SilkwormItem(@NotNull String name) {
-    super(name);
+  public SilkwormItem() {
+    super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
   }
 
   @Override

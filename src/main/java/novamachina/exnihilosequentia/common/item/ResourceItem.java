@@ -1,18 +1,14 @@
 package novamachina.exnihilosequentia.common.item;
 
-import javax.annotation.Nonnull;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class ResourceItem extends Item {
 

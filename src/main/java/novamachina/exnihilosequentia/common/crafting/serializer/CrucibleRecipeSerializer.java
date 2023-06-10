@@ -9,17 +9,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
-public class CrucibleRecipeSerializer extends ExNihiloRecipeSerializer<CrucibleRecipe> {
-
-  @Override
-  public ItemStack getIcon() {
-    return new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get());
-  }
+public class CrucibleRecipeSerializer extends NovaRecipeSerializer<CrucibleRecipe> {
 
   @Override
   @Nonnull

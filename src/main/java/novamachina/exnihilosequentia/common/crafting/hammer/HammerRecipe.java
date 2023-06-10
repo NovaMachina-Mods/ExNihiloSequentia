@@ -7,11 +7,14 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
+import org.jetbrains.annotations.NotNull;
 
 public class HammerRecipe extends SingleItemSerializableRecipe {
 
@@ -25,7 +28,7 @@ public class HammerRecipe extends SingleItemSerializableRecipe {
       @Nonnull final ResourceLocation id,
       @Nonnull final Ingredient input,
       @Nonnull final List<ItemStackWithChance> output) {
-    super(ItemStack.EMPTY, input, ExNihiloRecipeTypes.HAMMER_RECIPE_TYPE.get(), id);
+    super(ItemStack.EMPTY, input, EXNRecipeTypes.HAMMER_RECIPE_TYPE, id);
     this.output = output;
   }
 
@@ -56,8 +59,12 @@ public class HammerRecipe extends SingleItemSerializableRecipe {
   }
 
   @Override
-  @Nullable
-  protected ExNihiloRecipeSerializer<HammerRecipe> getENSerializer() {
-    return ExNihiloSerializers.HAMMER_RECIPE_SERIALIZER.get();
+  public @NotNull ItemStack getToastSymbol() {
+    return EXNItems.HAMMER_DIAMOND.itemStack();
+  }
+
+  @Override
+  public RecipeSerializer<?> getSerializer() {
+    return EXNRecipeSerializers.HAMMER_RECIPE_SERIALIZER.getRecipeSerializer();
   }
 }

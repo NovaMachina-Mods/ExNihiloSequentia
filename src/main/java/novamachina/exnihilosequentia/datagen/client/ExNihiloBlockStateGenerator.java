@@ -5,8 +5,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.fluid.SeaWaterFluidType;
 import novamachina.exnihilosequentia.common.fluid.WitchWaterFluidType;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.exnihilosequentia.world.level.material.EXNFluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.datagen.api.datagen.AbstractBlockStateGenerator;
 
@@ -28,157 +28,157 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
   }
 
   private void registerCakes() {
-    createCake(ExNihiloBlocks.END_CAKE.get());
+    createCake(EXNBlocks.END_CAKE.block());
   }
 
   private void registerBarrels() {
     createBarrel(
-        ExNihiloBlocks.BARREL_STONE.get(),
+        EXNBlocks.STONE_BARREL.block(),
         exnihiloLoc("block/stone_barrel"),
         vanillaLoc("block/stone"));
     createBarrel(
-        ExNihiloBlocks.BARREL_ACACIA.get(),
+        EXNBlocks.ACACIA_BARREL.block(),
         exnihiloLoc("block/acacia_barrel"),
         vanillaLoc("block/acacia_planks"));
     createBarrel(
-        ExNihiloBlocks.BARREL_BIRCH.get(),
+        EXNBlocks.BIRCH_BARREL.block(),
         exnihiloLoc("block/birch_barrel"),
         vanillaLoc("block/birch_planks"));
     createBarrel(
-        ExNihiloBlocks.BARREL_DARK_OAK.get(),
+        EXNBlocks.DARK_OAK_BARREL.block(),
         exnihiloLoc("block/dark_oak_barrel"),
         vanillaLoc("block/dark_oak_planks"));
     createBarrel(
-        ExNihiloBlocks.BARREL_JUNGLE.get(),
+        EXNBlocks.JUNGLE_BARREL.block(),
         exnihiloLoc("block/jungle_barrel"),
         vanillaLoc("block/jungle_planks"));
     createBarrel(
-        ExNihiloBlocks.BARREL_MANGROVE.get(),
+        EXNBlocks.MANGROVE_BARREL.block(),
         exnihiloLoc("block/mangrove_barrel"),
         vanillaLoc("block/mangrove_planks"));
     createBarrel(
-        ExNihiloBlocks.BARREL_OAK.get(),
+        EXNBlocks.OAK_BARREL.block(),
         exnihiloLoc("block/oak_barrel"),
         vanillaLoc("block/oak_planks"));
     createBarrel(
-        ExNihiloBlocks.BARREL_SPRUCE.get(),
+        EXNBlocks.SPRUCE_BARREL.block(),
         exnihiloLoc("block/spruce_barrel"),
         vanillaLoc("block/spruce_planks"));
     createBarrel(
-        ExNihiloBlocks.BARREL_CRIMSON.get(),
+        EXNBlocks.CRIMSON_BARREL.block(),
         exnihiloLoc("block/crimson_barrel"),
         vanillaLoc("block/crimson_planks"));
     createBarrel(
-        ExNihiloBlocks.BARREL_WARPED.get(),
+        EXNBlocks.WARPED_BARREL.block(),
         exnihiloLoc("block/warped_barrel"),
         vanillaLoc("block/warped_planks"));
   }
 
   private void registerCrucibles() {
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_FIRED.get(),
+        EXNBlocks.FIRED_CRUCIBLE.block(),
         exnihiloLoc("block/fired_crucible"),
         exnihiloLoc("block/fired_crucible"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_UNFIRED.get(),
+        EXNBlocks.UNFIRED_CRUCIBLE.block(),
         exnihiloLoc("block/unfired_crucible"),
         exnihiloLoc("block/unfired_crucible"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_ACACIA.get(),
+        EXNBlocks.ACACIA_CRUCIBLE.block(),
         exnihiloLoc("block/acacia_crucible"),
         vanillaLoc("block/acacia_planks"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_BIRCH.get(),
+        EXNBlocks.BIRCH_CRUCIBLE.block(),
         exnihiloLoc("block/birch_crucible"),
         vanillaLoc("block/birch_planks"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(),
+        EXNBlocks.DARK_OAK_CRUCIBLE.block(),
         exnihiloLoc("block/dark_oak_crucible"),
         vanillaLoc("block/dark_oak_planks"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
+        EXNBlocks.JUNGLE_CRUCIBLE.block(),
         exnihiloLoc("block/jungle_crucible"),
         vanillaLoc("block/jungle_planks"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_MANGROVE.get(),
+        EXNBlocks.MANGROVE_CRUCIBLE.block(),
         exnihiloLoc("block/mangrove_crucible"),
         vanillaLoc("block/mangrove_planks"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_OAK.get(),
+        EXNBlocks.OAK_CRUCIBLE.block(),
         exnihiloLoc("block/oak_crucible"),
         vanillaLoc("block/oak_planks"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_SPRUCE.get(),
+        EXNBlocks.SPRUCE_CRUCIBLE.block(),
         exnihiloLoc("block/spruce_crucible"),
         vanillaLoc("block/spruce_planks"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_CRIMSON.get(),
+        EXNBlocks.CRIMSON_CRUCIBLE.block(),
         exnihiloLoc("block/crimson_crucible"),
         vanillaLoc("block/crimson_planks"));
     createCrucible(
-        ExNihiloBlocks.CRUCIBLE_WARPED.get(),
+        EXNBlocks.WARPED_CRUCIBLE.block(),
         exnihiloLoc("block/warped_crucible"),
         vanillaLoc("block/warped_planks"));
   }
 
   private void registerFluids() {
-    registerFluid(ExNihiloFluids.WITCH_WATER.get(), WitchWaterFluidType.STILL);
-    registerFluid(ExNihiloFluids.SEA_WATER.get(), SeaWaterFluidType.STILL);
+    registerFluid(EXNFluids.WITCH_WATER.getStillFluid(), WitchWaterFluidType.STILL);
+    registerFluid(EXNFluids.SEA_WATER.getStillFluid(), SeaWaterFluidType.STILL);
   }
 
   private void registerSieves() {
     createSieve(
-        ExNihiloBlocks.SIEVE_ACACIA.get(),
+        EXNBlocks.ACACIA_SIEVE.block(),
         exnihiloLoc("block/acacia_sieve"),
         vanillaLoc("block/acacia_planks"));
     createSieve(
-        ExNihiloBlocks.SIEVE_BIRCH.get(),
+        EXNBlocks.BIRCH_SIEVE.block(),
         exnihiloLoc("block/birch_sieve"),
         vanillaLoc("block/birch_planks"));
     createSieve(
-        ExNihiloBlocks.SIEVE_DARK_OAK.get(),
+        EXNBlocks.DARK_OAK_SIEVE.block(),
         exnihiloLoc("block/dark_oak_sieve"),
         vanillaLoc("block/dark_oak_planks"));
     createSieve(
-        ExNihiloBlocks.SIEVE_JUNGLE.get(),
+        EXNBlocks.JUNGLE_SIEVE.block(),
         exnihiloLoc("block/jungle_sieve"),
         vanillaLoc("block/jungle_planks"));
     createSieve(
-        ExNihiloBlocks.SIEVE_MANGROVE.get(),
+        EXNBlocks.MANGROVE_SIEVE.block(),
         exnihiloLoc("block/mangrove_sieve"),
         vanillaLoc("block/mangrove_planks"));
     createSieve(
-        ExNihiloBlocks.SIEVE_OAK.get(),
+        EXNBlocks.OAK_SIEVE.block(),
         exnihiloLoc("block/oak_sieve"),
         vanillaLoc("block/oak_planks"));
     createSieve(
-        ExNihiloBlocks.SIEVE_SPRUCE.get(),
+        EXNBlocks.SPRUCE_SIEVE.block(),
         exnihiloLoc("block/spruce_sieve"),
         vanillaLoc("block/spruce_planks"));
     createSieve(
-        ExNihiloBlocks.SIEVE_CRIMSON.get(),
+        EXNBlocks.CRIMSON_SIEVE.block(),
         exnihiloLoc("block/crimson_sieve"),
         vanillaLoc("block/crimson_planks"));
     createSieve(
-        ExNihiloBlocks.SIEVE_WARPED.get(),
+        EXNBlocks.WARPED_SIEVE.block(),
         exnihiloLoc("block/warped_sieve"),
         vanillaLoc("block/warped_planks"));
   }
 
   private void registerSimpleBlocks() {
-    basicBlock(ExNihiloBlocks.CRUSHED_ANDESITE.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_BASALT.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_BLACKSTONE.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_CALCITE.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_DEEPSLATE.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_DIORITE.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_DRIPSTONE.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_GRANITE.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_NETHERRACK.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_TUFF.get());
-    basicBlock(ExNihiloBlocks.CRUSHED_END_STONE.get());
-    basicBlock(ExNihiloBlocks.DUST.get());
-    basicBlock(ExNihiloBlocks.INFESTED_LEAVES.get());
-    basicBlock(ExNihiloBlocks.INFESTING_LEAVES.get());
+    basicBlock(EXNBlocks.CRUSHED_ANDESITE.block());
+    basicBlock(EXNBlocks.CRUSHED_BASALT.block());
+    basicBlock(EXNBlocks.CRUSHED_BLACKSTONE.block());
+    basicBlock(EXNBlocks.CRUSHED_CALCITE.block());
+    basicBlock(EXNBlocks.CRUSHED_DEEPSLATE.block());
+    basicBlock(EXNBlocks.CRUSHED_DIORITE.block());
+    basicBlock(EXNBlocks.CRUSHED_DRIPSTONE.block());
+    basicBlock(EXNBlocks.CRUSHED_GRANITE.block());
+    basicBlock(EXNBlocks.CRUSHED_NETHERRACK.block());
+    basicBlock(EXNBlocks.CRUSHED_TUFF.block());
+    basicBlock(EXNBlocks.CRUSHED_END_STONE.block());
+    basicBlock(EXNBlocks.DUST.block());
+    basicBlock(EXNBlocks.INFESTED_LEAVES.block());
+    basicBlock(EXNBlocks.INFESTING_LEAVES.block());
   }
 }

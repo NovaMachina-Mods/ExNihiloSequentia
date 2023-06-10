@@ -5,13 +5,13 @@ import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 
 public class HeatRecipeBuilder extends ExNihiloFinishedRecipe<HeatRecipeBuilder> {
 
   private HeatRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions
-    super(ExNihiloSerializers.HEAT_RECIPE_SERIALIZER.get());
+    super(EXNRecipeSerializers.HEAT_RECIPE_SERIALIZER);
   }
 
   public static HeatRecipeBuilder builder() {

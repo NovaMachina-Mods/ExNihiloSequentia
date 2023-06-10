@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.FakePlayer;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
 import novamachina.exnihilosequentia.common.item.MeshItem;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
@@ -46,10 +45,6 @@ public class SieveEntity extends BlockEntity {
   @Nonnull private ItemStack meshStack = ItemStack.EMPTY;
   @Nonnull private MeshType meshType = MeshType.NONE;
   private float progress = 0;
-
-  public SieveEntity(BlockPos pos, BlockState state) {
-    this(ExNihiloBlockEntities.SIEVE_ENTITY.get(), pos, state);
-  }
 
   public SieveEntity(
       BlockEntityType<? extends SieveEntity> blockEntityType, BlockPos pos, BlockState state) {

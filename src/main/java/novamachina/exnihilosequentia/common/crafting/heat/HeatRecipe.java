@@ -5,13 +5,16 @@ import javax.annotation.Nullable;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
-import novamachina.exnihilosequentia.common.crafting.SerializableRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
+import novamachina.novacore.world.item.crafting.SerializableRecipe;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
+import org.jetbrains.annotations.NotNull;
 
 public class HeatRecipe extends SerializableRecipe {
 
@@ -21,7 +24,7 @@ public class HeatRecipe extends SerializableRecipe {
 
   public HeatRecipe(
       @Nonnull final ResourceLocation id, @Nullable final Block input, final int amount) {
-    super(null, ExNihiloRecipeTypes.HEAT_RECIPE_TYPE.get(), id);
+    super(null, EXNRecipeTypes.HEAT_RECIPE_TYPE, id);
     this.input = input;
     this.amount = amount;
     this.properties = null;
@@ -32,7 +35,7 @@ public class HeatRecipe extends SerializableRecipe {
       @Nonnull final Block input,
       final int amount,
       @Nonnull final StatePropertiesPredicate properties) {
-    super(null, ExNihiloRecipeTypes.HEAT_RECIPE_TYPE.get(), id);
+    super(null, EXNRecipeTypes.HEAT_RECIPE_TYPE, id);
     this.input = input;
     this.amount = amount;
     this.properties = properties;
@@ -84,8 +87,12 @@ public class HeatRecipe extends SerializableRecipe {
   }
 
   @Override
-  @Nullable
-  protected ExNihiloRecipeSerializer<HeatRecipe> getENSerializer() {
-    return ExNihiloSerializers.HEAT_RECIPE_SERIALIZER.get();
+  public @NotNull ItemStack getToastSymbol() {
+    return EXNBlocks.FIRED_CRUCIBLE.itemStack();
+  }
+
+  @Override
+  public RecipeSerializer<?> getSerializer() {
+    return EXNRecipeSerializers.HEAT_RECIPE_SERIALIZER;
   }
 }

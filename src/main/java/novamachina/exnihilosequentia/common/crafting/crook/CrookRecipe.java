@@ -7,11 +7,14 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
+import org.jetbrains.annotations.NotNull;
 
 public class CrookRecipe extends SingleItemSerializableRecipe {
   @Nonnull private final List<ItemStackWithChance> output;
@@ -23,7 +26,7 @@ public class CrookRecipe extends SingleItemSerializableRecipe {
     super(
         output.isEmpty() ? ItemStack.EMPTY : output.get(0).getStack(),
         input,
-        ExNihiloRecipeTypes.CROOK_RECIPE_TYPE.get(),
+        EXNRecipeTypes.CROOK_RECIPE_TYPE,
         id);
     this.output = output;
   }
@@ -51,8 +54,12 @@ public class CrookRecipe extends SingleItemSerializableRecipe {
   }
 
   @Override
-  @Nullable
-  protected ExNihiloRecipeSerializer<CrookRecipe> getENSerializer() {
-    return ExNihiloSerializers.CROOK_RECIPE_SERIALIZER.get();
+  public @NotNull ItemStack getToastSymbol() {
+    return EXNItems.CROOK_WOOD.itemStack();
+  }
+
+  @Override
+  public RecipeSerializer<?> getSerializer() {
+    return EXNRecipeSerializers.CROOK_RECIPE_SERIALIZER;
   }
 }

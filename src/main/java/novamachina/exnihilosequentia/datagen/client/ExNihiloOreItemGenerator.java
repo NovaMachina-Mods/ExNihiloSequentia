@@ -1,9 +1,10 @@
 package novamachina.exnihilosequentia.datagen.client;
 
+import java.util.Set;
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.datagen.api.datagen.AbstractOreItemGenerator;
@@ -18,7 +19,20 @@ public class ExNihiloOreItemGenerator extends AbstractOreItemGenerator {
 
   @Override
   protected void registerModels() {
-    for (Ore ore : ExNihiloItems.ORES) {
+    Set<Ore> ores =
+        Set.of(
+            EXNItems.IRON,
+            EXNItems.GOLD,
+            EXNItems.COPPER,
+            EXNItems.LEAD,
+            EXNItems.NICKEL,
+            EXNItems.SILVER,
+            EXNItems.TIN,
+            EXNItems.ALUMINUM,
+            EXNItems.PLATINUM,
+            EXNItems.URANIUM,
+            EXNItems.ZINC);
+    for (Ore ore : ores) {
       registerOre(ore);
     }
   }

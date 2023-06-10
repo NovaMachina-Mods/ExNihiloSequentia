@@ -1,17 +1,18 @@
 package novamachina.exnihilosequentia.common.crafting.fluiditem;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import org.jetbrains.annotations.NotNull;
 
 public class FluidItemRecipe extends SingleItemSerializableRecipe {
 
@@ -23,7 +24,7 @@ public class FluidItemRecipe extends SingleItemSerializableRecipe {
       @Nonnull final FluidStack fluid,
       @Nonnull final Ingredient input,
       @Nonnull final ItemStack output) {
-    super(output, input, ExNihiloRecipeTypes.FLUID_ITEM_RECIPE_TYPE.get(), id);
+    super(output, input, EXNRecipeTypes.FLUID_ITEM_RECIPE_TYPE, id);
     this.fluid = fluid;
     this.output = output;
   }
@@ -52,8 +53,12 @@ public class FluidItemRecipe extends SingleItemSerializableRecipe {
   }
 
   @Override
-  @Nullable
-  protected ExNihiloRecipeSerializer<FluidItemRecipe> getENSerializer() {
-    return ExNihiloSerializers.FLUID_ITEM_RECIPE_SERIALIZER.get();
+  public @NotNull ItemStack getToastSymbol() {
+    return EXNBlocks.OAK_BARREL.itemStack();
+  }
+
+  @Override
+  public RecipeSerializer<?> getSerializer() {
+    return EXNRecipeSerializers.FLUID_ITEM_RECIPE_SERIALIZER;
   }
 }

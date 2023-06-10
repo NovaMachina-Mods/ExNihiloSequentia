@@ -10,14 +10,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 
 public class FiredCrucibleEntity extends BaseCrucibleEntity {
-
-  public FiredCrucibleEntity(BlockPos pos, BlockState state) {
-    this(ExNihiloBlockEntities.FIRED_CURICLBE_ENTITY.get(), pos, state);
-  }
 
   public FiredCrucibleEntity(
       BlockEntityType<? extends FiredCrucibleEntity> tile, BlockPos pos, BlockState state) {

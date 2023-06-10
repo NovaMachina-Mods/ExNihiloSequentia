@@ -9,15 +9,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 public class WoodCrucibleEntity extends BaseCrucibleEntity {
-
-  public WoodCrucibleEntity(BlockPos pos, BlockState state) {
-    this(ExNihiloBlockEntities.WOODEN_CRUCIBLE_ENTITY.get(), pos, state);
-  }
 
   public WoodCrucibleEntity(
       BlockEntityType<? extends WoodCrucibleEntity> tile, BlockPos pos, BlockState state) {

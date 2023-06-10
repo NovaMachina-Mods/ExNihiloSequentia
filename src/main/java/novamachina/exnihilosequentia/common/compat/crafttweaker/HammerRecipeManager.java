@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenHammerRecipe;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
@@ -32,6 +32,6 @@ public class HammerRecipeManager implements IRecipeManager {
  @Override
  @Nonnull
  public RecipeType<HammerRecipe> getRecipeType() {
-   return ExNihiloRecipeTypes.HAMMER_RECIPE_TYPE.get();
+   return EXNRecipeTypes.HAMMER_RECIPE_TYPE;
  }
 }

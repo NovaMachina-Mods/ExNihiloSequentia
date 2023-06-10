@@ -7,7 +7,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
@@ -34,17 +34,17 @@ public class ExNihiloTags {
   public static final TagKey<Block> MINEABLE_WITH_HAMMER =
       BlockTags.create(modLoc("mineable/hammer"));
 
-  @Nonnull public static final OreTag IRON = new OreTag(ExNihiloItems.IRON);
-  @Nonnull public static final OreTag GOLD = new OreTag(ExNihiloItems.GOLD);
-  @Nonnull public static final OreTag COPPER = new OreTag(ExNihiloItems.COPPER);
-  @Nonnull public static final OreTag LEAD = new OreTag(ExNihiloItems.LEAD);
-  @Nonnull public static final OreTag NICKEL = new OreTag(ExNihiloItems.NICKEL);
-  @Nonnull public static final OreTag SILVER = new OreTag(ExNihiloItems.SILVER);
-  @Nonnull public static final OreTag TIN = new OreTag(ExNihiloItems.TIN);
-  @Nonnull public static final OreTag ALUMINUM = new OreTag(ExNihiloItems.ALUMINUM);
-  @Nonnull public static final OreTag PLATINUM = new OreTag(ExNihiloItems.PLATINUM);
-  @Nonnull public static final OreTag URANIUM = new OreTag(ExNihiloItems.URANIUM);
-  @Nonnull public static final OreTag ZINC = new OreTag(ExNihiloItems.ZINC);
+  @Nonnull public static final OreTag IRON = new OreTag(EXNItems.IRON);
+  @Nonnull public static final OreTag GOLD = new OreTag(EXNItems.GOLD);
+  @Nonnull public static final OreTag COPPER = new OreTag(EXNItems.COPPER);
+  @Nonnull public static final OreTag LEAD = new OreTag(EXNItems.LEAD);
+  @Nonnull public static final OreTag NICKEL = new OreTag(EXNItems.NICKEL);
+  @Nonnull public static final OreTag SILVER = new OreTag(EXNItems.SILVER);
+  @Nonnull public static final OreTag TIN = new OreTag(EXNItems.TIN);
+  @Nonnull public static final OreTag ALUMINUM = new OreTag(EXNItems.ALUMINUM);
+  @Nonnull public static final OreTag PLATINUM = new OreTag(EXNItems.PLATINUM);
+  @Nonnull public static final OreTag URANIUM = new OreTag(EXNItems.URANIUM);
+  @Nonnull public static final OreTag ZINC = new OreTag(EXNItems.ZINC);
   public static final TagKey<Item> NUGGET_COPPER = ItemTags.create(forgeLoc("nuggets/copper"));
 
   private ExNihiloTags() {}

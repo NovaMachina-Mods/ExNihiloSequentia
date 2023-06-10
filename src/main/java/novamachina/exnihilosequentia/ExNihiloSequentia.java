@@ -1,22 +1,28 @@
 package novamachina.exnihilosequentia;
 
+import static novamachina.exnihilosequentia.ExNihiloSequentia.MOD_ID;
+
 import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.init.*;
 
-@Mod(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA)
+@Mod(MOD_ID)
 public class ExNihiloSequentia {
+
+  public static final String MOD_ID = "exnihilosequentia";
 
   @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
@@ -38,23 +44,40 @@ public class ExNihiloSequentia {
     FMLJavaModLoadingContext.get()
         .getModEventBus()
         .addListener(ExNihiloInitialization::registerTOP);
+
+    FMLJavaModLoadingContext.get()
+        .getModEventBus()
+        .addListener(
+            (RegisterEvent event) -> {
+              if (event.getRegistryKey().equals(Registry.BLOCK_REGISTRY)) {
+                InitBlocks.init(ForgeRegistries.BLOCKS);
+              }
+              if (event.getRegistryKey().equals(Registry.BLOCK_ENTITY_TYPE_REGISTRY)) {
+                InitBlockEntityTypes.init(ForgeRegistries.BLOCK_ENTITY_TYPES);
+              }
+              if (event.getRegistryKey().equals(Registry.FLUID_REGISTRY)) {
+                InitFluidTypes.init(ForgeRegistries.FLUID_TYPES.get());
+                InitFluids.init(ForgeRegistries.FLUIDS);
+              }
+              if (event.getRegistryKey().equals(Registry.ITEM_REGISTRY)) {
+                InitItems.init(ForgeRegistries.ITEMS);
+              }
+              if (event.getRegistryKey().equals(Registry.RECIPE_SERIALIZER_REGISTRY)) {
+                InitRecipeSerializers.init(ForgeRegistries.RECIPE_SERIALIZERS);
+              }
+              if (event.getRegistryKey().equals(Registry.RECIPE_TYPE_REGISTRY)) {
+                InitRecipeTypes.init(ForgeRegistries.RECIPE_TYPES);
+              }
+              if (event.getRegistryKey().equals(Registry.SOUND_EVENT_REGISTRY)) {
+                InitSoundEvents.init(ForgeRegistries.SOUND_EVENTS);
+              }
+              if (event.getRegistryKey().equals(Registry.CUSTOM_STAT_REGISTRY)) {
+                InitStats.init();
+              }
+            });
   }
 
-  @EventBusSubscriber(modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, bus = Bus.MOD)
-  public static class EventHandlers {
-
-    private EventHandlers() {}
-
-    //    @SubscribeEvent
-    //    public static void registerModifierSerializers(
-    //        @Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-    //      logger.debug("Registering Loot Modifiers");
-    //      event.getRegistry()
-    //          .register(new UseHammerModifier.Serializer()
-    //              .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_hammer"));
-    //      event.getRegistry()
-    //          .register(new UseCrookModifier.Serializer()
-    //              .setRegistryName(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "use_crook"));
-    //    }
+  public static ResourceLocation makeId(String id) {
+    return new ResourceLocation(MOD_ID, id);
   }
 }

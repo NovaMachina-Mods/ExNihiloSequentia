@@ -9,17 +9,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 
-public class HammerRecipeSerializer extends ExNihiloRecipeSerializer<HammerRecipe> {
-
-  @Override
-  public ItemStack getIcon() {
-    return new ItemStack(ExNihiloItems.HAMMER_DIAMOND.get());
-  }
+public class HammerRecipeSerializer extends NovaRecipeSerializer<HammerRecipe> {
 
   @Override
   @Nonnull

@@ -5,12 +5,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 
 public class CompostRecipeBuilder extends ExNihiloFinishedRecipe<CompostRecipeBuilder> {
 
   private CompostRecipeBuilder() {
-    super(ExNihiloSerializers.COMPOST_RECIPE_SERIALIZER.get());
+    super(EXNRecipeSerializers.COMPOST_RECIPE_SERIALIZER);
   }
 
   @Nonnull

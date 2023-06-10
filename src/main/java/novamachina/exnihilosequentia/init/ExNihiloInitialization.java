@@ -1,4 +1,4 @@
-package novamachina.exnihilosequentia.common.init;
+package novamachina.exnihilosequentia.init;
 
 import com.mojang.logging.LogUtils;
 import java.util.Collection;
@@ -49,6 +49,10 @@ import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.novacore.world.item.ItemDefinition;
 
 @Mod.EventBusSubscriber(
     modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
@@ -61,7 +65,7 @@ public class ExNihiloInitialization {
         @Nonnull
         @Override
         public ItemStack makeIcon() {
-          return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
+          return EXNBlocks.OAK_SIEVE.itemStack();
         }
       };
 
@@ -79,15 +83,7 @@ public class ExNihiloInitialization {
 
   public static void init(@Nonnull final IEventBus modEventBus) {
     logger.debug("Initializing modded items");
-    ExNihiloBlocks.init(modEventBus);
-    ExNihiloItems.init(modEventBus);
-    ExNihiloBlockEntities.init(modEventBus);
-    ExNihiloFluids.init(modEventBus);
-    ExNihiloFluidTypes.init(modEventBus);
-    ExNihiloSerializers.init(modEventBus);
-    ExNihiloLootModifiers.init(modEventBus);
-    ExNihiloRecipeTypes.init(modEventBus);
-    ExNihiloSounds.init(modEventBus);
+    ExNihiloLootModifiers.getRegistry().addToBus(modEventBus);
   }
 
   // MinecraftForge.EVENT_BUS
@@ -131,7 +127,7 @@ public class ExNihiloInitialization {
     PacketHandler.registerMessages();
     registerVanillaCompost();
     registerDispenserFluids();
-    ExNihiloStats.register();
+//    EXNStats.register();
   }
 
   private static void registerDispenserFluids() {
@@ -159,8 +155,8 @@ public class ExNihiloInitialization {
             }
           }
         };
-    DispenserBlock.registerBehavior(ExNihiloItems.SEA_WATER_BUCKET.get(), idispenseitembehavior);
-    DispenserBlock.registerBehavior(ExNihiloItems.WITCH_WATER_BUCKET.get(), idispenseitembehavior);
+    DispenserBlock.registerBehavior(EXNItems.SEA_WATER_BUCKET, idispenseitembehavior);
+    DispenserBlock.registerBehavior(EXNItems.WITCH_WATER_BUCKET, idispenseitembehavior);
   }
 
   private static void registerVanillaCompost() {
@@ -180,15 +176,15 @@ public class ExNihiloInitialization {
     //    createMCCompost(ExNihiloItems.SEED_BAMBOO.get().asItem());
     //    createMCCompost(ExNihiloItems.SEED_FERN.get().asItem());
     //    createMCCompost(ExNihiloItems.SEED_LARGE_FERN.get().asItem());
-    createMCCompost(ExNihiloItems.GRASS_SEED.get().asItem());
-    createMCCompost(ExNihiloItems.MYCELIUM_SPORE.get().asItem());
+    createMCCompost(EXNItems.GRASS_SEED);
+    createMCCompost(EXNItems.MYCELIUM_SPORE);
     //    createMCCompost(ExNihiloItems.CRIMSON_NYLIUM_SPORE.get().asItem());
     //    createMCCompost(ExNihiloItems.WARPED_NYLIUM_SPORE.get().asItem());
-    createMCCompost(ExNihiloItems.SILKWORM.get());
-    createMCCompost(ExNihiloItems.COOKED_SILKWORM.get());
+    createMCCompost(EXNItems.SILKWORM);
+    createMCCompost(EXNItems.COOKED_SILKWORM);
   }
 
-  private static void createMCCompost(Item item) {
+  private static void createMCCompost(ItemDefinition<? extends Item> item) {
     ComposterBlock.COMPOSTABLES.put(item, (float) 0.3);
   }
 
@@ -211,71 +207,71 @@ public class ExNihiloInitialization {
     }
 
     ExNihiloRegistries.HAMMER_REGISTRY.setRecipes(
-        filterRecipes(recipes, HammerRecipe.class, ExNihiloRecipeTypes.HAMMER_RECIPE_TYPE.get()));
+        filterRecipes(recipes, HammerRecipe.class, EXNRecipeTypes.HAMMER_RECIPE_TYPE));
     ExNihiloRegistries.CROOK_REGISTRY.setRecipes(
-        filterRecipes(recipes, CrookRecipe.class, ExNihiloRecipeTypes.CROOK_RECIPE_TYPE.get()));
+        filterRecipes(recipes, CrookRecipe.class, EXNRecipeTypes.CROOK_RECIPE_TYPE));
     ExNihiloRegistries.COMPOST_REGISTRY.setRecipes(
-        filterRecipes(recipes, CompostRecipe.class, ExNihiloRecipeTypes.COMPOST_RECIPE_TYPE.get()));
+        filterRecipes(recipes, CompostRecipe.class, EXNRecipeTypes.COMPOST_RECIPE_TYPE));
     ExNihiloRegistries.FLUID_BLOCK_REGISTRY.setRecipes(
         filterRecipes(
-            recipes, FluidItemRecipe.class, ExNihiloRecipeTypes.FLUID_ITEM_RECIPE_TYPE.get()));
+            recipes, FluidItemRecipe.class, EXNRecipeTypes.FLUID_ITEM_RECIPE_TYPE));
     ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.setRecipes(
         filterRecipes(
-            recipes, FluidOnTopRecipe.class, ExNihiloRecipeTypes.FLUID_ON_TOP_RECIPE_TYPE.get()));
+            recipes, FluidOnTopRecipe.class, EXNRecipeTypes.FLUID_ON_TOP_RECIPE_TYPE));
     ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.setRecipes(
         filterRecipes(
             recipes,
             FluidTransformRecipe.class,
-            ExNihiloRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE.get()));
+            EXNRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE));
     ExNihiloRegistries.CRUCIBLE_REGISTRY.setRecipes(
         filterRecipes(
-            recipes, CrucibleRecipe.class, ExNihiloRecipeTypes.CRUCIBLE_RECIPE_TYPE.get()));
+            recipes, CrucibleRecipe.class, EXNRecipeTypes.CRUCIBLE_RECIPE_TYPE));
     ExNihiloRegistries.HEAT_REGISTRY.setRecipes(
-        filterRecipes(recipes, HeatRecipe.class, ExNihiloRecipeTypes.HEAT_RECIPE_TYPE.get()));
+        filterRecipes(recipes, HeatRecipe.class, EXNRecipeTypes.HEAT_RECIPE_TYPE));
     ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(
-        filterRecipes(recipes, SieveRecipe.class, ExNihiloRecipeTypes.SIEVE_RECIPE_TYPE.get()));
+        filterRecipes(recipes, SieveRecipe.class, EXNRecipeTypes.SIEVE_RECIPE_TYPE));
   }
 
   private static void overrideOres() {
     if (Config.enableOreOverride()) {
-      ExNihiloItems.COPPER.setEnabled(Config.enableCopper());
-      ExNihiloItems.LEAD.setEnabled(Config.enableLead());
-      ExNihiloItems.LEAD.setEnabled(Config.enableLead());
-      ExNihiloItems.NICKEL.setEnabled(Config.enableNickel());
-      ExNihiloItems.SILVER.setEnabled(Config.enableSilver());
-      ExNihiloItems.TIN.setEnabled(Config.enableTin());
-      ExNihiloItems.ALUMINUM.setEnabled(Config.enableAluminum());
-      ExNihiloItems.PLATINUM.setEnabled(Config.enablePlatinum());
-      ExNihiloItems.URANIUM.setEnabled(Config.enableUranium());
-      ExNihiloItems.ZINC.setEnabled(Config.enableZinc());
-      ExNihiloItems.IRON.setEnabled(Config.enableIron());
-      ExNihiloItems.GOLD.setEnabled(Config.enableGold());
+      EXNItems.COPPER.setEnabled(Config.enableCopper());
+      EXNItems.LEAD.setEnabled(Config.enableLead());
+      EXNItems.LEAD.setEnabled(Config.enableLead());
+      EXNItems.NICKEL.setEnabled(Config.enableNickel());
+      EXNItems.SILVER.setEnabled(Config.enableSilver());
+      EXNItems.TIN.setEnabled(Config.enableTin());
+      EXNItems.ALUMINUM.setEnabled(Config.enableAluminum());
+      EXNItems.PLATINUM.setEnabled(Config.enablePlatinum());
+      EXNItems.URANIUM.setEnabled(Config.enableUranium());
+      EXNItems.ZINC.setEnabled(Config.enableZinc());
+      EXNItems.IRON.setEnabled(Config.enableIron());
+      EXNItems.GOLD.setEnabled(Config.enableGold());
     }
   }
 
   private static void registerOreCompat() {
     logger.debug("Register ore compatibility");
 
-    ExNihiloItems.IRON.setEnabled(true);
-    ExNihiloItems.GOLD.setEnabled(true);
+    EXNItems.IRON.setEnabled(true);
+    EXNItems.GOLD.setEnabled(true);
 
     logger.debug(
         "Immersive Engineering detected: "
             + ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING));
     if (ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING)) {
       logger.debug("Added Immersive Engineering");
-      ExNihiloItems.ALUMINUM.setEnabled(true);
-      ExNihiloItems.COPPER.setEnabled(true);
-      ExNihiloItems.SILVER.setEnabled(true);
-      ExNihiloItems.NICKEL.setEnabled(true);
-      ExNihiloItems.LEAD.setEnabled(true);
-      ExNihiloItems.URANIUM.setEnabled(true);
+      EXNItems.ALUMINUM.setEnabled(true);
+      EXNItems.COPPER.setEnabled(true);
+      EXNItems.SILVER.setEnabled(true);
+      EXNItems.NICKEL.setEnabled(true);
+      EXNItems.LEAD.setEnabled(true);
+      EXNItems.URANIUM.setEnabled(true);
     }
     logger.debug("Create detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE));
     if (ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE)) {
       logger.debug("Added Create");
-      ExNihiloItems.COPPER.setEnabled(true);
-      ExNihiloItems.ZINC.setEnabled(true);
+      EXNItems.COPPER.setEnabled(true);
+      EXNItems.ZINC.setEnabled(true);
     }
   }
 }

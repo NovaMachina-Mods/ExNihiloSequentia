@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,19 +19,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.IForgeShearable;
 import novamachina.exnihilosequentia.common.blockentity.InfestedLeavesEntity;
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 
-public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable, EntityBlock {
+public class InfestedLeavesBlock extends Block implements IForgeShearable, EntityBlock {
 
   public InfestedLeavesBlock() {
     super(
-        new BlockBuilder()
-            .properties(
-                BlockBehaviour.Properties.of(Material.LEAVES)
-                    .strength(0.2F)
-                    .sound(SoundType.GRASS)
-                    .noOcclusion()
-                    .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false)));
+        BlockBehaviour.Properties.of(Material.LEAVES)
+            .strength(0.2F)
+            .sound(SoundType.GRASS)
+            .noOcclusion()
+            .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false));
   }
 
   @Override
@@ -52,7 +51,7 @@ public class InfestedLeavesBlock extends BaseBlock implements IForgeShearable, E
   @Nullable
   @Override
   public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-    return new InfestedLeavesEntity(pos, state);
+    return new InfestedLeavesEntity(EXNBlockEntityTypes. INFESTED_LEAVES_ENTITY.getType(), pos, state);
   }
 
   @Nullable

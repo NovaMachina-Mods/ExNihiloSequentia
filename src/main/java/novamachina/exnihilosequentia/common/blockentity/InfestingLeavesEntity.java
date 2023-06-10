@@ -7,9 +7,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
@@ -22,8 +22,9 @@ public class InfestingLeavesEntity extends BlockEntity {
   private int progressWaitInterval = (Config.getSecondsToTransformLeaves() * 20) / 100;
   private int spreadCounter = 0;
 
-  public InfestingLeavesEntity(BlockPos pos, BlockState state) {
-    super(ExNihiloBlockEntities.INFESTING_LEAVES_ENTITY.get(), pos, state);
+  public InfestingLeavesEntity(
+      BlockEntityType<? extends InfestingLeavesEntity> blockEntityType, BlockPos pos, BlockState state) {
+    super(blockEntityType, pos, state);
   }
 
   public int getProgress() {

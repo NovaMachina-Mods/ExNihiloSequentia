@@ -29,7 +29,7 @@ import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
@@ -81,7 +81,7 @@ public class UseCrookModifier extends LootModifier {
                 Items.STRING,
                 random.nextInt(Config.getMaxBonusStringCount()) + Config.getMinStringCount()));
         if (random.nextDouble() <= 0.8) {
-          newLoot.add(new ItemStack(ExNihiloItems.SILKWORM.get()));
+          newLoot.add(EXNItems.SILKWORM.itemStack());
         }
       }
     }

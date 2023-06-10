@@ -15,8 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.init.ExNihiloSounds;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.sounds.EXNSoundEvents;
 import novamachina.exnihilosequentia.common.utility.Config;
 
 public class PebbleItem extends SnowballItem {
@@ -37,7 +37,7 @@ public class PebbleItem extends SnowballItem {
         player.getX(),
         player.getY(),
         player.getZ(),
-        ExNihiloSounds.PEBBLE_THROW.get(),
+        EXNSoundEvents.PEBBLE_THROW,
         SoundSource.NEUTRAL,
         0.5F,
         0.4F / (new SecureRandom().nextFloat() * 0.4F + 0.8F));

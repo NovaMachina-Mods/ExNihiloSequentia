@@ -10,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,8 +21,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -208,7 +207,8 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   @Override
   protected boolean isTriggerItem(@Nonnull final ItemStack stack) {
-    return FluidUtil.getFluidContained(stack).map(FluidStack::getAmount).orElse(0) >= FluidType.BUCKET_VOLUME
+    return FluidUtil.getFluidContained(stack).map(FluidStack::getAmount).orElse(0)
+            >= FluidType.BUCKET_VOLUME
         || ItemStack.isSame(
             stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
   }
@@ -238,11 +238,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     if (barrelTile.getFluid() == null) {
       key = Fluids.EMPTY.getFluidType().getDescriptionId();
     } else {
-      key =
-          barrelTile
-              .getFluid()
-              .getFluidType()
-              .getDescriptionId();
+      key = barrelTile.getFluid().getFluidType().getDescriptionId();
     }
 
     info.add(
@@ -266,9 +262,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     @Nonnull final Item input = stack.getItem();
     if (ExNihiloRegistries.FLUID_BLOCK_REGISTRY.isValidRecipe(fluid, input)) {
       if (!simulate) {
-        barrelTile
-            .getTank()
-            .drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+        barrelTile.getTank().drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
         barrelTile
             .getInventory()
             .setStackInSlot(

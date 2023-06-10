@@ -7,13 +7,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 
 public class FluidItemRecipeBuilder extends ExNihiloFinishedRecipe<FluidItemRecipeBuilder> {
 
   private FluidItemRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions
-    super(ExNihiloSerializers.FLUID_ITEM_RECIPE_SERIALIZER.get());
+    super(EXNRecipeSerializers.FLUID_ITEM_RECIPE_SERIALIZER);
   }
 
   @Nonnull

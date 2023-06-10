@@ -7,17 +7,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
-public class FluidOnTopRecipeSerializer extends ExNihiloRecipeSerializer<FluidOnTopRecipe> {
-
-  @Override
-  public ItemStack getIcon() {
-    return new ItemStack(ExNihiloBlocks.BARREL_OAK.get());
-  }
+public class FluidOnTopRecipeSerializer extends NovaRecipeSerializer<FluidOnTopRecipe> {
 
   @Override
   @Nonnull

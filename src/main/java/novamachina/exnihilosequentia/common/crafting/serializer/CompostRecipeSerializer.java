@@ -6,16 +6,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 
-public class CompostRecipeSerializer extends ExNihiloRecipeSerializer<CompostRecipe> {
-
-  @Override
-  public ItemStack getIcon() {
-    return new ItemStack(ExNihiloBlocks.BARREL_OAK.get());
-  }
+public class CompostRecipeSerializer extends NovaRecipeSerializer<CompostRecipe> {
 
   @Override
   @Nonnull

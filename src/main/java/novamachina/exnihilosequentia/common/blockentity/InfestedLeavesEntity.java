@@ -4,9 +4,9 @@ import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.block.InfestingLeavesBlock;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
 
@@ -16,8 +16,9 @@ public class InfestedLeavesEntity extends BlockEntity {
 
   private int progressWaitInterval = 0;
 
-  public InfestedLeavesEntity(BlockPos pos, BlockState state) {
-    super(ExNihiloBlockEntities.INFESTED_LEAVES_ENTITY.get(), pos, state);
+  public InfestedLeavesEntity(
+      BlockEntityType<? extends InfestedLeavesEntity> blockEntityType, BlockPos pos, BlockState state) {
+    super(blockEntityType, pos, state);
   }
 
   public void tickServer() {

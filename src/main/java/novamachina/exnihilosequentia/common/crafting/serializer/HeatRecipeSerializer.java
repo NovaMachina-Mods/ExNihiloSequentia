@@ -10,18 +10,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 
-public class HeatRecipeSerializer extends ExNihiloRecipeSerializer<HeatRecipe> {
+public class HeatRecipeSerializer extends NovaRecipeSerializer<HeatRecipe> {
 
   private static final JsonParser PARSER = new JsonParser();
-
-  @Override
-  public ItemStack getIcon() {
-    return new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get());
-  }
 
   @Override
   public HeatRecipe fromNetwork(

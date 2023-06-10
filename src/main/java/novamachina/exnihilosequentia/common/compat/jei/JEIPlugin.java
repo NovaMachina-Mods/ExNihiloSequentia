@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.compat.jei;
 
 import com.mojang.logging.LogUtils;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import mezz.jei.api.IModPlugin;
@@ -11,8 +12,9 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.RegistryObject;
+import novamachina.exnihilosequentia.common.block.BlockBarrel;
+import novamachina.exnihilosequentia.common.block.BlockSieve;
+import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
 import novamachina.exnihilosequentia.common.compat.jei.compost.CompostRecipeCategory;
 import novamachina.exnihilosequentia.common.compat.jei.crook.CrookRecipeCategory;
@@ -33,13 +35,15 @@ import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe
 import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.item.CrookBaseItem;
-import novamachina.exnihilosequentia.common.item.HammerBaseItem;
+import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.exnihilosequentia.common.item.CrookItem;
+import novamachina.exnihilosequentia.common.item.HammerItem;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.novacore.world.level.block.BlockDefinition;
+import novamachina.novacore.world.item.ItemDefinition;
 
 @JeiPlugin
 @SuppressWarnings("unused")
@@ -85,188 +89,139 @@ public class JEIPlugin implements IModPlugin {
 
   @Override
   public void registerRecipeCatalysts(@Nonnull final IRecipeCatalystRegistration registration) {
-    for (RegistryObject<CrookBaseItem> crook : ExNihiloItems.CROOKS) {
-      registerCrookCatalyst(crook.get(), registration);
-    }
-
-    registerHammerCatalyst(ExNihiloItems.HAMMER_ANDESITE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_BASALT.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_BLACKSTONE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_CALCITE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_COPPER.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_DEEPSLATE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_DIAMOND.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_DIORITE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_DRIPSTONE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_GOLD.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_GRANITE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_IRON.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_NETHER_BRICK.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_NETHERITE.get(), registration);
-    //    registerHammerCatalyst(ExNihiloItems.HAMMER_PRISMARINE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_RED_NETHER_BRICK.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_STONE.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_TERRACOTTA.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_TUFF.get(), registration);
-    registerHammerCatalyst(ExNihiloItems.HAMMER_WOOD.get(), registration);
-
+    registerHammerCatalyst(registration);
+    registerCrookCatalyst(registration);
     registerCrucibles(registration);
     registerBarrels(registration);
     registerSieves(registration);
   }
 
-  private void registerCrookCatalyst(
-      CrookBaseItem crook, @Nonnull final IRecipeCatalystRegistration registration) {
-    registration.addRecipeCatalyst(new ItemStack(crook), RecipeTypes.CROOK);
+  private void registerCrookCatalyst(@Nonnull final IRecipeCatalystRegistration registration) {
+    Set<ItemDefinition<CrookItem>> crooks =
+        Set.of(
+            EXNItems.CROOK_ANDESITE,
+            EXNItems.CROOK_BASALT,
+            EXNItems.CROOK_BLACKSTONE,
+            EXNItems.CROOK_BONE,
+            EXNItems.CROOK_CALCITE,
+            EXNItems.CROOK_COPPER,
+            EXNItems.CROOK_DEEPSLATE,
+            EXNItems.CROOK_DIAMOND,
+            EXNItems.CROOK_DIORITE,
+            EXNItems.CROOK_DRIPSTONE,
+            EXNItems.CROOK_GOLD,
+            EXNItems.CROOK_GRANITE,
+            EXNItems.CROOK_IRON,
+            EXNItems.CROOK_NETHER_BRICK,
+            EXNItems.CROOK_NETHERITE,
+            EXNItems.CROOK_RED_NETHER_BRICK,
+            EXNItems.CROOK_STONE,
+            EXNItems.CROOK_TERRACOTTA,
+            EXNItems.CROOK_TUFF,
+            EXNItems.CROOK_WOOD);
+    for (ItemDefinition<CrookItem> crook : crooks) {
+      registration.addRecipeCatalyst(crook.itemStack(), RecipeTypes.CROOK);
+    }
   }
 
-  private void registerHammerCatalyst(
-      HammerBaseItem hammer, @Nonnull final IRecipeCatalystRegistration registration) {
-    registration.addRecipeCatalyst(new ItemStack(hammer), RecipeTypes.HAMMER);
+  private void registerHammerCatalyst(@Nonnull final IRecipeCatalystRegistration registration) {
+    Set<ItemDefinition<HammerItem>> hammers =
+        Set.of(
+            EXNItems.HAMMER_ANDESITE,
+            EXNItems.HAMMER_BASALT,
+            EXNItems.HAMMER_BLACKSTONE,
+            EXNItems.HAMMER_BONE,
+            EXNItems.HAMMER_CALCITE,
+            EXNItems.HAMMER_COPPER,
+            EXNItems.HAMMER_DEEPSLATE,
+            EXNItems.HAMMER_DIAMOND,
+            EXNItems.HAMMER_DIORITE,
+            EXNItems.HAMMER_DRIPSTONE,
+            EXNItems.HAMMER_GOLD,
+            EXNItems.HAMMER_GRANITE,
+            EXNItems.HAMMER_IRON,
+            EXNItems.HAMMER_NETHER_BRICK,
+            EXNItems.HAMMER_NETHERITE,
+            EXNItems.HAMMER_RED_NETHER_BRICK,
+            EXNItems.HAMMER_STONE,
+            EXNItems.HAMMER_TERRACOTTA,
+            EXNItems.HAMMER_TUFF,
+            EXNItems.HAMMER_WOOD);
+
+    for (ItemDefinition<HammerItem> hammer : hammers) {
+      registration.addRecipeCatalyst(hammer.itemStack(), RecipeTypes.HAMMER);
+    }
   }
 
   private void registerCrucibles(@Nonnull final IRecipeCatalystRegistration registration) {
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_ACACIA.get()),
-        RecipeTypes.CRUCIBLE,
-        RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_BIRCH.get()), RecipeTypes.CRUCIBLE, RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_DARK_OAK.get()),
-        RecipeTypes.CRUCIBLE,
-        RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_JUNGLE.get()),
-        RecipeTypes.CRUCIBLE,
-        RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_MANGROVE.get()),
-        RecipeTypes.CRUCIBLE,
-        RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_OAK.get()), RecipeTypes.CRUCIBLE, RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_SPRUCE.get()),
-        RecipeTypes.CRUCIBLE,
-        RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_FIRED.get()),
-        RecipeTypes.FIRED_CRUCIBLE,
-        RecipeTypes.CRUCIBLE,
-        RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_CRIMSON.get()),
-        RecipeTypes.FIRED_CRUCIBLE,
-        RecipeTypes.CRUCIBLE,
-        RecipeTypes.HEAT);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.CRUCIBLE_WARPED.get()),
-        RecipeTypes.FIRED_CRUCIBLE,
-        RecipeTypes.CRUCIBLE,
-        RecipeTypes.HEAT);
+    List<BlockDefinition<CrucibleBaseBlock>> nonFiredCrucibles =
+        List.of(
+            EXNBlocks.ACACIA_CRUCIBLE,
+            EXNBlocks.BIRCH_CRUCIBLE,
+            EXNBlocks.DARK_OAK_CRUCIBLE,
+            EXNBlocks.JUNGLE_CRUCIBLE,
+            EXNBlocks.MANGROVE_CRUCIBLE,
+            EXNBlocks.OAK_CRUCIBLE,
+            EXNBlocks.SPRUCE_CRUCIBLE);
+    for (BlockDefinition<CrucibleBaseBlock> blockDefinition : nonFiredCrucibles) {
+      registration.addRecipeCatalyst(
+          blockDefinition.itemStack(), RecipeTypes.CRUCIBLE, RecipeTypes.HEAT);
+    }
+
+    List<BlockDefinition<CrucibleBaseBlock>> firedCrucibles =
+        List.of(
+            EXNBlocks.FIRED_CRUCIBLE,
+            EXNBlocks.CRIMSON_CRUCIBLE,
+            EXNBlocks.WARPED_CRUCIBLE);
+    for (BlockDefinition<CrucibleBaseBlock> blockDefinition : nonFiredCrucibles) {
+      registration.addRecipeCatalyst(
+          blockDefinition.itemStack(),
+          RecipeTypes.FIRED_CRUCIBLE,
+          RecipeTypes.CRUCIBLE,
+          RecipeTypes.HEAT);
+    }
   }
 
   private void registerBarrels(@Nonnull final IRecipeCatalystRegistration registration) {
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_ACACIA.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_BIRCH.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_DARK_OAK.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_JUNGLE.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_MANGROVE.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_OAK.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_SPRUCE.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_STONE.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_CRIMSON.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.BARREL_WARPED.get()),
-        RecipeTypes.FLUID_ON_TOP,
-        RecipeTypes.FLUID_TRANSFORM,
-        RecipeTypes.FLUID_ITEM,
-        RecipeTypes.COMPOST);
+
+    List<BlockDefinition<BlockBarrel>> barrels =
+        List.of(
+            EXNBlocks.ACACIA_BARREL,
+            EXNBlocks.BIRCH_BARREL,
+            EXNBlocks.DARK_OAK_BARREL,
+            EXNBlocks.JUNGLE_BARREL,
+            EXNBlocks.MANGROVE_BARREL,
+            EXNBlocks.OAK_BARREL,
+            EXNBlocks.SPRUCE_BARREL,
+            EXNBlocks.STONE_BARREL,
+            EXNBlocks.CRIMSON_BARREL,
+            EXNBlocks.WARPED_BARREL);
+    for (BlockDefinition<BlockBarrel> blockDefinition : barrels) {
+      registration.addRecipeCatalyst(
+          blockDefinition.itemStack(),
+          RecipeTypes.FLUID_ON_TOP,
+          RecipeTypes.FLUID_TRANSFORM,
+          RecipeTypes.FLUID_ITEM,
+          RecipeTypes.COMPOST);
+    }
   }
 
   private void registerSieves(@Nonnull final IRecipeCatalystRegistration registration) {
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_ACACIA.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_BIRCH.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_DARK_OAK.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_JUNGLE.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_MANGROVE.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_OAK.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_SPRUCE.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_CRIMSON.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
-    registration.addRecipeCatalyst(
-        new ItemStack(ExNihiloBlocks.SIEVE_WARPED.get()),
-        RecipeTypes.DRY_SIEVE,
-        RecipeTypes.WET_SIEVE);
+    List<BlockDefinition<BlockSieve>> sieves =
+        List.of(
+            EXNBlocks.ACACIA_SIEVE,
+            EXNBlocks.BIRCH_SIEVE,
+            EXNBlocks.DARK_OAK_SIEVE,
+            EXNBlocks.JUNGLE_SIEVE,
+            EXNBlocks.MANGROVE_SIEVE,
+            EXNBlocks.OAK_SIEVE,
+            EXNBlocks.SPRUCE_SIEVE,
+            EXNBlocks.CRIMSON_SIEVE,
+            EXNBlocks.WARPED_SIEVE);
+    for (BlockDefinition<BlockSieve> blockDefinition : sieves) {
+      registration.addRecipeCatalyst(
+          blockDefinition.itemStack(), RecipeTypes.DRY_SIEVE, RecipeTypes.WET_SIEVE);
+    }
   }
 
   @Override

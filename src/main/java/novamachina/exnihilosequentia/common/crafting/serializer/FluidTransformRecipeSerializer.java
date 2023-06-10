@@ -8,17 +8,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
 
-public class FluidTransformRecipeSerializer extends ExNihiloRecipeSerializer<FluidTransformRecipe> {
+public class FluidTransformRecipeSerializer extends NovaRecipeSerializer<FluidTransformRecipe> {
 
-  @Override
-  public ItemStack getIcon() {
-    return new ItemStack(ExNihiloBlocks.BARREL_OAK.get());
-  }
 
   @Override
   @Nonnull

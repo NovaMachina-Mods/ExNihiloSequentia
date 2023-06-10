@@ -7,7 +7,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,54 +35,54 @@ public class ExNihiloBlockTagsGenerator extends BlockTagsProvider {
             Blocks.BUBBLE_CORAL,
             Blocks.FIRE_CORAL,
             Blocks.HORN_CORAL)
-        .add(ExNihiloBlocks.BARREL_STONE.get(), ExNihiloBlocks.CRUCIBLE_FIRED.get());
+        .add(EXNBlocks.STONE_BARREL.block(), EXNBlocks.FIRED_CRUCIBLE.block());
     tag(ExNihiloTags.MINEABLE_WITH_CROOK)
         .addTag(BlockTags.LEAVES)
-        .add(ExNihiloBlocks.INFESTED_LEAVES.get(), ExNihiloBlocks.INFESTING_LEAVES.get());
+        .add(EXNBlocks.INFESTED_LEAVES.block(), EXNBlocks.INFESTING_LEAVES.block());
     tag(BlockTags.MINEABLE_WITH_AXE)
         .add(
-            ExNihiloBlocks.BARREL_ACACIA.get(),
-            ExNihiloBlocks.BARREL_BIRCH.get(),
-            ExNihiloBlocks.BARREL_CRIMSON.get(),
-            ExNihiloBlocks.BARREL_DARK_OAK.get(),
-            ExNihiloBlocks.BARREL_JUNGLE.get(),
-            ExNihiloBlocks.BARREL_MANGROVE.get(),
-            ExNihiloBlocks.BARREL_OAK.get(),
-            ExNihiloBlocks.BARREL_SPRUCE.get(),
-            ExNihiloBlocks.BARREL_WARPED.get(),
-            ExNihiloBlocks.CRUCIBLE_ACACIA.get(),
-            ExNihiloBlocks.CRUCIBLE_BIRCH.get(),
-            ExNihiloBlocks.CRUCIBLE_CRIMSON.get(),
-            ExNihiloBlocks.CRUCIBLE_DARK_OAK.get(),
-            ExNihiloBlocks.CRUCIBLE_JUNGLE.get(),
-            ExNihiloBlocks.CRUCIBLE_MANGROVE.get(),
-            ExNihiloBlocks.CRUCIBLE_OAK.get(),
-            ExNihiloBlocks.CRUCIBLE_SPRUCE.get(),
-            ExNihiloBlocks.CRUCIBLE_WARPED.get(),
-            ExNihiloBlocks.SIEVE_ACACIA.get(),
-            ExNihiloBlocks.SIEVE_BIRCH.get(),
-            ExNihiloBlocks.SIEVE_CRIMSON.get(),
-            ExNihiloBlocks.SIEVE_DARK_OAK.get(),
-            ExNihiloBlocks.SIEVE_JUNGLE.get(),
-            ExNihiloBlocks.SIEVE_MANGROVE.get(),
-            ExNihiloBlocks.SIEVE_OAK.get(),
-            ExNihiloBlocks.SIEVE_SPRUCE.get(),
-            ExNihiloBlocks.SIEVE_WARPED.get());
+            EXNBlocks.ACACIA_BARREL.block(),
+            EXNBlocks.BIRCH_BARREL.block(),
+            EXNBlocks.CRIMSON_BARREL.block(),
+            EXNBlocks.DARK_OAK_BARREL.block(),
+            EXNBlocks.JUNGLE_BARREL.block(),
+            EXNBlocks.MANGROVE_BARREL.block(),
+            EXNBlocks.OAK_BARREL.block(),
+            EXNBlocks.SPRUCE_BARREL.block(),
+            EXNBlocks.WARPED_BARREL.block(),
+            EXNBlocks.ACACIA_CRUCIBLE.block(),
+            EXNBlocks.BIRCH_CRUCIBLE.block(),
+            EXNBlocks.CRIMSON_CRUCIBLE.block(),
+            EXNBlocks.DARK_OAK_CRUCIBLE.block(),
+            EXNBlocks.JUNGLE_CRUCIBLE.block(),
+            EXNBlocks.MANGROVE_CRUCIBLE.block(),
+            EXNBlocks.OAK_CRUCIBLE.block(),
+            EXNBlocks.SPRUCE_CRUCIBLE.block(),
+            EXNBlocks.WARPED_CRUCIBLE.block(),
+            EXNBlocks.ACACIA_SIEVE.block(),
+            EXNBlocks.BIRCH_SIEVE.block(),
+            EXNBlocks.CRIMSON_SIEVE.block(),
+            EXNBlocks.DARK_OAK_SIEVE.block(),
+            EXNBlocks.JUNGLE_SIEVE.block(),
+            EXNBlocks.MANGROVE_SIEVE.block(),
+            EXNBlocks.OAK_SIEVE.block(),
+            EXNBlocks.SPRUCE_SIEVE.block(),
+            EXNBlocks.WARPED_SIEVE.block());
     tag(BlockTags.MINEABLE_WITH_SHOVEL)
         .add(
-            ExNihiloBlocks.CRUSHED_ANDESITE.get(),
-            ExNihiloBlocks.CRUSHED_BASALT.get(),
-            ExNihiloBlocks.CRUSHED_BLACKSTONE.get(),
-            ExNihiloBlocks.CRUSHED_CALCITE.get(),
-            ExNihiloBlocks.CRUSHED_DEEPSLATE.get(),
-            ExNihiloBlocks.CRUSHED_DIORITE.get(),
-            ExNihiloBlocks.CRUSHED_DRIPSTONE.get(),
-            ExNihiloBlocks.CRUSHED_END_STONE.get(),
-            ExNihiloBlocks.CRUSHED_GRANITE.get(),
-            ExNihiloBlocks.CRUSHED_NETHERRACK.get(),
-            ExNihiloBlocks.CRUSHED_TUFF.get(),
-            ExNihiloBlocks.DUST.get(),
-            ExNihiloBlocks.CRUCIBLE_UNFIRED.get());
+            EXNBlocks.CRUSHED_ANDESITE.block(),
+            EXNBlocks.CRUSHED_BASALT.block(),
+            EXNBlocks.CRUSHED_BLACKSTONE.block(),
+            EXNBlocks.CRUSHED_CALCITE.block(),
+            EXNBlocks.CRUSHED_DEEPSLATE.block(),
+            EXNBlocks.CRUSHED_DIORITE.block(),
+            EXNBlocks.CRUSHED_DRIPSTONE.block(),
+            EXNBlocks.CRUSHED_END_STONE.block(),
+            EXNBlocks.CRUSHED_GRANITE.block(),
+            EXNBlocks.CRUSHED_NETHERRACK.block(),
+            EXNBlocks.CRUSHED_TUFF.block(),
+            EXNBlocks.DUST.block(),
+            EXNBlocks.UNFIRED_CRUCIBLE.block());
   }
 
   @Nonnull

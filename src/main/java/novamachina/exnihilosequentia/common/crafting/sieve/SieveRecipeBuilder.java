@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.common.crafting.ExNihiloFinishedRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 
 public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilder> {
 
@@ -13,7 +13,7 @@ public class SieveRecipeBuilder extends ExNihiloFinishedRecipe<SieveRecipeBuilde
 
   private SieveRecipeBuilder() throws NullPointerException {
     //noinspection ConstantConditions
-    super(ExNihiloSerializers.SIEVE_RECIPE_SERIALIZER.get());
+    super(EXNRecipeSerializers.SIEVE_RECIPE_SERIALIZER);
 
     addWriter(jsonObject -> jsonObject.add("rolls", meshArray));
   }

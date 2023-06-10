@@ -36,12 +36,14 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
     if (!player.getItemInHand(handIn).isEmpty()) {
 
       @Nonnull final ItemStack stack = player.getItemInHand(handIn);
-      @Nonnull final List<Supplier<AbstractBarrelMode>> modes = BarrelModeRegistry.getModes(
-          BarrelModeRegistry.TriggerType.ITEM);
+      @Nonnull
+      final List<Supplier<AbstractBarrelMode>> modes =
+          BarrelModeRegistry.getModes(BarrelModeRegistry.TriggerType.ITEM);
       for (Supplier<AbstractBarrelMode> mode : modes) {
         if (mode.get().isTriggerItem(stack)) {
           barrelTile.setMode(mode.get());
-          barrelTile.getMode()
+          barrelTile
+              .getMode()
               .onBlockActivated(barrelTile, player, handIn, fluidHandler, itemHandler);
           return InteractionResult.SUCCESS;
         }
@@ -89,13 +91,14 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public ItemStack handleInsert(@Nonnull final AbstractBarrelEntity barrelTile,
+  public ItemStack handleInsert(
+      @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemStack stack,
       final boolean simulate) {
     if (ExNihiloRegistries.COMPOST_REGISTRY.containsSolid(stack.getItem())) {
       barrelTile.setMode(ExNihiloConstants.BarrelModes.COMPOST);
-      @Nonnull final ItemStack returnStack = barrelTile.getMode()
-          .handleInsert(barrelTile, stack, simulate);
+      @Nonnull
+      final ItemStack returnStack = barrelTile.getMode().handleInsert(barrelTile, stack, simulate);
       if (simulate) {
         barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
       }

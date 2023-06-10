@@ -9,17 +9,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 
-public class SieveRecipeSerializer extends ExNihiloRecipeSerializer<SieveRecipe> {
-
-  @Override
-  public ItemStack getIcon() {
-    return new ItemStack(ExNihiloBlocks.SIEVE_OAK.get());
-  }
+public class SieveRecipeSerializer extends NovaRecipeSerializer<SieveRecipe> {
 
   @Override
   public SieveRecipe fromNetwork(@Nonnull final ResourceLocation recipeId,

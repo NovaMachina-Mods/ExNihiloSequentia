@@ -1,15 +1,16 @@
 package novamachina.exnihilosequentia.datagen.client;
 
 import net.minecraft.data.DataGenerator;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
-import novamachina.exnihilosequentia.common.item.mesh.MeshType;
-import novamachina.exnihilosequentia.common.item.ore.Ore;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Blocks;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Fluids;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Items;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Tooltips;
 import novamachina.exnihilosequentia.datagen.api.datagen.AbstractLangGenerator;
+import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.novacore.world.item.ItemDefinition;
+import novamachina.novacore.world.level.block.BlockDefinition;
 
 public class ExNihiloLangGenerator extends AbstractLangGenerator {
 
@@ -53,10 +54,10 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
 
   private void addMisc() {
     // Fluids
-    addFluid(Fluids.WITCH_WATER, "Witch Water");
-    addFluid(Fluids.SEA_WATER, "Sea Water");
-    addFluid(Fluids.WITCH_WATER_FLOW, "Flowing Witch Water");
-    addFluid(Fluids.SEA_WATER_FLOW, "Flowing Sea Water");
+    addFluidName(Fluids.WITCH_WATER, "Witch Water");
+    addFluidName(Fluids.SEA_WATER, "Sea Water");
+    addFluidName(Fluids.WITCH_WATER_FLOW, "Flowing Witch Water");
+    addFluidName(Fluids.SEA_WATER_FLOW, "Flowing Sea Water");
     // Tooltips
     add(Tooltips.BEE, "Add to a barrel of witch water to spawn a Bee");
     add(Tooltips.BLAZE, "Add to a barrel of lava to spawn a Blaze");
@@ -78,31 +79,14 @@ public class ExNihiloLangGenerator extends AbstractLangGenerator {
   }
 
   private void addItem() {
-    // Ores
-    // TODO
-    for (Ore ore : ExNihiloItems.ORES) {
-      addOreAutoName(ore);
-    }
-    // Meshes
-    for (MeshType mesh : MeshType.values()) {
-      addMeshAutoName(mesh.getMeshName());
-    }
-    // Dolls
-    addItem(Items.CRAFTING_DOLL, "Porcelain Doll");
-    addItem(Items.BEE_DOLL, "Buzzing Doll");
-    addItem(Items.BLAZE_DOLL, "Blazing Doll");
-    addItem(Items.ENDERMAN_DOLL, "Creeping Doll");
-    addItem(Items.GUARDIAN_DOLL, "Protecting Doll");
-    addItem(Items.SHULKER_DOLL, "Floating Doll");
-    // Resources
-    for (String name : Items.resourceList) {
-      addItemAutoName(name);
+    for (ItemDefinition<? extends Item> definition : EXNItems.ITEMS.getRegistry()) {
+      addItemName(definition);
     }
   }
 
   private void addBlock() {
-    for (int i = 0; i < Blocks.blocksList.size(); i++) {
-      addBlockAutoName(Blocks.blocksList.get(i));
+    for (BlockDefinition<? extends Block> definition : EXNBlocks.getDefinitions()) {
+      addBlockName(definition);
     }
   }
 }

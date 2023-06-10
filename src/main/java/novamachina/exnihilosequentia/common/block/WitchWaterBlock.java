@@ -31,13 +31,13 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
+import novamachina.exnihilosequentia.world.level.material.EXNFluids;
 
 public class WitchWaterBlock extends LiquidBlock {
 
   public WitchWaterBlock() {
     super(
-        ExNihiloFluids.WITCH_WATER,
+        () -> EXNFluids.WITCH_WATER.getStillFluid(),
         BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable());
   }
 

@@ -14,25 +14,28 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.blockentity.barrel.WoodBarrelEntity;
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 
 public class WoodBarrelBlock extends BlockBarrel implements EntityBlock {
 
   public WoodBarrelBlock() {
-    super(new BlockBuilder().properties(
-        BlockBehaviour.Properties.of(Material.WOOD).strength(0.75F).sound(SoundType.WOOD).noOcclusion()));
+    super(
+        BlockBehaviour.Properties.of(Material.WOOD)
+            .strength(0.75F)
+            .sound(SoundType.WOOD)
+            .noOcclusion());
   }
 
   @Nullable
   @Override
   public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-    return new WoodBarrelEntity(pos, state);
+    return new WoodBarrelEntity(EXNBlockEntityTypes.WOODEN_BARREL_ENTITY.getType(), pos, state);
   }
 
   @Nullable
   @Override
-  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level,
-      @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+      @Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockEntityType<T> type) {
     if (!level.isClientSide) {
       return (level1, blockPos, blockState, t) -> {
         if (t instanceof WoodBarrelEntity tile) {

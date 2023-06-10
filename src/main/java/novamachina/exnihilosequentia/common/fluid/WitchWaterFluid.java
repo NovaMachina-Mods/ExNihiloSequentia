@@ -5,19 +5,18 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
-import novamachina.exnihilosequentia.common.init.ExNihiloBlocks;
-import novamachina.exnihilosequentia.common.init.ExNihiloFluidTypes;
-import novamachina.exnihilosequentia.common.init.ExNihiloFluids;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.world.level.material.EXNFluids;
 
 public abstract class WitchWaterFluid extends ForgeFlowingFluid {
 
   @Nonnull
   public static final ForgeFlowingFluid.Properties WITCH_WATER_PROPS =
-      new ForgeFlowingFluid.Properties(ExNihiloFluidTypes.WITCH_WATER_FLUID_TYPE,
-          ExNihiloFluids.WITCH_WATER, ExNihiloFluids.WITCH_WATER_FLOW)
-          .bucket(ExNihiloItems.WITCH_WATER_BUCKET)
-          .block(ExNihiloBlocks.WITCH_WATER);
+      new ForgeFlowingFluid.Properties(
+              () -> EXNFluids.WITCH_WATER.getFluidType(),
+              () -> EXNFluids.WITCH_WATER.getStillFluid(),
+              () -> EXNFluids.WITCH_WATER.getFlowingFluid())
+          .bucket(() -> EXNFluids.WITCH_WATER.getBucket().asItem())
+          .block(() -> EXNFluids.WITCH_WATER.getBlock().block());
 
   protected WitchWaterFluid(@Nonnull final Properties properties) {
     super(properties);

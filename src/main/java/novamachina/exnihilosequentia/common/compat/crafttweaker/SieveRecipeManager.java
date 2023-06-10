@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenSieveRecipe;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
@@ -33,6 +33,6 @@ public class SieveRecipeManager implements IRecipeManager {
  @Override
  @Nonnull
  public RecipeType<SieveRecipe> getRecipeType() {
-   return ExNihiloRecipeTypes.SIEVE_RECIPE_TYPE.get();
+   return EXNRecipeTypes.SIEVE_RECIPE_TYPE;
  }
 }

@@ -16,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEntity;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
@@ -40,12 +39,7 @@ public class CompostBarrelMode extends AbstractBarrelMode {
       spawnParticle(barrelTile);
       if (currentProgress >= Config.getSecondsToCompost() * 20) {
         currentProgress = 0;
-        barrelTile
-            .getInventory()
-            .setStackInSlot(
-                0,
-                new ItemStack(
-                    ForgeRegistries.BLOCKS.getValue(ForgeRegistries.BLOCKS.getKey(Blocks.DIRT))));
+        barrelTile.getInventory().setStackInSlot(0, new ItemStack(Blocks.DIRT));
         barrelTile.removeSolid(barrelTile.getSolidAmount());
         barrelTile.setMode(ExNihiloConstants.BarrelModes.BLOCK);
       }

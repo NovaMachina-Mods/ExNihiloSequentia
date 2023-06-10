@@ -2,6 +2,8 @@ package novamachina.exnihilosequentia.common.blockentity.barrel;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;

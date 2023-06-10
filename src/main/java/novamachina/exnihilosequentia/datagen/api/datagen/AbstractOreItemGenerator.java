@@ -9,10 +9,10 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.item.OreItem;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.novacore.world.item.ItemDefinition;
 
 public abstract class AbstractOreItemGenerator extends ItemModelProvider {
 
@@ -28,9 +28,9 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
   }
 
   protected void registerRaw(@Nonnull final Ore ore) {
-    Either<RegistryObject<OreItem>, Item> rawEither = ore.getRawOreItem();
+    Either<ItemDefinition<OreItem>, Item> rawEither = ore.getRawOreItem();
     if (rawEither.left().isPresent()) {
-      @Nullable final Item rawRegistryObject = rawEither.left().get().get();
+      @Nullable final Item rawRegistryObject = rawEither.left().get().asItem();
       @Nullable
       final ResourceLocation rawResourceLocation = ForgeRegistries.ITEMS.getKey(rawRegistryObject);
       if (rawResourceLocation == null) {
@@ -45,9 +45,9 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
   }
 
   protected void registerIngot(@Nonnull final Ore ore) {
-    Either<RegistryObject<OreItem>, Item> ingotEither = ore.getIngotItem();
+    Either<ItemDefinition<OreItem>, Item> ingotEither = ore.getIngotItem();
     if (ingotEither.left().isPresent()) {
-      @Nullable final Item ingotItem = ingotEither.left().get().get();
+      @Nullable final Item ingotItem = ingotEither.left().get().asItem();
       final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(ingotItem);
       singleTexture(
           resourceLocation.getPath(),
@@ -76,9 +76,9 @@ public abstract class AbstractOreItemGenerator extends ItemModelProvider {
   }
 
   protected void registerNugget(@Nonnull final Ore ore) {
-    Either<RegistryObject<OreItem>, Item> nuggetEither = ore.getNuggetItem();
+    Either<ItemDefinition<OreItem>, Item> nuggetEither = ore.getNuggetItem();
     if (nuggetEither.left().isPresent()) {
-      @Nullable final Item nuggetItem = nuggetEither.left().get().get();
+      @Nullable final Item nuggetItem = nuggetEither.left().get().asItem();
       final ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(nuggetItem);
       singleTexture(
           resourceLocation.getPath(),

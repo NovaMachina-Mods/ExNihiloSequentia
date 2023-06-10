@@ -11,17 +11,17 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
-import novamachina.exnihilosequentia.common.init.ExNihiloItems;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
+import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.novacore.world.item.ItemDefinition;
 
-public class CrookBaseItem extends DiggerItem {
+public class CrookItem extends DiggerItem {
 
   @Nonnull
   private static final Set<Material> effectiveMaterialsOn = Sets.newHashSet(Material.LEAVES);
 
-  public CrookBaseItem(@Nonnull final Tier tier, final int maxDamage) {
+  public CrookItem(@Nonnull final Tier tier, final int maxDamage) {
     super(0.5F, 0.5F, tier, ExNihiloTags.MINEABLE_WITH_CROOK,
         new Item.Properties().defaultDurability(maxDamage)
             .tab(ExNihiloInitialization.ITEM_GROUP));
@@ -37,8 +37,8 @@ public class CrookBaseItem extends DiggerItem {
   @Override
   public int getBurnTime(@Nonnull final ItemStack itemStack,
       @Nullable final RecipeType<?> recipeType) {
-    @Nullable final RegistryObject<CrookBaseItem> woodRegistryObject = ExNihiloItems.CROOK_WOOD;
-    if (woodRegistryObject != null && itemStack.getItem() == woodRegistryObject.get()) {
+    @Nullable final ItemDefinition<CrookItem> woodRegistryObject = EXNItems.CROOK_WOOD;
+    if (itemStack.getItem() == woodRegistryObject.asItem()) {
       return 200;
     } else {
       return 0;

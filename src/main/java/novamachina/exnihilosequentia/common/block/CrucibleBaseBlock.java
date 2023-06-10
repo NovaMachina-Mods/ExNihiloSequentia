@@ -12,20 +12,20 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import novamachina.exnihilosequentia.common.blockentity.crucible.BaseCrucibleEntity;
-import novamachina.exnihilosequentia.common.builder.BlockBuilder;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
 import org.jetbrains.annotations.NotNull;
 
-public class CrucibleBaseBlock extends BaseBlock implements ITOPInfoProvider {
+public class CrucibleBaseBlock extends Block implements ITOPInfoProvider {
 
-  public CrucibleBaseBlock(@Nonnull final BlockBuilder builder) {
-    super(builder);
+  public CrucibleBaseBlock(Properties properties) {
+    super(properties);
   }
 
   @Override

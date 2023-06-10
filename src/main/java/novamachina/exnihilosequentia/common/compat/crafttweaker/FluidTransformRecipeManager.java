@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenFluidTransformRecipe;
 import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.openzen.zencode.java.ZenCodeType;
 
@@ -32,6 +32,6 @@ public class FluidTransformRecipeManager implements IRecipeManager {
  @Override
  @Nonnull
  public RecipeType<FluidTransformRecipe> getRecipeType() {
-   return ExNihiloRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE.get();
+   return EXNRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE;
  }
 }

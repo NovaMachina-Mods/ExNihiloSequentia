@@ -5,12 +5,15 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
-import novamachina.exnihilosequentia.common.crafting.ExNihiloRecipeSerializer;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
-import novamachina.exnihilosequentia.common.init.ExNihiloRecipeTypes;
-import novamachina.exnihilosequentia.common.init.ExNihiloSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
+import org.jetbrains.annotations.NotNull;
 
 public class CrucibleRecipe extends SingleItemSerializableRecipe {
 
@@ -24,7 +27,7 @@ public class CrucibleRecipe extends SingleItemSerializableRecipe {
       final int amount,
       @Nonnull final FluidStack fluid,
       @Nonnull final CrucibleTypeEnum crucibleType) {
-    super(null, input, ExNihiloRecipeTypes.CRUCIBLE_RECIPE_TYPE.get(), id);
+    super(null, input, EXNRecipeTypes.CRUCIBLE_RECIPE_TYPE, id);
     this.amount = amount;
     this.resultFluid = fluid;
     this.crucibleType = crucibleType;
@@ -53,6 +56,11 @@ public class CrucibleRecipe extends SingleItemSerializableRecipe {
     return ItemStack.EMPTY;
   }
 
+  @Override
+  public RecipeSerializer<?> getSerializer() {
+    return EXNRecipeSerializers.CRUCIBLE_RECIPE_SERIALIZER;
+  }
+
   @Nonnull
   public FluidStack getResultFluid() {
     return resultFluid;
@@ -63,8 +71,8 @@ public class CrucibleRecipe extends SingleItemSerializableRecipe {
   }
 
   @Override
-  @Nullable
-  protected ExNihiloRecipeSerializer<CrucibleRecipe> getENSerializer() {
-    return ExNihiloSerializers.CRUCIBLE_RECIPE_SERIALIZER.get();
+  @NotNull
+  public ItemStack getToastSymbol() {
+    return EXNBlocks.FIRED_CRUCIBLE.itemStack();
   }
 }
