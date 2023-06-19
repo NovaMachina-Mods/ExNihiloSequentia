@@ -253,7 +253,7 @@ dependencies {
 //        runtimeOnly fg.deobf("curse.maven:jade-324717:${property("jadeId")}")
 
     implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${property("minecraftVersion")}:${property("crafttweakerVersion")}")
-    annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10'
+    annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.15'
     annotationProcessor "net.minecraftforge:forge:${property("minecraftVersion")}-${property("forgeVersion")}"
     annotationProcessor "com.blamejared.crafttweaker:CraftTweaker-forge-${property("minecraftVersion")}:${property("crafttweakerVersion")}"
 
