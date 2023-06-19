@@ -48,6 +48,9 @@ if(project.tasks.findByName("wrapper") == null) {
     }
 }
 
+String minecraftRelease = getMinecraftRelease()
+String forgeMajor = getForgeMajor()
+
 ext {
     modsTomlProperties = [
             "version" : "${property("modVersion")}",
@@ -66,9 +69,6 @@ String basicVersion = "${property("modVersion")}." + (System.getenv("GITHUB_RUN_
 version = "${property("minecraftVersion")}-${basicVersion}" + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
 group = "novamachina.${project.name.toLowerCase()}"
 archivesBaseName = property("artifactBasename")
-
-String minecraftRelease = getMinecraftRelease()
-String forgeMajor = getForgeMajor()
 
 defaultTasks 'build'
 
