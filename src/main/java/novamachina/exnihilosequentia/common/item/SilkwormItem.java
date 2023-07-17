@@ -23,8 +23,7 @@ public class SilkwormItem extends Item {
       if (!context.getPlayer().isCreative()) {
         context.getItemInHand().shrink(1);
       }
-      InfestingLeavesBlock.normalToInfesting(context.getLevel(),
-          context.getClickedPos());
+      InfestingLeavesBlock.normalToInfesting(context.getLevel(), context.getClickedPos());
       return InteractionResult.SUCCESS;
     }
     return InteractionResult.FAIL;

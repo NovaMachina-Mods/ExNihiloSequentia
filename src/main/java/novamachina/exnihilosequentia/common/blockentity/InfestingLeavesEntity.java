@@ -23,7 +23,9 @@ public class InfestingLeavesEntity extends BlockEntity {
   private int spreadCounter = 0;
 
   public InfestingLeavesEntity(
-      BlockEntityType<? extends InfestingLeavesEntity> blockEntityType, BlockPos pos, BlockState state) {
+      BlockEntityType<? extends InfestingLeavesEntity> blockEntityType,
+      BlockPos pos,
+      BlockState state) {
     super(blockEntityType, pos, state);
   }
 

@@ -8,11 +8,12 @@ import net.minecraftforge.registries.RegistryObject;
 import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
 import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.novacore.registries.AbstractRegistry;
 
 public class ExNihiloLootModifiers {
   private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS =
-      DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+      DeferredRegister.create(
+          ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS,
+          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
 
   public static final RegistryObject<Codec<? extends UseHammerModifier>> hammerModifier =
       LOOT_MODIFIERS.register("use_hammer", UseHammerModifier.CODEC);

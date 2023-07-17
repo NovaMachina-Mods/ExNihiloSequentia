@@ -15,35 +15,39 @@ import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
- public class BarrelComponentProvider implements IBlockComponentProvider,
-     IServerDataProvider<BlockEntity> {
+public class BarrelComponentProvider
+    implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
 
   @Override
-  public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor,
-      IPluginConfig iPluginConfig) {
+  public void appendTooltip(
+      ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
     CompoundTag tag = blockAccessor.getServerData().getCompound("Barrel");
     int count = tag.getInt("count");
-    for(int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
       iTooltip.add(Component.literal(tag.getString("info" + i)));
     }
   }
 
-   @Override
-   public ResourceLocation getUid() {
-     return new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "barrel");
-   }
+  @Override
+  public ResourceLocation getUid() {
+    return new ResourceLocation(ModIds.EX_NIHILO_SEQUENTIA, "barrel");
+  }
 
-   @Override
-   public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level,
-       BlockEntity blockEntity, boolean b) {
-    if(blockEntity instanceof AbstractBarrelEntity barrelEntity) {
+  @Override
+  public void appendServerData(
+      CompoundTag compoundTag,
+      ServerPlayer serverPlayer,
+      Level level,
+      BlockEntity blockEntity,
+      boolean b) {
+    if (blockEntity instanceof AbstractBarrelEntity barrelEntity) {
       CompoundTag compound = new CompoundTag();
       List<Component> info = barrelEntity.getWailaInfo();
       compound.putInt("count", info.size());
-      for(int i = 0; i < info.size(); i++) {
+      for (int i = 0; i < info.size(); i++) {
         compound.putString("info" + i, info.get(i).getString());
       }
       compoundTag.put("Barrel", compound);
     }
-   }
- }
+  }
+}

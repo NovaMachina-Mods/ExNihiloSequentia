@@ -13,8 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.block.BlockBarrel;
 import novamachina.exnihilosequentia.common.blockentity.barrel.StoneBarrelEntity;
-import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import org.jetbrains.annotations.Nullable;
 
 public class NetherBarrelBlock extends BlockBarrel implements EntityBlock {

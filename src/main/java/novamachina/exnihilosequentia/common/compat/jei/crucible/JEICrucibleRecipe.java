@@ -12,9 +12,8 @@ public class JEICrucibleRecipe {
   private List<ItemStack> input;
   private FluidStack resultFluid;
 
-  public JEICrucibleRecipe(int amount,
-      CrucibleTypeEnum crucibleType, List<ItemStack> input,
-      FluidStack resultFluid) {
+  public JEICrucibleRecipe(
+      int amount, CrucibleTypeEnum crucibleType, List<ItemStack> input, FluidStack resultFluid) {
     this.amount = amount;
     this.crucibleType = crucibleType;
     this.input = input;

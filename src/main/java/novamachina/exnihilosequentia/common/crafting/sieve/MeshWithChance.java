@@ -9,13 +9,10 @@ import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 
 public class MeshWithChance {
 
-  @Nonnull
-  private static final String CHANCE_KEY = "chance";
-  @Nonnull
-  private static final String MESH_KEY = "mesh";
+  @Nonnull private static final String CHANCE_KEY = "chance";
+  @Nonnull private static final String MESH_KEY = "mesh";
   private final float chance;
-  @Nonnull
-  private final MeshType mesh;
+  @Nonnull private final MeshType mesh;
 
   public MeshWithChance(@Nonnull final MeshType mesh, final float chance) {
     this.mesh = mesh;
@@ -26,12 +23,14 @@ public class MeshWithChance {
   public static MeshWithChance deserialize(@Nonnull final JsonElement json) {
     if (json.isJsonObject() && json.getAsJsonObject().has(MESH_KEY)) {
       final float chance = GsonHelper.getAsFloat(json.getAsJsonObject(), CHANCE_KEY, 1.0F);
-      @Nonnull final MeshType mesh = MeshType.valueOf(
-          GsonHelper.getAsString(json.getAsJsonObject(), MESH_KEY).toUpperCase());
+      @Nonnull
+      final MeshType mesh =
+          MeshType.valueOf(GsonHelper.getAsString(json.getAsJsonObject(), MESH_KEY).toUpperCase());
       return new MeshWithChance(mesh, chance);
     } else {
-      @Nonnull final MeshType mesh = MeshType.valueOf(
-          GsonHelper.getAsString(json.getAsJsonObject(), MESH_KEY).toUpperCase());
+      @Nonnull
+      final MeshType mesh =
+          MeshType.valueOf(GsonHelper.getAsString(json.getAsJsonObject(), MESH_KEY).toUpperCase());
       return new MeshWithChance(mesh, 1.0F);
     }
   }

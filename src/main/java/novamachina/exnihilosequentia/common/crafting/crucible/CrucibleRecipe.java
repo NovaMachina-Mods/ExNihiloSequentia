@@ -8,11 +8,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.blockentity.crucible.CrucibleTypeEnum;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.SingleItemSerializableRecipe;
-import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public class CrucibleRecipe extends SingleItemSerializableRecipe {

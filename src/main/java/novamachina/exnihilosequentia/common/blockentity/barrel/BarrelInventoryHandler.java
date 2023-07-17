@@ -7,8 +7,7 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class BarrelInventoryHandler extends ItemStackHandler {
 
-  @Nonnull
-  private final AbstractBarrelEntity barrel;
+  @Nonnull private final AbstractBarrelEntity barrel;
 
   public BarrelInventoryHandler(@Nonnull final AbstractBarrelEntity abstractBarrelEntity) {
     this.barrel = abstractBarrelEntity;

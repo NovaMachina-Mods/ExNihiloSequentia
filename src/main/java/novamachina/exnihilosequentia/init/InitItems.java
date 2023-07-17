@@ -4,8 +4,8 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.world.level.block.BlockDefinition;
 import novamachina.novacore.world.item.ItemDefinition;
+import novamachina.novacore.world.level.block.BlockDefinition;
 
 public class InitItems {
   private InitItems() {}

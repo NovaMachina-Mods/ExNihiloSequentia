@@ -2,16 +2,13 @@ package novamachina.exnihilosequentia.common.blockentity.barrel;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class BarrelFluidHandler extends FluidTank {
 
-  @Nullable
-  private AbstractBarrelEntity barrel;
+  @Nullable private AbstractBarrelEntity barrel;
 
   public BarrelFluidHandler(@Nonnull final AbstractBarrelEntity barrelTile) {
     super(AbstractBarrelEntity.MAX_FLUID_AMOUNT);
@@ -30,9 +27,10 @@ public class BarrelFluidHandler extends FluidTank {
 
     int amount = super.fill(resource, action);
 
-    if (amount > 0 && this.fluid != FluidStack.EMPTY && (this.barrel.getMode().getModeName()
-        .equals(ExNihiloConstants.BarrelModes.EMPTY) || this.barrel.getMode()
-        .getModeName().equals(ExNihiloConstants.BarrelModes.FLUID))) {
+    if (amount > 0
+        && this.fluid != FluidStack.EMPTY
+        && (this.barrel.getMode().getModeName().equals(ExNihiloConstants.BarrelModes.EMPTY)
+            || this.barrel.getMode().getModeName().equals(ExNihiloConstants.BarrelModes.FLUID))) {
       this.barrel.setMode(ExNihiloConstants.BarrelModes.FLUID);
     }
     return amount;

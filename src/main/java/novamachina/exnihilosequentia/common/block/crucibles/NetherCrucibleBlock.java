@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.block.CrucibleBaseBlock;
 import novamachina.exnihilosequentia.common.blockentity.crucible.FiredCrucibleEntity;
-import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 
 public class NetherCrucibleBlock extends CrucibleBaseBlock implements EntityBlock {
 

@@ -6,8 +6,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraft.tags.FluidTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import novamachina.exnihilosequentia.world.level.material.EXNFluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.world.level.material.EXNFluids;
 
 public class ExNihiloFluidTagsGenerator extends FluidTagsProvider {
 

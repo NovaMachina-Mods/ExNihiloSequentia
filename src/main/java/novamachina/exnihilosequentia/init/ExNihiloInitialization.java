@@ -127,7 +127,7 @@ public class ExNihiloInitialization {
     PacketHandler.registerMessages();
     registerVanillaCompost();
     registerDispenserFluids();
-//    EXNStats.register();
+    //    EXNStats.register();
   }
 
   private static void registerDispenserFluids() {
@@ -213,19 +213,14 @@ public class ExNihiloInitialization {
     ExNihiloRegistries.COMPOST_REGISTRY.setRecipes(
         filterRecipes(recipes, CompostRecipe.class, EXNRecipeTypes.COMPOST_RECIPE_TYPE));
     ExNihiloRegistries.FLUID_BLOCK_REGISTRY.setRecipes(
-        filterRecipes(
-            recipes, FluidItemRecipe.class, EXNRecipeTypes.FLUID_ITEM_RECIPE_TYPE));
+        filterRecipes(recipes, FluidItemRecipe.class, EXNRecipeTypes.FLUID_ITEM_RECIPE_TYPE));
     ExNihiloRegistries.FLUID_ON_TOP_REGISTRY.setRecipes(
-        filterRecipes(
-            recipes, FluidOnTopRecipe.class, EXNRecipeTypes.FLUID_ON_TOP_RECIPE_TYPE));
+        filterRecipes(recipes, FluidOnTopRecipe.class, EXNRecipeTypes.FLUID_ON_TOP_RECIPE_TYPE));
     ExNihiloRegistries.FLUID_TRANSFORM_REGISTRY.setRecipes(
         filterRecipes(
-            recipes,
-            FluidTransformRecipe.class,
-            EXNRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE));
+            recipes, FluidTransformRecipe.class, EXNRecipeTypes.FLUID_TRANSFORM_RECIPE_TYPE));
     ExNihiloRegistries.CRUCIBLE_REGISTRY.setRecipes(
-        filterRecipes(
-            recipes, CrucibleRecipe.class, EXNRecipeTypes.CRUCIBLE_RECIPE_TYPE));
+        filterRecipes(recipes, CrucibleRecipe.class, EXNRecipeTypes.CRUCIBLE_RECIPE_TYPE));
     ExNihiloRegistries.HEAT_REGISTRY.setRecipes(
         filterRecipes(recipes, HeatRecipe.class, EXNRecipeTypes.HEAT_RECIPE_TYPE));
     ExNihiloRegistries.SIEVE_REGISTRY.setRecipes(

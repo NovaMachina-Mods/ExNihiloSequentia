@@ -9,8 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenCrookRecipe;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
@@ -18,21 +18,21 @@ import org.openzen.zencode.java.ZenCodeType;
 @SuppressWarnings("unused")
 public class CrookRecipeManager implements IRecipeManager {
 
- @ZenCodeType.Method
- @Nonnull
- public ZenCrookRecipe create(@Nonnull String recipeId) {
-   recipeId = fixRecipeName(recipeId);
-   @Nonnull final ResourceLocation resourceLocation = new ResourceLocation(
-       ExNihiloConstants.ModIds.CRAFT_TWEAKER,
-       recipeId);
-   @Nonnull final ZenCrookRecipe recipe = ZenCrookRecipe.builder(resourceLocation);
-   CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
-   return recipe;
- }
+  @ZenCodeType.Method
+  @Nonnull
+  public ZenCrookRecipe create(@Nonnull String recipeId) {
+    recipeId = fixRecipeName(recipeId);
+    @Nonnull
+    final ResourceLocation resourceLocation =
+        new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
+    @Nonnull final ZenCrookRecipe recipe = ZenCrookRecipe.builder(resourceLocation);
+    CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
+    return recipe;
+  }
 
- @Override
- @Nonnull
- public RecipeType<CrookRecipe> getRecipeType() {
-   return EXNRecipeTypes.CROOK_RECIPE_TYPE;
- }
+  @Override
+  @Nonnull
+  public RecipeType<CrookRecipe> getRecipeType() {
+    return EXNRecipeTypes.CROOK_RECIPE_TYPE;
+  }
 }

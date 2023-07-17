@@ -9,8 +9,8 @@ import novamachina.exnihilosequentia.common.utility.Config;
 
 public class WoodBarrelEntity extends AbstractBarrelEntity {
 
-  public WoodBarrelEntity(BlockEntityType<? extends AbstractBarrelEntity> tile, BlockPos pos,
-      BlockState state) {
+  public WoodBarrelEntity(
+      BlockEntityType<? extends AbstractBarrelEntity> tile, BlockPos pos, BlockState state) {
     super(tile, pos, state);
   }
 

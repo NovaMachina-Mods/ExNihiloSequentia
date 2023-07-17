@@ -4,10 +4,10 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.datagen.api.datagen.AbstractOreItemGenerator;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 
 public class ExNihiloOreItemGenerator extends AbstractOreItemGenerator {
 

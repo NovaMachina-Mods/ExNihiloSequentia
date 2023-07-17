@@ -7,8 +7,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import org.jetbrains.annotations.Nullable;
 
 public class ExNihiloBlockTagsGenerator extends BlockTagsProvider {

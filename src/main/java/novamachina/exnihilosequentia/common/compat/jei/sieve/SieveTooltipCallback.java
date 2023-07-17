@@ -17,7 +17,7 @@ import novamachina.exnihilosequentia.common.item.MeshItem;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
- public class SieveTooltipCallback implements IRecipeSlotTooltipCallback {
+public class SieveTooltipCallback implements IRecipeSlotTooltipCallback {
 
   private final JEISieveRecipe recipe;
   private final boolean isWaterlogged;
@@ -53,4 +53,4 @@ import novamachina.exnihilosequentia.common.utility.StringUtils;
       }
     }
   }
- }
+}

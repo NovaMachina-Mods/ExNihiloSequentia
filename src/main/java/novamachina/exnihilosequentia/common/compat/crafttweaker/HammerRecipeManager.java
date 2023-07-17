@@ -9,8 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenHammerRecipe;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
@@ -18,20 +18,21 @@ import org.openzen.zencode.java.ZenCodeType;
 @SuppressWarnings("unused")
 public class HammerRecipeManager implements IRecipeManager {
 
- @ZenCodeType.Method
- @Nonnull
- public ZenHammerRecipe create(@Nonnull String recipeId) {
-   recipeId = fixRecipeName(recipeId);
-   @Nonnull final ResourceLocation resourceLocation = new ResourceLocation(
-       ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
-   @Nonnull final ZenHammerRecipe recipe = ZenHammerRecipe.builder(resourceLocation);
-   CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
-   return recipe;
- }
+  @ZenCodeType.Method
+  @Nonnull
+  public ZenHammerRecipe create(@Nonnull String recipeId) {
+    recipeId = fixRecipeName(recipeId);
+    @Nonnull
+    final ResourceLocation resourceLocation =
+        new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
+    @Nonnull final ZenHammerRecipe recipe = ZenHammerRecipe.builder(resourceLocation);
+    CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
+    return recipe;
+  }
 
- @Override
- @Nonnull
- public RecipeType<HammerRecipe> getRecipeType() {
-   return EXNRecipeTypes.HAMMER_RECIPE_TYPE;
- }
+  @Override
+  @Nonnull
+  public RecipeType<HammerRecipe> getRecipeType() {
+    return EXNRecipeTypes.HAMMER_RECIPE_TYPE;
+  }
 }

@@ -14,6 +14,7 @@ public class EXNSoundEvents {
   public static Map<ResourceLocation, SoundEvent> getDefinitions() {
     return SOUND_EVENTS;
   }
+
   public static final SoundEvent PEBBLE_THROW =
       register(
           ExNihiloSequentia.makeId("pebble_throw"),

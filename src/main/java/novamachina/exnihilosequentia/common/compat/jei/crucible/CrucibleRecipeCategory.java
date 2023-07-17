@@ -17,11 +17,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- public class CrucibleRecipeCategory implements IRecipeCategory<JEICrucibleRecipe> {
+public class CrucibleRecipeCategory implements IRecipeCategory<JEICrucibleRecipe> {
 
-   @Nonnull
-   public static final ResourceLocation UID =
-       new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucible");
+  @Nonnull
+  public static final ResourceLocation UID =
+      new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "crucible");
 
   @Nonnull
   private static final ResourceLocation texture =
@@ -50,12 +50,12 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
     return null;
   }
 
-   @Override
-   public RecipeType<JEICrucibleRecipe> getRecipeType() {
-     return new RecipeType<>(this.uid, JEICrucibleRecipe.class);
-   }
+  @Override
+  public RecipeType<JEICrucibleRecipe> getRecipeType() {
+    return new RecipeType<>(this.uid, JEICrucibleRecipe.class);
+  }
 
-   @Nonnull
+  @Nonnull
   @Override
   public Component getTitle() {
     if (uid.equals(
@@ -67,8 +67,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
   }
 
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, JEICrucibleRecipe recipe, IFocusGroup
- focuses) {
+  public void setRecipe(
+      IRecipeLayoutBuilder builder, JEICrucibleRecipe recipe, IFocusGroup focuses) {
     IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 3, 21);
     if (recipe.getResultFluid().getAmount() != 1000) {
       recipe.getResultFluid().setAmount(1000);
@@ -91,4 +91,4 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
       }
     }
   }
- }
+}

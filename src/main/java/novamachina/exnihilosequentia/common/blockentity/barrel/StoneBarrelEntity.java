@@ -8,8 +8,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class StoneBarrelEntity extends AbstractBarrelEntity {
 
-  public StoneBarrelEntity(BlockEntityType<? extends AbstractBarrelEntity> tile, BlockPos pos,
-      BlockState state) {
+  public StoneBarrelEntity(
+      BlockEntityType<? extends AbstractBarrelEntity> tile, BlockPos pos, BlockState state) {
     super(tile, pos, state);
   }
 

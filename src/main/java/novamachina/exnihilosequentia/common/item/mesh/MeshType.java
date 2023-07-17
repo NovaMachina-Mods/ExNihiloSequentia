@@ -5,7 +5,13 @@ import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
 public enum MeshType implements StringRepresentable {
-  NONE(0), STRING(1), FLINT(2), IRON(3), DIAMOND(4), EMERALD(5), NETHERITE(6);
+  NONE(0),
+  STRING(1),
+  FLINT(2),
+  IRON(3),
+  DIAMOND(4),
+  EMERALD(5),
+  NETHERITE(6);
 
   private final int level;
 

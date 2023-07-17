@@ -7,12 +7,12 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
-import novamachina.exnihilosequentia.world.item.EXNItems;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.item.CrookItem;
 import novamachina.exnihilosequentia.common.item.HammerItem;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.datagen.api.datagen.AbstractItemTagGenerator;
+import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.ItemDefinition;
 
 public class ExNihiloItemTagsGenerator extends AbstractItemTagGenerator {

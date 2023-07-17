@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import org.jetbrains.annotations.NotNull;
 
- public class DrySieveRecipeCategory extends AbstractSieveRecipeCategory {
+public class DrySieveRecipeCategory extends AbstractSieveRecipeCategory {
 
   @Nonnull
   public static final ResourceLocation UID =
@@ -18,14 +18,14 @@ import org.jetbrains.annotations.NotNull;
     super(guiHelper, false);
   }
 
-   @Override
-   public RecipeType<JEISieveRecipe> getRecipeType() {
-     return new RecipeType<>(UID, JEISieveRecipe.class);
-   }
+  @Override
+  public RecipeType<JEISieveRecipe> getRecipeType() {
+    return new RecipeType<>(UID, JEISieveRecipe.class);
+  }
 
-   @Nonnull
+  @Nonnull
   @Override
   public Component getTitle() {
     return Component.literal("Sieve");
   }
- }
+}

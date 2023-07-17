@@ -24,10 +24,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.blockentity.InfestingLeavesEntity;
 import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
-import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 
 // TODO: Add progressive render
 public class InfestingLeavesBlock extends Block implements EntityBlock, ITOPInfoProvider {
@@ -107,7 +107,8 @@ public class InfestingLeavesBlock extends Block implements EntityBlock, ITOPInfo
   @org.jetbrains.annotations.Nullable
   @Override
   public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-    return new InfestingLeavesEntity(EXNBlockEntityTypes.INFESTING_LEAVES_ENTITY.getType(), pPos, pState);
+    return new InfestingLeavesEntity(
+        EXNBlockEntityTypes.INFESTING_LEAVES_ENTITY.getType(), pPos, pState);
   }
 
   @Nullable

@@ -1,19 +1,19 @@
 package novamachina.exnihilosequentia.common.compat.jei.crook;
 
- import java.util.List;
- import java.util.Optional;
- import java.util.concurrent.atomic.AtomicBoolean;
- import javax.annotation.Nonnull;
- import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
- import mezz.jei.api.gui.ingredient.IRecipeSlotView;
- import mezz.jei.api.ingredients.ITypedIngredient;
- import mezz.jei.api.recipe.RecipeIngredientRole;
- import net.minecraft.network.chat.Component;
- import net.minecraft.world.item.ItemStack;
- import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
- import novamachina.exnihilosequentia.common.utility.StringUtils;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import javax.annotation.Nonnull;
+import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
+import mezz.jei.api.gui.ingredient.IRecipeSlotView;
+import mezz.jei.api.ingredients.ITypedIngredient;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.common.utility.StringUtils;
 
- public class CrookTooltipCallback implements IRecipeSlotTooltipCallback {
+public class CrookTooltipCallback implements IRecipeSlotTooltipCallback {
 
   @Nonnull private final CrookRecipe crookRecipe;
 
@@ -43,4 +43,4 @@ package novamachina.exnihilosequentia.common.compat.jei.crook;
                           String.format("%s", StringUtils.formatPercent(stack.getChance())))));
     }
   }
- }
+}

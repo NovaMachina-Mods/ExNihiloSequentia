@@ -35,15 +35,15 @@ import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe
 import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.world.item.EXNItems;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.item.CrookItem;
 import novamachina.exnihilosequentia.common.item.HammerItem;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import novamachina.novacore.world.level.block.BlockDefinition;
+import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.ItemDefinition;
+import novamachina.novacore.world.level.block.BlockDefinition;
 
 @JeiPlugin
 @SuppressWarnings("unused")
@@ -169,10 +169,7 @@ public class JEIPlugin implements IModPlugin {
     }
 
     List<BlockDefinition<CrucibleBaseBlock>> firedCrucibles =
-        List.of(
-            EXNBlocks.FIRED_CRUCIBLE,
-            EXNBlocks.CRIMSON_CRUCIBLE,
-            EXNBlocks.WARPED_CRUCIBLE);
+        List.of(EXNBlocks.FIRED_CRUCIBLE, EXNBlocks.CRIMSON_CRUCIBLE, EXNBlocks.WARPED_CRUCIBLE);
     for (BlockDefinition<CrucibleBaseBlock> blockDefinition : nonFiredCrucibles) {
       registration.addRecipeCatalyst(
           blockDefinition.itemStack(),

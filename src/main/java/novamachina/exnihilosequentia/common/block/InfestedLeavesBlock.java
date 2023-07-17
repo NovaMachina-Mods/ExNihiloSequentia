@@ -51,7 +51,8 @@ public class InfestedLeavesBlock extends Block implements IForgeShearable, Entit
   @Nullable
   @Override
   public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-    return new InfestedLeavesEntity(EXNBlockEntityTypes. INFESTED_LEAVES_ENTITY.getType(), pos, state);
+    return new InfestedLeavesEntity(
+        EXNBlockEntityTypes.INFESTED_LEAVES_ENTITY.getType(), pos, state);
   }
 
   @Nullable

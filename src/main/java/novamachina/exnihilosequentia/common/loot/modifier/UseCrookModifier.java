@@ -29,10 +29,10 @@ import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
 import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 import org.jetbrains.annotations.NotNull;
 
 public class UseCrookModifier extends LootModifier {

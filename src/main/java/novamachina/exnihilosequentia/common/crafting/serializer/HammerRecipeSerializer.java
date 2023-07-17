@@ -7,19 +7,17 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
-import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 
 public class HammerRecipeSerializer extends NovaRecipeSerializer<HammerRecipe> {
 
   @Override
   @Nonnull
-  public HammerRecipe fromNetwork(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final FriendlyByteBuf buffer) {
+  public HammerRecipe fromNetwork(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
     @Nonnull final Ingredient input = Ingredient.fromNetwork(buffer);
     final int outputCount = buffer.readInt();
     @Nonnull final List<ItemStackWithChance> output = new ArrayList<>(outputCount);
@@ -41,8 +39,8 @@ public class HammerRecipeSerializer extends NovaRecipeSerializer<HammerRecipe> {
 
   @Override
   @Nonnull
-  protected HammerRecipe readFromJson(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final JsonObject json) {
+  protected HammerRecipe readFromJson(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) {
     @Nonnull final Ingredient input = Ingredient.fromJson(json.get("input"));
     @Nonnull final JsonArray results = json.getAsJsonArray("results");
     @Nonnull final List<ItemStackWithChance> output = new ArrayList<>(results.size());

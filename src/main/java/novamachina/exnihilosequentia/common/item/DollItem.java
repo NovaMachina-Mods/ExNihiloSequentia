@@ -80,7 +80,8 @@ public class DollItem extends Item {
 
     if (ForgeRegistries.ENTITY_TYPES.containsKey(spawneeResourceLocation)) {
       @Nullable
-      final EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(spawneeResourceLocation);
+      final EntityType<?> entityType =
+          ForgeRegistries.ENTITY_TYPES.getValue(spawneeResourceLocation);
       if (entityType != null) {
         @Nullable final Entity spawnee = entityType.create(world);
         if (spawnee != null) {

@@ -42,12 +42,12 @@ import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipeBuilder;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipeBuilder;
-import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.common.item.OreItem;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.novacore.world.level.block.BlockDefinition;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.novacore.world.item.ItemDefinition;
+import novamachina.novacore.world.level.block.BlockDefinition;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractRecipeGenerator extends RecipeProvider {
@@ -200,7 +200,9 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     Either<ItemDefinition<OreItem>, Item> ingotEither = ore.getIngotItem();
     @Nullable
     Item ingot =
-        ingotEither.left().isPresent() ? ingotEither.left().get().asItem() : ingotEither.right().get();
+        ingotEither.left().isPresent()
+            ? ingotEither.left().get().asItem()
+            : ingotEither.right().get();
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(raw), ingot, 0.7F, 200)
         .unlockedBy(CHUNK_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(raw))
         .save(consumer, new ResourceLocation(modId, prependRecipePrefix(ore.getIngotId())));
@@ -682,17 +684,17 @@ public abstract class AbstractRecipeGenerator extends RecipeProvider {
     createSeeds(seed, consumer, Blocks.DIRT);
   }
 
-  protected void createSeeds(ItemLike seed, @Nonnull final Consumer<FinishedRecipe> consumer, Block inputBlock) {
+  protected void createSeeds(
+      ItemLike seed, @Nonnull final Consumer<FinishedRecipe> consumer, Block inputBlock) {
     ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed.asItem());
     if (resourceLocation == null) {
       return;
     }
     SieveRecipeBuilder.builder()
-            .input(Ingredient.of(inputBlock))
-            .addResult(seed)
-            .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.05F))
-            .build(consumer, sieveLoc(resourceLocation.getPath()));
-
+        .input(Ingredient.of(inputBlock))
+        .addResult(seed)
+        .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.05F))
+        .build(consumer, sieveLoc(resourceLocation.getPath()));
   }
 
   protected void createWaterSeeds(ItemLike seed, Consumer<FinishedRecipe> consumer) {

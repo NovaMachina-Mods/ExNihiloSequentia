@@ -7,17 +7,16 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.FluidStackUtils;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 
 public class FluidOnTopRecipeSerializer extends NovaRecipeSerializer<FluidOnTopRecipe> {
 
   @Override
   @Nonnull
-  public FluidOnTopRecipe fromNetwork(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final FriendlyByteBuf buffer) {
+  public FluidOnTopRecipe fromNetwork(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
     @Nonnull final FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
     @Nonnull final FluidStack fluidOnTop = FluidStack.readFromPacket(buffer);
     @Nonnull final ItemStack result = buffer.readItem();
@@ -25,8 +24,8 @@ public class FluidOnTopRecipeSerializer extends NovaRecipeSerializer<FluidOnTopR
   }
 
   @Override
-  public void toNetwork(@Nonnull final FriendlyByteBuf buffer,
-      @Nonnull final FluidOnTopRecipe recipe) {
+  public void toNetwork(
+      @Nonnull final FriendlyByteBuf buffer, @Nonnull final FluidOnTopRecipe recipe) {
     recipe.getFluidInTank().writeToPacket(buffer);
     recipe.getFluidOnTop().writeToPacket(buffer);
     buffer.writeItem(recipe.getResultItem());
@@ -34,12 +33,14 @@ public class FluidOnTopRecipeSerializer extends NovaRecipeSerializer<FluidOnTopR
 
   @Override
   @Nonnull
-  protected FluidOnTopRecipe readFromJson(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final JsonObject json) {
-    @Nullable final FluidStack fluidInTank = FluidStackUtils.jsonDeserializeFluidStack(
-        json.get("fluidInTank").getAsJsonObject());
-    @Nullable final FluidStack fluidOnTop = FluidStackUtils.jsonDeserializeFluidStack(
-        json.get("fluidOnTop").getAsJsonObject());
+  protected FluidOnTopRecipe readFromJson(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) {
+    @Nullable
+    final FluidStack fluidInTank =
+        FluidStackUtils.jsonDeserializeFluidStack(json.get("fluidInTank").getAsJsonObject());
+    @Nullable
+    final FluidStack fluidOnTop =
+        FluidStackUtils.jsonDeserializeFluidStack(json.get("fluidOnTop").getAsJsonObject());
     @Nonnull final ItemStack result = readOutput(json.get("result"));
     return new FluidOnTopRecipe(recipeId, fluidInTank, fluidOnTop, result);
   }

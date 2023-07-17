@@ -23,8 +23,8 @@ public class PluginWaila implements IWailaPlugin {
     registrar.registerBlockDataProvider(new BarrelComponentProvider(), AbstractBarrelEntity.class);
     registrar.registerBlockDataProvider(new CrucibleComponentProvider(), BaseCrucibleEntity.class);
     registrar.registerBlockDataProvider(new SieveComponentProvider(), SieveEntity.class);
-    registrar.registerBlockDataProvider(new InfestingLeavesComponentProvider(),
-        InfestingLeavesEntity.class);
+    registrar.registerBlockDataProvider(
+        new InfestingLeavesComponentProvider(), InfestingLeavesEntity.class);
   }
 
   @Override
@@ -32,7 +32,7 @@ public class PluginWaila implements IWailaPlugin {
     registration.registerBlockComponent(new BarrelComponentProvider(), BlockBarrel.class);
     registration.registerBlockComponent(new CrucibleComponentProvider(), CrucibleBaseBlock.class);
     registration.registerBlockComponent(new SieveComponentProvider(), BlockSieve.class);
-    registration.registerBlockComponent(new InfestingLeavesComponentProvider(),
-        InfestingLeavesBlock.class);
+    registration.registerBlockComponent(
+        new InfestingLeavesComponentProvider(), InfestingLeavesBlock.class);
   }
 }

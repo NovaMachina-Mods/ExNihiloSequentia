@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.Blocks;
 import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
+public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
 
   @Nonnull
   public static final ResourceLocation UID =
@@ -80,4 +80,4 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
       }
     }
   }
- }
+}

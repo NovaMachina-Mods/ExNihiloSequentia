@@ -22,21 +22,25 @@ public class CrookItem extends DiggerItem {
   private static final Set<Material> effectiveMaterialsOn = Sets.newHashSet(Material.LEAVES);
 
   public CrookItem(@Nonnull final Tier tier, final int maxDamage) {
-    super(0.5F, 0.5F, tier, ExNihiloTags.MINEABLE_WITH_CROOK,
-        new Item.Properties().defaultDurability(maxDamage)
-            .tab(ExNihiloInitialization.ITEM_GROUP));
+    super(
+        0.5F,
+        0.5F,
+        tier,
+        ExNihiloTags.MINEABLE_WITH_CROOK,
+        new Item.Properties().defaultDurability(maxDamage).tab(ExNihiloInitialization.ITEM_GROUP));
   }
 
   @Override
   public float getDestroySpeed(@Nonnull final ItemStack stack, @Nonnull final BlockState state) {
     @Nonnull final Material material = state.getMaterial();
-    return effectiveMaterialsOn.contains(material) ? this.speed
+    return effectiveMaterialsOn.contains(material)
+        ? this.speed
         : super.getDestroySpeed(stack, state);
   }
 
   @Override
-  public int getBurnTime(@Nonnull final ItemStack itemStack,
-      @Nullable final RecipeType<?> recipeType) {
+  public int getBurnTime(
+      @Nonnull final ItemStack itemStack, @Nullable final RecipeType<?> recipeType) {
     @Nullable final ItemDefinition<CrookItem> woodRegistryObject = EXNItems.CROOK_WOOD;
     if (itemStack.getItem() == woodRegistryObject.asItem()) {
       return 200;

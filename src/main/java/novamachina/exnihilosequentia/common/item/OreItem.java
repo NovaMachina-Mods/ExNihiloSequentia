@@ -3,8 +3,8 @@ package novamachina.exnihilosequentia.common.item;
 import javax.annotation.Nonnull;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 
 public class OreItem extends Item {
 

@@ -14,8 +14,7 @@ import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEnt
 
 public abstract class AbstractBarrelMode {
 
-  @Nonnull
-  private final String modeName;
+  @Nonnull private final String modeName;
 
   protected AbstractBarrelMode(@Nonnull final String name) {
     this.modeName = name;
@@ -29,8 +28,10 @@ public abstract class AbstractBarrelMode {
   public abstract void tick(@Nonnull final AbstractBarrelEntity barrelTile);
 
   @Nonnull
-  public abstract InteractionResult onBlockActivated(@Nonnull final AbstractBarrelEntity barrelTile,
-      @Nonnull final Player player, @Nonnull final InteractionHand handIn,
+  public abstract InteractionResult onBlockActivated(
+      @Nonnull final AbstractBarrelEntity barrelTile,
+      @Nonnull final Player player,
+      @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
       @Nonnull final IItemHandler itemHandler);
 
@@ -51,7 +52,8 @@ public abstract class AbstractBarrelMode {
   public abstract List<Component> getWailaInfo(@Nonnull final AbstractBarrelEntity barrelTile);
 
   @Nonnull
-  public abstract ItemStack handleInsert(@Nonnull final AbstractBarrelEntity barrelTile,
+  public abstract ItemStack handleInsert(
+      @Nonnull final AbstractBarrelEntity barrelTile,
       @Nonnull final ItemStack stack,
       final boolean simulate);
 }

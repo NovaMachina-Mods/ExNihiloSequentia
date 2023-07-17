@@ -7,8 +7,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public class CrucibleFluidHandler extends FluidTank {
 
-  @Nullable
-  private BaseCrucibleEntity crucible;
+  @Nullable private BaseCrucibleEntity crucible;
 
   public CrucibleFluidHandler(@Nonnull final BaseCrucibleEntity crucibleTile) {
     super(BaseCrucibleEntity.MAX_FLUID_AMOUNT);

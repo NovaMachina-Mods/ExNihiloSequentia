@@ -8,8 +8,8 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 public class TankUtil {
@@ -20,10 +20,10 @@ public class TankUtil {
     WATER_BOTTLE = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
   }
 
-  private TankUtil() {
-  }
+  private TankUtil() {}
 
-  public static boolean drainWaterFromBottle(@Nonnull final BlockEntity tileEntity,
+  public static boolean drainWaterFromBottle(
+      @Nonnull final BlockEntity tileEntity,
       @Nonnull final Player player,
       @Nonnull final IFluidHandler tank) {
     int waterAmount = 333;
@@ -52,7 +52,8 @@ public class TankUtil {
   }
 
   // TODO: Figure out how to completely fill and drain
-  public static boolean drainWaterIntoBottle(@Nonnull final BlockEntity tileEntity,
+  public static boolean drainWaterIntoBottle(
+      @Nonnull final BlockEntity tileEntity,
       @Nonnull final Player player,
       @Nonnull final IFluidHandler tank) {
     int waterAmount = 333;

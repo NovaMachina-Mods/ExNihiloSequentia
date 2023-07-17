@@ -9,8 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.common.compat.crafttweaker.builder.ZenCrucibleRecipe;
 import novamachina.exnihilosequentia.common.crafting.crucible.CrucibleRecipe;
-import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeTypes;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
@@ -18,21 +18,21 @@ import org.openzen.zencode.java.ZenCodeType;
 @SuppressWarnings("unused")
 public class CrucibleRecipeManager implements IRecipeManager {
 
- @ZenCodeType.Method
- @Nonnull
- public ZenCrucibleRecipe create(@Nonnull String recipeId) {
-   recipeId = fixRecipeName(recipeId);
-   @Nonnull final ResourceLocation resourceLocation = new ResourceLocation(
-       ExNihiloConstants.ModIds.CRAFT_TWEAKER,
-       recipeId);
-   @Nonnull final ZenCrucibleRecipe recipe = ZenCrucibleRecipe.builder(resourceLocation);
-   CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
-   return recipe;
- }
+  @ZenCodeType.Method
+  @Nonnull
+  public ZenCrucibleRecipe create(@Nonnull String recipeId) {
+    recipeId = fixRecipeName(recipeId);
+    @Nonnull
+    final ResourceLocation resourceLocation =
+        new ResourceLocation(ExNihiloConstants.ModIds.CRAFT_TWEAKER, recipeId);
+    @Nonnull final ZenCrucibleRecipe recipe = ZenCrucibleRecipe.builder(resourceLocation);
+    CraftTweakerAPI.apply(new ActionAddRecipe(this, recipe.build(), ""));
+    return recipe;
+  }
 
- @Override
- @Nonnull
- public RecipeType<CrucibleRecipe> getRecipeType() {
-   return EXNRecipeTypes.CRUCIBLE_RECIPE_TYPE;
- }
+  @Override
+  @Nonnull
+  public RecipeType<CrucibleRecipe> getRecipeType() {
+    return EXNRecipeTypes.CRUCIBLE_RECIPE_TYPE;
+  }
 }

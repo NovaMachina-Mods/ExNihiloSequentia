@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
+public class HammerRecipeCategory implements IRecipeCategory<HammerRecipe> {
 
   @Nonnull
   public static final ResourceLocation UID =
@@ -47,12 +47,12 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
     return null;
   }
 
-   @Override
-   public RecipeType<HammerRecipe> getRecipeType() {
-     return new RecipeType<>(UID, HammerRecipe.class);
-   }
+  @Override
+  public RecipeType<HammerRecipe> getRecipeType() {
+    return new RecipeType<>(UID, HammerRecipe.class);
+  }
 
-   @Nonnull
+  @Nonnull
   @Override
   public Component getTitle() {
     return Component.literal("Hammer");
@@ -73,4 +73,4 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
           .addTooltipCallback(new HammerTooltipCallback(recipe));
     }
   }
- }
+}

@@ -1,5 +1,7 @@
 package novamachina.exnihilosequentia.common.block;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -18,16 +20,15 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 public class EndCakeBlock extends CakeBlock {
 
   public EndCakeBlock() {
     super(BlockBehaviour.Properties.of(Material.CAKE).strength(0.5F).sound(SoundType.WOOL));
   }
 
-  /** @deprecated Ask Mojang */
+  /**
+   * @deprecated Ask Mojang
+   */
   @Nonnull
   @Deprecated(forRemoval = false)
   @Override

@@ -5,22 +5,19 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
 import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
-import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 
 public class CrookRecipeSerializer extends NovaRecipeSerializer<CrookRecipe> {
 
   @Override
   @Nonnull
-  public CrookRecipe fromNetwork(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final FriendlyByteBuf buffer) {
+  public CrookRecipe fromNetwork(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
     final int outputCount = buffer.readInt();
     @Nonnull final List<ItemStackWithChance> output = new ArrayList<>(outputCount);
     for (int i = 0; i < outputCount; i++) {
@@ -41,8 +38,8 @@ public class CrookRecipeSerializer extends NovaRecipeSerializer<CrookRecipe> {
 
   @Override
   @Nonnull
-  protected CrookRecipe readFromJson(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final JsonObject json) {
+  protected CrookRecipe readFromJson(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) {
     @Nonnull final Ingredient input = Ingredient.fromJson(json.get("input"));
     @Nonnull final JsonArray results = json.getAsJsonArray("results");
     @Nonnull final List<ItemStackWithChance> output = new ArrayList<>(results.size());

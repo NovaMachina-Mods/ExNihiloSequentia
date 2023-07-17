@@ -7,7 +7,9 @@ import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 public class CookedSilkwormItem extends Item {
 
   public CookedSilkwormItem() {
-    super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP)
-        .food(new FoodProperties.Builder().nutrition(2).saturationMod(0.6F).build()));
+    super(
+        new Item.Properties()
+            .tab(ExNihiloInitialization.ITEM_GROUP)
+            .food(new FoodProperties.Builder().nutrition(2).saturationMod(0.6F).build()));
   }
 }

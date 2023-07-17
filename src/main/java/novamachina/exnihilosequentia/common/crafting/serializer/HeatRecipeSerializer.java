@@ -7,12 +7,10 @@ import javax.annotation.Nullable;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.heat.HeatRecipe;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 
 public class HeatRecipeSerializer extends NovaRecipeSerializer<HeatRecipe> {
 

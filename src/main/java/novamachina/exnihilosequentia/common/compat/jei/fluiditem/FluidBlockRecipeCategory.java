@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.common.crafting.fluiditem.FluidItemRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe> {
+public class FluidBlockRecipeCategory implements IRecipeCategory<FluidItemRecipe> {
 
   @Nonnull
   public static final ResourceLocation UID =
@@ -47,20 +47,19 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
     return null;
   }
 
-   @Override
-   public RecipeType<FluidItemRecipe> getRecipeType() {
-     return new RecipeType<>(UID, FluidItemRecipe.class);
-   }
+  @Override
+  public RecipeType<FluidItemRecipe> getRecipeType() {
+    return new RecipeType<>(UID, FluidItemRecipe.class);
+  }
 
-   @Nonnull
+  @Nonnull
   @Override
   public Component getTitle() {
     return Component.literal("Fluid Item Transformation");
   }
 
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, FluidItemRecipe recipe, IFocusGroup focuses)
- {
+  public void setRecipe(IRecipeLayoutBuilder builder, FluidItemRecipe recipe, IFocusGroup focuses) {
     builder
         .addSlot(RecipeIngredientRole.INPUT, 48, 37)
         .addIngredient(ForgeTypes.FLUID_STACK, recipe.getFluidInBarrel());
@@ -69,4 +68,4 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
         .addIngredients(VanillaTypes.ITEM_STACK, recipe.getInputs());
     builder.addSlot(RecipeIngredientRole.OUTPUT, 102, 37).addItemStack(recipe.getResultItem());
   }
- }
+}

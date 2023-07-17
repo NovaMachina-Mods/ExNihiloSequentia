@@ -9,9 +9,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 
 public class MeshItem extends Item {
 
@@ -20,11 +20,12 @@ public class MeshItem extends Item {
   private final MeshType type;
 
   public MeshItem(String name, int maxDamage, MeshType type) {
-    super(Config.enableMeshDurability() ?
-        new Properties().tab(ExNihiloInitialization.ITEM_GROUP).durability(maxDamage)
-        : new Properties().tab(ExNihiloInitialization.ITEM_GROUP)
-            .stacksTo(Config.getMeshStackSize())
-    );
+    super(
+        Config.enableMeshDurability()
+            ? new Properties().tab(ExNihiloInitialization.ITEM_GROUP).durability(maxDamage)
+            : new Properties()
+                .tab(ExNihiloInitialization.ITEM_GROUP)
+                .stacksTo(Config.getMeshStackSize()));
     this.name = name;
     this.type = type;
     meshItemMap.put(type, this);
@@ -35,15 +36,15 @@ public class MeshItem extends Item {
   }
 
   @Override
-  public boolean canApplyAtEnchantingTable(@Nonnull final ItemStack stack,
-      @Nonnull final Enchantment enchantment) {
+  public boolean canApplyAtEnchantingTable(
+      @Nonnull final ItemStack stack, @Nonnull final Enchantment enchantment) {
     return enchantment == Enchantments.BLOCK_EFFICIENCY
         || enchantment == Enchantments.BLOCK_FORTUNE;
   }
 
   @Override
-  public int getBurnTime(@Nonnull final ItemStack itemStack,
-      @Nullable final RecipeType<?> recipeType) {
+  public int getBurnTime(
+      @Nonnull final ItemStack itemStack, @Nullable final RecipeType<?> recipeType) {
     if (((MeshItem) itemStack.getItem()).getType() == MeshType.STRING) {
       return 200;
     } else {

@@ -17,7 +17,9 @@ public class InfestedLeavesEntity extends BlockEntity {
   private int progressWaitInterval = 0;
 
   public InfestedLeavesEntity(
-      BlockEntityType<? extends InfestedLeavesEntity> blockEntityType, BlockPos pos, BlockState state) {
+      BlockEntityType<? extends InfestedLeavesEntity> blockEntityType,
+      BlockPos pos,
+      BlockState state) {
     super(blockEntityType, pos, state);
   }
 

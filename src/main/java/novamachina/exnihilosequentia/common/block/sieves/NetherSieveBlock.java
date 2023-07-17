@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import novamachina.exnihilosequentia.common.block.BlockSieve;
 import novamachina.exnihilosequentia.common.blockentity.SieveEntity;
-import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 
 public class NetherSieveBlock extends BlockSieve implements EntityBlock {
 

@@ -7,7 +7,6 @@ import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.util.MapJS;
-
 import java.util.Arrays;
 import java.util.Map;
 import net.minecraft.world.item.ItemStack;
@@ -23,14 +22,21 @@ public class HeatRecipeJS extends RecipeJS {
 
   @Override
   public void create(RecipeArguments args) {
-    this.block = Block.byItem(Arrays.stream(IngredientJS.of(args.get(0)).getItems()).findFirst().get().getItem());
+    this.block =
+        Block.byItem(
+            Arrays.stream(IngredientJS.of(args.get(0)).getItems()).findFirst().get().getItem());
     this.amount = args.getInt(1, 0);
     this.state = MapJS.of(args.get(2));
   }
 
   @Override
   public void deserialize() {
-    this.block = Block.byItem(Arrays.stream(IngredientJS.of(this.json.get("block")).getItems()).findFirst().get().getItem());
+    this.block =
+        Block.byItem(
+            Arrays.stream(IngredientJS.of(this.json.get("block")).getItems())
+                .findFirst()
+                .get()
+                .getItem());
     this.amount = this.json.get("amount").getAsInt();
     this.state = MapJS.of(this.json.get("state"));
   }

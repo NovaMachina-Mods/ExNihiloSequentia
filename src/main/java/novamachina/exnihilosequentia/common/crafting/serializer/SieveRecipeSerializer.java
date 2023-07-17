@@ -9,16 +9,15 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 import novamachina.exnihilosequentia.common.crafting.sieve.MeshWithChance;
 import novamachina.exnihilosequentia.common.crafting.sieve.SieveRecipe;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.novacore.world.item.crafting.NovaRecipeSerializer;
 
 public class SieveRecipeSerializer extends NovaRecipeSerializer<SieveRecipe> {
 
   @Override
-  public SieveRecipe fromNetwork(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final FriendlyByteBuf buffer) {
+  public SieveRecipe fromNetwork(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final FriendlyByteBuf buffer) {
     @Nonnull final Ingredient input = Ingredient.fromNetwork(buffer);
     @Nonnull final ItemStack drop = buffer.readItem();
     @Nonnull final List<MeshWithChance> rolls = new ArrayList<>();
@@ -42,8 +41,8 @@ public class SieveRecipeSerializer extends NovaRecipeSerializer<SieveRecipe> {
   }
 
   @Override
-  protected SieveRecipe readFromJson(@Nonnull final ResourceLocation recipeId,
-      @Nonnull final JsonObject json) {
+  protected SieveRecipe readFromJson(
+      @Nonnull final ResourceLocation recipeId, @Nonnull final JsonObject json) {
     @Nonnull final Ingredient input = Ingredient.fromJson(json.get("input"));
     @Nonnull final ItemStack drop = readOutput(json.get("result"));
     @Nonnull final List<MeshWithChance> rolls = new ArrayList<>();

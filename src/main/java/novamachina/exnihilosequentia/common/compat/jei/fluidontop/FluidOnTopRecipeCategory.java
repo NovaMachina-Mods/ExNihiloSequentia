@@ -16,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.common.crafting.fluidontop.FluidOnTopRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecipe> {
+public class FluidOnTopRecipeCategory implements IRecipeCategory<FluidOnTopRecipe> {
 
   @Nonnull
   public static final ResourceLocation UID =
@@ -45,12 +45,12 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
     return null;
   }
 
-   @Override
-   public RecipeType<FluidOnTopRecipe> getRecipeType() {
-     return new RecipeType<>(UID, FluidOnTopRecipe.class);
-   }
+  @Override
+  public RecipeType<FluidOnTopRecipe> getRecipeType() {
+    return new RecipeType<>(UID, FluidOnTopRecipe.class);
+  }
 
-   @Nonnull
+  @Nonnull
   @Override
   public Component getTitle() {
     return Component.literal("Fluid On Top");
@@ -67,4 +67,4 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
         .addIngredient(ForgeTypes.FLUID_STACK, recipe.getFluidOnTop());
     builder.addSlot(RecipeIngredientRole.OUTPUT, 102, 37).addItemStack(recipe.getResultItem());
   }
- }
+}

@@ -16,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.common.crafting.fluidtransform.FluidTransformRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
- public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
+public class FluidTransformCategory implements IRecipeCategory<FluidTransformRecipe> {
 
   @Nonnull
   public static final ResourceLocation UID =
@@ -45,12 +45,12 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
     return null;
   }
 
-   @Override
-   public RecipeType<FluidTransformRecipe> getRecipeType() {
-     return new RecipeType<>(UID, FluidTransformRecipe.class);
-   }
+  @Override
+  public RecipeType<FluidTransformRecipe> getRecipeType() {
+    return new RecipeType<>(UID, FluidTransformRecipe.class);
+  }
 
-   @Nonnull
+  @Nonnull
   @Override
   public Component getTitle() {
     return Component.literal("Fluid Transform");
@@ -67,4 +67,4 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
         .addSlot(RecipeIngredientRole.OUTPUT, 102, 10)
         .addIngredient(ForgeTypes.FLUID_STACK, recipe.getResult());
   }
- }
+}

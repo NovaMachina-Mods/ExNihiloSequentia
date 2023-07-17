@@ -10,8 +10,7 @@ import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 public class MeltableItemHandler extends ItemStackHandler {
 
   private boolean crucibleHasRoom = true;
-  @Nullable
-  private CrucibleTypeEnum type;
+  @Nullable private CrucibleTypeEnum type;
 
   public MeltableItemHandler(@Nonnull final CrucibleTypeEnum crucibleType) {
     super(1);
@@ -20,8 +19,8 @@ public class MeltableItemHandler extends ItemStackHandler {
 
   @Nonnull
   @Override
-  public ItemStack insertItem(final int slot, @Nonnull final ItemStack stack,
-      final boolean simulate) {
+  public ItemStack insertItem(
+      final int slot, @Nonnull final ItemStack stack, final boolean simulate) {
     if (crucibleHasRoom) {
       return super.insertItem(slot, stack, simulate);
     }

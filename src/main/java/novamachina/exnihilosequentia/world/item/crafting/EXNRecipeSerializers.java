@@ -1,12 +1,11 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
+import java.util.List;
+import javax.annotation.Nonnull;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.common.crafting.serializer.*;
 import novamachina.novacore.registries.RecipeSerializerRegistry;
 import novamachina.novacore.world.item.crafting.RecipeSerializerDefinition;
-
-import javax.annotation.Nonnull;
-import java.util.List;
 
 public class EXNRecipeSerializers {
 
@@ -28,10 +27,8 @@ public class EXNRecipeSerializers {
       RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new);
   public static final RecipeSerializerDefinition<?> FLUID_ON_TOP_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new);
-  public static final RecipeSerializerDefinition<?>
-      FLUID_TRANSFORM_RECIPE_SERIALIZER =
-          RECIPE_SERIALIZERS.register(
-              "fluid_transform", FluidTransformRecipeSerializer::new);
+  public static final RecipeSerializerDefinition<?> FLUID_TRANSFORM_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new);
   public static final RecipeSerializerDefinition<?> CRUCIBLE_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("crucible", CrucibleRecipeSerializer::new);
   public static final RecipeSerializerDefinition<?> HEAT_RECIPE_SERIALIZER =

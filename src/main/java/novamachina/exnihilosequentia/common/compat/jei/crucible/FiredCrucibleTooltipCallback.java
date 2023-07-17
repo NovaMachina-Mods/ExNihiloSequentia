@@ -23,8 +23,7 @@ public class FiredCrucibleTooltipCallback implements IRecipeSlotTooltipCallback 
                 (ItemStack) optional.get().getIngredient());
         if (recipeOptional.isPresent()) {
           CrucibleRecipe recipe = recipeOptional.get();
-          tooltip.add(Component.literal(String.format("Fluid Amount: %d mb",
-              recipe.getAmount())));
+          tooltip.add(Component.literal(String.format("Fluid Amount: %d mb", recipe.getAmount())));
         }
       }
     }

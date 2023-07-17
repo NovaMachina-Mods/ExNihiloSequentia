@@ -5,10 +5,10 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.fluid.SeaWaterFluidType;
 import novamachina.exnihilosequentia.common.fluid.WitchWaterFluidType;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.exnihilosequentia.world.level.material.EXNFluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.datagen.api.datagen.AbstractBlockStateGenerator;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.exnihilosequentia.world.level.material.EXNFluids;
 
 public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
 

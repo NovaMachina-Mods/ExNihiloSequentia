@@ -2,9 +2,9 @@ package novamachina.exnihilosequentia.datagen.common;
 
 import javax.annotation.Nonnull;
 import net.minecraft.data.DataGenerator;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.datagen.api.datagen.AbstractLootTableGenerator;
+import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 
 public class ExNihiloLootTableGenerator extends AbstractLootTableGenerator {
 

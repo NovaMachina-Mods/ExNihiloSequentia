@@ -42,8 +42,7 @@ public class RecipeTypes {
           "fluidtransform",
           FluidTransformRecipe.class);
   public static final RecipeType<HammerRecipe> HAMMER =
-      RecipeType.create(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer",
-          HammerRecipe.class);
+      RecipeType.create(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "hammer", HammerRecipe.class);
   public static final RecipeType<HeatRecipe> HEAT =
       RecipeType.create(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "heat", HeatRecipe.class);
   public static final RecipeType<JEISieveRecipe> DRY_SIEVE =
@@ -52,6 +51,6 @@ public class RecipeTypes {
   public static final RecipeType<JEISieveRecipe> WET_SIEVE =
       RecipeType.create(
           ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "wet_sieve", JEISieveRecipe.class);
-  private RecipeTypes() {
-  }
+
+  private RecipeTypes() {}
 }

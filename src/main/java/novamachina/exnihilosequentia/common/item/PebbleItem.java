@@ -15,9 +15,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import novamachina.exnihilosequentia.common.utility.Config;
 import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.sounds.EXNSoundEvents;
-import novamachina.exnihilosequentia.common.utility.Config;
 
 public class PebbleItem extends SnowballItem {
 

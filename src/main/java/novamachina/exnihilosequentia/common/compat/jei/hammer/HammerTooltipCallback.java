@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import novamachina.exnihilosequentia.common.crafting.hammer.HammerRecipe;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
 
- public class HammerTooltipCallback implements IRecipeSlotTooltipCallback {
+public class HammerTooltipCallback implements IRecipeSlotTooltipCallback {
 
   @Nonnull private final HammerRecipe hammerRecipe;
 
@@ -39,4 +39,4 @@ import novamachina.exnihilosequentia.common.utility.StringUtils;
                                       "%s", StringUtils.formatPercent(stack.getChance()))))));
     }
   }
- }
+}

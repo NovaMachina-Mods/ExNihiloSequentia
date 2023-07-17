@@ -15,8 +15,8 @@ import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public class InfestingLeavesComponentProvider implements IBlockComponentProvider,
-    IServerDataProvider<BlockEntity> {
+public class InfestingLeavesComponentProvider
+    implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
 
   @Override
   public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig iPluginConfig) {
@@ -30,12 +30,20 @@ public class InfestingLeavesComponentProvider implements IBlockComponentProvider
   }
 
   @Override
-  public void appendServerData(CompoundTag compoundTag, ServerPlayer serverPlayer, Level level,
-      BlockEntity blockEntity, boolean b) {
+  public void appendServerData(
+      CompoundTag compoundTag,
+      ServerPlayer serverPlayer,
+      Level level,
+      BlockEntity blockEntity,
+      boolean b) {
     CompoundTag tag = new CompoundTag();
     if (blockEntity instanceof InfestingLeavesEntity infestingLeavesEntity) {
-      tag.putString("progress", Component.translatable("waila.progress", StringUtils
-          .formatPercent((float) infestingLeavesEntity.getProgress() / 100)).getString());
+      tag.putString(
+          "progress",
+          Component.translatable(
+                  "waila.progress",
+                  StringUtils.formatPercent((float) infestingLeavesEntity.getProgress() / 100))
+              .getString());
     }
     compoundTag.put("Infesting Leaves", tag);
   }

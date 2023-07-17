@@ -7,9 +7,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.common.item.ore.Ore;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.world.item.EXNItems;
 
 public class ExNihiloTags {
 

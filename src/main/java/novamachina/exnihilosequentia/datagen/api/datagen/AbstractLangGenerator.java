@@ -5,8 +5,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import novamachina.exnihilosequentia.common.utility.StringUtils;
-import novamachina.novacore.world.level.block.BlockDefinition;
 import novamachina.novacore.world.item.ItemDefinition;
+import novamachina.novacore.world.level.block.BlockDefinition;
 
 public class AbstractLangGenerator extends LanguageProvider {
 
@@ -18,7 +18,7 @@ public class AbstractLangGenerator extends LanguageProvider {
     super(gen, modId, locale);
     this.ITEM_LANG = String.format("item.%s.", modId);
     this.BLOCK_LANG = String.format("block.%s.", modId);
-    this.FLUID_LANG = String.format("fluid_type.%s.",modId);
+    this.FLUID_LANG = String.format("fluid_type.%s.", modId);
     ;
   }
 

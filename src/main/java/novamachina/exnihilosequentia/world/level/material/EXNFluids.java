@@ -11,8 +11,8 @@ import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.registries.FluidRegistry;
-import novamachina.novacore.world.level.block.BlockDefinition;
 import novamachina.novacore.world.item.ItemDefinition;
+import novamachina.novacore.world.level.block.BlockDefinition;
 import novamachina.novacore.world.level.material.FluidDefinition;
 
 public class EXNFluids {

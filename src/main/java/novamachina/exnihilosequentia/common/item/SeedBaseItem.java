@@ -21,14 +21,12 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 
-//TODO can be cleaned now
+// TODO can be cleaned now
 
 public class SeedBaseItem extends Item implements IPlantable {
 
-  @Nonnull
-  private final BlockState plant;
-  @Nullable
-  private PlantType type;
+  @Nonnull private final BlockState plant;
+  @Nullable private PlantType type;
 
   public SeedBaseItem(@Nonnull final BlockState plant, @Nonnull final PlantType type) {
     super(new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP));
@@ -60,8 +58,10 @@ public class SeedBaseItem extends Item implements IPlantable {
     @Nonnull final BlockPos pos = context.getClickedPos();
     @Nonnull final Direction direction = context.getClickedFace();
     @Nonnull final Level world = context.getLevel();
-    if (player != null && type != null && player.mayUseItemAt(pos, direction, item) && player
-        .mayUseItemAt(pos.offset(0, 1, 0), direction, item)) {
+    if (player != null
+        && type != null
+        && player.mayUseItemAt(pos, direction, item)
+        && player.mayUseItemAt(pos.offset(0, 1, 0), direction, item)) {
 
       @Nullable final BlockState soil;
       if (type == PlantType.WATER) {
@@ -76,22 +76,22 @@ public class SeedBaseItem extends Item implements IPlantable {
       if (canSustain && blockEmpty && plantAtPos != null) {
         world.setBlockAndUpdate(pos.offset(0, 1, 0), plantAtPos);
         if (plantAtPos.getBlock() instanceof DoublePlantBlock) {
-          world.setBlockAndUpdate(pos.above(2),
-              plantAtPos.setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
+          world.setBlockAndUpdate(
+              pos.above(2), plantAtPos.setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
         }
         if (!player.isCreative()) {
           item.shrink(1);
         }
-        world.playSound(player, player.blockPosition(), SoundEvents.GRASS_PLACE,
-            SoundSource.AMBIENT, 1f, 1f);
+        world.playSound(
+            player, player.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.AMBIENT, 1f, 1f);
         return InteractionResult.SUCCESS;
       }
     }
     return InteractionResult.PASS;
   }
 
-  private boolean isBlockSpaceEmpty(@Nonnull final Level world, @Nonnull final BlockPos pos,
-      @Nonnull final PlantType type) {
+  private boolean isBlockSpaceEmpty(
+      @Nonnull final Level world, @Nonnull final BlockPos pos, @Nonnull final PlantType type) {
     if (type == PlantType.WATER) {
       return world.getBlockState(pos.above()).getBlock() == Blocks.WATER;
     }

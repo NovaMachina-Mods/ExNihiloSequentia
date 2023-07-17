@@ -7,7 +7,7 @@ import novamachina.novacore.world.level.material.FluidDefinition;
 
 public class InitFluids {
   public static void init(IForgeRegistry<Fluid> registry) {
-    for(FluidDefinition<?,?,?> definition : EXNFluids.getDefinitions()) {
+    for (FluidDefinition<?, ?, ?> definition : EXNFluids.getDefinitions()) {
       registry.register(definition.getId(), definition.getStillFluid());
       registry.register(definition.getFlowingId(), definition.getFlowingFluid());
     }
