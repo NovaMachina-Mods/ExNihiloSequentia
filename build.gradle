@@ -15,7 +15,7 @@ plugins {
     id 'idea'
     id 'eclipse'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'net.darkhax.curseforgegradle' version '1.0.11'
     id 'com.modrinth.minotaur' version "2.+"
@@ -25,7 +25,7 @@ plugins {
 if(!System.getenv('CI')) {
     apply plugin: 'com.diffplug.spotless'
     spotless {
-        ratchetFrom 'origin/1.19'
+//        ratchetFrom 'origin/1.20'
         format 'misc', {
             target '*.gradle', '*.md', '.gitignore'
 
@@ -43,32 +43,21 @@ if(!System.getenv('CI')) {
 
 if(project.tasks.findByName("wrapper") == null) {
     task wrapper(type: Wrapper) {
-        gradleVersion = '7.6'
+        gradleVersion = '8.1.1'
         distributionType = Wrapper.DistributionType.ALL
     }
 }
 
 String minecraftRelease = getMinecraftRelease()
-String forgeMajor = getForgeMajor()
 
-ext {
-    modsTomlProperties = [
-            "version" : "${property("modVersion")}",
-            "mc_version" : "[${minecraftRelease},)",
-            "forge_version" : "[${property("forgeVersion")},)",
-            "loader_version" : "[${forgeMajor},)",
-            "git_url" : "${property("gitUrl")}",
-            "curseforge_url" : "${property("curseForgeUrl")}",
-            "crafttweaker_version" : "[${property("crafttweakerVersion")},)",
-            "jei_version" : "[${property("jeiVersion")},)"
-    ]
-    jsonPatterns = ["**/*.json", "**/*.mcmeta"]
+String basicVersion = "${mod_version}." + (System.getenv("GITHUB_RUN_NUMBER") ?: "homebaked")
+version = "${minecraft_version}-${basicVersion}" + (release_type != 'release' ? "-${release_type}" : '')
+group = mod_group_id
+//archivesBaseName = property("artifactBasename")
+
+base {
+    archivesName = mod_id
 }
-
-String basicVersion = "${property("modVersion")}." + (System.getenv("GITHUB_RUN_NUMBER") ?: "homebaked")
-version = "${property("minecraftVersion")}-${basicVersion}" + (property("releaseType") != 'release' ? "-${property("releaseType")}" : '')
-group = "novamachina.${project.name.toLowerCase()}"
-archivesBaseName = property("artifactBasename")
 
 defaultTasks 'build'
 
@@ -93,7 +82,9 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println("Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}")
 minecraft {
-    mappings channel: property("mappingsChannel"), version: property("mappingsVersion")
+    mappings channel: mappings_channel, version: mappings_version
+
+    copyIdeResources = true
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
@@ -103,12 +94,12 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', "${project.name.toLowerCase()}"
+            property 'forge.enabledGameTestNamespaces', mod_id
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
-                "${project.name}" {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -119,12 +110,12 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', "${project.name.toLowerCase()}"
+            property 'forge.enabledGameTestNamespaces', mod_id
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
-                "${project.name}" {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -135,12 +126,12 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', "${project.name.toLowerCase()}"
+            property 'forge.enabledGameTestNamespaces', mod_id
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
-                "${project.name}" {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -154,10 +145,10 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            args '--mod', "${project.name.toLowerCase()}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                "${project.name}" {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -168,14 +159,6 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    //moved from progwml6 to blamejared's repo (for future updates)
-    //maven {
-    //    name 'prog'
-    //    url 'https://dvs1.progwml6.com/files/maven'
-    //    content {
-    //        includeGroup 'mezz.jei'
-    //    }
-    //}
     maven {
         name 'CraftTweaker'
         url "https://maven.blamejared.com"
@@ -243,52 +226,60 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${property("minecraftVersion")}-${property("forgeVersion")}"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     if (findProject(':NovaCore') != null) {
         implementation(project(':NovaCore')) {
             transitive = false
         }
     } else {
-        implementation fg.deobf (project.dependencies.create("novamachina.novacore:NovaCore:${property("novaCoreVersion")}") {
+        implementation fg.deobf (project.dependencies.create("novamachina.novacore:NovaCore:${nova_core_version}") {
             transitive = false
         })
     }
 
-    compileOnly fg.deobf("mezz.jei:jei-${property("minecraftVersion")}-forge-api:${property("jeiVersion")}")
-    implementation fg.deobf("mezz.jei:jei-${property("minecraftVersion")}-forge:${property("jeiVersion")}")
-
-    compileOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraftRelease}-${property("topVersion")}:api") {
-        transitive = false
-    }
-    runtimeOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraftRelease}-${property("topVersion")}") {
-        transitive = false
+    if(project.hasProperty("jei_version")) {
+        compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+        implementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     }
 
-    compileOnly fg.deobf("curse.maven:jade-api-324717:${property("jadeApiId")}")
-//        runtimeOnly fg.deobf("curse.maven:jade-324717:${property("jadeId")}")
+    if(project.hasProperty("top_version")) {
+        compileOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraftRelease}-${top_version}:api") {
+            transitive = false
+        }
+        runtimeOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${minecraftRelease}-${top_version}") {
+            transitive = false
+        }
+    }
 
-    implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${property("minecraftVersion")}:${property("crafttweakerVersion")}")
-    annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10'
-    annotationProcessor "net.minecraftforge:forge:${property("minecraftVersion")}-${property("forgeVersion")}"
-    annotationProcessor "com.blamejared.crafttweaker:CraftTweaker-forge-${property("minecraftVersion")}:${property("crafttweakerVersion")}"
+    if(project.hasProperty("jade_id")) {
+        compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
+//        runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+    }
 
-    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${property("kubejsVersion")}")
-    implementation fg.deobf("dev.latvian.mods:rhino-forge:${property("rhinoVersion")}")
-    implementation fg.deobf("dev.architectury:architectury-forge:${property("architecturyVersion")}")
+    if(project.hasProperty("crafttweaker_version")) {
+        implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+        annotationProcessor 'com.blamejared.crafttweaker:Crafttweaker_Annotation_Processors:3.0.0.10'
+        annotationProcessor "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+        annotationProcessor "com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}"
+    }
+
+    if(project.hasProperty("kubejs_version")) {
+        implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+        implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+        implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
+    }
 }
-
-String projectProperName = property("projectProperName")
 
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : projectProperName,
-                "Specification-Vendor"    : "NovaMachina",
-                "Specification-Version"   : "${modVersion}",
-                "Implementation-Title"    : projectProperName,
-                "Implementation-Version"  : "${modVersion}",
-                "Implementation-Vendor"   : "NovaMachina",
+                "Specification-Title"     : mod_id,
+                "Specification-Vendor"    : mod_authors,
+                "Specification-Version"   : mod_version,
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : mod_authors,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -311,23 +302,23 @@ publishing {
             publication.from((SoftwareComponent) components.java)
             publication.groupId = project.group
             publication.version = project.version
-            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: project.archivesBaseName
+            publication.artifactId = System.getenv("MAVEN_ARTIFACT") ?: mod_id
             publication.artifacts = [jar]
             publication.pom {
-                name.set("${property("projectProperName")}")
+                name.set("${mod_name}")
                 packaging = 'jar'
-                description.set("${property("projectDescription")}")
-                url.set("${property("curseForgeUrl")}")
+                description.set("${mod_description}")
+                url.set("${curseforge_url}")
                 scm {
-                    url.set("${property("gitUrl")}.git")
+                    url.set("${github_url}.git")
                 }
                 issueManagement {
                     system.set('github')
-                    url.set("${property("gitUrl")}/issues")
+                    url.set("${github_url}/issues")
                 }
                 licenses {
                     license {
-                        name.set('Creative Commons')
+                        name.set("${mod_license}")
                         distribution.set('repo')
                     }
                 }
@@ -371,52 +362,38 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
-task replaceResources(type: Copy) {
-    it.outputs.upToDateWhen { false }
-    def modsToml = copySpec {
-        from(sourceSets.main.resources) {
-            include "META-INF/mods.toml"
-            expand modsTomlProperties
-        }
-    }
-    it.with modsToml
-    it.into "$buildDir/resources/main/"
-    if (new File("$rootDir/out/production/${project.name}.main/").exists()) {
-        copy {
-            with modsToml
-            into "$rootDir/out/production/${project.name}.main/"
-        }
-    }
-    if (new File("$rootDir/bin/main/").exists()) {
-        copy {
-            with modsToml
-            into "$rootDir/bin/main/"
-        }
-    }
-}
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+
+def replaceProperties = [
+        minecraft_version: minecraft_version,
+        minecraft_version_range: minecraft_version_range,
+        forge_version: forge_version,
+        forge_version_range: forge_version_range,
+        loader_version_range: loader_version_range,
+        mod_id: mod_id,
+        mod_name: mod_name,
+        mod_license: mod_license,
+        mod_version: mod_version,
+        mod_authors: mod_authors,
+        mod_description: mod_description,
+        git_url: github_url,
+        curseforge_url: curseforge_url,
+//        crafttweaker_version_range: crafttweaker_version_range,
+//        jei_version_range : jei_version_range,
+//        kubejs_version_range : kubejs_version_range
+]
 
 processResources {
-    duplicatesStrategy(DuplicatesStrategy.FAIL)
-    exclude('META-INF/mods.toml')
-    from(projectDir) {
-        include "logo.png"
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
+
+    filesMatching(resourceTargets) {
+        expand replaceProperties
     }
-    configure {
-        finalizedBy {
-            replaceResources
-        }
-    }
+
     doLast {
         fileTree(dir: getOutputs().getFiles().getAsPath(), includes: jsonPatterns).each {
             File file -> file.setText(JsonOutput.toJson(new JsonSlurper().parse(file)))
-        }
-    }
-}
-
-classes {
-    configure {
-        dependsOn {
-            replaceResources
         }
     }
 }
@@ -427,7 +404,7 @@ compileJava {
 }
 
 String getMinecraftRelease() {
-    String value = property("minecraftVersion")
+    String value = minecraft_version
     String[] values = value.split("\\.")
     return "${values[0]}.${values[1]}"
 }
@@ -443,14 +420,14 @@ task publishCurseForge(type: TaskPublishCurseForge) {
     description = "Publishes project to CurseForge"
 
     apiToken = System.getenv("CURSEFORGE_KEY")
-    String projectId = project.property("curseForgeId")
+    String projectId = curseforge_id
 
     UploadArtifact mainFile = upload(projectId, jar)
-    mainFile.releaseType = project.property("releaseType")
+    mainFile.releaseType = release_type
     mainFile.changelogType = 'html'
     mainFile.changelog = (file('changelog.html').exists() ? file('changelog.html').text : "No changelog was specified.")
     mainFile.addModLoader("Forge")
-    mainFile.addGameVersion(project.property("minecraftVersion"))
+    mainFile.addGameVersion(minecraft_version)
     mainFile.addOptional("jade")
     mainFile.addOptional("jei")
     mainFile.addOptional("the-one-probe")
@@ -461,10 +438,10 @@ publishCurseForge.dependsOn('makeChangelogHtml')
 
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
-    projectId = "${project.property("modrinthProjectId")}"
+    projectId = modrinth_project_id
     uploadFile = jar
-    versionType = "${project.property("releaseType")}"
-    gameVersions = ["${project.property("minecraftVersion")}"]
+    versionType = release_type
+    gameVersions = [minecraft_version]
     loaders = ["forge"]
     changelog = (file('changelog.md').exists() ? file('changelog.md').text : DEFAULT_CHANGELOG)
     dependencies {
@@ -534,13 +511,13 @@ task makeChangelogHtml(type: GitChangelogTask) {
     fromRepo = projectDir.absolutePath.toString()
     file = new File ("changelog.html")
     untaggedName = "Current release ${project.version}"
-    fromCommit = (System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: changelogStartCommit)
+    fromCommit = (System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: changelog_start_commit)
     toRef =  "HEAD"
     templateContent = file("changelog.mustache").text
 
     doLast {
         String changeLogText = file('changelog.html').text
-        if (releaseType == "alpha" || releaseType == "beta") {
+        if (release_type == "alpha" || release_type == "beta") {
             changeLogText = attachPreReleaseWarning(changeLogText, ChangeLogType.HTML)
         }
         changeLogText = attachReleaseNotes(changeLogText, ChangeLogType.HTML)
@@ -552,13 +529,13 @@ task makeChangelogMd(type: GitChangelogTask) {
     fromRepo = projectDir.absolutePath.toString()
     file = new File ("changelog.md")
     untaggedName = "Current release ${project.version}"
-    fromCommit = (System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: changelogStartCommit)
+    fromCommit = (System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: changelog_start_commit)
     toRef =  "HEAD"
     templateContent = file("changelog-markdown.mustache").text
 
     doLast {
         String changeLogText = file('changelog.md').text
-        if (releaseType == "alpha" || releaseType == "beta") {
+        if (release_type == "alpha" || release_type == "beta") {
             changeLogText = attachPreReleaseWarning(changeLogText, ChangeLogType.MARKDOWN)
         }
         changeLogText = attachReleaseNotes(changeLogText, ChangeLogType.MARKDOWN)
@@ -573,13 +550,13 @@ enum ChangeLogType {
 
 String attachReleaseNotes(String changeLogText, ChangeLogType type) {
     if (type == ChangeLogType.HTML) {
-        def releaseNotesFile = project.file("docs/release_${modVersion}.html")
+        def releaseNotesFile = project.file("docs/release_${mod_version}.html")
         if (releaseNotesFile.exists()) {
             def releaseNotes = releaseNotesFile.getText()
             changeLogText = "$releaseNotes\n<br />\n$changeLogText"
         }
     } else if (type == ChangeLogType.MARKDOWN) {
-        def releaseNotesFile = project.file("docs/release_${modVersion}.md")
+        def releaseNotesFile = project.file("docs/release_${mod_version}.md")
         if (releaseNotesFile.exists()) {
             def releaseNotes = releaseNotesFile.getText()
             changeLogText = "$releaseNotes\n\n$changeLogText"
@@ -592,13 +569,13 @@ String attachReleaseNotes(String changeLogText, ChangeLogType type) {
 
 String attachPreReleaseWarning(String changeLogText, ChangeLogType type) {
     if (type == ChangeLogType.HTML) {
-        changeLogText = "<strong>Warning: ${projectProperName} is currently in a pre-release state, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
-        "and updating from one pre-release to the next may cause various ${projectProperName} blocks and items to disappear/void their contents. " +
-        "While this is unlikely to happen, make sure to make backups.</strong>\n<br />\n$changeLogText"
+        changeLogText = "<strong>Warning: ${mod_name} is currently in a pre-release state, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
+                "and updating from one pre-release to the next may cause various ${mod_name} blocks and items to disappear/void their contents. " +
+                "While this is unlikely to happen, make sure to make backups.</strong>\n<br />\n$changeLogText"
     } else if (type == ChangeLogType.MARKDOWN) {
-        changeLogText = "**Warning: ${projectProperName} is currently in a pre-release state, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
-        "and updating from one pre-release to the next may cause various ${projectProperName} blocks and items to disappear/void their contents. " +
-        "While this is unlikely to happen, make sure to make backups.**\n\n$changeLogText"
+        changeLogText = "**Warning: ${mod_name} is currently in a pre-release state, and is not recommended for widespread use in modpacks. There may be game breaking bugs, " +
+                "and updating from one pre-release to the next may cause various ${mod_name} blocks and items to disappear/void their contents. " +
+                "While this is unlikely to happen, make sure to make backups.**\n\n$changeLogText"
     } else {
         println("Could not attach pre-release warning to changelog")
     }

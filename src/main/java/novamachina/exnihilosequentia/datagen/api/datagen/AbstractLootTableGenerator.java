@@ -55,7 +55,7 @@ public abstract class AbstractLootTableGenerator implements DataProvider {
     @Nonnull
     final ValidationContext validator =
         new ValidationContext(LootContextParamSets.ALL_PARAMS, function -> null, lootTables::get);
-    lootTables.forEach((name, table) -> LootTables.validate(validator, name, table));
+    lootTables.forEach((name, table) -> LootTable.validate(validator, name, table));
     @Nonnull final Multimap<String, String> problems = validator.getProblems();
     if (!problems.isEmpty()) {
       problems.forEach(
