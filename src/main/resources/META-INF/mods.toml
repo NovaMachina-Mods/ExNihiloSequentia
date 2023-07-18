@@ -39,3 +39,9 @@ mandatory = false
 versionRange = "${jei_version}"
 ordering = "AFTER"
 side = "BOTH"
+[[dependencies.exnihilosequentia]]
+modId = "kubejs"
+mandatory = false
+versionRange = "${kubejs_version}"
+ordering = "AFTER"
+side = "BOTH"

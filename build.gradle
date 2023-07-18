@@ -60,7 +60,8 @@ ext {
             "git_url" : "${property("gitUrl")}",
             "curseforge_url" : "${property("curseForgeUrl")}",
             "crafttweaker_version" : "[${property("crafttweakerVersion")},)",
-            "jei_version" : "[${property("jeiVersion")},)"
+            "jei_version" : "[${property("jeiVersion")},)",
+            "kubejs_version" : "[${property("kubejsVersion")},)"
     ]
     jsonPatterns = ["**/*.json", "**/*.mcmeta"]
 }
