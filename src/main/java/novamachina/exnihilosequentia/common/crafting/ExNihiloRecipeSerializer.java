@@ -25,6 +25,6 @@ public abstract class ExNihiloRecipeSerializer<R extends Recipe<?>> implements R
 
   @Nonnull
   protected ItemStack readOutput(@Nonnull final JsonElement outputObject) {
-    return ShapedRecipe.itemFromJson(outputObject.getAsJsonObject()).getDefaultInstance();
+    return ShapedRecipe.itemStackFromJson(outputObject.getAsJsonObject());
   }
 }

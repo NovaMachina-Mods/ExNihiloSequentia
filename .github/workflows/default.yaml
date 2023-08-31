@@ -19,7 +19,7 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title": "Build started for ${{github.event.repository.name}}", "description": "Pipeline run $GITHUB_RUN_NUMBER", "color": "3224808"}]'
+          DISCORD_EMBEDS: '[{"title": "Build started for ${{github.event.repository.name}}", "description": "Pipeline run ${{github.run_number}}", "color": "3224808"}]'
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -35,13 +35,13 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title": "Build succeeded for ${{github.event.repository.name}}", "description": "Pipeline run $GITHUB_RUN_NUMBER", "color": "3470945"}]'
+          DISCORD_EMBEDS: '[{"title": "Build succeeded for ${{github.event.repository.name}}", "description": "Pipeline run ${{github.run_number}}", "color": "3470945"}]'
       - name: Notify Discord of Failed Build
         if: (github.event_name != 'pull_request') && failure()
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title": "Build failed for ${{github.event.repository.name}}", "description": "Pipeline run $GITHUB_RUN_NUMBER", "color": "16071463"}]'
+          DISCORD_EMBEDS: '[{"title": "Build failed for ${{github.event.repository.name}}", "description": "Pipeline run ${{github.run_number}}", "color": "16071463"}]'
 
   deploy:
     name: Deploy Project
@@ -57,7 +57,7 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title": "Deploy started for ${{github.event.repository.name}}", "description": "Pipeline run $GITHUB_RUN_NUMBER", "color": "3224808"}]'
+          DISCORD_EMBEDS: '[{"title": "Deploy started for ${{github.event.repository.name}}", "description": "Pipeline run ${{github.run_number}}", "color": "3224808"}]'
       - name: Restore Last Successful Build SHA from Cache
         id: last-success-sha-restore
         uses: actions/cache/restore@v3
@@ -81,6 +81,11 @@ jobs:
         with:
           gradle-version: wrapper
           arguments: publish
+      - name: Generate ChangeLog
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: wrapper
+          arguments: makeChangelogHtml makeChangelogMd
       - name: Deploy to CurseForge
         env:
           CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_APIKEY }}
@@ -100,7 +105,7 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title": "Deploy succeeded for ${{github.event.repository.name}}", "description": "Pipeline run $GITHUB_RUN_NUMBER", "color": "3470945"}]'
+          DISCORD_EMBEDS: '[{"title": "Deploy succeeded for ${{github.event.repository.name}}", "description": "Pipeline run ${{github.run_number}}", "color": "3470945"}]'
       - name: Write Last Successful Build SHA to file
         if: success()
         run: ${GITHUB_WORKSPACE}/scripts/save-last-build-sha
@@ -116,4 +121,4 @@ jobs:
         uses: "Ilshidur/action-discord@0.3.2"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title": "Deploy failed for ${{github.event.repository.name}}", "description": "Pipeline run $GITHUB_RUN_NUMBER", "color": "16071463"}]'
+          DISCORD_EMBEDS: '[{"title": "Deploy failed for ${{github.event.repository.name}}", "description": "Pipeline run ${{github.run_number}}", "color": "16071463"}]'

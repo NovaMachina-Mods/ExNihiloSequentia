@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "x": {
+      "item": "exnihilomekanism:osmium_pieces"
+    }
+  },
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "result": {
+    "item": "mekanism:raw_osmium"
+  }
+}
