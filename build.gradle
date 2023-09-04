@@ -19,7 +19,7 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'net.darkhax.curseforgegradle' version '1.0.11'
     id 'com.modrinth.minotaur' version "2.+"
-    id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.79.0"
+    id "se.bjurr.gitchangelog.git-changelog-gradle-plugin" version "1.80.0"
 }
 
 if(!System.getenv('CI')) {
