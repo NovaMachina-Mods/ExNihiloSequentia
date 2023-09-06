@@ -1,7 +1,0 @@
-{
-  "parent": "exnihilosequentia:block/barrel_base",
-  "textures": {
-    "particle": "minecraft:block/stone",
-    "texture": "exnihilosequentia:block/stone_barrel"
-  }
-}

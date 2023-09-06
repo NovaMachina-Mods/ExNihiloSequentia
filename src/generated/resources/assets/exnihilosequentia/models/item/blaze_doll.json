@@ -1,6 +1,0 @@
-{
-  "parent": "exnihilosequentia:item/overlap_gui",
-  "textures": {
-    "layer0": "exnihilosequentia:item/blaze_doll"
-  }
-}

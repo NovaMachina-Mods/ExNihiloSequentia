@@ -6,7 +6,7 @@
     <a href="https://github.com/NovaMachina-Mods/ExNihiloSequentia/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/NovaMachina-Mods/ExNihiloSequentia"></a>
 </p>
 
-# Ex Nihilo: Sequentia for Minecraft 1.19
+# Ex Nihilo: Sequentia
 
 Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.
 
@@ -28,14 +28,14 @@ Artwork of this mod is licensed under an All rights reserved license: Copyright 
 
 # Maven
 
-Ex Nihilo: Sequentia is avaliable via the [NovaMachina Mods artifact repository](https://cloudsmith.io/~novamachina-mods/repos/ex-nihilo-sequentia/packages/) for developers wishing to utilize its API.
+Ex Nihilo: Sequentia is avaliable via the [NovaMachina Mods artifact repository](https://cloudsmith.io/~novamachina-mods/repos/mods/packages/) for developers wishing to utilize its API.
 
 Add the following to your `build.gradle`:
 
 ```groovy
 repositories {
     maven {
-        url = "https://dl.cloudsmith.io/public/novamachina-mods/ex-nihilo-sequentia/maven/"
+        url = "https://dl.cloudsmith.io/public/novamachina-mods/mods/maven/"
 
     }
 }
@@ -45,7 +45,7 @@ dependencies {
 }
 ```
 
-Add the following to your `gradle.properties` (see [Maven](https://cloudsmith.io/~novamachina-mods/repos/ex-nihilo-sequentia/packages/) for the list of available versions):
+Add the following to your `gradle.properties` (see [Maven](https://cloudsmith.io/~novamachina-mods/repos/mods/packages/) for the list of available versions):
 
 ```properties
 exnihilo_version: 1.19.2-4.1.0.55-beta
