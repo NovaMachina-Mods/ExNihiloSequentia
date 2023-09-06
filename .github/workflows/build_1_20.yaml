@@ -1,5 +1,5 @@
 ---
-name: Build Pipeline
+name: Build 1.20
 on:
   push:
     branches:
