@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:crushing",
+  "input": {
+    "item": "minecraft:bubble_coral_block"
+  },
+  "results": [
+    {
+      "chance": 1.0,
+      "count": 1,
+      "item": "minecraft:bubble_coral"
+    }
+  ]
+}

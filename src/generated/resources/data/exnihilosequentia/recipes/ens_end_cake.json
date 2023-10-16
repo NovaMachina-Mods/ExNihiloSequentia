@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "c": {
       "item": "minecraft:end_crystal"
@@ -18,5 +19,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:end_cake"
-  }
+  },
+  "show_notification": true
 }

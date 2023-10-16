@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "exnihilosequentia",
+  "key": {
+    "x": {
+      "item": "minecraft:bamboo"
+    }
+  },
+  "pattern": [
+    "xx",
+    " x",
+    " x"
+  ],
+  "result": {
+    "item": "exnihilosequentia:bamboo_crook"
+  },
+  "show_notification": true
+}

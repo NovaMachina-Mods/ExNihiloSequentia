@@ -1,4 +1,0 @@
-#! /bin/bash
-
-echo "$GITHUB_SHA" > last-success-sha
-cat last-success-sha

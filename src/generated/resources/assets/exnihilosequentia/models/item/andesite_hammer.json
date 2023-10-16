@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "exnihilosequentia:item/tools/hammer/andesite_hammer"
+    "layer0": "exnihilosequentia:item/andesite_hammer"
   }
 }

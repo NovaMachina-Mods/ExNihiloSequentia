@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:crushing",
+  "input": {
+    "item": "minecraft:calcite"
+  },
+  "results": [
+    {
+      "chance": 1.0,
+      "count": 1,
+      "item": "exnihilosequentia:crushed_calcite"
+    }
+  ]
+}

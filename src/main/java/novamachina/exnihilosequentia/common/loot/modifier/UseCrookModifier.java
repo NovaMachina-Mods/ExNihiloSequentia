@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.common.base.Suppliers;
-import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -25,25 +24,26 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import novamachina.exnihilosequentia.api.tag.ExNihiloTags;
-import novamachina.exnihilosequentia.common.block.InfestedLeavesBlock;
-import novamachina.exnihilosequentia.common.crafting.ItemStackWithChance;
-import novamachina.exnihilosequentia.common.crafting.crook.CrookRecipe;
+import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.utility.Config;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.tags.ExNihiloTags;
 import novamachina.exnihilosequentia.world.item.EXNItems;
+import novamachina.exnihilosequentia.world.item.crafting.HarvestRecipe;
+import novamachina.exnihilosequentia.world.item.crafting.ItemStackWithChance;
+import novamachina.exnihilosequentia.world.level.block.InfestedLeavesBlock;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UseCrookModifier extends LootModifier {
+
+  private static Logger log = LoggerFactory.getLogger(UseCrookModifier.class);
 
   public static final Supplier<Codec<UseCrookModifier>> CODEC =
       Suppliers.memoize(
           () ->
               RecordCodecBuilder.create(
                   inst -> codecStart(inst).apply(inst, UseCrookModifier::new)));
-
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
 
   @Nonnull private final Random random = new SecureRandom();
 
@@ -55,7 +55,7 @@ public class UseCrookModifier extends LootModifier {
   @Override
   public ObjectArrayList<ItemStack> doApply(
       @Nonnull ObjectArrayList<ItemStack> generatedLoot, @Nonnull final LootContext context) {
-    logger.debug("Fired Crook Modifier");
+    log.debug("Fired Crook Modifier");
     @Nullable final ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
     @Nullable final BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
     @Nullable final Vec3 origin = context.getParamOrNull(LootContextParams.ORIGIN);
@@ -70,7 +70,7 @@ public class UseCrookModifier extends LootModifier {
       }
 
       for (@Nonnull
-      final CrookRecipe recipe :
+      final HarvestRecipe recipe :
           ExNihiloRegistries.CROOK_REGISTRY.getDrops(blockState.getBlock())) {
         getCrookBlockDrops(newLoot, recipe);
       }
@@ -86,15 +86,15 @@ public class UseCrookModifier extends LootModifier {
       }
     }
     if (!newLoot.isEmpty()) {
-      logger.debug("Adding new loot");
+      log.debug("Adding new loot");
       generatedLoot = newLoot;
     }
-    logger.debug("Crook Generated Loot: " + generatedLoot);
+    log.debug("Crook Generated Loot: " + generatedLoot);
     return generatedLoot;
   }
 
-  private void getCrookBlockDrops(@NotNull List<ItemStack> newLoot, @NotNull CrookRecipe recipe) {
-    for (@Nonnull final ItemStackWithChance itemStackWithChance : recipe.getOutput()) {
+  private void getCrookBlockDrops(@NotNull List<ItemStack> newLoot, @NotNull HarvestRecipe recipe) {
+    for (@Nonnull final ItemStackWithChance itemStackWithChance : recipe.getDrops()) {
       if (random.nextFloat() <= itemStackWithChance.getChance()
           && itemStackWithChance.getStack() != ItemStack.EMPTY) {
         newLoot.add(itemStackWithChance.getStack());
@@ -111,7 +111,8 @@ public class UseCrookModifier extends LootModifier {
     final ServerLevel serverWorld =
         context.getLevel().getServer().getLevel(context.getLevel().dimension());
     if (origin != null && serverWorld != null) {
-      @Nonnull final BlockPos pos = new BlockPos(origin.x(), origin.y(), origin.z());
+      @Nonnull
+      final BlockPos pos = new BlockPos((int) origin.x(), (int) origin.y(), (int) origin.z());
       @Nonnull final List<ItemStack> items = Block.getDrops(blockState, serverWorld, pos, null);
       newLoot.addAll(
           items.stream()

@@ -1,3 +1,6 @@
 {
-  "parent": "exnihilosequentia:block/diamond_mesh"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "exnihilosequentia:item/diamond_mesh"
+  }
 }

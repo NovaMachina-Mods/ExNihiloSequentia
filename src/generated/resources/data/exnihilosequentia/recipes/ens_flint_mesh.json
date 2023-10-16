@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "i": {
       "item": "minecraft:flint"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:flint_mesh"
-  }
+  },
+  "show_notification": true
 }

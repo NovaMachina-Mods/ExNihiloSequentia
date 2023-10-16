@@ -1,5 +1,6 @@
 {
   "parent": "exnihilosequentia:block/barrel_base",
+  "render_type": "minecraft:cutout_mipped",
   "textures": {
     "particle": "minecraft:block/spruce_planks",
     "texture": "exnihilosequentia:block/spruce_barrel"

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "exnihilosequentia",
   "key": {
     "-": {
@@ -16,5 +17,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:crimson_barrel"
-  }
+  },
+  "show_notification": true
 }

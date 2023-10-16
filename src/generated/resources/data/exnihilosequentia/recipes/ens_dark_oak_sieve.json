@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "l": {
       "item": "minecraft:dark_oak_slab"
@@ -18,5 +19,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:dark_oak_sieve"
-  }
+  },
+  "show_notification": true
 }

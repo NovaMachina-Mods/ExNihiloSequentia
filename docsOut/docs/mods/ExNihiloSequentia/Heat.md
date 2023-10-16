@@ -8,74 +8,179 @@ import mods.exnihilosequentia.HeatRecipe;
 ```
 
 
+## Implemented Interfaces
+HeatRecipe implements the following interfaces. That means all methods defined in these interfaces are also available in HeatRecipe
+
+- [IRecipeManager](/vanilla/api/recipe/manager/IRecipeManager)
+
 ## Methods
 
-:::group{name=create}
-
-Create a recipe name for the new recipe
-
-Return Type: [HeatRecipe](/mods/ExNihiloSequentia/Heat)
+:::group{name=addJsonRecipe}
 
 ```zenscript
-HeatRecipe.create(recipeId as string) as HeatRecipe
+HeatRecipe.addJsonRecipe(name as string, mapData as MapData)
 ```
 
-| Parameter |  Type  |  Description   |
-|-----------|--------|----------------|
-| recipeId  | string | name of recipe |
+| Parameter |                 Type                 |
+|-----------|--------------------------------------|
+| name      | string                               |
+| mapData   | [MapData](/vanilla/api/data/MapData) |
 
 
 :::
 
-:::group{name=setAmount}
-
-Sets the amount of heat that the given block should generate.
-
-Return Type: [HeatRecipe](/mods/ExNihiloSequentia/Heat)
+:::group{name=addRecipe}
 
 ```zenscript
-HeatRecipe.setAmount(amount as int) as HeatRecipe
+HeatRecipe.addRecipe(name as string, amount as int, input as Block, properties as StatePropertiesPredicate)
 ```
 
-| Parameter | Type |     Description     |
-|-----------|------|---------------------|
-| amount    | int  | The amount of heat. |
+| Parameter  |                                    Type                                     |
+|------------|-----------------------------------------------------------------------------|
+| name       | string                                                                      |
+| amount     | int                                                                         |
+| input      | [Block](/vanilla/api/block/Block)                                           |
+| properties | [StatePropertiesPredicate](/vanilla/api/predicate/StatePropertiesPredicate) |
 
 
 :::
 
-:::group{name=setBlock}
+:::group{name=getAllRecipes}
 
-Sets the block that should be modified to generate heat.
-
-Return Type: [HeatRecipe](/mods/ExNihiloSequentia/Heat)
+Return Type: stdlib.List&lt;T&gt;
 
 ```zenscript
-HeatRecipe.setBlock(input as Block) as HeatRecipe
+// HeatRecipe.getAllRecipes() as stdlib.List<T>
+
+myHeatRecipe.getAllRecipes();
 ```
 
-| Parameter |               Type                |   Description   |
-|-----------|-----------------------------------|-----------------|
-| input     | [Block](/vanilla/api/block/Block) | Sets the block. |
+:::
+
+:::group{name=getRecipeByName}
+
+Return Type: T
+
+```zenscript
+HeatRecipe.getRecipeByName(name as string) as T
+```
+
+| Parameter |  Type  |
+|-----------|--------|
+| name      | string |
 
 
 :::
 
-:::group{name=setProperties}
+:::group{name=getRecipeMap}
 
-(Optional) Sets the state that should be used to generate heat.
-
-Return Type: [HeatRecipe](/mods/ExNihiloSequentia/Heat)
+Return Type: T[[ResourceLocation](/vanilla/api/resource/ResourceLocation)]
 
 ```zenscript
-HeatRecipe.setProperties(properties as StatePropertiesPredicate) as HeatRecipe
+// HeatRecipe.getRecipeMap() as T[ResourceLocation]
+
+myHeatRecipe.getRecipeMap();
 ```
 
-| Parameter  |                                    Type                                     |       Description        |
-|------------|-----------------------------------------------------------------------------|--------------------------|
-| properties | [StatePropertiesPredicate](/vanilla/api/predicate/StatePropertiesPredicate) | Sets special properties. |
+:::
+
+:::group{name=getRecipesByOutput}
+
+Return Type: stdlib.List&lt;T&gt;
+
+```zenscript
+HeatRecipe.getRecipesByOutput(output as IIngredient) as stdlib.List<T>
+```
+
+| Parameter |                        Type                        |
+|-----------|----------------------------------------------------|
+| output    | [IIngredient](/vanilla/api/ingredient/IIngredient) |
 
 
 :::
 
+:::group{name=remove}
+
+```zenscript
+HeatRecipe.remove(output as IIngredient)
+```
+
+| Parameter |                        Type                        |
+|-----------|----------------------------------------------------|
+| output    | [IIngredient](/vanilla/api/ingredient/IIngredient) |
+
+
+:::
+
+:::group{name=removeAll}
+
+```zenscript
+// HeatRecipe.removeAll()
+
+myHeatRecipe.removeAll();
+```
+
+:::
+
+:::group{name=removeByInput}
+
+```zenscript
+HeatRecipe.removeByInput(input as IItemStack)
+```
+
+| Parameter |                    Type                    |
+|-----------|--------------------------------------------|
+| input     | [IItemStack](/vanilla/api/item/IItemStack) |
+
+
+:::
+
+:::group{name=removeByModid}
+
+```zenscript
+HeatRecipe.removeByModid(modid as string, exclude as Predicate<string>)
+```
+
+| Parameter |          Type           | Optional |           Default Value           |
+|-----------|-------------------------|----------|-----------------------------------|
+| modid     | string                  | false    |                                   |
+| exclude   | Predicate&lt;string&gt; | true     | (name as string) as bool => false |
+
+
+:::
+
+:::group{name=removeByName}
+
+```zenscript
+HeatRecipe.removeByName(names as string[])
+```
+
+| Parameter |   Type   |
+|-----------|----------|
+| names     | string[] |
+
+
+:::
+
+:::group{name=removeByRegex}
+
+```zenscript
+HeatRecipe.removeByRegex(regex as string, exclude as Predicate<string>)
+```
+
+| Parameter |          Type           | Optional |           Default Value           |
+|-----------|-------------------------|----------|-----------------------------------|
+| regex     | string                  | false    |                                   |
+| exclude   | Predicate&lt;string&gt; | true     | (name as string) as bool => false |
+
+
+:::
+
+
+## Properties
+
+|    Name    |                             Type                              | Has Getter | Has Setter |
+|------------|---------------------------------------------------------------|------------|------------|
+| allRecipes | stdlib.List&lt;T&gt;                                          | true       | false      |
+| recipeMap  | T[[ResourceLocation](/vanilla/api/resource/ResourceLocation)] | true       | false      |
 

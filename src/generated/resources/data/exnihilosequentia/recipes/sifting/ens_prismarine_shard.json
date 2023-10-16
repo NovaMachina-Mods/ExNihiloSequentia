@@ -1,0 +1,20 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "item": "minecraft:prismarine_shard"
+  },
+  "rolls": [
+    {
+      "chance": 0.02,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.04,
+      "mesh": "diamond"
+    }
+  ],
+  "waterlogged": true
+}

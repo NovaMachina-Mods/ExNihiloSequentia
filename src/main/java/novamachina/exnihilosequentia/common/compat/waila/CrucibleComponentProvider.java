@@ -3,11 +3,9 @@ package novamachina.exnihilosequentia.common.compat.waila;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import novamachina.exnihilosequentia.common.blockentity.crucible.BaseCrucibleEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
+import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
@@ -15,7 +13,7 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class CrucibleComponentProvider
-    implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+    implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
 
   @Override
   public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig iPluginConfig) {
@@ -37,14 +35,10 @@ public class CrucibleComponentProvider
   }
 
   @Override
-  public void appendServerData(
-      CompoundTag compoundTag,
-      ServerPlayer serverPlayer,
-      Level level,
-      BlockEntity blockEntity,
-      boolean b) {
+  public void appendServerData(CompoundTag compoundTag, BlockAccessor accessor) {
     CompoundTag tag = new CompoundTag();
-    if (blockEntity instanceof BaseCrucibleEntity crucibleEntity) {
+    BlockEntity blockEntity = accessor.getBlockEntity();
+    if (blockEntity instanceof CrucibleBlockEntity crucibleEntity) {
       if (crucibleEntity.getSolidAmount() > 0) {
         String solidAmount =
             Component.translatable(

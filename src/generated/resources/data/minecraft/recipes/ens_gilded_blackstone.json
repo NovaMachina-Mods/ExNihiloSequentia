@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "g": {
       "tag": "forge:raw_materials/gold"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "minecraft:gilded_blackstone"
-  }
+  },
+  "show_notification": true
 }

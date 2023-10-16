@@ -14,7 +14,9 @@
           "name": "exnihilosequentia:birch_barrel"
         }
       ],
+      "name": "main",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "exnihilosequentia:blocks/birch_barrel"
 }

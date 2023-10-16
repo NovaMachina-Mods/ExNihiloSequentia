@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "b": {
       "tag": "forge:ender_pearls"
@@ -24,5 +25,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:shulker_doll"
-  }
+  },
+  "show_notification": true
 }

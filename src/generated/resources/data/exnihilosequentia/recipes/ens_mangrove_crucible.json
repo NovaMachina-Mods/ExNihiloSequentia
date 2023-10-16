@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "exnihilosequentia",
   "key": {
     "c": {
@@ -19,5 +20,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:mangrove_crucible"
-  }
+  },
+  "show_notification": true
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "b": {
       "item": "minecraft:water_bucket"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "minecraft:crying_obsidian"
-  }
+  },
+  "show_notification": true
 }

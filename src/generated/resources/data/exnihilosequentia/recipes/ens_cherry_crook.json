@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "exnihilosequentia",
+  "key": {
+    "x": {
+      "item": "minecraft:cherry_planks"
+    }
+  },
+  "pattern": [
+    "xx",
+    " x",
+    " x"
+  ],
+  "result": {
+    "item": "exnihilosequentia:cherry_crook"
+  },
+  "show_notification": true
+}

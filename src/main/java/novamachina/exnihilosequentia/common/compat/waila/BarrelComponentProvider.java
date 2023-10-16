@@ -4,11 +4,9 @@ import java.util.List;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEntity;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
+import novamachina.exnihilosequentia.world.level.block.entity.BarrelBlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
@@ -16,7 +14,7 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class BarrelComponentProvider
-    implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+    implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
 
   @Override
   public void appendTooltip(
@@ -34,13 +32,9 @@ public class BarrelComponentProvider
   }
 
   @Override
-  public void appendServerData(
-      CompoundTag compoundTag,
-      ServerPlayer serverPlayer,
-      Level level,
-      BlockEntity blockEntity,
-      boolean b) {
-    if (blockEntity instanceof AbstractBarrelEntity barrelEntity) {
+  public void appendServerData(CompoundTag compoundTag, BlockAccessor accessor) {
+    BlockEntity blockEntity = accessor.getBlockEntity();
+    if (blockEntity instanceof BarrelBlockEntity barrelEntity) {
       CompoundTag compound = new CompoundTag();
       List<Component> info = barrelEntity.getWailaInfo();
       compound.putInt("count", info.size());

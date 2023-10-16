@@ -1,5 +1,6 @@
 {
   "parent": "exnihilosequentia:block/crucible_base",
+  "render_type": "minecraft:cutout_mipped",
   "textures": {
     "particle": "exnihilosequentia:block/fired_crucible",
     "texture": "exnihilosequentia:block/fired_crucible"

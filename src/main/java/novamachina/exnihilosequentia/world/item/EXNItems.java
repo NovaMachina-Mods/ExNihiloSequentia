@@ -1,27 +1,14 @@
 package novamachina.exnihilosequentia.world.item;
 
-import com.mojang.logging.LogUtils;
 import java.util.*;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Blocks;
-import novamachina.exnihilosequentia.common.item.CookedSilkwormItem;
-import novamachina.exnihilosequentia.common.item.CrookItem;
-import novamachina.exnihilosequentia.common.item.DollItem;
-import novamachina.exnihilosequentia.common.item.HammerItem;
-import novamachina.exnihilosequentia.common.item.MeshItem;
-import novamachina.exnihilosequentia.common.item.PebbleItem;
-import novamachina.exnihilosequentia.common.item.ResourceItem;
-import novamachina.exnihilosequentia.common.item.SilkwormItem;
-import novamachina.exnihilosequentia.common.item.mesh.MeshType;
-import novamachina.exnihilosequentia.common.item.ore.Ore;
-import novamachina.exnihilosequentia.common.utility.Config;
+import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
-import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 import novamachina.exnihilosequentia.world.level.material.EXNFluids;
-import novamachina.novacore.registries.ItemRegistry;
+import novamachina.novacore.core.registries.ItemRegistry;
 import novamachina.novacore.world.item.ItemDefinition;
 
 @SuppressWarnings("unused")
@@ -181,7 +168,7 @@ public class EXNItems {
   public static final ItemDefinition<ResourceItem> MYCELIUM_SPORE =
       ITEMS.item(
           "Mycelium Spores",
-          "mycelium_spore",
+          "mycelium_spores",
           () ->
               new ResourceItem(
                   ExNihiloConstants.Items.MYCELIUM_SPORE, Blocks.DIRT, Blocks.MYCELIUM),
@@ -189,7 +176,7 @@ public class EXNItems {
   public static final ItemDefinition<ResourceItem> CRIMSON_NYLIUM_SPORE =
       ITEMS.item(
           "Crimson Nylium Spores",
-          "crimson_nylium_spore",
+          "crimson_nylium_spores",
           () ->
               new ResourceItem(
                   ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
@@ -199,7 +186,7 @@ public class EXNItems {
   public static final ItemDefinition<ResourceItem> WARPED_NYLIUM_SPORE =
       ITEMS.item(
           "Warped Nylium Spores",
-          "warped_nylium_spore",
+          "warped_nylium_spores",
           () ->
               new ResourceItem(
                   ExNihiloConstants.Items.WARPED_NYLIUM_SPORE,
@@ -324,6 +311,12 @@ public class EXNItems {
           "andesite_crook",
           () -> new CrookItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
           ItemDefinition.ItemType.TOOL);
+  public static final ItemDefinition<CrookItem> CROOK_BAMBOO =
+      ITEMS.item(
+          "Bamboo Crook",
+          "bamboo_crook",
+          () -> new CrookItem(Tiers.WOOD, Config.getCrookWoodDurability()),
+          ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_BASALT =
       ITEMS.item(
           "Basalt Crook",
@@ -347,6 +340,12 @@ public class EXNItems {
           "Calcite Crook",
           "calcite_crook",
           () -> new CrookItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ItemDefinition.ItemType.TOOL);
+  public static final ItemDefinition<CrookItem> CROOK_CHERRY =
+      ITEMS.item(
+          "Cherry Crook",
+          "cherry_crook",
+          () -> new CrookItem(Tiers.WOOD, Config.getCrookWoodDurability()),
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_COPPER =
       ITEMS.item(
@@ -386,8 +385,8 @@ public class EXNItems {
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_GOLD =
       ITEMS.item(
-          "Gold Crook",
-          "gold_crook",
+          "Golden Crook",
+          "golden_crook",
           () -> new CrookItem(Tiers.IRON, Config.getCrookGoldDurability()),
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_GRANITE =
@@ -462,6 +461,12 @@ public class EXNItems {
           "andesite_hammer",
           () -> new HammerItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
           ItemDefinition.ItemType.TOOL);
+  public static final ItemDefinition<HammerItem> HAMMER_BAMBOO =
+      ITEMS.item(
+          "Bamboo Hammer",
+          "bamboo_hammer",
+          () -> new HammerItem(Tiers.WOOD, Config.getHammerWoodDurability()),
+          ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_BASALT =
       ITEMS.item(
           "Basalt Hammer",
@@ -485,6 +490,12 @@ public class EXNItems {
           "Calcite Hammer",
           "calcite_hammer",
           () -> new HammerItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ItemDefinition.ItemType.TOOL);
+  public static final ItemDefinition<HammerItem> HAMMER_CHERRY =
+      ITEMS.item(
+          "Cherry Hammer",
+          "cherry_hammer",
+          () -> new HammerItem(Tiers.WOOD, Config.getHammerWoodDurability()),
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_COPPER =
       ITEMS.item(
@@ -524,8 +535,8 @@ public class EXNItems {
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_GOLD =
       ITEMS.item(
-          "Gold Hammer",
-          "gold_hammer",
+          "Golden Hammer",
+          "golden_hammer",
           () -> new HammerItem(Tiers.IRON, Config.getCrookGoldDurability()),
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_GRANITE =
@@ -594,21 +605,22 @@ public class EXNItems {
           "wooden_hammer",
           () -> new HammerItem(Tiers.WOOD, Config.getCrookWoodDurability()),
           ItemDefinition.ItemType.TOOL);
-  private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
   // Begin Block Items
-  private static final Item.Properties tab =
-      new Item.Properties().tab(ExNihiloInitialization.ITEM_GROUP);
   public static final ItemDefinition<BucketItem> WITCH_WATER_BUCKET =
       ITEMS.item(
           "Witch Water Bucket",
           "witch_water_bucket",
-          () -> new BucketItem(EXNFluids.WITCH_WATER.getStillFluid(), tab.stacksTo(1)),
+          () ->
+              new BucketItem(
+                  () -> EXNFluids.WITCH_WATER.getStillFluid(), new Item.Properties().stacksTo(1)),
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<BucketItem> SEA_WATER_BUCKET =
       ITEMS.item(
           "Sea Water Bucket",
           "sea_water_bucket",
-          () -> new BucketItem(EXNFluids.SEA_WATER.getStillFluid(), tab.stacksTo(1)),
+          () ->
+              new BucketItem(
+                  () -> EXNFluids.SEA_WATER.getStillFluid(), new Item.Properties().stacksTo(1)),
           ItemDefinition.ItemType.OTHER);
 
   private EXNItems() {}

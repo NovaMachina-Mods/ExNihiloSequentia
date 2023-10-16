@@ -14,7 +14,9 @@
           "name": "exnihilosequentia:crushed_deepslate"
         }
       ],
+      "name": "main",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "exnihilosequentia:blocks/crushed_deepslate"
 }

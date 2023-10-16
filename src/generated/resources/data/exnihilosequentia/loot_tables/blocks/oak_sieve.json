@@ -14,7 +14,9 @@
           "name": "exnihilosequentia:oak_sieve"
         }
       ],
+      "name": "main",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "exnihilosequentia:blocks/oak_sieve"
 }

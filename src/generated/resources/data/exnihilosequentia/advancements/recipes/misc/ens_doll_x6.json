@@ -1,0 +1,46 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_emerald": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gems/emerald"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_porcelain_clay": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "exnihilosequentia:porcelain_clay"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_doll_x6"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_porcelain_clay",
+      "has_emerald",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_doll_x6"
+    ]
+  },
+  "sends_telemetry_event": false
+}

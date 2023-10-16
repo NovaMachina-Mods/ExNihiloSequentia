@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "exnihilosequentia",
   "key": {
     "x": {
@@ -12,5 +13,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:raw_silver"
-  }
+  },
+  "show_notification": true
 }

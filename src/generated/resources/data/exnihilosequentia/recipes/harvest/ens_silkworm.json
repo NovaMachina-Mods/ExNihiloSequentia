@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:harvest",
+  "input": {
+    "item": "exnihilosequentia:infested_leaves"
+  },
+  "results": [
+    {
+      "chance": 0.2,
+      "count": 1,
+      "item": "exnihilosequentia:silkworm"
+    }
+  ]
+}

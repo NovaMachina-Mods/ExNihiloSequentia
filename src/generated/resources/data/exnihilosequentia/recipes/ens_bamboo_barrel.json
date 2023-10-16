@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "exnihilosequentia",
+  "key": {
+    "-": {
+      "item": "minecraft:bamboo_slab"
+    },
+    "x": {
+      "item": "minecraft:bamboo_planks"
+    }
+  },
+  "pattern": [
+    "x x",
+    "x x",
+    "x-x"
+  ],
+  "result": {
+    "item": "exnihilosequentia:bamboo_barrel"
+  },
+  "show_notification": true
+}

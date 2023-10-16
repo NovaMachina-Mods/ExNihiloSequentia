@@ -14,7 +14,9 @@
           "name": "exnihilosequentia:stone_barrel"
         }
       ],
+      "name": "main",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "exnihilosequentia:blocks/stone_barrel"
 }

@@ -14,7 +14,9 @@
           "name": "exnihilosequentia:acacia_barrel"
         }
       ],
+      "name": "main",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "exnihilosequentia:blocks/acacia_barrel"
 }

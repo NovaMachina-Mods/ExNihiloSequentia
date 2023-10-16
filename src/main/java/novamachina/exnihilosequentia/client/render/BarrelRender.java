@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -16,27 +15,29 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import novamachina.exnihilosequentia.client.util.LiquidBlockVertexConsumer;
-import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEntity;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.world.level.block.entity.BarrelBlockEntity;
+import novamachina.novacore.client.renderer.blockentity.BlockEntityRenderer;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity> {
+public class BarrelRender extends BlockEntityRenderer<BarrelBlockEntity> {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private static Logger log = LoggerFactory.getLogger(BarrelRender.class);
 
   public BarrelRender(@Nonnull final BlockEntityRendererProvider.Context rendererDispatcherIn) {
     super();
   }
 
   public static void register(
-      @Nonnull final BlockEntityType<? extends AbstractBarrelEntity> tileEntityType) {
-    logger.debug("Register barrel renderer");
+      @Nonnull final BlockEntityType<? extends BarrelBlockEntity> tileEntityType) {
+    log.debug("Register barrel renderer");
     BlockEntityRenderers.register(tileEntityType, BarrelRender::new);
   }
 
   @Override
   public void render(
-      @Nonnull final AbstractBarrelEntity tileEntity,
+      @Nonnull final BarrelBlockEntity tileEntity,
       final float partialTicks,
       @Nonnull final PoseStack matrixStack,
       @Nonnull final MultiBufferSource buffer,
@@ -48,7 +49,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
   }
 
   private void renderSolid(
-      @NotNull AbstractBarrelEntity tileEntity,
+      @NotNull BarrelBlockEntity tileEntity,
       @NotNull PoseStack matrixStack,
       @NotNull MultiBufferSource buffer,
       int combinedLightIn,
@@ -78,7 +79,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
   private void renderFluid(
       @NotNull PoseStack matrixStack,
       @NotNull MultiBufferSource buffer,
-      AbstractBarrelEntity tileEntity) {
+      BarrelBlockEntity tileEntity) {
     if (tileEntity.getFluidAmount() > 0) {
       BlockState state = tileEntity.getFluid().defaultFluidState().createLegacyBlock();
       matrixStack.pushPose();
@@ -108,7 +109,7 @@ public class BarrelRender extends AbstractModBlockRenderer<AbstractBarrelEntity>
       @NotNull MultiBufferSource buffer,
       int combinedLightIn,
       int combinedOverlayIn,
-      AbstractBarrelEntity tileEntity) {
+      BarrelBlockEntity tileEntity) {
     if (tileEntity.getInventoryBlock() != ItemStack.EMPTY) {
       BlockState state = getStateFromItemStack(tileEntity.getInventoryBlock());
       matrixStack.pushPose();

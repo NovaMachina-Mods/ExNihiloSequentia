@@ -1,30 +1,19 @@
 package novamachina.exnihilosequentia.sounds;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-import net.minecraft.resources.ResourceLocation;
+import java.util.List;
 import net.minecraft.sounds.SoundEvent;
-import novamachina.exnihilosequentia.ExNihiloSequentia;
+import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.novacore.core.registries.SoundEventRegistry;
 
 public class EXNSoundEvents {
+  private static final SoundEventRegistry SOUND_EVENTS =
+      new SoundEventRegistry(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
 
-  private static final Map<ResourceLocation, SoundEvent> SOUND_EVENTS = new HashMap<>();
-
-  public static Map<ResourceLocation, SoundEvent> getDefinitions() {
-    return SOUND_EVENTS;
+  public static List<SoundEvent> getDefinitions() {
+    return SOUND_EVENTS.getRegistry();
   }
 
-  public static final SoundEvent PEBBLE_THROW =
-      register(
-          ExNihiloSequentia.makeId("pebble_throw"),
-          () -> new SoundEvent(ExNihiloSequentia.makeId("pebble_throw")));
+  public static final SoundEvent PEBBLE_THROW = SOUND_EVENTS.soundEvent("pebble_throw");
 
   private EXNSoundEvents() {}
-
-  public static SoundEvent register(ResourceLocation id, Supplier<SoundEvent> supplier) {
-    SoundEvent event = supplier.get();
-    SOUND_EVENTS.put(id, event);
-    return event;
-  }
 }

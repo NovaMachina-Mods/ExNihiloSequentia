@@ -1,7 +1,6 @@
 package novamachina.exnihilosequentia.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.logging.LogUtils;
 import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -15,27 +14,29 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import novamachina.exnihilosequentia.client.util.LiquidBlockVertexConsumer;
-import novamachina.exnihilosequentia.common.blockentity.crucible.BaseCrucibleEntity;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity;
+import novamachina.novacore.client.renderer.blockentity.BlockEntityRenderer;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity> {
+public class CrucibleRender extends BlockEntityRenderer<CrucibleBlockEntity> {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private static Logger log = LoggerFactory.getLogger(CrucibleRender.class);
 
   public CrucibleRender(@Nonnull final BlockEntityRendererProvider.Context rendererDispatcher) {
     super();
   }
 
   public static void register(
-      @Nonnull final BlockEntityType<? extends BaseCrucibleEntity> tileTileEntityType) {
-    logger.debug("Register crucible renderer, Type" + tileTileEntityType);
+      @Nonnull final BlockEntityType<? extends CrucibleBlockEntity> tileTileEntityType) {
+    log.debug("Register crucible renderer, Type" + tileTileEntityType);
     BlockEntityRenderers.register(tileTileEntityType, CrucibleRender::new);
   }
 
   @Override
   public void render(
-      @Nonnull final BaseCrucibleEntity tileEntity,
+      @Nonnull final CrucibleBlockEntity tileEntity,
       final float partialTicks,
       @Nonnull final PoseStack matrixStack,
       @Nonnull final MultiBufferSource buffer,
@@ -48,7 +49,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
   private void renderFluid(
       @NotNull PoseStack matrixStack,
       @NotNull MultiBufferSource buffer,
-      BaseCrucibleEntity tileEntity) {
+      CrucibleBlockEntity tileEntity) {
     if (tileEntity.getFluidAmount() > 0) {
       BlockState state = tileEntity.getFluid().defaultFluidState().createLegacyBlock();
       matrixStack.pushPose();
@@ -74,7 +75,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
   }
 
   private void renderSolid(
-      @NotNull BaseCrucibleEntity tileEntity,
+      @NotNull CrucibleBlockEntity tileEntity,
       @NotNull PoseStack matrixStack,
       @NotNull MultiBufferSource buffer,
       int combinedLightIn,
@@ -102,7 +103,7 @@ public class CrucibleRender extends AbstractModBlockRenderer<BaseCrucibleEntity>
             ModelData.EMPTY,
             RenderType.cutoutMipped());
       } else {
-        logger.warn("BlockState was null");
+        log.warn("BlockState was null");
       }
       matrixStack.popPose();
     }

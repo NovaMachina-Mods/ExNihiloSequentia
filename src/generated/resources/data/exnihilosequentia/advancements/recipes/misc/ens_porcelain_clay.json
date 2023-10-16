@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_clay": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:clay"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_porcelain_clay"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_clay",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_porcelain_clay"
+    ]
+  },
+  "sends_telemetry_event": false
+}

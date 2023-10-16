@@ -8,8 +8,8 @@ import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
-import novamachina.exnihilosequentia.common.utility.Config;
 
 public class CompostTooltipCallback implements IRecipeSlotTooltipCallback {
 

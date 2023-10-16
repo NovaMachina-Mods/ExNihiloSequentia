@@ -1,0 +1,16 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:mud"
+  },
+  "result": {
+    "item": "minecraft:mangrove_propagule"
+  },
+  "rolls": [
+    {
+      "chance": 0.03,
+      "mesh": "string"
+    }
+  ],
+  "waterlogged": true
+}

@@ -1,0 +1,19 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "item": "exnihilosequentia:calcite_pebble"
+  },
+  "rolls": [
+    {
+      "chance": 0.5,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "string"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import net.minecraft.resources.ResourceLocation;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
-import novamachina.novacore.registries.SimpleResourceLocationRegistry;
+import novamachina.novacore.core.registries.SimpleResourceLocationRegistry;
 
 public class EXNStats {
 
@@ -12,10 +12,10 @@ public class EXNStats {
       new SimpleResourceLocationRegistry(ExNihiloSequentia.MOD_ID);
 
   public static List<ResourceLocation> getDefinitions() {
-    return STATS;
+    return STATS.getRegistry();
   }
 
-  @Nonnull public static final ResourceLocation SIEVED = stat("sieved");
+  @Nonnull public static final ResourceLocation SIEVED = STATS.register("sieved");
 
   private EXNStats() {}
 }

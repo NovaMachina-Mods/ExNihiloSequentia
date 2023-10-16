@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "exnihilosequentia:item/ore/nugget/nickel_nugget"
+    "layer0": "exnihilosequentia:item/nickel_nugget"
   }
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "exnihilosequentia",
   "key": {
     "x": {
@@ -13,5 +14,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:nickel_ingot"
-  }
+  },
+  "show_notification": true
 }

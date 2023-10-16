@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "l": {
       "item": "minecraft:acacia_slab"
@@ -18,5 +19,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:acacia_sieve"
-  }
+  },
+  "show_notification": true
 }

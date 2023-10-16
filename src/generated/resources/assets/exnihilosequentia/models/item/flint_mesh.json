@@ -1,3 +1,6 @@
 {
-  "parent": "exnihilosequentia:block/flint_mesh"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "exnihilosequentia:item/flint_mesh"
+  }
 }

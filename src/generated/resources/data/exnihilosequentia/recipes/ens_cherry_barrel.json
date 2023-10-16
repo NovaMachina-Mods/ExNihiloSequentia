@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "exnihilosequentia",
+  "key": {
+    "-": {
+      "item": "minecraft:cherry_slab"
+    },
+    "x": {
+      "item": "minecraft:cherry_planks"
+    }
+  },
+  "pattern": [
+    "x x",
+    "x x",
+    "x-x"
+  ],
+  "result": {
+    "item": "exnihilosequentia:cherry_barrel"
+  },
+  "show_notification": true
+}

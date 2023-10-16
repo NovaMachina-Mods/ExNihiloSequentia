@@ -1,0 +1,14 @@
+{
+  "type": "exnihilosequentia:precipitate",
+  "fluid": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "count": 1,
+    "item": "minecraft:mud"
+  }
+}

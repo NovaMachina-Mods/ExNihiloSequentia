@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:crushing",
+  "input": {
+    "item": "minecraft:horn_coral"
+  },
+  "results": [
+    {
+      "chance": 1.0,
+      "count": 1,
+      "item": "minecraft:horn_coral_fan"
+    }
+  ]
+}

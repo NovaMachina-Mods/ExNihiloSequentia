@@ -1,0 +1,14 @@
+{
+  "type": "exnihilosequentia:precipitate",
+  "fluid": {
+    "amount": 1000,
+    "fluid": "exnihilosequentia:witch_water"
+  },
+  "input": {
+    "tag": "forge:mushrooms"
+  },
+  "result": {
+    "count": 1,
+    "item": "minecraft:slime_block"
+  }
+}

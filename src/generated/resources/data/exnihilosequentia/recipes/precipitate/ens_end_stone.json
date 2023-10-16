@@ -1,0 +1,14 @@
+{
+  "type": "exnihilosequentia:precipitate",
+  "fluid": {
+    "amount": 1000,
+    "fluid": "minecraft:lava"
+  },
+  "input": {
+    "tag": "forge:dusts/glowstone"
+  },
+  "result": {
+    "count": 1,
+    "item": "minecraft:end_stone"
+  }
+}

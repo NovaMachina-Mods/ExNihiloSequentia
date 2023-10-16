@@ -3,14 +3,12 @@ package novamachina.exnihilosequentia.common.compat.waila;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import novamachina.exnihilosequentia.common.blockentity.SieveEntity;
-import novamachina.exnihilosequentia.common.item.mesh.MeshType;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
-import novamachina.exnihilosequentia.common.utility.StringUtils;
+import novamachina.exnihilosequentia.world.item.MeshType;
+import novamachina.exnihilosequentia.world.level.block.entity.SieveBlockEntity;
+import novamachina.novacore.util.StringUtils;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
@@ -18,7 +16,7 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class SieveComponentProvider
-    implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+    implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
 
   @Override
   public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig iPluginConfig) {
@@ -39,28 +37,24 @@ public class SieveComponentProvider
   }
 
   @Override
-  public void appendServerData(
-      CompoundTag compoundTag,
-      ServerPlayer serverPlayer,
-      Level level,
-      BlockEntity blockEntity,
-      boolean b) {
+  public void appendServerData(CompoundTag compoundTag, BlockAccessor blockAccessor) {
     CompoundTag tag = new CompoundTag();
-    if (blockEntity instanceof SieveEntity sieveEntity) {
-      if (!sieveEntity.getBlockStack().isEmpty()) {
+    BlockEntity blockEntity = blockAccessor.getBlockEntity();
+    if (blockEntity instanceof SieveBlockEntity sieveBlockEntity) {
+      if (!sieveBlockEntity.getBlockStack().isEmpty()) {
         tag.putString(
             "progress",
             Component.translatable(
-                    "waila.progress", StringUtils.formatPercent(sieveEntity.getProgress()))
+                    "waila.progress", StringUtils.formatPercent(sieveBlockEntity.getProgress()))
                 .getString());
         tag.putString(
             "block",
             Component.translatable(
                     "waila.sieve.block",
-                    Component.translatable(sieveEntity.getBlockStack().getDescriptionId()))
+                    Component.translatable(sieveBlockEntity.getBlockStack().getDescriptionId()))
                 .getString());
       }
-      if (sieveEntity.getMeshType() != MeshType.NONE) {
+      if (sieveBlockEntity.getMeshType() != MeshType.NONE) {
         tag.putString(
             "mesh",
             Component.translatable(
@@ -69,7 +63,7 @@ public class SieveComponentProvider
                         "item."
                             + ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA
                             + "."
-                            + sieveEntity.getMeshType().getMeshName()))
+                            + sieveBlockEntity.getMeshType().getMeshName()))
                 .getString());
       }
     }

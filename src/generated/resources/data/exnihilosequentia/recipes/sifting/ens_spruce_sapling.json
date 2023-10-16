@@ -1,0 +1,15 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "item": "minecraft:spruce_sapling"
+  },
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "string"
+    }
+  ]
+}

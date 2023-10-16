@@ -14,7 +14,9 @@
           "name": "exnihilosequentia:fired_crucible"
         }
       ],
+      "name": "main",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "exnihilosequentia:blocks/fired_crucible"
 }

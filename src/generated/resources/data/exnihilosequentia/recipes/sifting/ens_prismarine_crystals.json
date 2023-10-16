@@ -1,0 +1,16 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:sand"
+  },
+  "result": {
+    "item": "minecraft:prismarine_crystals"
+  },
+  "rolls": [
+    {
+      "chance": 0.01,
+      "mesh": "diamond"
+    }
+  ],
+  "waterlogged": true
+}

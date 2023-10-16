@@ -7,7 +7,7 @@ issueTrackerURL = "${git_url}/issues" #optional
 modId = "${mod_id}" #mandatory
 version = "${mod_version}" #mandatory
 displayName = "${mod_name}" #mandatory
-updateJSONURL = "https://api.modrinth.com/updates/${modrinthProjectId}/forge_updates.json"
+updateJSONURL = "https://api.modrinth.com/updates/${modrinth_project_id}/forge_updates.json"
 displayURL = "${curseforge_url}" #optional
 logoFile = "logo.png" #optional
 credits = "Thanks to McJty for tutorials and those that created the Ex Nihilo series" #optional
@@ -28,23 +28,23 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-#[[dependencies.${mod_id}]]
-#modId = "crafttweaker"
-#mandatory = false
-#versionRange = "${crafttweaker_version_range}"
-#ordering = "AFTER"
-#side = "BOTH"
-#
-#[[dependencies.${mod_id}]]
-#modId = "jei"
-#mandatory = false
-#versionRange = "${jei_version_range}"
-#ordering = "AFTER"
-#side = "BOTH"
-#
-#[[dependencies.${mod_id}]]
-#modId = "kubejs"
-#mandatory = false
-#versionRange = "${kubejs_version_range}"
-#ordering = "AFTER"
-#side = "BOTH"
+[[dependencies.${mod_id}]]
+modId = "crafttweaker"
+mandatory = false
+versionRange = "${crafttweaker_version_range}"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "jei"
+mandatory = false
+versionRange = "${jei_version_range}"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "kubejs"
+mandatory = false
+versionRange = "${kubejs_version_range}"
+ordering = "AFTER"
+side = "BOTH"

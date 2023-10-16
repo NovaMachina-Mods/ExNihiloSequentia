@@ -4,16 +4,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
-import novamachina.exnihilosequentia.common.blockentity.InfestedLeavesEntity;
-import novamachina.exnihilosequentia.common.blockentity.InfestingLeavesEntity;
-import novamachina.exnihilosequentia.common.blockentity.SieveEntity;
-import novamachina.exnihilosequentia.common.blockentity.barrel.AbstractBarrelEntity;
-import novamachina.exnihilosequentia.common.blockentity.barrel.StoneBarrelEntity;
-import novamachina.exnihilosequentia.common.blockentity.barrel.WoodBarrelEntity;
-import novamachina.exnihilosequentia.common.blockentity.crucible.FiredCrucibleEntity;
-import novamachina.exnihilosequentia.common.blockentity.crucible.WoodCrucibleEntity;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.registries.BlockEntityTypeRegistry;
+import novamachina.novacore.core.registries.BlockEntityTypeRegistry;
 import novamachina.novacore.world.level.block.BlockEntityTypeDefinition;
 
 public class EXNBlockEntityTypes {
@@ -28,21 +20,24 @@ public class EXNBlockEntityTypes {
   }
 
   @Nonnull
-  public static final BlockEntityTypeDefinition<FiredCrucibleEntity> FIRED_CRUCIBLE_ENTITY =
-      BLOCK_ENTITY_TYPES.create(
-          "fired_crucible",
-          FiredCrucibleEntity::new,
-          EXNBlocks.FIRED_CRUCIBLE,
-          EXNBlocks.CRIMSON_CRUCIBLE,
-          EXNBlocks.WARPED_CRUCIBLE);
+  public static final BlockEntityTypeDefinition<FiredCrucibleBlockBlockEntity>
+      FIRED_CRUCIBLE_ENTITY =
+          BLOCK_ENTITY_TYPES.create(
+              "fired_crucible",
+              FiredCrucibleBlockBlockEntity::new,
+              EXNBlocks.FIRED_CRUCIBLE,
+              EXNBlocks.CRIMSON_CRUCIBLE,
+              EXNBlocks.WARPED_CRUCIBLE);
 
   @Nonnull
-  public static final BlockEntityTypeDefinition<WoodCrucibleEntity> WOODEN_CRUCIBLE_ENTITY =
+  public static final BlockEntityTypeDefinition<WoodCrucibleBlockEntity> WOODEN_CRUCIBLE_ENTITY =
       BLOCK_ENTITY_TYPES.create(
           "crucibles",
-          WoodCrucibleEntity::new,
+          WoodCrucibleBlockEntity::new,
           EXNBlocks.ACACIA_CRUCIBLE,
+          EXNBlocks.BAMBOO_CRUCIBLE,
           EXNBlocks.BIRCH_CRUCIBLE,
+          EXNBlocks.CHERRY_CRUCIBLE,
           EXNBlocks.DARK_OAK_CRUCIBLE,
           EXNBlocks.JUNGLE_CRUCIBLE,
           EXNBlocks.MANGROVE_CRUCIBLE,
@@ -50,12 +45,14 @@ public class EXNBlockEntityTypes {
           EXNBlocks.SPRUCE_CRUCIBLE);
 
   @Nonnull
-  public static final BlockEntityTypeDefinition<SieveEntity> SIEVE_ENTITY =
+  public static final BlockEntityTypeDefinition<SieveBlockEntity> SIEVE_ENTITY =
       BLOCK_ENTITY_TYPES.create(
           "sieves",
-          SieveEntity::new,
+          SieveBlockEntity::new,
           EXNBlocks.ACACIA_SIEVE,
+          EXNBlocks.BAMBOO_SIEVE,
           EXNBlocks.BIRCH_SIEVE,
+          EXNBlocks.CHERRY_SIEVE,
           EXNBlocks.DARK_OAK_SIEVE,
           EXNBlocks.JUNGLE_SIEVE,
           EXNBlocks.MANGROVE_SIEVE,
@@ -65,35 +62,36 @@ public class EXNBlockEntityTypes {
           EXNBlocks.WARPED_SIEVE);
 
   @Nonnull
-  public static final BlockEntityTypeDefinition<InfestingLeavesEntity> INFESTING_LEAVES_ENTITY =
-      BLOCK_ENTITY_TYPES.create(
-          "infesting_leaves", InfestingLeavesEntity::new, EXNBlocks.INFESTING_LEAVES);
-
-  @Nonnull
-  public static final BlockEntityTypeDefinition<InfestedLeavesEntity> INFESTED_LEAVES_ENTITY =
-      BLOCK_ENTITY_TYPES.create(
-          "infested_leaves", InfestedLeavesEntity::new, EXNBlocks.INFESTED_LEAVES);
-
-  @Nonnull
-  public static final BlockEntityTypeDefinition<? extends AbstractBarrelEntity>
-      WOODEN_BARREL_ENTITY =
+  public static final BlockEntityTypeDefinition<InfestingLeavesBlockEntity>
+      INFESTING_LEAVES_ENTITY =
           BLOCK_ENTITY_TYPES.create(
-              "barrels",
-              WoodBarrelEntity::new,
-              EXNBlocks.ACACIA_BARREL,
-              EXNBlocks.BIRCH_BARREL,
-              EXNBlocks.DARK_OAK_BARREL,
-              EXNBlocks.JUNGLE_BARREL,
-              EXNBlocks.OAK_BARREL,
-              EXNBlocks.SPRUCE_BARREL);
+              "infesting_leaves", InfestingLeavesBlockEntity::new, EXNBlocks.INFESTING_LEAVES);
 
   @Nonnull
-  public static final BlockEntityTypeDefinition<? extends AbstractBarrelEntity>
-      STONE_BARREL_ENTITY =
-          BLOCK_ENTITY_TYPES.create(
-              "stone_barrel",
-              StoneBarrelEntity::new,
-              EXNBlocks.STONE_BARREL,
-              EXNBlocks.CRIMSON_BARREL,
-              EXNBlocks.WARPED_BARREL);
+  public static final BlockEntityTypeDefinition<InfestedLeavesBlockEntity> INFESTED_LEAVES_ENTITY =
+      BLOCK_ENTITY_TYPES.create(
+          "infested_leaves", InfestedLeavesBlockEntity::new, EXNBlocks.INFESTED_LEAVES);
+
+  @Nonnull
+  public static final BlockEntityTypeDefinition<? extends BarrelBlockEntity> WOODEN_BARREL_ENTITY =
+      BLOCK_ENTITY_TYPES.create(
+          "barrels",
+          WoodBarrelBlockEntity::new,
+          EXNBlocks.ACACIA_BARREL,
+          EXNBlocks.BAMBOO_BARREL,
+          EXNBlocks.BIRCH_BARREL,
+          EXNBlocks.CHERRY_BARREL,
+          EXNBlocks.DARK_OAK_BARREL,
+          EXNBlocks.JUNGLE_BARREL,
+          EXNBlocks.OAK_BARREL,
+          EXNBlocks.SPRUCE_BARREL);
+
+  @Nonnull
+  public static final BlockEntityTypeDefinition<? extends BarrelBlockEntity> STONE_BARREL_ENTITY =
+      BLOCK_ENTITY_TYPES.create(
+          "stone_barrel",
+          StoneBarrelBlockEntity::new,
+          EXNBlocks.STONE_BARREL,
+          EXNBlocks.CRIMSON_BARREL,
+          EXNBlocks.WARPED_BARREL);
 }

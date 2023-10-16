@@ -1,0 +1,19 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:gravel"
+  },
+  "result": {
+    "item": "minecraft:flint"
+  },
+  "rolls": [
+    {
+      "chance": 0.25,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.25,
+      "mesh": "flint"
+    }
+  ]
+}

@@ -1,15 +1,11 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
 import java.util.List;
-import javax.annotation.Nonnull;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
-import novamachina.exnihilosequentia.common.crafting.serializer.*;
-import novamachina.novacore.registries.RecipeSerializerRegistry;
+import novamachina.novacore.core.registries.RecipeSerializerRegistry;
 import novamachina.novacore.world.item.crafting.RecipeSerializerDefinition;
 
 public class EXNRecipeSerializers {
-
-  @Nonnull
   private static final RecipeSerializerRegistry RECIPE_SERIALIZERS =
       new RecipeSerializerRegistry(ExNihiloSequentia.MOD_ID);
 
@@ -17,24 +13,32 @@ public class EXNRecipeSerializers {
     return RECIPE_SERIALIZERS.getRegistry();
   }
 
-  public static final RecipeSerializerDefinition<?> HAMMER_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("hammer", HammerRecipeSerializer::new);
-  public static final RecipeSerializerDefinition<?> CROOK_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("crook", CrookRecipeSerializer::new);
+  public static final RecipeSerializerDefinition<?> CRUSHING_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register(
+          "crushing", () -> new CrushingRecipe.Serializer<>(CrushingRecipe::new));
+  public static final RecipeSerializerDefinition<?> HARVEST_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register(
+          "harvest", () -> new HarvestRecipe.Serializer<>(HarvestRecipe::new));
   public static final RecipeSerializerDefinition<?> COMPOST_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("compost", CompostRecipeSerializer::new);
-  public static final RecipeSerializerDefinition<?> FLUID_ITEM_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("fluid_item", FluidItemRecipeSerializer::new);
-  public static final RecipeSerializerDefinition<?> FLUID_ON_TOP_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("fluid_on_top", FluidOnTopRecipeSerializer::new);
-  public static final RecipeSerializerDefinition<?> FLUID_TRANSFORM_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("fluid_transform", FluidTransformRecipeSerializer::new);
-  public static final RecipeSerializerDefinition<?> CRUCIBLE_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("crucible", CrucibleRecipeSerializer::new);
+      RECIPE_SERIALIZERS.register(
+          "compost", () -> new CompostRecipe.Serializer<>(CompostRecipe::new));
+  public static final RecipeSerializerDefinition<?> PRECIPITATE_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register(
+          "precipitate", () -> new PrecipitateRecipe.Serializer<>(PrecipitateRecipe::new));
+  public static final RecipeSerializerDefinition<?> SOLIDIFYING_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register(
+          "solidifying", () -> new SolidifyingRecipe.Serializer<>(SolidifyingRecipe::new));
+  public static final RecipeSerializerDefinition<?> TRANSITION_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register(
+          "transition", () -> new TransitionRecipe.Serializer<>(TransitionRecipe::new));
+  public static final RecipeSerializerDefinition<?> MELTING_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register(
+          "melting", () -> new MeltingRecipe.Serializer<>(MeltingRecipe::new));
   public static final RecipeSerializerDefinition<?> HEAT_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("heat", HeatRecipeSerializer::new);
-  public static final RecipeSerializerDefinition<?> SIEVE_RECIPE_SERIALIZER =
-      RECIPE_SERIALIZERS.register("sieve", SieveRecipeSerializer::new);
+      RECIPE_SERIALIZERS.register("heat", () -> new HeatRecipe.Serializer<>(HeatRecipe::new));
+  public static final RecipeSerializerDefinition<?> SIFTING_RECIPE_SERIALIZER =
+      RECIPE_SERIALIZERS.register(
+          "sifting", () -> new SiftingRecipe.Serializer<>(SiftingRecipe::new));
 
   private EXNRecipeSerializers() {}
 }

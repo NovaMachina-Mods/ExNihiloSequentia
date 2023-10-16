@@ -1,0 +1,11 @@
+{
+  "type": "exnihilosequentia:melting",
+  "crucibleType": "fired",
+  "fluidResult": {
+    "amount": 250,
+    "fluid": "minecraft:lava"
+  },
+  "input": {
+    "item": "minecraft:andesite"
+  }
+}

@@ -1,5 +1,6 @@
 {
   "parent": "exnihilosequentia:block/crucible_base",
+  "render_type": "minecraft:cutout_mipped",
   "textures": {
     "particle": "minecraft:block/acacia_planks",
     "texture": "exnihilosequentia:block/acacia_crucible"

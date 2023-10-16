@@ -1,0 +1,16 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "tag": "minecraft:sand"
+  },
+  "result": {
+    "item": "exnihilosequentia:bubble_coral_larva"
+  },
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "iron"
+    }
+  ],
+  "waterlogged": true
+}

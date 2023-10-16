@@ -14,7 +14,9 @@
           "name": "exnihilosequentia:warped_barrel"
         }
       ],
+      "name": "main",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "exnihilosequentia:blocks/warped_barrel"
 }

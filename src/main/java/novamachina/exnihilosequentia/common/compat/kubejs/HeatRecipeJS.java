@@ -1,76 +1,24 @@
 package novamachina.exnihilosequentia.common.compat.kubejs;
 
-import dev.latvian.mods.kubejs.item.ingredient.IngredientJS;
-import dev.latvian.mods.kubejs.recipe.IngredientMatch;
-import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
-import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
-import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.recipe.RecipeJS;
-import dev.latvian.mods.kubejs.util.MapJS;
-import java.util.Arrays;
-import java.util.Map;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
+import com.mojang.datafixers.util.Either;
+import dev.latvian.mods.kubejs.recipe.RecipeKey;
+import dev.latvian.mods.kubejs.recipe.component.BlockComponent;
+import dev.latvian.mods.kubejs.recipe.component.NumberComponent;
+import dev.latvian.mods.kubejs.recipe.component.RecipeComponent;
+import dev.latvian.mods.kubejs.recipe.component.TagKeyComponent;
+import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
+import novamachina.exnihilosequentia.common.compat.kubejs.component.StatePropertiesPredicateComponent;
 
-public class HeatRecipeJS extends RecipeJS {
+public interface HeatRecipeJS {
 
-  private Block block;
-  private int amount;
-  private Map<?, ?> state;
-
-  @Override
-  public void create(RecipeArguments args) {
-    this.block =
-        Block.byItem(
-            Arrays.stream(IngredientJS.of(args.get(0)).getItems()).findFirst().get().getItem());
-    this.amount = args.getInt(1, 0);
-    this.state = MapJS.of(args.get(2));
-  }
-
-  @Override
-  public void deserialize() {
-    this.block =
-        Block.byItem(
-            Arrays.stream(IngredientJS.of(this.json.get("block")).getItems())
-                .findFirst()
-                .get()
-                .getItem());
-    this.amount = this.json.get("amount").getAsInt();
-    this.state = MapJS.of(this.json.get("state"));
-  }
-
-  @Override
-  public void serialize() {
-    this.json.addProperty("block", ForgeRegistries.BLOCKS.getKey(this.block).toString());
-    this.json.addProperty("amount", this.amount);
-    this.json.add("state", MapJS.json(this.state));
-  }
-
-  @Override
-  public boolean hasInput(IngredientMatch ingredientMatch) {
-    return false;
-  }
-
-  @Override
-  public boolean replaceInput(
-      IngredientMatch ingredientMatch,
-      Ingredient ingredient,
-      ItemInputTransformer itemInputTransformer) {
-    return false;
-  }
-
-  @Override
-  public boolean hasOutput(IngredientMatch ingredientMatch) {
-    return false;
-  }
-
-  @Override
-  public boolean replaceOutput(
-      IngredientMatch ingredientMatch,
-      ItemStack itemStack,
-      ItemOutputTransformer itemOutputTransformer) {
-    return false;
-  }
+  RecipeComponent<Either<Block, TagKey<Block>>> INPUT =
+      BlockComponent.BLOCK.or(TagKeyComponent.BLOCK);
+  RecipeKey<Block> BLOCK = BlockComponent.BLOCK.key("block");
+  RecipeKey<Integer> AMOUNT = NumberComponent.INT.key("amount");
+  RecipeKey<StatePropertiesPredicate> STATE =
+      new StatePropertiesPredicateComponent().key("state").optional(StatePropertiesPredicate.ANY);
+  RecipeSchema SCHEMA = new RecipeSchema(BLOCK, AMOUNT, STATE);
 }

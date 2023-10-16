@@ -1,0 +1,8 @@
+{
+  "parent": "exnihilosequentia:block/sieve_base",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "minecraft:block/bamboo_planks",
+    "texture": "exnihilosequentia:block/bamboo_sieve"
+  }
+}

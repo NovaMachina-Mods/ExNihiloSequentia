@@ -1,18 +1,18 @@
 package novamachina.exnihilosequentia.common.network;
 
-import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntSupplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.network.FriendlyByteBuf;
-import novamachina.exnihilosequentia.common.item.ore.Ore;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.world.item.Ore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HandshakeMessages {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private static Logger log = LoggerFactory.getLogger(HandshakeMessages.class);
 
   private HandshakeMessages() {}
 
@@ -33,7 +33,7 @@ public class HandshakeMessages {
         String ore = buffer.readUtf();
         message.oreList.add(ore);
       }
-      logger.debug("Created ore list: " + message.oreList);
+      log.debug("Created ore list: " + message.oreList);
       return message;
     }
 
@@ -44,7 +44,7 @@ public class HandshakeMessages {
 
     void encode(@Nonnull final FriendlyByteBuf buffer) {
       oreList = Ore.getEnabledOres();
-      logger.debug("Writing ore list: " + oreList);
+      log.debug("Writing ore list: " + oreList);
       buffer.writeInt(oreList.size());
       for (@Nonnull final String ore : oreList) {
         buffer.writeUtf(ore);

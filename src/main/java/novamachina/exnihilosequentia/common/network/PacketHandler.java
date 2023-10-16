@@ -1,18 +1,17 @@
 package novamachina.exnihilosequentia.common.network;
 
-import com.mojang.logging.LogUtils;
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.HandshakeHandler;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PacketHandler {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private static Logger log = LoggerFactory.getLogger(PacketHandler.class);
   @Nullable private static SimpleChannel handshakeChannel;
 
   private PacketHandler() {}
@@ -56,7 +55,7 @@ public class PacketHandler {
                   try {
                     ExNihiloHandshakeHandler.handleOreList(msg, supplier);
                   } catch (InterruptedException e) {
-                    logger.error(e.getMessage());
+                    log.error(e.getMessage());
                     Thread.currentThread().interrupt();
                   }
                 }))

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "exnihilosequentia:item/tools/hammer/red_nether_brick_hammer"
+    "layer0": "exnihilosequentia:item/red_nether_brick_hammer"
   }
 }

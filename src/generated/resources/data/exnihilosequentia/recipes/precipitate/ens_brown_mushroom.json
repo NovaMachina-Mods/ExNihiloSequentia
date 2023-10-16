@@ -1,0 +1,14 @@
+{
+  "type": "exnihilosequentia:precipitate",
+  "fluid": {
+    "amount": 1000,
+    "fluid": "exnihilosequentia:witch_water"
+  },
+  "input": {
+    "item": "exnihilosequentia:mycelium_spores"
+  },
+  "result": {
+    "count": 1,
+    "item": "minecraft:brown_mushroom_block"
+  }
+}

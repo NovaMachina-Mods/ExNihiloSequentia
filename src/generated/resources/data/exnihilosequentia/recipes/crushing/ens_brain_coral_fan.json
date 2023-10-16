@@ -1,0 +1,13 @@
+{
+  "type": "exnihilosequentia:crushing",
+  "input": {
+    "item": "minecraft:brain_coral"
+  },
+  "results": [
+    {
+      "chance": 1.0,
+      "count": 1,
+      "item": "minecraft:brain_coral_fan"
+    }
+  ]
+}

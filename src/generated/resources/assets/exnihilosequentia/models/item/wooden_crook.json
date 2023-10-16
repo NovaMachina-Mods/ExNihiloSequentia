@@ -1,6 +1,14 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "exnihilosequentia:item/halloween_crook",
+      "predicate": {
+        "exnihilosequentia:halloween": 1.0
+      }
+    }
+  ],
   "textures": {
-    "layer0": "exnihilosequentia:item/tools/crook/wooden_crook"
+    "layer0": "exnihilosequentia:item/wooden_crook"
   }
 }

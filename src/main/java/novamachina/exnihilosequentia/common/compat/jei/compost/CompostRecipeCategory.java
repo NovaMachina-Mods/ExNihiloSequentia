@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.common.compat.jei.compost;
 
+import com.google.common.collect.Lists;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -15,8 +16,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
-import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.world.item.crafting.CompostRecipe;
 
 public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
 
@@ -56,7 +57,7 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
   @Nonnull
   @Override
   public Component getTitle() {
-    return Component.literal("Compost");
+    return Component.translatable("jei.category.compost");
   }
 
   @Override
@@ -64,15 +65,17 @@ public class CompostRecipeCategory implements IRecipeCategory<CompostRecipe> {
     IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 3, 21);
     output.addItemStack(new ItemStack(Blocks.DIRT));
 
-    if (recipe.getInputs().size() > 21) {
+    ItemStack[] inputArray = recipe.getInput().getItems();
+
+    if (inputArray.length > 21) {
       IRecipeSlotBuilder inputs = builder.addSlot(RecipeIngredientRole.INPUT, 39, 3);
-      inputs.addItemStacks(recipe.getInputs());
+      inputs.addItemStacks(Lists.newArrayList(inputArray));
     } else {
-      for (int i = 0; i < recipe.getInputs().size(); i++) {
+      for (int i = 0; i < inputArray.length; i++) {
         final int slotX = 39 + (i % 7 * 18);
         final int slotY = 3 + i / 7 * 18;
 
-        @Nonnull final ItemStack stack = recipe.getInputs().get(i);
+        @Nonnull final ItemStack stack = inputArray[i];
 
         IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, slotX, slotY);
         input.addItemStack(stack);

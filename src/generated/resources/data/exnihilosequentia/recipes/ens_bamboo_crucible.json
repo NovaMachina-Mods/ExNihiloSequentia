@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "exnihilosequentia",
+  "key": {
+    "c": {
+      "item": "minecraft:bamboo_block"
+    },
+    "l": {
+      "item": "minecraft:bamboo_slab"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "c c",
+    "clc",
+    "s s"
+  ],
+  "result": {
+    "item": "exnihilosequentia:bamboo_crucible"
+  },
+  "show_notification": true
+}

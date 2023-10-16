@@ -1,6 +1,5 @@
 package novamachina.exnihilosequentia.common.network;
 
-import com.mojang.logging.LogUtils;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
@@ -9,19 +8,20 @@ import javax.annotation.Nullable;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
-import novamachina.exnihilosequentia.common.item.ore.Ore;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.world.item.Ore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ExNihiloHandshakeHandler {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private static Logger log = LoggerFactory.getLogger(ExNihiloHandshakeHandler.class);
 
   private ExNihiloHandshakeHandler() {}
 
   public static void handleAcknowledge(
       @Nonnull final HandshakeMessages.C2SAcknowledge message,
       @Nonnull final Supplier<NetworkEvent.Context> ctx) {
-    logger.debug("Received acknowledgement from client. " + message);
+    log.debug("Received acknowledgement from client. " + message);
     ctx.get().setPacketHandled(true);
   }
 
@@ -29,7 +29,7 @@ public class ExNihiloHandshakeHandler {
       @Nonnull final HandshakeMessages.S2COreList msg,
       @Nonnull final Supplier<NetworkEvent.Context> ctx)
       throws InterruptedException {
-    logger.debug("Recieved ore data from server");
+    log.debug("Recieved ore data from server");
 
     @Nonnull final AtomicBoolean updatedOreList = new AtomicBoolean(false);
     @Nonnull final CountDownLatch block = new CountDownLatch(1);
@@ -49,20 +49,20 @@ public class ExNihiloHandshakeHandler {
     } catch (InterruptedException e) {
       //noinspection ResultOfMethodCallIgnored
       Thread.interrupted();
-      logger.error(e.getMessage());
+      log.error(e.getMessage());
       throw e;
     }
 
     ctx.get().setPacketHandled(true);
 
     if (updatedOreList.get()) {
-      logger.debug("Successfully synchronized ore list from server.");
+      log.debug("Successfully synchronized ore list from server.");
       @Nullable final SimpleChannel handshakeChannel = PacketHandler.getHandshakeChannel();
       if (handshakeChannel != null) {
         handshakeChannel.reply(new HandshakeMessages.C2SAcknowledge(), ctx.get());
       }
     } else {
-      logger.debug("Failed to synchronize ore list from server.");
+      log.debug("Failed to synchronize ore list from server.");
       ctx.get()
           .getNetworkManager()
           .disconnect(

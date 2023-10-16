@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "i": {
       "tag": "forge:gems/emerald"
@@ -15,5 +16,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:emerald_mesh"
-  }
+  },
+  "show_notification": true
 }

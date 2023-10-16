@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "l": {
+      "item": "minecraft:cherry_slab"
+    },
+    "p": {
+      "item": "minecraft:cherry_planks"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "p p",
+    "plp",
+    "s s"
+  ],
+  "result": {
+    "item": "exnihilosequentia:cherry_sieve"
+  },
+  "show_notification": true
+}

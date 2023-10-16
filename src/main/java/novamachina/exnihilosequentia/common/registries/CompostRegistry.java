@@ -1,46 +1,56 @@
 package novamachina.exnihilosequentia.common.registries;
 
-import com.mojang.logging.LogUtils;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import javax.annotation.Nonnull;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import novamachina.exnihilosequentia.common.crafting.compost.CompostRecipe;
-import novamachina.exnihilosequentia.common.utility.ExNihiloLogger;
+import novamachina.exnihilosequentia.world.item.crafting.CompostRecipe;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CompostRegistry {
 
-  @Nonnull private static final ExNihiloLogger logger = new ExNihiloLogger(LogUtils.getLogger());
+  private static Logger log = LoggerFactory.getLogger(CompostRegistry.class);
   @Nonnull public final List<CompostRecipe> recipeList = new ArrayList<>();
 
-  @Nonnull private final Map<Item, Integer> itemSolidAmountCache = new HashMap<>();
+  private final LoadingCache<ItemLike, Integer> cache;
+
+  public CompostRegistry() {
+    CacheLoader<ItemLike, Integer> loader =
+        new CacheLoader<>() {
+          @Override
+          public Integer load(ItemLike key) {
+            return recipeList.stream()
+                .filter(compostRecipe -> compostRecipe.getInput().test(new ItemStack(key)))
+                .findFirst()
+                .map(CompostRecipe::getAmount)
+                .orElse(0);
+          }
+        };
+    cache = CacheBuilder.newBuilder().maximumSize(100).build(loader);
+  }
 
   public boolean containsSolid(@Nonnull final ItemLike item) {
     return getSolidAmount(item) > 0;
   }
 
   public int getSolidAmount(@Nonnull final ItemLike item) {
-    return itemSolidAmountCache.computeIfAbsent(
-        item.asItem(),
-        k -> {
-          @Nonnull final ItemStack itemStack = new ItemStack(item);
-          return recipeList.stream()
-              .filter(compostRecipe -> compostRecipe.getInput().test(itemStack))
-              .findFirst()
-              .map(CompostRecipe::getAmount)
-              .orElse(0);
-        });
+    try {
+      return cache.get(item);
+    } catch (ExecutionException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public void setRecipes(@Nonnull final List<CompostRecipe> recipes) {
-    logger.debug("Compost Registry recipes: " + recipes.size());
+    log.debug("Compost Registry recipes: " + recipes.size());
     recipeList.addAll(recipes);
-
-    itemSolidAmountCache.clear();
+    cache.invalidateAll();
   }
 
   @Nonnull
@@ -51,6 +61,6 @@ public class CompostRegistry {
   public void clearRecipes() {
     recipeList.clear();
 
-    itemSolidAmountCache.clear();
+    cache.invalidateAll();
   }
 }

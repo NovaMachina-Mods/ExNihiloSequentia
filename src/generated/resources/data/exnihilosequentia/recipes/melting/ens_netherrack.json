@@ -1,0 +1,11 @@
+{
+  "type": "exnihilosequentia:melting",
+  "crucibleType": "fired",
+  "fluidResult": {
+    "amount": 1000,
+    "fluid": "minecraft:lava"
+  },
+  "input": {
+    "item": "minecraft:netherrack"
+  }
+}

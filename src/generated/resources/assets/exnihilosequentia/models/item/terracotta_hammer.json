@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "exnihilosequentia:item/tools/hammer/terracotta_hammer"
+    "layer0": "exnihilosequentia:item/terracotta_hammer"
   }
 }

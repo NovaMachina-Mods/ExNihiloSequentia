@@ -1,9 +1,0 @@
-#! /bin/bash
-
-if [ -e "last-success-sha" ]; then
-  cat last-success-sha
-  echo "GIT_PREVIOUS_SUCCESSFUL_COMMIT=$(cat last-success-sha)" >> $GITHUB_ENV
-else
-  echo "No last-success-sha"
-fi
-printf "EnvVar: %s" "$GIT_PREVIOUS_SUCCESSFUL_COMMIT"

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "e": {
       "tag": "forge:gems/diamond"
@@ -16,5 +17,6 @@
   "result": {
     "count": 4,
     "item": "exnihilosequentia:porcelain_doll"
-  }
+  },
+  "show_notification": true
 }

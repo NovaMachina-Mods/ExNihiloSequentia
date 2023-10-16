@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "c": {
       "item": "exnihilosequentia:porcelain_clay"
@@ -12,5 +13,6 @@
   ],
   "result": {
     "item": "exnihilosequentia:unfired_crucible"
-  }
+  },
+  "show_notification": true
 }

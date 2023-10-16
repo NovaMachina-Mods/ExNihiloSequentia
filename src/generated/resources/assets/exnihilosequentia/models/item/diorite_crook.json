@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "exnihilosequentia:item/tools/crook/diorite_crook"
+    "layer0": "exnihilosequentia:item/diorite_crook"
   }
 }

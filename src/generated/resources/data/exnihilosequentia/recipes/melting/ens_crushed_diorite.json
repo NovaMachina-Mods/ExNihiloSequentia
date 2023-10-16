@@ -1,0 +1,11 @@
+{
+  "type": "exnihilosequentia:melting",
+  "crucibleType": "fired",
+  "fluidResult": {
+    "amount": 200,
+    "fluid": "minecraft:lava"
+  },
+  "input": {
+    "item": "exnihilosequentia:crushed_diorite"
+  }
+}

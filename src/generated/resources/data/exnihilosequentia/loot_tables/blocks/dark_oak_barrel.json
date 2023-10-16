@@ -14,7 +14,9 @@
           "name": "exnihilosequentia:dark_oak_barrel"
         }
       ],
+      "name": "main",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "exnihilosequentia:blocks/dark_oak_barrel"
 }

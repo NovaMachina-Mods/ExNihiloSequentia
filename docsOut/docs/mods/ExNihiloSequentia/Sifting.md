@@ -1,97 +1,187 @@
-# SieveRecipe
+# SiftingRecipe
 
 ## Importing the class
 
 It might be required for you to import the package if you encounter any issues (like casting an Array), so better be safe than sorry and add the import at the very top of the file.
 ```zenscript
-import mods.exnihilosequentia.SieveRecipe;
+import mods.exnihilosequentia.SiftingRecipe;
 ```
 
+
+## Implemented Interfaces
+SiftingRecipe implements the following interfaces. That means all methods defined in these interfaces are also available in SiftingRecipe
+
+- [IRecipeManager](/vanilla/api/recipe/manager/IRecipeManager)
 
 ## Methods
 
-:::group{name=addDrop}
-
-Sets the item that should drop when sifting
-
-Return Type: [SieveRecipe](/mods/ExNihiloSequentia/Sifting)
+:::group{name=addJsonRecipe}
 
 ```zenscript
-SieveRecipe.addDrop(drop as IItemStack) as SieveRecipe
+SiftingRecipe.addJsonRecipe(name as string, mapData as MapData)
 ```
 
-| Parameter |                    Type                    | Description  |
-|-----------|--------------------------------------------|--------------|
-| drop      | [IItemStack](/vanilla/api/item/IItemStack) | dropped item |
+| Parameter |                 Type                 |
+|-----------|--------------------------------------|
+| name      | string                               |
+| mapData   | [MapData](/vanilla/api/data/MapData) |
 
 
 :::
 
-:::group{name=addRoll}
-
-Sets the mesh type and the chance, how often the item should drop.
-
-Return Type: [SieveRecipe](/mods/ExNihiloSequentia/Sifting)
+:::group{name=addRecipe}
 
 ```zenscript
-SieveRecipe.addRoll(mesh as string, chance as float) as SieveRecipe
+SiftingRecipe.addRecipe(name as string, input as IIngredient, drop as IItemStack, isWaterlogged as boolean, rolls as MeshWithChance[])
 ```
 
-| Parameter |  Type  |                        Description                         |
-|-----------|--------|------------------------------------------------------------|
-| mesh      | string | mesh type (only valid meshes are allowed)                  |
-| chance    | float  | the chance betweet 0 and 1 (greater than 1 is not allowed) |
+|   Parameter   |                               Type                               |
+|---------------|------------------------------------------------------------------|
+| name          | string                                                           |
+| input         | [IIngredient](/vanilla/api/ingredient/IIngredient)               |
+| drop          | [IItemStack](/vanilla/api/item/IItemStack)                       |
+| isWaterlogged | boolean                                                          |
+| rolls         | [MeshWithChance](/mods/ExNihiloSequentia/ExpandMeshWithChance)[] |
 
 
 :::
 
-:::group{name=create}
+:::group{name=getAllRecipes}
 
-Create a recipe name for the new recipe
-
-Return Type: [SieveRecipe](/mods/ExNihiloSequentia/Sifting)
+Return Type: stdlib.List&lt;T&gt;
 
 ```zenscript
-SieveRecipe.create(recipeId as string) as SieveRecipe
-```
+// SiftingRecipe.getAllRecipes() as stdlib.List<T>
 
-| Parameter |  Type  |  Description   |
-|-----------|--------|----------------|
-| recipeId  | string | name of recipe |
-
-
-:::
-
-:::group{name=setInput}
-
-Sets the input that should be sifted
-
-Return Type: [SieveRecipe](/mods/ExNihiloSequentia/Sifting)
-
-```zenscript
-SieveRecipe.setInput(input as IIngredient) as SieveRecipe
-```
-
-| Parameter |                        Type                        |       Description       |
-|-----------|----------------------------------------------------|-------------------------|
-| input     | [IIngredient](/vanilla/api/ingredient/IIngredient) | sifted block / item tag |
-
-
-:::
-
-:::group{name=setWaterlogged}
-
-(Optional) The drop will only happen when the sieve is waterlogged.
-
-Returns: needs a waterlogged sieve now  
-Return Type: [SieveRecipe](/mods/ExNihiloSequentia/Sifting)
-
-```zenscript
-// SieveRecipe.setWaterlogged() as SieveRecipe
-
-mySieveRecipe.setWaterlogged();
+mySiftingRecipe.getAllRecipes();
 ```
 
 :::
 
+:::group{name=getRecipeByName}
+
+Return Type: T
+
+```zenscript
+SiftingRecipe.getRecipeByName(name as string) as T
+```
+
+| Parameter |  Type  |
+|-----------|--------|
+| name      | string |
+
+
+:::
+
+:::group{name=getRecipeMap}
+
+Return Type: T[[ResourceLocation](/vanilla/api/resource/ResourceLocation)]
+
+```zenscript
+// SiftingRecipe.getRecipeMap() as T[ResourceLocation]
+
+mySiftingRecipe.getRecipeMap();
+```
+
+:::
+
+:::group{name=getRecipesByOutput}
+
+Return Type: stdlib.List&lt;T&gt;
+
+```zenscript
+SiftingRecipe.getRecipesByOutput(output as IIngredient) as stdlib.List<T>
+```
+
+| Parameter |                        Type                        |
+|-----------|----------------------------------------------------|
+| output    | [IIngredient](/vanilla/api/ingredient/IIngredient) |
+
+
+:::
+
+:::group{name=remove}
+
+```zenscript
+SiftingRecipe.remove(output as IIngredient)
+```
+
+| Parameter |                        Type                        |
+|-----------|----------------------------------------------------|
+| output    | [IIngredient](/vanilla/api/ingredient/IIngredient) |
+
+
+:::
+
+:::group{name=removeAll}
+
+```zenscript
+// SiftingRecipe.removeAll()
+
+mySiftingRecipe.removeAll();
+```
+
+:::
+
+:::group{name=removeByInput}
+
+```zenscript
+SiftingRecipe.removeByInput(input as IItemStack)
+```
+
+| Parameter |                    Type                    |
+|-----------|--------------------------------------------|
+| input     | [IItemStack](/vanilla/api/item/IItemStack) |
+
+
+:::
+
+:::group{name=removeByModid}
+
+```zenscript
+SiftingRecipe.removeByModid(modid as string, exclude as Predicate<string>)
+```
+
+| Parameter |          Type           | Optional |           Default Value           |
+|-----------|-------------------------|----------|-----------------------------------|
+| modid     | string                  | false    |                                   |
+| exclude   | Predicate&lt;string&gt; | true     | (name as string) as bool => false |
+
+
+:::
+
+:::group{name=removeByName}
+
+```zenscript
+SiftingRecipe.removeByName(names as string[])
+```
+
+| Parameter |   Type   |
+|-----------|----------|
+| names     | string[] |
+
+
+:::
+
+:::group{name=removeByRegex}
+
+```zenscript
+SiftingRecipe.removeByRegex(regex as string, exclude as Predicate<string>)
+```
+
+| Parameter |          Type           | Optional |           Default Value           |
+|-----------|-------------------------|----------|-----------------------------------|
+| regex     | string                  | false    |                                   |
+| exclude   | Predicate&lt;string&gt; | true     | (name as string) as bool => false |
+
+
+:::
+
+
+## Properties
+
+|    Name    |                             Type                              | Has Getter | Has Setter |
+|------------|---------------------------------------------------------------|------------|------------|
+| allRecipes | stdlib.List&lt;T&gt;                                          | true       | false      |
+| recipeMap  | T[[ResourceLocation](/vanilla/api/resource/ResourceLocation)] | true       | false      |
 
