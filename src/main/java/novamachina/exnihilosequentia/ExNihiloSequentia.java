@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia;
 
 import static novamachina.exnihilosequentia.ExNihiloSequentia.MOD_ID;
 
-import net.minecraft.SharedConstants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -48,7 +47,6 @@ public class ExNihiloSequentia {
   public static final String MOD_ID = "exnihilosequentia";
 
   public ExNihiloSequentia() {
-    SharedConstants.IS_RUNNING_IN_IDE = true;
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
     Config.loadConfig(
         Config.COMMON_CONFIG,

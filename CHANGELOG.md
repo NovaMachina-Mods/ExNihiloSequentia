@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Halloween Crook
 ### Changed
 - Replace Forge with [NeoForge](https://neoforged.net/)
+  - Requires NeoForge 47.1.55+
 - Use NovaCore definitions, registries, and common data generation classes
 - Replaced CraftTweaker builder functions with single `addRecipe` method
 - Updated textures

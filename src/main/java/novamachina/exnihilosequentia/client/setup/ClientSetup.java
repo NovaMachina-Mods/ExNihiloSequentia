@@ -39,9 +39,7 @@ public class ClientSetup {
         new ResourceLocation(ExNihiloSequentia.MOD_ID, "halloween"),
         (itemStack, clientLevel, livingEntity, i) -> {
           Calendar calendar = Calendar.getInstance();
-          if (calendar.get(Calendar.MONTH) + 1 == 10
-              && calendar.get(Calendar.DAY_OF_MONTH) >= 15
-              && calendar.get(Calendar.DAY_OF_MONTH) <= 31) {
+          if (calendar.get(Calendar.MONTH) + 1 == 10) {
             return 1.0F;
           }
           return 0.0F;

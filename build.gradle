@@ -27,7 +27,7 @@ project.replaceProperties.put("kubejs_version_range", "[0.0.0,)")
 apply from: "https://raw.githubusercontent.com/NovaMachina-Mods/conventions/1.20/scripts/mod.gradle"
 
 repositories {
-    mavenLocal()
+//    mavenLocal()
     maven {
         name 'CraftTweaker'
         url "https://maven.blamejared.com"
@@ -61,14 +61,6 @@ repositories {
         url 'https://maven.saps.dev/minecraft'
         content {
             includeGroup 'dev.latvian.mods'
-        }
-    }
-
-    maven {
-        name 'NovaMachina Mods'
-        url 'https://dl.cloudsmith.io/public/novamachina-mods/mods/maven/'
-        content {
-            includeGroup 'novamachina.novacore'
         }
     }
     maven {
@@ -129,3 +121,5 @@ compileJava {
     options.compilerArgs << "-Acrafttweaker.processor.document.output_directory=${file('docsOut')}"
     options.getGeneratedSourceOutputDirectory().set(file("src/main/resources/"))
 }
+
+jar.finalizedBy('reobfJar')
