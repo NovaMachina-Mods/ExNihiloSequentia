@@ -102,6 +102,12 @@ jobs:
           DISCORD_EMBEDS: '[{"title": "Deploy succeeded for ${{github.event.repository.name}}", "color": "3470945"}]'
         with:
           args: "Pipeline run ${{github.run_number}} on branch ${{github.ref_name}}"
+      - name: Notify Discord of New Release
+        if: success()
+        uses: Ilshidur/action-discord@0.3.2
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_MOD_UPDATE_WEBHOOK }}
+          DISCORD_EMBEDS: '[{"title": "New Release for ${{github.event.repository.name}}", "color": 3470945, "fields": [{"name": "Get it on CurseForge", "value": "${{env.CURSEFORGE_URL}}"}, {"name": "Get it on Modrinth", "value": "${{env.MODRINTH_URL}}"}]}]'
       - name: Notify Discord of Failed Deploy
         if: failure()
         uses: Ilshidur/action-discord@0.3.2
