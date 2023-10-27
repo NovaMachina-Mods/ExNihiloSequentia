@@ -345,8 +345,6 @@ task publishCurseForge(type: TaskPublishCurseForge) {
     apiToken = System.getenv("CURSEFORGE_KEY")
     String projectId = curseforge_id
 
-    debugMode = true
-
     UploadArtifact mainFile = upload(projectId, jar)
     mainFile.releaseType = release_type
     mainFile.changelogType = 'markdown'
@@ -363,8 +361,6 @@ task publishCurseForge(type: TaskPublishCurseForge) {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = modrinth_project_id
-
-    debugMode = true
 
     uploadFile = jar
     versionType = release_type
