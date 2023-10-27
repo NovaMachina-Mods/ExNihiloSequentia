@@ -4,7 +4,13 @@
     {
       "model": "exnihilosequentia:item/halloween_crook",
       "predicate": {
-        "exnihilosequentia:halloween": 1.0
+        "exnihilosequentia:holiday": 0.1
+      }
+    },
+    {
+      "model": "exnihilosequentia:item/christmas_crook",
+      "predicate": {
+        "exnihilosequentia:holiday": 0.12
       }
     }
   ],

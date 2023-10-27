@@ -40,6 +40,12 @@ public class ItemModelProvider
                         new ResourceLocation(ITEM_GENERATED_TAG),
                         LAYER_0_TAG,
                         new ResourceLocation(modid, ITEMS_TAG + "halloween_crook"));
+                ItemModelBuilder christmas =
+                    singleTexture(
+                        "christmas_crook",
+                        new ResourceLocation(ITEM_GENERATED_TAG),
+                        LAYER_0_TAG,
+                        new ResourceLocation(modid, ITEMS_TAG + "christmas_crook"));
 
                 singleTexture(
                         definition.getId().getPath(),
@@ -48,7 +54,11 @@ public class ItemModelProvider
                         new ResourceLocation(modid, ITEMS_TAG + definition.getId().getPath()))
                     .override()
                     .model(halloween)
-                    .predicate(new ResourceLocation(ExNihiloSequentia.MOD_ID, "halloween"), 1.0F)
+                    .predicate(new ResourceLocation(ExNihiloSequentia.MOD_ID, "holiday"), 0.10F)
+                    .end()
+                    .override()
+                    .model(christmas)
+                    .predicate(new ResourceLocation(ExNihiloSequentia.MOD_ID, "holiday"), 0.12F)
                     .end();
               } else {
                 singleTexture(

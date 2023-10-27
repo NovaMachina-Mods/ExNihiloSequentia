@@ -36,11 +36,15 @@ public class ClientSetup {
 
     ItemProperties.register(
         EXNItems.CROOK_WOOD.asItem(),
-        new ResourceLocation(ExNihiloSequentia.MOD_ID, "halloween"),
+        new ResourceLocation(ExNihiloSequentia.MOD_ID, "holiday"),
         (itemStack, clientLevel, livingEntity, i) -> {
           Calendar calendar = Calendar.getInstance();
           if (calendar.get(Calendar.MONTH) + 1 == 10) {
-            return 1.0F;
+            return 0.10F;
+          } else if (calendar.get(Calendar.MONTH) + 1 == 12
+              && calendar.get(Calendar.DAY_OF_MONTH) >= 24
+              && calendar.get(Calendar.DAY_OF_MONTH) <= 26) {
+            return 0.12F;
           }
           return 0.0F;
         });

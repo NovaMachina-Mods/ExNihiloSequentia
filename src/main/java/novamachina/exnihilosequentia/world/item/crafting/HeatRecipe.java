@@ -73,6 +73,7 @@ public class HeatRecipe extends Recipe {
   @Override
   public void write(FriendlyByteBuf buffer) {
     int length = ForgeRegistries.BLOCKS.getKey(inputBlock).toString().length();
+    buffer.writeInt(length);
     buffer.writeUtf(ForgeRegistries.BLOCKS.getKey(inputBlock).toString(), length);
     buffer.writeInt(amount);
     buffer.writeBoolean(hasProperties());
