@@ -13,6 +13,7 @@
     "minecraft:fire_coral",
     "minecraft:horn_coral",
     "exnihilosequentia:stone_barrel",
-    "exnihilosequentia:fired_crucible"
+    "exnihilosequentia:fired_crucible",
+    "#minecraft:mineable/pickaxe"
   ]
 }
