@@ -13,8 +13,6 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "1.19", "1.20" ]
-  schedule:
-    - cron: '27 15 * * 4'
 
 jobs:
   analyze:
