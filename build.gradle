@@ -341,7 +341,10 @@ publishing {
     repositories {
         maven {
             name = "cloudsmith"
-            url = "https://maven.cloudsmith.io/novamachina-mods/ex-nihilo-sequentia/"
+            url = "https://maven.cloudsmith.io/novamachina-mods/release/"
+            def releaseRepoUrl = "https://maven.cloudsmith.io/novamachina-mods/release/"
+            def snapshotRepoUrl = "https://maven.cloudsmith.io/novamachina-mods/snapshot/"
+            url = version.endsWith('SNAPSHOT') ? snapshotRepoUrl : releaseRepoUrl
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
