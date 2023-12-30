@@ -236,9 +236,8 @@ public class EXNTagProvider extends TagProvider {
   }
 
   private void addBlocks() {
-    addToTag(
-        ExNihiloTags.MINEABLE_WITH_HAMMER,
-        Blocks.GRAVEL,
+    getBlockBuilder(ExNihiloTags.MINEABLE_WITH_HAMMER)
+      .add(Blocks.GRAVEL,
         Blocks.SAND,
         Blocks.TUBE_CORAL_BLOCK,
         Blocks.BRAIN_CORAL_BLOCK,
@@ -251,7 +250,8 @@ public class EXNTagProvider extends TagProvider {
         Blocks.FIRE_CORAL,
         Blocks.HORN_CORAL,
         EXNBlocks.STONE_BARREL.block(),
-        EXNBlocks.FIRED_CRUCIBLE.block());
+        EXNBlocks.FIRED_CRUCIBLE.block())
+      .add(BlockTags.MINEABLE_WITH_PICKAXE);
     getBlockBuilder(ExNihiloTags.MINEABLE_WITH_CROOK)
         .add(BlockTags.LEAVES)
         .add(EXNBlocks.INFESTING_LEAVES.block(), EXNBlocks.INFESTED_LEAVES.block());
