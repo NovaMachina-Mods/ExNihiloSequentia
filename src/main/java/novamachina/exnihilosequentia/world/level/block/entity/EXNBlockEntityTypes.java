@@ -84,6 +84,7 @@ public class EXNBlockEntityTypes {
           EXNBlocks.DARK_OAK_BARREL,
           EXNBlocks.JUNGLE_BARREL,
           EXNBlocks.OAK_BARREL,
+          EXNBlocks.MANGROVE_BARREL,
           EXNBlocks.SPRUCE_BARREL);
 
   @Nonnull
