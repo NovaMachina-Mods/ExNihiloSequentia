@@ -45,6 +45,24 @@ public class EXNTagProvider extends TagProvider {
     addWoodenBarrel();
     addWoodenCrucible();
     addWoodenSieve();
+    addPebbles();
+  }
+
+  private void addPebbles() {
+    addToTag(
+        ExNihiloTags.PEBBLES,
+        EXNItems.PEBBLE_ANDESITE,
+        EXNItems.PEBBLE_BASALT,
+        EXNItems.PEBBLE_BLACKSTONE,
+        EXNItems.PEBBLE_CALCITE,
+        EXNItems.PEBBLE_DEEPSLATE,
+        EXNItems.PEBBLE_DIORITE,
+        EXNItems.PEBBLE_DRIPSTONE,
+        EXNItems.PEBBLE_END_STONE,
+        EXNItems.PEBBLE_GRANITE,
+        EXNItems.PEBBLE_NETHERRACK,
+        EXNItems.PEBBLE_STONE,
+        EXNItems.PEBBLE_TUFF);
   }
 
   private void addWoodenSieve() {
@@ -236,6 +254,8 @@ public class EXNTagProvider extends TagProvider {
   }
 
   private void addBlocks() {
+    getBlockBuilder(ExNihiloTags.INFESTABLE)
+      .add(BlockTags.LEAVES);
     getBlockBuilder(ExNihiloTags.MINEABLE_WITH_HAMMER)
       .add(Blocks.GRAVEL,
         Blocks.SAND,
