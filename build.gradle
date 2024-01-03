@@ -218,6 +218,7 @@ tasks.withType(ProcessResources).configureEach {
             crafttweaker_version_range  : "[14.0.12,)",
             jei_version_range           : "[15.2.0.25,)",
             kubejs_version_range        : "[0.0.0,)",
+            novacore_version_range      : "[1.0.0, 1.1.0)",
             modrinth_project_id         : modrinth_project_id
     ]
     inputs.properties replaceProperties
