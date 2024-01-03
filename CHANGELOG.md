@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 - Dependency on [NovaCore](https://github.com/NovaMachina-Mods/NovaCore)
 - Cherry barrel, crook, crucible, hammer, and sieve
+- Bamboo barrel, crook, crucible, hammer, and sieve
 - Christmas and Halloween Crook
 ### Changed
 - Replace Forge with [NeoForge](https://neoforged.net/)
