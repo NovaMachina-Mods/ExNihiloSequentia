@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.world.item.BucketItem;
@@ -14,25 +14,24 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
-import net.minecraftforge.client.event.RecipesUpdatedEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import novamachina.exnihilosequentia.common.Config;
-import novamachina.exnihilosequentia.common.compat.top.CompatTOP;
 import novamachina.exnihilosequentia.common.network.PacketHandler;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -61,7 +60,7 @@ public class ExNihiloInitialization {
 
   private ExNihiloInitialization() {}
 
-  // MinecraftForge.EVENT_BUS
+  // neoforged.neoforge.EVENT_BUS
   @OnlyIn(Dist.CLIENT)
   @SubscribeEvent
   public static void clearRegistries(@Nonnull final ClientPlayerNetworkEvent.LoggingOut event) {
@@ -73,20 +72,20 @@ public class ExNihiloInitialization {
     log.debug("Initializing modded items");
   }
 
-  // MinecraftForge.EVENT_BUS
+  // neoforged.neoforge.EVENT_BUS
   @SubscribeEvent
   public static void loadClientRecipes(@Nonnull final RecipesUpdatedEvent event) {
     ExNihiloRegistries.clearRegistries();
     loadRecipes(event.getRecipeManager());
   }
 
-  // MinecraftForge.EVENT_BUS
+  // neoforged.neoforge.EVENT_BUS
   @SubscribeEvent
   public static void onPlayerLogin(@Nonnull final PlayerEvent.PlayerLoggedInEvent event) {
     log.debug("Fired PlayerLoggedInEvent");
   }
 
-  // MinecraftForge.EVENT_BUS
+  // neoforged.neoforge.EVENT_BUS
   @SubscribeEvent
   public static void onServerStart(@Nonnull final ServerStartingEvent event) {
     log.debug("Fired FMLServerStartingEvent");
@@ -97,16 +96,18 @@ public class ExNihiloInitialization {
     }
   }
 
-  // MinecraftForge.EVENT_BUS
-  @SubscribeEvent
-  public static void registerTOP(@Nonnull final InterModEnqueueEvent event) {
-    log.debug("The One Probe detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
-    if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
-      CompatTOP.register();
-    }
-  }
+  // TODO: MOVE TO TOP ADDON
+  // neoforged.neoforge.EVENT_BUS
+  //  @SubscribeEvent
+  //  public static void registerTOP(@Nonnull final InterModEnqueueEvent event) {
+  //    log.debug("The One Probe detected: " +
+  // ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP));
+  //    if (ModList.get().isLoaded(ExNihiloConstants.ModIds.TOP)) {
+  //      CompatTOP.register();
+  //    }
+  //  }
 
-  // MinecraftForge.EVENT_BUS
+  // neoforged.neoforge.EVENT_BUS
   @SubscribeEvent
   public static void setupNonTagBasedRegistries(@Nonnull final FMLCommonSetupEvent event) {
     log.debug("FIRED FMLCOMMONSETUPEVENT");
@@ -132,8 +133,8 @@ public class ExNihiloInitialization {
             @Nonnull final BucketItem bucketitem = (BucketItem) pStack.getItem();
             @Nonnull
             final BlockPos blockpos =
-                pSource.getPos().relative(pSource.getBlockState().getValue(DispenserBlock.FACING));
-            @Nullable final Level world = pSource.getLevel();
+                pSource.pos().relative(pSource.state().getValue(DispenserBlock.FACING));
+            @Nullable final Level world = pSource.level();
             if (bucketitem.emptyContents(null, world, blockpos, null)) {
               bucketitem.checkExtraContent(null, world, pStack, blockpos);
               return new ItemStack(Items.BUCKET);
@@ -160,19 +161,20 @@ public class ExNihiloInitialization {
   }
 
   private static <R extends Recipe<?>> List<R> filterRecipes(
-      @Nonnull final Collection<Recipe<?>> recipes,
+      @Nonnull final Collection<RecipeHolder<?>> recipes,
       @Nonnull final Class<R> recipeClass,
       @Nonnull final RecipeType<R> recipeType) {
     log.debug("Filter Recipes, Class: " + recipeClass + ", Recipe Type: " + recipeType);
     return recipes.stream()
-        .filter(iRecipe -> iRecipe.getType() == recipeType)
+        .filter(iRecipe -> iRecipe.value().getType() == recipeType)
+        .map(RecipeHolder::value)
         .map(recipeClass::cast)
         .collect(Collectors.toList());
   }
 
   private static void loadRecipes(@Nonnull final RecipeManager manager) {
     log.debug("Loading Recipes");
-    @Nonnull final Collection<Recipe<?>> recipes = manager.getRecipes();
+    @Nonnull final Collection<RecipeHolder<?>> recipes = manager.getRecipes();
     if (recipes.isEmpty()) {
       return;
     }

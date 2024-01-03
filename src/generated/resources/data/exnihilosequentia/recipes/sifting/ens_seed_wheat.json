@@ -4,12 +4,14 @@
     "item": "minecraft:dirt"
   },
   "result": {
-    "item": "minecraft:wheat_seeds"
+    "Count": 1,
+    "id": "minecraft:wheat_seeds"
   },
   "rolls": [
     {
       "chance": 0.7,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

@@ -4,7 +4,8 @@
     "item": "minecraft:coarse_dirt"
   },
   "result": {
-    "item": "minecraft:dirt"
+    "Count": 1,
+    "id": "minecraft:dirt"
   },
   "rolls": [
     {
@@ -15,5 +16,6 @@
       "chance": 0.4,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

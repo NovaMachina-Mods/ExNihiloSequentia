@@ -4,12 +4,14 @@
     "item": "minecraft:dirt"
   },
   "result": {
-    "item": "exnihilosequentia:grass_seeds"
+    "Count": 1,
+    "id": "exnihilosequentia:grass_seeds"
   },
   "rolls": [
     {
       "chance": 0.05,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

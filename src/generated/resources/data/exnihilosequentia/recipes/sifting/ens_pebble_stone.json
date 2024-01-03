@@ -4,7 +4,8 @@
     "item": "minecraft:dirt"
   },
   "result": {
-    "item": "exnihilosequentia:stone_pebble"
+    "Count": 1,
+    "id": "exnihilosequentia:stone_pebble"
   },
   "rolls": [
     {
@@ -31,5 +32,6 @@
       "chance": 0.1,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

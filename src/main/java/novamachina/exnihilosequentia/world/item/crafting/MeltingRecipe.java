@@ -1,19 +1,19 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity.CrucibleType;
-import novamachina.novacore.util.FluidStackUtils;
 import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.Nullable;
 
 @Getter
 public class MeltingRecipe extends Recipe {
@@ -22,9 +22,7 @@ public class MeltingRecipe extends Recipe {
   private final FluidStack resultFluid;
   private final CrucibleType crucibleType;
 
-  public MeltingRecipe(
-      ResourceLocation id, Ingredient input, FluidStack fluid, CrucibleType crucibleType) {
-    super(id);
+  public MeltingRecipe(Ingredient input, FluidStack fluid, CrucibleType crucibleType) {
     this.resultFluid = fluid;
     this.input = input;
     this.crucibleType = crucibleType;
@@ -56,27 +54,40 @@ public class MeltingRecipe extends Recipe {
   }
 
   public static class Serializer<T extends MeltingRecipe> implements RecipeSerializer<T> {
+    private final Codec<T> codec;
     private final IFactory<T> factory;
 
     public Serializer(IFactory<T> factory) {
       this.factory = factory;
+
+      this.codec =
+          RecordCodecBuilder.create(
+              instance ->
+                  instance
+                      .group(
+                          Ingredient.CODEC_NONEMPTY
+                              .fieldOf("input")
+                              .forGetter(recipe -> recipe.getInput()),
+                          FluidStack.CODEC
+                              .fieldOf("fluidResult")
+                              .forGetter(recipe -> recipe.getResultFluid()),
+                          CrucibleType.CODEC
+                              .fieldOf("crucibleType")
+                              .forGetter(recipe -> recipe.getCrucibleType()))
+                      .apply(instance, factory::create));
     }
 
     @Override
-    @NonNull
-    public T fromJson(@NonNull ResourceLocation id, JsonObject json) {
-      Ingredient input = Ingredient.fromJson(json.get("input"));
-      FluidStack fluid = FluidStackUtils.deserialize(json.get("fluidResult").getAsJsonObject());
-      CrucibleType typeEnum = CrucibleType.getTypeByName(json.get("crucibleType").getAsString());
-      return this.factory.create(id, input, fluid, typeEnum);
+    public Codec<T> codec() {
+      return this.codec;
     }
 
     @Override
-    public T fromNetwork(@NonNull ResourceLocation id, @NonNull FriendlyByteBuf buffer) {
+    public @Nullable T fromNetwork(FriendlyByteBuf buffer) {
       Ingredient input = Ingredient.fromNetwork(buffer);
       FluidStack fluid = FluidStack.readFromPacket(buffer);
       CrucibleType type = buffer.readEnum(CrucibleType.class);
-      return this.factory.create(id, input, fluid, type);
+      return this.factory.create(input, fluid, type);
     }
 
     @Override
@@ -86,7 +97,7 @@ public class MeltingRecipe extends Recipe {
 
     @FunctionalInterface
     public interface IFactory<T> {
-      T create(ResourceLocation id, Ingredient input, FluidStack result, CrucibleType type);
+      T create(Ingredient input, FluidStack result, CrucibleType type);
     }
   }
 }

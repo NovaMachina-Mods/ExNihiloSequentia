@@ -1,5 +1,6 @@
 package novamachina.exnihilosequentia.world.level.block.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nonnull;
@@ -22,15 +23,15 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.common.capabilities.Capabilities;
+import net.neoforged.neoforge.common.capabilities.Capability;
+import net.neoforged.neoforge.common.util.LazyOptional;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.capability.BarrelInventoryHandler;
@@ -89,10 +90,10 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   @Override
   public <T> LazyOptional<T> getCapability(
       @Nonnull final Capability<T> cap, @Nullable final Direction side) {
-    if (cap == ForgeCapabilities.ITEM_HANDLER) {
+    if (cap == Capabilities.ITEM_HANDLER) {
       return inventoryHolder.cast();
     }
-    if (cap == ForgeCapabilities.FLUID_HANDLER) {
+    if (cap == Capabilities.FLUID_HANDLER) {
       return tankHolder.cast();
     }
     return super.getCapability(cap, side);
@@ -169,7 +170,7 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   @Nullable
   public List<Component> getWailaInfo() {
     if (mode == null) {
-      return null;
+      return new ArrayList<>();
     }
     return mode.getWailaInfo(this);
   }

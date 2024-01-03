@@ -14,6 +14,8 @@ public enum MeshType implements StringRepresentable {
   NETHERITE(6);
 
   private final int level;
+  public static final StringRepresentable.EnumCodec<MeshType> CODEC =
+      StringRepresentable.fromEnum(MeshType::values);
 
   MeshType(int level) {
     this.level = level;

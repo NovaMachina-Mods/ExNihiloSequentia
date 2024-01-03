@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -21,14 +22,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.common.capabilities.Capabilities;
+import net.neoforged.neoforge.common.capabilities.Capability;
+import net.neoforged.neoforge.common.util.LazyOptional;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.world.item.capability.MeltableItemHandler;
@@ -79,10 +80,10 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
   @Override
   public <T> LazyOptional<T> getCapability(
       @Nonnull final Capability<T> cap, @Nullable final Direction side) {
-    if (cap == ForgeCapabilities.ITEM_HANDLER) {
+    if (cap == Capabilities.ITEM_HANDLER) {
       return inventoryHolder.cast();
     }
-    if (cap == ForgeCapabilities.FLUID_HANDLER) {
+    if (cap == Capabilities.FLUID_HANDLER) {
       return tankHolder.cast();
     }
     return super.getCapability(cap, side);
@@ -396,9 +397,12 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
     }
   }
 
-  public enum CrucibleType {
+  public enum CrucibleType implements StringRepresentable {
     WOOD("wood", 0),
     FIRED("fired", 1);
+
+    public static final StringRepresentable.EnumCodec<CrucibleType> CODEC =
+        StringRepresentable.fromEnum(CrucibleType::values);
 
     @Nonnull
     public String getName() {
@@ -425,6 +429,11 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
 
     public int getLevel() {
       return level;
+    }
+
+    @Override
+    public String getSerializedName() {
+      return this.name;
     }
   }
 }

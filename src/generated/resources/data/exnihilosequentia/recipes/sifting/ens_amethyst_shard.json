@@ -4,7 +4,8 @@
     "item": "minecraft:gravel"
   },
   "result": {
-    "item": "minecraft:amethyst_shard"
+    "Count": 1,
+    "id": "minecraft:amethyst_shard"
   },
   "rolls": [
     {
@@ -23,5 +24,6 @@
       "chance": 0.2,
       "mesh": "diamond"
     }
-  ]
+  ],
+  "waterlogged": false
 }

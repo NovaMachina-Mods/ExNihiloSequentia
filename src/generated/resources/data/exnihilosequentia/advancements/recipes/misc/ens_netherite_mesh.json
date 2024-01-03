@@ -32,9 +32,9 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_emerald_mesh",
-      "has_material",
-      "has_the_recipe"
+      "has_material"
     ]
   ],
   "rewards": {

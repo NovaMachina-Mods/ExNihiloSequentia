@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.data;
 
 import javax.annotation.Nonnull;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.world.level.material.EXNFluids;
@@ -207,7 +207,7 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         EXNBlocks.INFESTED_LEAVES.block(),
         models()
             .cubeAll(
-                ForgeRegistries.BLOCKS.getKey(EXNBlocks.INFESTED_LEAVES.block()).getPath(),
+                BuiltInRegistries.BLOCK.getKey(EXNBlocks.INFESTED_LEAVES.block()).getPath(),
                 blockTexture(EXNBlocks.INFESTED_LEAVES.block()))
             .renderType("cutout"));
 
@@ -215,7 +215,7 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
         EXNBlocks.INFESTING_LEAVES.block(),
         models()
             .cubeAll(
-                ForgeRegistries.BLOCKS.getKey(EXNBlocks.INFESTING_LEAVES.block()).getPath(),
+                BuiltInRegistries.BLOCK.getKey(EXNBlocks.INFESTING_LEAVES.block()).getPath(),
                 blockTexture(EXNBlocks.INFESTING_LEAVES.block()))
             .renderType("cutout"));
   }

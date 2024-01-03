@@ -1,14 +1,14 @@
 {
   "type": "exnihilosequentia:precipitate",
   "fluid": {
-    "amount": 1000,
-    "fluid": "exnihilosequentia:sea_water"
+    "Amount": 1000,
+    "FluidName": "exnihilosequentia:sea_water"
   },
   "input": {
     "item": "exnihilosequentia:brain_coral_larva"
   },
   "result": {
-    "count": 1,
-    "item": "minecraft:brain_coral_block"
+    "Count": 1,
+    "id": "minecraft:brain_coral_block"
   }
 }

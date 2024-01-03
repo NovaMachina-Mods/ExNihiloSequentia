@@ -4,16 +4,16 @@ import static net.minecraft.world.level.block.CakeBlock.BITES;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 
 public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
@@ -41,7 +41,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
   }
 
   protected void registerFluid(@Nonnull final Fluid fluid, ResourceLocation stillTexture) {
-    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.FLUIDS.getKey(fluid);
+    @Nullable final ResourceLocation resourceLocation = BuiltInRegistries.FLUID.getKey(fluid);
     if (resourceLocation != null) {
       @Nonnull
       final ModelFile model =
@@ -61,7 +61,7 @@ public abstract class AbstractBlockStateGenerator extends BlockStateProvider {
 
   @Nullable
   protected String getRegistryName(@Nonnull final Block b) {
-    @Nullable final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(b);
+    @Nullable final ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(b);
     if (resourceLocation != null) {
       return resourceLocation.toString();
     }

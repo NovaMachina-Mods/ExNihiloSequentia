@@ -4,12 +4,14 @@
     "item": "minecraft:gravel"
   },
   "result": {
-    "item": "minecraft:lapis_lazuli"
+    "Count": 1,
+    "id": "minecraft:lapis_lazuli"
   },
   "rolls": [
     {
       "chance": 0.05,
       "mesh": "flint"
     }
-  ]
+  ],
+  "waterlogged": false
 }

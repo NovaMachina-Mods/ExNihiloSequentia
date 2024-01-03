@@ -4,7 +4,8 @@
     "tag": "minecraft:sand"
   },
   "result": {
-    "item": "minecraft:kelp"
+    "Count": 1,
+    "id": "minecraft:kelp"
   },
   "rolls": [
     {

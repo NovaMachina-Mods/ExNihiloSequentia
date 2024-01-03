@@ -4,11 +4,11 @@
     "tag": "forge:sand"
   },
   "fluidInTank": {
-    "amount": 1000,
-    "fluid": "minecraft:water"
+    "Amount": 1000,
+    "FluidName": "minecraft:water"
   },
   "result": {
-    "amount": 1000,
-    "fluid": "exnihilosequentia:sea_water"
+    "Amount": 1000,
+    "FluidName": "exnihilosequentia:sea_water"
   }
 }

@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_uncooked_crucible",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_uncooked_crucible"
     ]
   ],
   "rewards": {

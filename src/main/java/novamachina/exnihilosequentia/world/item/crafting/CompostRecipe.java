@@ -1,9 +1,9 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,8 +17,7 @@ public class CompostRecipe extends Recipe {
   private final Ingredient input;
   private final int amount;
 
-  public CompostRecipe(ResourceLocation id, Ingredient input, int amount) {
-    super(id);
+  public CompostRecipe(Ingredient input, int amount) {
     this.input = input;
     this.amount = amount;
   }
@@ -50,24 +49,32 @@ public class CompostRecipe extends Recipe {
   public static class Serializer<T extends CompostRecipe> implements RecipeSerializer<T> {
 
     private final IFactory<T> factory;
+    private final Codec<T> codec;
 
     public Serializer(IFactory<T> factory) {
       this.factory = factory;
+      this.codec =
+          RecordCodecBuilder.create(
+              instance ->
+                  instance
+                      .group(
+                          Ingredient.CODEC_NONEMPTY
+                              .fieldOf("input")
+                              .forGetter(recipe -> recipe.getInput()),
+                          Codec.INT.fieldOf("amount").forGetter(recipe -> recipe.getAmount()))
+                      .apply(instance, factory::create));
     }
 
     @Override
-    @NonNull
-    public T fromJson(@NonNull ResourceLocation id, JsonObject json) {
-      Ingredient input = Ingredient.fromJson(json.get("input"));
-      int amount = json.get("amount").getAsInt();
-      return this.factory.create(id, input, amount);
+    public Codec<T> codec() {
+      return this.codec;
     }
 
     @Override
-    public T fromNetwork(@NonNull ResourceLocation id, @NonNull FriendlyByteBuf buffer) {
+    public T fromNetwork(FriendlyByteBuf buffer) {
       Ingredient input = Ingredient.fromNetwork(buffer);
       int amount = buffer.readInt();
-      return this.factory.create(id, input, amount);
+      return this.factory.create(input, amount);
     }
 
     @Override
@@ -77,7 +84,7 @@ public class CompostRecipe extends Recipe {
 
     @FunctionalInterface
     public interface IFactory<T> {
-      T create(ResourceLocation id, Ingredient input, int amount);
+      T create(Ingredient input, int amount);
     }
   }
 }

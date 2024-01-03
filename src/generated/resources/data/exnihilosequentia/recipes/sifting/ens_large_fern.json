@@ -4,12 +4,14 @@
     "item": "minecraft:dirt"
   },
   "result": {
-    "item": "minecraft:large_fern"
+    "Count": 1,
+    "id": "minecraft:large_fern"
   },
   "rolls": [
     {
       "chance": 0.05,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

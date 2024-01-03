@@ -1,17 +1,20 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import java.util.Optional;
 import lombok.Getter;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -21,14 +24,10 @@ public class HeatRecipe extends Recipe {
 
   private final int amount;
   private final Block inputBlock;
-  private final StatePropertiesPredicate properties;
+  private final Optional<StatePropertiesPredicate> properties;
 
   public HeatRecipe(
-      ResourceLocation id,
-      Block inputBlock,
-      final int amount,
-      StatePropertiesPredicate properties) {
-    super(id);
+      Block inputBlock, final int amount, Optional<StatePropertiesPredicate> properties) {
     this.inputBlock = inputBlock;
     this.amount = amount;
     this.properties = properties;
@@ -38,13 +37,13 @@ public class HeatRecipe extends Recipe {
     if (inputBlock == null) {
       return false;
     }
-    ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(state.getBlock());
+    ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(state.getBlock());
     if (resourceLocation == null) {
       return false;
     }
 
     if (inputBlock != null) {
-      return state.is(inputBlock) && (properties == null || properties.matches(state));
+      return state.is(inputBlock) && (properties.isEmpty() || properties.get().matches(state));
     }
     return false;
   }
@@ -66,57 +65,60 @@ public class HeatRecipe extends Recipe {
     return EXNRecipeTypes.HEAT;
   }
 
-  private boolean hasProperties() {
-    return this.properties != StatePropertiesPredicate.ANY;
-  }
-
   @Override
   public void write(FriendlyByteBuf buffer) {
-    int length = ForgeRegistries.BLOCKS.getKey(inputBlock).toString().length();
+    int length = BuiltInRegistries.BLOCK.getKey(inputBlock).toString().length();
     buffer.writeInt(length);
-    buffer.writeUtf(ForgeRegistries.BLOCKS.getKey(inputBlock).toString(), length);
+    buffer.writeUtf(BuiltInRegistries.BLOCK.getKey(inputBlock).toString(), length);
     buffer.writeInt(amount);
-    buffer.writeBoolean(hasProperties());
-    if (hasProperties()) {
-      buffer.writeUtf(properties.serializeToJson().toString());
+    buffer.writeBoolean(this.properties.isEmpty());
+    if (this.properties.isPresent()) {
+      buffer.writeUtf(properties.get().serializeToJson().toString());
     }
   }
 
   public static class Serializer<T extends HeatRecipe> implements RecipeSerializer<T> {
-    private final IBlockFactory<T> blockFactory;
 
-    public Serializer(IBlockFactory<T> blockFactory) {
-      this.blockFactory = blockFactory;
+    private final Codec<T> codec;
+    private final IFactory<T> factory;
+
+    public Serializer(IFactory<T> factory) {
+      this.factory = factory;
+      this.codec =
+          RecordCodecBuilder.create(
+              instance ->
+                  instance
+                      .group(
+                          BuiltInRegistries.BLOCK
+                              .byNameCodec()
+                              .fieldOf("block")
+                              .forGetter(recipe -> recipe.getInputBlock()),
+                          Codec.INT.fieldOf("amount").forGetter(recipe -> recipe.getAmount()),
+                          ExtraCodecs.strictOptionalField(StatePropertiesPredicate.CODEC, "state")
+                              .forGetter(recipe -> recipe.getProperties()))
+                      .apply(instance, factory::create));
     }
 
     @Override
-    @NonNull
-    public T fromJson(@NonNull ResourceLocation id, JsonObject json) {
-      Block inputBlock =
-          ForgeRegistries.BLOCKS.getValue(new ResourceLocation(json.get("block").getAsString()));
-      int amount = json.get("amount").getAsInt();
-      if (json.has("state")) {
-        return this.blockFactory.create(
-            id, inputBlock, amount, StatePropertiesPredicate.fromJson(json.get("state")));
-      }
-      return this.blockFactory.create(id, inputBlock, amount, StatePropertiesPredicate.ANY);
+    public Codec<T> codec() {
+      return this.codec;
     }
 
     @Override
-    public T fromNetwork(@NonNull ResourceLocation id, FriendlyByteBuf buffer) {
+    public T fromNetwork(FriendlyByteBuf buffer) {
       int length = buffer.readInt();
-      Block inputBlock =
-          ForgeRegistries.BLOCKS.getValue(new ResourceLocation(buffer.readUtf(length)));
+      Block inputBlock = BuiltInRegistries.BLOCK.get(new ResourceLocation(buffer.readUtf(length)));
 
       int amount = buffer.readInt();
       boolean hasProperties =
           buffer.readBoolean(); // flag showing whether recipe depends on block state
       if (hasProperties) {
-        StatePropertiesPredicate properties =
+        Optional<StatePropertiesPredicate> properties =
             StatePropertiesPredicate.fromJson(JsonParser.parseString(buffer.readUtf()));
-        return this.blockFactory.create(id, inputBlock, amount, properties);
+        return this.factory.create(inputBlock, amount, properties);
       }
-      return this.blockFactory.create(id, inputBlock, amount, StatePropertiesPredicate.ANY);
+      return this.factory.create(
+          inputBlock, amount, StatePropertiesPredicate.Builder.properties().build());
     }
 
     @Override
@@ -125,9 +127,8 @@ public class HeatRecipe extends Recipe {
     }
 
     @FunctionalInterface
-    public interface IBlockFactory<T> {
-      T create(
-          ResourceLocation id, Block inputBlock, int amount, StatePropertiesPredicate properties);
+    public interface IFactory<T> {
+      T create(Block inputBlock, int amount, Optional<StatePropertiesPredicate> properties);
     }
   }
 }

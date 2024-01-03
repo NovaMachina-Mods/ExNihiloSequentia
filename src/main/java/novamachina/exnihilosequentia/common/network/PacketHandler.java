@@ -1,17 +1,15 @@
 package novamachina.exnihilosequentia.common.network;
 
 import javax.annotation.Nullable;
+import lombok.extern.slf4j.Slf4j;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.HandshakeHandler;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.neoforge.network.HandshakeHandler;
+import net.neoforged.neoforge.network.NetworkRegistry;
+import net.neoforged.neoforge.network.simple.SimpleChannel;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class PacketHandler {
-
-  private static Logger log = LoggerFactory.getLogger(PacketHandler.class);
   @Nullable private static SimpleChannel handshakeChannel;
 
   private PacketHandler() {}
@@ -39,7 +37,8 @@ public class PacketHandler {
         .decoder(HandshakeMessages.C2SAcknowledge::decode)
         .consumerNetworkThread(
             HandshakeHandler.indexFirst(
-                (handler, msg, s) -> ExNihiloHandshakeHandler.handleAcknowledge(msg, s)))
+                (handler, msg, context) ->
+                    ExNihiloHandshakeHandler.handleAcknowledge(msg, context)))
         .add();
 
     handshakeChannel
@@ -50,10 +49,10 @@ public class PacketHandler {
         .encoder(HandshakeMessages.S2COreList::encode)
         .decoder(HandshakeMessages.S2COreList::decode)
         .consumerNetworkThread(
-            HandshakeHandler.biConsumerFor(
-                (handler, msg, supplier) -> {
+            HandshakeHandler.consumerFor(
+                (handler, msg, context) -> {
                   try {
-                    ExNihiloHandshakeHandler.handleOreList(msg, supplier);
+                    ExNihiloHandshakeHandler.handleOreList(msg, context);
                   } catch (InterruptedException e) {
                     log.error(e.getMessage());
                     Thread.currentThread().interrupt();

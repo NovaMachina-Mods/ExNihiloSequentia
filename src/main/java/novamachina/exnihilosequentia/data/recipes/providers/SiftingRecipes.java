@@ -3,8 +3,8 @@ package novamachina.exnihilosequentia.data.recipes.providers;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
@@ -13,7 +13,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.data.recipes.RecipeProviderUtilities;
 import novamachina.exnihilosequentia.data.recipes.SiftingRecipeBuilder;
@@ -25,7 +24,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class SiftingRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(Consumer<FinishedRecipe> consumer) {
+  public void addRecipes(RecipeOutput consumer) {
     SiftingRecipeBuilder.sifting(Ingredient.of(Blocks.DIRT), EXNItems.PEBBLE_STONE)
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 1.0F))
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 1.0F))
@@ -215,10 +214,10 @@ public class SiftingRecipes implements ISubRecipeProvider {
     getLeavesSaplings()
         .forEach(
             (input, drop) -> {
-              final ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(input);
+              final ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(input);
               if (resourceLocation != null) {
                 if (Objects.equals(
-                    ForgeRegistries.BLOCKS.getKey(input), new ResourceLocation("jungle_leaves"))) {
+                    BuiltInRegistries.BLOCK.getKey(input), new ResourceLocation("jungle_leaves"))) {
                   SiftingRecipeBuilder.sifting(Ingredient.of(input), drop)
                       .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.025F))
                       .addRoll(new MeshWithChance(EXNItems.MESH_FLINT.asItem().getType(), 0.05F))
@@ -291,7 +290,7 @@ public class SiftingRecipes implements ISubRecipeProvider {
         .build(consumer, siftingLoc("amethyst_shard"));
   }
 
-  private void addIronOres(Consumer<FinishedRecipe> consumer) {
+  private void addIronOres(RecipeOutput consumer) {
     Item oreItem = EXNItems.IRON.getPieceItem();
     if (oreItem == null) {
       return;
@@ -306,7 +305,7 @@ public class SiftingRecipes implements ISubRecipeProvider {
         .build(consumer, siftingLoc(EXNItems.IRON.getPieceId() + "_sand"));
   }
 
-  private void addGoldOres(Consumer<FinishedRecipe> consumer) {
+  private void addGoldOres(RecipeOutput consumer) {
     Item oreItem = EXNItems.GOLD.getPieceItem();
     if (oreItem == null) {
       return;
@@ -323,7 +322,7 @@ public class SiftingRecipes implements ISubRecipeProvider {
         .build(consumer, siftingLoc(EXNItems.GOLD.getPieceId() + "_gravel"));
   }
 
-  private void addDefaultOres(Consumer<FinishedRecipe> consumer, Ore ore) {
+  private void addDefaultOres(RecipeOutput consumer, Ore ore) {
     Item oreItem = ore.getPieceItem();
     if (oreItem == null) {
       return;
@@ -340,12 +339,12 @@ public class SiftingRecipes implements ISubRecipeProvider {
         ExNihiloSequentia.MOD_ID, "sifting/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 
-  private void addSeeds(ItemLike seed, Consumer<FinishedRecipe> consumer) {
+  private void addSeeds(ItemLike seed, RecipeOutput consumer) {
     addSeeds(seed, consumer, Blocks.DIRT);
   }
 
-  private void addSeeds(ItemLike seed, Consumer<FinishedRecipe> consumer, Block inputBlock) {
-    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed.asItem());
+  private void addSeeds(ItemLike seed, RecipeOutput consumer, Block inputBlock) {
+    ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(seed.asItem());
     if (resourceLocation == null) {
       return;
     }
@@ -354,8 +353,8 @@ public class SiftingRecipes implements ISubRecipeProvider {
         .build(consumer, siftingLoc(resourceLocation.getPath()));
   }
 
-  private void addWaterSeeds(ItemLike seed, Consumer<FinishedRecipe> consumer) {
-    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(seed.asItem());
+  private void addWaterSeeds(ItemLike seed, RecipeOutput consumer) {
+    ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(seed.asItem());
     if (resourceLocation == null) {
       return;
     }

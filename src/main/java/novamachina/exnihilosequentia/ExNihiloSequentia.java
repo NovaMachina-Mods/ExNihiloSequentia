@@ -2,15 +2,16 @@ package novamachina.exnihilosequentia;
 
 import static novamachina.exnihilosequentia.ExNihiloSequentia.MOD_ID;
 
+import lombok.extern.slf4j.Slf4j;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -40,9 +41,9 @@ import novamachina.novacore.bootstrap.ForgeStatRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Slf4j
 @Mod(MOD_ID)
 public class ExNihiloSequentia {
-  private static Logger log = LoggerFactory.getLogger(ExNihiloSequentia.class);
 
   public static final String MOD_ID = "exnihilosequentia";
 
@@ -61,9 +62,6 @@ public class ExNihiloSequentia {
     FMLJavaModLoadingContext.get()
         .getModEventBus()
         .addListener(ExNihiloInitialization::setupNonTagBasedRegistries);
-    FMLJavaModLoadingContext.get()
-        .getModEventBus()
-        .addListener(ExNihiloInitialization::registerTOP);
 
     FMLJavaModLoadingContext.get()
         .getModEventBus()
@@ -99,7 +97,7 @@ public class ExNihiloSequentia {
               }
               if (event
                   .getRegistryKey()
-                  .equals(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS)) {
+                  .equals(NeoForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS.key())) {
                 InitLootModifiers.init(new ForgeLootModifierRegistry());
               }
             });

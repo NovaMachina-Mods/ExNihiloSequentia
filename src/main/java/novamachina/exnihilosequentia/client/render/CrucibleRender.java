@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import novamachina.exnihilosequentia.client.util.LiquidBlockVertexConsumer;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity;
 import novamachina.novacore.client.renderer.blockentity.BlockEntityRenderer;

@@ -6,8 +6,10 @@
   "results": [
     {
       "chance": 0.2,
-      "count": 1,
-      "item": "exnihilosequentia:silkworm"
+      "item": {
+        "Count": 1,
+        "id": "exnihilosequentia:silkworm"
+      }
     }
   ]
 }

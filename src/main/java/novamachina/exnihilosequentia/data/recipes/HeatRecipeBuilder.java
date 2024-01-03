@@ -2,20 +2,25 @@ package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
+import java.util.Optional;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.novacore.data.recipes.RecipeBuilder;
+import org.jetbrains.annotations.Nullable;
 
 public class HeatRecipeBuilder extends RecipeBuilder<HeatRecipeBuilder> {
 
   private final int amount;
   private final Block inputBlock;
-  private final StatePropertiesPredicate properties;
+  private final Optional<StatePropertiesPredicate> properties;
 
-  protected HeatRecipeBuilder(Block inputBlock, int amount, StatePropertiesPredicate properties) {
+  protected HeatRecipeBuilder(
+      Block inputBlock, int amount, Optional<StatePropertiesPredicate> properties) {
     super(EXNRecipeSerializers.HEAT_RECIPE_SERIALIZER.recipeSerializer());
     this.inputBlock = inputBlock;
     this.amount = amount;
@@ -23,11 +28,11 @@ public class HeatRecipeBuilder extends RecipeBuilder<HeatRecipeBuilder> {
   }
 
   public static HeatRecipeBuilder heat(Block inputBlock, int amount) {
-    return heat(inputBlock, amount, StatePropertiesPredicate.ANY);
+    return heat(inputBlock, amount, Optional.empty());
   }
 
   public static HeatRecipeBuilder heat(
-      Block inputBlock, int amount, StatePropertiesPredicate properties) {
+      Block inputBlock, int amount, Optional<StatePropertiesPredicate> properties) {
     return new HeatRecipeBuilder(inputBlock, amount, properties);
   }
 
@@ -51,11 +56,23 @@ public class HeatRecipeBuilder extends RecipeBuilder<HeatRecipeBuilder> {
 
     @Override
     public void serializeRecipeData(JsonObject json) {
-      json.addProperty("block", ForgeRegistries.BLOCKS.getKey(inputBlock).toString());
+      json.add(
+          "block",
+          BuiltInRegistries.BLOCK
+              .byNameCodec()
+              .encodeStart(JsonOps.INSTANCE, inputBlock)
+              .result()
+              .get());
       json.addProperty("amount", amount);
-      if (properties != StatePropertiesPredicate.ANY) {
-        json.add("state", properties.serializeToJson());
+      if (properties.isPresent()) {
+        json.add("state", properties.get().serializeToJson());
       }
+    }
+
+    @Nullable
+    @Override
+    public AdvancementHolder advancement() {
+      return null;
     }
   }
 }

@@ -2,16 +2,18 @@ package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity.CrucibleType;
 import novamachina.novacore.data.recipes.RecipeBuilder;
 import novamachina.novacore.util.FluidStackUtils;
+import org.jetbrains.annotations.Nullable;
 
 public class MeltingRecipeBuilder extends RecipeBuilder<MeltingRecipeBuilder> {
 
@@ -61,9 +63,15 @@ public class MeltingRecipeBuilder extends RecipeBuilder<MeltingRecipeBuilder> {
 
     @Override
     public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson());
+      json.add("input", input.toJson(false));
       json.add("fluidResult", FluidStackUtils.serialize(result));
       json.addProperty("crucibleType", type.getName());
+    }
+
+    @Nullable
+    @Override
+    public AdvancementHolder advancement() {
+      return null;
     }
   }
 }

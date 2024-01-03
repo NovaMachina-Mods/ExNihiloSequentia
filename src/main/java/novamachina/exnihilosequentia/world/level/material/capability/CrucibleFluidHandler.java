@@ -2,8 +2,8 @@ package novamachina.exnihilosequentia.world.level.material.capability;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity;
 
 public class CrucibleFluidHandler extends FluidTank {

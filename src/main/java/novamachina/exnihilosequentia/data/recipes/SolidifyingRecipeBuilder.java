@@ -2,14 +2,16 @@ package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.novacore.data.recipes.RecipeBuilder;
 import novamachina.novacore.util.FluidStackUtils;
 import novamachina.novacore.util.ItemStackHelper;
+import org.jetbrains.annotations.Nullable;
 
 public class SolidifyingRecipeBuilder extends RecipeBuilder<SolidifyingRecipeBuilder> {
   private final FluidStack fluidInTank;
@@ -55,6 +57,12 @@ public class SolidifyingRecipeBuilder extends RecipeBuilder<SolidifyingRecipeBui
       json.add("fluidInTank", FluidStackUtils.serialize(fluidInTank));
       json.add("fluidOnTop", FluidStackUtils.serialize(fluidOnTop));
       json.add("result", ItemStackHelper.serialize(result));
+    }
+
+    @Nullable
+    @Override
+    public AdvancementHolder advancement() {
+      return null;
     }
   }
 }

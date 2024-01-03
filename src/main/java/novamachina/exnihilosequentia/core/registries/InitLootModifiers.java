@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.core.registries;
 
-import net.minecraftforge.common.loot.LootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.common.loot.modifier.EXNLootModifiers;
 import novamachina.novacore.common.loot.modifier.LootModifierDefinition;
 import novamachina.novacore.core.IRegistry;

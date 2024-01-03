@@ -4,13 +4,13 @@ import javax.annotation.Nonnull;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
-public abstract class SeaWaterFluid extends ForgeFlowingFluid {
+public abstract class SeaWaterFluid extends BaseFlowingFluid {
 
   @Nonnull
-  public static final ForgeFlowingFluid.Properties SEA_WATER_PROPS =
-      new ForgeFlowingFluid.Properties(
+  public static final BaseFlowingFluid.Properties SEA_WATER_PROPS =
+      new BaseFlowingFluid.Properties(
               () -> EXNFluids.SEA_WATER.getFluidType(),
               () -> EXNFluids.SEA_WATER.getStillFluid(),
               () -> EXNFluids.SEA_WATER.getFlowingFluid())

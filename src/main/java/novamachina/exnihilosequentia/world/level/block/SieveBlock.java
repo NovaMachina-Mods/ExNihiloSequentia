@@ -1,11 +1,9 @@
 package novamachina.exnihilosequentia.world.level.block;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -32,10 +30,10 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import novamachina.exnihilosequentia.common.Config;
-import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+import novamachina.exnihilosequentia.common.compat.ITooltipProvider;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.MeshItem;
@@ -45,7 +43,7 @@ import novamachina.novacore.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock, ITOPInfoProvider {
+public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock, ITooltipProvider {
 
   private static Logger log = LoggerFactory.getLogger(SieveBlock.class);
 
@@ -93,32 +91,21 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
   }
 
   @Override
-  public void addProbeInfo(
-      @Nonnull final ProbeMode probeMode,
-      @Nonnull final IProbeInfo iProbeInfo,
-      @Nonnull final Player playerEntity,
-      @Nonnull final Level world,
-      @Nonnull final BlockState blockState,
-      @Nonnull final IProbeHitData iProbeHitData) {
-    @Nullable
-    final SieveBlockEntity sieveBlockEntity =
-        (SieveBlockEntity) world.getBlockEntity(iProbeHitData.getPos());
+  public List<Component> getTooltipInfo(Level world, BlockPos pos) {
+    List<Component> tooltip = new ArrayList<>();
+    SieveBlockEntity sieveBlockEntity = (SieveBlockEntity) world.getBlockEntity(pos);
     if (sieveBlockEntity == null) {
-      return;
+      return tooltip;
     }
+
     if (!sieveBlockEntity.getBlockStack().isEmpty()) {
-      if (probeMode == ProbeMode.EXTENDED) {
-        iProbeInfo.text(
-            Component.translatable(
-                "waila.progress", StringUtils.formatPercent(sieveBlockEntity.getProgress())));
-      }
-      iProbeInfo.text(
+      tooltip.add(
           Component.translatable(
               "waila.sieve.block",
               Component.translatable(sieveBlockEntity.getBlockStack().getDescriptionId())));
     }
     if (sieveBlockEntity.getMeshType() != MeshType.NONE) {
-      iProbeInfo.text(
+      tooltip.add(
           Component.translatable(
               "waila.sieve.mesh",
               Component.translatable(
@@ -127,6 +114,24 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
                       + "."
                       + sieveBlockEntity.getMeshType().getMeshName())));
     }
+    return tooltip;
+  }
+
+  @Override
+  public List<Component> getExpandedTooltipInfo(Level world, BlockPos pos) {
+    List<Component> tooltip = new ArrayList<>();
+    SieveBlockEntity sieveBlockEntity = (SieveBlockEntity) world.getBlockEntity(pos);
+    if (sieveBlockEntity == null) {
+      return tooltip;
+    }
+
+    if (!sieveBlockEntity.getBlockStack().isEmpty()) {
+      tooltip.add(
+          Component.translatable(
+              "waila.progress", StringUtils.formatPercent(sieveBlockEntity.getProgress())));
+    }
+    tooltip.addAll(this.getTooltipInfo(world, pos));
+    return tooltip;
   }
 
   @Override

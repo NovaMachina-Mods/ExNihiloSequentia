@@ -5,16 +5,19 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.List;
-import javax.annotation.Nonnull;
+import lombok.extern.slf4j.Slf4j;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.exnihilosequentia.world.item.crafting.MeshWithChance;
 import novamachina.novacore.data.recipes.RecipeBuilder;
+import novamachina.novacore.util.ItemStackHelper;
+import org.jetbrains.annotations.Nullable;
 
+@Slf4j
 public class SiftingRecipeBuilder extends RecipeBuilder<SiftingRecipeBuilder> {
   private final Ingredient input;
   private final ItemStack drop;
@@ -97,29 +100,18 @@ public class SiftingRecipeBuilder extends RecipeBuilder<SiftingRecipeBuilder> {
 
     @Override
     public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson());
-      json.add("result", serializeItemStack(drop));
+      json.add("input", input.toJson(false));
+      json.add("result", ItemStackHelper.serialize(drop));
       JsonArray rollArray = new JsonArray();
       rolls.forEach(roll -> rollArray.add(roll.serialize()));
       json.add("rolls", rollArray);
-      if (isWaterlogged) {
-        json.addProperty("waterlogged", true);
-      }
+      json.addProperty("waterlogged", isWaterlogged);
     }
 
-    private JsonObject serializeItemStack(@Nonnull final ItemStack itemStack) {
-      JsonObject obj = new JsonObject();
-      ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(itemStack.getItem());
-      if (resourceLocation != null) {
-        obj.addProperty("item", resourceLocation.toString());
-      }
-      if (itemStack.getCount() > 1) {
-        obj.addProperty("count", itemStack.getCount());
-      }
-      if (itemStack.hasTag() && itemStack.getTag() != null) {
-        obj.addProperty("nbt", itemStack.getTag().toString());
-      }
-      return obj;
+    @Nullable
+    @Override
+    public AdvancementHolder advancement() {
+      return null;
     }
   }
 }

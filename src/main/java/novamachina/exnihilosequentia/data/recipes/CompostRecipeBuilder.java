@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -9,6 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.novacore.data.recipes.RecipeBuilder;
+import org.jetbrains.annotations.Nullable;
 
 public class CompostRecipeBuilder extends RecipeBuilder<CompostRecipeBuilder> {
   private final Ingredient input;
@@ -51,8 +53,14 @@ public class CompostRecipeBuilder extends RecipeBuilder<CompostRecipeBuilder> {
 
     @Override
     public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson());
+      json.add("input", input.toJson(false));
       json.addProperty("amount", amount);
+    }
+
+    @Nullable
+    @Override
+    public AdvancementHolder advancement() {
+      return null;
     }
   }
 }

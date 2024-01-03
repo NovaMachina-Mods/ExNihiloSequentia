@@ -2,8 +2,8 @@ package novamachina.exnihilosequentia.world.level.material;
 
 import java.util.function.Consumer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidType;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class SeaWaterFluidType extends FluidType {

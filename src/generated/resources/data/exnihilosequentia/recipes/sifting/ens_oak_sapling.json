@@ -4,12 +4,14 @@
     "item": "minecraft:dirt"
   },
   "result": {
-    "item": "minecraft:oak_sapling"
+    "Count": 1,
+    "id": "minecraft:oak_sapling"
   },
   "rolls": [
     {
       "chance": 0.05,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

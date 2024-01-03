@@ -1,11 +1,11 @@
 package novamachina.exnihilosequentia.data.recipes.packs;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.data.recipes.providers.CompostRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.CraftingRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.CrushingRecipes;
@@ -20,8 +20,9 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 import novamachina.novacore.data.recipes.RecipeProvider;
 
 public class EXNRecipeProvider extends RecipeProvider {
-  public EXNRecipeProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-    super(output, existingFileHelper, ExNihiloSequentia.MOD_ID);
+  public EXNRecipeProvider(
+      PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+    super(output, lookupProvider);
   }
 
   @Override

@@ -4,7 +4,8 @@
     "item": "exnihilosequentia:crushed_netherrack"
   },
   "result": {
-    "item": "exnihilosequentia:netherrack_pebble"
+    "Count": 1,
+    "id": "exnihilosequentia:netherrack_pebble"
   },
   "rolls": [
     {
@@ -15,5 +16,6 @@
       "chance": 0.1,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

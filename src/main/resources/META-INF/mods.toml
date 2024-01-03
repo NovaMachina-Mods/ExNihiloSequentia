@@ -15,7 +15,7 @@ authors = "${mod_authors}" #optional
 description = '''${mod_description}'''
 
 [[dependencies.${mod_id}]] #optional
-modId = "forge" #mandatory
+modId = "neoforge" #mandatory
 mandatory = true #mandatory
 versionRange = "${neo_version_range}" #mandatory
 ordering = "NONE"
@@ -32,26 +32,5 @@ side = "BOTH"
 modId = "novacore"
 mandatory = true
 versionRange = "${novacore_version_range}"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.${mod_id}]]
-modId = "crafttweaker"
-mandatory = false
-versionRange = "${crafttweaker_version_range}"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies.${mod_id}]]
-modId = "jei"
-mandatory = false
-versionRange = "${jei_version_range}"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies.${mod_id}]]
-modId = "kubejs"
-mandatory = false
-versionRange = "${kubejs_version_range}"
 ordering = "AFTER"
 side = "BOTH"

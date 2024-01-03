@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.List;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.exnihilosequentia.world.item.crafting.ItemStackWithChance;
 import novamachina.novacore.data.recipes.RecipeBuilder;
+import org.jetbrains.annotations.Nullable;
 
 public class HarvestRecipeBuilder extends RecipeBuilder<HarvestRecipeBuilder> {
 
@@ -66,10 +68,16 @@ public class HarvestRecipeBuilder extends RecipeBuilder<HarvestRecipeBuilder> {
 
     @Override
     public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson());
+      json.add("input", input.toJson(false));
       JsonArray results = new JsonArray();
       drops.forEach(drop -> results.add(drop.serialize()));
       json.add("results", results);
+    }
+
+    @Nullable
+    @Override
+    public AdvancementHolder advancement() {
+      return null;
     }
   }
 }

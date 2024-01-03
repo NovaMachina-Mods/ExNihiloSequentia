@@ -4,7 +4,8 @@
     "item": "minecraft:oak_leaves"
   },
   "result": {
-    "item": "minecraft:oak_sapling"
+    "Count": 1,
+    "id": "minecraft:oak_sapling"
   },
   "rolls": [
     {
@@ -23,5 +24,6 @@
       "chance": 0.2,
       "mesh": "diamond"
     }
-  ]
+  ],
+  "waterlogged": false
 }

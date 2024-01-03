@@ -4,7 +4,8 @@
     "tag": "minecraft:leaves"
   },
   "result": {
-    "item": "minecraft:golden_apple"
+    "Count": 1,
+    "id": "minecraft:golden_apple"
   },
   "rolls": [
     {
@@ -23,5 +24,6 @@
       "chance": 0.01,
       "mesh": "diamond"
     }
-  ]
+  ],
+  "waterlogged": false
 }

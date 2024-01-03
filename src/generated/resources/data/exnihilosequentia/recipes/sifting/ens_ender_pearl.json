@@ -4,7 +4,8 @@
     "item": "exnihilosequentia:crushed_end_stone"
   },
   "result": {
-    "item": "minecraft:ender_pearl"
+    "Count": 1,
+    "id": "minecraft:ender_pearl"
   },
   "rolls": [
     {
@@ -23,5 +24,6 @@
       "chance": 0.02,
       "mesh": "netherite"
     }
-  ]
+  ],
+  "waterlogged": false
 }

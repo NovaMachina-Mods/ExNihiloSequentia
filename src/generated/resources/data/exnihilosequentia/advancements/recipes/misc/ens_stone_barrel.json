@@ -32,9 +32,9 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_walls",
-      "has_base",
-      "has_the_recipe"
+      "has_base"
     ]
   ],
   "rewards": {

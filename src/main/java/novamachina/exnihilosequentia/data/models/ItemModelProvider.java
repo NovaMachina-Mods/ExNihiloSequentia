@@ -2,8 +2,8 @@ package novamachina.exnihilosequentia.data.models;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.EXNItems;
@@ -11,7 +11,7 @@ import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.ItemDefinition;
 
 public class ItemModelProvider
-    extends net.minecraftforge.client.model.generators.ItemModelProvider {
+    extends net.neoforged.neoforge.client.model.generators.ItemModelProvider {
 
   private static final String ITEMS_TAG = "item/";
   private static final String ITEM_HANDHELD_TAG = "item/handheld";

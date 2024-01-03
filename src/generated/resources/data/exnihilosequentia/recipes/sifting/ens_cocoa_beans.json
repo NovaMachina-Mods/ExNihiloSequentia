@@ -4,12 +4,14 @@
     "item": "minecraft:sand"
   },
   "result": {
-    "item": "minecraft:cocoa_beans"
+    "Count": 1,
+    "id": "minecraft:cocoa_beans"
   },
   "rolls": [
     {
       "chance": 0.03,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

@@ -16,11 +16,11 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.IForgeShearable;
+import net.neoforged.neoforge.common.IShearable;
 import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.world.level.block.entity.InfestedLeavesBlockEntity;
 
-public class InfestedLeavesBlock extends Block implements IForgeShearable, EntityBlock {
+public class InfestedLeavesBlock extends Block implements IShearable, EntityBlock {
 
   public InfestedLeavesBlock() {
     super(

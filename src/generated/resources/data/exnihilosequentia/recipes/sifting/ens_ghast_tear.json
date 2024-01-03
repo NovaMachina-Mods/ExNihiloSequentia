@@ -4,12 +4,14 @@
     "item": "minecraft:soul_sand"
   },
   "result": {
-    "item": "minecraft:ghast_tear"
+    "Count": 1,
+    "id": "minecraft:ghast_tear"
   },
   "rolls": [
     {
       "chance": 0.02,
       "mesh": "diamond"
     }
-  ]
+  ],
+  "waterlogged": false
 }

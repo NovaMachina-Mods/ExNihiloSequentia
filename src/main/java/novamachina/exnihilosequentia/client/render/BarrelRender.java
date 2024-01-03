@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import novamachina.exnihilosequentia.client.util.LiquidBlockVertexConsumer;
 import novamachina.exnihilosequentia.world.level.block.entity.BarrelBlockEntity;
 import novamachina.novacore.client.renderer.blockentity.BlockEntityRenderer;

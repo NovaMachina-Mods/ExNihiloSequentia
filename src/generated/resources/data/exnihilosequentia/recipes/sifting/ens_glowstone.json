@@ -4,12 +4,14 @@
     "item": "exnihilosequentia:dust"
   },
   "result": {
-    "item": "minecraft:glowstone_dust"
+    "Count": 1,
+    "id": "minecraft:glowstone_dust"
   },
   "rolls": [
     {
       "chance": 0.0625,
       "mesh": "iron"
     }
-  ]
+  ],
+  "waterlogged": false
 }

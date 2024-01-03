@@ -32,9 +32,9 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_diamond_crook",
-      "has_material",
-      "has_the_recipe"
+      "has_material"
     ]
   ],
   "rewards": {

@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import net.minecraft.resources.ResourceLocation;
+import java.util.List;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -9,8 +9,8 @@ import novamachina.exnihilosequentia.world.item.EXNItems;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class HarvestRecipe extends DropListRecipe {
-  public HarvestRecipe(ResourceLocation id, Ingredient input, ItemStackWithChance... drops) {
-    super(id, input, drops);
+  public HarvestRecipe(Ingredient input, List<ItemStackWithChance> drops) {
+    super(input, drops);
   }
 
   @Override

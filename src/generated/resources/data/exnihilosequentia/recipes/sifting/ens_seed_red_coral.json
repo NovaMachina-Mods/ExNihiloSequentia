@@ -4,7 +4,8 @@
     "tag": "minecraft:sand"
   },
   "result": {
-    "item": "exnihilosequentia:fire_coral_larva"
+    "Count": 1,
+    "id": "exnihilosequentia:fire_coral_larva"
   },
   "rolls": [
     {

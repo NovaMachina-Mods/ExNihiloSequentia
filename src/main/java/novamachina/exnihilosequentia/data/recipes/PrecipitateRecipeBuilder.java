@@ -2,17 +2,19 @@ package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.novacore.data.recipes.RecipeBuilder;
 import novamachina.novacore.util.FluidStackUtils;
 import novamachina.novacore.util.ItemStackHelper;
+import org.jetbrains.annotations.Nullable;
 
 public class PrecipitateRecipeBuilder extends RecipeBuilder<PrecipitateRecipeBuilder> {
   private final Ingredient input;
@@ -62,9 +64,15 @@ public class PrecipitateRecipeBuilder extends RecipeBuilder<PrecipitateRecipeBui
 
     @Override
     public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson());
+      json.add("input", input.toJson(false));
       json.add("fluid", FluidStackUtils.serialize(fluid));
       json.add("result", ItemStackHelper.serialize(output));
+    }
+
+    @Nullable
+    @Override
+    public AdvancementHolder advancement() {
+      return null;
     }
   }
 }

@@ -4,12 +4,14 @@
     "item": "minecraft:sand"
   },
   "result": {
-    "item": "minecraft:cactus"
+    "Count": 1,
+    "id": "minecraft:cactus"
   },
   "rolls": [
     {
       "chance": 0.05,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

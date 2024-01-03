@@ -4,7 +4,7 @@ import java.util.List;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
-import net.minecraftforge.common.loot.LootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.tags.ExNihiloTags;
 import novamachina.novacore.common.loot.modifier.LootModifierDefinition;
