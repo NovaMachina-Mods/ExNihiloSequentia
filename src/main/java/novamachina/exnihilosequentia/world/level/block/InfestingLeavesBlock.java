@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.compat.ITooltipProvider;
+import novamachina.exnihilosequentia.tags.ExNihiloTags;
 import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.world.level.block.entity.InfestingLeavesBlockEntity;
 import novamachina.novacore.util.StringUtils;
@@ -70,7 +70,7 @@ public class InfestingLeavesBlock extends Block implements EntityBlock, ITooltip
             new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1))
         .forEach(
             item -> {
-              if (world.getBlockState(item).getBlock() instanceof LeavesBlock) {
+              if (world.getBlockState(item).is(ExNihiloTags.INFESTABLE)) {
                 nearbyLeaves.add(new BlockPos(item));
               }
             });
