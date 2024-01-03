@@ -30,6 +30,7 @@ public class Config {
   @Nonnull private static final String SUBCATEGORY_MESHES = "mesh";
   // Pebble
   @Nonnull private static final ForgeConfigSpec.IntValue pebbleDamage;
+  @Nonnull private static final ForgeConfigSpec.BooleanValue enableThrowable;
   // Ore
   @Nonnull private static final ForgeConfigSpec.BooleanValue enableOreOverride;
   @Nonnull private static final ForgeConfigSpec.BooleanValue enableAluminum;
@@ -106,6 +107,10 @@ public class Config {
         COMMON_BUILDER
             .comment("How much half hearts damage a pebble should do. (Default: 0)")
             .defineInRange("pebbleDamage", 0, 0, Integer.MAX_VALUE);
+    enableThrowable =
+        COMMON_BUILDER
+            .comment("Should pebbles be throwable? (Default: true)")
+            .define("enableThrowable", true);
     COMMON_BUILDER.pop();
 
     // barrelConfigs
@@ -681,5 +686,8 @@ public class Config {
 
   public static int getCrookNetheriteDurability() {
     return crookNetheriteValue.get();
+  }
+  public static boolean enableThrowable() {
+    return enableThrowable.get();
   }
 }
