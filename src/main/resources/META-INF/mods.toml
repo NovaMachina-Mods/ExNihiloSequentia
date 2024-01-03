@@ -29,6 +29,13 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
+modId = "novacore"
+mandatory = true
+versionRange = "${novacore_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
 modId = "crafttweaker"
 mandatory = false
 versionRange = "${crafttweaker_version_range}"
