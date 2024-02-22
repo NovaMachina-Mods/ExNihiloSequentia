@@ -3,6 +3,7 @@
 build
 lib
 run
+runs
 runserver
 **/.cache
 bin
