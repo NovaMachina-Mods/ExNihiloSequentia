@@ -60,18 +60,12 @@ repositories {
         content {
             includeGroup 'novamachina.novacore'
         }
-        mavenContent {
-            releasesOnly()
-        }
     }
     maven {
         name 'NovaMachina Mods - Snapshot'
         url 'https://dl.cloudsmith.io/public/novamachina-mods/snapshot/maven/'
         content {
             includeGroup 'novamachina.novacore'
-        }
-        mavenContent {
-            snapshotsOnly()
         }
     }
 }
