@@ -28,6 +28,5 @@
     "recipes": [
       "exnihilosequentia:ens_porcelain_clay"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

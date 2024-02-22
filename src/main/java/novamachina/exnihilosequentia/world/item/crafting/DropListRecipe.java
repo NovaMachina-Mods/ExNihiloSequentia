@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,7 +13,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-@Getter
 public abstract class DropListRecipe extends Recipe {
   private final Ingredient input;
   private final List<ItemStackWithChance> drops;
@@ -48,6 +46,14 @@ public abstract class DropListRecipe extends Recipe {
     buffer.writeInt(drops.size());
     drops.forEach(drop -> drop.write(buffer));
     input.toNetwork(buffer);
+  }
+
+  public Ingredient getInput() {
+    return this.input;
+  }
+
+  public List<ItemStackWithChance> getDrops() {
+    return this.drops;
   }
 
   public static class Serializer<T extends DropListRecipe> implements RecipeSerializer<T> {

@@ -1,8 +1,6 @@
 package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.JsonObject;
-import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -11,12 +9,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
+import novamachina.exnihilosequentia.world.item.crafting.PrecipitateRecipe;
 import novamachina.novacore.data.recipes.RecipeBuilder;
-import novamachina.novacore.util.FluidStackUtils;
-import novamachina.novacore.util.ItemStackHelper;
-import org.jetbrains.annotations.Nullable;
 
-public class PrecipitateRecipeBuilder extends RecipeBuilder<PrecipitateRecipeBuilder> {
+public class PrecipitateRecipeBuilder extends RecipeBuilder<PrecipitateRecipe> {
   private final Ingredient input;
   private final FluidStack fluid;
   private final ItemStack output;
@@ -44,35 +40,15 @@ public class PrecipitateRecipeBuilder extends RecipeBuilder<PrecipitateRecipeBui
   }
 
   @Override
+  protected PrecipitateRecipe getRecipe(ResourceLocation resourceLocation) {
+    return new PrecipitateRecipe(fluid, input, output);
+  }
+
+  @Override
   protected void validate(ResourceLocation id) {
     Preconditions.checkNotNull(input, "Input cannot be null.");
     Preconditions.checkNotNull(fluid, "Fluid cannot be null");
     Preconditions.checkArgument(!fluid.isEmpty(), "Fluid amount cannot be 0");
     Preconditions.checkNotNull(output, "Output cannot be null.");
-  }
-
-  @Override
-  protected PrecipitateRecipeResult getResult(ResourceLocation id) {
-    return new PrecipitateRecipeResult(id);
-  }
-
-  public class PrecipitateRecipeResult extends RecipeResult {
-
-    public PrecipitateRecipeResult(ResourceLocation id) {
-      super(id);
-    }
-
-    @Override
-    public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson(false));
-      json.add("fluid", FluidStackUtils.serialize(fluid));
-      json.add("result", ItemStackHelper.serialize(output));
-    }
-
-    @Nullable
-    @Override
-    public AdvancementHolder advancement() {
-      return null;
-    }
   }
 }

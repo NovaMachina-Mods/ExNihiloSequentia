@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.client.setup;
 
 import java.util.Calendar;
 import javax.annotation.Nonnull;
-import lombok.extern.slf4j.Slf4j;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -12,9 +11,11 @@ import novamachina.exnihilosequentia.client.render.CrucibleRender;
 import novamachina.exnihilosequentia.client.render.SieveRender;
 import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
+import org.slf4j.Logger;
 
-@Slf4j
 public class ClientSetup {
+
+  private static final Logger log = org.slf4j.LoggerFactory.getLogger(ClientSetup.class);
 
   private ClientSetup() {}
 

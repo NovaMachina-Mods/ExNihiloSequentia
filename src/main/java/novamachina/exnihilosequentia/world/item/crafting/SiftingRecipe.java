@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -15,7 +14,6 @@ import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-@Getter
 public class SiftingRecipe extends Recipe {
 
   private final Ingredient input;
@@ -75,6 +73,18 @@ public class SiftingRecipe extends Recipe {
     buffer.writeInt(rolls.size());
     rolls.forEach(roll -> roll.write(buffer));
     buffer.writeBoolean(isWaterlogged);
+  }
+
+  public Ingredient getInput() {
+    return this.input;
+  }
+
+  public boolean isWaterlogged() {
+    return this.isWaterlogged;
+  }
+
+  public List<MeshWithChance> getRolls() {
+    return this.rolls;
   }
 
   public static class Serializer<T extends SiftingRecipe> implements RecipeSerializer<T> {

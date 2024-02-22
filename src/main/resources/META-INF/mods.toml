@@ -1,36 +1,35 @@
-modLoader = "javafml" #mandatory
-loaderVersion = "${loader_version_range}" #mandatory
-license = "${mod_license}"
-issueTrackerURL = "${git_url}/issues" #optional
+modLoader="javafml"
+loaderVersion="[1,)"
+issueTrackerURL="https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues"
+license="CC BY-NC-SA 4.0"
 
-[[mods]] #mandatory
-modId = "${mod_id}" #mandatory
-version = "${mod_version}" #mandatory
-displayName = "${mod_name}" #mandatory
-updateJSONURL = "https://api.modrinth.com/updates/${modrinth_project_id}/forge_updates.json"
-displayURL = "${curseforge_url}" #optional
-logoFile = "logo.png" #optional
-credits = "Thanks to McJty for tutorials and those that created the Ex Nihilo series" #optional
-authors = "${mod_authors}" #optional
-description = '''${mod_description}'''
+[[mods]]
+    modId="exnihilosequentia"
+    logoFile="exnihilosequentia.png"
+    version="6.0.0"
+    displayName="Ex Nihilo: Sequentia"
+    updateJSONURL="https://api.modrinth.com/updates/WhVa4xyw/forge_updates.json"
+    authors="NovaMachina"
+    description='''Ex Nihilo: Sequentia is a modern port of Ex Nihilo: Creatio for 1.12, which in turn was a fork of Ex Nihilo: Adscensio for 1.10, which was a continuation of Ex Nihilo for 1.7.10.'''
 
-[[dependencies.${mod_id}]] #optional
-modId = "neoforge" #mandatory
-mandatory = true #mandatory
-versionRange = "${neo_version_range}" #mandatory
-ordering = "NONE"
-side = "BOTH"
+[[dependencies.exnihilosequentia]]
+    modId="neoforge"
+    type="required"
+    versionRange="[20.4, 21)"
+    ordering="NONE"
+    side="BOTH"
 
-[[dependencies.${mod_id}]]
-modId = "minecraft"
-mandatory = true
-versionRange = "${minecraft_version_range}"
-ordering = "NONE"
-side = "BOTH"
+[[dependencies.exnihilosequentia]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.20.4,1.21)"
+    ordering="NONE"
+    side="BOTH"
 
-[[dependencies.${mod_id}]]
-modId = "novacore"
-mandatory = true
-versionRange = "${novacore_version_range}"
-ordering = "AFTER"
-side = "BOTH"
+[[dependencies.exnihilosequentia]]
+   modId="novacore"
+   type="required"
+   ordering="AFTER"
+   side="BOTH"
+   versionRange="[2.0.0, 2.1.0)"
+

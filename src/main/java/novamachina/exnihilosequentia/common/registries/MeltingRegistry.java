@@ -8,19 +8,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import javax.annotation.Nonnull;
-
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-// import novamachina.exnihilosequentia.common.compat.jei.melting.JEICrucibleRecipe;
 import novamachina.exnihilosequentia.world.item.crafting.MeltingRecipe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Slf4j
+// import novamachina.exnihilosequentia.common.compat.jei.melting.JEICrucibleRecipe;
+
 public class MeltingRegistry {
-  @Getter
+  private static final Logger log = LoggerFactory.getLogger(MeltingRegistry.class);
   private final List<MeltingRecipe> recipeList = new ArrayList<>();
 
   private final LoadingCache<ItemLike, Optional<MeltingRecipe>> cache;
@@ -68,5 +65,9 @@ public class MeltingRegistry {
     recipeList.clear();
 
     cache.invalidateAll();
+  }
+
+  public List<MeltingRecipe> getRecipeList() {
+    return this.recipeList;
   }
 }

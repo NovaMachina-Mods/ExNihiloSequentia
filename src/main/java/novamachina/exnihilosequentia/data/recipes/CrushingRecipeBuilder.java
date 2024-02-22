@@ -2,21 +2,18 @@ package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import java.util.List;
 import javax.annotation.Nonnull;
-import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import novamachina.exnihilosequentia.world.item.crafting.CrushingRecipe;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.exnihilosequentia.world.item.crafting.ItemStackWithChance;
 import novamachina.novacore.data.recipes.RecipeBuilder;
-import org.jetbrains.annotations.Nullable;
 
-public class CrushingRecipeBuilder extends RecipeBuilder<CrushingRecipeBuilder> {
+public class CrushingRecipeBuilder extends RecipeBuilder<CrushingRecipe> {
 
   private final Ingredient input;
   private List<ItemStackWithChance> drops;
@@ -37,6 +34,11 @@ public class CrushingRecipeBuilder extends RecipeBuilder<CrushingRecipeBuilder> 
   }
 
   @Override
+  protected CrushingRecipe getRecipe(ResourceLocation resourceLocation) {
+    return new CrushingRecipe(input, drops);
+  }
+
+  @Override
   protected void validate(ResourceLocation id) {
     Preconditions.checkNotNull(input, "Input cannot be null.");
     Preconditions.checkArgument(!drops.isEmpty(), "Recipe needs at least one drop.");
@@ -53,31 +55,5 @@ public class CrushingRecipeBuilder extends RecipeBuilder<CrushingRecipeBuilder> 
   public CrushingRecipeBuilder addDrop(ItemStack stack, int count, float chance) {
     this.drops.add(ItemStackWithChance.of(stack, count, chance));
     return this;
-  }
-
-  @Override
-  protected CrushingRecipeResult getResult(ResourceLocation id) {
-    return new CrushingRecipeResult(id);
-  }
-
-  public class CrushingRecipeResult extends RecipeResult {
-
-    public CrushingRecipeResult(ResourceLocation id) {
-      super(id);
-    }
-
-    @Override
-    public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson(false));
-      JsonArray results = new JsonArray();
-      drops.forEach(drop -> results.add(drop.serialize()));
-      json.add("results", results);
-    }
-
-    @Nullable
-    @Override
-    public AdvancementHolder advancement() {
-      return null;
-    }
   }
 }

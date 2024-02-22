@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_unfired_crucible"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -685,6 +685,7 @@ public class Config {
   public static int getCrookNetheriteDurability() {
     return crookNetheriteValue.get();
   }
+
   public static boolean enableThrowable() {
     return enableThrowable.get();
   }

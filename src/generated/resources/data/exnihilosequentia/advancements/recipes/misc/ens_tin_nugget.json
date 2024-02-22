@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_tin_nugget"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

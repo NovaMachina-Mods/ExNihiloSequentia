@@ -41,6 +41,5 @@
     "recipes": [
       "exnihilosequentia:ens_stone_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

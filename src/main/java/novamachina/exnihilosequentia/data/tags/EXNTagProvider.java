@@ -254,24 +254,24 @@ public class EXNTagProvider extends TagProvider {
   }
 
   private void addBlocks() {
-    getBlockBuilder(ExNihiloTags.INFESTABLE)
-      .add(BlockTags.LEAVES);
+    getBlockBuilder(ExNihiloTags.INFESTABLE).add(BlockTags.LEAVES);
     getBlockBuilder(ExNihiloTags.MINEABLE_WITH_HAMMER)
-      .add(Blocks.GRAVEL,
-        Blocks.SAND,
-        Blocks.TUBE_CORAL_BLOCK,
-        Blocks.BRAIN_CORAL_BLOCK,
-        Blocks.BUBBLE_CORAL_BLOCK,
-        Blocks.FIRE_CORAL_BLOCK,
-        Blocks.HORN_CORAL_BLOCK,
-        Blocks.TUBE_CORAL,
-        Blocks.BRAIN_CORAL,
-        Blocks.BUBBLE_CORAL,
-        Blocks.FIRE_CORAL,
-        Blocks.HORN_CORAL,
-        EXNBlocks.STONE_BARREL.block(),
-        EXNBlocks.FIRED_CRUCIBLE.block())
-      .add(BlockTags.MINEABLE_WITH_PICKAXE);
+        .add(
+            Blocks.GRAVEL,
+            Blocks.SAND,
+            Blocks.TUBE_CORAL_BLOCK,
+            Blocks.BRAIN_CORAL_BLOCK,
+            Blocks.BUBBLE_CORAL_BLOCK,
+            Blocks.FIRE_CORAL_BLOCK,
+            Blocks.HORN_CORAL_BLOCK,
+            Blocks.TUBE_CORAL,
+            Blocks.BRAIN_CORAL,
+            Blocks.BUBBLE_CORAL,
+            Blocks.FIRE_CORAL,
+            Blocks.HORN_CORAL,
+            EXNBlocks.STONE_BARREL.block(),
+            EXNBlocks.FIRED_CRUCIBLE.block())
+        .add(BlockTags.MINEABLE_WITH_PICKAXE);
     getBlockBuilder(ExNihiloTags.MINEABLE_WITH_CROOK)
         .add(BlockTags.LEAVES)
         .add(EXNBlocks.INFESTING_LEAVES.block(), EXNBlocks.INFESTED_LEAVES.block());

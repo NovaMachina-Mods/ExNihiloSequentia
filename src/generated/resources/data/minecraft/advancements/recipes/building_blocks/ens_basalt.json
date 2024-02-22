@@ -30,6 +30,5 @@
     "recipes": [
       "minecraft:ens_basalt"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -1,10 +1,8 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.google.gson.JsonParser;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.Optional;
-import lombok.Getter;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -19,9 +17,7 @@ import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-@Getter
 public class HeatRecipe extends Recipe {
-
   private final int amount;
   private final Block inputBlock;
   private final Optional<StatePropertiesPredicate> properties;
@@ -71,10 +67,22 @@ public class HeatRecipe extends Recipe {
     buffer.writeInt(length);
     buffer.writeUtf(BuiltInRegistries.BLOCK.getKey(inputBlock).toString(), length);
     buffer.writeInt(amount);
-    buffer.writeBoolean(this.properties.isEmpty());
+    buffer.writeBoolean(this.properties.isPresent());
     if (this.properties.isPresent()) {
-      buffer.writeUtf(properties.get().serializeToJson().toString());
+      buffer.writeJsonWithCodec(StatePropertiesPredicate.CODEC, this.properties.get());
     }
+  }
+
+  public int getAmount() {
+    return this.amount;
+  }
+
+  public Block getInputBlock() {
+    return this.inputBlock;
+  }
+
+  public Optional<StatePropertiesPredicate> getProperties() {
+    return this.properties;
   }
 
   public static class Serializer<T extends HeatRecipe> implements RecipeSerializer<T> {
@@ -113,9 +121,8 @@ public class HeatRecipe extends Recipe {
       boolean hasProperties =
           buffer.readBoolean(); // flag showing whether recipe depends on block state
       if (hasProperties) {
-        Optional<StatePropertiesPredicate> properties =
-            StatePropertiesPredicate.fromJson(JsonParser.parseString(buffer.readUtf()));
-        return this.factory.create(inputBlock, amount, properties);
+        StatePropertiesPredicate props = buffer.readJsonWithCodec(StatePropertiesPredicate.CODEC);
+        return this.factory.create(inputBlock, amount, Optional.of(props));
       }
       return this.factory.create(
           inputBlock, amount, StatePropertiesPredicate.Builder.properties().build());

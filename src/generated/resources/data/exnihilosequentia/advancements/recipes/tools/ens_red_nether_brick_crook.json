@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_red_nether_brick_crook"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

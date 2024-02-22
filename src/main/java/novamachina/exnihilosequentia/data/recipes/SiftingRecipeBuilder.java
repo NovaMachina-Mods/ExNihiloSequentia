@@ -2,23 +2,19 @@ package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
-import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.exnihilosequentia.world.item.crafting.MeshWithChance;
+import novamachina.exnihilosequentia.world.item.crafting.SiftingRecipe;
 import novamachina.novacore.data.recipes.RecipeBuilder;
-import novamachina.novacore.util.ItemStackHelper;
-import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
-@Slf4j
-public class SiftingRecipeBuilder extends RecipeBuilder<SiftingRecipeBuilder> {
+public class SiftingRecipeBuilder extends RecipeBuilder<SiftingRecipe> {
+  private static final Logger log = org.slf4j.LoggerFactory.getLogger(SiftingRecipeBuilder.class);
   private final Ingredient input;
   private final ItemStack drop;
   private final boolean isWaterlogged;
@@ -75,6 +71,11 @@ public class SiftingRecipeBuilder extends RecipeBuilder<SiftingRecipeBuilder> {
   }
 
   @Override
+  protected SiftingRecipe getRecipe(ResourceLocation resourceLocation) {
+    return new SiftingRecipe(input, drop, isWaterlogged, rolls);
+  }
+
+  @Override
   protected void validate(ResourceLocation id) {
     Preconditions.checkNotNull(input, "Input cannot be null.");
     Preconditions.checkNotNull(drop, "Drop cannot be null.");
@@ -85,33 +86,5 @@ public class SiftingRecipeBuilder extends RecipeBuilder<SiftingRecipeBuilder> {
   public SiftingRecipeBuilder addRoll(MeshWithChance mesh) {
     rolls.add(mesh);
     return this;
-  }
-
-  @Override
-  protected SiftingRecipeResult getResult(ResourceLocation id) {
-    return new SiftingRecipeResult(id);
-  }
-
-  public class SiftingRecipeResult extends RecipeResult {
-
-    public SiftingRecipeResult(ResourceLocation id) {
-      super(id);
-    }
-
-    @Override
-    public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson(false));
-      json.add("result", ItemStackHelper.serialize(drop));
-      JsonArray rollArray = new JsonArray();
-      rolls.forEach(roll -> rollArray.add(roll.serialize()));
-      json.add("rolls", rollArray);
-      json.addProperty("waterlogged", isWaterlogged);
-    }
-
-    @Nullable
-    @Override
-    public AdvancementHolder advancement() {
-      return null;
-    }
   }
 }

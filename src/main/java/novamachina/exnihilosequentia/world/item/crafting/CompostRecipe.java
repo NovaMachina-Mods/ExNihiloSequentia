@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -12,7 +11,6 @@ import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-@Getter
 public class CompostRecipe extends Recipe {
   private final Ingredient input;
   private final int amount;
@@ -44,6 +42,14 @@ public class CompostRecipe extends Recipe {
   @NonNull
   public ItemStack getToastSymbol() {
     return EXNBlocks.OAK_BARREL.itemStack();
+  }
+
+  public Ingredient getInput() {
+    return this.input;
+  }
+
+  public int getAmount() {
+    return this.amount;
   }
 
   public static class Serializer<T extends CompostRecipe> implements RecipeSerializer<T> {

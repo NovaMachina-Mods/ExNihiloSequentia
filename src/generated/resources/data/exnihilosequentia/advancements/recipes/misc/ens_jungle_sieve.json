@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_jungle_sieve"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

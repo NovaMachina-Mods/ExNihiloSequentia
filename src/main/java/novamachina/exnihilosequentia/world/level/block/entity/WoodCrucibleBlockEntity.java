@@ -10,7 +10,9 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
+import novamachina.exnihilosequentia.world.item.capability.MeltableItemHandler;
 import novamachina.exnihilosequentia.world.item.crafting.MeltingRecipe;
+import novamachina.exnihilosequentia.world.level.material.capability.CrucibleFluidHandler;
 
 public class WoodCrucibleBlockEntity extends CrucibleBlockEntity {
 
@@ -25,18 +27,18 @@ public class WoodCrucibleBlockEntity extends CrucibleBlockEntity {
         ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());
     if (recipe.isPresent()) {
       FluidStack fluidStack = new FluidStack(recipe.get().getResultFluid(), heat);
-      int filled = tank.fill(fluidStack, FluidAction.EXECUTE);
+      int filled = CrucibleFluidHandler.getHandler(this).fill(fluidStack, FluidAction.EXECUTE);
       solidAmount -= filled;
     }
   }
 
   @Override
   protected void consumeNewSolid() {
-    currentItem = inventory.getStackInSlot(0).copy();
-    inventory.getStackInSlot(0).shrink(1);
+    currentItem = MeltableItemHandler.getHandler(this).getStackInSlot(0).copy();
+    MeltableItemHandler.getHandler(this).getStackInSlot(0).shrink(1);
 
-    if (inventory.getStackInSlot(0).isEmpty()) {
-      inventory.setStackInSlot(0, ItemStack.EMPTY);
+    if (MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()) {
+      MeltableItemHandler.getHandler(this).setStackInSlot(0, ItemStack.EMPTY);
     }
 
     ExNihiloRegistries.CRUCIBLE_REGISTRY
@@ -61,7 +63,7 @@ public class WoodCrucibleBlockEntity extends CrucibleBlockEntity {
       final Optional<MeltingRecipe> recipe =
           ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());
       if (recipe.isPresent()) {
-        int itemCount = inventory.getStackInSlot(0).getCount();
+        int itemCount = MeltableItemHandler.getHandler(this).getStackInSlot(0).getCount();
         return solidAmount + (itemCount * recipe.get().getResultFluid().getAmount());
       }
     }

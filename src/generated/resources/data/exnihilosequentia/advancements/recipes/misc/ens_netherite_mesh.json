@@ -41,6 +41,5 @@
     "recipes": [
       "exnihilosequentia:ens_netherite_mesh"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -13,7 +12,6 @@ import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-@Getter
 public class SolidifyingRecipe extends Recipe {
   private final FluidStack fluidInTank;
   private final FluidStack fluidOnTop;
@@ -53,6 +51,18 @@ public class SolidifyingRecipe extends Recipe {
     fluidInTank.writeToPacket(buffer);
     fluidOnTop.writeToPacket(buffer);
     buffer.writeItem(result);
+  }
+
+  public FluidStack getFluidInTank() {
+    return this.fluidInTank;
+  }
+
+  public FluidStack getFluidOnTop() {
+    return this.fluidOnTop;
+  }
+
+  public ItemStack getResult() {
+    return this.result;
   }
 
   public static class Serializer<T extends SolidifyingRecipe> implements RecipeSerializer<T> {

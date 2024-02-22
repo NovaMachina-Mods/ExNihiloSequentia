@@ -6,12 +6,10 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import javax.annotation.Nonnull;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import novamachina.exnihilosequentia.world.item.MeshType;
 
-@Getter
 public class MeshWithChance {
 
   public static final Codec<MeshWithChance> CODEC =
@@ -80,5 +78,14 @@ public class MeshWithChance {
   @Override
   public int hashCode() {
     return Objects.hashCode(getChance(), getMesh());
+  }
+
+  public float getChance() {
+    return this.chance;
+  }
+
+  @Nonnull
+  public MeshType getMesh() {
+    return this.mesh;
   }
 }

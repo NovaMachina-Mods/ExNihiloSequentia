@@ -41,6 +41,5 @@
     "recipes": [
       "exnihilosequentia:ens_doll_x4"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

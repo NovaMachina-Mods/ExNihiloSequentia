@@ -28,6 +28,5 @@
     "recipes": [
       "exnihilosequentia:ens_golden_crook"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

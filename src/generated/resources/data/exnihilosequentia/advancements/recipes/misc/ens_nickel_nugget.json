@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_nickel_nugget"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

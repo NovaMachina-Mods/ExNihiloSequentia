@@ -80,6 +80,5 @@
     "recipes": [
       "exnihilosequentia:ens_string_mesh"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

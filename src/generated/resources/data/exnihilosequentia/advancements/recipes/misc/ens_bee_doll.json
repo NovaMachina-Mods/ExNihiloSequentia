@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_bee_doll"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

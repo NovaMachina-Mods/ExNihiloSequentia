@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_zinc_ingot_blast"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

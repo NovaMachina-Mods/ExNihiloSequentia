@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_dark_oak_sieve"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

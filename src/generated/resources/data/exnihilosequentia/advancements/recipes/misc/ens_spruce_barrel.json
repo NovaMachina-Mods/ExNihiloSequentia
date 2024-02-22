@@ -43,6 +43,5 @@
     "recipes": [
       "exnihilosequentia:ens_spruce_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

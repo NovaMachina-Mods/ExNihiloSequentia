@@ -28,6 +28,5 @@
     "recipes": [
       "exnihilosequentia:ens_diamond_crook"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

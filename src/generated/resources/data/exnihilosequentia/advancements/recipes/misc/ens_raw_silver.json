@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_raw_silver"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

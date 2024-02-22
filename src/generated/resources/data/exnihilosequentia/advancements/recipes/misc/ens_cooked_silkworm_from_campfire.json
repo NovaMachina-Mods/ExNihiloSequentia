@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_cooked_silkworm_from_campfire"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

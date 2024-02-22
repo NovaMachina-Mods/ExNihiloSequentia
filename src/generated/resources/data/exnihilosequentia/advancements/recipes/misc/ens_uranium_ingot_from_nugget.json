@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_uranium_ingot_from_nugget"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

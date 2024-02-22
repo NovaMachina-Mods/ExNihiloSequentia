@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_fired_crucible_blast"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

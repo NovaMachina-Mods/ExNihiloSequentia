@@ -30,6 +30,5 @@
     "recipes": [
       "minecraft:ens_end_stone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

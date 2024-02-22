@@ -41,6 +41,5 @@
     "recipes": [
       "exnihilosequentia:ens_red_nether_brick_hammer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

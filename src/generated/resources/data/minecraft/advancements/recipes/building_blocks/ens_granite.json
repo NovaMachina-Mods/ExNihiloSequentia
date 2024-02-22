@@ -30,6 +30,5 @@
     "recipes": [
       "minecraft:ens_granite"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

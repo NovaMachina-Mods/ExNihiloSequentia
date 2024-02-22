@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_diorite_crook"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

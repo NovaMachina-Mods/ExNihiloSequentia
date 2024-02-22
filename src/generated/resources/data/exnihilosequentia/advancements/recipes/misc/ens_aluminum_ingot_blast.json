@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_aluminum_ingot_blast"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

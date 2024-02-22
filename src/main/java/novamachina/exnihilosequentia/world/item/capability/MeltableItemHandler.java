@@ -1,14 +1,26 @@
 package novamachina.exnihilosequentia.world.item.capability;
 
+import java.util.IdentityHashMap;
+import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
+import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity.CrucibleType;
 
 public class MeltableItemHandler extends ItemStackHandler {
+
+  private static final Map<BlockEntity, MeltableItemHandler> BLOCK_TO_MELTABLE =
+      new IdentityHashMap<>();
+
+  public static MeltableItemHandler getHandler(CrucibleBlockEntity entity) {
+    return BLOCK_TO_MELTABLE.computeIfAbsent(
+        entity, (block) -> new MeltableItemHandler(entity.getCrucibleType()));
+  }
 
   private boolean crucibleHasRoom = true;
   @Nullable private CrucibleType type;

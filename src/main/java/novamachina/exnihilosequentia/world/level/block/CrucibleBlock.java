@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.common.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import novamachina.exnihilosequentia.common.compat.ITooltipProvider;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity;
@@ -95,8 +95,8 @@ public abstract class CrucibleBlock extends Block implements ITooltipProvider {
 
     if (tile != null) {
       IFluidHandler fluidHandler =
-          tile.getCapability(Capabilities.FLUID_HANDLER, hit.getDirection())
-              .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
+          worldIn.getCapability(
+              Capabilities.FluidHandler.BLOCK, pos, state, tile, hit.getDirection());
       return tile.onBlockActivated(player, handIn, fluidHandler);
     }
     return InteractionResult.SUCCESS;

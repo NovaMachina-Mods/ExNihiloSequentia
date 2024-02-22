@@ -41,6 +41,5 @@
     "recipes": [
       "exnihilosequentia:ens_andesite_hammer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

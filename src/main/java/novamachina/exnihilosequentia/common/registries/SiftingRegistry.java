@@ -8,14 +8,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
-
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.common.Config;
-// import novamachina.exnihilosequentia.common.compat.jei.sifting.JEISieveRecipe;
 import novamachina.exnihilosequentia.world.item.MeshType;
 import novamachina.exnihilosequentia.world.item.Ore;
 import novamachina.exnihilosequentia.world.item.OreItem;
@@ -24,12 +20,13 @@ import novamachina.novacore.util.IngredientUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Slf4j
+// import novamachina.exnihilosequentia.common.compat.jei.sifting.JEISieveRecipe;
+
 public class SiftingRegistry {
 
+  private static final Logger log = LoggerFactory.getLogger(SiftingRegistry.class);
   private final boolean flattenRecipes = Config.flattenSieveRecipes();
 
-  @Getter
   private final List<SiftingRecipe> recipeList = new ArrayList<>();
 
   private final LoadingCache<SiftingCacheKey, List<SiftingRecipe>> recipeCache;
@@ -115,6 +112,7 @@ public class SiftingRegistry {
       throw new RuntimeException(e);
     }
   }
+
   // TODO: MOVE TO JEI ADDON
   //  @Nonnull
   //  private List<JEISieveRecipe> getRecipeList(final boolean isWaterLogged) {
@@ -178,6 +176,10 @@ public class SiftingRegistry {
 
     recipeCache.invalidateAll();
     siftableCache.invalidateAll();
+  }
+
+  public List<SiftingRecipe> getRecipeList() {
+    return this.recipeList;
   }
 
   private record SiftingCacheKey(Ingredient input, MeshType meshType, boolean isWaterlogged) {}

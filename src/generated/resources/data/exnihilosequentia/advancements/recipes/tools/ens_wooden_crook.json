@@ -28,6 +28,5 @@
     "recipes": [
       "exnihilosequentia:ens_wooden_crook"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

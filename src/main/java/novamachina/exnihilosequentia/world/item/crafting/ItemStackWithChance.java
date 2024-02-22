@@ -5,16 +5,14 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.slf4j.Logger;
 
-@Slf4j
 public class ItemStackWithChance {
 
   public static final Codec<ItemStackWithChance> CODEC =
@@ -29,7 +27,8 @@ public class ItemStackWithChance {
   private static final String BASE_KEY = "item";
   private static final String CHANCE_KEY = "chance";
   private static final String COUNT_KEY = "count";
-  @Getter private final float chance;
+  private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemStackWithChance.class);
+  private final float chance;
   private final ItemStack itemStack;
 
   private ItemStackWithChance(ItemStack itemStack, float chance) {
@@ -110,5 +109,9 @@ public class ItemStackWithChance {
   @Override
   public int hashCode() {
     return Objects.hashCode(getChance(), itemStack);
+  }
+
+  public float getChance() {
+    return this.chance;
   }
 }

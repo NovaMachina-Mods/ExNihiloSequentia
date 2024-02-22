@@ -30,6 +30,5 @@
     "recipes": [
       "minecraft:ens_ancient_debris"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

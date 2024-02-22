@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,7 +13,6 @@ import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-@Getter
 public class TransitionRecipe extends Recipe {
 
   private final Ingredient catalyst;
@@ -49,6 +47,18 @@ public class TransitionRecipe extends Recipe {
     catalyst.toNetwork(buffer);
     fluidInTank.writeToPacket(buffer);
     result.writeToPacket(buffer);
+  }
+
+  public Ingredient getCatalyst() {
+    return this.catalyst;
+  }
+
+  public FluidStack getFluidInTank() {
+    return this.fluidInTank;
+  }
+
+  public FluidStack getResult() {
+    return this.result;
   }
 
   public static class Serializer<T extends TransitionRecipe> implements RecipeSerializer<T> {

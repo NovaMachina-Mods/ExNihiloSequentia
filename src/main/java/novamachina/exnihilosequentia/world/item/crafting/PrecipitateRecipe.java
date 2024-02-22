@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -17,7 +16,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Getter
 public class PrecipitateRecipe extends Recipe {
 
   private final Ingredient input;
@@ -56,6 +54,18 @@ public class PrecipitateRecipe extends Recipe {
   @NonNull
   public RecipeType<?> getType() {
     return EXNRecipeTypes.PRECIPITATE;
+  }
+
+  public Ingredient getInput() {
+    return this.input;
+  }
+
+  public FluidStack getFluid() {
+    return this.fluid;
+  }
+
+  public ItemStack getOutput() {
+    return this.output;
   }
 
   public static class Serializer<T extends PrecipitateRecipe> implements RecipeSerializer<T> {

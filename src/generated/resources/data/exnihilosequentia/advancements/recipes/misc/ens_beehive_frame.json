@@ -39,6 +39,5 @@
     "recipes": [
       "exnihilosequentia:ens_beehive_frame"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

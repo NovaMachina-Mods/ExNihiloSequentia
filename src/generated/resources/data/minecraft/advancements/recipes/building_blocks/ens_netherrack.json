@@ -30,6 +30,5 @@
     "recipes": [
       "minecraft:ens_netherrack"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

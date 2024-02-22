@@ -9,7 +9,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 - `ITooltipProvider` interface for blocks
 - Codecs for all recipes
-- Lombok
 ### Changed
 - Replace all references of Forge with NeoForge
 - Recipes with varargs parameters replaced with `List` parameter

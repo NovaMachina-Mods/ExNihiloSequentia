@@ -43,6 +43,5 @@
     "recipes": [
       "exnihilosequentia:ens_dark_oak_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

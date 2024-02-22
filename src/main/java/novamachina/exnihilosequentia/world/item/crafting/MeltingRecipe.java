@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -15,7 +14,6 @@ import novamachina.novacore.world.item.crafting.Recipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
 
-@Getter
 public class MeltingRecipe extends Recipe {
 
   private final Ingredient input;
@@ -51,6 +49,18 @@ public class MeltingRecipe extends Recipe {
     input.toNetwork(buffer);
     resultFluid.writeToPacket(buffer);
     buffer.writeEnum(crucibleType);
+  }
+
+  public Ingredient getInput() {
+    return this.input;
+  }
+
+  public FluidStack getResultFluid() {
+    return this.resultFluid;
+  }
+
+  public CrucibleType getCrucibleType() {
+    return this.crucibleType;
   }
 
   public static class Serializer<T extends MeltingRecipe> implements RecipeSerializer<T> {

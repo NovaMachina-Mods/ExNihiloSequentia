@@ -43,6 +43,5 @@
     "recipes": [
       "exnihilosequentia:ens_cherry_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

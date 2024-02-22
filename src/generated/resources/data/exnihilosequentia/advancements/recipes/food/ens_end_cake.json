@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_end_cake"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -1,8 +1,8 @@
 {
-  "pack": {
-    "description": {
-      "text": "${mod_id} resources"
-    },
-    "pack_format": ${pack_format_number}
-  }
+    "pack": {
+        "description": {
+            "text": "0 resources"
+        },
+        "pack_format": 15
+    }
 }

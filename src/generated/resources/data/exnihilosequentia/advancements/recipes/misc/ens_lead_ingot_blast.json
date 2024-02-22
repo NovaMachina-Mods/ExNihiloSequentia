@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_lead_ingot_blast"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

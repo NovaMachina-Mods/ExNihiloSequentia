@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import novamachina.exnihilosequentia.common.network.HandshakeMessages;
+import novamachina.exnihilosequentia.common.network.payload.OreConfigurationPayload;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.novacore.core.registries.ItemRegistry;
 import novamachina.novacore.util.StringUtils;
@@ -91,16 +91,16 @@ public class Ore {
   }
 
   @OnlyIn(Dist.CLIENT)
-  public static boolean updateEnabledOres(@Nonnull final HandshakeMessages.S2COreList message) {
-    @Nullable final List<String> oreList = message.getOreList();
+  public static void updateEnabledOres(OreConfigurationPayload message) {
+    @Nullable final List<String> oreList = message.oreList();
     Ore.enabledMap.replaceAll((k, v) -> false);
     if (oreList != null) {
       for (String ore : oreList) {
         Ore.enabledMap.put(ore, true);
       }
-      return true;
+    } else {
+      throw new RuntimeException("Failed to synchronize ore list from server.");
     }
-    return false;
   }
 
   public static @NotNull List<String> getEnabledOres() {

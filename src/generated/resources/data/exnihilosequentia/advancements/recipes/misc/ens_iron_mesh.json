@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_iron_mesh"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

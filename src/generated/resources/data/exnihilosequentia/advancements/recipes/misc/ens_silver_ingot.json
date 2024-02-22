@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_silver_ingot"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

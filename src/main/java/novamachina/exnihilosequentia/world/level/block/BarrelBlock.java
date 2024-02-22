@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.common.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.compat.ITooltipProvider;
@@ -80,12 +80,12 @@ public abstract class BarrelBlock extends Block implements ITooltipProvider {
     if (tile != null) {
       @Nonnull
       final IFluidHandler fluidHandler =
-          tile.getCapability(Capabilities.FLUID_HANDLER, hit.getDirection())
-              .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
+          worldIn.getCapability(
+              Capabilities.FluidHandler.BLOCK, pos, state, tile, hit.getDirection());
       @Nonnull
       final IItemHandler itemHandler =
-          tile.getCapability(Capabilities.ITEM_HANDLER, hit.getDirection())
-              .orElseThrow(() -> new RuntimeException("Missing Item Handler"));
+          worldIn.getCapability(
+              Capabilities.ItemHandler.BLOCK, pos, state, tile, hit.getDirection());
       return tile.onBlockActivated(player, handIn, fluidHandler, itemHandler);
     }
 
@@ -93,11 +93,13 @@ public abstract class BarrelBlock extends Block implements ITooltipProvider {
   }
 
   @Override
-  public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+  public BlockState playerWillDestroy(
+      Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
     super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     if (!pPlayer.isCreative()) {
       BarrelBlockEntity barrelEntity = (BarrelBlockEntity) pLevel.getBlockEntity(pPos);
       barrelEntity.dropInventory();
     }
+    return pState;
   }
 }

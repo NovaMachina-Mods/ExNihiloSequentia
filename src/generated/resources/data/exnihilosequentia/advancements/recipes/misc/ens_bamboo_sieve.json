@@ -30,6 +30,5 @@
     "recipes": [
       "exnihilosequentia:ens_bamboo_sieve"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

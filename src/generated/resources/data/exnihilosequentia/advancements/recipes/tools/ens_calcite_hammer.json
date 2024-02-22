@@ -41,6 +41,5 @@
     "recipes": [
       "exnihilosequentia:ens_calcite_hammer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

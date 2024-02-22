@@ -39,6 +39,5 @@
     "recipes": [
       "exnihilosequentia:ens_diamond_hammer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
