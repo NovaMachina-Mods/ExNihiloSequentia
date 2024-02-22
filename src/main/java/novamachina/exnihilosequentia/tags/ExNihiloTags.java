@@ -22,12 +22,14 @@ public class ExNihiloTags {
   public static final TagKey<Item> BARREL = ItemTags.create(modLoc("barrels"));
   public static final TagKey<Item> SIEVE = ItemTags.create(modLoc("sieves"));
   public static final TagKey<Item> PIECE = ItemTags.create(modLoc("pieces"));
+  public static final TagKey<Item> PEBBLES = ItemTags.create(modLoc("pebbles"));
 
   public static final TagKey<Block> MINEABLE_WITH_CROOK =
       BlockTags.create(modLoc("mineable/crook"));
 
   public static final TagKey<Block> MINEABLE_WITH_HAMMER =
       BlockTags.create(modLoc("mineable/hammer"));
+  public static final TagKey<Block> INFESTABLE = BlockTags.create(modLoc("infestable"));
 
   public static final TagKey<Item> NUGGET_COPPER = ItemTags.create(forgeLoc("nuggets/copper"));
 

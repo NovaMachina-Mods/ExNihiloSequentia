@@ -45,6 +45,24 @@ public class EXNTagProvider extends TagProvider {
     addWoodenBarrel();
     addWoodenCrucible();
     addWoodenSieve();
+    addPebbles();
+  }
+
+  private void addPebbles() {
+    addToTag(
+        ExNihiloTags.PEBBLES,
+        EXNItems.PEBBLE_ANDESITE,
+        EXNItems.PEBBLE_BASALT,
+        EXNItems.PEBBLE_BLACKSTONE,
+        EXNItems.PEBBLE_CALCITE,
+        EXNItems.PEBBLE_DEEPSLATE,
+        EXNItems.PEBBLE_DIORITE,
+        EXNItems.PEBBLE_DRIPSTONE,
+        EXNItems.PEBBLE_END_STONE,
+        EXNItems.PEBBLE_GRANITE,
+        EXNItems.PEBBLE_NETHERRACK,
+        EXNItems.PEBBLE_STONE,
+        EXNItems.PEBBLE_TUFF);
   }
 
   private void addWoodenSieve() {
@@ -236,22 +254,24 @@ public class EXNTagProvider extends TagProvider {
   }
 
   private void addBlocks() {
-    addToTag(
-        ExNihiloTags.MINEABLE_WITH_HAMMER,
-        Blocks.GRAVEL,
-        Blocks.SAND,
-        Blocks.TUBE_CORAL_BLOCK,
-        Blocks.BRAIN_CORAL_BLOCK,
-        Blocks.BUBBLE_CORAL_BLOCK,
-        Blocks.FIRE_CORAL_BLOCK,
-        Blocks.HORN_CORAL_BLOCK,
-        Blocks.TUBE_CORAL,
-        Blocks.BRAIN_CORAL,
-        Blocks.BUBBLE_CORAL,
-        Blocks.FIRE_CORAL,
-        Blocks.HORN_CORAL,
-        EXNBlocks.STONE_BARREL.block(),
-        EXNBlocks.FIRED_CRUCIBLE.block());
+    getBlockBuilder(ExNihiloTags.INFESTABLE).add(BlockTags.LEAVES);
+    getBlockBuilder(ExNihiloTags.MINEABLE_WITH_HAMMER)
+        .add(
+            Blocks.GRAVEL,
+            Blocks.SAND,
+            Blocks.TUBE_CORAL_BLOCK,
+            Blocks.BRAIN_CORAL_BLOCK,
+            Blocks.BUBBLE_CORAL_BLOCK,
+            Blocks.FIRE_CORAL_BLOCK,
+            Blocks.HORN_CORAL_BLOCK,
+            Blocks.TUBE_CORAL,
+            Blocks.BRAIN_CORAL,
+            Blocks.BUBBLE_CORAL,
+            Blocks.FIRE_CORAL,
+            Blocks.HORN_CORAL,
+            EXNBlocks.STONE_BARREL.block(),
+            EXNBlocks.FIRED_CRUCIBLE.block())
+        .add(BlockTags.MINEABLE_WITH_PICKAXE);
     getBlockBuilder(ExNihiloTags.MINEABLE_WITH_CROOK)
         .add(BlockTags.LEAVES)
         .add(EXNBlocks.INFESTING_LEAVES.block(), EXNBlocks.INFESTED_LEAVES.block());
