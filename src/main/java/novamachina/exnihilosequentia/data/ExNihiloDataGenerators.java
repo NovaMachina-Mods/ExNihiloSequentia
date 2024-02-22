@@ -28,7 +28,7 @@ public class ExNihiloDataGenerators {
     CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
     generator.addProvider(event.includeServer(), new EXNLootProvider(output));
-    generator.addProvider(event.includeServer(), new EXNRecipeProvider(output, lookupProvider));
+    generator.addProvider(event.includeServer(), new EXNRecipeProvider(output));
     generator.addProvider(
         event.includeServer(), new EXNTagProvider(output, lookupProvider, existingFileHelper));
     generator.addProvider(event.includeServer(), new EXNLootModifierProvider(output));

@@ -64,6 +64,16 @@ repositories {
             releasesOnly()
         }
     }
+    maven {
+        name 'NovaMachina Mods - Snapshot'
+        url 'https://dl.cloudsmith.io/public/novamachina-mods/snapshot/maven/'
+        content {
+            includeGroup 'novamachina.novacore'
+        }
+        mavenContent {
+            snapshotsOnly()
+        }
+    }
 }
 
 dependencies {
@@ -361,5 +371,5 @@ static String getBuildNumber() {
     if(refName.endsWith("dev")) {
         return "SNAPSHOT"
     }
-    return System.getenv("GITHUB_RUN_NUMBER") ?: "SNAPSHOT"
+    return System.getenv("GITHUB_RUN_NUMBER") ?: "LOCAL"
 }
