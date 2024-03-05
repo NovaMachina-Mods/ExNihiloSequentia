@@ -217,7 +217,7 @@ tasks.withType(ProcessResources).configureEach {
             curseforge_url              : curseforge_url,
             novacore_version_range      : "[1.0.0, 1.1.0)",
             crafttweaker_version_range  : "[14.0.12, 14.1.0)",
-            jei_version_range           : "[15.2.0.25, 15.3.0.0)",
+            jei_version_range           : "[15.2.0.25, 16.0.0.0)",
             kubejs_version_range        : "[2001.6.3, 2001.7.0)",
             modrinth_project_id         : modrinth_project_id
     ]
