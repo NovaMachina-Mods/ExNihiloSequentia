@@ -1,16 +1,23 @@
 package novamachina.exnihilosequentia.data;
 
+import static net.minecraft.world.level.block.CakeBlock.BITES;
+
 import javax.annotation.Nonnull;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.world.level.material.EXNFluids;
 import novamachina.exnihilosequentia.world.level.material.SeaWaterFluidType;
 import novamachina.exnihilosequentia.world.level.material.WitchWaterFluidType;
+import novamachina.novacore.client.model.generators.AbstractBlockStateProvider;
 
-public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
+public class ExNihiloBlockStateGenerator extends AbstractBlockStateProvider {
 
   public ExNihiloBlockStateGenerator(
       @Nonnull final PackOutput output, @Nonnull final ExistingFileHelper exFileHelper) {
@@ -33,108 +40,100 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
 
   private void registerBarrels() {
     createBarrel(
-        EXNBlocks.STONE_BARREL.block(),
-        exnihiloLoc("block/stone_barrel"),
-        vanillaLoc("block/stone"));
+        EXNBlocks.STONE_BARREL.block(), modLoc("block/stone_barrel"), mcLoc("block/stone"));
     createBarrel(
         EXNBlocks.ACACIA_BARREL.block(),
-        exnihiloLoc("block/acacia_barrel"),
-        vanillaLoc("block/acacia_planks"));
+        modLoc("block/acacia_barrel"),
+        mcLoc("block/acacia_planks"));
     createBarrel(
         EXNBlocks.BAMBOO_BARREL.block(),
-        exnihiloLoc("block/bamboo_barrel"),
-        vanillaLoc("block/bamboo_planks"));
+        modLoc("block/bamboo_barrel"),
+        mcLoc("block/bamboo_planks"));
     createBarrel(
-        EXNBlocks.BIRCH_BARREL.block(),
-        exnihiloLoc("block/birch_barrel"),
-        vanillaLoc("block/birch_planks"));
+        EXNBlocks.BIRCH_BARREL.block(), modLoc("block/birch_barrel"), mcLoc("block/birch_planks"));
     createBarrel(
         EXNBlocks.CHERRY_BARREL.block(),
-        exnihiloLoc("block/cherry_barrel"),
-        vanillaLoc("block/cherry_planks"));
+        modLoc("block/cherry_barrel"),
+        mcLoc("block/cherry_planks"));
     createBarrel(
         EXNBlocks.DARK_OAK_BARREL.block(),
-        exnihiloLoc("block/dark_oak_barrel"),
-        vanillaLoc("block/dark_oak_planks"));
+        modLoc("block/dark_oak_barrel"),
+        mcLoc("block/dark_oak_planks"));
     createBarrel(
         EXNBlocks.JUNGLE_BARREL.block(),
-        exnihiloLoc("block/jungle_barrel"),
-        vanillaLoc("block/jungle_planks"));
+        modLoc("block/jungle_barrel"),
+        mcLoc("block/jungle_planks"));
     createBarrel(
         EXNBlocks.MANGROVE_BARREL.block(),
-        exnihiloLoc("block/mangrove_barrel"),
-        vanillaLoc("block/mangrove_planks"));
+        modLoc("block/mangrove_barrel"),
+        mcLoc("block/mangrove_planks"));
     createBarrel(
-        EXNBlocks.OAK_BARREL.block(),
-        exnihiloLoc("block/oak_barrel"),
-        vanillaLoc("block/oak_planks"));
+        EXNBlocks.OAK_BARREL.block(), modLoc("block/oak_barrel"), mcLoc("block/oak_planks"));
     createBarrel(
         EXNBlocks.SPRUCE_BARREL.block(),
-        exnihiloLoc("block/spruce_barrel"),
-        vanillaLoc("block/spruce_planks"));
+        modLoc("block/spruce_barrel"),
+        mcLoc("block/spruce_planks"));
     createBarrel(
         EXNBlocks.CRIMSON_BARREL.block(),
-        exnihiloLoc("block/crimson_barrel"),
-        vanillaLoc("block/crimson_planks"));
+        modLoc("block/crimson_barrel"),
+        mcLoc("block/crimson_planks"));
     createBarrel(
         EXNBlocks.WARPED_BARREL.block(),
-        exnihiloLoc("block/warped_barrel"),
-        vanillaLoc("block/warped_planks"));
+        modLoc("block/warped_barrel"),
+        mcLoc("block/warped_planks"));
   }
 
   private void registerCrucibles() {
     createCrucible(
         EXNBlocks.FIRED_CRUCIBLE.block(),
-        exnihiloLoc("block/fired_crucible"),
-        exnihiloLoc("block/fired_crucible"));
+        modLoc("block/fired_crucible"),
+        modLoc("block/fired_crucible"));
     createCrucible(
         EXNBlocks.UNFIRED_CRUCIBLE.block(),
-        exnihiloLoc("block/unfired_crucible"),
-        exnihiloLoc("block/unfired_crucible"));
+        modLoc("block/unfired_crucible"),
+        modLoc("block/unfired_crucible"));
     createCrucible(
         EXNBlocks.ACACIA_CRUCIBLE.block(),
-        exnihiloLoc("block/acacia_crucible"),
-        vanillaLoc("block/acacia_planks"));
+        modLoc("block/acacia_crucible"),
+        mcLoc("block/acacia_planks"));
     createCrucible(
         EXNBlocks.BAMBOO_CRUCIBLE.block(),
-        exnihiloLoc("block/bamboo_crucible"),
-        vanillaLoc("block/bamboo_planks"));
+        modLoc("block/bamboo_crucible"),
+        mcLoc("block/bamboo_planks"));
     createCrucible(
         EXNBlocks.BIRCH_CRUCIBLE.block(),
-        exnihiloLoc("block/birch_crucible"),
-        vanillaLoc("block/birch_planks"));
+        modLoc("block/birch_crucible"),
+        mcLoc("block/birch_planks"));
     createCrucible(
         EXNBlocks.CHERRY_CRUCIBLE.block(),
-        exnihiloLoc("block/cherry_crucible"),
-        vanillaLoc("block/cherry_planks"));
+        modLoc("block/cherry_crucible"),
+        mcLoc("block/cherry_planks"));
     createCrucible(
         EXNBlocks.DARK_OAK_CRUCIBLE.block(),
-        exnihiloLoc("block/dark_oak_crucible"),
-        vanillaLoc("block/dark_oak_planks"));
+        modLoc("block/dark_oak_crucible"),
+        mcLoc("block/dark_oak_planks"));
     createCrucible(
         EXNBlocks.JUNGLE_CRUCIBLE.block(),
-        exnihiloLoc("block/jungle_crucible"),
-        vanillaLoc("block/jungle_planks"));
+        modLoc("block/jungle_crucible"),
+        mcLoc("block/jungle_planks"));
     createCrucible(
         EXNBlocks.MANGROVE_CRUCIBLE.block(),
-        exnihiloLoc("block/mangrove_crucible"),
-        vanillaLoc("block/mangrove_planks"));
+        modLoc("block/mangrove_crucible"),
+        mcLoc("block/mangrove_planks"));
     createCrucible(
-        EXNBlocks.OAK_CRUCIBLE.block(),
-        exnihiloLoc("block/oak_crucible"),
-        vanillaLoc("block/oak_planks"));
+        EXNBlocks.OAK_CRUCIBLE.block(), modLoc("block/oak_crucible"), mcLoc("block/oak_planks"));
     createCrucible(
         EXNBlocks.SPRUCE_CRUCIBLE.block(),
-        exnihiloLoc("block/spruce_crucible"),
-        vanillaLoc("block/spruce_planks"));
+        modLoc("block/spruce_crucible"),
+        mcLoc("block/spruce_planks"));
     createCrucible(
         EXNBlocks.CRIMSON_CRUCIBLE.block(),
-        exnihiloLoc("block/crimson_crucible"),
-        vanillaLoc("block/crimson_planks"));
+        modLoc("block/crimson_crucible"),
+        mcLoc("block/crimson_planks"));
     createCrucible(
         EXNBlocks.WARPED_CRUCIBLE.block(),
-        exnihiloLoc("block/warped_crucible"),
-        vanillaLoc("block/warped_planks"));
+        modLoc("block/warped_crucible"),
+        mcLoc("block/warped_planks"));
   }
 
   private void registerFluids() {
@@ -144,49 +143,32 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
 
   private void registerSieves() {
     createSieve(
-        EXNBlocks.ACACIA_SIEVE.block(),
-        exnihiloLoc("block/acacia_sieve"),
-        vanillaLoc("block/acacia_planks"));
+        EXNBlocks.ACACIA_SIEVE.block(), modLoc("block/acacia_sieve"), mcLoc("block/acacia_planks"));
     createSieve(
-        EXNBlocks.BAMBOO_SIEVE.block(),
-        exnihiloLoc("block/bamboo_sieve"),
-        vanillaLoc("block/bamboo_planks"));
+        EXNBlocks.BAMBOO_SIEVE.block(), modLoc("block/bamboo_sieve"), mcLoc("block/bamboo_planks"));
     createSieve(
-        EXNBlocks.BIRCH_SIEVE.block(),
-        exnihiloLoc("block/birch_sieve"),
-        vanillaLoc("block/birch_planks"));
+        EXNBlocks.BIRCH_SIEVE.block(), modLoc("block/birch_sieve"), mcLoc("block/birch_planks"));
     createSieve(
-        EXNBlocks.CHERRY_SIEVE.block(),
-        exnihiloLoc("block/cherry_sieve"),
-        vanillaLoc("block/cherry_planks"));
+        EXNBlocks.CHERRY_SIEVE.block(), modLoc("block/cherry_sieve"), mcLoc("block/cherry_planks"));
     createSieve(
         EXNBlocks.DARK_OAK_SIEVE.block(),
-        exnihiloLoc("block/dark_oak_sieve"),
-        vanillaLoc("block/dark_oak_planks"));
+        modLoc("block/dark_oak_sieve"),
+        mcLoc("block/dark_oak_planks"));
     createSieve(
-        EXNBlocks.JUNGLE_SIEVE.block(),
-        exnihiloLoc("block/jungle_sieve"),
-        vanillaLoc("block/jungle_planks"));
+        EXNBlocks.JUNGLE_SIEVE.block(), modLoc("block/jungle_sieve"), mcLoc("block/jungle_planks"));
     createSieve(
         EXNBlocks.MANGROVE_SIEVE.block(),
-        exnihiloLoc("block/mangrove_sieve"),
-        vanillaLoc("block/mangrove_planks"));
+        modLoc("block/mangrove_sieve"),
+        mcLoc("block/mangrove_planks"));
+    createSieve(EXNBlocks.OAK_SIEVE.block(), modLoc("block/oak_sieve"), mcLoc("block/oak_planks"));
     createSieve(
-        EXNBlocks.OAK_SIEVE.block(),
-        exnihiloLoc("block/oak_sieve"),
-        vanillaLoc("block/oak_planks"));
-    createSieve(
-        EXNBlocks.SPRUCE_SIEVE.block(),
-        exnihiloLoc("block/spruce_sieve"),
-        vanillaLoc("block/spruce_planks"));
+        EXNBlocks.SPRUCE_SIEVE.block(), modLoc("block/spruce_sieve"), mcLoc("block/spruce_planks"));
     createSieve(
         EXNBlocks.CRIMSON_SIEVE.block(),
-        exnihiloLoc("block/crimson_sieve"),
-        vanillaLoc("block/crimson_planks"));
+        modLoc("block/crimson_sieve"),
+        mcLoc("block/crimson_planks"));
     createSieve(
-        EXNBlocks.WARPED_SIEVE.block(),
-        exnihiloLoc("block/warped_sieve"),
-        vanillaLoc("block/warped_planks"));
+        EXNBlocks.WARPED_SIEVE.block(), modLoc("block/warped_sieve"), mcLoc("block/warped_planks"));
   }
 
   private void registerSimpleBlocks() {
@@ -218,5 +200,56 @@ public class ExNihiloBlockStateGenerator extends AbstractBlockStateGenerator {
                 BuiltInRegistries.BLOCK.getKey(EXNBlocks.INFESTING_LEAVES.block()).getPath(),
                 blockTexture(EXNBlocks.INFESTING_LEAVES.block()))
             .renderType("cutout"));
+  }
+
+  protected void createBarrel(Block block, ResourceLocation texture, ResourceLocation particle) {
+    ConfiguredModel model =
+        new ConfiguredModel(
+            models()
+                .withExistingParent(getRegistryName(block), modLoc("block/barrel_base"))
+                .texture("texture", texture)
+                .texture(PARTICLE_TAG, particle)
+                .renderType("cutout_mipped"));
+
+    simpleItemBlock(block, model.model);
+  }
+
+  protected void createCake(Block block) {
+    VariantBlockStateBuilder builder = getVariantBuilder(block);
+
+    for (int i = 1; i < 7; i++) {
+      VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
+      ConfiguredModel model =
+          new ConfiguredModel(models().getExistingFile(modLoc("block/cake_slice" + i)));
+      partialBlockstate.with(BITES, i).addModels(model);
+    }
+    VariantBlockStateBuilder.PartialBlockstate partialBlockstate = builder.partialState();
+    ConfiguredModel model =
+        new ConfiguredModel(models().getExistingFile(modLoc("block/cake_uneaten")));
+    partialBlockstate.with(BITES, 0).addModels(model);
+  }
+
+  protected void createCrucible(Block block, ResourceLocation texture, ResourceLocation particle) {
+    ConfiguredModel model =
+        new ConfiguredModel(
+            models()
+                .withExistingParent(getRegistryName(block), modLoc("block/crucible_base"))
+                .texture(PARTICLE_TAG, particle)
+                .texture("texture", texture)
+                .renderType("cutout_mipped"));
+
+    simpleItemBlock(block, model.model);
+  }
+
+  protected void createSieve(Block block, ResourceLocation texture, ResourceLocation particle) {
+    ConfiguredModel model =
+        new ConfiguredModel(
+            models()
+                .withExistingParent(getRegistryName(block), modLoc("block/sieve_base"))
+                .texture("texture", texture)
+                .texture(PARTICLE_TAG, particle)
+                .renderType("cutout_mipped"));
+
+    simpleItemBlock(block, model.model);
   }
 }

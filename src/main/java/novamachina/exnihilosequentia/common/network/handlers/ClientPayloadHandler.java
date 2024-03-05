@@ -19,10 +19,7 @@ public class ClientPayloadHandler {
     log.info("Received ore list");
     context
         .workHandler()
-        .submitAsync(
-            () -> {
-              Ore.updateEnabledOres(payload);
-            })
+        .submitAsync(() -> Ore.updateEnabledOres(payload))
         .exceptionally(
             e -> {
               context
@@ -32,9 +29,6 @@ public class ClientPayloadHandler {
                           "Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));
               return null;
             })
-        .thenAccept(
-            v -> {
-              context.replyHandler().send(new OreAckPayload());
-            });
+        .thenAccept(v -> context.replyHandler().send(new OreAckPayload()));
   }
 }

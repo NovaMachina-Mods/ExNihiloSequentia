@@ -11,10 +11,10 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.world.item.MeshType;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.world.item.crafting.Recipe;
+import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class SiftingRecipe extends Recipe {
+public class SiftingRecipe extends AbstractRecipe {
 
   private final Ingredient input;
   private final ItemStack drop;

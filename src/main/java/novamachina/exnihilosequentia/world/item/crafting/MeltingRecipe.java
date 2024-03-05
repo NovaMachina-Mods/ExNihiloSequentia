@@ -10,11 +10,11 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity.CrucibleType;
-import novamachina.novacore.world.item.crafting.Recipe;
+import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MeltingRecipe extends Recipe {
+public class MeltingRecipe extends AbstractRecipe {
 
   private final Ingredient input;
   private final FluidStack resultFluid;

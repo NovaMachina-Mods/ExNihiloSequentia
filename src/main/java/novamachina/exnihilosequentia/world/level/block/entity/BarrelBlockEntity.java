@@ -46,7 +46,7 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   @Nonnull private static final String SOLID_AMOUNT_TAG = "solidAmount";
   @Nonnull private static final String TANK_TAG = "tank";
   @Nullable private AbstractBarrelTileState lastSyncedState = null;
-  @Nullable private AbstractBarrelMode mode;
+  private AbstractBarrelMode mode;
   private int solidAmount = 0;
 
   protected BarrelBlockEntity(

@@ -12,10 +12,10 @@ import novamachina.exnihilosequentia.data.recipes.providers.PrecipitateRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.SiftingRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.SolidifyingRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.TransitionRecipes;
+import novamachina.novacore.data.recipes.AbstractRecipeProvider;
 import novamachina.novacore.data.recipes.ISubRecipeProvider;
-import novamachina.novacore.data.recipes.RecipeProvider;
 
-public class EXNRecipeProvider extends RecipeProvider {
+public class EXNRecipeProvider extends AbstractRecipeProvider {
   public EXNRecipeProvider(PackOutput output) {
     super(output);
   }

@@ -8,10 +8,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.world.item.crafting.Recipe;
+import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class CompostRecipe extends Recipe {
+public class CompostRecipe extends AbstractRecipe {
   private final Ingredient input;
   private final int amount;
 
@@ -66,8 +66,8 @@ public class CompostRecipe extends Recipe {
                       .group(
                           Ingredient.CODEC_NONEMPTY
                               .fieldOf("input")
-                              .forGetter(recipe -> recipe.getInput()),
-                          Codec.INT.fieldOf("amount").forGetter(recipe -> recipe.getAmount()))
+                              .forGetter(CompostRecipe::getInput),
+                          Codec.INT.fieldOf("amount").forGetter(CompostRecipe::getAmount))
                       .apply(instance, factory::create));
     }
 

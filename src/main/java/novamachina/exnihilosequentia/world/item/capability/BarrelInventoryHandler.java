@@ -15,7 +15,7 @@ public class BarrelInventoryHandler extends ItemStackHandler {
       new IdentityHashMap<>();
 
   public static BarrelInventoryHandler getHandler(BarrelBlockEntity entity) {
-    return BLOCK_TO_HANDLER.computeIfAbsent(entity, (block) -> new BarrelInventoryHandler(entity));
+    return BLOCK_TO_HANDLER.computeIfAbsent(entity, block -> new BarrelInventoryHandler(entity));
   }
 
   @Nonnull private final BarrelBlockEntity barrel;

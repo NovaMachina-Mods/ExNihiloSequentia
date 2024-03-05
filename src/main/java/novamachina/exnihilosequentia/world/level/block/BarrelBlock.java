@@ -23,7 +23,7 @@ import novamachina.exnihilosequentia.world.level.block.entity.BarrelBlockEntity;
 
 public abstract class BarrelBlock extends Block implements ITooltipProvider {
 
-  public BarrelBlock(Properties properties) {
+  protected BarrelBlock(Properties properties) {
     super(properties);
   }
 

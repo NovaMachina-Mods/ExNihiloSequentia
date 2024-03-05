@@ -9,11 +9,11 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.world.item.crafting.Recipe;
+import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-public class TransitionRecipe extends Recipe {
+public class TransitionRecipe extends AbstractRecipe {
 
   private final Ingredient catalyst;
   private final FluidStack fluidInTank;

@@ -19,7 +19,7 @@ public class BarrelFluidHandler extends FluidTank {
   public static BarrelFluidHandler getHandler(BarrelBlockEntity entity) {
     return BLOCK_TO_BARREL.computeIfAbsent(
         entity,
-        (block) ->
+        block ->
             new BarrelFluidHandler(
                 (fluidStack ->
                     entity.canAcceptFluidTemperature(fluidStack)

@@ -10,10 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import novamachina.novacore.world.item.crafting.Recipe;
+import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public abstract class DropListRecipe extends Recipe {
+public abstract class DropListRecipe extends AbstractRecipe {
   private final Ingredient input;
   private final List<ItemStackWithChance> drops;
 

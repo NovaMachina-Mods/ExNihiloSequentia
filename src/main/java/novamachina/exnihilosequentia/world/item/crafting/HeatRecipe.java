@@ -14,10 +14,10 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.world.item.crafting.Recipe;
+import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class HeatRecipe extends Recipe {
+public class HeatRecipe extends AbstractRecipe {
   private final int amount;
   private final Block inputBlock;
   private final Optional<StatePropertiesPredicate> properties;

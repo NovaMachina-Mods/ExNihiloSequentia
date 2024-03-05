@@ -11,12 +11,12 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.world.item.crafting.Recipe;
+import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PrecipitateRecipe extends Recipe {
+public class PrecipitateRecipe extends AbstractRecipe {
 
   private final Ingredient input;
   private final FluidStack fluid;

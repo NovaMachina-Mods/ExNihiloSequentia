@@ -16,12 +16,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import novamachina.exnihilosequentia.client.util.LiquidBlockVertexConsumer;
 import novamachina.exnihilosequentia.world.level.block.entity.BarrelBlockEntity;
-import novamachina.novacore.client.renderer.blockentity.BlockEntityRenderer;
+import novamachina.novacore.client.renderer.blockentity.AbstractBlockEntityRenderer;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BarrelRender extends BlockEntityRenderer<BarrelBlockEntity> {
+public class BarrelRender extends AbstractBlockEntityRenderer<BarrelBlockEntity> {
 
   private static Logger log = LoggerFactory.getLogger(BarrelRender.class);
 
