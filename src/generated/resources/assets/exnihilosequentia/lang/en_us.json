@@ -56,6 +56,8 @@
   "config.jade.plugin_exnihilosequentia.crucible": "Crucible",
   "config.jade.plugin_exnihilosequentia.infesting_leaves": "Infesting Leaves",
   "config.jade.plugin_exnihilosequentia.sieve": "Sieve",
+  "exnihilosequentia.issue_collector": "Issue Collector",
+  "exnihilosequentia.open_beta_text": "Ex Nihilo: Sequentia is in open Beta. There may be things that are broken or missing. If you encounter something that is broken or missing, please open a bug ticket: ",
   "exnihilosequentia.subtitle.pebbleThrow": "Pebble flies",
   "fluid_type.exnihilosequentia.sea_water": "Sea Water",
   "fluid_type.exnihilosequentia.sea_water_flow": "Flowing Sea Water",

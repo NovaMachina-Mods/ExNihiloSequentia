@@ -2,8 +2,12 @@ package novamachina.exnihilosequentia.events;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -17,6 +21,7 @@ import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
@@ -37,6 +42,9 @@ import org.slf4j.Logger;
     modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
     bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NeoForgeEventListeners {
+
+  private NeoForgeEventListeners() {}
+
   private static final Logger log = org.slf4j.LoggerFactory.getLogger(NeoForgeEventListeners.class);
 
   @OnlyIn(Dist.CLIENT)
@@ -55,6 +63,21 @@ public class NeoForgeEventListeners {
   @SubscribeEvent
   public static void onPlayerLogin(@Nonnull final PlayerEvent.PlayerLoggedInEvent event) {
     log.debug("Fired PlayerLoggedInEvent");
+    if (!ExNihiloSequentia.isRelease()) {
+      MutableComponent text = Component.translatable(ExNihiloSequentia.MOD_ID + ".open_beta_text");
+      MutableComponent link = Component.translatable(ExNihiloSequentia.MOD_ID + ".issue_collector");
+      Style linkStyle =
+          Style.EMPTY
+              .withColor(ChatFormatting.BLUE)
+              .withUnderlined(true)
+              .withClickEvent(
+                  new ClickEvent(
+                      ClickEvent.Action.OPEN_URL,
+                      "https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues"));
+      link.withStyle(linkStyle);
+      text.append(link);
+      event.getEntity().sendSystemMessage(text);
+    }
   }
 
   @SubscribeEvent
@@ -71,12 +94,12 @@ public class NeoForgeEventListeners {
       @Nonnull final Collection<RecipeHolder<?>> recipes,
       @Nonnull final Class<R> recipeClass,
       @Nonnull final RecipeType<R> recipeType) {
-    log.debug("Filter Recipes, Class: " + recipeClass + ", Recipe Type: " + recipeType);
+    log.debug("Filter Recipes, Class: {}, Recipe Type: {}", recipeClass, recipeType);
     return recipes.stream()
         .filter(iRecipe -> iRecipe.value().getType() == recipeType)
         .map(RecipeHolder::value)
         .map(recipeClass::cast)
-        .collect(Collectors.toList());
+        .toList();
   }
 
   private static void loadRecipes(@Nonnull final RecipeManager manager) {
@@ -130,8 +153,8 @@ public class NeoForgeEventListeners {
     EXNItems.GOLD.setEnabled(true);
 
     log.debug(
-        "Immersive Engineering detected: "
-            + ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING));
+        "Immersive Engineering detected: {}",
+        ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING));
     if (ModList.get().isLoaded(ExNihiloConstants.ModIds.IMMERSIVE_ENGINEERING)) {
       log.debug("Added Immersive Engineering");
       EXNItems.ALUMINUM.setEnabled(true);
@@ -141,7 +164,7 @@ public class NeoForgeEventListeners {
       EXNItems.LEAD.setEnabled(true);
       EXNItems.URANIUM.setEnabled(true);
     }
-    log.debug("Create detected: " + ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE));
+    log.debug("Create detected: {}", ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE));
     if (ModList.get().isLoaded(ExNihiloConstants.ModIds.CREATE)) {
       log.debug("Added Create");
       EXNItems.COPPER.setEnabled(true);

@@ -46,6 +46,7 @@ public class ExNihiloSequentia {
   private static final Logger log = org.slf4j.LoggerFactory.getLogger(ExNihiloSequentia.class);
 
   public ExNihiloSequentia(IEventBus modEventBus) {
+
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
     Config.loadConfig(
         Config.COMMON_CONFIG,
@@ -98,5 +99,11 @@ public class ExNihiloSequentia {
 
   public static ResourceLocation makeId(String id) {
     return new ResourceLocation(MOD_ID, id);
+  }
+
+  public static boolean isRelease() {
+    String version = ExNihiloSequentia.class.getPackage().getImplementationVersion();
+    log.info("EXN VERSION: {}", version);
+    return !(version.endsWith("beta") || version.endsWith("alpha"));
   }
 }

@@ -18,6 +18,10 @@ group = "novamachina." + project.mod_id
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+base {
+    archivesName = project.mod_id
+}
+
 sourceSets {
     main {
         java {
@@ -240,7 +244,7 @@ project.jar {
                 "Specification-Vendor": "NovaMachina Mods",
                 "Specification-Version": project.mod_version,
                 "Implementation-Title": project.mod_name,
-                "Implementation-Version"  : project.mod_version,
+                "Implementation-Version"  : project.version,
                 "Implementation-Vendor": "NovaMachina Mods",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
