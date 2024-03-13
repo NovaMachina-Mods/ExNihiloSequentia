@@ -31,5 +31,5 @@ license="CC BY-NC-SA 4.0"
    type="required"
    ordering="AFTER"
    side="BOTH"
-   versionRange="[2.0.0, 2.1.0)"
+   versionRange="[2.0.0, 3.0.0)"
 

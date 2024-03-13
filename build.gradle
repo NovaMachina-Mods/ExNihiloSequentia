@@ -161,7 +161,7 @@ project.tasks.named("processResources") {
     outputs.upToDateWhen { false }
     filesMatching('pack.mcmeta') {
         processJsonFile([
-                description : project.mod_name + " resources",
+                description : mod_name + " resources",
                 pack_format : resource_pack_format,
                 "forge:resource_pack_format" : resource_pack_format,
                 "forge:data_pack_format" : data_pack_format
