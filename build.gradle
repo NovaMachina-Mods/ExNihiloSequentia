@@ -92,8 +92,7 @@ publishing {
             groupId group
             artifactId System.getenv("MAVEN_ARTIFACT") ?: project.mod_id
             version version
-            from components.java
-//            artifact jar
+            artifact jar
 
             pom {
                 name = mod_name
@@ -293,11 +292,7 @@ project.tasks.modrinth.enabled = System.getenv("MODRINTH_TOKEN") != null
 project.tasks.modrinth.group = 'publishing'
 project.modrinth {
     token = System.getenv("MODRINTH_TOKEN")
-    if(project.hasProperty("modrinth_id")) {
-        projectId = project.modrinth_id
-    } else {
-        projectId = project.mod_id
-    }
+    projectId = project.modrinth_project_id
     versionNumber = project.mod_version
     versionType = project.release_type
     uploadFile = project.jar
