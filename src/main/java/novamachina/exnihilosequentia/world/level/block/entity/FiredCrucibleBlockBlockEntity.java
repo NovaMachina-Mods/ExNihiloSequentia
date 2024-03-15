@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.world.level.block.entity;
 
 import java.util.Optional;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -33,8 +32,7 @@ public class FiredCrucibleBlockBlockEntity extends CrucibleBlockEntity {
   public int getSolidAmount() {
     if (!currentItem.isEmpty()) {
       final int itemCount = MeltableItemHandler.getHandler(this).getStackInSlot(0).getCount();
-      @Nullable
-      final Optional<MeltingRecipe> recipe =
+      Optional<MeltingRecipe> recipe =
           ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());
       if (recipe.isPresent()) {
         return solidAmount + (itemCount * recipe.get().getResultFluid().getAmount());

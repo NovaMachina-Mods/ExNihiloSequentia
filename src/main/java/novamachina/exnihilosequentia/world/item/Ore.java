@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
@@ -22,11 +21,11 @@ import org.jetbrains.annotations.NotNull;
 public class Ore {
 
   private static Map<String, Boolean> enabledMap = new HashMap<>();
-  @Nonnull private final String name;
-  @Nullable private Either<ItemDefinition<OreItem>, Item> ingotItem;
-  @Nullable private Either<ItemDefinition<OreItem>, Item> rawOreItem;
-  @Nullable private final ItemDefinition<OreItem> pieceItem;
-  @Nullable private Either<ItemDefinition<OreItem>, Item> nuggetItem;
+  private final String name;
+  private Either<ItemDefinition<OreItem>, Item> ingotItem;
+  private Either<ItemDefinition<OreItem>, Item> rawOreItem;
+  private final ItemDefinition<OreItem> pieceItem;
+  private Either<ItemDefinition<OreItem>, Item> nuggetItem;
 
   public Ore(
       @Nonnull String name,
@@ -92,7 +91,7 @@ public class Ore {
 
   @OnlyIn(Dist.CLIENT)
   public static void updateEnabledOres(OreConfigurationPayload message) {
-    @Nullable final List<String> oreList = message.oreList();
+    List<String> oreList = message.oreList();
     Ore.enabledMap.replaceAll((k, v) -> false);
     if (oreList != null) {
       for (String ore : oreList) {
@@ -113,12 +112,10 @@ public class Ore {
     return enabledOres;
   }
 
-  @Nullable
   public Either<ItemDefinition<OreItem>, Item> getIngotItem() {
     return ingotItem;
   }
 
-  @Nullable
   public Either<ItemDefinition<OreItem>, Item> getNuggetItem() {
     return nuggetItem;
   }
@@ -127,12 +124,10 @@ public class Ore {
     return name + "_ingot";
   }
 
-  @Nonnull
   public String getOreName() {
     return name;
   }
 
-  @Nullable
   public OreItem getPieceItem() {
     return pieceItem.asItem();
   }
@@ -141,7 +136,6 @@ public class Ore {
     return name + "_pieces";
   }
 
-  @Nullable
   public Either<ItemDefinition<OreItem>, Item> getRawOreItem() {
     return rawOreItem;
   }

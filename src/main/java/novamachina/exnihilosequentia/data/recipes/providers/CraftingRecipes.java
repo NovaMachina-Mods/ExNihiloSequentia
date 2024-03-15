@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.data.recipes.providers;
 
 import com.mojang.datafixers.util.Either;
 import java.util.Objects;
+import java.util.Optional;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -189,7 +190,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
     ItemDefinition<PebbleItem> blackstonePebble = EXNItems.PEBBLE_BLACKSTONE;
     final ResourceLocation gildedBlackstoneResourceLocation =
         BuiltInRegistries.BLOCK.getKey(Blocks.GILDED_BLACKSTONE);
-    if (EXNItems.GOLD.getRawOreItem() != null && gildedBlackstoneResourceLocation != null) {
+    if (EXNItems.GOLD.getRawOreItem() != null) {
       ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Blocks.GILDED_BLACKSTONE)
           .pattern("xxx")
           .pattern("xgx")
@@ -203,29 +204,23 @@ public class CraftingRecipes implements ISubRecipeProvider {
     }
     ResourceLocation cryingObsidianResourceLocation =
         BuiltInRegistries.BLOCK.getKey(Blocks.CRYING_OBSIDIAN);
-    if (cryingObsidianResourceLocation != null) {
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Blocks.CRYING_OBSIDIAN)
-          .pattern(" o ")
-          .pattern("obo")
-          .pattern(" o ")
-          .define('b', Items.WATER_BUCKET)
-          .define('o', Blocks.OBSIDIAN)
-          .unlockedBy(
-              "has_obsidian", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.OBSIDIAN))
-          .save(
-              consumer, RecipeProviderUtilities.createSaveLocation(cryingObsidianResourceLocation));
-    }
+    ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Blocks.CRYING_OBSIDIAN)
+        .pattern(" o ")
+        .pattern("obo")
+        .pattern(" o ")
+        .define('b', Items.WATER_BUCKET)
+        .define('o', Blocks.OBSIDIAN)
+        .unlockedBy(
+            "has_obsidian", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.OBSIDIAN))
+        .save(consumer, RecipeProviderUtilities.createSaveLocation(cryingObsidianResourceLocation));
     ResourceLocation ancientDebrisResourceLocation =
         BuiltInRegistries.BLOCK.getKey(Blocks.ANCIENT_DEBRIS);
-    if (ancientDebrisResourceLocation != null) {
-      ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS)
-          .requires(Items.NETHERITE_SCRAP)
-          .requires(Blocks.OBSIDIAN)
-          .unlockedBy(
-              "has_scrap", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHERITE_SCRAP))
-          .save(
-              consumer, RecipeProviderUtilities.createSaveLocation(ancientDebrisResourceLocation));
-    }
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS)
+        .requires(Items.NETHERITE_SCRAP)
+        .requires(Blocks.OBSIDIAN)
+        .unlockedBy(
+            "has_scrap", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHERITE_SCRAP))
+        .save(consumer, RecipeProviderUtilities.createSaveLocation(ancientDebrisResourceLocation));
   }
 
   private void addMeshes(RecipeOutput consumer) {
@@ -681,8 +676,16 @@ public class CraftingRecipes implements ISubRecipeProvider {
   private void createRawRecipe(Ore ore, RecipeOutput consumer) {
     Item piece = ore.getPieceItem();
     Either<ItemDefinition<OreItem>, Item> rawEither = ore.getRawOreItem();
-    Item rawOre =
-        rawEither.left().isPresent() ? rawEither.left().get().asItem() : rawEither.right().get();
+    Item rawOre;
+    Optional<ItemDefinition<OreItem>> left = rawEither.left();
+    Optional<Item> right = rawEither.right();
+    if (left.isPresent()) {
+      rawOre = left.get().asItem();
+    } else if (right.isPresent()) {
+      rawOre = right.get();
+    } else {
+      throw new IllegalStateException("Raw either is completely empty");
+    }
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, rawOre)
         .pattern("xx")
         .pattern("xx")
@@ -698,13 +701,20 @@ public class CraftingRecipes implements ISubRecipeProvider {
   }
 
   private void createNuggetRecipes(Ore ore, RecipeOutput consumer) {
-    if (ore.getNuggetItem().left().isPresent()) {
+    Optional<ItemDefinition<OreItem>> nuggetItem = ore.getNuggetItem().left();
+    if (nuggetItem.isPresent()) {
       Either<ItemDefinition<OreItem>, Item> eitherIngot = ore.getIngotItem();
-      Item ingot =
-          eitherIngot.left().isPresent()
-              ? eitherIngot.left().get().asItem()
-              : eitherIngot.right().get();
-      Item nugget = ore.getNuggetItem().left().get().asItem();
+      Item ingot;
+      Optional<ItemDefinition<OreItem>> left = eitherIngot.left();
+      Optional<Item> right = eitherIngot.right();
+      if (left.isPresent()) {
+        ingot = left.get().asItem();
+      } else if (right.isPresent()) {
+        ingot = right.get();
+      } else {
+        throw new IllegalStateException("Ingot either is completely empty");
+      }
+      Item nugget = nuggetItem.get().asItem();
 
       ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ingot)
           .pattern("xxx")
@@ -731,11 +741,13 @@ public class CraftingRecipes implements ISubRecipeProvider {
 
   private void createOreRecipes(Ore ore, ResourceLocation registryId, RecipeOutput consumer) {
     createOre(ore, consumer);
-    if (ore.getRawOreItem().left().isPresent() && ore.getIngotItem().left().isPresent()) {
+    Optional<ItemDefinition<OreItem>> rawOre = ore.getRawOreItem().left();
+    Optional<ItemDefinition<OreItem>> ingot = ore.getIngotItem().left();
+    if (rawOre.isPresent() && ingot.isPresent()) {
       createSmeltingRecipe(
           consumer,
-          ore.getRawOreItem().left().get().asItem(),
-          ore.getIngotItem().left().get().asItem(),
+          rawOre.get().asItem(),
+          ingot.get().asItem(),
           0.7F,
           200,
           0.7F,

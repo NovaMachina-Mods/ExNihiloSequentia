@@ -204,7 +204,7 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
       return InteractionResult.SUCCESS;
     }
 
-    @Nullable final Optional<MeltingRecipe> recipe = getMeltable();
+    Optional<MeltingRecipe> recipe = getMeltable();
     if (recipe.isPresent()
         && !CrucibleFluidHandler.getHandler(this).isEmpty()
         && !CrucibleFluidHandler.getHandler(this)

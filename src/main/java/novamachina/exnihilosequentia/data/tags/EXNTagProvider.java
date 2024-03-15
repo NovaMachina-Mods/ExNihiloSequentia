@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.data.tags;
 
 import com.mojang.datafixers.util.Either;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -223,16 +224,18 @@ public class EXNTagProvider extends TagProvider {
 
   private void addNugget(Ore ore, ExNihiloTags.OreTag tags) {
     Either<ItemDefinition<OreItem>, Item> either = ore.getNuggetItem();
-    if (either.left().isPresent()) {
-      addToTag(tags.getNuggetTag(), either.left().get());
+    Optional<ItemDefinition<OreItem>> oreItem = either.left();
+    if (oreItem.isPresent()) {
+      addToTag(tags.getNuggetTag(), oreItem.get());
       getItemBuilder(Tags.Items.NUGGETS).add(tags.getNuggetTag());
     }
   }
 
   private void addRaw(Ore ore, ExNihiloTags.OreTag tags) {
     Either<ItemDefinition<OreItem>, Item> either = ore.getRawOreItem();
-    if (either.left().isPresent()) {
-      addToTag(tags.getRawMaterialTag(), either.left().get());
+    Optional<ItemDefinition<OreItem>> oreItem = either.left();
+    if (oreItem.isPresent()) {
+      addToTag(tags.getRawMaterialTag(), oreItem.get());
       getItemBuilder(Tags.Items.RAW_MATERIALS).add(tags.getRawMaterialTag());
     }
   }
@@ -243,8 +246,9 @@ public class EXNTagProvider extends TagProvider {
 
   private void addIngot(Ore ore, ExNihiloTags.OreTag tags) {
     Either<ItemDefinition<OreItem>, Item> either = ore.getIngotItem();
-    if (either.left().isPresent()) {
-      addToTag(tags.getIngotTag(), either.left().get());
+    Optional<ItemDefinition<OreItem>> oreItem = either.left();
+    if (oreItem.isPresent()) {
+      addToTag(tags.getIngotTag(), oreItem.get());
       getItemBuilder(Tags.Items.INGOTS).add(tags.getIngotTag());
     }
   }

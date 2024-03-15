@@ -14,8 +14,6 @@ import novamachina.exnihilosequentia.world.item.crafting.MeltingRecipe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// import novamachina.exnihilosequentia.common.compat.jei.melting.JEICrucibleRecipe;
-
 public class MeltingRegistry {
   private static final Logger log = LoggerFactory.getLogger(MeltingRegistry.class);
   private final List<MeltingRecipe> recipeList = new ArrayList<>();
@@ -36,7 +34,7 @@ public class MeltingRegistry {
   }
 
   public void setRecipes(@Nonnull final List<MeltingRecipe> recipes) {
-    log.debug("Crucible Registry recipes: " + recipes.size());
+    log.debug("Crucible Registry recipes: {}", recipes.size());
     recipeList.addAll(recipes);
     cache.invalidateAll();
   }
@@ -51,7 +49,7 @@ public class MeltingRegistry {
   }
 
   public boolean isMeltable(@Nonnull final ItemLike item, final int level) {
-    Optional<MeltingRecipe> recipe = null;
+    Optional<MeltingRecipe> recipe = Optional.empty();
     try {
       recipe = cache.get(item);
     } catch (ExecutionException e) {
