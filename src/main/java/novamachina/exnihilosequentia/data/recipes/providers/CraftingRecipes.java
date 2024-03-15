@@ -59,18 +59,16 @@ public class CraftingRecipes implements ISubRecipeProvider {
 
   private void addMisc(RecipeOutput consumer) {
     ResourceLocation beehive = BuiltInRegistries.BLOCK.getKey(Blocks.BEEHIVE);
-    if (beehive != null) {
-      ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.BEEHIVE)
-          .pattern("xxx")
-          .pattern("fff")
-          .pattern("xxx")
-          .define('x', ItemTags.PLANKS)
-          .define('f', EXNItems.BEEHIVE_FRAME.asItem())
-          .unlockedBy(
-              "has_frame",
-              InventoryChangeTrigger.TriggerInstance.hasItems(EXNItems.BEEHIVE_FRAME.asItem()))
-          .save(consumer, RecipeProviderUtilities.createSaveLocation(beehive));
-    }
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.BEEHIVE)
+        .pattern("xxx")
+        .pattern("fff")
+        .pattern("xxx")
+        .define('x', ItemTags.PLANKS)
+        .define('f', EXNItems.BEEHIVE_FRAME.asItem())
+        .unlockedBy(
+            "has_frame",
+            InventoryChangeTrigger.TriggerInstance.hasItems(EXNItems.BEEHIVE_FRAME.asItem()))
+        .save(consumer, RecipeProviderUtilities.createSaveLocation(beehive));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.BEEHIVE_FRAME.asItem())
         .pattern("xxx")
@@ -588,9 +586,6 @@ public class CraftingRecipes implements ISubRecipeProvider {
 
   private void createPebbleBlock(Block result, Item input, RecipeOutput consumer) {
     ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(result);
-    if (resourceLocation == null) {
-      return;
-    }
     ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result)
         .pattern("xx")
         .pattern("xx")

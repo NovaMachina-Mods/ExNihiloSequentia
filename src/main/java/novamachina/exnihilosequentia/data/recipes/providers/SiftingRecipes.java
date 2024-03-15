@@ -345,9 +345,6 @@ public class SiftingRecipes implements ISubRecipeProvider {
 
   private void addSeeds(ItemLike seed, RecipeOutput consumer, Block inputBlock) {
     ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(seed.asItem());
-    if (resourceLocation == null) {
-      return;
-    }
     SiftingRecipeBuilder.sifting(Ingredient.of(inputBlock), seed)
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc(resourceLocation.getPath()));
@@ -355,9 +352,6 @@ public class SiftingRecipes implements ISubRecipeProvider {
 
   private void addWaterSeeds(ItemLike seed, RecipeOutput consumer) {
     ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(seed.asItem());
-    if (resourceLocation == null) {
-      return;
-    }
     SiftingRecipeBuilder.sifting(Ingredient.of(ItemTags.SAND), seed, true)
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc(resourceLocation.getPath()));

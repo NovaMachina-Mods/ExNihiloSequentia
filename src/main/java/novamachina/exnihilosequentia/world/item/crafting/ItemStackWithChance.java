@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.google.common.base.Objects;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -15,18 +16,19 @@ import org.slf4j.Logger;
 
 public class ItemStackWithChance {
 
+  private static final String BASE_KEY = "item";
+  private static final String CHANCE_KEY = "chance";
+  private static final String COUNT_KEY = "count";
+
   public static final Codec<ItemStackWithChance> CODEC =
       RecordCodecBuilder.create(
           instance ->
               instance
                   .group(
-                      ItemStack.CODEC.fieldOf("item").forGetter(recipe -> recipe.getStack()),
-                      Codec.FLOAT.fieldOf("chance").forGetter(recipe -> recipe.getChance()))
+                      ItemStack.CODEC.fieldOf(BASE_KEY).forGetter(recipe -> recipe.getStack()),
+                      Codec.FLOAT.fieldOf(CHANCE_KEY).forGetter(recipe -> recipe.getChance()))
                   .apply(instance, ItemStackWithChance::new));
 
-  private static final String BASE_KEY = "item";
-  private static final String CHANCE_KEY = "chance";
-  private static final String COUNT_KEY = "count";
   private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemStackWithChance.class);
   private final float chance;
   private final ItemStack itemStack;
@@ -89,7 +91,7 @@ public class ItemStackWithChance {
     return CODEC
         .encodeStart(JsonOps.INSTANCE, this)
         .resultOrPartial(error -> log.error("Unable to encode ItemStackWithChance"))
-        .get();
+        .orElse(new JsonObject());
   }
 
   public void write(FriendlyByteBuf buffer) {

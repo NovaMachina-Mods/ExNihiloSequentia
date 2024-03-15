@@ -33,15 +33,7 @@ public class HeatRecipe extends AbstractRecipe {
     if (inputBlock == null) {
       return false;
     }
-    ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-    if (resourceLocation == null) {
-      return false;
-    }
-
-    if (inputBlock != null) {
-      return state.is(inputBlock) && (properties.isEmpty() || properties.get().matches(state));
-    }
-    return false;
+    return state.is(inputBlock) && (properties.isEmpty() || properties.get().matches(state));
   }
 
   @Override
