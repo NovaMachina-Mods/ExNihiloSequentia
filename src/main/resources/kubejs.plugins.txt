@@ -1,1 +1,0 @@
-novamachina.exnihilosequentia.common.compat.kubejs.KubeJSExNihiloPlugin

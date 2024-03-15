@@ -32,15 +32,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_material",
-      "has_the_recipe"
+      "has_material"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_diorite_hammer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

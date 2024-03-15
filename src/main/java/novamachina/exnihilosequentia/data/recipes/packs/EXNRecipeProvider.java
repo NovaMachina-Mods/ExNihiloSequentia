@@ -1,11 +1,7 @@
 package novamachina.exnihilosequentia.data.recipes.packs;
 
 import java.util.List;
-import java.util.function.Consumer;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.data.recipes.providers.CompostRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.CraftingRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.CrushingRecipes;
@@ -16,16 +12,13 @@ import novamachina.exnihilosequentia.data.recipes.providers.PrecipitateRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.SiftingRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.SolidifyingRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.TransitionRecipes;
+import novamachina.novacore.data.recipes.AbstractRecipeProvider;
 import novamachina.novacore.data.recipes.ISubRecipeProvider;
-import novamachina.novacore.data.recipes.RecipeProvider;
 
-public class EXNRecipeProvider extends RecipeProvider {
-  public EXNRecipeProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-    super(output, existingFileHelper, ExNihiloSequentia.MOD_ID);
+public class EXNRecipeProvider extends AbstractRecipeProvider {
+  public EXNRecipeProvider(PackOutput output) {
+    super(output);
   }
-
-  @Override
-  protected void addRecipes(Consumer<FinishedRecipe> consumer) {}
 
   @Override
   protected List<ISubRecipeProvider> getSubProviders() {

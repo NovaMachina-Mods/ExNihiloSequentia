@@ -4,12 +4,14 @@
     "item": "minecraft:dirt"
   },
   "result": {
-    "item": "minecraft:beetroot_seeds"
+    "Count": 1,
+    "id": "minecraft:beetroot_seeds"
   },
   "rolls": [
     {
       "chance": 0.35,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

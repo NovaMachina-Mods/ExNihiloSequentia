@@ -4,12 +4,14 @@
     "item": "exnihilosequentia:crushed_netherrack"
   },
   "result": {
-    "item": "exnihilosequentia:warped_nylium_spores"
+    "Count": 1,
+    "id": "exnihilosequentia:warped_nylium_spores"
   },
   "rolls": [
     {
       "chance": 0.05,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

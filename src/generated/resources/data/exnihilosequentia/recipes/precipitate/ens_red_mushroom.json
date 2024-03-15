@@ -1,14 +1,14 @@
 {
   "type": "exnihilosequentia:precipitate",
   "fluid": {
-    "amount": 1000,
-    "fluid": "exnihilosequentia:witch_water"
+    "Amount": 1000,
+    "FluidName": "exnihilosequentia:witch_water"
   },
   "input": {
     "item": "minecraft:brown_mushroom_block"
   },
   "result": {
-    "count": 1,
-    "item": "minecraft:red_mushroom_block"
+    "Count": 1,
+    "id": "minecraft:red_mushroom_block"
   }
 }

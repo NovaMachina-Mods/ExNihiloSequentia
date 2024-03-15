@@ -29,8 +29,7 @@ public class ExNihiloTags {
 
   public static final TagKey<Block> MINEABLE_WITH_HAMMER =
       BlockTags.create(modLoc("mineable/hammer"));
-  public static final TagKey<Block> INFESTABLE =
-      BlockTags.create(modLoc("infestable"));
+  public static final TagKey<Block> INFESTABLE = BlockTags.create(modLoc("infestable"));
 
   public static final TagKey<Item> NUGGET_COPPER = ItemTags.create(forgeLoc("nuggets/copper"));
 

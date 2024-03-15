@@ -4,14 +4,12 @@ import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import java.nio.file.Path;
 import javax.annotation.Nonnull;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.Builder;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.Builder;
 
-@Mod.EventBusSubscriber
 public class Config {
 
-  @Nonnull public static final ForgeConfigSpec COMMON_CONFIG;
+  @Nonnull public static final ModConfigSpec COMMON_CONFIG;
   @Nonnull private static final String CATEGORY_BARREL = "barrel";
   @Nonnull private static final String CATEGORY_CROOK = "crook";
   @Nonnull private static final String CATEGORY_CRUCIBLE = "crucible";
@@ -20,7 +18,7 @@ public class Config {
   @Nonnull private static final String CATEGORY_SIEVE = "sieve";
   @Nonnull private static final String CATEGORY_DURABILITY = "durability";
   @Nonnull private static final String CATEGORY_PEBBLE = "pebble";
-  @Nonnull private static final ForgeConfigSpec.Builder COMMON_BUILDER = new Builder();
+  @Nonnull private static final ModConfigSpec.Builder COMMON_BUILDER = new Builder();
   @Nonnull private static final String SUBCATEGORY_BARREL_COMPOST = "compost";
   @Nonnull private static final String SUBCATEGORY_BARREL_FLUID = "fluid_transform";
   @Nonnull private static final String SUBCATEGORY_BARREL_MOB = "mob_spawn";
@@ -29,76 +27,76 @@ public class Config {
   @Nonnull private static final String SUBCATEGORY_HAMMERS = "hammer";
   @Nonnull private static final String SUBCATEGORY_MESHES = "mesh";
   // Pebble
-  @Nonnull private static final ForgeConfigSpec.IntValue pebbleDamage;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableThrowable;
+  @Nonnull private static final ModConfigSpec.IntValue pebbleDamage;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableThrowable;
   // Ore
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableOreOverride;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableAluminum;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableCopper;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableGold;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableIron;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableLead;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableNickel;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enablePlatinum;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableSilver;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableTin;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableUranium;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableZinc;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableOreOverride;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableAluminum;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableCopper;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableGold;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableIron;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableLead;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableNickel;
+  @Nonnull private static final ModConfigSpec.BooleanValue enablePlatinum;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableSilver;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableTin;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableUranium;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableZinc;
   // Sieve
-  @Nonnull private static final ForgeConfigSpec.BooleanValue flattenSieveRecipes;
-  @Nonnull private static final ForgeConfigSpec.IntValue sieveRange;
-  @Nonnull private static final ForgeConfigSpec.IntValue maxSieveClicks;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue netherSieveSoundsEnabled;
+  @Nonnull private static final ModConfigSpec.BooleanValue flattenSieveRecipes;
+  @Nonnull private static final ModConfigSpec.IntValue sieveRange;
+  @Nonnull private static final ModConfigSpec.IntValue maxSieveClicks;
+  @Nonnull private static final ModConfigSpec.BooleanValue netherSieveSoundsEnabled;
   // Crook
-  @Nonnull private static final ForgeConfigSpec.IntValue maxBonusStringCount;
-  @Nonnull private static final ForgeConfigSpec.IntValue minStringCount;
-  @Nonnull private static final ForgeConfigSpec.IntValue secondsToCompost;
-  @Nonnull private static final ForgeConfigSpec.IntValue secondsToFluidTransform;
+  @Nonnull private static final ModConfigSpec.IntValue maxBonusStringCount;
+  @Nonnull private static final ModConfigSpec.IntValue minStringCount;
+  @Nonnull private static final ModConfigSpec.IntValue secondsToCompost;
+  @Nonnull private static final ModConfigSpec.IntValue secondsToFluidTransform;
   // Durability Hammer
-  @Nonnull private static final ForgeConfigSpec.IntValue hammerWoodValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue hammerStoneValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue hammerIronValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue hammerGoldValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue hammerDiamondValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue hammerNetheriteValue;
+  @Nonnull private static final ModConfigSpec.IntValue hammerWoodValue;
+  @Nonnull private static final ModConfigSpec.IntValue hammerStoneValue;
+  @Nonnull private static final ModConfigSpec.IntValue hammerIronValue;
+  @Nonnull private static final ModConfigSpec.IntValue hammerGoldValue;
+  @Nonnull private static final ModConfigSpec.IntValue hammerDiamondValue;
+  @Nonnull private static final ModConfigSpec.IntValue hammerNetheriteValue;
   // Durability Crooks
-  @Nonnull private static final ForgeConfigSpec.IntValue crookWoodValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookStoneValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookAndesiteValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookGraniteValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookDioriteValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookGoldValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookIronValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookDiamondValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookNetheriteValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue crookBoneValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookWoodValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookStoneValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookAndesiteValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookGraniteValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookDioriteValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookGoldValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookIronValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookDiamondValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookNetheriteValue;
+  @Nonnull private static final ModConfigSpec.IntValue crookBoneValue;
   // Durability Meshes
-  @Nonnull private static final ForgeConfigSpec.BooleanValue enableMeshDurability;
-  @Nonnull private static final ForgeConfigSpec.IntValue meshStackSize;
-  @Nonnull private static final ForgeConfigSpec.IntValue meshStringValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue meshFlintValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue meshIronValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue meshDiamondValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue meshNetheriteValue;
-  @Nonnull private static final ForgeConfigSpec.IntValue meshEmeraldValue;
+  @Nonnull private static final ModConfigSpec.BooleanValue enableMeshDurability;
+  @Nonnull private static final ModConfigSpec.IntValue meshStackSize;
+  @Nonnull private static final ModConfigSpec.IntValue meshStringValue;
+  @Nonnull private static final ModConfigSpec.IntValue meshFlintValue;
+  @Nonnull private static final ModConfigSpec.IntValue meshIronValue;
+  @Nonnull private static final ModConfigSpec.IntValue meshDiamondValue;
+  @Nonnull private static final ModConfigSpec.IntValue meshNetheriteValue;
+  @Nonnull private static final ModConfigSpec.IntValue meshEmeraldValue;
   // Barrel
-  @Nonnull private static final ForgeConfigSpec.IntValue barrelMaxSolidAmount;
-  @Nonnull private static final ForgeConfigSpec.IntValue barrelNumberOfBuckets;
-  @Nonnull private static final ForgeConfigSpec.IntValue secondsToSpawn;
-  @Nonnull private static final ForgeConfigSpec.IntValue rainFillAmount;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue showParticles;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue netherBarrelSoundsEnabled;
+  @Nonnull private static final ModConfigSpec.IntValue barrelMaxSolidAmount;
+  @Nonnull private static final ModConfigSpec.IntValue barrelNumberOfBuckets;
+  @Nonnull private static final ModConfigSpec.IntValue secondsToSpawn;
+  @Nonnull private static final ModConfigSpec.IntValue rainFillAmount;
+  @Nonnull private static final ModConfigSpec.BooleanValue showParticles;
+  @Nonnull private static final ModConfigSpec.BooleanValue netherBarrelSoundsEnabled;
   // Infested Leaves
-  @Nonnull private static final ForgeConfigSpec.IntValue secondsToTransformLeaves;
-  @Nonnull private static final ForgeConfigSpec.DoubleValue spreadChance;
+  @Nonnull private static final ModConfigSpec.IntValue secondsToTransformLeaves;
+  @Nonnull private static final ModConfigSpec.DoubleValue spreadChance;
   // Crucible
-  @Nonnull private static final ForgeConfigSpec.IntValue crucibleNumberOfBuckets;
-  @Nonnull private static final ForgeConfigSpec.IntValue ticksBetweenMelts;
-  @Nonnull private static final ForgeConfigSpec.IntValue ticksBetweenSpreadAttempt;
-  @Nonnull private static final ForgeConfigSpec.IntValue vanillaSimulateDropCount;
-  @Nonnull private static final ForgeConfigSpec.IntValue woodBarrelMaxTemp;
-  @Nonnull private static final ForgeConfigSpec.IntValue woodHeatRate;
-  @Nonnull private static final ForgeConfigSpec.BooleanValue netherCrucibleSoundsEnabled;
+  @Nonnull private static final ModConfigSpec.IntValue crucibleNumberOfBuckets;
+  @Nonnull private static final ModConfigSpec.IntValue ticksBetweenMelts;
+  @Nonnull private static final ModConfigSpec.IntValue ticksBetweenSpreadAttempt;
+  @Nonnull private static final ModConfigSpec.IntValue vanillaSimulateDropCount;
+  @Nonnull private static final ModConfigSpec.IntValue woodBarrelMaxTemp;
+  @Nonnull private static final ModConfigSpec.IntValue woodHeatRate;
+  @Nonnull private static final ModConfigSpec.BooleanValue netherCrucibleSoundsEnabled;
 
   static {
     // pebbleConfigs
@@ -671,7 +669,7 @@ public class Config {
     return pebbleDamage.get();
   }
 
-  public static void loadConfig(@Nonnull final ForgeConfigSpec spec, @Nonnull final Path path) {
+  public static void loadConfig(@Nonnull final ModConfigSpec spec, @Nonnull final Path path) {
     @Nonnull
     final CommentedFileConfig configData =
         CommentedFileConfig.builder(path)
@@ -687,6 +685,7 @@ public class Config {
   public static int getCrookNetheriteDurability() {
     return crookNetheriteValue.get();
   }
+
   public static boolean enableThrowable() {
     return enableThrowable.get();
   }

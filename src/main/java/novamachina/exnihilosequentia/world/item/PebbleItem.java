@@ -2,7 +2,6 @@ package novamachina.exnihilosequentia.world.item;
 
 import java.security.SecureRandom;
 import javax.annotation.Nonnull;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -32,40 +31,41 @@ public class PebbleItem extends SnowballItem {
       @Nonnull final Player player,
       @Nonnull final InteractionHand hand) {
     @Nonnull final ItemStack itemstack = player.getItemInHand(hand);
-      if (Config.enableThrowable()) {
-        world.playSound(
-                null,
-                player.getX(),
-                player.getY(),
-                player.getZ(),
-                EXNSoundEvents.PEBBLE_THROW,
-                SoundSource.NEUTRAL,
-                0.5F,
-                0.4F / (new SecureRandom().nextFloat() * 0.4F + 0.8F));
-        if (!world.isClientSide) {
-          @Nonnull final Snowball snowball =
-                  new Snowball(world, player) {
-                    @Override
-                    public Component getName() {
-                      return Component.translatable("item.exnihilosequentia.pebble");
-                    }
+    if (Config.enableThrowable()) {
+      world.playSound(
+          null,
+          player.getX(),
+          player.getY(),
+          player.getZ(),
+          EXNSoundEvents.PEBBLE_THROW,
+          SoundSource.NEUTRAL,
+          0.5F,
+          0.4F / (new SecureRandom().nextFloat() * 0.4F + 0.8F));
+      if (!world.isClientSide) {
+        @Nonnull
+        final Snowball snowball =
+            new Snowball(world, player) {
+              @Override
+              public Component getName() {
+                return Component.translatable("item.exnihilosequentia.pebble");
+              }
 
-                    @Override
-                    public void onHitEntity(EntityHitResult entityRayTraceResult) {
-                      @Nonnull final Entity entity = entityRayTraceResult.getEntity();
-                      entity.hurt(this.damageSources().generic(), Config.getPebbleDamage());
-                    }
-                  };
-          snowball.setItem(itemstack);
-          snowball.shootFromRotation(player, player.xRotO, player.yRotO, 0.0F, 1.5F, 1.0F);
-          world.addFreshEntity(snowball);
-        }
+              @Override
+              public void onHitEntity(EntityHitResult entityRayTraceResult) {
+                @Nonnull final Entity entity = entityRayTraceResult.getEntity();
+                entity.hurt(this.damageSources().generic(), Config.getPebbleDamage());
+              }
+            };
+        snowball.setItem(itemstack);
+        snowball.shootFromRotation(player, player.xRotO, player.yRotO, 0.0F, 1.5F, 1.0F);
+        world.addFreshEntity(snowball);
+      }
 
       player.awardStat(Stats.ITEM_USED.get(this));
       if (!player.getAbilities().instabuild) {
         itemstack.shrink(1);
       }
-        return InteractionResultHolder.sidedSuccess(itemstack, world.isClientSide());
+      return InteractionResultHolder.sidedSuccess(itemstack, world.isClientSide());
     }
     return InteractionResultHolder.pass(itemstack);
   }

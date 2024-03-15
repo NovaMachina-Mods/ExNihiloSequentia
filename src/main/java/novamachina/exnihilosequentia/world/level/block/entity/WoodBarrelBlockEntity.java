@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.common.Config;
 
 public class WoodBarrelBlockEntity extends BarrelBlockEntity {

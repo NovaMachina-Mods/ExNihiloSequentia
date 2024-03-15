@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_uncooked_crucible",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_uncooked_crucible"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_fired_crucible_blast"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

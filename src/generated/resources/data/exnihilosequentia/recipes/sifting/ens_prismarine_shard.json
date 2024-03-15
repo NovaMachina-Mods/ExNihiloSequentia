@@ -4,7 +4,8 @@
     "item": "minecraft:sand"
   },
   "result": {
-    "item": "minecraft:prismarine_shard"
+    "Count": 1,
+    "id": "minecraft:prismarine_shard"
   },
   "rolls": [
     {

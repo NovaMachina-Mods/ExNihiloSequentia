@@ -1,8 +1,7 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
-import java.util.function.Consumer;
 import javax.annotation.Nonnull;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
@@ -14,7 +13,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class CrushingRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(Consumer<FinishedRecipe> consumer) {
+  public void addRecipes(RecipeOutput consumer) {
     CrushingRecipeBuilder.crushing(Blocks.STONE)
         .addDrop(new ItemStack(Blocks.COBBLESTONE))
         .build(consumer, crushingLoc("cobblestone"));

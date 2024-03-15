@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -14,10 +15,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.DollItem;
@@ -90,8 +90,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
     if (nbt.contains(DOLL_TYPE_TAG)) {
       doll =
-          (DollItem)
-              ForgeRegistries.ITEMS.getValue(new ResourceLocation(nbt.getString(DOLL_TYPE_TAG)));
+          (DollItem) BuiltInRegistries.ITEM.get(new ResourceLocation(nbt.getString(DOLL_TYPE_TAG)));
     } else {
       doll = null;
     }
@@ -103,7 +102,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     @Nonnull final CompoundTag nbt = new CompoundTag();
     nbt.putInt(CURRENT_PROGRESS_TAG, currentProgress);
     if (doll != null) {
-      String name = ForgeRegistries.ITEMS.getKey(doll).toString();
+      String name = BuiltInRegistries.ITEM.getKey(doll).toString();
       nbt.putString(DOLL_TYPE_TAG, name);
     }
     return nbt;

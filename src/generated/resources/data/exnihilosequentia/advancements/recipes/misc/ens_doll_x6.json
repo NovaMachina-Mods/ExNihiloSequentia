@@ -32,15 +32,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_porcelain_clay",
-      "has_emerald",
-      "has_the_recipe"
+      "has_emerald"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_doll_x6"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

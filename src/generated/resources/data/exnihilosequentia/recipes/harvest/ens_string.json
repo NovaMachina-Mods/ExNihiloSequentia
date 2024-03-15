@@ -6,8 +6,10 @@
   "results": [
     {
       "chance": 0.5,
-      "count": 1,
-      "item": "minecraft:string"
+      "item": {
+        "Count": 1,
+        "id": "minecraft:string"
+      }
     }
   ]
 }

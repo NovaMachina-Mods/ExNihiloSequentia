@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_gold",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_gold"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:ens_gilded_blackstone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

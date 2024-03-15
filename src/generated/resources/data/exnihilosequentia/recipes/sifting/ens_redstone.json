@@ -4,7 +4,8 @@
     "item": "exnihilosequentia:dust"
   },
   "result": {
-    "item": "minecraft:redstone"
+    "Count": 1,
+    "id": "minecraft:redstone"
   },
   "rolls": [
     {
@@ -15,5 +16,6 @@
       "chance": 0.25,
       "mesh": "diamond"
     }
-  ]
+  ],
+  "waterlogged": false
 }

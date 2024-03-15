@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_doll",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_doll"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_guardian_doll"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_walls",
-      "has_base",
-      "has_the_recipe"
+      "has_base"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_crimson_barrel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

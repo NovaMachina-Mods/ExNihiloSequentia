@@ -4,13 +4,13 @@ import javax.annotation.Nonnull;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
-public abstract class WitchWaterFluid extends ForgeFlowingFluid {
+public abstract class WitchWaterFluid extends BaseFlowingFluid {
 
   @Nonnull
-  public static final ForgeFlowingFluid.Properties WITCH_WATER_PROPS =
-      new ForgeFlowingFluid.Properties(
+  public static final BaseFlowingFluid.Properties WITCH_WATER_PROPS =
+      new BaseFlowingFluid.Properties(
               () -> EXNFluids.WITCH_WATER.getFluidType(),
               () -> EXNFluids.WITCH_WATER.getStillFluid(),
               () -> EXNFluids.WITCH_WATER.getFlowingFluid())

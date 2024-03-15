@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_piece",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_piece"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_raw_lead"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

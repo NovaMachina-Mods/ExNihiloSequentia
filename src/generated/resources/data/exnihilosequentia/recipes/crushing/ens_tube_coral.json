@@ -6,8 +6,10 @@
   "results": [
     {
       "chance": 1.0,
-      "count": 1,
-      "item": "minecraft:tube_coral"
+      "item": {
+        "Count": 1,
+        "id": "minecraft:tube_coral"
+      }
     }
   ]
 }

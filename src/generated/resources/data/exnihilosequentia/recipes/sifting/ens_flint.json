@@ -4,7 +4,8 @@
     "item": "minecraft:gravel"
   },
   "result": {
-    "item": "minecraft:flint"
+    "Count": 1,
+    "id": "minecraft:flint"
   },
   "rolls": [
     {
@@ -15,5 +16,6 @@
       "chance": 0.25,
       "mesh": "flint"
     }
-  ]
+  ],
+  "waterlogged": false
 }

@@ -1,8 +1,8 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
-import java.util.function.Consumer;
+import java.util.Optional;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -13,7 +13,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class HeatRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(Consumer<FinishedRecipe> consumer) {
+  public void addRecipes(RecipeOutput consumer) {
     HeatRecipeBuilder.heat(Blocks.LAVA, 3).build(consumer, heatLoc("lava"));
     HeatRecipeBuilder.heat(Blocks.FIRE, 4).build(consumer, heatLoc("fire"));
     HeatRecipeBuilder.heat(Blocks.TORCH, 1).build(consumer, heatLoc("torch"));
@@ -24,7 +24,7 @@ public class HeatRecipes implements ISubRecipeProvider {
     HeatRecipeBuilder.heat(Blocks.SOUL_FIRE, 4).build(consumer, heatLoc("soul_fire"));
 
     // Lit blocks
-    StatePropertiesPredicate lit =
+    Optional<StatePropertiesPredicate> lit =
         StatePropertiesPredicate.Builder.properties()
             .hasProperty(BlockStateProperties.LIT, true)
             .build();

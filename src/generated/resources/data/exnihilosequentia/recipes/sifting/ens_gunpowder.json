@@ -4,12 +4,14 @@
     "item": "exnihilosequentia:dust"
   },
   "result": {
-    "item": "minecraft:gunpowder"
+    "Count": 1,
+    "id": "minecraft:gunpowder"
   },
   "rolls": [
     {
       "chance": 0.07,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

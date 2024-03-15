@@ -1,29 +1,23 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.google.gson.JsonObject;
-import lombok.Getter;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
-import novamachina.novacore.util.FluidStackUtils;
-import novamachina.novacore.util.ItemStackHelper;
-import novamachina.novacore.world.item.crafting.Recipe;
+import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-@Getter
-public class SolidifyingRecipe extends Recipe {
+public class SolidifyingRecipe extends AbstractRecipe {
   private final FluidStack fluidInTank;
   private final FluidStack fluidOnTop;
   private final ItemStack result;
 
-  public SolidifyingRecipe(
-      ResourceLocation id, FluidStack fluidInTank, FluidStack fluidOnTop, ItemStack result) {
-    super(id);
+  public SolidifyingRecipe(FluidStack fluidInTank, FluidStack fluidOnTop, ItemStack result) {
     this.fluidInTank = fluidInTank;
     this.fluidOnTop = fluidOnTop;
     this.result = result;
@@ -59,30 +53,52 @@ public class SolidifyingRecipe extends Recipe {
     buffer.writeItem(result);
   }
 
+  public FluidStack getFluidInTank() {
+    return this.fluidInTank;
+  }
+
+  public FluidStack getFluidOnTop() {
+    return this.fluidOnTop;
+  }
+
+  public ItemStack getResult() {
+    return this.result;
+  }
+
   public static class Serializer<T extends SolidifyingRecipe> implements RecipeSerializer<T> {
 
     private final IFactory<T> factory;
+    private final Codec<T> codec;
 
     public Serializer(IFactory<T> factory) {
       this.factory = factory;
+      this.codec =
+          RecordCodecBuilder.create(
+              instance ->
+                  instance
+                      .group(
+                          FluidStack.CODEC
+                              .fieldOf("fluidInTank")
+                              .forGetter(recipe -> recipe.getFluidInTank()),
+                          FluidStack.CODEC
+                              .fieldOf("fluidOnTop")
+                              .forGetter(recipe -> recipe.getFluidOnTop()),
+                          ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.getResult()))
+                      .apply(instance, factory::create));
+    }
+
+    @Override
+    public Codec<T> codec() {
+      return this.codec;
     }
 
     @Override
     @NonNull
-    public T fromJson(@NonNull ResourceLocation id, JsonObject json) {
-      FluidStack fluidInTank = FluidStackUtils.deserialize(json.getAsJsonObject("fluidInTank"));
-      FluidStack fluidOnTop = FluidStackUtils.deserialize(json.getAsJsonObject("fluidOnTop"));
-      ItemStack result = ItemStackHelper.deserialize(json.get("result"));
-      return this.factory.create(id, fluidInTank, fluidOnTop, result);
-    }
-
-    @Override
-    @NonNull
-    public T fromNetwork(@NonNull ResourceLocation id, @NonNull FriendlyByteBuf buffer) {
+    public T fromNetwork(FriendlyByteBuf buffer) {
       FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
       FluidStack fluidOnTop = FluidStack.readFromPacket(buffer);
       ItemStack result = buffer.readItem();
-      return this.factory.create(id, fluidInTank, fluidOnTop, result);
+      return this.factory.create(fluidInTank, fluidOnTop, result);
     }
 
     @Override
@@ -92,8 +108,7 @@ public class SolidifyingRecipe extends Recipe {
 
     @FunctionalInterface
     public interface IFactory<T> {
-      T create(
-          ResourceLocation id, FluidStack fluidInTank, FluidStack fluidOnTop, ItemStack result);
+      T create(FluidStack fluidInTank, FluidStack fluidOnTop, ItemStack result);
     }
   }
 }

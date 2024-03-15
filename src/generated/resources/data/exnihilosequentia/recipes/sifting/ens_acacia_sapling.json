@@ -4,12 +4,14 @@
     "item": "minecraft:dirt"
   },
   "result": {
-    "item": "minecraft:acacia_sapling"
+    "Count": 1,
+    "id": "minecraft:acacia_sapling"
   },
   "rolls": [
     {
       "chance": 0.05,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

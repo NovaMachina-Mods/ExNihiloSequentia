@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_plank",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_plank"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_acacia_sieve"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

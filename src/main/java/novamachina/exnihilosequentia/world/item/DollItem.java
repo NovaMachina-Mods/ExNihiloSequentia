@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -14,7 +15,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class DollItem extends Item {
 
@@ -65,9 +65,9 @@ public class DollItem extends Item {
     @Nonnull
     final ResourceLocation fluidLocation = new ResourceLocation(this.fluidModId, this.fluidName);
 
-    if (ForgeRegistries.FLUIDS.containsKey(fluidLocation)) {
+    if (BuiltInRegistries.FLUID.containsKey(fluidLocation)) {
 
-      return ForgeRegistries.FLUIDS.getValue(fluidLocation);
+      return BuiltInRegistries.FLUID.get(fluidLocation);
     }
     return Fluids.EMPTY;
   }
@@ -77,10 +77,9 @@ public class DollItem extends Item {
     ResourceLocation spawneeResourceLocation =
         new ResourceLocation(this.entityModId, this.entityName);
 
-    if (ForgeRegistries.ENTITY_TYPES.containsKey(spawneeResourceLocation)) {
+    if (BuiltInRegistries.ENTITY_TYPE.containsKey(spawneeResourceLocation)) {
       @Nullable
-      final EntityType<?> entityType =
-          ForgeRegistries.ENTITY_TYPES.getValue(spawneeResourceLocation);
+      final EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(spawneeResourceLocation);
       if (entityType != null) {
         @Nullable final Entity spawnee = entityType.create(world);
         if (spawnee != null) {

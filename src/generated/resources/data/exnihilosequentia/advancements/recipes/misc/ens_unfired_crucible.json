@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_porcelain_clay",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_porcelain_clay"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_unfired_crucible"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

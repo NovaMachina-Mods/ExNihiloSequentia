@@ -3,6 +3,7 @@ package novamachina.exnihilosequentia.data;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Fluids;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.ModIds;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants.Tooltips;
@@ -84,6 +85,11 @@ public class EXNLangProvider extends AbstractLangGenerator {
     addJEIEntry("wet_sifting", "Waterlogged Sifting");
     addJEIEntry("solidifying", "Solidifying");
     addJEIEntry("transition", "Transition");
+
+    add(
+        ExNihiloSequentia.MOD_ID + ".open_beta_text",
+        "Ex Nihilo: Sequentia is in open Beta. There may be things that are broken or missing. If you encounter something that is broken or missing, please open a bug ticket: ");
+    add(ExNihiloSequentia.MOD_ID + ".issue_collector", "Issue Collector");
   }
 
   private void addJEIEntry(String id, String fullText) {

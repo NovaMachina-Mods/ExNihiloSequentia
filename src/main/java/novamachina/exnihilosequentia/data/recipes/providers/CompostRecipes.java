@@ -1,12 +1,11 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
-import java.util.function.Consumer;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.data.recipes.CompostRecipeBuilder;
 import novamachina.exnihilosequentia.data.recipes.RecipeProviderUtilities;
@@ -16,7 +15,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class CompostRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(Consumer<FinishedRecipe> consumer) {
+  public void addRecipes(RecipeOutput consumer) {
     CompostRecipeBuilder.composting(ItemTags.SAPLINGS, 125).build(consumer, compostLoc("saplings"));
     CompostRecipeBuilder.composting(ItemTags.LEAVES, 125).build(consumer, compostLoc("leaves"));
     CompostRecipeBuilder.composting(ItemTags.FLOWERS, 100).build(consumer, compostLoc("flowers"));

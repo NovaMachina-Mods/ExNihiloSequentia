@@ -5,10 +5,10 @@ import javax.annotation.Nonnull;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import novamachina.exnihilosequentia.data.loot.EXNLootModifierProvider;
 import novamachina.exnihilosequentia.data.loot.EXNLootProvider;
 import novamachina.exnihilosequentia.data.models.ItemModelProvider;
@@ -28,7 +28,7 @@ public class ExNihiloDataGenerators {
     CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
     generator.addProvider(event.includeServer(), new EXNLootProvider(output));
-    generator.addProvider(event.includeServer(), new EXNRecipeProvider(output, existingFileHelper));
+    generator.addProvider(event.includeServer(), new EXNRecipeProvider(output));
     generator.addProvider(
         event.includeServer(), new EXNTagProvider(output, lookupProvider, existingFileHelper));
     generator.addProvider(event.includeServer(), new EXNLootModifierProvider(output));

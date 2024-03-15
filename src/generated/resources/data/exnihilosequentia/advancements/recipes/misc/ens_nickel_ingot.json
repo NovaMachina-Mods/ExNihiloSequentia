@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_chunk",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_chunk"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_nickel_ingot"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

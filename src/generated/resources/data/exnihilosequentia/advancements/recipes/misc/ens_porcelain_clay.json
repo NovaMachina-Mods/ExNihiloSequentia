@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_clay",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_clay"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_porcelain_clay"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

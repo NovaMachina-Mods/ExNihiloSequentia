@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.world.item.crafting.HarvestRecipe;
@@ -73,17 +72,7 @@ public class HarvestingRegistry {
               final List<List<ItemStackWithChance>> partitions =
                   Lists.partition(crookRecipe.getDrops(), 21);
               return IntStream.range(0, partitions.size())
-                  .mapToObj(
-                      i -> {
-                        final ResourceLocation crookRecipeId = crookRecipe.getId();
-                        final ResourceLocation newId =
-                            new ResourceLocation(
-                                crookRecipeId.getNamespace(), crookRecipeId.getPath() + i);
-                        return new HarvestRecipe(
-                            newId,
-                            crookRecipe.getInput(),
-                            partitions.get(i).toArray(ItemStackWithChance[]::new));
-                      });
+                  .mapToObj(i -> new HarvestRecipe(crookRecipe.getInput(), partitions.get(i)));
             })
         .collect(Collectors.toList());
   }

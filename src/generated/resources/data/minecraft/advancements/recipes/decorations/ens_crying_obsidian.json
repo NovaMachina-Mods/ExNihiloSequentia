@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_obsidian",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_obsidian"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:ens_crying_obsidian"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

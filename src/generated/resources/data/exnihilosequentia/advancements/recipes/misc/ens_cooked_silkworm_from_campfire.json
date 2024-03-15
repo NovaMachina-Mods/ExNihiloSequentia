@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_silkworm",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_silkworm"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_cooked_silkworm_from_campfire"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

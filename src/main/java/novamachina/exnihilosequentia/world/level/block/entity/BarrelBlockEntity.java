@@ -1,11 +1,11 @@
 package novamachina.exnihilosequentia.world.level.block.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -22,15 +22,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.capability.BarrelInventoryHandler;
@@ -48,15 +45,8 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   @Nonnull private static final String MODE_TAG = "barrelMode";
   @Nonnull private static final String SOLID_AMOUNT_TAG = "solidAmount";
   @Nonnull private static final String TANK_TAG = "tank";
-  @Nonnull private final BarrelInventoryHandler inventory = new BarrelInventoryHandler(this);
-
-  @Nonnull
-  private final LazyOptional<IItemHandler> inventoryHolder = LazyOptional.of(() -> inventory);
-
-  @Nonnull private final BarrelFluidHandler tank = new BarrelFluidHandler(this);
-  @Nonnull private final LazyOptional<IFluidHandler> tankHolder = LazyOptional.of(() -> tank);
   @Nullable private AbstractBarrelTileState lastSyncedState = null;
-  @Nullable private AbstractBarrelMode mode;
+  private AbstractBarrelMode mode;
   private int solidAmount = 0;
 
   protected BarrelBlockEntity(
@@ -85,38 +75,25 @@ public abstract class BarrelBlockEntity extends BlockEntity {
 
   public abstract boolean canAcceptFluidTemperature(@Nonnull final FluidStack resource);
 
-  @Nonnull
-  @Override
-  public <T> LazyOptional<T> getCapability(
-      @Nonnull final Capability<T> cap, @Nullable final Direction side) {
-    if (cap == ForgeCapabilities.ITEM_HANDLER) {
-      return inventoryHolder.cast();
-    }
-    if (cap == ForgeCapabilities.FLUID_HANDLER) {
-      return tankHolder.cast();
-    }
-    return super.getCapability(cap, side);
-  }
-
   @Nullable
   public Fluid getFluid() {
-    if (!tank.isEmpty()) {
-      return tank.getFluid().getFluid();
+    if (!BarrelFluidHandler.getHandler(this).isEmpty()) {
+      return BarrelFluidHandler.getHandler(this).getFluid().getFluid();
     }
     return null;
   }
 
   public int getFluidAmount() {
-    return tank.getFluidAmount();
+    return BarrelFluidHandler.getHandler(this).getFluidAmount();
   }
 
   public float getFluidProportion() {
-    return (float) tank.getFluidAmount() / MAX_FLUID_AMOUNT;
+    return (float) BarrelFluidHandler.getHandler(this).getFluidAmount() / MAX_FLUID_AMOUNT;
   }
 
   @Nonnull
   public ItemStackHandler getInventory() {
-    return inventory;
+    return BarrelInventoryHandler.getHandler(this);
   }
 
   @Nullable
@@ -144,12 +121,12 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   }
 
   public ItemStack getInventoryBlock() {
-    return inventory.getStackInSlot(0);
+    return BarrelInventoryHandler.getHandler(this).getStackInSlot(0);
   }
 
   @Nonnull
   public FluidTank getTank() {
-    return tank;
+    return BarrelFluidHandler.getHandler(this);
   }
 
   @Nonnull
@@ -169,7 +146,7 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   @Nullable
   public List<Component> getWailaInfo() {
     if (mode == null) {
-      return null;
+      return new ArrayList<>();
     }
     return mode.getWailaInfo(this);
   }
@@ -177,10 +154,10 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   @Override
   public void load(@Nonnull final CompoundTag compound) {
     if (compound.contains(INVENTORY_TAG)) {
-      inventory.deserializeNBT(compound.getCompound(INVENTORY_TAG));
+      BarrelInventoryHandler.getHandler(this).deserializeNBT(compound.getCompound(INVENTORY_TAG));
     }
     if (compound.contains(TANK_TAG)) {
-      tank.readFromNBT(compound.getCompound(TANK_TAG));
+      BarrelFluidHandler.getHandler(this).readFromNBT(compound.getCompound(TANK_TAG));
     }
     if (compound.contains(MODE_TAG)) {
       mode = BarrelModeRegistry.getModeFromName(compound.getString(MODE_TAG));
@@ -211,10 +188,10 @@ public abstract class BarrelBlockEntity extends BlockEntity {
       @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket pkt) {
     @Nonnull final CompoundTag nbt = pkt.getTag();
     if (nbt.contains(INVENTORY_TAG)) {
-      inventory.deserializeNBT(nbt.getCompound(INVENTORY_TAG));
+      BarrelInventoryHandler.getHandler(this).deserializeNBT(nbt.getCompound(INVENTORY_TAG));
     }
     if (nbt.contains(TANK_TAG)) {
-      tank.readFromNBT(nbt.getCompound(TANK_TAG));
+      BarrelFluidHandler.getHandler(this).readFromNBT(nbt.getCompound(TANK_TAG));
     }
     mode = BarrelModeRegistry.getModeFromName(nbt.getString(MODE_TAG));
     if (nbt.contains(MODE_INFO_TAG) && mode != null) {
@@ -233,8 +210,8 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   @Override
   public void saveAdditional(@Nonnull final CompoundTag compound) {
     super.saveAdditional(compound);
-    compound.put(INVENTORY_TAG, inventory.serializeNBT());
-    compound.put(TANK_TAG, tank.writeToNBT(new CompoundTag()));
+    compound.put(INVENTORY_TAG, BarrelInventoryHandler.getHandler(this).serializeNBT());
+    compound.put(TANK_TAG, BarrelFluidHandler.getHandler(this).writeToNBT(new CompoundTag()));
     if (mode != null) {
       compound.putString(MODE_TAG, mode.getModeName());
       compound.put(MODE_INFO_TAG, mode.write());
@@ -244,7 +221,7 @@ public abstract class BarrelBlockEntity extends BlockEntity {
 
   public void dropInventory() {
     @Nonnull final NonNullList<ItemStack> list = NonNullList.create();
-    list.add(inventory.getStackInSlot(0));
+    list.add(BarrelInventoryHandler.getHandler(this).getStackInSlot(0));
     if (level != null) {
       Containers.dropContents(level, worldPosition, list);
     }
@@ -257,9 +234,10 @@ public abstract class BarrelBlockEntity extends BlockEntity {
 
     if (mode.isEmptyMode() || mode.getModeName().equals(ExNihiloConstants.BarrelModes.FLUID)) {
       @Nonnull final BlockPos abovePos = worldPosition.offset(0, 1, 0);
-      if (level.isRainingAt(abovePos) && tank.getSpace() >= Config.getRainFillAmount()) {
+      if (level.isRainingAt(abovePos)
+          && BarrelFluidHandler.getHandler(this).getSpace() >= Config.getRainFillAmount()) {
         @Nonnull final FluidStack stack = new FluidStack(Fluids.WATER, Config.getRainFillAmount());
-        tank.fill(stack, IFluidHandler.FluidAction.EXECUTE);
+        BarrelFluidHandler.getHandler(this).fill(stack, IFluidHandler.FluidAction.EXECUTE);
       }
     }
     mode.tick(this);
@@ -282,7 +260,7 @@ public abstract class BarrelBlockEntity extends BlockEntity {
     AbstractBarrelTileState(@Nonnull final BarrelBlockEntity barrelBlockEntity) {
       fluid = barrelBlockEntity.getFluid();
       fluidAmount = barrelBlockEntity.getFluidAmount();
-      solid = barrelBlockEntity.inventory.getStackInSlot(0).getItem();
+      solid = BarrelInventoryHandler.getHandler(barrelBlockEntity).getStackInSlot(0).getItem();
       solidAmount = barrelBlockEntity.getSolidAmount();
       wailaInfo = barrelBlockEntity.getWailaInfo();
     }

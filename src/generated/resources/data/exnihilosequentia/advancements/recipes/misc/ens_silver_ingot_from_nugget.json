@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_nugget",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nugget"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_silver_ingot_from_nugget"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

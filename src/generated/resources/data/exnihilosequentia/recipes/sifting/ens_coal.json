@@ -4,12 +4,14 @@
     "item": "minecraft:gravel"
   },
   "result": {
-    "item": "minecraft:coal"
+    "Count": 1,
+    "id": "minecraft:coal"
   },
   "rolls": [
     {
       "chance": 0.125,
       "mesh": "flint"
     }
-  ]
+  ],
+  "waterlogged": false
 }

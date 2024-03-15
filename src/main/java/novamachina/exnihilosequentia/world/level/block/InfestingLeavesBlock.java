@@ -1,16 +1,14 @@
 package novamachina.exnihilosequentia.world.level.block;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -21,14 +19,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import novamachina.exnihilosequentia.common.Config;
-import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+import novamachina.exnihilosequentia.common.compat.ITooltipProvider;
 import novamachina.exnihilosequentia.tags.ExNihiloTags;
 import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.world.level.block.entity.InfestingLeavesBlockEntity;
 import novamachina.novacore.util.StringUtils;
 
 // TODO: Add progressive render
-public class InfestingLeavesBlock extends Block implements EntityBlock, ITOPInfoProvider {
+public class InfestingLeavesBlock extends Block implements EntityBlock, ITooltipProvider {
 
   @Nonnull private static final Random random = new SecureRandom();
 
@@ -80,28 +78,6 @@ public class InfestingLeavesBlock extends Block implements EntityBlock, ITOPInfo
     return nearbyLeaves;
   }
 
-  @Override
-  public void addProbeInfo(
-      @Nonnull final ProbeMode probeMode,
-      @Nonnull final IProbeInfo iProbeInfo,
-      @Nonnull final Player playerEntity,
-      @Nonnull final Level world,
-      @Nonnull final BlockState blockState,
-      @Nonnull final IProbeHitData iProbeHitData) {
-    if (probeMode == ProbeMode.EXTENDED) {
-      @Nullable
-      final InfestingLeavesBlockEntity infestingLeavesBlockEntity =
-          (InfestingLeavesBlockEntity) world.getBlockEntity(iProbeHitData.getPos());
-
-      if (infestingLeavesBlockEntity != null) {
-        iProbeInfo.text(
-            Component.translatable(
-                "waila.progress",
-                StringUtils.formatPercent((float) infestingLeavesBlockEntity.getProgress() / 100)));
-      }
-    }
-  }
-
   @org.jetbrains.annotations.Nullable
   @Override
   public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
@@ -121,5 +97,34 @@ public class InfestingLeavesBlock extends Block implements EntityBlock, ITOPInfo
       };
     }
     return null;
+  }
+
+  @Override
+  public List<Component> getTooltipInfo(Level world, BlockPos pos) {
+    List<Component> tooltip = new ArrayList<>();
+    final InfestingLeavesBlockEntity infestingLeavesBlockEntity =
+        (InfestingLeavesBlockEntity) world.getBlockEntity(pos);
+    if (infestingLeavesBlockEntity == null) {
+      return tooltip;
+    }
+    return tooltip;
+  }
+
+  @Override
+  public List<Component> getExpandedTooltipInfo(Level world, BlockPos pos) {
+    List<Component> tooltip = new ArrayList<>();
+    final InfestingLeavesBlockEntity infestingLeavesBlockEntity =
+        (InfestingLeavesBlockEntity) world.getBlockEntity(pos);
+    if (infestingLeavesBlockEntity == null) {
+      return tooltip;
+    }
+
+    tooltip.add(
+        Component.translatable(
+            "waila.progress",
+            StringUtils.formatPercent((float) infestingLeavesBlockEntity.getProgress() / 100)));
+
+    tooltip.addAll(this.getTooltipInfo(world, pos));
+    return tooltip;
   }
 }

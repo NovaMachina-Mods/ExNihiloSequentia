@@ -14,13 +14,13 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import novamachina.exnihilosequentia.world.level.block.entity.SieveBlockEntity;
-import novamachina.novacore.client.renderer.blockentity.BlockEntityRenderer;
+import novamachina.novacore.client.renderer.blockentity.AbstractBlockEntityRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SieveRender extends BlockEntityRenderer<SieveBlockEntity> {
+public class SieveRender extends AbstractBlockEntityRenderer<SieveBlockEntity> {
 
   private static Logger log = LoggerFactory.getLogger(SieveRender.class);
 

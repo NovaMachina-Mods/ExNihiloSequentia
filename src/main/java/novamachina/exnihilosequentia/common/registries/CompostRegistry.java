@@ -48,7 +48,7 @@ public class CompostRegistry {
   }
 
   public void setRecipes(@Nonnull final List<CompostRecipe> recipes) {
-    log.debug("Compost Registry recipes: " + recipes.size());
+    log.debug("Compost Registry recipes: {}", recipes.size());
     recipeList.addAll(recipes);
     cache.invalidateAll();
   }

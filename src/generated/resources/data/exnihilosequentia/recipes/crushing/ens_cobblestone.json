@@ -6,8 +6,10 @@
   "results": [
     {
       "chance": 1.0,
-      "count": 1,
-      "item": "minecraft:cobblestone"
+      "item": {
+        "Count": 1,
+        "id": "minecraft:cobblestone"
+      }
     }
   ]
 }

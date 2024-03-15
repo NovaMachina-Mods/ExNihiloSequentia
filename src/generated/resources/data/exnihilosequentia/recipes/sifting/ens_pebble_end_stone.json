@@ -4,7 +4,8 @@
     "item": "exnihilosequentia:crushed_end_stone"
   },
   "result": {
-    "item": "exnihilosequentia:end_stone_pebble"
+    "Count": 1,
+    "id": "exnihilosequentia:end_stone_pebble"
   },
   "rolls": [
     {
@@ -15,5 +16,6 @@
       "chance": 0.1,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

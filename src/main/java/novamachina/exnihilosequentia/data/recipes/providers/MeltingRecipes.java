@@ -1,12 +1,11 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
-import java.util.function.Consumer;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.data.recipes.MeltingRecipeBuilder;
 import novamachina.exnihilosequentia.data.recipes.RecipeProviderUtilities;
@@ -16,7 +15,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class MeltingRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(Consumer<FinishedRecipe> consumer) {
+  public void addRecipes(RecipeOutput consumer) {
     MeltingRecipeBuilder.melting(
             Blocks.COBBLESTONE, new FluidStack(Fluids.LAVA, 250), CrucibleType.FIRED)
         .build(consumer, meltingLoc("cobblestone"));

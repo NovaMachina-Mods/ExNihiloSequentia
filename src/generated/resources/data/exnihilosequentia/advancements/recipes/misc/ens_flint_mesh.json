@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_mesh",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mesh"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_flint_mesh"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

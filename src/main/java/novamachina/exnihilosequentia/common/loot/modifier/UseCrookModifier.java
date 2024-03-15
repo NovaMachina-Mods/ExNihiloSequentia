@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -21,9 +22,8 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.common.loot.LootModifier;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.registries.ExNihiloRegistries;
 import novamachina.exnihilosequentia.tags.ExNihiloTags;
@@ -120,12 +120,12 @@ public class UseCrookModifier extends LootModifier {
                   drop -> {
                     @Nullable
                     final ResourceLocation resourceLocation =
-                        ForgeRegistries.ITEMS.getKey(drop.getItem());
+                        BuiltInRegistries.ITEM.getKey(drop.getItem());
                     if (resourceLocation == null) {
                       return false;
                     }
                     return !resourceLocation.equals(
-                        ForgeRegistries.BLOCKS.getKey(blockState.getBlock()));
+                        BuiltInRegistries.BLOCK.getKey(blockState.getBlock()));
                   })
               .toList());
     }

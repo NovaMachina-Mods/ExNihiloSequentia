@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_logs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_logs"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_jungle_crucible"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

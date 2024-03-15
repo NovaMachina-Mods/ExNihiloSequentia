@@ -4,7 +4,8 @@
     "tag": "minecraft:sand"
   },
   "result": {
-    "item": "exnihilosequentia:horn_coral_larva"
+    "Count": 1,
+    "id": "exnihilosequentia:horn_coral_larva"
   },
   "rolls": [
     {

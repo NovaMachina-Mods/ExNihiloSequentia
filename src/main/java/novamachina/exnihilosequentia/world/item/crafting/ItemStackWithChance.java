@@ -3,20 +3,34 @@ package novamachina.exnihilosequentia.world.item.crafting;
 import com.google.common.base.Objects;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import lombok.Getter;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.slf4j.Logger;
 
 public class ItemStackWithChance {
 
   private static final String BASE_KEY = "item";
   private static final String CHANCE_KEY = "chance";
   private static final String COUNT_KEY = "count";
-  @Getter private final float chance;
+
+  public static final Codec<ItemStackWithChance> CODEC =
+      RecordCodecBuilder.create(
+          instance ->
+              instance
+                  .group(
+                      ItemStack.CODEC.fieldOf(BASE_KEY).forGetter(recipe -> recipe.getStack()),
+                      Codec.FLOAT.fieldOf(CHANCE_KEY).forGetter(recipe -> recipe.getChance()))
+                  .apply(instance, ItemStackWithChance::new));
+
+  private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemStackWithChance.class);
+  private final float chance;
   private final ItemStack itemStack;
 
   private ItemStackWithChance(ItemStack itemStack, float chance) {
@@ -52,12 +66,11 @@ public class ItemStackWithChance {
         count = json.getAsJsonObject().get(COUNT_KEY).getAsInt();
       }
       return of(
-          new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemString)), count),
+          new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(itemString)), count),
           chance);
     } else {
       String itemString = GsonHelper.convertToString(json, BASE_KEY);
-      return of(
-          new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemString))), 1.0F);
+      return of(new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(itemString))), 1.0F);
     }
   }
 
@@ -75,14 +88,10 @@ public class ItemStackWithChance {
 
   @NonNull
   public JsonElement serialize() {
-    JsonObject json = new JsonObject();
-    json.addProperty(CHANCE_KEY, getChance());
-    ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(getStack().getItem());
-    if (resourceLocation != null) {
-      json.addProperty(BASE_KEY, resourceLocation.toString());
-    }
-    json.addProperty(COUNT_KEY, getStack().getCount());
-    return json;
+    return CODEC
+        .encodeStart(JsonOps.INSTANCE, this)
+        .resultOrPartial(error -> log.error("Unable to encode ItemStackWithChance"))
+        .orElse(new JsonObject());
   }
 
   public void write(FriendlyByteBuf buffer) {
@@ -102,5 +111,9 @@ public class ItemStackWithChance {
   @Override
   public int hashCode() {
     return Objects.hashCode(getChance(), itemStack);
+  }
+
+  public float getChance() {
+    return this.chance;
   }
 }

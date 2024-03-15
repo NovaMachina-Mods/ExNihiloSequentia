@@ -1,10 +1,9 @@
 package novamachina.exnihilosequentia.world.level.block;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -16,59 +15,47 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import novamachina.exnihilosequentia.common.compat.top.ITOPInfoProvider;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import novamachina.exnihilosequentia.common.compat.ITooltipProvider;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity;
-import org.jetbrains.annotations.NotNull;
 
-public abstract class CrucibleBlock extends Block implements ITOPInfoProvider {
+public abstract class CrucibleBlock extends Block implements ITooltipProvider {
 
   public CrucibleBlock(Properties properties) {
     super(properties);
   }
 
   @Override
-  public void addProbeInfo(
-      @Nonnull final ProbeMode probeMode,
-      @Nonnull final IProbeInfo probeInfo,
-      @Nonnull final Player playerEntity,
-      @Nonnull final Level world,
-      @Nonnull final BlockState blockState,
-      final @Nonnull IProbeHitData data) {
-    if (probeMode == ProbeMode.EXTENDED) {
-      gatherExtendedData(probeInfo, world, data);
-    }
-  }
-
-  private void gatherExtendedData(
-      @NotNull IProbeInfo probeInfo, @NotNull Level world, @NotNull IProbeHitData data) {
-    @Nullable
-    final CrucibleBlockEntity crucibleTile =
-        (CrucibleBlockEntity) world.getBlockEntity(data.getPos());
+  public List<Component> getTooltipInfo(Level world, BlockPos pos) {
+    List<Component> tooltip = new ArrayList<>();
+    final CrucibleBlockEntity crucibleTile = (CrucibleBlockEntity) world.getBlockEntity(pos);
     if (crucibleTile == null) {
-      return;
+      return tooltip;
     }
-    addSolidInformation(probeInfo, crucibleTile);
-    addFluidInformation(probeInfo, crucibleTile);
-    addHeatInformation(probeInfo, crucibleTile);
+    return tooltip;
   }
 
-  private void addHeatInformation(
-      @NotNull IProbeInfo probeInfo, @NotNull CrucibleBlockEntity crucibleTile) {
-    if (crucibleTile.getHeat() == 0) {
-      probeInfo.text(Component.translatable("waila.crucible.no_heat"));
-    } else {
-      probeInfo.text(Component.translatable("waila.crucible.heat", crucibleTile.getHeat()));
+  @Override
+  public List<Component> getExpandedTooltipInfo(Level world, BlockPos pos) {
+    List<Component> tooltip = new ArrayList<>();
+    final CrucibleBlockEntity crucibleTile = (CrucibleBlockEntity) world.getBlockEntity(pos);
+    if (crucibleTile == null) {
+      return tooltip;
     }
-  }
 
-  private void addFluidInformation(
-      @NotNull IProbeInfo probeInfo, @NotNull CrucibleBlockEntity crucibleTile) {
+    if (crucibleTile.getSolidAmount() > 0) {
+      final ItemStack itemStack = crucibleTile.getCurrentItem();
+      tooltip.add(
+          Component.translatable(
+              "waila.crucible.solid",
+              Component.translatable(itemStack.getItem().getDescriptionId()),
+              crucibleTile.getSolidAmount()));
+    }
     if (crucibleTile.getFluidAmount() > 0) {
       @Nullable final Fluid fluid = crucibleTile.getFluid();
       if (fluid != null) {
-        probeInfo.text(
+        tooltip.add(
             Component.translatable(
                 "waila.crucible.fluid",
                 Component.translatable(
@@ -76,18 +63,15 @@ public abstract class CrucibleBlock extends Block implements ITOPInfoProvider {
                 crucibleTile.getFluidAmount()));
       }
     }
-  }
-
-  private void addSolidInformation(
-      @NotNull IProbeInfo probeInfo, @NotNull CrucibleBlockEntity crucibleTile) {
-    if (crucibleTile.getSolidAmount() > 0) {
-      final ItemStack itemStack = crucibleTile.getCurrentItem();
-      probeInfo.text(
-          Component.translatable(
-              "waila.crucible.solid",
-              Component.translatable(itemStack.getItem().getDescriptionId()),
-              crucibleTile.getSolidAmount()));
+    if (crucibleTile.getHeat() == 0) {
+      tooltip.add(Component.translatable("waila.crucible.no_heat"));
+    } else {
+      tooltip.add(Component.translatable("waila.crucible.heat", crucibleTile.getHeat()));
     }
+
+    tooltip.addAll(this.getTooltipInfo(world, pos));
+
+    return tooltip;
   }
 
   /**
@@ -111,8 +95,8 @@ public abstract class CrucibleBlock extends Block implements ITOPInfoProvider {
 
     if (tile != null) {
       IFluidHandler fluidHandler =
-          tile.getCapability(ForgeCapabilities.FLUID_HANDLER, hit.getDirection())
-              .orElseThrow(() -> new RuntimeException("Missing Fluid Handler"));
+          worldIn.getCapability(
+              Capabilities.FluidHandler.BLOCK, pos, state, tile, hit.getDirection());
       return tile.onBlockActivated(player, handIn, fluidHandler);
     }
     return InteractionResult.SUCCESS;

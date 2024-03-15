@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_scrap",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_scrap"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:ens_ancient_debris"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

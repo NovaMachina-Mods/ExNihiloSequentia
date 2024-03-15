@@ -4,12 +4,14 @@
     "item": "exnihilosequentia:dust"
   },
   "result": {
-    "item": "minecraft:bone_meal"
+    "Count": 1,
+    "id": "minecraft:bone_meal"
   },
   "rolls": [
     {
       "chance": 0.2,
       "mesh": "string"
     }
-  ]
+  ],
+  "waterlogged": false
 }

@@ -4,7 +4,8 @@
     "item": "minecraft:gravel"
   },
   "result": {
-    "item": "exnihilosequentia:uranium_pieces"
+    "Count": 1,
+    "id": "exnihilosequentia:uranium_pieces"
   },
   "rolls": [
     {
@@ -19,5 +20,6 @@
       "chance": 0.1,
       "mesh": "diamond"
     }
-  ]
+  ],
+  "waterlogged": false
 }

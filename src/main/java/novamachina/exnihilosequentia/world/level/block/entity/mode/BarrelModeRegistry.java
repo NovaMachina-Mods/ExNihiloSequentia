@@ -30,7 +30,7 @@ public class BarrelModeRegistry {
 
   @Nonnull
   public static List<Supplier<AbstractBarrelMode>> getModes(@Nonnull final TriggerType type) {
-    log.debug("Getting barrel mode, Trigger: " + type);
+    log.debug("Getting barrel mode, Trigger: {}", type);
     return modeMap.get(type);
   }
 
@@ -48,7 +48,7 @@ public class BarrelModeRegistry {
 
   public static void addMode(
       @Nonnull final Supplier<AbstractBarrelMode> mode, @Nonnull final TriggerType type) {
-    log.debug("Adding mode: " + mode + ", Trigger: " + type);
+    log.debug("Adding mode: {}, Trigger: {}", mode, type);
     @Nullable ArrayList<Supplier<AbstractBarrelMode>> list = modeMap.get(type);
     if (list == null) {
       list = new ArrayList<>();

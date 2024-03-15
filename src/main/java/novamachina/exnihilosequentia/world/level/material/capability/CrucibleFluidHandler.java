@@ -1,26 +1,24 @@
 package novamachina.exnihilosequentia.world.level.material.capability;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import java.util.IdentityHashMap;
+import java.util.Map;
+import java.util.function.Predicate;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity;
 
 public class CrucibleFluidHandler extends FluidTank {
+  private static final Map<BlockEntity, CrucibleFluidHandler> BLOCK_TO_CRUCIBLE =
+      new IdentityHashMap<>();
 
-  @Nullable private CrucibleBlockEntity crucible;
+  public static CrucibleFluidHandler getHandler(CrucibleBlockEntity entity) {
 
-  public CrucibleFluidHandler(@Nonnull final CrucibleBlockEntity crucibleTile) {
-    super(CrucibleBlockEntity.MAX_FLUID_AMOUNT);
-    this.crucible = crucibleTile;
+    return BLOCK_TO_CRUCIBLE.computeIfAbsent(
+        entity, (block1) -> new CrucibleFluidHandler(entity::canAcceptFluidTemperature));
   }
 
-  @Override
-  public int fill(FluidStack resource, FluidAction action) {
-    if (crucible != null && !crucible.canAcceptFluidTemperature(resource)) {
-      return 0;
-    }
-
-    return super.fill(resource, action);
+  public CrucibleFluidHandler(Predicate<FluidStack> validator) {
+    super(CrucibleBlockEntity.MAX_FLUID_AMOUNT, validator);
   }
 }

@@ -6,8 +6,10 @@
   "results": [
     {
       "chance": 1.0,
-      "count": 1,
-      "item": "minecraft:horn_coral_fan"
+      "item": {
+        "Count": 1,
+        "id": "minecraft:horn_coral_fan"
+      }
     }
   ]
 }

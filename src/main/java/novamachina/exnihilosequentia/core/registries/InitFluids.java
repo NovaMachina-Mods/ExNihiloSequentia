@@ -8,7 +8,6 @@ public class InitFluids {
   public static void init(IRegistry<FluidDefinition<?, ?, ?>> registry) {
     for (FluidDefinition<?, ?, ?> definition : EXNFluids.getDefinitions()) {
       registry.register(definition);
-      registry.register(definition);
     }
   }
 }

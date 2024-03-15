@@ -3,14 +3,23 @@ package novamachina.exnihilosequentia.world.item.crafting;
 import com.google.common.base.Objects;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import javax.annotation.Nonnull;
-import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import novamachina.exnihilosequentia.world.item.MeshType;
 
-@Getter
 public class MeshWithChance {
+
+  public static final Codec<MeshWithChance> CODEC =
+      RecordCodecBuilder.create(
+          instance ->
+              instance
+                  .group(
+                      MeshType.CODEC.fieldOf("mesh").forGetter(recipe -> recipe.getMesh()),
+                      Codec.FLOAT.fieldOf("chance").forGetter(recipe -> recipe.getChance()))
+                  .apply(instance, MeshWithChance::new));
 
   @Nonnull private static final String CHANCE_KEY = "chance";
   @Nonnull private static final String MESH_KEY = "mesh";
@@ -69,5 +78,14 @@ public class MeshWithChance {
   @Override
   public int hashCode() {
     return Objects.hashCode(getChance(), getMesh());
+  }
+
+  public float getChance() {
+    return this.chance;
+  }
+
+  @Nonnull
+  public MeshType getMesh() {
+    return this.mesh;
   }
 }

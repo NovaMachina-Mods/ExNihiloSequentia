@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_frame",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_frame"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:ens_beehive"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

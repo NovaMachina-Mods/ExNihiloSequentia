@@ -2,8 +2,8 @@
   "type": "exnihilosequentia:melting",
   "crucibleType": "wood",
   "fluidResult": {
-    "amount": 250,
-    "fluid": "minecraft:water"
+    "Amount": 250,
+    "FluidName": "minecraft:water"
   },
   "input": {
     "tag": "minecraft:leaves"

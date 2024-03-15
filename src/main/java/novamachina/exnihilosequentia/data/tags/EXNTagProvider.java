@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.data.tags;
 
 import com.mojang.datafixers.util.Either;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -9,8 +10,8 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.tags.ExNihiloTags;
 import novamachina.exnihilosequentia.world.item.EXNItems;
@@ -223,16 +224,18 @@ public class EXNTagProvider extends TagProvider {
 
   private void addNugget(Ore ore, ExNihiloTags.OreTag tags) {
     Either<ItemDefinition<OreItem>, Item> either = ore.getNuggetItem();
-    if (either.left().isPresent()) {
-      addToTag(tags.getNuggetTag(), either.left().get());
+    Optional<ItemDefinition<OreItem>> oreItem = either.left();
+    if (oreItem.isPresent()) {
+      addToTag(tags.getNuggetTag(), oreItem.get());
       getItemBuilder(Tags.Items.NUGGETS).add(tags.getNuggetTag());
     }
   }
 
   private void addRaw(Ore ore, ExNihiloTags.OreTag tags) {
     Either<ItemDefinition<OreItem>, Item> either = ore.getRawOreItem();
-    if (either.left().isPresent()) {
-      addToTag(tags.getRawMaterialTag(), either.left().get());
+    Optional<ItemDefinition<OreItem>> oreItem = either.left();
+    if (oreItem.isPresent()) {
+      addToTag(tags.getRawMaterialTag(), oreItem.get());
       getItemBuilder(Tags.Items.RAW_MATERIALS).add(tags.getRawMaterialTag());
     }
   }
@@ -243,8 +246,9 @@ public class EXNTagProvider extends TagProvider {
 
   private void addIngot(Ore ore, ExNihiloTags.OreTag tags) {
     Either<ItemDefinition<OreItem>, Item> either = ore.getIngotItem();
-    if (either.left().isPresent()) {
-      addToTag(tags.getIngotTag(), either.left().get());
+    Optional<ItemDefinition<OreItem>> oreItem = either.left();
+    if (oreItem.isPresent()) {
+      addToTag(tags.getIngotTag(), oreItem.get());
       getItemBuilder(Tags.Items.INGOTS).add(tags.getIngotTag());
     }
   }
@@ -254,24 +258,24 @@ public class EXNTagProvider extends TagProvider {
   }
 
   private void addBlocks() {
-    getBlockBuilder(ExNihiloTags.INFESTABLE)
-      .add(BlockTags.LEAVES);
+    getBlockBuilder(ExNihiloTags.INFESTABLE).add(BlockTags.LEAVES);
     getBlockBuilder(ExNihiloTags.MINEABLE_WITH_HAMMER)
-      .add(Blocks.GRAVEL,
-        Blocks.SAND,
-        Blocks.TUBE_CORAL_BLOCK,
-        Blocks.BRAIN_CORAL_BLOCK,
-        Blocks.BUBBLE_CORAL_BLOCK,
-        Blocks.FIRE_CORAL_BLOCK,
-        Blocks.HORN_CORAL_BLOCK,
-        Blocks.TUBE_CORAL,
-        Blocks.BRAIN_CORAL,
-        Blocks.BUBBLE_CORAL,
-        Blocks.FIRE_CORAL,
-        Blocks.HORN_CORAL,
-        EXNBlocks.STONE_BARREL.block(),
-        EXNBlocks.FIRED_CRUCIBLE.block())
-      .add(BlockTags.MINEABLE_WITH_PICKAXE);
+        .add(
+            Blocks.GRAVEL,
+            Blocks.SAND,
+            Blocks.TUBE_CORAL_BLOCK,
+            Blocks.BRAIN_CORAL_BLOCK,
+            Blocks.BUBBLE_CORAL_BLOCK,
+            Blocks.FIRE_CORAL_BLOCK,
+            Blocks.HORN_CORAL_BLOCK,
+            Blocks.TUBE_CORAL,
+            Blocks.BRAIN_CORAL,
+            Blocks.BUBBLE_CORAL,
+            Blocks.FIRE_CORAL,
+            Blocks.HORN_CORAL,
+            EXNBlocks.STONE_BARREL.block(),
+            EXNBlocks.FIRED_CRUCIBLE.block())
+        .add(BlockTags.MINEABLE_WITH_PICKAXE);
     getBlockBuilder(ExNihiloTags.MINEABLE_WITH_CROOK)
         .add(BlockTags.LEAVES)
         .add(EXNBlocks.INFESTING_LEAVES.block(), EXNBlocks.INFESTED_LEAVES.block());

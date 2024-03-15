@@ -1,14 +1,13 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
-import java.util.function.Consumer;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.data.recipes.PrecipitateRecipeBuilder;
 import novamachina.exnihilosequentia.data.recipes.RecipeProviderUtilities;
@@ -27,7 +26,7 @@ public class PrecipitateRecipes implements ISubRecipeProvider {
       new FluidStack(EXNFluids.WITCH_WATER.getStillFluid(), FluidType.BUCKET_VOLUME);
 
   @Override
-  public void addRecipes(Consumer<FinishedRecipe> consumer) {
+  public void addRecipes(RecipeOutput consumer) {
     PrecipitateRecipeBuilder.precipitate(water, EXNBlocks.DUST, Blocks.CLAY)
         .build(consumer, precipitateLoc("clay"));
     PrecipitateRecipeBuilder.precipitate(water, Blocks.DIRT, Blocks.MUD)

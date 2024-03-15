@@ -1,8 +1,7 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
-import java.util.function.Consumer;
 import javax.annotation.Nonnull;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +15,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class HarvestingRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(Consumer<FinishedRecipe> consumer) {
+  public void addRecipes(RecipeOutput consumer) {
     HarvestRecipeBuilder.harvest(ItemTags.LEAVES)
         .addDrop(new ItemStack(EXNItems.SILKWORM.asItem()), 0.1F)
         .build(consumer, harvestLoc("leaves"));

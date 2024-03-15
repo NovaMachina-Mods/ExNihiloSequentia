@@ -2,8 +2,8 @@
   "type": "exnihilosequentia:melting",
   "crucibleType": "fired",
   "fluidResult": {
-    "amount": 200,
-    "fluid": "minecraft:lava"
+    "Amount": 200,
+    "FluidName": "minecraft:lava"
   },
   "input": {
     "item": "exnihilosequentia:crushed_dripstone"

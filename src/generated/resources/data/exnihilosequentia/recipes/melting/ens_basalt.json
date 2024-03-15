@@ -2,8 +2,8 @@
   "type": "exnihilosequentia:melting",
   "crucibleType": "fired",
   "fluidResult": {
-    "amount": 250,
-    "fluid": "minecraft:lava"
+    "Amount": 250,
+    "FluidName": "minecraft:lava"
   },
   "input": {
     "item": "minecraft:basalt"

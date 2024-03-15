@@ -30,15 +30,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_string",
-      "has_the_recipe"
+      "has_string"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_beehive_frame"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

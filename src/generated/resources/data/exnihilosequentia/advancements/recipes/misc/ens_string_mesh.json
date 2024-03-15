@@ -72,14 +72,13 @@
   },
   "requirements": [
     [
-      "has_sieve",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_sieve"
     ]
   ],
   "rewards": {
     "recipes": [
       "exnihilosequentia:ens_string_mesh"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

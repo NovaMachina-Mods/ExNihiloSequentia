@@ -1,16 +1,16 @@
 package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import novamachina.exnihilosequentia.world.item.crafting.CompostRecipe;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.novacore.data.recipes.RecipeBuilder;
 
-public class CompostRecipeBuilder extends RecipeBuilder<CompostRecipeBuilder> {
+public class CompostRecipeBuilder extends RecipeBuilder<CompostRecipe> {
   private final Ingredient input;
   private final int amount;
 
@@ -33,26 +33,13 @@ public class CompostRecipeBuilder extends RecipeBuilder<CompostRecipeBuilder> {
   }
 
   @Override
-  protected void validate(ResourceLocation id) {
-    Preconditions.checkNotNull(input, "Input cannot be null.");
-    Preconditions.checkArgument(amount > 0, "Amount must be greater than 0.");
+  protected CompostRecipe getRecipe(ResourceLocation resourceLocation) {
+    return new CompostRecipe(input, amount);
   }
 
   @Override
-  protected CompostRecipeResult getResult(ResourceLocation id) {
-    return new CompostRecipeResult(id);
-  }
-
-  public class CompostRecipeResult extends RecipeResult {
-
-    public CompostRecipeResult(ResourceLocation id) {
-      super(id);
-    }
-
-    @Override
-    public void serializeRecipeData(JsonObject json) {
-      json.add("input", input.toJson());
-      json.addProperty("amount", amount);
-    }
+  protected void validate(ResourceLocation id) {
+    Preconditions.checkNotNull(input, "Input cannot be null.");
+    Preconditions.checkArgument(amount > 0, "Amount must be greater than 0.");
   }
 }
