@@ -104,6 +104,9 @@ public class ExNihiloSequentia {
   public static boolean isRelease() {
     String version = ExNihiloSequentia.class.getPackage().getImplementationVersion();
     log.info("EXN VERSION: {}", version);
+    if (version == null) {
+      return false;
+    }
     return !(version.endsWith("beta") || version.endsWith("alpha"));
   }
 }

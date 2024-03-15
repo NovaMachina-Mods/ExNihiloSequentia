@@ -5,7 +5,7 @@ license="CC BY-NC-SA 4.0"
 
 [[mods]]
     modId="exnihilosequentia"
-    logoFile="exnihilosequentia.png"
+    logoFile="logo.png"
     version="6.0.0"
     displayName="Ex Nihilo: Sequentia"
     updateJSONURL="https://api.modrinth.com/updates/WhVa4xyw/forge_updates.json"
