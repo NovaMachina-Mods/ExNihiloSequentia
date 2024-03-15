@@ -25,7 +25,6 @@ import novamachina.exnihilosequentia.core.registries.InitRecipeSerializers;
 import novamachina.exnihilosequentia.core.registries.InitRecipeTypes;
 import novamachina.exnihilosequentia.core.registries.InitSoundEvents;
 import novamachina.exnihilosequentia.core.registries.InitStats;
-import novamachina.exnihilosequentia.init.ExNihiloInitialization;
 import novamachina.novacore.bootstrap.NeoforgeBlockEntityTypeRegistry;
 import novamachina.novacore.bootstrap.NeoforgeBlockRegistry;
 import novamachina.novacore.bootstrap.NeoforgeCreativeModeTabRegistry;
@@ -56,7 +55,6 @@ public class ExNihiloSequentia {
 
     log.debug("Starting Ex Nihilo: Sequentia");
 
-    ExNihiloInitialization.init(modEventBus);
     modEventBus.addListener(ClientSetup::init);
 
     modEventBus.addListener(
