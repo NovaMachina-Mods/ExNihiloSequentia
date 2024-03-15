@@ -9,10 +9,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 - `ITooltipProvider` interface for blocks
 - Codecs for all recipes
+- Advancements for all recipes
 ### Changed
+- Update to NeoForge 20.4.167
+- Update to NovaCore 2.0.0
 - Replace all references of Forge with NeoForge
 - Recipes with varargs parameters replaced with `List` parameter
 - `MeshType` and `CrucibleType` now implement `StringRepresentable`
+- Updated ore networking with ConfigurationTasks
 ### Removed
 - CraftTweaker, Jade, JEI, KubeJS and TOP compatibility and moved them to their own addon mod
 - Useless `EventBusSubscriber` annotations
