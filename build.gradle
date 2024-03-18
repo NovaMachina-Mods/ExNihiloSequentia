@@ -293,7 +293,7 @@ project.tasks.modrinth.group = 'publishing'
 project.modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = project.modrinth_project_id
-    versionNumber = project.mod_version
+    versionNumber = project.version
     versionType = project.release_type
     uploadFile = project.jar
     gameVersions = [ project.minecraft_version ]
