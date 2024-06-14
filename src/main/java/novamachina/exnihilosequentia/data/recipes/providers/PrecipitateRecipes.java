@@ -35,7 +35,7 @@ public class PrecipitateRecipes implements ISubRecipeProvider {
         .build(consumer, precipitateLoc("netherrack"));
     PrecipitateRecipeBuilder.precipitate(lava, Tags.Items.DUSTS_GLOWSTONE, Blocks.END_STONE)
         .build(consumer, precipitateLoc("end_stone"));
-    PrecipitateRecipeBuilder.precipitate(witchwater, Tags.Items.SAND, Blocks.SOUL_SAND)
+    PrecipitateRecipeBuilder.precipitate(witchwater, Tags.Items.SANDS, Blocks.SOUL_SAND)
         .build(consumer, precipitateLoc("soul_sand"));
     PrecipitateRecipeBuilder.precipitate(witchwater, Items.COARSE_DIRT, Blocks.SOUL_SOIL)
         .build(consumer, precipitateLoc("soul_soil"));

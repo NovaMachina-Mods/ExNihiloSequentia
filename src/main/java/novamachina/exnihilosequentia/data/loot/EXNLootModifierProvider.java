@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.data.loot;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
@@ -10,9 +11,11 @@ import novamachina.exnihilosequentia.common.loot.modifier.UseCrookModifier;
 import novamachina.exnihilosequentia.common.loot.modifier.UseHammerModifier;
 import novamachina.exnihilosequentia.tags.ExNihiloTags;
 
+import java.util.concurrent.CompletableFuture;
+
 public class EXNLootModifierProvider extends GlobalLootModifierProvider {
-  public EXNLootModifierProvider(PackOutput output) {
-    super(output, ExNihiloSequentia.MOD_ID);
+  public EXNLootModifierProvider(CompletableFuture<HolderLookup.Provider> lookupProvider, PackOutput output) {
+    super(output, lookupProvider, ExNihiloSequentia.MOD_ID);
   }
 
   @Override

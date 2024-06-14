@@ -20,7 +20,7 @@ public class EXNLootModifiers {
           new LootItemCondition[] {
             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ExNihiloTags.HAMMER)).build()
           },
-          UseHammerModifier.CODEC.get(),
+          UseHammerModifier.CODEC,
           UseHammerModifier::new);
   public static final LootModifierDefinition<UseCrookModifier> USE_CROOK =
       LOOT_MODIFIERS.create(
@@ -28,7 +28,7 @@ public class EXNLootModifiers {
           new LootItemCondition[] {
             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ExNihiloTags.CROOK)).build()
           },
-          UseCrookModifier.CODEC.get(),
+          UseCrookModifier.CODEC,
           UseCrookModifier::new);
 
   public static List<LootModifierDefinition<? extends LootModifier>> getDefinitions() {

@@ -1,8 +1,10 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,12 +20,6 @@ public class CompostRecipe extends AbstractRecipe {
   public CompostRecipe(Ingredient input, int amount) {
     this.input = input;
     this.amount = amount;
-  }
-
-  @Override
-  public void write(FriendlyByteBuf buffer) {
-    input.toNetwork(buffer);
-    buffer.writeInt(amount);
   }
 
   @Override
@@ -52,45 +48,40 @@ public class CompostRecipe extends AbstractRecipe {
     return this.amount;
   }
 
-  public static class Serializer<T extends CompostRecipe> implements RecipeSerializer<T> {
+  public static class Serializer implements RecipeSerializer<CompostRecipe> {
 
-    private final IFactory<T> factory;
-    private final Codec<T> codec;
+    public static final MapCodec<CompostRecipe> CODEC =
+        RecordCodecBuilder.mapCodec(
+            instance ->
+                instance
+                    .group(
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("input")
+                            .forGetter(CompostRecipe::getInput),
+                        Codec.INT.fieldOf("amount").forGetter(CompostRecipe::getAmount))
+                    .apply(instance, CompostRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, CompostRecipe> STREAM_CODEC =
+        StreamCodec.of(CompostRecipe.Serializer::toNetwork, CompostRecipe.Serializer::fromNetwork);
 
-    public Serializer(IFactory<T> factory) {
-      this.factory = factory;
-      this.codec =
-          RecordCodecBuilder.create(
-              instance ->
-                  instance
-                      .group(
-                          Ingredient.CODEC_NONEMPTY
-                              .fieldOf("input")
-                              .forGetter(CompostRecipe::getInput),
-                          Codec.INT.fieldOf("amount").forGetter(CompostRecipe::getAmount))
-                      .apply(instance, factory::create));
+    @Override
+    public MapCodec<CompostRecipe> codec() {
+      return CODEC;
     }
 
     @Override
-    public Codec<T> codec() {
-      return this.codec;
+    public StreamCodec<RegistryFriendlyByteBuf, CompostRecipe> streamCodec() {
+      return STREAM_CODEC;
     }
 
-    @Override
-    public T fromNetwork(FriendlyByteBuf buffer) {
-      Ingredient input = Ingredient.fromNetwork(buffer);
+    public static CompostRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+      Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
       int amount = buffer.readInt();
-      return this.factory.create(input, amount);
+      return new CompostRecipe(input, amount);
     }
 
-    @Override
-    public void toNetwork(@NonNull FriendlyByteBuf buffer, T recipe) {
-      recipe.write(buffer);
-    }
-
-    @FunctionalInterface
-    public interface IFactory<T> {
-      T create(Ingredient input, int amount);
+    public static void toNetwork(RegistryFriendlyByteBuf buffer, CompostRecipe recipe) {
+      Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getInput());
+      buffer.writeInt(recipe.getAmount());
     }
   }
 }

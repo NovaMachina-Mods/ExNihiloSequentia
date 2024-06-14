@@ -5,15 +5,17 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -124,7 +126,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public InteractionResult onBlockActivated(
+  public ItemInteractionResult onBlockActivated(
       @Nonnull final BarrelBlockEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
@@ -132,14 +134,14 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       @Nonnull final IItemHandler itemHandler) {
     @Nonnull final ItemStack stack = player.getItemInHand(handIn);
     if (stack.isEmpty()) {
-      return InteractionResult.SUCCESS;
+      return ItemInteractionResult.SUCCESS;
     }
 
     if (TankUtil.drainWaterIntoBottle(barrelTile, player, fluidHandler)) {
-      return InteractionResult.SUCCESS;
+      return ItemInteractionResult.SUCCESS;
     }
     if (TankUtil.drainWaterFromBottle(barrelTile, player, fluidHandler)) {
-      return InteractionResult.SUCCESS;
+      return ItemInteractionResult.SUCCESS;
     }
 
     boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
@@ -154,11 +156,11 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         world.sendBlockUpdated(barrelTile.getBlockPos(), blockState, blockState, 2);
       }
       barrelTile.setChanged();
-      return InteractionResult.SUCCESS;
+      return ItemInteractionResult.SUCCESS;
     }
 
     if (fluidBlockTransform(barrelTile, player, handIn)) {
-      return InteractionResult.SUCCESS;
+      return ItemInteractionResult.SUCCESS;
     }
 
     @Nonnull final ItemLike catalyst = player.getItemInHand(handIn).getItem();
@@ -168,7 +170,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     doMobSpawn(barrelTile, player, handIn);
 
-    return InteractionResult.SUCCESS;
+    return ItemInteractionResult.SUCCESS;
   }
 
   private boolean fluidBlockTransform(
@@ -210,17 +212,17 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
     return FluidUtil.getFluidContained(stack).map(FluidStack::getAmount).orElse(0)
             >= FluidType.BUCKET_VOLUME
         || ItemStack.isSameItem(
-            stack, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
+            stack, PotionContents.createItemStack(Items.POTION, Potions.WATER));
   }
 
   @Override
-  public void read(@Nonnull final CompoundTag nbt) {
+  public void read(CompoundTag nbt, HolderLookup.Provider provider) {
     // NOOP
   }
 
   @Override
   @Nonnull
-  public CompoundTag write() {
+  public CompoundTag write(HolderLookup.Provider provider) {
     return new CompoundTag();
   }
 

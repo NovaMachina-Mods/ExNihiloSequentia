@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.security.SecureRandom;
@@ -27,11 +28,9 @@ public class UseHammerModifier extends LootModifier {
 
   private static Logger log = LoggerFactory.getLogger(UseHammerModifier.class);
 
-  public static final Supplier<Codec<UseHammerModifier>> CODEC =
-      Suppliers.memoize(
-          () ->
-              RecordCodecBuilder.create(
-                  inst -> codecStart(inst).apply(inst, UseHammerModifier::new)));
+  public static final MapCodec<UseHammerModifier> CODEC =
+      RecordCodecBuilder.mapCodec(
+                  inst -> codecStart(inst).apply(inst, UseHammerModifier::new));
 
   private final Random random = new SecureRandom();
 
@@ -71,7 +70,7 @@ public class UseHammerModifier extends LootModifier {
   }
 
   @Override
-  public Codec<? extends IGlobalLootModifier> codec() {
-    return CODEC.get();
+  public MapCodec<? extends IGlobalLootModifier> codec() {
+    return CODEC;
   }
 }

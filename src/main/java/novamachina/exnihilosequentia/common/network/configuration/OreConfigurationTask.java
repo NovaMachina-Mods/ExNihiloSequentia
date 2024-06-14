@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.network.configuration;
 
 import java.util.function.Consumer;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.protocol.configuration.ServerConfigurationPacketListener;
 import net.minecraft.server.network.ConfigurationTask;
 import net.neoforged.neoforge.network.configuration.ICustomConfigurationTask;
 import novamachina.exnihilosequentia.ExNihiloSequentia;

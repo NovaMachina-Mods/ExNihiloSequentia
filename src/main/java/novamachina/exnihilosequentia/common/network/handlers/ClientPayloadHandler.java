@@ -1,7 +1,7 @@
 package novamachina.exnihilosequentia.common.network.handlers;
 
 import net.minecraft.network.chat.Component;
-import net.neoforged.neoforge.network.handling.ConfigurationPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import novamachina.exnihilosequentia.common.network.payload.OreAckPayload;
 import novamachina.exnihilosequentia.common.network.payload.OreConfigurationPayload;
 import novamachina.exnihilosequentia.world.item.Ore;
@@ -15,20 +15,18 @@ public class ClientPayloadHandler {
     return INSTANCE;
   }
 
-  public void handle(OreConfigurationPayload payload, ConfigurationPayloadContext context) {
+  public static void handle(OreConfigurationPayload payload, IPayloadContext context) {
     log.info("Received ore list");
     context
-        .workHandler()
-        .submitAsync(() -> Ore.updateEnabledOres(payload))
+        .enqueueWork(() -> Ore.updateEnabledOres(payload))
         .exceptionally(
             e -> {
               context
-                  .packetHandler()
                   .disconnect(
                       Component.literal(
                           "Connection closed - [Ex Nihilo: Sequentia] Failed to synchronize ore list from server."));
               return null;
             })
-        .thenAccept(v -> context.replyHandler().send(new OreAckPayload()));
+        .thenAccept(v -> context.reply(new OreAckPayload()));
   }
 }

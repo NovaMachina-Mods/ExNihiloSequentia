@@ -10,6 +10,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -262,41 +263,54 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
     return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
   }
 
-  /**
-   * @deprecated Ask Mojang
-   */
-  @Nonnull
-  @Deprecated(forRemoval = false)
   @Override
-  public InteractionResult use(
-      @Nonnull final BlockState state,
-      @Nonnull final Level worldIn,
-      @Nonnull final BlockPos pos,
-      @Nonnull final Player player,
-      @Nonnull final InteractionHand handIn,
-      @Nonnull final BlockHitResult hit) {
-    @Nullable
-    final SieveBlockEntity sieveBlockEntity = (SieveBlockEntity) worldIn.getBlockEntity(pos);
+  protected InteractionResult useWithoutItem(
+      BlockState blockState,
+      Level level,
+      BlockPos blockPos,
+      Player player,
+      BlockHitResult blockHitResult) {
+    final SieveBlockEntity sieveBlockEntity = (SieveBlockEntity) level.getBlockEntity(blockPos);
     if (sieveBlockEntity == null) {
       return InteractionResult.PASS;
     }
-    if (!worldIn.isClientSide()) {
-      log.debug("Sieve Activated");
-      @Nonnull final ItemStack stack = player.getItemInHand(handIn);
-      if (player.isShiftKeyDown() && stack.isEmpty()) {
+    if (!level.isClientSide()) {
+      log.debug("Sieve Activated without item");
+      if (player.isShiftKeyDown()) {
         sieveBlockEntity.removeMesh(true);
       }
+    }
+    level.sendBlockUpdated(
+        blockPos, level.getBlockState(blockPos), level.getBlockState(blockPos), 2);
+    return InteractionResult.SUCCESS;
+  }
 
-      for (BlockPos sievePos : getNearbySieves(worldIn, pos)) {
-        @Nonnull final BlockState currentState = worldIn.getBlockState(sievePos);
-        activateBlock(currentState, worldIn, player, sievePos, handIn);
+  @Override
+  protected ItemInteractionResult useItemOn(
+      ItemStack itemStack,
+      BlockState blockState,
+      Level level,
+      BlockPos blockPos,
+      Player player,
+      InteractionHand interactionHand,
+      BlockHitResult blockHitResult) {
+    SieveBlockEntity sieveBlockEntity = (SieveBlockEntity) level.getBlockEntity(blockPos);
+    if (sieveBlockEntity == null) {
+      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+    if (!level.isClientSide()) {
+      log.debug("Sieve Activated with item");
+      for (BlockPos sievePos : getNearbySieves(level, blockPos)) {
+        @Nonnull final BlockState currentState = level.getBlockState(sievePos);
+        activateBlock(currentState, level, player, sievePos, interactionHand);
       }
 
-      if (stack.getItem() instanceof MeshItem) {
-        sieveBlockEntity.insertMesh(stack, player);
+      if (itemStack.getItem() instanceof MeshItem) {
+        sieveBlockEntity.insertMesh(itemStack, player);
       }
     }
-    worldIn.sendBlockUpdated(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 2);
-    return InteractionResult.SUCCESS;
+    level.sendBlockUpdated(
+        blockPos, level.getBlockState(blockPos), level.getBlockState(blockPos), 2);
+    return ItemInteractionResult.SUCCESS;
   }
 }

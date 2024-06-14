@@ -1,6 +1,6 @@
 package novamachina.exnihilosequentia.common.network.handlers;
 
-import net.neoforged.neoforge.network.handling.ConfigurationPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import novamachina.exnihilosequentia.common.network.configuration.OreConfigurationTask;
 import novamachina.exnihilosequentia.common.network.payload.OreAckPayload;
 import org.slf4j.Logger;
@@ -13,8 +13,8 @@ public class ServerPayloadHandler {
     return INSTANCE;
   }
 
-  public void handle(OreAckPayload payload, ConfigurationPayloadContext context) {
+  public static void handle(OreAckPayload payload, IPayloadContext context) {
     log.info("Client received ore list");
-    context.taskCompletedHandler().onTaskCompleted(OreConfigurationTask.TYPE);
+    context.finishCurrentTask(OreConfigurationTask.TYPE);
   }
 }

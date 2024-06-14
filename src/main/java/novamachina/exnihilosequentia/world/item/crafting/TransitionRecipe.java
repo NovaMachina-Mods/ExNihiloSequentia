@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -11,7 +12,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class TransitionRecipe extends AbstractRecipe {
 
@@ -42,13 +42,6 @@ public class TransitionRecipe extends AbstractRecipe {
     return EXNRecipeTypes.TRANSITION;
   }
 
-  @Override
-  public void write(FriendlyByteBuf buffer) {
-    catalyst.toNetwork(buffer);
-    fluidInTank.writeToPacket(buffer);
-    result.writeToPacket(buffer);
-  }
-
   public Ingredient getCatalyst() {
     return this.catalyst;
   }
@@ -61,52 +54,46 @@ public class TransitionRecipe extends AbstractRecipe {
     return this.result;
   }
 
-  public static class Serializer<T extends TransitionRecipe> implements RecipeSerializer<T> {
+  public static class Serializer implements RecipeSerializer<TransitionRecipe> {
 
-    private final IFactory<T> factory;
-    private final Codec<T> codec;
+    private static final MapCodec<TransitionRecipe> CODEC =
+        RecordCodecBuilder.mapCodec(
+            instance ->
+                instance
+                    .group(
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("catalyst")
+                            .forGetter(TransitionRecipe::getCatalyst),
+                        FluidStack.CODEC
+                            .fieldOf("fluidInTank")
+                            .forGetter(TransitionRecipe::getFluidInTank),
+                        FluidStack.CODEC.fieldOf("result").forGetter(TransitionRecipe::getResult))
+                    .apply(instance, TransitionRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, TransitionRecipe> STREAM_CODEC =
+        StreamCodec.of(
+            TransitionRecipe.Serializer::toNetwork, TransitionRecipe.Serializer::fromNetwork);
 
-    public Serializer(IFactory<T> factory) {
-      this.factory = factory;
-      this.codec =
-          RecordCodecBuilder.create(
-              instance ->
-                  instance
-                      .group(
-                          Ingredient.CODEC_NONEMPTY
-                              .fieldOf("catalyst")
-                              .forGetter(recipe -> recipe.getCatalyst()),
-                          FluidStack.CODEC
-                              .fieldOf("fluidInTank")
-                              .forGetter(recipe -> recipe.getFluidInTank()),
-                          FluidStack.CODEC
-                              .fieldOf("result")
-                              .forGetter(recipe -> recipe.getResult()))
-                      .apply(instance, factory::create));
+    public static TransitionRecipe fromNetwork(@NonNull RegistryFriendlyByteBuf buffer) {
+      Ingredient catalyst = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+      FluidStack fluidInTank = FluidStack.STREAM_CODEC.decode(buffer);
+      FluidStack result = FluidStack.STREAM_CODEC.decode(buffer);
+      return new TransitionRecipe(catalyst, fluidInTank, result);
     }
 
     @Override
-    @Nullable
-    public T fromNetwork(@NonNull FriendlyByteBuf buffer) {
-      Ingredient catalyst = Ingredient.fromNetwork(buffer);
-      FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
-      FluidStack result = FluidStack.readFromPacket(buffer);
-      return this.factory.create(catalyst, fluidInTank, result);
+    public MapCodec<TransitionRecipe> codec() {
+      return CODEC;
     }
 
     @Override
-    public Codec<T> codec() {
-      return this.codec;
+    public StreamCodec<RegistryFriendlyByteBuf, TransitionRecipe> streamCodec() {
+      return STREAM_CODEC;
     }
 
-    @Override
-    public void toNetwork(@NonNull FriendlyByteBuf buffer, @NonNull T recipe) {
-      recipe.write(buffer);
-    }
-
-    @FunctionalInterface
-    public interface IFactory<T> {
-      T create(Ingredient catalyst, FluidStack fluidInTank, FluidStack result);
+    public static void toNetwork(RegistryFriendlyByteBuf buffer, TransitionRecipe recipe) {
+      Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getCatalyst());
+      FluidStack.STREAM_CODEC.encode(buffer, recipe.getFluidInTank());
+      FluidStack.STREAM_CODEC.encode(buffer, recipe.getResult());
     }
   }
 }

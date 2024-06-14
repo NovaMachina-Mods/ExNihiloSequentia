@@ -44,10 +44,10 @@ public class DollItem extends Item {
   @Override
   public void appendHoverText(
       @Nonnull final ItemStack stack,
-      @Nullable final Level worldIn,
+      @Nullable final TooltipContext context,
       @Nonnull final List<Component> tooltip,
       @Nonnull final TooltipFlag flagIn) {
-    super.appendHoverText(stack, worldIn, tooltip, flagIn);
+    super.appendHoverText(stack, context, tooltip, flagIn);
     tooltip.add(Component.translatable(this.tooltip));
   }
 

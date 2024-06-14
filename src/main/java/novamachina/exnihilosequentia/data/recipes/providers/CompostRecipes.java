@@ -36,7 +36,7 @@ public class CompostRecipes implements ISubRecipeProvider {
     CompostRecipeBuilder.composting(Tags.Items.CROPS_NETHER_WART, 100)
         .build(consumer, compostLoc("nether_wart"));
     CompostRecipeBuilder.composting(Tags.Items.EGGS, 80).build(consumer, compostLoc("eggs"));
-    CompostRecipeBuilder.composting(Tags.Items.STRING, 40).build(consumer, compostLoc("string"));
+    CompostRecipeBuilder.composting(Tags.Items.STRINGS, 40).build(consumer, compostLoc("string"));
     CompostRecipeBuilder.composting(Items.ROTTEN_FLESH, 100)
         .build(consumer, compostLoc("rotten_flesh"));
     CompostRecipeBuilder.composting(Items.SPIDER_EYE, 80).build(consumer, compostLoc("spider_eye"));

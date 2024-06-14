@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -12,7 +13,6 @@ import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.exnihilosequentia.world.level.block.entity.CrucibleBlockEntity.CrucibleType;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jetbrains.annotations.Nullable;
 
 public class MeltingRecipe extends AbstractRecipe {
 
@@ -44,13 +44,6 @@ public class MeltingRecipe extends AbstractRecipe {
     return EXNBlocks.FIRED_CRUCIBLE.itemStack();
   }
 
-  @Override
-  public void write(FriendlyByteBuf buffer) {
-    input.toNetwork(buffer);
-    resultFluid.writeToPacket(buffer);
-    buffer.writeEnum(crucibleType);
-  }
-
   public Ingredient getInput() {
     return this.input;
   }
@@ -63,51 +56,46 @@ public class MeltingRecipe extends AbstractRecipe {
     return this.crucibleType;
   }
 
-  public static class Serializer<T extends MeltingRecipe> implements RecipeSerializer<T> {
-    private final Codec<T> codec;
-    private final IFactory<T> factory;
+  public static class Serializer implements RecipeSerializer<MeltingRecipe> {
+    public static final MapCodec<MeltingRecipe> CODEC =
+        RecordCodecBuilder.mapCodec(
+            instance ->
+                instance
+                    .group(
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("input")
+                            .forGetter(MeltingRecipe::getInput),
+                        FluidStack.CODEC
+                            .fieldOf("fluidResult")
+                            .forGetter(MeltingRecipe::getResultFluid),
+                        CrucibleType.CODEC
+                            .fieldOf("crucibleType")
+                            .forGetter(MeltingRecipe::getCrucibleType))
+                    .apply(instance, MeltingRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, MeltingRecipe> STREAM_CODEC =
+        StreamCodec.of(MeltingRecipe.Serializer::toNetwork, MeltingRecipe.Serializer::fromNetwork);
 
-    public Serializer(IFactory<T> factory) {
-      this.factory = factory;
-
-      this.codec =
-          RecordCodecBuilder.create(
-              instance ->
-                  instance
-                      .group(
-                          Ingredient.CODEC_NONEMPTY
-                              .fieldOf("input")
-                              .forGetter(recipe -> recipe.getInput()),
-                          FluidStack.CODEC
-                              .fieldOf("fluidResult")
-                              .forGetter(recipe -> recipe.getResultFluid()),
-                          CrucibleType.CODEC
-                              .fieldOf("crucibleType")
-                              .forGetter(recipe -> recipe.getCrucibleType()))
-                      .apply(instance, factory::create));
+    @Override
+    public MapCodec<MeltingRecipe> codec() {
+      return CODEC;
     }
 
     @Override
-    public Codec<T> codec() {
-      return this.codec;
+    public StreamCodec<RegistryFriendlyByteBuf, MeltingRecipe> streamCodec() {
+      return STREAM_CODEC;
     }
 
-    @Override
-    public @Nullable T fromNetwork(FriendlyByteBuf buffer) {
-      Ingredient input = Ingredient.fromNetwork(buffer);
-      FluidStack fluid = FluidStack.readFromPacket(buffer);
+    public static MeltingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+      Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+      FluidStack fluid = FluidStack.STREAM_CODEC.decode(buffer);
       CrucibleType type = buffer.readEnum(CrucibleType.class);
-      return this.factory.create(input, fluid, type);
+      return new MeltingRecipe(input, fluid, type);
     }
 
-    @Override
-    public void toNetwork(@NonNull FriendlyByteBuf buffer, T recipe) {
-      recipe.write(buffer);
-    }
-
-    @FunctionalInterface
-    public interface IFactory<T> {
-      T create(Ingredient input, FluidStack result, CrucibleType type);
+    public static void toNetwork(@NonNull RegistryFriendlyByteBuf buffer, MeltingRecipe recipe) {
+      Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getInput());
+      FluidStack.STREAM_CODEC.encode(buffer, recipe.getResultFluid());
+      buffer.writeEnum(recipe.crucibleType);
     }
   }
 }

@@ -1,13 +1,14 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.Optional;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -53,18 +54,6 @@ public class HeatRecipe extends AbstractRecipe {
     return EXNRecipeTypes.HEAT;
   }
 
-  @Override
-  public void write(FriendlyByteBuf buffer) {
-    int length = BuiltInRegistries.BLOCK.getKey(inputBlock).toString().length();
-    buffer.writeInt(length);
-    buffer.writeUtf(BuiltInRegistries.BLOCK.getKey(inputBlock).toString(), length);
-    buffer.writeInt(amount);
-    buffer.writeBoolean(this.properties.isPresent());
-    if (this.properties.isPresent()) {
-      buffer.writeJsonWithCodec(StatePropertiesPredicate.CODEC, this.properties.get());
-    }
-  }
-
   public int getAmount() {
     return this.amount;
   }
@@ -77,57 +66,57 @@ public class HeatRecipe extends AbstractRecipe {
     return this.properties;
   }
 
-  public static class Serializer<T extends HeatRecipe> implements RecipeSerializer<T> {
+  public static class Serializer implements RecipeSerializer<HeatRecipe> {
 
-    private final Codec<T> codec;
-    private final IFactory<T> factory;
+    public static final MapCodec<HeatRecipe> CODEC =
+        RecordCodecBuilder.mapCodec(
+            instance ->
+                instance
+                    .group(
+                        BuiltInRegistries.BLOCK
+                            .byNameCodec()
+                            .fieldOf("block")
+                            .forGetter(HeatRecipe::getInputBlock),
+                        Codec.INT.fieldOf("amount").forGetter(HeatRecipe::getAmount),
+                        StatePropertiesPredicate.CODEC
+                            .optionalFieldOf("state")
+                            .forGetter(HeatRecipe::getProperties))
+                    .apply(instance, HeatRecipe::new));
 
-    public Serializer(IFactory<T> factory) {
-      this.factory = factory;
-      this.codec =
-          RecordCodecBuilder.create(
-              instance ->
-                  instance
-                      .group(
-                          BuiltInRegistries.BLOCK
-                              .byNameCodec()
-                              .fieldOf("block")
-                              .forGetter(recipe -> recipe.getInputBlock()),
-                          Codec.INT.fieldOf("amount").forGetter(recipe -> recipe.getAmount()),
-                          ExtraCodecs.strictOptionalField(StatePropertiesPredicate.CODEC, "state")
-                              .forGetter(recipe -> recipe.getProperties()))
-                      .apply(instance, factory::create));
+    public static final StreamCodec<RegistryFriendlyByteBuf, HeatRecipe> STREAM_CODEC =
+        StreamCodec.of(HeatRecipe.Serializer::toNetwork, HeatRecipe.Serializer::fromNetwork);
+
+    @Override
+    public MapCodec<HeatRecipe> codec() {
+      return CODEC;
     }
 
     @Override
-    public Codec<T> codec() {
-      return this.codec;
+    public StreamCodec<RegistryFriendlyByteBuf, HeatRecipe> streamCodec() {
+      return STREAM_CODEC;
     }
 
-    @Override
-    public T fromNetwork(FriendlyByteBuf buffer) {
-      int length = buffer.readInt();
-      Block inputBlock = BuiltInRegistries.BLOCK.get(new ResourceLocation(buffer.readUtf(length)));
-
+    public static HeatRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+      Block inputBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.STREAM_CODEC.decode(buffer));
       int amount = buffer.readInt();
       boolean hasProperties =
           buffer.readBoolean(); // flag showing whether recipe depends on block state
       if (hasProperties) {
-        StatePropertiesPredicate props = buffer.readJsonWithCodec(StatePropertiesPredicate.CODEC);
-        return this.factory.create(inputBlock, amount, Optional.of(props));
+        StatePropertiesPredicate props = StatePropertiesPredicate.STREAM_CODEC.decode(buffer);
+        return new HeatRecipe(inputBlock, amount, Optional.of(props));
       }
-      return this.factory.create(
+      return new HeatRecipe(
           inputBlock, amount, StatePropertiesPredicate.Builder.properties().build());
     }
 
-    @Override
-    public void toNetwork(@NonNull FriendlyByteBuf buffer, T recipe) {
-      recipe.write(buffer);
-    }
-
-    @FunctionalInterface
-    public interface IFactory<T> {
-      T create(Block inputBlock, int amount, Optional<StatePropertiesPredicate> properties);
+    public static void toNetwork(RegistryFriendlyByteBuf buffer, HeatRecipe recipe) {
+      ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(recipe.getInputBlock());
+      ResourceLocation.STREAM_CODEC.encode(buffer, blockId);
+      buffer.writeInt(recipe.getAmount());
+      buffer.writeBoolean(recipe.getProperties().isPresent());
+      recipe
+          .getProperties()
+          .ifPresent(props -> StatePropertiesPredicate.STREAM_CODEC.encode(buffer, props));
     }
   }
 }

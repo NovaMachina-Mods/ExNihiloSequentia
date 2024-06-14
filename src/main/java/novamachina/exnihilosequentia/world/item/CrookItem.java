@@ -12,11 +12,9 @@ public class CrookItem extends DiggerItem {
 
   public CrookItem(Tier tier, final int maxDamage) {
     super(
-        0.5F,
-        0.5F,
         tier,
         ExNihiloTags.MINEABLE_WITH_CROOK,
-        new Item.Properties().defaultDurability(maxDamage));
+        new Item.Properties().durability(maxDamage));
   }
 
   @Override

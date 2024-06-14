@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -57,13 +60,13 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public InteractionResult onBlockActivated(
+  public ItemInteractionResult onBlockActivated(
       @Nonnull final BarrelBlockEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
       @Nonnull final IItemHandler itemHandler) {
-    return InteractionResult.SUCCESS;
+    return ItemInteractionResult.SUCCESS;
   }
 
   @Override
@@ -82,7 +85,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
   }
 
   @Override
-  public void read(@Nonnull final CompoundTag nbt) {
+  public void read(CompoundTag nbt, HolderLookup.Provider provider) {
     if (nbt.contains(CURRENT_PROGRESS_TAG)) {
       this.currentProgress = nbt.getInt(CURRENT_PROGRESS_TAG);
     } else {
@@ -98,7 +101,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public CompoundTag write() {
+  public CompoundTag write(HolderLookup.Provider provider) {
     @Nonnull final CompoundTag nbt = new CompoundTag();
     nbt.putInt(CURRENT_PROGRESS_TAG, currentProgress);
     if (doll != null) {

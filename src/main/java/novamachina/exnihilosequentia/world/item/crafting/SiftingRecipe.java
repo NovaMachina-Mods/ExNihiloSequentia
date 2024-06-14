@@ -1,10 +1,13 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -66,15 +69,6 @@ public class SiftingRecipe extends AbstractRecipe {
     return EXNRecipeTypes.SIFTING;
   }
 
-  @Override
-  public void write(FriendlyByteBuf buffer) {
-    input.toNetwork(buffer);
-    buffer.writeItem(drop);
-    buffer.writeInt(rolls.size());
-    rolls.forEach(roll -> roll.write(buffer));
-    buffer.writeBoolean(isWaterlogged);
-  }
-
   public Ingredient getInput() {
     return this.input;
   }
@@ -87,56 +81,55 @@ public class SiftingRecipe extends AbstractRecipe {
     return this.rolls;
   }
 
-  public static class Serializer<T extends SiftingRecipe> implements RecipeSerializer<T> {
-    private final IFactory<T> factory;
-    private final Codec<T> codec;
+  public static class Serializer implements RecipeSerializer<SiftingRecipe> {
+    public static final MapCodec<SiftingRecipe> CODEC =
+        RecordCodecBuilder.mapCodec(
+            instance ->
+                instance
+                    .group(
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("input")
+                            .forGetter(recipe -> recipe.getInput()),
+                        ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.getDrop()),
+                        Codec.BOOL
+                            .fieldOf("waterlogged")
+                            .forGetter(recipe -> recipe.isWaterlogged()),
+                        Codec.list(MeshWithChance.CODEC)
+                            .fieldOf("rolls")
+                            .forGetter(recipe -> recipe.getRolls()))
+                    .apply(instance, SiftingRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, SiftingRecipe> STREAM_CODEC =
+        StreamCodec.of(SiftingRecipe.Serializer::toNetwork, SiftingRecipe.Serializer::fromNetwork);
 
-    public Serializer(IFactory<T> factory) {
-      this.factory = factory;
-      this.codec =
-          RecordCodecBuilder.create(
-              instance ->
-                  instance
-                      .group(
-                          Ingredient.CODEC_NONEMPTY
-                              .fieldOf("input")
-                              .forGetter(recipe -> recipe.getInput()),
-                          ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.getDrop()),
-                          Codec.BOOL
-                              .fieldOf("waterlogged")
-                              .forGetter(recipe -> recipe.isWaterlogged()),
-                          Codec.list(MeshWithChance.CODEC)
-                              .fieldOf("rolls")
-                              .forGetter(recipe -> recipe.getRolls()))
-                      .apply(instance, factory::create));
+    @Override
+    public MapCodec<SiftingRecipe> codec() {
+      return CODEC;
     }
 
     @Override
-    public Codec<T> codec() {
-      return this.codec;
+    public StreamCodec<RegistryFriendlyByteBuf, SiftingRecipe> streamCodec() {
+      return STREAM_CODEC;
     }
 
-    @Override
-    public T fromNetwork(FriendlyByteBuf buffer) {
-      Ingredient input = Ingredient.fromNetwork(buffer);
-      ItemStack drop = buffer.readItem();
+    public static SiftingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+
+      Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+      ItemStack drop = ItemStack.STREAM_CODEC.decode(buffer);
       int rollCount = buffer.readInt();
       List<MeshWithChance> rolls = new ArrayList<>(rollCount);
       for (int i = 0; i < rollCount; i++) {
         rolls.add(MeshWithChance.read(buffer));
       }
       boolean waterlogged = buffer.readBoolean();
-      return this.factory.create(input, drop, waterlogged, rolls);
+      return new SiftingRecipe(input, drop, waterlogged, rolls);
     }
 
-    @Override
-    public void toNetwork(@NonNull FriendlyByteBuf buffer, T recipe) {
-      recipe.write(buffer);
-    }
-
-    @FunctionalInterface
-    public interface IFactory<T> {
-      T create(Ingredient input, ItemStack drop, boolean waterlogged, List<MeshWithChance> rolls);
+    public static void toNetwork(@NonNull RegistryFriendlyByteBuf buffer, SiftingRecipe recipe) {
+      Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getInput());
+      ItemStack.STREAM_CODEC.encode(buffer, recipe.getDrop());
+      buffer.writeInt(recipe.getRolls().size());
+      recipe.getRolls().forEach(roll -> roll.write(buffer));
+      buffer.writeBoolean(recipe.isWaterlogged());
     }
   }
 }

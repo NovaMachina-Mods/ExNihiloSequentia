@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,35 +26,23 @@ public class EndCakeBlock extends CakeBlock {
     super(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.WOOL));
   }
 
-  /**
-   * @deprecated Ask Mojang
-   */
-  @Nonnull
-  @Deprecated(forRemoval = false)
   @Override
-  public InteractionResult use(
-      @Nonnull final BlockState state,
-      @Nonnull final Level worldIn,
-      @Nonnull final BlockPos pos,
-      @Nonnull final Player player,
-      @Nonnull final InteractionHand handIn,
-      @Nonnull final BlockHitResult blockRayTraceResult) {
-    @Nonnull final ItemStack itemStack = player.getItemInHand(handIn);
+  protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    final int bites = blockState.getValue(BITES);
 
-    if (itemStack.isEmpty()) {
-      return eatCake(worldIn, pos, state, player);
-    } else {
-      final int bites = state.getValue(BITES);
-
-      if (itemStack.getItem() == Items.ENDER_EYE && bites > 0) {
-        if (!worldIn.isClientSide()) {
-          worldIn.setBlockAndUpdate(pos, state.setValue(BITES, bites - 1));
-          itemStack.shrink(1);
-        }
-        return InteractionResult.SUCCESS;
+    if (itemStack.getItem() == Items.ENDER_EYE && bites > 0) {
+      if (!level.isClientSide()) {
+        level.setBlockAndUpdate(blockPos, blockState.setValue(BITES, bites - 1));
+        itemStack.shrink(1);
       }
+      return ItemInteractionResult.SUCCESS;
     }
-    return InteractionResult.CONSUME;
+    return ItemInteractionResult.CONSUME;
+  }
+
+  @Override
+  protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+    return eatCake(level, blockPos, blockState, player);
   }
 
   private InteractionResult eatCake(

@@ -8,11 +8,13 @@ import java.util.UUID;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -59,9 +61,9 @@ public class SieveBlockEntity extends BlockEntity {
   public void activateSieve(@Nullable final Player player, boolean isWaterlogged) {
     log.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
     float fortune =
-        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, meshStack);
+        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FORTUNE, meshStack);
     float efficiency =
-        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, meshStack);
+        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.EFFICIENCY, meshStack);
 
     // 4 ticks is the same period of holding down right click
     if (level != null && level.getLevelData().getGameTime() - lastSieveAction < 4) {
@@ -125,15 +127,15 @@ public class SieveBlockEntity extends BlockEntity {
   }
 
   @Override
-  public @NotNull CompoundTag getUpdateTag() {
+  public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
     @Nonnull final CompoundTag nbt = new CompoundTag();
     if (!meshStack.isEmpty()) {
-      CompoundTag meshNBT = meshStack.save(new CompoundTag());
+      Tag meshNBT = meshStack.save(provider);
       nbt.put(MESH_TAG, meshNBT);
     }
 
     if (!blockStack.isEmpty()) {
-      CompoundTag blockNbt = blockStack.save(new CompoundTag());
+      Tag blockNbt = blockStack.save(provider);
       nbt.put(BLOCK_TAG, blockNbt);
     }
     nbt.putFloat(PROGRESS_TAG, progress);
@@ -173,11 +175,11 @@ public class SieveBlockEntity extends BlockEntity {
   }
 
   @Override
-  public void load(@Nonnull final CompoundTag compound) {
+  public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
     if (compound.contains(MESH_TAG)) {
       @Nullable final Tag meshTag = compound.get(MESH_TAG);
       if (meshTag != null) {
-        meshStack = ItemStack.of((CompoundTag) meshTag);
+        meshStack = ItemStack.parse(provider, meshTag).orElse(ItemStack.EMPTY);
         if (meshStack.getItem() instanceof MeshItem meshItem) {
           meshType = meshItem.getType();
         }
@@ -191,7 +193,7 @@ public class SieveBlockEntity extends BlockEntity {
     if (compound.contains(BLOCK_TAG)) {
       @Nullable final Tag blockTag = compound.get(BLOCK_TAG);
       if (blockTag != null) {
-        blockStack = ItemStack.of((CompoundTag) blockTag);
+        blockStack = ItemStack.parse(provider, blockTag).orElse(ItemStack.EMPTY);
       } else {
         blockStack = ItemStack.EMPTY;
       }
@@ -201,17 +203,17 @@ public class SieveBlockEntity extends BlockEntity {
 
     progress = compound.getFloat(PROGRESS_TAG);
 
-    super.load(compound);
+    super.loadAdditional(compound, provider);
   }
 
   @Override
   public void onDataPacket(
-      @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket packet) {
+      @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket packet, HolderLookup.Provider provider) {
     CompoundTag nbt = packet.getTag();
     if (nbt.contains(MESH_TAG)) {
       @Nullable final Tag meshTag = nbt.get(MESH_TAG);
       if (meshTag != null) {
-        meshStack = ItemStack.of((CompoundTag) meshTag);
+        meshStack = ItemStack.parse(provider, meshTag).orElse(ItemStack.EMPTY);
         if (meshStack.getItem() instanceof MeshItem meshItem) {
           meshType = meshItem.getType();
         }
@@ -225,7 +227,7 @@ public class SieveBlockEntity extends BlockEntity {
     if (nbt.contains(BLOCK_TAG)) {
       @Nullable final Tag blockTag = nbt.get(BLOCK_TAG);
       if (blockTag != null) {
-        blockStack = ItemStack.of((CompoundTag) blockTag);
+        blockStack = ItemStack.parse(provider, blockTag).orElse(ItemStack.EMPTY);
       } else {
         blockStack = ItemStack.EMPTY;
       }
@@ -262,7 +264,7 @@ public class SieveBlockEntity extends BlockEntity {
       meshStack.hurtAndBreak(
           1,
           new FakePlayer((ServerLevel) level, new GameProfile(UUID.randomUUID(), "Fake Player")),
-          player -> log.debug("Broken"));
+          EquipmentSlot.MAINHAND);
     }
     blockStack = ItemStack.EMPTY;
     progress = 0;
@@ -274,14 +276,14 @@ public class SieveBlockEntity extends BlockEntity {
   }
 
   @Override
-  public void saveAdditional(@Nonnull final CompoundTag compound) {
+  public void saveAdditional(CompoundTag compound, HolderLookup.Provider provider) {
     if (!meshStack.isEmpty()) {
-      CompoundTag meshNBT = meshStack.save(new CompoundTag());
+      Tag meshNBT = meshStack.save(provider);
       compound.put(MESH_TAG, meshNBT);
     }
 
     if (!blockStack.isEmpty()) {
-      CompoundTag blockNBT = blockStack.save(new CompoundTag());
+      Tag blockNBT = blockStack.save(provider);
       compound.put(BLOCK_TAG, blockNBT);
     }
 

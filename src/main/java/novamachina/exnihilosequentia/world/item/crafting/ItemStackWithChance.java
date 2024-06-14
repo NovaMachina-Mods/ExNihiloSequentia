@@ -6,8 +6,12 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.handler.codec.DecoderException;
+import io.netty.handler.codec.EncoderException;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -21,15 +25,41 @@ public class ItemStackWithChance {
   private static final String COUNT_KEY = "count";
 
   public static final Codec<ItemStackWithChance> CODEC =
-      RecordCodecBuilder.create(
-          instance ->
-              instance
-                  .group(
-                      ItemStack.CODEC.fieldOf(BASE_KEY).forGetter(recipe -> recipe.getStack()),
-                      Codec.FLOAT.fieldOf(CHANCE_KEY).forGetter(recipe -> recipe.getChance()))
-                  .apply(instance, ItemStackWithChance::new));
+      Codec.lazyInitialized(
+          () ->
+              RecordCodecBuilder.create(
+                  instance ->
+                      instance
+                          .group(
+                              ItemStack.CODEC
+                                  .fieldOf(BASE_KEY)
+                                  .forGetter(recipe -> recipe.getStack()),
+                              Codec.FLOAT
+                                  .fieldOf(CHANCE_KEY)
+                                  .forGetter(recipe -> recipe.getChance()))
+                          .apply(instance, ItemStackWithChance::new)));
+  public static final StreamCodec<RegistryFriendlyByteBuf, ItemStackWithChance> STREAM_CODEC =
+      new StreamCodec<RegistryFriendlyByteBuf, ItemStackWithChance>() {
+        public ItemStackWithChance decode(RegistryFriendlyByteBuf buff) {
+          ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buff);
+          if (itemstack.isEmpty()) {
+            throw new DecoderException("Empty ItemStack not allowed");
+          }
+          float chance = buff.readFloat();
+          return new ItemStackWithChance(itemstack, chance);
+        }
 
-  private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemStackWithChance.class);
+        public void encode(RegistryFriendlyByteBuf buff, ItemStackWithChance itemStackWithChance) {
+          ItemStack itemstack = itemStackWithChance.getStack();
+          if (itemstack.isEmpty()) {
+            throw new EncoderException("Empty ItemStack not allowed");
+          }
+          ItemStack.STREAM_CODEC.encode(buff, itemstack);
+          buff.writeFloat(itemStackWithChance.getChance());
+        }
+      };
+
+  private static final Logger LOG = org.slf4j.LoggerFactory.getLogger(ItemStackWithChance.class);
   private final float chance;
   private final ItemStack itemStack;
 
@@ -75,28 +105,13 @@ public class ItemStackWithChance {
   }
 
   @NonNull
-  public static ItemStackWithChance read(FriendlyByteBuf buffer) {
-    ItemStack stack = buffer.readItem();
-    final float chance = buffer.readFloat();
-    return new ItemStackWithChance(stack, chance);
+  public static ItemStackWithChance read(RegistryFriendlyByteBuf buffer) {
+    return ItemStackWithChance.STREAM_CODEC.decode(buffer);
   }
 
   @NonNull
   public ItemStack getStack() {
     return itemStack.copy();
-  }
-
-  @NonNull
-  public JsonElement serialize() {
-    return CODEC
-        .encodeStart(JsonOps.INSTANCE, this)
-        .resultOrPartial(error -> log.error("Unable to encode ItemStackWithChance"))
-        .orElse(new JsonObject());
-  }
-
-  public void write(FriendlyByteBuf buffer) {
-    buffer.writeItem(getStack());
-    buffer.writeFloat(getChance());
   }
 
   @Override

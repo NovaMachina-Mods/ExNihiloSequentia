@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -14,6 +15,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -137,9 +139,9 @@ public abstract class BarrelBlockEntity extends BlockEntity {
 
   @Override
   @Nonnull
-  public CompoundTag getUpdateTag() {
+  public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
     @Nonnull final CompoundTag nbt = new CompoundTag();
-    this.saveAdditional(nbt);
+    this.saveAdditional(nbt, provider);
     return nbt;
   }
 
@@ -152,27 +154,27 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   }
 
   @Override
-  public void load(@Nonnull final CompoundTag compound) {
+  public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
     if (compound.contains(INVENTORY_TAG)) {
-      BarrelInventoryHandler.getHandler(this).deserializeNBT(compound.getCompound(INVENTORY_TAG));
+      BarrelInventoryHandler.getHandler(this).deserializeNBT(provider, compound.getCompound(INVENTORY_TAG));
     }
     if (compound.contains(TANK_TAG)) {
-      BarrelFluidHandler.getHandler(this).readFromNBT(compound.getCompound(TANK_TAG));
+      BarrelFluidHandler.getHandler(this).readFromNBT(provider, compound.getCompound(TANK_TAG));
     }
     if (compound.contains(MODE_TAG)) {
       mode = BarrelModeRegistry.getModeFromName(compound.getString(MODE_TAG));
     }
     if (compound.contains(MODE_INFO_TAG) && mode != null) {
-      mode.read(compound.getCompound(MODE_INFO_TAG));
+      mode.read(compound.getCompound(MODE_INFO_TAG), provider);
     }
     if (compound.contains(SOLID_AMOUNT_TAG)) {
       this.solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
     }
-    super.load(compound);
+    super.loadAdditional(compound, provider);
   }
 
   @Nullable
-  public InteractionResult onBlockActivated(
+  public ItemInteractionResult onBlockActivated(
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
@@ -185,17 +187,17 @@ public abstract class BarrelBlockEntity extends BlockEntity {
 
   @Override
   public void onDataPacket(
-      @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket pkt) {
+      @Nonnull final Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
     @Nonnull final CompoundTag nbt = pkt.getTag();
     if (nbt.contains(INVENTORY_TAG)) {
-      BarrelInventoryHandler.getHandler(this).deserializeNBT(nbt.getCompound(INVENTORY_TAG));
+      BarrelInventoryHandler.getHandler(this).deserializeNBT(lookupProvider, nbt.getCompound(INVENTORY_TAG));
     }
     if (nbt.contains(TANK_TAG)) {
-      BarrelFluidHandler.getHandler(this).readFromNBT(nbt.getCompound(TANK_TAG));
+      BarrelFluidHandler.getHandler(this).readFromNBT(lookupProvider, nbt.getCompound(TANK_TAG));
     }
     mode = BarrelModeRegistry.getModeFromName(nbt.getString(MODE_TAG));
     if (nbt.contains(MODE_INFO_TAG) && mode != null) {
-      mode.read(nbt.getCompound(MODE_INFO_TAG));
+      mode.read(nbt.getCompound(MODE_INFO_TAG), lookupProvider);
     }
     solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
   }
@@ -208,13 +210,13 @@ public abstract class BarrelBlockEntity extends BlockEntity {
   }
 
   @Override
-  public void saveAdditional(@Nonnull final CompoundTag compound) {
-    super.saveAdditional(compound);
-    compound.put(INVENTORY_TAG, BarrelInventoryHandler.getHandler(this).serializeNBT());
-    compound.put(TANK_TAG, BarrelFluidHandler.getHandler(this).writeToNBT(new CompoundTag()));
+  public void saveAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+    super.saveAdditional(compound, provider);
+    compound.put(INVENTORY_TAG, BarrelInventoryHandler.getHandler(this).serializeNBT(provider));
+    compound.put(TANK_TAG, BarrelFluidHandler.getHandler(this).writeToNBT(provider, new CompoundTag()));
     if (mode != null) {
       compound.putString(MODE_TAG, mode.getModeName());
-      compound.put(MODE_INFO_TAG, mode.write());
+      compound.put(MODE_INFO_TAG, mode.write(provider));
     }
     compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
   }

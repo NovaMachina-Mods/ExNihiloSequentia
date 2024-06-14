@@ -34,8 +34,8 @@ public class MeshItem extends Item {
   @Override
   public boolean canApplyAtEnchantingTable(
       @Nonnull final ItemStack stack, @Nonnull final Enchantment enchantment) {
-    return enchantment == Enchantments.BLOCK_EFFICIENCY
-        || enchantment == Enchantments.BLOCK_FORTUNE;
+    return enchantment == Enchantments.EFFICIENCY
+        || enchantment == Enchantments.FORTUNE;
   }
 
   @Override

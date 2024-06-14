@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.world.level.block.entity;
 
 import javax.annotation.Nonnull;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -65,7 +66,7 @@ public class InfestingLeavesBlockEntity extends BlockEntity {
   }
 
   @Override
-  public CompoundTag getUpdateTag() {
+  public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
     @Nonnull final CompoundTag nbt = new CompoundTag();
     nbt.putInt(PROGRESS_TAG, progress);
     return nbt;
@@ -73,7 +74,7 @@ public class InfestingLeavesBlockEntity extends BlockEntity {
 
   @Override
   public void onDataPacket(
-      @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket pkt) {
+      Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
     @Nonnull final CompoundTag nbt = pkt.getTag();
     if (nbt.contains(PROGRESS_TAG)) {
       progress = nbt.getInt(PROGRESS_TAG);

@@ -36,7 +36,7 @@ public class WitchWaterBlock extends LiquidBlock {
 
   public WitchWaterBlock() {
     super(
-        () -> EXNFluids.WITCH_WATER.getStillFluid(),
+        EXNFluids.WITCH_WATER.getStillFluid(),
         BlockBehaviour.Properties.of().noCollission().strength(100.0F).noLootTable());
   }
 
@@ -89,7 +89,7 @@ public class WitchWaterBlock extends LiquidBlock {
             new ZombieVillager(EntityType.ZOMBIE_VILLAGER, worldIn);
         zombieVillagerEntity.setVillagerData(villagerEntity.getVillagerData());
         zombieVillagerEntity.setGossips(villagerEntity.getGossips().store(NbtOps.INSTANCE));
-        zombieVillagerEntity.setTradeOffers(villagerEntity.getOffers().createTag());
+        zombieVillagerEntity.setTradeOffers(villagerEntity.getOffers());
         zombieVillagerEntity.setVillagerXp(villagerEntity.getVillagerXp());
         replaceMob(worldIn, villagerEntity, zombieVillagerEntity);
       }

@@ -51,7 +51,7 @@ public class FiredCrucibleBlockBlockEntity extends CrucibleBlockEntity {
     final Optional<MeltingRecipe> recipe =
         ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());
     if (recipe.isPresent()) {
-      FluidStack fluidStack = new FluidStack(recipe.get().getResultFluid(), heat);
+      FluidStack fluidStack = new FluidStack(recipe.get().getResultFluid().getFluid(), heat);
       int filled = CrucibleFluidHandler.getHandler(this).fill(fluidStack, FluidAction.EXECUTE);
       solidAmount -= filled;
     }

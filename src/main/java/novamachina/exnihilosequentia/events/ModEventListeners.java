@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -27,9 +28,9 @@ import novamachina.exnihilosequentia.world.level.material.capability.CrucibleFlu
 import novamachina.novacore.world.item.ItemDefinition;
 import org.slf4j.Logger;
 
-@Mod.EventBusSubscriber(
+@EventBusSubscriber(
     modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-    bus = Mod.EventBusSubscriber.Bus.MOD)
+    bus = EventBusSubscriber.Bus.MOD)
 public class ModEventListeners {
   private static final Logger log = org.slf4j.LoggerFactory.getLogger(ModEventListeners.class);
 

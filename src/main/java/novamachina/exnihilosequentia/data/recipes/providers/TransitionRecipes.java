@@ -24,7 +24,7 @@ public class TransitionRecipes implements ISubRecipeProvider {
   public void addRecipes(RecipeOutput consumer) {
     TransitionRecipeBuilder.transition(water, Blocks.MYCELIUM, witchwater)
         .build(consumer, transitionLoc("witch_water"));
-    TransitionRecipeBuilder.transition(water, Tags.Items.SAND, seawater)
+    TransitionRecipeBuilder.transition(water, Tags.Items.SANDS, seawater)
         .build(consumer, transitionLoc("sea_water"));
   }
 

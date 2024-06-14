@@ -1,10 +1,10 @@
 package novamachina.exnihilosequentia.common.network;
 
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.network.event.OnGameConfigurationEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.common.network.configuration.OreConfigurationTask;
 import novamachina.exnihilosequentia.common.network.handlers.ClientPayloadHandler;
@@ -12,25 +12,18 @@ import novamachina.exnihilosequentia.common.network.handlers.ServerPayloadHandle
 import novamachina.exnihilosequentia.common.network.payload.OreAckPayload;
 import novamachina.exnihilosequentia.common.network.payload.OreConfigurationPayload;
 
-@Mod.EventBusSubscriber(modid = ExNihiloSequentia.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ExNihiloSequentia.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class NetworkInitialization {
   @SubscribeEvent
-  private static void register(RegisterPayloadHandlerEvent event) {
-    IPayloadRegistrar registrar =
-        event.registrar(ExNihiloSequentia.MOD_ID).versioned("1.0.0").optional();
-    registrar
-        .configuration(
-            OreConfigurationPayload.ID,
-            OreConfigurationPayload::new,
-            handler -> handler.client(ClientPayloadHandler.getInstance()::handle))
-        .configuration(
-            OreAckPayload.ID,
-            OreAckPayload::new,
-            handler -> handler.server(ServerPayloadHandler.getInstance()::handle));
+  private static void register(RegisterConfigurationTasksEvent event) {
+    event.register(new OreConfigurationTask());
   }
 
   @SubscribeEvent
-  private static void configureModdedClient(OnGameConfigurationEvent event) {
-    event.register(new OreConfigurationTask());
+  private static void register(RegisterPayloadHandlersEvent event) {
+    PayloadRegistrar registrar = event.registrar("1").optional();
+    registrar
+        .configurationToClient(OreConfigurationPayload.TYPE, OreConfigurationPayload.STREAM_CODEC, ClientPayloadHandler::handle)
+        .configurationToServer(OreAckPayload.TYPE, OreAckPayload.STREAM_CODEC, ServerPayloadHandler::handle);
   }
 }

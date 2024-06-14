@@ -2,6 +2,7 @@ package novamachina.exnihilosequentia.common.loot.modifier;
 
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.security.SecureRandom;
@@ -39,11 +40,8 @@ public class UseCrookModifier extends LootModifier {
 
   private static Logger log = LoggerFactory.getLogger(UseCrookModifier.class);
 
-  public static final Supplier<Codec<UseCrookModifier>> CODEC =
-      Suppliers.memoize(
-          () ->
-              RecordCodecBuilder.create(
-                  inst -> codecStart(inst).apply(inst, UseCrookModifier::new)));
+  public static final MapCodec<UseCrookModifier> CODEC = RecordCodecBuilder.mapCodec(
+                  inst -> codecStart(inst).apply(inst, UseCrookModifier::new));
 
   @Nonnull private final Random random = new SecureRandom();
 
@@ -132,7 +130,7 @@ public class UseCrookModifier extends LootModifier {
   }
 
   @Override
-  public Codec<? extends IGlobalLootModifier> codec() {
-    return CODEC.get();
+  public MapCodec<? extends IGlobalLootModifier> codec() {
+    return CODEC;
   }
 }

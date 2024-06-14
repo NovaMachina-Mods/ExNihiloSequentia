@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -14,7 +15,6 @@ import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PrecipitateRecipe extends AbstractRecipe {
 
@@ -30,13 +30,6 @@ public class PrecipitateRecipe extends AbstractRecipe {
 
   public boolean validInputs(Fluid fluid, ItemLike input) {
     return this.fluid.getFluid().isSame(fluid) && this.input.test(new ItemStack(input));
-  }
-
-  @Override
-  public void write(FriendlyByteBuf buffer) {
-    input.toNetwork(buffer);
-    fluid.writeToPacket(buffer);
-    buffer.writeItem(output);
   }
 
   @Override
@@ -68,56 +61,45 @@ public class PrecipitateRecipe extends AbstractRecipe {
     return this.output;
   }
 
-  public static class Serializer<T extends PrecipitateRecipe> implements RecipeSerializer<T> {
+  public static class Serializer implements RecipeSerializer<PrecipitateRecipe> {
 
-    private final IFactory<T> factory;
-    private final Codec<T> codec;
-
-    public Serializer(IFactory<T> factory) {
-      this.factory = factory;
-      this.codec =
-          RecordCodecBuilder.create(
-              instance ->
-                  instance
-                      .group(
-                          FluidStack.CODEC.fieldOf("fluid").forGetter(recipe -> recipe.getFluid()),
-                          Ingredient.CODEC_NONEMPTY
-                              .fieldOf("input")
-                              .forGetter(recipe -> recipe.getInput()),
-                          ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.getOutput()))
-                      .apply(instance, factory::create));
-    }
-
-    //    @Override
-    //    @NonNull
-    //    public T fromJson(@NonNull ResourceLocation id, JsonObject json) {
-    //      Ingredient input = Ingredient.fromJson(json.get("input"));
-    //      FluidStack fluid = FluidStackUtils.deserialize(json.getAsJsonObject("fluid"));
-    //      ItemStack result = ItemStackHelper.deserialize(json.get("result"));
-    //      return this.factory.create(id, fluid, input, result);
-    //    }
+    public static final MapCodec<PrecipitateRecipe> CODEC =
+        RecordCodecBuilder.mapCodec(
+            instance ->
+                instance
+                    .group(
+                        FluidStack.CODEC.fieldOf("fluid").forGetter(PrecipitateRecipe::getFluid),
+                        Ingredient.CODEC_NONEMPTY
+                            .fieldOf("input")
+                            .forGetter(PrecipitateRecipe::getInput),
+                        ItemStack.CODEC.fieldOf("result").forGetter(PrecipitateRecipe::getOutput))
+                    .apply(instance, PrecipitateRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, PrecipitateRecipe> STREAM_CODEC =
+        StreamCodec.of(
+            PrecipitateRecipe.Serializer::toNetwork, PrecipitateRecipe.Serializer::fromNetwork);
 
     @Override
-    public Codec<T> codec() {
-      return this.codec;
+    public MapCodec<PrecipitateRecipe> codec() {
+      return CODEC;
     }
 
     @Override
-    public @Nullable T fromNetwork(FriendlyByteBuf buffer) {
-      Ingredient input = Ingredient.fromNetwork(buffer);
-      FluidStack fluid = FluidStack.readFromPacket(buffer);
-      ItemStack result = buffer.readItem();
-      return this.factory.create(fluid, input, result);
+    public StreamCodec<RegistryFriendlyByteBuf, PrecipitateRecipe> streamCodec() {
+      return STREAM_CODEC;
     }
 
-    @Override
-    public void toNetwork(@NonNull FriendlyByteBuf buffer, T recipe) {
-      recipe.write(buffer);
+    public static PrecipitateRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+      Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+      FluidStack fluid = FluidStack.STREAM_CODEC.decode(buffer);
+      ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
+      return new PrecipitateRecipe(fluid, input, result);
     }
 
-    @FunctionalInterface
-    public interface IFactory<T> {
-      T create(FluidStack fluid, Ingredient input, ItemStack result);
+    public static void toNetwork(
+        @NonNull RegistryFriendlyByteBuf buffer, PrecipitateRecipe recipe) {
+      Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getInput());
+      FluidStack.STREAM_CODEC.encode(buffer, recipe.getFluid());
+      ItemStack.STREAM_CODEC.encode(buffer, recipe.getOutput());
     }
   }
 }

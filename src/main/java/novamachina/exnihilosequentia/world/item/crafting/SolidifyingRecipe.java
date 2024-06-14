@@ -1,8 +1,9 @@
 package novamachina.exnihilosequentia.world.item.crafting;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -46,13 +47,6 @@ public class SolidifyingRecipe extends AbstractRecipe {
     return EXNRecipeTypes.SOLIDIFYING;
   }
 
-  @Override
-  public void write(FriendlyByteBuf buffer) {
-    fluidInTank.writeToPacket(buffer);
-    fluidOnTop.writeToPacket(buffer);
-    buffer.writeItem(result);
-  }
-
   public FluidStack getFluidInTank() {
     return this.fluidInTank;
   }
@@ -65,50 +59,46 @@ public class SolidifyingRecipe extends AbstractRecipe {
     return this.result;
   }
 
-  public static class Serializer<T extends SolidifyingRecipe> implements RecipeSerializer<T> {
+  public static class Serializer implements RecipeSerializer<SolidifyingRecipe> {
 
-    private final IFactory<T> factory;
-    private final Codec<T> codec;
+    public static final MapCodec<SolidifyingRecipe> CODEC =
+        RecordCodecBuilder.mapCodec(
+            instance ->
+                instance
+                    .group(
+                        FluidStack.CODEC
+                            .fieldOf("fluidInTank")
+                            .forGetter(SolidifyingRecipe::getFluidInTank),
+                        FluidStack.CODEC
+                            .fieldOf("fluidOnTop")
+                            .forGetter(SolidifyingRecipe::getFluidOnTop),
+                        ItemStack.CODEC.fieldOf("result").forGetter(SolidifyingRecipe::getResult))
+                    .apply(instance, SolidifyingRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, SolidifyingRecipe> STREAM_CODEC =
+        StreamCodec.of(
+            SolidifyingRecipe.Serializer::toNetwork, SolidifyingRecipe.Serializer::fromNetwork);
 
-    public Serializer(IFactory<T> factory) {
-      this.factory = factory;
-      this.codec =
-          RecordCodecBuilder.create(
-              instance ->
-                  instance
-                      .group(
-                          FluidStack.CODEC
-                              .fieldOf("fluidInTank")
-                              .forGetter(recipe -> recipe.getFluidInTank()),
-                          FluidStack.CODEC
-                              .fieldOf("fluidOnTop")
-                              .forGetter(recipe -> recipe.getFluidOnTop()),
-                          ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.getResult()))
-                      .apply(instance, factory::create));
+    @Override
+    public MapCodec<SolidifyingRecipe> codec() {
+      return CODEC;
     }
 
     @Override
-    public Codec<T> codec() {
-      return this.codec;
+    public StreamCodec<RegistryFriendlyByteBuf, SolidifyingRecipe> streamCodec() {
+      return STREAM_CODEC;
     }
 
-    @Override
-    @NonNull
-    public T fromNetwork(FriendlyByteBuf buffer) {
-      FluidStack fluidInTank = FluidStack.readFromPacket(buffer);
-      FluidStack fluidOnTop = FluidStack.readFromPacket(buffer);
-      ItemStack result = buffer.readItem();
-      return this.factory.create(fluidInTank, fluidOnTop, result);
+    public static SolidifyingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+      FluidStack fluidInTank = FluidStack.STREAM_CODEC.decode(buffer);
+      FluidStack fluidOnTop = FluidStack.STREAM_CODEC.decode(buffer);
+      ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
+      return new SolidifyingRecipe(fluidInTank, fluidOnTop, result);
     }
 
-    @Override
-    public void toNetwork(@NonNull FriendlyByteBuf buffer, T recipe) {
-      recipe.write(buffer);
-    }
-
-    @FunctionalInterface
-    public interface IFactory<T> {
-      T create(FluidStack fluidInTank, FluidStack fluidOnTop, ItemStack result);
+    public static void toNetwork(RegistryFriendlyByteBuf buffer, SolidifyingRecipe recipe) {
+      FluidStack.STREAM_CODEC.encode(buffer, recipe.getFluidInTank());
+      FluidStack.STREAM_CODEC.encode(buffer, recipe.getFluidOnTop());
+      ItemStack.STREAM_CODEC.encode(buffer, recipe.getResult());
     }
   }
 }

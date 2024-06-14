@@ -1,31 +1,13 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
-        maven {
-            name = "NeoForge"
-            url = uri("https://maven.neoforged.net/releases")
-        }
-    }
-}
-
-buildscript {
-    repositories {
-        maven {
-            name = "SpongePowered"
-            url = uri("https://repo.spongepowered.org/repository/maven-public/")
-        }
-        maven {
-            name = "MvnRepository"
-            url = uri("https://mvnrepository.com/")
-        }
-    }
-    dependencies {
-        classpath("org.spongepowered:mixingradle:0.7+")
+        maven { url = 'https://maven.neoforged.net/releases' }
     }
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version("0.5.0")
+    id("org.gradle.toolchains.foojay-resolver-convention") version("0.8.0")
 }
 
 rootProject.name = "ExNihiloSequentia"

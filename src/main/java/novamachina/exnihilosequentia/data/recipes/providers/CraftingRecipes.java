@@ -76,7 +76,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .pattern("xfx")
         .pattern("xxx")
         .define('x', Tags.Items.RODS_WOODEN)
-        .define('f', Tags.Items.STRING)
+        .define('f', Tags.Items.STRINGS)
         .unlockedBy(
             "has_stick",
             InventoryChangeTrigger.TriggerInstance.hasItems(
@@ -84,7 +84,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             "has_string",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.STRING).build()))
+                ItemPredicate.Builder.item().of(Tags.Items.STRINGS).build()))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.BEEHIVE_FRAME.getId()));
 
     createCookingRecipe(
@@ -264,7 +264,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .pattern("iii")
         .pattern("iii")
         .pattern("iii")
-        .define('i', Tags.Items.STRING)
+        .define('i', Tags.Items.STRINGS)
         .unlockedBy(
             "has_sieve",
             InventoryChangeTrigger.TriggerInstance.hasItems(
@@ -472,7 +472,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
   }
 
   private void addBarrels(RecipeOutput consumer) {
-    createBarrel(consumer, EXNBlocks.STONE_BARREL, Tags.Items.STONE, Items.STONE_SLAB);
+    createBarrel(consumer, EXNBlocks.STONE_BARREL, Tags.Items.STONES, Items.STONE_SLAB);
     createBarrel(consumer, EXNBlocks.ACACIA_BARREL, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
     createBarrel(consumer, EXNBlocks.BAMBOO_BARREL, Items.BAMBOO_PLANKS, Items.BAMBOO_SLAB);
     createBarrel(consumer, EXNBlocks.BIRCH_BARREL, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);

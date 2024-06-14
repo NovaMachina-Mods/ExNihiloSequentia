@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -29,7 +32,7 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public InteractionResult onBlockActivated(
+  public ItemInteractionResult onBlockActivated(
       @Nonnull final BarrelBlockEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
@@ -47,11 +50,11 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
           barrelTile
               .getMode()
               .onBlockActivated(barrelTile, player, handIn, fluidHandler, itemHandler);
-          return InteractionResult.SUCCESS;
+          return ItemInteractionResult.SUCCESS;
         }
       }
     }
-    return InteractionResult.SUCCESS;
+    return ItemInteractionResult.SUCCESS;
   }
 
   @Override
@@ -70,13 +73,13 @@ public class EmptyBarrelMode extends AbstractBarrelMode {
   }
 
   @Override
-  public void read(@Nonnull final CompoundTag nbt) {
+  public void read(CompoundTag nbt, HolderLookup.Provider provider) {
     // NOOP
   }
 
   @Override
   @Nonnull
-  public CompoundTag write() {
+  public CompoundTag write(HolderLookup.Provider provider) {
     return new CompoundTag();
   }
 

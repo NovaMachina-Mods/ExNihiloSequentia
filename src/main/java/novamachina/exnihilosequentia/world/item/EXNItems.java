@@ -612,7 +612,7 @@ public class EXNItems {
           "witch_water_bucket",
           () ->
               new BucketItem(
-                  () -> EXNFluids.WITCH_WATER.getStillFluid(), new Item.Properties().stacksTo(1)),
+                  EXNFluids.WITCH_WATER.getStillFluid(), new Item.Properties().stacksTo(1)),
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<BucketItem> SEA_WATER_BUCKET =
       ITEMS.item(
@@ -620,7 +620,7 @@ public class EXNItems {
           "sea_water_bucket",
           () ->
               new BucketItem(
-                  () -> EXNFluids.SEA_WATER.getStillFluid(), new Item.Properties().stacksTo(1)),
+                  EXNFluids.SEA_WATER.getStillFluid(), new Item.Properties().stacksTo(1)),
           ItemDefinition.ItemType.OTHER);
 
   private EXNItems() {}

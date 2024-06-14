@@ -4,6 +4,8 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -59,8 +61,8 @@ public class MeltableItemHandler extends ItemStackHandler {
 
   @Override
   @Nonnull
-  public CompoundTag serializeNBT() {
-    @Nonnull final CompoundTag nbt = super.serializeNBT();
+  public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+    @Nonnull final CompoundTag nbt = super.serializeNBT(provider);
     nbt.putBoolean("hasRoom", crucibleHasRoom);
     if (type != null) {
       nbt.putString("type", type.getName());
@@ -69,8 +71,8 @@ public class MeltableItemHandler extends ItemStackHandler {
   }
 
   @Override
-  public void deserializeNBT(CompoundTag nbt) {
-    super.deserializeNBT(nbt);
+  public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+    super.deserializeNBT(provider, nbt);
     crucibleHasRoom = nbt.getBoolean("hasRoom");
     type = CrucibleType.getTypeByName(nbt.getString("type"));
   }

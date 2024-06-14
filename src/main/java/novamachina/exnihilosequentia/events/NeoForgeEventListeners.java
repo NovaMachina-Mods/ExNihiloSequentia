@@ -16,6 +16,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
@@ -38,9 +39,9 @@ import novamachina.exnihilosequentia.world.item.crafting.SolidifyingRecipe;
 import novamachina.exnihilosequentia.world.item.crafting.TransitionRecipe;
 import org.slf4j.Logger;
 
-@Mod.EventBusSubscriber(
+@EventBusSubscriber(
     modid = ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-    bus = Mod.EventBusSubscriber.Bus.FORGE)
+    bus = EventBusSubscriber.Bus.GAME)
 public class NeoForgeEventListeners {
 
   private NeoForgeEventListeners() {}

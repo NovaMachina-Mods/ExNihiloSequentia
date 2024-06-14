@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -15,7 +16,7 @@ import novamachina.exnihilosequentia.data.models.ItemModelProvider;
 import novamachina.exnihilosequentia.data.recipes.packs.EXNRecipeProvider;
 import novamachina.exnihilosequentia.data.tags.EXNTagProvider;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class ExNihiloDataGenerators {
 
   private ExNihiloDataGenerators() {}
@@ -27,11 +28,11 @@ public class ExNihiloDataGenerators {
     ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
     CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-    generator.addProvider(event.includeServer(), new EXNLootProvider(output));
-    generator.addProvider(event.includeServer(), new EXNRecipeProvider(output));
+    generator.addProvider(event.includeServer(), new EXNLootProvider(lookupProvider, output));
+    generator.addProvider(event.includeServer(), new EXNRecipeProvider(output, lookupProvider));
     generator.addProvider(
         event.includeServer(), new EXNTagProvider(output, lookupProvider, existingFileHelper));
-    generator.addProvider(event.includeServer(), new EXNLootModifierProvider(output));
+    generator.addProvider(event.includeServer(), new EXNLootModifierProvider(lookupProvider, output));
 
     generator.addProvider(event.includeClient(), new ItemModelProvider(output, existingFileHelper));
     generator.addProvider(event.includeClient(), new EXNLangProvider(output, "en_us"));
