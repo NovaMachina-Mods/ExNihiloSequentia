@@ -5,6 +5,7 @@ import static novamachina.exnihilosequentia.ExNihiloSequentia.MOD_ID;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
@@ -25,17 +26,17 @@ import novamachina.exnihilosequentia.core.registries.InitRecipeSerializers;
 import novamachina.exnihilosequentia.core.registries.InitRecipeTypes;
 import novamachina.exnihilosequentia.core.registries.InitSoundEvents;
 import novamachina.exnihilosequentia.core.registries.InitStats;
-import novamachina.novacore.bootstrap.NeoforgeBlockEntityTypeRegistry;
-import novamachina.novacore.bootstrap.NeoforgeBlockRegistry;
-import novamachina.novacore.bootstrap.NeoforgeCreativeModeTabRegistry;
-import novamachina.novacore.bootstrap.NeoforgeFluidRegistry;
-import novamachina.novacore.bootstrap.NeoforgeFluidTypeRegistry;
-import novamachina.novacore.bootstrap.NeoforgeItemRegistry;
-import novamachina.novacore.bootstrap.NeoforgeLootModifierRegistry;
-import novamachina.novacore.bootstrap.NeoforgeRecipeSerializerRegistry;
-import novamachina.novacore.bootstrap.NeoforgeRecipeTypeRegistry;
-import novamachina.novacore.bootstrap.NeoforgeSoundEventRegistry;
-import novamachina.novacore.bootstrap.NeoforgeStatRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeBlockEntityTypeRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeBlockRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeCreativeModeTabRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeFluidRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeFluidTypeRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeItemRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeLootModifierRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeRecipeSerializerRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeRecipeTypeRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeSoundEventRegistry;
+import novamachina.novacore.bootstrap.core.registries.NeoforgeStatRegistry;
 import org.slf4j.Logger;
 
 @Mod(MOD_ID)
@@ -44,9 +45,9 @@ public class ExNihiloSequentia {
   public static final String MOD_ID = "exnihilosequentia";
   private static final Logger log = org.slf4j.LoggerFactory.getLogger(ExNihiloSequentia.class);
 
-  public ExNihiloSequentia(IEventBus modEventBus) {
+  public ExNihiloSequentia(ModContainer container, IEventBus modEventBus) {
 
-    ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+    container.registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
     Config.loadConfig(
         Config.COMMON_CONFIG,
         FMLPaths.CONFIGDIR
@@ -96,7 +97,7 @@ public class ExNihiloSequentia {
   }
 
   public static ResourceLocation makeId(String id) {
-    return new ResourceLocation(MOD_ID, id);
+    return ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
   }
 
   public static boolean isRelease() {

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pebble": {
+      "conditions": {
+        "items": [
+          {
+            "items": "exnihilosequentia:basalt_pebble"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ens_basalt"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pebble"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ens_basalt"
+    ]
+  }
+}

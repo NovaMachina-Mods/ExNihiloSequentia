@@ -30,7 +30,7 @@ public class ClientSetup {
 
     ItemProperties.register(
         EXNItems.CROOK_WOOD.asItem(),
-        new ResourceLocation(ExNihiloSequentia.MOD_ID, "holiday"),
+        ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "holiday"),
         (itemStack, clientLevel, livingEntity, i) -> {
           Calendar calendar = Calendar.getInstance();
           if (calendar.get(Calendar.MONTH) + 1 == 10) {

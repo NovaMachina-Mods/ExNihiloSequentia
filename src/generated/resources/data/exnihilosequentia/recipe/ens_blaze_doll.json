@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "tag": "c:crops/nether_wart"
+    },
+    "c": {
+      "item": "minecraft:blaze_powder"
+    },
+    "m": {
+      "item": "exnihilosequentia:porcelain_doll"
+    },
+    "s": {
+      "tag": "c:dusts/glowstone"
+    },
+    "t": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "ctc",
+    "sms",
+    "cbc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:blaze_doll"
+  }
+}

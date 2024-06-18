@@ -28,7 +28,7 @@ public class HarvestingRecipes implements ISubRecipeProvider {
   }
 
   private ResourceLocation harvestLoc(@Nonnull final String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "harvest/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 }

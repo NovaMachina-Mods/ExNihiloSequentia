@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "exnihilosequentia",
+  "key": {
+    "c": {
+      "item": "minecraft:warped_stem"
+    },
+    "l": {
+      "item": "minecraft:warped_slab"
+    },
+    "s": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "c c",
+    "clc",
+    "s s"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:warped_crucible"
+  }
+}

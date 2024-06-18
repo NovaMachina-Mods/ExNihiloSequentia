@@ -5,13 +5,15 @@ import javax.annotation.Nonnull;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
+import novamachina.novacore.NovaCore;
 import novamachina.novacore.core.registries.BlockEntityTypeRegistry;
-import novamachina.novacore.world.level.block.BlockEntityTypeDefinition;
+import novamachina.novacore.world.level.block.entity.BlockEntityTypeDefinition;
 
 public class EXNBlockEntityTypes {
 
   private static final BlockEntityTypeRegistry BLOCK_ENTITY_TYPES =
-      new BlockEntityTypeRegistry(ExNihiloSequentia.MOD_ID);
+      new BlockEntityTypeRegistry(
+          ExNihiloSequentia.MOD_ID, NovaCore.SERVICE_PROVIDER);
 
   private EXNBlockEntityTypes() {}
 

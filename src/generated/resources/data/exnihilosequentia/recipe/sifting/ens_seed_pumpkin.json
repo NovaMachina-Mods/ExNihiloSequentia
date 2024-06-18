@@ -1,0 +1,17 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:pumpkin_seeds"
+  },
+  "rolls": [
+    {
+      "chance": 0.35,
+      "mesh": "string"
+    }
+  ],
+  "waterlogged": false
+}

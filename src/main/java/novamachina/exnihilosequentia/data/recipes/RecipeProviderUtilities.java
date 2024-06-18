@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RecipeProviderUtilities {
   public static ResourceLocation createSaveLocation(@Nonnull final ResourceLocation location) {
-    return new ResourceLocation(location.getNamespace(), prependRecipePrefix(location.getPath()));
+    return ResourceLocation.fromNamespaceAndPath(location.getNamespace(), prependRecipePrefix(location.getPath()));
   }
 
   public static String prependRecipePrefix(@Nonnull final String id) {

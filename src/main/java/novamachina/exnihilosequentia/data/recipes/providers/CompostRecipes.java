@@ -113,7 +113,7 @@ public class CompostRecipes implements ISubRecipeProvider {
   }
 
   protected ResourceLocation compostLoc(String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "compost/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 }

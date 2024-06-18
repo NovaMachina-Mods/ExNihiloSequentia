@@ -1,0 +1,14 @@
+{
+  "type": "exnihilosequentia:transition",
+  "catalyst": {
+    "tag": "c:sands"
+  },
+  "fluidInTank": {
+    "amount": 1000,
+    "id": "minecraft:water"
+  },
+  "result": {
+    "amount": 1000,
+    "id": "exnihilosequentia:sea_water"
+  }
+}

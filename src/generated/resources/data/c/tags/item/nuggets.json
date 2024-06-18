@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#c:nuggets/copper",
+    "#c:nuggets/lead",
+    "#c:nuggets/nickel",
+    "#c:nuggets/silver",
+    "#c:nuggets/tin",
+    "#c:nuggets/aluminum",
+    "#c:nuggets/platinum",
+    "#c:nuggets/uranium",
+    "#c:nuggets/zinc"
+  ]
+}

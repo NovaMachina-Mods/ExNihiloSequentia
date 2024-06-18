@@ -1,0 +1,21 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "exnihilosequentia:dust"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:redstone"
+  },
+  "rolls": [
+    {
+      "chance": 0.125,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.25,
+      "mesh": "diamond"
+    }
+  ],
+  "waterlogged": false
+}

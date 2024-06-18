@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "exnihilosequentia",
+  "key": {
+    "-": {
+      "item": "minecraft:crimson_slab"
+    },
+    "x": {
+      "item": "minecraft:crimson_planks"
+    }
+  },
+  "pattern": [
+    "x x",
+    "x x",
+    "x-x"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:crimson_barrel"
+  }
+}

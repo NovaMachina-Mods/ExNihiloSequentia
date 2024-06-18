@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "exnihilosequentia",
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:diorite_pebble"
+    }
+  },
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:diorite"
+  }
+}

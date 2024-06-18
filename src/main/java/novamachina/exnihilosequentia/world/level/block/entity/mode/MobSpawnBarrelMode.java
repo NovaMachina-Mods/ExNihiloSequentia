@@ -93,7 +93,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
     if (nbt.contains(DOLL_TYPE_TAG)) {
       doll =
-          (DollItem) BuiltInRegistries.ITEM.get(new ResourceLocation(nbt.getString(DOLL_TYPE_TAG)));
+          (DollItem) BuiltInRegistries.ITEM.get(ResourceLocation.parse(nbt.getString(DOLL_TYPE_TAG)));
     } else {
       doll = null;
     }

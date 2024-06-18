@@ -1,0 +1,17 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:coarse_dirt"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:gravel"
+  },
+  "rolls": [
+    {
+      "chance": 0.4,
+      "mesh": "string"
+    }
+  ],
+  "waterlogged": false
+}

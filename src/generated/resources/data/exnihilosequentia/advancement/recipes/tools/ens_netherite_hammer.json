@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diamond_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "exnihilosequentia:diamond_hammer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_material": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/netherite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "exnihilosequentia:ens_netherite_hammer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_diamond_hammer",
+      "has_material"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "exnihilosequentia:ens_netherite_hammer"
+    ]
+  }
+}

@@ -5,10 +5,12 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
@@ -19,8 +21,8 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -58,12 +60,23 @@ public class SieveBlockEntity extends BlockEntity {
     super(blockEntityType, pos, state);
   }
 
-  public void activateSieve(@Nullable final Player player, boolean isWaterlogged) {
-    log.debug("Activate Sieve, isWaterlogged: " + isWaterlogged);
-    float fortune =
-        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FORTUNE, meshStack);
-    float efficiency =
-        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.EFFICIENCY, meshStack);
+  public void activateSieve(Level level, boolean isWaterlogged) {
+    log.debug("Activate Sieve, isWaterlogged: {}", isWaterlogged);
+    AtomicReference<Float> fortune = new AtomicReference<>(0.0f);
+    AtomicReference<Float> efficiency = new AtomicReference<>(0.0f);
+    level
+        .registryAccess()
+        .registry(Registries.ENCHANTMENT)
+        .ifPresent(
+            registry -> {
+              registry
+                  .getHolder(Enchantments.FORTUNE)
+                  .ifPresent(holder -> fortune.set((float) meshStack.getEnchantmentLevel(holder)));
+              registry
+                  .getHolder(Enchantments.EFFICIENCY)
+                  .ifPresent(
+                      holder -> efficiency.set((float) meshStack.getEnchantmentLevel(holder)));
+            });
 
     // 4 ticks is the same period of holding down right click
     if (level != null && level.getLevelData().getGameTime() - lastSieveAction < 4) {
@@ -76,7 +89,7 @@ public class SieveBlockEntity extends BlockEntity {
     }
 
     if (isReadyToSieve()) {
-      progress += 1 * (1 + efficiency / 5);
+      progress += 1 * (1 + efficiency.get() / 5);
 
       if (progress >= Config.getMaxSieveClicks()) {
         log.debug("Sieve progress complete");
@@ -90,7 +103,7 @@ public class SieveBlockEntity extends BlockEntity {
                     .forEach(
                         meshWithChance -> {
                           if (random.nextFloat()
-                              <= meshWithChance.getChance() * (1F + (fortune / 3))) {
+                              <= meshWithChance.getChance() * (1F + (fortune.get() / 3))) {
                             log.debug("Spawning Item: " + entry.getDrop());
                             level.addFreshEntity(
                                 new ItemEntity(
@@ -208,7 +221,9 @@ public class SieveBlockEntity extends BlockEntity {
 
   @Override
   public void onDataPacket(
-      @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket packet, HolderLookup.Provider provider) {
+      @Nonnull final Connection net,
+      @Nonnull final ClientboundBlockEntityDataPacket packet,
+      HolderLookup.Provider provider) {
     CompoundTag nbt = packet.getTag();
     if (nbt.contains(MESH_TAG)) {
       @Nullable final Tag meshTag = nbt.get(MESH_TAG);

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:water_bucket"
+    },
+    "o": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    " o ",
+    "obo",
+    " o "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:crying_obsidian"
+  }
+}

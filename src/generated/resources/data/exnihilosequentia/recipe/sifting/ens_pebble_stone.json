@@ -1,0 +1,37 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:stone_pebble"
+  },
+  "rolls": [
+    {
+      "chance": 1.0,
+      "mesh": "string"
+    },
+    {
+      "chance": 1.0,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.5,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.5,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "string"
+    }
+  ],
+  "waterlogged": false
+}

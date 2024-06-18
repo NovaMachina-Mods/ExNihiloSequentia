@@ -1,0 +1,17 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:soul_sand"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:ghast_tear"
+  },
+  "rolls": [
+    {
+      "chance": 0.02,
+      "mesh": "diamond"
+    }
+  ],
+  "waterlogged": false
+}

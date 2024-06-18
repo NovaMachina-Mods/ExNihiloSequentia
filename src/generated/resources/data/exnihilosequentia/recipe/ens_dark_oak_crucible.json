@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "exnihilosequentia",
+  "key": {
+    "c": {
+      "item": "minecraft:dark_oak_log"
+    },
+    "l": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "s": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "c c",
+    "clc",
+    "s s"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:dark_oak_crucible"
+  }
+}

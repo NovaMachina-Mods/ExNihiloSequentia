@@ -162,17 +162,6 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
     return nbt;
   }
 
-  @Override
-  public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
-    log.info("IN CRUCIBLE LOAD");
-    MeltableItemHandler.getHandler(this).deserializeNBT(provider, compound.getCompound(INVENTORY_TAG));
-    CrucibleFluidHandler.getHandler(this).readFromNBT(provider, compound.getCompound("tank"));
-    ticksSinceLast = compound.getInt("ticksSinceLast");
-    solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
-    currentItem = ItemStack.parse(provider, compound.getCompound(CURRENT_ITEM_TAG)).orElse(ItemStack.EMPTY);
-    super.loadAdditional(compound, provider);
-  }
-
   public ItemInteractionResult onBlockActivated(
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
@@ -278,7 +267,22 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
     compound.put("tank", CrucibleFluidHandler.getHandler(this).writeToNBT(provider, new CompoundTag()));
     compound.putInt("ticksSinceLast", ticksSinceLast);
     compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
-    compound.put(CURRENT_ITEM_TAG, currentItem.save(provider, new CompoundTag()));
+    if(!currentItem.isEmpty()) {
+      compound.put(CURRENT_ITEM_TAG, currentItem.save(provider, new CompoundTag()));
+    }
+  }
+
+  @Override
+  public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+    log.info("IN CRUCIBLE LOAD");
+    MeltableItemHandler.getHandler(this).deserializeNBT(provider, compound.getCompound(INVENTORY_TAG));
+    CrucibleFluidHandler.getHandler(this).readFromNBT(provider, compound.getCompound("tank"));
+    ticksSinceLast = compound.getInt("ticksSinceLast");
+    solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
+    if(compound.contains(CURRENT_ITEM_TAG)) {
+      currentItem = ItemStack.parse(provider, compound.getCompound(CURRENT_ITEM_TAG)).orElse(ItemStack.EMPTY);
+    }
+    super.loadAdditional(compound, provider);
   }
 
   public void tickServer() {
@@ -303,6 +307,7 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
     if (!currentState.equals(lastSyncedState)) {
       level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
       lastSyncedState = currentState;
+      this.setChanged();
     }
   }
 

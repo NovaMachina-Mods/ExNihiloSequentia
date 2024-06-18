@@ -1,0 +1,21 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:gravel"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:diamond"
+  },
+  "rolls": [
+    {
+      "chance": 0.008,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.016,
+      "mesh": "diamond"
+    }
+  ],
+  "waterlogged": false
+}

@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.common.network.payload.OreConfigurationPayload;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.novacore.core.registries.ItemRegistry;
@@ -78,7 +79,7 @@ public class Ore {
   }
 
   private ResourceLocation id(String path) {
-    return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, path);
+    return ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, path);
   }
 
   private String getEnglishName(String id) {

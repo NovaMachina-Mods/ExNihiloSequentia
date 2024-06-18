@@ -217,7 +217,7 @@ public class SiftingRecipes implements ISubRecipeProvider {
               final ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(input);
               if (resourceLocation != null) {
                 if (Objects.equals(
-                    BuiltInRegistries.BLOCK.getKey(input), new ResourceLocation("jungle_leaves"))) {
+                    BuiltInRegistries.BLOCK.getKey(input), ResourceLocation.withDefaultNamespace("jungle_leaves"))) {
                   SiftingRecipeBuilder.sifting(Ingredient.of(input), drop)
                       .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.025F))
                       .addRoll(new MeshWithChance(EXNItems.MESH_FLINT.asItem().getType(), 0.05F))
@@ -335,7 +335,7 @@ public class SiftingRecipes implements ISubRecipeProvider {
   }
 
   private ResourceLocation siftingLoc(String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "sifting/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 

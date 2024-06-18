@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "exnihilosequentia",
+  "key": {
+    "x": {
+      "item": "exnihilosequentia:diorite_pebble"
+    }
+  },
+  "pattern": [
+    "xx",
+    " x",
+    " x"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:diorite_crook"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "tag": "minecraft:sand"
+  },
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:tube_coral_larva"
+  },
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "iron"
+    }
+  ],
+  "waterlogged": true
+}

@@ -1,0 +1,17 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "exnihilosequentia:dust"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:glowstone_dust"
+  },
+  "rolls": [
+    {
+      "chance": 0.0625,
+      "mesh": "iron"
+    }
+  ],
+  "waterlogged": false
+}

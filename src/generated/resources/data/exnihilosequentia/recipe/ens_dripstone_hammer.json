@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "-": {
+      "tag": "c:rods"
+    },
+    "x": {
+      "item": "minecraft:dripstone_block"
+    }
+  },
+  "pattern": [
+    " x ",
+    " -x",
+    "-  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:dripstone_hammer"
+  }
+}

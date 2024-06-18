@@ -4,14 +4,15 @@ import java.util.function.Consumer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidType;
+import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 
 public class WitchWaterFluidType extends FluidType {
 
   public static final ResourceLocation STILL =
-      new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witch_water");
+      ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "block/witch_water");
   private static final ResourceLocation FLOW =
-      new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "block/witch_water_flow");
+      ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "block/witch_water_flow");
 
   public WitchWaterFluidType(Properties properties) {
     super(properties);

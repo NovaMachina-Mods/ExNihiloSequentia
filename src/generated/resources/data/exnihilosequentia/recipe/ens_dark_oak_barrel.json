@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "exnihilosequentia",
+  "key": {
+    "-": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "x": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "x x",
+    "x x",
+    "x-x"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:dark_oak_barrel"
+  }
+}

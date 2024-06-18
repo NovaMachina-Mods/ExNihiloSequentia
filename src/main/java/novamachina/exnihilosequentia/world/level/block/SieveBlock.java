@@ -74,7 +74,7 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
     }
     log.debug("isReadyToSieve: " + sieveBlockEntity.isReadyToSieve());
     if (sieveBlockEntity.isReadyToSieve()) {
-      sieveBlockEntity.activateSieve(player, state.getValue(WATERLOGGED));
+      sieveBlockEntity.activateSieve(worldIn, state.getValue(WATERLOGGED));
     }
     if (!sieveBlockEntity.isReadyToSieve() && stack.getItem() instanceof BlockItem blockItem) {
       log.debug(

@@ -1,9 +1,14 @@
 package novamachina.exnihilosequentia.data.loot.table;
 
+import net.minecraft.core.HolderLookup;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.data.loot.table.BlockLootTables;
 
 public class EXNBlockLootTable extends BlockLootTables {
+  public EXNBlockLootTable(HolderLookup.Provider provider) {
+    super(provider);
+  }
+
   @Override
   protected void generate() {
     add(

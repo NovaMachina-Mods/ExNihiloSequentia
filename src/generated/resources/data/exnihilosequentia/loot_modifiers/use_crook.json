@@ -4,7 +4,7 @@
     {
       "condition": "minecraft:match_tool",
       "predicate": {
-        "tag": "exnihilosequentia:crook"
+        "items": "#exnihilosequentia:crook"
       }
     }
   ]

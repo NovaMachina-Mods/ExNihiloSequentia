@@ -1,0 +1,29 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:jungle_leaves"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:jungle_sapling"
+  },
+  "rolls": [
+    {
+      "chance": 0.025,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.05,
+      "mesh": "flint"
+    },
+    {
+      "chance": 0.075,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "diamond"
+    }
+  ],
+  "waterlogged": false
+}

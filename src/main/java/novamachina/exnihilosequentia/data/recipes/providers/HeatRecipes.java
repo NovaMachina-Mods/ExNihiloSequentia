@@ -38,7 +38,7 @@ public class HeatRecipes implements ISubRecipeProvider {
   }
 
   private ResourceLocation heatLoc(String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "heat/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 }

@@ -68,7 +68,7 @@ public class PrecipitateRecipes implements ISubRecipeProvider {
   }
 
   private ResourceLocation precipitateLoc(String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "precipitate/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 }

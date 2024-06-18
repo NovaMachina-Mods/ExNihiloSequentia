@@ -31,12 +31,13 @@ public class MeshItem extends Item {
     return meshItemMap.get(meshType);
   }
 
-  @Override
-  public boolean canApplyAtEnchantingTable(
-      @Nonnull final ItemStack stack, @Nonnull final Enchantment enchantment) {
-    return enchantment == Enchantments.EFFICIENCY
-        || enchantment == Enchantments.FORTUNE;
-  }
+  //TODO
+//  @Override
+//  public boolean canApplyAtEnchantingTable(
+//      @Nonnull final ItemStack stack, @Nonnull final Enchantment enchantment) {
+//    return enchantment == Enchantments.EFFICIENCY
+//        || enchantment == Enchantments.FORTUNE;
+//  }
 
   @Override
   public int getBurnTime(

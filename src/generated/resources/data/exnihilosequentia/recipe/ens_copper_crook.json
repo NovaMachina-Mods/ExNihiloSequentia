@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "exnihilosequentia",
+  "key": {
+    "x": {
+      "tag": "c:nuggets/copper"
+    }
+  },
+  "pattern": [
+    "xx",
+    " x",
+    " x"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:copper_crook"
+  }
+}

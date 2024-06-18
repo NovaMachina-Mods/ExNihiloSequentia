@@ -1,0 +1,17 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:gravel"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:coal"
+  },
+  "rolls": [
+    {
+      "chance": 0.125,
+      "mesh": "flint"
+    }
+  ],
+  "waterlogged": false
+}

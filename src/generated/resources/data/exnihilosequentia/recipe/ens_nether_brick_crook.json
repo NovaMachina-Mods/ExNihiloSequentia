@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "exnihilosequentia",
+  "key": {
+    "x": {
+      "item": "minecraft:nether_bricks"
+    }
+  },
+  "pattern": [
+    "xx",
+    " x",
+    " x"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:nether_brick_crook"
+  }
+}

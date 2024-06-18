@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "tag": "minecraft:fishes"
+    },
+    "c": {
+      "tag": "c:gems/prismarine"
+    },
+    "m": {
+      "item": "exnihilosequentia:porcelain_doll"
+    },
+    "s": {
+      "tag": "c:dusts/glowstone"
+    },
+    "t": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "ctc",
+    "sms",
+    "cbc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:guardian_doll"
+  }
+}

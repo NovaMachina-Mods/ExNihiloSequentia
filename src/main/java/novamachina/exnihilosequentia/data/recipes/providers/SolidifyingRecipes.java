@@ -25,7 +25,7 @@ public class SolidifyingRecipes implements ISubRecipeProvider {
   }
 
   private ResourceLocation solidifyLoc(String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "solidify/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 }

@@ -1,0 +1,14 @@
+{
+  "type": "exnihilosequentia:precipitate",
+  "fluid": {
+    "amount": 1000,
+    "id": "exnihilosequentia:sea_water"
+  },
+  "input": {
+    "item": "exnihilosequentia:tube_coral_larva"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:tube_coral_block"
+  }
+}

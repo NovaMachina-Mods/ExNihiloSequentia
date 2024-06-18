@@ -146,7 +146,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
-                new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x4")));
+                ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "doll_x4")));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.CRAFTING_DOLL.asItem(), 6)
         .pattern("xex")
@@ -164,7 +164,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
-                new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, "doll_x6")));
+                ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "doll_x6")));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, EXNBlocks.END_CAKE)
         .pattern("ece")
@@ -256,8 +256,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
-                new ResourceLocation(
-                    ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+                ResourceLocation.fromNamespaceAndPath(
+                    ExNihiloSequentia.MOD_ID,
                     ExNihiloConstants.Items.NETHERITE_MESH)));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.MESH_STRING.asItem())
@@ -384,8 +384,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
-                new ResourceLocation(
-                    ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+                ResourceLocation.fromNamespaceAndPath(
+                    ExNihiloSequentia.MOD_ID,
                     ExNihiloConstants.Items.NETHERITE_HAMMER)));
     //    createHammer(ExNihiloItems.HAMMER_PRISMARINE.asItem(), Tags.Items.GEMS_PRISMARINE,
     // consumer);
@@ -403,43 +403,43 @@ public class CraftingRecipes implements ISubRecipeProvider {
     createOre(EXNItems.COPPER, consumer);
     createOreRecipes(
         EXNItems.LEAD,
-        new ResourceLocation(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EXNItems.LEAD.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, EXNItems.LEAD.getIngotId()),
         consumer);
     createOreRecipes(
         EXNItems.NICKEL,
-        new ResourceLocation(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EXNItems.NICKEL.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, EXNItems.NICKEL.getIngotId()),
         consumer);
     createOreRecipes(
         EXNItems.SILVER,
-        new ResourceLocation(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EXNItems.SILVER.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, EXNItems.SILVER.getIngotId()),
         consumer);
     createOreRecipes(
         EXNItems.TIN,
-        new ResourceLocation(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EXNItems.TIN.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, EXNItems.TIN.getIngotId()),
         consumer);
     createOreRecipes(
         EXNItems.ALUMINUM,
-        new ResourceLocation(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EXNItems.ALUMINUM.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, EXNItems.ALUMINUM.getIngotId()),
         consumer);
     createOreRecipes(
         EXNItems.PLATINUM,
-        new ResourceLocation(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EXNItems.PLATINUM.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, EXNItems.PLATINUM.getIngotId()),
         consumer);
     createOreRecipes(
         EXNItems.URANIUM,
-        new ResourceLocation(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EXNItems.URANIUM.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, EXNItems.URANIUM.getIngotId()),
         consumer);
     createOreRecipes(
         EXNItems.ZINC,
-        new ResourceLocation(
-            ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, EXNItems.ZINC.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, EXNItems.ZINC.getIngotId()),
         consumer);
   }
 
@@ -535,8 +535,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
-                new ResourceLocation(
-                    ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+                ResourceLocation.fromNamespaceAndPath(
+                    ExNihiloSequentia.MOD_ID,
                     ExNihiloConstants.Items.NETHERITE_CROOK)));
     createCrook(EXNItems.CROOK_RED_NETHER_BRICK.asItem(), Items.RED_NETHER_BRICKS, consumer);
     //    createCrook(ExNihiloItems.CROOK_PRISMARINE.asItem(), Tags.Items.GEMS_PRISMARINE,
@@ -694,7 +694,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy("has_piece", InventoryChangeTrigger.TriggerInstance.hasItems(piece))
         .save(
             consumer,
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                 ExNihiloSequentia.MOD_ID,
                 RecipeProviderUtilities.prependRecipePrefix(
                     BuiltInRegistries.ITEM.getKey(rawOre).getPath())));
@@ -725,7 +725,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
           .unlockedBy("has_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(nugget))
           .save(
               consumer,
-              new ResourceLocation(
+              ResourceLocation.fromNamespaceAndPath(
                   ExNihiloSequentia.MOD_ID,
                   RecipeProviderUtilities.prependRecipePrefix(
                       BuiltInRegistries.ITEM.getKey(ingot).getPath() + "_from_nugget")));
@@ -776,7 +776,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
         .save(
             consumer,
-            RecipeProviderUtilities.createSaveLocation(new ResourceLocation(rl + "_blast")));
+            RecipeProviderUtilities.createSaveLocation(ResourceLocation.parse(rl + "_blast")));
   }
 
   private void createHammer(Item output, Item input, RecipeOutput consumer) {
@@ -863,12 +863,12 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
-                new ResourceLocation(rl + "_from_campfire")));
+                ResourceLocation.parse(rl + "_from_campfire")));
     SimpleCookingRecipeBuilder.smoking(
             Ingredient.of(input), RecipeCategory.MISC, output, xpSmoker, durationSmoker)
         .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
         .save(
             consumer,
-            RecipeProviderUtilities.createSaveLocation(new ResourceLocation(rl + "_from_smoker")));
+            RecipeProviderUtilities.createSaveLocation(ResourceLocation.parse(rl + "_from_smoker")));
   }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "-": {
+      "tag": "c:rods"
+    },
+    "x": {
+      "tag": "c:ingots/copper"
+    }
+  },
+  "pattern": [
+    " x ",
+    " -x",
+    "-  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:copper_hammer"
+  }
+}

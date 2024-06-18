@@ -27,7 +27,7 @@ public record OreConfigurationPayload(List<String> oreList) implements CustomPac
       };
 
   public static final CustomPacketPayload.Type<OreConfigurationPayload> TYPE =
-      new CustomPacketPayload.Type<>(new ResourceLocation(ExNihiloSequentia.MOD_ID, "ore_list"));
+      new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "ore_list"));
   public static final StreamCodec<ByteBuf, OreConfigurationPayload> STREAM_CODEC =
       StreamCodec.composite(
           ORE_LIST, OreConfigurationPayload::oreList, OreConfigurationPayload::new);

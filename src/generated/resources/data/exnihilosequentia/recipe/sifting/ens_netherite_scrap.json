@@ -1,0 +1,21 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "exnihilosequentia:crushed_netherrack"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherite_scrap"
+  },
+  "rolls": [
+    {
+      "chance": 0.004,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.008,
+      "mesh": "diamond"
+    }
+  ],
+  "waterlogged": false
+}

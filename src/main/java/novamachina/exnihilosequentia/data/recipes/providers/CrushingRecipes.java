@@ -92,7 +92,7 @@ public class CrushingRecipes implements ISubRecipeProvider {
   }
 
   private ResourceLocation crushingLoc(@Nonnull final String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "crushing/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 }

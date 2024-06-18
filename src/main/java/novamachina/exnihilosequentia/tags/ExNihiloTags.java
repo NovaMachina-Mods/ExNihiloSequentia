@@ -48,11 +48,11 @@ public class ExNihiloTags {
   }
 
   private static ResourceLocation forgeLoc(final String path) {
-    return new ResourceLocation("forge", path);
+    return ResourceLocation.fromNamespaceAndPath("c", path);
   }
 
   private static ResourceLocation modLoc(String path) {
-    return new ResourceLocation(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, path);
+    return ResourceLocation.fromNamespaceAndPath(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, path);
   }
 
   public static class OreTag {

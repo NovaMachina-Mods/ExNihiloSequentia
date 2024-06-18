@@ -28,7 +28,7 @@ public class BarrelFluidHandler extends FluidTank {
   }
 
   public BarrelFluidHandler(Predicate<FluidStack> validator, BarrelBlockEntity entity) {
-    super(BarrelBlockEntity.MAX_FLUID_AMOUNT);
+    super(BarrelBlockEntity.MAX_FLUID_AMOUNT, validator);
     this.barrel = entity;
   }
 

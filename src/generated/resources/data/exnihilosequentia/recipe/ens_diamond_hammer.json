@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "-": {
+      "tag": "c:rods"
+    },
+    "x": {
+      "tag": "c:gems/diamond"
+    }
+  },
+  "pattern": [
+    " x ",
+    " -x",
+    "-  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:diamond_hammer"
+  }
+}

@@ -106,7 +106,7 @@ public class MeltingRecipes implements ISubRecipeProvider {
   }
 
   private ResourceLocation meltingLoc(String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "melting/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 }

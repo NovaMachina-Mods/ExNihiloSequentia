@@ -63,7 +63,7 @@ public class DollItem extends Item {
 
   public Fluid getSpawnFluid() {
     @Nonnull
-    final ResourceLocation fluidLocation = new ResourceLocation(this.fluidModId, this.fluidName);
+    final ResourceLocation fluidLocation = ResourceLocation.fromNamespaceAndPath(this.fluidModId, this.fluidName);
 
     if (BuiltInRegistries.FLUID.containsKey(fluidLocation)) {
 
@@ -75,7 +75,7 @@ public class DollItem extends Item {
   public boolean spawnMob(@Nonnull final Level world, @Nonnull final BlockPos pos) {
     @Nonnull
     ResourceLocation spawneeResourceLocation =
-        new ResourceLocation(this.entityModId, this.entityName);
+        ResourceLocation.fromNamespaceAndPath(this.entityModId, this.entityName);
 
     if (BuiltInRegistries.ENTITY_TYPE.containsKey(spawneeResourceLocation)) {
       @Nullable

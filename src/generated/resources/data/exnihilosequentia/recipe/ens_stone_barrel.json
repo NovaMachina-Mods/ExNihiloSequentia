@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "exnihilosequentia",
+  "key": {
+    "-": {
+      "item": "minecraft:stone_slab"
+    },
+    "x": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "x x",
+    "x x",
+    "x-x"
+  ],
+  "result": {
+    "count": 1,
+    "id": "exnihilosequentia:stone_barrel"
+  }
+}

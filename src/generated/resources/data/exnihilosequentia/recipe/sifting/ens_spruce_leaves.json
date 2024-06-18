@@ -1,0 +1,29 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:spruce_leaves"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:spruce_sapling"
+  },
+  "rolls": [
+    {
+      "chance": 0.05,
+      "mesh": "string"
+    },
+    {
+      "chance": 0.1,
+      "mesh": "flint"
+    },
+    {
+      "chance": 0.15,
+      "mesh": "iron"
+    },
+    {
+      "chance": 0.2,
+      "mesh": "diamond"
+    }
+  ],
+  "waterlogged": false
+}

@@ -1,0 +1,17 @@
+{
+  "type": "exnihilosequentia:sifting",
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:wheat_seeds"
+  },
+  "rolls": [
+    {
+      "chance": 0.7,
+      "mesh": "string"
+    }
+  ],
+  "waterlogged": false
+}

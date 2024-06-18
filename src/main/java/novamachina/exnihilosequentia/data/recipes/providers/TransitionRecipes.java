@@ -29,7 +29,7 @@ public class TransitionRecipes implements ISubRecipeProvider {
   }
 
   private ResourceLocation transitionLoc(String id) {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "transition/" + RecipeProviderUtilities.prependRecipePrefix(id));
   }
 }

@@ -3,103 +3,103 @@ package novamachina.exnihilosequentia.world.level.block;
 import java.util.List;
 import javax.annotation.Nonnull;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.level.material.EXNFluids;
+import novamachina.novacore.NovaCore;
 import novamachina.novacore.core.registries.BlockRegistry;
 import novamachina.novacore.world.item.ItemDefinition;
-import novamachina.novacore.world.level.block.BlockBuilder;
 import novamachina.novacore.world.level.block.BlockDefinition;
 
 public class EXNBlocks {
 
   private static final BlockRegistry BLOCKS =
-      new BlockRegistry(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+      new BlockRegistry(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA, NovaCore.SERVICE_PROVIDER);
 
   @Nonnull
-  public static final BlockDefinition<Block> DUST =
-      BLOCKS.block(
-          "Dust",
-          "dust",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.WOOL).buildFallingBlock());
+  public static final BlockDefinition<FallingBlock> DUST =
+      BLOCKS.fallingBlock(
+          "Dust", "dust", BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.WOOL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_ANDESITE =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_ANDESITE =
+      BLOCKS.fallingBlock(
           "Crushed Andesite",
           "crushed_andesite",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_BASALT =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_BASALT =
+      BLOCKS.fallingBlock(
           "Crushed Basalt",
           "crushed_basalt",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_BLACKSTONE =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_BLACKSTONE =
+      BLOCKS.fallingBlock(
           "Crushed Blackstone",
           "crushed_blackstone",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_CALCITE =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_CALCITE =
+      BLOCKS.fallingBlock(
           "Crushed Calcite",
           "crushed_calcite",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_DEEPSLATE =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_DEEPSLATE =
+      BLOCKS.fallingBlock(
           "Crushed Deepslate",
           "crushed_deepslate",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_DIORITE =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_DIORITE =
+      BLOCKS.fallingBlock(
           "Crushed Diorite",
           "crushed_diorite",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_DRIPSTONE =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_DRIPSTONE =
+      BLOCKS.fallingBlock(
           "Crushed Dripstone",
           "crushed_dripstone",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_END_STONE =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_END_STONE =
+      BLOCKS.fallingBlock(
           "Crushed End Stone",
           "crushed_end_stone",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_GRANITE =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_GRANITE =
+      BLOCKS.fallingBlock(
           "Crushed Granite",
           "crushed_granite",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_NETHERRACK =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_NETHERRACK =
+      BLOCKS.fallingBlock(
           "Crushed Netherrack",
           "crushed_netherrack",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
-  public static final BlockDefinition<Block> CRUSHED_TUFF =
-      BLOCKS.block(
+  public static final BlockDefinition<FallingBlock> CRUSHED_TUFF =
+      BLOCKS.fallingBlock(
           "Crushed Tuff",
           "crushed_tuff",
-          () -> BlockBuilder.create().strength(0.7F).sound(SoundType.GRAVEL).buildFallingBlock());
+          BlockBehaviour.Properties.of().strength(0.7F).sound(SoundType.GRAVEL));
 
   @Nonnull
   public static final BlockDefinition<EndCakeBlock> END_CAKE =
@@ -112,15 +112,11 @@ public class EXNBlocks {
 
   @Nonnull
   public static final BlockDefinition<LiquidBlock> SEA_WATER =
-      BLOCKS.block(
+      BLOCKS.liquidBlock(
           "Sea Water",
           "sea_water",
-          () ->
-              BlockBuilder.create()
-                  .noCollision()
-                  .strength(100.0F)
-                  .noLootTable()
-                  .buildLiquidBlock(EXNFluids.SEA_WATER::getStillFluid),
+          BlockBehaviour.Properties.of().noCollission().strength(100.0F).noLootTable(),
+          EXNFluids.SEA_WATER.getStillFluid(),
           ItemDefinition.ItemType.CUSTOM);
 
   @Nonnull
@@ -136,12 +132,7 @@ public class EXNBlocks {
       BLOCKS.block(
           "Unfired Crucible",
           "unfired_crucible",
-          () ->
-              BlockBuilder.create()
-                  .strength(0.6F)
-                  .sound(SoundType.GRAVEL)
-                  .noOcclusion()
-                  .buildBlock());
+          BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.GRAVEL).noOcclusion());
 
   @Nonnull
   public static final BlockDefinition<CrucibleBlock> FIRED_CRUCIBLE =

@@ -3,7 +3,7 @@ package novamachina.exnihilosequentia.core.registries;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.novacore.core.IRegistry;
-import novamachina.novacore.world.level.block.BlockEntityTypeDefinition;
+import novamachina.novacore.world.level.block.entity.BlockEntityTypeDefinition;
 
 public class InitBlockEntityTypes {
   private InitBlockEntityTypes() {}
