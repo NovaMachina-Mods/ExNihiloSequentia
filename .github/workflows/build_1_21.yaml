@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Notify Discord of Run Start
@@ -24,10 +24,12 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{"title":"STARTED","color":3224808,"fields":[{"name":"Project","value":"${{github.event.repository.name}}"},{"name":"Action","value":"Build"},{"name":"Branch","value":"${{github.ref_name}}","inline":true},{"name":"Run","value":"${{github.run_number}}","inline":true}]}]'
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
@@ -35,13 +37,10 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Build Project
-        uses: gradle/gradle-build-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          gradle-version: wrapper
-          arguments: build sonar --info
+        run: ./gradlew build sonar --info
       - name: Notify Discord of Succeeded Build
         if: (github.event_name != 'pull_request') && success()
         uses: Ilshidur/action-discord@0.3.2
@@ -62,7 +61,7 @@ jobs:
     if: (github.event_name != 'pull_request' && github.ref_name == '1.21')
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Notify Discord of Deploy
@@ -71,18 +70,17 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{"title":"STARTED","color":3224808,"fields":[{"name":"Project","value":"${{github.event.repository.name}}"},{"name":"Action","value":"Deploy"},{"name":"Branch","value":"${{github.ref_name}}","inline":true},{"name":"Run","value":"${{github.run_number}}","inline":true}]}]'
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
       - name: Deploy to CloudSmith
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: wrapper
-          arguments: publish
+        run: ./gradlew publish
       - name: Deploy to CurseForge
         env:
           CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_APIKEY }}
