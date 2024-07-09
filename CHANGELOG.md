@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [NeoForged Semantic Versioning](https://docs.neoforged.net/docs/gettingstarted/versioning).
 
+## [7.0.0](https://github.com/NovaMachina-Mods/ExNihiloSequentia/compare/v6.0.0...v7.0.0) - 2024-07-09
+
+### Changed
+- Update to NeoForge 21.0.40-beta
+- Update to NovaCore 3.0.0
+- Moved common tags from `forge` to `c`
+
 ## [6.0.0](https://github.com/NovaMachina-Mods/ExNihiloSequentia/compare/v5.0.0...v6.0.0) - 2024-01-01
 
 ### Added
