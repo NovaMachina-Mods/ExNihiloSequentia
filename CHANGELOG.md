@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 - Config moved to STARTUP rather than COMMON
+- - Update to NeoForge 21.0.106-beta
 
 ## [7.0.0](https://github.com/NovaMachina-Mods/ExNihiloSequentia/compare/v6.0.0...v7.0.0) - 2024-07-09
 
