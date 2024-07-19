@@ -47,12 +47,7 @@ public class ExNihiloSequentia {
 
   public ExNihiloSequentia(ModContainer container, IEventBus modEventBus) {
 
-    container.registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
-    Config.loadConfig(
-        Config.COMMON_CONFIG,
-        FMLPaths.CONFIGDIR
-            .get()
-            .resolve(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA + "-common.toml"));
+    container.registerConfig(ModConfig.Type.STARTUP, Config.COMMON_CONFIG);
 
     log.debug("Starting Ex Nihilo: Sequentia");
 

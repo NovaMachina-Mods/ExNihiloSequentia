@@ -669,19 +669,6 @@ public class Config {
     return pebbleDamage.get();
   }
 
-  public static void loadConfig(@Nonnull final ModConfigSpec spec, @Nonnull final Path path) {
-    @Nonnull
-    final CommentedFileConfig configData =
-        CommentedFileConfig.builder(path)
-            .sync()
-            .autosave()
-            .writingMode(WritingMode.REPLACE)
-            .build();
-
-    configData.load();
-    spec.setConfig(configData);
-  }
-
   public static int getCrookNetheriteDurability() {
     return crookNetheriteValue.get();
   }
