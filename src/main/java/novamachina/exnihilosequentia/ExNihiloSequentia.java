@@ -10,6 +10,8 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import novamachina.exnihilosequentia.client.setup.ClientSetup;
@@ -48,6 +50,7 @@ public class ExNihiloSequentia {
   public ExNihiloSequentia(ModContainer container, IEventBus modEventBus) {
 
     container.registerConfig(ModConfig.Type.STARTUP, Config.COMMON_CONFIG);
+    container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
     log.debug("Starting Ex Nihilo: Sequentia");
 

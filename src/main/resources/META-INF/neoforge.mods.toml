@@ -6,7 +6,7 @@ license="CC BY-NC-SA 4.0"
 [[mods]]
     modId="exnihilosequentia"
     logoFile="logo.png"
-    version="7.0.0"
+    version="7.0.1"
     displayName="Ex Nihilo: Sequentia"
     updateJSONURL="https://api.modrinth.com/updates/WhVa4xyw/forge_updates.json"
     authors="NovaMachina"

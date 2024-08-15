@@ -31,6 +31,101 @@ public class EXNLangProvider extends AbstractLangGenerator {
     addCompat();
     // Miscs
     addMisc();
+    addConfigs();
+  }
+
+  private void addConfigs() {
+    addConfigEntry("pebble", "Pebble Settings");
+    addConfigEntry("pebbleDamage", "Damage");
+    addConfigEntry("enableThrowable", "Throwable");
+
+    addConfigEntry("barrel", "Barrel Settings");
+    addConfigEntry("barrelNumberOfBuckets", "Max Number of Buckets");
+    addConfigEntry("rainFillAmount", "Rain mB per Second");
+    addConfigEntry("woodBarrelMaxTemp", "Wooden Barrel Max Temp");
+    addConfigEntry("showParticles", "Show Particles");
+    addConfigEntry("netherBarrelSoundsEnabled", "Nether Barrel Sounds Enabled");
+
+    addConfigEntry("mob_spawn", "Mob Spawn Settings");
+    addConfigEntry("secondsToSpawnMobs", "Seconds to Spawn Mobs");
+
+    addConfigEntry("compost", "Compost Settings");
+    addConfigEntry("maxSolidAmount", "Max Solid Amount");
+    addConfigEntry("secondsToCompost", "Seconds to Compost");
+
+    addConfigEntry("fluid_transform", "Fluid Transform Settings");
+    addConfigEntry("secondsToTransformFluid", "Seconds to Transform Fluid");
+
+    addConfigEntry("crook", "Crook Settings");
+    addConfigEntry("vanillaDropSimulateCount", "Drop Simulation Count");
+    addConfigEntry("maxBonusStringCount", "Max Bonus String");
+    addConfigEntry("minStringCount", "Min Bonus String");
+
+    addConfigEntry("crucible", "Crucible Settings");
+    addConfigEntry("ticksBetweenMelts", "Ticks Between Melt Actions");
+    addConfigEntry("crucibleNumberOfBuckets", "Number of Buckets");
+    addConfigEntry("netherCrucibleSoundsEnabled", "Nether Crucible Sounds Enabled");
+
+    addConfigEntry("wood", "Wooden Crucible Settings");
+    addConfigEntry("woodHeatRate", "Wooden Crucible Heat Rate");
+
+    addConfigEntry("infested_leaves", "Infested Leaves Settings");
+    addConfigEntry("secondsToTransformLeaves", "Seconds to Transform");
+    addConfigEntry("spreadChance", "Spread Chance");
+    addConfigEntry("ticksBetweenSpreadAttempt", "Ticks Between Spread Attempt");
+
+    addConfigEntry("sieve", "Sieve Settings");
+    addConfigEntry("flattenSieveRecipes", "Flatten Recipes");
+    addConfigEntry("sieveRange", "Sieve Range");
+    addConfigEntry("enableMeshDurability", "Enable Mesh Durability");
+    addConfigEntry("meshStackSize", "Max Mesh Stack Size");
+    addConfigEntry("maxSieveClicks", "Sieve Clicks");
+    addConfigEntry("netherSieveSoundsEnabled", "Nether Sieve Sounds Enabled");
+
+    addConfigEntry("ore", "Ore Settings");
+    addConfigEntry("enableOreOverride", "Enable Ore Override");
+    addConfigEntry("enableAluminum", "Enable Aluminum");
+    addConfigEntry("enableCopper", "Enable Copper");
+    addConfigEntry("enableGold", "Enable Gold");
+    addConfigEntry("enableIron", "Enable Iron");
+    addConfigEntry("enableLead", "Enable Lead");
+    addConfigEntry("enableNickel", "Enable Nickel");
+    addConfigEntry("enablePlatinum", "Enable Platinum");
+    addConfigEntry("enableSilver", "Enable Silver");
+    addConfigEntry("enableTin", "Enable Tin");
+    addConfigEntry("enableUranium", "Enable Uranium");
+    addConfigEntry("enableZinc", "Enable Zinc");
+
+    addConfigEntry("durability", "Durability Settings");
+
+    addConfigEntry("hammer", "Hammer Durability");
+    addConfigEntry("hammerIronValue", "Iron Hammer");
+    addConfigEntry("hammerDiamondValue", "Diamond Hammer");
+    addConfigEntry("hammerGoldValue", "Gold Hammer");
+    addConfigEntry("hammerNetheriteValue", "Netherite Hammer");
+    addConfigEntry("hammerStoneValue", "Stone Hammer");
+    addConfigEntry("hammerWoodValue", "Wooden Hammer");
+
+    addConfigEntry("crookAndesiteValue", "Andesite Crook");
+    addConfigEntry("crookBoneValue", "Bone Crook");
+    addConfigEntry("crookDiamondValue", "Diamond Crook");
+    addConfigEntry("crookDioriteValue", "Diorite Crook");
+    addConfigEntry("crookGoldValue", "Gold Crook");
+    addConfigEntry("crookGraniteValue", "Granite Crook");
+    addConfigEntry("crookIronValue", "Iron Crook");
+    addConfigEntry("crookNetheriteValue", "Nether Crook");
+    addConfigEntry("crookStoneValue", "Stone Crook");
+    addConfigEntry("crookWoodValue", "Wooden Crok");
+
+    addConfigEntry("mesh", "Mesh Durability");
+    addConfigEntry("meshStringValue", "String Mesh");
+    addConfigEntry("meshFlintValue", "Flint Mesh");
+    addConfigEntry("meshIronValue", "Iron Mesh");
+    addConfigEntry("meshDiamondValue", "Diamond Mesh");
+    addConfigEntry("meshEmeraldValue", "Emerald Mesh");
+    addConfigEntry("meshNetheriteValue", "Netherite Mesh");
+    addConfigEntry("section.exnihilosequentia.startup.toml", "");
+    addConfigEntry("section.exnihilosequentia.startup.toml.title", "");
   }
 
   private void addCompat() {
@@ -98,6 +193,10 @@ public class EXNLangProvider extends AbstractLangGenerator {
 
   private void addJadeEntry(String id) {
     add("config.jade.plugin_" + ModIds.EX_NIHILO_SEQUENTIA + "." + id, properNaming(id));
+  }
+
+  private void addConfigEntry(String id, String fullText) {
+    add(String.format("%s.configuration.%s", ExNihiloSequentia.MOD_ID, id), fullText);
   }
 
   private void addItem() {
