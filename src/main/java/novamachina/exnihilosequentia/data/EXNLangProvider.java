@@ -200,14 +200,11 @@ public class EXNLangProvider extends AbstractLangGenerator {
   }
 
   private void addItem() {
-    for (ItemDefinition<? extends Item> definition : EXNItems.ITEMS.getRegistry()) {
-      addItemName(definition);
-    }
+    EXNItems.getDefinitions().forEach(this::addItemName);
+    EXNBlocks.getDefinitions().forEach(this::addItemName);
   }
 
   private void addBlock() {
-    for (BlockDefinition<? extends Block> definition : EXNBlocks.getDefinitions()) {
-      addBlockName(definition);
-    }
+    EXNBlocks.getDefinitions().forEach(this::addBlockName);
   }
 }

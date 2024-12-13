@@ -4,9 +4,7 @@
     "amount": 1000,
     "id": "exnihilosequentia:sea_water"
   },
-  "input": {
-    "item": "exnihilosequentia:fire_coral_larva"
-  },
+  "input": "exnihilosequentia:fire_coral_larva",
   "result": {
     "count": 1,
     "id": "minecraft:fire_coral_block"

@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "c": {
-      "item": "minecraft:jungle_log"
-    },
-    "l": {
-      "item": "minecraft:jungle_slab"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "c": "minecraft:jungle_log",
+    "l": "minecraft:jungle_slab",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "c c",

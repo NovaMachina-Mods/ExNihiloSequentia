@@ -29,10 +29,11 @@ public class ExNihiloDataGenerators {
     CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
     generator.addProvider(event.includeServer(), new EXNLootProvider(lookupProvider, output));
-    generator.addProvider(event.includeServer(), new EXNRecipeProvider(output, lookupProvider));
+    generator.addProvider(event.includeServer(), new EXNRecipeProvider.Runner(output, lookupProvider));
     generator.addProvider(
         event.includeServer(), new EXNTagProvider(output, lookupProvider, existingFileHelper));
     generator.addProvider(event.includeServer(), new EXNLootModifierProvider(lookupProvider, output));
+    generator.addProvider(event.includeClient(), new ExNihiloFurnaceFuleGenerator(output, lookupProvider));
 
     generator.addProvider(event.includeClient(), new ItemModelProvider(output, existingFileHelper));
     generator.addProvider(event.includeClient(), new EXNLangProvider(output, "en_us"));

@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 100,
-  "input": {
-    "item": "minecraft:lily_pad"
-  }
+  "input": "minecraft:lily_pad"
 }

@@ -4,9 +4,7 @@
     "amount": 1000,
     "id": "exnihilosequentia:witch_water"
   },
-  "input": {
-    "item": "exnihilosequentia:mycelium_spores"
-  },
+  "input": "exnihilosequentia:mycelium_spores",
   "result": {
     "count": 1,
     "id": "minecraft:brown_mushroom_block"

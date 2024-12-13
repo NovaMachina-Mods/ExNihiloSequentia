@@ -3,9 +3,7 @@
   "category": "misc",
   "cookingtime": 100,
   "experience": 0.7,
-  "ingredient": {
-    "item": "exnihilosequentia:raw_aluminum"
-  },
+  "ingredient": "exnihilosequentia:raw_aluminum",
   "result": {
     "count": 1,
     "id": "exnihilosequentia:aluminum_ingot"

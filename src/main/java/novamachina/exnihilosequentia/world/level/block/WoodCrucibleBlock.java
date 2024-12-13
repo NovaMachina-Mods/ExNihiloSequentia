@@ -16,8 +16,8 @@ import novamachina.exnihilosequentia.world.level.block.entity.WoodCrucibleBlockE
 
 public class WoodCrucibleBlock extends CrucibleBlock implements EntityBlock {
 
-  public WoodCrucibleBlock() {
-    super(BlockBehaviour.Properties.of().strength(.75F).sound(SoundType.WOOD).noOcclusion());
+  public WoodCrucibleBlock(BlockBehaviour.Properties properties) {
+    super(properties);
   }
 
   @Nullable

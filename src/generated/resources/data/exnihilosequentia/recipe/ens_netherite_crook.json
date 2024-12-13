@@ -1,16 +1,10 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "tag": "c:ingots/netherite"
-  },
-  "base": {
-    "item": "exnihilosequentia:diamond_crook"
-  },
+  "addition": "#c:ingots/netherite",
+  "base": "exnihilosequentia:diamond_crook",
   "result": {
     "count": 1,
     "id": "exnihilosequentia:netherite_crook"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

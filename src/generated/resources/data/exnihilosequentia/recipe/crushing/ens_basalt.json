@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:basalt"
-  },
+  "input": "minecraft:basalt",
   "results": [
     {
       "chance": 1.0,

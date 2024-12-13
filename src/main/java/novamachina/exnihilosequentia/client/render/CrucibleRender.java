@@ -87,7 +87,7 @@ public class CrucibleRender extends AbstractBlockEntityRenderer<CrucibleBlockEnt
       }
       matrixStack.pushPose();
 
-      final float fillAmount = (Math.min(tileEntity.getSolidProportion(), 1.0F)) - 0.1875F;
+      final float fillAmount = (Math.max(tileEntity.getSolidProportion(), 0.0F)) - 0.1875F;
 
       matrixStack.translate(0.125, 0.1875, 0.125);
       matrixStack.scale(0.75F, fillAmount, 0.75F);

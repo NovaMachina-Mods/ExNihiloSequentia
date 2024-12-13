@@ -3,9 +3,7 @@
   "category": "equipment",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "tag": "c:gems/diamond"
-    }
+    "x": "#c:gems/diamond"
   },
   "pattern": [
     "xx",

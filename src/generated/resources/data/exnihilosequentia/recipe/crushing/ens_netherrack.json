@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:netherrack"
-  },
+  "input": "minecraft:netherrack",
   "results": [
     {
       "chance": 1.0,

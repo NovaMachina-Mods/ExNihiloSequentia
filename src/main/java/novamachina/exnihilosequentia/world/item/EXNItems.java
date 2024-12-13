@@ -1,14 +1,15 @@
 package novamachina.exnihilosequentia.world.item;
 
 import java.util.*;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.level.block.Blocks;
 import novamachina.exnihilosequentia.common.Config;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
+import novamachina.exnihilosequentia.core.registries.ExNihiloItemRegistry;
 import novamachina.exnihilosequentia.world.level.material.EXNFluids;
-import novamachina.novacore.core.registries.ItemRegistry;
 import novamachina.novacore.world.item.ItemDefinition;
 
 @SuppressWarnings("unused")
@@ -18,17 +19,24 @@ public class EXNItems {
     return ITEMS.getRegistry();
   }
 
-  public static final ItemRegistry ITEMS =
-      new ItemRegistry(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
+  public static final ExNihiloItemRegistry ITEMS =
+      new ExNihiloItemRegistry(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
   // Begin Items Only
   public static final ItemDefinition<CookedSilkwormItem> COOKED_SILKWORM =
       ITEMS.item(
           "Cooked Silkworm",
           "cooked_silkworm",
+          new Item.Properties()
+              .food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.6F).build()),
           CookedSilkwormItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<SilkwormItem> SILKWORM =
-      ITEMS.item("Silkworm", "silkworm", SilkwormItem::new, ItemDefinition.ItemType.OTHER);
+      ITEMS.item(
+          "Silkworm",
+          "silkworm",
+          new Item.Properties(),
+          SilkwormItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final Ore IRON =
       createOre(
           ExNihiloConstants.Ore.IRON,
@@ -67,291 +75,386 @@ public class EXNItems {
   public static final Ore ZINC =
       createOre(ExNihiloConstants.Ore.ZINC, Optional.empty(), Optional.empty(), Optional.empty());
   public static final ItemDefinition<DollItem> BLAZE_DOLL =
-      ITEMS.item(
+      ITEMS.dollItem(
           "Blazing Doll",
           "blaze_doll",
-          () ->
-              new DollItem(
-                  ExNihiloConstants.ModIds.MINECRAFT,
-                  "blaze",
-                  "minecraft",
-                  "lava",
-                  1,
-                  ExNihiloConstants.Tooltips.BLAZE),
+          ExNihiloConstants.ModIds.MINECRAFT,
+          "blaze",
+          "minecraft",
+          "lava",
+          1,
+          ExNihiloConstants.Tooltips.BLAZE,
+          new Item.Properties(),
+          DollItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<DollItem> ENDERMAN_DOLL =
-      ITEMS.item(
+      ITEMS.dollItem(
           "Creeping Doll",
           "enderman_doll",
-          () ->
-              new DollItem(
-                  ExNihiloConstants.ModIds.MINECRAFT,
-                  "enderman",
-                  ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-                  ExNihiloConstants.Fluids.WITCH_WATER,
-                  2,
-                  ExNihiloConstants.Tooltips.ENDERMAN),
+          ExNihiloConstants.ModIds.MINECRAFT,
+          "enderman",
+          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+          ExNihiloConstants.Fluids.WITCH_WATER,
+          2,
+          ExNihiloConstants.Tooltips.ENDERMAN,
+          new Item.Properties(),
+          DollItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<DollItem> SHULKER_DOLL =
-      ITEMS.item(
+      ITEMS.dollItem(
           "Floating Doll",
           "shulker_doll",
-          () ->
-              new DollItem(
-                  ExNihiloConstants.ModIds.MINECRAFT,
-                  "shulker",
-                  ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-                  ExNihiloConstants.Fluids.WITCH_WATER,
-                  1.5,
-                  ExNihiloConstants.Tooltips.SHULKER),
+          ExNihiloConstants.ModIds.MINECRAFT,
+          "shulker",
+          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+          ExNihiloConstants.Fluids.WITCH_WATER,
+          1.5,
+          ExNihiloConstants.Tooltips.SHULKER,
+          new Item.Properties(),
+          DollItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<DollItem> GUARDIAN_DOLL =
-      ITEMS.item(
+      ITEMS.dollItem(
           "Protecting Doll",
           "guardian_doll",
-          () ->
-              new DollItem(
-                  ExNihiloConstants.ModIds.MINECRAFT,
-                  "guardian",
-                  ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-                  ExNihiloConstants.Fluids.SEA_WATER,
-                  1,
-                  ExNihiloConstants.Tooltips.GUARDIAN),
+          ExNihiloConstants.ModIds.MINECRAFT,
+          "guardian",
+          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+          ExNihiloConstants.Fluids.SEA_WATER,
+          1,
+          ExNihiloConstants.Tooltips.GUARDIAN,
+          new Item.Properties(),
+          DollItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<DollItem> BEE_DOLL =
-      ITEMS.item(
+      ITEMS.dollItem(
           "Buzzing Doll",
           "bee_doll",
-          () ->
-              new DollItem(
-                  ExNihiloConstants.ModIds.MINECRAFT,
-                  "bee",
-                  ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
-                  ExNihiloConstants.Fluids.WITCH_WATER,
-                  1,
-                  ExNihiloConstants.Tooltips.BEE),
+          ExNihiloConstants.ModIds.MINECRAFT,
+          "bee",
+          ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA,
+          ExNihiloConstants.Fluids.WITCH_WATER,
+          1,
+          ExNihiloConstants.Tooltips.BEE,
+          new Item.Properties(),
+          DollItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_ANDESITE =
       ITEMS.item(
-          "Andesite Pebble", "andesite_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "Andesite Pebble",
+          "andesite_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_BASALT =
-      ITEMS.item("Basalt Pebble", "basalt_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+      ITEMS.item(
+          "Basalt Pebble",
+          "basalt_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_BLACKSTONE =
       ITEMS.item(
-          "Blackstone Pebble", "blackstone_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "Blackstone Pebble",
+          "blackstone_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_CALCITE =
       ITEMS.item(
-          "Calcite Pebble", "calcite_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "Calcite Pebble",
+          "calcite_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_DEEPSLATE =
       ITEMS.item(
-          "Deepslate Pebble", "deepslate_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "Deepslate Pebble",
+          "deepslate_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_DIORITE =
       ITEMS.item(
-          "Diorite Pebble", "diorite_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "Diorite Pebble",
+          "diorite_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_DRIPSTONE =
       ITEMS.item(
-          "Dripstone Pebble", "dripstone_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "Dripstone Pebble",
+          "dripstone_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_END_STONE =
       ITEMS.item(
-          "End Stone Pebble", "end_stone_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "End Stone Pebble",
+          "end_stone_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_GRANITE =
       ITEMS.item(
-          "Granite Pebble", "granite_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "Granite Pebble",
+          "granite_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_NETHERRACK =
       ITEMS.item(
-          "Netherrack Pebble", "netherrack_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+          "Netherrack Pebble",
+          "netherrack_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_STONE =
-      ITEMS.item("Stone Pebble", "stone_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+      ITEMS.item(
+          "Stone Pebble",
+          "stone_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<PebbleItem> PEBBLE_TUFF =
-      ITEMS.item("Tuff Pebble", "tuff_pebble", PebbleItem::new, ItemDefinition.ItemType.OTHER);
+      ITEMS.item(
+          "Tuff Pebble",
+          "tuff_pebble",
+          new Item.Properties(),
+          PebbleItem::new,
+          ItemDefinition.ItemType.OTHER);
   // TODO: Rename ResourceItem class
   public static final ItemDefinition<ResourceItem> MYCELIUM_SPORE =
-      ITEMS.item(
+      ITEMS.resourceItem(
           "Mycelium Spores",
           "mycelium_spores",
-          () ->
-              new ResourceItem(
-                  ExNihiloConstants.Items.MYCELIUM_SPORE, Blocks.DIRT, Blocks.MYCELIUM),
+          Blocks.DIRT,
+          Blocks.MYCELIUM,
+          new Item.Properties(),
+          ResourceItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<ResourceItem> CRIMSON_NYLIUM_SPORE =
-      ITEMS.item(
+      ITEMS.resourceItem(
           "Crimson Nylium Spores",
           "crimson_nylium_spores",
-          () ->
-              new ResourceItem(
-                  ExNihiloConstants.Items.CRIMSON_NYLIUM_SPORE,
-                  Blocks.NETHERRACK,
-                  Blocks.CRIMSON_NYLIUM),
+          Blocks.NETHERRACK,
+          Blocks.CRIMSON_NYLIUM,
+          new Item.Properties(),
+          ResourceItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<ResourceItem> WARPED_NYLIUM_SPORE =
-      ITEMS.item(
+      ITEMS.resourceItem(
           "Warped Nylium Spores",
           "warped_nylium_spores",
-          () ->
-              new ResourceItem(
-                  ExNihiloConstants.Items.WARPED_NYLIUM_SPORE,
-                  Blocks.NETHERRACK,
-                  Blocks.WARPED_NYLIUM),
+          Blocks.NETHERRACK,
+          Blocks.WARPED_NYLIUM,
+          new Item.Properties(),
+          ResourceItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<ResourceItem> GRASS_SEED =
-      ITEMS.item(
+      ITEMS.resourceItem(
           "Grass Seeds",
           "grass_seeds",
-          () ->
-              new ResourceItem(ExNihiloConstants.Items.GRASS_SEED, Blocks.DIRT, Blocks.GRASS_BLOCK),
+          Blocks.DIRT,
+          Blocks.GRASS_BLOCK,
+          new Item.Properties(),
+          ResourceItem::new,
           ItemDefinition.ItemType.OTHER);
-  // TODO: Replace below ResourceItem with a generic base item
-  public static final ItemDefinition<ResourceItem> PORCELAIN_CLAY =
+  public static final ItemDefinition<Item> PORCELAIN_CLAY =
       ITEMS.item(
           "Porcelain Clay",
           "porcelain_clay",
-          () -> new ResourceItem(ExNihiloConstants.Items.PORCELAIN_CLAY),
+          new Item.Properties(),
+          Item::new,
           ItemDefinition.ItemType.OTHER);
-  public static final ItemDefinition<ResourceItem> CRAFTING_DOLL =
+  public static final ItemDefinition<Item> CRAFTING_DOLL =
       ITEMS.item(
           "Porcelain Doll",
           "porcelain_doll",
-          () -> new ResourceItem(ExNihiloConstants.Items.CRAFTING_DOLL),
+          new Item.Properties(),
+          Item::new,
           ItemDefinition.ItemType.OTHER);
-  public static final ItemDefinition<ResourceItem> TUBE_CORAL_LARVA =
+  public static final ItemDefinition<Item> TUBE_CORAL_LARVA =
       ITEMS.item(
           "Tube Coral Larva",
           "tube_coral_larva",
-          () -> new ResourceItem(ExNihiloConstants.Items.TUBE_CORAL_LARVA),
+          new Item.Properties(),
+          Item::new,
           ItemDefinition.ItemType.OTHER);
-  public static final ItemDefinition<ResourceItem> BRAIN_CORAL_LARVA =
+  public static final ItemDefinition<Item> BRAIN_CORAL_LARVA =
       ITEMS.item(
           "Brain Coral Larva",
           "brain_coral_larva",
-          () -> new ResourceItem(ExNihiloConstants.Items.BRAIN_CORAL_LARVA),
+          new Item.Properties(),
+          Item::new,
           ItemDefinition.ItemType.OTHER);
-  public static final ItemDefinition<ResourceItem> BUBBLE_CORAL_LARVA =
+  public static final ItemDefinition<Item> BUBBLE_CORAL_LARVA =
       ITEMS.item(
           "Bubble Coral Larva",
           "bubble_coral_larva",
-          () -> new ResourceItem(ExNihiloConstants.Items.BUBBLE_CORAL_LARVA),
+          new Item.Properties(),
+          Item::new,
           ItemDefinition.ItemType.OTHER);
-  public static final ItemDefinition<ResourceItem> FIRE_CORAL_LARVA =
+  public static final ItemDefinition<Item> FIRE_CORAL_LARVA =
       ITEMS.item(
           "Fire Coral Larva",
           "fire_coral_larva",
-          () -> new ResourceItem(ExNihiloConstants.Items.FIRE_CORAL_LARVA),
+          new Item.Properties(),
+          Item::new,
           ItemDefinition.ItemType.OTHER);
-  public static final ItemDefinition<ResourceItem> HORN_CORAL_LARVA =
+  public static final ItemDefinition<Item> HORN_CORAL_LARVA =
       ITEMS.item(
           "Horn Coral Larva",
           "horn_coral_larva",
-          () -> new ResourceItem(ExNihiloConstants.Items.HORN_CORAL_LARVA),
+          new Item.Properties(),
+          Item::new,
           ItemDefinition.ItemType.OTHER);
-  public static final ItemDefinition<ResourceItem> BEEHIVE_FRAME =
+  public static final ItemDefinition<Item> BEEHIVE_FRAME =
       ITEMS.item(
           "Beehive Frame",
           "beehive_frame",
-          () -> new ResourceItem(ExNihiloConstants.Items.BEEHIVE_FRAME),
+          new Item.Properties(),
+          Item::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<MeshItem> MESH_STRING =
-      ITEMS.item(
+      ITEMS.meshItem(
           "String Mesh",
           "string_mesh",
-          () ->
-              new MeshItem(
-                  ExNihiloConstants.Items.STRING_MESH,
-                  Config.getMeshStringValue(),
-                  MeshType.STRING),
+          MeshType.STRING,
+          Config.enableMeshDurability()
+              ? new Item.Properties().durability(Config.getMeshStringValue())
+              : new Item.Properties().stacksTo(Config.getMeshStackSize()),
+          MeshItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<MeshItem> MESH_FLINT =
-      ITEMS.item(
+      ITEMS.meshItem(
           "Flint Mesh",
           "flint_mesh",
-          () ->
-              new MeshItem(
-                  ExNihiloConstants.Items.FLINT_MESH, Config.getMeshFlintValue(), MeshType.FLINT),
+          MeshType.FLINT,
+          Config.enableMeshDurability()
+              ? new Item.Properties().durability(Config.getMeshFlintValue())
+              : new Item.Properties().stacksTo(Config.getMeshStackSize()),
+          MeshItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<MeshItem> MESH_IRON =
-      ITEMS.item(
+      ITEMS.meshItem(
           "Iron Mesh",
           "iron_mesh",
-          () ->
-              new MeshItem(
-                  ExNihiloConstants.Items.IRON_MESH, Config.getMeshIronValue(), MeshType.IRON),
+          MeshType.IRON,
+          Config.enableMeshDurability()
+              ? new Item.Properties().durability(Config.getMeshIronValue())
+              : new Item.Properties().stacksTo(Config.getMeshStackSize()),
+          MeshItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<MeshItem> MESH_DIAMOND =
-      ITEMS.item(
+      ITEMS.meshItem(
           "Diamond Mesh",
           "diamond_mesh",
-          () ->
-              new MeshItem(
-                  ExNihiloConstants.Items.DIAMOND_MESH,
-                  Config.getMeshDiamondValue(),
-                  MeshType.DIAMOND),
+          MeshType.DIAMOND,
+          Config.enableMeshDurability()
+              ? new Item.Properties().durability(Config.getMeshDiamondValue())
+              : new Item.Properties().stacksTo(Config.getMeshStackSize()),
+          MeshItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<MeshItem> MESH_EMERALD =
-      ITEMS.item(
+      ITEMS.meshItem(
           "Emerald Mesh",
           "emerald_mesh",
-          () ->
-              new MeshItem(
-                  ExNihiloConstants.Items.EMERALD_MESH,
-                  Config.getMeshEmeraldValue(),
-                  MeshType.EMERALD),
+          MeshType.EMERALD,
+          Config.enableMeshDurability()
+              ? new Item.Properties().durability(Config.getMeshEmeraldValue())
+              : new Item.Properties().stacksTo(Config.getMeshStackSize()),
+          MeshItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<MeshItem> MESH_NETHERITE =
-      ITEMS.item(
+      ITEMS.meshItem(
           "Netherite Mesh",
           "netherite_mesh",
-          () ->
-              new MeshItem(
-                  ExNihiloConstants.Items.NETHERITE_MESH,
-                  Config.getMeshNetheriteValue(),
-                  MeshType.NETHERITE),
+          MeshType.NETHERITE,
+          Config.enableMeshDurability()
+              ? new Item.Properties().durability(Config.getMeshNetheriteValue())
+              : new Item.Properties().stacksTo(Config.getMeshStackSize()),
+          MeshItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<CrookItem> CROOK_ANDESITE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Andesite Crook",
           "andesite_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_BAMBOO =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Bamboo Crook",
           "bamboo_crook",
-          () -> new CrookItem(Tiers.WOOD, Config.getCrookWoodDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_BASALT =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Basalt Crook",
           "basalt_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_BLACKSTONE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Blackstone Crook",
           "blackstone_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_BONE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Bone Crook",
           "bone_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookBoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_CALCITE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Calcite Crook",
           "calcite_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_CHERRY =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Cherry Crook",
           "cherry_crook",
-          () -> new CrookItem(Tiers.WOOD, Config.getCrookWoodDurability()),
+          ToolMaterial.WOOD,
+          0.0F,
+          -3.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_COPPER =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Copper Crook",
           "copper_crook",
-          () -> new CrookItem(Tiers.IRON, Config.getCrookIronDurability()),
+          ToolMaterial.IRON,
+          -2.0F,
+          -1.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   //  public static final ItemDefinition<CrookItem> CROOK_CRIMSON_FUNGUS =
   //      ITEMS.item(
@@ -360,58 +463,94 @@ public class EXNItems {
   //          () -> new CrookItem(Tiers.STONE, Config.getCrookWoodDurability()),
   // ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_DEEPSLATE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Deepslate Crook",
           "deepslate_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_DIAMOND =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Diamond Crook",
           "diamond_crook",
-          () -> new CrookItem(Tiers.DIAMOND, Config.getCrookDiamondDurability()),
+          ToolMaterial.DIAMOND,
+          -3.0F,
+          0.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_DIORITE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Diorite Crook",
           "diorite_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookDioriteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_DRIPSTONE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Dripstone Crook",
           "dripstone_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookDioriteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_GOLD =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Golden Crook",
           "golden_crook",
-          () -> new CrookItem(Tiers.IRON, Config.getCrookGoldDurability()),
+          ToolMaterial.GOLD,
+          0.0F,
+          -3.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_GRANITE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Granite Crook",
           "granite_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookGraniteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_IRON =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Iron Crook",
           "iron_crook",
-          () -> new CrookItem(Tiers.IRON, Config.getCrookIronDurability()),
+          ToolMaterial.IRON,
+          -2.0F,
+          -1.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_NETHER_BRICK =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Nether Brick Crook",
           "nether_brick_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_NETHERITE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Netherite Crook",
           "netherite_crook",
-          () -> new CrookItem(Tiers.NETHERITE, Config.getCrookNetheriteDurability()),
+          ToolMaterial.NETHERITE,
+          -4.0F,
+          0.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   //    public static final ItemDefinition<CrookItem> CROOK_PRISMARINE =
   //        ITEMS.item(
@@ -420,28 +559,44 @@ public class EXNItems {
   //            () -> new CrookItem(Tiers.STONE,
   //   Config.getCrookStoneDurability()), ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_RED_NETHER_BRICK =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Red Nether Brick Crook",
           "red_nether_brick_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_STONE =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Stone Crook",
           "stone_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_TERRACOTTA =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Terracotta Crook",
           "terracotta_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_TUFF =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Tuff Crook",
           "tuff_crook",
-          () -> new CrookItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   //  public static final ItemDefinition<CrookItem> CROOK_WARPED_FUNGUS =
   //      ITEMS.item(
@@ -450,58 +605,94 @@ public class EXNItems {
   //          () -> new CrookItem(Tiers.STONE, Config.getCrookStoneDurability()),
   // ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<CrookItem> CROOK_WOOD =
-      ITEMS.item(
+      ITEMS.crookItem(
           "Wooden Crook",
           "wooden_crook",
-          () -> new CrookItem(Tiers.WOOD, Config.getCrookWoodDurability()),
+          ToolMaterial.WOOD,
+          0.0F,
+          -3.0F,
+          new Item.Properties(),
+          CrookItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_ANDESITE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Andesite Hammer",
           "andesite_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_BAMBOO =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Bamboo Hammer",
           "bamboo_hammer",
-          () -> new HammerItem(Tiers.WOOD, Config.getHammerWoodDurability()),
+          ToolMaterial.WOOD,
+          0.0F,
+          -3.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_BASALT =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Basalt Hammer",
           "basalt_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_BLACKSTONE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Blackstone Hammer",
           "blackstone_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_BONE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Bone Hammer",
           "bone_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookBoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_CALCITE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Calcite Hammer",
           "calcite_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookAndesiteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_CHERRY =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Cherry Hammer",
           "cherry_hammer",
-          () -> new HammerItem(Tiers.WOOD, Config.getHammerWoodDurability()),
+          ToolMaterial.WOOD,
+          0.0F,
+          -3.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_COPPER =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Copper Hammer",
           "copper_hammer",
-          () -> new HammerItem(Tiers.IRON, Config.getCrookIronDurability()),
+          ToolMaterial.IRON,
+          -2.0F,
+          -1.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   //  public static final ItemDefinition<HammerItem> HAMMER_CRIMSON_FUNGUS =
   //      ITEMS.item(
@@ -510,58 +701,94 @@ public class EXNItems {
   //          () -> new HammerItem(Tiers.STONE, Config.getCrookWoodDurability()),
   // ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_DEEPSLATE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Deepslate Hammer",
           "deepslate_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_DIAMOND =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Diamond Hammer",
           "diamond_hammer",
-          () -> new HammerItem(Tiers.DIAMOND, Config.getCrookDiamondDurability()),
+          ToolMaterial.DIAMOND,
+          -3.0F,
+          0.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_DIORITE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Diorite Hammer",
           "diorite_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookDioriteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_DRIPSTONE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Dripstone Hammer",
           "dripstone_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookDioriteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_GOLD =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Golden Hammer",
           "golden_hammer",
-          () -> new HammerItem(Tiers.IRON, Config.getCrookGoldDurability()),
+          ToolMaterial.GOLD,
+          0.0F,
+          -3.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_GRANITE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Granite Hammer",
           "granite_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookGraniteDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_IRON =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Iron Hammer",
           "iron_hammer",
-          () -> new HammerItem(Tiers.IRON, Config.getCrookIronDurability()),
+          ToolMaterial.IRON,
+          -2.0F,
+          -1.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_NETHER_BRICK =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Nether Brick Hammer",
           "nether_brick_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_NETHERITE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Netherite Hammer",
           "netherite_hammer",
-          () -> new HammerItem(Tiers.NETHERITE, Config.getCrookNetheriteDurability()),
+          ToolMaterial.NETHERITE,
+          -4.0F,
+          0.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   //    public static final ItemDefinition<HammerItem> HAMMER_PRISMARINE =
   //        ITEMS.item(
@@ -570,28 +797,44 @@ public class EXNItems {
   //            () -> new HammerItem(Tiers.STONE,
   //   Config.getCrookStoneDurability()), ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_RED_NETHER_BRICK =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Red Nether Brick Hammer",
           "red_nether_brick_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_STONE =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Stone Hammer",
           "stone_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_TERRACOTTA =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Terracotta Hammer",
           "terracotta_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_TUFF =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Tuff Hammer",
           "tuff_hammer",
-          () -> new HammerItem(Tiers.STONE, Config.getCrookStoneDurability()),
+          ToolMaterial.STONE,
+          -1.0F,
+          -2.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   //  public static final ItemDefinition<HammerItem> HAMMER_WARPED_FUNGUS =
   //      ITEMS.item(
@@ -600,27 +843,31 @@ public class EXNItems {
   //          () -> new HammerItem(Tiers.STONE, Config.getCrookStoneDurability()),
   // ItemDefinition.ItemType.TOOL);
   public static final ItemDefinition<HammerItem> HAMMER_WOOD =
-      ITEMS.item(
+      ITEMS.hammerItem(
           "Wooden Hammer",
           "wooden_hammer",
-          () -> new HammerItem(Tiers.WOOD, Config.getCrookWoodDurability()),
+          ToolMaterial.WOOD,
+          0.0F,
+          -3.0F,
+          new Item.Properties(),
+          HammerItem::new,
           ItemDefinition.ItemType.TOOL);
   // Begin Block Items
   public static final ItemDefinition<BucketItem> WITCH_WATER_BUCKET =
-      ITEMS.item(
+      ITEMS.bucketItem(
           "Witch Water Bucket",
           "witch_water_bucket",
-          () ->
-              new BucketItem(
-                  EXNFluids.WITCH_WATER.getStillFluid(), new Item.Properties().stacksTo(1)),
+          EXNFluids.WITCH_WATER.getStillFluid(),
+          new Item.Properties().stacksTo(1),
+          BucketItem::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<BucketItem> SEA_WATER_BUCKET =
-      ITEMS.item(
+      ITEMS.bucketItem(
           "Sea Water Bucket",
           "sea_water_bucket",
-          () ->
-              new BucketItem(
-                  EXNFluids.SEA_WATER.getStillFluid(), new Item.Properties().stacksTo(1)),
+          EXNFluids.SEA_WATER.getStillFluid(),
+          new Item.Properties().stacksTo(1),
+          BucketItem::new,
           ItemDefinition.ItemType.OTHER);
 
   private EXNItems() {}

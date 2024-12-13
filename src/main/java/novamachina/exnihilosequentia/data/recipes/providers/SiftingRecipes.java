@@ -3,13 +3,17 @@ package novamachina.exnihilosequentia.data.recipes.providers;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -24,7 +28,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class SiftingRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(RecipeOutput consumer) {
+  public void addRecipes(HolderGetter.Provider holderGetter, RecipeOutput consumer) {
     SiftingRecipeBuilder.sifting(Ingredient.of(Blocks.DIRT), EXNItems.PEBBLE_STONE)
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 1.0F))
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 1.0F))
@@ -202,8 +206,8 @@ public class SiftingRecipes implements ISubRecipeProvider {
     addSeeds(Items.LARGE_FERN, consumer);
     addSeeds(Items.CACTUS, consumer, Blocks.SAND);
     addSeeds(Items.SUGAR_CANE, consumer, Blocks.SAND);
-    addWaterSeeds(Items.KELP, consumer);
-    addWaterSeeds(Items.SEA_PICKLE, consumer);
+    addWaterSeeds(Items.KELP, consumer, holderGetter);
+    addWaterSeeds(Items.SEA_PICKLE, consumer, holderGetter);
 
     SiftingRecipeBuilder.sifting(Ingredient.of(EXNBlocks.CRUSHED_END_STONE), Items.CHORUS_FLOWER)
         .addRoll(new MeshWithChance(EXNItems.MESH_DIAMOND.asItem().getType(), 0.01f))
@@ -217,7 +221,8 @@ public class SiftingRecipes implements ISubRecipeProvider {
               final ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(input);
               if (resourceLocation != null) {
                 if (Objects.equals(
-                    BuiltInRegistries.BLOCK.getKey(input), ResourceLocation.withDefaultNamespace("jungle_leaves"))) {
+                    BuiltInRegistries.BLOCK.getKey(input),
+                    ResourceLocation.withDefaultNamespace("jungle_leaves"))) {
                   SiftingRecipeBuilder.sifting(Ingredient.of(input), drop)
                       .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.025F))
                       .addRoll(new MeshWithChance(EXNItems.MESH_FLINT.asItem().getType(), 0.05F))
@@ -234,45 +239,79 @@ public class SiftingRecipes implements ISubRecipeProvider {
                 }
               }
             });
-    SiftingRecipeBuilder.sifting(Ingredient.of(ItemTags.LEAVES), Items.APPLE)
+    SiftingRecipeBuilder.sifting(
+            Ingredient.of(
+                holderGetter
+                    .lookupOrThrow(BuiltInRegistries.ITEM.key())
+                    .getOrThrow(ItemTags.LEAVES)),
+            Items.APPLE)
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.05F))
         .addRoll(new MeshWithChance(EXNItems.MESH_FLINT.asItem().getType(), 0.1F))
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.15F))
         .addRoll(new MeshWithChance(EXNItems.MESH_DIAMOND.asItem().getType(), 0.2F))
         .build(consumer, siftingLoc("apple"));
-    SiftingRecipeBuilder.sifting(Ingredient.of(ItemTags.LEAVES), Items.GOLDEN_APPLE)
+    SiftingRecipeBuilder.sifting(
+            Ingredient.of(
+                holderGetter
+                    .lookupOrThrow(BuiltInRegistries.ITEM.key())
+                    .getOrThrow(ItemTags.LEAVES)),
+            Items.GOLDEN_APPLE)
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.001F))
         .addRoll(new MeshWithChance(EXNItems.MESH_FLINT.asItem().getType(), 0.003F))
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.005F))
         .addRoll(new MeshWithChance(EXNItems.MESH_DIAMOND.asItem().getType(), 0.01F))
         .build(consumer, siftingLoc("golden_apple"));
-    SiftingRecipeBuilder.sifting(Ingredient.of(ItemTags.LEAVES), EXNItems.SILKWORM.asItem())
+    SiftingRecipeBuilder.sifting(
+            Ingredient.of(
+                holderGetter
+                    .lookupOrThrow(BuiltInRegistries.ITEM.key())
+                    .getOrThrow(ItemTags.LEAVES)),
+            EXNItems.SILKWORM.asItem())
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.025F))
         .addRoll(new MeshWithChance(EXNItems.MESH_FLINT.asItem().getType(), 0.05F))
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.1F))
         .addRoll(new MeshWithChance(EXNItems.MESH_DIAMOND.asItem().getType(), 0.2F))
         .build(consumer, siftingLoc("silkworm"));
     SiftingRecipeBuilder.sifting(
-            Ingredient.of(ItemTags.SAND), EXNItems.TUBE_CORAL_LARVA.asItem(), true)
+            Ingredient.of(
+                holderGetter.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(ItemTags.SAND)),
+            EXNItems.TUBE_CORAL_LARVA.asItem(),
+            true)
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc("seed_blue_coral"));
     SiftingRecipeBuilder.sifting(
-            Ingredient.of(ItemTags.SAND), EXNItems.BUBBLE_CORAL_LARVA.asItem(), true)
+            Ingredient.of(
+                holderGetter.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(ItemTags.SAND)),
+            EXNItems.BUBBLE_CORAL_LARVA.asItem(),
+            true)
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc("seed_purple_coral"));
     SiftingRecipeBuilder.sifting(
-            Ingredient.of(ItemTags.SAND), EXNItems.BRAIN_CORAL_LARVA.asItem(), true)
+            Ingredient.of(
+                holderGetter.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(ItemTags.SAND)),
+            EXNItems.BRAIN_CORAL_LARVA.asItem(),
+            true)
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc("seed_pink_coral"));
     SiftingRecipeBuilder.sifting(
-            Ingredient.of(ItemTags.SAND), EXNItems.HORN_CORAL_LARVA.asItem(), true)
+            Ingredient.of(
+                holderGetter.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(ItemTags.SAND)),
+            EXNItems.HORN_CORAL_LARVA.asItem(),
+            true)
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc("seed_yellow_coral"));
     SiftingRecipeBuilder.sifting(
-            Ingredient.of(ItemTags.SAND), EXNItems.FIRE_CORAL_LARVA.asItem(), true)
+            Ingredient.of(
+                holderGetter.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(ItemTags.SAND)),
+            EXNItems.FIRE_CORAL_LARVA.asItem(),
+            true)
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc("seed_red_coral"));
-    SiftingRecipeBuilder.sifting(Ingredient.of(ItemTags.SAND), Items.SEAGRASS, true)
+    SiftingRecipeBuilder.sifting(
+            Ingredient.of(
+                holderGetter.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(ItemTags.SAND)),
+            Items.SEAGRASS,
+            true)
         .addRoll(new MeshWithChance(EXNItems.MESH_IRON.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc("seagrass"));
     SiftingRecipeBuilder.sifting(Ingredient.of(Blocks.COARSE_DIRT), Items.DIRT)
@@ -334,9 +373,11 @@ public class SiftingRecipes implements ISubRecipeProvider {
         .build(consumer, siftingLoc(ore.getPieceId() + "_gravel"));
   }
 
-  private ResourceLocation siftingLoc(String id) {
-    return ResourceLocation.fromNamespaceAndPath(
-        ExNihiloSequentia.MOD_ID, "sifting/" + RecipeProviderUtilities.prependRecipePrefix(id));
+  private ResourceKey<Recipe<?>> siftingLoc(String id) {
+    ResourceLocation rl =
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, "sifting/" + RecipeProviderUtilities.prependRecipePrefix(id));
+    return ResourceKey.create(Registries.RECIPE, rl);
   }
 
   private void addSeeds(ItemLike seed, RecipeOutput consumer) {
@@ -350,9 +391,13 @@ public class SiftingRecipes implements ISubRecipeProvider {
         .build(consumer, siftingLoc(resourceLocation.getPath()));
   }
 
-  private void addWaterSeeds(ItemLike seed, RecipeOutput consumer) {
+  private void addWaterSeeds(ItemLike seed, RecipeOutput consumer, HolderGetter.Provider provider) {
     ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(seed.asItem());
-    SiftingRecipeBuilder.sifting(Ingredient.of(ItemTags.SAND), seed, true)
+    SiftingRecipeBuilder.sifting(
+            Ingredient.of(
+                provider.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(ItemTags.SAND)),
+            seed,
+            true)
         .addRoll(new MeshWithChance(EXNItems.MESH_STRING.asItem().getType(), 0.05F))
         .build(consumer, siftingLoc(resourceLocation.getPath()));
   }

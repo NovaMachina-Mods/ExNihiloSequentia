@@ -5,20 +5,21 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nonnull;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class CrushingRecipe extends AbstractRecipe {
 
-  public static final CrushingRecipe EMPTY = new CrushingRecipe(Ingredient.EMPTY, List.of());
+  public static final CrushingRecipe EMPTY = new CrushingRecipe(null, List.of());
   private final Ingredient input;
   private final List<ItemStackWithChance> drops;
 
@@ -29,19 +30,13 @@ public class CrushingRecipe extends AbstractRecipe {
 
   @Override
   @NonNull
-  public ItemStack getToastSymbol() {
-    return EXNItems.HAMMER_DIAMOND.itemStack();
-  }
-
-  @Override
-  @NonNull
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<CrushingRecipe> getSerializer() {
     return EXNRecipeSerializers.CRUSHING_RECIPE_SERIALIZER.recipeSerializer();
   }
 
   @Override
   @NonNull
-  public RecipeType<?> getType() {
+  public RecipeType<CrushingRecipe> getType() {
     return EXNRecipeTypes.CRUSHING;
   }
 
@@ -67,7 +62,7 @@ public class CrushingRecipe extends AbstractRecipe {
             instance ->
                 instance
                     .group(
-                        Ingredient.CODEC_NONEMPTY
+                        Ingredient.CODEC
                             .fieldOf("input")
                             .forGetter(CrushingRecipe::getInput),
                         Codec.list(ItemStackWithChance.CODEC)
@@ -104,5 +99,9 @@ public class CrushingRecipe extends AbstractRecipe {
       recipe.getDrops().forEach(drop -> ItemStackWithChance.STREAM_CODEC.encode(buffer, drop));
       Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getInput());
     }
+  }
+  @Override
+  public PlacementInfo placementInfo() {
+    return PlacementInfo.createFromOptionals(List.of(Optional.of(input)));
   }
 }

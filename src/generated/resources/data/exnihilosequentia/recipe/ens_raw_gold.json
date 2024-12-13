@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "exnihilosequentia:gold_pieces"
-    }
+    "x": "exnihilosequentia:gold_pieces"
   },
   "pattern": [
     "xx",

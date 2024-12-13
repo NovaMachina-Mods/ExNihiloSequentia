@@ -10,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -61,9 +60,9 @@ public abstract class BarrelBlock extends Block implements ITooltipProvider {
   }
 
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+  protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
     if (level.isClientSide()) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     @Nullable final BarrelBlockEntity tile = (BarrelBlockEntity) level.getBlockEntity(blockPos);
@@ -80,7 +79,7 @@ public abstract class BarrelBlock extends Block implements ITooltipProvider {
       return tile.onBlockActivated(player, interactionHand, fluidHandler, itemHandler);
     }
 
-    return ItemInteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS;
   }
 
   @Override

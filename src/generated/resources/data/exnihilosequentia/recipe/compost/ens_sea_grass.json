@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 100,
-  "input": {
-    "item": "minecraft:seagrass"
-  }
+  "input": "minecraft:seagrass"
 }

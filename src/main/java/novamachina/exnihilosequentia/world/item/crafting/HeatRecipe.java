@@ -3,18 +3,21 @@ package novamachina.exnihilosequentia.world.item.crafting;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import java.util.List;
 import java.util.Optional;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -38,19 +41,14 @@ public class HeatRecipe extends AbstractRecipe {
   }
 
   @Override
-  public @NonNull ItemStack getToastSymbol() {
-    return EXNBlocks.FIRED_CRUCIBLE.itemStack();
-  }
-
-  @Override
   @NonNull
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<HeatRecipe> getSerializer() {
     return EXNRecipeSerializers.HEAT_RECIPE_SERIALIZER.recipeSerializer();
   }
 
   @Override
   @NonNull
-  public RecipeType<?> getType() {
+  public RecipeType<HeatRecipe> getType() {
     return EXNRecipeTypes.HEAT;
   }
 
@@ -97,7 +95,8 @@ public class HeatRecipe extends AbstractRecipe {
     }
 
     public static HeatRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-      Block inputBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.STREAM_CODEC.decode(buffer));
+      Block inputBlock =
+          BuiltInRegistries.BLOCK.get(ResourceLocation.STREAM_CODEC.decode(buffer)).get().value();
       int amount = buffer.readInt();
       boolean hasProperties =
           buffer.readBoolean(); // flag showing whether recipe depends on block state
@@ -118,5 +117,13 @@ public class HeatRecipe extends AbstractRecipe {
           .getProperties()
           .ifPresent(props -> StatePropertiesPredicate.STREAM_CODEC.encode(buffer, props));
     }
+  }
+
+  @Override
+  public PlacementInfo placementInfo() {
+    Item stateItem = this.inputBlock.asItem();
+    return PlacementInfo.createFromOptionals(
+        List.of(
+            stateItem != Items.AIR ? Optional.of(Ingredient.of(inputBlock)) : Optional.empty()));
   }
 }

@@ -31,19 +31,13 @@ public class SolidifyingRecipe extends AbstractRecipe {
 
   @Override
   @NonNull
-  public ItemStack getToastSymbol() {
-    return EXNBlocks.OAK_SIEVE.itemStack();
-  }
-
-  @Override
-  @NonNull
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<SolidifyingRecipe> getSerializer() {
     return EXNRecipeSerializers.SOLIDIFYING_RECIPE_SERIALIZER.recipeSerializer();
   }
 
   @Override
   @NonNull
-  public RecipeType<?> getType() {
+  public RecipeType<SolidifyingRecipe> getType() {
     return EXNRecipeTypes.SOLIDIFYING;
   }
 

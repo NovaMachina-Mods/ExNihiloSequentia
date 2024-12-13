@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:tube_coral"
-  },
+  "input": "minecraft:tube_coral",
   "results": [
     {
       "chance": 1.0,

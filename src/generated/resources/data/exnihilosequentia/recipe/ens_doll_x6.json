@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "e": {
-      "tag": "c:gems/emerald"
-    },
-    "x": {
-      "item": "exnihilosequentia:porcelain_clay"
-    }
+    "e": "#c:gems/emerald",
+    "x": "exnihilosequentia:porcelain_clay"
   },
   "pattern": [
     "xex",

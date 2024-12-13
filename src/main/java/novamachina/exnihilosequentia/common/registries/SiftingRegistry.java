@@ -40,7 +40,7 @@ public class SiftingRegistry {
             return recipeList.parallelStream()
                 .filter(recipe -> recipe.isWaterlogged() == key.isWaterlogged())
                 .filter(
-                    recipe -> IngredientUtils.areIngredientsEqual(recipe.getInput(), key.input()))
+                    recipe -> recipe.getInput().equals(key.input()))
                 .map(recipe -> recipe.filterByMesh(key.meshType(), flattenRecipes))
                 .filter(
                     recipe -> {

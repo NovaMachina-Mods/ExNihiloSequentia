@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:andesite"
-  },
+  "input": "minecraft:andesite",
   "results": [
     {
       "chance": 1.0,

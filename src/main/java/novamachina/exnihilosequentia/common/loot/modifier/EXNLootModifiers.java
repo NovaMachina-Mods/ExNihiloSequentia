@@ -17,19 +17,11 @@ public class EXNLootModifiers {
   public static final LootModifierDefinition<UseHammerModifier> USE_HAMMER =
       LOOT_MODIFIERS.create(
           "use_hammer",
-          new LootItemCondition[] {
-            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ExNihiloTags.HAMMER)).build()
-          },
-          UseHammerModifier.CODEC,
-          UseHammerModifier::new);
+          UseHammerModifier.CODEC);
   public static final LootModifierDefinition<UseCrookModifier> USE_CROOK =
       LOOT_MODIFIERS.create(
           "use_crook",
-          new LootItemCondition[] {
-            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ExNihiloTags.CROOK)).build()
-          },
-          UseCrookModifier.CODEC,
-          UseCrookModifier::new);
+          UseCrookModifier.CODEC);
 
   public static List<LootModifierDefinition<? extends LootModifier>> getDefinitions() {
     return LOOT_MODIFIERS.getRegistry();

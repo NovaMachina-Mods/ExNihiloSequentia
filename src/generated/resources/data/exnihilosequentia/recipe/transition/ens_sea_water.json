@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:transition",
-  "catalyst": {
-    "tag": "c:sands"
-  },
+  "catalyst": "#c:sands",
   "fluidInTank": {
     "amount": 1000,
     "id": "minecraft:water"

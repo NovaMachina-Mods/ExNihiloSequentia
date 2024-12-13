@@ -2,18 +2,17 @@ package novamachina.exnihilosequentia.world.level.block.entity;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -38,20 +37,19 @@ import org.slf4j.LoggerFactory;
 
 public abstract class CrucibleBlockEntity extends BlockEntity {
 
+  private static final String CURRENT_ITEM = "currentItem";
   private static Logger log = LoggerFactory.getLogger(CrucibleBlockEntity.class);
 
   public static final int MAX_FLUID_AMOUNT =
       Config.getCrucibleNumberOfBuckets() * FluidType.BUCKET_VOLUME;
   @Nonnull private static final String BLOCK_TAG = "block";
-  @Nonnull private static final String CURRENT_ITEM_TAG = "currentItem";
   @Nonnull private static final String FLUID_TAG = "fluid";
   @Nonnull private static final String INVENTORY_TAG = "inventory";
   @Nonnull private static final String SOLID_AMOUNT_TAG = "solidAmount";
-  @Nonnull protected ItemStack currentItem;
   @Nullable protected BaseCrucibleTileState lastSyncedState = null;
   protected int solidAmount;
-  //  @Nonnull protected CrucibleFluidHandler tank;
   protected int ticksSinceLast;
+  protected ItemStack currentItem = ItemStack.EMPTY;
 
   protected CrucibleBlockEntity(
       BlockEntityType<? extends CrucibleBlockEntity> tileEntityType,
@@ -60,7 +58,6 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
     super(tileEntityType, pos, state);
     ticksSinceLast = 0;
     solidAmount = 0;
-    currentItem = ItemStack.EMPTY;
   }
 
   public abstract boolean canAcceptFluidTemperature(@Nonnull final FluidStack fluidStack);
@@ -104,32 +101,26 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
   }
 
   private Optional<MeltingRecipe> getMeltable() {
-    return ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());
+    return ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(getCurrentItem().getItem());
   }
 
   public abstract int getSolidAmount();
 
   public float getSolidProportion() {
-
-    try {
-      int itemCount =
-          MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()
-              ? 0
-              : MeltableItemHandler.getHandler(this).getStackInSlot(0).getCount();
-      float solidProportion = ((float) itemCount) / 4;
-
-      if (solidAmount > 0) {
-        Optional<MeltingRecipe> meltable = getMeltable();
-        if (meltable.isPresent()) {
-          solidProportion +=
-              ((float) solidAmount) / (4 * meltable.get().getResultFluid().getAmount());
-        }
-      }
-      return solidProportion;
-    } catch (NullPointerException e) {
-      log.error(e.getMessage());
+    int itemCount = MeltableItemHandler.getHandler(this).getStackInSlot(0).getCount();
+    AtomicReference<Float> returnValue = new AtomicReference<>(0.0f);
+    if (itemCount > 0) {
+      getMeltable()
+          .ifPresent(
+              recipe -> {
+                int amountPerItem = recipe.getResultFluid().getAmount();
+                int maxSolid = amountPerItem * 4;
+                int totalSolid = (amountPerItem * itemCount) + solidAmount;
+                returnValue.set((float) totalSolid / maxSolid);
+              });
     }
-    return 0;
+
+    return returnValue.get();
   }
 
   @Override
@@ -138,31 +129,7 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
     return ClientboundBlockEntityDataPacket.create(this);
   }
 
-  @Override
-  public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-    log.info("IN CRUCIBLE GETUPDATETAG");
-    @Nonnull final CompoundTag nbt = new CompoundTag();
-    if (!MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()) {
-      @Nonnull
-      final Tag blockNbt =
-          MeltableItemHandler.getHandler(this).getStackInSlot(0).save(provider);
-      nbt.put(BLOCK_TAG, blockNbt);
-    }
-    if (!currentItem.isEmpty()) {
-      @Nonnull final Tag currentItemTag = currentItem.save(provider);
-      nbt.put(CURRENT_ITEM_TAG, currentItemTag);
-    }
-    if (!CrucibleFluidHandler.getHandler(this).isEmpty()) {
-      @Nonnull
-      final CompoundTag fluidNbt =
-          CrucibleFluidHandler.getHandler(this).writeToNBT(provider, new CompoundTag());
-      nbt.put(FLUID_TAG, fluidNbt);
-    }
-    nbt.putInt(SOLID_AMOUNT_TAG, solidAmount);
-    return nbt;
-  }
-
-  public ItemInteractionResult onBlockActivated(
+  public InteractionResult onBlockActivated(
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler handler) {
@@ -170,15 +137,15 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
 
     @Nonnull final ItemStack stack = player.getItemInHand(handIn);
     if (stack.isEmpty()) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     if (TankUtil.drainWaterIntoBottle(this, player, handler)) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     if (TankUtil.drainWaterFromBottle(this, player, handler)) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     boolean result = FluidUtil.interactWithFluidHandler(player, handIn, handler);
@@ -192,7 +159,7 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
         level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
       }
       setChanged();
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     Optional<MeltingRecipe> recipe = getMeltable();
@@ -202,7 +169,7 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
             .getFluid()
             .getFluid()
             .isSame(recipe.get().getResultFluid().getFluid())) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     log.debug("Inserting item");
@@ -219,70 +186,61 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
       }
       setChanged();
       tickCrucible();
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
-    return ItemInteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS;
   }
 
   @Override
   public void onDataPacket(
-      @Nonnull final Connection net, @Nonnull final ClientboundBlockEntityDataPacket packet, HolderLookup.Provider lookupProvider) {
+      @Nonnull final Connection net,
+      @Nonnull final ClientboundBlockEntityDataPacket packet,
+      HolderLookup.Provider lookupProvider) {
     log.info("IN CRUCIBLE ONDATAPACKET");
-    @Nonnull final CompoundTag nbt = packet.getTag();
-    if (nbt.contains(CURRENT_ITEM_TAG)) {
-      @Nullable final Tag currentItemTag = nbt.get(CURRENT_ITEM_TAG);
-      if (currentItemTag != null) {
-        currentItem = ItemStack.parse(lookupProvider, currentItemTag).orElse(ItemStack.EMPTY);
-      } else {
-        currentItem = ItemStack.EMPTY;
-      }
-    } else {
-      currentItem = ItemStack.EMPTY;
-    }
+    super.onDataPacket(net, packet, lookupProvider);
+  }
 
-    if (nbt.contains(BLOCK_TAG)) {
-      @Nullable final Tag blockTag = nbt.get(BLOCK_TAG);
-      if (blockTag != null) {
-        MeltableItemHandler.getHandler(this)
-            .setStackInSlot(0, ItemStack.parse(lookupProvider, blockTag).orElse(ItemStack.EMPTY));
-      } else {
-        MeltableItemHandler.getHandler(this).setStackInSlot(0, ItemStack.EMPTY);
-      }
-    } else {
-      MeltableItemHandler.getHandler(this).setStackInSlot(0, ItemStack.EMPTY);
-    }
-
-    if (nbt.contains(FLUID_TAG)) {
-      CrucibleFluidHandler.getHandler(this).readFromNBT(lookupProvider, nbt.getCompound(FLUID_TAG));
-    } else {
-      CrucibleFluidHandler.getHandler(this).setFluid(FluidStack.EMPTY);
-    }
-    solidAmount = nbt.getInt(SOLID_AMOUNT_TAG);
+  @Override
+  public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+    log.info("IN CRUCIBLE GETUPDATETAG");
+    @Nonnull final CompoundTag nbt = new CompoundTag();
+    saveAdditional(nbt, provider);
+    return nbt;
   }
 
   @Override
   public void saveAdditional(@Nonnull final CompoundTag compound, HolderLookup.Provider provider) {
     log.info("IN CRUCIBLE SAVE ADDITIONAL");
     compound.put(INVENTORY_TAG, MeltableItemHandler.getHandler(this).serializeNBT(provider));
-    compound.put("tank", CrucibleFluidHandler.getHandler(this).writeToNBT(provider, new CompoundTag()));
+    if (!currentItem.isEmpty()) {
+      compound.put(CURRENT_ITEM, currentItem.save(provider));
+    }
+    compound.put(
+        "tank", CrucibleFluidHandler.getHandler(this).writeToNBT(provider, new CompoundTag()));
     compound.putInt("ticksSinceLast", ticksSinceLast);
     compound.putInt(SOLID_AMOUNT_TAG, solidAmount);
-    if(!currentItem.isEmpty()) {
-      compound.put(CURRENT_ITEM_TAG, currentItem.save(provider, new CompoundTag()));
-    }
+    super.saveAdditional(compound, provider);
   }
 
   @Override
   public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
     log.info("IN CRUCIBLE LOAD");
-    MeltableItemHandler.getHandler(this).deserializeNBT(provider, compound.getCompound(INVENTORY_TAG));
+    MeltableItemHandler.getHandler(this)
+        .deserializeNBT(provider, compound.getCompound(INVENTORY_TAG));
+    if (compound.contains(CURRENT_ITEM)) {
+      ItemStack.parse(provider, compound.get(CURRENT_ITEM))
+          .ifPresent((itemStack -> currentItem = itemStack));
+    } else {
+      setCurrentItem(ItemStack.EMPTY);
+    }
     CrucibleFluidHandler.getHandler(this).readFromNBT(provider, compound.getCompound("tank"));
     ticksSinceLast = compound.getInt("ticksSinceLast");
-    solidAmount = compound.getInt(SOLID_AMOUNT_TAG);
-    if(compound.contains(CURRENT_ITEM_TAG)) {
-      currentItem = ItemStack.parse(provider, compound.getCompound(CURRENT_ITEM_TAG)).orElse(ItemStack.EMPTY);
-    }
+    setSolidAmount(compound.getInt(SOLID_AMOUNT_TAG));
     super.loadAdditional(compound, provider);
+  }
+
+  protected void setCurrentItem(ItemStack itemStack) {
+    currentItem = itemStack;
   }
 
   public void tickServer() {
@@ -316,49 +274,82 @@ public abstract class CrucibleBlockEntity extends BlockEntity {
     if (heat <= 0) {
       return;
     }
-    if (solidAmount <= 0) {
-      if (!MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()) {
-        consumeNewSolid();
-      } else {
-        return;
+    if (solidAmount > 0) {
+      if (heat > solidAmount) {
+        heat = solidAmount;
       }
-    }
-
-    if (!MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()
-        && MeltableItemHandler.getHandler(this).getStackInSlot(0).is(currentItem.getItem())) {
-      addFluid(heat);
-    }
-
-    if (heat > solidAmount) {
-      heat = solidAmount;
-    }
-
-    if (heat > 0
-        && ExNihiloRegistries.CRUCIBLE_REGISTRY.isMeltable(
-            currentItem.getItem(), getCrucibleType().getLevel())) {
       processSolid(heat);
+      return;
     }
+    if (solidAmount <= 0) {
+      consumeNewSolid();
+    }
+    //    if (solidAmount <= 0) {
+    //      if (!MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()) {
+    //        consumeNewSolid();
+    //      } else {
+    //        return;
+    //      }
+    //    }
+
+    //    if (!getCurrentItem().isEmpty()) {
+    //      addFluid(heat);
+    //    }
+    //
+    //    if(MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty() && solidAmount <=0 ) {
+    //      setCurrentItem(ItemStack.EMPTY);
+    //    }
   }
 
-  protected abstract void processSolid(int heat);
+  private void processSolid(int heat) {
+    ExNihiloRegistries.CRUCIBLE_REGISTRY
+        .findRecipe(getCurrentItem().getItem())
+        .ifPresent(
+            recipe -> {
+              FluidStack fluidStack = new FluidStack(recipe.getResultFluid().getFluid(), heat);
+              int filled =
+                  CrucibleFluidHandler.getHandler(this)
+                      .fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
+              solidAmount -= filled;
+            });
+  }
 
   private void addFluid(int heat) {
-    while (heat > solidAmount
-        && !MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()) {
+    while (heat > solidAmount && !getCurrentItem().isEmpty()) {
       final Optional<MeltingRecipe> recipe =
-          ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(currentItem.getItem());
+          ExNihiloRegistries.CRUCIBLE_REGISTRY.findRecipe(getCurrentItem().getItem());
       if (recipe.isPresent()) {
-        solidAmount += recipe.get().getResultFluid().getAmount();
-        MeltableItemHandler.getHandler(this).getStackInSlot(0).shrink(1);
+        //        setSolidAmount(solidAmount + recipe.get().getResultFluid().getAmount());
+        getCurrentItem().shrink(1);
 
-        if (MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()) {
+        if (getCurrentItem().isEmpty()) {
           MeltableItemHandler.getHandler(this).setStackInSlot(0, ItemStack.EMPTY);
         }
       }
     }
   }
 
-  protected abstract void consumeNewSolid();
+  public void setSolidAmount(int newValue) {
+    log.info("New Solid Amount: {}", newValue);
+    solidAmount = newValue;
+  }
+
+  private void consumeNewSolid() {
+    ExNihiloRegistries.CRUCIBLE_REGISTRY
+        .findRecipe(MeltableItemHandler.getHandler(this).getStackInSlot(0).getItem())
+        .ifPresent(recipe -> {
+          setSolidAmount(recipe.getResultFluid().getAmount());
+          setCurrentItem(MeltableItemHandler.getHandler(this).getStackInSlot(0).copy());
+          currentItem.setCount(1);
+          MeltableItemHandler.getHandler(this).getStackInSlot(0).shrink(1);
+        });
+
+
+
+    if (MeltableItemHandler.getHandler(this).getStackInSlot(0).isEmpty()) {
+      MeltableItemHandler.getHandler(this).setStackInSlot(0, ItemStack.EMPTY);
+    }
+  }
 
   protected static class BaseCrucibleTileState {
 

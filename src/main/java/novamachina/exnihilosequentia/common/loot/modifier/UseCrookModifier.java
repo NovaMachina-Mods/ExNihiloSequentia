@@ -1,14 +1,11 @@
 package novamachina.exnihilosequentia.common.loot.modifier;
 
-import com.google.common.base.Suppliers;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
@@ -54,14 +51,12 @@ public class UseCrookModifier extends LootModifier {
   public ObjectArrayList<ItemStack> doApply(
       @Nonnull ObjectArrayList<ItemStack> generatedLoot, @Nonnull final LootContext context) {
     log.debug("Fired Crook Modifier");
-    @Nullable final ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
-    @Nullable final BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
-    @Nullable final Vec3 origin = context.getParamOrNull(LootContextParams.ORIGIN);
+    @Nullable final ItemStack tool = context.getParameter(LootContextParams.TOOL);
+    @Nullable final BlockState blockState = context.getParameter(LootContextParams.BLOCK_STATE);
+    @Nullable final Vec3 origin = context.getParameter(LootContextParams.ORIGIN);
     @Nonnull final ObjectArrayList<ItemStack> newLoot = new ObjectArrayList<>();
 
-    if (tool != null
-        && blockState != null
-        && tool.getItem().getDefaultInstance().is(ExNihiloTags.CROOK)
+    if (tool.getItem().getDefaultInstance().is(ExNihiloTags.CROOK)
         && ExNihiloRegistries.CROOK_REGISTRY.isCrookable(blockState.getBlock())) {
       for (int i = 0; i < Config.getVanillaSimulateDropCount(); i++) {
         getVanillaDrops(context, blockState, origin, newLoot);
@@ -87,7 +82,7 @@ public class UseCrookModifier extends LootModifier {
       log.debug("Adding new loot");
       generatedLoot = newLoot;
     }
-    log.debug("Crook Generated Loot: " + generatedLoot);
+    log.debug("Crook Generated Loot: {}", generatedLoot);
     return generatedLoot;
   }
 

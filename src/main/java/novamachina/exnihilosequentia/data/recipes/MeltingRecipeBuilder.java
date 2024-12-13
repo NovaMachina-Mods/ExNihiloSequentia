@@ -1,10 +1,14 @@
 package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
@@ -30,8 +34,8 @@ public class MeltingRecipeBuilder extends RecipeBuilder<MeltingRecipe> {
   }
 
   public static MeltingRecipeBuilder melting(
-      TagKey<Item> input, FluidStack result, CrucibleType type) {
-    return melting(Ingredient.of(input), result, type);
+      TagKey<Item> input, FluidStack result, CrucibleType type, HolderGetter.Provider provider) {
+    return melting(Ingredient.of(provider.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(input)), result, type);
   }
 
   public static MeltingRecipeBuilder melting(
@@ -40,12 +44,12 @@ public class MeltingRecipeBuilder extends RecipeBuilder<MeltingRecipe> {
   }
 
   @Override
-  protected MeltingRecipe getRecipe(ResourceLocation resourceLocation) {
+  protected MeltingRecipe getRecipe(ResourceKey<Recipe<?>> id) {
     return new MeltingRecipe(input, result, type);
   }
 
   @Override
-  protected void validate(ResourceLocation id) {
+  protected void validate(ResourceKey<Recipe<?>> id) {
     Preconditions.checkNotNull(input, "Input cannot be null.");
     Preconditions.checkNotNull(result, "Fluid cannot be null");
     Preconditions.checkArgument(!result.isEmpty(), "Fluid amount cannot be 0");

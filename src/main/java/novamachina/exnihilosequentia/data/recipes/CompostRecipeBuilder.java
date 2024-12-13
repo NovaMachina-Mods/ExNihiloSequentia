@@ -1,10 +1,13 @@
 package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.world.item.crafting.CompostRecipe;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
@@ -24,8 +27,8 @@ public class CompostRecipeBuilder extends RecipeBuilder<CompostRecipe> {
     return composting(Ingredient.of(inputItem), amount);
   }
 
-  public static CompostRecipeBuilder composting(TagKey<Item> inputTag, int amount) {
-    return composting(Ingredient.of(inputTag), amount);
+  public static CompostRecipeBuilder composting(TagKey<Item> inputTag, int amount, HolderGetter.Provider provider) {
+    return composting(Ingredient.of(provider.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(inputTag)), amount);
   }
 
   public static CompostRecipeBuilder composting(Ingredient input, int amount) {
@@ -33,13 +36,13 @@ public class CompostRecipeBuilder extends RecipeBuilder<CompostRecipe> {
   }
 
   @Override
-  protected CompostRecipe getRecipe(ResourceLocation resourceLocation) {
-    return new CompostRecipe(input, amount);
+  protected void validate(ResourceKey<Recipe<?>> id) {
+    Preconditions.checkNotNull(input, "Input cannot be null.");
+    Preconditions.checkArgument(amount > 0, "Amount must be greater than 0.");
   }
 
   @Override
-  protected void validate(ResourceLocation id) {
-    Preconditions.checkNotNull(input, "Input cannot be null.");
-    Preconditions.checkArgument(amount > 0, "Amount must be greater than 0.");
+  protected CompostRecipe getRecipe(ResourceKey<Recipe<?>> id) {
+    return new CompostRecipe(input, amount);
   }
 }

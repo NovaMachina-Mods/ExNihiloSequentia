@@ -16,8 +16,8 @@ import novamachina.exnihilosequentia.world.level.block.entity.FiredCrucibleBlock
 
 public class FiredCrucibleBlock extends CrucibleBlock implements EntityBlock {
 
-  public FiredCrucibleBlock() {
-    super(BlockBehaviour.Properties.of().strength(1.5F).sound(SoundType.STONE).noOcclusion());
+  public FiredCrucibleBlock(BlockBehaviour.Properties properties) {
+    super(properties);
   }
 
   @Nullable

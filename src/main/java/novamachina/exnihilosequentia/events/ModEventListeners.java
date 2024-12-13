@@ -17,12 +17,16 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.world.item.capability.BarrelInventoryHandler;
 import novamachina.exnihilosequentia.world.item.capability.MeltableItemHandler;
 import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.world.level.block.entity.mode.BarrelModeRegistry;
+import novamachina.exnihilosequentia.world.level.material.EXNFluids;
+import novamachina.exnihilosequentia.world.level.material.SeaWaterFluidType;
+import novamachina.exnihilosequentia.world.level.material.WitchWaterFluidType;
 import novamachina.exnihilosequentia.world.level.material.capability.BarrelFluidHandler;
 import novamachina.exnihilosequentia.world.level.material.capability.CrucibleFluidHandler;
 import novamachina.novacore.world.item.ItemDefinition;
@@ -102,6 +106,12 @@ public class ModEventListeners {
         Capabilities.FluidHandler.BLOCK,
         EXNBlockEntityTypes.STONE_BARREL_ENTITY.getType(),
         (blockEntity, side) -> BarrelFluidHandler.getHandler(blockEntity));
+  }
+
+  @SubscribeEvent
+  public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
+    event.registerFluidType(WitchWaterFluidType.fluidTextures(), EXNFluids.WITCH_WATER.getFluidType());
+    event.registerFluidType(SeaWaterFluidType.fluidTextures(), EXNFluids.SEA_WATER.getFluidType());
   }
 
   private static void registerVanillaCompost() {

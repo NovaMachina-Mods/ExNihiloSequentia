@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:brain_coral_block"
-  },
+  "input": "minecraft:brain_coral_block",
   "results": [
     {
       "chance": 1.0,

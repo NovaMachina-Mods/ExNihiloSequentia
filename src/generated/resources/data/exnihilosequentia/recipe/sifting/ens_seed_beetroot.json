@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "item": "minecraft:dirt"
-  },
+  "input": "minecraft:dirt",
   "result": {
     "count": 1,
     "id": "minecraft:beetroot_seeds"

@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "item": "exnihilosequentia:dust"
-  },
+  "input": "exnihilosequentia:dust",
   "result": {
     "count": 1,
     "id": "minecraft:blaze_powder"

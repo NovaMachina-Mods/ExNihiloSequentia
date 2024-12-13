@@ -10,27 +10,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class ResourceItem extends Item {
 
-  @Nonnull private final String resourceName;
-  private Block tiggerBlock;
-  private BlockState replaceBlock;
+  private final Block triggerBlock;
+  private final BlockState replaceBlock;
 
-  public ResourceItem(@Nonnull final String name, Block tiggerBlock, Block replaceBlock) {
-    super(new Item.Properties());
-    this.resourceName = name;
-    this.tiggerBlock = tiggerBlock;
+  public ResourceItem(Block triggerBlock, Block replaceBlock, Item.Properties properties) {
+    super(properties);
+    this.triggerBlock = triggerBlock;
     this.replaceBlock = replaceBlock == null ? null : replaceBlock.defaultBlockState();
-  }
-
-  public ResourceItem(@Nonnull final String name) {
-    super(new Item.Properties());
-    this.resourceName = name;
-    this.tiggerBlock = null;
-    this.replaceBlock = null;
-  }
-
-  @Nonnull
-  public String getResourceName() {
-    return resourceName;
   }
 
   @Override
@@ -52,10 +38,15 @@ public class ResourceItem extends Item {
   }
 
   private Block getTriggerBlock() {
-    return this.tiggerBlock;
+    return this.triggerBlock;
   }
 
   private BlockState getReplaceBlock() {
     return this.replaceBlock;
+  }
+
+  @FunctionalInterface
+  public interface ResourceItemFunction {
+    ResourceItem apply(Block tiggerBlock, Block replaceBlock, Item.Properties properties);
   }
 }

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "-": {
-      "item": "minecraft:oak_slab"
-    },
-    "x": {
-      "item": "minecraft:oak_planks"
-    }
+    "-": "minecraft:oak_slab",
+    "x": "minecraft:oak_planks"
   },
   "pattern": [
     "x x",

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "-": {
-      "item": "minecraft:jungle_slab"
-    },
-    "x": {
-      "item": "minecraft:jungle_planks"
-    }
+    "-": "minecraft:jungle_slab",
+    "x": "minecraft:jungle_planks"
   },
   "pattern": [
     "x x",

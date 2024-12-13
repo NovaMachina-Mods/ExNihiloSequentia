@@ -3,9 +3,7 @@
   "category": "equipment",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "exnihilosequentia:diorite_pebble"
-    }
+    "x": "exnihilosequentia:diorite_pebble"
   },
   "pattern": [
     "xx",

@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:end_stone"
-  },
+  "input": "minecraft:end_stone",
   "results": [
     {
       "chance": 1.0,

@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 100,
-  "input": {
-    "item": "exnihilosequentia:crimson_nylium_spores"
-  }
+  "input": "exnihilosequentia:crimson_nylium_spores"
 }

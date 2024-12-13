@@ -30,13 +30,8 @@ public class InfestingLeavesBlock extends Block implements EntityBlock, ITooltip
 
   @Nonnull private static final Random random = new SecureRandom();
 
-  public InfestingLeavesBlock() {
-    super(
-        BlockBehaviour.Properties.of()
-            .strength(0.2F)
-            .sound(SoundType.GRASS)
-            .noOcclusion()
-            .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false));
+  public InfestingLeavesBlock(BlockBehaviour.Properties properties) {
+    super(properties);
   }
 
   public static void finishInfestingBlock(@Nonnull final Level world, @Nonnull final BlockPos pos) {

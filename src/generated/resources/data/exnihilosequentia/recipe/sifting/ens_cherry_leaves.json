@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "item": "minecraft:cherry_leaves"
-  },
+  "input": "minecraft:cherry_leaves",
   "result": {
     "count": 1,
     "id": "minecraft:cherry_sapling"

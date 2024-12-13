@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "c": {
-      "item": "minecraft:birch_log"
-    },
-    "l": {
-      "item": "minecraft:birch_slab"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "c": "minecraft:birch_log",
+    "l": "minecraft:birch_slab",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "c c",

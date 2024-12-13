@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 100,
-  "input": {
-    "item": "minecraft:crimson_roots"
-  }
+  "input": "minecraft:crimson_roots"
 }

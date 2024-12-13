@@ -3,9 +3,7 @@
   "category": "building",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "exnihilosequentia:calcite_pebble"
-    }
+    "x": "exnihilosequentia:calcite_pebble"
   },
   "pattern": [
     "xx",

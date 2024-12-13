@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "exnihilosequentia:aluminum_pieces"
-    }
+    "x": "exnihilosequentia:aluminum_pieces"
   },
   "pattern": [
     "xx",

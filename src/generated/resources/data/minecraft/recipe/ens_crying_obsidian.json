@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "b": {
-      "item": "minecraft:water_bucket"
-    },
-    "o": {
-      "item": "minecraft:obsidian"
-    }
+    "b": "minecraft:water_bucket",
+    "o": "minecraft:obsidian"
   },
   "pattern": [
     " o ",

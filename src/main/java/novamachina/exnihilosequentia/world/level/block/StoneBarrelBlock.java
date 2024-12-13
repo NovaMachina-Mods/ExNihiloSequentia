@@ -15,8 +15,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class StoneBarrelBlock extends BarrelBlock implements EntityBlock {
 
-  public StoneBarrelBlock() {
-    super(BlockBehaviour.Properties.of().strength(0.75F).sound(SoundType.STONE).noOcclusion());
+  public StoneBarrelBlock(BlockBehaviour.Properties properties) {
+    super(properties);
   }
 
   @Override

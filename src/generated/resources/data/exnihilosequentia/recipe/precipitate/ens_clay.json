@@ -4,9 +4,7 @@
     "amount": 1000,
     "id": "minecraft:water"
   },
-  "input": {
-    "item": "exnihilosequentia:dust"
-  },
+  "input": "exnihilosequentia:dust",
   "result": {
     "count": 1,
     "id": "minecraft:clay"

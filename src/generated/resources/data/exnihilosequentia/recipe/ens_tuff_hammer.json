@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "-": {
-      "tag": "c:rods"
-    },
-    "x": {
-      "item": "minecraft:tuff"
-    }
+    "-": "#c:rods",
+    "x": "minecraft:tuff"
   },
   "pattern": [
     " x ",

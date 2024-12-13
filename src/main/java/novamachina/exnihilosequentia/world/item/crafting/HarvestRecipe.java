@@ -5,19 +5,20 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nonnull;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class HarvestRecipe extends AbstractRecipe {
-  public static final HarvestRecipe EMPTY = new HarvestRecipe(Ingredient.EMPTY, List.of());
+  public static final HarvestRecipe EMPTY = new HarvestRecipe(null, List.of());
   private final Ingredient input;
   private final List<ItemStackWithChance> drops;
 
@@ -28,19 +29,13 @@ public class HarvestRecipe extends AbstractRecipe {
 
   @Override
   @NonNull
-  public ItemStack getToastSymbol() {
-    return EXNItems.CROOK_WOOD.itemStack();
-  }
-
-  @Override
-  @NonNull
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<HarvestRecipe> getSerializer() {
     return EXNRecipeSerializers.HARVEST_RECIPE_SERIALIZER.recipeSerializer();
   }
 
   @Override
   @NonNull
-  public RecipeType<?> getType() {
+  public RecipeType<HarvestRecipe> getType() {
     return EXNRecipeTypes.HARVEST;
   }
 
@@ -66,9 +61,7 @@ public class HarvestRecipe extends AbstractRecipe {
             instance ->
                 instance
                     .group(
-                        Ingredient.CODEC_NONEMPTY
-                            .fieldOf("input")
-                            .forGetter(HarvestRecipe::getInput),
+                        Ingredient.CODEC.fieldOf("input").forGetter(HarvestRecipe::getInput),
                         Codec.list(ItemStackWithChance.CODEC)
                             .fieldOf("results")
                             .forGetter(HarvestRecipe::getDrops))
@@ -102,5 +95,10 @@ public class HarvestRecipe extends AbstractRecipe {
       recipe.getDrops().forEach(drop -> ItemStackWithChance.STREAM_CODEC.encode(buffer, drop));
       Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getInput());
     }
+  }
+
+  @Override
+  public PlacementInfo placementInfo() {
+    return PlacementInfo.createFromOptionals(List.of(Optional.of(input)));
   }
 }

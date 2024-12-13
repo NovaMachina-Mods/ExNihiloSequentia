@@ -3,9 +3,7 @@
   "category": "equipment",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "minecraft:red_nether_bricks"
-    }
+    "x": "minecraft:red_nether_bricks"
   },
   "pattern": [
     "xx",

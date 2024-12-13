@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "exnihilosequentia:zinc_pieces"
-    }
+    "x": "exnihilosequentia:zinc_pieces"
   },
   "pattern": [
     "xx",

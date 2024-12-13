@@ -13,23 +13,23 @@ public class EXNRecipeSerializers {
     return RECIPE_SERIALIZERS.getRegistry();
   }
 
-  public static final RecipeSerializerDefinition<?> CRUSHING_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<CrushingRecipe> CRUSHING_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("crushing", CrushingRecipe.Serializer::new);
-  public static final RecipeSerializerDefinition<?> HARVEST_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<HarvestRecipe> HARVEST_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("harvest", HarvestRecipe.Serializer::new);
-  public static final RecipeSerializerDefinition<?> COMPOST_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<CompostRecipe> COMPOST_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("compost", CompostRecipe.Serializer::new);
-  public static final RecipeSerializerDefinition<?> PRECIPITATE_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<PrecipitateRecipe> PRECIPITATE_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("precipitate", PrecipitateRecipe.Serializer::new);
-  public static final RecipeSerializerDefinition<?> SOLIDIFYING_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<SolidifyingRecipe> SOLIDIFYING_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("solidifying", SolidifyingRecipe.Serializer::new);
-  public static final RecipeSerializerDefinition<?> TRANSITION_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<TransitionRecipe> TRANSITION_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("transition", TransitionRecipe.Serializer::new);
-  public static final RecipeSerializerDefinition<?> MELTING_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<MeltingRecipe> MELTING_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("melting", MeltingRecipe.Serializer::new);
-  public static final RecipeSerializerDefinition<?> HEAT_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<HeatRecipe> HEAT_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("heat", HeatRecipe.Serializer::new);
-  public static final RecipeSerializerDefinition<?> SIFTING_RECIPE_SERIALIZER =
+  public static final RecipeSerializerDefinition<SiftingRecipe> SIFTING_RECIPE_SERIALIZER =
       RECIPE_SERIALIZERS.register("sifting", SiftingRecipe.Serializer::new);
 
   private EXNRecipeSerializers() {}

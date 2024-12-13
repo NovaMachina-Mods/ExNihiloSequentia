@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "l": {
-      "item": "minecraft:birch_slab"
-    },
-    "p": {
-      "item": "minecraft:birch_planks"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "l": "minecraft:birch_slab",
+    "p": "minecraft:birch_planks",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "p p",

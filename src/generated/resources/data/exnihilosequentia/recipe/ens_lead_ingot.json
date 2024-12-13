@@ -3,9 +3,7 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.7,
-  "ingredient": {
-    "item": "exnihilosequentia:raw_lead"
-  },
+  "ingredient": "exnihilosequentia:raw_lead",
   "result": {
     "count": 1,
     "id": "exnihilosequentia:lead_ingot"

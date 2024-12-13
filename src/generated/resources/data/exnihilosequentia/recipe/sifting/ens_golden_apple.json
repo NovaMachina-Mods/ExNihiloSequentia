@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "tag": "minecraft:leaves"
-  },
+  "input": "#minecraft:leaves",
   "result": {
     "count": 1,
     "id": "minecraft:golden_apple"
