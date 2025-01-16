@@ -22,7 +22,7 @@ public class CompostRecipes implements ISubRecipeProvider {
   public void addRecipes(HolderGetter.Provider holderGetter, RecipeOutput consumer) {
     CompostRecipeBuilder.composting(ItemTags.SAPLINGS, 125, holderGetter).build(consumer, compostLoc("saplings"));
     CompostRecipeBuilder.composting(ItemTags.LEAVES, 125, holderGetter).build(consumer, compostLoc("leaves"));
-    CompostRecipeBuilder.composting(ItemTags.FLOWERS, 100, holderGetter).build(consumer, compostLoc("flowers"));
+    CompostRecipeBuilder.composting(ItemTags.SMALL_FLOWERS, 100, holderGetter).build(consumer, compostLoc("flowers"));
     CompostRecipeBuilder.composting(ItemTags.FISHES, 150, holderGetter).build(consumer, compostLoc("fishes"));
     CompostRecipeBuilder.composting(ExNihiloTags.MEAT_COOKED, 200, holderGetter)
         .build(consumer, compostLoc("meat_cooked"));

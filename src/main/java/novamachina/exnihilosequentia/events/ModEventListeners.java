@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +18,10 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import novamachina.exnihilosequentia.ExNihiloSequentia;
+import novamachina.exnihilosequentia.client.renderer.item.properties.Holiday;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.world.item.capability.BarrelInventoryHandler;
@@ -125,5 +129,10 @@ public class ModEventListeners {
 
   private static void createMCCompost(ItemDefinition<? extends Item> item) {
     ComposterBlock.COMPOSTABLES.put(item, (float) 0.3);
+  }
+
+  @SubscribeEvent
+  public static void registerSelectProperties(RegisterSelectItemModelPropertyEvent event) {
+    event.register(ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "holiday"), Holiday.TYPE);
   }
 }

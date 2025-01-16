@@ -324,7 +324,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .pattern("cbc")
         .define('c', Tags.Items.DYES_YELLOW)
         .define('s', Tags.Items.DUSTS_GLOWSTONE)
-        .define('t', ItemTags.FLOWERS)
+        .define('t', ItemTags.SMALL_FLOWERS)
         .define('b', EXNItems.BEEHIVE_FRAME.asItem())
         .define('m', EXNItems.CRAFTING_DOLL.asItem())
         .unlockedBy(

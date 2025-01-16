@@ -8,6 +8,7 @@ plugins {
     id 'net.neoforged.gradle.userdev' version "7.0.171"
     id 'com.diffplug.spotless' version '6.23.3'
     id 'org.sonarqube' version '4.4.1.3373'
+    id "io.freefair.lombok" version "8.11"
 }
 
 if (project.file('../gradletools.gradle').exists()) {

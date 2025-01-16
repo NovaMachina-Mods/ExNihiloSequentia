@@ -22,13 +22,13 @@ public class EXNItems {
   public static final ExNihiloItemRegistry ITEMS =
       new ExNihiloItemRegistry(ExNihiloConstants.ModIds.EX_NIHILO_SEQUENTIA);
   // Begin Items Only
-  public static final ItemDefinition<CookedSilkwormItem> COOKED_SILKWORM =
+  public static final ItemDefinition<Item> COOKED_SILKWORM =
       ITEMS.item(
           "Cooked Silkworm",
           "cooked_silkworm",
           new Item.Properties()
               .food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.6F).build()),
-          CookedSilkwormItem::new,
+          Item::new,
           ItemDefinition.ItemType.OTHER);
   public static final ItemDefinition<SilkwormItem> SILKWORM =
       ITEMS.item(

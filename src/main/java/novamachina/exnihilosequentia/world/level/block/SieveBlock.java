@@ -175,9 +175,6 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
     return nearbySieves;
   }
 
-  /**
-   * @deprecated Ask Mojang
-   */
   @OnlyIn(Dist.CLIENT)
   @Override
   public float getShadeBrightness(
