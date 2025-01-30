@@ -2,8 +2,12 @@ package novamachina.exnihilosequentia.data.recipes.providers;
 
 import java.util.Optional;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
@@ -13,7 +17,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class HeatRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(RecipeOutput consumer) {
+  public void addRecipes(HolderGetter.Provider holderGetter, RecipeOutput consumer) {
     HeatRecipeBuilder.heat(Blocks.LAVA, 3).build(consumer, heatLoc("lava"));
     HeatRecipeBuilder.heat(Blocks.FIRE, 4).build(consumer, heatLoc("fire"));
     HeatRecipeBuilder.heat(Blocks.TORCH, 1).build(consumer, heatLoc("torch"));
@@ -37,8 +41,9 @@ public class HeatRecipes implements ISubRecipeProvider {
         .build(consumer, heatLoc("redstone_wall_torch"));
   }
 
-  private ResourceLocation heatLoc(String id) {
-    return ResourceLocation.fromNamespaceAndPath(
+  private ResourceKey<Recipe<?>> heatLoc(String id) {
+    ResourceLocation rl = ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "heat/" + RecipeProviderUtilities.prependRecipePrefix(id));
+    return ResourceKey.create(Registries.RECIPE, rl);
   }
 }

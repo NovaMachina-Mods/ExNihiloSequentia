@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 200,
-  "input": {
-    "tag": "c:meat_cooked"
-  }
+  "input": "#c:meat_cooked"
 }

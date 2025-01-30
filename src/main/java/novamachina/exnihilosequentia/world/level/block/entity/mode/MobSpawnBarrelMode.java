@@ -14,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -60,13 +59,13 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public ItemInteractionResult onBlockActivated(
+  public InteractionResult onBlockActivated(
       @Nonnull final BarrelBlockEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
       @Nonnull final IFluidHandler fluidHandler,
       @Nonnull final IItemHandler itemHandler) {
-    return ItemInteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS;
   }
 
   @Override
@@ -93,7 +92,7 @@ public class MobSpawnBarrelMode extends AbstractBarrelMode {
     }
     if (nbt.contains(DOLL_TYPE_TAG)) {
       doll =
-          (DollItem) BuiltInRegistries.ITEM.get(ResourceLocation.parse(nbt.getString(DOLL_TYPE_TAG)));
+          (DollItem) BuiltInRegistries.ITEM.get(ResourceLocation.parse(nbt.getString(DOLL_TYPE_TAG))).get().value();
     } else {
       doll = null;
     }

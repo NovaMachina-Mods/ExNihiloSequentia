@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "item": "minecraft:sand"
-  },
+  "input": "minecraft:sand",
   "result": {
     "count": 1,
     "id": "minecraft:sugar_cane"

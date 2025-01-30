@@ -1,9 +1,14 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
 import javax.annotation.Nonnull;
+
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.data.recipes.CrushingRecipeBuilder;
@@ -13,7 +18,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class CrushingRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(RecipeOutput consumer) {
+  public void addRecipes(HolderGetter.Provider holderGetter, RecipeOutput consumer) {
     CrushingRecipeBuilder.crushing(Blocks.STONE)
         .addDrop(new ItemStack(Blocks.COBBLESTONE))
         .build(consumer, crushingLoc("cobblestone"));
@@ -91,8 +96,9 @@ public class CrushingRecipes implements ISubRecipeProvider {
         .build(consumer, crushingLoc("horn_coral_fan"));
   }
 
-  private ResourceLocation crushingLoc(@Nonnull final String id) {
-    return ResourceLocation.fromNamespaceAndPath(
+  private ResourceKey<Recipe<?>> crushingLoc(@Nonnull final String id) {
+    ResourceLocation rl = ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "crushing/" + RecipeProviderUtilities.prependRecipePrefix(id));
+    return ResourceKey.create(Registries.RECIPE, rl);
   }
 }

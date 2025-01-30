@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 80,
-  "input": {
-    "tag": "c:eggs"
-  }
+  "input": "#c:eggs"
 }

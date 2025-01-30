@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "b": {
-      "tag": "minecraft:fishes"
-    },
-    "c": {
-      "tag": "c:gems/prismarine"
-    },
-    "m": {
-      "item": "exnihilosequentia:porcelain_doll"
-    },
-    "s": {
-      "tag": "c:dusts/glowstone"
-    },
-    "t": {
-      "tag": "c:dusts/redstone"
-    }
+    "b": "#minecraft:fishes",
+    "c": "#c:gems/prismarine",
+    "m": "exnihilosequentia:porcelain_doll",
+    "s": "#c:dusts/glowstone",
+    "t": "#c:dusts/redstone"
   },
   "pattern": [
     "ctc",

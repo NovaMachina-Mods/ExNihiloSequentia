@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "item": "minecraft:birch_leaves"
-  },
+  "input": "minecraft:birch_leaves",
   "result": {
     "count": 1,
     "id": "minecraft:birch_sapling"

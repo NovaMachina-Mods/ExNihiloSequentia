@@ -3,9 +3,7 @@
   "category": "building",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "exnihilosequentia:deepslate_pebble"
-    }
+    "x": "exnihilosequentia:deepslate_pebble"
   },
   "pattern": [
     "xx",

@@ -1,6 +1,7 @@
 package novamachina.exnihilosequentia.world.item;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
@@ -8,6 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,21 +20,22 @@ import net.minecraft.world.level.material.Fluids;
 
 public class DollItem extends Item {
 
-  @Nonnull private final String entityModId;
-  @Nonnull private final String entityName;
-  @Nonnull private final String fluidModId;
-  @Nonnull private final String fluidName;
-  @Nonnull private final String tooltip;
+  private final String entityModId;
+  private final String entityName;
+  private final String fluidModId;
+  private final String fluidName;
+  private final String tooltip;
   private final double yOffset;
 
   public DollItem(
-      @Nonnull final String entityModId,
-      @Nonnull final String entityName,
-      @Nonnull final String fluidModId,
-      @Nonnull final String fluidName,
+      String entityModId,
+      String entityName,
+      String fluidModId,
+      String fluidName,
       double yOffset,
-      @Nonnull final String tooltip) {
-    super(new Item.Properties());
+      String tooltip,
+      Item.Properties properties) {
+    super(properties);
     this.entityModId = entityModId;
     this.entityName = entityName;
     this.fluidModId = fluidModId;
@@ -63,13 +66,12 @@ public class DollItem extends Item {
 
   public Fluid getSpawnFluid() {
     @Nonnull
-    final ResourceLocation fluidLocation = ResourceLocation.fromNamespaceAndPath(this.fluidModId, this.fluidName);
-
-    if (BuiltInRegistries.FLUID.containsKey(fluidLocation)) {
-
-      return BuiltInRegistries.FLUID.get(fluidLocation);
-    }
-    return Fluids.EMPTY;
+    final ResourceLocation fluidLocation =
+        ResourceLocation.fromNamespaceAndPath(this.fluidModId, this.fluidName);
+    return BuiltInRegistries.FLUID
+        .get(fluidLocation)
+        .orElse(Fluids.EMPTY.builtInRegistryHolder())
+        .value();
   }
 
   public boolean spawnMob(@Nonnull final Level world, @Nonnull final BlockPos pos) {
@@ -77,17 +79,31 @@ public class DollItem extends Item {
     ResourceLocation spawneeResourceLocation =
         ResourceLocation.fromNamespaceAndPath(this.entityModId, this.entityName);
 
-    if (BuiltInRegistries.ENTITY_TYPE.containsKey(spawneeResourceLocation)) {
-      @Nullable
-      final EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(spawneeResourceLocation);
-      if (entityType != null) {
-        @Nullable final Entity spawnee = entityType.create(world);
-        if (spawnee != null) {
-          spawnee.setPos(pos.getX(), pos.getY() + this.yOffset, pos.getZ());
-          return world.addFreshEntity(spawnee);
-        }
-      }
-    }
-    return false;
+    AtomicBoolean success = new AtomicBoolean(false);
+
+    BuiltInRegistries.ENTITY_TYPE
+        .get(spawneeResourceLocation)
+        .ifPresent(
+            holder -> {
+              EntityType<?> entityType = holder.value();
+              final Entity spawnee = entityType.create(world, EntitySpawnReason.SPAWN_ITEM_USE);
+              if (spawnee != null) {
+                spawnee.setPos(pos.getX(), pos.getY() + this.yOffset, pos.getZ());
+                success.set(world.addFreshEntity(spawnee));
+              }
+            });
+    return success.get();
+  }
+
+  @FunctionalInterface
+  public interface DollItemFunction {
+    DollItem apply(
+        String entityModId,
+        String entityName,
+        String fluidModId,
+        String fluidName,
+        double yOffset,
+        String tooltip,
+        Item.Properties properties);
   }
 }

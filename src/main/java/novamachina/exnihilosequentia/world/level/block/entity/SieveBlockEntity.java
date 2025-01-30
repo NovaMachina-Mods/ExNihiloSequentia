@@ -64,16 +64,19 @@ public class SieveBlockEntity extends BlockEntity {
     log.debug("Activate Sieve, isWaterlogged: {}", isWaterlogged);
     AtomicReference<Float> fortune = new AtomicReference<>(0.0f);
     AtomicReference<Float> efficiency = new AtomicReference<>(0.0f);
+
     level
         .registryAccess()
-        .registry(Registries.ENCHANTMENT)
+        .get(Registries.ENCHANTMENT)
         .ifPresent(
             registry -> {
               registry
-                  .getHolder(Enchantments.FORTUNE)
+                  .value()
+                  .get(Enchantments.FORTUNE)
                   .ifPresent(holder -> fortune.set((float) meshStack.getEnchantmentLevel(holder)));
               registry
-                  .getHolder(Enchantments.EFFICIENCY)
+                  .value()
+                  .get(Enchantments.EFFICIENCY)
                   .ifPresent(
                       holder -> efficiency.set((float) meshStack.getEnchantmentLevel(holder)));
             });

@@ -7,11 +7,15 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.List;
+import java.util.Optional;
 
 public class CompostRecipe extends AbstractRecipe {
   private final Ingredient input;
@@ -24,20 +28,14 @@ public class CompostRecipe extends AbstractRecipe {
 
   @Override
   @NonNull
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<CompostRecipe> getSerializer() {
     return EXNRecipeSerializers.COMPOST_RECIPE_SERIALIZER.recipeSerializer();
   }
 
   @Override
   @NonNull
-  public RecipeType<?> getType() {
+  public RecipeType<CompostRecipe> getType() {
     return EXNRecipeTypes.COMPOST;
-  }
-
-  @Override
-  @NonNull
-  public ItemStack getToastSymbol() {
-    return EXNBlocks.OAK_BARREL.itemStack();
   }
 
   public Ingredient getInput() {
@@ -55,7 +53,7 @@ public class CompostRecipe extends AbstractRecipe {
             instance ->
                 instance
                     .group(
-                        Ingredient.CODEC_NONEMPTY
+                        Ingredient.CODEC
                             .fieldOf("input")
                             .forGetter(CompostRecipe::getInput),
                         Codec.INT.fieldOf("amount").forGetter(CompostRecipe::getAmount))
@@ -83,5 +81,9 @@ public class CompostRecipe extends AbstractRecipe {
       Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getInput());
       buffer.writeInt(recipe.getAmount());
     }
+  }
+  @Override
+  public PlacementInfo placementInfo() {
+    return PlacementInfo.createFromOptionals(List.of(Optional.of(input)));
   }
 }

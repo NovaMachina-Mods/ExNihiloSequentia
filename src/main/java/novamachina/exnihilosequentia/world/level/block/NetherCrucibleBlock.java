@@ -17,12 +17,8 @@ import novamachina.exnihilosequentia.world.level.block.entity.FiredCrucibleBlock
 
 public class NetherCrucibleBlock extends CrucibleBlock implements EntityBlock {
 
-  public NetherCrucibleBlock() {
-    super(
-        BlockBehaviour.Properties.of()
-            .strength(1.0F)
-            .sound(Config.getNetherCrucibleSoundsEnabled() ? SoundType.STEM : SoundType.WOOD)
-            .noOcclusion());
+  public NetherCrucibleBlock(BlockBehaviour.Properties properties) {
+    super(properties);
   }
 
   @Nullable

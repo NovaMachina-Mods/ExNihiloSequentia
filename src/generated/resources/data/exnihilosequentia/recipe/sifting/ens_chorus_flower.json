@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "item": "exnihilosequentia:crushed_end_stone"
-  },
+  "input": "exnihilosequentia:crushed_end_stone",
   "result": {
     "count": 1,
     "id": "minecraft:chorus_flower"

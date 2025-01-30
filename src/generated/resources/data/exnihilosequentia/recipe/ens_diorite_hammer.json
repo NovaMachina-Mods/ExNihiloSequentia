@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "-": {
-      "tag": "c:rods"
-    },
-    "x": {
-      "item": "minecraft:diorite"
-    }
+    "-": "#c:rods",
+    "x": "minecraft:diorite"
   },
   "pattern": [
     " x ",

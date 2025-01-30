@@ -13,13 +13,17 @@ public class ExNihiloTags {
 
   public static final TagKey<Item> CLAY = ItemTags.create(forgeLoc("clay"));
   public static final TagKey<Item> HAMMER = ItemTags.create(modLoc("hammer"));
+  public static final TagKey<Item> WOOD_HAMMER = ItemTags.create(modLoc("wood_hammer"));
   public static final TagKey<Item> CROOK = ItemTags.create(modLoc("crook"));
+  public static final TagKey<Item> WOOD_CROOK = ItemTags.create(modLoc("wood_crook"));
   public static final TagKey<Item> MEAT_COOKED = ItemTags.create(forgeLoc("meat_cooked"));
 
   public static final TagKey<Item> MEAT_UNCOOKED = ItemTags.create(forgeLoc("meat_uncooked"));
 
   public static final TagKey<Item> CRUCIBLE = ItemTags.create(modLoc("crucibles"));
+  public static final TagKey<Item> WOOD_CRUCIBLE = ItemTags.create(modLoc("wood_crucibles"));
   public static final TagKey<Item> BARREL = ItemTags.create(modLoc("barrels"));
+  public static final TagKey<Item> WOOD_BARREL = ItemTags.create(modLoc("wood_barrels"));
   public static final TagKey<Item> SIEVE = ItemTags.create(modLoc("sieves"));
   public static final TagKey<Item> PIECE = ItemTags.create(modLoc("pieces"));
   public static final TagKey<Item> PEBBLES = ItemTags.create(modLoc("pebbles"));

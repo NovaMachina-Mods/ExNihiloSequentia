@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 100,
-  "input": {
-    "tag": "c:crops/nether_wart"
-  }
+  "input": "#c:crops/nether_wart"
 }

@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "tag": "minecraft:sand"
-  },
+  "input": "#minecraft:sand",
   "result": {
     "count": 1,
     "id": "exnihilosequentia:bubble_coral_larva"

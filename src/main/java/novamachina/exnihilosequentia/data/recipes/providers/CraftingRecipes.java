@@ -5,13 +5,16 @@ import java.util.Objects;
 import java.util.Optional;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -45,22 +48,23 @@ public class CraftingRecipes implements ISubRecipeProvider {
   private static final String PORCELAIN_CLAY_CONDITION = "has_porcelain_clay";
 
   @Override
-  public void addRecipes(RecipeOutput consumer) {
-    addCrooks(consumer);
-    addPebbleBlocks(consumer);
-    addBarrels(consumer);
-    addCrucibles(consumer);
-    addSieves(consumer);
-    addOres(consumer);
-    addHammers(consumer);
-    addDolls(consumer);
-    addMeshes(consumer);
-    addMisc(consumer);
+  public void addRecipes(HolderGetter.Provider provider, RecipeOutput consumer) {
+    HolderGetter<Item> holderGetter = provider.lookupOrThrow(Registries.ITEM);
+    addCrooks(holderGetter, consumer);
+    addPebbleBlocks(holderGetter, consumer);
+    addBarrels(holderGetter, consumer);
+    addCrucibles(holderGetter, consumer);
+    addSieves(holderGetter, consumer);
+    addOres(holderGetter, consumer);
+    addHammers(holderGetter, consumer);
+    addDolls(holderGetter, consumer);
+    addMeshes(holderGetter, consumer);
+    addMisc(holderGetter, consumer);
   }
 
-  private void addMisc(RecipeOutput consumer) {
+  private void addMisc(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
     ResourceLocation beehive = BuiltInRegistries.BLOCK.getKey(Blocks.BEEHIVE);
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.BEEHIVE)
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, Blocks.BEEHIVE)
         .pattern("xxx")
         .pattern("fff")
         .pattern("xxx")
@@ -71,7 +75,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
             InventoryChangeTrigger.TriggerInstance.hasItems(EXNItems.BEEHIVE_FRAME.asItem()))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(beehive));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.BEEHIVE_FRAME.asItem())
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, EXNItems.BEEHIVE_FRAME.asItem())
         .pattern("xxx")
         .pattern("xfx")
         .pattern("xxx")
@@ -80,11 +84,11 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             "has_stick",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.RODS_WOODEN).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.RODS_WOODEN).build()))
         .unlockedBy(
             "has_string",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.STRINGS).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.STRINGS).build()))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.BEEHIVE_FRAME.getId()));
 
     createCookingRecipe(
@@ -118,7 +122,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         100,
         "has_uncooked_crucible",
         EXNBlocks.FIRED_CRUCIBLE.getId());
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNBlocks.UNFIRED_CRUCIBLE)
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, EXNBlocks.UNFIRED_CRUCIBLE)
         .pattern("c c")
         .pattern("c c")
         .pattern("ccc")
@@ -130,7 +134,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
             consumer,
             RecipeProviderUtilities.createSaveLocation(EXNBlocks.UNFIRED_CRUCIBLE.getId()));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.CRAFTING_DOLL.asItem(), 4)
+    ShapedRecipeBuilder.shaped(
+            holderGetter, RecipeCategory.MISC, EXNItems.CRAFTING_DOLL.asItem(), 4)
         .pattern("xex")
         .pattern(" x ")
         .pattern("x x")
@@ -142,13 +147,14 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             "has_diamond",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.GEMS_DIAMOND).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.GEMS_DIAMOND).build()))
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
                 ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "doll_x4")));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.CRAFTING_DOLL.asItem(), 6)
+    ShapedRecipeBuilder.shaped(
+            holderGetter, RecipeCategory.MISC, EXNItems.CRAFTING_DOLL.asItem(), 6)
         .pattern("xex")
         .pattern(" x ")
         .pattern("x x")
@@ -160,13 +166,13 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             "has_emerald",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.GEMS_EMERALD).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.GEMS_EMERALD).build()))
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
                 ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "doll_x6")));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, EXNBlocks.END_CAKE)
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.FOOD, EXNBlocks.END_CAKE)
         .pattern("ece")
         .pattern("eke")
         .pattern("ece")
@@ -177,13 +183,14 @@ public class CraftingRecipes implements ISubRecipeProvider {
             "has_ender_pearl", InventoryChangeTrigger.TriggerInstance.hasItems(Items.ENDER_PEARL))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNBlocks.END_CAKE.getId()));
 
-    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EXNItems.PORCELAIN_CLAY.asItem())
+    ShapelessRecipeBuilder.shapeless(
+            holderGetter, RecipeCategory.MISC, EXNItems.PORCELAIN_CLAY.asItem())
         .requires(ExNihiloTags.CLAY)
         .requires(Items.BONE_MEAL)
         .unlockedBy(
             "has_clay",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(ExNihiloTags.CLAY).build()))
+                ItemPredicate.Builder.item().of(holderGetter, ExNihiloTags.CLAY).build()))
         .save(
             consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.PORCELAIN_CLAY.getId()));
 
@@ -191,7 +198,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
     final ResourceLocation gildedBlackstoneResourceLocation =
         BuiltInRegistries.BLOCK.getKey(Blocks.GILDED_BLACKSTONE);
     if (EXNItems.GOLD.getRawOreItem() != null) {
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Blocks.GILDED_BLACKSTONE)
+      ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.DECORATIONS, Blocks.GILDED_BLACKSTONE)
           .pattern("xxx")
           .pattern("xgx")
           .pattern("xxx")
@@ -204,7 +211,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
     }
     ResourceLocation cryingObsidianResourceLocation =
         BuiltInRegistries.BLOCK.getKey(Blocks.CRYING_OBSIDIAN);
-    ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Blocks.CRYING_OBSIDIAN)
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.DECORATIONS, Blocks.CRYING_OBSIDIAN)
         .pattern(" o ")
         .pattern("obo")
         .pattern(" o ")
@@ -215,7 +222,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(consumer, RecipeProviderUtilities.createSaveLocation(cryingObsidianResourceLocation));
     ResourceLocation ancientDebrisResourceLocation =
         BuiltInRegistries.BLOCK.getKey(Blocks.ANCIENT_DEBRIS);
-    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS)
+    ShapelessRecipeBuilder.shapeless(holderGetter, RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS)
         .requires(Items.NETHERITE_SCRAP)
         .requires(Blocks.OBSIDIAN)
         .unlockedBy(
@@ -223,27 +230,30 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(consumer, RecipeProviderUtilities.createSaveLocation(ancientDebrisResourceLocation));
   }
 
-  private void addMeshes(RecipeOutput consumer) {
-    createMesh(EXNItems.MESH_FLINT.asItem(), EXNItems.MESH_STRING.asItem(), Items.FLINT, consumer);
+  private void addMeshes(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createMesh(EXNItems.MESH_FLINT.asItem(), EXNItems.MESH_STRING.asItem(), Items.FLINT, holderGetter, consumer);
     createMesh(
         EXNItems.MESH_IRON.asItem(),
         EXNItems.MESH_FLINT.asItem(),
         Tags.Items.INGOTS_IRON,
+        holderGetter,
         consumer);
     createMesh(
         EXNItems.MESH_DIAMOND.asItem(),
         EXNItems.MESH_IRON.asItem(),
         Tags.Items.GEMS_DIAMOND,
+        holderGetter,
         consumer);
     createMesh(
         EXNItems.MESH_EMERALD.asItem(),
         EXNItems.MESH_DIAMOND.asItem(),
         Tags.Items.GEMS_EMERALD,
+        holderGetter,
         consumer);
     SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
             Ingredient.of(EXNItems.MESH_EMERALD.asItem()),
-            Ingredient.of(Tags.Items.INGOTS_NETHERITE),
+            Ingredient.of(holderGetter.getOrThrow(Tags.Items.INGOTS_NETHERITE)),
             RecipeCategory.MISC,
             EXNItems.MESH_NETHERITE.asItem())
         .unlocks(
@@ -252,15 +262,14 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlocks(
             MATERIAL_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.INGOTS_NETHERITE).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.INGOTS_NETHERITE).build()))
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
                 ResourceLocation.fromNamespaceAndPath(
-                    ExNihiloSequentia.MOD_ID,
-                    ExNihiloConstants.Items.NETHERITE_MESH)));
+                    ExNihiloSequentia.MOD_ID, ExNihiloConstants.Items.NETHERITE_MESH)));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.MESH_STRING.asItem())
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, EXNItems.MESH_STRING.asItem())
         .pattern("iii")
         .pattern("iii")
         .pattern("iii")
@@ -282,8 +291,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.MESH_STRING.getId()));
   }
 
-  private void addDolls(RecipeOutput consumer) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.SHULKER_DOLL.asItem())
+  private void addDolls(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, EXNItems.SHULKER_DOLL.asItem())
         .pattern("ctc")
         .pattern("sms")
         .pattern("cbc")
@@ -296,7 +305,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
             DOLL_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(EXNItems.CRAFTING_DOLL.asItem()))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.SHULKER_DOLL.getId()));
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.GUARDIAN_DOLL.asItem())
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, EXNItems.GUARDIAN_DOLL.asItem())
         .pattern("ctc")
         .pattern("sms")
         .pattern("cbc")
@@ -309,20 +318,20 @@ public class CraftingRecipes implements ISubRecipeProvider {
             DOLL_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(EXNItems.CRAFTING_DOLL.asItem()))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.GUARDIAN_DOLL.getId()));
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.BEE_DOLL.asItem())
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, EXNItems.BEE_DOLL.asItem())
         .pattern("ctc")
         .pattern("sms")
         .pattern("cbc")
         .define('c', Tags.Items.DYES_YELLOW)
         .define('s', Tags.Items.DUSTS_GLOWSTONE)
-        .define('t', ItemTags.FLOWERS)
+        .define('t', ItemTags.SMALL_FLOWERS)
         .define('b', EXNItems.BEEHIVE_FRAME.asItem())
         .define('m', EXNItems.CRAFTING_DOLL.asItem())
         .unlockedBy(
             DOLL_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(EXNItems.CRAFTING_DOLL.asItem()))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.BEE_DOLL.getId()));
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.BLAZE_DOLL.asItem())
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, EXNItems.BLAZE_DOLL.asItem())
         .pattern("ctc")
         .pattern("sms")
         .pattern("cbc")
@@ -335,7 +344,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
             DOLL_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(EXNItems.CRAFTING_DOLL.asItem()))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.BLAZE_DOLL.getId()));
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EXNItems.ENDERMAN_DOLL.asItem())
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, EXNItems.ENDERMAN_DOLL.asItem())
         .pattern("ctc")
         .pattern("sms")
         .pattern("cbc")
@@ -350,28 +359,28 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(consumer, RecipeProviderUtilities.createSaveLocation(EXNItems.ENDERMAN_DOLL.getId()));
   }
 
-  private void addHammers(RecipeOutput consumer) {
-    createHammer(EXNItems.HAMMER_ANDESITE.asItem(), Items.ANDESITE, consumer);
-    createHammer(EXNItems.HAMMER_BAMBOO.asItem(), Items.BAMBOO, consumer);
-    createHammer(EXNItems.HAMMER_BASALT.asItem(), Items.BASALT, consumer);
-    createHammer(EXNItems.HAMMER_BLACKSTONE.asItem(), Items.BLACKSTONE, consumer);
-    createHammer(EXNItems.HAMMER_CALCITE.asItem(), Items.CALCITE, consumer);
-    createHammer(EXNItems.HAMMER_CHERRY.asItem(), Items.CHERRY_PLANKS, consumer);
-    createHammer(EXNItems.HAMMER_COPPER.asItem(), Tags.Items.INGOTS_COPPER, consumer);
+  private void addHammers(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createHammer(EXNItems.HAMMER_ANDESITE.asItem(), Items.ANDESITE, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_BAMBOO.asItem(), Items.BAMBOO, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_BASALT.asItem(), Items.BASALT, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_BLACKSTONE.asItem(), Items.BLACKSTONE, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_CALCITE.asItem(), Items.CALCITE, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_CHERRY.asItem(), Items.CHERRY_PLANKS, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_COPPER.asItem(), Tags.Items.INGOTS_COPPER, holderGetter, consumer);
     //    createHammer(ExNihiloItems.HAMMER_CRIMSON_FUNGUS.asItem(), Items.CRIMSON_PLANKS,
     // consumer);
-    createHammer(EXNItems.HAMMER_DEEPSLATE.asItem(), Items.DEEPSLATE, consumer);
-    createHammer(EXNItems.HAMMER_DIAMOND.asItem(), Tags.Items.GEMS_DIAMOND, consumer);
-    createHammer(EXNItems.HAMMER_DIORITE.asItem(), Items.DIORITE, consumer);
-    createHammer(EXNItems.HAMMER_DRIPSTONE.asItem(), Items.DRIPSTONE_BLOCK, consumer);
-    createHammer(EXNItems.HAMMER_GOLD.asItem(), Tags.Items.INGOTS_GOLD, consumer);
-    createHammer(EXNItems.HAMMER_GRANITE.asItem(), Items.GRANITE, consumer);
-    createHammer(EXNItems.HAMMER_IRON.asItem(), Tags.Items.INGOTS_IRON, consumer);
-    createHammer(EXNItems.HAMMER_NETHER_BRICK.asItem(), Items.NETHER_BRICKS, consumer);
+    createHammer(EXNItems.HAMMER_DEEPSLATE.asItem(), Items.DEEPSLATE, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_DIAMOND.asItem(), Tags.Items.GEMS_DIAMOND, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_DIORITE.asItem(), Items.DIORITE, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_DRIPSTONE.asItem(), Items.DRIPSTONE_BLOCK, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_GOLD.asItem(), Tags.Items.INGOTS_GOLD, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_GRANITE.asItem(), Items.GRANITE, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_IRON.asItem(), Tags.Items.INGOTS_IRON, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_NETHER_BRICK.asItem(), Items.NETHER_BRICKS, holderGetter, consumer);
     SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
             Ingredient.of(EXNItems.HAMMER_DIAMOND.asItem()),
-            Ingredient.of(Tags.Items.INGOTS_NETHERITE),
+            Ingredient.of(holderGetter.getOrThrow(Tags.Items.INGOTS_NETHERITE)),
             RecipeCategory.TOOLS,
             EXNItems.HAMMER_NETHERITE.asItem())
         .unlocks(
@@ -380,149 +389,152 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlocks(
             MATERIAL_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.INGOTS_NETHERITE).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.INGOTS_NETHERITE).build()))
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
                 ResourceLocation.fromNamespaceAndPath(
-                    ExNihiloSequentia.MOD_ID,
-                    ExNihiloConstants.Items.NETHERITE_HAMMER)));
+                    ExNihiloSequentia.MOD_ID, ExNihiloConstants.Items.NETHERITE_HAMMER)));
     //    createHammer(ExNihiloItems.HAMMER_PRISMARINE.asItem(), Tags.Items.GEMS_PRISMARINE,
     // consumer);
-    createHammer(EXNItems.HAMMER_RED_NETHER_BRICK.asItem(), Items.RED_NETHER_BRICKS, consumer);
-    createHammer(EXNItems.HAMMER_STONE.asItem(), Items.COBBLESTONE, consumer);
-    createHammer(EXNItems.HAMMER_TERRACOTTA.asItem(), Items.TERRACOTTA, consumer);
-    createHammer(EXNItems.HAMMER_TUFF.asItem(), Items.TUFF, consumer);
-    //    createHammer(ExNihiloItems.HAMMER_WARPED_FUNGUS.asItem(), Items.WARPED_PLANKS, consumer);
-    createHammer(EXNItems.HAMMER_WOOD.asItem(), ItemTags.PLANKS, consumer);
+    createHammer(EXNItems.HAMMER_RED_NETHER_BRICK.asItem(), Items.RED_NETHER_BRICKS, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_STONE.asItem(), Items.COBBLESTONE, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_TERRACOTTA.asItem(), Items.TERRACOTTA, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_TUFF.asItem(), Items.TUFF, holderGetter, consumer);
+    //    createHammer(ExNihiloItems.HAMMER_WARPED_FUNGUS.asItem(), Items.WARPED_PLANKS, holderGetter, consumer);
+    createHammer(EXNItems.HAMMER_WOOD.asItem(), ItemTags.PLANKS, holderGetter, consumer);
   }
 
-  private void addOres(RecipeOutput consumer) {
-    createOre(EXNItems.IRON, consumer);
-    createOre(EXNItems.GOLD, consumer);
-    createOre(EXNItems.COPPER, consumer);
+  private void addOres(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createOre(EXNItems.IRON, holderGetter, consumer);
+    createOre(EXNItems.GOLD, holderGetter, consumer);
+    createOre(EXNItems.COPPER, holderGetter, consumer);
     createOreRecipes(
         EXNItems.LEAD,
-        ResourceLocation.fromNamespaceAndPath(
-            ExNihiloSequentia.MOD_ID, EXNItems.LEAD.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, EXNItems.LEAD.getIngotId()),
+        holderGetter,
         consumer);
     createOreRecipes(
         EXNItems.NICKEL,
         ResourceLocation.fromNamespaceAndPath(
             ExNihiloSequentia.MOD_ID, EXNItems.NICKEL.getIngotId()),
+        holderGetter,
         consumer);
     createOreRecipes(
         EXNItems.SILVER,
         ResourceLocation.fromNamespaceAndPath(
             ExNihiloSequentia.MOD_ID, EXNItems.SILVER.getIngotId()),
+        holderGetter,
         consumer);
     createOreRecipes(
         EXNItems.TIN,
-        ResourceLocation.fromNamespaceAndPath(
-            ExNihiloSequentia.MOD_ID, EXNItems.TIN.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, EXNItems.TIN.getIngotId()),
+        holderGetter,
         consumer);
     createOreRecipes(
         EXNItems.ALUMINUM,
         ResourceLocation.fromNamespaceAndPath(
             ExNihiloSequentia.MOD_ID, EXNItems.ALUMINUM.getIngotId()),
+        holderGetter,
         consumer);
     createOreRecipes(
         EXNItems.PLATINUM,
         ResourceLocation.fromNamespaceAndPath(
             ExNihiloSequentia.MOD_ID, EXNItems.PLATINUM.getIngotId()),
+        holderGetter,
         consumer);
     createOreRecipes(
         EXNItems.URANIUM,
         ResourceLocation.fromNamespaceAndPath(
             ExNihiloSequentia.MOD_ID, EXNItems.URANIUM.getIngotId()),
+        holderGetter,
         consumer);
     createOreRecipes(
         EXNItems.ZINC,
-        ResourceLocation.fromNamespaceAndPath(
-            ExNihiloSequentia.MOD_ID, EXNItems.ZINC.getIngotId()),
+        ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, EXNItems.ZINC.getIngotId()),
+        holderGetter,
         consumer);
   }
 
-  private void addSieves(RecipeOutput consumer) {
-    createSieve(consumer, EXNBlocks.ACACIA_SIEVE, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
-    createSieve(consumer, EXNBlocks.BAMBOO_SIEVE, Items.BAMBOO_PLANKS, Items.BAMBOO_SLAB);
-    createSieve(consumer, EXNBlocks.BIRCH_SIEVE, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
-    createSieve(consumer, EXNBlocks.CHERRY_SIEVE, Items.CHERRY_PLANKS, Items.CHERRY_SLAB);
-    createSieve(consumer, EXNBlocks.DARK_OAK_SIEVE, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
-    createSieve(consumer, EXNBlocks.JUNGLE_SIEVE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
-    createSieve(consumer, EXNBlocks.MANGROVE_SIEVE, Items.MANGROVE_PLANKS, Items.MANGROVE_SLAB);
-    createSieve(consumer, EXNBlocks.OAK_SIEVE, Items.OAK_PLANKS, Items.OAK_SLAB);
-    createSieve(consumer, EXNBlocks.SPRUCE_SIEVE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
-    createSieve(consumer, EXNBlocks.CRIMSON_SIEVE, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
-    createSieve(consumer, EXNBlocks.WARPED_SIEVE, Items.WARPED_PLANKS, Items.WARPED_SLAB);
+  private void addSieves(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createSieve(holderGetter, consumer, EXNBlocks.ACACIA_SIEVE, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
+    createSieve(holderGetter, consumer, EXNBlocks.BAMBOO_SIEVE, Items.BAMBOO_PLANKS, Items.BAMBOO_SLAB);
+    createSieve(holderGetter, consumer, EXNBlocks.BIRCH_SIEVE, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
+    createSieve(holderGetter, consumer, EXNBlocks.CHERRY_SIEVE, Items.CHERRY_PLANKS, Items.CHERRY_SLAB);
+    createSieve(holderGetter,consumer, EXNBlocks.JUNGLE_SIEVE, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
+    createSieve(holderGetter,consumer, EXNBlocks.MANGROVE_SIEVE, Items.MANGROVE_PLANKS, Items.MANGROVE_SLAB);
+    createSieve(holderGetter,consumer, EXNBlocks.OAK_SIEVE, Items.OAK_PLANKS, Items.OAK_SLAB);
+    createSieve(holderGetter,consumer, EXNBlocks.SPRUCE_SIEVE, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
+    createSieve(holderGetter,consumer, EXNBlocks.CRIMSON_SIEVE, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
+    createSieve(holderGetter,consumer, EXNBlocks.WARPED_SIEVE, Items.WARPED_PLANKS, Items.WARPED_SLAB);
   }
 
-  private void addCrucibles(RecipeOutput consumer) {
-    createCrucible(consumer, EXNBlocks.ACACIA_CRUCIBLE, Items.ACACIA_LOG, Items.ACACIA_SLAB);
-    createCrucible(consumer, EXNBlocks.BAMBOO_CRUCIBLE, Items.BAMBOO_BLOCK, Items.BAMBOO_SLAB);
-    createCrucible(consumer, EXNBlocks.BIRCH_CRUCIBLE, Items.BIRCH_LOG, Items.BIRCH_SLAB);
-    createCrucible(consumer, EXNBlocks.CHERRY_CRUCIBLE, Items.CHERRY_LOG, Items.CHERRY_SLAB);
-    createCrucible(consumer, EXNBlocks.DARK_OAK_CRUCIBLE, Items.DARK_OAK_LOG, Items.DARK_OAK_SLAB);
-    createCrucible(consumer, EXNBlocks.JUNGLE_CRUCIBLE, Items.JUNGLE_LOG, Items.JUNGLE_SLAB);
-    createCrucible(consumer, EXNBlocks.MANGROVE_CRUCIBLE, Items.MANGROVE_LOG, Items.MANGROVE_SLAB);
-    createCrucible(consumer, EXNBlocks.OAK_CRUCIBLE, Items.OAK_LOG, Items.OAK_SLAB);
-    createCrucible(consumer, EXNBlocks.SPRUCE_CRUCIBLE, Items.SPRUCE_LOG, Items.SPRUCE_SLAB);
-    createCrucible(consumer, EXNBlocks.CRIMSON_CRUCIBLE, Items.CRIMSON_STEM, Items.CRIMSON_SLAB);
-    createCrucible(consumer, EXNBlocks.WARPED_CRUCIBLE, Items.WARPED_STEM, Items.WARPED_SLAB);
+  private void addCrucibles(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createCrucible(holderGetter, consumer, EXNBlocks.ACACIA_CRUCIBLE, Items.ACACIA_LOG, Items.ACACIA_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.BAMBOO_CRUCIBLE, Items.BAMBOO_BLOCK, Items.BAMBOO_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.BIRCH_CRUCIBLE, Items.BIRCH_LOG, Items.BIRCH_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.CHERRY_CRUCIBLE, Items.CHERRY_LOG, Items.CHERRY_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.DARK_OAK_CRUCIBLE, Items.DARK_OAK_LOG, Items.DARK_OAK_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.JUNGLE_CRUCIBLE, Items.JUNGLE_LOG, Items.JUNGLE_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.MANGROVE_CRUCIBLE, Items.MANGROVE_LOG, Items.MANGROVE_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.OAK_CRUCIBLE, Items.OAK_LOG, Items.OAK_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.SPRUCE_CRUCIBLE, Items.SPRUCE_LOG, Items.SPRUCE_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.CRIMSON_CRUCIBLE, Items.CRIMSON_STEM, Items.CRIMSON_SLAB);
+    createCrucible(holderGetter, consumer, EXNBlocks.WARPED_CRUCIBLE, Items.WARPED_STEM, Items.WARPED_SLAB);
   }
 
-  private void addBarrels(RecipeOutput consumer) {
-    createBarrel(consumer, EXNBlocks.STONE_BARREL, Tags.Items.STONES, Items.STONE_SLAB);
-    createBarrel(consumer, EXNBlocks.ACACIA_BARREL, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
-    createBarrel(consumer, EXNBlocks.BAMBOO_BARREL, Items.BAMBOO_PLANKS, Items.BAMBOO_SLAB);
-    createBarrel(consumer, EXNBlocks.BIRCH_BARREL, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
-    createBarrel(consumer, EXNBlocks.CHERRY_BARREL, Items.CHERRY_PLANKS, Items.CHERRY_SLAB);
-    createBarrel(consumer, EXNBlocks.DARK_OAK_BARREL, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
-    createBarrel(consumer, EXNBlocks.JUNGLE_BARREL, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
-    createBarrel(consumer, EXNBlocks.MANGROVE_BARREL, Items.MANGROVE_PLANKS, Items.MANGROVE_SLAB);
-    createBarrel(consumer, EXNBlocks.OAK_BARREL, Items.OAK_PLANKS, Items.OAK_SLAB);
-    createBarrel(consumer, EXNBlocks.SPRUCE_BARREL, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
-    createBarrel(consumer, EXNBlocks.CRIMSON_BARREL, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
-    createBarrel(consumer, EXNBlocks.WARPED_BARREL, Items.WARPED_PLANKS, Items.WARPED_SLAB);
+  private void addBarrels(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createBarrel(holderGetter, consumer, EXNBlocks.STONE_BARREL, Tags.Items.STONES, Items.STONE_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.ACACIA_BARREL, Items.ACACIA_PLANKS, Items.ACACIA_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.BAMBOO_BARREL, Items.BAMBOO_PLANKS, Items.BAMBOO_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.BIRCH_BARREL, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.CHERRY_BARREL, Items.CHERRY_PLANKS, Items.CHERRY_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.DARK_OAK_BARREL, Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.JUNGLE_BARREL, Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.MANGROVE_BARREL, Items.MANGROVE_PLANKS, Items.MANGROVE_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.OAK_BARREL, Items.OAK_PLANKS, Items.OAK_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.SPRUCE_BARREL, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.CRIMSON_BARREL, Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB);
+    createBarrel(holderGetter, consumer, EXNBlocks.WARPED_BARREL, Items.WARPED_PLANKS, Items.WARPED_SLAB);
   }
 
-  private void addPebbleBlocks(RecipeOutput consumer) {
-    createPebbleBlock(Blocks.ANDESITE, EXNItems.PEBBLE_ANDESITE.asItem(), consumer);
-    createPebbleBlock(Blocks.BASALT, EXNItems.PEBBLE_BASALT.asItem(), consumer);
-    createPebbleBlock(Blocks.BLACKSTONE, EXNItems.PEBBLE_BLACKSTONE.asItem(), consumer);
-    createPebbleBlock(Blocks.COBBLESTONE, EXNItems.PEBBLE_STONE.asItem(), consumer);
-    createPebbleBlock(Blocks.CALCITE, EXNItems.PEBBLE_CALCITE.asItem(), consumer);
-    createPebbleBlock(Blocks.DEEPSLATE, EXNItems.PEBBLE_DEEPSLATE.asItem(), consumer);
-    createPebbleBlock(Blocks.DIORITE, EXNItems.PEBBLE_DIORITE.asItem(), consumer);
-    createPebbleBlock(Blocks.DRIPSTONE_BLOCK, EXNItems.PEBBLE_DRIPSTONE.asItem(), consumer);
-    createPebbleBlock(Blocks.END_STONE, EXNItems.PEBBLE_END_STONE.asItem(), consumer);
-    createPebbleBlock(Blocks.GRANITE, EXNItems.PEBBLE_GRANITE.asItem(), consumer);
-    createPebbleBlock(Blocks.NETHERRACK, EXNItems.PEBBLE_NETHERRACK.asItem(), consumer);
-    createPebbleBlock(Blocks.TUFF, EXNItems.PEBBLE_TUFF.asItem(), consumer);
+  private void addPebbleBlocks(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createPebbleBlock(Blocks.ANDESITE, EXNItems.PEBBLE_ANDESITE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.BASALT, EXNItems.PEBBLE_BASALT.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.BLACKSTONE, EXNItems.PEBBLE_BLACKSTONE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.COBBLESTONE, EXNItems.PEBBLE_STONE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.CALCITE, EXNItems.PEBBLE_CALCITE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.DEEPSLATE, EXNItems.PEBBLE_DEEPSLATE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.DIORITE, EXNItems.PEBBLE_DIORITE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.DRIPSTONE_BLOCK, EXNItems.PEBBLE_DRIPSTONE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.END_STONE, EXNItems.PEBBLE_END_STONE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.GRANITE, EXNItems.PEBBLE_GRANITE.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.NETHERRACK, EXNItems.PEBBLE_NETHERRACK.asItem(), holderGetter, consumer);
+    createPebbleBlock(Blocks.TUFF, EXNItems.PEBBLE_TUFF.asItem(), holderGetter, consumer);
   }
 
-  private void addCrooks(RecipeOutput consumer) {
-    createCrook(EXNItems.CROOK_ANDESITE.asItem(), EXNItems.PEBBLE_ANDESITE.asItem(), consumer);
-    createCrook(EXNItems.CROOK_BAMBOO.asItem(), Items.BAMBOO, consumer);
-    createCrook(EXNItems.CROOK_BASALT.asItem(), EXNItems.PEBBLE_BASALT.asItem(), consumer);
-    createCrook(EXNItems.CROOK_BLACKSTONE.asItem(), EXNItems.PEBBLE_BLACKSTONE.asItem(), consumer);
-    createCrook(EXNItems.CROOK_BONE.asItem(), Tags.Items.BONES, consumer);
-    createCrook(EXNItems.CROOK_CALCITE.asItem(), EXNItems.PEBBLE_CALCITE.asItem(), consumer);
-    createCrook(EXNItems.CROOK_CHERRY.asItem(), Items.CHERRY_PLANKS, consumer);
-    createCrook(EXNItems.CROOK_COPPER.asItem(), ExNihiloTags.NUGGET_COPPER, consumer);
+  private void addCrooks(HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createCrook(EXNItems.CROOK_ANDESITE.asItem(), EXNItems.PEBBLE_ANDESITE.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_BAMBOO.asItem(), Items.BAMBOO, holderGetter, consumer);
+    createCrook(EXNItems.CROOK_BASALT.asItem(), EXNItems.PEBBLE_BASALT.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_BLACKSTONE.asItem(), EXNItems.PEBBLE_BLACKSTONE.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_BONE.asItem(), Tags.Items.BONES, holderGetter, consumer);
+    createCrook(EXNItems.CROOK_CALCITE.asItem(), EXNItems.PEBBLE_CALCITE.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_CHERRY.asItem(), Items.CHERRY_PLANKS, holderGetter, consumer);
+    createCrook(EXNItems.CROOK_COPPER.asItem(), ExNihiloTags.NUGGET_COPPER, holderGetter, consumer);
     //    createCrook(ExNihiloItems.CROOK_CRIMSON_FUNGUS.asItem(), Items.CRIMSON_PLANKS, consumer);
-    createCrook(EXNItems.CROOK_DEEPSLATE.asItem(), EXNItems.PEBBLE_DEEPSLATE.asItem(), consumer);
-    createCrook(EXNItems.CROOK_DIAMOND.asItem(), Tags.Items.GEMS_DIAMOND, consumer);
-    createCrook(EXNItems.CROOK_DIORITE.asItem(), EXNItems.PEBBLE_DIORITE.asItem(), consumer);
-    createCrook(EXNItems.CROOK_DRIPSTONE.asItem(), EXNItems.PEBBLE_DRIPSTONE.asItem(), consumer);
-    createCrook(EXNItems.CROOK_GOLD.asItem(), Tags.Items.NUGGETS_GOLD, consumer);
-    createCrook(EXNItems.CROOK_GRANITE.asItem(), EXNItems.PEBBLE_GRANITE.asItem(), consumer);
-    createCrook(EXNItems.CROOK_IRON.asItem(), Tags.Items.NUGGETS_IRON, consumer);
-    createCrook(EXNItems.CROOK_NETHER_BRICK.asItem(), Items.NETHER_BRICKS, consumer);
+    createCrook(EXNItems.CROOK_DEEPSLATE.asItem(), EXNItems.PEBBLE_DEEPSLATE.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_DIAMOND.asItem(), Tags.Items.GEMS_DIAMOND, holderGetter, consumer);
+    createCrook(EXNItems.CROOK_DIORITE.asItem(), EXNItems.PEBBLE_DIORITE.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_DRIPSTONE.asItem(), EXNItems.PEBBLE_DRIPSTONE.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_GOLD.asItem(), Tags.Items.NUGGETS_GOLD, holderGetter, consumer);
+    createCrook(EXNItems.CROOK_GRANITE.asItem(), EXNItems.PEBBLE_GRANITE.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_IRON.asItem(), Tags.Items.NUGGETS_IRON, holderGetter, consumer);
+    createCrook(EXNItems.CROOK_NETHER_BRICK.asItem(), Items.NETHER_BRICKS, holderGetter, consumer);
     SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
             Ingredient.of(EXNItems.CROOK_DIAMOND.asItem()),
-            Ingredient.of(Tags.Items.INGOTS_NETHERITE),
+            Ingredient.of(holderGetter.getOrThrow(Tags.Items.INGOTS_NETHERITE)),
             RecipeCategory.TOOLS,
             EXNItems.CROOK_NETHERITE.asItem())
         .unlocks(
@@ -531,25 +543,28 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlocks(
             MATERIAL_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.INGOTS_NETHERITE).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.INGOTS_NETHERITE).build()))
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
                 ResourceLocation.fromNamespaceAndPath(
-                    ExNihiloSequentia.MOD_ID,
-                    ExNihiloConstants.Items.NETHERITE_CROOK)));
-    createCrook(EXNItems.CROOK_RED_NETHER_BRICK.asItem(), Items.RED_NETHER_BRICKS, consumer);
+                    ExNihiloSequentia.MOD_ID, ExNihiloConstants.Items.NETHERITE_CROOK)));
+    createCrook(
+        EXNItems.CROOK_RED_NETHER_BRICK.asItem(), Items.RED_NETHER_BRICKS, holderGetter, consumer);
     //    createCrook(ExNihiloItems.CROOK_PRISMARINE.asItem(), Tags.Items.GEMS_PRISMARINE,
     // consumer);
-    createCrook(EXNItems.CROOK_STONE.asItem(), EXNItems.PEBBLE_STONE.asItem(), consumer);
-    createCrook(EXNItems.CROOK_TERRACOTTA.asItem(), Items.TERRACOTTA, consumer);
-    createCrook(EXNItems.CROOK_TUFF.asItem(), EXNItems.PEBBLE_TUFF.asItem(), consumer);
+    createCrook(
+        EXNItems.CROOK_STONE.asItem(), EXNItems.PEBBLE_STONE.asItem(), holderGetter, consumer);
+    createCrook(EXNItems.CROOK_TERRACOTTA.asItem(), Items.TERRACOTTA, holderGetter, consumer);
+    createCrook(
+        EXNItems.CROOK_TUFF.asItem(), EXNItems.PEBBLE_TUFF.asItem(), holderGetter, consumer);
     //    createCrook(ExNihiloItems.CROOK_WARPED_FUNGUS.asItem(), Items.WARPED_PLANKS, consumer);
-    createCrook(EXNItems.CROOK_WOOD.asItem(), Tags.Items.RODS_WOODEN, consumer);
+    createCrook(EXNItems.CROOK_WOOD.asItem(), Tags.Items.RODS_WOODEN, holderGetter, consumer);
   }
 
-  private void createCrook(Item result, Item input, RecipeOutput consumer) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+  private void createCrook(
+      Item result, Item input, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.TOOLS, result)
         .pattern("xx")
         .pattern(" x")
         .pattern(" x")
@@ -562,8 +577,9 @@ public class CraftingRecipes implements ISubRecipeProvider {
                 Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(result))));
   }
 
-  private void createCrook(Item result, TagKey<Item> input, RecipeOutput consumer) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+  private void createCrook(
+      Item result, TagKey<Item> input, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.TOOLS, result)
         .pattern("xx")
         .pattern(" x")
         .pattern(" x")
@@ -572,16 +588,17 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             PEBBLE_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(input).build()))
+                ItemPredicate.Builder.item().of(holderGetter, input).build()))
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
                 Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(result))));
   }
 
-  private void createPebbleBlock(Block result, Item input, RecipeOutput consumer) {
+  private void createPebbleBlock(
+      Block result, Item input, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
     ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(result);
-    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result)
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.BUILDING_BLOCKS, result)
         .pattern("xx")
         .pattern("xx")
         .define('x', input)
@@ -591,8 +608,12 @@ public class CraftingRecipes implements ISubRecipeProvider {
   }
 
   private void createBarrel(
-      RecipeOutput consumer, BlockDefinition<BarrelBlock> barrel, TagKey<Item> block, Item slab) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, barrel.block())
+      HolderGetter<Item> holderGetter,
+      RecipeOutput consumer,
+      BlockDefinition<BarrelBlock> barrel,
+      TagKey<Item> block,
+      Item slab) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, barrel.block())
         .pattern("x x")
         .pattern("x x")
         .pattern("x-x")
@@ -602,14 +623,18 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             "has_walls",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(block).build()))
+                ItemPredicate.Builder.item().of(holderGetter, block).build()))
         .unlockedBy("has_base", InventoryChangeTrigger.TriggerInstance.hasItems(slab))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(barrel.getId()));
   }
 
   private void createBarrel(
-      RecipeOutput consumer, BlockDefinition<BarrelBlock> barrel, Item block, Item slab) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, barrel.block())
+      HolderGetter<Item> holderGetter,
+      RecipeOutput consumer,
+      BlockDefinition<BarrelBlock> barrel,
+      Item block,
+      Item slab) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, barrel.block())
         .pattern("x x")
         .pattern("x x")
         .pattern("x-x")
@@ -622,8 +647,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
   }
 
   private void createCrucible(
-      RecipeOutput consumer, BlockDefinition<CrucibleBlock> crucible, Item block, Item slab) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, crucible.block())
+      HolderGetter<Item> holderGetter, RecipeOutput consumer, BlockDefinition<CrucibleBlock> crucible, Item block, Item slab) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, crucible.block())
         .pattern("c c")
         .pattern("clc")
         .pattern("s s")
@@ -636,11 +661,12 @@ public class CraftingRecipes implements ISubRecipeProvider {
   }
 
   private void createCrucible(
+      HolderGetter<Item> holderGetter,
       RecipeOutput consumer,
       BlockDefinition<CrucibleBlock> crucible,
       TagKey<Item> block,
       TagKey<Item> slab) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, crucible.block())
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, crucible.block())
         .pattern("c c")
         .pattern("clc")
         .pattern("s s")
@@ -651,13 +677,14 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             "has_logs",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(block).build()))
+                ItemPredicate.Builder.item().of(holderGetter, block).build()))
         .save(consumer, RecipeProviderUtilities.createSaveLocation(crucible.getId()));
   }
 
   private void createSieve(
+      HolderGetter<Item> holderGetter,
       RecipeOutput consumer, BlockDefinition<SieveBlock> sieve, Item block, Item slab) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, sieve)
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, sieve)
         .pattern("p p")
         .pattern("plp")
         .pattern("s s")
@@ -668,12 +695,12 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .save(consumer, RecipeProviderUtilities.createSaveLocation(sieve.getId()));
   }
 
-  private void createOre(Ore ore, RecipeOutput consumer) {
-    createRawRecipe(ore, consumer);
-    createNuggetRecipes(ore, consumer);
+  private void createOre(Ore ore, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createRawRecipe(ore, holderGetter, consumer);
+    createNuggetRecipes(ore, holderGetter, consumer);
   }
 
-  private void createRawRecipe(Ore ore, RecipeOutput consumer) {
+  private void createRawRecipe(Ore ore, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
     Item piece = ore.getPieceItem();
     Either<ItemDefinition<OreItem>, Item> rawEither = ore.getRawOreItem();
     Item rawOre;
@@ -686,7 +713,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
     } else {
       throw new IllegalStateException("Raw either is completely empty");
     }
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, rawOre)
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, rawOre)
         .pattern("xx")
         .pattern("xx")
         .define('x', piece)
@@ -694,13 +721,13 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy("has_piece", InventoryChangeTrigger.TriggerInstance.hasItems(piece))
         .save(
             consumer,
-            ResourceLocation.fromNamespaceAndPath(
+            ResourceKey.create(Registries.RECIPE,ResourceLocation.fromNamespaceAndPath(
                 ExNihiloSequentia.MOD_ID,
                 RecipeProviderUtilities.prependRecipePrefix(
-                    BuiltInRegistries.ITEM.getKey(rawOre).getPath())));
+                    BuiltInRegistries.ITEM.getKey(rawOre).getPath()))));
   }
 
-  private void createNuggetRecipes(Ore ore, RecipeOutput consumer) {
+  private void createNuggetRecipes(Ore ore, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
     Optional<ItemDefinition<OreItem>> nuggetItem = ore.getNuggetItem().left();
     if (nuggetItem.isPresent()) {
       Either<ItemDefinition<OreItem>, Item> eitherIngot = ore.getIngotItem();
@@ -716,7 +743,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
       }
       Item nugget = nuggetItem.get().asItem();
 
-      ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ingot)
+      ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, ingot)
           .pattern("xxx")
           .pattern("xxx")
           .pattern("xxx")
@@ -725,12 +752,13 @@ public class CraftingRecipes implements ISubRecipeProvider {
           .unlockedBy("has_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(nugget))
           .save(
               consumer,
+              ResourceKey.create(Registries.RECIPE,
               ResourceLocation.fromNamespaceAndPath(
                   ExNihiloSequentia.MOD_ID,
                   RecipeProviderUtilities.prependRecipePrefix(
-                      BuiltInRegistries.ITEM.getKey(ingot).getPath() + "_from_nugget")));
+                      BuiltInRegistries.ITEM.getKey(ingot).getPath() + "_from_nugget"))));
 
-      ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nugget, 9)
+      ShapelessRecipeBuilder.shapeless(holderGetter, RecipeCategory.MISC, nugget, 9)
           .requires(ingot)
           .unlockedBy("has_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(ingot))
           .save(
@@ -739,8 +767,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
     }
   }
 
-  private void createOreRecipes(Ore ore, ResourceLocation registryId, RecipeOutput consumer) {
-    createOre(ore, consumer);
+  private void createOreRecipes(Ore ore, ResourceLocation registryId, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    createOre(ore, holderGetter, consumer);
     Optional<ItemDefinition<OreItem>> rawOre = ore.getRawOreItem().left();
     Optional<ItemDefinition<OreItem>> ingot = ore.getIngotItem().left();
     if (rawOre.isPresent() && ingot.isPresent()) {
@@ -779,8 +807,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
             RecipeProviderUtilities.createSaveLocation(ResourceLocation.parse(rl + "_blast")));
   }
 
-  private void createHammer(Item output, Item input, RecipeOutput consumer) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, output)
+  private void createHammer(Item output, Item input, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.TOOLS, output)
         .pattern(" x ")
         .pattern(" -x")
         .pattern("-  ")
@@ -789,7 +817,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             "has_stick",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.RODS).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.RODS).build()))
         .unlockedBy(MATERIAL_CONDITION, InventoryChangeTrigger.TriggerInstance.hasItems(input))
         .save(
             consumer,
@@ -797,8 +825,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
                 Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(output))));
   }
 
-  private void createHammer(Item output, TagKey<Item> input, RecipeOutput consumer) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, output)
+  private void createHammer(Item output, TagKey<Item> input, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.TOOLS, output)
         .pattern(" x ")
         .pattern(" -x")
         .pattern("-  ")
@@ -807,11 +835,11 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(
             "has_stick",
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(Tags.Items.RODS).build()))
+                ItemPredicate.Builder.item().of(holderGetter, Tags.Items.RODS).build()))
         .unlockedBy(
             MATERIAL_CONDITION,
             InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(input).build()))
+                ItemPredicate.Builder.item().of(holderGetter, input).build()))
         .save(
             consumer,
             RecipeProviderUtilities.createSaveLocation(
@@ -819,8 +847,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
   }
 
   private void createMesh(
-      Item output, Item inputMesh, TagKey<Item> inputItem, RecipeOutput consumer) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, output)
+      Item output, Item inputMesh, TagKey<Item> inputItem, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, output)
         .pattern("i i")
         .pattern("imi")
         .pattern("i i")
@@ -833,8 +861,8 @@ public class CraftingRecipes implements ISubRecipeProvider {
                 Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(output))));
   }
 
-  private void createMesh(Item output, Item inputMesh, Item inputItem, RecipeOutput consumer) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, output)
+  private void createMesh(Item output, Item inputMesh, Item inputItem, HolderGetter<Item> holderGetter, RecipeOutput consumer) {
+    ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, output)
         .pattern("i i")
         .pattern("imi")
         .pattern("i i")
@@ -869,6 +897,7 @@ public class CraftingRecipes implements ISubRecipeProvider {
         .unlockedBy(condition, InventoryChangeTrigger.TriggerInstance.hasItems(input))
         .save(
             consumer,
-            RecipeProviderUtilities.createSaveLocation(ResourceLocation.parse(rl + "_from_smoker")));
+            RecipeProviderUtilities.createSaveLocation(
+                ResourceLocation.parse(rl + "_from_smoker")));
   }
 }

@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "c": {
-      "item": "minecraft:crimson_stem"
-    },
-    "l": {
-      "item": "minecraft:crimson_slab"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "c": "minecraft:crimson_stem",
+    "l": "minecraft:crimson_slab",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "c c",

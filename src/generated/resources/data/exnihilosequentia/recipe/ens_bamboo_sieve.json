@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "l": {
-      "item": "minecraft:bamboo_slab"
-    },
-    "p": {
-      "item": "minecraft:bamboo_planks"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "l": "minecraft:bamboo_slab",
+    "p": "minecraft:bamboo_planks",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "p p",

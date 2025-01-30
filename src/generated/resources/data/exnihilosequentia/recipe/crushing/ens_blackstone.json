@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:blackstone"
-  },
+  "input": "minecraft:blackstone",
   "results": [
     {
       "chance": 1.0,

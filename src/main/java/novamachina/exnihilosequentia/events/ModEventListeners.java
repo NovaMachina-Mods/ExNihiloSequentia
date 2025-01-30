@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,12 +18,19 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import novamachina.exnihilosequentia.ExNihiloSequentia;
+import novamachina.exnihilosequentia.client.renderer.item.properties.Holiday;
 import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
 import novamachina.exnihilosequentia.world.item.EXNItems;
 import novamachina.exnihilosequentia.world.item.capability.BarrelInventoryHandler;
 import novamachina.exnihilosequentia.world.item.capability.MeltableItemHandler;
 import novamachina.exnihilosequentia.world.level.block.entity.EXNBlockEntityTypes;
 import novamachina.exnihilosequentia.world.level.block.entity.mode.BarrelModeRegistry;
+import novamachina.exnihilosequentia.world.level.material.EXNFluids;
+import novamachina.exnihilosequentia.world.level.material.SeaWaterFluidType;
+import novamachina.exnihilosequentia.world.level.material.WitchWaterFluidType;
 import novamachina.exnihilosequentia.world.level.material.capability.BarrelFluidHandler;
 import novamachina.exnihilosequentia.world.level.material.capability.CrucibleFluidHandler;
 import novamachina.novacore.world.item.ItemDefinition;
@@ -104,6 +112,12 @@ public class ModEventListeners {
         (blockEntity, side) -> BarrelFluidHandler.getHandler(blockEntity));
   }
 
+  @SubscribeEvent
+  public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
+    event.registerFluidType(WitchWaterFluidType.fluidTextures(), EXNFluids.WITCH_WATER.getFluidType());
+    event.registerFluidType(SeaWaterFluidType.fluidTextures(), EXNFluids.SEA_WATER.getFluidType());
+  }
+
   private static void registerVanillaCompost() {
     createMCCompost(EXNItems.GRASS_SEED);
     createMCCompost(EXNItems.MYCELIUM_SPORE);
@@ -115,5 +129,10 @@ public class ModEventListeners {
 
   private static void createMCCompost(ItemDefinition<? extends Item> item) {
     ComposterBlock.COMPOSTABLES.put(item, (float) 0.3);
+  }
+
+  @SubscribeEvent
+  public static void registerSelectProperties(RegisterSelectItemModelPropertyEvent event) {
+    event.register(ResourceLocation.fromNamespaceAndPath(ExNihiloSequentia.MOD_ID, "holiday"), Holiday.TYPE);
   }
 }

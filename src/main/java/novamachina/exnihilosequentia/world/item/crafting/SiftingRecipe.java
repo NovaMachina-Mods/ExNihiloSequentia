@@ -10,6 +10,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import novamachina.exnihilosequentia.world.item.MeshType;
@@ -54,18 +55,12 @@ public class SiftingRecipe extends AbstractRecipe {
 
   @Override
   @NonNull
-  public ItemStack getToastSymbol() {
-    return EXNBlocks.OAK_SIEVE.itemStack();
-  }
-
-  @Override
-  @NonNull
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<SiftingRecipe> getSerializer() {
     return EXNRecipeSerializers.SIFTING_RECIPE_SERIALIZER.recipeSerializer();
   }
 
   @Override
-  public RecipeType<?> getType() {
+  public RecipeType<SiftingRecipe> getType() {
     return EXNRecipeTypes.SIFTING;
   }
 
@@ -87,7 +82,7 @@ public class SiftingRecipe extends AbstractRecipe {
             instance ->
                 instance
                     .group(
-                        Ingredient.CODEC_NONEMPTY
+                        Ingredient.CODEC
                             .fieldOf("input")
                             .forGetter(recipe -> recipe.getInput()),
                         ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.getDrop()),
@@ -131,5 +126,10 @@ public class SiftingRecipe extends AbstractRecipe {
       recipe.getRolls().forEach(roll -> roll.write(buffer));
       buffer.writeBoolean(recipe.isWaterlogged());
     }
+  }
+
+  @Override
+  public PlacementInfo placementInfo() {
+    return PlacementInfo.create(input);
   }
 }

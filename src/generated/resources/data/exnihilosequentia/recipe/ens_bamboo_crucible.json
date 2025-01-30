@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "c": {
-      "item": "minecraft:bamboo_block"
-    },
-    "l": {
-      "item": "minecraft:bamboo_slab"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "c": "minecraft:bamboo_block",
+    "l": "minecraft:bamboo_slab",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "c c",

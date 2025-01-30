@@ -6,12 +6,16 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.List;
+import java.util.Optional;
 
 public class TransitionRecipe extends AbstractRecipe {
 
@@ -26,19 +30,14 @@ public class TransitionRecipe extends AbstractRecipe {
   }
 
   @Override
-  public @NonNull ItemStack getToastSymbol() {
-    return EXNBlocks.OAK_BARREL.itemStack();
-  }
-
-  @Override
   @NonNull
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<TransitionRecipe> getSerializer() {
     return EXNRecipeSerializers.TRANSITION_RECIPE_SERIALIZER.recipeSerializer();
   }
 
   @Override
   @NonNull
-  public RecipeType<?> getType() {
+  public RecipeType<TransitionRecipe> getType() {
     return EXNRecipeTypes.TRANSITION;
   }
 
@@ -61,7 +60,7 @@ public class TransitionRecipe extends AbstractRecipe {
             instance ->
                 instance
                     .group(
-                        Ingredient.CODEC_NONEMPTY
+                        Ingredient.CODEC
                             .fieldOf("catalyst")
                             .forGetter(TransitionRecipe::getCatalyst),
                         FluidStack.CODEC
@@ -95,5 +94,10 @@ public class TransitionRecipe extends AbstractRecipe {
       FluidStack.STREAM_CODEC.encode(buffer, recipe.getFluidInTank());
       FluidStack.STREAM_CODEC.encode(buffer, recipe.getResult());
     }
+  }
+
+  @Override
+  public PlacementInfo placementInfo() {
+    return PlacementInfo.createFromOptionals(List.of(Optional.of(catalyst)));
   }
 }

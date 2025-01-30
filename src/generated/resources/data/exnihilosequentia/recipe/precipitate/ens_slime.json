@@ -4,9 +4,7 @@
     "amount": 1000,
     "id": "exnihilosequentia:witch_water"
   },
-  "input": {
-    "tag": "c:mushrooms"
-  },
+  "input": "#c:mushrooms",
   "result": {
     "count": 1,
     "id": "minecraft:slime_block"

@@ -53,7 +53,7 @@ public class SolidifyingRegistry {
 
   @Nonnull
   public ItemStack getResult(@Nonnull final Fluid fluidInTank, @Nonnull final Fluid fluidOnTop) {
-    return getResultItem(fluidInTank, fluidOnTop);
+    return getResultItem(fluidInTank, fluidOnTop).copy();
   }
 
   @Nonnull

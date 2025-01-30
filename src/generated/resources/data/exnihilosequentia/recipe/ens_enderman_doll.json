@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "b": {
-      "tag": "c:crops/nether_wart"
-    },
-    "c": {
-      "tag": "c:dyes/black"
-    },
-    "m": {
-      "item": "exnihilosequentia:porcelain_doll"
-    },
-    "s": {
-      "tag": "c:dusts/glowstone"
-    },
-    "t": {
-      "tag": "c:dusts/redstone"
-    }
+    "b": "#c:crops/nether_wart",
+    "c": "#c:dyes/black",
+    "m": "exnihilosequentia:porcelain_doll",
+    "s": "#c:dusts/glowstone",
+    "t": "#c:dusts/redstone"
   },
   "pattern": [
     "ctc",

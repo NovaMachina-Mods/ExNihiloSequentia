@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:tuff"
-  },
+  "input": "minecraft:tuff",
   "results": [
     {
       "chance": 1.0,

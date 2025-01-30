@@ -43,8 +43,8 @@ public class EXNTagProvider extends TagProvider {
     addHammers();
     addCrooks();
     addMisc();
-    addWoodenBarrel();
-    addWoodenCrucible();
+    addBarrels();
+    addCrucibles();
     addWoodenSieve();
     addPebbles();
   }
@@ -82,9 +82,9 @@ public class EXNTagProvider extends TagProvider {
         EXNBlocks.WARPED_SIEVE);
   }
 
-  private void addWoodenCrucible() {
+  private void addCrucibles() {
     addToTag(
-        ExNihiloTags.CRUCIBLE,
+        ExNihiloTags.WOOD_CRUCIBLE,
         EXNBlocks.ACACIA_CRUCIBLE,
         EXNBlocks.BAMBOO_CRUCIBLE,
         EXNBlocks.BIRCH_CRUCIBLE,
@@ -96,11 +96,13 @@ public class EXNTagProvider extends TagProvider {
         EXNBlocks.SPRUCE_CRUCIBLE,
         EXNBlocks.CRIMSON_CRUCIBLE,
         EXNBlocks.WARPED_CRUCIBLE);
+    addToTag(ExNihiloTags.CRUCIBLE, EXNBlocks.FIRED_CRUCIBLE);
+    addToTag(ExNihiloTags.CRUCIBLE, ExNihiloTags.WOOD_CRUCIBLE);
   }
 
-  private void addWoodenBarrel() {
+  private void addBarrels() {
     addToTag(
-        ExNihiloTags.BARREL,
+        ExNihiloTags.WOOD_BARREL,
         EXNBlocks.ACACIA_BARREL,
         EXNBlocks.BAMBOO_BARREL,
         EXNBlocks.BIRCH_BARREL,
@@ -112,6 +114,8 @@ public class EXNTagProvider extends TagProvider {
         EXNBlocks.SPRUCE_BARREL,
         EXNBlocks.CRIMSON_BARREL,
         EXNBlocks.WARPED_BARREL);
+    addToTag(ExNihiloTags.BARREL, EXNBlocks.STONE_BARREL);
+    addToTag(ExNihiloTags.BARREL, ExNihiloTags.WOOD_BARREL);
   }
 
   private void addMisc() {
@@ -120,14 +124,14 @@ public class EXNTagProvider extends TagProvider {
 
   private void addCrooks() {
     addToTag(
+        ExNihiloTags.WOOD_CROOK, EXNItems.CROOK_BAMBOO, EXNItems.CROOK_CHERRY, EXNItems.CROOK_WOOD);
+    addToTag(
         ExNihiloTags.CROOK,
         EXNItems.CROOK_ANDESITE,
-        EXNItems.CROOK_BAMBOO,
         EXNItems.CROOK_BASALT,
         EXNItems.CROOK_BLACKSTONE,
         EXNItems.CROOK_BONE,
         EXNItems.CROOK_CALCITE,
-        EXNItems.CROOK_CHERRY,
         EXNItems.CROOK_COPPER,
         EXNItems.CROOK_DEEPSLATE,
         EXNItems.CROOK_DIAMOND,
@@ -141,20 +145,24 @@ public class EXNTagProvider extends TagProvider {
         EXNItems.CROOK_RED_NETHER_BRICK,
         EXNItems.CROOK_STONE,
         EXNItems.CROOK_TERRACOTTA,
-        EXNItems.CROOK_TUFF,
-        EXNItems.CROOK_WOOD);
+        EXNItems.CROOK_TUFF);
+
+    addToTag(ExNihiloTags.CROOK, ExNihiloTags.WOOD_CROOK);
   }
 
   private void addHammers() {
     addToTag(
+        ExNihiloTags.WOOD_HAMMER,
+        EXNItems.HAMMER_BAMBOO,
+        EXNItems.HAMMER_CHERRY,
+        EXNItems.HAMMER_WOOD);
+    addToTag(
         ExNihiloTags.HAMMER,
         EXNItems.HAMMER_ANDESITE,
-        EXNItems.HAMMER_BAMBOO,
         EXNItems.HAMMER_BASALT,
         EXNItems.HAMMER_BLACKSTONE,
         EXNItems.HAMMER_BONE,
         EXNItems.HAMMER_CALCITE,
-        EXNItems.HAMMER_CHERRY,
         EXNItems.HAMMER_COPPER,
         EXNItems.HAMMER_DEEPSLATE,
         EXNItems.HAMMER_DIAMOND,
@@ -168,8 +176,8 @@ public class EXNTagProvider extends TagProvider {
         EXNItems.HAMMER_RED_NETHER_BRICK,
         EXNItems.HAMMER_STONE,
         EXNItems.HAMMER_TERRACOTTA,
-        EXNItems.HAMMER_TUFF,
-        EXNItems.HAMMER_WOOD);
+        EXNItems.HAMMER_TUFF);
+    addToTag(ExNihiloTags.HAMMER, ExNihiloTags.WOOD_HAMMER);
   }
 
   private void addMeats() {

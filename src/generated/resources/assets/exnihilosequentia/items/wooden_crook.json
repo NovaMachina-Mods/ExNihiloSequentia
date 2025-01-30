@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "exnihilosequentia:holiday",
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "exnihilosequentia:item/wooden_crook"
+    },
+    "cases": [
+      {
+        "when": "halloween",
+        "model": {
+          "type": "minecraft:model",
+          "model": "exnihilosequentia:item/halloween_crook"
+        }
+      },
+      {
+        "when": "christmas",
+        "model": {
+          "type": "minecraft:model",
+          "model": "exnihilosequentia:item/christmas_crook"
+        }
+      }
+    ]
+  }
+}

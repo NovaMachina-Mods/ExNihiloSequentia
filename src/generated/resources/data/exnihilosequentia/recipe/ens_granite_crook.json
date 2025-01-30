@@ -3,9 +3,7 @@
   "category": "equipment",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "exnihilosequentia:granite_pebble"
-    }
+    "x": "exnihilosequentia:granite_pebble"
   },
   "pattern": [
     "xx",

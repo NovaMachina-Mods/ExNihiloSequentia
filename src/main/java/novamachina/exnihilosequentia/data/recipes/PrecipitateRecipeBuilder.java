@@ -1,11 +1,14 @@
 package novamachina.exnihilosequentia.data.recipes;
 
 import com.google.common.base.Preconditions;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.fluids.FluidStack;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
@@ -30,8 +33,11 @@ public class PrecipitateRecipeBuilder extends RecipeBuilder<PrecipitateRecipe> {
   }
 
   public static PrecipitateRecipeBuilder precipitate(
-      FluidStack fluid, TagKey<Item> inputTag, ItemLike output) {
-    return precipitate(fluid, Ingredient.of(inputTag), output);
+      FluidStack fluid, TagKey<Item> inputTag, ItemLike output, HolderGetter.Provider provider) {
+    return precipitate(
+        fluid,
+        Ingredient.of(provider.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(inputTag)),
+        output);
   }
 
   public static PrecipitateRecipeBuilder precipitate(
@@ -40,12 +46,12 @@ public class PrecipitateRecipeBuilder extends RecipeBuilder<PrecipitateRecipe> {
   }
 
   @Override
-  protected PrecipitateRecipe getRecipe(ResourceLocation resourceLocation) {
+  protected PrecipitateRecipe getRecipe(ResourceKey<Recipe<?>> resourceLocation) {
     return new PrecipitateRecipe(fluid, input, output);
   }
 
   @Override
-  protected void validate(ResourceLocation id) {
+  protected void validate(ResourceKey<Recipe<?>> id) {
     Preconditions.checkNotNull(input, "Input cannot be null.");
     Preconditions.checkNotNull(fluid, "Fluid cannot be null");
     Preconditions.checkArgument(!fluid.isEmpty(), "Fluid amount cannot be 0");

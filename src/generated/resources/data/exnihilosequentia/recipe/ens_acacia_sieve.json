@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "l": {
-      "item": "minecraft:acacia_slab"
-    },
-    "p": {
-      "item": "minecraft:acacia_planks"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "l": "minecraft:acacia_slab",
+    "p": "minecraft:acacia_planks",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "p p",

@@ -1,7 +1,11 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.Tags;
@@ -21,15 +25,16 @@ public class TransitionRecipes implements ISubRecipeProvider {
       new FluidStack(EXNFluids.WITCH_WATER.getStillFluid(), FluidType.BUCKET_VOLUME);
 
   @Override
-  public void addRecipes(RecipeOutput consumer) {
+  public void addRecipes(HolderGetter.Provider holderGetter, RecipeOutput consumer) {
     TransitionRecipeBuilder.transition(water, Blocks.MYCELIUM, witchwater)
         .build(consumer, transitionLoc("witch_water"));
-    TransitionRecipeBuilder.transition(water, Tags.Items.SANDS, seawater)
+    TransitionRecipeBuilder.transition(water, Tags.Items.SANDS, seawater, holderGetter)
         .build(consumer, transitionLoc("sea_water"));
   }
 
-  private ResourceLocation transitionLoc(String id) {
-    return ResourceLocation.fromNamespaceAndPath(
+  private ResourceKey<Recipe<?>> transitionLoc(String id) {
+    ResourceLocation rl = ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "transition/" + RecipeProviderUtilities.prependRecipePrefix(id));
+    return ResourceKey.create(Registries.RECIPE, rl);
   }
 }

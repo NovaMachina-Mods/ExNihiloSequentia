@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "c": {
-      "item": "minecraft:mangrove_log"
-    },
-    "l": {
-      "item": "minecraft:mangrove_slab"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "c": "minecraft:mangrove_log",
+    "l": "minecraft:mangrove_slab",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "c c",

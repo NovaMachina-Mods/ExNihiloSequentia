@@ -13,8 +13,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
 import novamachina.exnihilosequentia.common.network.payload.OreConfigurationPayload;
-import novamachina.exnihilosequentia.common.utility.ExNihiloConstants;
-import novamachina.novacore.core.registries.ItemRegistry;
+import novamachina.exnihilosequentia.core.registries.ExNihiloItemRegistry;
 import novamachina.novacore.util.StringUtils;
 import novamachina.novacore.world.item.ItemDefinition;
 import org.jetbrains.annotations.NotNull;
@@ -34,15 +33,17 @@ public class Ore {
       Optional<Item> optionalRawItem,
       Optional<Item> optionalIngotItem,
       Optional<Item> optionalNuggetItem,
-      ItemRegistry registry) {
+      ExNihiloItemRegistry registry) {
     this.name = name;
     Ore.enabledMap.put(name, enabled);
     if (optionalIngotItem.isEmpty()) {
       ItemDefinition<OreItem> definition =
-          registry.item(
+          registry.oreItem(
               this.getEnglishName(this.getIngotId()),
               this.getIngotId(),
-              () -> new OreItem.IngotOreItem(this),
+              this,
+              new Item.Properties(),
+              OreItem.IngotOreItem::new,
               ItemDefinition.ItemType.OTHER);
       ingotItem = Either.left(definition);
     } else {
@@ -50,27 +51,33 @@ public class Ore {
     }
     if (optionalRawItem.isEmpty()) {
       ItemDefinition<OreItem> definition =
-          registry.item(
+          registry.oreItem(
               this.getEnglishName(this.getRawOreId()),
               this.getRawOreId(),
-              () -> new OreItem.RawOreItem(this),
+              this,
+              new Item.Properties(),
+              OreItem.RawOreItem::new,
               ItemDefinition.ItemType.OTHER);
       rawOreItem = Either.left(definition);
     } else {
       rawOreItem = Either.right(optionalRawItem.get());
     }
     pieceItem =
-        registry.item(
+        registry.oreItem(
             this.getEnglishName(this.getPieceId()),
             this.getPieceId(),
-            () -> new OreItem.PieceOreItem(this),
+            this,
+            new Item.Properties(),
+            OreItem.PieceOreItem::new,
             ItemDefinition.ItemType.OTHER);
     if (optionalNuggetItem.isEmpty()) {
       ItemDefinition<OreItem> definition =
-          registry.item(
+          registry.oreItem(
               this.getEnglishName(this.getNuggetId()),
               this.getNuggetId(),
-              () -> new OreItem.NuggetOreItem(this),
+              this,
+              new Item.Properties(),
+              OreItem.NuggetOreItem::new,
               ItemDefinition.ItemType.OTHER);
       nuggetItem = Either.left(definition);
     } else {

@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:crushing",
-  "input": {
-    "item": "minecraft:sand"
-  },
+  "input": "minecraft:sand",
   "results": [
     {
       "chance": 1.0,

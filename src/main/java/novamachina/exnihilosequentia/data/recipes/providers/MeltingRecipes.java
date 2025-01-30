@@ -1,8 +1,12 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -15,7 +19,7 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class MeltingRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(RecipeOutput consumer) {
+  public void addRecipes(HolderGetter.Provider holderGetter, RecipeOutput consumer) {
     MeltingRecipeBuilder.melting(
             Blocks.COBBLESTONE, new FluidStack(Fluids.LAVA, 250), CrucibleType.FIRED)
         .build(consumer, meltingLoc("cobblestone"));
@@ -98,15 +102,17 @@ public class MeltingRecipes implements ISubRecipeProvider {
             Blocks.OBSIDIAN, new FluidStack(Fluids.LAVA, 1000), CrucibleType.FIRED)
         .build(consumer, meltingLoc("obsidian"));
     MeltingRecipeBuilder.melting(
-            ItemTags.SAPLINGS, new FluidStack(Fluids.WATER, 250), CrucibleType.WOOD)
+            ItemTags.SAPLINGS, new FluidStack(Fluids.WATER, 250), CrucibleType.WOOD, holderGetter)
         .build(consumer, meltingLoc("saplings"));
     MeltingRecipeBuilder.melting(
-            ItemTags.LEAVES, new FluidStack(Fluids.WATER, 250), CrucibleType.WOOD)
+            ItemTags.LEAVES, new FluidStack(Fluids.WATER, 250), CrucibleType.WOOD, holderGetter)
         .build(consumer, meltingLoc("leaves"));
   }
 
-  private ResourceLocation meltingLoc(String id) {
-    return ResourceLocation.fromNamespaceAndPath(
-        ExNihiloSequentia.MOD_ID, "melting/" + RecipeProviderUtilities.prependRecipePrefix(id));
+  private ResourceKey<Recipe<?>> meltingLoc(String id) {
+    ResourceLocation rl =
+        ResourceLocation.fromNamespaceAndPath(
+            ExNihiloSequentia.MOD_ID, "melting/" + RecipeProviderUtilities.prependRecipePrefix(id));
+    return ResourceKey.create(Registries.RECIPE, rl);
   }
 }

@@ -4,9 +4,7 @@
     "amount": 1000,
     "id": "exnihilosequentia:sea_water"
   },
-  "input": {
-    "item": "exnihilosequentia:horn_coral_larva"
-  },
+  "input": "exnihilosequentia:horn_coral_larva",
   "result": {
     "count": 1,
     "id": "minecraft:horn_coral_block"

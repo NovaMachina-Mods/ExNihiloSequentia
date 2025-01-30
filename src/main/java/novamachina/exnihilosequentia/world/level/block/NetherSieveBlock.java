@@ -14,15 +14,9 @@ import novamachina.exnihilosequentia.world.level.block.entity.SieveBlockEntity;
 
 public class NetherSieveBlock extends SieveBlock implements EntityBlock {
 
-  public NetherSieveBlock() {
+  public NetherSieveBlock(BlockBehaviour.Properties properties) {
     super(
-        BlockBehaviour.Properties.of()
-            .strength(1.0F)
-            .sound(Config.getNetherSieveSoundsEnabled() ? SoundType.STEM : SoundType.SCAFFOLDING)
-            .noOcclusion()
-            .isRedstoneConductor((state, reader, pos) -> false)
-            .isSuffocating((state, reader, pos) -> false)
-            .isViewBlocking((state, reader, pos) -> false));
+        properties);
   }
 
   @Nullable

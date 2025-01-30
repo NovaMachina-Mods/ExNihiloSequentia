@@ -16,12 +16,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class NetherBarrelBlock extends BarrelBlock implements EntityBlock {
 
-  public NetherBarrelBlock() {
-    super(
-        BlockBehaviour.Properties.of()
-            .strength(1.0F)
-            .sound(Config.getNetherBarrelSoundsEnabled() ? SoundType.STEM : SoundType.WOOD)
-            .noOcclusion());
+  public NetherBarrelBlock(BlockBehaviour.Properties properties) {
+    super(properties);
   }
 
   @Override

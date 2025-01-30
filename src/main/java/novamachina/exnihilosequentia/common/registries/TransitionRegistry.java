@@ -32,10 +32,9 @@ public class TransitionRegistry {
             return recipeList.stream()
                 .filter(
                     recipe ->
-                        recipe
-                            .getFluidInTank()
-                            .isFluidEqual(
-                                new FluidStack(key.fluidInTank(), FluidType.BUCKET_VOLUME)))
+                        FluidStack.isSameFluidSameComponents(
+                            recipe.getFluidInTank(),
+                            new FluidStack(key.fluidInTank(), FluidType.BUCKET_VOLUME)))
                 .filter(recipe -> recipe.getCatalyst().test(new ItemStack(key.catalyst)))
                 .findFirst()
                 .map(TransitionRecipe::getResult)

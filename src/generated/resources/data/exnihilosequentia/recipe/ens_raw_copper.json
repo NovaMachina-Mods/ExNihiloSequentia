@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "exnihilosequentia:copper_pieces"
-    }
+    "x": "exnihilosequentia:copper_pieces"
   },
   "pattern": [
     "xx",

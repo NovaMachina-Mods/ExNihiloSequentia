@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 166,
-  "input": {
-    "item": "minecraft:carved_pumpkin"
-  }
+  "input": "minecraft:carved_pumpkin"
 }

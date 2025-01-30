@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "i": {
-      "tag": "c:gems/diamond"
-    },
-    "m": {
-      "item": "exnihilosequentia:iron_mesh"
-    }
+    "i": "#c:gems/diamond",
+    "m": "exnihilosequentia:iron_mesh"
   },
   "pattern": [
     "i i",

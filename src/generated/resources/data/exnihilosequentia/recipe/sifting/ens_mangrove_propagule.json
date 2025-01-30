@@ -1,8 +1,6 @@
 {
   "type": "exnihilosequentia:sifting",
-  "input": {
-    "item": "minecraft:mud"
-  },
+  "input": "minecraft:mud",
   "result": {
     "count": 1,
     "id": "minecraft:mangrove_propagule"

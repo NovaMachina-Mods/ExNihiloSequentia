@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "c": {
-      "item": "minecraft:oak_log"
-    },
-    "l": {
-      "item": "minecraft:oak_slab"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "c": "minecraft:oak_log",
+    "l": "minecraft:oak_slab",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "c c",

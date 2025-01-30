@@ -3,9 +3,7 @@
   "category": "equipment",
   "group": "exnihilosequentia",
   "key": {
-    "x": {
-      "item": "minecraft:terracotta"
-    }
+    "x": "minecraft:terracotta"
   },
   "pattern": [
     "xx",

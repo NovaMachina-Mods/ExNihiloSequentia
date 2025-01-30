@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "-": {
-      "item": "minecraft:mangrove_slab"
-    },
-    "x": {
-      "item": "minecraft:mangrove_planks"
-    }
+    "-": "minecraft:mangrove_slab",
+    "x": "minecraft:mangrove_planks"
   },
   "pattern": [
     "x x",

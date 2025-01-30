@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "exnihilosequentia:silver_ingot"
-    }
+    "exnihilosequentia:silver_ingot"
   ],
   "result": {
     "count": 9,

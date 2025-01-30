@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "-": {
-      "item": "minecraft:bamboo_slab"
-    },
-    "x": {
-      "item": "minecraft:bamboo_planks"
-    }
+    "-": "minecraft:bamboo_slab",
+    "x": "minecraft:bamboo_planks"
   },
   "pattern": [
     "x x",

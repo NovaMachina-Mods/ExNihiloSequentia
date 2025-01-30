@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +31,7 @@ public class BlockBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public ItemInteractionResult onBlockActivated(
+  public InteractionResult onBlockActivated(
       @Nonnull final BarrelBlockEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
@@ -51,7 +49,7 @@ public class BlockBarrelMode extends AbstractBarrelMode {
     }
     barrelTile.getInventory().setStackInSlot(0, ItemStack.EMPTY);
     barrelTile.setMode(ExNihiloConstants.BarrelModes.EMPTY);
-    return ItemInteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS;
   }
 
   @Override
@@ -92,9 +90,7 @@ public class BlockBarrelMode extends AbstractBarrelMode {
 
     info.add(
         Component.translatable(
-            "waila.barrel.block",
-            Component.translatable(
-                barrelTile.getInventory().getStackInSlot(0).getDescriptionId())));
+            "waila.barrel.block", barrelTile.getInventory().getStackInSlot(0).getDisplayName()));
 
     return info;
   }

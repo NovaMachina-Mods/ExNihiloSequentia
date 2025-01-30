@@ -1,15 +1,6 @@
 {
   "values": [
-    "exnihilosequentia:acacia_crucible",
-    "exnihilosequentia:bamboo_crucible",
-    "exnihilosequentia:birch_crucible",
-    "exnihilosequentia:cherry_crucible",
-    "exnihilosequentia:dark_oak_crucible",
-    "exnihilosequentia:jungle_crucible",
-    "exnihilosequentia:mangrove_crucible",
-    "exnihilosequentia:oak_crucible",
-    "exnihilosequentia:spruce_crucible",
-    "exnihilosequentia:crimson_crucible",
-    "exnihilosequentia:warped_crucible"
+    "exnihilosequentia:fired_crucible",
+    "#exnihilosequentia:wood_crucibles"
   ]
 }

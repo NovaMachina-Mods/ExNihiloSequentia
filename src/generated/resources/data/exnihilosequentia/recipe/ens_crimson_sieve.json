@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "l": {
-      "item": "minecraft:crimson_slab"
-    },
-    "p": {
-      "item": "minecraft:crimson_planks"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "l": "minecraft:crimson_slab",
+    "p": "minecraft:crimson_planks",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "p p",

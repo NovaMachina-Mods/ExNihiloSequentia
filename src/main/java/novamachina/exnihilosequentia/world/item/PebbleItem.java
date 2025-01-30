@@ -6,8 +6,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Item;
@@ -20,13 +21,13 @@ import novamachina.exnihilosequentia.sounds.EXNSoundEvents;
 
 public class PebbleItem extends SnowballItem {
 
-  public PebbleItem() {
-    super(new Item.Properties());
+  public PebbleItem(Item.Properties properties) {
+    super(properties);
   }
 
   @Override
   @Nonnull
-  public InteractionResultHolder<ItemStack> use(
+  public InteractionResult use(
       @Nonnull final Level world,
       @Nonnull final Player player,
       @Nonnull final InteractionHand hand) {
@@ -44,7 +45,7 @@ public class PebbleItem extends SnowballItem {
       if (!world.isClientSide) {
         @Nonnull
         final Snowball snowball =
-            new Snowball(world, player) {
+            new Snowball(EntityType.SNOWBALL, world) {
               @Override
               public Component getName() {
                 return Component.translatable("item.exnihilosequentia.pebble");
@@ -65,8 +66,8 @@ public class PebbleItem extends SnowballItem {
       if (!player.getAbilities().instabuild) {
         itemstack.shrink(1);
       }
-      return InteractionResultHolder.sidedSuccess(itemstack, world.isClientSide());
+      return InteractionResult.SUCCESS;
     }
-    return InteractionResultHolder.pass(itemstack);
+    return InteractionResult.PASS;
   }
 }

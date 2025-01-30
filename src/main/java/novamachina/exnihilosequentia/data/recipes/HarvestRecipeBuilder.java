@@ -3,11 +3,16 @@ package novamachina.exnihilosequentia.data.recipes;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import java.util.List;
+
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import novamachina.exnihilosequentia.world.item.crafting.EXNRecipeSerializers;
 import novamachina.exnihilosequentia.world.item.crafting.HarvestRecipe;
@@ -29,8 +34,8 @@ public class HarvestRecipeBuilder extends RecipeBuilder<HarvestRecipe> {
     return harvest(Ingredient.of(inputItem), drops);
   }
 
-  public static HarvestRecipeBuilder harvest(TagKey<Item> inputTag, ItemStackWithChance... drops) {
-    return harvest(Ingredient.of(inputTag), drops);
+  public static HarvestRecipeBuilder harvest(HolderGetter.Provider provider, TagKey<Item> inputTag, ItemStackWithChance... drops) {
+    return harvest(Ingredient.of(provider.lookupOrThrow(BuiltInRegistries.ITEM.key()).getOrThrow(inputTag)), drops);
   }
 
   public static HarvestRecipeBuilder harvest(Ingredient input, ItemStackWithChance... drops) {
@@ -39,12 +44,12 @@ public class HarvestRecipeBuilder extends RecipeBuilder<HarvestRecipe> {
   }
 
   @Override
-  protected HarvestRecipe getRecipe(ResourceLocation resourceLocation) {
+  protected HarvestRecipe getRecipe(ResourceKey<Recipe<?>> id) {
     return new HarvestRecipe(input, drops);
   }
 
   @Override
-  protected void validate(ResourceLocation id) {
+  protected void validate(ResourceKey<Recipe<?>> id) {
     Preconditions.checkNotNull(input, "Input cannot be null.");
     Preconditions.checkArgument(!drops.isEmpty(), "Recipe needs at least one drop.");
   }

@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "l": {
-      "item": "minecraft:spruce_slab"
-    },
-    "p": {
-      "item": "minecraft:spruce_planks"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "l": "minecraft:spruce_slab",
+    "p": "minecraft:spruce_planks",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "p p",

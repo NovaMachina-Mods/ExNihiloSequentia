@@ -17,9 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
-import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
@@ -55,11 +53,11 @@ public class NeoForgeEventListeners {
     ExNihiloRegistries.clearRegistries();
   }
 
-  @SubscribeEvent
-  public static void loadClientRecipes(@Nonnull final RecipesUpdatedEvent event) {
-    ExNihiloRegistries.clearRegistries();
-    loadRecipes(event.getRecipeManager());
-  }
+//  @SubscribeEvent
+//  public static void loadClientRecipes(@Nonnull final RecipesUpdatedEvent event) {
+//    ExNihiloRegistries.clearRegistries();
+//    loadRecipes(event.getRecipeManager());
+//  }
 
   @SubscribeEvent
   public static void onPlayerLogin(@Nonnull final PlayerEvent.PlayerLoggedInEvent event) {
@@ -77,7 +75,7 @@ public class NeoForgeEventListeners {
                       "https://github.com/NovaMachina-Mods/ExNihiloSequentia/issues"));
       link.withStyle(linkStyle);
       text.append(link);
-      event.getEntity().sendSystemMessage(text);
+      event.getEntity().displayClientMessage(text, false);
     }
   }
 
@@ -86,8 +84,8 @@ public class NeoForgeEventListeners {
     log.debug("Fired FMLServerStartingEvent");
     registerOreCompat();
     overrideOres();
+    loadRecipes(event.getServer().getRecipeManager());
     if (event.getServer().isDedicatedServer()) {
-      loadRecipes(event.getServer().getRecipeManager());
     }
   }
 

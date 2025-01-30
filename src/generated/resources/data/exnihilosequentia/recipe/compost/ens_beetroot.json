@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 100,
-  "input": {
-    "tag": "c:crops/beetroot"
-  }
+  "input": "#c:crops/beetroot"
 }

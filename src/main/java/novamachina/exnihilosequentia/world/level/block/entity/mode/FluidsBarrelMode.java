@@ -10,7 +10,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -126,7 +125,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
   @Override
   @Nonnull
-  public ItemInteractionResult onBlockActivated(
+  public InteractionResult onBlockActivated(
       @Nonnull final BarrelBlockEntity barrelTile,
       @Nonnull final Player player,
       @Nonnull final InteractionHand handIn,
@@ -134,14 +133,14 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
       @Nonnull final IItemHandler itemHandler) {
     @Nonnull final ItemStack stack = player.getItemInHand(handIn);
     if (stack.isEmpty()) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     if (TankUtil.drainWaterIntoBottle(barrelTile, player, fluidHandler)) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
     if (TankUtil.drainWaterFromBottle(barrelTile, player, fluidHandler)) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     boolean result = FluidUtil.interactWithFluidHandler(player, handIn, fluidHandler);
@@ -156,11 +155,11 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
         world.sendBlockUpdated(barrelTile.getBlockPos(), blockState, blockState, 2);
       }
       barrelTile.setChanged();
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     if (fluidBlockTransform(barrelTile, player, handIn)) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
 
     @Nonnull final ItemLike catalyst = player.getItemInHand(handIn).getItem();
@@ -170,7 +169,7 @@ public class FluidsBarrelMode extends AbstractBarrelMode {
 
     doMobSpawn(barrelTile, player, handIn);
 
-    return ItemInteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS;
   }
 
   private boolean fluidBlockTransform(

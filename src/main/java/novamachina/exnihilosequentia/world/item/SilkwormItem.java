@@ -10,8 +10,8 @@ import novamachina.exnihilosequentia.world.level.block.InfestingLeavesBlock;
 
 public class SilkwormItem extends Item {
 
-  public SilkwormItem() {
-    super(new Item.Properties());
+  public SilkwormItem(Item.Properties properties) {
+    super(properties);
   }
 
   @Override

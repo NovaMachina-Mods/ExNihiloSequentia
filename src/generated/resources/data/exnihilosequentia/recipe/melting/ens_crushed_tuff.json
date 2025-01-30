@@ -5,7 +5,5 @@
     "amount": 200,
     "id": "minecraft:lava"
   },
-  "input": {
-    "item": "exnihilosequentia:crushed_tuff"
-  }
+  "input": "exnihilosequentia:crushed_tuff"
 }

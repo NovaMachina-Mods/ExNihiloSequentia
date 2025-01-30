@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 150,
-  "input": {
-    "tag": "minecraft:fishes"
-  }
+  "input": "#minecraft:fishes"
 }

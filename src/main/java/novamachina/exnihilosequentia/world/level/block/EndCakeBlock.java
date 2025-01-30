@@ -9,7 +9,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,19 +19,19 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.EndPlatformFeature;
-import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class EndCakeBlock extends CakeBlock {
 
-  public EndCakeBlock() {
-    super(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.WOOL));
+  public EndCakeBlock(BlockBehaviour.Properties properties) {
+    super(properties);
   }
 
   @Override
-  protected ItemInteractionResult useItemOn(
+  protected InteractionResult useItemOn(
       ItemStack itemStack,
       BlockState blockState,
       Level level,
@@ -47,9 +46,9 @@ public class EndCakeBlock extends CakeBlock {
         level.setBlockAndUpdate(blockPos, blockState.setValue(BITES, bites - 1));
         itemStack.shrink(1);
       }
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
-    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    return InteractionResult.PASS;
   }
 
   @Override
@@ -118,16 +117,16 @@ public class EndCakeBlock extends CakeBlock {
       return InteractionResult.FAIL;
     }
 
-    DimensionTransition transition = getPortalDestination(serverLevel, player, player.getOnPos());
+    TeleportTransition transition = getPortalDestination(serverLevel, player, player.getOnPos());
 
     if (transition == null) {
       return InteractionResult.FAIL;
     }
-    player.changeDimension(transition);
+    player.teleport(transition);
     return InteractionResult.SUCCESS;
   }
 
-  private DimensionTransition getPortalDestination(ServerLevel serverLevel, Entity entity, BlockPos blockPos) {
+  private TeleportTransition getPortalDestination(ServerLevel serverLevel, Entity entity, BlockPos blockPos) {
     ResourceKey<Level> resourcekey = serverLevel.dimension() == Level.END ? Level.OVERWORLD : Level.END;
     ServerLevel serverlevel = serverLevel.getServer().getLevel(resourcekey);
     if (serverlevel == null) {
@@ -145,19 +144,19 @@ public class EndCakeBlock extends CakeBlock {
         }
       } else {
         if (entity instanceof ServerPlayer serverplayer) {
-          return serverplayer.findRespawnPositionAndUseSpawnBlock(false, DimensionTransition.DO_NOTHING);
+          return serverplayer.findRespawnPositionAndUseSpawnBlock(false, TeleportTransition.DO_NOTHING);
         }
 
         vec3 = entity.adjustSpawnLocation(serverlevel, blockpos).getBottomCenter();
       }
 
-      return new DimensionTransition(
+      return new TeleportTransition(
           serverlevel,
           vec3,
           entity.getDeltaMovement(),
           f,
           entity.getXRot(),
-          DimensionTransition.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET)
+          TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET)
       );
     }
   }

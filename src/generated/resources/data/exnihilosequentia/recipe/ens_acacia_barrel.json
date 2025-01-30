@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "-": {
-      "item": "minecraft:acacia_slab"
-    },
-    "x": {
-      "item": "minecraft:acacia_planks"
-    }
+    "-": "minecraft:acacia_slab",
+    "x": "minecraft:acacia_planks"
   },
   "pattern": [
     "x x",

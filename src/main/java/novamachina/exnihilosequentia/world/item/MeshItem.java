@@ -3,26 +3,16 @@ package novamachina.exnihilosequentia.world.item;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
-import novamachina.exnihilosequentia.common.Config;
 
 public class MeshItem extends Item {
 
   private static final Map<MeshType, MeshItem> meshItemMap = new HashMap<>();
-  private final String name;
   private final MeshType type;
 
-  public MeshItem(String name, int maxDamage, MeshType type) {
-    super(
-        Config.enableMeshDurability()
-            ? new Properties().durability(maxDamage)
-            : new Properties().stacksTo(Config.getMeshStackSize()));
-    this.name = name;
+  public MeshItem(MeshType type, Item.Properties properties) {
+    super(properties);
     this.type = type;
     meshItemMap.put(type, this);
   }
@@ -31,30 +21,16 @@ public class MeshItem extends Item {
     return meshItemMap.get(meshType);
   }
 
-  //TODO
-//  @Override
-//  public boolean canApplyAtEnchantingTable(
-//      @Nonnull final ItemStack stack, @Nonnull final Enchantment enchantment) {
-//    return enchantment == Enchantments.EFFICIENCY
-//        || enchantment == Enchantments.FORTUNE;
-//  }
-
-  @Override
-  public int getBurnTime(
-      @Nonnull final ItemStack itemStack, @Nullable final RecipeType<?> recipeType) {
-    if (((MeshItem) itemStack.getItem()).getType() == MeshType.STRING) {
-      return 200;
-    } else {
-      return 0;
-    }
-  }
+  // TODO
+  //  @Override
+  //  public boolean canApplyAtEnchantingTable(
+  //      @Nonnull final ItemStack stack, @Nonnull final Enchantment enchantment) {
+  //    return enchantment == Enchantments.EFFICIENCY
+  //        || enchantment == Enchantments.FORTUNE;
+  //  }
 
   public int getLevel() {
     return type.getLevel();
-  }
-
-  public String getName() {
-    return name;
   }
 
   public MeshType getType() {
@@ -64,5 +40,11 @@ public class MeshItem extends Item {
   @Override
   public boolean isBookEnchantable(@Nonnull final ItemStack stack, @Nonnull final ItemStack book) {
     return true;
+  }
+
+  @FunctionalInterface
+  public interface MeshFunction {
+
+    MeshItem apply(MeshType meshType, Item.Properties properties);
   }
 }

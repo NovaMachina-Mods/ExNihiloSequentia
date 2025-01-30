@@ -1,9 +1,13 @@
 package novamachina.exnihilosequentia.data.recipes.providers;
 
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import novamachina.exnihilosequentia.ExNihiloSequentia;
@@ -15,28 +19,28 @@ import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class CompostRecipes implements ISubRecipeProvider {
   @Override
-  public void addRecipes(RecipeOutput consumer) {
-    CompostRecipeBuilder.composting(ItemTags.SAPLINGS, 125).build(consumer, compostLoc("saplings"));
-    CompostRecipeBuilder.composting(ItemTags.LEAVES, 125).build(consumer, compostLoc("leaves"));
-    CompostRecipeBuilder.composting(ItemTags.FLOWERS, 100).build(consumer, compostLoc("flowers"));
-    CompostRecipeBuilder.composting(ItemTags.FISHES, 150).build(consumer, compostLoc("fishes"));
-    CompostRecipeBuilder.composting(ExNihiloTags.MEAT_COOKED, 200)
+  public void addRecipes(HolderGetter.Provider holderGetter, RecipeOutput consumer) {
+    CompostRecipeBuilder.composting(ItemTags.SAPLINGS, 125, holderGetter).build(consumer, compostLoc("saplings"));
+    CompostRecipeBuilder.composting(ItemTags.LEAVES, 125, holderGetter).build(consumer, compostLoc("leaves"));
+    CompostRecipeBuilder.composting(ItemTags.SMALL_FLOWERS, 100, holderGetter).build(consumer, compostLoc("flowers"));
+    CompostRecipeBuilder.composting(ItemTags.FISHES, 150, holderGetter).build(consumer, compostLoc("fishes"));
+    CompostRecipeBuilder.composting(ExNihiloTags.MEAT_COOKED, 200, holderGetter)
         .build(consumer, compostLoc("meat_cooked"));
-    CompostRecipeBuilder.composting(ExNihiloTags.MEAT_UNCOOKED, 200)
+    CompostRecipeBuilder.composting(ExNihiloTags.MEAT_UNCOOKED, 200, holderGetter)
         .build(consumer, compostLoc("meat_uncooked"));
-    CompostRecipeBuilder.composting(Tags.Items.SEEDS, 80).build(consumer, compostLoc("seeds"));
-    CompostRecipeBuilder.composting(Tags.Items.CROPS_WHEAT, 80)
+    CompostRecipeBuilder.composting(Tags.Items.SEEDS, 80, holderGetter).build(consumer, compostLoc("seeds"));
+    CompostRecipeBuilder.composting(Tags.Items.CROPS_WHEAT, 80, holderGetter)
         .build(consumer, compostLoc("wheat"));
-    CompostRecipeBuilder.composting(Tags.Items.CROPS_CARROT, 100)
+    CompostRecipeBuilder.composting(Tags.Items.CROPS_CARROT, 100, holderGetter)
         .build(consumer, compostLoc("carrot"));
-    CompostRecipeBuilder.composting(Tags.Items.CROPS_BEETROOT, 100)
+    CompostRecipeBuilder.composting(Tags.Items.CROPS_BEETROOT, 100, holderGetter)
         .build(consumer, compostLoc("beetroot"));
-    CompostRecipeBuilder.composting(Tags.Items.CROPS_POTATO, 100)
+    CompostRecipeBuilder.composting(Tags.Items.CROPS_POTATO, 100, holderGetter)
         .build(consumer, compostLoc("potato"));
-    CompostRecipeBuilder.composting(Tags.Items.CROPS_NETHER_WART, 100)
+    CompostRecipeBuilder.composting(Tags.Items.CROPS_NETHER_WART, 100, holderGetter)
         .build(consumer, compostLoc("nether_wart"));
-    CompostRecipeBuilder.composting(Tags.Items.EGGS, 80).build(consumer, compostLoc("eggs"));
-    CompostRecipeBuilder.composting(Tags.Items.STRINGS, 40).build(consumer, compostLoc("string"));
+    CompostRecipeBuilder.composting(Tags.Items.EGGS, 80, holderGetter).build(consumer, compostLoc("eggs"));
+    CompostRecipeBuilder.composting(Tags.Items.STRINGS, 40, holderGetter).build(consumer, compostLoc("string"));
     CompostRecipeBuilder.composting(Items.ROTTEN_FLESH, 100)
         .build(consumer, compostLoc("rotten_flesh"));
     CompostRecipeBuilder.composting(Items.SPIDER_EYE, 80).build(consumer, compostLoc("spider_eye"));
@@ -112,8 +116,9 @@ public class CompostRecipes implements ISubRecipeProvider {
         .build(consumer, compostLoc("glow_berries"));
   }
 
-  protected ResourceLocation compostLoc(String id) {
-    return ResourceLocation.fromNamespaceAndPath(
+  protected ResourceKey<Recipe<?>> compostLoc(String id) {
+    ResourceLocation rl = ResourceLocation.fromNamespaceAndPath(
         ExNihiloSequentia.MOD_ID, "compost/" + RecipeProviderUtilities.prependRecipePrefix(id));
+    return ResourceKey.create(Registries.RECIPE, rl);
   }
 }

@@ -8,9 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +19,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -102,8 +103,7 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
     if (!sieveBlockEntity.getBlockStack().isEmpty()) {
       tooltip.add(
           Component.translatable(
-              "waila.sieve.block",
-              Component.translatable(sieveBlockEntity.getBlockStack().getDescriptionId())));
+              "waila.sieve.block", sieveBlockEntity.getBlockStack().getDisplayName()));
     }
     if (sieveBlockEntity.getMeshType() != MeshType.NONE) {
       tooltip.add(
@@ -175,11 +175,7 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
     return nearbySieves;
   }
 
-  /**
-   * @deprecated Ask Mojang
-   */
   @OnlyIn(Dist.CLIENT)
-  @Deprecated(forRemoval = false)
   @Override
   public float getShadeBrightness(
       @Nonnull final BlockState state,
@@ -220,10 +216,7 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
   }
 
   @Override
-  public boolean propagatesSkylightDown(
-      @Nonnull final BlockState state,
-      @Nonnull final BlockGetter reader,
-      @Nonnull final BlockPos pos) {
+  public boolean propagatesSkylightDown(@Nonnull final BlockState state) {
     return true;
   }
 
@@ -244,23 +237,30 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
     }
   }
 
-  /**
-   * @deprecated Ask Mojang
-   */
-  @Nonnull
-  @Deprecated(forRemoval = false)
   @Override
+  @Nonnull
   public BlockState updateShape(
-      @Nonnull final BlockState stateIn,
-      @Nonnull final Direction facing,
-      @Nonnull final BlockState facingState,
-      @Nonnull final LevelAccessor worldIn,
-      @Nonnull final BlockPos currentPos,
-      @Nonnull final BlockPos facingPos) {
-    if (Boolean.TRUE.equals(stateIn.getValue(WATERLOGGED))) {
-      worldIn.getFluidTicks().hasScheduledTick(currentPos, Fluids.WATER);
+      BlockState stateIn,
+      LevelReader worldIn,
+      ScheduledTickAccess scheduledTickAccess,
+      BlockPos currentPos,
+      Direction facing,
+      BlockPos facingPos,
+      BlockState facingState,
+      RandomSource randomSource) {
+    if (stateIn.getValue(WATERLOGGED)) {
+      scheduledTickAccess.scheduleTick(
+          currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
     }
-    return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    return super.updateShape(
+        stateIn,
+        worldIn,
+        scheduledTickAccess,
+        currentPos,
+        facing,
+        facingPos,
+        facingState,
+        randomSource);
   }
 
   @Override
@@ -286,7 +286,7 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
   }
 
   @Override
-  protected ItemInteractionResult useItemOn(
+  protected InteractionResult useItemOn(
       ItemStack itemStack,
       BlockState blockState,
       Level level,
@@ -296,7 +296,7 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
       BlockHitResult blockHitResult) {
     SieveBlockEntity sieveBlockEntity = (SieveBlockEntity) level.getBlockEntity(blockPos);
     if (sieveBlockEntity == null) {
-      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+      return InteractionResult.PASS;
     }
     if (!level.isClientSide()) {
       log.debug("Sieve Activated with item");
@@ -311,6 +311,6 @@ public abstract class SieveBlock extends Block implements SimpleWaterloggedBlock
     }
     level.sendBlockUpdated(
         blockPos, level.getBlockState(blockPos), level.getBlockState(blockPos), 2);
-    return ItemInteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS;
   }
 }

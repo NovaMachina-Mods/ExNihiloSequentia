@@ -5,6 +5,8 @@ import java.util.concurrent.CompletableFuture;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 import novamachina.exnihilosequentia.data.recipes.providers.CompostRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.CraftingRecipes;
 import novamachina.exnihilosequentia.data.recipes.providers.CrushingRecipes;
@@ -19,8 +21,8 @@ import novamachina.novacore.data.recipes.AbstractRecipeProvider;
 import novamachina.novacore.data.recipes.ISubRecipeProvider;
 
 public class EXNRecipeProvider extends AbstractRecipeProvider {
-  public EXNRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-    super(output, lookupProvider);
+  public EXNRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+    super(provider, recipeOutput);
   }
 
   @Override
@@ -36,5 +38,21 @@ public class EXNRecipeProvider extends AbstractRecipeProvider {
         new SiftingRecipes(),
         new SolidifyingRecipes(),
         new TransitionRecipes());
+  }
+
+  public static final class Runner extends RecipeProvider.Runner {
+    public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+      super(output, lookupProvider);
+    }
+
+    @Override
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput output) {
+      return new EXNRecipeProvider(lookupProvider, output);
+    }
+
+    @Override
+    public String getName() {
+      return "Ex Nihilo: Sequentia recipes";
+    }
   }
 }

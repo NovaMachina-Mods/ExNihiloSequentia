@@ -10,7 +10,6 @@ import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -22,13 +21,8 @@ import novamachina.exnihilosequentia.world.level.block.entity.InfestedLeavesBloc
 
 public class InfestedLeavesBlock extends Block implements IShearable, EntityBlock {
 
-  public InfestedLeavesBlock() {
-    super(
-        BlockBehaviour.Properties.of()
-            .strength(0.2F)
-            .sound(SoundType.GRASS)
-            .noOcclusion()
-            .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false));
+  public InfestedLeavesBlock(BlockBehaviour.Properties properties) {
+    super(properties);
   }
 
   @Override

@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "l": {
-      "item": "minecraft:warped_slab"
-    },
-    "p": {
-      "item": "minecraft:warped_planks"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "l": "minecraft:warped_slab",
+    "p": "minecraft:warped_planks",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "p p",

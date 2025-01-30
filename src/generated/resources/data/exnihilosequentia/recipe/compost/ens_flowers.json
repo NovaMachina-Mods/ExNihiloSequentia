@@ -1,7 +1,5 @@
 {
   "type": "exnihilosequentia:compost",
   "amount": 100,
-  "input": {
-    "tag": "minecraft:flowers"
-  }
+  "input": "#minecraft:small_flowers"
 }

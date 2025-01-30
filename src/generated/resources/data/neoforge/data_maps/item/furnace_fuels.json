@@ -1,0 +1,22 @@
+{
+  "values": {
+    "#exnihilosequentia:sieves": {
+      "burn_time": 400
+    },
+    "#exnihilosequentia:wood_barrels": {
+      "burn_time": 400
+    },
+    "#exnihilosequentia:wood_crook": {
+      "burn_time": 200
+    },
+    "#exnihilosequentia:wood_crucibles": {
+      "burn_time": 400
+    },
+    "#exnihilosequentia:wood_hammer": {
+      "burn_time": 200
+    },
+    "exnihilosequentia:string_mesh": {
+      "burn_time": 200
+    }
+  }
+}

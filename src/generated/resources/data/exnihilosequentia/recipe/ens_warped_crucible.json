@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "exnihilosequentia",
   "key": {
-    "c": {
-      "item": "minecraft:warped_stem"
-    },
-    "l": {
-      "item": "minecraft:warped_slab"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "c": "minecraft:warped_stem",
+    "l": "minecraft:warped_slab",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "c c",

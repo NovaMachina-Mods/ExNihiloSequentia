@@ -6,6 +6,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
@@ -15,6 +16,9 @@ import novamachina.exnihilosequentia.world.level.block.EXNBlocks;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Optional;
 
 public class PrecipitateRecipe extends AbstractRecipe {
 
@@ -33,19 +37,14 @@ public class PrecipitateRecipe extends AbstractRecipe {
   }
 
   @Override
-  public @NotNull ItemStack getToastSymbol() {
-    return EXNBlocks.OAK_BARREL.itemStack();
-  }
-
-  @Override
   @NonNull
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<PrecipitateRecipe> getSerializer() {
     return EXNRecipeSerializers.PRECIPITATE_RECIPE_SERIALIZER.recipeSerializer();
   }
 
   @Override
   @NonNull
-  public RecipeType<?> getType() {
+  public RecipeType<PrecipitateRecipe> getType() {
     return EXNRecipeTypes.PRECIPITATE;
   }
 
@@ -69,7 +68,7 @@ public class PrecipitateRecipe extends AbstractRecipe {
                 instance
                     .group(
                         FluidStack.CODEC.fieldOf("fluid").forGetter(PrecipitateRecipe::getFluid),
-                        Ingredient.CODEC_NONEMPTY
+                        Ingredient.CODEC
                             .fieldOf("input")
                             .forGetter(PrecipitateRecipe::getInput),
                         ItemStack.CODEC.fieldOf("result").forGetter(PrecipitateRecipe::getOutput))
@@ -101,5 +100,9 @@ public class PrecipitateRecipe extends AbstractRecipe {
       FluidStack.STREAM_CODEC.encode(buffer, recipe.getFluid());
       ItemStack.STREAM_CODEC.encode(buffer, recipe.getOutput());
     }
+  }
+  @Override
+  public PlacementInfo placementInfo() {
+    return PlacementInfo.createFromOptionals(List.of(Optional.of(input)));
   }
 }
